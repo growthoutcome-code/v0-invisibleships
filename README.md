@@ -1,33 +1,75 @@
-# v0-invisibleships
+# Invisible Ships — Journal Browser
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [v0](https://v0.app).
+A Next.js front end for the *Discovery of Neuro-tech Terrorism* corpus: browse the
+journal (day entries + recording transcripts) and glossary, filter by date / part /
+location / topic / statement-type / audio, and read each chunk with its Google Drive
+audio and source links. Data is served from **Supabase** (built from the 712-file
+Markdown corpus), with a bundled JSON fallback so it runs instantly offline.
 
-## Built with v0
+## Stack
+- Next.js 14 (App Router) + React 18 + TypeScript + Tailwind CSS
+- Supabase (Postgres) as the queryable index — project **Invisible Ships** (`djbnuzqfickrdehbbmrv`)
+- Bundled corpus in `public/corpus/` used as a seed / offline fallback
 
-This repository is linked to a [v0](https://v0.app) project. You can continue developing by visiting the link below -- start new chats to make changes, and v0 will push commits directly to this repo. Every merge to `main` will automatically deploy.
-
-[Continue working on v0 →](https://v0.app/chat/projects/prj_WgklczuymEvBDnkaAFTCYljgQBkF)
-
-## Getting Started
-
-First, run the development server:
-
+## 1. Run locally
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+npm install
+cp .env.local.example .env.local     # values are prefilled for this project
+npm run dev                          # http://localhost:3000
 ```
+On first load the app tries Supabase; if the DB isn't populated yet it automatically
+falls back to the bundled corpus in `public/corpus/`, so you always see data.
+The header shows the active source (`supabase` or `bundled`).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Default app password (client-side gate): **`ships`** — change `NEXT_PUBLIC_SITE_PASSWORD`
+in `.env.local`. Leave it blank to disable the gate.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 2. Environment (`.env.local`)
+| var | purpose |
+|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | publishable/anon key (read-only; RLS enforced) |
+| `NEXT_PUBLIC_SITE_PASSWORD` | client-side gate for the prototype |
 
-## Learn More
+The anon key is read-only: Row-Level Security is enabled with a select-only policy,
+so the public site can read but not modify data.
 
-To learn more, take a look at the following resources:
+## 3. Deploy to Vercel (canonical repo: `v0-invisibleships`)
+```bash
+git init && git add -A && git commit -m "Corpus-backed journal browser"
+git remote add origin https://github.com/growthoutcome-code/v0-invisibleships.git
+git branch -M main
+git push -u origin main        # replaces the v0 scaffold with this app
+```
+In Vercel, the project already auto-deploys `main` to `staging.invisibleships.com`.
+Add the three env vars above in **Project → Settings → Environment Variables**, then redeploy.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [v0 Documentation](https://v0.app/docs) - learn about v0 and how to use it.
+> Note: `v0-invisibleships` is linked to a v0.dev project. Pushing here means v0 is no
+> longer the source of truth — future edits happen in code, not v0. (This matches the
+> "rebuild fresh from Corpus" decision.)
+
+## 4. Populate Supabase from the deployed app (one step, after first deploy)
+The corpus is served statically at `/corpus/*.json`. A stored Postgres function pulls it
+straight into the database (no large payloads through any client). After the site is live, run:
+```sql
+select ingest_from_url('https://staging.invisibleships.com/corpus');
+```
+(or your deployment's URL). This upserts documents, audio_files, glossary, categories,
+and cross-reference tables. Re-run any time the corpus is regenerated. Once populated,
+the app reads live from Supabase (header shows `source: supabase`).
+
+## 5. Updating the corpus
+Regenerate the Markdown corpus (see `convert.py` in the corpus project), rebuild the
+JSON with the project's `build_json.py`, drop the files into `public/corpus/`, redeploy,
+and re-run `ingest_from_url(...)`.
+
+## Data model
+See the corpus project's `supabase_schema.sql` and `00_PLAN_*`. Core table `documents`
+(one row per chunk) plus `audio_files`, `glossary`, `categories` + join tables.
+
+## Notes / next steps
+- Topic filter uses the corpus taxonomy (`categories` + `statement_types`). The old
+  staging app's **severity** dimension (Critical/High/Medium/Low) is not in the corpus;
+  add it later via an enrichment pass into the reserved `themes` field if wanted.
+- Full-text search (`documents.fts`) and pgvector semantic Q&A are provisioned in the
+  schema for a later pass.
