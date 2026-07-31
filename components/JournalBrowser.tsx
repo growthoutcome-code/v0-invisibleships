@@ -240,23 +240,32 @@ function Reader({ doc, body, bodyLoading, cats, gloss, onBack, onPrev, onNext }:
 }
 
 /* ---------- Glossary ---------- */
+function cleanDef(str: string) {
+  return (str || "").replace(/^#.*\n/, "").replace(/\[([^\]]+)\]\([^)]+\)/g, "$1").replace(/\*\*/g, "").trim();
+}
 function Glossary({ ds, gcat, setGcat }: any) {
   const terms = [...(ds?.glossary || []), ...EXTRA_GLOSSARY].sort((a: any, b: any) => a.term.localeCompare(b.term))
     .filter((t: any) => !gcat || t.term.toLowerCase().includes(gcat.toLowerCase()) || (t.definition || "").toLowerCase().includes(gcat.toLowerCase()));
   return (
-    <div>
-      <div className="flex items-center justify-between mb-4">
+    <div className="max-w-3xl mx-auto">
+      <div className="flex items-center justify-between mb-5">
         <h1 className="text-lg font-semibold text-white">Glossary</h1>
         <input value={gcat} onChange={(e) => setGcat(e.target.value)} placeholder="Filter terms…"
-          className="bg-ink border border-edge rounded-md px-3 py-1.5 text-sm outline-none focus:border-accent w-48" />
+          className="bg-ink border border-edge rounded-md px-3 py-1.5 text-sm outline-none focus:border-accent w-44" />
       </div>
-      <div className="grid sm:grid-cols-2 gap-3">
-        {terms.map((t: any) => (
-          <div key={t.slug} className="rounded-lg border border-edge bg-card p-4">
-            <div className="font-semibold text-white">{t.term}</div>
-            <p className="text-sm text-slate-300 mt-1 whitespace-pre-wrap">{(t.definition || "").replace(/^#.*\n/, "").trim().slice(0, 600)}</p>
-          </div>
-        ))}
+      <div className="divide-y divide-edge">
+        {terms.map((t: any) => {
+          const parts: string[] = (t.definition || "").split("\n\n");
+          const pron = parts.length > 1 && parts[0].length < 80 ? parts[0].trim() : "";
+          const body = pron ? parts.slice(1).join("\n\n") : (t.definition || "");
+          return (
+            <div key={t.slug} className="py-6">
+              <h2 className="text-xl font-semibold text-white">{t.term}</h2>
+              {pron && <div className="text-xs text-muted italic mt-1">{pron}</div>}
+              <p className="text-[15px] text-slate-300 mt-2 whitespace-pre-wrap leading-relaxed">{cleanDef(body)}</p>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
