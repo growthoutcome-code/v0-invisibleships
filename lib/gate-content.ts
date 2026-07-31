@@ -1,4 +1,4 @@
-// Editable gate copy. Placeholders marked; swap freely without touching layout.
+// Editable gate copy. Swap freely without touching layout.
 export const GATE = {
   copyrightLine: "© 2026 Sean C. Harris. All Rights Reserved.",
   welcome: {
@@ -7,17 +7,14 @@ export const GATE = {
       "A documented record of neuro-tech terrorism — dated entries, verbatim transcripts, and technical analysis.",
     supporting:
       "Compiled by Sean C. Harris · 140+ dated entries · 298 audio-linked recordings · 2,800+ pages.",
+    contentWarning:
+      "Content warning: this archive contains sensitive and potentially disturbing material.",
     cta: "Enter",
+    ageLine: "By continuing to the site, I agree that I am at least 18 years of age.",
+    copyright: "© 2026 Sean C. Harris",
   },
   copyright: {
     intro: "Please read the following before entering.",
     cta: "I understand and agree",
-  },
-  notice: {
-    headline: "Before you enter",
-    body:
-      "This archive contains verbatim transcripts and related analysis. The statements recorded are external communications and do not represent the views, beliefs, or intent of the author.",
-    ageSentence: "By entering, I confirm I am at least 18 years old.",
-    cta: "Enter the archive",
   },
 };
