@@ -9,7 +9,7 @@ export const GATE = {
       "Compiled by Sean C. Harris · 140+ dated entries · 298 audio-linked recordings · 2,800+ pages.",
     contentWarning:
       "Content warning: this archive contains sensitive and potentially disturbing material.",
-    cta: "Enter",
+    cta: "I'm at least 18",
     ageLine: "By continuing to the site, I agree that I am at least 18 years of age.",
     copyright: "© 2026 Sean C. Harris",
   },
