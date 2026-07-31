@@ -1,11 +1,14 @@
 import posthog from "posthog-js";
 
-let inited = false;
-const KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY;
+// Public PostHog project key (phc_) — safe for client-side use.
+// Env vars override if set (e.g. in Vercel).
+const KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY || "phc_oztF87Ru2kLa9YGd56zpBonGRFfoyUoF75ao9imrxeT3";
 const HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com";
 
+let inited = false;
+
 export function initAnalytics() {
-  if (inited || typeof window === "undefined" || !KEY) return; // graceful no-op without a key
+  if (inited || typeof window === "undefined" || !KEY) return;
   posthog.init(KEY, {
     api_host: HOST,
     capture_pageview: true,
