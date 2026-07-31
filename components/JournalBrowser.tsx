@@ -3,10 +3,12 @@ import { useEffect, useMemo, useState } from "react";
 import { loadDataset, getBody } from "@/lib/data";
 import type { Dataset, Doc } from "@/lib/types";
 import { track } from "@/lib/analytics";
-import Header from "@/components/Header";
+import Header, { type Tab } from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { X, ChevronLeft, ChevronRight, Volume2 } from "lucide-react";
+import CopyrightTerms from "@/components/CopyrightTerms";
+import { DOCUMENTS, AUTHOR, EXTRA_GLOSSARY } from "@/lib/site-content";
 
 const PAGE_SIZE = 10;
 const cap = (s?: string | null) => (s ? s.charAt(0).toUpperCase() + s.slice(1).replace(/-/g, " ") : "");
@@ -50,7 +52,7 @@ function excerpt(md: string): string {
 export default function JournalBrowser() {
   const [ds, setDs] = useState<Dataset | null>(null);
   const [loading, setLoading] = useState(true);
-  const [tab, setTab] = useState<"journal" | "glossary">("journal");
+  const [tab, setTab] = useState<Tab>("journal");
 
   const [q, setQ] = useState(""); const [dFrom, setDFrom] = useState(""); const [dTo, setDTo] = useState("");
   const [part, setPart] = useState(""); const [loc, setLoc] = useState("");
@@ -126,6 +128,12 @@ export default function JournalBrowser() {
           <div className="text-muted text-center py-20">Loading corpus…</div>
         ) : tab === "glossary" ? (
           <Glossary ds={ds} gcat={gcat} setGcat={setGcat} />
+        ) : tab === "documents" ? (
+          <DocumentsView />
+        ) : tab === "author" ? (
+          <AuthorView />
+        ) : tab === "disclaimer" ? (
+          <DisclaimerView />
         ) : selDoc ? (
           <Reader
             doc={selDoc} body={body} bodyLoading={bodyLoading} cats={ds?.docCats[selDoc.id] || []} gloss={ds?.docGloss[selDoc.id] || []}
@@ -233,7 +241,7 @@ function Reader({ doc, body, bodyLoading, cats, gloss, onBack, onPrev, onNext }:
 
 /* ---------- Glossary ---------- */
 function Glossary({ ds, gcat, setGcat }: any) {
-  const terms = (ds?.glossary || []).slice().sort((a: any, b: any) => a.term.localeCompare(b.term))
+  const terms = [...(ds?.glossary || []), ...EXTRA_GLOSSARY].sort((a: any, b: any) => a.term.localeCompare(b.term))
     .filter((t: any) => !gcat || t.term.toLowerCase().includes(gcat.toLowerCase()) || (t.definition || "").toLowerCase().includes(gcat.toLowerCase()));
   return (
     <div>
@@ -319,6 +327,57 @@ function ExportModal({ onClose }: { onClose: () => void }) {
           </a>
         </div>
       </div>
+    </div>
+  );
+}
+
+/* ---------- Documents ---------- */
+function DocumentsView() {
+  return (
+    <div>
+      <h1 className="text-lg font-semibold text-white mb-1">Documents</h1>
+      <p className="text-sm text-muted mb-5">Additional documents beyond the four-part journal series.</p>
+      <div className="space-y-4">
+        {DOCUMENTS.map((d) => (
+          <a key={d.title} href={d.url} target="_blank" rel="noreferrer" className="block rounded-xl border border-edge bg-card hover:border-accent/50 transition-colors p-5">
+            <div className="text-white font-medium text-[17px]">{d.title}</div>
+            <div className="text-[13px] text-accent mt-0.5">{d.subline}</div>
+            <p className="mt-2 text-sm text-slate-300">{d.description}</p>
+            <div className="mt-3 text-accent text-sm">Open document ↗</div>
+          </a>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Author ---------- */
+function AuthorView() {
+  return (
+    <div className="max-w-3xl">
+      <h1 className="text-2xl font-semibold text-white mb-5">About the Author</h1>
+      <div className="flex flex-col sm:flex-row gap-6">
+        <div className="relative w-40 h-40 rounded-xl border border-edge bg-panel shrink-0 overflow-hidden">
+          <span className="absolute inset-0 grid place-items-center text-muted text-xs">Photo</span>
+          <img src={AUTHOR.photo} alt="Sean C. Harris" className="relative w-full h-full object-cover"
+            onError={(e) => { (e.currentTarget as HTMLImageElement).style.opacity = "0"; }} />
+        </div>
+        <div>
+          <p className="text-slate-300 leading-relaxed">{AUTHOR.summary}</p>
+          <p className="text-slate-300 leading-relaxed mt-4">{AUTHOR.bio}</p>
+          <p className="text-sm text-muted mt-5">{AUTHOR.contact}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Disclaimer ---------- */
+function DisclaimerView() {
+  return (
+    <div className="max-w-3xl">
+      <h1 className="text-2xl font-semibold text-white mb-5">Copyright &amp; Terms of Use</h1>
+      <CopyrightTerms />
     </div>
   );
 }
