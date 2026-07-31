@@ -28,13 +28,13 @@ function renderInline(text: string, key: number) {
 }
 function Transcript({ md }: { md: string }) {
   return (
-    <div className="text-[15px] text-slate-200">
+    <div className="font-serif text-[17px] text-foreground/90">
       {md.split("\n").map((ln, i) => {
         const t = ln.trim();
         if (!t) return null;
-        if (t.startsWith("## ")) return <h3 key={i} className="text-lg font-semibold mt-4 mb-2 text-white">{t.slice(3)}</h3>;
-        if (t.startsWith("# ")) return <h2 key={i} className="text-xl font-semibold mt-2 mb-3 text-white">{t.slice(2)}</h2>;
-        return <p key={i} className="my-2 leading-relaxed">{renderInline(t, i)}</p>;
+        if (t.startsWith("## ")) return <h3 key={i} className="font-display text-lg font-semibold mt-5 mb-2 text-foreground">{t.slice(3)}</h3>;
+        if (t.startsWith("# ")) return <h2 key={i} className="font-display text-xl font-semibold mt-3 mb-3 text-foreground">{t.slice(2)}</h2>;
+        return <p key={i} className="my-2.5 leading-[1.75]">{renderInline(t, i)}</p>;
       })}
     </div>
   );
@@ -168,7 +168,7 @@ function Feed({ items, excerpts, docCats, total, page, totalPages, setPage, onOp
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <h1 className="text-lg font-semibold text-white">Journal</h1>
+        <h1 className="font-display text-lg font-semibold text-foreground">Journal</h1>
         <div className="text-xs text-muted">{total} entries · page {page} of {totalPages}</div>
       </div>
       <div className="space-y-4">
@@ -179,9 +179,9 @@ function Feed({ items, excerpts, docCats, total, page, totalPages, setPage, onOp
               {d.audio_url && <span className="text-accent inline-flex items-center gap-1"><Volume2 size={12} /> audio</span>}
               {d.part != null && <span className="ml-auto">Part {d.part}</span>}
             </div>
-            <div className="mt-1 text-white font-medium text-[17px]">{d.title || d.id}</div>
+            <div className="mt-1.5 font-display text-[19px] font-semibold text-foreground">{d.title || d.id}</div>
             <div className="text-[12px] text-muted mt-0.5">{d.entry_date}{d.weekday ? ` · ${d.weekday}` : ""}{d.recording_time ? ` · ${d.recording_time}` : ""}</div>
-            <p className="mt-2 text-sm text-slate-300 line-clamp-3">{excerpts[d.id] ?? "…"}</p>
+            <p className="mt-2 font-serif text-[15.5px] text-foreground/80 leading-relaxed line-clamp-3">{excerpts[d.id] ?? "…"}</p>
             <div className="mt-3 flex flex-wrap gap-1.5">
               {(docCats[d.id] || []).slice(0, 4).map((c: string) => <span key={c} className="text-[11px] px-2 py-0.5 rounded-full bg-edge text-muted">{cap(c)}</span>)}
             </div>
@@ -201,15 +201,15 @@ function Pager({ page, totalPages, setPage }: any) {
   const go = (p: number) => { setPage(Math.min(totalPages, Math.max(1, p))); window.scrollTo({ top: 0 }); };
   return (
     <div className="flex items-center justify-center gap-1.5 mt-8">
-      <button onClick={() => go(page - 1)} disabled={page === 1} className="px-2.5 py-1.5 rounded-md text-sm text-muted hover:text-white disabled:opacity-40 inline-flex items-center"><ChevronLeft size={16} /></button>
-      {nums[0] > 1 && <button onClick={() => go(1)} className="px-3 py-1.5 rounded-md text-sm text-muted hover:text-white">1</button>}
+      <button onClick={() => go(page - 1)} disabled={page === 1} className="px-2.5 py-1.5 rounded-md text-sm text-muted hover:text-foreground disabled:opacity-40 inline-flex items-center"><ChevronLeft size={16} /></button>
+      {nums[0] > 1 && <button onClick={() => go(1)} className="px-3 py-1.5 rounded-md text-sm text-muted hover:text-foreground">1</button>}
       {nums[0] > 2 && <span className="text-muted px-1">…</span>}
       {nums.map((n) => (
-        <button key={n} onClick={() => go(n)} className={`px-3 py-1.5 rounded-md text-sm ${n === page ? "bg-accent text-primary-foreground" : "text-muted hover:text-white"}`}>{n}</button>
+        <button key={n} onClick={() => go(n)} className={`px-3 py-1.5 rounded-md text-sm ${n === page ? "bg-accent text-primary-foreground" : "text-muted hover:text-foreground"}`}>{n}</button>
       ))}
       {nums[nums.length - 1] < totalPages - 1 && <span className="text-muted px-1">…</span>}
-      {nums[nums.length - 1] < totalPages && <button onClick={() => go(totalPages)} className="px-3 py-1.5 rounded-md text-sm text-muted hover:text-white">{totalPages}</button>}
-      <button onClick={() => go(page + 1)} disabled={page === totalPages} className="px-2.5 py-1.5 rounded-md text-sm text-muted hover:text-white disabled:opacity-40 inline-flex items-center"><ChevronRight size={16} /></button>
+      {nums[nums.length - 1] < totalPages && <button onClick={() => go(totalPages)} className="px-3 py-1.5 rounded-md text-sm text-muted hover:text-foreground">{totalPages}</button>}
+      <button onClick={() => go(page + 1)} disabled={page === totalPages} className="px-2.5 py-1.5 rounded-md text-sm text-muted hover:text-foreground disabled:opacity-40 inline-flex items-center"><ChevronRight size={16} /></button>
     </div>
   );
 }
@@ -223,7 +223,7 @@ function Reader({ doc, body, bodyLoading, cats, gloss, onBack, onPrev, onNext }:
         <span className="font-mono">{doc.id}</span>
         {cats.map((c: string) => <span key={c} className="px-2 py-0.5 bg-edge rounded-full">{cap(c)}</span>)}
       </div>
-      <h1 className="text-2xl font-semibold text-white mb-1">{doc.title || doc.id}</h1>
+      <h1 className="font-display text-3xl font-semibold text-foreground mb-1 leading-tight">{doc.title || doc.id}</h1>
       <div className="text-sm text-muted mb-4">
         {doc.entry_date}{doc.weekday ? ` · ${doc.weekday}` : ""}{doc.audio_duration ? ` · ${doc.audio_duration}` : ""}
         {doc.audio_url && <> · <a className="text-accent underline" href={doc.audio_url} target="_blank" rel="noreferrer">audio ↗</a></>}
@@ -249,9 +249,9 @@ function Glossary({ ds, gcat, setGcat }: any) {
   return (
     <div className="max-w-3xl mx-auto">
       <div className="flex items-center justify-between mb-5">
-        <h1 className="text-lg font-semibold text-white">Glossary</h1>
+        <h1 className="font-display text-lg font-semibold text-foreground">Glossary</h1>
         <input value={gcat} onChange={(e) => setGcat(e.target.value)} placeholder="Filter terms…"
-          className="bg-ink border border-edge rounded-md px-3 py-1.5 text-sm outline-none focus:border-accent w-44" />
+          className="bg-background border border-edge rounded-md px-3 py-1.5 text-sm outline-none focus:border-accent w-44" />
       </div>
       <div className="divide-y divide-edge">
         {terms.map((t: any) => {
@@ -260,9 +260,9 @@ function Glossary({ ds, gcat, setGcat }: any) {
           const body = pron ? parts.slice(1).join("\n\n") : (t.definition || "");
           return (
             <div key={t.slug} className="py-6">
-              <h2 className="text-xl font-semibold text-white">{t.term}</h2>
+              <h2 className="font-display text-xl font-semibold text-foreground">{t.term}</h2>
               {pron && <div className="text-xs text-muted italic mt-1">{pron}</div>}
-              <p className="text-[15px] text-slate-300 mt-2 whitespace-pre-wrap leading-relaxed">{cleanDef(body)}</p>
+              <p className="font-serif text-[16px] text-foreground/85 mt-2 whitespace-pre-wrap leading-[1.7]">{cleanDef(body)}</p>
             </div>
           );
         })}
@@ -275,7 +275,7 @@ function Glossary({ ds, gcat, setGcat }: any) {
 function Sel({ label, value, onChange, options, all }: any) {
   return (
     <label className="block text-xs text-muted">{label}
-      <select value={value} onChange={(e) => onChange(e.target.value)} className="mt-1 w-full bg-ink border border-edge rounded-md px-2 py-2 text-sm text-white">
+      <select value={value} onChange={(e) => onChange(e.target.value)} className="mt-1 w-full bg-background border border-edge rounded-md px-2 py-2 text-sm text-foreground">
         <option value="">{all}</option>
         {options.map((o: any) => <option key={o.v} value={o.v}>{o.l}</option>)}
       </select>
@@ -288,15 +288,15 @@ function FilterPanel(p: any) {
       <div className="absolute inset-0 bg-black/60" onClick={p.onClose} />
       <div className="absolute right-0 top-0 h-full w-full max-w-sm bg-panel border-l border-edge p-5 overflow-y-auto animate-fade-in">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="font-semibold text-white">Search &amp; filter</h2>
-          <button onClick={p.onClose} className="text-muted hover:text-white"><X size={20} /></button>
+          <h2 className="font-display font-semibold text-foreground">Search &amp; filter</h2>
+          <button onClick={p.onClose} className="text-muted hover:text-foreground"><X size={20} /></button>
         </div>
         <div className="space-y-3">
           <input autoFocus value={p.q} onChange={(e: any) => p.setQ(e.target.value)} placeholder="Search title, id, location"
-            className="w-full bg-ink border border-edge rounded-md px-3 py-2 text-sm outline-none focus:border-accent" />
+            className="w-full bg-background border border-edge rounded-md px-3 py-2 text-sm outline-none focus:border-accent" />
           <div className="grid grid-cols-2 gap-2">
-            <label className="text-xs text-muted">From<input type="date" value={p.dFrom} onChange={(e: any) => p.setDFrom(e.target.value)} className="mt-1 w-full bg-ink border border-edge rounded-md px-2 py-1.5 text-sm" /></label>
-            <label className="text-xs text-muted">To<input type="date" value={p.dTo} onChange={(e: any) => p.setDTo(e.target.value)} className="mt-1 w-full bg-ink border border-edge rounded-md px-2 py-1.5 text-sm" /></label>
+            <label className="text-xs text-muted">From<input type="date" value={p.dFrom} onChange={(e: any) => p.setDFrom(e.target.value)} className="mt-1 w-full bg-background border border-edge rounded-md px-2 py-1.5 text-sm" /></label>
+            <label className="text-xs text-muted">To<input type="date" value={p.dTo} onChange={(e: any) => p.setDTo(e.target.value)} className="mt-1 w-full bg-background border border-edge rounded-md px-2 py-1.5 text-sm" /></label>
           </div>
           <Sel label="Part" value={p.part} onChange={p.setPart} options={p.parts.map((x: number) => ({ v: String(x), l: `Part ${x}` }))} all="All parts" />
           <Sel label="Location" value={p.loc} onChange={p.setLoc} options={p.locs.map((x: string) => ({ v: x, l: x }))} all="All locations" />
@@ -320,10 +320,10 @@ function ExportModal({ onClose }: { onClose: () => void }) {
       <div className="absolute inset-0 bg-black/60" onClick={onClose} />
       <div className="relative w-full max-w-md rounded-xl border border-edge bg-panel p-6 animate-fade-in">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-lg font-semibold text-white">Export the corpus</h2>
-          <button onClick={onClose} className="text-muted hover:text-white"><X size={20} /></button>
+          <h2 className="font-display text-lg font-semibold text-foreground">Export the corpus</h2>
+          <button onClick={onClose} className="text-muted hover:text-foreground"><X size={20} /></button>
         </div>
-        <p className="text-sm text-slate-300">
+        <p className="text-sm text-foreground/80">
           You&rsquo;re about to download the <strong>Invisible Ships corpus</strong> as a <strong>.zip of Markdown files</strong> — the journal, transcripts, references, and glossary — structured for use with AI tools.
         </p>
         <p className="text-xs text-muted mt-3">
@@ -344,14 +344,14 @@ function ExportModal({ onClose }: { onClose: () => void }) {
 function DocumentsView() {
   return (
     <div>
-      <h1 className="text-lg font-semibold text-white mb-1">Documents</h1>
+      <h1 className="font-display text-lg font-semibold text-foreground mb-1">Documents</h1>
       <p className="text-sm text-muted mb-5">Additional documents beyond the four-part journal series.</p>
       <div className="space-y-4">
         {DOCUMENTS.map((d) => (
           <a key={d.title} href={d.url} target="_blank" rel="noreferrer" className="block rounded-xl border border-edge bg-card hover:border-accent/50 transition-colors p-5">
-            <div className="text-white font-medium text-[17px]">{d.title}</div>
+            <div className="font-display text-[18px] font-semibold text-foreground">{d.title}</div>
             <div className="text-[13px] text-accent mt-0.5">{d.subline}</div>
-            <p className="mt-2 text-sm text-slate-300">{d.description}</p>
+            <p className="mt-2 font-serif text-[15.5px] text-foreground/80 leading-relaxed">{d.description}</p>
             <div className="mt-3 text-accent text-sm">Open document ↗</div>
           </a>
         ))}
@@ -364,7 +364,7 @@ function DocumentsView() {
 function AuthorView() {
   return (
     <div className="max-w-3xl">
-      <h1 className="text-2xl font-semibold text-white mb-5">About the Author</h1>
+      <h1 className="font-display text-3xl font-semibold text-foreground mb-5">About the Author</h1>
       <div className="flex flex-col sm:flex-row gap-6">
         <div className="relative w-40 h-40 rounded-xl border border-edge bg-panel shrink-0 overflow-hidden">
           <span className="absolute inset-0 grid place-items-center text-muted text-xs">Photo</span>
@@ -372,8 +372,8 @@ function AuthorView() {
             onError={(e) => { (e.currentTarget as HTMLImageElement).style.opacity = "0"; }} />
         </div>
         <div>
-          <p className="text-slate-300 leading-relaxed">{AUTHOR.summary}</p>
-          <p className="text-slate-300 leading-relaxed mt-4">{AUTHOR.bio}</p>
+          <p className="font-serif text-[17px] text-foreground/85 leading-[1.75]">{AUTHOR.summary}</p>
+          <p className="font-serif text-[17px] text-foreground/85 leading-[1.75] mt-4">{AUTHOR.bio}</p>
           <p className="text-sm text-muted mt-5">{AUTHOR.contact}</p>
         </div>
       </div>
@@ -385,7 +385,7 @@ function AuthorView() {
 function DisclaimerView() {
   return (
     <div className="max-w-3xl">
-      <h1 className="text-2xl font-semibold text-white mb-5">Copyright &amp; Terms of Use</h1>
+      <h1 className="font-display text-3xl font-semibold text-foreground mb-5">Copyright &amp; Terms of Use</h1>
       <CopyrightTerms />
     </div>
   );

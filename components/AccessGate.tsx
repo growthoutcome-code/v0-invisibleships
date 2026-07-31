@@ -55,10 +55,10 @@ export default function AccessGate({ onEnter }: { onEnter: () => void }) {
     return (
       <Shell step="welcome" copyright={GATE.welcome.copyright}>
         <div className="text-center">
-          <h1 className="text-5xl sm:text-6xl font-bold tracking-tight text-white">{GATE.welcome.headline}</h1>
-          <p className="mt-5 text-lg text-slate-300 max-w-xl mx-auto">{GATE.welcome.subline}</p>
+          <h1 className="font-display text-5xl sm:text-6xl font-bold tracking-tight text-foreground">{GATE.welcome.headline}</h1>
+          <p className="mt-5 font-serif text-xl text-foreground/80 max-w-xl mx-auto leading-relaxed">{GATE.welcome.subline}</p>
           <p className="mt-3 text-sm text-muted max-w-xl mx-auto">{GATE.welcome.supporting}</p>
-          <p className="mt-6 text-sm text-slate-400 max-w-xl mx-auto">{GATE.welcome.contentWarning}</p>
+          <p className="mt-6 font-serif text-[15px] text-foreground/70 max-w-xl mx-auto leading-relaxed">{GATE.welcome.contentWarning}</p>
           <div className="mt-8">
             <Button
               size="lg"
@@ -77,11 +77,12 @@ export default function AccessGate({ onEnter }: { onEnter: () => void }) {
     );
   }
 
+  // copyright (final step)
   return (
     <Shell step="copyright" copyright={GATE.copyrightLine}>
       <div>
         <p className="text-sm text-muted mb-2">{GATE.copyright.intro}</p>
-        <h2 className="text-2xl font-semibold text-white mb-5">Copyright &amp; Terms of Use</h2>
+        <h2 className="font-display text-2xl font-semibold text-foreground mb-5">Copyright &amp; Terms of Use</h2>
         <div className="max-h-[52vh] overflow-y-auto pr-3 border border-edge rounded-lg p-5 bg-panel/40">
           <CopyrightTerms />
         </div>

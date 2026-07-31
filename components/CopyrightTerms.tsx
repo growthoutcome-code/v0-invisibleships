@@ -1,15 +1,15 @@
 // Verbatim "Copyright & Terms of Use" from the Invisible Ships series front matter.
 export default function CopyrightTerms() {
   return (
-    <div className="space-y-5 text-[15px] leading-relaxed text-slate-200">
+    <div className="space-y-5 font-serif text-[15.5px] leading-[1.7] text-foreground/90">
       <div>
-        <div className="text-white font-semibold text-lg">Copyright</div>
+        <div className="font-display text-foreground font-semibold text-lg">Copyright</div>
         <p className="mt-1">An Unpublished Report by Sean C. Harris</p>
         <p>Copyright © 2026 by Sean C. Harris | All Rights Reserved</p>
       </div>
 
       <div>
-        <div className="text-white font-semibold">A Note from the Author</div>
+        <div className="font-display text-foreground font-semibold">A Note from the Author</div>
         <p className="mt-1">
           This report is a product of my personal research and lived experience. My goal in sharing it
           is to offer a unique perspective and contribute to the conversation.
@@ -17,7 +17,7 @@ export default function CopyrightTerms() {
       </div>
 
       <div className="rounded-lg border border-accent/40 bg-accent/5 p-4">
-        <div className="text-white font-semibold">Critical Disclaimer on Transcripts and Accusations</div>
+        <div className="font-display text-foreground font-semibold">Critical Disclaimer on Transcripts and Accusations</div>
         <p className="mt-1">
           The author explicitly states that the content of the transcripts and &lsquo;suggestions&rsquo;
           recorded in this document are <em>external communications</em> and DO NOT represent the
@@ -35,7 +35,7 @@ export default function CopyrightTerms() {
       </div>
 
       <div>
-        <div className="text-white font-semibold">How You Can Share This Work</div>
+        <div className="font-display text-foreground font-semibold">How You Can Share This Work</div>
         <p className="mt-1">
           I encourage you to share this report with others who may find it valuable. You may distribute
           this document in its complete, original digital format.
@@ -43,7 +43,7 @@ export default function CopyrightTerms() {
       </div>
 
       <div>
-        <div className="text-white font-semibold">Protecting This Work</div>
+        <div className="font-display text-foreground font-semibold">Protecting This Work</div>
         <p className="mt-1">
           The insights and narrative within are my proprietary work. While you are free to share the
           report itself, you are not permitted to reproduce its contents. This means you may not:
@@ -57,7 +57,7 @@ export default function CopyrightTerms() {
       </div>
 
       <div>
-        <div className="text-white font-semibold">How to Contact the Author</div>
+        <div className="font-display text-foreground font-semibold">How to Contact the Author</div>
         <p className="mt-1">
           All inquiries and permission requests are welcome and should be directed to:
           <br />Sean C. Harris

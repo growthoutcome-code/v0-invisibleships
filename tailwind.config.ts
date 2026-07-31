@@ -1,19 +1,31 @@
 import type { Config } from "tailwindcss";
+
+// Themeable tokens read from CSS variables (defined in globals.css as RGB
+// channel triplets) so every color responds to the light/dark class and
+// still supports Tailwind's /opacity modifiers.
+const v = (name: string) => `rgb(var(--${name}) / <alpha-value>)`;
+
 const config: Config = {
   darkMode: "class",
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        // existing app palette
-        ink: "#0f1216", panel: "#161b22", edge: "#232a34",
-        muted: "#8b97a7", accent: "#4a9eff",
+        // app palette (theme-aware)
+        ink: v("background"), panel: v("panel"), edge: v("edge"),
+        muted: v("muted"), accent: v("accent"),
+        // fixed severity colors (read fine on both themes)
         crit: "#ef4444", high: "#f59e0b", med: "#eab308", low: "#22c55e",
-        // shadcn tokens mapped to the same palette (so ui components match)
-        background: "#0f1216", foreground: "#e6eaf0",
-        primary: "#4a9eff", "primary-foreground": "#0a0e14",
-        card: "#161b22", "card-foreground": "#e6eaf0",
-        border: "#232a34", input: "#232a34", ring: "#4a9eff",
+        // shadcn tokens mapped to the same variables (so ui components match)
+        background: v("background"), foreground: v("foreground"),
+        primary: v("accent"), "primary-foreground": v("primary-foreground"),
+        card: v("panel"), "card-foreground": v("foreground"),
+        border: v("edge"), input: v("edge"), ring: v("accent"),
+      },
+      fontFamily: {
+        sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
+        serif: ["var(--font-serif)", "Georgia", "Times New Roman", "serif"],
+        display: ["var(--font-display)", "var(--font-sans)", "ui-sans-serif", "sans-serif"],
       },
       keyframes: {
         "fade-in": { from: { opacity: "0", transform: "translateY(6px)" }, to: { opacity: "1", transform: "translateY(0)" } },
