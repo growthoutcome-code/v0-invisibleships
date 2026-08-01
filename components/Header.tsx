@@ -30,7 +30,7 @@ export default function Header({
     </button>
   );
   return (
-    <header className="sticky top-0 z-30 border-b border-edge bg-panel/80 backdrop-blur">
+    <header className="sticky top-0 z-30 bg-background/85 backdrop-blur">
       <div className="mx-auto max-w-6xl px-4 h-14 flex items-center gap-3">
         <button onClick={onHome} className="font-display font-semibold tracking-tight text-foreground shrink-0">Invisible Ships</button>
 
@@ -55,7 +55,7 @@ export default function Header({
       </div>
 
       {open && (
-        <div className="lg:hidden border-t border-edge bg-panel px-4 py-3 flex flex-col gap-1">
+        <div className="lg:hidden bg-panel px-4 py-3 flex flex-col gap-1">
           {NAV.map((n) => btn(n.t, n.label, "text-left"))}
           <button onClick={() => { onSearch(); setOpen(false); }} className="text-left px-2.5 py-1.5 rounded-md text-sm text-muted hover:text-foreground inline-flex items-center gap-1.5"><Search size={15} /> Search</button>
           <button onClick={() => { onExport(); setOpen(false); }} className="text-left px-2.5 py-1.5 rounded-md text-sm text-muted hover:text-foreground inline-flex items-center gap-1.5"><Download size={15} /> Export</button>

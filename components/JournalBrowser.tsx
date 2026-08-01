@@ -28,13 +28,13 @@ function renderInline(text: string, key: number) {
 }
 function Transcript({ md }: { md: string }) {
   return (
-    <div className="font-serif text-[17px] text-foreground/90">
+    <div className="font-serif text-[18px] text-foreground/90">
       {md.split("\n").map((ln, i) => {
         const t = ln.trim();
         if (!t) return null;
-        if (t.startsWith("## ")) return <h3 key={i} className="font-display text-lg font-semibold mt-5 mb-2 text-foreground">{t.slice(3)}</h3>;
-        if (t.startsWith("# ")) return <h2 key={i} className="font-display text-xl font-semibold mt-3 mb-3 text-foreground">{t.slice(2)}</h2>;
-        return <p key={i} className="my-2.5 leading-[1.75]">{renderInline(t, i)}</p>;
+        if (t.startsWith("## ")) return <h3 key={i} className="font-display text-xl font-semibold mt-6 mb-2 text-foreground">{t.slice(3)}</h3>;
+        if (t.startsWith("# ")) return <h2 key={i} className="font-display text-2xl font-semibold mt-4 mb-3 text-foreground">{t.slice(2)}</h2>;
+        return <p key={i} className="my-3 leading-[1.85]">{renderInline(t, i)}</p>;
       })}
     </div>
   );
@@ -171,9 +171,9 @@ function Feed({ items, excerpts, docCats, total, page, totalPages, setPage, onOp
         <h1 className="font-display text-lg font-semibold text-foreground">Journal</h1>
         <div className="text-xs text-muted">{total} entries · page {page} of {totalPages}</div>
       </div>
-      <div className="space-y-4">
+      <div className="space-y-3">
         {items.map((d: Doc) => (
-          <button key={d.id} onClick={() => onOpen(d.id)} className="block w-full text-left rounded-xl border border-edge bg-card hover:border-accent/50 transition-colors p-5">
+          <button key={d.id} onClick={() => onOpen(d.id)} className="block w-full text-left bg-card hover:bg-edge/60 transition-colors p-5">
             <div className="flex items-center gap-2 text-[11px] uppercase tracking-wide text-muted">
               <span>{d.doc_type}</span>
               {d.audio_url && <span className="text-accent inline-flex items-center gap-1"><Volume2 size={12} /> audio</span>}
@@ -181,9 +181,9 @@ function Feed({ items, excerpts, docCats, total, page, totalPages, setPage, onOp
             </div>
             <div className="mt-1.5 font-display text-[19px] font-semibold text-foreground">{d.title || d.id}</div>
             <div className="text-[12px] text-muted mt-0.5">{d.entry_date}{d.weekday ? ` · ${d.weekday}` : ""}{d.recording_time ? ` · ${d.recording_time}` : ""}</div>
-            <p className="mt-2 font-serif text-[15.5px] text-foreground/80 leading-relaxed line-clamp-3">{excerpts[d.id] ?? "…"}</p>
+            <p className="mt-2.5 font-serif text-[16.5px] text-foreground/80 leading-[1.7] line-clamp-3">{excerpts[d.id] ?? "…"}</p>
             <div className="mt-3 flex flex-wrap gap-1.5">
-              {(docCats[d.id] || []).slice(0, 4).map((c: string) => <span key={c} className="text-[11px] px-2 py-0.5 rounded-full bg-edge text-muted">{cap(c)}</span>)}
+              {(docCats[d.id] || []).slice(0, 4).map((c: string) => <span key={c} className="text-[11px] px-2 py-0.5 bg-edge text-muted">{cap(c)}</span>)}
             </div>
             <div className="mt-3 text-accent text-sm">Read →</div>
           </button>
@@ -201,15 +201,15 @@ function Pager({ page, totalPages, setPage }: any) {
   const go = (p: number) => { setPage(Math.min(totalPages, Math.max(1, p))); window.scrollTo({ top: 0 }); };
   return (
     <div className="flex items-center justify-center gap-1.5 mt-8">
-      <button onClick={() => go(page - 1)} disabled={page === 1} className="px-2.5 py-1.5 rounded-md text-sm text-muted hover:text-foreground disabled:opacity-40 inline-flex items-center"><ChevronLeft size={16} /></button>
-      {nums[0] > 1 && <button onClick={() => go(1)} className="px-3 py-1.5 rounded-md text-sm text-muted hover:text-foreground">1</button>}
+      <button onClick={() => go(page - 1)} disabled={page === 1} className="px-2.5 py-1.5 text-sm text-muted hover:text-foreground disabled:opacity-40 inline-flex items-center"><ChevronLeft size={16} /></button>
+      {nums[0] > 1 && <button onClick={() => go(1)} className="px-3 py-1.5 text-sm text-muted hover:text-foreground">1</button>}
       {nums[0] > 2 && <span className="text-muted px-1">…</span>}
       {nums.map((n) => (
-        <button key={n} onClick={() => go(n)} className={`px-3 py-1.5 rounded-md text-sm ${n === page ? "bg-accent text-primary-foreground" : "text-muted hover:text-foreground"}`}>{n}</button>
+        <button key={n} onClick={() => go(n)} className={`px-3 py-1.5 text-sm ${n === page ? "bg-accent text-primary-foreground" : "text-muted hover:text-foreground"}`}>{n}</button>
       ))}
       {nums[nums.length - 1] < totalPages - 1 && <span className="text-muted px-1">…</span>}
-      {nums[nums.length - 1] < totalPages && <button onClick={() => go(totalPages)} className="px-3 py-1.5 rounded-md text-sm text-muted hover:text-foreground">{totalPages}</button>}
-      <button onClick={() => go(page + 1)} disabled={page === totalPages} className="px-2.5 py-1.5 rounded-md text-sm text-muted hover:text-foreground disabled:opacity-40 inline-flex items-center"><ChevronRight size={16} /></button>
+      {nums[nums.length - 1] < totalPages && <button onClick={() => go(totalPages)} className="px-3 py-1.5 text-sm text-muted hover:text-foreground">{totalPages}</button>}
+      <button onClick={() => go(page + 1)} disabled={page === totalPages} className="px-2.5 py-1.5 text-sm text-muted hover:text-foreground disabled:opacity-40 inline-flex items-center"><ChevronRight size={16} /></button>
     </div>
   );
 }
@@ -221,17 +221,17 @@ function Reader({ doc, body, bodyLoading, cats, gloss, onBack, onPrev, onNext }:
       <button onClick={onBack} className="text-sm text-accent mb-4 inline-flex items-center gap-1"><ChevronLeft size={15} /> Back to journal</button>
       <div className="flex flex-wrap items-center gap-2 text-[11px] text-muted mb-2">
         <span className="font-mono">{doc.id}</span>
-        {cats.map((c: string) => <span key={c} className="px-2 py-0.5 bg-edge rounded-full">{cap(c)}</span>)}
+        {cats.map((c: string) => <span key={c} className="px-2 py-0.5 bg-edge">{cap(c)}</span>)}
       </div>
       <h1 className="font-display text-3xl font-semibold text-foreground mb-1 leading-tight">{doc.title || doc.id}</h1>
-      <div className="text-sm text-muted mb-4">
+      <div className="text-sm text-muted mb-5">
         {doc.entry_date}{doc.weekday ? ` · ${doc.weekday}` : ""}{doc.audio_duration ? ` · ${doc.audio_duration}` : ""}
         {doc.audio_url && <> · <a className="text-accent underline" href={doc.audio_url} target="_blank" rel="noreferrer">audio ↗</a></>}
         {doc.source_url && <> · <a className="text-accent underline" href={doc.source_url} target="_blank" rel="noreferrer">source ↗</a></>}
       </div>
-      {gloss.length > 0 && <div className="text-xs text-muted mb-4">Glossary: {gloss.map(cap).join(", ")}</div>}
+      {gloss.length > 0 && <div className="text-xs text-muted mb-5">Glossary: {gloss.map(cap).join(", ")}</div>}
       {bodyLoading ? <div className="text-muted text-sm">Loading…</div> : <Transcript md={body} />}
-      <div className="flex gap-3 mt-10 pt-6 border-t border-edge">
+      <div className="flex gap-3 mt-12 pt-6">
         {onPrev ? <button onClick={onPrev} className="text-accent text-sm inline-flex items-center gap-1"><ChevronLeft size={15} /> Previous</button> : <span />}
         {onNext && <button onClick={onNext} className="text-accent text-sm ml-auto inline-flex items-center gap-1">Next <ChevronRight size={15} /></button>}
       </div>
@@ -251,18 +251,18 @@ function Glossary({ ds, gcat, setGcat }: any) {
       <div className="flex items-center justify-between mb-5">
         <h1 className="font-display text-lg font-semibold text-foreground">Glossary</h1>
         <input value={gcat} onChange={(e) => setGcat(e.target.value)} placeholder="Filter terms…"
-          className="bg-background border border-edge rounded-md px-3 py-1.5 text-sm outline-none focus:border-accent w-44" />
+          className="bg-panel px-3 py-1.5 text-sm outline-none focus:ring-1 focus:ring-accent w-44" />
       </div>
-      <div className="divide-y divide-edge">
+      <div className="space-y-8">
         {terms.map((t: any) => {
           const parts: string[] = (t.definition || "").split("\n\n");
           const pron = parts.length > 1 && parts[0].length < 80 ? parts[0].trim() : "";
           const body = pron ? parts.slice(1).join("\n\n") : (t.definition || "");
           return (
-            <div key={t.slug} className="py-6">
+            <div key={t.slug}>
               <h2 className="font-display text-xl font-semibold text-foreground">{t.term}</h2>
               {pron && <div className="text-xs text-muted italic mt-1">{pron}</div>}
-              <p className="font-serif text-[16px] text-foreground/85 mt-2 whitespace-pre-wrap leading-[1.7]">{cleanDef(body)}</p>
+              <p className="font-serif text-[17px] text-foreground/85 mt-2 whitespace-pre-wrap leading-[1.75]">{cleanDef(body)}</p>
             </div>
           );
         })}
@@ -275,7 +275,7 @@ function Glossary({ ds, gcat, setGcat }: any) {
 function Sel({ label, value, onChange, options, all }: any) {
   return (
     <label className="block text-xs text-muted">{label}
-      <select value={value} onChange={(e) => onChange(e.target.value)} className="mt-1 w-full bg-background border border-edge rounded-md px-2 py-2 text-sm text-foreground">
+      <select value={value} onChange={(e) => onChange(e.target.value)} className="mt-1 w-full bg-background border border-edge px-2 py-2 text-sm text-foreground">
         <option value="">{all}</option>
         {options.map((o: any) => <option key={o.v} value={o.v}>{o.l}</option>)}
       </select>
@@ -286,17 +286,17 @@ function FilterPanel(p: any) {
   return (
     <div className="fixed inset-0 z-40">
       <div className="absolute inset-0 bg-black/60" onClick={p.onClose} />
-      <div className="absolute right-0 top-0 h-full w-full max-w-sm bg-panel border-l border-edge p-5 overflow-y-auto animate-fade-in">
+      <div className="absolute right-0 top-0 h-full w-full max-w-sm bg-panel p-5 overflow-y-auto animate-fade-in">
         <div className="flex items-center justify-between mb-4">
           <h2 className="font-display font-semibold text-foreground">Search &amp; filter</h2>
           <button onClick={p.onClose} className="text-muted hover:text-foreground"><X size={20} /></button>
         </div>
         <div className="space-y-3">
           <input autoFocus value={p.q} onChange={(e: any) => p.setQ(e.target.value)} placeholder="Search title, id, location"
-            className="w-full bg-background border border-edge rounded-md px-3 py-2 text-sm outline-none focus:border-accent" />
+            className="w-full bg-background border border-edge px-3 py-2 text-sm outline-none focus:border-accent" />
           <div className="grid grid-cols-2 gap-2">
-            <label className="text-xs text-muted">From<input type="date" value={p.dFrom} onChange={(e: any) => p.setDFrom(e.target.value)} className="mt-1 w-full bg-background border border-edge rounded-md px-2 py-1.5 text-sm" /></label>
-            <label className="text-xs text-muted">To<input type="date" value={p.dTo} onChange={(e: any) => p.setDTo(e.target.value)} className="mt-1 w-full bg-background border border-edge rounded-md px-2 py-1.5 text-sm" /></label>
+            <label className="text-xs text-muted">From<input type="date" value={p.dFrom} onChange={(e: any) => p.setDFrom(e.target.value)} className="mt-1 w-full bg-background border border-edge px-2 py-1.5 text-sm" /></label>
+            <label className="text-xs text-muted">To<input type="date" value={p.dTo} onChange={(e: any) => p.setDTo(e.target.value)} className="mt-1 w-full bg-background border border-edge px-2 py-1.5 text-sm" /></label>
           </div>
           <Sel label="Part" value={p.part} onChange={p.setPart} options={p.parts.map((x: number) => ({ v: String(x), l: `Part ${x}` }))} all="All parts" />
           <Sel label="Location" value={p.loc} onChange={p.setLoc} options={p.locs.map((x: string) => ({ v: x, l: x }))} all="All locations" />
@@ -318,12 +318,12 @@ function ExportModal({ onClose }: { onClose: () => void }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
       <div className="absolute inset-0 bg-black/60" onClick={onClose} />
-      <div className="relative w-full max-w-md rounded-xl border border-edge bg-panel p-6 animate-fade-in">
+      <div className="relative w-full max-w-md bg-panel p-6 animate-fade-in">
         <div className="flex items-center justify-between mb-3">
           <h2 className="font-display text-lg font-semibold text-foreground">Export the corpus</h2>
           <button onClick={onClose} className="text-muted hover:text-foreground"><X size={20} /></button>
         </div>
-        <p className="text-sm text-foreground/80">
+        <p className="font-serif text-[16px] text-foreground/80 leading-[1.7]">
           You&rsquo;re about to download the <strong>Invisible Ships corpus</strong> as a <strong>.zip of Markdown files</strong> — the journal, transcripts, references, and glossary — structured for use with AI tools.
         </p>
         <p className="text-xs text-muted mt-3">
@@ -346,12 +346,12 @@ function DocumentsView() {
     <div>
       <h1 className="font-display text-lg font-semibold text-foreground mb-1">Documents</h1>
       <p className="text-sm text-muted mb-5">Additional documents beyond the four-part journal series.</p>
-      <div className="space-y-4">
+      <div className="space-y-3">
         {DOCUMENTS.map((d) => (
-          <a key={d.title} href={d.url} target="_blank" rel="noreferrer" className="block rounded-xl border border-edge bg-card hover:border-accent/50 transition-colors p-5">
+          <a key={d.title} href={d.url} target="_blank" rel="noreferrer" className="block bg-card hover:bg-edge/60 transition-colors p-5">
             <div className="font-display text-[18px] font-semibold text-foreground">{d.title}</div>
             <div className="text-[13px] text-accent mt-0.5">{d.subline}</div>
-            <p className="mt-2 font-serif text-[15.5px] text-foreground/80 leading-relaxed">{d.description}</p>
+            <p className="mt-2 font-serif text-[16.5px] text-foreground/80 leading-[1.7]">{d.description}</p>
             <div className="mt-3 text-accent text-sm">Open document ↗</div>
           </a>
         ))}
@@ -366,14 +366,14 @@ function AuthorView() {
     <div className="max-w-3xl">
       <h1 className="font-display text-3xl font-semibold text-foreground mb-5">About the Author</h1>
       <div className="flex flex-col sm:flex-row gap-6">
-        <div className="relative w-40 h-40 rounded-xl border border-edge bg-panel shrink-0 overflow-hidden">
+        <div className="relative w-40 h-40 bg-panel shrink-0 overflow-hidden">
           <span className="absolute inset-0 grid place-items-center text-muted text-xs">Photo</span>
           <img src={AUTHOR.photo} alt="Sean C. Harris" className="relative w-full h-full object-cover"
             onError={(e) => { (e.currentTarget as HTMLImageElement).style.opacity = "0"; }} />
         </div>
         <div>
-          <p className="font-serif text-[17px] text-foreground/85 leading-[1.75]">{AUTHOR.summary}</p>
-          <p className="font-serif text-[17px] text-foreground/85 leading-[1.75] mt-4">{AUTHOR.bio}</p>
+          <p className="font-serif text-[18px] text-foreground/85 leading-[1.8]">{AUTHOR.summary}</p>
+          <p className="font-serif text-[18px] text-foreground/85 leading-[1.8] mt-4">{AUTHOR.bio}</p>
           <p className="text-sm text-muted mt-5">{AUTHOR.contact}</p>
         </div>
       </div>

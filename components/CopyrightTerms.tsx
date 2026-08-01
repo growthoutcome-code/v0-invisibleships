@@ -1,7 +1,7 @@
 // Verbatim "Copyright & Terms of Use" from the Invisible Ships series front matter.
 export default function CopyrightTerms() {
   return (
-    <div className="space-y-5 font-serif text-[15.5px] leading-[1.7] text-foreground/90">
+    <div className="space-y-5 font-serif text-[16.5px] leading-[1.75] text-foreground/90">
       <div>
         <div className="font-display text-foreground font-semibold text-lg">Copyright</div>
         <p className="mt-1">An Unpublished Report by Sean C. Harris</p>
@@ -16,7 +16,7 @@ export default function CopyrightTerms() {
         </p>
       </div>
 
-      <div className="rounded-lg border border-accent/40 bg-accent/5 p-4">
+      <div className="bg-panel p-4">
         <div className="font-display text-foreground font-semibold">Critical Disclaimer on Transcripts and Accusations</div>
         <p className="mt-1">
           The author explicitly states that the content of the transcripts and &lsquo;suggestions&rsquo;

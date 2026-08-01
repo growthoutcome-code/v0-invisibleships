@@ -85,7 +85,7 @@ export default function AccessGate({ onEnter }: { onEnter: () => void }) {
         <div>
           <p className="text-sm text-muted mb-2">{GATE.copyright.intro}</p>
           <h2 className="font-display text-2xl font-semibold text-foreground mb-5">Copyright &amp; Terms of Use</h2>
-          <div className="max-h-[52vh] overflow-y-auto pr-3 border border-edge p-5 bg-panel/40">
+          <div className="max-h-[52vh] overflow-y-auto pr-1 py-4 bg-panel/40 px-5">
             <CopyrightTerms />
           </div>
           <div className="mt-6 flex items-center gap-3">
@@ -103,10 +103,10 @@ export default function AccessGate({ onEnter }: { onEnter: () => void }) {
       <div>
         <p className="text-xs uppercase tracking-[0.14em] text-muted mb-2">{GATE.perceptual.eyebrow}</p>
         <h2 className="font-display text-3xl font-semibold text-foreground mb-5">{GATE.perceptual.title}</h2>
-        <div className="font-serif text-[17px] leading-[1.75] text-foreground/90 space-y-4">
+        <div className="font-serif text-[18px] leading-[1.8] text-foreground/90 space-y-4">
           <p>{GATE.perceptual.definition}</p>
           <p>{GATE.perceptual.story}</p>
-          <p className="text-foreground/70 border-l-2 border-edge pl-4">{GATE.perceptual.caveat}</p>
+          <p className="text-foreground/60 italic">{GATE.perceptual.caveat}</p>
           <p>{GATE.perceptual.tie}</p>
         </div>
         <div className="mt-8 flex items-center gap-3">
