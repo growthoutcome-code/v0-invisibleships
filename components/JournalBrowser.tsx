@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import { loadDataset, getBody } from "@/lib/data";
 import type { Dataset, Doc } from "@/lib/types";
 import { track } from "@/lib/analytics";
@@ -9,39 +10,18 @@ import { Button } from "@/components/ui/button";
 import { X, ChevronLeft, ChevronRight, Volume2 } from "lucide-react";
 import CopyrightTerms from "@/components/CopyrightTerms";
 import ShareMenu from "@/components/ShareMenu";
+import { Transcript } from "@/components/Transcript";
+import { cleanTerm, cleanDef, splitDef } from "@/lib/glossary-format";
 import { DOCUMENTS, AUTHOR, EXTRA_GLOSSARY } from "@/lib/site-content";
+
+const journalHref = (id: string) => `/journal/${id.toLowerCase()}`;
+const glossaryHref = (slug: string) => `/glossary/${slug.toLowerCase()}`;
 
 const PAGE_SIZE = 10;
 const SITE = "Invisible Ships";
 const TABS: Tab[] = ["journal", "glossary", "documents", "author", "disclaimer"];
 const cap = (s?: string | null) => (s ? s.charAt(0).toUpperCase() + s.slice(1).replace(/-/g, " ") : "");
 
-function renderInline(text: string, key: number) {
-  const nodes: React.ReactNode[] = [];
-  const re = /\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*/g;
-  let last = 0, m: RegExpExecArray | null, i = 0;
-  while ((m = re.exec(text))) {
-    if (m.index > last) nodes.push(text.slice(last, m.index));
-    if (m[1]) nodes.push(<a key={`${key}-${i}`} href={m[2]} target="_blank" rel="noreferrer" className="text-accent underline">{m[1]}</a>);
-    else nodes.push(<strong key={`${key}-${i}`}>{m[3]}</strong>);
-    last = re.lastIndex; i++;
-  }
-  if (last < text.length) nodes.push(text.slice(last));
-  return nodes;
-}
-function Transcript({ md }: { md: string }) {
-  return (
-    <div className="font-serif text-[27px] text-foreground/90">
-      {md.split("\n").map((ln, i) => {
-        const t = ln.trim();
-        if (!t) return null;
-        if (t.startsWith("## ")) return <h3 key={i} className="font-display text-2xl font-semibold mt-8 mb-3 text-foreground">{t.slice(3)}</h3>;
-        if (t.startsWith("# ")) return <h2 key={i} className="font-display text-3xl font-semibold mt-6 mb-4 text-foreground">{t.slice(2)}</h2>;
-        return <p key={i} className="my-4 leading-[1.6]">{renderInline(t, i)}</p>;
-      })}
-    </div>
-  );
-}
 function excerpt(md: string): string {
   const lines = (md || "").split("\n").map((l) => l.trim()).filter(Boolean)
     .filter((l) => !l.startsWith("#") && !l.startsWith("**Audio") && !/^File duration/i.test(l));
@@ -220,7 +200,7 @@ function Feed({ items, excerpts, docCats, total, page, totalPages, setPage, onOp
       </div>
       <div className="space-y-10">
         {items.map((d: Doc) => (
-          <button key={d.id} onClick={() => onOpen(d.id)} className="group block w-full text-left">
+          <Link key={d.id} href={journalHref(d.id)} className="group block w-full text-left">
             <div className="flex items-center gap-2 text-[11px] uppercase tracking-wide text-muted">
               <span>{d.doc_type}</span>
               {d.audio_url && <span className="text-accent inline-flex items-center gap-1"><Volume2 size={12} /> audio</span>}
@@ -233,7 +213,7 @@ function Feed({ items, excerpts, docCats, total, page, totalPages, setPage, onOp
               {(docCats[d.id] || []).slice(0, 4).map((c: string) => <span key={c}>{cap(c)}</span>)}
             </div>
             <div className="mt-3 text-accent text-sm">Read →</div>
-          </button>
+          </Link>
         ))}
         {items.length === 0 && <div className="text-muted text-sm py-10 text-center">No entries match. <button onClick={onSearch} className="text-accent underline">Adjust filters</button></div>}
       </div>
@@ -290,30 +270,6 @@ function Reader({ doc, body, bodyLoading, cats, gloss, onBack, onPrev, onNext }:
 }
 
 /* ---------- Glossary ---------- */
-// Strip markdown headings anywhere in a definition (some entries lead with "## term").
-function stripHeadings(str: string) {
-  return (str || "").replace(/^\s*#{1,6}\s+.*(?:\n|$)/gm, "");
-}
-// Some term names carry raw markdown (links, bold). Render/​share them clean.
-function cleanTerm(str: string) {
-  return (str || "").replace(/\[([^\]]+)\]\([^)]+\)/g, "$1").replace(/\*+/g, "").trim();
-}
-function cleanDef(str: string) {
-  return stripHeadings(str)
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1") // links → text
-    .replace(/\*+/g, "")                      // bold/italic markers
-    .replace(/\n{3,}/g, "\n\n")               // collapse extra blank lines
-    .trim();
-}
-// A definition may lead with a short pronunciation line, separated by a blank line.
-function splitDef(def?: string) {
-  const cleaned = stripHeadings(def || "").trim();
-  const parts: string[] = cleaned.split("\n\n");
-  const pron = parts.length > 1 && parts[0].length < 80 ? parts[0].trim().replace(/\*+/g, "") : "";
-  const body = pron ? parts.slice(1).join("\n\n") : cleaned;
-  return { pron, body };
-}
-
 function GlossarySection({ terms, gcat, setGcat, gsel, setGsel }: any) {
   if (gsel) {
     const gi = terms.findIndex((t: any) => t.slug === gsel);
@@ -347,12 +303,12 @@ function GlossaryList({ terms, gcat, setGcat, onOpen }: any) {
         {shown.map((t: any) => {
           const { pron, body } = splitDef(t.definition);
           return (
-            <button key={t.slug} onClick={() => onOpen(t.slug)} className="group block w-full text-left">
+            <Link key={t.slug} href={glossaryHref(t.slug)} className="group block w-full text-left">
               <h2 className="font-display text-xl font-semibold text-foreground group-hover:text-accent transition-colors">{cleanTerm(t.term)}</h2>
               {pron && <div className="text-xs text-muted italic mt-1">{pron}</div>}
               <p className="font-serif text-[25px] text-foreground/85 mt-2 whitespace-pre-wrap leading-[1.6] line-clamp-3">{cleanDef(body)}</p>
               <div className="mt-2 text-accent text-sm">Read →</div>
-            </button>
+            </Link>
           );
         })}
         {shown.length === 0 && <div className="text-muted text-sm py-10 text-center">No terms match “{gcat}”.</div>}

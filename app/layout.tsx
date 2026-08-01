@@ -3,8 +3,22 @@ import "./globals.css";
 import AnalyticsInit from "@/components/AnalyticsInit";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.invisibleships.com"),
   title: "Invisible Ships — Journal Browser",
   description: "Discovery of Neuro-tech Terrorism — journal, transcripts, and glossary.",
+  openGraph: {
+    title: "Invisible Ships",
+    description: "A firsthand documentary archive of neuro-tech terrorism — journal, transcripts, and glossary.",
+    siteName: "Invisible Ships",
+    url: "/",
+    images: ["/og-default.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Invisible Ships",
+    description: "A firsthand documentary archive of neuro-tech terrorism — journal, transcripts, and glossary.",
+    images: ["/og-default.png"],
+  },
 };
 
 // Runs before paint (no flash): use the visitor's saved choice if they have
