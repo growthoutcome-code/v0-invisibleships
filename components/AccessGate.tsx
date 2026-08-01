@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import CopyrightTerms from "@/components/CopyrightTerms";
+import GateAnimation from "@/components/GateAnimation";
 import { GATE } from "@/lib/gate-content";
 import { track } from "@/lib/analytics";
 
@@ -58,11 +59,7 @@ export default function AccessGate({ onEnter }: { onEnter: () => void }) {
     return (
       <Shell step="welcome" copyright={GATE.welcome.copyright}>
         <div className="text-center">
-          <img
-            src="/gate-01.png"
-            alt="Line drawing of figures observing a wireframe human head on a screen; one wears a headset."
-            className="mx-auto mb-8 w-full max-w-2xl dark:invert select-none"
-          />
+          <GateAnimation />
           <h1 className="font-display text-5xl sm:text-6xl font-bold tracking-tight text-foreground">{GATE.welcome.headline}</h1>
           <p className="mt-5 font-serif text-3xl text-foreground/80 max-w-2xl mx-auto leading-snug">{GATE.welcome.subline}</p>
           <p className="mt-3 text-sm text-muted max-w-xl mx-auto">{GATE.welcome.supporting}</p>

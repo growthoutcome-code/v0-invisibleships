@@ -52,3 +52,21 @@ body {
 
 .scroll-thin::-webkit-scrollbar { width: 8px; height: 8px; }
 .scroll-thin::-webkit-scrollbar-thumb { background: rgb(var(--edge)); border-radius: 4px; }
+
+/* ---- Gate welcome animation (four scenes crossfading, 12s loop) ---- */
+.gate-anim svg { display: block; width: 100%; height: auto; }
+.gate-anim .ga-bg { fill: rgb(var(--background)); }
+.gate-anim .ga-scene { opacity: 0; filter: grayscale(1) contrast(1.55) brightness(1.12); }
+.dark .gate-anim .ga-scene { filter: grayscale(1) invert(1) contrast(1.55) brightness(1.12); }
+.gate-anim .ga-s1 { animation: ga-open 12s ease-in-out infinite; }
+.gate-anim .ga-s2 { animation: ga-second 12s ease-in-out infinite; }
+.gate-anim .ga-s3 { animation: ga-third 12s ease-in-out infinite; }
+.gate-anim .ga-sq { animation: ga-final 12s ease-in-out infinite; }
+@keyframes ga-open   { 0% { opacity: 1; } 11% { opacity: 1; } 20% { opacity: 0; } 86% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes ga-second { 0% { opacity: 0; } 11% { opacity: 0; } 20% { opacity: 1; } 33% { opacity: 1; } 43% { opacity: 0; } 100% { opacity: 0; } }
+@keyframes ga-third  { 0% { opacity: 0; } 33% { opacity: 0; } 43% { opacity: 1; } 56% { opacity: 1; } 65% { opacity: 0; } 100% { opacity: 0; } }
+@keyframes ga-final  { 0% { opacity: 0; } 56% { opacity: 0; } 65% { opacity: 1; } 86% { opacity: 1; } 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .gate-anim .ga-scene { animation: none !important; }
+  .gate-anim .ga-sq { opacity: 1; } /* hold the final scene statically */
+}
