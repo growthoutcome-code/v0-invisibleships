@@ -171,19 +171,19 @@ function Feed({ items, excerpts, docCats, total, page, totalPages, setPage, onOp
         <h1 className="font-display text-lg font-semibold text-foreground">Journal</h1>
         <div className="text-xs text-muted">{total} entries · page {page} of {totalPages}</div>
       </div>
-      <div className="space-y-3">
+      <div className="space-y-10">
         {items.map((d: Doc) => (
-          <button key={d.id} onClick={() => onOpen(d.id)} className="block w-full text-left bg-card hover:bg-edge/60 transition-colors p-5">
+          <button key={d.id} onClick={() => onOpen(d.id)} className="group block w-full text-left">
             <div className="flex items-center gap-2 text-[11px] uppercase tracking-wide text-muted">
               <span>{d.doc_type}</span>
               {d.audio_url && <span className="text-accent inline-flex items-center gap-1"><Volume2 size={12} /> audio</span>}
               {d.part != null && <span className="ml-auto">Part {d.part}</span>}
             </div>
-            <div className="mt-1.5 font-display text-[19px] font-semibold text-foreground">{d.title || d.id}</div>
+            <div className="mt-1.5 font-display text-[19px] font-semibold text-foreground group-hover:text-accent transition-colors">{d.title || d.id}</div>
             <div className="text-[12px] text-muted mt-0.5">{d.entry_date}{d.weekday ? ` · ${d.weekday}` : ""}{d.recording_time ? ` · ${d.recording_time}` : ""}</div>
             <p className="mt-2.5 font-serif text-[24px] text-foreground/80 leading-[1.5] line-clamp-3">{excerpts[d.id] ?? "…"}</p>
-            <div className="mt-3 flex flex-wrap gap-1.5">
-              {(docCats[d.id] || []).slice(0, 4).map((c: string) => <span key={c} className="text-[11px] px-2 py-0.5 bg-edge text-muted">{cap(c)}</span>)}
+            <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-[11px] uppercase tracking-wide text-muted">
+              {(docCats[d.id] || []).slice(0, 4).map((c: string) => <span key={c}>{cap(c)}</span>)}
             </div>
             <div className="mt-3 text-accent text-sm">Read →</div>
           </button>
@@ -221,7 +221,7 @@ function Reader({ doc, body, bodyLoading, cats, gloss, onBack, onPrev, onNext }:
       <button onClick={onBack} className="text-sm text-accent mb-4 inline-flex items-center gap-1"><ChevronLeft size={15} /> Back to journal</button>
       <div className="flex flex-wrap items-center gap-2 text-[11px] text-muted mb-2">
         <span className="font-mono">{doc.id}</span>
-        {cats.map((c: string) => <span key={c} className="px-2 py-0.5 bg-edge">{cap(c)}</span>)}
+        {cats.map((c: string) => <span key={c} className="uppercase tracking-wide">{cap(c)}</span>)}
       </div>
       <h1 className="font-display text-3xl font-semibold text-foreground mb-1 leading-tight">{doc.title || doc.id}</h1>
       <div className="text-sm text-muted mb-5">
@@ -346,10 +346,10 @@ function DocumentsView() {
     <div>
       <h1 className="font-display text-lg font-semibold text-foreground mb-1">Documents</h1>
       <p className="text-sm text-muted mb-5">Additional documents beyond the four-part journal series.</p>
-      <div className="space-y-3">
+      <div className="space-y-10">
         {DOCUMENTS.map((d) => (
-          <a key={d.title} href={d.url} target="_blank" rel="noreferrer" className="block bg-card hover:bg-edge/60 transition-colors p-5">
-            <div className="font-display text-[18px] font-semibold text-foreground">{d.title}</div>
+          <a key={d.title} href={d.url} target="_blank" rel="noreferrer" className="group block">
+            <div className="font-display text-[18px] font-semibold text-foreground group-hover:text-accent transition-colors">{d.title}</div>
             <div className="text-[13px] text-accent mt-0.5">{d.subline}</div>
             <p className="mt-2 font-serif text-[24px] text-foreground/80 leading-[1.5]">{d.description}</p>
             <div className="mt-3 text-accent text-sm">Open document ↗</div>

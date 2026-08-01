@@ -57,28 +57,40 @@ export default function AccessGate({ onEnter }: { onEnter: () => void }) {
 
   if (step === "welcome") {
     return (
-      <Shell step="welcome" copyright={GATE.welcome.copyright}>
-        <div className="text-center">
-          <GateAnimation />
-          <h1 className="font-display text-5xl sm:text-6xl font-bold tracking-tight text-foreground">{GATE.welcome.headline}</h1>
-          <p className="mt-5 font-serif text-3xl text-foreground/80 max-w-2xl mx-auto leading-snug">{GATE.welcome.subline}</p>
-          <p className="mt-3 text-sm text-muted max-w-xl mx-auto">{GATE.welcome.supporting}</p>
-          <p className="mt-6 font-serif text-[15px] text-foreground/70 max-w-xl mx-auto leading-relaxed">{GATE.welcome.contentWarning}</p>
-          <div className="mt-8">
-            <Button
-              size="lg"
-              onClick={() => {
-                track("gate_age_confirmed");
-                track("gate_enter_clicked");
-                setStep("copyright");
-              }}
-            >
-              {GATE.welcome.cta}
-            </Button>
-            <p className="mt-4 text-[13px] text-foreground/70 max-w-md mx-auto">{GATE.welcome.ageLine}</p>
+      <main className="relative min-h-screen bg-background text-foreground overflow-hidden">
+        {/* Full-screen animation */}
+        <GateAnimation fill />
+        {/* Left content overlay with a gradient scrim for legibility */}
+        <div className="relative z-10 min-h-screen flex flex-col w-full sm:w-[62%] md:w-[48%] lg:w-[38%] px-6 sm:px-10 lg:px-12 py-10 bg-gradient-to-r from-background from-30% via-background/85 to-transparent">
+          <div className="flex-1 flex flex-col justify-center animate-fade-in max-w-md">
+            <h1 className="font-display text-4xl sm:text-5xl font-bold tracking-tight text-foreground">{GATE.welcome.headline}</h1>
+            <p className="mt-4 font-serif text-xl sm:text-2xl text-foreground/80 leading-snug">{GATE.welcome.subline}</p>
+            <p className="mt-3 text-sm text-muted">{GATE.welcome.supporting}</p>
+            <p className="mt-5 font-serif text-[15px] text-foreground/70 leading-relaxed">{GATE.welcome.contentWarning}</p>
+            <div className="mt-7">
+              <Button
+                size="lg"
+                onClick={() => {
+                  track("gate_age_confirmed");
+                  track("gate_enter_clicked");
+                  setStep("copyright");
+                }}
+              >
+                {GATE.welcome.cta}
+              </Button>
+              <p className="mt-4 text-[13px] text-foreground/70">{GATE.welcome.ageLine}</p>
+            </div>
+          </div>
+          <div className="mt-8 max-w-md">
+            <div className="flex items-center gap-2">
+              {Array.from({ length: STEP_COUNT }, (_, k) => k + 1).map((n) => (
+                <span key={n} className={`h-1.5 ${n === 1 ? "w-6 bg-accent" : "w-2 bg-edge"}`} />
+              ))}
+            </div>
+            <div className="text-xs text-muted pt-4">{GATE.welcome.copyright}</div>
           </div>
         </div>
-      </Shell>
+      </main>
     );
   }
 
@@ -88,7 +100,7 @@ export default function AccessGate({ onEnter }: { onEnter: () => void }) {
         <div>
           <p className="text-sm text-muted mb-2">{GATE.copyright.intro}</p>
           <h2 className="font-display text-2xl font-semibold text-foreground mb-5">Copyright &amp; Terms of Use</h2>
-          <div className="max-h-[52vh] overflow-y-auto pr-1 py-4 bg-panel/40 px-5">
+          <div className="max-h-[52vh] overflow-y-auto pr-2 py-2">
             <CopyrightTerms />
           </div>
           <div className="mt-6 flex items-center gap-3">

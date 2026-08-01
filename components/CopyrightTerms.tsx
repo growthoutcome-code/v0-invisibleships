@@ -16,7 +16,7 @@ export default function CopyrightTerms() {
         </p>
       </div>
 
-      <div className="bg-panel p-4">
+      <div>
         <div className="font-display text-foreground font-semibold">Critical Disclaimer on Transcripts and Accusations</div>
         <p className="mt-1">
           The author explicitly states that the content of the transcripts and &lsquo;suggestions&rsquo;

@@ -55,6 +55,7 @@ body {
 
 /* ---- Gate welcome animation (four scenes crossfading, 12s loop) ---- */
 .gate-anim svg { display: block; width: 100%; height: auto; }
+.gate-anim.is-fill, .gate-anim.is-fill svg { width: 100%; height: 100%; }
 .gate-anim .ga-bg { fill: rgb(var(--background)); }
 .gate-anim .ga-scene { opacity: 0; filter: grayscale(1) contrast(1.55) brightness(1.12); }
 .dark .gate-anim .ga-scene { filter: grayscale(1) invert(1) contrast(1.55) brightness(1.12); }
