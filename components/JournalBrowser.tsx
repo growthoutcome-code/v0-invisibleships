@@ -64,6 +64,7 @@ export default function JournalBrowser() {
 
   const [page, setPage] = useState(1);
   const [sel, setSel] = useState<string | null>(null);
+  const [gsel, setGsel] = useState<string | null>(null);
   const [body, setBody] = useState(""); const [bodyLoading, setBodyLoading] = useState(false);
   const [excerpts, setExcerpts] = useState<Record<string, string>>({});
   const [panelOpen, setPanelOpen] = useState(false);
@@ -79,8 +80,10 @@ export default function JournalBrowser() {
     try {
       const sp = new URLSearchParams(window.location.search);
       const entry = sp.get("entry");
+      const term = sp.get("term");
       const view = sp.get("view") as Tab | null;
       if (entry && ds.docs.some((d) => d.id === entry)) { setTab("journal"); setSel(entry); }
+      else if (term && glossaryTerms.some((t: any) => t.slug === term)) { setTab("glossary"); setGsel(term); }
       else if (view && TABS.includes(view)) { setTab(view); }
     } catch { /* ignore */ }
     setDeepLinked(true);
@@ -92,13 +95,24 @@ export default function JournalBrowser() {
     try {
       const params = new URLSearchParams();
       if (sel) params.set("entry", sel);
+      else if (tab === "glossary" && gsel) params.set("term", gsel);
       else if (tab !== "journal") params.set("view", tab);
       const qs = params.toString();
       window.history.replaceState(null, "", window.location.pathname + (qs ? `?${qs}` : "") + window.location.hash);
     } catch { /* ignore */ }
-  }, [tab, sel, deepLinked]);
+  }, [tab, sel, gsel, deepLinked]);
+
+  // Track + scroll to top when a glossary term opens.
+  useEffect(() => {
+    if (gsel) { track("term_opened", { slug: gsel }); window.scrollTo({ top: 0 }); }
+  }, [gsel]);
 
   const journal = useMemo(() => (ds?.docs || []).filter((d) => d.collection === "journal"), [ds]);
+  // Full glossary, sorted — used for deep-link validation and prev/next term navigation.
+  const glossaryTerms = useMemo(
+    () => [...(ds?.glossary || []), ...EXTRA_GLOSSARY].sort((a: any, b: any) => a.term.localeCompare(b.term)),
+    [ds]
+  );
   const parts = useMemo(() => Array.from(new Set(journal.map((d) => d.part).filter((p): p is number => p != null))).sort(), [journal]);
   const locs = useMemo(() => Array.from(new Set(journal.map((d) => d.location).filter((l): l is string => !!l))).sort(), [journal]);
   const topics = useMemo(() => (ds?.categories || []).filter((c) => c.kind === "category").map((c) => c.slug).sort(), [ds]);
@@ -147,17 +161,17 @@ export default function JournalBrowser() {
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       <Header
         tab={tab}
-        onTab={(t) => { setTab(t); setSel(null); }}
+        onTab={(t) => { setTab(t); setSel(null); setGsel(null); }}
         onSearch={() => { setPanelOpen(true); track("search_opened"); }}
         onExport={() => { setExportOpen(true); track("export_opened"); }}
-        onHome={() => { setTab("journal"); setSel(null); setPage(1); }}
+        onHome={() => { setTab("journal"); setSel(null); setGsel(null); setPage(1); }}
       />
 
       <main className="flex-1 w-full mx-auto max-w-4xl px-4 py-6">
         {loading ? (
           <div className="text-muted text-center py-20">Loading corpus…</div>
         ) : tab === "glossary" ? (
-          <Glossary ds={ds} gcat={gcat} setGcat={setGcat} />
+          <GlossarySection terms={glossaryTerms} gcat={gcat} setGcat={setGcat} gsel={gsel} setGsel={setGsel} />
         ) : tab === "documents" ? (
           <DocumentsView />
         ) : tab === "author" ? (
@@ -276,12 +290,49 @@ function Reader({ doc, body, bodyLoading, cats, gloss, onBack, onPrev, onNext }:
 }
 
 /* ---------- Glossary ---------- */
-function cleanDef(str: string) {
-  return (str || "").replace(/^#.*\n/, "").replace(/\[([^\]]+)\]\([^)]+\)/g, "$1").replace(/\*\*/g, "").trim();
+// Strip markdown headings anywhere in a definition (some entries lead with "## term").
+function stripHeadings(str: string) {
+  return (str || "").replace(/^\s*#{1,6}\s+.*(?:\n|$)/gm, "");
 }
-function Glossary({ ds, gcat, setGcat }: any) {
-  const terms = [...(ds?.glossary || []), ...EXTRA_GLOSSARY].sort((a: any, b: any) => a.term.localeCompare(b.term))
-    .filter((t: any) => !gcat || t.term.toLowerCase().includes(gcat.toLowerCase()) || (t.definition || "").toLowerCase().includes(gcat.toLowerCase()));
+// Some term names carry raw markdown (links, bold). Render/​share them clean.
+function cleanTerm(str: string) {
+  return (str || "").replace(/\[([^\]]+)\]\([^)]+\)/g, "$1").replace(/\*+/g, "").trim();
+}
+function cleanDef(str: string) {
+  return stripHeadings(str)
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1") // links → text
+    .replace(/\*+/g, "")                      // bold/italic markers
+    .replace(/\n{3,}/g, "\n\n")               // collapse extra blank lines
+    .trim();
+}
+// A definition may lead with a short pronunciation line, separated by a blank line.
+function splitDef(def?: string) {
+  const cleaned = stripHeadings(def || "").trim();
+  const parts: string[] = cleaned.split("\n\n");
+  const pron = parts.length > 1 && parts[0].length < 80 ? parts[0].trim().replace(/\*+/g, "") : "";
+  const body = pron ? parts.slice(1).join("\n\n") : cleaned;
+  return { pron, body };
+}
+
+function GlossarySection({ terms, gcat, setGcat, gsel, setGsel }: any) {
+  if (gsel) {
+    const gi = terms.findIndex((t: any) => t.slug === gsel);
+    if (gi >= 0) {
+      return (
+        <GlossaryTermReader
+          term={terms[gi]}
+          onBack={() => setGsel(null)}
+          onPrev={gi > 0 ? () => setGsel(terms[gi - 1].slug) : undefined}
+          onNext={gi < terms.length - 1 ? () => setGsel(terms[gi + 1].slug) : undefined}
+        />
+      );
+    }
+  }
+  return <GlossaryList terms={terms} gcat={gcat} setGcat={setGcat} onOpen={setGsel} />;
+}
+
+function GlossaryList({ terms, gcat, setGcat, onOpen }: any) {
+  const shown = terms.filter((t: any) => !gcat || t.term.toLowerCase().includes(gcat.toLowerCase()) || (t.definition || "").toLowerCase().includes(gcat.toLowerCase()));
   return (
     <div className="max-w-3xl mx-auto">
       <div className="flex items-center justify-between mb-5">
@@ -293,20 +344,40 @@ function Glossary({ ds, gcat, setGcat }: any) {
         </div>
       </div>
       <div className="space-y-8">
-        {terms.map((t: any) => {
-          const parts: string[] = (t.definition || "").split("\n\n");
-          const pron = parts.length > 1 && parts[0].length < 80 ? parts[0].trim() : "";
-          const body = pron ? parts.slice(1).join("\n\n") : (t.definition || "");
+        {shown.map((t: any) => {
+          const { pron, body } = splitDef(t.definition);
           return (
-            <div key={t.slug}>
-              <h2 className="font-display text-xl font-semibold text-foreground">{t.term}</h2>
+            <button key={t.slug} onClick={() => onOpen(t.slug)} className="group block w-full text-left">
+              <h2 className="font-display text-xl font-semibold text-foreground group-hover:text-accent transition-colors">{cleanTerm(t.term)}</h2>
               {pron && <div className="text-xs text-muted italic mt-1">{pron}</div>}
-              <p className="font-serif text-[25px] text-foreground/85 mt-2 whitespace-pre-wrap leading-[1.6]">{cleanDef(body)}</p>
-            </div>
+              <p className="font-serif text-[25px] text-foreground/85 mt-2 whitespace-pre-wrap leading-[1.6] line-clamp-3">{cleanDef(body)}</p>
+              <div className="mt-2 text-accent text-sm">Read →</div>
+            </button>
           );
         })}
+        {shown.length === 0 && <div className="text-muted text-sm py-10 text-center">No terms match “{gcat}”.</div>}
       </div>
     </div>
+  );
+}
+
+function GlossaryTermReader({ term, onBack, onPrev, onNext }: any) {
+  const { pron, body } = splitDef(term.definition);
+  return (
+    <article className="max-w-3xl mx-auto">
+      <div className="flex items-center justify-between mb-4">
+        <button onClick={onBack} className="text-sm text-accent inline-flex items-center gap-1"><ChevronLeft size={15} /> Back to glossary</button>
+        <ShareMenu title={`${cleanTerm(term.term)} — ${SITE}`} align="right" />
+      </div>
+      <p className="text-xs uppercase tracking-[0.14em] text-muted mb-2">Glossary</p>
+      <h1 className="font-display text-3xl font-semibold text-foreground mb-1 leading-tight">{cleanTerm(term.term)}</h1>
+      {pron && <div className="text-sm text-muted italic mb-5">{pron}</div>}
+      <p className="font-serif text-[27px] text-foreground/90 whitespace-pre-wrap leading-[1.6]">{cleanDef(body)}</p>
+      <div className="flex gap-3 mt-12 pt-6">
+        {onPrev ? <button onClick={onPrev} className="text-accent text-sm inline-flex items-center gap-1"><ChevronLeft size={15} /> Previous</button> : <span />}
+        {onNext && <button onClick={onNext} className="text-accent text-sm ml-auto inline-flex items-center gap-1">Next <ChevronRight size={15} /></button>}
+      </div>
+    </article>
   );
 }
 
