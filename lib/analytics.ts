@@ -1,13 +1,11 @@
 import posthog from "posthog-js";
 
-// Public PostHog project key (phc_) — safe for client-side use. Env vars override if set.
-const KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY || "phc_oztF87Ru2kLa9YGd56zpBonGRFfoyUoF75ao9imrxeT3";
+let inited = false;
+const KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY;
 const HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com";
 
-let inited = false;
-
 export function initAnalytics() {
-  if (inited || typeof window === "undefined" || !KEY) return;
+  if (inited || typeof window === "undefined" || !KEY) return; // graceful no-op without a key
   posthog.init(KEY, {
     api_host: HOST,
     capture_pageview: true,
@@ -17,15 +15,23 @@ export function initAnalytics() {
   inited = true;
 }
 
+type Gtag = (command: string, event: string, params?: Record<string, unknown>) => void;
+
 export function track(event: string, props?: Record<string, unknown>) {
   if (typeof window === "undefined") return;
-  // PostHog
+  // PostHog (no-op without a key)
   if (KEY) {
-    try { posthog.capture(event, props); } catch { /* no-op */ }
+    try {
+      posthog.capture(event, props);
+    } catch {
+      /* no-op */
+    }
   }
-  // Google Analytics 4 (gtag) — forward the same event
-  const g = (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag;
-  if (typeof g === "function") {
-    try { g("event", event, props || {}); } catch { /* no-op */ }
+  // Google Analytics (gtag) — dual-write when GA is present on the page
+  try {
+    const gtag = (window as unknown as { gtag?: Gtag }).gtag;
+    if (typeof gtag === "function") gtag("event", event, props);
+  } catch {
+    /* no-op */
   }
 }

@@ -8,9 +8,12 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { X, ChevronLeft, ChevronRight, Volume2 } from "lucide-react";
 import CopyrightTerms from "@/components/CopyrightTerms";
+import ShareMenu from "@/components/ShareMenu";
 import { DOCUMENTS, AUTHOR, EXTRA_GLOSSARY } from "@/lib/site-content";
 
 const PAGE_SIZE = 10;
+const SITE = "Invisible Ships";
+const TABS: Tab[] = ["journal", "glossary", "documents", "author", "disclaimer"];
 const cap = (s?: string | null) => (s ? s.charAt(0).toUpperCase() + s.slice(1).replace(/-/g, " ") : "");
 
 function renderInline(text: string, key: number) {
@@ -65,8 +68,35 @@ export default function JournalBrowser() {
   const [excerpts, setExcerpts] = useState<Record<string, string>>({});
   const [panelOpen, setPanelOpen] = useState(false);
   const [exportOpen, setExportOpen] = useState(false);
+  const [deepLinked, setDeepLinked] = useState(false);
 
   useEffect(() => { loadDataset().then((d) => { setDs(d); setLoading(false); }).catch(() => setLoading(false)); }, []);
+
+  // Deep-link IN: once the dataset is available, honor ?entry= / ?view= so a
+  // shared link reopens the exact content (after the gate).
+  useEffect(() => {
+    if (!ds || deepLinked) return;
+    try {
+      const sp = new URLSearchParams(window.location.search);
+      const entry = sp.get("entry");
+      const view = sp.get("view") as Tab | null;
+      if (entry && ds.docs.some((d) => d.id === entry)) { setTab("journal"); setSel(entry); }
+      else if (view && TABS.includes(view)) { setTab(view); }
+    } catch { /* ignore */ }
+    setDeepLinked(true);
+  }, [ds, deepLinked]);
+
+  // Deep-link OUT: keep the URL in sync with the current view so it's shareable.
+  useEffect(() => {
+    if (!deepLinked) return;
+    try {
+      const params = new URLSearchParams();
+      if (sel) params.set("entry", sel);
+      else if (tab !== "journal") params.set("view", tab);
+      const qs = params.toString();
+      window.history.replaceState(null, "", window.location.pathname + (qs ? `?${qs}` : "") + window.location.hash);
+    } catch { /* ignore */ }
+  }, [tab, sel, deepLinked]);
 
   const journal = useMemo(() => (ds?.docs || []).filter((d) => d.collection === "journal"), [ds]);
   const parts = useMemo(() => Array.from(new Set(journal.map((d) => d.part).filter((p): p is number => p != null))).sort(), [journal]);
@@ -169,7 +199,10 @@ function Feed({ items, excerpts, docCats, total, page, totalPages, setPage, onOp
     <div>
       <div className="flex items-center justify-between mb-4">
         <h1 className="font-display text-lg font-semibold text-foreground">Journal</h1>
-        <div className="text-xs text-muted">{total} entries · page {page} of {totalPages}</div>
+        <div className="flex items-center gap-2">
+          <span className="text-xs text-muted">{total} entries · page {page} of {totalPages}</span>
+          <ShareMenu title={`${SITE} — Journal`} align="right" />
+        </div>
       </div>
       <div className="space-y-10">
         {items.map((d: Doc) => (
@@ -218,7 +251,10 @@ function Pager({ page, totalPages, setPage }: any) {
 function Reader({ doc, body, bodyLoading, cats, gloss, onBack, onPrev, onNext }: any) {
   return (
     <article className="max-w-3xl mx-auto">
-      <button onClick={onBack} className="text-sm text-accent mb-4 inline-flex items-center gap-1"><ChevronLeft size={15} /> Back to journal</button>
+      <div className="flex items-center justify-between mb-4">
+        <button onClick={onBack} className="text-sm text-accent inline-flex items-center gap-1"><ChevronLeft size={15} /> Back to journal</button>
+        <ShareMenu title={`${doc.title || doc.id} — ${SITE}`} align="right" />
+      </div>
       <div className="flex flex-wrap items-center gap-2 text-[11px] text-muted mb-2">
         <span className="font-mono">{doc.id}</span>
         {cats.map((c: string) => <span key={c} className="uppercase tracking-wide">{cap(c)}</span>)}
@@ -250,8 +286,11 @@ function Glossary({ ds, gcat, setGcat }: any) {
     <div className="max-w-3xl mx-auto">
       <div className="flex items-center justify-between mb-5">
         <h1 className="font-display text-lg font-semibold text-foreground">Glossary</h1>
-        <input value={gcat} onChange={(e) => setGcat(e.target.value)} placeholder="Filter terms…"
-          className="bg-panel px-3 py-1.5 text-sm outline-none focus:ring-1 focus:ring-accent w-44" />
+        <div className="flex items-center gap-2">
+          <input value={gcat} onChange={(e) => setGcat(e.target.value)} placeholder="Filter terms…"
+            className="bg-panel px-3 py-1.5 text-sm outline-none focus:ring-1 focus:ring-accent w-44" />
+          <ShareMenu title={`${SITE} — Glossary`} align="right" />
+        </div>
       </div>
       <div className="space-y-8">
         {terms.map((t: any) => {
@@ -344,7 +383,10 @@ function ExportModal({ onClose }: { onClose: () => void }) {
 function DocumentsView() {
   return (
     <div>
-      <h1 className="font-display text-lg font-semibold text-foreground mb-1">Documents</h1>
+      <div className="flex items-center justify-between mb-1">
+        <h1 className="font-display text-lg font-semibold text-foreground">Documents</h1>
+        <ShareMenu title={`${SITE} — Documents`} align="right" />
+      </div>
       <p className="text-sm text-muted mb-5">Additional documents beyond the four-part journal series.</p>
       <div className="space-y-10">
         {DOCUMENTS.map((d) => (

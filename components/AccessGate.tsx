@@ -4,8 +4,13 @@ import { Button } from "@/components/ui/button";
 import CopyrightTerms from "@/components/CopyrightTerms";
 import GateAnimation from "@/components/GateAnimation";
 import ThemeToggle from "@/components/ThemeToggle";
+import ShareMenu from "@/components/ShareMenu";
 import { GATE } from "@/lib/gate-content";
 import { track } from "@/lib/analytics";
+
+// Homepage share always points at the clean root, even if the visitor arrived
+// on a deep link (?entry=…) they haven't entered through yet.
+const homeUrl = () => (typeof window !== "undefined" ? window.location.origin + "/" : "");
 
 type Step = "welcome" | "copyright" | "perceptual" | "safety";
 const STEP_INDEX: Record<Step, number> = { welcome: 1, copyright: 2, perceptual: 3, safety: 4 };
@@ -60,7 +65,10 @@ export default function AccessGate({ onEnter }: { onEnter: () => void }) {
   if (step === "welcome") {
     return (
       <main className="min-h-screen flex flex-col md:flex-row bg-background text-foreground">
-        <div className="fixed top-4 right-4 z-50"><ThemeToggle /></div>
+        <div className="fixed top-4 right-4 z-50 flex items-center gap-1">
+          <ShareMenu title="Invisible Ships — a firsthand documentary archive" url={homeUrl()} label="" align="right" />
+          <ThemeToggle />
+        </div>
         {/* Left 40% — content + button, floated with padding */}
         <div className="md:w-[40%] md:min-w-[360px] flex flex-col px-8 sm:px-12 lg:px-16 py-12 order-2 md:order-1">
           <div className="flex-1 flex flex-col justify-center animate-fade-in max-w-md">
