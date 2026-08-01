@@ -32,13 +32,15 @@ export const GATE = {
   },
   safety: {
     eyebrow: "Before you enter",
-    title: "A note on safety",
+    title: "A Note on Safety",
     body:
-      "This archive documents communication received without consent, and preserves external statements that reference coercion, self-harm, and euthanasia. These are recorded as documentation. They are external communications — they do not reflect the author's beliefs, and the author does not endorse, encourage, or condone self-harm or harm to anyone.",
-    support:
-      "If you are having thoughts of self-harm, please reach out to someone you trust.",
+      "This archive documents communications received without consent, including material that references coercion, self-harm, and euthanasia. These materials are preserved as documentation of external statements. They do not reflect the author's beliefs, and the author does not endorse, encourage, or condone self-harm or harm to anyone.",
+    distress:
+      "If this material feels distressing, please step away and return only when you feel ready. You may also wish to speak with someone you trust.",
+    crisis:
+      "If you are in the United States and are thinking about harming yourself, call or text 988 to reach the Suicide & Crisis Lifeline. If you are elsewhere, contact local emergency or crisis-support services.",
     guidance:
-      "If any of this material is distressing, step away and return when you are ready. For personal-protection guidance, see the Personal Protection Plan in the Documents section.",
-    cta: "Enter the archive",
+      "For practical guidance about protecting your personal space and well-being, see the Personal Protection Plan in the Documents section.",
+    cta: "Enter the Archive",
   },
 };

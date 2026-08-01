@@ -132,7 +132,8 @@ export default function AccessGate({ onEnter }: { onEnter: () => void }) {
         <h2 className="font-display text-3xl font-semibold text-foreground mb-5">{GATE.safety.title}</h2>
         <div className="font-serif text-[22px] leading-[1.65] text-foreground/90 space-y-4">
           <p>{GATE.safety.body}</p>
-          <p className="text-foreground">{GATE.safety.support}</p>
+          <p>{GATE.safety.distress}</p>
+          <p className="text-foreground">{GATE.safety.crisis}</p>
           <p className="text-foreground/70">{GATE.safety.guidance}</p>
         </div>
         <div className="mt-8 flex items-center gap-3">
