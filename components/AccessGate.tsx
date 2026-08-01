@@ -57,12 +57,10 @@ export default function AccessGate({ onEnter }: { onEnter: () => void }) {
 
   if (step === "welcome") {
     return (
-      <main className="relative min-h-screen bg-background text-foreground overflow-hidden">
-        {/* Full-screen animation */}
-        <GateAnimation fill />
-        {/* Left content overlay with a gradient scrim for legibility */}
-        <div className="relative z-10 min-h-screen flex flex-col w-full sm:w-[62%] md:w-[48%] lg:w-[38%] px-6 sm:px-10 lg:px-12 py-10 bg-gradient-to-r from-background from-30% via-background/85 to-transparent">
-          <div className="flex-1 flex flex-col justify-center animate-fade-in max-w-md">
+      <main className="min-h-screen flex flex-col md:flex-row bg-background text-foreground">
+        {/* Left 30% — content + button */}
+        <div className="md:w-[30%] md:min-w-[320px] flex flex-col px-6 sm:px-10 py-10 order-2 md:order-1">
+          <div className="flex-1 flex flex-col justify-center animate-fade-in">
             <h1 className="font-display text-4xl sm:text-5xl font-bold tracking-tight text-foreground">{GATE.welcome.headline}</h1>
             <p className="mt-4 font-serif text-xl sm:text-2xl text-foreground/80 leading-snug">{GATE.welcome.subline}</p>
             <p className="mt-3 text-sm text-muted">{GATE.welcome.supporting}</p>
@@ -81,7 +79,7 @@ export default function AccessGate({ onEnter }: { onEnter: () => void }) {
               <p className="mt-4 text-[13px] text-foreground/70">{GATE.welcome.ageLine}</p>
             </div>
           </div>
-          <div className="mt-8 max-w-md">
+          <div className="mt-8">
             <div className="flex items-center gap-2">
               {Array.from({ length: STEP_COUNT }, (_, k) => k + 1).map((n) => (
                 <span key={n} className={`h-1.5 ${n === 1 ? "w-6 bg-accent" : "w-2 bg-edge"}`} />
@@ -89,6 +87,10 @@ export default function AccessGate({ onEnter }: { onEnter: () => void }) {
             </div>
             <div className="text-xs text-muted pt-4">{GATE.welcome.copyright}</div>
           </div>
+        </div>
+        {/* Right 70% — animation panel */}
+        <div className="relative md:w-[70%] min-h-[42vh] md:min-h-screen order-1 md:order-2 overflow-hidden bg-background">
+          <GateAnimation fill />
         </div>
       </main>
     );
