@@ -7,12 +7,13 @@ export const metadata: Metadata = {
   description: "Discovery of Neuro-tech Terrorism — journal, transcripts, and glossary.",
 };
 
-// Runs before paint: applies the saved theme, or the OS preference on first
-// visit, so there is no light/dark flash on load.
+// Runs before paint (no flash): use the visitor's saved choice if they have
+// one; otherwise default by their local time of day — light 6am–6pm, dark
+// 6pm–6am. The header toggle overrides and is remembered.
 const themeScript = `
 (function(){try{
   var t=localStorage.getItem('is_theme');
-  if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
+  if(t!=='light'&&t!=='dark'){var h=new Date().getHours();t=(h>=6&&h<18)?'light':'dark';}
   var e=document.documentElement;
   if(t==='dark'){e.classList.add('dark');}else{e.classList.remove('dark');}
   e.style.colorScheme=t;
