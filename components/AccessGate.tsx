@@ -72,7 +72,7 @@ export default function AccessGate({ onEnter }: { onEnter: () => void }) {
             >
               {GATE.welcome.cta}
             </Button>
-            <p className="mt-3 text-xs text-muted max-w-md mx-auto">{GATE.welcome.ageLine}</p>
+            <p className="mt-4 text-[13px] text-foreground/70 max-w-md mx-auto">{GATE.welcome.ageLine}</p>
           </div>
         </div>
       </Shell>
