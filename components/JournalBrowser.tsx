@@ -28,13 +28,13 @@ function renderInline(text: string, key: number) {
 }
 function Transcript({ md }: { md: string }) {
   return (
-    <div className="font-serif text-[18px] text-foreground/90">
+    <div className="font-serif text-[27px] text-foreground/90">
       {md.split("\n").map((ln, i) => {
         const t = ln.trim();
         if (!t) return null;
-        if (t.startsWith("## ")) return <h3 key={i} className="font-display text-xl font-semibold mt-6 mb-2 text-foreground">{t.slice(3)}</h3>;
-        if (t.startsWith("# ")) return <h2 key={i} className="font-display text-2xl font-semibold mt-4 mb-3 text-foreground">{t.slice(2)}</h2>;
-        return <p key={i} className="my-3 leading-[1.85]">{renderInline(t, i)}</p>;
+        if (t.startsWith("## ")) return <h3 key={i} className="font-display text-2xl font-semibold mt-8 mb-3 text-foreground">{t.slice(3)}</h3>;
+        if (t.startsWith("# ")) return <h2 key={i} className="font-display text-3xl font-semibold mt-6 mb-4 text-foreground">{t.slice(2)}</h2>;
+        return <p key={i} className="my-4 leading-[1.6]">{renderInline(t, i)}</p>;
       })}
     </div>
   );
@@ -181,7 +181,7 @@ function Feed({ items, excerpts, docCats, total, page, totalPages, setPage, onOp
             </div>
             <div className="mt-1.5 font-display text-[19px] font-semibold text-foreground">{d.title || d.id}</div>
             <div className="text-[12px] text-muted mt-0.5">{d.entry_date}{d.weekday ? ` · ${d.weekday}` : ""}{d.recording_time ? ` · ${d.recording_time}` : ""}</div>
-            <p className="mt-2.5 font-serif text-[16.5px] text-foreground/80 leading-[1.7] line-clamp-3">{excerpts[d.id] ?? "…"}</p>
+            <p className="mt-2.5 font-serif text-[24px] text-foreground/80 leading-[1.5] line-clamp-3">{excerpts[d.id] ?? "…"}</p>
             <div className="mt-3 flex flex-wrap gap-1.5">
               {(docCats[d.id] || []).slice(0, 4).map((c: string) => <span key={c} className="text-[11px] px-2 py-0.5 bg-edge text-muted">{cap(c)}</span>)}
             </div>
@@ -262,7 +262,7 @@ function Glossary({ ds, gcat, setGcat }: any) {
             <div key={t.slug}>
               <h2 className="font-display text-xl font-semibold text-foreground">{t.term}</h2>
               {pron && <div className="text-xs text-muted italic mt-1">{pron}</div>}
-              <p className="font-serif text-[17px] text-foreground/85 mt-2 whitespace-pre-wrap leading-[1.75]">{cleanDef(body)}</p>
+              <p className="font-serif text-[25px] text-foreground/85 mt-2 whitespace-pre-wrap leading-[1.6]">{cleanDef(body)}</p>
             </div>
           );
         })}
@@ -351,7 +351,7 @@ function DocumentsView() {
           <a key={d.title} href={d.url} target="_blank" rel="noreferrer" className="block bg-card hover:bg-edge/60 transition-colors p-5">
             <div className="font-display text-[18px] font-semibold text-foreground">{d.title}</div>
             <div className="text-[13px] text-accent mt-0.5">{d.subline}</div>
-            <p className="mt-2 font-serif text-[16.5px] text-foreground/80 leading-[1.7]">{d.description}</p>
+            <p className="mt-2 font-serif text-[24px] text-foreground/80 leading-[1.5]">{d.description}</p>
             <div className="mt-3 text-accent text-sm">Open document ↗</div>
           </a>
         ))}
@@ -372,8 +372,8 @@ function AuthorView() {
             onError={(e) => { (e.currentTarget as HTMLImageElement).style.opacity = "0"; }} />
         </div>
         <div>
-          <p className="font-serif text-[18px] text-foreground/85 leading-[1.8]">{AUTHOR.summary}</p>
-          <p className="font-serif text-[18px] text-foreground/85 leading-[1.8] mt-4">{AUTHOR.bio}</p>
+          <p className="font-serif text-[27px] text-foreground/85 leading-[1.6]">{AUTHOR.summary}</p>
+          <p className="font-serif text-[27px] text-foreground/85 leading-[1.6] mt-4">{AUTHOR.bio}</p>
           <p className="text-sm text-muted mt-5">{AUTHOR.contact}</p>
         </div>
       </div>

@@ -58,7 +58,7 @@ export default function AccessGate({ onEnter }: { onEnter: () => void }) {
       <Shell step="welcome" copyright={GATE.welcome.copyright}>
         <div className="text-center">
           <h1 className="font-display text-5xl sm:text-6xl font-bold tracking-tight text-foreground">{GATE.welcome.headline}</h1>
-          <p className="mt-5 font-serif text-xl text-foreground/80 max-w-xl mx-auto leading-relaxed">{GATE.welcome.subline}</p>
+          <p className="mt-5 font-serif text-3xl text-foreground/80 max-w-2xl mx-auto leading-snug">{GATE.welcome.subline}</p>
           <p className="mt-3 text-sm text-muted max-w-xl mx-auto">{GATE.welcome.supporting}</p>
           <p className="mt-6 font-serif text-[15px] text-foreground/70 max-w-xl mx-auto leading-relaxed">{GATE.welcome.contentWarning}</p>
           <div className="mt-8">
@@ -103,7 +103,7 @@ export default function AccessGate({ onEnter }: { onEnter: () => void }) {
       <div>
         <p className="text-xs uppercase tracking-[0.14em] text-muted mb-2">{GATE.perceptual.eyebrow}</p>
         <h2 className="font-display text-3xl font-semibold text-foreground mb-5">{GATE.perceptual.title}</h2>
-        <div className="font-serif text-[18px] leading-[1.8] text-foreground/90 space-y-4">
+        <div className="font-serif text-[27px] leading-[1.6] text-foreground/90 space-y-4">
           <p>{GATE.perceptual.definition}</p>
           <p>{GATE.perceptual.story}</p>
           <p className="text-foreground/60 italic">{GATE.perceptual.caveat}</p>
