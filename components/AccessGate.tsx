@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import CopyrightTerms from "@/components/CopyrightTerms";
 import GateAnimation from "@/components/GateAnimation";
+import ThemeToggle from "@/components/ThemeToggle";
 import { GATE } from "@/lib/gate-content";
 import { track } from "@/lib/analytics";
 
@@ -24,6 +25,7 @@ function Progress({ step }: { step: Step }) {
 function Shell({ children, step, copyright }: { children: React.ReactNode; step: Step; copyright: string }) {
   return (
     <main className="min-h-screen flex flex-col bg-background text-foreground">
+      <div className="fixed top-4 right-4 z-50"><ThemeToggle /></div>
       <div className="flex-1 flex items-center justify-center px-4 py-10">
         <div key={step} className="w-full max-w-2xl animate-fade-in">{children}</div>
       </div>
@@ -58,6 +60,7 @@ export default function AccessGate({ onEnter }: { onEnter: () => void }) {
   if (step === "welcome") {
     return (
       <main className="min-h-screen flex flex-col md:flex-row bg-background text-foreground">
+        <div className="fixed top-4 right-4 z-50"><ThemeToggle /></div>
         {/* Left 40% — content + button, floated with padding */}
         <div className="md:w-[40%] md:min-w-[360px] flex flex-col px-8 sm:px-12 lg:px-16 py-12 order-2 md:order-1">
           <div className="flex-1 flex flex-col justify-center animate-fade-in max-w-md">

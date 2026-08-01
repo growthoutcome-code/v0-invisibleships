@@ -8,17 +8,18 @@ export default function GateAnimation({ fill = false }: { fill?: boolean }) {
   const scenes = (
     <>
       <rect className="ga-bg" width="1440" height="810" />
-      <image className="ga-scene ga-s1" href="/anim/is-scene-1.webp" x="0" y="0" width="1440" height="810" preserveAspectRatio={fill ? "xMidYMid slice" : "none"} />
-      <image className="ga-scene ga-s2" href="/anim/is-scene-2.webp" x="0" y="0" width="1440" height="810" preserveAspectRatio={fill ? "xMidYMid slice" : "none"} />
-      <image className="ga-scene ga-s3" href="/anim/is-scene-3.webp" x="0" y="0" width="1440" height="810" preserveAspectRatio={fill ? "xMidYMid slice" : "none"} />
-      <image className="ga-scene ga-sq" href="/anim/is-quality.webp" x="0" y="0" width="1440" height="810" preserveAspectRatio={fill ? "xMidYMid slice" : "none"} />
+      <image className="ga-scene ga-s1" href="/anim/is-scene-1.webp" x="0" y="0" width="1440" height="810" preserveAspectRatio="none" />
+      <image className="ga-scene ga-s2" href="/anim/is-scene-2.webp" x="0" y="0" width="1440" height="810" preserveAspectRatio="none" />
+      <image className="ga-scene ga-s3" href="/anim/is-scene-3.webp" x="0" y="0" width="1440" height="810" preserveAspectRatio="none" />
+      <image className="ga-scene ga-sq" href="/anim/is-quality.webp" x="0" y="0" width="1440" height="810" preserveAspectRatio="none" />
     </>
   );
 
   if (fill) {
+    // Fit the whole scene inside the container (contain); page bg fills any gaps.
     return (
       <div className="gate-anim is-fill absolute inset-0 select-none" aria-hidden="true">
-        <svg viewBox="0 0 1440 810" preserveAspectRatio="xMidYMid slice" className="block h-full w-full">
+        <svg viewBox="0 0 1440 810" preserveAspectRatio="xMidYMid meet" className="block h-full w-full">
           {scenes}
         </svg>
       </div>
