@@ -10,25 +10,31 @@
   --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
-  /* Light (default; the pre-paint script may switch to .dark) */
-  --background: 250 249 246;   /* #faf9f6 warm off-white */
-  --panel: 255 255 255;        /* #ffffff cards/surfaces */
-  --edge: 226 221 210;         /* #e2ddd2 warm border */
-  --foreground: 26 28 31;      /* #1a1c1f near-black text */
-  --muted: 92 102 116;         /* #5c6674 secondary text */
-  --accent: 40 96 200;         /* #2860c8 links/accent */
-  --primary-foreground: 255 255 255; /* text on accent */
+  /* ---- TEMPORARY: ultra-minimalist pure black & white ----
+     To restore the previous warm/blue palette, swap these blocks back to:
+       light  bg 250 249 246 · panel 255 255 255 · edge 226 221 210 · fg 26 28 31 · muted 92 102 116 · accent 40 96 200 · primary-fg 255 255 255
+       dark   bg 15 18 22    · panel 22 27 34    · edge 35 42 52   · fg 230 234 240 · muted 139 151 167 · accent 74 158 255 · primary-fg 10 14 20  */
+
+  /* Light — pure white canvas, black type & buttons */
+  --background: 255 255 255;   /* #ffffff */
+  --panel: 255 255 255;        /* #ffffff cards share the canvas; defined by borders */
+  --edge: 224 224 224;         /* #e0e0e0 hairline borders + chip fills */
+  --foreground: 0 0 0;         /* #000000 text */
+  --muted: 90 90 90;           /* #5a5a5a secondary text */
+  --accent: 0 0 0;             /* #000000 links/active/focus (monochrome) */
+  --primary-foreground: 255 255 255; /* white text on black buttons */
   color-scheme: light;
 }
 
 .dark {
-  --background: 15 18 22;       /* #0f1216 */
-  --panel: 22 27 34;           /* #161b22 */
-  --edge: 35 42 52;            /* #232a34 */
-  --foreground: 230 234 240;   /* #e6eaf0 */
-  --muted: 139 151 167;        /* #8b97a7 */
-  --accent: 74 158 255;        /* #4a9eff */
-  --primary-foreground: 10 14 20; /* #0a0e14 dark text on light-blue accent */
+  /* Dark — pure black canvas, white type & buttons */
+  --background: 0 0 0;         /* #000000 */
+  --panel: 0 0 0;             /* #000000 */
+  --edge: 38 38 38;           /* #262626 hairline borders + chip fills */
+  --foreground: 255 255 255;  /* #ffffff text */
+  --muted: 163 163 163;       /* #a3a3a3 secondary text */
+  --accent: 255 255 255;      /* #ffffff links/active/focus */
+  --primary-foreground: 0 0 0; /* black text on white buttons */
   color-scheme: dark;
 }
 

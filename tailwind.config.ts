@@ -27,6 +27,12 @@ const config: Config = {
         serif: ["var(--font-serif)", "Georgia", "Times New Roman", "serif"],
         display: ["var(--font-display)", "var(--font-sans)", "ui-sans-serif", "sans-serif"],
       },
+      // TEMPORARY: angular / sharp edges everywhere. Every rounded-* utility
+      // resolves to 0. Remove this block to restore rounded corners.
+      borderRadius: {
+        none: "0", sm: "0", DEFAULT: "0", md: "0", lg: "0",
+        xl: "0", "2xl": "0", "3xl": "0", full: "0",
+      },
       keyframes: {
         "fade-in": { from: { opacity: "0", transform: "translateY(6px)" }, to: { opacity: "1", transform: "translateY(0)" } },
       },
