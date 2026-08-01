@@ -28,6 +28,17 @@ export const GATE = {
       "The anecdote is almost certainly apocryphal. The principle it dramatizes is not — perceptual set is real and measurable.",
     tie:
       "This archive is an attempt to make something visible: to describe, in plain and dated detail, a phenomenon that is easy to look past precisely because most people have no framework for it yet.",
+    cta: "Continue",
+  },
+  safety: {
+    eyebrow: "Before you enter",
+    title: "A note on safety",
+    body:
+      "This archive documents communication received without consent, and preserves external statements that reference coercion, self-harm, and euthanasia. These are recorded as documentation. They are external communications — they do not reflect the author's beliefs, and the author does not endorse, encourage, or condone self-harm or harm to anyone.",
+    support:
+      "If you are having thoughts of self-harm, please reach out to someone you trust.",
+    guidance:
+      "If any of this material is distressing, step away and return when you are ready. For personal-protection guidance, see the Personal Protection Plan in the Documents section.",
     cta: "Enter the archive",
   },
 };

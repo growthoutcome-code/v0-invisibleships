@@ -5,9 +5,9 @@ import CopyrightTerms from "@/components/CopyrightTerms";
 import { GATE } from "@/lib/gate-content";
 import { track } from "@/lib/analytics";
 
-type Step = "welcome" | "copyright" | "perceptual";
-const STEP_INDEX: Record<Step, number> = { welcome: 1, copyright: 2, perceptual: 3 };
-const STEP_COUNT = 3;
+type Step = "welcome" | "copyright" | "perceptual" | "safety";
+const STEP_INDEX: Record<Step, number> = { welcome: 1, copyright: 2, perceptual: 3, safety: 4 };
+const STEP_COUNT = 4;
 
 function Progress({ step }: { step: Step }) {
   const i = STEP_INDEX[step];
@@ -41,6 +41,7 @@ export default function AccessGate({ onEnter }: { onEnter: () => void }) {
   useEffect(() => {
     if (step === "copyright") track("gate_copyright_viewed");
     if (step === "perceptual") track("gate_perceptual_viewed");
+    if (step === "safety") track("gate_safety_viewed");
   }, [step]);
 
   const finish = () => {
@@ -102,21 +103,41 @@ export default function AccessGate({ onEnter }: { onEnter: () => void }) {
     );
   }
 
-  // perceptual set (final step)
+  if (step === "perceptual") {
+    return (
+      <Shell step="perceptual" copyright={GATE.copyrightLine}>
+        <div>
+          <p className="text-xs uppercase tracking-[0.14em] text-muted mb-2">{GATE.perceptual.eyebrow}</p>
+          <h2 className="font-display text-3xl font-semibold text-foreground mb-5">{GATE.perceptual.title}</h2>
+          <div className="font-serif text-[27px] leading-[1.6] text-foreground/90 space-y-4">
+            <p>{GATE.perceptual.definition}</p>
+            <p>{GATE.perceptual.story}</p>
+            <p className="text-foreground/60 italic">{GATE.perceptual.caveat}</p>
+            <p>{GATE.perceptual.tie}</p>
+          </div>
+          <div className="mt-8 flex items-center gap-3">
+            <Button variant="outline" onClick={() => setStep("copyright")}>Back</Button>
+            <Button size="lg" className="ml-auto" onClick={() => setStep("safety")}>{GATE.perceptual.cta}</Button>
+          </div>
+        </div>
+      </Shell>
+    );
+  }
+
+  // safety (final step)
   return (
-    <Shell step="perceptual" copyright={GATE.copyrightLine}>
+    <Shell step="safety" copyright={GATE.copyrightLine}>
       <div>
-        <p className="text-xs uppercase tracking-[0.14em] text-muted mb-2">{GATE.perceptual.eyebrow}</p>
-        <h2 className="font-display text-3xl font-semibold text-foreground mb-5">{GATE.perceptual.title}</h2>
-        <div className="font-serif text-[27px] leading-[1.6] text-foreground/90 space-y-4">
-          <p>{GATE.perceptual.definition}</p>
-          <p>{GATE.perceptual.story}</p>
-          <p className="text-foreground/60 italic">{GATE.perceptual.caveat}</p>
-          <p>{GATE.perceptual.tie}</p>
+        <p className="text-xs uppercase tracking-[0.14em] text-muted mb-2">{GATE.safety.eyebrow}</p>
+        <h2 className="font-display text-3xl font-semibold text-foreground mb-5">{GATE.safety.title}</h2>
+        <div className="font-serif text-[22px] leading-[1.65] text-foreground/90 space-y-4">
+          <p>{GATE.safety.body}</p>
+          <p className="text-foreground">{GATE.safety.support}</p>
+          <p className="text-foreground/70">{GATE.safety.guidance}</p>
         </div>
         <div className="mt-8 flex items-center gap-3">
-          <Button variant="outline" onClick={() => setStep("copyright")}>Back</Button>
-          <Button size="lg" className="ml-auto" onClick={finish}>{GATE.perceptual.cta}</Button>
+          <Button variant="outline" onClick={() => setStep("perceptual")}>Back</Button>
+          <Button size="lg" className="ml-auto" onClick={finish}>{GATE.safety.cta}</Button>
         </div>
       </div>
     </Shell>
