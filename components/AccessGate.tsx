@@ -6,6 +6,7 @@ import GateAnimation from "@/components/GateAnimation";
 import ThemeToggle from "@/components/ThemeToggle";
 import ShareMenu from "@/components/ShareMenu";
 import { GATE } from "@/lib/gate-content";
+import { markGateEntered } from "@/lib/gate";
 import { track } from "@/lib/analytics";
 
 // Homepage share always points at the clean root, even if the visitor arrived
@@ -53,11 +54,7 @@ export default function AccessGate({ onEnter }: { onEnter: () => void }) {
   }, [step]);
 
   const finish = () => {
-    try {
-      localStorage.setItem("is_gate_ok", String(Date.now()));
-    } catch {
-      /* ignore */
-    }
+    markGateEntered();
     track("gate_entered");
     onEnter();
   };
