@@ -7,6 +7,7 @@
 import { clientIp, ipHash, verifyTurnstile, json } from "@/lib/ai/server";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 const MAX_BYTES = 1_500_000; // ~15–20s of compressed audio
 const MODEL = process.env.AI_WHISPER_MODEL ?? "whisper-large-v3-turbo";

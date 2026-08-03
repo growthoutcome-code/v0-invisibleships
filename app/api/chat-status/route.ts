@@ -7,6 +7,7 @@
 import { supabase, IP_PER_DAY, clientIp, ipHash, json } from "@/lib/ai/server";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 export async function GET(req: Request) {
   const iph = ipHash(clientIp(req));
