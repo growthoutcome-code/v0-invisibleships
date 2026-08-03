@@ -1,0 +1,11 @@
+[
+  { "group": "Orientation", "q": "What is this archive? Start me at the beginning." },
+  { "group": "Orientation", "q": "Give me the timeline — how did this start and how has it developed?" },
+  { "group": "Orientation", "q": "What does 'neuro-tech terrorism' mean here?" },
+  { "group": "Skeptic", "q": "Is the author credible — or just crazy?" },
+  { "group": "Skeptic", "q": "Is America really being attacked?" },
+  { "group": "Depth", "q": "What's the strongest evidence in the archive?" },
+  { "group": "Depth", "q": "What do the transcripts actually say?" },
+  { "group": "Depth", "q": "Which entries should I read first?" }
+]
+
