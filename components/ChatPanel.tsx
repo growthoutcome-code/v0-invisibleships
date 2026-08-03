@@ -45,7 +45,7 @@ export default function ChatPanel() {
 
     const w = window as any;
     const SR = w.SpeechRecognition || w.webkitSpeechRecognition;
-    const hasMedia = !!(navigator.mediaDevices?.getUserMedia && w.MediaRecorder);
+    const hasMedia = !!((navigator as any).mediaDevices?.getUserMedia && w.MediaRecorder);
     if (SR) {
       const rec = new SR();
       rec.lang = "en-US"; rec.interimResults = true; rec.continuous = false;
