@@ -13,6 +13,9 @@ const NAV: { t: Tab; label: string }[] = [
   { t: "disclaimer", label: "Disclaimer" },
 ];
 
+// Search temporarily hidden while it's broken. Flip to true to restore it.
+const SHOW_SEARCH = false;
+
 export default function Header({
   tab, onTab, onSearch, onExport, onHome,
 }: {
@@ -36,9 +39,11 @@ export default function Header({
 
         <nav className="hidden lg:flex items-center gap-0.5 mx-auto">
           {NAV.map((n) => btn(n.t, n.label))}
-          <button onClick={onSearch} className="px-2.5 py-1.5 text-[13px] uppercase tracking-wide text-muted hover:text-foreground inline-flex items-center gap-1.5">
-            <Search size={15} /> Search
-          </button>
+          {SHOW_SEARCH && (
+            <button onClick={onSearch} className="px-2.5 py-1.5 text-[13px] uppercase tracking-wide text-muted hover:text-foreground inline-flex items-center gap-1.5">
+              <Search size={15} /> Search
+            </button>
+          )}
         </nav>
 
         <div className="hidden lg:flex items-center gap-1.5 ml-auto">
@@ -57,7 +62,9 @@ export default function Header({
       {open && (
         <div className="lg:hidden bg-panel px-4 py-3 flex flex-col gap-1">
           {NAV.map((n) => btn(n.t, n.label, "text-left"))}
-          <button onClick={() => { onSearch(); setOpen(false); }} className="text-left px-2.5 py-1.5 text-[13px] uppercase tracking-wide text-muted hover:text-foreground inline-flex items-center gap-1.5"><Search size={15} /> Search</button>
+          {SHOW_SEARCH && (
+            <button onClick={() => { onSearch(); setOpen(false); }} className="text-left px-2.5 py-1.5 text-[13px] uppercase tracking-wide text-muted hover:text-foreground inline-flex items-center gap-1.5"><Search size={15} /> Search</button>
+          )}
           <button onClick={() => { onExport(); setOpen(false); }} className="text-left px-2.5 py-1.5 text-[13px] uppercase tracking-wide text-muted hover:text-foreground inline-flex items-center gap-1.5"><Download size={15} /> Export</button>
         </div>
       )}
