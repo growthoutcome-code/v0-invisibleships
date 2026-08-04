@@ -53,11 +53,9 @@ export default function AccessGate({ onEnter }: { onEnter: () => void }) {
   }, [step]);
 
   const finish = () => {
-    try {
-      localStorage.setItem("is_gate_ok", String(Date.now()));
-    } catch {
-      /* ignore */
-    }
+    // Persistence is the caller's responsibility (see lib/gate.ts). We keep the
+    // gate in-memory during the MVP so it re-shows on every browser refresh, so
+    // AccessGate deliberately writes NO storage here.
     track("gate_entered");
     onEnter();
   };
