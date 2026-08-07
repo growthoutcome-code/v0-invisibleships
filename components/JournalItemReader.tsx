@@ -37,7 +37,7 @@ export default function JournalItemReader({ doc, body, cats, gloss, prev, next }
             <span className="font-mono">{doc.id}</span>
             {cats.map((c) => <span key={c} className="uppercase tracking-wide">{cap(c)}</span>)}
           </div>
-          <h1 className="font-display text-3xl font-semibold text-foreground mb-1 leading-tight">{doc.title || doc.id}</h1>
+          <h1 className="font-display text-[21px] font-semibold text-foreground mb-1 leading-tight">{doc.title || doc.id}</h1>
           <div className="text-sm text-muted mb-5">
             {doc.entry_date}{doc.weekday ? ` · ${doc.weekday}` : ""}{doc.audio_duration ? ` · ${doc.audio_duration}` : ""}
             {doc.audio_url && <> · <a className="text-accent underline" href={doc.audio_url} target="_blank" rel="noreferrer">audio ↗</a></>}

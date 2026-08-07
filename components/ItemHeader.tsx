@@ -12,7 +12,7 @@ const NAV: { href: string; label: string }[] = [
 
 export default function ItemHeader() {
   return (
-    <header className="sticky top-0 z-30 bg-background/85 backdrop-blur border-b border-edge">
+    <header className="sticky top-0 z-30 bg-background/85 backdrop-blur">
       <div className="w-full px-4 sm:px-6 h-14 flex items-center gap-3">
         <Link href="/" className="font-display font-semibold tracking-tight text-foreground shrink-0">Invisible Ships</Link>
         <nav className="hidden lg:flex items-center gap-0.5 mx-auto">

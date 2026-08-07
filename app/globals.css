@@ -50,12 +50,12 @@ body {
 .font-reading { font-family: var(--font-serif), Georgia, "Times New Roman", serif; }
 .prose-transcript p { margin: 0.5rem 0; line-height: 1.7; }
 
-/* Form inputs: borderless with a 2px bottom rule (matches link/accent styling) */
+/* Form inputs: fully borderless — rely on placeholder + focus text color */
 @layer components {
   .input-line {
-    @apply bg-transparent border-0 border-b-2 border-edge rounded-none px-1 py-1.5 text-sm outline-none transition-colors placeholder:text-muted;
+    @apply bg-transparent border-0 rounded-none px-1 py-1.5 text-sm outline-none transition-colors placeholder:text-muted;
   }
-  .input-line:focus { @apply border-accent; }
+  .input-line:focus { @apply text-foreground placeholder:text-foreground/40; }
   /* Consistent Title Case for glossary term names (preserves acronyms like BCI, V2K) */
   .term-title { @apply capitalize; }
 }

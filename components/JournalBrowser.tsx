@@ -188,7 +188,7 @@ export default function JournalBrowser() {
           <GlossaryPeek terms={glossaryTerms} onView={() => { setTab("glossary"); setSel(null); setGsel(null); }} onOpen={(slug: string) => { setTab("glossary"); setSel(null); setGsel(slug); }} />
         )}
         {!loading && tab === "glossary" && !gsel && (
-          <JournalPeek items={journal} onView={() => { setTab("journal"); setSel(null); setGsel(null); }} onOpen={(id: string) => { setTab("journal"); setGsel(null); setSel(id); }} />
+          <JournalPeek items={journal} source={ds?.source} onView={() => { setTab("journal"); setSel(null); setGsel(null); }} onOpen={(id: string) => { setTab("journal"); setGsel(null); setSel(id); }} />
         )}
       </main>
 
@@ -214,8 +214,8 @@ const TAB_TITLE: Record<Tab, string> = { journal: "Journal", glossary: "Glossary
 // left-aligned and larger than any other heading. 80% width via its parent <main>.
 function TitleBand({ title }: { title: string }) {
   return (
-    <section className="w-full min-h-[140px] md:min-h-[180px] lg:min-h-[200px] flex items-end border-b border-edge mb-8 pb-6">
-      <h1 className="font-display font-bold tracking-tight text-foreground text-4xl md:text-5xl lg:text-6xl leading-none">{title}</h1>
+    <section className="w-full min-h-[140px] md:min-h-[180px] lg:min-h-[200px] flex items-end mb-8 pb-6">
+      <h1 className="font-display font-bold tracking-tight text-foreground text-[25px] md:text-[34px] lg:text-[42px] leading-none">{title}</h1>
     </section>
   );
 }
@@ -286,7 +286,7 @@ function Reader({ doc, body, bodyLoading, cats, gloss, onBack, onPrev, onNext }:
         <span className="font-mono">{doc.id}</span>
         {cats.map((c: string) => <span key={c} className="uppercase tracking-wide">{cap(c)}</span>)}
       </div>
-      <h1 className="font-display text-3xl font-semibold text-foreground mb-1 leading-tight">{doc.title || doc.id}</h1>
+      <h1 className="font-display text-[21px] font-semibold text-foreground mb-1 leading-tight">{doc.title || doc.id}</h1>
       <div className="text-sm text-muted mb-5">
         {doc.entry_date}{doc.weekday ? ` · ${doc.weekday}` : ""}{doc.audio_duration ? ` · ${doc.audio_duration}` : ""}
         {doc.audio_url && <> · <a className="text-accent underline" href={doc.audio_url} target="_blank" rel="noreferrer">audio ↗</a></>}
@@ -342,7 +342,7 @@ function GlossarySection({ terms, gcat, setGcat, gsel, setGsel }: any) {
 // Sticky term index — desktop only; on mobile the term list itself is the nav.
 function GlossarySidebar({ terms, activeSlug, onOpen }: any) {
   return (
-    <aside className="hidden lg:block w-52 shrink-0 sticky top-6 self-start max-h-[calc(100vh-3rem)] overflow-y-auto no-scrollbar pr-2">
+    <aside className="hidden lg:block w-52 shrink-0 self-start pr-2">
       <div className="text-[11px] uppercase tracking-wide text-muted mb-3">Terms</div>
       <ul className="space-y-1.5">
         {terms.map((t: any) => (
@@ -350,7 +350,7 @@ function GlossarySidebar({ terms, activeSlug, onOpen }: any) {
             <Link
               href={glossaryHref(t.slug)}
               onClick={spaClick(() => onOpen(t.slug))}
-              className={`block text-sm term-title leading-snug transition-colors ${activeSlug === t.slug ? "text-accent" : "text-muted hover:text-foreground"}`}
+              className={`block text-sm term-title leading-[1.6] transition-colors ${activeSlug === t.slug ? "text-accent" : "text-muted hover:text-foreground"}`}
             >
               {cleanTerm(t.term)}
             </Link>
@@ -400,7 +400,7 @@ function GlossaryTermReader({ term, onBack, onPrev, onNext, onOpenTerm }: any) {
         <ShareMenu title={`${cleanTerm(term.term)} — ${SITE}`} align="right" />
       </div>
       <p className="text-xs uppercase tracking-[0.14em] text-muted mb-2">Glossary</p>
-      <h1 className="font-display text-3xl font-semibold text-foreground mb-1 leading-tight term-title">{cleanTerm(term.term)}</h1>
+      <h1 className="font-display text-[21px] font-semibold text-foreground mb-1 leading-tight term-title">{cleanTerm(term.term)}</h1>
       {pron && <div className="text-sm text-muted italic mb-5">{pron}</div>}
       <GlossaryBody text={body} onInternalNav={onOpenTerm} />
       <div className="flex gap-3 mt-12 pt-6">
@@ -424,8 +424,8 @@ function shuffle<T>(arr: T[]): T[] {
 function PeekCarousel({ title, cta, onCta, slides }: { title: string; cta: string; onCta: () => void; slides: JSX.Element[] }) {
   const autoplay = useRef(Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true }));
   return (
-    <section className="mt-16 pt-8 border-t border-edge">
-      <div className="flex items-center justify-between mb-4">
+    <section className="mt-16 pt-8 min-h-[460px]">
+      <div className="flex items-center justify-between mb-5">
         <h2 className="font-display text-lg font-semibold text-foreground">{title}</h2>
         <button onClick={onCta} className="text-sm text-accent hover:underline inline-flex items-center gap-1">{cta} <ChevronRight size={15} /></button>
       </div>
@@ -445,20 +445,37 @@ function PeekCarousel({ title, cta, onCta, slides }: { title: string; cta: strin
 function GlossaryPeek({ terms, onView, onOpen }: any) {
   const sample = useMemo(() => shuffle(terms).slice(0, 9), [terms]);
   const slides = sample.map((t: any) => (
-    <Link key={t.slug} href={glossaryHref(t.slug)} onClick={spaClick(() => onOpen(t.slug))} className="group flex h-full flex-col border border-edge p-4 hover:border-accent transition-colors">
-      <div className="font-display text-base font-semibold text-foreground group-hover:text-accent term-title">{cleanTerm(t.term)}</div>
-      <p className="mt-1.5 font-serif text-[15px] text-foreground/75 leading-snug line-clamp-3">{cleanDef(splitDef(t.definition).body)}</p>
+    <Link key={t.slug} href={glossaryHref(t.slug)} onClick={spaClick(() => onOpen(t.slug))} className="group flex h-[380px] md:h-[400px] flex-col bg-panel p-8 transition-colors hover:bg-edge">
+      <div className="text-[11px] uppercase tracking-wide text-muted mb-2">Glossary</div>
+      <div className="font-display text-2xl font-semibold text-foreground group-hover:text-accent term-title">{cleanTerm(t.term)}</div>
+      <p className="mt-4 flex-1 font-serif text-[19px] text-foreground/80 leading-[1.6] line-clamp-[8] overflow-hidden">{cleanDef(splitDef(t.definition).body)}</p>
+      <div className="mt-4 text-accent text-sm">Read →</div>
     </Link>
   ));
   return <PeekCarousel title="From the glossary" cta="View Glossary" onCta={onView} slides={slides} />;
 }
 
-function JournalPeek({ items, onView, onOpen }: any) {
+function JournalPeek({ items, source, onView, onOpen }: any) {
   const sample = useMemo(() => shuffle(items).slice(0, 9), [items]);
+  // Load a truncated excerpt of each sampled journal entry so the card shows
+  // real body text, not just the title.
+  const [ex, setEx] = useState<Record<string, string>>({});
+  useEffect(() => {
+    let alive = true;
+    Promise.all(
+      sample.map(async (d: any) => {
+        try { return [d.id, excerpt(await getBody(d.id, source))] as const; }
+        catch { return [d.id, ""] as const; }
+      })
+    ).then((pairs) => { if (alive) setEx(Object.fromEntries(pairs)); });
+    return () => { alive = false; };
+  }, [sample, source]);
   const slides = sample.map((d: any) => (
-    <Link key={d.id} href={journalHref(d.id)} onClick={spaClick(() => onOpen(d.id))} className="group flex h-full flex-col border border-edge p-4 hover:border-accent transition-colors">
-      <div className="text-[11px] uppercase tracking-wide text-muted">{d.entry_date}{d.part != null ? ` · Part ${d.part}` : ""}</div>
-      <div className="mt-1 font-display text-base font-semibold text-foreground group-hover:text-accent line-clamp-2">{d.title || d.id}</div>
+    <Link key={d.id} href={journalHref(d.id)} onClick={spaClick(() => onOpen(d.id))} className="group flex h-[380px] md:h-[400px] flex-col bg-panel p-8 transition-colors hover:bg-edge">
+      <div className="text-[11px] uppercase tracking-wide text-muted">Journal · {d.entry_date}{d.part != null ? ` · Part ${d.part}` : ""}</div>
+      <div className="mt-2 font-display text-2xl font-semibold text-foreground group-hover:text-accent line-clamp-2">{d.title || d.id}</div>
+      <p className="mt-4 flex-1 font-serif text-[19px] text-foreground/80 leading-[1.6] line-clamp-[7] overflow-hidden">{ex[d.id] ?? "…"}</p>
+      <div className="mt-4 text-accent text-sm">Read →</div>
     </Link>
   ));
   return <PeekCarousel title="From the journal" cta="View Journal" onCta={onView} slides={slides} />;
@@ -468,7 +485,7 @@ function JournalPeek({ items, onView, onOpen }: any) {
 function Sel({ label, value, onChange, options, all }: any) {
   return (
     <label className="block text-xs text-muted">{label}
-      <select value={value} onChange={(e) => onChange(e.target.value)} className="mt-1 w-full bg-background border border-edge px-2 py-2 text-sm text-foreground">
+      <select value={value} onChange={(e) => onChange(e.target.value)} className="mt-1 w-full bg-panel px-2 py-2 text-sm text-foreground rounded-none">
         <option value="">{all}</option>
         {options.map((o: any) => <option key={o.v} value={o.v}>{o.l}</option>)}
       </select>
