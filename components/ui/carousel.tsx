@@ -98,7 +98,7 @@ const CarouselItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLD
 CarouselItem.displayName = "CarouselItem";
 
 const arrowBase =
-  "absolute z-10 inline-flex h-8 w-8 items-center justify-center rounded-full border border-edge bg-background text-foreground transition-colors hover:bg-panel disabled:pointer-events-none disabled:opacity-40";
+  "absolute z-10 inline-flex h-8 w-8 items-center justify-center rounded-full bg-background text-muted transition-colors hover:text-foreground disabled:pointer-events-none disabled:opacity-40";
 
 const CarouselPrevious = React.forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement>>(
   ({ className, ...props }, ref) => {

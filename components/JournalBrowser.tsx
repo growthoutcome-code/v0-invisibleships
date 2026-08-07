@@ -46,6 +46,15 @@ function excerpt(md: string): string {
   return text.length > 240 ? text.slice(0, 240) + "…" : text;
 }
 
+// First N sentences of a string (falls back to the whole text if it has no
+// sentence punctuation). Used to cap the glossary peek at 2 sentences.
+function firstSentences(text: string, n = 2): string {
+  const clean = (text || "").trim();
+  const matches = clean.match(/[^.!?]+[.!?]+(\s|$)/g);
+  if (!matches) return clean;
+  return matches.slice(0, n).join(" ").replace(/\s+/g, " ").trim() || clean;
+}
+
 export default function JournalBrowser({ initialTab = "journal" }: { initialTab?: Tab } = {}) {
   const [ds, setDs] = useState<Dataset | null>(null);
   const [loading, setLoading] = useState(true);
@@ -224,7 +233,7 @@ const TAB_TITLE: Record<Tab, string> = { journal: "Journal", glossary: "Glossary
 // left-aligned and larger than any other heading. 80% width via its parent <main>.
 function TitleBand({ title }: { title: string }) {
   return (
-    <section className="w-full min-h-[140px] md:min-h-[180px] lg:min-h-[200px] flex items-end mb-8 pb-6">
+    <section className="w-full min-h-[160px] flex items-end mb-8 pb-6">
       <h1 className="font-display font-bold tracking-tight text-foreground text-[25px] md:text-[34px] lg:text-[42px] leading-none">{title}</h1>
     </section>
   );
@@ -431,7 +440,7 @@ function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
-function PeekCarousel({ title, cta, onCta, slides }: { title: string; cta: string; onCta: () => void; slides: JSX.Element[] }) {
+function PeekCarousel({ title, cta, onCta, slides, bottomCta }: { title: string; cta: string; onCta: () => void; slides: JSX.Element[]; bottomCta?: boolean }) {
   const autoplay = useRef(Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true }));
   return (
     <section className="mt-16 pt-8 min-h-[460px]">
@@ -448,6 +457,11 @@ function PeekCarousel({ title, cta, onCta, slides }: { title: string; cta: strin
         <CarouselPrevious />
         <CarouselNext />
       </Carousel>
+      {bottomCta && (
+        <div className="mt-6 flex justify-center">
+          <Button size="lg" onClick={onCta} className="inline-flex items-center gap-1.5">{cta} <ChevronRight size={16} /></Button>
+        </div>
+      )}
     </section>
   );
 }
@@ -455,14 +469,14 @@ function PeekCarousel({ title, cta, onCta, slides }: { title: string; cta: strin
 function GlossaryPeek({ terms, onView, onOpen }: any) {
   const sample = useMemo(() => shuffle(terms).slice(0, 9), [terms]);
   const slides = sample.map((t: any) => (
-    <Link key={t.slug} href={glossaryHref(t.slug)} onClick={spaClick(() => onOpen(t.slug))} className="group flex h-[380px] md:h-[400px] flex-col bg-panel p-8 transition-colors hover:bg-edge">
+    <Link key={t.slug} href={glossaryHref(t.slug)} onClick={spaClick(() => onOpen(t.slug))} className="group flex h-[340px] md:h-[360px] flex-col justify-center pr-8">
       <div className="text-[11px] uppercase tracking-wide text-muted mb-2">Glossary</div>
-      <div className="font-display text-2xl font-semibold text-foreground group-hover:text-accent term-title">{cleanTerm(t.term)}</div>
-      <p className="mt-4 flex-1 font-serif text-[19px] text-foreground/80 leading-[1.6] line-clamp-[8] overflow-hidden">{cleanDef(splitDef(t.definition).body)}</p>
-      <div className="mt-4 text-accent text-sm">Read →</div>
+      <div className="font-display text-3xl font-semibold text-foreground group-hover:text-accent term-title">{cleanTerm(t.term)}</div>
+      <p className="mt-4 font-serif text-[26px] text-foreground/85 leading-[1.55]">{firstSentences(cleanDef(splitDef(t.definition).body), 2)}</p>
+      <div className="mt-5 text-accent text-base">Read →</div>
     </Link>
   ));
-  return <PeekCarousel title="From the glossary" cta="View Glossary" onCta={onView} slides={slides} />;
+  return <PeekCarousel title="From the glossary" cta="Go to Glossary" onCta={onView} slides={slides} bottomCta />;
 }
 
 function JournalPeek({ items, source, onView, onOpen }: any) {
@@ -481,7 +495,7 @@ function JournalPeek({ items, source, onView, onOpen }: any) {
     return () => { alive = false; };
   }, [sample, source]);
   const slides = sample.map((d: any) => (
-    <Link key={d.id} href={journalHref(d.id)} onClick={spaClick(() => onOpen(d.id))} className="group flex h-[380px] md:h-[400px] flex-col bg-panel p-8 transition-colors hover:bg-edge">
+    <Link key={d.id} href={journalHref(d.id)} onClick={spaClick(() => onOpen(d.id))} className="group flex h-[380px] md:h-[400px] flex-col justify-center pr-8">
       <div className="text-[11px] uppercase tracking-wide text-muted">Journal · {d.entry_date}{d.part != null ? ` · Part ${d.part}` : ""}</div>
       <div className="mt-2 font-display text-2xl font-semibold text-foreground group-hover:text-accent line-clamp-2">{d.title || d.id}</div>
       <p className="mt-4 flex-1 font-serif text-[19px] text-foreground/80 leading-[1.6] line-clamp-[7] overflow-hidden">{ex[d.id] ?? "…"}</p>
