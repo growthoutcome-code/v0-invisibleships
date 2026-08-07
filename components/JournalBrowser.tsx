@@ -296,7 +296,7 @@ function GlossaryList({ terms, gcat, setGcat, onOpen }: any) {
         <h1 className="font-display text-lg font-semibold text-foreground">Glossary</h1>
         <div className="flex items-center gap-2">
           <input value={gcat} onChange={(e) => setGcat(e.target.value)} placeholder="Filter terms…"
-            className="bg-panel px-3 py-1.5 text-sm outline-none focus:ring-1 focus:ring-accent w-44" />
+            className="input-line w-44" />
           <ShareMenu title={`${SITE} — Glossary`} align="right" />
         </div>
       </div>
@@ -305,7 +305,7 @@ function GlossaryList({ terms, gcat, setGcat, onOpen }: any) {
           const { pron, body } = splitDef(t.definition);
           return (
             <Link key={t.slug} href={glossaryHref(t.slug)} className="group block w-full text-left">
-              <h2 className="font-display text-xl font-semibold text-foreground group-hover:text-accent transition-colors">{cleanTerm(t.term)}</h2>
+              <h2 className="font-display text-xl font-semibold text-foreground group-hover:text-accent transition-colors term-title">{cleanTerm(t.term)}</h2>
               {pron && <div className="text-xs text-muted italic mt-1">{pron}</div>}
               <p className="font-serif text-[25px] text-foreground/85 mt-2 whitespace-pre-wrap leading-[1.6] line-clamp-3">{cleanDef(body)}</p>
               <div className="mt-2 text-accent text-sm">Read →</div>
@@ -327,7 +327,7 @@ function GlossaryTermReader({ term, onBack, onPrev, onNext }: any) {
         <ShareMenu title={`${cleanTerm(term.term)} — ${SITE}`} align="right" />
       </div>
       <p className="text-xs uppercase tracking-[0.14em] text-muted mb-2">Glossary</p>
-      <h1 className="font-display text-3xl font-semibold text-foreground mb-1 leading-tight">{cleanTerm(term.term)}</h1>
+      <h1 className="font-display text-3xl font-semibold text-foreground mb-1 leading-tight term-title">{cleanTerm(term.term)}</h1>
       {pron && <div className="text-sm text-muted italic mb-5">{pron}</div>}
       <GlossaryBody text={body} />
       <div className="flex gap-3 mt-12 pt-6">
@@ -360,10 +360,10 @@ function FilterPanel(p: any) {
         </div>
         <div className="space-y-3">
           <input autoFocus value={p.q} onChange={(e: any) => p.setQ(e.target.value)} placeholder="Search title, id, location"
-            className="w-full bg-background border border-edge px-3 py-2 text-sm outline-none focus:border-accent" />
+            className="input-line w-full" />
           <div className="grid grid-cols-2 gap-2">
-            <label className="text-xs text-muted">From<input type="date" value={p.dFrom} onChange={(e: any) => p.setDFrom(e.target.value)} className="mt-1 w-full bg-background border border-edge px-2 py-1.5 text-sm" /></label>
-            <label className="text-xs text-muted">To<input type="date" value={p.dTo} onChange={(e: any) => p.setDTo(e.target.value)} className="mt-1 w-full bg-background border border-edge px-2 py-1.5 text-sm" /></label>
+            <label className="text-xs text-muted">From<input type="date" value={p.dFrom} onChange={(e: any) => p.setDFrom(e.target.value)} className="input-line mt-1 w-full" /></label>
+            <label className="text-xs text-muted">To<input type="date" value={p.dTo} onChange={(e: any) => p.setDTo(e.target.value)} className="input-line mt-1 w-full" /></label>
           </div>
           <Sel label="Part" value={p.part} onChange={p.setPart} options={p.parts.map((x: number) => ({ v: String(x), l: `Part ${x}` }))} all="All parts" />
           <Sel label="Location" value={p.loc} onChange={p.setLoc} options={p.locs.map((x: string) => ({ v: x, l: x }))} all="All locations" />

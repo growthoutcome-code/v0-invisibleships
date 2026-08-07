@@ -48,7 +48,7 @@ export default function Header({
 
         <div className="hidden lg:flex items-center gap-1.5 ml-auto">
           <ThemeToggle />
-          <Button variant="outline" size="sm" onClick={onExport} className="uppercase tracking-wide text-[13px]"><Download size={15} /> Export</Button>
+          <Button variant="ghost" size="sm" onClick={onExport} className="uppercase tracking-wide text-[13px]"><Download size={15} /> Export</Button>
         </div>
 
         <div className="lg:hidden ml-auto flex items-center gap-1">

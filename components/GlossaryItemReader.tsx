@@ -32,7 +32,7 @@ export default function GlossaryItemReader({ term, prev, next }: Props) {
             <ShareMenu title={`${name} — Invisible Ships`} align="right" />
           </div>
           <p className="text-xs uppercase tracking-[0.14em] text-muted mb-2">Glossary</p>
-          <h1 className="font-display text-3xl font-semibold text-foreground mb-1 leading-tight">{name}</h1>
+          <h1 className="font-display text-3xl font-semibold text-foreground mb-1 leading-tight term-title">{name}</h1>
           {pron && <div className="text-sm text-muted italic mb-5">{pron}</div>}
           <GlossaryBody text={body} />
           <div className="flex gap-3 mt-12 pt-6">
