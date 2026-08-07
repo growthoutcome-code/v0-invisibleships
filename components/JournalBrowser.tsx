@@ -20,6 +20,17 @@ import Autoplay from "embla-carousel-autoplay";
 const journalHref = (id: string) => `/journal/${id.toLowerCase()}`;
 const glossaryHref = (slug: string) => `/glossary/${slug.toLowerCase()}`;
 
+// Intercept a normal left-click so in-app links update SPA state instead of
+// doing a full navigation to the standalone route (which sits behind the gate
+// and bounces the visitor back to the splash). Modifier/middle clicks fall
+// through so "open in new tab" and hover previews on the real URL still work.
+const spaClick = (fn: () => void) => (e: any) => {
+  if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1) return;
+  e.preventDefault();
+  fn();
+  if (typeof window !== "undefined") window.scrollTo({ top: 0 });
+};
+
 const PAGE_SIZE = 10;
 const SITE = "Invisible Ships";
 const TABS: Tab[] = ["journal", "glossary", "documents", "author", "disclaimer"];
@@ -174,10 +185,10 @@ export default function JournalBrowser() {
             page={page} totalPages={totalPages} setPage={setPage} onOpen={setSel} onSearch={() => setPanelOpen(true)} />
         )}
         {!loading && tab === "journal" && !selDoc && (
-          <GlossaryPeek terms={glossaryTerms} onView={() => { setTab("glossary"); setSel(null); setGsel(null); }} />
+          <GlossaryPeek terms={glossaryTerms} onView={() => { setTab("glossary"); setSel(null); setGsel(null); }} onOpen={(slug: string) => { setTab("glossary"); setSel(null); setGsel(slug); }} />
         )}
         {!loading && tab === "glossary" && !gsel && (
-          <JournalPeek items={journal} onView={() => { setTab("journal"); setSel(null); setGsel(null); }} />
+          <JournalPeek items={journal} onView={() => { setTab("journal"); setSel(null); setGsel(null); }} onOpen={(id: string) => { setTab("journal"); setGsel(null); setSel(id); }} />
         )}
       </main>
 
@@ -222,7 +233,7 @@ function Feed({ items, excerpts, docCats, total, page, totalPages, setPage, onOp
       </div>
       <div className="space-y-10">
         {items.map((d: Doc) => (
-          <Link key={d.id} href={journalHref(d.id)} className="group block w-full text-left">
+          <Link key={d.id} href={journalHref(d.id)} onClick={spaClick(() => onOpen(d.id))} className="group block w-full text-left">
             <div className="flex items-center gap-2 text-[11px] uppercase tracking-wide text-muted">
               <span>{d.doc_type}</span>
               {d.audio_url && <span className="text-accent inline-flex items-center gap-1"><Volume2 size={12} /> audio</span>}
@@ -309,14 +320,14 @@ function GlossarySection({ terms, gcat, setGcat, gsel, setGsel }: any) {
   }
   return (
     <div className="lg:flex lg:gap-8 lg:items-start">
-      <GlossarySidebar terms={terms} activeSlug={gsel} />
+      <GlossarySidebar terms={terms} activeSlug={gsel} onOpen={setGsel} />
       <div className="flex-1 min-w-0">{content}</div>
     </div>
   );
 }
 
 // Sticky term index — desktop only; on mobile the term list itself is the nav.
-function GlossarySidebar({ terms, activeSlug }: any) {
+function GlossarySidebar({ terms, activeSlug, onOpen }: any) {
   return (
     <aside className="hidden lg:block w-52 shrink-0 sticky top-6 self-start max-h-[calc(100vh-3rem)] overflow-y-auto no-scrollbar pr-2">
       <div className="text-[11px] uppercase tracking-wide text-muted mb-3">Terms</div>
@@ -325,6 +336,7 @@ function GlossarySidebar({ terms, activeSlug }: any) {
           <li key={t.slug}>
             <Link
               href={glossaryHref(t.slug)}
+              onClick={spaClick(() => onOpen(t.slug))}
               className={`block text-sm term-title leading-snug transition-colors ${activeSlug === t.slug ? "text-accent" : "text-muted hover:text-foreground"}`}
             >
               {cleanTerm(t.term)}
@@ -352,7 +364,7 @@ function GlossaryList({ terms, gcat, setGcat, onOpen }: any) {
         {shown.map((t: any) => {
           const { pron, body } = splitDef(t.definition);
           return (
-            <Link key={t.slug} href={glossaryHref(t.slug)} className="group block w-full text-left">
+            <Link key={t.slug} href={glossaryHref(t.slug)} onClick={spaClick(() => onOpen(t.slug))} className="group block w-full text-left">
               <h2 className="font-display text-xl font-semibold text-foreground group-hover:text-accent transition-colors term-title">{cleanTerm(t.term)}</h2>
               {pron && <div className="text-xs text-muted italic mt-1">{pron}</div>}
               <p className="font-serif text-[21px] text-foreground/85 mt-2 whitespace-pre-wrap leading-[1.6] line-clamp-3">{cleanDef(body)}</p>
@@ -417,10 +429,10 @@ function PeekCarousel({ title, cta, onCta, slides }: { title: string; cta: strin
   );
 }
 
-function GlossaryPeek({ terms, onView }: any) {
+function GlossaryPeek({ terms, onView, onOpen }: any) {
   const sample = useMemo(() => shuffle(terms).slice(0, 9), [terms]);
   const slides = sample.map((t: any) => (
-    <Link key={t.slug} href={glossaryHref(t.slug)} className="group flex h-full flex-col border border-edge p-4 hover:border-accent transition-colors">
+    <Link key={t.slug} href={glossaryHref(t.slug)} onClick={spaClick(() => onOpen(t.slug))} className="group flex h-full flex-col border border-edge p-4 hover:border-accent transition-colors">
       <div className="font-display text-base font-semibold text-foreground group-hover:text-accent term-title">{cleanTerm(t.term)}</div>
       <p className="mt-1.5 font-serif text-[15px] text-foreground/75 leading-snug line-clamp-3">{cleanDef(splitDef(t.definition).body)}</p>
     </Link>
@@ -428,10 +440,10 @@ function GlossaryPeek({ terms, onView }: any) {
   return <PeekCarousel title="From the glossary" cta="View Glossary" onCta={onView} slides={slides} />;
 }
 
-function JournalPeek({ items, onView }: any) {
+function JournalPeek({ items, onView, onOpen }: any) {
   const sample = useMemo(() => shuffle(items).slice(0, 9), [items]);
   const slides = sample.map((d: any) => (
-    <Link key={d.id} href={journalHref(d.id)} className="group flex h-full flex-col border border-edge p-4 hover:border-accent transition-colors">
+    <Link key={d.id} href={journalHref(d.id)} onClick={spaClick(() => onOpen(d.id))} className="group flex h-full flex-col border border-edge p-4 hover:border-accent transition-colors">
       <div className="text-[11px] uppercase tracking-wide text-muted">{d.entry_date}{d.part != null ? ` · Part ${d.part}` : ""}</div>
       <div className="mt-1 font-display text-base font-semibold text-foreground group-hover:text-accent line-clamp-2">{d.title || d.id}</div>
     </Link>
