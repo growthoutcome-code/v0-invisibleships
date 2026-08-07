@@ -49,10 +49,13 @@ function excerpt(md: string): string {
 // First N sentences of a string (falls back to the whole text if it has no
 // sentence punctuation). Used to cap the glossary peek at 2 sentences.
 function firstSentences(text: string, n = 2): string {
-  const clean = (text || "").trim();
+  // Strip any leading dictionary-style ":" and collapse whitespace.
+  const clean = (text || "").replace(/^[\s:]+/, "").trim();
   const matches = clean.match(/[^.!?]+[.!?]+(\s|$)/g);
-  if (!matches) return clean;
-  return matches.slice(0, n).join(" ").replace(/\s+/g, " ").trim() || clean;
+  const out = (matches ? matches.slice(0, n).join(" ").replace(/\s+/g, " ").trim() : clean) || clean;
+  // Hard char cap so definitions with no early period (colon-delimited entries)
+  // can't overflow the card.
+  return out.length > 220 ? out.slice(0, 220).trim() + "…" : out;
 }
 
 export default function JournalBrowser({ initialTab = "journal" }: { initialTab?: Tab } = {}) {
@@ -481,7 +484,7 @@ function GlossaryPeek({ terms, onView, onOpen }: any) {
     <Link key={t.slug} href={glossaryHref(t.slug)} onClick={spaClick(() => onOpen(t.slug))} className="group flex h-[340px] md:h-[360px] flex-col justify-center pr-8">
       <div className="text-[11px] uppercase tracking-wide text-muted mb-2">Glossary</div>
       <div className="font-display text-3xl font-semibold text-foreground group-hover:text-accent term-title">{cleanTerm(t.term)}</div>
-      <p className="mt-4 font-serif text-[26px] text-foreground/85 leading-[1.55]">{firstSentences(cleanDef(splitDef(t.definition).body), 2)}</p>
+      <p className="mt-4 font-serif text-[26px] text-foreground/85 leading-[1.55] line-clamp-3 overflow-hidden">{firstSentences(cleanDef(splitDef(t.definition).body), 2)}</p>
       <div className="mt-5 text-accent text-base">Read →</div>
     </Link>
   ));
