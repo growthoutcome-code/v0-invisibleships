@@ -382,10 +382,16 @@ function GlossarySidebar({ terms, activeSlug, onOpen }: any) {
 
 function GlossaryList({ terms, gcat, setGcat, onOpen }: any) {
   const shown = terms.filter((t: any) => !gcat || t.term.toLowerCase().includes(gcat.toLowerCase()) || (t.definition || "").toLowerCase().includes(gcat.toLowerCase()));
+  // Paginate the term list, matching the journal feed (same PAGE_SIZE + Pager).
+  const [gpage, setGpage] = useState(1);
+  useEffect(() => { setGpage(1); }, [gcat]);
+  const totalPages = Math.max(1, Math.ceil(shown.length / PAGE_SIZE));
+  const page = Math.min(gpage, totalPages);
+  const pageItems = shown.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
   return (
     <div className="w-full mx-auto">
       <div className="flex items-center justify-between mb-5">
-        <span />
+        <span className="text-xs text-muted">{shown.length} terms · page {page} of {totalPages}</span>
         <div className="flex items-center gap-2">
           <input value={gcat} onChange={(e) => setGcat(e.target.value)} placeholder="Filter terms…"
             className="input-line w-44" />
@@ -393,7 +399,7 @@ function GlossaryList({ terms, gcat, setGcat, onOpen }: any) {
         </div>
       </div>
       <div className="space-y-8">
-        {shown.map((t: any) => {
+        {pageItems.map((t: any) => {
           const { pron, body } = splitDef(t.definition);
           return (
             <Link key={t.slug} href={glossaryHref(t.slug)} onClick={spaClick(() => onOpen(t.slug))} className="group block w-full text-left">
@@ -406,6 +412,7 @@ function GlossaryList({ terms, gcat, setGcat, onOpen }: any) {
         })}
         {shown.length === 0 && <div className="text-muted text-sm py-10 text-center">No terms match “{gcat}”.</div>}
       </div>
+      {totalPages > 1 && <Pager page={page} totalPages={totalPages} setPage={setGpage} />}
     </div>
   );
 }
@@ -441,21 +448,23 @@ function shuffle<T>(arr: T[]): T[] {
 }
 
 function PeekCarousel({ title, cta, onCta, slides, bottomCta }: { title: string; cta: string; onCta: () => void; slides: JSX.Element[]; bottomCta?: boolean }) {
-  const autoplay = useRef(Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true }));
+  const autoplay = useRef(Autoplay({ delay: 6000, stopOnInteraction: false, stopOnMouseEnter: true }));
   return (
     <section className="mt-16 pt-8 min-h-[460px]">
       <div className="flex items-center justify-between mb-5">
         <h2 className="font-display text-lg font-semibold text-foreground">{title}</h2>
         <button onClick={onCta} className="text-sm text-accent hover:underline inline-flex items-center gap-1">{cta} <ChevronRight size={15} /></button>
       </div>
-      <Carousel opts={{ loop: true, align: "start" }} plugins={[autoplay.current]}>
+      {/* Carousel content is 65% of the main area, centered, so the arrows sit in
+          the side margins instead of overlapping the card text. */}
+      <Carousel opts={{ loop: true, align: "start" }} plugins={[autoplay.current]} className="w-[65%] mx-auto">
         <CarouselContent>
           {slides.map((s, i) => (
             <CarouselItem key={i}>{s}</CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+        <CarouselPrevious className="-left-12" />
+        <CarouselNext className="-right-12" />
       </Carousel>
       {bottomCta && (
         <div className="mt-6 flex justify-center">
