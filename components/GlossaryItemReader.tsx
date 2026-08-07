@@ -7,7 +7,8 @@ import { useEffect } from "react";
 import ItemHeader from "@/components/ItemHeader";
 import Footer from "@/components/Footer";
 import ShareMenu from "@/components/ShareMenu";
-import { cleanTerm, cleanDef, splitDef } from "@/lib/glossary-format";
+import { cleanTerm, splitDef } from "@/lib/glossary-format";
+import GlossaryBody from "@/components/GlossaryBody";
 import { track } from "@/lib/analytics";
 
 type Nav = { slug: string; term: string };
@@ -33,7 +34,7 @@ export default function GlossaryItemReader({ term, prev, next }: Props) {
           <p className="text-xs uppercase tracking-[0.14em] text-muted mb-2">Glossary</p>
           <h1 className="font-display text-3xl font-semibold text-foreground mb-1 leading-tight">{name}</h1>
           {pron && <div className="text-sm text-muted italic mb-5">{pron}</div>}
-          <p className="font-serif text-[27px] text-foreground/90 whitespace-pre-wrap leading-[1.6]">{cleanDef(body)}</p>
+          <GlossaryBody text={body} />
           <div className="flex gap-3 mt-12 pt-6">
             {prev ? <Link href={`/glossary/${prev.slug}`} className="text-accent text-sm inline-flex items-center gap-1"><ChevronLeft size={15} /> Previous</Link> : <span />}
             {next && <Link href={`/glossary/${next.slug}`} className="text-accent text-sm ml-auto inline-flex items-center gap-1">Next <ChevronRight size={15} /></Link>}
