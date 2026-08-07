@@ -151,6 +151,7 @@ export default function JournalBrowser() {
       />
 
       <main className="flex-1 w-[80%] max-w-none mx-auto px-4 py-6">
+        {!loading && <TitleBand title={TAB_TITLE[tab]} />}
         {loading ? (
           <div className="text-muted text-center py-20">Loading corpus…</div>
         ) : tab === "glossary" ? (
@@ -196,12 +197,24 @@ export default function JournalBrowser() {
   );
 }
 
+const TAB_TITLE: Record<Tab, string> = { journal: "Journal", glossary: "Glossary", documents: "Documents", author: "Author", disclaimer: "Disclaimer" };
+
+// ~200px page-title band under the nav; its h1 is the current section name,
+// left-aligned and larger than any other heading. 80% width via its parent <main>.
+function TitleBand({ title }: { title: string }) {
+  return (
+    <section className="w-full min-h-[140px] md:min-h-[180px] lg:min-h-[200px] flex items-end border-b border-edge mb-8 pb-6">
+      <h1 className="font-display font-bold tracking-tight text-foreground text-4xl md:text-5xl lg:text-6xl leading-none">{title}</h1>
+    </section>
+  );
+}
+
 /* ---------- Feed ---------- */
 function Feed({ items, excerpts, docCats, total, page, totalPages, setPage, onOpen, onSearch }: any) {
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <h1 className="font-display text-lg font-semibold text-foreground">Journal</h1>
+        <span />
         <div className="flex items-center gap-2">
           <span className="text-xs text-muted">{total} entries · page {page} of {totalPages}</span>
           <ShareMenu title={`${SITE} — Journal`} align="right" />
@@ -328,7 +341,7 @@ function GlossaryList({ terms, gcat, setGcat, onOpen }: any) {
   return (
     <div className="w-full mx-auto">
       <div className="flex items-center justify-between mb-5">
-        <h1 className="font-display text-lg font-semibold text-foreground">Glossary</h1>
+        <span />
         <div className="flex items-center gap-2">
           <input value={gcat} onChange={(e) => setGcat(e.target.value)} placeholder="Filter terms…"
             className="input-line w-44" />
@@ -394,7 +407,7 @@ function PeekCarousel({ title, cta, onCta, slides }: { title: string; cta: strin
       <Carousel opts={{ loop: true, align: "start" }} plugins={[autoplay.current]}>
         <CarouselContent>
           {slides.map((s, i) => (
-            <CarouselItem key={i} className="sm:basis-1/2 lg:basis-1/3">{s}</CarouselItem>
+            <CarouselItem key={i}>{s}</CarouselItem>
           ))}
         </CarouselContent>
         <CarouselPrevious />
@@ -500,7 +513,7 @@ function DocumentsView() {
   return (
     <div>
       <div className="flex items-center justify-between mb-1">
-        <h1 className="font-display text-lg font-semibold text-foreground">Documents</h1>
+        <span />
         <ShareMenu title={`${SITE} — Documents`} align="right" />
       </div>
       <p className="text-sm text-muted mb-5">Additional documents beyond the four-part journal series.</p>
@@ -522,7 +535,7 @@ function DocumentsView() {
 function AuthorView() {
   return (
     <div className="w-full">
-      <h1 className="font-display text-3xl font-semibold text-foreground mb-5">About the Author</h1>
+      <h2 className="font-display text-3xl font-semibold text-foreground mb-5">About the Author</h2>
       <div className="flex flex-col sm:flex-row gap-6">
         <div className="relative w-40 h-40 bg-panel shrink-0 overflow-hidden">
           <span className="absolute inset-0 grid place-items-center text-muted text-xs">Photo</span>
@@ -543,7 +556,7 @@ function AuthorView() {
 function DisclaimerView() {
   return (
     <div className="w-full">
-      <h1 className="font-display text-3xl font-semibold text-foreground mb-5">Copyright &amp; Terms of Use</h1>
+      <h2 className="font-display text-3xl font-semibold text-foreground mb-5">Copyright &amp; Terms of Use</h2>
       <CopyrightTerms />
     </div>
   );
