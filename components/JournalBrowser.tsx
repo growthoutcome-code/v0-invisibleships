@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { loadDataset, getBody } from "@/lib/data";
 import type { Dataset, Doc } from "@/lib/types";
@@ -14,6 +14,8 @@ import { Transcript } from "@/components/Transcript";
 import { cleanTerm, cleanDef, splitDef } from "@/lib/glossary-format";
 import GlossaryBody from "@/components/GlossaryBody";
 import { DOCUMENTS, AUTHOR, EXTRA_GLOSSARY } from "@/lib/site-content";
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 
 const journalHref = (id: string) => `/journal/${id.toLowerCase()}`;
 const glossaryHref = (slug: string) => `/glossary/${slug.toLowerCase()}`;
@@ -170,9 +172,15 @@ export default function JournalBrowser() {
           <Feed items={pageItems} excerpts={excerpts} docCats={ds?.docCats || {}} total={filtered.length}
             page={page} totalPages={totalPages} setPage={setPage} onOpen={setSel} onSearch={() => setPanelOpen(true)} />
         )}
+        {!loading && tab === "journal" && !selDoc && (
+          <GlossaryPeek terms={glossaryTerms} onView={() => { setTab("glossary"); setSel(null); setGsel(null); }} />
+        )}
+        {!loading && tab === "glossary" && !gsel && (
+          <JournalPeek items={journal} onView={() => { setTab("journal"); setSel(null); setGsel(null); }} />
+        )}
       </main>
 
-      <Footer />
+      <Footer onNav={(t) => { setTab(t); setSel(null); setGsel(null); }} />
 
       {panelOpen && (
         <FilterPanel
@@ -272,20 +280,47 @@ function Reader({ doc, body, bodyLoading, cats, gloss, onBack, onPrev, onNext }:
 
 /* ---------- Glossary ---------- */
 function GlossarySection({ terms, gcat, setGcat, gsel, setGsel }: any) {
-  if (gsel) {
-    const gi = terms.findIndex((t: any) => t.slug === gsel);
-    if (gi >= 0) {
-      return (
-        <GlossaryTermReader
-          term={terms[gi]}
-          onBack={() => setGsel(null)}
-          onPrev={gi > 0 ? () => setGsel(terms[gi - 1].slug) : undefined}
-          onNext={gi < terms.length - 1 ? () => setGsel(terms[gi + 1].slug) : undefined}
-        />
-      );
-    }
+  let content;
+  const gi = gsel ? terms.findIndex((t: any) => t.slug === gsel) : -1;
+  if (gsel && gi >= 0) {
+    content = (
+      <GlossaryTermReader
+        term={terms[gi]}
+        onBack={() => setGsel(null)}
+        onPrev={gi > 0 ? () => setGsel(terms[gi - 1].slug) : undefined}
+        onNext={gi < terms.length - 1 ? () => setGsel(terms[gi + 1].slug) : undefined}
+      />
+    );
+  } else {
+    content = <GlossaryList terms={terms} gcat={gcat} setGcat={setGcat} onOpen={setGsel} />;
   }
-  return <GlossaryList terms={terms} gcat={gcat} setGcat={setGcat} onOpen={setGsel} />;
+  return (
+    <div className="lg:flex lg:gap-8 lg:items-start">
+      <GlossarySidebar terms={terms} activeSlug={gsel} />
+      <div className="flex-1 min-w-0">{content}</div>
+    </div>
+  );
+}
+
+// Sticky term index — desktop only; on mobile the term list itself is the nav.
+function GlossarySidebar({ terms, activeSlug }: any) {
+  return (
+    <aside className="hidden lg:block w-52 shrink-0 sticky top-16 self-start max-h-[calc(100vh-5rem)] overflow-y-auto scroll-thin pr-2">
+      <div className="text-[11px] uppercase tracking-wide text-muted mb-3">Terms</div>
+      <ul className="space-y-1.5">
+        {terms.map((t: any) => (
+          <li key={t.slug}>
+            <Link
+              href={glossaryHref(t.slug)}
+              className={`block text-sm term-title leading-snug transition-colors ${activeSlug === t.slug ? "text-accent" : "text-muted hover:text-foreground"}`}
+            >
+              {cleanTerm(t.term)}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  );
 }
 
 function GlossaryList({ terms, gcat, setGcat, onOpen }: any) {
@@ -336,6 +371,59 @@ function GlossaryTermReader({ term, onBack, onPrev, onNext }: any) {
       </div>
     </article>
   );
+}
+
+/* ---------- Peek carousels (auto-rotating cross-links) ---------- */
+function shuffle<T>(arr: T[]): T[] {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function PeekCarousel({ title, cta, onCta, slides }: { title: string; cta: string; onCta: () => void; slides: JSX.Element[] }) {
+  const autoplay = useRef(Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true }));
+  return (
+    <section className="mt-16 pt-8 border-t border-edge">
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="font-display text-lg font-semibold text-foreground">{title}</h2>
+        <button onClick={onCta} className="text-sm text-accent hover:underline inline-flex items-center gap-1">{cta} <ChevronRight size={15} /></button>
+      </div>
+      <Carousel opts={{ loop: true, align: "start" }} plugins={[autoplay.current]}>
+        <CarouselContent>
+          {slides.map((s, i) => (
+            <CarouselItem key={i} className="sm:basis-1/2 lg:basis-1/3">{s}</CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
+    </section>
+  );
+}
+
+function GlossaryPeek({ terms, onView }: any) {
+  const sample = useMemo(() => shuffle(terms).slice(0, 9), [terms]);
+  const slides = sample.map((t: any) => (
+    <Link key={t.slug} href={glossaryHref(t.slug)} className="group flex h-full flex-col border border-edge p-4 hover:border-accent transition-colors">
+      <div className="font-display text-base font-semibold text-foreground group-hover:text-accent term-title">{cleanTerm(t.term)}</div>
+      <p className="mt-1.5 font-serif text-[15px] text-foreground/75 leading-snug line-clamp-3">{cleanDef(splitDef(t.definition).body)}</p>
+    </Link>
+  ));
+  return <PeekCarousel title="From the glossary" cta="View Glossary" onCta={onView} slides={slides} />;
+}
+
+function JournalPeek({ items, onView }: any) {
+  const sample = useMemo(() => shuffle(items).slice(0, 9), [items]);
+  const slides = sample.map((d: any) => (
+    <Link key={d.id} href={journalHref(d.id)} className="group flex h-full flex-col border border-edge p-4 hover:border-accent transition-colors">
+      <div className="text-[11px] uppercase tracking-wide text-muted">{d.entry_date}{d.part != null ? ` · Part ${d.part}` : ""}</div>
+      <div className="mt-1 font-display text-base font-semibold text-foreground group-hover:text-accent line-clamp-2">{d.title || d.id}</div>
+    </Link>
+  ));
+  return <PeekCarousel title="From the journal" cta="View Journal" onCta={onView} slides={slides} />;
 }
 
 /* ---------- Filter panel (slide-over) ---------- */

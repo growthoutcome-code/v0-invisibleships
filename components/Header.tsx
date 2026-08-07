@@ -9,8 +9,6 @@ const NAV: { t: Tab; label: string }[] = [
   { t: "journal", label: "Journal" },
   { t: "glossary", label: "Glossary" },
   { t: "documents", label: "Documents" },
-  { t: "author", label: "Author" },
-  { t: "disclaimer", label: "Disclaimer" },
 ];
 
 // Search temporarily hidden while it's broken. Flip to true to restore it.
