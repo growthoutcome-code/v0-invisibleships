@@ -150,7 +150,7 @@ export default function JournalBrowser() {
         onHome={() => { setTab("journal"); setSel(null); setGsel(null); setPage(1); }}
       />
 
-      <main className="flex-1 w-full mx-auto max-w-4xl px-4 py-6">
+      <main className="flex-1 w-[80%] max-w-none mx-auto px-4 py-6">
         {loading ? (
           <div className="text-muted text-center py-20">Loading corpus…</div>
         ) : tab === "glossary" ? (
@@ -217,7 +217,7 @@ function Feed({ items, excerpts, docCats, total, page, totalPages, setPage, onOp
             </div>
             <div className="mt-1.5 font-display text-[19px] font-semibold text-foreground group-hover:text-accent transition-colors">{d.title || d.id}</div>
             <div className="text-[12px] text-muted mt-0.5">{d.entry_date}{d.weekday ? ` · ${d.weekday}` : ""}{d.recording_time ? ` · ${d.recording_time}` : ""}</div>
-            <p className="mt-2.5 font-serif text-[24px] text-foreground/80 leading-[1.5] line-clamp-3">{excerpts[d.id] ?? "…"}</p>
+            <p className="mt-2.5 font-serif text-[20px] text-foreground/80 leading-[1.5] line-clamp-3">{excerpts[d.id] ?? "…"}</p>
             <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-[11px] uppercase tracking-wide text-muted">
               {(docCats[d.id] || []).slice(0, 4).map((c: string) => <span key={c}>{cap(c)}</span>)}
             </div>
@@ -253,7 +253,7 @@ function Pager({ page, totalPages, setPage }: any) {
 /* ---------- Reader ---------- */
 function Reader({ doc, body, bodyLoading, cats, gloss, onBack, onPrev, onNext }: any) {
   return (
-    <article className="max-w-3xl mx-auto">
+    <article className="w-full mx-auto">
       <div className="flex items-center justify-between mb-4">
         <button onClick={onBack} className="text-sm text-accent inline-flex items-center gap-1"><ChevronLeft size={15} /> Back to journal</button>
         <ShareMenu title={`${doc.title || doc.id} — ${SITE}`} align="right" />
@@ -305,7 +305,7 @@ function GlossarySection({ terms, gcat, setGcat, gsel, setGsel }: any) {
 // Sticky term index — desktop only; on mobile the term list itself is the nav.
 function GlossarySidebar({ terms, activeSlug }: any) {
   return (
-    <aside className="hidden lg:block w-52 shrink-0 sticky top-16 self-start max-h-[calc(100vh-5rem)] overflow-y-auto scroll-thin pr-2">
+    <aside className="hidden lg:block w-52 shrink-0 sticky top-6 self-start max-h-[calc(100vh-3rem)] overflow-y-auto no-scrollbar pr-2">
       <div className="text-[11px] uppercase tracking-wide text-muted mb-3">Terms</div>
       <ul className="space-y-1.5">
         {terms.map((t: any) => (
@@ -326,7 +326,7 @@ function GlossarySidebar({ terms, activeSlug }: any) {
 function GlossaryList({ terms, gcat, setGcat, onOpen }: any) {
   const shown = terms.filter((t: any) => !gcat || t.term.toLowerCase().includes(gcat.toLowerCase()) || (t.definition || "").toLowerCase().includes(gcat.toLowerCase()));
   return (
-    <div className="max-w-3xl mx-auto">
+    <div className="w-full mx-auto">
       <div className="flex items-center justify-between mb-5">
         <h1 className="font-display text-lg font-semibold text-foreground">Glossary</h1>
         <div className="flex items-center gap-2">
@@ -342,7 +342,7 @@ function GlossaryList({ terms, gcat, setGcat, onOpen }: any) {
             <Link key={t.slug} href={glossaryHref(t.slug)} className="group block w-full text-left">
               <h2 className="font-display text-xl font-semibold text-foreground group-hover:text-accent transition-colors term-title">{cleanTerm(t.term)}</h2>
               {pron && <div className="text-xs text-muted italic mt-1">{pron}</div>}
-              <p className="font-serif text-[25px] text-foreground/85 mt-2 whitespace-pre-wrap leading-[1.6] line-clamp-3">{cleanDef(body)}</p>
+              <p className="font-serif text-[21px] text-foreground/85 mt-2 whitespace-pre-wrap leading-[1.6] line-clamp-3">{cleanDef(body)}</p>
               <div className="mt-2 text-accent text-sm">Read →</div>
             </Link>
           );
@@ -356,7 +356,7 @@ function GlossaryList({ terms, gcat, setGcat, onOpen }: any) {
 function GlossaryTermReader({ term, onBack, onPrev, onNext }: any) {
   const { pron, body } = splitDef(term.definition);
   return (
-    <article className="max-w-3xl mx-auto">
+    <article className="w-full mx-auto">
       <div className="flex items-center justify-between mb-4">
         <button onClick={onBack} className="text-sm text-accent inline-flex items-center gap-1"><ChevronLeft size={15} /> Back to glossary</button>
         <ShareMenu title={`${cleanTerm(term.term)} — ${SITE}`} align="right" />
@@ -509,7 +509,7 @@ function DocumentsView() {
           <a key={d.title} href={d.url} target="_blank" rel="noreferrer" className="group block">
             <div className="font-display text-[18px] font-semibold text-foreground group-hover:text-accent transition-colors">{d.title}</div>
             <div className="text-[13px] text-accent mt-0.5">{d.subline}</div>
-            <p className="mt-2 font-serif text-[24px] text-foreground/80 leading-[1.5]">{d.description}</p>
+            <p className="mt-2 font-serif text-[20px] text-foreground/80 leading-[1.5]">{d.description}</p>
             <div className="mt-3 text-accent text-sm">Open document ↗</div>
           </a>
         ))}
@@ -521,7 +521,7 @@ function DocumentsView() {
 /* ---------- Author ---------- */
 function AuthorView() {
   return (
-    <div className="max-w-3xl">
+    <div className="w-full">
       <h1 className="font-display text-3xl font-semibold text-foreground mb-5">About the Author</h1>
       <div className="flex flex-col sm:flex-row gap-6">
         <div className="relative w-40 h-40 bg-panel shrink-0 overflow-hidden">
@@ -530,8 +530,8 @@ function AuthorView() {
             onError={(e) => { (e.currentTarget as HTMLImageElement).style.opacity = "0"; }} />
         </div>
         <div>
-          <p className="font-serif text-[27px] text-foreground/85 leading-[1.6]">{AUTHOR.summary}</p>
-          <p className="font-serif text-[27px] text-foreground/85 leading-[1.6] mt-4">{AUTHOR.bio}</p>
+          <p className="font-serif text-[23px] text-foreground/85 leading-[1.6]">{AUTHOR.summary}</p>
+          <p className="font-serif text-[23px] text-foreground/85 leading-[1.6] mt-4">{AUTHOR.bio}</p>
           <p className="text-sm text-muted mt-5">{AUTHOR.contact}</p>
         </div>
       </div>
@@ -542,7 +542,7 @@ function AuthorView() {
 /* ---------- Disclaimer ---------- */
 function DisclaimerView() {
   return (
-    <div className="max-w-3xl">
+    <div className="w-full">
       <h1 className="font-display text-3xl font-semibold text-foreground mb-5">Copyright &amp; Terms of Use</h1>
       <CopyrightTerms />
     </div>

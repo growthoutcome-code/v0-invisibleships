@@ -60,6 +60,10 @@ body {
   .term-title { @apply capitalize; }
 }
 
+/* Scrollable regions with no visible scrollbar (e.g. the glossary sidebar) */
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
 .scroll-thin::-webkit-scrollbar { width: 8px; height: 8px; }
 .scroll-thin::-webkit-scrollbar-thumb { background: rgb(var(--edge)); border-radius: 4px; }
 
