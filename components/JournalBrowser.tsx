@@ -306,10 +306,23 @@ function Reader({ doc, body, bodyLoading, cats, gloss, onBack, onPrev, onNext }:
 function GlossarySection({ terms, gcat, setGcat, gsel, setGsel }: any) {
   let content;
   const gi = gsel ? terms.findIndex((t: any) => t.slug === gsel) : -1;
+  // In-app handler for internal links inside a definition (e.g. "Related terms").
+  // Resolves a /glossary/<slug> href to a term and swaps the content in place;
+  // anything it can't resolve falls back to a real navigation.
+  const openInternal = (href: string) => {
+    const mm = href.match(/^\/glossary\/([^/?#]+)/i);
+    if (mm) {
+      const slug = decodeURIComponent(mm[1]).toLowerCase();
+      const found = terms.find((t: any) => (t.slug || "").toLowerCase() === slug);
+      if (found) { setGsel(found.slug); return; }
+    }
+    if (typeof window !== "undefined") window.location.assign(href);
+  };
   if (gsel && gi >= 0) {
     content = (
       <GlossaryTermReader
         term={terms[gi]}
+        onOpenTerm={openInternal}
         onBack={() => setGsel(null)}
         onPrev={gi > 0 ? () => setGsel(terms[gi - 1].slug) : undefined}
         onNext={gi < terms.length - 1 ? () => setGsel(terms[gi + 1].slug) : undefined}
@@ -378,7 +391,7 @@ function GlossaryList({ terms, gcat, setGcat, onOpen }: any) {
   );
 }
 
-function GlossaryTermReader({ term, onBack, onPrev, onNext }: any) {
+function GlossaryTermReader({ term, onBack, onPrev, onNext, onOpenTerm }: any) {
   const { pron, body } = splitDef(term.definition);
   return (
     <article className="w-full mx-auto">
@@ -389,7 +402,7 @@ function GlossaryTermReader({ term, onBack, onPrev, onNext }: any) {
       <p className="text-xs uppercase tracking-[0.14em] text-muted mb-2">Glossary</p>
       <h1 className="font-display text-3xl font-semibold text-foreground mb-1 leading-tight term-title">{cleanTerm(term.term)}</h1>
       {pron && <div className="text-sm text-muted italic mb-5">{pron}</div>}
-      <GlossaryBody text={body} />
+      <GlossaryBody text={body} onInternalNav={onOpenTerm} />
       <div className="flex gap-3 mt-12 pt-6">
         {onPrev ? <button onClick={onPrev} className="text-accent text-sm inline-flex items-center gap-1"><ChevronLeft size={15} /> Previous</button> : <span />}
         {onNext && <button onClick={onNext} className="text-accent text-sm ml-auto inline-flex items-center gap-1">Next <ChevronRight size={15} /></button>}
