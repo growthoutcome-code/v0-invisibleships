@@ -6,8 +6,8 @@ import ThemeToggle from "@/components/ThemeToggle";
 
 const NAV: { href: string; label: string }[] = [
   { href: "/", label: "Journal" },
-  { href: "/?view=glossary", label: "Glossary" },
-  { href: "/?view=documents", label: "Documents" },
+  { href: "/glossary", label: "Glossary" },
+  { href: "/documents", label: "Documents" },
 ];
 
 export default function ItemHeader() {

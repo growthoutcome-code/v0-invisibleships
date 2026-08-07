@@ -46,10 +46,10 @@ function excerpt(md: string): string {
   return text.length > 240 ? text.slice(0, 240) + "…" : text;
 }
 
-export default function JournalBrowser() {
+export default function JournalBrowser({ initialTab = "journal" }: { initialTab?: Tab } = {}) {
   const [ds, setDs] = useState<Dataset | null>(null);
   const [loading, setLoading] = useState(true);
-  const [tab, setTab] = useState<Tab>("journal");
+  const [tab, setTab] = useState<Tab>(initialTab);
 
   const [q, setQ] = useState(""); const [dFrom, setDFrom] = useState(""); const [dTo, setDTo] = useState("");
   const [part, setPart] = useState(""); const [loc, setLoc] = useState("");
@@ -67,8 +67,10 @@ export default function JournalBrowser() {
 
   useEffect(() => { loadDataset().then((d) => { setDs(d); setLoading(false); }).catch(() => setLoading(false)); }, []);
 
-  // Deep-link IN: once the dataset is available, honor ?entry= / ?view= so a
-  // shared link reopens the exact content (after the gate).
+  // Back-compat IN: the current section comes from the route (initialTab), but
+  // still honor any LEGACY query params (?entry= / ?term= / ?view=) on already
+  // shared links so they reopen the right content. The OUT effect below then
+  // rewrites the address bar to a clean path.
   useEffect(() => {
     if (!ds || deepLinked) return;
     try {
@@ -83,18 +85,26 @@ export default function JournalBrowser() {
     setDeepLinked(true);
   }, [ds, deepLinked]);
 
-  // Deep-link OUT: keep the URL in sync with the current view so it's shareable.
+  // Deep-link OUT: keep the address bar in sync with the current view as a CLEAN
+  // path (no query strings). Uses replaceState so switching sections/terms never
+  // triggers a navigation or re-shows the gate. These paths match the real
+  // routes, so refreshing/sharing them resolves correctly.
   useEffect(() => {
     if (!deepLinked) return;
     try {
-      const params = new URLSearchParams();
-      if (sel) params.set("entry", sel);
-      else if (tab === "glossary" && gsel) params.set("term", gsel);
-      else if (tab !== "journal") params.set("view", tab);
-      const qs = params.toString();
-      window.history.replaceState(null, "", window.location.pathname + (qs ? `?${qs}` : "") + window.location.hash);
+      let path = "/";
+      if (sel) path = `/journal/${sel.toLowerCase()}`;
+      else if (tab === "glossary") path = gsel ? `/glossary/${gsel.toLowerCase()}` : "/glossary";
+      else if (tab === "documents") path = "/documents";
+      else if (tab === "author") path = "/author";
+      else if (tab === "disclaimer") path = "/disclaimer";
+      window.history.replaceState(null, "", path + window.location.hash);
     } catch { /* ignore */ }
   }, [tab, sel, gsel, deepLinked]);
+
+  // Section-level analytics: replaceState alone doesn't emit a pageview, so record
+  // in-app section switches explicitly for tracking.
+  useEffect(() => { if (deepLinked) track("section_viewed", { section: tab }); }, [tab, deepLinked]);
 
   // Track + scroll to top when a glossary term opens.
   useEffect(() => {

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import CopyrightTerms from "@/components/CopyrightTerms";
 import GateAnimation from "@/components/GateAnimation";
@@ -27,12 +27,15 @@ function Progress({ step }: { step: Step }) {
   );
 }
 
+// Every text step renders inside a fixed-height panel so Copyright, Perceptual
+// Set, and Safety present a consistent ~560px content area (body scrolls, the
+// Back/CTA row stays pinned at the bottom).
 function Shell({ children, step, copyright }: { children: React.ReactNode; step: Step; copyright: string }) {
   return (
     <main className="min-h-screen flex flex-col bg-background text-foreground">
       <div className="fixed top-4 right-4 z-50"><ThemeToggle /></div>
       <div className="flex-1 flex items-center justify-center px-4 py-10">
-        <div key={step} className="w-full max-w-2xl animate-fade-in">{children}</div>
+        <div key={step} className="w-full max-w-2xl h-[560px] max-h-[calc(100vh-9rem)] flex flex-col animate-fade-in">{children}</div>
       </div>
       <Progress step={step} />
       <footer className="text-center text-xs text-muted py-6">{copyright}</footer>
@@ -42,6 +45,24 @@ function Shell({ children, step, copyright }: { children: React.ReactNode; step:
 
 export default function AccessGate({ onEnter }: { onEnter: () => void }) {
   const [step, setStep] = useState<Step>("welcome");
+
+  // Copyright step: the CTA stays disabled until the visitor scrolls through the
+  // whole document (or if it already fits without scrolling).
+  const [canAgree, setCanAgree] = useState(false);
+  const copyrightScrollRef = useRef<HTMLDivElement>(null);
+  const checkCopyrightScrolled = () => {
+    const el = copyrightScrollRef.current;
+    if (el && el.scrollTop + el.clientHeight >= el.scrollHeight - 8) setCanAgree(true);
+  };
+  useEffect(() => {
+    if (step !== "copyright") return;
+    setCanAgree(false);
+    const id = requestAnimationFrame(() => {
+      const el = copyrightScrollRef.current;
+      if (el && el.scrollHeight <= el.clientHeight + 8) setCanAgree(true);
+    });
+    return () => cancelAnimationFrame(id);
+  }, [step]);
 
   useEffect(() => {
     track("gate_welcome_viewed");
@@ -108,15 +129,20 @@ export default function AccessGate({ onEnter }: { onEnter: () => void }) {
   if (step === "copyright") {
     return (
       <Shell step="copyright" copyright={GATE.copyrightLine}>
-        <div>
-          <p className="text-sm text-muted mb-2">{GATE.copyright.intro}</p>
-          <h2 className="font-display text-2xl font-semibold text-foreground mb-5">Copyright &amp; Terms of Use</h2>
-          <div className="max-h-[52vh] overflow-y-auto pr-2 py-2">
+        <div className="flex flex-col h-full">
+          <div className="shrink-0">
+            <p className="text-sm text-muted mb-2">{GATE.copyright.intro}</p>
+            <h2 className="font-display text-2xl font-semibold text-foreground mb-4">Copyright &amp; Terms of Use</h2>
+          </div>
+          <div ref={copyrightScrollRef} onScroll={checkCopyrightScrolled} className="flex-1 overflow-y-auto pr-2 py-1">
             <CopyrightTerms />
           </div>
-          <div className="mt-6 flex items-center gap-3">
+          <div className="shrink-0 mt-6 flex items-center gap-3">
             <Button variant="outline" onClick={() => setStep("welcome")}>Back</Button>
-            <Button className="ml-auto" onClick={() => setStep("perceptual")}>{GATE.copyright.cta}</Button>
+            <div className="ml-auto flex items-center gap-3">
+              {!canAgree && <span className="text-xs text-muted">Scroll to continue</span>}
+              <Button disabled={!canAgree} onClick={() => setStep("perceptual")}>{GATE.copyright.cta}</Button>
+            </div>
           </div>
         </div>
       </Shell>
@@ -126,16 +152,18 @@ export default function AccessGate({ onEnter }: { onEnter: () => void }) {
   if (step === "perceptual") {
     return (
       <Shell step="perceptual" copyright={GATE.copyrightLine}>
-        <div>
-          <p className="text-xs uppercase tracking-[0.14em] text-muted mb-2">{GATE.perceptual.eyebrow}</p>
-          <h2 className="font-display text-3xl font-semibold text-foreground mb-5">{GATE.perceptual.title}</h2>
-          <div className="font-serif text-[27px] leading-[1.6] text-foreground/90 space-y-4">
+        <div className="flex flex-col h-full">
+          <div className="shrink-0">
+            <p className="text-xs uppercase tracking-[0.14em] text-muted mb-2">{GATE.perceptual.eyebrow}</p>
+            <h2 className="font-display text-3xl font-semibold text-foreground mb-4">{GATE.perceptual.title}</h2>
+          </div>
+          <div className="flex-1 overflow-y-auto pr-2 font-serif text-[22px] leading-[1.6] text-foreground/90 space-y-4">
             <p>{GATE.perceptual.definition}</p>
             <p>{GATE.perceptual.story}</p>
             <p className="text-foreground/60 italic">{GATE.perceptual.caveat}</p>
             <p>{GATE.perceptual.tie}</p>
           </div>
-          <div className="mt-8 flex items-center gap-3">
+          <div className="shrink-0 mt-6 flex items-center gap-3">
             <Button variant="outline" onClick={() => setStep("copyright")}>Back</Button>
             <Button size="lg" className="ml-auto" onClick={() => setStep("safety")}>{GATE.perceptual.cta}</Button>
           </div>
@@ -147,16 +175,18 @@ export default function AccessGate({ onEnter }: { onEnter: () => void }) {
   // safety (final step)
   return (
     <Shell step="safety" copyright={GATE.copyrightLine}>
-      <div>
-        <p className="text-xs uppercase tracking-[0.14em] text-muted mb-2">{GATE.safety.eyebrow}</p>
-        <h2 className="font-display text-3xl font-semibold text-foreground mb-5">{GATE.safety.title}</h2>
-        <div className="font-serif text-[22px] leading-[1.65] text-foreground/90 space-y-4">
+      <div className="flex flex-col h-full">
+        <div className="shrink-0">
+          <p className="text-xs uppercase tracking-[0.14em] text-muted mb-2">{GATE.safety.eyebrow}</p>
+          <h2 className="font-display text-3xl font-semibold text-foreground mb-4">{GATE.safety.title}</h2>
+        </div>
+        <div className="flex-1 overflow-y-auto pr-2 font-serif text-[22px] leading-[1.65] text-foreground/90 space-y-4">
           <p>{GATE.safety.body}</p>
           <p>{GATE.safety.distress}</p>
           <p className="text-foreground">{GATE.safety.crisis}</p>
           <p className="text-foreground/70">{GATE.safety.guidance}</p>
         </div>
-        <div className="mt-8 flex items-center gap-3">
+        <div className="shrink-0 mt-6 flex items-center gap-3">
           <Button variant="outline" onClick={() => setStep("perceptual")}>Back</Button>
           <Button size="lg" className="ml-auto" onClick={finish}>{GATE.safety.cta}</Button>
         </div>

@@ -28,7 +28,7 @@ export default function GlossaryItemReader({ term, prev, next }: Props) {
       <main className="flex-1 w-[80%] max-w-none mx-auto px-4 py-6">
         <article className="w-full">
           <div className="flex items-center justify-between mb-4">
-            <Link href="/?view=glossary" className="text-sm text-accent inline-flex items-center gap-1"><ChevronLeft size={15} /> Back to glossary</Link>
+            <Link href="/glossary" className="text-sm text-accent inline-flex items-center gap-1"><ChevronLeft size={15} /> Back to glossary</Link>
             <ShareMenu title={`${name} — Invisible Ships`} align="right" />
           </div>
           <p className="text-xs uppercase tracking-[0.14em] text-muted mb-2">Glossary</p>

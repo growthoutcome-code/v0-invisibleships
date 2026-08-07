@@ -20,7 +20,7 @@ export default function Footer({ onNav }: { onNav?: (t: NavTab) => void }) {
             onNav ? (
               <button key={l.t} onClick={() => onNav(l.t)} className="hover:text-foreground transition-colors">{l.label}</button>
             ) : (
-              <Link key={l.t} href={`/?view=${l.t}`} className="hover:text-foreground transition-colors">{l.label}</Link>
+              <Link key={l.t} href={`/${l.t}`} className="hover:text-foreground transition-colors">{l.label}</Link>
             )
           )}
         </nav>
