@@ -35,6 +35,12 @@ const PAGE_SIZE = 10;
 const SITE = "Invisible Ships";
 const TABS: Tab[] = ["journal", "glossary", "documents", "author", "disclaimer"];
 const cap = (s?: string | null) => (s ? s.charAt(0).toUpperCase() + s.slice(1).replace(/-/g, " ") : "");
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+// Format an ISO date (YYYY-MM-DD) as "Feb 27, 2025" without Date() (avoids TZ shifts).
+function formatDay(iso: string): string {
+  const [y, m, d] = (iso || "").split("-").map(Number);
+  return y && m && d ? `${MONTHS[m - 1]} ${d}, ${y}` : iso;
+}
 
 function excerpt(md: string): string {
   const lines = (md || "").split("\n").map((l) => l.trim()).filter(Boolean)
@@ -93,6 +99,14 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
       if (entry && ds.docs.some((d) => d.id === entry)) { setTab("journal"); setSel(entry); }
       else if (term && glossaryTerms.some((t: any) => t.slug === term)) { setTab("glossary"); setGsel(term); }
       else if (view && TABS.includes(view)) { setTab(view); }
+      else if (initialTab === "journal") {
+        // Default journal landing (i.e. straight through the gate): open the FIRST
+        // journal entry rather than the feed.
+        const first = (ds.docs || [])
+          .filter((d) => d.collection === "journal")
+          .sort((a, b) => (a.entry_date || "").localeCompare(b.entry_date || "") || ((a.recording_index || 0) - (b.recording_index || 0)))[0];
+        if (first) { setTab("journal"); setSel(first.id); }
+      }
     } catch { /* ignore */ }
     setDeepLinked(true);
   }, [ds, deepLinked]);
@@ -124,6 +138,18 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
   }, [gsel]);
 
   const journal = useMemo(() => (ds?.docs || []).filter((d) => d.collection === "journal"), [ds]);
+  // One entry per calendar day (chronological), each pointing at that day's first
+  // entry — powers the dated journal sidebar (mirrors the glossary term index).
+  const journalDays = useMemo(() => {
+    const sorted = [...journal].sort((a, b) => (a.entry_date || "").localeCompare(b.entry_date || "") || ((a.recording_index || 0) - (b.recording_index || 0)));
+    const byDay = new Map<string, { date: string; id: string; label: string }>();
+    for (const d of sorted) {
+      const date = d.entry_date || "";
+      if (!date || byDay.has(date)) continue;
+      byDay.set(date, { date, id: d.id, label: formatDay(date) });
+    }
+    return Array.from(byDay.values());
+  }, [journal]);
   // Full glossary, sorted — used for deep-link validation and prev/next term navigation.
   const glossaryTerms = useMemo(
     () => [...(ds?.glossary || []), ...EXTRA_GLOSSARY].sort((a: any, b: any) => a.term.localeCompare(b.term)),
@@ -195,16 +221,23 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
           <AuthorView />
         ) : tab === "disclaimer" ? (
           <DisclaimerView />
-        ) : selDoc ? (
-          <Reader
-            doc={selDoc} body={body} bodyLoading={bodyLoading} cats={ds?.docCats[selDoc.id] || []} gloss={ds?.docGloss[selDoc.id] || []}
-            onBack={() => setSel(null)}
-            onPrev={selIdx > 0 ? () => setSel(filtered[selIdx - 1].id) : undefined}
-            onNext={selIdx >= 0 && selIdx < filtered.length - 1 ? () => setSel(filtered[selIdx + 1].id) : undefined}
-          />
         ) : (
-          <Feed items={pageItems} excerpts={excerpts} docCats={ds?.docCats || {}} total={filtered.length}
-            page={page} totalPages={totalPages} setPage={setPage} onOpen={setSel} onSearch={() => setPanelOpen(true)} />
+          <div className="lg:flex lg:gap-8 lg:items-start">
+            <JournalSidebar days={journalDays} activeDate={selDoc?.entry_date} onOpen={setSel} />
+            <div className="flex-1 min-w-0">
+              {selDoc ? (
+                <Reader
+                  doc={selDoc} body={body} bodyLoading={bodyLoading} cats={ds?.docCats[selDoc.id] || []} gloss={ds?.docGloss[selDoc.id] || []}
+                  onBack={() => setSel(null)}
+                  onPrev={selIdx > 0 ? () => setSel(filtered[selIdx - 1].id) : undefined}
+                  onNext={selIdx >= 0 && selIdx < filtered.length - 1 ? () => setSel(filtered[selIdx + 1].id) : undefined}
+                />
+              ) : (
+                <Feed items={pageItems} excerpts={excerpts} docCats={ds?.docCats || {}} total={filtered.length}
+                  page={page} totalPages={totalPages} setPage={setPage} onOpen={setSel} onSearch={() => setPanelOpen(true)} />
+              )}
+            </div>
+          </div>
         )}
         {!loading && tab === "journal" && !selDoc && (
           <GlossaryPeek terms={glossaryTerms} onView={() => { setTab("glossary"); setSel(null); setGsel(null); }} onOpen={(slug: string) => { setTab("glossary"); setSel(null); setGsel(slug); }} />
@@ -358,6 +391,29 @@ function GlossarySection({ terms, gcat, setGcat, gsel, setGsel }: any) {
       <GlossarySidebar terms={terms} activeSlug={gsel} onOpen={setGsel} />
       <div className="flex-1 min-w-0">{content}</div>
     </div>
+  );
+}
+
+// Dated day index for the journal — desktop only, mirrors the glossary sidebar.
+// One link per calendar day; clicking opens that day's first entry in-app.
+function JournalSidebar({ days, activeDate, onOpen }: any) {
+  return (
+    <aside className="hidden lg:block w-52 shrink-0 self-start pr-2">
+      <div className="text-[11px] uppercase tracking-wide text-muted mb-3">Entries</div>
+      <ul className="space-y-1.5">
+        {days.map((d: any) => (
+          <li key={d.date}>
+            <Link
+              href={journalHref(d.id)}
+              onClick={spaClick(() => onOpen(d.id))}
+              className={`block text-sm leading-[1.6] transition-colors ${activeDate === d.date ? "text-accent" : "text-muted hover:text-foreground"}`}
+            >
+              {d.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </aside>
   );
 }
 
