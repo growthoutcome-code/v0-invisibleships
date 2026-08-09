@@ -21,6 +21,17 @@ function initGoogleAnalytics() {
   document.head.appendChild(initScript);
 }
 
+function initVercelAnalytics() {
+  if (typeof window === "undefined") return;
+  const w = window as unknown as { __vercelInsights?: boolean };
+  if (w.__vercelInsights) return; // already loaded
+  w.__vercelInsights = true;
+  const s = document.createElement("script");
+  s.defer = true;
+  s.src = "/_vercel/insights/script.js";
+  document.head.appendChild(s);
+}
+
 export function initAnalytics() {
   if (inited || typeof window === "undefined") return;
   if (KEY) {
@@ -32,6 +43,7 @@ export function initAnalytics() {
     });
   }
   initGoogleAnalytics();
+  initVercelAnalytics();
   inited = true;
 }
 
