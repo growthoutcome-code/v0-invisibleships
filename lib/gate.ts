@@ -1,25 +1,30 @@
-// In-memory gate memory for the MVP.
+// Gate memory, persisted per browser tab session.
 //
-// This intentionally lives at MODULE scope (not sessionStorage / localStorage):
-//   • It survives client-side route navigation — the SPA keeps this module
-//     loaded, so moving between /, /journal/[id] and /glossary/[slug] within a
-//     single visit does NOT re-show the gate.
-//   • It resets on a full page reload — a browser refresh tears down the JS
-//     context, so `entered` goes back to false and the gate shows again.
+// Persistence lives HERE in one place (not scattered across page.tsx /
+// AccessGate.tsx). We use sessionStorage so:
+//   • Client-side navigation between section routes stays past the gate.
+//   • A full browser refresh KEEPS you past the gate (fixes losing your place).
+//   • A brand-new tab or a closed/reopened browser re-shows the gate — the
+//     right behavior for an age gate (per-session consent).
 //
-// That combination is the desired MVP behavior: the gate re-appears on every
-// browser refresh, but navigating around inside one visit does not re-gate.
-//
-// When we later want a longer-lived "remember me", reintroduce persistence
-// HERE, in this one place, instead of scattering storage reads/writes across
-// page.tsx, ItemGate.tsx and AccessGate.tsx (which is what kept regressing).
+// For a longer-lived "remember me", swap sessionStorage -> localStorage below.
 
-let entered = false;
+const KEY = "is_gate_entered";
 
 export function hasEntered(): boolean {
-  return entered;
+  if (typeof window === "undefined") return false;
+  try {
+    return window.sessionStorage.getItem(KEY) === "1";
+  } catch {
+    return false;
+  }
 }
 
 export function markEntered(): void {
-  entered = true;
+  if (typeof window === "undefined") return;
+  try {
+    window.sessionStorage.setItem(KEY, "1");
+  } catch {
+    /* ignore (private mode / storage disabled) */
+  }
 }
