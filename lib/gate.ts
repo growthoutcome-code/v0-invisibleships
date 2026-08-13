@@ -1,30 +1,19 @@
-// Gate memory, persisted per browser tab session.
+// In-memory gate memory.
 //
-// Persistence lives HERE in one place (not scattered across page.tsx /
-// AccessGate.tsx). We use sessionStorage so:
-//   • Client-side navigation between section routes stays past the gate.
-//   • A full browser refresh KEEPS you past the gate (fixes losing your place).
-//   • A brand-new tab or a closed/reopened browser re-shows the gate — the
-//     right behavior for an age gate (per-session consent).
+// Lives at MODULE scope (not sessionStorage / localStorage):
+//   • Survives client-side tab navigation within one visit (no re-gate).
+//   • Resets on a full page reload — a refresh tears down the JS context, so
+//     `entered` returns to false and the gate shows again.
 //
-// For a longer-lived "remember me", swap sessionStorage -> localStorage below.
+// Paired with GatedApp's reset-to-root effect, every browser refresh returns to
+// the root URL ("/") and re-shows the gate: a clean front-door start each time.
 
-const KEY = "is_gate_entered";
+let entered = false;
 
 export function hasEntered(): boolean {
-  if (typeof window === "undefined") return false;
-  try {
-    return window.sessionStorage.getItem(KEY) === "1";
-  } catch {
-    return false;
-  }
+  return entered;
 }
 
 export function markEntered(): void {
-  if (typeof window === "undefined") return;
-  try {
-    window.sessionStorage.setItem(KEY, "1");
-  } catch {
-    /* ignore (private mode / storage disabled) */
-  }
+  entered = true;
 }
