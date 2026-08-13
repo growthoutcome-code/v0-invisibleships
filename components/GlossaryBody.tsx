@@ -79,7 +79,7 @@ export default function GlossaryBody({
     .trim();
   const paras = body.split(/\n{2,}/);
   return (
-    <div className="font-serif text-[23px] text-foreground/90 leading-[1.6] space-y-5">
+    <div className="body-copy text-foreground/90 space-y-5">
       {paras.map((p, idx) => (
         <p key={idx} className="whitespace-pre-wrap">
           {renderInline(p, `p${idx}`, onInternalNav)}
