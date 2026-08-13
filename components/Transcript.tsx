@@ -18,7 +18,7 @@ export function renderInline(text: string, key: number) {
 
 export function Transcript({ md }: { md: string }) {
   return (
-    <div className="font-serif text-[23px] text-foreground/90">
+    <div className="body-copy text-foreground/90">
       {md.split("\n").map((ln, i) => {
         const t = ln.trim();
         if (!t) return null;

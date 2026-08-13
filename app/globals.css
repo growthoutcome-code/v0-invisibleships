@@ -58,6 +58,8 @@ body {
   .input-line:focus { @apply text-foreground placeholder:text-foreground/40; }
   /* Consistent Title Case for glossary term names (preserves acronyms like BCI, V2K) */
   .term-title { @apply capitalize; }
+  /* Unified reading body-copy size (one place to tune the site-wide paragraph size) */
+  .body-copy { @apply font-serif text-[22px] leading-[1.6]; }
 }
 
 /* Scrollable regions with no visible scrollbar (e.g. the glossary sidebar) */

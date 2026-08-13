@@ -7,7 +7,12 @@ import { track } from "@/lib/analytics";
 import Header, { type Tab } from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { X, ChevronLeft, ChevronRight, Volume2 } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationPrevious, PaginationNext, PaginationEllipsis } from "@/components/ui/pagination";
+import { ChevronLeft, ChevronRight, Volume2, List } from "lucide-react";
 import CopyrightTerms from "@/components/CopyrightTerms";
 import ShareMenu from "@/components/ShareMenu";
 import { Transcript } from "@/components/Transcript";
@@ -146,7 +151,8 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
     for (const d of sorted) {
       const date = d.entry_date || "";
       if (!date || byDay.has(date)) continue;
-      byDay.set(date, { date, id: d.id, label: formatDay(date) });
+      const [yy, mm, dd] = date.split("-");
+      byDay.set(date, { date, id: d.id, label: `${mm}/${dd}/${yy}` });
     }
     return Array.from(byDay.values());
   }, [journal]);
@@ -222,9 +228,14 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
         ) : tab === "disclaimer" ? (
           <DisclaimerView />
         ) : (
-          <div className="lg:flex lg:gap-8 lg:items-start">
+          <div className="lg:grid lg:grid-cols-[13rem_65%_1fr] lg:gap-x-8 lg:items-start">
             <JournalSidebar days={journalDays} activeDate={selDoc?.entry_date} onOpen={setSel} />
-            <div className="flex-1 min-w-0">
+            <div className="min-w-0">
+              <IndexDrawer
+                triggerLabel="Entries"
+                title="Entries"
+                items={journalDays.map((d: any) => ({ key: d.date, label: d.label, active: selDoc?.entry_date === d.date, onOpen: () => setSel(d.id) }))}
+              />
               {selDoc ? (
                 <Reader
                   doc={selDoc} body={body} bodyLoading={bodyLoading} cats={ds?.docCats[selDoc.id] || []} gloss={ds?.docGloss[selDoc.id] || []}
@@ -249,16 +260,14 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
 
       <Footer onNav={(t) => { setTab(t); setSel(null); setGsel(null); }} />
 
-      {panelOpen && (
-        <FilterPanel
-          onClose={() => setPanelOpen(false)} resultCount={filtered.length}
-          q={q} setQ={setQ} dFrom={dFrom} setDFrom={setDFrom} dTo={dTo} setDTo={setDTo}
-          part={part} setPart={setPart} loc={loc} setLoc={setLoc} cat={cat} setCat={setCat}
-          stype={stype} setSType={setSType} audioOnly={audioOnly} setAudioOnly={setAudioOnly}
-          parts={parts} locs={locs} topics={topics} stypes={stypes} onReset={resetFilters}
-        />
-      )}
-      {exportOpen && <ExportModal onClose={() => setExportOpen(false)} />}
+      <FilterPanel
+        open={panelOpen} onOpenChange={setPanelOpen} resultCount={filtered.length}
+        q={q} setQ={setQ} dFrom={dFrom} setDFrom={setDFrom} dTo={dTo} setDTo={setDTo}
+        part={part} setPart={setPart} loc={loc} setLoc={setLoc} cat={cat} setCat={setCat}
+        stype={stype} setSType={setSType} audioOnly={audioOnly} setAudioOnly={setAudioOnly}
+        parts={parts} locs={locs} topics={topics} stypes={stypes} onReset={resetFilters}
+      />
+      <ExportModal open={exportOpen} onOpenChange={setExportOpen} />
     </div>
   );
 }
@@ -296,7 +305,7 @@ function Feed({ items, excerpts, docCats, total, page, totalPages, setPage, onOp
             </div>
             <div className="mt-1.5 font-display text-[19px] font-semibold text-foreground group-hover:text-accent transition-colors">{d.title || d.id}</div>
             <div className="text-[12px] text-muted mt-0.5">{d.entry_date}{d.weekday ? ` · ${d.weekday}` : ""}{d.recording_time ? ` · ${d.recording_time}` : ""}</div>
-            <p className="mt-2.5 font-serif text-[20px] text-foreground/80 leading-[1.5] line-clamp-3">{excerpts[d.id] ?? "…"}</p>
+            <p className="mt-2.5 body-copy text-foreground/80 line-clamp-3">{excerpts[d.id] ?? "…"}</p>
             <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-[11px] uppercase tracking-wide text-muted">
               {(docCats[d.id] || []).slice(0, 4).map((c: string) => <span key={c}>{cap(c)}</span>)}
             </div>
@@ -315,17 +324,25 @@ function Pager({ page, totalPages, setPage }: any) {
   for (let i = Math.max(1, end - 4); i <= end; i++) nums.push(i);
   const go = (p: number) => { setPage(Math.min(totalPages, Math.max(1, p))); window.scrollTo({ top: 0 }); };
   return (
-    <div className="flex items-center justify-center gap-1.5 mt-8">
-      <button onClick={() => go(page - 1)} disabled={page === 1} className="px-2.5 py-1.5 text-sm text-muted hover:text-foreground disabled:opacity-40 inline-flex items-center"><ChevronLeft size={16} /></button>
-      {nums[0] > 1 && <button onClick={() => go(1)} className="px-3 py-1.5 text-sm text-muted hover:text-foreground">1</button>}
-      {nums[0] > 2 && <span className="text-muted px-1">…</span>}
-      {nums.map((n) => (
-        <button key={n} onClick={() => go(n)} className={`px-3 py-1.5 text-sm ${n === page ? "bg-accent text-primary-foreground" : "text-muted hover:text-foreground"}`}>{n}</button>
-      ))}
-      {nums[nums.length - 1] < totalPages - 1 && <span className="text-muted px-1">…</span>}
-      {nums[nums.length - 1] < totalPages && <button onClick={() => go(totalPages)} className="px-3 py-1.5 text-sm text-muted hover:text-foreground">{totalPages}</button>}
-      <button onClick={() => go(page + 1)} disabled={page === totalPages} className="px-2.5 py-1.5 text-sm text-muted hover:text-foreground disabled:opacity-40 inline-flex items-center"><ChevronRight size={16} /></button>
-    </div>
+    <Pagination className="mt-8">
+      <PaginationContent>
+        <PaginationItem>
+          <PaginationPrevious onClick={() => go(page - 1)} disabled={page === 1} className="disabled:opacity-40" />
+        </PaginationItem>
+        {nums[0] > 1 && <PaginationItem><PaginationLink onClick={() => go(1)}>1</PaginationLink></PaginationItem>}
+        {nums[0] > 2 && <PaginationItem><PaginationEllipsis /></PaginationItem>}
+        {nums.map((n) => (
+          <PaginationItem key={n}>
+            <PaginationLink isActive={n === page} onClick={() => go(n)}>{n}</PaginationLink>
+          </PaginationItem>
+        ))}
+        {nums[nums.length - 1] < totalPages - 1 && <PaginationItem><PaginationEllipsis /></PaginationItem>}
+        {nums[nums.length - 1] < totalPages && <PaginationItem><PaginationLink onClick={() => go(totalPages)}>{totalPages}</PaginationLink></PaginationItem>}
+        <PaginationItem>
+          <PaginationNext onClick={() => go(page + 1)} disabled={page === totalPages} className="disabled:opacity-40" />
+        </PaginationItem>
+      </PaginationContent>
+    </Pagination>
   );
 }
 
@@ -387,9 +404,17 @@ function GlossarySection({ terms, gcat, setGcat, gsel, setGsel }: any) {
     content = <GlossaryList terms={terms} gcat={gcat} setGcat={setGcat} onOpen={setGsel} />;
   }
   return (
-    <div className="lg:flex lg:gap-8 lg:items-start">
+    <div className="lg:grid lg:grid-cols-[13rem_65%_1fr] lg:gap-x-8 lg:items-start">
       <GlossarySidebar terms={terms} activeSlug={gsel} onOpen={setGsel} />
-      <div className="flex-1 min-w-0">{content}</div>
+      <div className="min-w-0">
+        <IndexDrawer
+          triggerLabel="Terms"
+          title="Terms"
+          itemClassName="term-title"
+          items={terms.map((t: any) => ({ key: t.slug, label: cleanTerm(t.term), active: gsel === t.slug, onOpen: () => setGsel(t.slug) }))}
+        />
+        {content}
+      </div>
     </div>
   );
 }
@@ -398,7 +423,7 @@ function GlossarySection({ terms, gcat, setGcat, gsel, setGsel }: any) {
 // One link per calendar day; clicking opens that day's first entry in-app.
 function JournalSidebar({ days, activeDate, onOpen }: any) {
   return (
-    <aside className="hidden lg:block w-52 shrink-0 self-start pr-2">
+    <aside className="hidden lg:block w-52 self-start pr-2">
       <div className="text-[11px] uppercase tracking-wide text-muted mb-3">Entries</div>
       <ul className="space-y-1.5">
         {days.map((d: any) => (
@@ -420,7 +445,7 @@ function JournalSidebar({ days, activeDate, onOpen }: any) {
 // Sticky term index — desktop only; on mobile the term list itself is the nav.
 function GlossarySidebar({ terms, activeSlug, onOpen }: any) {
   return (
-    <aside className="hidden lg:block w-52 shrink-0 self-start pr-2">
+    <aside className="hidden lg:block w-52 self-start pr-2">
       <div className="text-[11px] uppercase tracking-wide text-muted mb-3">Terms</div>
       <ul className="space-y-1.5">
         {terms.map((t: any) => (
@@ -452,8 +477,7 @@ function GlossaryList({ terms, gcat, setGcat, onOpen }: any) {
       <div className="flex items-center justify-between mb-5">
         <span className="text-xs text-muted">{shown.length} terms · page {page} of {totalPages}</span>
         <div className="flex items-center gap-2">
-          <input value={gcat} onChange={(e) => setGcat(e.target.value)} placeholder="Filter terms…"
-            className="input-line w-44" />
+          <Input value={gcat} onChange={(e) => setGcat(e.target.value)} placeholder="Filter terms…" className="w-44" />
           <ShareMenu title={`${SITE} — Glossary`} align="right" />
         </div>
       </div>
@@ -464,7 +488,7 @@ function GlossaryList({ terms, gcat, setGcat, onOpen }: any) {
             <Link key={t.slug} href={glossaryHref(t.slug)} onClick={spaClick(() => onOpen(t.slug))} className="group block w-full text-left">
               <h2 className="font-display text-xl font-semibold text-foreground group-hover:text-accent transition-colors term-title">{cleanTerm(t.term)}</h2>
               {pron && <div className="text-xs text-muted italic mt-1">{pron}</div>}
-              <p className="font-serif text-[21px] text-foreground/85 mt-2 whitespace-pre-wrap leading-[1.6] line-clamp-3">{cleanDef(body)}</p>
+              <p className="body-copy text-foreground/85 mt-2 whitespace-pre-wrap line-clamp-3">{cleanDef(body)}</p>
               <div className="mt-2 text-accent text-sm">Read →</div>
             </Link>
           );
@@ -496,6 +520,40 @@ function GlossaryTermReader({ term, onBack, onPrev, onNext, onOpenTerm }: any) {
   );
 }
 
+// Mobile-only index drawer (shadcn Sheet) mirroring the desktop sidebars.
+// A List-icon trigger opens a left sheet with the same links; hidden on lg+.
+function IndexDrawer({ triggerLabel, title, items, itemClassName }: { triggerLabel: string; title: string; items: { key: string; label: string; active: boolean; onOpen: () => void }[]; itemClassName?: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="lg:hidden mb-6">
+      <Sheet open={open} onOpenChange={setOpen}>
+        <SheetTrigger asChild>
+          <button className="inline-flex items-center gap-2 text-sm text-muted hover:text-foreground">
+            <List size={16} /> {triggerLabel}
+          </button>
+        </SheetTrigger>
+        <SheetContent side="left" className="w-72">
+          <SheetHeader className="mb-4">
+            <SheetTitle className="text-[11px] uppercase tracking-wide text-muted">{title}</SheetTitle>
+          </SheetHeader>
+          <ul className="space-y-1.5">
+            {items.map((it) => (
+              <li key={it.key}>
+                <button
+                  onClick={() => { it.onOpen(); setOpen(false); if (typeof window !== "undefined") window.scrollTo({ top: 0 }); }}
+                  className={`block w-full text-left text-sm leading-[1.6] transition-colors ${itemClassName || ""} ${it.active ? "text-accent" : "text-muted hover:text-foreground"}`}
+                >
+                  {it.label}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </SheetContent>
+      </Sheet>
+    </div>
+  );
+}
+
 /* ---------- Peek carousels (auto-rotating cross-links) ---------- */
 function shuffle<T>(arr: T[]): T[] {
   const a = arr.slice();
@@ -510,13 +568,14 @@ function PeekCarousel({ title, cta, onCta, slides, bottomCta }: { title: string;
   const autoplay = useRef(Autoplay({ delay: 6000, stopOnInteraction: false, stopOnMouseEnter: true }));
   return (
     <section className="mt-16 pt-8 min-h-[460px]">
+      <div className="lg:ml-[15rem] lg:w-[65%]">
       <div className="flex items-center justify-between mb-5">
         <h2 className="font-display text-lg font-semibold text-foreground">{title}</h2>
         <button onClick={onCta} className="text-sm text-accent hover:underline inline-flex items-center gap-1">{cta} <ChevronRight size={15} /></button>
       </div>
-      {/* Carousel content is 65% of the main area, centered, so the arrows sit in
-          the side margins instead of overlapping the card text. */}
-      <Carousel opts={{ loop: true, align: "start" }} plugins={[autoplay.current]} className="w-[65%] mx-auto">
+      {/* Carousel fills the shared 65% reading column (left-aligned to match the
+          feed/list content above) so every stacked section lines up at one width. */}
+      <Carousel opts={{ loop: true, align: "start" }} plugins={[autoplay.current]} className="w-full">
         <CarouselContent>
           {slides.map((s, i) => (
             <CarouselItem key={i}>{s}</CarouselItem>
@@ -530,6 +589,7 @@ function PeekCarousel({ title, cta, onCta, slides, bottomCta }: { title: string;
           <Button size="lg" onClick={onCta} className="inline-flex items-center gap-1.5">{cta} <ChevronRight size={16} /></Button>
         </div>
       )}
+      </div>
     </section>
   );
 }
@@ -540,7 +600,7 @@ function GlossaryPeek({ terms, onView, onOpen }: any) {
     <Link key={t.slug} href={glossaryHref(t.slug)} onClick={spaClick(() => onOpen(t.slug))} className="group flex h-[340px] md:h-[360px] flex-col justify-center pr-8">
       <div className="text-[11px] uppercase tracking-wide text-muted mb-2">Glossary</div>
       <div className="font-display text-3xl font-semibold text-foreground group-hover:text-accent term-title">{cleanTerm(t.term)}</div>
-      <p className="mt-4 font-serif text-[26px] text-foreground/85 leading-[1.55] line-clamp-3 overflow-hidden">{firstSentences(cleanDef(splitDef(t.definition).body), 2)}</p>
+      <p className="mt-4 body-copy text-foreground/85 line-clamp-3 overflow-hidden">{firstSentences(cleanDef(splitDef(t.definition).body), 2)}</p>
       <div className="mt-5 text-accent text-base">Read →</div>
     </Link>
   ));
@@ -566,7 +626,7 @@ function JournalPeek({ items, source, onView, onOpen }: any) {
     <Link key={d.id} href={journalHref(d.id)} onClick={spaClick(() => onOpen(d.id))} className="group flex h-[380px] md:h-[400px] flex-col justify-center pr-8">
       <div className="text-[11px] uppercase tracking-wide text-muted">Journal · {d.entry_date}{d.part != null ? ` · Part ${d.part}` : ""}</div>
       <div className="mt-2 font-display text-2xl font-semibold text-foreground group-hover:text-accent line-clamp-2">{d.title || d.id}</div>
-      <p className="mt-4 flex-1 font-serif text-[19px] text-foreground/80 leading-[1.6] line-clamp-[7] overflow-hidden">{ex[d.id] ?? "…"}</p>
+      <p className="mt-4 flex-1 body-copy text-foreground/80 line-clamp-[7] overflow-hidden">{ex[d.id] ?? "…"}</p>
       <div className="mt-4 text-accent text-sm">Read →</div>
     </Link>
   ));
@@ -574,31 +634,34 @@ function JournalPeek({ items, source, onView, onOpen }: any) {
 }
 
 /* ---------- Filter panel (slide-over) ---------- */
+const ALL_VALUE = "__all__";
 function Sel({ label, value, onChange, options, all }: any) {
   return (
     <label className="block text-xs text-muted">{label}
-      <select value={value} onChange={(e) => onChange(e.target.value)} className="mt-1 w-full bg-panel px-2 py-2 text-sm text-foreground rounded-none">
-        <option value="">{all}</option>
-        {options.map((o: any) => <option key={o.v} value={o.v}>{o.l}</option>)}
-      </select>
+      <Select value={value ? value : ALL_VALUE} onValueChange={(v) => onChange(v === ALL_VALUE ? "" : v)}>
+        <SelectTrigger className="mt-1 w-full">
+          <SelectValue placeholder={all} />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value={ALL_VALUE}>{all}</SelectItem>
+          {options.map((o: any) => <SelectItem key={o.v} value={o.v}>{o.l}</SelectItem>)}
+        </SelectContent>
+      </Select>
     </label>
   );
 }
 function FilterPanel(p: any) {
   return (
-    <div className="fixed inset-0 z-40">
-      <div className="absolute inset-0 bg-black/60" onClick={p.onClose} />
-      <div className="absolute right-0 top-0 h-full w-full max-w-sm bg-panel p-5 overflow-y-auto animate-fade-in">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="font-display font-semibold text-foreground">Search &amp; filter</h2>
-          <button onClick={p.onClose} className="text-muted hover:text-foreground"><X size={20} /></button>
-        </div>
+    <Sheet open={p.open} onOpenChange={p.onOpenChange}>
+      <SheetContent side="right" className="w-full max-w-sm p-5">
+        <SheetHeader className="mb-4">
+          <SheetTitle>Search &amp; filter</SheetTitle>
+        </SheetHeader>
         <div className="space-y-3">
-          <input autoFocus value={p.q} onChange={(e: any) => p.setQ(e.target.value)} placeholder="Search title, id, location"
-            className="input-line w-full" />
+          <Input autoFocus value={p.q} onChange={(e: any) => p.setQ(e.target.value)} placeholder="Search title, id, location" />
           <div className="grid grid-cols-2 gap-2">
-            <label className="text-xs text-muted">From<input type="date" value={p.dFrom} onChange={(e: any) => p.setDFrom(e.target.value)} className="input-line mt-1 w-full" /></label>
-            <label className="text-xs text-muted">To<input type="date" value={p.dTo} onChange={(e: any) => p.setDTo(e.target.value)} className="input-line mt-1 w-full" /></label>
+            <label className="text-xs text-muted">From<Input type="date" value={p.dFrom} onChange={(e: any) => p.setDFrom(e.target.value)} className="mt-1" /></label>
+            <label className="text-xs text-muted">To<Input type="date" value={p.dTo} onChange={(e: any) => p.setDTo(e.target.value)} className="mt-1" /></label>
           </div>
           <Sel label="Part" value={p.part} onChange={p.setPart} options={p.parts.map((x: number) => ({ v: String(x), l: `Part ${x}` }))} all="All parts" />
           <Sel label="Location" value={p.loc} onChange={p.setLoc} options={p.locs.map((x: string) => ({ v: x, l: x }))} all="All locations" />
@@ -608,44 +671,42 @@ function FilterPanel(p: any) {
         </div>
         <div className="flex items-center gap-3 mt-6">
           <button onClick={p.onReset} className="text-xs text-accent hover:underline">Reset</button>
-          <Button className="ml-auto" onClick={p.onClose}>Show {p.resultCount} results</Button>
+          <Button className="ml-auto" onClick={() => p.onOpenChange(false)}>Show {p.resultCount} results</Button>
         </div>
-      </div>
-    </div>
+      </SheetContent>
+    </Sheet>
   );
 }
 
 /* ---------- Export modal ---------- */
-function ExportModal({ onClose }: { onClose: () => void }) {
+function ExportModal({ open, onOpenChange }: { open: boolean; onOpenChange: (o: boolean) => void }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
-      <div className="absolute inset-0 bg-black/60" onClick={onClose} />
-      <div className="relative w-full max-w-md bg-panel p-6 animate-fade-in">
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="font-display text-lg font-semibold text-foreground">Export the corpus</h2>
-          <button onClick={onClose} className="text-muted hover:text-foreground"><X size={20} /></button>
-        </div>
-        <p className="font-serif text-[16px] text-foreground/80 leading-[1.7]">
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-md">
+        <DialogHeader>
+          <DialogTitle>Export the corpus</DialogTitle>
+        </DialogHeader>
+        <p className="body-copy text-foreground/80">
           You&rsquo;re about to download the <strong>Invisible Ships corpus</strong> as a <strong>.zip of Markdown files</strong> — the journal, transcripts, references, and glossary — structured for use with AI tools.
         </p>
-        <p className="text-xs text-muted mt-3">
+        <p className="text-xs text-muted">
           The files carry the author&rsquo;s copyright and Critical Disclaimer. Please use them in their complete, original form.
         </p>
-        <div className="flex items-center gap-3 mt-6">
-          <Button variant="outline" onClick={onClose}>Cancel</Button>
+        <div className="flex items-center gap-3 mt-2">
+          <Button variant="outline" onClick={() => onOpenChange(false)}>Cancel</Button>
           <a className="ml-auto" href="/invisible-ships-corpus.zip" download onClick={() => track("export_downloaded")}>
             <Button>Download .zip</Button>
           </a>
         </div>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 }
 
 /* ---------- Documents ---------- */
 function DocumentsView() {
   return (
-    <div>
+    <div className="lg:w-[65%] lg:mx-auto">
       <div className="flex items-center justify-between mb-1">
         <span />
         <ShareMenu title={`${SITE} — Documents`} align="right" />
@@ -656,7 +717,7 @@ function DocumentsView() {
           <a key={d.title} href={d.url} target="_blank" rel="noreferrer" className="group block">
             <div className="font-display text-[18px] font-semibold text-foreground group-hover:text-accent transition-colors">{d.title}</div>
             <div className="text-[13px] text-accent mt-0.5">{d.subline}</div>
-            <p className="mt-2 font-serif text-[20px] text-foreground/80 leading-[1.5]">{d.description}</p>
+            <p className="mt-2 body-copy text-foreground/80">{d.description}</p>
             <div className="mt-3 text-accent text-sm">Open document ↗</div>
           </a>
         ))}
@@ -668,7 +729,7 @@ function DocumentsView() {
 /* ---------- Author ---------- */
 function AuthorView() {
   return (
-    <div className="w-full">
+    <div className="w-full lg:w-[65%] lg:mx-auto">
       <h2 className="font-display text-3xl font-semibold text-foreground mb-5">About the Author</h2>
       <div className="flex flex-col sm:flex-row gap-6">
         <div className="relative w-40 h-40 bg-panel shrink-0 overflow-hidden">
@@ -677,8 +738,8 @@ function AuthorView() {
             onError={(e) => { (e.currentTarget as HTMLImageElement).style.opacity = "0"; }} />
         </div>
         <div>
-          <p className="font-serif text-[23px] text-foreground/85 leading-[1.6]">{AUTHOR.summary}</p>
-          <p className="font-serif text-[23px] text-foreground/85 leading-[1.6] mt-4">{AUTHOR.bio}</p>
+          <p className="body-copy text-foreground/85">{AUTHOR.summary}</p>
+          <p className="body-copy text-foreground/85 mt-4">{AUTHOR.bio}</p>
           <p className="text-sm text-muted mt-5">{AUTHOR.contact}</p>
         </div>
       </div>
@@ -689,7 +750,7 @@ function AuthorView() {
 /* ---------- Disclaimer ---------- */
 function DisclaimerView() {
   return (
-    <div className="w-full">
+    <div className="w-full lg:w-[65%] lg:mx-auto">
       <h2 className="font-display text-3xl font-semibold text-foreground mb-5">Copyright &amp; Terms of Use</h2>
       <CopyrightTerms />
     </div>
