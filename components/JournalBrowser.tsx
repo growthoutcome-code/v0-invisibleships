@@ -157,8 +157,16 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
     return Array.from(byDay.values());
   }, [journal]);
   // Full glossary, sorted — used for deep-link validation and prev/next term navigation.
+  // Supabase already holds all terms (incl. the former EXTRA_GLOSSARY set), so use it alone.
+  // Only the bundled-JSON fallback still needs EXTRA_GLOSSARY merged in.
   const glossaryTerms = useMemo(
-    () => [...(ds?.glossary || []), ...EXTRA_GLOSSARY].sort((a: any, b: any) => a.term.localeCompare(b.term)),
+    () => {
+      const base =
+        ds?.source === "supabase"
+          ? (ds?.glossary || [])
+          : [...(ds?.glossary || []), ...EXTRA_GLOSSARY];
+      return [...base].sort((a: any, b: any) => a.term.localeCompare(b.term));
+    },
     [ds]
   );
   const parts = useMemo(() => Array.from(new Set(journal.map((d) => d.part).filter((p): p is number => p != null))).sort(), [journal]);
