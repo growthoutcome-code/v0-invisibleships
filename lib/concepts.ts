@@ -24,6 +24,7 @@
 
 export type Basis = "documented" | "structural" | "pattern";
 export type Origin = "ai" | "author";
+export type Verification = "unverified" | "partially_verified" | "verified";
 
 export type Concept = {
   id: string;
@@ -33,6 +34,22 @@ export type Concept = {
   body: string;
   /** Short evidence lines. Kept as text where a stable public URL isn't recorded. */
   evidence?: string[];
+  /** Open questions the concept does NOT answer. Shown to the reader. */
+  questions?: string[];
+  /** External or internal references, with how they relate. */
+  references?: { label: string; href: string }[];
+  /** How the references relate — prevents a contextual link reading as proof. */
+  referencesNote?: string;
+  /** Independent verification state. Rendered whenever it is not "verified". */
+  verification?: Verification;
+  /** Scope limit shown beneath the concept. Verbatim, never paraphrased. */
+  disclaimer?: string;
+};
+
+export const VERIFICATION_LABEL: Record<Verification, string> = {
+  unverified: "Not independently verified",
+  partially_verified: "Partially verified",
+  verified: "Independently verified",
 };
 
 export const BASIS_LABEL: Record<Basis, string> = {
@@ -191,5 +208,30 @@ export const CONCEPTS: Concept[] = [
       "32 of 311 milestones carry a relationship label with no target",
       "The deployments table has no date field of any kind",
     ],
+  },
+  {
+    id: "has-an-attack-happened",
+    origin: "author",
+    basis: "pattern",
+    title: "Has an attack happened?",
+    body:
+      "The author reports experiences interpreted as possible unconsented-to auditory or neurological communication, along with perceived coercive messages, including messages related to self-harm. The author does not know the mechanism and raises possible explanations only as hypotheses. This is a dated record of reported experience, not evidence that any particular technology, transmission infrastructure, person, organization, or coordinated campaign is responsible. No conclusion should be drawn without independent technical testing, corroboration, and reliable records.",
+    questions: [
+      "What independently verifiable evidence would distinguish an external event from other possible explanations?",
+      "Are there original recordings, contemporaneous notes, technical measurements, or witnesses that can be evaluated independently?",
+      "Is there reliable evidence identifying a specific technology, person, or organization?",
+      "Does any verified data collection or processing meet the legal definition of neural data under Colorado law?",
+      "What official inquiry, technical assessment, or corroborating record would be needed before drawing a conclusion?",
+    ],
+    references: [
+      { label: "Journal entry — 27 Feb 2025", href: "/journal/is-j01-20250227-entry" },
+      { label: "The Guardian — military AI surveillance (context only)", href: "https://www.theguardian.com/world/2025/mar/06/israel-military-ai-surveillance" },
+      { label: "Colorado HB24-1058 — neural data", href: "https://leg.colorado.gov/bills/hb24-1058" },
+    ],
+    referencesNote:
+      "The journal is an unverified first-person report. The Guardian article is context about surveillance elsewhere and is not evidence of a connection. Colorado law is relevant only if qualifying data collection or processing is established.",
+    verification: "unverified",
+    disclaimer:
+      "This concept records reported experience and open questions. It does not establish an attack, technology, responsible party, organization, or coordinated campaign.",
   },
 ];

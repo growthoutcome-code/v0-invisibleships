@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import { track } from "@/lib/analytics";
-import { CONCEPTS, BASIS_LABEL, BASIS_NOTE, ORIGIN_LABEL, ORIGIN_NOTE, type Basis, type Origin } from "@/lib/concepts";
+import { CONCEPTS, BASIS_LABEL, BASIS_NOTE, ORIGIN_LABEL, ORIGIN_NOTE, VERIFICATION_LABEL, type Basis, type Origin } from "@/lib/concepts";
 
 const BASIS_ORDER: Basis[] = ["documented", "structural", "pattern"];
 const ORIGIN_ORDER: Origin[] = ["ai", "author"];
@@ -80,7 +80,7 @@ export default function ConceptsView() {
             <p className="body-copy text-foreground/85 max-w-[70ch] mb-6">{c.body}</p>
 
             {c.evidence && (
-              <ul className="list-none p-0 m-0 max-w-[70ch]">
+              <ul className="list-none p-0 m-0 max-w-[70ch] mb-6">
                 {c.evidence.map((e) => (
                   <li key={e} className="text-[16px] text-muted py-1.5 pl-5 relative">
                     <span aria-hidden className="absolute left-0 top-1.5 text-foreground">—</span>
@@ -89,6 +89,64 @@ export default function ConceptsView() {
                 ))}
               </ul>
             )}
+
+            {/* Open questions are published deliberately: a concept that names what
+                would settle it is more credible than one that only asserts. */}
+            {c.questions && (
+              <div className="max-w-[70ch] mb-6">
+                <h4 className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground mb-2">
+                  Open questions
+                </h4>
+                <ul className="list-none p-0 m-0">
+                  {c.questions.map((q) => (
+                    <li key={q} className="body-copy text-foreground/75 py-2 pl-5 relative">
+                      <span aria-hidden className="absolute left-0 top-2 text-foreground">?</span>
+                      {q}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {c.references && (
+              <div className="max-w-[70ch] mb-6">
+                <h4 className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground mb-2">
+                  References
+                </h4>
+                <ul className="list-none p-0 m-0">
+                  {c.references.map((r) => (
+                    <li key={r.href} className="py-1.5">
+                      <a
+                        href={r.href}
+                        target={r.href.startsWith("http") ? "_blank" : undefined}
+                        rel={r.href.startsWith("http") ? "noreferrer noopener" : undefined}
+                        onClick={() => track("concept_reference_opened", { concept: c.id, href: r.href })}
+                        className="text-[17px] text-foreground underline underline-offset-4 hover:text-accent"
+                      >
+                        {r.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+                {/* Without this note a contextual link reads as corroboration. */}
+                {c.referencesNote && (
+                  <p className="text-[16px] text-muted mt-3 m-0">{c.referencesNote}</p>
+                )}
+              </div>
+            )}
+
+            {(c.verification && c.verification !== "verified") || c.disclaimer ? (
+              <div className="max-w-[70ch] border-l-2 border-edge pl-5 py-1">
+                {c.verification && c.verification !== "verified" && (
+                  <p className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground m-0 mb-2">
+                    {VERIFICATION_LABEL[c.verification]}
+                  </p>
+                )}
+                {c.disclaimer && (
+                  <p className="body-copy text-foreground/75 m-0">{c.disclaimer}</p>
+                )}
+              </div>
+            ) : null}
           </li>
         ))}
       </ol>
