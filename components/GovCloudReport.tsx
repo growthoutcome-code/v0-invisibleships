@@ -248,7 +248,30 @@ html.dark .gov-report{
 }
 .gov-report .hm td:not(.z):hover { outline: 2px solid rgb(var(--foreground)); outline-offset: -2px; }
 .gov-report .hm td.z { cursor: default; }
-.gov-report .hm th { color: rgb(var(--foreground)); }
+/* Crosshair: hovering a cell marks its row and column headers, so the value can
+   never be misattributed to the wrong domain — the failure mode when 21 columns
+   share one grid. */
+.gov-report .hm th.xh {
+  color: rgb(var(--background)) !important;
+  background: rgb(var(--foreground)) !important;
+}
+.gov-report .hm td.xh-cell { outline: 2px solid rgb(var(--foreground)); outline-offset: -2px; }
+/* 21 domain columns in a fixed-layout table give ~50px each — nowhere near
+   enough for labels like "defence-intel", which previously overflowed into their
+   neighbours and made the whole grid unreadable. Rotate the column headers so the
+   full name is legible and the columns can stay narrow. */
+.gov-report .hm thead th {
+  writing-mode: vertical-rl; transform: rotate(180deg);
+  height: 165px; vertical-align: bottom; text-align: left;
+  white-space: nowrap; padding: 6px 2px; font-size: 14px;
+  color: rgb(var(--foreground));
+}
+.gov-report .hm thead th:first-child { writing-mode: horizontal-tb; transform: none; width: 108px; }
+.gov-report .hm tbody th {
+  writing-mode: horizontal-tb; transform: none; text-align: left;
+  font-size: 14px; padding: 0 10px 0 0; white-space: nowrap;
+  color: rgb(var(--foreground));
+}
 `;
 const MARKUP = `<div class="wrap">
 <h1>Government Cloud — Adoption · Procurement · Timeline · Investment · Litigation · Capabilities</h1>

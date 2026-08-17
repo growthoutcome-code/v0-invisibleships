@@ -70,17 +70,37 @@ render();
   if (!host) return;
   var tip = document.getElementById('tip');
 
-  /* ---- 1. per-cell digit contrast -------------------------------------
-     Cells are rgba(ink, a) with a = 0.18-1.0. Nothing is overlaid, so the full
-     gradation shows; the digit flips to the surface colour once the fill is dark
-     enough to need it. 0.55 is where inverted text starts winning on both themes. */
+  /* ---- 1. heatmap gradation ---------------------------------------------
+     The report paints cells rgba(ink, 0.18-1.0), which in light mode leaves the
+     low-count end almost white — and its digits are white, so they vanished.
+
+     Fix the band rather than the type: each cell's alpha is remapped onto an
+     explicit 13-step grayscale ramp chosen so the LIGHTEST step still carries
+     inverted digits (3.74:1 light / 3.88:1 dark on bold text, rising to 21:1).
+     The gradation stays visible across the whole range and the numbers stay
+     white — no black type, no flattening overlay.
+
+     Ramps are precomputed from CIE L* (55->0 light, 45->100 dark) so the steps
+     are perceptually even rather than evenly spaced in sRGB. */
+  var RAMP_L = ['#848484','#777777','#6c6c6c','#616161','#565656','#4b4b4b','#404040','#363636','#2c2c2c','#232323','#191919','#0f0f0f','#000000'];
+  var RAMP_D = ['#6a6a6a','#757575','#828282','#8e8e8e','#9a9a9a','#a6a6a6','#b2b2b2','#bfbfbf','#cbcbcb','#d8d8d8','#e5e5e5','#f2f2f2','#ffffff'];
+
   function inkCells(){
+    var dark = document.documentElement.classList.contains('dark');
+    var ramp = dark ? RAMP_D : RAMP_L;
     host.querySelectorAll('.hm td:not(.z)').forEach(function(td){
-      var m = (td.getAttribute('style')||'').match(/rgba\(var\(--heat\),\s*([0-9.]+)\)/);
-      var a = m ? parseFloat(m[1]) : 0;
-      td.style.color = a >= 0.55 ? 'rgb(var(--background))' : 'rgb(var(--foreground))';
+      if (!td.dataset.alpha) {
+        var m = (td.getAttribute('style')||'').match(/rgba\(var\(--heat\),\s*([0-9.]+)\)/);
+        td.dataset.alpha = m ? m[1] : '0.18';
+      }
+      var a = parseFloat(td.dataset.alpha);
+      var t = Math.max(0, Math.min(1, (a - 0.18) / 0.82));
+      td.style.background = ramp[Math.round(t * (ramp.length - 1))];
+      td.style.color = dark ? '#000' : '#fff';
     });
   }
+  /* Re-ink when the site theme flips — the two ramps are separate, not inverses. */
+  new MutationObserver(inkCells).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
   /* ---- 2. source data (lazy) ------------------------------------------
      The report's inlined DATA carries no source URLs, so resolve them from the
@@ -152,11 +172,29 @@ render();
       if (td.dataset.bound) return;
       td.dataset.bound = '1';
       td.setAttribute('tabindex', '0');
+      // Self-describing coordinates, so the cell is unambiguous even without the
+      // header row in view.
+      var rowTh = td.closest('tr') ? td.closest('tr').querySelector('th') : null;
+      td.setAttribute('aria-label',
+        (rowTh ? rowTh.textContent.trim() : td.dataset.g) + ' / ' + td.dataset.d + ': ' + td.textContent.trim());
       td.addEventListener('click', function(){
         var row = td.closest('tr'), th = row ? row.querySelector('th') : null;
         openCell(td.dataset.g, td.dataset.d, td.textContent.trim(), th ? th.textContent.trim() : td.dataset.g);
       });
       td.addEventListener('keydown', function(e){ if (e.key === 'Enter') td.click(); });
+
+      td.addEventListener('mouseenter', function(){
+        var row = td.closest('tr');
+        var idx = Array.prototype.indexOf.call(row.children, td);
+        var head = host.querySelector('.hm thead tr');
+        if (head && head.children[idx]) head.children[idx].classList.add('xh');
+        var rh = row.querySelector('th'); if (rh) rh.classList.add('xh');
+        td.classList.add('xh-cell');
+      });
+      td.addEventListener('mouseleave', function(){
+        host.querySelectorAll('.hm th.xh').forEach(function(el){ el.classList.remove('xh'); });
+        td.classList.remove('xh-cell');
+      });
     });
   }
 
