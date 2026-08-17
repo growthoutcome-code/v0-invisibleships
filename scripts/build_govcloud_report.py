@@ -287,13 +287,28 @@ ENHANCE_JS = """
   var RAMP_L = ['#848484','#777777','#6c6c6c','#616161','#565656','#4b4b4b','#404040','#363636','#2c2c2c','#232323','#191919','#0f0f0f','#000000'];
   var RAMP_D = ['#6a6a6a','#757575','#828282','#8e8e8e','#9a9a9a','#a6a6a6','#b2b2b2','#bfbfbf','#cbcbcb','#d8d8d8','#e5e5e5','#f2f2f2','#ffffff'];
 
+  function maxCount(){
+    var mx = 0;
+    host.querySelectorAll('.hm td:not(.z)').forEach(function(td){
+      var n = parseFloat(td.textContent) || 0; if (n > mx) mx = n;
+    });
+    return mx;
+  }
+
   function inkCells(){
     var dark = document.documentElement.classList.contains('dark');
     var ramp = dark ? RAMP_D : RAMP_L;
     host.querySelectorAll('.hm td:not(.z)').forEach(function(td){
       if (!td.dataset.alpha) {
-        var m = (td.getAttribute('style')||'').match(/rgba\(var\(--heat\),\s*([0-9.]+)\)/);
-        td.dataset.alpha = m ? m[1] : '0.18';
+        // Accept the original rgba(...,A) form or the rewritten rgb(... / A) one,
+        // and fall back to count-over-max so the ramp paints regardless.
+        var st = td.getAttribute('style') || '';
+        var m = st.match(/--heat\)\s*[,/]\s*([0-9.]+)/);
+        if (m) { td.dataset.alpha = m[1]; }
+        else {
+          var n = parseFloat(td.textContent) || 0;
+          td.dataset.alpha = String(Math.min(1, 0.18 + 0.82 * (n / (maxCount() || 1))));
+        }
       }
       var a = parseFloat(td.dataset.alpha);
       var t = Math.max(0, Math.min(1, (a - 0.18) / 0.82));
@@ -482,6 +497,15 @@ def main():
     # regeneration that flips the default fails loudly instead of silently hiding
     # 52 Tier C sources.
     assert "includeC=true" in js, "Tier C is no longer included by default"
+
+    # The heatmap emits inline `rgba(var(--heat),A)`. Valid when --heat was a
+    # comma-separated triplet (42,120,214); rebound to the site's --foreground it
+    # becomes `rgba(0 0 0, A)`, and space-separated values inside rgba() are INVALID
+    # — the browser drops the declaration and every cell renders with no background.
+    # Rewrite to the modern slash form, which accepts a space-separated triplet.
+    old_fill = "background:rgba(var(--heat),${a})"
+    assert old_fill in js, "heatmap fill expression not found — did the report change?"
+    js = js.replace(old_fill, "background:rgb(var(--heat) / ${a})")
 
     # Tier C is always in. The toggle and its handler both go — removing the button
     # alone would leave the listener throwing on a null element and render() would

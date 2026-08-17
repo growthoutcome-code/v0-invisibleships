@@ -19,7 +19,7 @@ function hbars(el,pairs,max){const m=max||Math.max(...pairs.map(p=>p[1]),1);el.i
 const vkind={};DATA.rows.forEach(r=>{});
 function adopt(){const R=rows();document.getElementById('a_tiles').innerHTML=[['Deployments',R.length],['Geographies',new Set(R.map(r=>r.g)).size],['Vendors',new Set(R.map(r=>r.v)).size],['Domains',new Set(R.map(r=>r.d)).size],['Tier A',R.filter(r=>r.t==='A').length],['Non-adoption',R.filter(r=>r.st==='decommissioned').length]].map(x=>`<div class="tile"><div class="n">${x[1]}</div><div class="l">${x[0]}</div></div>`).join('');
  const doms=DATA.domains,geos=DATA.geos.slice().sort((a,b)=>a.region<b.region?-1:1),cnt={};let mx=0;R.forEach(r=>{const k=r.g+'|'+r.d;cnt[k]=(cnt[k]||0)+1;if(cnt[k]>mx)mx=cnt[k]});
- let h='<thead><tr><th></th>'+doms.map(d=>`<th title="${d.name}">${d.id}</th>`).join('')+'</tr></thead><tbody>';geos.forEach(g=>{h+=`<tr><th title="${g.name}">${g.id}</th>`;doms.forEach(d=>{const c=cnt[g.id+'|'+d.id]||0;if(!c){h+='<td class="z">·</td>';return}const a=(0.18+0.82*c/mx).toFixed(2);h+=`<td data-g="${g.id}" data-d="${d.id}" style="background:rgba(var(--heat),${a})">${c}</td>`});h+='</tr>'});document.getElementById('heat').innerHTML=h+'</tbody>';
+ let h='<thead><tr><th></th>'+doms.map(d=>`<th title="${d.name}">${d.id}</th>`).join('')+'</tr></thead><tbody>';geos.forEach(g=>{h+=`<tr><th title="${g.name}">${g.id}</th>`;doms.forEach(d=>{const c=cnt[g.id+'|'+d.id]||0;if(!c){h+='<td class="z">·</td>';return}const a=(0.18+0.82*c/mx).toFixed(2);h+=`<td data-g="${g.id}" data-d="${d.id}" style="background:rgb(var(--heat) / ${a})">${c}</td>`});h+='</tr>'});document.getElementById('heat').innerHTML=h+'</tbody>';
  document.querySelectorAll('#heat td:not(.z)').forEach(td=>{td.onmousemove=e=>{const g=td.dataset.g,d=td.dataset.d;const vs=[...new Set(R.filter(r=>r.g==g&&r.d==d).map(r=>DATA.vname[r.v]||r.v))].join(', ');showTip(e,`<b>${DATA.gname[g]||g} — ${d}</b><br>${td.textContent} deployment(s)<br><span style="color:var(--text-secondary)">${vs}</span>`)};td.onmouseleave=hideTip});
  const vc={};R.forEach(r=>vc[r.v]=(vc[r.v]||0)+1);hbars(document.getElementById('vbars'),Object.entries(vc).sort((a,b)=>b[1]-a[1]).slice(0,15).map(([v,n])=>[DATA.vname[v]||v,n,DATA.vname[v]||v,'--series-1']))}
 function proc(){const A=awards(),wv=A.filter(a=>a.val);document.getElementById('p_tiles').innerHTML=[['Awards',A.length],['Geographies',new Set(A.map(a=>a.g)).size],['Disclosed value','$'+(wv.reduce((s,a)=>s+a.val,0)/1e9).toFixed(0)+'B'],['w/ value',wv.length],['Emergency',A.filter(a=>a.emg).length],['Re-competes 36mo',A.filter(a=>a.rc>='2026-08-17'&&a.rc<='2029-08-17').length]].map(x=>`<div class="tile"><div class="n">${x[1]}</div><div class="l">${x[0]}</div></div>`).join('');
@@ -85,13 +85,28 @@ render();
   var RAMP_L = ['#848484','#777777','#6c6c6c','#616161','#565656','#4b4b4b','#404040','#363636','#2c2c2c','#232323','#191919','#0f0f0f','#000000'];
   var RAMP_D = ['#6a6a6a','#757575','#828282','#8e8e8e','#9a9a9a','#a6a6a6','#b2b2b2','#bfbfbf','#cbcbcb','#d8d8d8','#e5e5e5','#f2f2f2','#ffffff'];
 
+  function maxCount(){
+    var mx = 0;
+    host.querySelectorAll('.hm td:not(.z)').forEach(function(td){
+      var n = parseFloat(td.textContent) || 0; if (n > mx) mx = n;
+    });
+    return mx;
+  }
+
   function inkCells(){
     var dark = document.documentElement.classList.contains('dark');
     var ramp = dark ? RAMP_D : RAMP_L;
     host.querySelectorAll('.hm td:not(.z)').forEach(function(td){
       if (!td.dataset.alpha) {
-        var m = (td.getAttribute('style')||'').match(/rgba\(var\(--heat\),\s*([0-9.]+)\)/);
-        td.dataset.alpha = m ? m[1] : '0.18';
+        // Accept the original rgba(...,A) form or the rewritten rgb(... / A) one,
+        // and fall back to count-over-max so the ramp paints regardless.
+        var st = td.getAttribute('style') || '';
+        var m = st.match(/--heat\)\s*[,/]\s*([0-9.]+)/);
+        if (m) { td.dataset.alpha = m[1]; }
+        else {
+          var n = parseFloat(td.textContent) || 0;
+          td.dataset.alpha = String(Math.min(1, 0.18 + 0.82 * (n / (maxCount() || 1))));
+        }
       }
       var a = parseFloat(td.dataset.alpha);
       var t = Math.max(0, Math.min(1, (a - 0.18) / 0.82));
