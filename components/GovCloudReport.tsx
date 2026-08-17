@@ -256,6 +256,35 @@ html.dark .gov-report{
   background: rgb(var(--foreground)) !important;
 }
 .gov-report .hm td.xh-cell { outline: 2px solid rgb(var(--foreground)); outline-offset: -2px; }
+
+/* --- adoption grid: mobile alternative -----------------------------------
+   A 21-column x 28-row matrix cannot be made legible on a phone by scaling —
+   it needs a different form. Below 900px the grid is replaced by a stacked
+   list: one block per geography, its domains ranked by count, each row a
+   tappable bar that opens the same detail modal. Same data, same interaction,
+   linear instead of tabular. */
+.gov-report .hmm { display: none; }
+@media (max-width: 900px) {
+  .gov-report .hm { display: none; }
+  .gov-report .hmm { display: block; }
+}
+.gov-report .hmm-geo {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+  margin: 32px 0 12px; padding-bottom: 8px;
+  border-bottom: 1px solid rgb(var(--edge));
+}
+.gov-report .hmm-geo b { font-family: var(--font-display), sans-serif; font-size: 19px; font-weight: 600; }
+.gov-report .hmm-geo span { font-size: 15px; color: rgb(var(--muted)); }
+.gov-report .hmm ul { list-style: none; margin: 0; padding: 0; }
+.gov-report .hmm li { margin: 0 0 8px; }
+.gov-report .hmm button {
+  width: 100%; display: grid; grid-template-columns: 1fr auto; align-items: center;
+  gap: 12px; background: none; border: none; padding: 10px 0; cursor: pointer;
+  font-family: var(--font-sans), sans-serif; font-size: 16px; text-align: left;
+  color: rgb(var(--foreground));
+}
+.gov-report .hmm .hmm-bar { grid-column: 1 / -1; height: 10px; }
+.gov-report .hmm .hmm-n { font-weight: 700; font-variant-numeric: tabular-nums; }
 /* 21 domain columns in a fixed-layout table give ~50px each — nowhere near
    enough for labels like "defence-intel", which previously overflowed into their
    neighbours and made the whole grid unreadable. Rotate the column headers so the

@@ -244,6 +244,35 @@ TYPE_RULES = """
   background: rgb(var(--foreground)) !important;
 }
 .gov-report .hm td.xh-cell { outline: 2px solid rgb(var(--foreground)); outline-offset: -2px; }
+
+/* --- adoption grid: mobile alternative -----------------------------------
+   A 21-column x 28-row matrix cannot be made legible on a phone by scaling —
+   it needs a different form. Below 900px the grid is replaced by a stacked
+   list: one block per geography, its domains ranked by count, each row a
+   tappable bar that opens the same detail modal. Same data, same interaction,
+   linear instead of tabular. */
+.gov-report .hmm { display: none; }
+@media (max-width: 900px) {
+  .gov-report .hm { display: none; }
+  .gov-report .hmm { display: block; }
+}
+.gov-report .hmm-geo {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+  margin: 32px 0 12px; padding-bottom: 8px;
+  border-bottom: 1px solid rgb(var(--edge));
+}
+.gov-report .hmm-geo b { font-family: var(--font-display), sans-serif; font-size: 19px; font-weight: 600; }
+.gov-report .hmm-geo span { font-size: 15px; color: rgb(var(--muted)); }
+.gov-report .hmm ul { list-style: none; margin: 0; padding: 0; }
+.gov-report .hmm li { margin: 0 0 8px; }
+.gov-report .hmm button {
+  width: 100%; display: grid; grid-template-columns: 1fr auto; align-items: center;
+  gap: 12px; background: none; border: none; padding: 10px 0; cursor: pointer;
+  font-family: var(--font-sans), sans-serif; font-size: 16px; text-align: left;
+  color: rgb(var(--foreground));
+}
+.gov-report .hmm .hmm-bar { grid-column: 1 / -1; height: 10px; }
+.gov-report .hmm .hmm-n { font-weight: 700; font-variant-numeric: tabular-nums; }
 /* 21 domain columns in a fixed-layout table give ~50px each — nowhere near
    enough for labels like "defence-intel", which previously overflowed into their
    neighbours and made the whole grid unreadable. Rotate the column headers so the
@@ -317,7 +346,7 @@ ENHANCE_JS = """
     });
   }
   /* Re-ink when the site theme flips — the two ramps are separate, not inverses. */
-  new MutationObserver(inkCells).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+  new MutationObserver(function(){ inkCells(); buildMobile(); }).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
   /* ---- 2. source data (lazy) ------------------------------------------
      The report's inlined DATA carries no source URLs, so resolve them from the
@@ -385,6 +414,7 @@ ENHANCE_JS = """
   /* ---- 4. bind heatmap cells ------------------------------------------- */
   function bind(){
     inkCells();
+    buildMobile();
     host.querySelectorAll('.hm td:not(.z)').forEach(function(td){
       if (td.dataset.bound) return;
       td.dataset.bound = '1';
@@ -411,6 +441,61 @@ ENHANCE_JS = """
       td.addEventListener('mouseleave', function(){
         host.querySelectorAll('.hm th.xh').forEach(function(el){ el.classList.remove('xh'); });
         td.classList.remove('xh-cell');
+      });
+    });
+  }
+
+  /* ---- mobile alternative to the grid ---------------------------------
+     Built from the rendered table so it can't drift from it: same counts, same
+     geo/domain ids, same modal on tap. Rebuilt whenever the grid redraws. */
+  function buildMobile(){
+    var table = host.querySelector('.hm');
+    if (!table) return;
+    var heads = Array.prototype.slice.call(table.querySelectorAll('thead th'))
+      .map(function(th){ return th.textContent.trim(); });
+    var dark = document.documentElement.classList.contains('dark');
+    var ramp = dark ? RAMP_D : RAMP_L;
+
+    var wrap = host.querySelector('.hmm');
+    if (!wrap) {
+      wrap = document.createElement('div');
+      wrap.className = 'hmm';
+      table.parentNode.insertBefore(wrap, table.nextSibling);
+    }
+
+    var html = '';
+    Array.prototype.forEach.call(table.querySelectorAll('tbody tr'), function(tr){
+      var geo = tr.querySelector('th');
+      var cells = Array.prototype.slice.call(tr.querySelectorAll('td:not(.z)'))
+        .map(function(td){
+          return { d: td.dataset.d, g: td.dataset.g,
+                   n: parseFloat(td.textContent) || 0,
+                   a: parseFloat(td.dataset.alpha || '0.18') };
+        })
+        .filter(function(c){ return c.n > 0; })
+        .sort(function(a, b){ return b.n - a.n; });
+      if (!cells.length) return;
+      var total = cells.reduce(function(s, c){ return s + c.n; }, 0);
+      var mx = cells[0].n;
+      html += '<div class="hmm-geo"><b>' + (geo ? geo.textContent.trim() : '') + '</b>'
+            + '<span>' + total + ' deployment' + (total === 1 ? '' : 's') + '</span></div><ul>';
+      cells.forEach(function(c){
+        var step = ramp[Math.round(Math.max(0, Math.min(1, (c.a - 0.18) / 0.82)) * (ramp.length - 1))];
+        html += '<li><button type="button" data-g="' + c.g + '" data-d="' + c.d + '" data-n="' + c.n + '">'
+              + '<span>' + c.d + '</span><span class="hmm-n">' + c.n + '</span>'
+              + '<span class="hmm-bar" style="background:' + step + ';width:'
+              + Math.max(4, Math.round(100 * c.n / mx)) + '%"></span>'
+              + '</button></li>';
+      });
+      html += '</ul>';
+    });
+    wrap.innerHTML = html;
+
+    wrap.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click', function(){
+        var geoLabel = b.closest('ul').previousElementSibling;
+        openCell(b.dataset.g, b.dataset.d, b.dataset.n,
+                 geoLabel ? geoLabel.querySelector('b').textContent.trim() : b.dataset.g);
       });
     });
   }

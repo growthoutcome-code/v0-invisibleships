@@ -115,7 +115,7 @@ render();
     });
   }
   /* Re-ink when the site theme flips — the two ramps are separate, not inverses. */
-  new MutationObserver(inkCells).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+  new MutationObserver(function(){ inkCells(); buildMobile(); }).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
   /* ---- 2. source data (lazy) ------------------------------------------
      The report's inlined DATA carries no source URLs, so resolve them from the
@@ -183,6 +183,7 @@ render();
   /* ---- 4. bind heatmap cells ------------------------------------------- */
   function bind(){
     inkCells();
+    buildMobile();
     host.querySelectorAll('.hm td:not(.z)').forEach(function(td){
       if (td.dataset.bound) return;
       td.dataset.bound = '1';
@@ -209,6 +210,61 @@ render();
       td.addEventListener('mouseleave', function(){
         host.querySelectorAll('.hm th.xh').forEach(function(el){ el.classList.remove('xh'); });
         td.classList.remove('xh-cell');
+      });
+    });
+  }
+
+  /* ---- mobile alternative to the grid ---------------------------------
+     Built from the rendered table so it can't drift from it: same counts, same
+     geo/domain ids, same modal on tap. Rebuilt whenever the grid redraws. */
+  function buildMobile(){
+    var table = host.querySelector('.hm');
+    if (!table) return;
+    var heads = Array.prototype.slice.call(table.querySelectorAll('thead th'))
+      .map(function(th){ return th.textContent.trim(); });
+    var dark = document.documentElement.classList.contains('dark');
+    var ramp = dark ? RAMP_D : RAMP_L;
+
+    var wrap = host.querySelector('.hmm');
+    if (!wrap) {
+      wrap = document.createElement('div');
+      wrap.className = 'hmm';
+      table.parentNode.insertBefore(wrap, table.nextSibling);
+    }
+
+    var html = '';
+    Array.prototype.forEach.call(table.querySelectorAll('tbody tr'), function(tr){
+      var geo = tr.querySelector('th');
+      var cells = Array.prototype.slice.call(tr.querySelectorAll('td:not(.z)'))
+        .map(function(td){
+          return { d: td.dataset.d, g: td.dataset.g,
+                   n: parseFloat(td.textContent) || 0,
+                   a: parseFloat(td.dataset.alpha || '0.18') };
+        })
+        .filter(function(c){ return c.n > 0; })
+        .sort(function(a, b){ return b.n - a.n; });
+      if (!cells.length) return;
+      var total = cells.reduce(function(s, c){ return s + c.n; }, 0);
+      var mx = cells[0].n;
+      html += '<div class="hmm-geo"><b>' + (geo ? geo.textContent.trim() : '') + '</b>'
+            + '<span>' + total + ' deployment' + (total === 1 ? '' : 's') + '</span></div><ul>';
+      cells.forEach(function(c){
+        var step = ramp[Math.round(Math.max(0, Math.min(1, (c.a - 0.18) / 0.82)) * (ramp.length - 1))];
+        html += '<li><button type="button" data-g="' + c.g + '" data-d="' + c.d + '" data-n="' + c.n + '">'
+              + '<span>' + c.d + '</span><span class="hmm-n">' + c.n + '</span>'
+              + '<span class="hmm-bar" style="background:' + step + ';width:'
+              + Math.max(4, Math.round(100 * c.n / mx)) + '%"></span>'
+              + '</button></li>';
+      });
+      html += '</ul>';
+    });
+    wrap.innerHTML = html;
+
+    wrap.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click', function(){
+        var geoLabel = b.closest('ul').previousElementSibling;
+        openCell(b.dataset.g, b.dataset.d, b.dataset.n,
+                 geoLabel ? geoLabel.querySelector('b').textContent.trim() : b.dataset.g);
       });
     });
   }

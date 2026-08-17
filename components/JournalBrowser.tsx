@@ -108,14 +108,9 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
       if (entry && ds.docs.some((d) => d.id === entry)) { setTab("journal"); setSel(entry); }
       else if (term && glossaryTerms.some((t: any) => t.slug === term)) { setTab("glossary"); setGsel(term); }
       else if (view && TABS.includes(view)) { setTab(view); }
-      else if (initialTab === "journal") {
-        // Default journal landing (i.e. straight through the gate): open the FIRST
-        // journal entry rather than the feed.
-        const first = (ds.docs || [])
-          .filter((d) => d.collection === "journal")
-          .sort((a, b) => (a.entry_date || "").localeCompare(b.entry_date || "") || ((a.recording_index || 0) - (b.recording_index || 0)))[0];
-        if (first) { setTab("journal"); setSel(first.id); }
-      }
+      // Default journal landing (straight through the gate) shows the FEED — the
+      // list of entries — not an individual entry. An earlier version opened the
+      // oldest entry here, which dropped visitors mid-archive with no overview.
     } catch { /* ignore */ }
     setDeepLinked(true);
   }, [ds, deepLinked]);
@@ -678,7 +673,7 @@ function ExportModal({ open, onOpenChange }: { open: boolean; onOpenChange: (o: 
           <DialogTitle>Export the corpus</DialogTitle>
         </DialogHeader>
         <p className="body-copy text-foreground/80">
-          You&rsquo;re about to download the <strong>Invisible Ships corpus</strong> as a <strong>.zip</strong> — the journal, transcripts, references, and glossary as Markdown, plus the <strong>Government Cloud research dataset</strong> (CSV + JSON tables, chart data and briefs) — structured for use with AI tools.
+          You&rsquo;re about to download the <strong>Invisible Ships corpus</strong> as a <strong>.zip of Markdown files</strong> — the journal, transcripts, references, and glossary — structured for use with AI tools.
         </p>
         <p className="text-xs text-muted">
           The files carry the author&rsquo;s copyright and Critical Disclaimer. Please use them in their complete, original form.
