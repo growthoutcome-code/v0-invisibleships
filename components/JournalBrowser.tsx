@@ -19,6 +19,7 @@ import { Transcript } from "@/components/Transcript";
 import { cleanTerm, cleanDef, splitDef } from "@/lib/glossary-format";
 import GlossaryBody from "@/components/GlossaryBody";
 import { DOCUMENTS, AUTHOR, EXTRA_GLOSSARY } from "@/lib/site-content";
+import PageActions, { SortMenu, type SortDir } from "@/components/PageActions";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 
@@ -80,6 +81,8 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
   const [gcat, setGcat] = useState("");
 
   const [page, setPage] = useState(1);
+  // Feed order. Default matches the entries themselves, which read latest-first.
+  const [sort, setSort] = useState<SortDir>("newest");
   const [sel, setSel] = useState<string | null>(null);
   const [gsel, setGsel] = useState<string | null>(null);
   const [body, setBody] = useState(""); const [bodyLoading, setBodyLoading] = useState(false);
@@ -143,19 +146,6 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
   }, [gsel]);
 
   const journal = useMemo(() => (ds?.docs || []).filter((d) => d.collection === "journal"), [ds]);
-  // One entry per calendar day (chronological), each pointing at that day's first
-  // entry — powers the dated journal sidebar (mirrors the glossary term index).
-  const journalDays = useMemo(() => {
-    const sorted = [...journal].sort((a, b) => (a.entry_date || "").localeCompare(b.entry_date || "") || ((a.recording_index || 0) - (b.recording_index || 0)));
-    const byDay = new Map<string, { date: string; id: string; label: string }>();
-    for (const d of sorted) {
-      const date = d.entry_date || "";
-      if (!date || byDay.has(date)) continue;
-      const [yy, mm, dd] = date.split("-");
-      byDay.set(date, { date, id: d.id, label: `${mm}/${dd}/${yy}` });
-    }
-    return Array.from(byDay.values());
-  }, [journal]);
   // Full glossary, sorted — used for deep-link validation and prev/next term navigation.
   // Supabase already holds all terms (incl. the former EXTRA_GLOSSARY set), so use it alone.
   // Only the bundled-JSON fallback still needs EXTRA_GLOSSARY merged in.
@@ -185,11 +175,12 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
     if (audioOnly) r = r.filter((d) => !!d.audio_url);
     if (cat) r = r.filter((d) => (dc[d.id] || []).includes(cat));
     if (stype) r = r.filter((d) => (dc[d.id] || []).includes(stype));
-    r.sort((a, b) => (a.entry_date || "").localeCompare(b.entry_date || "") || (a.recording_index || 0) - (b.recording_index || 0));
+    const dir = sort === "newest" ? -1 : 1;
+    r.sort((a, b) => dir * ((a.entry_date || "").localeCompare(b.entry_date || "") || (a.recording_index || 0) - (b.recording_index || 0)));
     return r;
-  }, [journal, ds, q, dFrom, dTo, part, loc, audioOnly, cat, stype]);
+  }, [journal, ds, q, dFrom, dTo, part, loc, audioOnly, cat, stype, sort]);
 
-  useEffect(() => { setPage(1); }, [q, dFrom, dTo, part, loc, cat, stype, audioOnly]);
+  useEffect(() => { setPage(1); }, [q, dFrom, dTo, part, loc, cat, stype, audioOnly, sort]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const pageItems = useMemo(() => filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE), [filtered, page]);
@@ -224,7 +215,21 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
       />
 
       <main className="flex-1 w-[80%] max-w-none mx-auto px-4 py-6">
-        {!loading && <TitleBand title={TAB_TITLE[tab]} />}
+        {!loading && (
+          <TitleBand
+            title={TAB_TITLE[tab]}
+            actions={
+              tab === "journal" && !selDoc ? (
+                <PageActions>
+                  <SortMenu
+                    value={sort}
+                    onChange={(v) => { setSort(v); track("sort_changed", { sort: v }); }}
+                  />
+                </PageActions>
+              ) : undefined
+            }
+          />
+        )}
         {loading ? (
           <div className="text-muted text-center py-20">Loading corpus…</div>
         ) : tab === "glossary" ? (
@@ -236,14 +241,8 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
         ) : tab === "disclaimer" ? (
           <DisclaimerView />
         ) : (
-          <div className="lg:grid lg:grid-cols-[13rem_65%_1fr] lg:gap-x-8 lg:items-start">
-            <JournalSidebar days={journalDays} activeDate={selDoc?.entry_date} onOpen={setSel} />
+          <div>
             <div className="min-w-0">
-              <IndexDrawer
-                triggerLabel="Entries"
-                title="Entries"
-                items={journalDays.map((d: any) => ({ key: d.date, label: d.label, active: selDoc?.entry_date === d.date, onOpen: () => setSel(d.id) }))}
-              />
               {selDoc ? (
                 <Reader
                   doc={selDoc} body={body} bodyLoading={bodyLoading} cats={ds?.docCats[selDoc.id] || []} gloss={ds?.docGloss[selDoc.id] || []}
@@ -284,10 +283,11 @@ const TAB_TITLE: Record<Tab, string> = { journal: "Journal", glossary: "Glossary
 
 // ~200px page-title band under the nav; its h1 is the current section name,
 // left-aligned and larger than any other heading. 80% width via its parent <main>.
-function TitleBand({ title }: { title: string }) {
+function TitleBand({ title, actions }: { title: string; actions?: React.ReactNode }) {
   return (
-    <section className="w-full min-h-[160px] flex items-end mb-8 pb-6">
+    <section className="w-full min-h-[160px] flex items-end justify-between gap-6 mb-8 pb-6">
       <h1 className="font-display font-bold tracking-tight text-foreground text-[25px] md:text-[34px] lg:text-[42px] leading-none">{title}</h1>
+      {actions}
     </section>
   );
 }
@@ -429,28 +429,6 @@ function GlossarySection({ terms, gcat, setGcat, gsel, setGsel }: any) {
 
 // Dated day index for the journal — desktop only, mirrors the glossary sidebar.
 // One link per calendar day; clicking opens that day's first entry in-app.
-function JournalSidebar({ days, activeDate, onOpen }: any) {
-  return (
-    <aside className="hidden lg:block w-52 self-start pr-2">
-      <div className="text-[11px] uppercase tracking-wide text-muted mb-3">Entries</div>
-      <ul className="space-y-1.5">
-        {days.map((d: any) => (
-          <li key={d.date}>
-            <Link
-              href={journalHref(d.id)}
-              onClick={spaClick(() => onOpen(d.id))}
-              className={`block text-sm leading-[1.6] transition-colors ${activeDate === d.date ? "text-accent" : "text-muted hover:text-foreground"}`}
-            >
-              {d.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </aside>
-  );
-}
-
-// Sticky term index — desktop only; on mobile the term list itself is the nav.
 function GlossarySidebar({ terms, activeSlug, onOpen }: any) {
   return (
     <aside className="hidden lg:block w-52 self-start pr-2">
@@ -576,13 +554,14 @@ function PeekCarousel({ title, cta, onCta, slides, bottomCta }: { title: string;
   const autoplay = useRef(Autoplay({ delay: 6000, stopOnInteraction: false, stopOnMouseEnter: true }));
   return (
     <section className="mt-16 pt-8 min-h-[460px]">
-      <div className="lg:ml-[15rem] lg:w-[65%]">
+      <div className="w-full">
       <div className="flex items-center justify-between mb-5">
         <h2 className="font-display text-lg font-semibold text-foreground">{title}</h2>
         <button onClick={onCta} className="text-sm text-accent hover:underline inline-flex items-center gap-1">{cta} <ChevronRight size={15} /></button>
       </div>
-      {/* Carousel fills the shared 65% reading column (left-aligned to match the
-          feed/list content above) so every stacked section lines up at one width. */}
+      {/* Carousel fills the full main container width, matching TitleBand above it,
+          so the bottom section lines up with the page on both journal and glossary.
+          (It was previously inset to the old 13rem-sidebar + 65% column layout.) */}
       <Carousel opts={{ loop: true, align: "start" }} plugins={[autoplay.current]} className="w-full">
         <CarouselContent>
           {slides.map((s, i) => (
@@ -714,7 +693,8 @@ function ExportModal({ open, onOpenChange }: { open: boolean; onOpenChange: (o: 
 /* ---------- Documents ---------- */
 function DocumentsView() {
   return (
-    <div className="lg:w-[65%] lg:mx-auto">
+    // Full main-container width, matching the journal feed and glossary page.
+    <div className="w-full">
       <div className="flex items-center justify-between mb-1">
         <span />
         <ShareMenu title={`${SITE} — Documents`} align="right" />
