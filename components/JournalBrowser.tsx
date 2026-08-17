@@ -20,6 +20,7 @@ import { cleanTerm, cleanDef, splitDef } from "@/lib/glossary-format";
 import GlossaryBody from "@/components/GlossaryBody";
 import { DOCUMENTS, AUTHOR, EXTRA_GLOSSARY } from "@/lib/site-content";
 import PageActions, { SortMenu, type SortDir } from "@/components/PageActions";
+import DataView from "@/components/DataView";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 
@@ -130,6 +131,7 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
       if (sel) path = `/journal/${sel.toLowerCase()}`;
       else if (tab === "glossary") path = gsel ? `/glossary/${gsel.toLowerCase()}` : "/glossary";
       else if (tab === "documents") path = "/documents";
+      else if (tab === "data") path = "/data";
       else if (tab === "author") path = "/author";
       else if (tab === "disclaimer") path = "/disclaimer";
       window.history.replaceState(null, "", path + window.location.hash);
@@ -236,6 +238,8 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
           <GlossarySection terms={glossaryTerms} gcat={gcat} setGcat={setGcat} gsel={gsel} setGsel={setGsel} />
         ) : tab === "documents" ? (
           <DocumentsView />
+        ) : tab === "data" ? (
+          <DataView />
         ) : tab === "author" ? (
           <AuthorView />
         ) : tab === "disclaimer" ? (
@@ -279,7 +283,7 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
   );
 }
 
-const TAB_TITLE: Record<Tab, string> = { journal: "Journal", glossary: "Glossary", documents: "Documents", author: "Author", disclaimer: "Disclaimer" };
+const TAB_TITLE: Record<Tab, string> = { journal: "Journal", glossary: "Glossary", documents: "Documents", data: "Data", author: "Author", disclaimer: "Disclaimer" };
 
 // ~200px page-title band under the nav; its h1 is the current section name,
 // left-aligned and larger than any other heading. 80% width via its parent <main>.
