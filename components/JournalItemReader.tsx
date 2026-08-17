@@ -27,7 +27,7 @@ export default function JournalItemReader({ doc, body, cats, gloss, prev, next }
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       <ItemHeader />
-      <main className="flex-1 w-[80%] max-w-[1400px] mx-auto px-4 py-6">
+      <main className="flex-1 w-full max-w-[1400px] mx-auto px-4 sm:px-6 py-6">
         <article className="w-full">
           <div className="flex items-center justify-between mb-4">
             <Link href="/" className="text-sm text-accent inline-flex items-center gap-1"><ChevronLeft size={15} /> Back to journal</Link>

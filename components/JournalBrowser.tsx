@@ -21,6 +21,7 @@ import GlossaryBody from "@/components/GlossaryBody";
 import { DOCUMENTS, AUTHOR, EXTRA_GLOSSARY } from "@/lib/site-content";
 import PageActions, { SortMenu, type SortDir } from "@/components/PageActions";
 import DataView from "@/components/DataView";
+import ConceptsView from "@/components/ConceptsView";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 
@@ -108,9 +109,14 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
       if (entry && ds.docs.some((d) => d.id === entry)) { setTab("journal"); setSel(entry); }
       else if (term && glossaryTerms.some((t: any) => t.slug === term)) { setTab("glossary"); setGsel(term); }
       else if (view && TABS.includes(view)) { setTab(view); }
-      // Default journal landing (straight through the gate) shows the FEED — the
-      // list of entries — not an individual entry. An earlier version opened the
-      // oldest entry here, which dropped visitors mid-archive with no overview.
+      else if (initialTab === "journal") {
+        // Default journal landing (i.e. straight through the gate): open the FIRST
+        // journal entry rather than the feed.
+        const first = (ds.docs || [])
+          .filter((d) => d.collection === "journal")
+          .sort((a, b) => (a.entry_date || "").localeCompare(b.entry_date || "") || ((a.recording_index || 0) - (b.recording_index || 0)))[0];
+        if (first) { setTab("journal"); setSel(first.id); }
+      }
     } catch { /* ignore */ }
     setDeepLinked(true);
   }, [ds, deepLinked]);
@@ -122,11 +128,15 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
   useEffect(() => {
     if (!deepLinked) return;
     try {
-      let path = "/";
+      // The journal feed has its own path now, so every section is addressable:
+      // /journal, /glossary, /documents, /data, /author, /disclaimer. "/" still
+      // resolves (it renders the journal) and gets rewritten to /journal here.
+      let path = "/journal";
       if (sel) path = `/journal/${sel.toLowerCase()}`;
       else if (tab === "glossary") path = gsel ? `/glossary/${gsel.toLowerCase()}` : "/glossary";
       else if (tab === "documents") path = "/documents";
       else if (tab === "data") path = "/data";
+      else if (tab === "concepts") path = "/concepts";
       else if (tab === "author") path = "/author";
       else if (tab === "disclaimer") path = "/disclaimer";
       window.history.replaceState(null, "", path + window.location.hash);
@@ -211,7 +221,7 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
         onHome={() => { setTab("journal"); setSel(null); setGsel(null); setPage(1); }}
       />
 
-      <main className="flex-1 w-[80%] max-w-[1400px] mx-auto px-4 py-6">
+      <main className="flex-1 w-full max-w-[1400px] mx-auto px-4 sm:px-6 py-6">
         {!loading && (
           <TitleBand
             title={TAB_TITLE[tab]}
@@ -235,6 +245,8 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
           <DocumentsView />
         ) : tab === "data" ? (
           <DataView />
+        ) : tab === "concepts" ? (
+          <ConceptsView />
         ) : tab === "author" ? (
           <AuthorView />
         ) : tab === "disclaimer" ? (
@@ -278,7 +290,7 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
   );
 }
 
-const TAB_TITLE: Record<Tab, string> = { journal: "Journal", glossary: "Glossary", documents: "Documents", data: "Data", author: "Author", disclaimer: "Disclaimer" };
+const TAB_TITLE: Record<Tab, string> = { journal: "Journal", glossary: "Glossary", documents: "Documents", data: "Data", concepts: "Concepts", author: "Author", disclaimer: "Disclaimer" };
 
 // ~200px page-title band under the nav; its h1 is the current section name,
 // left-aligned and larger than any other heading. 80% width via its parent <main>.

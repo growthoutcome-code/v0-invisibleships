@@ -7,12 +7,13 @@ import { Menu, X, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ThemeToggle";
 
-export type Tab = "journal" | "glossary" | "documents" | "data" | "author" | "disclaimer";
+export type Tab = "journal" | "glossary" | "documents" | "data" | "concepts" | "author" | "disclaimer";
 const NAV: { t: Tab; label: string }[] = [
   { t: "journal", label: "Journal" },
   { t: "glossary", label: "Glossary" },
   { t: "documents", label: "Documents" },
   { t: "data", label: "Data" },
+  { t: "concepts", label: "Concepts" },
 ];
 
 export default function Header({
