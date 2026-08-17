@@ -109,14 +109,9 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
       if (entry && ds.docs.some((d) => d.id === entry)) { setTab("journal"); setSel(entry); }
       else if (term && glossaryTerms.some((t: any) => t.slug === term)) { setTab("glossary"); setGsel(term); }
       else if (view && TABS.includes(view)) { setTab(view); }
-      else if (initialTab === "journal") {
-        // Default journal landing (i.e. straight through the gate): open the FIRST
-        // journal entry rather than the feed.
-        const first = (ds.docs || [])
-          .filter((d) => d.collection === "journal")
-          .sort((a, b) => (a.entry_date || "").localeCompare(b.entry_date || "") || ((a.recording_index || 0) - (b.recording_index || 0)))[0];
-        if (first) { setTab("journal"); setSel(first.id); }
-      }
+      // Landing straight through the gate shows the FEED — the list of entries.
+      // Do NOT auto-open an entry here: it drops a first-time visitor into the
+      // middle of the archive with no overview and no sort control.
     } catch { /* ignore */ }
     setDeepLinked(true);
   }, [ds, deepLinked]);
