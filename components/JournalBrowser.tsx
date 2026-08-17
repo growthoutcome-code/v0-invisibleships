@@ -211,7 +211,7 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
         onHome={() => { setTab("journal"); setSel(null); setGsel(null); setPage(1); }}
       />
 
-      <main className="flex-1 w-[80%] max-w-none mx-auto px-4 py-6">
+      <main className="flex-1 w-[80%] max-w-[1400px] mx-auto px-4 py-6">
         {!loading && (
           <TitleBand
             title={TAB_TITLE[tab]}
