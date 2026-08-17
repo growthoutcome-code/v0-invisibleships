@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { track } from "@/lib/analytics";
+import ConceptsNav, { type Filters } from "@/components/ConceptsNav";
 import { CONCEPTS, BASIS_LABEL, BASIS_NOTE, ORIGIN_LABEL, ORIGIN_NOTE, VERIFICATION_LABEL, type Basis, type Origin } from "@/lib/concepts";
 
 const BASIS_ORDER: Basis[] = ["documented", "structural", "pattern"];
@@ -16,7 +17,30 @@ const ORIGIN_ORDER: Origin[] = ["ai", "author"];
  * each claim is weighed on its own basis instead of by its neighbours.
  */
 export default function ConceptsView() {
+  const [filters, setFilters] = useState<Filters>({ origin: "all", basis: "all" });
+
   useEffect(() => { track("concepts_viewed"); }, []);
+
+  // A shared anchor must always resolve, even if the target is filtered out —
+  // so an incoming hash clears the filters before the browser scrolls.
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.location.hash) return;
+    setFilters({ origin: "all", basis: "all" });
+    const id = window.location.hash.slice(1);
+    const t = window.setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 60);
+    return () => window.clearTimeout(t);
+  }, []);
+
+  const visible = useMemo(
+    () => CONCEPTS.filter(
+      (c) =>
+        (filters.origin === "all" || c.origin === filters.origin) &&
+        (filters.basis === "all" || c.basis === filters.basis)
+    ),
+    [filters]
+  );
 
   return (
     <div className="w-full">
@@ -56,12 +80,14 @@ export default function ConceptsView() {
         </div>
       </div>
 
+      <ConceptsNav filters={filters} setFilters={setFilters} shown={visible.length} />
+
       <ol className="list-none p-0 m-0">
-        {CONCEPTS.map((c, i) => (
+        {visible.map((c) => (
           <li key={c.id} id={c.id} className="mb-20 scroll-mt-28">
             <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2 mb-3">
               <span className="text-[13px] uppercase tracking-[0.08em] font-semibold text-muted tabular-nums">
-                {String(i + 1).padStart(2, "0")}
+                {String(CONCEPTS.indexOf(c) + 1).padStart(2, "0")}
               </span>
               {/* Origin reads first — a reader should know who formed a claim before
                   they weigh what it rests on. */}
@@ -150,6 +176,12 @@ export default function ConceptsView() {
           </li>
         ))}
       </ol>
+
+      {!visible.length && (
+        <p className="body-copy text-muted max-w-[70ch] mb-16">
+          No concepts match that combination. Clear a filter to see the rest.
+        </p>
+      )}
 
       <p className="body-copy text-muted max-w-[70ch]">
         Every figure cited here is drawn from the research in the{" "}
