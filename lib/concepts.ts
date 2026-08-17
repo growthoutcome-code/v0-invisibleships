@@ -25,7 +25,6 @@
 export type Basis = "documented" | "structural" | "pattern";
 export type Origin = "ai" | "author";
 export type Verification = "unverified" | "partially_verified" | "verified";
-export type SourceOrigin = "journal" | "data" | "external_research";
 
 export type Concept = {
   id: string;
@@ -45,20 +44,6 @@ export type Concept = {
   verification?: Verification;
   /** Scope limit shown beneath the concept. Verbatim, never paraphrased. */
   disclaimer?: string;
-  /** Where the concept came from. */
-  sourceOrigin?: SourceOrigin;
-  /** Site glossary terms connected to the concept. NOT independent evidence. */
-  glossaryReferences?: { term: string; href: string }[];
-  /** Sub-hypotheses, each unverified in its own right (see System Functionality). */
-  hypotheses?: { id: string; title: string; text: string }[];
-  /** Current Situation / Future State / Public Accountability. Optional. */
-  taxonomy?: string;
-};
-
-export const SOURCE_ORIGIN_LABEL: Record<SourceOrigin, string> = {
-  journal: "From the journal",
-  data: "From the dataset",
-  external_research: "From external research",
 };
 
 export const VERIFICATION_LABEL: Record<Verification, string> = {
@@ -228,19 +213,15 @@ export const CONCEPTS: Concept[] = [
     id: "has-an-attack-happened",
     origin: "author",
     basis: "pattern",
-    sourceOrigin: "journal",
     title: "Has an attack happened?",
     body:
-      "The author reports experiences interpreted as possible unconsented-to auditory or neurological communication, along with perceived coercive messages, including messages related to self-harm or harm to others. The author interprets some reported messages through the site's Zersetzung-tactics framework; this is an unverified, site-specific interpretive lens and does not establish a source, cause, or coordinated activity. The author does not know the mechanism and raises possible explanations only as hypotheses. This is a dated record of reported experience, not evidence that any particular technology, transmission infrastructure, person, organization, or coordinated campaign is responsible. No conclusion should be drawn without independent technical testing, corroboration, and reliable records.",
+      "The author reports experiences interpreted as possible unconsented-to auditory or neurological communication, along with perceived coercive messages, including messages related to self-harm. The author does not know the mechanism and raises possible explanations only as hypotheses. This is a dated record of reported experience, not evidence that any particular technology, transmission infrastructure, person, organization, or coordinated campaign is responsible. No conclusion should be drawn without independent technical testing, corroboration, and reliable records.",
     questions: [
       "What independently verifiable evidence would distinguish an external event from other possible explanations?",
       "Are there original recordings, contemporaneous notes, technical measurements, or witnesses that can be evaluated independently?",
       "Is there reliable evidence identifying a specific technology, person, or organization?",
       "Does any verified data collection or processing meet the legal definition of neural data under Colorado law?",
       "What official inquiry, technical assessment, or corroborating record would be needed before drawing a conclusion?",
-    ],
-    glossaryReferences: [
-      { term: "Zersetzung tactics", href: "/glossary/zersetzung-tactics" },
     ],
     references: [
       { label: "Journal entry — 27 Feb 2025", href: "/journal/is-j01-20250227-entry" },
@@ -251,199 +232,6 @@ export const CONCEPTS: Concept[] = [
       "The journal is an unverified first-person report. The Guardian article is context about surveillance elsewhere and is not evidence of a connection. Colorado law is relevant only if qualifying data collection or processing is established.",
     verification: "unverified",
     disclaimer:
-      "This concept records reported experience and open questions. Zersetzung is used only as an unverified, site-specific interpretive framework. The concept does not establish an attack, technology, responsible party, organization, or coordinated campaign.",
-  },
-  {
-    id: "is-manipulation-happening",
-    origin: "author",
-    basis: "pattern",
-    sourceOrigin: "journal",
-    title: "Is manipulation happening?",
-    body:
-      "The journal records experiences the author perceived as coercive or controlling, including messages interpreted as pressure to obey, withdraw, or harm oneself or others. These reports raise a question about how repeated perceived messages can affect a person's sense of agency and safety. They do not establish an external source, a specific technology, or a coordinated effort.",
-    questions: [
-      "Which entries preserve original recordings, notes, or other material that can be independently assessed?",
-      "Are there identifiable, observable events that corroborate a perceived instruction or threat?",
-      "What alternative explanations should be considered before assigning cause?",
-      "What support helps a person regain safety and agency when messages feel coercive?",
-    ],
-    referencesNote:
-      "Journal accounts are unverified first-person reports; no independent connection to a source, technology, or organization has been established.",
-    verification: "unverified",
-    disclaimer:
-      "This concept documents reported experience and open questions. It does not establish an external source, technology, responsible party, or coordinated effort.",
-  },
-  {
-    id: "spirit-world-interpretations",
-    origin: "author",
-    basis: "pattern",
-    sourceOrigin: "journal",
-    title: "How should spirit world interpretations be understood?",
-    body:
-      "The journal includes experiences the author interprets through a spirit world narrative, including perceived communications and physical sensations. Some reported interpretations connect those experiences to a claimed historical or military framework and to the glossary term Diving. Those connections remain unverified. The archive does not establish that any military training practice, remote brain-to-brain connection, or specific technology is responsible. This concept preserves the reported interpretation while keeping the source and mechanism open to independent verification.",
-    questions: [
-      "What source material supports the claimed historical or military background?",
-      "Which reported details are directly observable, recorded, or independently corroborated?",
-      "What would distinguish a documented neuroscience device from a proposed explanation that lacks evidence?",
-      "Is there reliable evidence connecting Diving to any real-world technology or practice?",
-      "What alternative explanations should be considered before drawing a conclusion?",
-    ],
-    glossaryReferences: [{ term: "Diving", href: "/glossary/diving" }],
-    references: [
-      { label: "NIH — brain-computer device helps man speak", href: "https://www.nih.gov/news-events/nih-research-matters/brain-computer-device-helps-man-speak" },
-      { label: "FDA — neurological devices", href: "https://www.fda.gov/medical-devices/products-and-medical-procedures/neurological-devices" },
-    ],
-    referencesNote:
-      "Diving is a site-specific glossary term, not independent evidence. The neuroscience sources provide context about current consent-based devices and do not support the reported mechanism.",
-    verification: "unverified",
-    disclaimer:
-      "This concept preserves reported interpretation and does not establish a military practice, remote brain-to-brain connection, technology, or responsible party.",
-  },
-  {
-    id: "obedience-to-a-stranger",
-    origin: "author",
-    basis: "pattern",
-    sourceOrigin: "journal",
-    title: "Are people expected to be obedient to a stranger?",
-    body:
-      "The journal records messages the author interpreted as demands for obedience. The author's working hypothesis is that reported experiences may involve an LRAD or comparable external audio technology, possibly delivered through infrastructure such as radio towers or satellites; this remains unverified. This concept asks how perceived pressure can affect agency, safety, and day-to-day participation. The site's Zersetzung-tactics framework is an unverified, site-specific interpretive lens and does not establish a source, cause, or coordinated activity. Milgram's obedience research provides limited historical context about apparent authority in a controlled experiment; it does not establish a connection to unknown communications described in the journal.",
-    questions: [
-      "Which journal entries preserve observable impacts on work, housing, health, or relationships?",
-      "What independent evidence would be needed to establish an external source or organized activity?",
-      "What helps a person maintain agency and safety when messages feel coercive?",
-      "What alternative explanations should be considered before drawing conclusions?",
-    ],
-    glossaryReferences: [
-      { term: "Zersetzung tactics", href: "/glossary/zersetzung-tactics" },
-      { term: "obedience experiment", href: "/glossary/obedience-experiment" },
-    ],
-    references: [
-      { label: "Milgram (1963) — Behavioral study of obedience", href: "https://web.mit.edu/curhan/www/docs/Articles/15341_Readings/Influence_Compliance/Milgrim_1963_Behavioral_study_of_obedience.pdf" },
-    ],
-    referencesNote:
-      "The journal is an unverified first-person source. Milgram is historical context about an apparent authority in a controlled study, not evidence of an external communication system.",
-    verification: "unverified",
-    disclaimer:
-      "This concept documents reported experience and open questions. It does not establish an LRAD, other technology, delivery infrastructure, source, responsible party, or coordinated activity.",
-  },
-  {
-    id: "system-functionality",
-    origin: "author",
-    basis: "pattern",
-    sourceOrigin: "journal",
-    title: "System functionality",
-    body:
-      "This parent concept groups the author's unverified working hypotheses about possible system functionality. It provides a structured place to record proposed mechanisms, the evidence that would be needed to assess them, and alternative explanations. It does not establish that a system, technology, participant, mechanism, or attribution exists.",
-    hypotheses: [
-      { id: "IS-SYSTEM-001", title: "Connection hypothesis", text: "The author proposes that a hardware-and-software system, possibly involving wearables, could link two or more people and produce shared communication or bodily sensations." },
-      { id: "IS-SYSTEM-002", title: "POV visual-experience hypothesis", text: "The author proposes that computer users may share visual information or perspective with another person, experienced as shared POV eyesight." },
-      { id: "IS-SYSTEM-003", title: "Identity-presentation hypothesis", text: "The author reports perceived mismatches between voice, visual impression, and assumed identity, and hypothesizes that an intermediary could use computer-based avatars or voice conversion to create that impression." },
-      { id: "IS-SYSTEM-004", title: "Observation-without-coercion hypothesis", text: "The author reflects on a hypothetical contrast between perceived silent observation and later experiences interpreted as coercive communication. The author does not view silent monitoring as acceptable without informed consent. This hypothesis does not establish that anyone monitored a person's eyesight, that law enforcement was involved, or that any historical period or system existed." },
-    ],
-    questions: [
-      "What observable, repeatable effect is being claimed?",
-      "What equipment, measurements, logs, or independent experts would be needed to test it?",
-      "What result would disconfirm the hypothesis?",
-      "What alternative explanations account for the same reported experience?",
-    ],
-    glossaryReferences: [
-      { term: "Diving", href: "/glossary/diving" },
-      { term: "Neuro-engagement", href: "/glossary/neuro-engagement" },
-    ],
-    referencesNote: "The listed glossary terms are site-specific and not independent evidence.",
-    verification: "unverified",
-    disclaimer:
-      "This concept records assumptions and open questions. It does not establish a system, technology, participant, mechanism, or attribution.",
-  },
-  {
-    id: "responsible-neural-audit",
-    origin: "ai",
-    basis: "structural",
-    sourceOrigin: "external_research",
-    taxonomy: "Public Accountability",
-    title: "What would a responsible neural audit look like?",
-    body:
-      "Neural audit is used here as a proposed accountability framework, not as the name of a verified municipal service. It asks how a community member could document a concern, identify what can actually be tested, and understand the limits of each assessment. A responsible framework separates health, environmental measurement, preserved evidence, and rights or process questions. It does not establish a source, technology, injury, crime, or cause.",
-    questions: [
-      "Which existing local services can address health, environmental, evidence, and rights questions?",
-      "What qualifications, calibration standards, and privacy protections should be required?",
-      "How can a resident obtain an independent second opinion?",
-      "What evidence threshold should be required before referral to law enforcement or a regulatory body?",
-    ],
-    references: [
-      { label: "US DOJ — forensic science", href: "https://www.justice.gov/olp/forensic-science" },
-      { label: "NIST — OSAC registry", href: "https://www.nist.gov/adlp/spo/organization-scientific-area-committees-forensic-science/osac-registry-implementation/osac" },
-      { label: "Forensic neuroscience research (Taylor & Francis)", href: "https://www.tandfonline.com/doi/full/10.1080/03036758.2020.1796104" },
-    ],
-    referencesNote:
-      "These sources describe established forensic science and forensic-neuroscience research. They do not establish a public neural-audit service or validate an unconsented communication mechanism.",
-    verification: "unverified",
-    disclaimer:
-      "This is a proposed public-interest framework. It does not establish that a neural audit, a relevant technology, or a causal explanation exists.",
-  },
-  {
-    id: "translation-or-telepathic-communication",
-    origin: "author",
-    basis: "pattern",
-    sourceOrigin: "journal",
-    taxonomy: "Current Situation",
-    title: "Is language translation or telepathic communication happening?",
-    body:
-      "The author reports perceived communication that seems to occur both as sound in the environment and as an internal experience. The author also reports an impression that people may experience the communication in their own native language. The author records sometimes covering the ears to notice whether a perceived sound changes. This is a personal observation, not a validated diagnostic test. The reports do not establish telepathic communication, language translation, voice-to-skull technology, direct brain communication, an external source, or any other mechanism.",
-    questions: [
-      "Which journal entries describe language, translation, or changes in perceived sound?",
-      "Is there an independently preserved recording or other observable material?",
-      "What qualified assessment could distinguish environmental sound from other possible explanations?",
-      "What alternative explanations should be considered before assigning a mechanism?",
-    ],
-    referencesNote:
-      "The journal is an unverified first-person source. Changes in perceived sound while covering the ears do not identify a source or mechanism.",
-    verification: "unverified",
-    disclaimer:
-      "This concept records the author's reported experience and questions. It does not establish telepathic communication, a technology, a source, or a cause.",
-  },
-  {
-    id: "automatic-translation-access",
-    origin: "ai",
-    basis: "structural",
-    sourceOrigin: "external_research",
-    taxonomy: "Future State",
-    title: "Could automatic language translation improve travel and communication access?",
-    body:
-      "Automatic translation already has practical forms in phones, captions, text-to-speech, speech-to-text, and augmentative and alternative communication tools. This future-state question asks how such tools could become faster, more accurate, more private, and more accessible with informed consent and user control. It does not establish telepathic translation or a brain-to-brain connection.",
-    questions: [
-      "How can translation tools become more accessible for travelers and people who use assistive communication?",
-      "What consent, privacy, and accuracy safeguards should govern future communication tools?",
-    ],
-    references: [
-      { label: "WHO — deafness and hearing loss", href: "https://www.who.int/news-room/fact-sheets/detail/deafness-and-hearing-loss" },
-    ],
-    referencesNote:
-      "WHO reports that about 430 million people worldwide require rehabilitation for disabling hearing loss. This is context about access needs, not evidence for a proposed neural mechanism.",
-    verification: "unverified",
-    disclaimer:
-      "This concept is a future-state question. It does not establish telepathic translation, access to private thought, or a brain-to-brain connection.",
-  },
-  {
-    id: "future-neurotech-translation",
-    origin: "author",
-    basis: "pattern",
-    sourceOrigin: "journal",
-    taxonomy: "Future State",
-    title: "Could future neurotechnology support faster translation?",
-    body:
-      "The author speculates that a future, consent-based brain-to-brain system could use signals associated with intended speech, including what the author calls an efference-copy space, to translate communication with very little delay. In this proposed model, a person could intentionally communicate across languages while traveling or using accessibility tools, without relying on spoken words. This is an unverified future-state hypothesis and does not establish that brain-to-brain communication, access to intended speech, direct neural translation, or a shared communication space currently exists.",
-    questions: [
-      "What evidence would be needed to show that intended communication can be decoded accurately and voluntarily?",
-      "What safeguards would prevent access to private thoughts beyond intentional communication?",
-    ],
-    references: [
-      { label: "Efference copy — research overview", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC8282223/" },
-    ],
-    referencesNote:
-      "Efference copy is an established neuroscience concept involving copies of motor commands. The source does not support a brain-to-brain translation mechanism.",
-    verification: "unverified",
-    disclaimer:
-      "This concept records the author's future-state speculation. It does not establish a brain-to-brain system, access to intended speech, direct neural translation, or a shared communication space.",
+      "This concept records reported experience and open questions. It does not establish an attack, technology, responsible party, organization, or coordinated campaign.",
   },
 ];
