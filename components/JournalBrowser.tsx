@@ -687,7 +687,7 @@ function ExportModal({ open, onOpenChange }: { open: boolean; onOpenChange: (o: 
         </p>
         <div className="flex items-center gap-3 mt-2">
           <Button variant="outline" onClick={() => onOpenChange(false)}>Cancel</Button>
-          <a className="ml-auto" href="/invisible-ships-corpus.zip" download onClick={() => track("export_downloaded")}>
+          <a className="ml-auto" href="/api/corpus?from=export_dialog" download onClick={() => track("export_downloaded")}>
             <Button>Download .zip</Button>
           </a>
         </div>
