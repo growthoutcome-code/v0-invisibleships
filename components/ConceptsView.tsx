@@ -3,9 +3,10 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import { track } from "@/lib/analytics";
-import { CONCEPTS, BASIS_LABEL, BASIS_NOTE, type Basis } from "@/lib/concepts";
+import { CONCEPTS, BASIS_LABEL, BASIS_NOTE, ORIGIN_LABEL, ORIGIN_NOTE, type Basis, type Origin } from "@/lib/concepts";
 
-const ORDER: Basis[] = ["documented", "structural", "pattern"];
+const BASIS_ORDER: Basis[] = ["documented", "structural", "pattern"];
+const ORIGIN_ORDER: Origin[] = ["ai", "author"];
 
 /**
  * Core concepts, each showing the basis it rests on.
@@ -26,32 +27,55 @@ export default function ConceptsView() {
         the same kind of claim, so they are not presented as though they were.
       </p>
 
-      <dl className="mb-16 max-w-[70ch]">
-        {ORDER.map((b) => (
-          <div key={b} className="flex flex-wrap items-baseline gap-x-4 gap-y-1 py-2">
-            <dt className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground min-w-[104px]">
-              {BASIS_LABEL[b]}
-            </dt>
-            <dd className="text-[16px] text-muted m-0 flex-1">{BASIS_NOTE[b]}</dd>
-          </div>
-        ))}
-      </dl>
+      <div className="mb-16 max-w-[70ch] grid gap-10 md:grid-cols-2">
+        <div>
+          <h2 className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground mb-3">
+            Who formed it
+          </h2>
+          <dl className="m-0">
+            {ORIGIN_ORDER.map((o) => (
+              <div key={o} className="py-1.5">
+                <dt className="text-[16px] font-semibold text-foreground">{ORIGIN_LABEL[o]}</dt>
+                <dd className="text-[16px] text-muted m-0">{ORIGIN_NOTE[o]}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <div>
+          <h2 className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground mb-3">
+            What it rests on
+          </h2>
+          <dl className="m-0">
+            {BASIS_ORDER.map((b) => (
+              <div key={b} className="py-1.5">
+                <dt className="text-[16px] font-semibold text-foreground">{BASIS_LABEL[b]}</dt>
+                <dd className="text-[16px] text-muted m-0">{BASIS_NOTE[b]}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
 
       <ol className="list-none p-0 m-0">
         {CONCEPTS.map((c, i) => (
           <li key={c.id} id={c.id} className="mb-20 scroll-mt-28">
-            <div className="flex items-baseline gap-4 mb-3">
+            <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2 mb-3">
               <span className="text-[13px] uppercase tracking-[0.08em] font-semibold text-muted tabular-nums">
                 {String(i + 1).padStart(2, "0")}
+              </span>
+              {/* Origin reads first — a reader should know who formed a claim before
+                  they weigh what it rests on. */}
+              <span className="text-[13px] uppercase tracking-[0.08em] font-semibold text-background bg-foreground px-2.5 py-1">
+                {ORIGIN_LABEL[c.origin]}
               </span>
               <span className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground">
                 {BASIS_LABEL[c.basis]}
               </span>
             </div>
 
-            <h2 className="font-display font-semibold text-foreground text-[26px] md:text-[30px] leading-tight mb-4 max-w-[46ch]">
+            <h3 className="font-display font-semibold text-foreground text-[26px] md:text-[30px] leading-tight mb-4 max-w-[46ch]">
               {c.title}
-            </h2>
+            </h3>
 
             <p className="body-copy text-foreground/85 max-w-[70ch] mb-6">{c.body}</p>
 
