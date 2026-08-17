@@ -1,0 +1,121 @@
+{
+  "schema_version": "1.0",
+  "generated_for": "Next.js + d3.js",
+  "generated_note": "static export; production can query Supabase (see 03-dataset)",
+  "tables": {
+    "awards": {
+      "rows": 90,
+      "path": "/data/tables/awards.json"
+    },
+    "capabilities": {
+      "rows": 73,
+      "path": "/data/tables/capabilities.json"
+    },
+    "deployments": {
+      "rows": 399,
+      "path": "/data/tables/deployments.json"
+    },
+    "domains": {
+      "rows": 21,
+      "path": "/data/tables/domains.json"
+    },
+    "geographies": {
+      "rows": 35,
+      "path": "/data/tables/geographies.json"
+    },
+    "investments": {
+      "rows": 81,
+      "path": "/data/tables/investments.json"
+    },
+    "litigation": {
+      "rows": 46,
+      "path": "/data/tables/litigation.json"
+    },
+    "milestones": {
+      "rows": 311,
+      "path": "/data/tables/milestones.json"
+    },
+    "regulations": {
+      "rows": 99,
+      "path": "/data/tables/regulations.json"
+    },
+    "sources": {
+      "rows": 660,
+      "path": "/data/tables/sources.json"
+    },
+    "vendors": {
+      "rows": 107,
+      "path": "/data/tables/vendors.json"
+    }
+  },
+  "charts": {
+    "awards_by_year": {
+      "rows": 10,
+      "path": "/data/charts/awards_by_year.json"
+    },
+    "awards_value_by_geo": {
+      "rows": 23,
+      "path": "/data/charts/awards_value_by_geo.json"
+    },
+    "capabilities_by_category": {
+      "rows": 17,
+      "path": "/data/charts/capabilities_by_category.json"
+    },
+    "capabilities_by_vendor": {
+      "rows": 18,
+      "path": "/data/charts/capabilities_by_vendor.json"
+    },
+    "capabilities_register": {
+      "rows": 73,
+      "path": "/data/charts/capabilities_register.json"
+    },
+    "capital_flows": {
+      "rows": 39,
+      "path": "/data/charts/capital_flows.json"
+    },
+    "geo_domain_matrix": {
+      "rows": 135,
+      "path": "/data/charts/geo_domain_matrix.json"
+    },
+    "investment_thesis": {
+      "rows": 13,
+      "path": "/data/charts/investment_thesis.json"
+    },
+    "litigation_by_jurisdiction": {
+      "rows": 14,
+      "path": "/data/charts/litigation_by_jurisdiction.json"
+    },
+    "litigation_by_status": {
+      "rows": 5,
+      "path": "/data/charts/litigation_by_status.json"
+    },
+    "litigation_by_vendor": {
+      "rows": 8,
+      "path": "/data/charts/litigation_by_vendor.json"
+    },
+    "litigation_register": {
+      "rows": 46,
+      "path": "/data/charts/litigation_register.json"
+    },
+    "market_size_by_domain": {
+      "rows": 10,
+      "path": "/data/charts/market_size_by_domain.json"
+    },
+    "recompete": {
+      "rows": 3,
+      "path": "/data/charts/recompete.json"
+    },
+    "sankey_funding": {
+      "rows": 95,
+      "path": "/data/charts/sankey_funding.json"
+    },
+    "timeline": {
+      "rows": 311,
+      "path": "/data/charts/timeline.json"
+    },
+    "vendor_deploy_rank": {
+      "rows": 86,
+      "path": "/data/charts/vendor_deploy_rank.json"
+    }
+  }
+}
