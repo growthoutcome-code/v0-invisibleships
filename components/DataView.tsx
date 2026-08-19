@@ -47,15 +47,15 @@ export default function DataView() {
         </button>
       </div>
 
-      {sub === "govcloud" ? (
-        <>
-          <DataDisclaimer />
-          <GovCloudReport />
-          <GovCloudSources />
-        </>
-      ) : (
-        <HealthSignals />
-      )}
+      {/* The Government Cloud report's drawing script runs once per page load and
+          cannot re-render after an unmount (its <script> stays in the DOM by id, so
+          a remount leaves empty markup). Keep it mounted and toggle visibility. */}
+      <div className={sub === "govcloud" ? "" : "hidden"}>
+        <DataDisclaimer />
+        <GovCloudReport />
+        <GovCloudSources />
+      </div>
+      {sub === "health" && <HealthSignals />}
     </div>
   );
 }

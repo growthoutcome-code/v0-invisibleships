@@ -10,7 +10,7 @@
  "safe_reporting": "Rates and counts only; no method detail. Crisis resources: US 988 Suicide & Crisis Lifeline (call/text 988); international directory at https://findahelpline.com.",
  "tables": {
   "health_indicators.json": 165,
-  "health_milestones.json": 26,
+  "health_milestones.json": 25,
   "health_claims.json": 36,
   "health_data_quality.json": 14,
   "health_trends.json": 30,
