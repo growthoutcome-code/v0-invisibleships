@@ -1,0 +1,22 @@
+{
+ "name": "Invisible Ships — Public Health Signals",
+ "generated": "2026-08-19",
+ "method_note": "All figures verified against fetched primary sources on 2026-08-19; 22 headline figures re-derived by independent second-pass verification (21 confirmed, 1 partially confirmed). Causes reported as attributed, never asserted. Overlaps with the Government Cloud dataset are structural/pattern observations only. This dataset does not corroborate the journal, and the Government Cloud dataset does not corroborate this one.",
+ "tier_legend": {
+  "A": "documented — official statistical agency or peer-reviewed source fetched and read",
+  "B": "corroborated — reputable secondary corroboration, provisional or modeled official data",
+  "C": "claimed — could not be verified against a fetched source / proprietary forecast"
+ },
+ "safe_reporting": "Rates and counts only; no method detail. Crisis resources: US 988 Suicide & Crisis Lifeline (call/text 988); international directory at https://findahelpline.com.",
+ "tables": {
+  "health_indicators.json": 165,
+  "health_milestones.json": 26,
+  "health_claims.json": 36,
+  "health_data_quality.json": 14,
+  "health_trends.json": 30,
+  "health_overlaps.json": 12,
+  "health_verdict.json": 1,
+  "health_caveats.json": 50,
+  "health_sources.json": 102
+ }
+}

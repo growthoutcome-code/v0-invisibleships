@@ -1,0 +1,44 @@
+{
+ "claim": "~30% increase in US suicide",
+ "mapping": "The claim maps to LONG-RUN cumulative increases documented by CDC, not a recent spike. Primary match: CDC Vital Signs / MMWR (June 8, 2018): suicide rates rose ~30% nationally 1999-2016 (persons aged >=10), significant increases in 44 states, >30% increases in 25 states. Companions: NCHS Data Brief 362 (Apr 2020): +35% from 10.5 (1999) to 14.2 (2018); NCHS Data Brief 509 (Sept 2024): +30% from 10.9 (2002) to 14.2 (2022).",
+ "recent_spike": false,
+ "summary": "The '~30% increase' is real but describes a two-decade climb, not a post-2021 surge. Post-2021: 14.1 (2021) -> 14.2 (2022, record 49,476 deaths, highest rate since 1941) -> 14.1 (2023, -0.7%, not significant) -> 13.7 final 2024 (48,824 deaths, -2.8%, genuine decline; suicide returned to 10th leading cause). Recent single-year moves all under 5%.",
+ "key_figures": [
+  {
+   "figure": "Rates rose ~30% nationally 1999-2016; significant increases in 44 states; >30% in 25 states (ages >=10)",
+   "tier": "A",
+   "source_url": "https://www.cdc.gov/mmwr/volumes/67/wr/mm6722a1.htm",
+   "source_id": "hs008"
+  },
+  {
+   "figure": "+35% from 10.5 (1999) to 14.2 (2018); pace ~1%/yr 1999-2006, ~2%/yr 2006-2018",
+   "tier": "A",
+   "source_url": "https://www.cdc.gov/nchs/products/databriefs/db362.htm",
+   "source_id": "hs007"
+  },
+  {
+   "figure": "+30% from 10.9 (2002) to 14.2 (2022); 2022 rate highest since 1941; 49,476 deaths",
+   "tier": "A",
+   "source_url": "https://www.cdc.gov/nchs/products/databriefs/db509.htm",
+   "source_id": "hs004"
+  },
+  {
+   "figure": "2023: 14.1 per 100k, 49,316 deaths (-0.7% vs 2022, not significant)",
+   "tier": "A",
+   "source_url": "https://www.cdc.gov/nchs/products/databriefs/db541.htm",
+   "source_id": "hs005"
+  },
+  {
+   "figure": "2024 (final): 13.7 per 100k, 48,824 deaths (-2.8% vs 2023)",
+   "tier": "A",
+   "source_url": "https://www.cdc.gov/nchs/products/databriefs/db548.htm",
+   "source_id": "hs006"
+  },
+  {
+   "figure": "2020-2021 rebound: 13.5 -> 14.1 (+4%), largest 1-yr rise of the 2001-2021 period",
+   "tier": "A",
+   "source_url": "https://www.cdc.gov/nchs/data/databriefs/db464.pdf",
+   "source_id": "hs003"
+  }
+ ]
+}

@@ -1,0 +1,202 @@
+[
+ {
+  "workstream": "W1",
+  "caveat": "US series age-adjusted to 2000 US standard population; annual 2001-2021 from NCHS db464 tables, 2022-2024 from db509/541/548, 1999 from db362. No US 2025 figure yet — provisional 2025 counts expected via CDC WONDER/NVSS later in 2026."
+ },
+ {
+  "workstream": "W1",
+  "caveat": "CDC Vital Signs June 2018 analyzed persons aged >=10; its rates not directly comparable to all-ages age-adjusted NCHS rates; its '~30% since 1999' is the origin of the claim under review."
+ },
+ {
+  "workstream": "W1",
+  "caveat": "Cross-country 'WHO' rows are WHO Global Health Estimates (age-standardized to WHO world standard population) via World Bank API mirror (SH.STA.SUIC.P5); modeled estimates differ in level from national vital registration (e.g., WHO Canada 2021 = 9.4 vs PHAC 11.8). Use WHO rows for trend comparison, national rows for latest levels."
+ },
+ {
+  "workstream": "W1",
+  "caveat": "UK: ONS figures are England & Wales registrations, not UK-wide occurrences; only 38.7% of 2024 registrations occurred in 2024 (coroner delays) — occurrence-based rates broadly stable since 2018. UK definition includes deaths of undetermined intent (15+), inflating rates relative to some countries."
+ },
+ {
+  "workstream": "W1",
+  "caveat": "Japan: NPA/MHLW suicide statistics (2025: 19,097; rate 15.4) compiled differently from vital-statistics causes of death; crude rates."
+ },
+ {
+  "workstream": "W1",
+  "caveat": "Australia 2024 (11.9), Canada 2024 count (4,394), South Korea 2024 (28.3; 14,439) are preliminary/subject to revision."
+ },
+ {
+  "workstream": "W1",
+  "caveat": "Germany 12.2 (2023) is a crude resident rate; EU-standardized German rate 10.3 in 2021 vs EU average 10.2 (Destatis)."
+ },
+ {
+  "workstream": "W1",
+  "caveat": "Divergence answer: yes — the US long-run rise (~+30-35% since 1999/2002) diverges from peers. Japan, Germany, France declined substantially since 2000; Canada flat-to-declining; UK and Australia roughly flat with modest recent upticks; South Korea rose steeply to ~2010-2011, declined, remains OECD's highest, ticked up in 2024."
+ },
+ {
+  "workstream": "W1",
+  "caveat": "Per safe-reporting standards, method-specific figures intentionally excluded; only aggregate rates and counts reported."
+ },
+ {
+  "workstream": "W1B",
+  "caveat": "WHO GHE values fetched via World Bank API mirror; WHO IRIS PDF returned 403 — headline findings verified from WHO's news release and fact sheet."
+ },
+ {
+  "workstream": "W1B",
+  "caveat": "Small discrepancies between the 2019 report's global rate (9.0) and GHE-2021-revision value for 2019 (9.42); series internally consistent within one source, not mixable across sources."
+ },
+ {
+  "workstream": "W1B",
+  "caveat": "WHO GHE figures for China, Russia, India are modeled estimates, not counted deaths; countries included by design — the data-quality problem is reported as a finding, not a reason for exclusion."
+ },
+ {
+  "workstream": "W1B",
+  "caveat": "NCRB ADSI 2022 PDF robots-blocked; count tier B via CMHLP; rate and 2017-2022 trend tier A via peer-reviewed analysis."
+ },
+ {
+  "workstream": "W1B",
+  "caveat": "Million Death Study absolute count not verifiable from a fetchable page; represented by the peer-reviewed rate comparison (22 vs ~11.4)."
+ },
+ {
+  "workstream": "W1B",
+  "caveat": "Rosstat not fetched directly; Rosstat-based figures via peer-reviewed EJPH analysis (conference-supplement abstract) and 2024 Population and Economics article."
+ },
+ {
+  "workstream": "W1B",
+  "caveat": "Frontiers 2025 corrected global total (>1M/yr) is a peer-reviewed MODELED estimate; present as such."
+ },
+ {
+  "workstream": "W1B",
+  "caveat": "Safe-reporting: rates and counts only; method details deliberately not extracted."
+ },
+ {
+  "workstream": "W1B",
+  "caveat": "WHO fact sheet 727,000 / 73% LMIC = 2021 (GHE 2021); 700,000+/36% decline = 2019 (GHE 2019). Label years explicitly in visualizations."
+ },
+ {
+  "workstream": "W2",
+  "caveat": "Provisional vs final overdose counts differ: May 2026 release compares provisional 2025 (69,973) vs provisional 2024 (81,313); final 2024 is 79,384. Do not mix provisional and final in one series."
+ },
+ {
+  "workstream": "W2",
+  "caveat": "Gallup depression = self-reported lifetime/current diagnosis, not clinically assessed prevalence; rising diagnosis can reflect help-seeking, screening, reduced stigma as well as true incidence — different construct from NSDUH MDE or PHQ-8."
+ },
+ {
+  "workstream": "W2",
+  "caveat": "NSDUH 2021+ uses redesigned multimode methodology, not directly comparable with pre-2020 NSDUH; do not splice."
+ },
+ {
+  "workstream": "W2",
+  "caveat": "WHO 25% pandemic increase is a modeled first-pandemic-year estimate, not diagnoses; WHO baselines since revised (depression 5.7% adults / ~332M; anxiety 359M in 2021)."
+ },
+ {
+  "workstream": "W2",
+  "caveat": "Cancer incidence trends can be inflated/masked by screening and diagnostic change; BMJ Oncology global counts (+79%) are raw counts affected by population growth, not age-standardized rates; 2020 incidence depressed by pandemic diagnosis disruptions."
+ },
+ {
+  "workstream": "W2",
+  "caveat": "SEER 'stable' all-sites incidence coexists with rising site- and demographic-specific trends."
+ },
+ {
+  "workstream": "W2",
+  "caveat": "US-vs-peer life expectancy gap depends on comparator set (Peterson-KFF: 3.7 yrs in 2024). OECD Health at a Glance 2025 US note not directly fetchable (robots/403) — cited only via Peterson-KFF."
+ },
+ {
+  "workstream": "W2",
+  "caveat": "ACS 2026 projections are model-based estimates, not registrations; actual incidence data through 2022, mortality through 2023."
+ },
+ {
+  "workstream": "W3",
+  "caveat": "Diagnoses vs prescriptions must not be blurred: every Tier A epidemiology source shows stable-to-declining age-standardised schizophrenia prevalence/incidence, while every Tier A prescribing dataset shows rising volumes — cited authors attribute the gap to off-label use, expanded indications, demographics, access; not rising disease."
+ },
+ {
+  "workstream": "W3",
+  "caveat": "England 'items' count dispensing events, not people or doses; items, fills, DDDs, and %-of-population are different measures, not directly comparable."
+ },
+ {
+  "workstream": "W3",
+  "caveat": "Hong Kong study (PMID 39961232) cited by identity only — retrieve exact figures before publishing numbers from it."
+ },
+ {
+  "workstream": "W3",
+  "caveat": "England 2024/25 class-level antipsychotic (13.9m) and hypnotic/anxiolytic (13.4m) items corroborated via The Pharmacist (tier B); canonical values in NHSBSA Excel tables. NHSBSA issued a Jan 2026 correction for patient double-counting in some calendar-year tables — re-check patient counts."
+ },
+ {
+  "workstream": "W3",
+  "caveat": "ASPE = IQVIA Total Patient Tracker projections (SSRIs only for antidepressants — understates total); CDC MMWR = commercially insured only; DEA/IQVIA LRx ~94% of retail — none is a full census."
+ },
+ {
+  "workstream": "W3",
+  "caveat": "GBD 'stable prevalence' is modeled with wide uncertainty in low-data regions; registry incidence measures treated/diagnosed cases, sensitive to service coverage and coding."
+ },
+ {
+  "workstream": "W3",
+  "caveat": "Market-size figures (tier C) are proprietary forecasts, not measured data."
+ },
+ {
+  "workstream": "W3",
+  "caveat": "OECD DDD figures corroborated via Euronews (tier B); primary reference: https://www.oecd.org/en/publications/health-at-a-glance-2023_7a7afb35-en/full-report/pharmaceutical-consumption_4b6cb013.html"
+ },
+ {
+  "workstream": "W4",
+  "caveat": "All rows are attributions as stated by the cited source, not asserted causes; several sources themselves flag correlational evidence."
+ },
+ {
+  "workstream": "W4",
+  "caveat": "CDC Vital Signs 2018: suicide rarely caused by a single factor; 54% = no *known* mental health condition — undiagnosed conditions cannot be ruled out."
+ },
+ {
+  "workstream": "W4",
+  "caveat": "Case & Deaton supporting line quoted from Brookings' official publication page summary; deaths-of-despair framing scholarly contested (Ruhm c07; other critiques exist, not fetched)."
+ },
+ {
+  "workstream": "W4",
+  "caveat": "HRSA figures are 2038 projections based on current utilization, explicitly excluding unmet need; page updated Dec 2025."
+ },
+ {
+  "workstream": "W4",
+  "caveat": "WHO suicide fact sheet and CDC opioid epidemic page are living documents; dates are last-updated as displayed 2026-08-19."
+ },
+ {
+  "workstream": "W4",
+  "caveat": "Surgeon General doc_dates at month precision where fetched PDF displayed only year."
+ },
+ {
+  "workstream": "W4",
+  "caveat": "Per safe-reporting standards, no suicide method details; firearm access named only as access-level risk factor."
+ },
+ {
+  "workstream": "W4",
+  "caveat": "Twenge et al. (c10) remains contested; both attribution and principal critique (c14) included so the register carries the dispute, not a resolution."
+ },
+ {
+  "workstream": "W4",
+  "caveat": "All tier-A documents fetched and confirmed to contain quoted/near-verbatim lines on 2026-08-19."
+ },
+ {
+  "workstream": "W5",
+  "caveat": "Health is NOT the most-deployed domain: public-admin 151, defence-intel 33, health 32, law-enforcement 31. Phrase health as the largest citizen-facing service domain / third overall."
+ },
+ {
+  "workstream": "W5",
+  "caveat": "deployments.json contains no date fields; all temporal claims about deployments come from milestones.json (occurred_on) or year mentions in workload strings."
+ },
+ {
+  "workstream": "W5",
+  "caveat": "'Live' = status=production. Pandemic-response has 1 accredited row counted as neither live nor decommissioned."
+ },
+ {
+  "workstream": "W5",
+  "caveat": "geographies.json: 35 rows, 32 country-level (EU, INTL supranational; US-CO sub-national)."
+ },
+ {
+  "workstream": "W5",
+  "caveat": "regulations.json: exactly 99 rows, 8 neural_data=true (one proposed); '0 of 99 record recourse' structurally confirmed — no recourse/redress/appeal field exists in the schema."
+ },
+ {
+  "workstream": "W5",
+  "caveat": "WebFetch truncates deployments.json (~148KB); counts were parsed from complete raw JSON, not summarized extractions."
+ },
+ {
+  "workstream": "W5",
+  "caveat": "Every row is structural or pattern only; no row asserts or implies causation; tier grades reflect strength of the documented overlap, never strength of any causal story."
+ }
+]
