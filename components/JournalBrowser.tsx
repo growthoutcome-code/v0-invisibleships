@@ -680,7 +680,7 @@ function ExportModal({ open, onOpenChange }: { open: boolean; onOpenChange: (o: 
           <DialogTitle>Export the corpus</DialogTitle>
         </DialogHeader>
         <p className="body-copy text-foreground/80">
-          You&rsquo;re about to download the <strong>Invisible Ships corpus</strong> as a <strong>.zip of Markdown files</strong> — the journal, transcripts, references, and glossary — structured for use with AI tools.
+          You&rsquo;re about to download the <strong>Invisible Ships corpus</strong> as a <strong>.zip of Markdown files</strong> — the journal, transcripts, references, and glossary, plus the site-produced Government Cloud and Public Health Signals research tables — structured for use with AI tools.
         </p>
         <p className="text-xs text-muted">
           The files carry the author&rsquo;s copyright and Critical Disclaimer. Please use them in their complete, original form.
