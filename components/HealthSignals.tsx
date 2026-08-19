@@ -117,8 +117,17 @@ function LineChart({
   const path = points.map((p, i) => `${i ? "L" : "M"}${X(p.year).toFixed(1)},${Y(p.value).toFixed(1)}`).join(" ");
   const ticks = 4;
   const yTicks = Array.from({ length: ticks + 1 }, (_, i) => v0 + ((v1 - v0) * i) / ticks);
+  // Anchor x ticks on the most recent year and step backwards, so the latest
+  // year is always labelled (the recent end is what readers check first).
   const xStep = Math.max(1, Math.ceil((x1 - x0) / 8));
+  const xTicks: number[] = [];
+  for (let y = x1; y >= x0; y -= xStep) xTicks.push(y);
   const h = hover !== null ? points[hover] : null;
+  // Endpoint label: below the point when the series is falling into it,
+  // above when rising — keeps the label out of the data path.
+  const last = points[points.length - 1];
+  const prev = points[points.length - 2];
+  const labelBelow = prev && last.value < prev.value;
 
   return (
     <figure className="m-0 mb-12">
@@ -138,7 +147,7 @@ function LineChart({
             <text x={padL - 8} y={Y(t) + 4} fontSize="11" fill="rgb(var(--muted))" textAnchor="end">{fmt(t)}</text>
           </g>
         ))}
-        {xs.filter((y) => (y - x0) % xStep === 0).map((y) => (
+        {xTicks.map((y) => (
           <text key={y} x={X(y)} y={H - 10} fontSize="11" fill="rgb(var(--muted))" textAnchor="middle">{y}</text>
         ))}
         <path d={path} fill="none" stroke="rgb(var(--foreground))" strokeWidth="2" />
@@ -168,13 +177,13 @@ function LineChart({
             </text>
           </g>
         )}
-        {/* selective direct label on the last point */}
+        {/* selective direct label on the last point, kept out of the data path */}
         <text
-          x={X(points[points.length - 1].year) - 6}
-          y={Y(points[points.length - 1].value) - 10}
+          x={X(last.year) - 8}
+          y={Y(last.value) + (labelBelow ? 20 : -12)}
           fontSize="12" fill="rgb(var(--foreground))" textAnchor="end" fontWeight="600"
         >
-          {fmt(points[points.length - 1].value)}
+          {fmt(last.value)}
         </text>
       </svg>
     </figure>

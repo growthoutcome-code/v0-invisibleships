@@ -304,7 +304,7 @@ html.dark .gov-report{
 `;
 const MARKUP = `<div class="wrap">
 <h1>Government Cloud — Adoption · Procurement · Timeline · Investment · Litigation · Capabilities</h1>
-<p class="sub">Prompts 1&ndash;6 · research date 2026-08-17 · 399 deployments · 90 awards · 99 regulations · 311 timeline milestones · 81 investment rows · 46 lawsuits · 73 platform capabilities · 660 sources · 34 geographies. Tier C = claimed/theoretical.</p>
+<p class="sub">Prompts 1&ndash;6 · research date 2026-08-17 · 399 deployments · 90 awards · 99 regulations · 333 timeline milestones (incl. 22 health signals) · 81 investment rows · 46 lawsuits · 73 platform capabilities · 660 sources · 34 geographies. Tier C = claimed/theoretical.</p>
 <div class="tabs">
  <button class="tab on" data-t="adopt">Adoption map</button><button class="tab" data-t="proc">Procurement</button>
  <button class="tab" data-t="time">Timeline</button><button class="tab" data-t="invest">Investment</button>
@@ -321,7 +321,7 @@ const MARKUP = `<div class="wrap">
  <h2>Awards by year announced</h2><div class="card"><div class="tl" id="tline"></div></div><h2>Re-compete calendar &mdash; next 36 months</h2><div class="card"><div class="hbars" id="rcbars"></div></div></div>
 
 <div id="time" class="hidden"><div class="tiles" id="t_tiles"></div><h2>Master timeline &mdash; all threads</h2>
- <div class="legend"><span><span class="sw" style="background:var(--series-2)"></span>Law (A)</span><span><span class="sw" style="background:var(--series-1)"></span>Release (B)</span><span><span class="sw" style="background:var(--series-3)"></span>Deploy/enforcement (C)</span><span><span class="sw" style="background:var(--series-4)"></span>Litigation (D)</span><span><span class="sw" style="background:var(--series-5)"></span>Investment (E)</span><span style="color:var(--text-muted)">hollow=projected · line=today</span></div>
+ <div class="legend"><span><span class="sw" style="background:var(--series-2)"></span>Law (A)</span><span><span class="sw" style="background:var(--series-1)"></span>Release (B)</span><span><span class="sw" style="background:var(--series-3)"></span>Deploy/enforcement (C)</span><span><span class="sw" style="background:var(--series-4)"></span>Litigation (D)</span><span><span class="sw" style="background:var(--series-5)"></span>Investment (E)</span><span><span class="sw" style="background:var(--series-6)"></span>Health (F)</span><!--HEALTH-TRACK-F-LEGEND--><span style="color:var(--text-muted)">hollow=projected · line=today</span></div>
  <div class="card"><div id="tlsvg"></div></div>
  <div class="callout"><b>Enforcement in the timeline:</b> DHS-reported operations now appear on the Deploy track — e.g. the Jul 2026 World Cup human-trafficking crackdown (905 arrested, 180 rescued, agency-reported). The 2025 enforcement sequence still shows policy switch (Jan) preceding software (Apr) and appropriations (Jul): law and money followed policy.</div>
  <h2>Relationship: does law follow capability?</h2><div class="card"><div class="hbars" id="relbars"></div></div></div>
