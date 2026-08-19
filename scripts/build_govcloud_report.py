@@ -35,8 +35,8 @@ OUT_JS = os.path.join(ROOT, "public", "reports", "gov-cloud-report.js")
 # modes. Slots 4-5 sit below it by necessity — five greys cannot all be high
 # contrast on one surface — so they are only safe where position or a label carries
 # identity too (timeline lanes, labelled bars), never as fill-only identity.
-SERIES_LIGHT = ["#1f1f1f", "#4f4f4f", "#878787", "#b6b6b6", "#dddddd"]
-SERIES_DARK  = ["#f1f1f1", "#b6b6b6", "#878787", "#595959", "#343434"]
+SERIES_LIGHT = ["#1f1f1f", "#4f4f4f", "#878787", "#b6b6b6", "#dddddd", "#6b6b6b"]  # slot 6: timeline lane F — identity carried by position+label, like slots 4-5
+SERIES_DARK  = ["#f1f1f1", "#b6b6b6", "#878787", "#595959", "#343434", "#a3a3a3"]
 
 LIGHT_VARS = f"""
   --surface-1: transparent;
@@ -48,7 +48,7 @@ LIGHT_VARS = f"""
   --warn: rgb(var(--foreground));
   --heat: var(--foreground);
   --series-1: {SERIES_LIGHT[0]}; --series-2: {SERIES_LIGHT[1]}; --series-3: {SERIES_LIGHT[2]};
-  --series-4: {SERIES_LIGHT[3]}; --series-5: {SERIES_LIGHT[4]};
+  --series-4: {SERIES_LIGHT[3]}; --series-5: {SERIES_LIGHT[4]}; --series-6: {SERIES_LIGHT[5]};
 """
 
 DARK_VARS = f"""
@@ -61,7 +61,7 @@ DARK_VARS = f"""
   --warn: rgb(var(--foreground));
   --heat: var(--foreground);
   --series-1: {SERIES_DARK[0]}; --series-2: {SERIES_DARK[1]}; --series-3: {SERIES_DARK[2]};
-  --series-4: {SERIES_DARK[3]}; --series-5: {SERIES_DARK[4]};
+  --series-4: {SERIES_DARK[3]}; --series-5: {SERIES_DARK[4]}; --series-6: {SERIES_DARK[5]};
 """
 
 # Typography rebind: the report shipped a generic system stack. Headings take the

@@ -19,7 +19,7 @@ const CSS = `.gov-report{
   --warn: rgb(var(--foreground));
   --heat: var(--foreground);
   --series-1: #1f1f1f; --series-2: #4f4f4f; --series-3: #878787;
-  --series-4: #b6b6b6; --series-5: #dddddd;
+  --series-4: #b6b6b6; --series-5: #dddddd; --series-6: #6b6b6b;
 }
 html.dark .gov-report{
   --surface-1: transparent;
@@ -31,7 +31,7 @@ html.dark .gov-report{
   --warn: rgb(var(--foreground));
   --heat: var(--foreground);
   --series-1: #f1f1f1; --series-2: #b6b6b6; --series-3: #878787;
-  --series-4: #595959; --series-5: #343434;
+  --series-4: #595959; --series-5: #343434; --series-6: #a3a3a3;
 }
 .gov-report *{box-sizing:border-box}
 .gov-report{font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;font-size:14px;line-height:1.5}
