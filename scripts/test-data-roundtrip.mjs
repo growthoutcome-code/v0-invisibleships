@@ -141,6 +141,20 @@ const hs = await page.evaluate(() => ({
   onlyOneSuicideChart: [...document.querySelectorAll("figcaption")]
     .filter((n) => /suicide rate/i.test(n.textContent)).length === 1,
   chartSummary: document.body.textContent.includes("What the chart shows"),
+  changeToggle: [...document.querySelectorAll("button")].some((b) => /Change over period/.test(b.textContent)),
+  changeTable: (() => {
+    const t = [...document.querySelectorAll("table")].find((x) => /Change in suicide rate by country/.test(x.querySelector("caption")?.textContent || ""));
+    return !!t && t.querySelectorAll("tbody tr").length === 12;
+  })(),
+  usRowShows40: (() => {
+    const t = [...document.querySelectorAll("table")].find((x) => /Change in suicide rate by country/.test(x.querySelector("caption")?.textContent || ""));
+    const row = t && [...t.querySelectorAll("tbody tr")].find((r) => r.textContent.startsWith("United States"));
+    return !!row && /\+40%/.test(row.textContent);
+  })(),
+  reconciles: document.body.textContent.includes("Why 40% here"),
+  windowToggle: [...document.querySelectorAll("button")].some((b) => /pandemic/i.test(b.textContent)),
+  covidMarker: [...document.querySelectorAll("svg text")].some((t) => t.textContent === "COVID-19"),
+  explains2021: document.body.textContent.includes("Why this chart stops at 2021"),
   causesLink: [...document.querySelectorAll("a")].some((a) => /Causes, as attributed/.test(a.textContent)),
   reproducible: document.body.textContent.includes("None of this is privileged information"),
   provenanceModal: [...document.querySelectorAll("button")].some((b) => /How this research was gathered/.test(b.textContent)),

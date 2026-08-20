@@ -233,20 +233,47 @@ function LineChart({
  */
 function MultiLineChart({ chart }: { chart: IntlChart }) {
   const [hoverYear, setHoverYear] = useState<number | null>(null);
+  // Two views of the same twelve series. "rate" answers "how high?"; "change"
+  // answers "by how much?" — which is the question the ~30% claim is actually
+  // about, and which a levels chart cannot show (Sean, 2026-08-20).
+  const [mode, setMode] = useState<"rate" | "change">("rate");
+  const indexed = mode === "change";
+  // Window: the full two-decade record, or the pandemic era. Comparable
+  // international estimates stop at 2021 — see the note under the chart.
+  const [win, setWin] = useState<"full" | "covid">("full");
+  const winFrom = win === "covid" ? 2017 : 0;
   const W = 760, H = 440, padL = 44, padR = 128, padT = 18, padB = 34;
-  const all = chart.series.flatMap((s) => s.points);
+  const view = chart.series.map((s) => ({ ...s, points: s.points.filter((p) => p.year >= winFrom) }));
+  const base = new Map(view.map((s) => [s.country, s.points[0]?.value ?? 1]));
+  const val = (s: { country: string }, v: number) =>
+    indexed ? (v / (base.get(s.country) || 1)) * 100 : v;
+  const all = view.flatMap((s) => s.points.map((p) => ({ ...p, value: val(s, p.value) })));
   if (!all.length) return null;
   const x0 = Math.min(...all.map((p) => p.year)), x1 = Math.max(...all.map((p) => p.year));
   const vMax = Math.max(...all.map((p) => p.value));
   const v0 = 0, v1 = vMax * 1.08;
+  const winChange = (c: string) => {
+    const ser = view.find((x) => x.country === c);
+    if (!ser || ser.points.length < 2) return 0;
+    const a = ser.points[0].value, b = ser.points[ser.points.length - 1].value;
+    return ((b - a) / a) * 100;
+  };
+  const fmtEnd = (s: { country: string }, v: number) => {
+    if (!indexed) return v.toFixed(1);
+    const c = winChange(s.country);
+    return `${c > 0 ? "+" : ""}${c.toFixed(0)}%`;
+  };
   const X = (y: number) => padL + ((y - x0) / (x1 - x0)) * (W - padL - padR);
   const Y = (v: number) => padT + (1 - (v - v0) / (v1 - v0)) * (H - padT - padB);
 
   // End labels: sort by value and enforce a minimum vertical gap so eight
   // countries remain readable where their 2021 values sit close together.
   const MIN_GAP = 14;
-  const ends = chart.series
-    .map((s) => ({ s, last: s.points[s.points.length - 1] }))
+  const ends = view
+    .map((s) => {
+      const raw = s.points[s.points.length - 1];
+      return { s, last: { year: raw.year, value: val(s, raw.value), raw: raw.value } };
+    })
     .sort((a, b) => a.last.value - b.last.value);
   // Walk top-to-bottom (highest value first) and push each label down only as
   // far as it must go to clear the one above it. Seeded at -Infinity so the
@@ -261,31 +288,90 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
       return { ...e, labelY: y };
     });
 
-  const yTicks = [0, 10, 20, 30, 40, 50].filter((t) => t <= v1);
-  const xTicks = [2000, 2005, 2010, 2015, 2021].filter((y) => y >= x0 && y <= x1);
+  const yTicks = (indexed ? [0, 50, 100, 150, 200] : [0, 10, 20, 30, 40, 50]).filter((t) => t <= v1);
+  const xTicks = (win === "covid" ? [2017, 2018, 2019, 2020, 2021] : [2000, 2005, 2010, 2015, 2021]).filter((y) => y >= x0 && y <= x1);
 
   return (
     <figure className="m-0 mb-6">
-      <figcaption className="font-display font-semibold text-foreground text-[17px] mb-1">{chart.title}</figcaption>
-      <p className="text-muted text-[13px] m-0 mb-2">{chart.unit}.</p>
+      <figcaption className="mb-1">
+        <span className="block font-display font-semibold text-foreground text-[19px]">
+          {win === "covid"
+            ? (indexed ? "Change across the pandemic years, 2017–2021" : "Suicide rate through the pandemic, 2017–2021")
+            : (indexed ? "The US rose 40% while the world fell 27%" : "Suicide rate, 2000–2021: the US against ten countries and the world")}
+        </span>
+        <span className="block text-foreground/75 text-[15px] mt-1">
+          {indexed
+            ? `Each line starts at its own ${win === "covid" ? 2017 : 2000} rate. Above the middle line means more suicide than then; below means less.`
+            : "Deaths per 100,000 people per year, adjusted so countries with older or younger populations can be compared."}
+        </span>
+      </figcaption>
+      <p className="text-muted text-[13px] m-0 mb-3">
+        Bold line = United States · dashed line = world average · hover any year to read all twelve.
+      </p>
+      <div className="flex flex-wrap gap-x-6 gap-y-2 mb-3">
+      <div role="group" aria-label="Chart period" className="flex gap-1">
+        {([["full", "2000–2021"], ["covid", "2017–2021 (pandemic)"]] as const).map(([w, label]) => (
+          <button key={w} type="button" onClick={() => { setWin(w); track("health_chart_window", { win: w }); }}
+            aria-pressed={win === w}
+            className={`text-[13px] px-3 py-1 border transition-colors ${
+              win === w ? "border-foreground text-foreground font-semibold" : "border-edge text-muted hover:text-foreground"
+            }`}>
+            {label}
+          </button>
+        ))}
+      </div>
+      <div role="group" aria-label="Chart view" className="flex gap-1">
+        {([["rate", "Rate per 100,000"], ["change", "Change over period"]] as const).map(([m, label]) => (
+          <button key={m} type="button" onClick={() => { setMode(m); track("health_chart_mode", { mode: m }); }}
+            aria-pressed={mode === m}
+            className={`text-[13px] px-3 py-1 border transition-colors ${
+              mode === m ? "border-foreground text-foreground font-semibold" : "border-edge text-muted hover:text-foreground"
+            }`}>
+            {label}
+          </button>
+        ))}
+      </div>
+      </div>
       <svg viewBox={`0 0 ${W} ${H}`} width="100%" role="img" aria-label={chart.title}
         onMouseLeave={() => setHoverYear(null)} style={{ fontFamily: "inherit" }}>
         {yTicks.map((t) => (
           <g key={t}>
             <line x1={padL} y1={Y(t)} x2={W - padR} y2={Y(t)} stroke="rgb(var(--edge))" strokeWidth="1" />
-            <text x={padL - 8} y={Y(t) + 4} fontSize="11" fill="rgb(var(--muted))" textAnchor="end">{t}</text>
+            <text x={padL - 8} y={Y(t) + 4} fontSize="11" fill="rgb(var(--muted))" textAnchor="end">
+              {indexed ? (t === 100 ? "same" : `${t > 100 ? "+" : "−"}${Math.abs(t - 100)}%`) : t}
+            </text>
           </g>
         ))}
         {xTicks.map((y) => (
           <text key={y} x={X(y)} y={H - 10} fontSize="11" fill="rgb(var(--muted))" textAnchor="middle">{y}</text>
         ))}
+        {x1 >= 2020 && x0 <= 2020 && (
+          <>
+            <rect x={X(2020)} y={padT} width={Math.max(0, X(x1) - X(2020))} height={H - padT - padB}
+              fill="rgb(var(--foreground))" opacity="0.05" />
+            <line x1={X(2020)} y1={padT} x2={X(2020)} y2={H - padB}
+              stroke="rgb(var(--muted))" strokeWidth="1" />
+            <text x={X(2020) + 5} y={padT + 11} fontSize="10.5" fill="rgb(var(--muted))">
+              COVID-19
+            </text>
+          </>
+        )}
+        {indexed && (
+          <>
+            <line x1={padL} y1={Y(100)} x2={W - padR} y2={Y(100)}
+              stroke="rgb(var(--foreground))" strokeWidth="1" opacity="0.45" />
+            <text x={padL + 4} y={Y(100) - 5} fontSize="10.5" fill="rgb(var(--muted))">
+              same as {x0}
+            </text>
+          </>
+        )}
         {hoverYear !== null && (
           <line x1={X(hoverYear)} y1={padT} x2={X(hoverYear)} y2={H - padB}
             stroke="rgb(var(--muted))" strokeDasharray="3 3" pointerEvents="none" />
         )}
-        {chart.series.map((s) => (
+        {view.map((s) => (
           <path key={s.country}
-            d={s.points.map((p, i) => `${i ? "L" : "M"}${X(p.year).toFixed(1)},${Y(p.value).toFixed(1)}`).join(" ")}
+            d={s.points.map((p, i) => `${i ? "L" : "M"}${X(p.year).toFixed(1)},${Y(val(s, p.value)).toFixed(1)}`).join(" ")}
             fill="none"
             stroke={s.emphasis ? "rgb(var(--foreground))" : "rgb(var(--muted))"}
             strokeWidth={s.emphasis ? 3 : s.kind === "world" ? 1.5 : 1.1}
@@ -299,7 +385,16 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
             <text x={W - padR + 10} y={labelY + 4} fontSize={s.emphasis ? 13 : 11.5}
               fill={s.emphasis ? "rgb(var(--foreground))" : "rgb(var(--muted))"}
               fontWeight={s.emphasis || s.kind === "world" ? 700 : 400}>
-              {s.country} {hoverYear === null ? last.value.toFixed(1) : (s.points.find((p) => p.year === hoverYear)?.value.toFixed(1) ?? "—")}
+              {s.country}{" "}
+              {hoverYear === null
+                ? fmtEnd(s, last.value)
+                : (() => {
+                    const p = s.points.find((q) => q.year === hoverYear);
+                    if (!p) return "—";
+                    return indexed
+                      ? `${p.value >= (base.get(s.country) || 0) ? "+" : ""}${(((p.value / (base.get(s.country) || 1)) - 1) * 100).toFixed(0)}%`
+                      : p.value.toFixed(1);
+                  })()}
             </text>
           </g>
         ))}
@@ -447,12 +542,62 @@ export default function HealthSignals() {
             <h3 className="font-display font-semibold text-foreground text-[17px] mb-2 mt-2">
               What the chart shows
             </h3>
-            <p className="body-copy text-foreground/90 max-w-[80ch] mb-3">
+            <p className="body-copy text-foreground/90 max-w-[80ch] mb-4">
               Twelve lines, one way of counting. Over these two decades the world&rsquo;s suicide
-              rate fell 27%, and most countries fell with it — Russia by 60%, China by 42%, Japan by
-              28%, India by 21%. The United States went the other way: up 40%, in a steady climb
-              with no reversal. South Korea rose further still but peaked around 2011 and has fallen
-              since; the UK and Australia sit roughly flat.
+              rate fell 27%, and most countries fell with it. The United States went the other way:
+              up 40%, in a steady climb with no reversal. Only three other lines rise at all — and
+              South Korea, the steepest, peaked around 2011 and has fallen since. Switch the chart
+              to <strong>Change since 2000</strong> to read every country against its own starting
+              point.
+            </p>
+
+            {/* Every country's change, ranked — the chart shows levels, so the
+                figure behind the claim needs to be legible as a number too. */}
+            <div className="max-w-[80ch] mb-4 border border-edge rounded-xl overflow-hidden">
+              <table className="w-full text-[15px]">
+                <caption className="sr-only">Change in suicide rate by country, 2000 to 2021</caption>
+                <thead>
+                  <tr className="text-left text-muted text-[13px] uppercase tracking-wide">
+                    <th className="py-2 px-4 font-medium">Country</th>
+                    <th className="py-2 px-4 font-medium text-right">2000</th>
+                    <th className="py-2 px-4 font-medium text-right">2021</th>
+                    <th className="py-2 px-4 font-medium text-right">Change</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[...intl.series]
+                    .sort((a, b) => b.change_pct - a.change_pct)
+                    .map((s) => (
+                      <tr key={s.country}
+                        className={`border-t border-edge/60 ${s.emphasis ? "font-semibold text-foreground bg-panel" : "text-foreground/85"}`}>
+                        <td className="py-2 px-4">{s.country}</td>
+                        <td className="py-2 px-4 text-right tabular-nums">{s.points[0].value.toFixed(1)}</td>
+                        <td className="py-2 px-4 text-right tabular-nums">{s.points[s.points.length - 1].value.toFixed(1)}</td>
+                        <td className="py-2 px-4 text-right tabular-nums">
+                          {s.change_pct > 0 ? "+" : ""}{s.change_pct.toFixed(0)}%
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
+
+            <p className="body-copy text-foreground/90 max-w-[80ch] mb-3">
+              <strong>Why this chart stops at 2021.</strong> That is where the comparable
+              international estimates end — WHO has not yet published figures on this basis for 2022
+              onward, so no country-against-country view can reach the present. The pandemic window
+              above shows what is available: rates were broadly flat or falling into 2020, the first
+              pandemic year. For the United States alone, national figures do continue — 14.2 in
+              2022 (the highest rate since 1941), 14.1 in 2023, and 13.7 in 2024 — and those are
+              listed with their sources directly below.
+            </p>
+            <p className="body-copy text-foreground/90 max-w-[80ch] mb-3">
+              <strong>Why 40% here and &ldquo;~30%&rdquo; below?</strong> Both are the United States
+              and both are correct — they count from different years and adjust for age differently.
+              This chart runs 2000–2021 on WHO&rsquo;s world standard population. The ~30% figure
+              comes from the CDC&rsquo;s own vital statistics on the US 2000 standard population,
+              measured 1999–2016. Compare like with like and the answer is the same either way: a
+              rise of roughly a third or more, sustained across two decades.
             </p>
             <p className="body-copy text-foreground/90 max-w-[80ch] mb-3">
               What makes the US unusual here is less the direction than the shape — a rise that kept
