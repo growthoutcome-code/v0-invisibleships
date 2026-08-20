@@ -124,3 +124,32 @@ def patch_legend_and_counts():
 
 
 patch_legend_and_counts()
+
+
+def patch_default_tab_timeline():
+    """Third guarded pass: the Timeline becomes the report's default view.
+
+    Sean, 2026-08-19: the first thing someone sees on Data should be the master
+    timeline — the only view spanning all six tracks including Health. Four
+    coordinated edits: initial JS tab state, the .on class, the initial hidden
+    classes on the adopt/time sections, and the domain-filter visibility.
+    """
+    global html
+    MARK3 = "DEFAULT-TAB-TIMELINE"
+    html = open(SRC, encoding="utf-8").read()
+    if MARK3 in html:
+        print("default tab already timeline — no-op")
+        return
+    sub_once(r"tab='adopt'", "tab='time'/*" + MARK3 + "*/", "initial tab state")
+    sub_once(r'<button class="tab on" data-t="adopt">Adoption map</button>',
+             '<button class="tab" data-t="adopt">Adoption map</button>', "adopt tab class")
+    sub_once(r'<button class="tab" data-t="time">Timeline</button>',
+             '<button class="tab on" data-t="time">Timeline</button>', "time tab class")
+    sub_once(r'<div id="adopt">', '<div id="adopt" class="hidden">', "adopt section hidden")
+    sub_once(r'<div id="time" class="hidden">', '<div id="time">', "time section shown")
+    sub_once(r'<span id="domWrap" class="hidden">', '<span id="domWrap">', "domain filter shown")
+    open(SRC, "w", encoding="utf-8").write(html)
+    print("default tab -> timeline")
+
+
+patch_default_tab_timeline()
