@@ -6,6 +6,7 @@ import { DataNoteLine } from "@/components/DataIntro";
 import DisclaimerLink from "@/components/DisclaimerLink";
 import { Skeleton, SkeletonRows, SkeletonChart } from "@/components/Skeleton";
 import { Input } from "@/components/ui/input";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { track } from "@/lib/analytics";
 
 /**
@@ -50,10 +51,17 @@ type Source = {
   source_id: string; url: string; publisher?: string; title?: string;
   evidence_tier?: string; accessed?: string; archived_url?: string | null;
 };
+type IntlSeries = {
+  country: string; emphasis: boolean; kind?: string; change_pct: number;
+  points: { year: number; value: number }[];
+  method?: string; basis_short?: string; source_url?: string; publisher?: string;
+  tier?: string; caveats?: string[];
+};
 type IntlChart = {
   title: string; unit: string; note: string; publisher: string; tier: string;
   source_url: string;
-  series: { country: string; emphasis: boolean; kind?: string; change_pct: number; points: { year: number; value: number }[] }[];
+  series: IntlSeries[];
+  covid_markers?: { date: string; x: number; label: string; source_url: string }[];
 };
 type Verdict = {
   claim: string; mapping: string; recent_spike: boolean; summary: string;
@@ -255,6 +263,8 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
   // Window: the full two-decade record, or the pandemic era. Comparable
   // international estimates stop at 2021 — see the note under the chart.
   const [win, setWin] = useState<"full" | "covid">("full");
+  const [showCovid, setShowCovid] = useState(false);
+  const [open, setOpen] = useState<IntlSeries | null>(null);
   const winFrom = win === "covid" ? 2017 : 0;
   const W = 760, H = 440, padL = 44, padT = 18, padB = 34;
   // On a phone the SVG scales to ~47%, which would render 11.5px labels at ~5px.
@@ -329,7 +339,7 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
       </figcaption>
       <p className="text-muted text-[13px] m-0 mb-3">
         Bold line = United States · dashed line = world average ·{" "}
-        {narrow ? "every country's figures are in the table below" : "hover any year to read all twelve"}.
+        {narrow ? "every country's figures are in the table below" : "hover any year to read all fourteen, or click a line for its sources and method"}.
       </p>
       <div className="flex flex-wrap gap-x-6 gap-y-2 mb-3">
       <div role="group" aria-label="Chart period" className="flex gap-1">
@@ -343,6 +353,16 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
           </button>
         ))}
       </div>
+      <label className="flex items-center gap-2 text-[13px] text-muted cursor-pointer">
+        <input type="checkbox" checked={showCovid}
+          onChange={(e) => { setShowCovid(e.target.checked); track("health_chart_covid", { on: e.target.checked }); }} />
+        Show COVID-19 timeline
+      </label>
+      {showCovid && x1 <= 2021 && (
+        <span className="text-muted text-[12px] self-center">
+          booster and end-of-emergency markers fall after 2021
+        </span>
+      )}
       <div role="group" aria-label="Chart view" className="flex gap-1">
         {([["rate", "Rate per 100,000"], ["change", "Change over period"]] as const).map(([m, label]) => (
           <button key={m} type="button" onClick={() => { setMode(m); track("health_chart_mode", { mode: m }); }}
@@ -368,6 +388,16 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
         {xTicks.map((y) => (
           <text key={y} x={X(y)} y={H - 8} fontSize={narrow ? 18 : 11} fill="rgb(var(--muted))" textAnchor="middle">{y}</text>
         ))}
+        {showCovid && (chart.covid_markers || [])
+          .filter((m) => m.x >= x0 && m.x <= x1)
+          .map((m) => (
+            <g key={m.date} pointerEvents="none">
+              <line x1={X(m.x)} y1={padT + 26} x2={X(m.x)} y2={H - padB}
+                stroke="rgb(var(--foreground))" strokeWidth="1" strokeDasharray="2 3" opacity="0.55" />
+              <text x={X(m.x)} y={padT + 22} fontSize={narrow ? 14 : 10}
+                fill="rgb(var(--muted))" textAnchor="middle">{m.label}</text>
+            </g>
+          ))}
         {x1 >= 2020 && x0 <= 2020 && (
           <>
             <rect x={X(2020)} y={padT} width={Math.max(0, X(x1) - X(2020))} height={H - padT - padB}
@@ -401,6 +431,15 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
             strokeDasharray={s.kind === "world" ? "5 4" : undefined}
             opacity={s.emphasis ? 1 : s.kind === "world" ? 0.9 : 0.6} />
         ))}
+        {view.map((s) => (
+          <path key={"hit-" + s.country}
+            d={s.points.map((p, i) => `${i ? "L" : "M"}${X(p.year).toFixed(1)},${Y(val(s, p.value)).toFixed(1)}`).join(" ")}
+            fill="none" stroke="transparent" strokeWidth="14"
+            style={{ cursor: "pointer" }}
+            onClick={() => { setOpen(s); track("health_chart_series_opened", { country: s.country }); }}>
+            <title>{s.country} — click for sources and method</title>
+          </path>
+        ))}
         {placed
           .filter(({ s }) => !narrow || s.emphasis || s.kind === "world")
           .map(({ s, last, labelY }) => (
@@ -409,7 +448,9 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
               stroke="rgb(var(--edge))" strokeWidth="1" />
             <text x={W - padR + 10} y={labelY + 4} fontSize={narrow ? 22 : s.emphasis ? 13 : 11.5}
               fill={s.emphasis ? "rgb(var(--foreground))" : "rgb(var(--muted))"}
-              fontWeight={s.emphasis || s.kind === "world" ? 700 : 400}>
+              fontWeight={s.emphasis || s.kind === "world" ? 700 : 400}
+              style={{ cursor: "pointer" }}
+              onClick={() => { setOpen(s); track("health_chart_series_opened", { country: s.country, via: "label" }); }}>
               {s.country}{" "}
               {hoverYear === null
                 ? fmtEnd(s, last.value)
@@ -436,13 +477,74 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
           </text>
         )}
       </svg>
+
+      <Dialog open={!!open} onOpenChange={(v) => !v && setOpen(null)}>
+        <DialogContent className="max-w-[720px] max-h-[85vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="font-display text-2xl">{open?.country}</DialogTitle>
+          </DialogHeader>
+          {open && (
+            <div className="mt-1">
+              <p className="body-copy text-foreground/90 m-0 mb-4">
+                {open.points[open.points.length - 1].value.toFixed(1)} suicide deaths per 100,000
+                people in {open.points[open.points.length - 1].year}
+                {open.kind === "world" ? "" : ", against"}{" "}
+                {open.kind === "world" ? "" : `${open.points[0].value.toFixed(1)} in ${open.points[0].year} — a change of ${open.change_pct > 0 ? "+" : ""}${open.change_pct.toFixed(0)}%`}
+                {open.kind === "world" ? `a change of ${open.change_pct.toFixed(0)}% since ${open.points[0].year}` : ""}.
+              </p>
+
+              <h4 className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground mb-2">
+                How this is measured
+              </h4>
+              <p className="text-[15px] text-foreground/85 m-0 mb-4">{open.method}</p>
+
+              {!!open.caveats?.length && (
+                <>
+                  <h4 className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground mb-2">
+                    What to know before quoting it
+                  </h4>
+                  <ul className="list-none p-0 m-0 mb-4">
+                    {open.caveats.map((c, i) => (
+                      <li key={i} className="text-[15px] text-foreground/85 py-1.5 pl-5 relative">
+                        <span aria-hidden className="absolute left-0 top-1.5 text-foreground">—</span>{c}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+
+              <h4 className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground mb-2">
+                Every year
+              </h4>
+              <div className="max-h-[240px] overflow-y-auto border border-edge rounded-lg mb-4">
+                <table className="w-full text-[14px]">
+                  <tbody>
+                    {open.points.map((p) => (
+                      <tr key={p.year} className="border-b border-edge/50 last:border-0">
+                        <td className="py-1.5 px-4 text-muted tabular-nums">{p.year}</td>
+                        <td className="py-1.5 px-4 text-right tabular-nums text-foreground/85">{p.value.toFixed(2)}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              <p className="text-muted text-[14px] m-0">
+                Source: {open.publisher} · Tier {open.tier} ·{" "}
+                <a href={open.source_url} target="_blank" rel="noreferrer noopener"
+                  className="underline underline-offset-4 hover:text-foreground">open the data</a>
+              </p>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </figure>
   );
 }
 
 /* ------------------------------------------------------------ component --- */
 
-export default function HealthSignals() {
+export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => void } = {}) {
   const indicators = useTable<Indicator>("health_indicators");
   const milestones = useTable<Milestone>("health_milestones");
   const claims = useTable<Claim>("health_claims");
@@ -570,12 +672,12 @@ export default function HealthSignals() {
               What the chart shows
             </h3>
             <p className="body-copy text-foreground/90 max-w-[80ch] mb-4">
-              Twelve lines, one way of counting. Over these two decades the world&rsquo;s suicide
-              rate fell 27%, and most countries fell with it. The United States went the other way:
-              up 40%, in a steady climb with no reversal. Only three other lines rise at all — and
-              South Korea, the steepest, peaked around 2011 and has fallen since. Switch the chart
-              to <strong>Change since 2000</strong> to read every country against its own starting
-              point.
+              Fourteen lines, one way of counting. Over these two decades the world&rsquo;s
+              suicide rate fell 27%, and most countries fell with it. The United States went the
+              other way: up 40%, in a steady climb with no reversal. Only three other lines rise at
+              all — and South Korea, the steepest, peaked around 2011 and has fallen since. Switch
+              to <strong>Change over period</strong> to read every country against its own starting
+              point, and <strong>click any line</strong> for its sources, method and caveats.
             </p>
 
             {/* Every country's change, ranked — the chart shows levels, so the
@@ -609,6 +711,15 @@ export default function HealthSignals() {
               </table>
             </div>
 
+            <p className="body-copy text-foreground/90 max-w-[80ch] mb-3">
+              <strong>The two lowest lines need reading with care.</strong> Israel is among the
+              lowest recorded rates in the OECD. West Bank &amp; Gaza sits near 0.65 per 100,000 —
+              which would be the lowest on earth by a wide margin, and is far more likely to measure
+              registration than reality: suicide is heavily stigmatised and religiously proscribed
+              there, deaths are often recorded as accidents or undetermined, and vital registration
+              is fragmented. Both series end in 2021 and say nothing about the war that began in
+              October 2023.
+            </p>
             <p className="body-copy text-foreground/90 max-w-[80ch] mb-3">
               <strong>Why this chart stops at 2021.</strong> That is where the comparable
               international estimates end — WHO has not yet published figures on this basis for 2022
@@ -645,6 +756,18 @@ export default function HealthSignals() {
               same public tools can rebuild this chart and check it.{" "}
               <DisclaimerLink from="health_chart">How this research was gathered</DisclaimerLink>
             </p>
+            {onGoTimeline && (
+              <p className="body-copy text-foreground/85 max-w-[80ch] mb-3">
+                Want to see this period against the procurement and legislation record?{" "}
+                <button type="button"
+                  onClick={() => { track("health_to_timeline"); onGoTimeline(); }}
+                  className="text-accent underline underline-offset-4">
+                  Open the master timeline
+                </button>
+                , where health sits on its own track beside them — parallel, because sitting near
+                something in time is not evidence of a relationship.
+              </p>
+            )}
             <p className="text-muted text-[14px] max-w-[80ch]">
               {intl.note}{" "}
               <a href={intl.source_url} target="_blank" rel="noreferrer noopener"

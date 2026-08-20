@@ -1,6 +1,6 @@
 {
  "chart_id": "suicide_international_who",
- "title": "Suicide rate, 2000–2021 — the United States among eleven countries and the world",
+ "title": "Suicide rate, 2000–2021 — the United States among thirteen countries and the world",
  "unit": "Deaths per 100,000, age-standardised to the WHO world standard population",
  "source_id": "hs016",
  "source_url": "https://api.worldbank.org/v2/country/USA;GBR;CAN;AUS/indicator/SH.STA.SUIC.P5?format=json&per_page=120&date=2000:2021",
@@ -103,102 +103,15 @@
      "value": 15.63
     }
    ],
-   "kind": "country"
-  },
-  {
-   "country": "Russia",
-   "emphasis": false,
    "kind": "country",
-   "change_pct": -59.7,
-   "points": [
-    {
-     "year": 2000,
-     "value": 53.06
-    },
-    {
-     "year": 2001,
-     "value": 51.79
-    },
-    {
-     "year": 2002,
-     "value": 50.72
-    },
-    {
-     "year": 2003,
-     "value": 49.35
-    },
-    {
-     "year": 2004,
-     "value": 47.44
-    },
-    {
-     "year": 2005,
-     "value": 45.17
-    },
-    {
-     "year": 2006,
-     "value": 41.44
-    },
-    {
-     "year": 2007,
-     "value": 39.63
-    },
-    {
-     "year": 2008,
-     "value": 38.39
-    },
-    {
-     "year": 2009,
-     "value": 36.84
-    },
-    {
-     "year": 2010,
-     "value": 35.78
-    },
-    {
-     "year": 2011,
-     "value": 34.61
-    },
-    {
-     "year": 2012,
-     "value": 33.6
-    },
-    {
-     "year": 2013,
-     "value": 32.83
-    },
-    {
-     "year": 2014,
-     "value": 32.61
-    },
-    {
-     "year": 2015,
-     "value": 31.12
-    },
-    {
-     "year": 2016,
-     "value": 30.2
-    },
-    {
-     "year": 2017,
-     "value": 27.3
-    },
-    {
-     "year": 2018,
-     "value": 25.9
-    },
-    {
-     "year": 2019,
-     "value": 24.47
-    },
-    {
-     "year": 2020,
-     "value": 21.01
-    },
-    {
-     "year": 2021,
-     "value": 21.37
-    }
+   "method": "WHO Global Health Estimates, age-standardised to the WHO world standard population",
+   "basis_short": "WHO estimate, age-standardised",
+   "source_url": "https://api.worldbank.org/v2/country/all/indicator/SH.STA.SUIC.P5",
+   "publisher": "WHO Global Health Estimates (via the World Bank open API)",
+   "tier": "B",
+   "caveats": [
+    "WHO's estimate for 2021 is 15.6. The United States' own vital statistics, age-adjusted to the US 2000 standard population, give 14.1 for the same year — different standard population, same underlying deaths.",
+    "US national figures continue past this chart: 14.2 in 2022 (the highest rate since 1941), 14.1 in 2023, 13.7 in 2024."
    ]
   },
   {
@@ -295,7 +208,121 @@
      "value": 27.53
     }
    ],
-   "kind": "country"
+   "kind": "country",
+   "method": "WHO Global Health Estimates, age-standardised to the WHO world standard population",
+   "basis_short": "WHO estimate, age-standardised",
+   "source_url": "https://api.worldbank.org/v2/country/all/indicator/SH.STA.SUIC.P5",
+   "publisher": "WHO Global Health Estimates (via the World Bank open API)",
+   "tier": "B",
+   "caveats": [
+    "Highest rate in the OECD across most of this period. Rose steeply to a peak around 2009–2011, then declined.",
+    "Korea's own crude rate reached 29.1 per 100,000 in 2024, a 13-year high — a different (crude) basis from the standardised figures shown here."
+   ]
+  },
+  {
+   "country": "Russia",
+   "emphasis": false,
+   "kind": "country",
+   "change_pct": -59.7,
+   "points": [
+    {
+     "year": 2000,
+     "value": 53.06
+    },
+    {
+     "year": 2001,
+     "value": 51.79
+    },
+    {
+     "year": 2002,
+     "value": 50.72
+    },
+    {
+     "year": 2003,
+     "value": 49.35
+    },
+    {
+     "year": 2004,
+     "value": 47.44
+    },
+    {
+     "year": 2005,
+     "value": 45.17
+    },
+    {
+     "year": 2006,
+     "value": 41.44
+    },
+    {
+     "year": 2007,
+     "value": 39.63
+    },
+    {
+     "year": 2008,
+     "value": 38.39
+    },
+    {
+     "year": 2009,
+     "value": 36.84
+    },
+    {
+     "year": 2010,
+     "value": 35.78
+    },
+    {
+     "year": 2011,
+     "value": 34.61
+    },
+    {
+     "year": 2012,
+     "value": 33.6
+    },
+    {
+     "year": 2013,
+     "value": 32.83
+    },
+    {
+     "year": 2014,
+     "value": 32.61
+    },
+    {
+     "year": 2015,
+     "value": 31.12
+    },
+    {
+     "year": 2016,
+     "value": 30.2
+    },
+    {
+     "year": 2017,
+     "value": 27.3
+    },
+    {
+     "year": 2018,
+     "value": 25.9
+    },
+    {
+     "year": 2019,
+     "value": 24.47
+    },
+    {
+     "year": 2020,
+     "value": 21.01
+    },
+    {
+     "year": 2021,
+     "value": 21.37
+    }
+   ],
+   "method": "WHO Global Health Estimates, age-standardised to the WHO world standard population",
+   "basis_short": "WHO estimate, age-standardised",
+   "source_url": "https://api.worldbank.org/v2/country/all/indicator/SH.STA.SUIC.P5",
+   "publisher": "WHO Global Health Estimates (via the World Bank open API)",
+   "tier": "B",
+   "caveats": [
+    "Peer-reviewed analysis finds Russia's official suicide mortality is substantially understated: deaths coded 'undetermined intent' fell far more slowly than coded suicides, implying true mortality roughly 60% higher for men and more than double for women.",
+    "Part of the recorded decline is therefore coding migration rather than fewer deaths."
+   ]
   },
   {
    "country": "Japan",
@@ -391,7 +418,16 @@
      "value": 17.43
     }
    ],
-   "kind": "country"
+   "kind": "country",
+   "method": "WHO Global Health Estimates, age-standardised to the WHO world standard population",
+   "basis_short": "WHO estimate, age-standardised",
+   "source_url": "https://api.worldbank.org/v2/country/all/indicator/SH.STA.SUIC.P5",
+   "publisher": "WHO Global Health Estimates (via the World Bank open API)",
+   "tier": "B",
+   "caveats": [
+    "Japan's own published figures are CRUDE rates from police records (15.6 per 100,000 in 2025), not age-standardised, and are not comparable with the standardised figures shown here.",
+    "Japan recorded its first year below 20,000 deaths in 2025 since records began in 1978."
+   ]
   },
   {
    "country": "France",
@@ -487,7 +523,16 @@
      "value": 16.58
     }
    ],
-   "kind": "country"
+   "kind": "country",
+   "method": "WHO Global Health Estimates, age-standardised to the WHO world standard population",
+   "basis_short": "WHO estimate, age-standardised",
+   "source_url": "https://api.worldbank.org/v2/country/all/indicator/SH.STA.SUIC.P5",
+   "publisher": "WHO Global Health Estimates (via the World Bank open API)",
+   "tier": "B",
+   "caveats": [
+    "France excludes deaths of undetermined intent, which Santé publique France flags as an under-estimate — the opposite convention to the UK.",
+    "2023: 8,848 deaths, standardised rate 13 per 100,000 on France's own basis."
+   ]
   },
   {
    "country": "India",
@@ -583,6 +628,15 @@
      "year": 2021,
      "value": 12.56
     }
+   ],
+   "method": "WHO Global Health Estimates, age-standardised to the WHO world standard population",
+   "basis_short": "WHO estimate, age-standardised",
+   "source_url": "https://api.worldbank.org/v2/country/all/indicator/SH.STA.SUIC.P5",
+   "publisher": "WHO Global Health Estimates (via the World Bank open API)",
+   "tier": "B",
+   "caveats": [
+    "India's official statistics are police-reported (NCRB). Verbal-autopsy research found roughly twice the official rate for adults in 2010.",
+    "GBD estimates ran about 75% above the official count for 2016. Attempted suicide was a criminal offence until the Mental Healthcare Act 2017."
    ]
   },
   {
@@ -679,7 +733,15 @@
      "value": 12.9
     }
    ],
-   "kind": "country"
+   "kind": "country",
+   "method": "WHO Global Health Estimates, age-standardised to the WHO world standard population",
+   "basis_short": "WHO estimate, age-standardised",
+   "source_url": "https://api.worldbank.org/v2/country/all/indicator/SH.STA.SUIC.P5",
+   "publisher": "WHO Global Health Estimates (via the World Bank open API)",
+   "tier": "B",
+   "caveats": [
+    "Germany's own published rate is crude (12.4 per 100,000 in 2024) and partly reflects population ageing; its EU-standardised rate for 2021 was 10.3."
+   ]
   },
   {
    "country": "Australia",
@@ -775,7 +837,15 @@
      "value": 13.08
     }
    ],
-   "kind": "country"
+   "kind": "country",
+   "method": "WHO Global Health Estimates, age-standardised to the WHO world standard population",
+   "basis_short": "WHO estimate, age-standardised",
+   "source_url": "https://api.worldbank.org/v2/country/all/indicator/SH.STA.SUIC.P5",
+   "publisher": "WHO Global Health Estimates (via the World Bank open API)",
+   "tier": "B",
+   "caveats": [
+    "ABS figures for the most recent years are preliminary and are revised upward as coronial investigations close."
+   ]
   },
   {
    "country": "Canada",
@@ -871,7 +941,15 @@
      "value": 9.44
     }
    ],
-   "kind": "country"
+   "kind": "country",
+   "method": "WHO Global Health Estimates, age-standardised to the WHO world standard population",
+   "basis_short": "WHO estimate, age-standardised",
+   "source_url": "https://api.worldbank.org/v2/country/all/indicator/SH.STA.SUIC.P5",
+   "publisher": "WHO Global Health Estimates (via the World Bank open API)",
+   "tier": "B",
+   "caveats": [
+    "WHO's 2021 estimate is 9.4. The Public Health Agency of Canada reports about 11.8 per 100,000 for 2023 on its own basis — a different standard population, not a contradiction."
+   ]
   },
   {
    "country": "China",
@@ -967,6 +1045,15 @@
      "year": 2021,
      "value": 8.95
     }
+   ],
+   "method": "WHO Global Health Estimates, age-standardised to the WHO world standard population",
+   "basis_short": "WHO estimate, age-standardised",
+   "source_url": "https://api.worldbank.org/v2/country/all/indicator/SH.STA.SUIC.P5",
+   "publisher": "WHO Global Health Estimates (via the World Bank open API)",
+   "tier": "B",
+   "caveats": [
+    "China's mortality registration historically covered around 10% of the population and was weighted toward eastern cities; earlier national figures required explicit adjustment for unreported deaths.",
+    "The long-run decline is nonetheless one of the largest recorded anywhere."
    ]
   },
   {
@@ -1063,7 +1150,226 @@
      "value": 9.55
     }
    ],
-   "kind": "country"
+   "kind": "country",
+   "method": "WHO Global Health Estimates, age-standardised to the WHO world standard population",
+   "basis_short": "WHO estimate, age-standardised",
+   "source_url": "https://api.worldbank.org/v2/country/all/indicator/SH.STA.SUIC.P5",
+   "publisher": "WHO Global Health Estimates (via the World Bank open API)",
+   "tier": "B",
+   "caveats": [
+    "The UK's own definition includes deaths of undetermined intent aged 15 and over, which raises its national figures relative to countries that exclude them.",
+    "England & Wales registration is subject to long coroner delays — only 38.7% of deaths registered in 2024 occurred in 2024."
+   ]
+  },
+  {
+   "country": "Israel",
+   "emphasis": false,
+   "kind": "country",
+   "change_pct": -36.0,
+   "points": [
+    {
+     "year": 2000,
+     "value": 6.83
+    },
+    {
+     "year": 2001,
+     "value": 6.45
+    },
+    {
+     "year": 2002,
+     "value": 5.7
+    },
+    {
+     "year": 2003,
+     "value": 6.38
+    },
+    {
+     "year": 2004,
+     "value": 6.06
+    },
+    {
+     "year": 2005,
+     "value": 6.93
+    },
+    {
+     "year": 2006,
+     "value": 5.58
+    },
+    {
+     "year": 2007,
+     "value": 5.27
+    },
+    {
+     "year": 2008,
+     "value": 5.29
+    },
+    {
+     "year": 2009,
+     "value": 5.98
+    },
+    {
+     "year": 2010,
+     "value": 6.71
+    },
+    {
+     "year": 2011,
+     "value": 5.63
+    },
+    {
+     "year": 2012,
+     "value": 6.03
+    },
+    {
+     "year": 2013,
+     "value": 5.09
+    },
+    {
+     "year": 2014,
+     "value": 4.98
+    },
+    {
+     "year": 2015,
+     "value": 4.51
+    },
+    {
+     "year": 2016,
+     "value": 5.13
+    },
+    {
+     "year": 2017,
+     "value": 5.07
+    },
+    {
+     "year": 2018,
+     "value": 5.36
+    },
+    {
+     "year": 2019,
+     "value": 5.03
+    },
+    {
+     "year": 2020,
+     "value": 5.08
+    },
+    {
+     "year": 2021,
+     "value": 4.37
+    }
+   ],
+   "method": "WHO Global Health Estimates, age-standardised to the WHO world standard population",
+   "basis_short": "WHO estimate, age-standardised",
+   "source_url": "https://api.worldbank.org/v2/country/all/indicator/SH.STA.SUIC.P5",
+   "publisher": "WHO Global Health Estimates (via the World Bank open API)",
+   "tier": "B",
+   "caveats": [
+    "Among the lowest recorded rates in the OECD across this period.",
+    "This series ends in 2021. It predates October 2023 entirely and says nothing about the current war."
+   ]
+  },
+  {
+   "country": "West Bank & Gaza",
+   "emphasis": false,
+   "kind": "country",
+   "change_pct": 3.2,
+   "points": [
+    {
+     "year": 2000,
+     "value": 0.63
+    },
+    {
+     "year": 2001,
+     "value": 0.64
+    },
+    {
+     "year": 2002,
+     "value": 0.66
+    },
+    {
+     "year": 2003,
+     "value": 0.64
+    },
+    {
+     "year": 2004,
+     "value": 0.64
+    },
+    {
+     "year": 2005,
+     "value": 0.63
+    },
+    {
+     "year": 2006,
+     "value": 0.59
+    },
+    {
+     "year": 2007,
+     "value": 0.63
+    },
+    {
+     "year": 2008,
+     "value": 0.59
+    },
+    {
+     "year": 2009,
+     "value": 0.55
+    },
+    {
+     "year": 2010,
+     "value": 0.53
+    },
+    {
+     "year": 2011,
+     "value": 0.57
+    },
+    {
+     "year": 2012,
+     "value": 0.67
+    },
+    {
+     "year": 2013,
+     "value": 0.8
+    },
+    {
+     "year": 2014,
+     "value": 0.92
+    },
+    {
+     "year": 2015,
+     "value": 0.76
+    },
+    {
+     "year": 2016,
+     "value": 0.65
+    },
+    {
+     "year": 2017,
+     "value": 0.66
+    },
+    {
+     "year": 2018,
+     "value": 0.68
+    },
+    {
+     "year": 2019,
+     "value": 0.66
+    },
+    {
+     "year": 2020,
+     "value": 0.64
+    },
+    {
+     "year": 2021,
+     "value": 0.65
+    }
+   ],
+   "method": "WHO Global Health Estimates, age-standardised to the WHO world standard population",
+   "basis_short": "WHO estimate, age-standardised",
+   "source_url": "https://api.worldbank.org/v2/country/all/indicator/SH.STA.SUIC.P5",
+   "publisher": "WHO Global Health Estimates (via the World Bank open API)",
+   "tier": "B",
+   "caveats": [
+    "A rate of 0.65 per 100,000 would be the lowest on earth by a wide margin. It is far more likely to measure registration than reality: suicide is heavily stigmatised and religiously proscribed, deaths are frequently recorded as accidents or of undetermined intent, and vital registration in the territories is fragmented.",
+    "This series ends in 2021. It predates October 2023 entirely and says nothing about the current war."
+   ]
   },
   {
    "country": "World",
@@ -1159,7 +1465,48 @@
      "year": 2021,
      "value": 9.13
     }
+   ],
+   "method": "WHO Global Health Estimates, age-standardised to the WHO world standard population",
+   "basis_short": "WHO estimate, age-standardised",
+   "source_url": "https://api.worldbank.org/v2/country/all/indicator/SH.STA.SUIC.P5",
+   "publisher": "WHO Global Health Estimates (via the World Bank open API)",
+   "tier": "B",
+   "caveats": [
+    "A population-weighted global estimate, not a country. Only 86 of 183 WHO member states have good-quality vital registration, so the global figure rests heavily on modelling.",
+    "A 2025 meta-analysis estimates about 17.9% of suicides are missing from official statistics worldwide — implying over a million actual deaths a year against WHO's ~727,000."
    ]
+  }
+ ],
+ "covid_markers": [
+  {
+   "date": "2019-12-31",
+   "x": 2019.99,
+   "label": "WHO notified, Wuhan",
+   "source_url": "https://www.who.int/news/item/29-06-2020-covidtimeline"
+  },
+  {
+   "date": "2020-03-11",
+   "x": 2020.19,
+   "label": "Pandemic declared",
+   "source_url": "https://www.who.int/news/item/29-06-2020-covidtimeline"
+  },
+  {
+   "date": "2020-12-08",
+   "x": 2020.94,
+   "label": "First vaccinations",
+   "source_url": "https://www.who.int/news-room/spotlight/the-race-for-a-covid-19-vaccine-explained"
+  },
+  {
+   "date": "2021-08-01",
+   "x": 2021.58,
+   "label": "Boosters begin",
+   "source_url": "https://www.who.int/news/item/10-08-2021-interim-statement-on-covid-19-vaccine-booster-doses"
+  },
+  {
+   "date": "2023-05-05",
+   "x": 2023.34,
+   "label": "Emergency phase ends",
+   "source_url": "https://www.who.int/news/item/05-05-2023-statement-on-the-fifteenth-meeting-of-the-international-health-regulations-(2005)-emergency-committee-regarding-the-coronavirus-disease-(covid-19)-pandemic"
   }
  ]
 }

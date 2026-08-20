@@ -97,7 +97,7 @@ export default function DataView() {
 
       {sub === "timeline" && <TimelineNarrative onGo={pick} />}
       {sub === "timeline" && <TimelineHub onGo={pick} />}
-      {sub === "health" && <HealthSignals />}
+      {sub === "health" && <HealthSignals onGoTimeline={() => pick("timeline")} />}
     </div>
   );
 }

@@ -118,9 +118,9 @@ await page.getByRole("button", { name: /Open Public Health/i }).click();
 await page.waitForTimeout(1000);
 const hs = await page.evaluate(() => ({
   verdictRenamed: document.body.textContent.includes("Has suicide increased by ~30%?"),
-  intlChart: document.body.textContent.includes("Twelve lines, one way of counting"),
+  intlChart: document.body.textContent.includes("Fourteen lines, one way of counting"),
   intlLabels: (() => {
-    const want = ["United States","Russia","South Korea","Japan","France","India","Germany","Australia","Canada","China","UK","World"];
+    const want = ["United States","Russia","South Korea","Japan","France","India","Germany","Australia","Canada","China","UK","Israel","West Bank & Gaza","World"];
     const found = want.map((c) => [...document.querySelectorAll("svg text")].find((t) => t.textContent.startsWith(c + " ")));
     if (found.some((t) => !t)) return false;
     // every label must sit inside the drawing area with a finite y
@@ -128,9 +128,9 @@ const hs = await page.evaluate(() => ({
   })(),
   intlLabelsDistinct: (() => {
     const ys = [...document.querySelectorAll("svg text")]
-      .filter((t) => /^(United States|Russia|South Korea|Japan|France|India|Germany|Australia|Canada|China|UK|World) /.test(t.textContent))
+      .filter((t) => /^(United States|Russia|South Korea|Japan|France|India|Germany|Australia|Canada|China|UK|Israel|West Bank & Gaza|World) /.test(t.textContent))
       .map((t) => Math.round(t.getBBox?.().y ?? -1));
-    return new Set(ys).size === ys.length && ys.length === 12;
+    return new Set(ys).size === ys.length && ys.length === 14;
   })(),
   chartBeforeVerdict: (() => {
     const h = [...document.querySelectorAll("h2,figcaption")];
@@ -144,7 +144,7 @@ const hs = await page.evaluate(() => ({
   changeToggle: [...document.querySelectorAll("button")].some((b) => /Change over period/.test(b.textContent)),
   changeTable: (() => {
     const t = [...document.querySelectorAll("table")].find((x) => /Change in suicide rate by country/.test(x.querySelector("caption")?.textContent || ""));
-    return !!t && t.querySelectorAll("tbody tr").length === 12;
+    return !!t && t.querySelectorAll("tbody tr").length === 14;
   })(),
   usRowShows40: (() => {
     const t = [...document.querySelectorAll("table")].find((x) => /Change in suicide rate by country/.test(x.querySelector("caption")?.textContent || ""));
@@ -234,8 +234,47 @@ console.log("phone:", JSON.stringify(mob));
 if (mob.minLabelPx < 9) fail(`phone chart labels ${mob.minLabelPx}px — illegible`);
 if (mob.labelled < 2) fail("phone chart lost its US/world labels");
 if (!mob.noOverflow) fail("phone chart overflows viewport");
-if (mob.tableRows !== 12) fail("phone: change table missing rows");
+if (mob.tableRows !== 14) fail("phone: change table missing rows");
 await phone.close();
+
+// Stage A: clickable series modal, COVID toggle, cross-link
+await page.getByRole("tab", { name: /^Public Health$/i }).click();
+await page.waitForTimeout(1500);
+const stageA = await page.evaluate(async () => {
+  const covidBox = [...document.querySelectorAll("input[type=checkbox]")]
+    .find((b) => /COVID/i.test(b.closest("label")?.textContent || ""));
+  covidBox?.click();
+  await new Promise((r) => setTimeout(r, 500));
+  const markers = [...document.querySelectorAll("svg text")]
+    .filter((t) => /WHO notified|Pandemic declared|First vaccinations/.test(t.textContent)).length;
+  covidBox?.click();
+  // click the US line's end label
+  const lbl = [...document.querySelectorAll("svg text")].find((t) => t.textContent.startsWith("United States"));
+  lbl?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+  await new Promise((r) => setTimeout(r, 700));
+  const d = [...document.querySelectorAll('[role="dialog"]')].find((n) => /How this is measured/.test(n.textContent));
+  const out = {
+    covidMarkers: markers,
+    modalOpen: !!d,
+    modalHasMethod: !!d?.textContent.includes("WHO Global Health Estimates"),
+    modalHasCaveat: !!d?.textContent.includes("What to know before quoting it"),
+    modalHasSource: !!d?.querySelector('a[href*="worldbank"]'),
+    modalRows: d ? d.querySelectorAll("tbody tr").length : 0,
+    crossLink: [...document.querySelectorAll("button")].some((b) => /Open the master timeline/.test(b.textContent)),
+    palestineCaveat: document.body.textContent.includes("two lowest lines need reading with care"),
+  };
+  document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+  return out;
+});
+console.log("stageA:", JSON.stringify(stageA));
+// Only the pre-2021 markers can render while the chart ends at 2021; the
+// booster and emergency-end markers appear once Stage B extends the range.
+if (stageA.covidMarkers < 3) fail(`covid markers in range: ${stageA.covidMarkers}, expected 3`);
+if (!stageA.modalOpen) fail("series modal did not open");
+if (!stageA.modalHasMethod || !stageA.modalHasCaveat || !stageA.modalHasSource) fail("series modal incomplete");
+if (stageA.modalRows !== 22) fail(`series modal year rows: ${stageA.modalRows}`);
+if (!stageA.crossLink) fail("timeline cross-link missing");
+if (!stageA.palestineCaveat) fail("Israel/Palestine caveat missing");
 
 // The change view's headline must also name what is being measured
 await page.getByRole("tab", { name: /^Public Health$/i }).click();
