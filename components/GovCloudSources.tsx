@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import ListPager from "@/components/ListPager";
+import { SkeletonRows, Skeleton } from "@/components/Skeleton";
 import { Input } from "@/components/ui/input";
 import { track } from "@/lib/analytics";
 
@@ -59,7 +60,15 @@ export default function GovCloudSources() {
   const totalPages = Math.max(1, Math.ceil(list.length / PAGE_SIZE));
   const pageItems = useMemo(() => list.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE), [list, page]);
 
-  if (!rows) return null;
+  if (!rows) {
+    return (
+      <section className="w-full mt-24" aria-busy="true">
+        <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">Sources</h2>
+        <Skeleton className="h-4 w-96 mb-8" />
+        <SkeletonRows n={8} />
+      </section>
+    );
+  }
 
   return (
     <section ref={topRef} className="w-full mt-24">

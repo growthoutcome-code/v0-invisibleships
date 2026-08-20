@@ -118,6 +118,25 @@ html.dark .gov-report{
 /* Axis and series labels shipped at 10-12px, sized for a dense standalone page.
    At the site's scale they were unreadable, so every label class steps up. */
 .gov-report .dt { font-size: 15px; }
+
+/* loading shimmer: script-drawn containers are empty until the report JS has
+   loaded and rendered (~1-4s). Give empty containers their final footprint and
+   a subtle pulse so nothing pops in; the :empty selector self-clears the
+   instant content is drawn. Static under prefers-reduced-motion. */
+.gov-report .tiles:empty, .gov-report #tlsvg:empty, .gov-report .hbars:empty,
+.gov-report #heat:empty, .gov-report #tline:empty, .gov-report #rcbars:empty {
+  display: block; background: rgb(var(--panel)); border-radius: 12px;
+  animation: gr-pulse 1.6s ease-in-out infinite;
+}
+.gov-report .tiles:empty { min-height: 92px; }
+.gov-report #tlsvg:empty { min-height: 420px; }
+.gov-report #heat:empty { min-height: 320px; }
+.gov-report .hbars:empty, .gov-report #tline:empty, .gov-report #rcbars:empty { min-height: 160px; }
+@keyframes gr-pulse { 0%,100% { opacity: 1 } 50% { opacity: .45 } }
+@media (prefers-reduced-motion: reduce) {
+  .gov-report .tiles:empty, .gov-report #tlsvg:empty, .gov-report .hbars:empty,
+  .gov-report #heat:empty, .gov-report #tline:empty, .gov-report #rcbars:empty { animation: none; }
+}
 .gov-report .legend, .gov-report .foot, .gov-report .pill,
 .gov-report .tile .l { font-size: 14px; }
 .gov-report .hrow, .gov-report .tllab, .gov-report .tlval { font-size: 15px; }

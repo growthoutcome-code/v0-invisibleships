@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import ListPager from "@/components/ListPager";
+import { Skeleton, SkeletonRows, SkeletonChart } from "@/components/Skeleton";
 import { Input } from "@/components/ui/input";
 import { track } from "@/lib/analytics";
 
@@ -91,6 +92,16 @@ function SourceLink({ id, sources }: { id?: string | null; sources: Source[] }) 
     >
       source
     </a>
+  );
+}
+
+/** Loading placeholder for a register section (heading + rows). */
+function SectionSkeleton({ title }: { title: string }) {
+  return (
+    <section className="mb-16" aria-busy="true">
+      <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">{title}</h2>
+      <SkeletonRows n={5} />
+    </section>
   );
 }
 
@@ -309,14 +320,16 @@ export default function HealthSignals() {
 
       {/* Stat tiles + tier legend */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-3">
-        {[
-          [indicators?.length ?? "—", "indicator rows"],
-          [milestones?.length ?? "—", "timeline milestones"],
-          [(claims?.length ?? 0) + (dq?.length ?? 0) + (overlaps?.length ?? 0) || "—", "register rows"],
-          [srcs.length || "—", "sources"],
-        ].map(([n, l]) => (
-          <div key={String(l)} className="border border-edge rounded-xl px-4 py-3">
-            <div className="font-display font-semibold text-[28px] text-foreground">{n}</div>
+        {([
+          [indicators?.length ?? null, "indicator rows"],
+          [milestones?.length ?? null, "timeline milestones"],
+          [claims && dq && overlaps ? claims.length + dq.length + overlaps.length : null, "register rows"],
+          [sources ? sources.length : null, "sources"],
+        ] as [number | null, string][]).map(([n, l]) => (
+          <div key={l} className="border border-edge rounded-xl px-4 py-3">
+            {n === null
+              ? <Skeleton className="h-[34px] w-14 my-[3px]" />
+              : <div className="font-display font-semibold text-[28px] text-foreground">{n}</div>}
             <div className="text-muted text-[13px]">{l}</div>
           </div>
         ))}
@@ -328,6 +341,16 @@ export default function HealthSignals() {
       </p>
 
       {/* Verdict */}
+      {!verdict && (
+        <section className="mb-16" aria-busy="true">
+          <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
+            The claim under review: &ldquo;a ~30% increase in suicide&rdquo;
+          </h2>
+          <Skeleton className="h-4 w-full max-w-[80ch] mb-2" />
+          <Skeleton className="h-4 w-5/6 max-w-[74ch] mb-6" />
+          <SkeletonRows n={4} />
+        </section>
+      )}
       {verdict && (
         <section className="mb-16">
           <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
@@ -349,6 +372,7 @@ export default function HealthSignals() {
       {/* Charts */}
       <section className="mb-16">
         <h2 className="font-display font-semibold text-foreground text-[21px] mb-6">Two series, read together</h2>
+        {indicators === null && (<><SkeletonChart /><SkeletonChart /></>)}
         {suicideSeries.length > 1 && (
           <LineChart
             title="United States — suicide rate, 1999–2024"
@@ -373,6 +397,7 @@ export default function HealthSignals() {
       </section>
 
       {/* Trends */}
+      {trends === null && <SectionSkeleton title="What the series show" />}
       {!!trends?.length && (
         <section ref={trendsP.ref} className="mb-16">
           <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">What the series show</h2>
@@ -390,6 +415,7 @@ export default function HealthSignals() {
       )}
 
       {/* Data quality register */}
+      {dq === null && <SectionSkeleton title="How much the numbers can be trusted" />}
       {!!dq?.length && (
         <section ref={dqP.ref} className="mb-16">
           <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">How much the numbers can be trusted</h2>
@@ -415,6 +441,7 @@ export default function HealthSignals() {
       )}
 
       {/* Claims register */}
+      {claims === null && <SectionSkeleton title="Causes, as attributed" />}
       {!!claims?.length && (
         <section ref={claimsP.ref} className="mb-16">
           <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">Causes, as attributed</h2>
@@ -442,6 +469,7 @@ export default function HealthSignals() {
       )}
 
       {/* Overlaps */}
+      {overlaps === null && <SectionSkeleton title="Overlaps with the Government Cloud record" />}
       {!!overlaps?.length && (
         <section ref={overlapsP.ref} className="mb-16">
           <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">Overlaps with the Government Cloud record</h2>
@@ -466,6 +494,7 @@ export default function HealthSignals() {
       )}
 
       {/* Milestones */}
+      {milestones === null && <SectionSkeleton title="Dated milestones" />}
       {!!milestones?.length && (
         <section ref={milestonesP.ref} className="mb-16">
           <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">Dated milestones</h2>
@@ -503,6 +532,7 @@ export default function HealthSignals() {
           aria-label="Filter indicators"
           className="mb-6 max-w-[420px]"
         />
+        {indicators === null && <SkeletonRows n={8} />}
         <div className="overflow-x-auto">
           <table className="w-full text-[14px]">
             <thead>
@@ -543,6 +573,7 @@ export default function HealthSignals() {
           all accessed 2026-08-19. Links open in a new tab.
           {srcTotalPages > 1 && <span className="text-muted"> Page {srcPage} of {srcTotalPages}.</span>}
         </p>
+        {sources === null && <SkeletonRows n={8} />}
         <ol className="list-none p-0 m-0">
           {srcPageItems.map((s) => (
             <li key={s.source_id} className="flex flex-wrap items-baseline gap-x-5 gap-y-1 py-3">
