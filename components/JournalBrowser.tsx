@@ -707,7 +707,7 @@ function DocumentsView() {
         <span />
         <ShareMenu title={`${SITE} — Documents`} align="right" />
       </div>
-      <p className="text-sm text-muted mb-5">Additional documents beyond the four-part journal series.</p>
+      <p className="text-sm text-muted mb-5 measure">Additional documents beyond the four-part journal series.</p>
       <div className="space-y-10">
         {DOCUMENTS.map((d) => (
           <a key={d.title} href={d.url} target="_blank" rel="noreferrer" className="group block">
@@ -734,8 +734,8 @@ function AuthorView() {
             onError={(e) => { (e.currentTarget as HTMLImageElement).style.opacity = "0"; }} />
         </div>
         <div>
-          <p className="body-copy text-foreground/85">{AUTHOR.summary}</p>
-          <p className="body-copy text-foreground/85 mt-4">{AUTHOR.bio}</p>
+          <p className="body-copy text-foreground/85 measure">{AUTHOR.summary}</p>
+          <p className="body-copy text-foreground/85 mt-4 measure">{AUTHOR.bio}</p>
           <p className="text-sm text-muted mt-5">{AUTHOR.contact}</p>
         </div>
       </div>

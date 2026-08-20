@@ -39,7 +39,7 @@ export function DataNotice() {
 
   return (
     <aside role="note" className="w-full flex items-start gap-6 bg-panel px-6 py-5 mb-10">
-      <p className="body-copy text-foreground/85 max-w-[80ch] m-0">
+      <p className="body-copy text-foreground/85 measure m-0">
         <strong>About this data.</strong> This research was assembled with AI assistance from public
         records and published statistics, then checked against the original sources. Coverage is
         uneven — a small number here may mean little was reported, not that little happened — and
@@ -58,7 +58,7 @@ export function DataNotice() {
 
 export function DataNoteLine({ children, from }: { children: React.ReactNode; from: string }) {
   return (
-    <p className="text-muted text-[15px] mb-10 max-w-[80ch]">
+    <p className="text-muted text-[15px] mb-10 measure">
       {children} <DisclaimerLink from={from} />
     </p>
   );

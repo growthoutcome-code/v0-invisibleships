@@ -394,5 +394,25 @@ if (odPhone.minPx < 9) fail(`overdose chart label paints at ${odPhone.minPx}px o
 if (odPhone.overflow) fail("overdose chart overflows the phone viewport");
 await page.setViewportSize({ width: 1280, height: 900 });
 
+// One reading measure across the site. Prose had drifted to 70/74/75/80/85ch
+// and unconstrained; `.measure` is now the single token. This guards the drift
+// coming back one ad-hoc max-w-[Nch] at a time.
+const measures = await page.evaluate(() => {
+  const main = document.querySelector("main");
+  const w = [...main.querySelectorAll("p.measure.body-copy")]
+    .filter((e) => e.getBoundingClientRect().width > 400)
+    .map((e) => Math.round(e.getBoundingClientRect().width));
+  return { widths: [...new Set(w)], n: w.length };
+});
+console.log("measure:", JSON.stringify(measures));
+if (measures.n === 0) fail("no .measure prose found on the Data section");
+if (measures.widths.length > 1) fail(`prose measure is not uniform: ${measures.widths.join(", ")}`);
+if (measures.widths[0] < 820 || measures.widths[0] > 940) fail(`prose measure ${measures.widths[0]}px, expected ~880 (80ch)`);
+const stray = await page.evaluate(() =>
+  [...document.querySelectorAll('[class*="max-w-["]')]
+    .map((e) => (e.className || "").toString().match(/max-w-\[\d+ch\]/g) || [])
+    .flat().filter((c) => c !== "max-w-[46ch]"));
+if (stray.length) fail(`ad-hoc ch widths still present: ${[...new Set(stray)].join(", ")} — use .measure`);
+
 await browser.close();
 console.log(process.exitCode ? "RESULT: FAIL" : "RESULT: PASS");

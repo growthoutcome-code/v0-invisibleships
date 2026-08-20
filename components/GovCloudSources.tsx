@@ -73,7 +73,7 @@ export default function GovCloudSources() {
   return (
     <section ref={topRef} className="w-full mt-24">
       <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">Sources</h2>
-      <p className="body-copy text-foreground/75 mb-8 max-w-[70ch]">
+      <p className="body-copy text-foreground/75 mb-8 measure">
         {rows.length} citations across {distinct} distinct URLs. Tier A is primary or
         official, B corroborated secondary, C claimed or theoretical. Links open in a
         new tab.{totalPages > 1 && <span className="text-muted"> Page {page} of {totalPages}.</span>}

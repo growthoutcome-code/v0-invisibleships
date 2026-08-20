@@ -748,7 +748,7 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
         Official statistics, independently re-checked · causes shown only as attributed by their
         source · under-reporting documented rather than hidden ·
       </DataNoteLine>
-      <p className="text-muted text-[15px] max-w-[80ch] -mt-6 mb-10">
+      <p className="text-muted text-[15px] measure -mt-6 mb-10">
         This page reports suicide and overdose statistics — rates and counts only. If you or someone
         you know needs support: in the US, call or text{" "}
         <a href="https://988lifeline.org" target="_blank" rel="noreferrer noopener" className="underline underline-offset-4">988</a>;
@@ -785,7 +785,7 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
             <h3 className="font-display font-semibold text-foreground text-[17px] mb-2 mt-2">
               What the chart shows
             </h3>
-            <p className="body-copy text-foreground/90 max-w-[80ch] mb-4">
+            <p className="body-copy text-foreground/90 measure mb-4">
               Fourteen lines, one way of counting. Over these two decades the world&rsquo;s
               suicide rate fell 27%, and most countries fell with it. The United States went the
               other way: up 40%, in a steady climb with no reversal. Only three other lines rise at
@@ -796,7 +796,7 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
 
             {/* Every country's change, ranked — the chart shows levels, so the
                 figure behind the claim needs to be legible as a number too. */}
-            <div className="max-w-[80ch] mb-4 border border-edge rounded-xl overflow-hidden">
+            <div className="measure mb-4 border border-edge rounded-xl overflow-hidden">
               <table className="w-full text-[15px]">
                 <caption className="sr-only">Change in suicide rate by country, 2000 to 2021</caption>
                 <thead>
@@ -825,7 +825,7 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
               </table>
             </div>
 
-            <p className="body-copy text-foreground/90 max-w-[80ch] mb-3">
+            <p className="body-copy text-foreground/90 measure mb-3">
               <strong>The two lowest lines need reading with care.</strong> Israel is among the
               lowest recorded rates in the OECD. West Bank &amp; Gaza sits near 0.65 per 100,000 —
               which would be the lowest on earth by a wide margin, and is far more likely to measure
@@ -834,7 +834,7 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
               is fragmented. Both series end in 2021 and say nothing about the war that began in
               October 2023.
             </p>
-            <p className="body-copy text-foreground/90 max-w-[80ch] mb-3">
+            <p className="body-copy text-foreground/90 measure mb-3">
               <strong>The dotted ends: what happens after 2021.</strong> WHO&rsquo;s comparable
               estimates stop there, so beyond 2021 the chart switches to each country&rsquo;s own
               national statistics — five publish a series recent and complete enough to use. Those
@@ -843,13 +843,13 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
               2021 is each country&rsquo;s real movement; the <em>level</em> carries over. Click any
               line to see its published figures, unscaled, next to what the chart draws.
             </p>
-            <p className="body-copy text-foreground/90 max-w-[80ch] mb-3">
+            <p className="body-copy text-foreground/90 measure mb-3">
               What those five show: the United States peaked in 2022 at its highest rate since 1941
               and has fallen since, to 13.7 in 2024. Japan fell to its lowest count since records
               began in 1978. Australia and the UK edged down. South Korea went the other way, rising
               to a 13-year high in 2024.
             </p>
-            <p className="body-copy text-foreground/90 max-w-[80ch] mb-3">
+            <p className="body-copy text-foreground/90 measure mb-3">
               <strong>Why 40% here and &ldquo;~30%&rdquo; below?</strong> Both are the United States
               and both are correct — they count from different years and adjust for age differently.
               This chart runs 2000–2021 on WHO&rsquo;s world standard population. The ~30% figure
@@ -857,7 +857,7 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
               measured 1999–2016. Compare like with like and the answer is the same either way: a
               rise of roughly a third or more, sustained across two decades.
             </p>
-            <p className="body-copy text-foreground/90 max-w-[80ch] mb-3">
+            <p className="body-copy text-foreground/90 measure mb-3">
               What makes the US unusual here is less the direction than the shape — a rise that kept
               going while the global trend ran the other way. What the chart does <em>not</em> show
               is why. Explanations put forward by agencies and researchers — economic distress, the
@@ -869,7 +869,7 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
                 Causes, as attributed
               </a>
             </p>
-            <p className="text-muted text-[15px] max-w-[80ch] mb-3">
+            <p className="text-muted text-[15px] measure mb-3">
               <strong className="text-foreground/80">None of this is privileged information.</strong>{" "}
               The figures are WHO estimates published through the World Bank&rsquo;s open API; they
               were gathered with AI assistance and checked against the source, and anyone with the
@@ -877,7 +877,7 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
               <DisclaimerLink from="health_chart">How this research was gathered</DisclaimerLink>
             </p>
             {onGoTimeline && (
-              <p className="body-copy text-foreground/85 max-w-[80ch] mb-3">
+              <p className="body-copy text-foreground/85 measure mb-3">
                 Want to see this period against the procurement and legislation record?{" "}
                 <button type="button"
                   onClick={() => { track("health_to_timeline"); onGoTimeline(); }}
@@ -888,7 +888,7 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
                 something in time is not evidence of a relationship.
               </p>
             )}
-            <p className="text-muted text-[14px] max-w-[80ch]">
+            <p className="text-muted text-[14px] measure">
               {intl.note}{" "}
               <a href={intl.source_url} target="_blank" rel="noreferrer noopener"
                 className="underline underline-offset-4 hover:text-foreground">
@@ -906,8 +906,8 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
           <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
             Has suicide increased by ~30%?
           </h2>
-          <Skeleton className="h-4 w-full max-w-[80ch] mb-2" />
-          <Skeleton className="h-4 w-5/6 max-w-[74ch] mb-6" />
+          <Skeleton className="h-4 w-full measure mb-2" />
+          <Skeleton className="h-4 w-5/6 measure mb-6" />
           <SkeletonRows n={4} />
         </section>
       )}
@@ -916,7 +916,7 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
           <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
             Has suicide increased by ~30%?
           </h2>
-          <p className="body-copy text-foreground/90 max-w-[80ch]">{verdict.summary}</p>
+          <p className="body-copy text-foreground/90 measure">{verdict.summary}</p>
           <ul className="list-none p-0 m-0 mt-4">
             {verdict.key_figures.map((f, i) => (
               <li key={i} className="flex items-baseline gap-3 py-2 border-b border-edge/60 text-[16px] text-foreground/85">
@@ -936,7 +936,7 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
         <h2 className="font-display font-semibold text-foreground text-[21px] mb-6">
           The other curve: overdose deaths
         </h2>
-        <p className="body-copy text-foreground/90 max-w-[80ch] mb-6">
+        <p className="body-copy text-foreground/90 measure mb-6">
           Suicide and overdose are often reported together as &ldquo;deaths of despair.&rdquo;
           They have not moved together. Over the same quarter-century in which the US suicide
           rate rose, overdose deaths rose far more steeply — then reversed, sharply, in a way
@@ -951,7 +951,7 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
             yFmt={(v) => `${Math.round(v / 1000)}k`}
           />
         )}
-        <p className="body-copy text-foreground/90 max-w-[80ch]">
+        <p className="body-copy text-foreground/90 measure">
           <strong className="text-foreground">The rise is the larger half of this record.</strong>{" "}
           Overdose deaths went from 16,849 in 1999 to 107,941 in 2022 — more than six times as
           many, in twenty-three years. The decline since is real and steep: down 26.2% in 2024,
@@ -959,7 +959,7 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
           starts from a peak that did not exist a generation ago, and 2025 remains roughly four
           times the 1999 count.
         </p>
-        <p className="text-muted text-[14px] max-w-[80ch] mt-3">
+        <p className="text-muted text-[14px] measure mt-3">
           The 2025 point is provisional (hollow) and will revise upward as late certificates are
           processed. That matters for the headline: measured against CDC&rsquo;s provisional 2024
           estimate the 2025 fall is almost 14%; measured against the final 2024 count it is about
@@ -977,7 +977,7 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
             {trendsP.slice.map((t, i) => (
               <li key={i} className="flex items-baseline gap-3 py-3 border-b border-edge/60 text-[16px] text-foreground/85">
                 <TierChip t={t.tier} />
-                <span className="max-w-[85ch]">{t.statement}</span>
+                <span className="measure">{t.statement}</span>
                 <span className="ml-auto"><SourceLink id={t.source_id} sources={srcs} /></span>
               </li>
             ))}
@@ -991,7 +991,7 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
       {!!dq?.length && (
         <section ref={dqP.ref} className="mb-16">
           <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">How much the numbers can be trusted</h2>
-          <p className="text-muted text-[15px] mb-6 max-w-[80ch]">
+          <p className="text-muted text-[15px] mb-6 measure">
             No country was excluded for having weak data — the weakness is the record.
           </p>
           <ul className="list-none p-0 m-0">
@@ -1000,10 +1000,10 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
                 <div className="flex items-baseline gap-3">
                   <TierChip t={d.tier} />
                   <span className="text-foreground text-[16px] font-medium">{d.geography}</span>
-                  <span className="text-foreground/85 text-[16px] max-w-[75ch]">{d.issue}</span>
+                  <span className="text-foreground/85 text-[16px] measure">{d.issue}</span>
                   <span className="ml-auto"><SourceLink id={d.source_id} sources={srcs} /></span>
                 </div>
-                <p className="text-muted text-[14px] mt-2 mb-0 max-w-[85ch]">{d.quantification} — {d.documented_by}, {d.document}</p>
+                <p className="text-muted text-[14px] mt-2 mb-0 measure">{d.quantification} — {d.documented_by}, {d.document}</p>
               </li>
             ))}
           </ul>
@@ -1016,7 +1016,7 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
       {!!claims?.length && (
         <section ref={claimsP.ref} id="causes" className="mb-16 scroll-mt-28">
           <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">Causes, as attributed</h2>
-          <p className="text-muted text-[15px] mb-6 max-w-[80ch]">
+          <p className="text-muted text-[15px] mb-6 measure">
             Who attributes what, in which document. Counter-attributions listed on the same terms.
           </p>
           <ul className="list-none p-0 m-0">
@@ -1024,10 +1024,10 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
               <li key={c.claim_id} className="py-4 border-b border-edge/60">
                 <div className="flex items-baseline gap-3">
                   <TierChip t={c.tier} />
-                  <span className="text-foreground/85 text-[16px] max-w-[80ch]">{c.cause_attributed}</span>
+                  <span className="text-foreground/85 text-[16px] measure">{c.cause_attributed}</span>
                   <span className="ml-auto"><SourceLink id={c.source_id} sources={srcs} /></span>
                 </div>
-                <p className="text-muted text-[14px] mt-2 mb-0 max-w-[85ch]">
+                <p className="text-muted text-[14px] mt-2 mb-0 measure">
                   — {c.attributed_by}, <em>{c.document}</em>{c.doc_date ? ` (${c.doc_date})` : ""}
                   {c.contested_by ? ` · contested by ${c.contested_by}` : ""}
                 </p>
@@ -1043,7 +1043,7 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
       {!!overlaps?.length && (
         <section ref={overlapsP.ref} className="mb-16">
           <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">Overlaps with the Government Cloud record</h2>
-          <p className="text-muted text-[15px] mb-6 max-w-[80ch]">
+          <p className="text-muted text-[15px] mb-6 measure">
             Co-occurrence in time or place is not evidence of a relationship. Each row says what it
             does <em>not</em> show.
           </p>
@@ -1053,9 +1053,9 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
                 <div className="flex items-baseline gap-3">
                   <TierChip t={o.tier} />
                   <span className="text-[12px] uppercase tracking-wide text-muted shrink-0">{o.basis}</span>
-                  <span className="text-foreground/85 text-[16px] max-w-[80ch]">{o.observation}</span>
+                  <span className="text-foreground/85 text-[16px] measure">{o.observation}</span>
                 </div>
-                <p className="text-muted text-[14px] mt-2 mb-0 max-w-[85ch]">Does not show: {o.non_causal_note}</p>
+                <p className="text-muted text-[14px] mt-2 mb-0 measure">Does not show: {o.non_causal_note}</p>
               </li>
             ))}
           </ul>
@@ -1068,7 +1068,7 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
       {!!milestones?.length && (
         <section ref={milestonesP.ref} className="mb-16">
           <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">Dated milestones</h2>
-          <p className="body-copy text-foreground/75 mb-6 max-w-[80ch]">
+          <p className="body-copy text-foreground/75 mb-6 measure">
             These feed track F (&ldquo;Health&rdquo;) on the Government Cloud master
             timeline; entries before 2015 appear only here.
           </p>
@@ -1090,7 +1090,7 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
       {/* Indicator table */}
       <section className="mb-16">
         <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">All indicators</h2>
-        <p className="body-copy text-foreground/75 mb-6 max-w-[80ch]">
+        <p className="body-copy text-foreground/75 mb-6 measure">
           {indicators?.length ?? 0} rows across the United States, OECD peers, and the
           unrestricted international set (Global, China, Russia, India). Provisional
           and preliminary values are marked.
@@ -1138,7 +1138,7 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
       {/* Sources */}
       <section ref={srcRef} className="mb-8">
         <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">Sources</h2>
-        <p className="body-copy text-foreground/75 mb-8 max-w-[70ch]">
+        <p className="body-copy text-foreground/75 mb-8 measure">
           {srcs.length} sources ({tierCounts.A} A · {tierCounts.B} B · {tierCounts.C} C), accessed
           2026-08-19.
           {srcTotalPages > 1 && <span className="text-muted"> Page {srcPage} of {srcTotalPages}.</span>}

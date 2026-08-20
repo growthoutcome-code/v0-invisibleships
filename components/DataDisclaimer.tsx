@@ -35,7 +35,7 @@ export default function DataDisclaimer() {
       role="note"
       className="w-full flex items-start gap-6 bg-panel px-6 py-5 mb-10"
     >
-      <p className="body-copy text-foreground/85 max-w-[80ch] m-0">
+      <p className="body-copy text-foreground/85 measure m-0">
         This research was compiled with AI assistance from public sources, from a
         United States vantage point. <strong>Coverage is uneven by jurisdiction</strong> —
         a low count may reflect limited public reporting rather than limited activity,
