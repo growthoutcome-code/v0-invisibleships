@@ -31,7 +31,7 @@ console.log("initial tiles:", t0);
 // round trip
 await page.getByRole("tab", { name: /^Public Health$/i }).click();
 await page.waitForTimeout(1200);
-const health = await page.evaluate(() => document.body.textContent.includes("claim under review"));
+const health = await page.evaluate(() => document.body.textContent.includes("Has suicide increased"));
 console.log("health tab renders:", health);
 if (!health) fail("health tab content missing");
 const hiddenTiles = await page.evaluate(() => document.getElementById("a_tiles")?.innerHTML.length ?? -1);
@@ -117,6 +117,16 @@ for (const k of Object.keys(tl)) if (!tl[k]) fail("timeline." + k);
 await page.getByRole("button", { name: /Open Public Health/i }).click();
 await page.waitForTimeout(1000);
 const hs = await page.evaluate(() => ({
+  verdictRenamed: document.body.textContent.includes("Has suicide increased by ~30%?"),
+  intlChart: document.body.textContent.includes("Did it happen everywhere?"),
+  intlLabels: ["United States","South Korea","Japan","France","Germany","Australia","Canada","UK"]
+    .every((c) => [...document.querySelectorAll("svg text")].some((t) => t.textContent.startsWith(c))),
+  chartBeforeVerdict: (() => {
+    const h = [...document.querySelectorAll("h2,figcaption")];
+    const chart = h.findIndex((n) => n.textContent.includes("suicide rate, 1999"));
+    const verdict = h.findIndex((n) => n.textContent.includes("Has suicide increased"));
+    return chart > -1 && verdict > -1 && chart < verdict;
+  })(),
   crisisKept: document.body.textContent.includes("988"),
   longNoteGone: !document.body.textContent.includes("Public health statistics compiled with AI assistance"),
   link: [...document.querySelectorAll("button")].some((b) => /full disclaimer/i.test(b.textContent)),

@@ -49,6 +49,11 @@ type Source = {
   source_id: string; url: string; publisher?: string; title?: string;
   evidence_tier?: string; accessed?: string; archived_url?: string | null;
 };
+type IntlChart = {
+  title: string; unit: string; note: string; publisher: string; tier: string;
+  source_url: string;
+  series: { country: string; emphasis: boolean; change_pct: number; points: { year: number; value: number }[] }[];
+};
 type Verdict = {
   claim: string; mapping: string; recent_spike: boolean; summary: string;
   key_figures: { figure: string; tier: string; source_id?: string | null }[];
@@ -218,6 +223,97 @@ function LineChart({
   );
 }
 
+/**
+ * Multi-series line chart. The site is monochrome, so colour cannot carry
+ * identity: every line is labelled at its right end (labels de-collide by
+ * pushing apart to a minimum spacing), one series is emphasised with a heavier
+ * solid stroke, and the rest are recessive. The full table below the charts is
+ * the table view.
+ */
+function MultiLineChart({ chart }: { chart: IntlChart }) {
+  const [hoverYear, setHoverYear] = useState<number | null>(null);
+  const W = 760, H = 380, padL = 44, padR = 132, padT = 16, padB = 34;
+  const all = chart.series.flatMap((s) => s.points);
+  if (!all.length) return null;
+  const x0 = Math.min(...all.map((p) => p.year)), x1 = Math.max(...all.map((p) => p.year));
+  const vMax = Math.max(...all.map((p) => p.value));
+  const v0 = 0, v1 = vMax * 1.08;
+  const X = (y: number) => padL + ((y - x0) / (x1 - x0)) * (W - padL - padR);
+  const Y = (v: number) => padT + (1 - (v - v0) / (v1 - v0)) * (H - padT - padB);
+
+  // End labels: sort by value and enforce a minimum vertical gap so eight
+  // countries remain readable where their 2021 values sit close together.
+  const MIN_GAP = 15;
+  const ends = chart.series
+    .map((s) => ({ s, last: s.points[s.points.length - 1] }))
+    .sort((a, b) => a.last.value - b.last.value);
+  let prevY = Infinity;
+  const placed = ends
+    .slice()
+    .reverse()
+    .map((e) => {
+      let y = Y(e.last.value);
+      if (y - prevY < MIN_GAP) y = prevY + MIN_GAP;
+      prevY = y;
+      return { ...e, labelY: y };
+    });
+
+  const yTicks = [0, 10, 20, 30].filter((t) => t <= v1);
+  const xTicks = [2000, 2005, 2010, 2015, 2021].filter((y) => y >= x0 && y <= x1);
+
+  return (
+    <figure className="m-0 mb-6">
+      <figcaption className="font-display font-semibold text-foreground text-[17px] mb-1">{chart.title}</figcaption>
+      <p className="text-muted text-[13px] m-0 mb-2">{chart.unit}.</p>
+      <svg viewBox={`0 0 ${W} ${H}`} width="100%" role="img" aria-label={chart.title}
+        onMouseLeave={() => setHoverYear(null)} style={{ fontFamily: "inherit" }}>
+        {yTicks.map((t) => (
+          <g key={t}>
+            <line x1={padL} y1={Y(t)} x2={W - padR} y2={Y(t)} stroke="rgb(var(--edge))" strokeWidth="1" />
+            <text x={padL - 8} y={Y(t) + 4} fontSize="11" fill="rgb(var(--muted))" textAnchor="end">{t}</text>
+          </g>
+        ))}
+        {xTicks.map((y) => (
+          <text key={y} x={X(y)} y={H - 10} fontSize="11" fill="rgb(var(--muted))" textAnchor="middle">{y}</text>
+        ))}
+        {hoverYear !== null && (
+          <line x1={X(hoverYear)} y1={padT} x2={X(hoverYear)} y2={H - padB}
+            stroke="rgb(var(--muted))" strokeDasharray="3 3" pointerEvents="none" />
+        )}
+        {chart.series.map((s) => (
+          <path key={s.country}
+            d={s.points.map((p, i) => `${i ? "L" : "M"}${X(p.year).toFixed(1)},${Y(p.value).toFixed(1)}`).join(" ")}
+            fill="none"
+            stroke={s.emphasis ? "rgb(var(--foreground))" : "rgb(var(--muted))"}
+            strokeWidth={s.emphasis ? 2.5 : 1.25}
+            opacity={s.emphasis ? 1 : 0.75} />
+        ))}
+        {placed.map(({ s, last, labelY }) => (
+          <g key={s.country}>
+            <line x1={X(last.year)} y1={Y(last.value)} x2={W - padR + 6} y2={labelY}
+              stroke="rgb(var(--edge))" strokeWidth="1" />
+            <text x={W - padR + 10} y={labelY + 4} fontSize="12"
+              fill={s.emphasis ? "rgb(var(--foreground))" : "rgb(var(--muted))"}
+              fontWeight={s.emphasis ? 700 : 400}>
+              {s.country} {hoverYear === null ? last.value.toFixed(1) : (s.points.find((p) => p.year === hoverYear)?.value.toFixed(1) ?? "—")}
+            </text>
+          </g>
+        ))}
+        {/* Hover columns: one hit target per year, so every line reads at once. */}
+        {Array.from({ length: x1 - x0 + 1 }, (_, i) => x0 + i).map((y) => (
+          <rect key={y} x={X(y) - (W - padL - padR) / (x1 - x0) / 2} y={padT}
+            width={(W - padL - padR) / (x1 - x0)} height={H - padT - padB}
+            fill="transparent" onMouseEnter={() => setHoverYear(y)} />
+        ))}
+        {hoverYear !== null && (
+          <text x={X(hoverYear)} y={padT - 2} fontSize="12" fontWeight="600"
+            fill="rgb(var(--foreground))" textAnchor="middle" pointerEvents="none">{hoverYear}</text>
+        )}
+      </svg>
+    </figure>
+  );
+}
+
 /* ------------------------------------------------------------ component --- */
 
 export default function HealthSignals() {
@@ -229,6 +325,7 @@ export default function HealthSignals() {
   const trends = useTable<Trend>("health_trends");
   const sources = useTable<Source>("health_sources");
   const [verdict, setVerdict] = useState<Verdict | null>(null);
+  const [intl, setIntl] = useState<IntlChart | null>(null);
   const [q, setQ] = useState("");
   const [srcPage, setSrcPage] = useState(1);
   const srcRef = useRef<HTMLElement | null>(null);
@@ -240,6 +337,10 @@ export default function HealthSignals() {
     fetch("/data/health/tables/health_verdict.json")
       .then((r) => r.json())
       .then((d: Verdict) => { if (alive) setVerdict(d); })
+      .catch(() => {});
+    fetch("/data/health/charts/suicide_international.json")
+      .then((r) => r.json())
+      .then((d: IntlChart) => { if (alive) setIntl(d); })
       .catch(() => {});
     return () => { alive = false; };
   }, []);
@@ -334,11 +435,24 @@ export default function HealthSignals() {
         <strong className="text-foreground/80">C claimed</strong> ({tierCounts.C}). Tier C renders dashed.
       </p>
 
+      {/* Chart first, then the verdict it answers (Sean, 2026-08-20). */}
+      <section className="mb-16">
+        {indicators === null && <SkeletonChart />}
+        {suicideSeries.length > 1 && (
+          <LineChart
+            title="United States — suicide rate, 1999–2024"
+            points={suicideSeries}
+            unit="Deaths per 100,000, age-adjusted (CDC/NCHS, final data)"
+            yFmt={(v) => v.toFixed(1)}
+          />
+        )}
+      </section>
+
       {/* Verdict */}
       {!verdict && (
         <section className="mb-16" aria-busy="true">
           <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
-            The claim under review: &ldquo;a ~30% increase in suicide&rdquo;
+            Has suicide increased by ~30%?
           </h2>
           <Skeleton className="h-4 w-full max-w-[80ch] mb-2" />
           <Skeleton className="h-4 w-5/6 max-w-[74ch] mb-6" />
@@ -348,7 +462,7 @@ export default function HealthSignals() {
       {verdict && (
         <section className="mb-16">
           <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
-            The claim under review: &ldquo;a ~30% increase in suicide&rdquo;
+            Has suicide increased by ~30%?
           </h2>
           <p className="body-copy text-foreground/90 max-w-[80ch]">{verdict.summary}</p>
           <ul className="list-none p-0 m-0 mt-4">
@@ -363,18 +477,37 @@ export default function HealthSignals() {
         </section>
       )}
 
-      {/* Charts */}
+
+      {/* The same question asked across borders, on one comparable basis. */}
       <section className="mb-16">
-        <h2 className="font-display font-semibold text-foreground text-[21px] mb-6">Two series, read together</h2>
-        {indicators === null && (<><SkeletonChart /><SkeletonChart /></>)}
-        {suicideSeries.length > 1 && (
-          <LineChart
-            title="United States — suicide rate, 1999–2024"
-            points={suicideSeries}
-            unit="Deaths per 100,000, age-adjusted (CDC/NCHS, final data)"
-            yFmt={(v) => v.toFixed(1)}
-          />
+        <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">
+          Did it happen everywhere?
+        </h2>
+        <p className="body-copy text-foreground/85 max-w-[80ch] mb-6">
+          Eight wealthy countries, measured the same way. The United States is the one with a
+          steady, uninterrupted climb across the whole period. South Korea rose further — but
+          peaked around 2011 and has fallen since. Japan, France, Canada and Germany all declined.
+          The UK and Australia sit roughly flat with a recent uptick.
+        </p>
+        {intl === null ? <SkeletonChart /> : <MultiLineChart chart={intl} />}
+        {intl && (
+          <p className="text-muted text-[14px] max-w-[80ch]">
+            {intl.note}{" "}
+            <a href={intl.source_url} target="_blank" rel="noreferrer noopener"
+              className="underline underline-offset-4 hover:text-foreground">
+              {intl.publisher}
+            </a>{" "}
+            · Tier {intl.tier}
+          </p>
         )}
+      </section>
+
+      {/* Overdose */}
+      <section className="mb-16">
+        <h2 className="font-display font-semibold text-foreground text-[21px] mb-6">
+          The other curve: overdose deaths
+        </h2>
+        {indicators === null && <SkeletonChart />}
         {overdoseSeries.length > 1 && (
           <LineChart
             title="United States — drug overdose deaths, 2022–2025"
@@ -384,9 +517,8 @@ export default function HealthSignals() {
           />
         )}
         <p className="text-muted text-[14px] max-w-[80ch]">
-          The suicide series rose ~35% from 1999 to its 2018/2022 peak and declined in
-          2024; the overdose series fell 26.2% in 2024 — the largest drop on record —
-          and continued falling in 2025. Both directions are part of the record.
+          Overdose deaths fell 26.2% in 2024 — the largest one-year drop on record — and kept
+          falling in 2025. Both directions are part of the record.
         </p>
       </section>
 

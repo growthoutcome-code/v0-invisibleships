@@ -1,0 +1,773 @@
+{
+ "chart_id": "suicide_international_who",
+ "title": "Suicide rate, 2000-2021 — United States against seven peer countries",
+ "unit": "Deaths per 100,000, age-standardised to the WHO world standard population",
+ "source_id": "hs016",
+ "source_url": "https://api.worldbank.org/v2/country/USA;GBR;CAN;AUS/indicator/SH.STA.SUIC.P5?format=json&per_page=120&date=2000:2021",
+ "publisher": "WHO Global Health Estimates (via World Bank API)",
+ "tier": "B",
+ "accessed": "2026-08-20",
+ "note": "One comparable basis for all eight countries. These WHO modelled estimates differ in level from each country's own vital-registration figures (e.g. WHO Canada 2021 = 9.4 vs PHAC 11.8) and must not be spliced with the US national series shown above, which is age-adjusted to the US 2000 standard population.",
+ "series": [
+  {
+   "country": "United States",
+   "emphasis": true,
+   "change_pct": 39.9,
+   "points": [
+    {
+     "year": 2000,
+     "value": 11.17
+    },
+    {
+     "year": 2001,
+     "value": 11.55
+    },
+    {
+     "year": 2002,
+     "value": 11.87
+    },
+    {
+     "year": 2003,
+     "value": 11.76
+    },
+    {
+     "year": 2004,
+     "value": 11.92
+    },
+    {
+     "year": 2005,
+     "value": 11.83
+    },
+    {
+     "year": 2006,
+     "value": 11.96
+    },
+    {
+     "year": 2007,
+     "value": 12.31
+    },
+    {
+     "year": 2008,
+     "value": 12.65
+    },
+    {
+     "year": 2009,
+     "value": 12.82
+    },
+    {
+     "year": 2010,
+     "value": 13.2
+    },
+    {
+     "year": 2011,
+     "value": 13.44
+    },
+    {
+     "year": 2012,
+     "value": 13.67
+    },
+    {
+     "year": 2013,
+     "value": 13.7
+    },
+    {
+     "year": 2014,
+     "value": 14.1
+    },
+    {
+     "year": 2015,
+     "value": 14.42
+    },
+    {
+     "year": 2016,
+     "value": 14.63
+    },
+    {
+     "year": 2017,
+     "value": 15.19
+    },
+    {
+     "year": 2018,
+     "value": 15.44
+    },
+    {
+     "year": 2019,
+     "value": 15.11
+    },
+    {
+     "year": 2020,
+     "value": 14.96
+    },
+    {
+     "year": 2021,
+     "value": 15.63
+    }
+   ]
+  },
+  {
+   "country": "South Korea",
+   "emphasis": false,
+   "change_pct": 82.8,
+   "points": [
+    {
+     "year": 2000,
+     "value": 15.06
+    },
+    {
+     "year": 2001,
+     "value": 16.14
+    },
+    {
+     "year": 2002,
+     "value": 19.56
+    },
+    {
+     "year": 2003,
+     "value": 24.9
+    },
+    {
+     "year": 2004,
+     "value": 26.21
+    },
+    {
+     "year": 2005,
+     "value": 27.58
+    },
+    {
+     "year": 2006,
+     "value": 24.45
+    },
+    {
+     "year": 2007,
+     "value": 27.55
+    },
+    {
+     "year": 2008,
+     "value": 29.29
+    },
+    {
+     "year": 2009,
+     "value": 35.12
+    },
+    {
+     "year": 2010,
+     "value": 34.92
+    },
+    {
+     "year": 2011,
+     "value": 35.49
+    },
+    {
+     "year": 2012,
+     "value": 31.01
+    },
+    {
+     "year": 2013,
+     "value": 31.21
+    },
+    {
+     "year": 2014,
+     "value": 29.35
+    },
+    {
+     "year": 2015,
+     "value": 28.23
+    },
+    {
+     "year": 2016,
+     "value": 27.06
+    },
+    {
+     "year": 2017,
+     "value": 25.61
+    },
+    {
+     "year": 2018,
+     "value": 28.28
+    },
+    {
+     "year": 2019,
+     "value": 28.44
+    },
+    {
+     "year": 2020,
+     "value": 27.16
+    },
+    {
+     "year": 2021,
+     "value": 27.53
+    }
+   ]
+  },
+  {
+   "country": "Japan",
+   "emphasis": false,
+   "change_pct": -27.7,
+   "points": [
+    {
+     "year": 2000,
+     "value": 24.12
+    },
+    {
+     "year": 2001,
+     "value": 23.4
+    },
+    {
+     "year": 2002,
+     "value": 24.05
+    },
+    {
+     "year": 2003,
+     "value": 25.81
+    },
+    {
+     "year": 2004,
+     "value": 24.31
+    },
+    {
+     "year": 2005,
+     "value": 24.56
+    },
+    {
+     "year": 2006,
+     "value": 24.09
+    },
+    {
+     "year": 2007,
+     "value": 25.19
+    },
+    {
+     "year": 2008,
+     "value": 24.62
+    },
+    {
+     "year": 2009,
+     "value": 25.12
+    },
+    {
+     "year": 2010,
+     "value": 24.31
+    },
+    {
+     "year": 2011,
+     "value": 23.52
+    },
+    {
+     "year": 2012,
+     "value": 21.8
+    },
+    {
+     "year": 2013,
+     "value": 21.54
+    },
+    {
+     "year": 2014,
+     "value": 20.23
+    },
+    {
+     "year": 2015,
+     "value": 19.3
+    },
+    {
+     "year": 2016,
+     "value": 17.67
+    },
+    {
+     "year": 2017,
+     "value": 17.19
+    },
+    {
+     "year": 2018,
+     "value": 16.87
+    },
+    {
+     "year": 2019,
+     "value": 16.47
+    },
+    {
+     "year": 2020,
+     "value": 17.16
+    },
+    {
+     "year": 2021,
+     "value": 17.43
+    }
+   ]
+  },
+  {
+   "country": "France",
+   "emphasis": false,
+   "change_pct": -18.4,
+   "points": [
+    {
+     "year": 2000,
+     "value": 20.32
+    },
+    {
+     "year": 2001,
+     "value": 19.57
+    },
+    {
+     "year": 2002,
+     "value": 19.9
+    },
+    {
+     "year": 2003,
+     "value": 20.18
+    },
+    {
+     "year": 2004,
+     "value": 19.53
+    },
+    {
+     "year": 2005,
+     "value": 19.17
+    },
+    {
+     "year": 2006,
+     "value": 18.46
+    },
+    {
+     "year": 2007,
+     "value": 18.03
+    },
+    {
+     "year": 2008,
+     "value": 18.26
+    },
+    {
+     "year": 2009,
+     "value": 18.43
+    },
+    {
+     "year": 2010,
+     "value": 18.23
+    },
+    {
+     "year": 2011,
+     "value": 18.04
+    },
+    {
+     "year": 2012,
+     "value": 17.13
+    },
+    {
+     "year": 2013,
+     "value": 16.98
+    },
+    {
+     "year": 2014,
+     "value": 15.66
+    },
+    {
+     "year": 2015,
+     "value": 15.57
+    },
+    {
+     "year": 2016,
+     "value": 14.63
+    },
+    {
+     "year": 2017,
+     "value": 14.78
+    },
+    {
+     "year": 2018,
+     "value": 15.17
+    },
+    {
+     "year": 2019,
+     "value": 15.05
+    },
+    {
+     "year": 2020,
+     "value": 16.25
+    },
+    {
+     "year": 2021,
+     "value": 16.58
+    }
+   ]
+  },
+  {
+   "country": "Germany",
+   "emphasis": false,
+   "change_pct": -10.5,
+   "points": [
+    {
+     "year": 2000,
+     "value": 14.42
+    },
+    {
+     "year": 2001,
+     "value": 14.47
+    },
+    {
+     "year": 2002,
+     "value": 14.56
+    },
+    {
+     "year": 2003,
+     "value": 14.37
+    },
+    {
+     "year": 2004,
+     "value": 13.99
+    },
+    {
+     "year": 2005,
+     "value": 13.28
+    },
+    {
+     "year": 2006,
+     "value": 12.78
+    },
+    {
+     "year": 2007,
+     "value": 12.38
+    },
+    {
+     "year": 2008,
+     "value": 12.52
+    },
+    {
+     "year": 2009,
+     "value": 12.74
+    },
+    {
+     "year": 2010,
+     "value": 13.23
+    },
+    {
+     "year": 2011,
+     "value": 13.24
+    },
+    {
+     "year": 2012,
+     "value": 12.92
+    },
+    {
+     "year": 2013,
+     "value": 13.48
+    },
+    {
+     "year": 2014,
+     "value": 13.44
+    },
+    {
+     "year": 2015,
+     "value": 13.3
+    },
+    {
+     "year": 2016,
+     "value": 12.99
+    },
+    {
+     "year": 2017,
+     "value": 12.53
+    },
+    {
+     "year": 2018,
+     "value": 12.82
+    },
+    {
+     "year": 2019,
+     "value": 12.49
+    },
+    {
+     "year": 2020,
+     "value": 12.87
+    },
+    {
+     "year": 2021,
+     "value": 12.9
+    }
+   ]
+  },
+  {
+   "country": "Australia",
+   "emphasis": false,
+   "change_pct": 1.9,
+   "points": [
+    {
+     "year": 2000,
+     "value": 12.83
+    },
+    {
+     "year": 2001,
+     "value": 13.04
+    },
+    {
+     "year": 2002,
+     "value": 12.15
+    },
+    {
+     "year": 2003,
+     "value": 11.08
+    },
+    {
+     "year": 2004,
+     "value": 10.79
+    },
+    {
+     "year": 2005,
+     "value": 11.67
+    },
+    {
+     "year": 2006,
+     "value": 11.21
+    },
+    {
+     "year": 2007,
+     "value": 11.5
+    },
+    {
+     "year": 2008,
+     "value": 12.1
+    },
+    {
+     "year": 2009,
+     "value": 11.65
+    },
+    {
+     "year": 2010,
+     "value": 12.13
+    },
+    {
+     "year": 2011,
+     "value": 11.57
+    },
+    {
+     "year": 2012,
+     "value": 12.16
+    },
+    {
+     "year": 2013,
+     "value": 11.92
+    },
+    {
+     "year": 2014,
+     "value": 13.09
+    },
+    {
+     "year": 2015,
+     "value": 13.64
+    },
+    {
+     "year": 2016,
+     "value": 12.5
+    },
+    {
+     "year": 2017,
+     "value": 13.9
+    },
+    {
+     "year": 2018,
+     "value": 13.4
+    },
+    {
+     "year": 2019,
+     "value": 13.98
+    },
+    {
+     "year": 2020,
+     "value": 13.03
+    },
+    {
+     "year": 2021,
+     "value": 13.08
+    }
+   ]
+  },
+  {
+   "country": "Canada",
+   "emphasis": false,
+   "change_pct": -24.2,
+   "points": [
+    {
+     "year": 2000,
+     "value": 12.45
+    },
+    {
+     "year": 2001,
+     "value": 12.78
+    },
+    {
+     "year": 2002,
+     "value": 12.45
+    },
+    {
+     "year": 2003,
+     "value": 13.09
+    },
+    {
+     "year": 2004,
+     "value": 12.39
+    },
+    {
+     "year": 2005,
+     "value": 12.87
+    },
+    {
+     "year": 2006,
+     "value": 11.86
+    },
+    {
+     "year": 2007,
+     "value": 12.18
+    },
+    {
+     "year": 2008,
+     "value": 12.34
+    },
+    {
+     "year": 2009,
+     "value": 12.83
+    },
+    {
+     "year": 2010,
+     "value": 12.89
+    },
+    {
+     "year": 2011,
+     "value": 12.02
+    },
+    {
+     "year": 2012,
+     "value": 12.6
+    },
+    {
+     "year": 2013,
+     "value": 12.86
+    },
+    {
+     "year": 2014,
+     "value": 13.38
+    },
+    {
+     "year": 2015,
+     "value": 13.43
+    },
+    {
+     "year": 2016,
+     "value": 11.49
+    },
+    {
+     "year": 2017,
+     "value": 11.82
+    },
+    {
+     "year": 2018,
+     "value": 12.56
+    },
+    {
+     "year": 2019,
+     "value": 12.69
+    },
+    {
+     "year": 2020,
+     "value": 11.64
+    },
+    {
+     "year": 2021,
+     "value": 9.44
+    }
+   ]
+  },
+  {
+   "country": "UK",
+   "emphasis": false,
+   "change_pct": 12.2,
+   "points": [
+    {
+     "year": 2000,
+     "value": 8.51
+    },
+    {
+     "year": 2001,
+     "value": 8.23
+    },
+    {
+     "year": 2002,
+     "value": 8.27
+    },
+    {
+     "year": 2003,
+     "value": 7.99
+    },
+    {
+     "year": 2004,
+     "value": 8.2
+    },
+    {
+     "year": 2005,
+     "value": 7.9
+    },
+    {
+     "year": 2006,
+     "value": 7.83
+    },
+    {
+     "year": 2007,
+     "value": 7.54
+    },
+    {
+     "year": 2008,
+     "value": 8.05
+    },
+    {
+     "year": 2009,
+     "value": 7.94
+    },
+    {
+     "year": 2010,
+     "value": 7.8
+    },
+    {
+     "year": 2011,
+     "value": 8.33
+    },
+    {
+     "year": 2012,
+     "value": 8.27
+    },
+    {
+     "year": 2013,
+     "value": 8.74
+    },
+    {
+     "year": 2014,
+     "value": 8.45
+    },
+    {
+     "year": 2015,
+     "value": 8.62
+    },
+    {
+     "year": 2016,
+     "value": 8.25
+    },
+    {
+     "year": 2017,
+     "value": 7.98
+    },
+    {
+     "year": 2018,
+     "value": 9.16
+    },
+    {
+     "year": 2019,
+     "value": 9.39
+    },
+    {
+     "year": 2020,
+     "value": 8.9
+    },
+    {
+     "year": 2021,
+     "value": 9.55
+    }
+   ]
+  }
+ ]
+}

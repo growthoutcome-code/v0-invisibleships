@@ -18,5 +18,8 @@
   "health_verdict.json": 1,
   "health_caveats.json": 50,
   "health_sources.json": 102
+ },
+ "charts": {
+  "suicide_international.json": "8 countries × 22 years, WHO age-standardised (comparable basis)"
  }
 }
