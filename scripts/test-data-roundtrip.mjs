@@ -119,8 +119,19 @@ await page.waitForTimeout(1000);
 const hs = await page.evaluate(() => ({
   verdictRenamed: document.body.textContent.includes("Has suicide increased by ~30%?"),
   intlChart: document.body.textContent.includes("Did it happen everywhere?"),
-  intlLabels: ["United States","South Korea","Japan","France","Germany","Australia","Canada","UK"]
-    .every((c) => [...document.querySelectorAll("svg text")].some((t) => t.textContent.startsWith(c))),
+  intlLabels: (() => {
+    const want = ["United States","South Korea","Japan","France","Germany","Australia","Canada","UK"];
+    const found = want.map((c) => [...document.querySelectorAll("svg text")].find((t) => t.textContent.startsWith(c + " ")));
+    if (found.some((t) => !t)) return false;
+    // every label must sit inside the drawing area with a finite y
+    return found.every((t) => { const y = t.getBBox?.().y; return Number.isFinite(y) && y > 0 && y < 400; });
+  })(),
+  intlLabelsDistinct: (() => {
+    const ys = [...document.querySelectorAll("svg text")]
+      .filter((t) => /^(United States|South Korea|Japan|France|Germany|Australia|Canada|UK) /.test(t.textContent))
+      .map((t) => Math.round(t.getBBox?.().y ?? -1));
+    return new Set(ys).size === ys.length && ys.length === 8;
+  })(),
   chartBeforeVerdict: (() => {
     const h = [...document.querySelectorAll("h2,figcaption")];
     const chart = h.findIndex((n) => n.textContent.includes("suicide rate, 1999"));

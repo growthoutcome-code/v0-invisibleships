@@ -247,13 +247,15 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
   const ends = chart.series
     .map((s) => ({ s, last: s.points[s.points.length - 1] }))
     .sort((a, b) => a.last.value - b.last.value);
-  let prevY = Infinity;
+  // Walk top-to-bottom (highest value first) and push each label down only as
+  // far as it must go to clear the one above it. Seeded at -Infinity so the
+  // first label keeps its true position.
+  let prevY = -Infinity;
   const placed = ends
     .slice()
     .reverse()
     .map((e) => {
-      let y = Y(e.last.value);
-      if (y - prevY < MIN_GAP) y = prevY + MIN_GAP;
+      const y = Math.max(Y(e.last.value), prevY + MIN_GAP);
       prevY = y;
       return { ...e, labelY: y };
     });
