@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import ListPager from "@/components/ListPager";
+import { DataNoteLine } from "@/components/DataIntro";
 import { Skeleton, SkeletonRows, SkeletonChart } from "@/components/Skeleton";
 import { Input } from "@/components/ui/input";
 import { track } from "@/lib/analytics";
@@ -298,25 +299,18 @@ export default function HealthSignals() {
 
   return (
     <div className="w-full">
-      {/* Standing note — not dismissable; readers arrive from shared fragments. */}
-      <aside role="note" className="w-full bg-panel px-6 py-5 mb-10">
-        <p className="body-copy text-foreground/85 max-w-[80ch] m-0">
-          Public health statistics compiled with AI assistance from official and
-          peer-reviewed sources; every figure was fetched from its cited source and
-          the headline figures were independently re-derived. <strong>This dataset and
-          the Government Cloud dataset do not corroborate each other</strong>, and
-          neither connects this infrastructure to any individual&apos;s experience.
-          Causes appear only as attributions — who claims what, in which document.
-          Where data is missing or under-reported, that is documented as a finding
-          rather than silently excluded.
-        </p>
-        <p className="text-muted text-[15px] max-w-[80ch] mt-3 mb-0">
-          This page reports suicide and overdose statistics — rates and counts only.
-          If you or someone you know needs support: in the US, call or text{" "}
-          <a href="https://988lifeline.org" target="_blank" rel="noreferrer noopener" className="underline underline-offset-4">988</a>;
-          elsewhere, <a href="https://findahelpline.com" target="_blank" rel="noreferrer noopener" className="underline underline-offset-4">findahelpline.com</a>.
-        </p>
-      </aside>
+      {/* Secondary disclaimer: one line + link. The crisis-resources sentence is
+          SAFETY information, not disclaimer language, and stays visible. */}
+      <DataNoteLine from="health">
+        Official statistics, independently re-checked · causes shown only as attributed by their
+        source · under-reporting documented rather than hidden ·
+      </DataNoteLine>
+      <p className="text-muted text-[15px] max-w-[80ch] -mt-6 mb-10">
+        This page reports suicide and overdose statistics — rates and counts only. If you or someone
+        you know needs support: in the US, call or text{" "}
+        <a href="https://988lifeline.org" target="_blank" rel="noreferrer noopener" className="underline underline-offset-4">988</a>;
+        elsewhere, <a href="https://findahelpline.com" target="_blank" rel="noreferrer noopener" className="underline underline-offset-4">findahelpline.com</a>.
+      </p>
 
       {/* Stat tiles + tier legend */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-3">
@@ -419,9 +413,8 @@ export default function HealthSignals() {
       {!!dq?.length && (
         <section ref={dqP.ref} className="mb-16">
           <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">How much the numbers can be trusted</h2>
-          <p className="body-copy text-foreground/75 mb-6 max-w-[80ch]">
-            No country was excluded for having weak data. Instead, the weakness is the
-            record: each row documents a reporting gap, who documented it, and by how much.
+          <p className="text-muted text-[15px] mb-6 max-w-[80ch]">
+            No country was excluded for having weak data — the weakness is the record.
           </p>
           <ul className="list-none p-0 m-0">
             {dqP.slice.map((d) => (
@@ -445,9 +438,8 @@ export default function HealthSignals() {
       {!!claims?.length && (
         <section ref={claimsP.ref} className="mb-16">
           <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">Causes, as attributed</h2>
-          <p className="body-copy text-foreground/75 mb-6 max-w-[80ch]">
-            This site does not assert causes. Each row records who attributes what, in
-            which document. Counter-attributions are listed on the same terms.
+          <p className="text-muted text-[15px] mb-6 max-w-[80ch]">
+            Who attributes what, in which document. Counter-attributions listed on the same terms.
           </p>
           <ul className="list-none p-0 m-0">
             {claimsP.slice.map((c) => (
@@ -473,9 +465,9 @@ export default function HealthSignals() {
       {!!overlaps?.length && (
         <section ref={overlapsP.ref} className="mb-16">
           <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">Overlaps with the Government Cloud record</h2>
-          <p className="body-copy text-foreground/75 mb-6 max-w-[80ch]">
-            Structural and pattern observations only. Co-occurrence in time or place is
-            not evidence of relation; every row states what it does <em>not</em> show.
+          <p className="text-muted text-[15px] mb-6 max-w-[80ch]">
+            Co-occurrence in time or place is not evidence of a relationship. Each row says what it
+            does <em>not</em> show.
           </p>
           <ul className="list-none p-0 m-0">
             {overlapsP.slice.map((o) => (
@@ -569,8 +561,8 @@ export default function HealthSignals() {
       <section ref={srcRef} className="mb-8">
         <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">Sources</h2>
         <p className="body-copy text-foreground/75 mb-8 max-w-[70ch]">
-          {srcs.length} sources ({tierCounts.A} A · {tierCounts.B} B · {tierCounts.C} C),
-          all accessed 2026-08-19. Links open in a new tab.
+          {srcs.length} sources ({tierCounts.A} A · {tierCounts.B} B · {tierCounts.C} C), accessed
+          2026-08-19.
           {srcTotalPages > 1 && <span className="text-muted"> Page {srcPage} of {srcTotalPages}.</span>}
         </p>
         {sources === null && <SkeletonRows n={8} />}

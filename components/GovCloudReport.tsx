@@ -119,6 +119,10 @@ html.dark .gov-report{
    At the site's scale they were unreadable, so every label class steps up. */
 .gov-report .dt { font-size: 15px; }
 
+/* The report's own footer paragraph moved to /disclaimer (Sean, 2026-08-20:
+   one comprehensive disclaimer, pointers everywhere else). FOOT-TO-DISCLAIMER */
+.gov-report .foot { display: none; }
+
 /* loading shimmer: script-drawn containers are empty until the report JS has
    loaded and rendered (~1-4s). Give empty containers their final footprint and
    a subtle pulse so nothing pops in; the :empty selector self-clears the
@@ -340,7 +344,7 @@ const MARKUP = `<div class="wrap">
  <h2>Awards by year announced</h2><div class="card"><div class="tl" id="tline"></div></div><h2>Re-compete calendar &mdash; next 36 months</h2><div class="card"><div class="hbars" id="rcbars"></div></div></div>
 
 <div id="time"><div class="tiles" id="t_tiles"></div><h2>Master timeline &mdash; all threads</h2>
- <div class="legend"><span><span class="sw" style="background:var(--series-2)"></span>Law (A)</span><span><span class="sw" style="background:var(--series-1)"></span>Release (B)</span><span><span class="sw" style="background:var(--series-3)"></span>Deploy/enforcement (C)</span><span><span class="sw" style="background:var(--series-4)"></span>Litigation (D)</span><span><span class="sw" style="background:var(--series-5)"></span>Investment (E)</span><span><span class="sw" style="background:var(--series-6)"></span>Health (F)</span><!--HEALTH-TRACK-F-LEGEND--><span style="color:var(--text-muted)">hollow=projected · line=today</span></div>
+ <div class="legend"><span><span class="sw" style="background:var(--series-2)"></span>Legislation (A)</span><span><span class="sw" style="background:var(--series-1)"></span>Release (B)</span><span><span class="sw" style="background:var(--series-3)"></span>Deploy/enforcement (C)</span><span><span class="sw" style="background:var(--series-4)"></span>Litigation (D)</span><span><span class="sw" style="background:var(--series-5)"></span>Investment (E)</span><span><span class="sw" style="background:var(--series-6)"></span>Health (F)</span><!--HEALTH-TRACK-F-LEGEND--><span style="color:var(--text-muted)">hollow=projected · line=today</span></div>
  <div class="card"><div id="tlsvg"></div></div>
  <div class="callout"><b>Enforcement in the timeline:</b> DHS-reported operations now appear on the Deploy track — e.g. the Jul 2026 World Cup human-trafficking crackdown (905 arrested, 180 rescued, agency-reported). The 2025 enforcement sequence still shows policy switch (Jan) preceding software (Apr) and appropriations (Jul): law and money followed policy.</div>
  <h2>Relationship: does law follow capability?</h2><div class="card"><div class="hbars" id="relbars"></div></div></div>

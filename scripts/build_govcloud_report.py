@@ -107,6 +107,10 @@ TYPE_RULES = """
    At the site's scale they were unreadable, so every label class steps up. */
 .gov-report .dt { font-size: 15px; }
 
+/* The report's own footer paragraph moved to /disclaimer (Sean, 2026-08-20:
+   one comprehensive disclaimer, pointers everywhere else). FOOT-TO-DISCLAIMER */
+.gov-report .foot { display: none; }
+
 /* loading shimmer: script-drawn containers are empty until the report JS has
    loaded and rendered (~1-4s). Give empty containers their final footprint and
    a subtle pulse so nothing pops in; the :empty selector self-clears the

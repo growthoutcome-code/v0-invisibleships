@@ -135,7 +135,7 @@ export default function AccessGate({ onEnter }: { onEnter: () => void }) {
             <h2 className="font-display text-2xl font-semibold text-foreground mb-4">Copyright &amp; Terms of Use</h2>
           </div>
           <div ref={copyrightScrollRef} onScroll={checkCopyrightScrolled} className="flex-1 overflow-y-auto pr-2 py-1">
-            <CopyrightTerms />
+            <CopyrightTerms variant="gate" />
           </div>
           <div className="shrink-0 mt-6 flex items-center gap-3">
             <Button variant="outline" onClick={() => setStep("welcome")}>Back</Button>

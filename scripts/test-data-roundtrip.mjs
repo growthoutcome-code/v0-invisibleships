@@ -100,5 +100,29 @@ const first2 = await page.evaluate(() => [...document.querySelectorAll("section"
 console.log("trends page flip changed content:", first1 !== first2);
 if (first1 === first2) fail("trends pager did not change page");
 
+// Disclaimer tiering + timeline narrative + Legislation rename
+await page.getByRole("tab", { name: /^Timeline$/i }).click();
+await page.waitForTimeout(800);
+const tl = await page.evaluate(() => ({
+  narrative: document.body.textContent.includes("Three things this timeline shows"),
+  hub: document.body.textContent.includes("Where to go next"),
+  notice: document.body.textContent.includes("About this data"),
+  legislation: document.getElementById("t_tiles")?.textContent.includes("Legislation"),
+  noLaw: !document.getElementById("t_tiles")?.textContent.includes("Law"),
+  disclaimerLink: !!document.querySelector('a[href="/disclaimer"]'),
+}));
+console.log("timeline copy:", JSON.stringify(tl));
+for (const k of Object.keys(tl)) if (!tl[k]) fail("timeline." + k);
+
+await page.getByRole("button", { name: /Open Public Health/i }).click();
+await page.waitForTimeout(1000);
+const hs = await page.evaluate(() => ({
+  crisisKept: document.body.textContent.includes("988"),
+  longNoteGone: !document.body.textContent.includes("Public health statistics compiled with AI assistance"),
+  link: !!document.querySelector('a[href="/disclaimer"]'),
+}));
+console.log("health disclaimer:", JSON.stringify(hs));
+for (const k of Object.keys(hs)) if (!hs[k]) fail("health." + k);
+
 await browser.close();
 console.log(process.exitCode ? "RESULT: FAIL" : "RESULT: PASS");

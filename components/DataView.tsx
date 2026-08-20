@@ -2,7 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { track } from "@/lib/analytics";
-import DataDisclaimer from "@/components/DataDisclaimer";
+import { DataNotice, DataNoteLine } from "@/components/DataIntro";
+import { TimelineNarrative, TimelineHub } from "@/components/TimelineIntro";
 import GovCloudReport from "@/components/GovCloudReport";
 import GovCloudSources from "@/components/GovCloudSources";
 import HealthSignals from "@/components/HealthSignals";
@@ -77,11 +78,22 @@ export default function DataView() {
         </button>
       </div>
 
+      {/* PRIMARY disclaimer: prominent, once, on the landing view only. */}
+      {sub === "timeline" && <DataNotice />}
+      {sub === "timeline" && <TimelineNarrative onGo={pick} />}
+      {sub === "govcloud" && (
+        <DataNoteLine from="govcloud">
+          AI-assisted research from public records · every fact evidence-graded and linked to its
+          source · names used for identification only, no wrongdoing implied ·
+        </DataNoteLine>
+      )}
+
       <div className={sub === "health" ? "hidden" : sub === "timeline" ? "gov-timeline-only" : "gov-cloud-mode"}>
-        <DataDisclaimer />
         {report}
         {sub === "govcloud" && <GovCloudSources />}
       </div>
+
+      {sub === "timeline" && <TimelineHub onGo={pick} />}
       {sub === "health" && <HealthSignals />}
     </div>
   );

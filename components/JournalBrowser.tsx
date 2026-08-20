@@ -747,7 +747,7 @@ function AuthorView() {
 function DisclaimerView() {
   return (
     <div className="w-full lg:w-[65%] lg:mx-auto">
-      <h2 className="font-display text-3xl font-semibold text-foreground mb-5">Copyright &amp; Terms of Use</h2>
+      <h2 className="font-display text-3xl font-semibold text-foreground mb-5">Disclaimer, Copyright &amp; Terms of Use</h2>
       <CopyrightTerms />
     </div>
   );

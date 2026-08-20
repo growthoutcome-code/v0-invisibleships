@@ -42,15 +42,37 @@ export default function ConceptsView() {
     [filters]
   );
 
+  const [labelsOpen, setLabelsOpen] = useState(false);
+
   return (
     <div className="w-full">
-      <p className="body-copy text-foreground/85 max-w-[70ch] mb-10">
-        Each concept below shows what it rests on. Some are supported directly by a
-        court ruling or official document. Some follow from what the research does and
-        does not contain. Some are observations drawn from experience. They are not
-        the same kind of claim, so they are not presented as though they were.
+      <p className="body-copy text-foreground/85 max-w-[70ch] mb-4">
+        Ideas drawn from the research. Each one is tagged with who formed it and what it rests on,
+        because they are not the same kind of claim: some follow from a document, some from what the
+        record is missing, some from the author&rsquo;s own experience.
+      </p>
+      <p className="text-muted text-[15px] max-w-[70ch] mb-10">
+        None of this establishes wrongdoing by any organisation, and nothing here is independently
+        verified unless it says so.{" "}
+        <Link
+          href="/disclaimer"
+          onClick={() => track("disclaimer_opened", { from: "concepts" })}
+          className="underline underline-offset-4 hover:text-foreground"
+        >
+          Read the full disclaimer
+        </Link>{" "}
+        ·{" "}
+        <button
+          type="button"
+          onClick={() => setLabelsOpen((v) => !v)}
+          className="underline underline-offset-4 hover:text-foreground"
+          aria-expanded={labelsOpen}
+        >
+          {labelsOpen ? "Hide" : "What the labels mean"}
+        </button>
       </p>
 
+      {labelsOpen && (
       <div className="mb-16 max-w-[70ch] grid gap-10 md:grid-cols-2">
         <div>
           <h2 className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground mb-3">
@@ -79,6 +101,7 @@ export default function ConceptsView() {
           </dl>
         </div>
       </div>
+      )}
 
       <ConceptsNav filters={filters} setFilters={setFilters} shown={visible.length} />
 
@@ -161,15 +184,20 @@ export default function ConceptsView() {
               </div>
             )}
 
+            {/* Verification state is information, not boilerplate, so it stays as a
+                chip. The long per-concept disclaimer is gone: the standing line at
+                the top of the section points at /disclaimer instead. The one
+                exception is a concept whose scope limit is specific to it — it
+                carries `disclaimer`, and that is deliberately preserved. */}
             {(c.verification && c.verification !== "verified") || c.disclaimer ? (
               <div className="max-w-[70ch] border-l-2 border-edge pl-5 py-1">
                 {c.verification && c.verification !== "verified" && (
-                  <p className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground m-0 mb-2">
+                  <p className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground m-0">
                     {VERIFICATION_LABEL[c.verification]}
                   </p>
                 )}
                 {c.disclaimer && (
-                  <p className="body-copy text-foreground/75 m-0">{c.disclaimer}</p>
+                  <p className="text-[16px] text-muted m-0 mt-2">{c.disclaimer}</p>
                 )}
               </div>
             ) : null}

@@ -153,3 +153,29 @@ def patch_default_tab_timeline():
 
 
 patch_default_tab_timeline()
+
+
+def patch_law_to_legislation():
+    """Fourth guarded pass: the timeline's track-A label reads "Legislation".
+
+    Sean, 2026-08-20. Display string only — the track key stays "A" and the
+    underlying relationship values (law-follows) are untouched, so no data
+    migrates. Four sites: stat tile, lane label, legend, tooltip name.
+    """
+    global html
+    MARK4 = "RENAME-LAW-LANE"
+    html = open(SRC, encoding="utf-8").read()
+    if MARK4 in html:
+        print("law->legislation already patched — no-op")
+        return
+    sub_once(r"\[\'Law\',M\.filter\(m=>m\.tk===\'A\'\)\.length\]",
+             "['Legislation',M.filter(m=>m.tk==='A').length]/*" + MARK4 + "*/", "tile label")
+    sub_once(r"\[\'Law\',lane\.A,\'--series-2\'\]",
+             "['Legislation',lane.A,'--series-2']", "lane label")
+    sub_once(r"Law \(A\)</span>", "Legislation (A)</span>", "legend label")
+    sub_once(r"\(\{A:\'Law\',", "({A:'Legislation',", "tooltip name")
+    open(SRC, "w", encoding="utf-8").write(html)
+    print("law -> legislation")
+
+
+patch_law_to_legislation()
