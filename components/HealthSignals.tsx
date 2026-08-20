@@ -314,13 +314,17 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
       <figcaption className="mb-1">
         <span className="block font-display font-semibold text-foreground text-[19px]">
           {win === "covid"
-            ? (indexed ? "Change across the pandemic years, 2017–2021" : "Suicide rate through the pandemic, 2017–2021")
-            : (indexed ? "The US rose 40% while the world fell 27%" : "Suicide rate, 2000–2021: the US against ten countries and the world")}
+            ? (indexed
+                ? "Suicide rates through the pandemic: change from 2017 to 2021"
+                : "Suicide rate through the pandemic, 2017–2021")
+            : (indexed
+                ? "Suicide rates, 2000–2021: the US rose 40% while the world fell 27%"
+                : "Suicide rate, 2000–2021: the US against ten countries and the world")}
         </span>
         <span className="block text-foreground/75 text-[15px] mt-1">
           {indexed
-            ? `Each line starts at its own ${win === "covid" ? 2017 : 2000} rate. Above the middle line means more suicide than then; below means less.`
-            : "Deaths per 100,000 people per year, adjusted so countries with older or younger populations can be compared."}
+            ? `Each line starts at its own ${win === "covid" ? 2017 : 2000} suicide rate. Above the middle line means more suicide deaths per person than then; below means fewer.`
+            : "Suicide deaths per 100,000 people per year — for the US, 15.6 per 100,000 is roughly 52,000 deaths in a year. Rates are adjusted so countries with older or younger populations can be compared."}
         </span>
       </figcaption>
       <p className="text-muted text-[13px] m-0 mb-3">
@@ -427,7 +431,9 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
         ))}
         {hoverYear !== null && (
           <text x={X(hoverYear)} y={padT - 2} fontSize={narrow ? 18 : 12} fontWeight="600"
-            fill="rgb(var(--foreground))" textAnchor="middle" pointerEvents="none">{hoverYear}</text>
+            fill="rgb(var(--foreground))" textAnchor="middle" pointerEvents="none">
+            {hoverYear}{narrow ? "" : indexed ? " — change since start" : " — deaths per 100,000"}
+          </text>
         )}
       </svg>
     </figure>

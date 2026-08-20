@@ -152,6 +152,11 @@ const hs = await page.evaluate(() => ({
     return !!row && /\+40%/.test(row.textContent);
   })(),
   reconciles: document.body.textContent.includes("Why 40% here"),
+  headlineNamesMetric: (() => {
+    const h = document.querySelector("figcaption span");
+    return !!h && /suicide/i.test(h.textContent);
+  })(),
+  rateExplained: document.body.textContent.includes("roughly 52,000 deaths"),
   windowToggle: [...document.querySelectorAll("button")].some((b) => /pandemic/i.test(b.textContent)),
   covidMarker: [...document.querySelectorAll("svg text")].some((t) => t.textContent === "COVID-19"),
   explains2021: document.body.textContent.includes("Why this chart stops at 2021"),
@@ -231,6 +236,19 @@ if (mob.labelled < 2) fail("phone chart lost its US/world labels");
 if (!mob.noOverflow) fail("phone chart overflows viewport");
 if (mob.tableRows !== 12) fail("phone: change table missing rows");
 await phone.close();
+
+// The change view's headline must also name what is being measured
+await page.getByRole("tab", { name: /^Public Health$/i }).click();
+await page.waitForTimeout(1400);
+const cv = await page.evaluate(async () => {
+  const b = [...document.querySelectorAll("button")].find((x) => x.textContent.trim() === "Change over period");
+  b?.click();
+  await new Promise((r) => setTimeout(r, 700));
+  const h = document.querySelector("figcaption span");
+  return { headline: h?.textContent || "", namesMetric: /suicide/i.test(h?.textContent || "") };
+});
+console.log("change-view headline:", JSON.stringify(cv));
+if (!cv.namesMetric) fail("change-view headline does not say what it measures");
 
 await browser.close();
 console.log(process.exitCode ? "RESULT: FAIL" : "RESULT: PASS");
