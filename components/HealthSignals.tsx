@@ -265,7 +265,9 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
   // Two views of the same twelve series. "rate" answers "how high?"; "change"
   // answers "by how much?" — which is the question the ~30% claim is actually
   // about, and which a levels chart cannot show (Sean, 2026-08-20).
-  const [mode, setMode] = useState<"rate" | "change">("rate");
+  // Default view: relative change. The rate view is dominated by Russia's 2000
+  // level (53) which squashes every other line into the lower third.
+  const [mode, setMode] = useState<"rate" | "change">("change");
   const indexed = mode === "change";
   // Window: the full two-decade record, or the pandemic era. Comparable
   // international estimates stop at 2021 — see the note under the chart.
@@ -293,6 +295,19 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
   const x0 = Math.min(...all.map((p) => p.year)), x1 = Math.max(...all.map((p) => p.year));
   const vMax = Math.max(...all.map((p) => p.value));
   const v0 = 0, v1 = vMax * 1.08;
+  // Headline figures are computed over the WHO comparable period only (to 2021),
+  // because that is the stretch where a cross-country claim is legitimate — the
+  // national extensions end in different years.
+  const whoChange = (c: string) => {
+    const ser = chart.series.find((x) => x.country === c);
+    if (!ser) return null;
+    const pts = ser.points.filter((p) => p.year >= (winFrom || 0));
+    if (pts.length < 2) return null;
+    const a = pts[0].value, b = pts[pts.length - 1].value;
+    return { pct: ((b - a) / a) * 100, from: pts[0].year, to: pts[pts.length - 1].year };
+  };
+  const usW = whoChange("United States"), wdW = whoChange("World");
+
   const winChange = (c: string) => {
     const ser = view.find((x) => x.country === c);
     if (!ser || ser.points.length < 2) return 0;
@@ -338,15 +353,19 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
         <span className="block font-display font-semibold text-foreground text-[19px]">
           {win === "covid"
             ? (indexed
-                ? `Suicide rates through the pandemic: change from 2017 to ${x1}`
+                ? (usW
+                    ? `Suicide rates through the pandemic: the US ${usW.pct >= 0 ? "rose" : "fell"} ${Math.abs(Math.round(usW.pct))}% from ${usW.from} to ${usW.to}`
+                    : `Suicide rates through the pandemic`)
                 : `Suicide rate through the pandemic, 2017–${x1}`)
             : (indexed
-                ? `Suicide rates, 2000–${x1}: the US rose 40% while the world fell 27%`
+                ? (usW && wdW
+                    ? `Suicide rates, ${usW.from}–${usW.to}: the US rose ${Math.round(usW.pct)}% while the world fell ${Math.abs(Math.round(wdW.pct))}%`
+                    : `Suicide rates, change over the period`)
                 : `Suicide rate, 2000–${x1}: the US against twelve countries and the world`)}
         </span>
         <span className="block text-foreground/75 text-[15px] mt-1">
           {indexed
-            ? `Each line starts at its own ${win === "covid" ? 2017 : 2000} suicide rate. Above the middle line means more suicide deaths per person than then; below means fewer.`
+            ? `Each line starts at its own ${win === "covid" ? 2017 : 2000} suicide rate — for the US that was 11.2 deaths per 100,000 people, roughly 32,000 deaths that year. Above the middle line means more suicide deaths per person than then; below means fewer. Headline figures compare the WHO period, to 2021; dotted tails run on each country's own statistics.`
             : "Suicide deaths per 100,000 people per year — for the US, 15.6 per 100,000 is roughly 52,000 deaths in a year. Rates are adjusted so countries with older or younger populations can be compared."}
         </span>
       </figcaption>

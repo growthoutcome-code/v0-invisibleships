@@ -134,7 +134,7 @@ const hs = await page.evaluate(() => ({
   })(),
   chartBeforeVerdict: (() => {
     const h = [...document.querySelectorAll("h2,figcaption")];
-    const chart = h.findIndex((n) => n.textContent.includes("Suicide rate, 2000"));
+    const chart = h.findIndex((n) => /^Suicide rates?, 2000/.test(n.textContent));
     const verdict = h.findIndex((n) => n.textContent.includes("Has suicide increased"));
     return chart > -1 && verdict > -1 && chart < verdict;
   })(),
@@ -156,7 +156,7 @@ const hs = await page.evaluate(() => ({
     const h = document.querySelector("figcaption span");
     return !!h && /suicide/i.test(h.textContent);
   })(),
-  rateExplained: document.body.textContent.includes("roughly 52,000 deaths"),
+  rateExplained: /roughly (32|52),000 deaths/.test(document.body.textContent),
   windowToggle: [...document.querySelectorAll("button")].some((b) => /pandemic/i.test(b.textContent)),
   covidMarker: [...document.querySelectorAll("svg text")].some((t) => t.textContent === "COVID-19"),
   explains2021: document.body.textContent.includes("The dotted ends: what happens after 2021"),
@@ -310,14 +310,21 @@ if (!stageA.palestineCaveat) fail("Israel/Palestine caveat missing");
 await page.getByRole("tab", { name: /^Public Health$/i }).click();
 await page.waitForTimeout(1400);
 const cv = await page.evaluate(async () => {
-  const b = [...document.querySelectorAll("button")].find((x) => x.textContent.trim() === "Change over period");
-  b?.click();
-  await new Promise((r) => setTimeout(r, 700));
   const h = document.querySelector("figcaption span");
-  return { headline: h?.textContent || "", namesMetric: /suicide/i.test(h?.textContent || "") };
+  const active = [...document.querySelectorAll("button")]
+    .find((b) => /Change over period/.test(b.textContent))?.getAttribute("aria-pressed");
+  return {
+    headline: h?.textContent || "",
+    namesMetric: /suicide/i.test(h?.textContent || ""),
+    defaultsToChange: active === "true",
+    // the hardcoded 40% must be gone: the figure is computed now
+    headlineHasComputedPct: /\d+% while the world fell \d+%/.test(h?.textContent || ""),
+  };
 });
 console.log("change-view headline:", JSON.stringify(cv));
 if (!cv.namesMetric) fail("change-view headline does not say what it measures");
+if (!cv.defaultsToChange) fail("chart does not default to the change view");
+if (!cv.headlineHasComputedPct) fail("headline percentages not computed from data");
 
 await browser.close();
 console.log(process.exitCode ? "RESULT: FAIL" : "RESULT: PASS");
