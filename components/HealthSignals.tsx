@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import ListPager from "@/components/ListPager";
 import { Input } from "@/components/ui/input";
 import { track } from "@/lib/analytics";
 
@@ -91,6 +92,21 @@ function SourceLink({ id, sources }: { id?: string | null; sources: Source[] }) 
       source
     </a>
   );
+}
+
+/** Journal-style pagination state for a register list. */
+function usePager<T>(items: T[] | null | undefined, size: number) {
+  const [page, setPage] = useState(1);
+  const ref = useRef<HTMLElement | null>(null);
+  const list = items || [];
+  const totalPages = Math.max(1, Math.ceil(list.length / size));
+  const safePage = Math.min(page, totalPages);
+  return {
+    page: safePage, setPage, totalPages,
+    slice: list.slice((safePage - 1) * size, safePage * size),
+    ref,
+    scrollTo: () => ref.current?.scrollIntoView({ block: "start" }),
+  };
 }
 
 /* ---------------------------------------------------------------- chart --- */
@@ -202,6 +218,9 @@ export default function HealthSignals() {
   const sources = useTable<Source>("health_sources");
   const [verdict, setVerdict] = useState<Verdict | null>(null);
   const [q, setQ] = useState("");
+  const [srcPage, setSrcPage] = useState(1);
+  const srcRef = useRef<HTMLElement | null>(null);
+  const SRC_PAGE_SIZE = 25;
 
   useEffect(() => {
     track("health_signals_viewed");
@@ -243,6 +262,22 @@ export default function HealthSignals() {
       a.indicator_id.localeCompare(b.indicator_id) ||
       a.geography.localeCompare(b.geography) || a.year - b.year);
   }, [indicators, q]);
+
+  const sortedSources = useMemo(
+    () => [...srcs].sort((a, b) => (a.publisher || "").localeCompare(b.publisher || "")),
+    [srcs],
+  );
+  const srcTotalPages = Math.max(1, Math.ceil(sortedSources.length / SRC_PAGE_SIZE));
+  const srcPageItems = useMemo(
+    () => sortedSources.slice((srcPage - 1) * SRC_PAGE_SIZE, srcPage * SRC_PAGE_SIZE),
+    [sortedSources, srcPage],
+  );
+
+  const trendsP = usePager(trends, 5);
+  const dqP = usePager(dq, 5);
+  const claimsP = usePager(claims, 5);
+  const overlapsP = usePager(overlaps, 5);
+  const milestonesP = usePager(milestones, 5);
 
   const tierCounts = useMemo(() => {
     const c: Record<string, number> = { A: 0, B: 0, C: 0 };
@@ -339,10 +374,10 @@ export default function HealthSignals() {
 
       {/* Trends */}
       {!!trends?.length && (
-        <section className="mb-16">
+        <section ref={trendsP.ref} className="mb-16">
           <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">What the series show</h2>
           <ul className="list-none p-0 m-0">
-            {trends.map((t, i) => (
+            {trendsP.slice.map((t, i) => (
               <li key={i} className="flex items-baseline gap-3 py-3 border-b border-edge/60 text-[16px] text-foreground/85">
                 <TierChip t={t.tier} />
                 <span className="max-w-[85ch]">{t.statement}</span>
@@ -350,19 +385,20 @@ export default function HealthSignals() {
               </li>
             ))}
           </ul>
+          <ListPager page={trendsP.page} totalPages={trendsP.totalPages} setPage={trendsP.setPage} scrollTo={trendsP.scrollTo} />
         </section>
       )}
 
       {/* Data quality register */}
       {!!dq?.length && (
-        <section className="mb-16">
+        <section ref={dqP.ref} className="mb-16">
           <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">How much the numbers can be trusted</h2>
           <p className="body-copy text-foreground/75 mb-6 max-w-[80ch]">
             No country was excluded for having weak data. Instead, the weakness is the
             record: each row documents a reporting gap, who documented it, and by how much.
           </p>
           <ul className="list-none p-0 m-0">
-            {dq.map((d) => (
+            {dqP.slice.map((d) => (
               <li key={d.dq_id} className="py-4 border-b border-edge/60">
                 <div className="flex items-baseline gap-3">
                   <TierChip t={d.tier} />
@@ -374,19 +410,20 @@ export default function HealthSignals() {
               </li>
             ))}
           </ul>
+          <ListPager page={dqP.page} totalPages={dqP.totalPages} setPage={dqP.setPage} scrollTo={dqP.scrollTo} />
         </section>
       )}
 
       {/* Claims register */}
       {!!claims?.length && (
-        <section className="mb-16">
+        <section ref={claimsP.ref} className="mb-16">
           <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">Causes, as attributed</h2>
           <p className="body-copy text-foreground/75 mb-6 max-w-[80ch]">
             This site does not assert causes. Each row records who attributes what, in
             which document. Counter-attributions are listed on the same terms.
           </p>
           <ul className="list-none p-0 m-0">
-            {claims.map((c) => (
+            {claimsP.slice.map((c) => (
               <li key={c.claim_id} className="py-4 border-b border-edge/60">
                 <div className="flex items-baseline gap-3">
                   <TierChip t={c.tier} />
@@ -400,19 +437,20 @@ export default function HealthSignals() {
               </li>
             ))}
           </ul>
+          <ListPager page={claimsP.page} totalPages={claimsP.totalPages} setPage={claimsP.setPage} scrollTo={claimsP.scrollTo} />
         </section>
       )}
 
       {/* Overlaps */}
       {!!overlaps?.length && (
-        <section className="mb-16">
+        <section ref={overlapsP.ref} className="mb-16">
           <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">Overlaps with the Government Cloud record</h2>
           <p className="body-copy text-foreground/75 mb-6 max-w-[80ch]">
             Structural and pattern observations only. Co-occurrence in time or place is
             not evidence of relation; every row states what it does <em>not</em> show.
           </p>
           <ul className="list-none p-0 m-0">
-            {overlaps.map((o) => (
+            {overlapsP.slice.map((o) => (
               <li key={o.overlap_id} className="py-4 border-b border-edge/60">
                 <div className="flex items-baseline gap-3">
                   <TierChip t={o.tier} />
@@ -423,19 +461,20 @@ export default function HealthSignals() {
               </li>
             ))}
           </ul>
+          <ListPager page={overlapsP.page} totalPages={overlapsP.totalPages} setPage={overlapsP.setPage} scrollTo={overlapsP.scrollTo} />
         </section>
       )}
 
       {/* Milestones */}
       {!!milestones?.length && (
-        <section className="mb-16">
+        <section ref={milestonesP.ref} className="mb-16">
           <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">Dated milestones</h2>
           <p className="body-copy text-foreground/75 mb-6 max-w-[80ch]">
             These feed track F (&ldquo;Health&rdquo;) on the Government Cloud master
             timeline; entries before 2015 appear only here.
           </p>
           <ul className="list-none p-0 m-0">
-            {milestones.map((m) => (
+            {milestonesP.slice.map((m) => (
               <li key={m.milestone_id} className="flex items-baseline gap-4 py-3 border-b border-edge/60 text-[16px]">
                 <span className="text-muted tabular-nums shrink-0 w-[92px]">{m.occurred_on}</span>
                 <TierChip t={m.tier} />
@@ -445,6 +484,7 @@ export default function HealthSignals() {
               </li>
             ))}
           </ul>
+          <ListPager page={milestonesP.page} totalPages={milestonesP.totalPages} setPage={milestonesP.setPage} scrollTo={milestonesP.scrollTo} />
         </section>
       )}
 
@@ -496,14 +536,15 @@ export default function HealthSignals() {
       </section>
 
       {/* Sources */}
-      <section className="mb-8">
+      <section ref={srcRef} className="mb-8">
         <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">Sources</h2>
         <p className="body-copy text-foreground/75 mb-8 max-w-[70ch]">
           {srcs.length} sources ({tierCounts.A} A · {tierCounts.B} B · {tierCounts.C} C),
           all accessed 2026-08-19. Links open in a new tab.
+          {srcTotalPages > 1 && <span className="text-muted"> Page {srcPage} of {srcTotalPages}.</span>}
         </p>
         <ol className="list-none p-0 m-0">
-          {[...srcs].sort((a, b) => (a.publisher || "").localeCompare(b.publisher || "")).map((s) => (
+          {srcPageItems.map((s) => (
             <li key={s.source_id} className="flex flex-wrap items-baseline gap-x-5 gap-y-1 py-3">
               <a
                 href={s.url}
@@ -519,6 +560,12 @@ export default function HealthSignals() {
             </li>
           ))}
         </ol>
+        <ListPager
+          page={srcPage}
+          totalPages={srcTotalPages}
+          setPage={setSrcPage}
+          scrollTo={() => srcRef.current?.scrollIntoView({ block: "start" })}
+        />
       </section>
     </div>
   );

@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import ListPager from "@/components/ListPager";
 import { Input } from "@/components/ui/input";
 import { track } from "@/lib/analytics";
 
@@ -21,9 +22,13 @@ type Source = {
  * brief was to avoid stacking more. Fetched from the published dataset rather than
  * inlined, so it stays in step with what the click-through modals resolve against.
  */
+const PAGE_SIZE = 25;
+
 export default function GovCloudSources() {
   const [rows, setRows] = useState<Source[] | null>(null);
   const [q, setQ] = useState("");
+  const [page, setPage] = useState(1);
+  const topRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     let alive = true;
@@ -49,15 +54,20 @@ export default function GovCloudSources() {
     return { list: sorted, distinct: new Set(all.map((r) => r.url)).size };
   }, [rows, q]);
 
+  useEffect(() => { setPage(1); }, [q]);
+
+  const totalPages = Math.max(1, Math.ceil(list.length / PAGE_SIZE));
+  const pageItems = useMemo(() => list.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE), [list, page]);
+
   if (!rows) return null;
 
   return (
-    <section className="w-full mt-24">
+    <section ref={topRef} className="w-full mt-24">
       <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">Sources</h2>
       <p className="body-copy text-foreground/75 mb-8 max-w-[70ch]">
         {rows.length} citations across {distinct} distinct URLs. Tier A is primary or
         official, B corroborated secondary, C claimed or theoretical. Links open in a
-        new tab.
+        new tab.{totalPages > 1 && <span className="text-muted"> Page {page} of {totalPages}.</span>}
       </p>
 
       <Input
@@ -69,7 +79,7 @@ export default function GovCloudSources() {
       />
 
       <ol className="list-none p-0 m-0">
-        {list.map((r) => (
+        {pageItems.map((r) => (
           <li key={r.id} className="flex flex-wrap items-baseline gap-x-5 gap-y-1 py-4">
             <a
               href={r.url}
@@ -90,6 +100,13 @@ export default function GovCloudSources() {
       </ol>
 
       {!list.length && <p className="body-copy text-muted">No sources match that filter.</p>}
+
+      <ListPager
+        page={page}
+        totalPages={totalPages}
+        setPage={setPage}
+        scrollTo={() => topRef.current?.scrollIntoView({ block: "start" })}
+      />
     </section>
   );
 }
