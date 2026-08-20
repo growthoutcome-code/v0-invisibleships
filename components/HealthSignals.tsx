@@ -231,8 +231,22 @@ function LineChart({
  * solid stroke, and the rest are recessive. The full table below the charts is
  * the table view.
  */
+/** True on phone-width screens, where twelve end-labels cannot render legibly. */
+function useNarrow() {
+  const [narrow, setNarrow] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 700px)");
+    const on = () => setNarrow(mq.matches);
+    on();
+    mq.addEventListener("change", on);
+    return () => mq.removeEventListener("change", on);
+  }, []);
+  return narrow;
+}
+
 function MultiLineChart({ chart }: { chart: IntlChart }) {
   const [hoverYear, setHoverYear] = useState<number | null>(null);
+  const narrow = useNarrow();
   // Two views of the same twelve series. "rate" answers "how high?"; "change"
   // answers "by how much?" — which is the question the ~30% claim is actually
   // about, and which a levels chart cannot show (Sean, 2026-08-20).
@@ -242,7 +256,11 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
   // international estimates stop at 2021 — see the note under the chart.
   const [win, setWin] = useState<"full" | "covid">("full");
   const winFrom = win === "covid" ? 2017 : 0;
-  const W = 760, H = 440, padL = 44, padR = 128, padT = 18, padB = 34;
+  const W = 760, H = 440, padL = 44, padT = 18, padB = 34;
+  // On a phone the SVG scales to ~47%, which would render 11.5px labels at ~5px.
+  // Label only the US and the world there, at a size that survives the scale;
+  // every country's numbers are in the ranked table directly below.
+  const padR = narrow ? 96 : 128;
   const view = chart.series.map((s) => ({ ...s, points: s.points.filter((p) => p.year >= winFrom) }));
   const base = new Map(view.map((s) => [s.country, s.points[0]?.value ?? 1]));
   const val = (s: { country: string }, v: number) =>
@@ -306,7 +324,8 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
         </span>
       </figcaption>
       <p className="text-muted text-[13px] m-0 mb-3">
-        Bold line = United States · dashed line = world average · hover any year to read all twelve.
+        Bold line = United States · dashed line = world average ·{" "}
+        {narrow ? "every country's figures are in the table below" : "hover any year to read all twelve"}.
       </p>
       <div className="flex flex-wrap gap-x-6 gap-y-2 mb-3">
       <div role="group" aria-label="Chart period" className="flex gap-1">
@@ -337,13 +356,13 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
         {yTicks.map((t) => (
           <g key={t}>
             <line x1={padL} y1={Y(t)} x2={W - padR} y2={Y(t)} stroke="rgb(var(--edge))" strokeWidth="1" />
-            <text x={padL - 8} y={Y(t) + 4} fontSize="11" fill="rgb(var(--muted))" textAnchor="end">
+            <text x={padL - 8} y={Y(t) + 4} fontSize={narrow ? 18 : 11} fill="rgb(var(--muted))" textAnchor="end">
               {indexed ? (t === 100 ? "same" : `${t > 100 ? "+" : "−"}${Math.abs(t - 100)}%`) : t}
             </text>
           </g>
         ))}
         {xTicks.map((y) => (
-          <text key={y} x={X(y)} y={H - 10} fontSize="11" fill="rgb(var(--muted))" textAnchor="middle">{y}</text>
+          <text key={y} x={X(y)} y={H - 8} fontSize={narrow ? 18 : 11} fill="rgb(var(--muted))" textAnchor="middle">{y}</text>
         ))}
         {x1 >= 2020 && x0 <= 2020 && (
           <>
@@ -351,7 +370,7 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
               fill="rgb(var(--foreground))" opacity="0.05" />
             <line x1={X(2020)} y1={padT} x2={X(2020)} y2={H - padB}
               stroke="rgb(var(--muted))" strokeWidth="1" />
-            <text x={X(2020) + 5} y={padT + 11} fontSize="10.5" fill="rgb(var(--muted))">
+            <text x={X(2020) + 5} y={padT + (narrow ? 16 : 11)} fontSize={narrow ? 16 : 10.5} fill="rgb(var(--muted))">
               COVID-19
             </text>
           </>
@@ -360,7 +379,7 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
           <>
             <line x1={padL} y1={Y(100)} x2={W - padR} y2={Y(100)}
               stroke="rgb(var(--foreground))" strokeWidth="1" opacity="0.45" />
-            <text x={padL + 4} y={Y(100) - 5} fontSize="10.5" fill="rgb(var(--muted))">
+            <text x={padL + 4} y={Y(100) - 5} fontSize={narrow ? 16 : 10.5} fill="rgb(var(--muted))">
               same as {x0}
             </text>
           </>
@@ -378,11 +397,13 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
             strokeDasharray={s.kind === "world" ? "5 4" : undefined}
             opacity={s.emphasis ? 1 : s.kind === "world" ? 0.9 : 0.6} />
         ))}
-        {placed.map(({ s, last, labelY }) => (
+        {placed
+          .filter(({ s }) => !narrow || s.emphasis || s.kind === "world")
+          .map(({ s, last, labelY }) => (
           <g key={s.country}>
             <line x1={X(last.year)} y1={Y(last.value)} x2={W - padR + 6} y2={labelY}
               stroke="rgb(var(--edge))" strokeWidth="1" />
-            <text x={W - padR + 10} y={labelY + 4} fontSize={s.emphasis ? 13 : 11.5}
+            <text x={W - padR + 10} y={labelY + 4} fontSize={narrow ? 22 : s.emphasis ? 13 : 11.5}
               fill={s.emphasis ? "rgb(var(--foreground))" : "rgb(var(--muted))"}
               fontWeight={s.emphasis || s.kind === "world" ? 700 : 400}>
               {s.country}{" "}
@@ -405,7 +426,7 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
             fill="transparent" onMouseEnter={() => setHoverYear(y)} />
         ))}
         {hoverYear !== null && (
-          <text x={X(hoverYear)} y={padT - 2} fontSize="12" fontWeight="600"
+          <text x={X(hoverYear)} y={padT - 2} fontSize={narrow ? 18 : 12} fontWeight="600"
             fill="rgb(var(--foreground))" textAnchor="middle" pointerEvents="none">{hoverYear}</text>
         )}
       </svg>

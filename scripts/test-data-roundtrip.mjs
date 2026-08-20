@@ -196,5 +196,41 @@ if (page.url() !== before) fail("navigated away instead of opening modal");
 await page.keyboard.press("Escape");
 await page.waitForTimeout(400);
 
+// Phone width: labels must stay legible; the table carries the rest
+const phone = await browser.newContext({ viewport: { width: 390, height: 844 } });
+const pp = await phone.newPage();
+await pp.goto(BASE + "/data", { waitUntil: "networkidle" });
+await pp.getByRole("button", { name: /18 or older/i }).click();
+await pp.waitForTimeout(400);
+await pp.evaluate(() => document.querySelectorAll("div,section").forEach((e) => { if (e.scrollHeight > e.clientHeight + 20) e.scrollTop = e.scrollHeight; }));
+await pp.waitForTimeout(400);
+await pp.getByRole("button", { name: /I understand and agree/i }).click();
+await pp.getByRole("button", { name: /^Continue$/i }).click();
+await pp.getByRole("button", { name: /Enter the Archive/i }).click();
+await pp.waitForTimeout(900);
+await pp.goto(BASE + "/data", { waitUntil: "networkidle" });
+await pp.waitForTimeout(1600);
+await pp.getByRole("tab", { name: /^Public Health$/i }).click();
+await pp.waitForTimeout(1800);
+const mob = await pp.evaluate(() => {
+  const svg = document.querySelector("svg[role=img]");
+  const scale = svg ? svg.getBoundingClientRect().width / 760 : 0;
+  const labels = [...document.querySelectorAll("svg text")].filter((t) => /^(United States|World) /.test(t.textContent));
+  const px = labels.map((t) => parseFloat(getComputedStyle(t).fontSize) * scale);
+  const tbl = [...document.querySelectorAll("table")].find((t) => /Change in suicide/.test(t.querySelector("caption")?.textContent || ""));
+  return {
+    minLabelPx: px.length ? Math.round(Math.min(...px) * 10) / 10 : 0,
+    labelled: labels.length,
+    noOverflow: svg ? svg.getBoundingClientRect().right <= window.innerWidth + 2 : false,
+    tableRows: tbl ? tbl.querySelectorAll("tbody tr").length : 0,
+  };
+});
+console.log("phone:", JSON.stringify(mob));
+if (mob.minLabelPx < 9) fail(`phone chart labels ${mob.minLabelPx}px — illegible`);
+if (mob.labelled < 2) fail("phone chart lost its US/world labels");
+if (!mob.noOverflow) fail("phone chart overflows viewport");
+if (mob.tableRows !== 12) fail("phone: change table missing rows");
+await phone.close();
+
 await browser.close();
 console.log(process.exitCode ? "RESULT: FAIL" : "RESULT: PASS");
