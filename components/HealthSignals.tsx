@@ -153,8 +153,18 @@ function LineChart({
   yFmt?: (v: number) => string;
 }) {
   const [hover, setHover] = useState<number | null>(null);
+  // The SVG is drawn in a 720-wide viewBox and scaled to fit. On a 390px phone
+  // that is a 0.49x scale, so an 11px label paints at 5.4px — the same defect
+  // fixed on the international chart. Type is scaled up to compensate, and the
+  // gutters grow with it so the larger axis labels still fit.
+  const narrow = useNarrow();
   if (points.length < 2) return null;
-  const W = 720, H = 260, padL = 56, padR = 24, padT = 18, padB = 34;
+  const fsTick = narrow ? 20 : 11;
+  const fsLabel = narrow ? 22 : 12;
+  const rMark = narrow ? 5 : 3.5, rHover = narrow ? 7.5 : 5.5, sw = narrow ? 3.5 : 2;
+  const W = 720, H = 260;
+  const padL = narrow ? 92 : 56, padR = narrow ? 30 : 24;
+  const padT = narrow ? 26 : 18, padB = narrow ? 46 : 34;
   const xs = points.map((p) => p.year);
   const vs = points.map((p) => p.value);
   const x0 = Math.min(...xs), x1 = Math.max(...xs);
@@ -168,7 +178,7 @@ function LineChart({
   const yTicks = Array.from({ length: ticks + 1 }, (_, i) => v0 + ((v1 - v0) * i) / ticks);
   // Anchor x ticks on the most recent year and step backwards, so the latest
   // year is always labelled (the recent end is what readers check first).
-  const xStep = Math.max(1, Math.ceil((x1 - x0) / 8));
+  const xStep = Math.max(1, Math.ceil((x1 - x0) / (narrow ? 3 : 8)));
   const xTicks: number[] = [];
   for (let y = x1; y >= x0; y -= xStep) xTicks.push(y);
   const h = hover !== null ? points[hover] : null;
@@ -193,19 +203,19 @@ function LineChart({
         {yTicks.map((t, i) => (
           <g key={i}>
             <line x1={padL} y1={Y(t)} x2={W - padR} y2={Y(t)} stroke="rgb(var(--edge))" strokeWidth="1" />
-            <text x={padL - 8} y={Y(t) + 4} fontSize="11" fill="rgb(var(--muted))" textAnchor="end">{fmt(t)}</text>
+            <text x={padL - 8} y={Y(t) + 4} fontSize={fsTick} fill="rgb(var(--muted))" textAnchor="end">{fmt(t)}</text>
           </g>
         ))}
         {xTicks.map((y) => (
-          <text key={y} x={X(y)} y={H - 10} fontSize="11" fill="rgb(var(--muted))" textAnchor="middle">{y}</text>
+          <text key={y} x={X(y)} y={H - 10} fontSize={fsTick} fill="rgb(var(--muted))" textAnchor="middle">{y}</text>
         ))}
-        <path d={path} fill="none" stroke="rgb(var(--foreground))" strokeWidth="2" />
+        <path d={path} fill="none" stroke="rgb(var(--foreground))" strokeWidth={sw} />
         {points.map((p, i) => (
           <g key={i}>
             <circle
-              cx={X(p.year)} cy={Y(p.value)} r={hover === i ? 5.5 : 3.5}
+              cx={X(p.year)} cy={Y(p.value)} r={hover === i ? rHover : rMark}
               fill={p.provisional ? "rgb(var(--background))" : "rgb(var(--foreground))"}
-              stroke="rgb(var(--foreground))" strokeWidth="1.5"
+              stroke="rgb(var(--foreground))" strokeWidth={narrow ? 2.5 : 1.5}
             />
             {/* hit target larger than the mark */}
             <circle
@@ -220,7 +230,7 @@ function LineChart({
             <line x1={X(h.year)} y1={padT} x2={X(h.year)} y2={H - padB} stroke="rgb(var(--muted))" strokeDasharray="3 3" />
             <text
               x={Math.min(Math.max(X(h.year), padL + 60), W - padR - 60)} y={padT - 4}
-              fontSize="12" fill="rgb(var(--foreground))" textAnchor="middle" fontWeight="600"
+              fontSize={fsLabel} fill="rgb(var(--foreground))" textAnchor="middle" fontWeight="600"
             >
               {h.year}: {fmt(h.value)}{h.provisional ? " (provisional)" : ""}
             </text>
@@ -230,7 +240,7 @@ function LineChart({
         <text
           x={X(last.year) - 8}
           y={Y(last.value) + (labelBelow ? 20 : -12)}
-          fontSize="12" fill="rgb(var(--foreground))" textAnchor="end" fontWeight="600"
+          fontSize={fsLabel} fill="rgb(var(--foreground))" textAnchor="end" fontWeight="600"
         >
           {fmt(last.value)}
         </text>
@@ -926,18 +936,35 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
         <h2 className="font-display font-semibold text-foreground text-[21px] mb-6">
           The other curve: overdose deaths
         </h2>
+        <p className="body-copy text-foreground/90 max-w-[80ch] mb-6">
+          Suicide and overdose are often reported together as &ldquo;deaths of despair.&rdquo;
+          They have not moved together. Over the same quarter-century in which the US suicide
+          rate rose, overdose deaths rose far more steeply — then reversed, sharply, in a way
+          suicide has not.
+        </p>
         {indicators === null && <SkeletonChart />}
         {overdoseSeries.length > 1 && (
           <LineChart
-            title="United States — drug overdose deaths, 2022–2025"
+            title="United States — drug overdose deaths, 1999–2025"
             points={overdoseSeries}
-            unit="Deaths per year (CDC/NCHS; 2025 provisional)"
+            unit="Deaths per year (CDC/NCHS; final to 2024, 2025 provisional)"
             yFmt={(v) => `${Math.round(v / 1000)}k`}
           />
         )}
-        <p className="text-muted text-[14px] max-w-[80ch]">
-          Overdose deaths fell 26.2% in 2024 — the largest one-year drop on record — and kept
-          falling in 2025. Both directions are part of the record.
+        <p className="body-copy text-foreground/90 max-w-[80ch]">
+          <strong className="text-foreground">The rise is the larger half of this record.</strong>{" "}
+          Overdose deaths went from 16,849 in 1999 to 107,941 in 2022 — more than six times as
+          many, in twenty-three years. The decline since is real and steep: down 26.2% in 2024,
+          the largest one-year drop across 2014&ndash;2024, and falling again in 2025. But it
+          starts from a peak that did not exist a generation ago, and 2025 remains roughly four
+          times the 1999 count.
+        </p>
+        <p className="text-muted text-[14px] max-w-[80ch] mt-3">
+          The 2025 point is provisional (hollow) and will revise upward as late certificates are
+          processed. That matters for the headline: measured against CDC&rsquo;s provisional 2024
+          estimate the 2025 fall is almost 14%; measured against the final 2024 count it is about
+          11.9%. Neither figure is wrong &mdash; they compare different vintages of the same year.
+          The data-quality register below carries this in full.
         </p>
       </section>
 

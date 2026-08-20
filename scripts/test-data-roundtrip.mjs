@@ -326,5 +326,73 @@ if (!cv.namesMetric) fail("change-view headline does not say what it measures");
 if (!cv.defaultsToChange) fail("chart does not default to the change view");
 if (!cv.headlineHasComputedPct) fail("headline percentages not computed from data");
 
+// Overdose chart: the fault being guarded against is a chart that opens at the
+// 2022 peak and therefore shows only the decline. It must carry the rise too.
+const od = await page.evaluate(() => {
+  const figs = [...document.querySelectorAll("figure")];
+  const fig = figs.find((f) => /overdose/i.test(f.querySelector("figcaption")?.textContent || ""));
+  if (!fig) return { found: false };
+  const cap = fig.querySelector("figcaption")?.textContent || "";
+  const svg = fig.querySelector("svg");
+  const pts = svg ? svg.querySelectorAll("circle").length / 2 : 0; // mark + hit target
+  const xLabels = svg
+    ? [...svg.querySelectorAll("text")].map((t) => t.textContent).filter((t) => /^(19|20)\d\d$/.test(t))
+    : [];
+  const years = xLabels.map(Number);
+  // hollow point = provisional 2025, filled = final
+  const hollow = svg
+    ? [...svg.querySelectorAll("circle")].filter((c) => /background/.test(c.getAttribute("fill") || "")).length
+    : 0;
+  const section = fig.closest("section")?.textContent || "";
+  return {
+    found: true,
+    caption: cap,
+    points: pts,
+    minYear: years.length ? Math.min(...years) : null,
+    maxYear: years.length ? Math.max(...years) : null,
+    hollow,
+    // the copy must state the rise, not just the fall
+    statesRise: /16,849/.test(section) && /107,941/.test(section),
+    statesFall: /26\.2%/.test(section),
+    // provisional-vs-final vintage caveat present
+    vintageCaveat: /provisional/i.test(section) && /11\.9%/.test(section),
+    despairFraming: /despair/i.test(section),
+  };
+});
+console.log("overdose:", JSON.stringify(od));
+if (!od.found) fail("overdose chart not found");
+if (od.points < 25) fail(`overdose chart points: ${od.points}, expected the full 1999-2025 series`);
+if (od.minYear === null || od.minYear > 2001) fail(`overdose chart starts at ${od.minYear}, expected ~1999`);
+if (od.maxYear !== 2025) fail(`overdose chart ends at ${od.maxYear}, expected 2025`);
+if (od.hollow < 1) fail("provisional 2025 point is not drawn hollow");
+if (!od.statesRise) fail("overdose copy does not state the rise (1999 and 2022 figures)");
+if (!od.statesFall) fail("overdose copy does not state the 2024 decline");
+if (!od.vintageCaveat) fail("overdose copy missing the provisional-vs-final vintage caveat");
+
+// Same phone-legibility guard the international chart has: the 720-wide viewBox
+// scales to ~0.5x on a 390px screen, which silently halves every label.
+await page.setViewportSize({ width: 390, height: 900 });
+await page.waitForTimeout(1400);
+const odPhone = await page.evaluate(() => {
+  const f = [...document.querySelectorAll("figure")]
+    .find((x) => /overdose deaths, 1999/.test(x.querySelector("figcaption")?.textContent || ""));
+  if (!f) return { found: false };
+  const svg = f.querySelector("svg");
+  const r = svg.getBoundingClientRect();
+  const scale = r.width / svg.viewBox.baseVal.width;
+  const sizes = [...svg.querySelectorAll("text")].map((t) => +(t.getAttribute("font-size") || 11) * scale);
+  return {
+    found: true,
+    minPx: +Math.min(...sizes).toFixed(1),
+    labels: sizes.length,
+    overflow: r.right > document.documentElement.clientWidth + 1,
+  };
+});
+console.log("overdose phone:", JSON.stringify(odPhone));
+if (!odPhone.found) fail("overdose chart missing at phone width");
+if (odPhone.minPx < 9) fail(`overdose chart label paints at ${odPhone.minPx}px on a phone`);
+if (odPhone.overflow) fail("overdose chart overflows the phone viewport");
+await page.setViewportSize({ width: 1280, height: 900 });
+
 await browser.close();
 console.log(process.exitCode ? "RESULT: FAIL" : "RESULT: PASS");

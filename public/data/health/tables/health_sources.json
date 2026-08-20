@@ -1,920 +1,938 @@
 [
- {
-  "source_id": "hs001",
-  "url": "https://www.cdc.gov/nchs/fastats/suicide.htm",
-  "publisher": "CDC/NCHS",
-  "title": "FastStats: Suicide and Self-Harm Injury (2024 final data)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs002",
-  "url": "https://www.cdc.gov/nchs/data/databriefs/db464-tables.pdf",
-  "publisher": "CDC/NCHS",
-  "title": "Data tables for NCHS Data Brief 464: Suicide Mortality in the United States, 2001-2021",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs003",
-  "url": "https://www.cdc.gov/nchs/data/databriefs/db464.pdf",
-  "publisher": "CDC/NCHS",
-  "title": "NCHS Data Brief 464: Suicide Mortality in the United States, 2001-2021 (Apr 2023)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs004",
-  "url": "https://www.cdc.gov/nchs/products/databriefs/db509.htm",
-  "publisher": "CDC/NCHS",
-  "title": "NCHS Data Brief 509: Suicide Mortality in the United States, 2002-2022 (Sept 2024)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs005",
-  "url": "https://www.cdc.gov/nchs/products/databriefs/db541.htm",
-  "publisher": "CDC/NCHS",
-  "title": "NCHS Data Brief 541: Changes in Suicide Rates in the United States From 2022 to 2023 (Sept 2025)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs006",
-  "url": "https://www.cdc.gov/nchs/products/databriefs/db548.htm",
-  "publisher": "CDC/NCHS",
-  "title": "NCHS Data Brief 548: Mortality in the United States, 2024 (Jan 29, 2026)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs007",
-  "url": "https://www.cdc.gov/nchs/products/databriefs/db362.htm",
-  "publisher": "CDC/NCHS",
-  "title": "NCHS Data Brief 362: Increase in Suicide Mortality in the United States, 1999-2018 (Apr 2020)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs008",
-  "url": "https://www.cdc.gov/mmwr/volumes/67/wr/mm6722a1.htm",
-  "publisher": "CDC MMWR",
-  "title": "Vital Signs: Trends in State Suicide Rates — United States, 1999-2016 (June 8, 2018)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs009",
-  "url": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/bulletins/suicidesintheunitedkingdom/latest",
-  "publisher": "UK Office for National Statistics",
-  "title": "Suicides in England and Wales: 2024 registrations (Oct 3, 2025)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs010",
-  "url": "https://www.abs.gov.au/statistics/health/causes-death/intentional-self-harm-suicide-deaths/2024",
-  "publisher": "Australian Bureau of Statistics",
-  "title": "Intentional self-harm (suicide) deaths, 2024 (Nov 14, 2025)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs011",
-  "url": "https://health-infobase.canada.ca/mental-health/suicide-self-harm/suicide-mortality.html",
-  "publisher": "Public Health Agency of Canada",
-  "title": "Suicide mortality (Health Infobase)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs012",
-  "url": "https://www.mhlw.go.jp/content/001464705.pdf",
-  "publisher": "Japan Ministry of Health, Labour and Welfare",
-  "title": "2024 White Paper on Suicide Prevention (provisional English translation)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs013",
-  "url": "https://www.nippon.com/en/japan-data/h02690/",
-  "publisher": "Nippon.com (citing MHLW/National Police Agency)",
-  "title": "Number of Suicides in Japan Falls Below 20,000 (2025 data)",
-  "evidence_tier": "B",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs014",
-  "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2024/09/PD24_N046_23211.html",
-  "publisher": "Destatis",
-  "title": "Press release N046: Jeder 100. Todesfall in Deutschland ist ein Suizid (Sept 2024, 2023 data)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs015",
-  "url": "https://www.santepubliquefrance.fr/les-actualites/suicide-et-tentative-de-suicides-donnees-nationales-et-regionales",
-  "publisher": "Santé publique France",
-  "title": "Suicide et tentatives de suicide : données nationales et régionales",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs016",
-  "url": "https://api.worldbank.org/v2/country/USA;GBR;CAN;AUS/indicator/SH.STA.SUIC.P5?format=json&per_page=120&date=2000:2021",
-  "publisher": "WHO Global Health Estimates via World Bank API",
-  "title": "Suicide mortality rate, age-standardized (SH.STA.SUIC.P5): US, UK, Canada, Australia",
-  "evidence_tier": "B",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs017",
-  "url": "https://api.worldbank.org/v2/country/JPN;DEU;FRA;KOR/indicator/SH.STA.SUIC.P5?format=json&per_page=120&date=2000:2021",
-  "publisher": "WHO Global Health Estimates via World Bank API",
-  "title": "Suicide mortality rate, age-standardized (SH.STA.SUIC.P5): Japan, Germany, France, Korea",
-  "evidence_tier": "B",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs018",
-  "url": "https://www.koreaherald.com/article/10429652",
-  "publisher": "Korea Herald (citing Korea Foundation for Suicide Prevention / Statistics Korea)",
-  "title": "Suicide deaths in S. Korea hit 13-yr high in 2024",
-  "evidence_tier": "B",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs019",
-  "url": "https://www.who.int/news/item/17-06-2021-one-in-100-deaths-is-by-suicide",
-  "publisher": "World Health Organization",
-  "title": "One in 100 deaths is by suicide (launch of 'Suicide worldwide in 2019')",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs020",
-  "url": "https://www.fcc.gov/document/us-transition-988-suicide-crisis-lifeline-begins-july-16",
-  "publisher": "US Federal Communications Commission",
-  "title": "U.S. Transition to 988 Suicide & Crisis Lifeline Begins July 16",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs021",
-  "url": "https://api.worldbank.org/v2/country/WLD;CHN;RUS;IND/indicator/SH.STA.SUIC.P5?format=json&per_page=400",
-  "publisher": "World Bank (mirroring WHO GHE)",
-  "title": "Suicide mortality rate — World, China, Russia, India",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs022",
-  "url": "https://www.who.int/news-room/fact-sheets/detail/suicide",
-  "publisher": "WHO",
-  "title": "Suicide — fact sheet",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs023",
-  "url": "https://www.who.int/teams/mental-health-and-substance-use/data-research/suicide-data",
-  "publisher": "WHO",
-  "title": "Suicide data",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs024",
-  "url": "https://www.who.int/data/global-health-estimates",
-  "publisher": "WHO",
-  "title": "Global Health Estimates",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs025",
-  "url": "https://www.who.int/publications/i/item/9789240026643",
-  "publisher": "WHO",
-  "title": "Suicide worldwide in 2019 (publication page; PDF 403)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs026",
-  "url": "https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(02)07954-0/abstract",
-  "publisher": "The Lancet",
-  "title": "Phillips, Li & Zhang — Suicide rates in China, 1995-99",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs027",
-  "url": "https://link.springer.com/article/10.1186/s12889-024-18743-z",
-  "publisher": "BMC Public Health",
-  "title": "Long-term changing patterns of suicide mortality in China 1987-2020",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs028",
-  "url": "https://academic.oup.com/eurpub/article/30/Supplement_5/ckaa166.1371/5915576",
-  "publisher": "European Journal of Public Health",
-  "title": "Semyonova et al. — Russian suicide mortality: official and actual rates",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs029",
-  "url": "https://populationandeconomics.pensoft.net/article/107534/",
-  "publisher": "Population and Economics",
-  "title": "Semyonova, Zubko & Sabgayda — Undercounting of Age-Specific Suicide Mortality",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs030",
-  "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3828708/",
-  "publisher": "AJPH via PMC",
-  "title": "Pridemore et al. — 2006 Russian Alcohol Policy and Male Suicide Mortality",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs031",
-  "url": "https://journals.sagepub.com/doi/10.1177/02537176241240699",
-  "publisher": "Indian J Psychological Medicine",
-  "title": "Abhijita et al. — NCRB Suicide in India 2022 Report: Key Time Trends",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs032",
-  "url": "https://cmhlp.org/imho/blog/takeaways-from-the-ncrb-data-on-suicide-for-2022/",
-  "publisher": "CMHLP",
-  "title": "Takeaways from the NCRB data on suicide for 2022",
-  "evidence_tier": "B",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs033",
-  "url": "https://cmhlp.org/blogs/data-is-the-new-oil-but-not-when-it-comes-to-suicides-in-india/",
-  "publisher": "CMHLP",
-  "title": "Is India's suicide data accurate? NCRB vs GBD",
-  "evidence_tier": "B",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs034",
-  "url": "https://shanghaiarchivesofpsychiatry.org/en/2014.02.003.html",
-  "publisher": "Shanghai Archives of Psychiatry",
-  "title": "Indian suicide data review (Million Death Study)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs035",
-  "url": "https://en.wikipedia.org/wiki/Mental_Healthcare_Act,_2017",
-  "publisher": "Wikipedia",
-  "title": "Mental Healthcare Act, 2017",
-  "evidence_tier": "B",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs036",
-  "url": "https://unitedgmh.org/suicide-decriminalisation/",
-  "publisher": "United for Global Mental Health",
-  "title": "Suicide Decriminalisation",
-  "evidence_tier": "B",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs037",
-  "url": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/articles/changeinthestandardofproofusedbycoronersandtheimpactonsuicidedeathregistrationsdatainenglandandwales/2020-12-08",
-  "publisher": "ONS",
-  "title": "Change in the standard of proof used by coroners",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs038",
-  "url": "https://media.samaritans.org/documents/Understanding_UK_and_ROI_Suicide_Statistics.pdf",
-  "publisher": "Samaritans",
-  "title": "Understanding UK and ROI suicide statistics",
-  "evidence_tier": "B",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs039",
-  "url": "https://www.frontiersin.org/journals/psychiatry/articles/10.3389/fpsyt.2025.1609580/full",
-  "publisher": "Frontiers in Psychiatry",
-  "title": "Meda et al. — How many people die by suicide each year? Not 727,000",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs040",
-  "url": "https://ourworldindata.org/how-do-global-statistics-on-suicide-differ-between-sources",
-  "publisher": "Our World in Data",
-  "title": "How do global statistics on suicide differ between sources?",
-  "evidence_tier": "B",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs041",
-  "url": "https://pressroom.cancer.org/cancer-statistics-report-2026",
-  "publisher": "American Cancer Society",
-  "title": "Annual Cancer Statistics Report 2026",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs042",
-  "url": "https://pressroom.cancer.org/2025CancerFactsandFigures",
-  "publisher": "American Cancer Society",
-  "title": "ACS Annual Report 2025: Cancer Mortality Continues to Drop Despite Rising Incidence in Women",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs043",
-  "url": "https://seer.cancer.gov/statfacts/html/all.html",
-  "publisher": "NCI SEER",
-  "title": "Cancer Stat Facts: Cancer of Any Site",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs044",
-  "url": "https://www.cancer.org/research/acs-research-news/colorectal-cancer-drops-in-older-adults-and-rises-in-young-ones.html",
-  "publisher": "American Cancer Society",
-  "title": "Colorectal Cancer Drops in Older Adults and Rises in Younger Ones (CRC Statistics 2026)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs045",
-  "url": "https://bmjgroup.com/global-surge-in-cancers-among-the-under-50s-over-past-three-decades/",
-  "publisher": "BMJ Group (BMJ Oncology)",
-  "title": "Global surge in cancers among the under 50s over past three decades",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs046",
-  "url": "https://www.docwirenews.com/post/2026-cancer-statistics-report-breast-cancer-incidence-continues-to-rise-driven-by-increases-among-younger-women",
-  "publisher": "Docwire News",
-  "title": "2026 Cancer Statistics Report: Breast Cancer Incidence Continues to Rise",
-  "evidence_tier": "B",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs047",
-  "url": "https://www.nimh.nih.gov/health/statistics/major-depression",
-  "publisher": "NIMH (NIH)",
-  "title": "Major Depression Statistics (2021 NSDUH)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs048",
-  "url": "https://www.naco.org/news/samhsa-releases-new-2024-data-rates-mental-illness-and-substance-use-disorder-us",
-  "publisher": "NACo (citing SAMHSA 2024 NSDUH)",
-  "title": "SAMHSA releases new 2024 data on rates of mental illness and substance use disorder",
-  "evidence_tier": "B",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs049",
-  "url": "https://www.samhsa.gov/data/data-we-collect/nsduh-national-survey-drug-use-and-health/national-releases/2024",
-  "publisher": "SAMHSA",
-  "title": "2024 NSDUH Releases (2025-07-28)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs050",
-  "url": "https://news.gallup.com/poll/505745/depression-rates-reach-new-highs.aspx",
-  "publisher": "Gallup",
-  "title": "U.S. Depression Rates Reach New Highs",
-  "evidence_tier": "B",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs051",
-  "url": "https://www.cdc.gov/nchs/data/nhsr/nhsr213.pdf",
-  "publisher": "CDC/NCHS",
-  "title": "Symptoms of Anxiety and Depression Among Adults: United States, 2019 and 2022 (NHSR 213)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs052",
-  "url": "https://www.who.int/news-room/fact-sheets/detail/depression",
-  "publisher": "WHO",
-  "title": "Depression fact sheet (updated 2025-08-29)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs053",
-  "url": "https://www.who.int/news-room/fact-sheets/detail/anxiety-disorders",
-  "publisher": "WHO",
-  "title": "Anxiety disorders fact sheet (updated 2025-09-08)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs054",
-  "url": "https://www.who.int/news/item/02-03-2022-covid-19-pandemic-triggers-25-increase-in-prevalence-of-anxiety-and-depression-worldwide",
-  "publisher": "WHO",
-  "title": "COVID-19 pandemic triggers 25% increase in prevalence of anxiety and depression worldwide",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs055",
-  "url": "https://cdc.gov/nchs/products/databriefs/db549.htm",
-  "publisher": "CDC/NCHS",
-  "title": "Drug Overdose Deaths in the United States, 2023-2024 (Data Brief 549, Jan 2026)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs056",
-  "url": "https://www.ncbi.nlm.nih.gov/books/NBK621157/",
-  "publisher": "NCBI Bookshelf (NCHS)",
-  "title": "Drug Overdose Deaths in the United States, 2023-2024 (verification copy)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs057",
-  "url": "https://www.cdc.gov/nchs/pressroom/releases/20260513.html",
-  "publisher": "CDC/NCHS",
-  "title": "U.S. Overdose Deaths Decrease for Third Consecutive Year in 2025 (provisional)",
-  "evidence_tier": "B",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs058",
-  "url": "https://www.cdc.gov/media/releases/2025/2025-cdc-reports-decline-in-us-drug-overdose-deaths.html",
-  "publisher": "CDC",
-  "title": "CDC Reports Nearly 24% Decline in U.S. Drug Overdose Deaths (2025-02-25, provisional)",
-  "evidence_tier": "B",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs059",
-  "url": "https://cdc.gov/nchs/products/databriefs/db548.htm",
-  "publisher": "CDC/NCHS",
-  "title": "Mortality in the United States, 2024 (Data Brief 548, Jan 2026)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs060",
-  "url": "https://www.cdc.gov/nchs/data/databriefs/db521.pdf",
-  "publisher": "CDC/NCHS",
-  "title": "Mortality in the United States, 2023 (Data Brief 521, Dec 2024)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs061",
-  "url": "https://www.cdc.gov/nchs/products/databriefs/db456.htm",
-  "publisher": "CDC/NCHS",
-  "title": "Mortality in the United States, 2021 (Data Brief 456)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs062",
-  "url": "https://www.cdc.gov/nchs/products/databriefs/db267.htm",
-  "publisher": "CDC/NCHS",
-  "title": "Mortality in the United States, 2015 (Data Brief 267)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs063",
-  "url": "https://www.healthsystemtracker.org/chart-collection/u-s-life-expectancy-compare-countries/",
-  "publisher": "Peterson-KFF Health System Tracker",
-  "title": "How does U.S. life expectancy compare to other countries? (updated 2026-03-31)",
-  "evidence_tier": "B",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs064",
-  "url": "https://www.aha.org/news/headline/2021-12-07-surgeon-general-advisory-targets-youth-mental-health-crisis",
-  "publisher": "American Hospital Association",
-  "title": "Surgeon general advisory targets youth mental health crisis (2021-12-07)",
-  "evidence_tier": "B",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs065",
-  "url": "https://www.oecd.org/en/publications/health-at-a-glance-2025_15a55280-en/united-states_3517f35e-en.html",
-  "publisher": "OECD",
-  "title": "Health at a Glance 2025: United States country note (located but not fetchable — robots/403)",
-  "evidence_tier": "C",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs066",
-  "url": "https://www.nhsbsa.nhs.uk/statistical-collections/medicines-used-mental-health-england/medicines-used-mental-health-england-201516-202425",
-  "publisher": "NHSBSA",
-  "title": "Medicines Used in Mental Health – England – 2015/16 to 2024/25",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs067",
-  "url": "https://nhsbsa-opendata.s3.eu-west-2.amazonaws.com/mumh/mumh_annual_2021_22_v002.html",
-  "publisher": "NHSBSA (open data)",
-  "title": "MUMH annual summary 2015/16 to 2021/22",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs068",
-  "url": "https://www.nhsbsa.nhs.uk/statistical-collections/medicines-used-mental-health-england/medicines-used-mental-health-england-annual/medicines-used-mental-health-england-201516-202324",
-  "publisher": "NHSBSA",
-  "title": "MUMH 2015/16 to 2023/24",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs069",
-  "url": "https://www.nhsbsa.nhs.uk/statistical-collections/medicines-used-mental-health-england/medicines-used-mental-health-england-quarterly-summary-statistics-20242025/medicines-used-mental-health-england-quarterly-summary-statistics-october-december-2024",
-  "publisher": "NHSBSA",
-  "title": "MUMH quarterly, Oct-Dec 2024",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs070",
-  "url": "https://www.thepharmacist.co.uk/in-practice/mental-health-prescribing-in-england-reaches-new-high-nhsbsa-report-reveals/",
-  "publisher": "The Pharmacist",
-  "title": "Mental health prescribing in England reaches new high",
-  "evidence_tier": "B",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs071",
-  "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12303834/",
-  "publisher": "BJPsych Open",
-  "title": "Newman et al., Twenty-five year trend in antipsychotic prescribing in England (2025)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs072",
-  "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6192504/",
-  "publisher": "Schizophrenia Bulletin",
-  "title": "Charlson et al., Global Epidemiology and Burden of Schizophrenia (GBD 2016)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs073",
-  "url": "https://www.frontiersin.org/journals/psychiatry/articles/10.3389/fpsyt.2025.1629032/full",
-  "publisher": "Frontiers in Psychiatry",
-  "title": "GBD schizophrenia trends 1990-2021 and projections to 2050",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs074",
-  "url": "https://www.nimh.nih.gov/health/statistics/schizophrenia",
-  "publisher": "NIMH",
-  "title": "Schizophrenia — statistics",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs075",
-  "url": "https://onlinelibrary.wiley.com/doi/10.1111/acps.13565",
-  "publisher": "Acta Psychiatrica Scandinavica",
-  "title": "Köhler-Forsberg et al., Schizophrenia spectrum disorders in Denmark 2000-2018",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs076",
-  "url": "https://pubmed.ncbi.nlm.nih.gov/39961232/",
-  "publisher": "J Psychiatric Research (PubMed record)",
-  "title": "Hong Kong 11-year antipsychotic utilization study (DOI 10.1016/j.jpsychires.2025.02.017)",
-  "evidence_tier": "B",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs077",
-  "url": "https://www.aspe.hhs.gov/sites/default/files/documents/1ef68c455fa5aa5932acf481b0954ddf/DataPoint_PsychRxPrev_BHDAP_20250409%20July%2031%202025.pdf",
-  "publisher": "HHS ASPE",
-  "title": "US Population Prevalence of Psychotropic Medication Use, 2006-2023",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs078",
-  "url": "https://www.cdc.gov/mmwr/volumes/72/wr/mm7213a1.htm",
-  "publisher": "CDC MMWR",
-  "title": "Danielson et al., Trends in Stimulant Prescription Fills 2016-2021",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs079",
-  "url": "https://www.deadiversion.usdoj.gov/pubs/docs/IQVIA-Report-on-Stimulant-Trends-2024.pdf",
-  "publisher": "IQVIA for DEA",
-  "title": "Stimulant Prescription Trends in the United States, 2012-2023",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs080",
-  "url": "https://ihpi.umich.edu/news-events/news/antidepressant-dispensing-adolescents-and-young-adults-surges-during-pandemic",
-  "publisher": "U. Michigan IHPI",
-  "title": "Antidepressant dispensing to adolescents surges during pandemic",
-  "evidence_tier": "B",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs081",
-  "url": "https://publications.aap.org/pediatrics/article/153/3/e2023064245/196655/Antidepressant-Dispensing-to-US-Adolescents-and",
-  "publisher": "Pediatrics",
-  "title": "Chua et al., Antidepressant Dispensing to US Adolescents and Young Adults: 2016-2022 (page 403 to proxy; verified via IHPI)",
-  "evidence_tier": "B",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs082",
-  "url": "https://www.2minutemedicine.com/benzodiazepine-use-declined-before-the-covid-19-pandemic-then-plateaued/",
-  "publisher": "2 Minute Medicine",
-  "title": "Benzodiazepine use declined then plateaued (IQVIA LRx 2015-2024, 65+)",
-  "evidence_tier": "B",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs083",
-  "url": "https://www.euronews.com/health/2023/09/09/europes-mental-health-crisis-in-data-which-country-uses-the-most-antidepressants",
-  "publisher": "Euronews (OECD data)",
-  "title": "Which country uses the most antidepressants?",
-  "evidence_tier": "B",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs084",
-  "url": "https://www.oecd.org/en/publications/health-at-a-glance-2023_7a7afb35-en/full-report/pharmaceutical-consumption_4b6cb013.html",
-  "publisher": "OECD",
-  "title": "Health at a Glance 2023 — Pharmaceutical consumption",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs085",
-  "url": "https://www.fda.gov/drugs/drug-safety-and-availability/fda-announces-shortage-adderall",
-  "publisher": "FDA",
-  "title": "FDA Announces Shortage of Adderall (2022-10-12)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs086",
-  "url": "https://www.fda.gov/news-events/press-announcements/fda-approves-drug-new-mechanism-action-treatment-schizophrenia",
-  "publisher": "FDA",
-  "title": "FDA Approves Cobenfy (2024-09-26)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs087",
-  "url": "https://www.grandviewresearch.com/press-release/global-antipsychotic-drugs-market",
-  "publisher": "Grand View Research",
-  "title": "Antipsychotic Drugs Market To Reach $32.24B By 2033",
-  "evidence_tier": "C",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs088",
-  "url": "https://www.hhs.gov/sites/default/files/surgeon-general-social-connection-advisory.pdf",
-  "publisher": "US Surgeon General / HHS",
-  "title": "Our Epidemic of Loneliness and Isolation",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs089",
-  "url": "https://www.hhs.gov/sites/default/files/surgeon-general-youth-mental-health-advisory.pdf",
-  "publisher": "US Surgeon General / HHS",
-  "title": "Protecting Youth Mental Health",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs090",
-  "url": "https://www.hhs.gov/sites/default/files/sg-youth-mental-health-social-media-advisory.pdf",
-  "publisher": "US Surgeon General / HHS",
-  "title": "Social Media and Youth Mental Health",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs091",
-  "url": "https://www.hhs.gov/sites/default/files/parents-under-pressure.pdf",
-  "publisher": "US Surgeon General / HHS",
-  "title": "Parents Under Pressure",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs092",
-  "url": "https://www.brookings.edu/articles/mortality-and-morbidity-in-the-21st-century/",
-  "publisher": "Brookings (BPEA)",
-  "title": "Mortality and Morbidity in the 21st Century (Case & Deaton)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs093",
-  "url": "https://www.nber.org/papers/w24188",
-  "publisher": "NBER",
-  "title": "Deaths of Despair or Drug Problems? (Ruhm)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs094",
-  "url": "https://www.nature.com/articles/d41586-024-00902-2",
-  "publisher": "Nature",
-  "title": "The great rewiring (Odgers)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs095",
-  "url": "https://archive.cdc.gov/www_cdc_gov/media/releases/2018/s1129-US-life-expectancy.html",
-  "publisher": "CDC (archived)",
-  "title": "CDC Director's Media Statement on U.S. Life Expectancy (2018-11-29)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs096",
-  "url": "https://www.cdc.gov/overdose-prevention/about/understanding-the-opioid-overdose-epidemic.html",
-  "publisher": "CDC",
-  "title": "Understanding the Opioid Overdose Epidemic",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs097",
-  "url": "https://pubmed.ncbi.nlm.nih.gov/24592495/",
-  "publisher": "Annals of Internal Medicine (PubMed)",
-  "title": "The Accessibility of Firearms and Risk for Suicide and Homicide Victimization (Anglemyer et al.)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs098",
-  "url": "https://bhw.hrsa.gov/data-research/projecting-health-workforce-supply-demand/behavioral-health",
-  "publisher": "HRSA",
-  "title": "Health Workforce Projections: Behavioral Health",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs099",
-  "url": "https://www.dol.gov/sites/dolgov/files/EBSA/laws-and-regulations/laws/mental-health-parity/report-to-congress-2022-realizing-parity-reducing-stigma-and-raising-awareness.pdf",
-  "publisher": "US DOL/HHS/Treasury",
-  "title": "2022 MHPAEA Report to Congress",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs100",
-  "url": "https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2778451",
-  "publisher": "JAMA Network Open",
-  "title": "Overdiagnosis of ADHD in Children and Adolescents (Kazda et al.)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs101",
-  "url": "https://pubmed.ncbi.nlm.nih.gov/24345349/",
-  "publisher": "J Clin Psychiatry (PubMed)",
-  "title": "National Trends in Long-Term Use of Antidepressant Medications (Mojtabai & Olfson)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- },
- {
-  "source_id": "hs102",
-  "url": "https://journals.sagepub.com/doi/10.1177/2167702617723376",
-  "publisher": "Clinical Psychological Science",
-  "title": "Increases in Depressive Symptoms, Suicide-Related Outcomes... After 2010 (Twenge et al.)",
-  "evidence_tier": "A",
-  "accessed": "2026-08-19",
-  "archived_url": null
- }
+  {
+    "source_id": "hs001",
+    "url": "https://www.cdc.gov/nchs/fastats/suicide.htm",
+    "publisher": "CDC/NCHS",
+    "title": "FastStats: Suicide and Self-Harm Injury (2024 final data)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs002",
+    "url": "https://www.cdc.gov/nchs/data/databriefs/db464-tables.pdf",
+    "publisher": "CDC/NCHS",
+    "title": "Data tables for NCHS Data Brief 464: Suicide Mortality in the United States, 2001-2021",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs003",
+    "url": "https://www.cdc.gov/nchs/data/databriefs/db464.pdf",
+    "publisher": "CDC/NCHS",
+    "title": "NCHS Data Brief 464: Suicide Mortality in the United States, 2001-2021 (Apr 2023)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs004",
+    "url": "https://www.cdc.gov/nchs/products/databriefs/db509.htm",
+    "publisher": "CDC/NCHS",
+    "title": "NCHS Data Brief 509: Suicide Mortality in the United States, 2002-2022 (Sept 2024)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs005",
+    "url": "https://www.cdc.gov/nchs/products/databriefs/db541.htm",
+    "publisher": "CDC/NCHS",
+    "title": "NCHS Data Brief 541: Changes in Suicide Rates in the United States From 2022 to 2023 (Sept 2025)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs006",
+    "url": "https://www.cdc.gov/nchs/products/databriefs/db548.htm",
+    "publisher": "CDC/NCHS",
+    "title": "NCHS Data Brief 548: Mortality in the United States, 2024 (Jan 29, 2026)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs007",
+    "url": "https://www.cdc.gov/nchs/products/databriefs/db362.htm",
+    "publisher": "CDC/NCHS",
+    "title": "NCHS Data Brief 362: Increase in Suicide Mortality in the United States, 1999-2018 (Apr 2020)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs008",
+    "url": "https://www.cdc.gov/mmwr/volumes/67/wr/mm6722a1.htm",
+    "publisher": "CDC MMWR",
+    "title": "Vital Signs: Trends in State Suicide Rates \u2014 United States, 1999-2016 (June 8, 2018)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs009",
+    "url": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/bulletins/suicidesintheunitedkingdom/latest",
+    "publisher": "UK Office for National Statistics",
+    "title": "Suicides in England and Wales: 2024 registrations (Oct 3, 2025)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs010",
+    "url": "https://www.abs.gov.au/statistics/health/causes-death/intentional-self-harm-suicide-deaths/2024",
+    "publisher": "Australian Bureau of Statistics",
+    "title": "Intentional self-harm (suicide) deaths, 2024 (Nov 14, 2025)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs011",
+    "url": "https://health-infobase.canada.ca/mental-health/suicide-self-harm/suicide-mortality.html",
+    "publisher": "Public Health Agency of Canada",
+    "title": "Suicide mortality (Health Infobase)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs012",
+    "url": "https://www.mhlw.go.jp/content/001464705.pdf",
+    "publisher": "Japan Ministry of Health, Labour and Welfare",
+    "title": "2024 White Paper on Suicide Prevention (provisional English translation)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs013",
+    "url": "https://www.nippon.com/en/japan-data/h02690/",
+    "publisher": "Nippon.com (citing MHLW/National Police Agency)",
+    "title": "Number of Suicides in Japan Falls Below 20,000 (2025 data)",
+    "evidence_tier": "B",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs014",
+    "url": "https://www.destatis.de/DE/Presse/Pressemitteilungen/2024/09/PD24_N046_23211.html",
+    "publisher": "Destatis",
+    "title": "Press release N046: Jeder 100. Todesfall in Deutschland ist ein Suizid (Sept 2024, 2023 data)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs015",
+    "url": "https://www.santepubliquefrance.fr/les-actualites/suicide-et-tentative-de-suicides-donnees-nationales-et-regionales",
+    "publisher": "Sant\u00e9 publique France",
+    "title": "Suicide et tentatives de suicide : donn\u00e9es nationales et r\u00e9gionales",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs016",
+    "url": "https://api.worldbank.org/v2/country/USA;GBR;CAN;AUS/indicator/SH.STA.SUIC.P5?format=json&per_page=120&date=2000:2021",
+    "publisher": "WHO Global Health Estimates via World Bank API",
+    "title": "Suicide mortality rate, age-standardized (SH.STA.SUIC.P5): US, UK, Canada, Australia",
+    "evidence_tier": "B",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs017",
+    "url": "https://api.worldbank.org/v2/country/JPN;DEU;FRA;KOR/indicator/SH.STA.SUIC.P5?format=json&per_page=120&date=2000:2021",
+    "publisher": "WHO Global Health Estimates via World Bank API",
+    "title": "Suicide mortality rate, age-standardized (SH.STA.SUIC.P5): Japan, Germany, France, Korea",
+    "evidence_tier": "B",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs018",
+    "url": "https://www.koreaherald.com/article/10429652",
+    "publisher": "Korea Herald (citing Korea Foundation for Suicide Prevention / Statistics Korea)",
+    "title": "Suicide deaths in S. Korea hit 13-yr high in 2024",
+    "evidence_tier": "B",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs019",
+    "url": "https://www.who.int/news/item/17-06-2021-one-in-100-deaths-is-by-suicide",
+    "publisher": "World Health Organization",
+    "title": "One in 100 deaths is by suicide (launch of 'Suicide worldwide in 2019')",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs020",
+    "url": "https://www.fcc.gov/document/us-transition-988-suicide-crisis-lifeline-begins-july-16",
+    "publisher": "US Federal Communications Commission",
+    "title": "U.S. Transition to 988 Suicide & Crisis Lifeline Begins July 16",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs021",
+    "url": "https://api.worldbank.org/v2/country/WLD;CHN;RUS;IND/indicator/SH.STA.SUIC.P5?format=json&per_page=400",
+    "publisher": "World Bank (mirroring WHO GHE)",
+    "title": "Suicide mortality rate \u2014 World, China, Russia, India",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs022",
+    "url": "https://www.who.int/news-room/fact-sheets/detail/suicide",
+    "publisher": "WHO",
+    "title": "Suicide \u2014 fact sheet",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs023",
+    "url": "https://www.who.int/teams/mental-health-and-substance-use/data-research/suicide-data",
+    "publisher": "WHO",
+    "title": "Suicide data",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs024",
+    "url": "https://www.who.int/data/global-health-estimates",
+    "publisher": "WHO",
+    "title": "Global Health Estimates",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs025",
+    "url": "https://www.who.int/publications/i/item/9789240026643",
+    "publisher": "WHO",
+    "title": "Suicide worldwide in 2019 (publication page; PDF 403)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs026",
+    "url": "https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(02)07954-0/abstract",
+    "publisher": "The Lancet",
+    "title": "Phillips, Li & Zhang \u2014 Suicide rates in China, 1995-99",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs027",
+    "url": "https://link.springer.com/article/10.1186/s12889-024-18743-z",
+    "publisher": "BMC Public Health",
+    "title": "Long-term changing patterns of suicide mortality in China 1987-2020",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs028",
+    "url": "https://academic.oup.com/eurpub/article/30/Supplement_5/ckaa166.1371/5915576",
+    "publisher": "European Journal of Public Health",
+    "title": "Semyonova et al. \u2014 Russian suicide mortality: official and actual rates",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs029",
+    "url": "https://populationandeconomics.pensoft.net/article/107534/",
+    "publisher": "Population and Economics",
+    "title": "Semyonova, Zubko & Sabgayda \u2014 Undercounting of Age-Specific Suicide Mortality",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs030",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3828708/",
+    "publisher": "AJPH via PMC",
+    "title": "Pridemore et al. \u2014 2006 Russian Alcohol Policy and Male Suicide Mortality",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs031",
+    "url": "https://journals.sagepub.com/doi/10.1177/02537176241240699",
+    "publisher": "Indian J Psychological Medicine",
+    "title": "Abhijita et al. \u2014 NCRB Suicide in India 2022 Report: Key Time Trends",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs032",
+    "url": "https://cmhlp.org/imho/blog/takeaways-from-the-ncrb-data-on-suicide-for-2022/",
+    "publisher": "CMHLP",
+    "title": "Takeaways from the NCRB data on suicide for 2022",
+    "evidence_tier": "B",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs033",
+    "url": "https://cmhlp.org/blogs/data-is-the-new-oil-but-not-when-it-comes-to-suicides-in-india/",
+    "publisher": "CMHLP",
+    "title": "Is India's suicide data accurate? NCRB vs GBD",
+    "evidence_tier": "B",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs034",
+    "url": "https://shanghaiarchivesofpsychiatry.org/en/2014.02.003.html",
+    "publisher": "Shanghai Archives of Psychiatry",
+    "title": "Indian suicide data review (Million Death Study)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs035",
+    "url": "https://en.wikipedia.org/wiki/Mental_Healthcare_Act,_2017",
+    "publisher": "Wikipedia",
+    "title": "Mental Healthcare Act, 2017",
+    "evidence_tier": "B",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs036",
+    "url": "https://unitedgmh.org/suicide-decriminalisation/",
+    "publisher": "United for Global Mental Health",
+    "title": "Suicide Decriminalisation",
+    "evidence_tier": "B",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs037",
+    "url": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/articles/changeinthestandardofproofusedbycoronersandtheimpactonsuicidedeathregistrationsdatainenglandandwales/2020-12-08",
+    "publisher": "ONS",
+    "title": "Change in the standard of proof used by coroners",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs038",
+    "url": "https://media.samaritans.org/documents/Understanding_UK_and_ROI_Suicide_Statistics.pdf",
+    "publisher": "Samaritans",
+    "title": "Understanding UK and ROI suicide statistics",
+    "evidence_tier": "B",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs039",
+    "url": "https://www.frontiersin.org/journals/psychiatry/articles/10.3389/fpsyt.2025.1609580/full",
+    "publisher": "Frontiers in Psychiatry",
+    "title": "Meda et al. \u2014 How many people die by suicide each year? Not 727,000",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs040",
+    "url": "https://ourworldindata.org/how-do-global-statistics-on-suicide-differ-between-sources",
+    "publisher": "Our World in Data",
+    "title": "How do global statistics on suicide differ between sources?",
+    "evidence_tier": "B",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs041",
+    "url": "https://pressroom.cancer.org/cancer-statistics-report-2026",
+    "publisher": "American Cancer Society",
+    "title": "Annual Cancer Statistics Report 2026",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs042",
+    "url": "https://pressroom.cancer.org/2025CancerFactsandFigures",
+    "publisher": "American Cancer Society",
+    "title": "ACS Annual Report 2025: Cancer Mortality Continues to Drop Despite Rising Incidence in Women",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs043",
+    "url": "https://seer.cancer.gov/statfacts/html/all.html",
+    "publisher": "NCI SEER",
+    "title": "Cancer Stat Facts: Cancer of Any Site",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs044",
+    "url": "https://www.cancer.org/research/acs-research-news/colorectal-cancer-drops-in-older-adults-and-rises-in-young-ones.html",
+    "publisher": "American Cancer Society",
+    "title": "Colorectal Cancer Drops in Older Adults and Rises in Younger Ones (CRC Statistics 2026)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs045",
+    "url": "https://bmjgroup.com/global-surge-in-cancers-among-the-under-50s-over-past-three-decades/",
+    "publisher": "BMJ Group (BMJ Oncology)",
+    "title": "Global surge in cancers among the under 50s over past three decades",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs046",
+    "url": "https://www.docwirenews.com/post/2026-cancer-statistics-report-breast-cancer-incidence-continues-to-rise-driven-by-increases-among-younger-women",
+    "publisher": "Docwire News",
+    "title": "2026 Cancer Statistics Report: Breast Cancer Incidence Continues to Rise",
+    "evidence_tier": "B",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs047",
+    "url": "https://www.nimh.nih.gov/health/statistics/major-depression",
+    "publisher": "NIMH (NIH)",
+    "title": "Major Depression Statistics (2021 NSDUH)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs048",
+    "url": "https://www.naco.org/news/samhsa-releases-new-2024-data-rates-mental-illness-and-substance-use-disorder-us",
+    "publisher": "NACo (citing SAMHSA 2024 NSDUH)",
+    "title": "SAMHSA releases new 2024 data on rates of mental illness and substance use disorder",
+    "evidence_tier": "B",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs049",
+    "url": "https://www.samhsa.gov/data/data-we-collect/nsduh-national-survey-drug-use-and-health/national-releases/2024",
+    "publisher": "SAMHSA",
+    "title": "2024 NSDUH Releases (2025-07-28)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs050",
+    "url": "https://news.gallup.com/poll/505745/depression-rates-reach-new-highs.aspx",
+    "publisher": "Gallup",
+    "title": "U.S. Depression Rates Reach New Highs",
+    "evidence_tier": "B",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs051",
+    "url": "https://www.cdc.gov/nchs/data/nhsr/nhsr213.pdf",
+    "publisher": "CDC/NCHS",
+    "title": "Symptoms of Anxiety and Depression Among Adults: United States, 2019 and 2022 (NHSR 213)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs052",
+    "url": "https://www.who.int/news-room/fact-sheets/detail/depression",
+    "publisher": "WHO",
+    "title": "Depression fact sheet (updated 2025-08-29)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs053",
+    "url": "https://www.who.int/news-room/fact-sheets/detail/anxiety-disorders",
+    "publisher": "WHO",
+    "title": "Anxiety disorders fact sheet (updated 2025-09-08)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs054",
+    "url": "https://www.who.int/news/item/02-03-2022-covid-19-pandemic-triggers-25-increase-in-prevalence-of-anxiety-and-depression-worldwide",
+    "publisher": "WHO",
+    "title": "COVID-19 pandemic triggers 25% increase in prevalence of anxiety and depression worldwide",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs055",
+    "url": "https://cdc.gov/nchs/products/databriefs/db549.htm",
+    "publisher": "CDC/NCHS",
+    "title": "Drug Overdose Deaths in the United States, 2023-2024 (Data Brief 549, Jan 2026)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs056",
+    "url": "https://www.ncbi.nlm.nih.gov/books/NBK621157/",
+    "publisher": "NCBI Bookshelf (NCHS)",
+    "title": "Drug Overdose Deaths in the United States, 2023-2024 (verification copy)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs057",
+    "url": "https://www.cdc.gov/nchs/pressroom/releases/20260513.html",
+    "publisher": "CDC/NCHS",
+    "title": "U.S. Overdose Deaths Decrease for Third Consecutive Year in 2025 (provisional)",
+    "evidence_tier": "B",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs058",
+    "url": "https://www.cdc.gov/media/releases/2025/2025-cdc-reports-decline-in-us-drug-overdose-deaths.html",
+    "publisher": "CDC",
+    "title": "CDC Reports Nearly 24% Decline in U.S. Drug Overdose Deaths (2025-02-25, provisional)",
+    "evidence_tier": "B",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs059",
+    "url": "https://cdc.gov/nchs/products/databriefs/db548.htm",
+    "publisher": "CDC/NCHS",
+    "title": "Mortality in the United States, 2024 (Data Brief 548, Jan 2026)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs060",
+    "url": "https://www.cdc.gov/nchs/data/databriefs/db521.pdf",
+    "publisher": "CDC/NCHS",
+    "title": "Mortality in the United States, 2023 (Data Brief 521, Dec 2024)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs061",
+    "url": "https://www.cdc.gov/nchs/products/databriefs/db456.htm",
+    "publisher": "CDC/NCHS",
+    "title": "Mortality in the United States, 2021 (Data Brief 456)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs062",
+    "url": "https://www.cdc.gov/nchs/products/databriefs/db267.htm",
+    "publisher": "CDC/NCHS",
+    "title": "Mortality in the United States, 2015 (Data Brief 267)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs063",
+    "url": "https://www.healthsystemtracker.org/chart-collection/u-s-life-expectancy-compare-countries/",
+    "publisher": "Peterson-KFF Health System Tracker",
+    "title": "How does U.S. life expectancy compare to other countries? (updated 2026-03-31)",
+    "evidence_tier": "B",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs064",
+    "url": "https://www.aha.org/news/headline/2021-12-07-surgeon-general-advisory-targets-youth-mental-health-crisis",
+    "publisher": "American Hospital Association",
+    "title": "Surgeon general advisory targets youth mental health crisis (2021-12-07)",
+    "evidence_tier": "B",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs065",
+    "url": "https://www.oecd.org/en/publications/health-at-a-glance-2025_15a55280-en/united-states_3517f35e-en.html",
+    "publisher": "OECD",
+    "title": "Health at a Glance 2025: United States country note (located but not fetchable \u2014 robots/403)",
+    "evidence_tier": "C",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs066",
+    "url": "https://www.nhsbsa.nhs.uk/statistical-collections/medicines-used-mental-health-england/medicines-used-mental-health-england-201516-202425",
+    "publisher": "NHSBSA",
+    "title": "Medicines Used in Mental Health \u2013 England \u2013 2015/16 to 2024/25",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs067",
+    "url": "https://nhsbsa-opendata.s3.eu-west-2.amazonaws.com/mumh/mumh_annual_2021_22_v002.html",
+    "publisher": "NHSBSA (open data)",
+    "title": "MUMH annual summary 2015/16 to 2021/22",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs068",
+    "url": "https://www.nhsbsa.nhs.uk/statistical-collections/medicines-used-mental-health-england/medicines-used-mental-health-england-annual/medicines-used-mental-health-england-201516-202324",
+    "publisher": "NHSBSA",
+    "title": "MUMH 2015/16 to 2023/24",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs069",
+    "url": "https://www.nhsbsa.nhs.uk/statistical-collections/medicines-used-mental-health-england/medicines-used-mental-health-england-quarterly-summary-statistics-20242025/medicines-used-mental-health-england-quarterly-summary-statistics-october-december-2024",
+    "publisher": "NHSBSA",
+    "title": "MUMH quarterly, Oct-Dec 2024",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs070",
+    "url": "https://www.thepharmacist.co.uk/in-practice/mental-health-prescribing-in-england-reaches-new-high-nhsbsa-report-reveals/",
+    "publisher": "The Pharmacist",
+    "title": "Mental health prescribing in England reaches new high",
+    "evidence_tier": "B",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs071",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12303834/",
+    "publisher": "BJPsych Open",
+    "title": "Newman et al., Twenty-five year trend in antipsychotic prescribing in England (2025)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs072",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6192504/",
+    "publisher": "Schizophrenia Bulletin",
+    "title": "Charlson et al., Global Epidemiology and Burden of Schizophrenia (GBD 2016)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs073",
+    "url": "https://www.frontiersin.org/journals/psychiatry/articles/10.3389/fpsyt.2025.1629032/full",
+    "publisher": "Frontiers in Psychiatry",
+    "title": "GBD schizophrenia trends 1990-2021 and projections to 2050",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs074",
+    "url": "https://www.nimh.nih.gov/health/statistics/schizophrenia",
+    "publisher": "NIMH",
+    "title": "Schizophrenia \u2014 statistics",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs075",
+    "url": "https://onlinelibrary.wiley.com/doi/10.1111/acps.13565",
+    "publisher": "Acta Psychiatrica Scandinavica",
+    "title": "K\u00f6hler-Forsberg et al., Schizophrenia spectrum disorders in Denmark 2000-2018",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs076",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/39961232/",
+    "publisher": "J Psychiatric Research (PubMed record)",
+    "title": "Hong Kong 11-year antipsychotic utilization study (DOI 10.1016/j.jpsychires.2025.02.017)",
+    "evidence_tier": "B",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs077",
+    "url": "https://www.aspe.hhs.gov/sites/default/files/documents/1ef68c455fa5aa5932acf481b0954ddf/DataPoint_PsychRxPrev_BHDAP_20250409%20July%2031%202025.pdf",
+    "publisher": "HHS ASPE",
+    "title": "US Population Prevalence of Psychotropic Medication Use, 2006-2023",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs078",
+    "url": "https://www.cdc.gov/mmwr/volumes/72/wr/mm7213a1.htm",
+    "publisher": "CDC MMWR",
+    "title": "Danielson et al., Trends in Stimulant Prescription Fills 2016-2021",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs079",
+    "url": "https://www.deadiversion.usdoj.gov/pubs/docs/IQVIA-Report-on-Stimulant-Trends-2024.pdf",
+    "publisher": "IQVIA for DEA",
+    "title": "Stimulant Prescription Trends in the United States, 2012-2023",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs080",
+    "url": "https://ihpi.umich.edu/news-events/news/antidepressant-dispensing-adolescents-and-young-adults-surges-during-pandemic",
+    "publisher": "U. Michigan IHPI",
+    "title": "Antidepressant dispensing to adolescents surges during pandemic",
+    "evidence_tier": "B",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs081",
+    "url": "https://publications.aap.org/pediatrics/article/153/3/e2023064245/196655/Antidepressant-Dispensing-to-US-Adolescents-and",
+    "publisher": "Pediatrics",
+    "title": "Chua et al., Antidepressant Dispensing to US Adolescents and Young Adults: 2016-2022 (page 403 to proxy; verified via IHPI)",
+    "evidence_tier": "B",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs082",
+    "url": "https://www.2minutemedicine.com/benzodiazepine-use-declined-before-the-covid-19-pandemic-then-plateaued/",
+    "publisher": "2 Minute Medicine",
+    "title": "Benzodiazepine use declined then plateaued (IQVIA LRx 2015-2024, 65+)",
+    "evidence_tier": "B",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs083",
+    "url": "https://www.euronews.com/health/2023/09/09/europes-mental-health-crisis-in-data-which-country-uses-the-most-antidepressants",
+    "publisher": "Euronews (OECD data)",
+    "title": "Which country uses the most antidepressants?",
+    "evidence_tier": "B",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs084",
+    "url": "https://www.oecd.org/en/publications/health-at-a-glance-2023_7a7afb35-en/full-report/pharmaceutical-consumption_4b6cb013.html",
+    "publisher": "OECD",
+    "title": "Health at a Glance 2023 \u2014 Pharmaceutical consumption",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs085",
+    "url": "https://www.fda.gov/drugs/drug-safety-and-availability/fda-announces-shortage-adderall",
+    "publisher": "FDA",
+    "title": "FDA Announces Shortage of Adderall (2022-10-12)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs086",
+    "url": "https://www.fda.gov/news-events/press-announcements/fda-approves-drug-new-mechanism-action-treatment-schizophrenia",
+    "publisher": "FDA",
+    "title": "FDA Approves Cobenfy (2024-09-26)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs087",
+    "url": "https://www.grandviewresearch.com/press-release/global-antipsychotic-drugs-market",
+    "publisher": "Grand View Research",
+    "title": "Antipsychotic Drugs Market To Reach $32.24B By 2033",
+    "evidence_tier": "C",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs088",
+    "url": "https://www.hhs.gov/sites/default/files/surgeon-general-social-connection-advisory.pdf",
+    "publisher": "US Surgeon General / HHS",
+    "title": "Our Epidemic of Loneliness and Isolation",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs089",
+    "url": "https://www.hhs.gov/sites/default/files/surgeon-general-youth-mental-health-advisory.pdf",
+    "publisher": "US Surgeon General / HHS",
+    "title": "Protecting Youth Mental Health",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs090",
+    "url": "https://www.hhs.gov/sites/default/files/sg-youth-mental-health-social-media-advisory.pdf",
+    "publisher": "US Surgeon General / HHS",
+    "title": "Social Media and Youth Mental Health",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs091",
+    "url": "https://www.hhs.gov/sites/default/files/parents-under-pressure.pdf",
+    "publisher": "US Surgeon General / HHS",
+    "title": "Parents Under Pressure",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs092",
+    "url": "https://www.brookings.edu/articles/mortality-and-morbidity-in-the-21st-century/",
+    "publisher": "Brookings (BPEA)",
+    "title": "Mortality and Morbidity in the 21st Century (Case & Deaton)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs093",
+    "url": "https://www.nber.org/papers/w24188",
+    "publisher": "NBER",
+    "title": "Deaths of Despair or Drug Problems? (Ruhm)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs094",
+    "url": "https://www.nature.com/articles/d41586-024-00902-2",
+    "publisher": "Nature",
+    "title": "The great rewiring (Odgers)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs095",
+    "url": "https://archive.cdc.gov/www_cdc_gov/media/releases/2018/s1129-US-life-expectancy.html",
+    "publisher": "CDC (archived)",
+    "title": "CDC Director's Media Statement on U.S. Life Expectancy (2018-11-29)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs096",
+    "url": "https://www.cdc.gov/overdose-prevention/about/understanding-the-opioid-overdose-epidemic.html",
+    "publisher": "CDC",
+    "title": "Understanding the Opioid Overdose Epidemic",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs097",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/24592495/",
+    "publisher": "Annals of Internal Medicine (PubMed)",
+    "title": "The Accessibility of Firearms and Risk for Suicide and Homicide Victimization (Anglemyer et al.)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs098",
+    "url": "https://bhw.hrsa.gov/data-research/projecting-health-workforce-supply-demand/behavioral-health",
+    "publisher": "HRSA",
+    "title": "Health Workforce Projections: Behavioral Health",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs099",
+    "url": "https://www.dol.gov/sites/dolgov/files/EBSA/laws-and-regulations/laws/mental-health-parity/report-to-congress-2022-realizing-parity-reducing-stigma-and-raising-awareness.pdf",
+    "publisher": "US DOL/HHS/Treasury",
+    "title": "2022 MHPAEA Report to Congress",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs100",
+    "url": "https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2778451",
+    "publisher": "JAMA Network Open",
+    "title": "Overdiagnosis of ADHD in Children and Adolescents (Kazda et al.)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs101",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/24345349/",
+    "publisher": "J Clin Psychiatry (PubMed)",
+    "title": "National Trends in Long-Term Use of Antidepressant Medications (Mojtabai & Olfson)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs102",
+    "url": "https://journals.sagepub.com/doi/10.1177/2167702617723376",
+    "publisher": "Clinical Psychological Science",
+    "title": "Increases in Depressive Symptoms, Suicide-Related Outcomes... After 2010 (Twenge et al.)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-19",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs103",
+    "url": "https://www.cdc.gov/nchs/data/databriefs/db428-tables.pdf",
+    "publisher": "CDC/NCHS",
+    "title": "Data tables for NCHS Data Brief 428: Drug Overdose Deaths in the United States, 1999-2020",
+    "evidence_tier": "A",
+    "accessed": "2026-08-20",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs104",
+    "url": "https://www.cdc.gov/nchs/products/databriefs/db522.htm",
+    "publisher": "CDC/NCHS",
+    "title": "NCHS Data Brief 522: Drug Overdose Deaths in the United States, 2003-2023",
+    "evidence_tier": "A",
+    "accessed": "2026-08-20",
+    "archived_url": null
+  }
 ]

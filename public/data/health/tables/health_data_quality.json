@@ -1,142 +1,151 @@
 [
- {
-  "dq_id": "dq01",
-  "issue": "Most WHO Member States lack good-quality vital registration for suicide",
-  "geography": "Global",
-  "documented_by": "WHO",
-  "document": "WHO suicide data page + fact sheet",
-  "quantification": "86 of 183 Member States have good-quality vital registration (GHE 2021); the 37 LMICs with good registration account for only 16.3% of estimated LMIC suicides; 73% of global suicides occur in LMICs.",
-  "tier": "A",
-  "source_id": "hs023"
- },
- {
-  "dq_id": "dq02",
-  "issue": "Systematic misclassification of suicides into other ICD categories",
-  "geography": "Global",
-  "documented_by": "WHO",
-  "document": "WHO suicide data page",
-  "quantification": "Most commonly misclassified as deaths of undetermined intent (Y10-Y34), accidents (V01-X59), homicides (X85-Y09), unknown cause; 'under-reporting and misclassification are greater problems for suicide than for most other causes of death.'",
-  "tier": "A",
-  "source_id": "hs023"
- },
- {
-  "dq_id": "dq03",
-  "issue": "Rising share of Russian deaths coded 'undetermined intent' masks suicides; official decline overstated",
-  "geography": "Russia",
-  "documented_by": "Semyonova, Sabgayda, Zubko & Gavrilov",
-  "document": "European Journal of Public Health 30(Suppl 5), 2020",
-  "quantification": "Official suicide mortality fell 3.4x (M) / 2.9x (F) 2000-2018 but undetermined-intent deaths fell only 14.2% / 11.6%; true suicide mortality likely exceeds Rosstat by ~60% (M) and >2x (F); latent events >1/3 (M) and ~50% (F) of total by 2018.",
-  "tier": "A",
-  "source_id": "hs028"
- },
- {
-  "dq_id": "dq04",
-  "issue": "Age-specific quantification of latent suicides in Russian undetermined-intent coding",
-  "geography": "Russia",
-  "documented_by": "Semyonova, Zubko & Sabgayda",
-  "document": "Population and Economics (2024)",
-  "quantification": "Counting relevant undetermined-intent deaths as latent suicides increases male estimated losses from ~80% (15-24) declining to ~50% at older ages; female suicide mortality rate doubles at all ages above 15.",
-  "tier": "A",
-  "source_id": "hs029"
- },
- {
-  "dq_id": "dq05",
-  "issue": "China's mortality registration historically covered ~10% of population, unrepresentative (eastern/central cities)",
-  "geography": "China",
-  "documented_by": "BMC Public Health (2024) analysis of NHC death registration",
-  "document": "'Long-term changing patterns of suicide mortality in China 1987-2020'",
-  "quantification": "'Mortality data in the early years only covered approximately 10% of China's population'; stigma-driven underreporting 'may affect the authenticity of suicide data.'",
-  "tier": "A",
-  "source_id": "hs027"
- },
- {
-  "dq_id": "dq06",
-  "issue": "China's 1990s national figures required explicit adjustment for unreported deaths",
-  "geography": "China",
-  "documented_by": "Phillips, Li & Zhang",
-  "document": "The Lancet 359(9309), 2002",
-  "quantification": "Adjusted official data to 23/100k and 287,000 deaths/yr; rural 3x urban, female 25% above male — patterns invisible in urban-weighted registration.",
-  "tier": "A",
-  "source_id": "hs026"
- },
- {
-  "dq_id": "dq07",
-  "issue": "India's official statistics are police-reported (NCRB/FIR); verbal autopsy finds ~2x the official rate",
-  "geography": "India",
-  "documented_by": "RGI Million Death Study (Patel et al., Lancet 2012), via peer-reviewed review",
-  "document": "Shanghai Archives of Psychiatry (2014)",
-  "quantification": "Verbal-autopsy 2010 rate ages 15+: 22/100k vs NCRB ~11.4; rural verbal-autopsy rates 3-4x government-reported.",
-  "tier": "A",
-  "source_id": "hs034"
- },
- {
-  "dq_id": "dq08",
-  "issue": "GBD modeled estimates for India substantially exceed NCRB, with gendered undercount",
-  "geography": "India",
-  "documented_by": "CMHLP (citing GBD)",
-  "document": "CMHLP blog on India suicide data accuracy",
-  "quantification": "GBD 2016 75% above NCRB; 802,684 additional deaths 2005-2015; undercount ~27% male / ~50% female; poisoning deaths often recorded as accidental.",
-  "tier": "B",
-  "source_id": "hs033"
- },
- {
-  "dq_id": "dq09",
-  "issue": "Legal history suppressed Indian reporting: attempted suicide criminal (IPC 309) until Mental Healthcare Act 2017",
-  "geography": "India",
-  "documented_by": "Parliament of India; CMHLP",
-  "document": "Mental Healthcare Act 2017 (S.115)",
-  "quantification": "Passed 2017-04-07, in force 2018-05-29; families still withhold information; 'misconceptions about legal consequences persist.'",
-  "tier": "B",
-  "source_id": "hs035"
- },
- {
-  "dq_id": "dq10",
-  "issue": "Criminalization of suicide/attempts in ≥24 countries deters help-seeking and drives misclassification",
-  "geography": "Global (≥24 countries)",
-  "documented_by": "United for Global Mental Health (corroborated by WHO)",
-  "document": "'Decriminalising Suicide: Saving Lives, Reducing Stigma' (2025 update)",
-  "quantification": "'In at least 24 countries anyone who attempts suicide can be arrested, prosecuted, or punished'; WHO: illegality makes under-reporting and misclassification greater problems.",
-  "tier": "B",
-  "source_id": "hs036"
- },
- {
-  "dq_id": "dq11",
-  "issue": "Definitional divergence: UK deliberately INCLUDES undetermined-intent deaths (Y10-Y34, 15+) in 'suicide' — official rates not like-for-like across countries",
-  "geography": "UK (England & Wales)",
-  "documented_by": "ONS",
-  "document": "'Change in the standard of proof used by coroners...' (ONS, 2020-12-08)",
-  "quantification": "Definition = X60-X84 (10+) plus Y10-Y34 (15+); from 2018-07-26 coroners' standard of proof lowered to 'balance of probabilities', after which intentional self-harm coding rose and undetermined intent fell.",
-  "tier": "A",
-  "source_id": "hs037"
- },
- {
-  "dq_id": "dq12",
-  "issue": "WHO headline numbers for most countries are modeled estimates (GHE), not counted deaths — incl. China, India, Russia",
-  "geography": "Global",
-  "documented_by": "WHO",
-  "document": "WHO Global Health Estimates page (GHE 2021)",
-  "quantification": "Estimates produced from consolidated sources incl. GBD models where registration is missing; only 86/183 states have good registration.",
-  "tier": "A",
-  "source_id": "hs024"
- },
- {
-  "dq_id": "dq13",
-  "issue": "WHO and IHME/GBD produce materially different estimates for the same country-years (different models, undetermined-intent redistribution)",
-  "geography": "Global",
-  "documented_by": "Our World in Data",
-  "document": "'How do global statistics on suicide differ between sources?'",
-  "quantification": "WHO uses adjusted registration where coverage >=80%; IHME reclassifies some undetermined-intent deaths to suicide; India lacks usable WHO Mortality Database registration data.",
-  "tier": "B",
-  "source_id": "hs040"
- },
- {
-  "dq_id": "dq14",
-  "issue": "Aggregate global underreporting: ~1 in 6 suicides missing worldwide; ~1 in 3 in large LMICs (India, China)",
-  "geography": "Global; LMICs",
-  "documented_by": "Meda et al. (systematic review + meta-analysis)",
-  "document": "Frontiers in Psychiatry (2025)",
-  "quantification": "Pooled global underreporting 17.9% (CI 10.9-28.1%); LMICs 'such as India and China' 34.9% (CI 20.3-53%); HICs 11.5% (CI 6.6-19.3%); corrected global total >1 million/yr.",
-  "tier": "A",
-  "source_id": "hs039"
- }
+  {
+    "dq_id": "dq01",
+    "issue": "Most WHO Member States lack good-quality vital registration for suicide",
+    "geography": "Global",
+    "documented_by": "WHO",
+    "document": "WHO suicide data page + fact sheet",
+    "quantification": "86 of 183 Member States have good-quality vital registration (GHE 2021); the 37 LMICs with good registration account for only 16.3% of estimated LMIC suicides; 73% of global suicides occur in LMICs.",
+    "tier": "A",
+    "source_id": "hs023"
+  },
+  {
+    "dq_id": "dq02",
+    "issue": "Systematic misclassification of suicides into other ICD categories",
+    "geography": "Global",
+    "documented_by": "WHO",
+    "document": "WHO suicide data page",
+    "quantification": "Most commonly misclassified as deaths of undetermined intent (Y10-Y34), accidents (V01-X59), homicides (X85-Y09), unknown cause; 'under-reporting and misclassification are greater problems for suicide than for most other causes of death.'",
+    "tier": "A",
+    "source_id": "hs023"
+  },
+  {
+    "dq_id": "dq03",
+    "issue": "Rising share of Russian deaths coded 'undetermined intent' masks suicides; official decline overstated",
+    "geography": "Russia",
+    "documented_by": "Semyonova, Sabgayda, Zubko & Gavrilov",
+    "document": "European Journal of Public Health 30(Suppl 5), 2020",
+    "quantification": "Official suicide mortality fell 3.4x (M) / 2.9x (F) 2000-2018 but undetermined-intent deaths fell only 14.2% / 11.6%; true suicide mortality likely exceeds Rosstat by ~60% (M) and >2x (F); latent events >1/3 (M) and ~50% (F) of total by 2018.",
+    "tier": "A",
+    "source_id": "hs028"
+  },
+  {
+    "dq_id": "dq04",
+    "issue": "Age-specific quantification of latent suicides in Russian undetermined-intent coding",
+    "geography": "Russia",
+    "documented_by": "Semyonova, Zubko & Sabgayda",
+    "document": "Population and Economics (2024)",
+    "quantification": "Counting relevant undetermined-intent deaths as latent suicides increases male estimated losses from ~80% (15-24) declining to ~50% at older ages; female suicide mortality rate doubles at all ages above 15.",
+    "tier": "A",
+    "source_id": "hs029"
+  },
+  {
+    "dq_id": "dq05",
+    "issue": "China's mortality registration historically covered ~10% of population, unrepresentative (eastern/central cities)",
+    "geography": "China",
+    "documented_by": "BMC Public Health (2024) analysis of NHC death registration",
+    "document": "'Long-term changing patterns of suicide mortality in China 1987-2020'",
+    "quantification": "'Mortality data in the early years only covered approximately 10% of China's population'; stigma-driven underreporting 'may affect the authenticity of suicide data.'",
+    "tier": "A",
+    "source_id": "hs027"
+  },
+  {
+    "dq_id": "dq06",
+    "issue": "China's 1990s national figures required explicit adjustment for unreported deaths",
+    "geography": "China",
+    "documented_by": "Phillips, Li & Zhang",
+    "document": "The Lancet 359(9309), 2002",
+    "quantification": "Adjusted official data to 23/100k and 287,000 deaths/yr; rural 3x urban, female 25% above male \u2014 patterns invisible in urban-weighted registration.",
+    "tier": "A",
+    "source_id": "hs026"
+  },
+  {
+    "dq_id": "dq07",
+    "issue": "India's official statistics are police-reported (NCRB/FIR); verbal autopsy finds ~2x the official rate",
+    "geography": "India",
+    "documented_by": "RGI Million Death Study (Patel et al., Lancet 2012), via peer-reviewed review",
+    "document": "Shanghai Archives of Psychiatry (2014)",
+    "quantification": "Verbal-autopsy 2010 rate ages 15+: 22/100k vs NCRB ~11.4; rural verbal-autopsy rates 3-4x government-reported.",
+    "tier": "A",
+    "source_id": "hs034"
+  },
+  {
+    "dq_id": "dq08",
+    "issue": "GBD modeled estimates for India substantially exceed NCRB, with gendered undercount",
+    "geography": "India",
+    "documented_by": "CMHLP (citing GBD)",
+    "document": "CMHLP blog on India suicide data accuracy",
+    "quantification": "GBD 2016 75% above NCRB; 802,684 additional deaths 2005-2015; undercount ~27% male / ~50% female; poisoning deaths often recorded as accidental.",
+    "tier": "B",
+    "source_id": "hs033"
+  },
+  {
+    "dq_id": "dq09",
+    "issue": "Legal history suppressed Indian reporting: attempted suicide criminal (IPC 309) until Mental Healthcare Act 2017",
+    "geography": "India",
+    "documented_by": "Parliament of India; CMHLP",
+    "document": "Mental Healthcare Act 2017 (S.115)",
+    "quantification": "Passed 2017-04-07, in force 2018-05-29; families still withhold information; 'misconceptions about legal consequences persist.'",
+    "tier": "B",
+    "source_id": "hs035"
+  },
+  {
+    "dq_id": "dq10",
+    "issue": "Criminalization of suicide/attempts in \u226524 countries deters help-seeking and drives misclassification",
+    "geography": "Global (\u226524 countries)",
+    "documented_by": "United for Global Mental Health (corroborated by WHO)",
+    "document": "'Decriminalising Suicide: Saving Lives, Reducing Stigma' (2025 update)",
+    "quantification": "'In at least 24 countries anyone who attempts suicide can be arrested, prosecuted, or punished'; WHO: illegality makes under-reporting and misclassification greater problems.",
+    "tier": "B",
+    "source_id": "hs036"
+  },
+  {
+    "dq_id": "dq11",
+    "issue": "Definitional divergence: UK deliberately INCLUDES undetermined-intent deaths (Y10-Y34, 15+) in 'suicide' \u2014 official rates not like-for-like across countries",
+    "geography": "UK (England & Wales)",
+    "documented_by": "ONS",
+    "document": "'Change in the standard of proof used by coroners...' (ONS, 2020-12-08)",
+    "quantification": "Definition = X60-X84 (10+) plus Y10-Y34 (15+); from 2018-07-26 coroners' standard of proof lowered to 'balance of probabilities', after which intentional self-harm coding rose and undetermined intent fell.",
+    "tier": "A",
+    "source_id": "hs037"
+  },
+  {
+    "dq_id": "dq12",
+    "issue": "WHO headline numbers for most countries are modeled estimates (GHE), not counted deaths \u2014 incl. China, India, Russia",
+    "geography": "Global",
+    "documented_by": "WHO",
+    "document": "WHO Global Health Estimates page (GHE 2021)",
+    "quantification": "Estimates produced from consolidated sources incl. GBD models where registration is missing; only 86/183 states have good registration.",
+    "tier": "A",
+    "source_id": "hs024"
+  },
+  {
+    "dq_id": "dq13",
+    "issue": "WHO and IHME/GBD produce materially different estimates for the same country-years (different models, undetermined-intent redistribution)",
+    "geography": "Global",
+    "documented_by": "Our World in Data",
+    "document": "'How do global statistics on suicide differ between sources?'",
+    "quantification": "WHO uses adjusted registration where coverage >=80%; IHME reclassifies some undetermined-intent deaths to suicide; India lacks usable WHO Mortality Database registration data.",
+    "tier": "B",
+    "source_id": "hs040"
+  },
+  {
+    "dq_id": "dq14",
+    "issue": "Aggregate global underreporting: ~1 in 6 suicides missing worldwide; ~1 in 3 in large LMICs (India, China)",
+    "geography": "Global; LMICs",
+    "documented_by": "Meda et al. (systematic review + meta-analysis)",
+    "document": "Frontiers in Psychiatry (2025)",
+    "quantification": "Pooled global underreporting 17.9% (CI 10.9-28.1%); LMICs 'such as India and China' 34.9% (CI 20.3-53%); HICs 11.5% (CI 6.6-19.3%); corrected global total >1 million/yr.",
+    "tier": "A",
+    "source_id": "hs039"
+  },
+  {
+    "dq_id": "hq015",
+    "geography": "US",
+    "topic": "Drug overdose deaths \u2014 provisional against final",
+    "issue": "The 2025 figure is provisional and the 2024 figure on this chart is final. They are different vintages, and the choice of vintage changes the headline. CDC's May 2026 release reports a fall of almost 14% for 2025 by comparing it with a provisional 2024 estimate of 81,313. Measured against the final 2024 count of 79,384, the same provisional 2025 figure is a fall of about 11.9%. Provisional counts rise as late certificates are processed, so the 2025 number should be expected to revise upward.",
+    "effect": "A reported percentage change spanning the provisional/final boundary can move several points without any underlying change in deaths.",
+    "tier": "A",
+    "source_id": "hs057"
+  }
 ]
