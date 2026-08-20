@@ -95,7 +95,26 @@ if not ALREADY:
     open(SRC, "w", encoding="utf-8").write(html)
     print(f"injected {len(rows)} track-F milestones (of {len(milestones)} total; pre-2015 excluded)")
 else:
-    print("track F already injected — skipping injection pass")
+    # The guard above stops the structural passes re-running, but the DATA has to
+    # stay live: adding a milestone to health_milestones.json used to leave the
+    # timeline showing the old set, silently, because this script reported
+    # "already injected" and exited. Re-write just the track-F row block.
+    before = html
+    # json.dumps writes ", " / ": " separators, so the pattern must tolerate them.
+    pattern = (r',(\{\s*"o":\s*"\d{4}-\d{2}-\d{2}",\s*"tk":\s*"F".*?)\](/\*'
+               + MARK + r'\*/)')
+    html, n = re.subn(
+        pattern,
+        lambda m: "," + inject + "]" + m.group(2),
+        html, count=1, flags=re.S,
+    )
+    if n != 1:
+        sys.exit(f"FAILED to refresh track-F rows (matched {n}, wanted 1)")
+    if html == before:
+        print(f"track F already current — {len(rows)} milestones, no change")
+    else:
+        open(SRC, "w", encoding="utf-8").write(html)
+        print(f"refreshed track-F rows: {len(rows)} milestones (of {len(milestones)} total; pre-2015 excluded)")
 
 
 def patch_legend_and_counts():

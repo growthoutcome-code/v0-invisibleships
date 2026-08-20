@@ -131,6 +131,90 @@ TREND_ROW = {
 }
 
 
+# The timeline's Health track carried four overdose milestones, three of which
+# were about the decline (Feb 2025, Jan 2026, May 2026) and one about the third
+# wave beginning. That is the chart's old fault in a second place: the record
+# reads as a fall with a single note that something started in 2013. These give
+# the rise the same dated treatment the fall already had.
+RISE_MILESTONES = [
+    {
+        "milestone_id": "hm026",
+        "track": "F",
+        "category": "overdose",
+        "occurred_on": "1999-01",
+        "title": "Overdose record begins: 16,849 deaths",
+        "description": (
+            "The first year of the modern comparable series. Age-adjusted rate 6.1 per "
+            "100,000. Every later figure on this track is measured against this."
+        ),
+        "certainty": "documented",
+        "tier": "A",
+        "source_id": "hs103",
+        "geo": "US",
+    },
+    {
+        "milestone_id": "hm027",
+        "track": "F",
+        "category": "overdose",
+        "occurred_on": "2010-01",
+        "title": "Second wave of opioid epidemic begins (heroin)",
+        "description": (
+            "CDC dates the second wave to 2010. Overdose deaths that year: 38,329 — "
+            "already more than double 1999, before fentanyl enters the record."
+        ),
+        "certainty": "documented",
+        "tier": "A",
+        "source_id": "hs096",
+        "geo": "US",
+    },
+    {
+        "milestone_id": "hm028",
+        "track": "F",
+        "category": "overdose",
+        "occurred_on": "2016-01",
+        "title": "Synthetic-opioid acceleration: 63,632 deaths (+21.4%)",
+        "description": (
+            "The steepest year of the fentanyl wave to that point, three years after it "
+            "began. Age-adjusted rate 19.8 per 100,000, more than triple 1999."
+        ),
+        "certainty": "documented",
+        "tier": "A",
+        "source_id": "hs103",
+        "geo": "US",
+    },
+    {
+        "milestone_id": "hm029",
+        "track": "F",
+        "category": "overdose",
+        "occurred_on": "2020-01",
+        "title": "Largest single-year rise on record: 91,799 deaths (+30.0%)",
+        "description": (
+            "The pandemic year. A rise of 21,169 deaths on 2019 — the largest one-year "
+            "increase in the series, and the mirror of the 2024 decline."
+        ),
+        "certainty": "documented",
+        "tier": "A",
+        "source_id": "hs103",
+        "geo": "US",
+    },
+    {
+        "milestone_id": "hm030",
+        "track": "F",
+        "category": "overdose",
+        "occurred_on": "2022-01",
+        "title": "Overdose deaths peak: 107,941",
+        "description": (
+            "The maximum of the series and the point every subsequent decline is measured "
+            "down from. Age-adjusted rate 32.6 per 100,000 — 6.4 times the 1999 count."
+        ),
+        "certainty": "documented",
+        "tier": "A",
+        "source_id": "hs104",
+        "geo": "US",
+    },
+]
+
+
 def load(name):
     return json.loads((TABLES / name).read_text())
 
@@ -217,6 +301,16 @@ def main():
     tr.append(TREND_ROW)
     save("health_trends.json", tr)
     print(f"trends: {len(tr)} rows")
+
+    # ---- milestones -------------------------------------------------------
+    ms = load("health_milestones.json")
+    new_ids = {m["milestone_id"] for m in RISE_MILESTONES}
+    ms = [m for m in ms if m.get("milestone_id") not in new_ids]
+    ms.extend(RISE_MILESTONES)
+    ms.sort(key=lambda m: (m.get("occurred_on") or "", m.get("milestone_id") or ""))
+    save("health_milestones.json", ms)
+    od = sum(1 for m in ms if m.get("category") == "overdose")
+    print(f"milestones: {len(ms)} rows ({od} overdose)")
 
 
 if __name__ == "__main__":
