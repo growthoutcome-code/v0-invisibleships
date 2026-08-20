@@ -112,7 +112,35 @@
    "caveats": [
     "WHO's estimate for 2021 is 15.6. The United States' own vital statistics, age-adjusted to the US 2000 standard population, give 14.1 for the same year — different standard population, same underlying deaths.",
     "US national figures continue past this chart: 14.2 in 2022 (the highest rate since 1941), 14.1 in 2023, 13.7 in 2024."
-   ]
+   ],
+   "extension": {
+    "joins_at": 2021,
+    "scale_factor": 1.1085,
+    "points": [
+     {
+      "year": 2022,
+      "value": 15.741,
+      "national_value": 14.2
+     },
+     {
+      "year": 2023,
+      "value": 15.63,
+      "national_value": 14.1
+     },
+     {
+      "year": 2024,
+      "value": 15.187,
+      "national_value": 13.7
+     }
+    ],
+    "basis": "Age-adjusted to the US 2000 standard population (CDC/NCHS vital statistics, final data)",
+    "basis_short": "CDC, age-adjusted (US 2000 standard)",
+    "publisher": "CDC / National Center for Health Statistics",
+    "source_url": "https://www.cdc.gov/nchs/products/databriefs/db548.htm",
+    "tier": "A",
+    "crude": false,
+    "note": "2022 was the highest US rate since 1941; 2024 is a genuine decline of 2.8%."
+   }
   },
   {
    "country": "South Korea",
@@ -217,7 +245,35 @@
    "caveats": [
     "Highest rate in the OECD across most of this period. Rose steeply to a peak around 2009–2011, then declined.",
     "Korea's own crude rate reached 29.1 per 100,000 in 2024, a 13-year high — a different (crude) basis from the standardised figures shown here."
-   ]
+   ],
+   "extension": {
+    "joins_at": 2021,
+    "scale_factor": 1.0588,
+    "points": [
+     {
+      "year": 2022,
+      "value": 26.683,
+      "national_value": 25.2
+     },
+     {
+      "year": 2023,
+      "value": 28.907,
+      "national_value": 27.3
+     },
+     {
+      "year": 2024,
+      "value": 30.812,
+      "national_value": 29.1
+     }
+    ],
+    "basis": "CRUDE rate per 100,000 from Causes of Death Statistics — not age-standardised",
+    "basis_short": "KOSTAT, CRUDE (not age-standardised)",
+    "publisher": "Statistics Korea (KOSTAT)",
+    "source_url": "https://kostat-sdg-kor.github.io/sdg-indicators/en/3-4-2/",
+    "tier": "A to 2022, B for 2023–24",
+    "crude": true,
+    "note": "Crude, and partly reflects ageing. 2024's 14,872 deaths were a 13-year high. KOSTAT's OECD-standardised rate for 2023 is 24.8 — a different and lower measure."
+   }
   },
   {
    "country": "Russia",
@@ -427,7 +483,40 @@
    "caveats": [
     "Japan's own published figures are CRUDE rates from police records (15.6 per 100,000 in 2025), not age-standardised, and are not comparable with the standardised figures shown here.",
     "Japan recorded its first year below 20,000 deaths in 2025 since records began in 1978."
-   ]
+   ],
+   "extension": {
+    "joins_at": 2021,
+    "scale_factor": 1.0437,
+    "points": [
+     {
+      "year": 2022,
+      "value": 18.265,
+      "national_value": 17.5
+     },
+     {
+      "year": 2023,
+      "value": 18.369,
+      "national_value": 17.6
+     },
+     {
+      "year": 2024,
+      "value": 17.117,
+      "national_value": 16.4
+     },
+     {
+      "year": 2025,
+      "value": 16.282,
+      "national_value": 15.6
+     }
+    ],
+    "basis": "CRUDE rate per 100,000 from National Police Agency records, compiled by MHLW — not age-standardised",
+    "basis_short": "MHLW/NPA, CRUDE (not age-standardised)",
+    "publisher": "Japan Ministry of Health, Labour and Welfare / National Police Agency",
+    "source_url": "https://www.mhlw.go.jp/content/001680736.pdf",
+    "tier": "A",
+    "crude": true,
+    "note": "Crude, so Japan's ageing population inflates it relative to a standardised rate. 2025 was the first year below 20,000 deaths since records began in 1978."
+   }
   },
   {
    "country": "France",
@@ -845,7 +934,35 @@
    "tier": "B",
    "caveats": [
     "ABS figures for the most recent years are preliminary and are revised upward as coronial investigations close."
-   ]
+   ],
+   "extension": {
+    "joins_at": 2021,
+    "scale_factor": 1.0634,
+    "points": [
+     {
+      "year": 2022,
+      "value": 13.399,
+      "national_value": 12.6
+     },
+     {
+      "year": 2023,
+      "value": 12.974,
+      "national_value": 12.2
+     },
+     {
+      "year": 2024,
+      "value": 12.655,
+      "national_value": 11.9
+     }
+    ],
+    "basis": "Age-standardised to the Australian 2001 population, by year of registration",
+    "basis_short": "ABS, age-standardised (Australia 2001)",
+    "publisher": "Australian Bureau of Statistics",
+    "source_url": "https://www.abs.gov.au/statistics/health/causes-death/intentional-self-harm-suicide-deaths/latest-release",
+    "tier": "A",
+    "crude": false,
+    "note": "2023 revised and 2024 preliminary; ABS revisions generally move the figure upward as coronial cases close."
+   }
   },
   {
    "country": "Canada",
@@ -1159,7 +1276,30 @@
    "caveats": [
     "The UK's own definition includes deaths of undetermined intent aged 15 and over, which raises its national figures relative to countries that exclude them.",
     "England & Wales registration is subject to long coroner delays — only 38.7% of deaths registered in 2024 occurred in 2024."
-   ]
+   ],
+   "extension": {
+    "joins_at": 2021,
+    "scale_factor": 0.8604,
+    "points": [
+     {
+      "year": 2022,
+      "value": 9.55,
+      "national_value": 11.1
+     },
+     {
+      "year": 2023,
+      "value": 8.69,
+      "national_value": 10.1
+     }
+    ],
+    "basis": "Age-standardised to the 2013 European Standard Population, England & Wales, by year of occurrence",
+    "basis_short": "ONS, age-standardised (ESP 2013)",
+    "publisher": "UK Office for National Statistics",
+    "source_url": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/bulletins/suicidesintheunitedkingdom/2024registrations",
+    "tier": "A",
+    "crude": false,
+    "note": "2023 is incomplete — only 38.7% of deaths registered in 2024 occurred that year, so recent occurrence years rise with later registrations. The UK also counts undetermined-intent deaths aged 15+."
+   }
   },
   {
    "country": "Israel",
@@ -1508,5 +1648,6 @@
    "label": "Emergency phase ends",
    "source_url": "https://www.who.int/news/item/05-05-2023-statement-on-the-fifteenth-meeting-of-the-international-health-regulations-(2005)-emergency-committee-regarding-the-coronavirus-disease-(covid-19)-pandemic"
   }
- ]
+ ],
+ "extension_note": "Lines continue past 2021 using each country's own national statistics, scaled to join the WHO series at 2021 so the join does not invent a step that never happened. The shape after 2021 is each country's real year-on-year movement; the level is carried over from the WHO series. Raw national figures, their basis and their sources are in each line's detail panel. Only five countries publish a series recent and complete enough to join this way."
 }

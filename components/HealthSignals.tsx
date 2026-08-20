@@ -56,12 +56,19 @@ type IntlSeries = {
   points: { year: number; value: number }[];
   method?: string; basis_short?: string; source_url?: string; publisher?: string;
   tier?: string; caveats?: string[];
+  extension?: {
+    joins_at: number; scale_factor: number;
+    points: { year: number; value: number; national_value: number }[];
+    basis: string; basis_short: string; publisher: string; source_url: string;
+    tier: string; crude: boolean; note: string;
+  };
 };
 type IntlChart = {
   title: string; unit: string; note: string; publisher: string; tier: string;
   source_url: string;
   series: IntlSeries[];
   covid_markers?: { date: string; x: number; label: string; source_url: string }[];
+  extension_note?: string;
 };
 type Verdict = {
   claim: string; mapping: string; recent_spike: boolean; summary: string;
@@ -271,7 +278,13 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
   // Label only the US and the world there, at a size that survives the scale;
   // every country's numbers are in the ranked table directly below.
   const padR = narrow ? 96 : 128;
-  const view = chart.series.map((s) => ({ ...s, points: s.points.filter((p) => p.year >= winFrom) }));
+  // The national continuation is part of the full-range view; the pandemic
+  // window keeps it too, since 2022-2025 is exactly the period of interest.
+  const withExt = chart.series.map((s) => ({
+    ...s,
+    points: [...s.points, ...((s.extension?.points || []).map((p) => ({ year: p.year, value: p.value })))],
+  }));
+  const view = withExt.map((s) => ({ ...s, points: s.points.filter((p) => p.year >= winFrom) }));
   const base = new Map(view.map((s) => [s.country, s.points[0]?.value ?? 1]));
   const val = (s: { country: string }, v: number) =>
     indexed ? (v / (base.get(s.country) || 1)) * 100 : v;
@@ -317,7 +330,7 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
     });
 
   const yTicks = (indexed ? [0, 50, 100, 150, 200] : [0, 10, 20, 30, 40, 50]).filter((t) => t <= v1);
-  const xTicks = (win === "covid" ? [2017, 2018, 2019, 2020, 2021] : [2000, 2005, 2010, 2015, 2021]).filter((y) => y >= x0 && y <= x1);
+  const xTicks = (win === "covid" ? [2017, 2019, 2021, 2023, 2025] : [2000, 2005, 2010, 2015, 2021, 2025]).filter((y) => y >= x0 && y <= x1);
 
   return (
     <figure className="m-0 mb-6">
@@ -325,11 +338,11 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
         <span className="block font-display font-semibold text-foreground text-[19px]">
           {win === "covid"
             ? (indexed
-                ? "Suicide rates through the pandemic: change from 2017 to 2021"
-                : "Suicide rate through the pandemic, 2017–2021")
+                ? `Suicide rates through the pandemic: change from 2017 to ${x1}`
+                : `Suicide rate through the pandemic, 2017–${x1}`)
             : (indexed
-                ? "Suicide rates, 2000–2021: the US rose 40% while the world fell 27%"
-                : "Suicide rate, 2000–2021: the US against ten countries and the world")}
+                ? `Suicide rates, 2000–${x1}: the US rose 40% while the world fell 27%`
+                : `Suicide rate, 2000–${x1}: the US against twelve countries and the world`)}
         </span>
         <span className="block text-foreground/75 text-[15px] mt-1">
           {indexed
@@ -338,7 +351,8 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
         </span>
       </figcaption>
       <p className="text-muted text-[13px] m-0 mb-3">
-        Bold line = United States · dashed line = world average ·{" "}
+        Bold line = United States · long-dashed line = world average · dotted after 2021 = each
+        country&rsquo;s own national statistics ·{" "}
         {narrow ? "every country's figures are in the table below" : "hover any year to read all fourteen, or click a line for its sources and method"}.
       </p>
       <div className="flex flex-wrap gap-x-6 gap-y-2 mb-3">
@@ -388,6 +402,14 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
         {xTicks.map((y) => (
           <text key={y} x={X(y)} y={H - 8} fontSize={narrow ? 18 : 11} fill="rgb(var(--muted))" textAnchor="middle">{y}</text>
         ))}
+        {x1 > 2021 && x0 < 2021 && (
+          <g pointerEvents="none">
+            <line x1={X(2021)} y1={padT} x2={X(2021)} y2={H - padB}
+              stroke="rgb(var(--edge))" strokeWidth="1.5" />
+            <text x={X(2021) + 4} y={H - padB - 6} fontSize={narrow ? 15 : 10}
+              fill="rgb(var(--muted))">national statistics →</text>
+          </g>
+        )}
         {showCovid && (chart.covid_markers || [])
           .filter((m) => m.x >= x0 && m.x <= x1)
           .map((m) => (
@@ -422,9 +444,25 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
           <line x1={X(hoverYear)} y1={padT} x2={X(hoverYear)} y2={H - padB}
             stroke="rgb(var(--muted))" strokeDasharray="3 3" pointerEvents="none" />
         )}
+        {view.map((s) => {
+          const ext = s.extension;
+          if (!ext) return null;
+          const seg = [...s.points.filter((p) => p.year === ext.joins_at), ...s.points.filter((p) => p.year > ext.joins_at)];
+          if (seg.length < 2) return null;
+          return (
+            <path key={"ext-" + s.country}
+              d={seg.map((p, i) => `${i ? "L" : "M"}${X(p.year).toFixed(1)},${Y(val(s, p.value)).toFixed(1)}`).join(" ")}
+              fill="none"
+              stroke={s.emphasis ? "rgb(var(--foreground))" : "rgb(var(--muted))"}
+              strokeWidth={s.emphasis ? 3 : 1.4}
+              strokeDasharray={s.emphasis ? "6 3" : "4 3"}
+              opacity={s.emphasis ? 1 : 0.7} />
+          );
+        })}
         {view.map((s) => (
           <path key={s.country}
-            d={s.points.map((p, i) => `${i ? "L" : "M"}${X(p.year).toFixed(1)},${Y(val(s, p.value)).toFixed(1)}`).join(" ")}
+            d={s.points.filter((p) => !s.extension || p.year <= s.extension.joins_at)
+              .map((p, i) => `${i ? "L" : "M"}${X(p.year).toFixed(1)},${Y(val(s, p.value)).toFixed(1)}`).join(" ")}
             fill="none"
             stroke={s.emphasis ? "rgb(var(--foreground))" : "rgb(var(--muted))"}
             strokeWidth={s.emphasis ? 3 : s.kind === "world" ? 1.5 : 1.1}
@@ -486,8 +524,12 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
           {open && (
             <div className="mt-1">
               <p className="body-copy text-foreground/90 m-0 mb-4">
-                {open.points[open.points.length - 1].value.toFixed(1)} suicide deaths per 100,000
-                people in {open.points[open.points.length - 1].year}
+                {(open.extension
+                  ? open.extension.points[open.extension.points.length - 1].national_value
+                  : open.points[open.points.length - 1].value).toFixed(1)} suicide deaths per 100,000
+                people in {open.extension
+                  ? open.extension.points[open.extension.points.length - 1].year
+                  : open.points[open.points.length - 1].year}
                 {open.kind === "world" ? "" : ", against"}{" "}
                 {open.kind === "world" ? "" : `${open.points[0].value.toFixed(1)} in ${open.points[0].year} — a change of ${open.change_pct > 0 ? "+" : ""}${open.change_pct.toFixed(0)}%`}
                 {open.kind === "world" ? `a change of ${open.change_pct.toFixed(0)}% since ${open.points[0].year}` : ""}.
@@ -513,8 +555,51 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
                 </>
               )}
 
+              {open.extension && (
+                <div className="border border-edge rounded-lg p-4 mb-4">
+                  <h4 className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground mb-2">
+                    After 2021 — {open.country}&rsquo;s own statistics
+                  </h4>
+                  <p className="text-[15px] text-foreground/85 m-0 mb-2">{open.extension.basis}.</p>
+                  {open.extension.crude && (
+                    <p className="text-[15px] text-foreground/85 m-0 mb-2">
+                      <strong>This is a crude rate</strong> — not adjusted for age — so it is not
+                      comparable with the standardised figures before 2021 or with other countries.
+                    </p>
+                  )}
+                  <p className="text-[15px] text-foreground/85 m-0 mb-3">{open.extension.note}</p>
+                  <table className="w-full text-[14px] mb-2">
+                    <thead>
+                      <tr className="text-left text-muted text-[12px] uppercase tracking-wide">
+                        <th className="py-1 pr-4 font-medium">Year</th>
+                        <th className="py-1 pr-4 font-medium text-right">As published</th>
+                        <th className="py-1 font-medium text-right">On the chart</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {open.extension.points.map((p) => (
+                        <tr key={p.year} className="border-t border-edge/50">
+                          <td className="py-1 pr-4 text-muted tabular-nums">{p.year}</td>
+                          <td className="py-1 pr-4 text-right tabular-nums text-foreground/85">{p.national_value.toFixed(1)}</td>
+                          <td className="py-1 text-right tabular-nums text-muted">{p.value.toFixed(1)}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  <p className="text-muted text-[13px] m-0">
+                    &ldquo;On the chart&rdquo; is the published figure multiplied by{" "}
+                    {open.extension.scale_factor.toFixed(3)} so the line joins the WHO series at 2021
+                    instead of stepping by an amount that is purely a difference of method. The
+                    year-on-year movement is unchanged. Source: {open.extension.publisher} · Tier{" "}
+                    {open.extension.tier} ·{" "}
+                    <a href={open.extension.source_url} target="_blank" rel="noreferrer noopener"
+                      className="underline underline-offset-4 hover:text-foreground">open the data</a>
+                  </p>
+                </div>
+              )}
+
               <h4 className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground mb-2">
-                Every year
+                {open.extension ? "WHO series, every year to 2021" : "Every year"}
               </h4>
               <div className="max-h-[240px] overflow-y-auto border border-edge rounded-lg mb-4">
                 <table className="w-full text-[14px]">
@@ -721,13 +806,19 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
               October 2023.
             </p>
             <p className="body-copy text-foreground/90 max-w-[80ch] mb-3">
-              <strong>Why this chart stops at 2021.</strong> That is where the comparable
-              international estimates end — WHO has not yet published figures on this basis for 2022
-              onward, so no country-against-country view can reach the present. The pandemic window
-              above shows what is available: rates were broadly flat or falling into 2020, the first
-              pandemic year. For the United States alone, national figures do continue — 14.2 in
-              2022 (the highest rate since 1941), 14.1 in 2023, and 13.7 in 2024 — and those are
-              listed with their sources directly below.
+              <strong>The dotted ends: what happens after 2021.</strong> WHO&rsquo;s comparable
+              estimates stop there, so beyond 2021 the chart switches to each country&rsquo;s own
+              national statistics — five publish a series recent and complete enough to use. Those
+              segments are dotted, and they are scaled to join the WHO line at 2021 rather than
+              stepping by an amount that is purely a difference of method. The <em>shape</em> after
+              2021 is each country&rsquo;s real movement; the <em>level</em> carries over. Click any
+              line to see its published figures, unscaled, next to what the chart draws.
+            </p>
+            <p className="body-copy text-foreground/90 max-w-[80ch] mb-3">
+              What those five show: the United States peaked in 2022 at its highest rate since 1941
+              and has fallen since, to 13.7 in 2024. Japan fell to its lowest count since records
+              began in 1978. Australia and the UK edged down. South Korea went the other way, rising
+              to a 13-year high in 2024.
             </p>
             <p className="body-copy text-foreground/90 max-w-[80ch] mb-3">
               <strong>Why 40% here and &ldquo;~30%&rdquo; below?</strong> Both are the United States

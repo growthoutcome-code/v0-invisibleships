@@ -159,7 +159,7 @@ const hs = await page.evaluate(() => ({
   rateExplained: document.body.textContent.includes("roughly 52,000 deaths"),
   windowToggle: [...document.querySelectorAll("button")].some((b) => /pandemic/i.test(b.textContent)),
   covidMarker: [...document.querySelectorAll("svg text")].some((t) => t.textContent === "COVID-19"),
-  explains2021: document.body.textContent.includes("Why this chart stops at 2021"),
+  explains2021: document.body.textContent.includes("The dotted ends: what happens after 2021"),
   causesLink: [...document.querySelectorAll("a")].some((a) => /Causes, as attributed/.test(a.textContent)),
   reproducible: document.body.textContent.includes("None of this is privileged information"),
   provenanceModal: [...document.querySelectorAll("button")].some((b) => /How this research was gathered/.test(b.textContent)),
@@ -246,7 +246,7 @@ const stageA = await page.evaluate(async () => {
   covidBox?.click();
   await new Promise((r) => setTimeout(r, 500));
   const markers = [...document.querySelectorAll("svg text")]
-    .filter((t) => /WHO notified|Pandemic declared|First vaccinations/.test(t.textContent)).length;
+    .filter((t) => /WHO notified|Pandemic declared|First vaccinations|Boosters begin|Emergency phase ends/.test(t.textContent)).length;
   covidBox?.click();
   // click the US line's end label
   const lbl = [...document.querySelectorAll("svg text")].find((t) => t.textContent.startsWith("United States"));
@@ -267,12 +267,42 @@ const stageA = await page.evaluate(async () => {
   return out;
 });
 console.log("stageA:", JSON.stringify(stageA));
+
+// Stage B: the chart must now read past 2021 with a marked national segment
+const stageB = await page.evaluate(async () => {
+  const svg = document.querySelector("svg[role=img]");
+  const xLabels = [...svg.querySelectorAll("text")].map((t) => t.textContent.trim());
+  const dotted = [...svg.querySelectorAll("path")].filter((p) => {
+    const d = p.getAttribute("stroke-dasharray") || "";
+    return d === "6 3" || d === "4 3";
+  }).length;
+  const lbl = [...svg.querySelectorAll("text")].find((t) => t.textContent.startsWith("United States"));
+  lbl?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+  await new Promise((r) => setTimeout(r, 700));
+  const d = [...document.querySelectorAll('[role="dialog"]')].find((n) => /own statistics/.test(n.textContent));
+  const out = {
+    reaches2025: xLabels.includes("2025"),
+    boundaryRule: xLabels.some((t) => /national statistics/.test(t)),
+    dottedSegments: dotted,
+    modalShowsRaw: !!d?.textContent.includes("As published"),
+    modalShowsScale: !!d?.textContent.includes("so the line joins the WHO series at 2021"),
+    modalUS2024: !!d?.textContent.includes("13.7"),
+  };
+  document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+  return out;
+});
+console.log("stageB:", JSON.stringify(stageB));
+if (!stageB.reaches2025) fail("chart does not reach 2025");
+if (!stageB.boundaryRule) fail("2021 boundary rule missing");
+if (stageB.dottedSegments < 5) fail(`national segments drawn: ${stageB.dottedSegments}, expected 5`);
+if (!stageB.modalShowsRaw || !stageB.modalShowsScale) fail("modal does not disclose raw vs scaled");
+if (!stageB.modalUS2024) fail("modal missing US 2024 figure");
 // Only the pre-2021 markers can render while the chart ends at 2021; the
 // booster and emergency-end markers appear once Stage B extends the range.
-if (stageA.covidMarkers < 3) fail(`covid markers in range: ${stageA.covidMarkers}, expected 3`);
+if (stageA.covidMarkers < 5) fail(`covid markers: ${stageA.covidMarkers}, expected all 5 now the chart reaches 2025`);
 if (!stageA.modalOpen) fail("series modal did not open");
 if (!stageA.modalHasMethod || !stageA.modalHasCaveat || !stageA.modalHasSource) fail("series modal incomplete");
-if (stageA.modalRows !== 22) fail(`series modal year rows: ${stageA.modalRows}`);
+if (stageA.modalRows < 22) fail(`series modal year rows: ${stageA.modalRows}`);
 if (!stageA.crossLink) fail("timeline cross-link missing");
 if (!stageA.palestineCaveat) fail("Israel/Palestine caveat missing");
 
