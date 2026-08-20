@@ -87,3 +87,10 @@ body {
   .gate-anim .ga-scene { animation: none !important; }
   .gate-anim .ga-sq { opacity: 1; } /* hold the final scene statically */
 }
+
+/* Data sub-tab modes (DataView). Timeline mode shows only the master timeline:
+   the report's internal tab row is hidden (the sub-tabs are the navigation).
+   Government Cloud mode hides the internal Timeline button so the same view
+   isn't offered in two places. */
+.gov-timeline-only .gov-report .tabs { display: none; }
+.gov-cloud-mode .gov-report .tab[data-t="time"] { display: none; }

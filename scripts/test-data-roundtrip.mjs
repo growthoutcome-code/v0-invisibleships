@@ -29,7 +29,7 @@ const t0 = await page.evaluate(() => document.getElementById("a_tiles").innerHTM
 console.log("initial tiles:", t0);
 
 // round trip
-await page.getByRole("tab", { name: /Public Health Signals/i }).click();
+await page.getByRole("tab", { name: /^Public Health$/i }).click();
 await page.waitForTimeout(1200);
 const health = await page.evaluate(() => document.body.textContent.includes("claim under review"));
 console.log("health tab renders:", health);
@@ -44,8 +44,8 @@ const heat = await page.evaluate(() => document.getElementById("heat")?.innerHTM
 console.log("tiles after round-trip:", t1, "| heat:", heat);
 if (t1 < 100 || heat < 1000) fail("report wiped after round-trip");
 
-// internal Timeline tab: verify Health lane exists
-await page.locator(".gov-report .tab", { hasText: "Timeline" }).click();
+// top-level Timeline sub-tab: verify Health lane exists
+await page.getByRole("tab", { name: /^Timeline$/i }).click();
 await page.waitForTimeout(600);
 const laneF = await page.evaluate(() => {
   const svg = document.querySelector("#tlsvg svg");
@@ -58,7 +58,7 @@ console.log("timeline:", JSON.stringify(laneF));
 if (!laneF.hasHealthLabel) fail("Health lane label missing on timeline");
 
 // second round-trip for good measure
-await page.getByRole("tab", { name: /Public Health Signals/i }).click();
+await page.getByRole("tab", { name: /^Public Health$/i }).click();
 await page.waitForTimeout(700);
 await page.getByRole("tab", { name: /Government Cloud/i }).click();
 await page.waitForTimeout(500);
@@ -67,7 +67,7 @@ console.log("tiles after second round-trip:", t2);
 if (t2 < 100) fail("report wiped after second round-trip");
 
 // Pagination: registers show max 5 with journal-style pager; sources paginate too
-await page.getByRole("tab", { name: /Public Health Signals/i }).click();
+await page.getByRole("tab", { name: /^Public Health$/i }).click();
 await page.waitForTimeout(1200);
 const pag = await page.evaluate(() => {
   const sections = [...document.querySelectorAll("section")];
