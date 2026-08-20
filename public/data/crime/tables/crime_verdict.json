@@ -1,0 +1,41 @@
+{
+  "claim": "Is crime in the United States rising or falling after the pandemic?",
+  "summary": "Both answers are defensible, and which one you get depends entirely on which measurement system you use. There was a real and large increase: murder rose 29.4% in 2020, the largest single-year rise the FBI has recorded, and CDC death certificates register the same event independently. On the police measure that increase has now fully reversed \u2014 the FBI's final 2025 data shows the largest year-to-year violent-crime decline since 1936, and a murder rate of 4.1 per 100,000 that is below the pre-pandemic level and tied for the lowest ever recorded. But the survey that asks people directly whether they were victimised shows violent victimisation higher in 2024 than in 2021 and holding near that level, while police-recorded violent crime barely moved across the same decade. Only about half of violent victimisations are reported to police at all, which is how both things can be true at once. The gap between the two measures is not a flaw in the data. On this record it is the most substantial finding.",
+  "key_figures": [
+    {
+      "figure": "Murder rose 29.4% in 2020 \u2014 the largest single-year increase the FBI has recorded",
+      "tier": "A",
+      "source_id": "cs013"
+    },
+    {
+      "figure": "2025 murder rate 4.1 per 100,000 \u2014 tied with 1955-56 for the lowest ever recorded",
+      "tier": "A",
+      "source_id": "cs033"
+    },
+    {
+      "figure": "Violent crime down 9.3% in 2025 \u2014 largest year-to-year decline since FBI estimation began in 1936",
+      "tier": "A",
+      "source_id": "cs033"
+    },
+    {
+      "figure": "NCVS violent victimisation 23.3 per 1,000 in 2024, against 16.5 in 2021",
+      "tier": "A",
+      "source_id": "cs_ncvs_cv24"
+    },
+    {
+      "figure": "Police-recorded violent crime moved only between 3.7 and 4.0 per 1,000 across 2015-2024",
+      "tier": "A",
+      "source_id": "cs_two_measures"
+    },
+    {
+      "figure": "About 48% of violent victimisations were reported to police in 2024",
+      "tier": "A",
+      "source_id": "cs_ncvs_cv24"
+    },
+    {
+      "figure": "NIBRS covered 65.7% of the US population in 2021, against 96.2% in 2025",
+      "tier": "A",
+      "source_id": "cs002"
+    }
+  ]
+}

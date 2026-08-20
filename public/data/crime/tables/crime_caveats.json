@@ -1,0 +1,37 @@
+[
+  {
+    "workstream": "W1",
+    "caveat": "FBI and CDC homicide series count different things and are never reconciled here. The gap between them is expected.",
+    "tier": "A"
+  },
+  {
+    "workstream": "W1",
+    "caveat": "Every FBI row records its publication vintage. Do not compare a first-published figure with a revised one.",
+    "tier": "A"
+  },
+  {
+    "workstream": "W1",
+    "caveat": "Murder counts for 2022 and 2023 could not be verified against a fetched source and are absent rather than estimated.",
+    "tier": "A"
+  },
+  {
+    "workstream": "W1",
+    "caveat": "The 2025 murder count is secondary; the FBI published the rate but not the count. The rate is Tier A.",
+    "tier": "B"
+  },
+  {
+    "workstream": "W1",
+    "caveat": "Clearance figures are selected years, not a continuous published annual series.",
+    "tier": "A"
+  },
+  {
+    "workstream": "W9",
+    "caveat": "The 2021 data year is the weakest in the modern record on both measures \u2014 NIBRS participation collapsed and NCVS fieldwork was disrupted. Treat any percentage change anchored on 2021 with suspicion.",
+    "tier": "A"
+  },
+  {
+    "workstream": "W9",
+    "caveat": "This dataset does not corroborate the Government Cloud dataset or the journal, and neither corroborates it.",
+    "tier": "A"
+  }
+]

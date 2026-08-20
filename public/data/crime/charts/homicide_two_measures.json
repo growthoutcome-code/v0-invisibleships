@@ -1,0 +1,422 @@
+{
+  "title": "US homicide, two official measures",
+  "unit": "Deaths per 100,000 people per year",
+  "note": "The FBI counts murder and nonnegligent manslaughter known to police, as a crude rate. The CDC counts deaths certified as homicide, age-adjusted. The gap between them is expected: they count different things. Neither series corrects the other.",
+  "publisher": "FBI; CDC/NCHS",
+  "tier": "A",
+  "series": [
+    {
+      "name": "FBI \u2014 murder known to police",
+      "emphasis": true,
+      "basis_short": "crude rate, offences known to police",
+      "publisher": "FBI (UCR/NIBRS)",
+      "tier": "A",
+      "points": [
+        {
+          "year": 1960,
+          "value": 5.1
+        },
+        {
+          "year": 1961,
+          "value": 4.8
+        },
+        {
+          "year": 1962,
+          "value": 4.6
+        },
+        {
+          "year": 1963,
+          "value": 4.6
+        },
+        {
+          "year": 1964,
+          "value": 4.9
+        },
+        {
+          "year": 1965,
+          "value": 5.1
+        },
+        {
+          "year": 1966,
+          "value": 5.6
+        },
+        {
+          "year": 1967,
+          "value": 6.2
+        },
+        {
+          "year": 1968,
+          "value": 6.9
+        },
+        {
+          "year": 1969,
+          "value": 7.3
+        },
+        {
+          "year": 1970,
+          "value": 7.9
+        },
+        {
+          "year": 1971,
+          "value": 8.6
+        },
+        {
+          "year": 1972,
+          "value": 9.0
+        },
+        {
+          "year": 1973,
+          "value": 9.4
+        },
+        {
+          "year": 1974,
+          "value": 9.8
+        },
+        {
+          "year": 1975,
+          "value": 9.6
+        },
+        {
+          "year": 1976,
+          "value": 8.8
+        },
+        {
+          "year": 1977,
+          "value": 8.8
+        },
+        {
+          "year": 1978,
+          "value": 9.0
+        },
+        {
+          "year": 1979,
+          "value": 9.7
+        },
+        {
+          "year": 1980,
+          "value": 10.2
+        },
+        {
+          "year": 1981,
+          "value": 9.8
+        },
+        {
+          "year": 1982,
+          "value": 9.1
+        },
+        {
+          "year": 1983,
+          "value": 8.3
+        },
+        {
+          "year": 1984,
+          "value": 7.9
+        },
+        {
+          "year": 1985,
+          "value": 7.9
+        },
+        {
+          "year": 1986,
+          "value": 8.6
+        },
+        {
+          "year": 1987,
+          "value": 8.3
+        },
+        {
+          "year": 1988,
+          "value": 8.4
+        },
+        {
+          "year": 1989,
+          "value": 8.7
+        },
+        {
+          "year": 1990,
+          "value": 9.4
+        },
+        {
+          "year": 1991,
+          "value": 9.8
+        },
+        {
+          "year": 1992,
+          "value": 9.3
+        },
+        {
+          "year": 1993,
+          "value": 9.5
+        },
+        {
+          "year": 1994,
+          "value": 9.0
+        },
+        {
+          "year": 1995,
+          "value": 8.2
+        },
+        {
+          "year": 1996,
+          "value": 7.4
+        },
+        {
+          "year": 1997,
+          "value": 6.8
+        },
+        {
+          "year": 1998,
+          "value": 6.3
+        },
+        {
+          "year": 1999,
+          "value": 5.7
+        },
+        {
+          "year": 2000,
+          "value": 5.5
+        },
+        {
+          "year": 2001,
+          "value": 5.6
+        },
+        {
+          "year": 2002,
+          "value": 5.6
+        },
+        {
+          "year": 2003,
+          "value": 5.7
+        },
+        {
+          "year": 2004,
+          "value": 5.5
+        },
+        {
+          "year": 2005,
+          "value": 5.6
+        },
+        {
+          "year": 2006,
+          "value": 5.8
+        },
+        {
+          "year": 2007,
+          "value": 5.7
+        },
+        {
+          "year": 2008,
+          "value": 5.4
+        },
+        {
+          "year": 2009,
+          "value": 5.0
+        },
+        {
+          "year": 2010,
+          "value": 4.8
+        },
+        {
+          "year": 2011,
+          "value": 4.7
+        },
+        {
+          "year": 2012,
+          "value": 4.7
+        },
+        {
+          "year": 2013,
+          "value": 4.5
+        },
+        {
+          "year": 2014,
+          "value": 4.4
+        },
+        {
+          "year": 2015,
+          "value": 4.9
+        },
+        {
+          "year": 2016,
+          "value": 5.4
+        },
+        {
+          "year": 2017,
+          "value": 5.3
+        },
+        {
+          "year": 2018,
+          "value": 5.0
+        },
+        {
+          "year": 2019,
+          "value": 5.0
+        },
+        {
+          "year": 2020,
+          "value": 6.6
+        },
+        {
+          "year": 2021,
+          "value": 6.5
+        },
+        {
+          "year": 2022,
+          "value": 6.6
+        },
+        {
+          "year": 2023,
+          "value": 6.0
+        },
+        {
+          "year": 2024,
+          "value": 5.0
+        },
+        {
+          "year": 2025,
+          "value": 4.1
+        }
+      ],
+      "caveats": [
+        "Vintages differ between annual reports; see the data-quality register.",
+        "2021 is the weakest year in the series \u2014 NIBRS covered 65.7% of the population."
+      ]
+    },
+    {
+      "name": "CDC \u2014 homicide deaths",
+      "emphasis": false,
+      "basis_short": "age-adjusted rate, death certificates",
+      "publisher": "CDC/NCHS",
+      "tier": "A",
+      "points": [
+        {
+          "year": 1950,
+          "value": 5.1
+        },
+        {
+          "year": 1960,
+          "value": 5.0
+        },
+        {
+          "year": 1970,
+          "value": 8.8
+        },
+        {
+          "year": 1980,
+          "value": 10.4
+        },
+        {
+          "year": 1990,
+          "value": 9.4
+        },
+        {
+          "year": 2000,
+          "value": 5.9
+        },
+        {
+          "year": 2003,
+          "value": 6.1
+        },
+        {
+          "year": 2004,
+          "value": 5.9
+        },
+        {
+          "year": 2005,
+          "value": 6.1
+        },
+        {
+          "year": 2006,
+          "value": 6.2
+        },
+        {
+          "year": 2007,
+          "value": 6.1
+        },
+        {
+          "year": 2008,
+          "value": 5.9
+        },
+        {
+          "year": 2009,
+          "value": 5.5
+        },
+        {
+          "year": 2010,
+          "value": 5.3
+        },
+        {
+          "year": 2011,
+          "value": 5.3
+        },
+        {
+          "year": 2012,
+          "value": 5.4
+        },
+        {
+          "year": 2013,
+          "value": 5.2
+        },
+        {
+          "year": 2014,
+          "value": 5.1
+        },
+        {
+          "year": 2015,
+          "value": 5.7
+        },
+        {
+          "year": 2016,
+          "value": 6.2
+        },
+        {
+          "year": 2017,
+          "value": 6.2
+        },
+        {
+          "year": 2018,
+          "value": 5.9
+        },
+        {
+          "year": 2019,
+          "value": 6.0
+        },
+        {
+          "year": 2020,
+          "value": 7.8
+        },
+        {
+          "year": 2021,
+          "value": 8.2
+        },
+        {
+          "year": 2022,
+          "value": 7.7
+        },
+        {
+          "year": 2023,
+          "value": 7.1
+        }
+      ],
+      "caveats": [
+        "Includes deaths the FBI classifies as justifiable homicide.",
+        "Age-adjusted to the US 2000 standard population.",
+        "Sampled at ten-year intervals before 2003 and annually after. Points are marked on the chart so the sampling is visible; the line between two decadal points is drawn to connect them, not to assert the years between."
+      ]
+    }
+  ],
+  "markers": [
+    {
+      "year": 2020,
+      "label": "Murder +29.4% \u2014 largest single-year rise on record"
+    },
+    {
+      "year": 2021,
+      "label": "NIBRS transition: 65.7% population coverage"
+    },
+    {
+      "year": 2025,
+      "label": "Rate 4.1 \u2014 tied for lowest ever recorded"
+    }
+  ]
+}

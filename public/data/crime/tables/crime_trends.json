@@ -1,0 +1,26 @@
+[
+  {
+    "topic": "homicide_2020_spike",
+    "statement": "US murder rose 29.4% in 2020 \u2014 the largest single-year increase the FBI has recorded. CDC vital statistics show the same event independently: the age-adjusted homicide death rate went from 6.0 to 7.8 per 100,000.",
+    "tier": "A",
+    "source_id": "cs013"
+  },
+  {
+    "topic": "homicide_reversal",
+    "statement": "The spike has fully reversed on the police measure. The FBI's final 2025 data records murder down 18.1% and violent crime down 9.3% year-over-year \u2014 the largest year-to-year violent-crime decline since FBI estimation began in 1936 \u2014 at a murder rate of 4.1 per 100,000, tied with 1955 and 1956 for the lowest ever recorded and below the 2019 pre-pandemic rate of 5.0.",
+    "tier": "A",
+    "source_id": "cs033"
+  },
+  {
+    "topic": "two_measures_diverge",
+    "statement": "The victimisation survey does not show the same recovery. NCVS violent victimisation was 23.3 per 1,000 persons age 12+ in 2024 against 16.5 in 2021, and has stayed near that level since 2022, while NIBRS-estimated police-recorded violent crime fluctuated only between 3.7 and 4.0 per 1,000 across 2015-2024. About 48% of violent victimisations were reported to police in 2024.",
+    "tier": "A",
+    "source_id": "cs_two_measures"
+  },
+  {
+    "topic": "clearance_decline",
+    "statement": "The share of homicides cleared by arrest or exceptional means fell from 93% in 1962 to 64% by 1994, reached 61.4% in 2019, dropped sharply to 54% in 2020 and to a reported low of 52.3% in 2022, recovering to 61.4% in 2024. Roughly four in ten US homicides are not cleared.",
+    "tier": "B",
+    "source_id": "cs012"
+  }
+]

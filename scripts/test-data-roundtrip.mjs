@@ -414,5 +414,94 @@ const stray = await page.evaluate(() =>
     .flat().filter((c) => c !== "max-w-[46ch]"));
 if (stray.length) fail(`ad-hoc ch widths still present: ${[...new Set(stray)].join(", ")} — use .measure`);
 
+// ---- Crime sub-tab -------------------------------------------------------
+// The section's point is that two official measures disagree, so the guard is
+// that BOTH series render and neither is silently reconciled away.
+await page.setViewportSize({ width: 1440, height: 1000 });
+await page.getByRole("tab", { name: /^Crime$/i }).click();
+await page.waitForTimeout(2500);
+const crime = await page.evaluate(() => {
+  const main = document.querySelector("main");
+  const fig = [...main.querySelectorAll("figure")]
+    .find((f) => /two official measures/i.test(f.querySelector("figcaption")?.textContent || ""));
+  const svg = fig?.querySelector("svg");
+  const drawn = svg ? [...svg.querySelectorAll("path")].filter((p) => p.getAttribute("stroke") !== "transparent") : [];
+  const heads = [...main.querySelectorAll("h2")].map((h) => h.textContent.trim());
+  const txt = main.innerText;
+  return {
+    chart: !!svg,
+    series: drawn.length,
+    labels: svg ? [...svg.querySelectorAll("text")].map((t) => t.textContent).filter((t) => /FBI|CDC/.test(t)) : [],
+    verdict: heads.some((h) => /rising or falling/i.test(h)),
+    clearance: heads.some((h) => /homicides are cleared/i.test(h)),
+    dq: heads.some((h) => /numbers can be trusted/i.test(h)),
+    // the three figures the section turns on
+    spike2020: /29\.4%/.test(txt),
+    low2025: /4\.1 per 100,000/.test(txt),
+    ncvsGap: /23\.3 per 1,000/.test(txt) && /48%/.test(txt),
+    crossLink: /procurement and legislation record/i.test(txt),
+    noOverlay: !/\bcaused by\b/i.test(txt),
+  };
+});
+console.log("crime:", JSON.stringify(crime));
+if (!crime.chart) fail("crime landing chart missing");
+if (crime.series !== 2) fail(`crime chart drew ${crime.series} series, expected 2 (FBI and CDC)`);
+if (crime.labels.length < 2) fail("crime chart series are not labelled");
+if (!crime.verdict) fail("crime verdict heading missing");
+if (!crime.clearance) fail("clearance section missing");
+if (!crime.dq) fail("crime data-quality register missing");
+if (!crime.spike2020) fail("2020 spike figure (29.4%) missing");
+if (!crime.low2025) fail("2025 record-low rate (4.1 per 100,000) missing");
+if (!crime.ncvsGap) fail("NCVS divergence figures missing — that gap is the section's finding");
+if (!crime.crossLink) fail("crime -> timeline cross-link missing");
+
+// Series modal: method, caveats and the full year table.
+await page.evaluate(() => {
+  const g = [...document.querySelectorAll("main figure svg g")].find((x) => x.querySelector("path"));
+  g?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+});
+await page.waitForTimeout(700);
+const crimeModal = await page.evaluate(() => {
+  const d = [...document.querySelectorAll("[role=dialog]")].find((x) => /Basis:/.test(x.innerText));
+  return d ? { open: true, rows: d.querySelectorAll("tbody tr").length, caveats: d.querySelectorAll("li").length } : { open: false };
+});
+console.log("crime modal:", JSON.stringify(crimeModal));
+if (!crimeModal.open) fail("crime series modal did not open");
+if (crimeModal.rows < 50) fail(`crime series modal year rows: ${crimeModal.rows}`);
+if (!crimeModal.caveats) fail("crime series modal carries no method caveats");
+await page.keyboard.press("Escape");
+
+// The GovCloud report must survive a Crime round-trip like any other sub-tab.
+await page.getByRole("tab", { name: /^Government Cloud$/i }).click();
+await page.waitForTimeout(1500);
+const afterCrime = await page.evaluate(() => document.getElementById("a_tiles")?.innerHTML.length || 0);
+console.log("tiles after crime round-trip:", afterCrime);
+if (afterCrime < 100) fail("GovCloud report was wiped by the Crime round-trip");
+
+// Phone legibility on the crime chart.
+await page.getByRole("tab", { name: /^Crime$/i }).click();
+await page.waitForTimeout(1800);
+await page.setViewportSize({ width: 390, height: 900 });
+await page.waitForTimeout(1500);
+const crimePhone = await page.evaluate(() => {
+  const svg = document.querySelector("main figure svg");
+  if (!svg) return { found: false };
+  const r = svg.getBoundingClientRect();
+  const sc = r.width / svg.viewBox.baseVal.width;
+  const sizes = [...svg.querySelectorAll("text")].map((t) => +(t.getAttribute("font-size") || 11) * sc);
+  return {
+    found: true,
+    minPx: +Math.min(...sizes).toFixed(1),
+    overflow: r.right > document.documentElement.clientWidth + 1,
+    key: /FBI . murder known to police/.test(document.querySelector("main").innerText),
+  };
+});
+console.log("crime phone:", JSON.stringify(crimePhone));
+if (!crimePhone.found) fail("crime chart missing at phone width");
+if (crimePhone.minPx < 9) fail(`crime chart label paints at ${crimePhone.minPx}px on a phone`);
+if (crimePhone.overflow) fail("crime chart overflows the phone viewport");
+if (!crimePhone.key) fail("crime chart drops end labels on phones without the text key");
+await page.setViewportSize({ width: 1280, height: 900 });
+
 await browser.close();
 console.log(process.exitCode ? "RESULT: FAIL" : "RESULT: PASS");

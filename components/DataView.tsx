@@ -7,6 +7,7 @@ import { TimelineNarrative, TimelineHub } from "@/components/TimelineIntro";
 import GovCloudReport from "@/components/GovCloudReport";
 import GovCloudSources from "@/components/GovCloudSources";
 import HealthSignals from "@/components/HealthSignals";
+import CrimeSignals from "@/components/CrimeSignals";
 
 /**
  * Data section — three sub-tabs (Sean, 2026-08-20):
@@ -14,6 +15,7 @@ import HealthSignals from "@/components/HealthSignals";
  *   Timeline          — the six-track master timeline, the section's landing view
  *   Government Cloud  — the full procurement research report + source list
  *   Public Health     — suicide/health statistics with tiered sources
+ *   Crime             — US crime statistics, built around the measurement problem
  *
  * Timeline and Government Cloud are two views of ONE mounted report instance:
  * the report is script-drawn, runs once per page load, and cannot survive an
@@ -22,7 +24,7 @@ import HealthSignals from "@/components/HealthSignals";
  * tab row; .gov-cloud-mode hides the internal Timeline button so the view
  * isn't offered twice).
  */
-type SubTab = "timeline" | "govcloud" | "health";
+type SubTab = "timeline" | "govcloud" | "health" | "crime";
 
 /** Keep asserting the report's internal tab until its script has wired the
  *  buttons (the 185KB drawing script loads after mount). Clicking is
@@ -76,6 +78,9 @@ export default function DataView() {
         <button role="tab" aria-selected={sub === "health"} className={tabCls(sub === "health")} onClick={() => pick("health")}>
           Public Health
         </button>
+        <button role="tab" aria-selected={sub === "crime"} className={tabCls(sub === "crime")} onClick={() => pick("crime")}>
+          Crime
+        </button>
       </div>
 
       {/* PRIMARY disclaimer: prominent, once, on the landing view only. */}
@@ -90,7 +95,7 @@ export default function DataView() {
       {/* Chart first, then what it means, then where to go (Sean, 2026-08-20):
           the reader sees the timeline, gets the summary under it, and only then
           meets the sibling sections. */}
-      <div className={sub === "health" ? "hidden" : sub === "timeline" ? "gov-timeline-only" : "gov-cloud-mode"}>
+      <div className={sub === "health" || sub === "crime" ? "hidden" : sub === "timeline" ? "gov-timeline-only" : "gov-cloud-mode"}>
         {report}
         {sub === "govcloud" && <GovCloudSources />}
       </div>
@@ -98,6 +103,7 @@ export default function DataView() {
       {sub === "timeline" && <TimelineNarrative onGo={pick} />}
       {sub === "timeline" && <TimelineHub onGo={pick} />}
       {sub === "health" && <HealthSignals onGoTimeline={() => pick("timeline")} />}
+      {sub === "crime" && <CrimeSignals onGoTimeline={() => pick("timeline")} />}
     </div>
   );
 }

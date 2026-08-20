@@ -1,0 +1,74 @@
+[
+  {
+    "dq_id": "cq01",
+    "geography": "US",
+    "topic": "US crime is measured by three systems that disagree",
+    "issue": "Police-recorded crime (FBI UCR/NIBRS), crimes people report experiencing when surveyed (BJS National Crime Victimization Survey), and homicide deaths recorded on death certificates (CDC/NCHS vital statistics) are three different counts of three different things. All are correct. None is 'the' crime rate.",
+    "effect": "A question as simple as 'is crime rising?' has more than one defensible answer depending on which system is cited, and the systems have recently pointed in opposite directions.",
+    "tier": "A",
+    "source_id": "cs_two_measures"
+  },
+  {
+    "dq_id": "cq02",
+    "geography": "US",
+    "topic": "The 2021 NIBRS transition broke comparability",
+    "issue": "The FBI retired its Summary Reporting System in favour of NIBRS for 2021. Agency participation collapsed: NIBRS covered 65.7% of the US population in 2021, against 96.2% in 2025. Major departments including the NYPD, LAPD and San Francisco PD did not submit 2021 data. The FBI's own language is that 'traditional methodologies could not be applied', and that the 2021 estimated trends are 'not considered statistically significant'.",
+    "effect": "Comparisons that span 2021 \u2014 including most 'crime since the pandemic' reporting \u2014 often compare two different collection systems rather than two years of crime.",
+    "tier": "A",
+    "source_id": "cs002"
+  },
+  {
+    "dq_id": "cq03",
+    "geography": "US",
+    "topic": "FBI figures are revised, and the vintage changes the answer",
+    "issue": "The same year carries different values depending on which annual report it is read from. 2019 murders were first published as 16,425 and revised to 16,669 \u2014 and the FBI's own headline '+29.4% in 2020' is calculated against the revised base. 2020 has both a 21,570 SRS-based estimate and a 22,000 NIBRS-based estimate for the same year. The 2024 rate was published as 5.0 and revised to 5.1.",
+    "effect": "Mixing vintages on one chart produces changes that are artefacts of publication rather than of crime. Every row in this dataset records its vintage for that reason.",
+    "tier": "A",
+    "source_id": "cs016"
+  },
+  {
+    "dq_id": "cq04",
+    "geography": "US",
+    "topic": "FBI and CDC homicide counts do not match, and should not",
+    "issue": "The FBI counts murder and nonnegligent manslaughter as offences known to police. CDC/NCHS counts deaths certified as homicide, including those the FBI classifies as justifiable and those never cleared as an offence. The CDC rate is also age-adjusted; the FBI rate is crude.",
+    "effect": "The two series run in parallel with a persistent gap. Neither is an error in the other. Quoting one as a correction of the other is the error.",
+    "tier": "A",
+    "source_id": "cs022"
+  },
+  {
+    "dq_id": "cq05",
+    "geography": "US",
+    "topic": "Clearance is not conviction, and the series is sparse",
+    "issue": "A homicide is 'cleared' when closed by arrest or by exceptional means \u2014 which includes cases where the suspect died or could not be extradited. It is not a conviction rate and not a 'solve rate', though it is reported as both. A continuous year-by-year national series could not be assembled from fetchable sources; what is recorded here is selected years.",
+    "effect": "The long decline from 93% in 1962 to the low 50s in 2022 is well documented, but the intervening shape is reconstructed from scattered years, not a published annual series.",
+    "tier": "A",
+    "source_id": "cs012"
+  },
+  {
+    "dq_id": "cq06",
+    "geography": "US",
+    "topic": "Only about half of violent victimisations reach police records",
+    "issue": "Approximately 48% of violent victimisations were reported to police in 2024. Police-recorded crime can therefore fall while victimisation rises, with no contradiction between the two.",
+    "effect": "Police-recorded series measure reported crime and the propensity to report, combined. They cannot separate the two.",
+    "tier": "A",
+    "source_id": "cs_ncvs_cv24"
+  },
+  {
+    "dq_id": "cq07",
+    "geography": "US",
+    "topic": "The 2021 NCVS baseline was collected under pandemic conditions",
+    "issue": "NCVS violent victimisation reads 16.5 per 1,000 in 2021 and 23.5 in 2022. Some of that step is likely collection: 2020 and 2021 fieldwork was disrupted, and the survey's own documentation cautions on comparability across that period.",
+    "effect": "A 2021-to-2024 percentage change overstates the rise by an unknown amount. This dataset does not publish that percentage as a headline for that reason.",
+    "tier": "B",
+    "source_id": "cs_ncvs_cv24"
+  },
+  {
+    "dq_id": "cq08",
+    "geography": "US",
+    "topic": "Two recent FBI counts could not be verified",
+    "issue": "Murder counts for 2022 and 2023 are absent here. The FBI's 2022 release publishes only a percentage change; the 2023 release and the 2023 CDE summary were unreachable when this dataset was assembled. The 2025 count is secondary \u2014 the FBI published the rate (4.1) but not the count.",
+    "effect": "The count series has two gaps. The rate series, which is what the charts use, is complete.",
+    "tier": "A",
+    "source_id": "cs031"
+  }
+]
