@@ -20,6 +20,6 @@
   "health_sources.json": 102
  },
  "charts": {
-  "suicide_international.json": "8 countries × 22 years, WHO age-standardised (comparable basis)"
+  "suicide_international.json": "12 series (11 countries + world) × 22 years, WHO age-standardised — one comparable basis"
  }
 }

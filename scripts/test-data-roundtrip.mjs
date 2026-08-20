@@ -118,26 +118,28 @@ await page.getByRole("button", { name: /Open Public Health/i }).click();
 await page.waitForTimeout(1000);
 const hs = await page.evaluate(() => ({
   verdictRenamed: document.body.textContent.includes("Has suicide increased by ~30%?"),
-  intlChart: document.body.textContent.includes("Did it happen everywhere?"),
+  intlChart: document.body.textContent.includes("Twelve lines, one way of counting"),
   intlLabels: (() => {
-    const want = ["United States","South Korea","Japan","France","Germany","Australia","Canada","UK"];
+    const want = ["United States","Russia","South Korea","Japan","France","India","Germany","Australia","Canada","China","UK","World"];
     const found = want.map((c) => [...document.querySelectorAll("svg text")].find((t) => t.textContent.startsWith(c + " ")));
     if (found.some((t) => !t)) return false;
     // every label must sit inside the drawing area with a finite y
-    return found.every((t) => { const y = t.getBBox?.().y; return Number.isFinite(y) && y > 0 && y < 400; });
+    return found.every((t) => { const y = t.getBBox?.().y; return Number.isFinite(y) && y > 0 && y < 460; });
   })(),
   intlLabelsDistinct: (() => {
     const ys = [...document.querySelectorAll("svg text")]
-      .filter((t) => /^(United States|South Korea|Japan|France|Germany|Australia|Canada|UK) /.test(t.textContent))
+      .filter((t) => /^(United States|Russia|South Korea|Japan|France|India|Germany|Australia|Canada|China|UK|World) /.test(t.textContent))
       .map((t) => Math.round(t.getBBox?.().y ?? -1));
-    return new Set(ys).size === ys.length && ys.length === 8;
+    return new Set(ys).size === ys.length && ys.length === 12;
   })(),
   chartBeforeVerdict: (() => {
     const h = [...document.querySelectorAll("h2,figcaption")];
-    const chart = h.findIndex((n) => n.textContent.includes("suicide rate, 1999"));
+    const chart = h.findIndex((n) => n.textContent.includes("Suicide rate, 2000"));
     const verdict = h.findIndex((n) => n.textContent.includes("Has suicide increased"));
     return chart > -1 && verdict > -1 && chart < verdict;
   })(),
+  onlyOneSuicideChart: [...document.querySelectorAll("figcaption")]
+    .filter((n) => /suicide rate/i.test(n.textContent)).length === 1,
   crisisKept: document.body.textContent.includes("988"),
   longNoteGone: !document.body.textContent.includes("Public health statistics compiled with AI assistance"),
   link: [...document.querySelectorAll("button")].some((b) => /full disclaimer/i.test(b.textContent)),
