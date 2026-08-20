@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
-import Link from "next/link";
 import { track } from "@/lib/analytics";
+import DisclaimerLink from "@/components/DisclaimerLink";
 
 /**
  * The Data section's disclaimer tiering (Sean, 2026-08-20).
@@ -45,13 +45,9 @@ export function DataNotice() {
         uneven — a small number here may mean little was reported, not that little happened — and
         nothing in this section connects any system to any person&rsquo;s experience. Every figure
         carries an evidence grade and a link to where it came from.{" "}
-        <Link
-          href="/disclaimer"
-          onClick={() => track("disclaimer_opened", { from: "data_notice" })}
-          className="text-accent underline underline-offset-4 whitespace-nowrap"
-        >
+        <DisclaimerLink from="data_notice" className="text-accent underline underline-offset-4 whitespace-nowrap">
           Read the full disclaimer →
-        </Link>
+        </DisclaimerLink>
       </p>
       <button onClick={dismiss} aria-label="Dismiss notice" className="ml-auto shrink-0 text-muted hover:text-foreground">
         <X size={20} />
@@ -63,14 +59,7 @@ export function DataNotice() {
 export function DataNoteLine({ children, from }: { children: React.ReactNode; from: string }) {
   return (
     <p className="text-muted text-[15px] mb-10 max-w-[80ch]">
-      {children}{" "}
-      <Link
-        href="/disclaimer"
-        onClick={() => track("disclaimer_opened", { from })}
-        className="underline underline-offset-4 hover:text-foreground"
-      >
-        full disclaimer
-      </Link>
+      {children} <DisclaimerLink from={from} />
     </p>
   );
 }

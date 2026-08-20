@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { track } from "@/lib/analytics";
+import DisclaimerLink from "@/components/DisclaimerLink";
 import ConceptsNav, { type Filters } from "@/components/ConceptsNav";
 import { CONCEPTS, BASIS_LABEL, BASIS_NOTE, ORIGIN_LABEL, ORIGIN_NOTE, VERIFICATION_LABEL, type Basis, type Origin } from "@/lib/concepts";
 
@@ -54,13 +55,7 @@ export default function ConceptsView() {
       <p className="text-muted text-[15px] max-w-[70ch] mb-10">
         None of this establishes wrongdoing by any organisation, and nothing here is independently
         verified unless it says so.{" "}
-        <Link
-          href="/disclaimer"
-          onClick={() => track("disclaimer_opened", { from: "concepts" })}
-          className="underline underline-offset-4 hover:text-foreground"
-        >
-          Read the full disclaimer
-        </Link>{" "}
+        <DisclaimerLink from="concepts">Read the full disclaimer</DisclaimerLink>{" "}
         ·{" "}
         <button
           type="button"

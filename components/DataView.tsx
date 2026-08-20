@@ -80,7 +80,6 @@ export default function DataView() {
 
       {/* PRIMARY disclaimer: prominent, once, on the landing view only. */}
       {sub === "timeline" && <DataNotice />}
-      {sub === "timeline" && <TimelineNarrative onGo={pick} />}
       {sub === "govcloud" && (
         <DataNoteLine from="govcloud">
           AI-assisted research from public records · every fact evidence-graded and linked to its
@@ -88,11 +87,15 @@ export default function DataView() {
         </DataNoteLine>
       )}
 
+      {/* Chart first, then what it means, then where to go (Sean, 2026-08-20):
+          the reader sees the timeline, gets the summary under it, and only then
+          meets the sibling sections. */}
       <div className={sub === "health" ? "hidden" : sub === "timeline" ? "gov-timeline-only" : "gov-cloud-mode"}>
         {report}
         {sub === "govcloud" && <GovCloudSources />}
       </div>
 
+      {sub === "timeline" && <TimelineNarrative onGo={pick} />}
       {sub === "timeline" && <TimelineHub onGo={pick} />}
       {sub === "health" && <HealthSignals />}
     </div>

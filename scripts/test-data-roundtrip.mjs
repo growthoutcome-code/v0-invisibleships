@@ -109,7 +109,7 @@ const tl = await page.evaluate(() => ({
   notice: document.body.textContent.includes("About this data"),
   legislation: document.getElementById("t_tiles")?.textContent.includes("Legislation"),
   noLaw: !document.getElementById("t_tiles")?.textContent.includes("Law"),
-  disclaimerLink: !!document.querySelector('a[href="/disclaimer"]'),
+  disclaimerLink: [...document.querySelectorAll("button")].some((b) => /full disclaimer/i.test(b.textContent)),
 }));
 console.log("timeline copy:", JSON.stringify(tl));
 for (const k of Object.keys(tl)) if (!tl[k]) fail("timeline." + k);
@@ -119,10 +119,41 @@ await page.waitForTimeout(1000);
 const hs = await page.evaluate(() => ({
   crisisKept: document.body.textContent.includes("988"),
   longNoteGone: !document.body.textContent.includes("Public health statistics compiled with AI assistance"),
-  link: !!document.querySelector('a[href="/disclaimer"]'),
+  link: [...document.querySelectorAll("button")].some((b) => /full disclaimer/i.test(b.textContent)),
 }));
 console.log("health disclaimer:", JSON.stringify(hs));
 for (const k of Object.keys(hs)) if (!hs[k]) fail("health." + k);
+
+// Summary sits between the chart and the hub; disclaimer opens as a modal
+await page.getByRole("tab", { name: /^Timeline$/i }).click();
+await page.waitForTimeout(900);
+const order = await page.evaluate(() => {
+  const y = (t) => { const el = [...document.querySelectorAll("h2,h3")].find((n) => n.textContent.includes(t)); return el ? el.getBoundingClientRect().top + window.scrollY : -1; };
+  const chart = document.querySelector("#tlsvg");
+  return { chart: chart ? chart.getBoundingClientRect().top + window.scrollY : -1, summary: y("Three things this timeline shows"), hub: y("Where to go next") };
+});
+console.log("order:", JSON.stringify(order));
+if (!(order.chart < order.summary && order.summary < order.hub)) fail("timeline order chart→summary→hub");
+
+const before = page.url();
+await page.getByRole("button", { name: /Read the full disclaimer/i }).click();
+await page.waitForTimeout(700);
+const modal = await page.evaluate(() => {
+  const d = [...document.querySelectorAll('[role="dialog"]')]
+    .find((n) => n.textContent.includes("Terms of Use"));
+  return {
+    open: !!d,
+    hasResearch: !!d?.textContent.includes("How the research data was gathered"),
+    hasCritical: !!d?.textContent.includes("Critical Disclaimer"),
+    hasGrades: !!d?.textContent.includes("What the evidence grades mean"),
+  };
+});
+console.log("disclaimer modal:", JSON.stringify(modal), "url unchanged:", page.url() === before);
+if (!modal.open) fail("disclaimer modal did not open");
+if (!modal.hasResearch || !modal.hasCritical || !modal.hasGrades) fail("modal missing sections");
+if (page.url() !== before) fail("navigated away instead of opening modal");
+await page.keyboard.press("Escape");
+await page.waitForTimeout(400);
 
 await browser.close();
 console.log(process.exitCode ? "RESULT: FAIL" : "RESULT: PASS");

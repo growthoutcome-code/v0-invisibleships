@@ -27,7 +27,7 @@ export function TimelineNarrative({ onGo }: { onGo: (tab: "govcloud" | "health")
   const linkCls = "text-accent underline underline-offset-4";
 
   return (
-    <section className="mb-14 max-w-[80ch]">
+    <section className="mt-14 mb-4 max-w-[80ch]">
       <h2 className="font-display font-semibold text-foreground text-[21px] mb-5">
         Three things this timeline shows
       </h2>

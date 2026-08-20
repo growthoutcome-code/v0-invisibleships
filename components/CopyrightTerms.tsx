@@ -9,11 +9,12 @@
 //            worse than a brief one.
 //   "full" — the /disclaimer page. Everything, including how the research data
 //            was gathered, which is what the rest of the site links to.
-export default function CopyrightTerms({ variant = "full" }: { variant?: "gate" | "full" }) {
-  const full = variant === "full";
+export default function CopyrightTerms({ variant = "full" }: { variant?: "gate" | "full" | "modal" }) {
+  const full = variant !== "gate";
+  const showToc = variant === "full";
   return (
     <div className="space-y-5 body-copy text-foreground/90">
-      {full && (
+      {showToc && (
         <nav aria-label="On this page" className="text-[16px] text-muted">
           <ul className="list-none p-0 m-0 flex flex-wrap gap-x-5 gap-y-1">
             <li><a href="#critical" className="underline underline-offset-4 hover:text-foreground">Critical Disclaimer</a></li>
