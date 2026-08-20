@@ -140,6 +140,10 @@ const hs = await page.evaluate(() => ({
   })(),
   onlyOneSuicideChart: [...document.querySelectorAll("figcaption")]
     .filter((n) => /suicide rate/i.test(n.textContent)).length === 1,
+  chartSummary: document.body.textContent.includes("What the chart shows"),
+  causesLink: [...document.querySelectorAll("a")].some((a) => /Causes, as attributed/.test(a.textContent)),
+  reproducible: document.body.textContent.includes("None of this is privileged information"),
+  provenanceModal: [...document.querySelectorAll("button")].some((b) => /How this research was gathered/.test(b.textContent)),
   crisisKept: document.body.textContent.includes("988"),
   longNoteGone: !document.body.textContent.includes("Public health statistics compiled with AI assistance"),
   link: [...document.querySelectorAll("button")].some((b) => /full disclaimer/i.test(b.textContent)),

@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import ListPager from "@/components/ListPager";
 import { DataNoteLine } from "@/components/DataIntro";
+import DisclaimerLink from "@/components/DisclaimerLink";
 import { Skeleton, SkeletonRows, SkeletonChart } from "@/components/Skeleton";
 import { Input } from "@/components/ui/input";
 import { track } from "@/lib/analytics";
@@ -443,12 +444,34 @@ export default function HealthSignals() {
         {intl === null ? <SkeletonChart /> : <MultiLineChart chart={intl} />}
         {intl && (
           <>
-            <p className="body-copy text-foreground/85 max-w-[80ch] mb-3">
-              Twelve lines, one way of counting. The world rate fell 27% over these two decades and
-              most countries fell with it — Russia by 60%, China by 42%, Japan by 28%. The United
-              States went the other way, rising 40% in a steady climb with no reversal. South Korea
-              rose further still, but peaked around 2011 and has been falling since; the UK and
-              Australia sit roughly flat.
+            <h3 className="font-display font-semibold text-foreground text-[17px] mb-2 mt-2">
+              What the chart shows
+            </h3>
+            <p className="body-copy text-foreground/90 max-w-[80ch] mb-3">
+              Twelve lines, one way of counting. Over these two decades the world&rsquo;s suicide
+              rate fell 27%, and most countries fell with it — Russia by 60%, China by 42%, Japan by
+              28%, India by 21%. The United States went the other way: up 40%, in a steady climb
+              with no reversal. South Korea rose further still but peaked around 2011 and has fallen
+              since; the UK and Australia sit roughly flat.
+            </p>
+            <p className="body-copy text-foreground/90 max-w-[80ch] mb-3">
+              What makes the US unusual here is less the direction than the shape — a rise that kept
+              going while the global trend ran the other way. What the chart does <em>not</em> show
+              is why. Explanations put forward by agencies and researchers — economic distress, the
+              drug supply, firearm access, social isolation, gaps in treatment — are recorded
+              separately, each with the name of whoever made it, because this site reports
+              attributed causes rather than asserting its own.{" "}
+              <a href="#causes" onClick={(e) => { e.preventDefault(); claimsP.scrollTo(); }}
+                className="text-accent underline underline-offset-4">
+                Causes, as attributed
+              </a>
+            </p>
+            <p className="text-muted text-[15px] max-w-[80ch] mb-3">
+              <strong className="text-foreground/80">None of this is privileged information.</strong>{" "}
+              The figures are WHO estimates published through the World Bank&rsquo;s open API; they
+              were gathered with AI assistance and checked against the source, and anyone with the
+              same public tools can rebuild this chart and check it.{" "}
+              <DisclaimerLink from="health_chart">How this research was gathered</DisclaimerLink>
             </p>
             <p className="text-muted text-[14px] max-w-[80ch]">
               {intl.note}{" "}
@@ -559,7 +582,7 @@ export default function HealthSignals() {
       {/* Claims register */}
       {claims === null && <SectionSkeleton title="Causes, as attributed" />}
       {!!claims?.length && (
-        <section ref={claimsP.ref} className="mb-16">
+        <section ref={claimsP.ref} id="causes" className="mb-16 scroll-mt-28">
           <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">Causes, as attributed</h2>
           <p className="text-muted text-[15px] mb-6 max-w-[80ch]">
             Who attributes what, in which document. Counter-attributions listed on the same terms.
