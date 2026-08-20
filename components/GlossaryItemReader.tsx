@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import ShareMenu from "@/components/ShareMenu";
 import { cleanTerm, splitDef } from "@/lib/glossary-format";
 import GlossaryBody from "@/components/GlossaryBody";
+import GlossaryIllustration from "@/components/GlossaryIllustration";
 import { track } from "@/lib/analytics";
 
 type Nav = { slug: string; term: string };
@@ -34,6 +35,7 @@ export default function GlossaryItemReader({ term, prev, next }: Props) {
           <p className="text-xs uppercase tracking-[0.14em] text-muted mb-2">Glossary</p>
           <h1 className="font-display text-[21px] font-semibold text-foreground mb-1 leading-tight term-title">{name}</h1>
           {pron && <div className="text-sm text-muted italic mb-5">{pron}</div>}
+          <GlossaryIllustration slug={term.slug} />
           <GlossaryBody text={body} />
           <div className="flex gap-3 mt-12 pt-6">
             {prev ? <Link href={`/glossary/${prev.slug}`} className="text-accent text-sm inline-flex items-center gap-1"><ChevronLeft size={15} /> Previous</Link> : <span />}

@@ -18,6 +18,7 @@ import ShareMenu from "@/components/ShareMenu";
 import { Transcript } from "@/components/Transcript";
 import { cleanTerm, cleanDef, splitDef } from "@/lib/glossary-format";
 import GlossaryBody from "@/components/GlossaryBody";
+import GlossaryIllustration from "@/components/GlossaryIllustration";
 import { DOCUMENTS, AUTHOR, EXTRA_GLOSSARY } from "@/lib/site-content";
 import PageActions, { SortMenu, type SortDir } from "@/components/PageActions";
 import DataView from "@/components/DataView";
@@ -503,6 +504,7 @@ function GlossaryTermReader({ term, onBack, onPrev, onNext, onOpenTerm }: any) {
       <p className="text-xs uppercase tracking-[0.14em] text-muted mb-2">Glossary</p>
       <h1 className="font-display text-[21px] font-semibold text-foreground mb-1 leading-tight term-title">{cleanTerm(term.term)}</h1>
       {pron && <div className="text-sm text-muted italic mb-5">{pron}</div>}
+      <GlossaryIllustration slug={term.slug} />
       <GlossaryBody text={body} onInternalNav={onOpenTerm} />
       <div className="flex gap-3 mt-12 pt-6">
         {onPrev ? <button onClick={onPrev} className="text-accent text-sm inline-flex items-center gap-1"><ChevronLeft size={15} /> Previous</button> : <span />}
