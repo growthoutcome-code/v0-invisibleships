@@ -255,4 +255,24 @@ export const CONCEPTS: Concept[] = [
     referencesNote:
       "The chart carries the per-country method, caveats and source behind each line.",
   },
+  {
+    id: "low-number-may-mean-low-counting",
+    origin: "ai",
+    basis: "documented",
+    title: "The numbers under the numbers",
+    body:
+      "A country reporting few suicides may have few suicides, or may not be counting them. The West Bank & Gaza record 0.65 deaths per 100,000 — which would be the lowest rate on earth by a wide margin, and much more plausibly measures a fragmented registration system in a region where the death is heavily stigmatised. Russia's falling rate runs alongside a rising share of deaths filed as \u201Cundetermined intent\u201D. India's official figures are police reports; verbal-autopsy studies find substantially more. In at least 24 countries suicide or its attempt is a criminal matter, which suppresses both help-seeking and recording. WHO's own position is that most member states lack vital registration good enough for this purpose, and that roughly one suicide in six goes missing worldwide — one in three in lower-income countries. The register that documents this is not a footnote to the chart. It is the finding: a low number is sometimes a fact about a country, and sometimes a fact about its filing.",
+    evidence: [
+      "15 rows in the data-quality register, each naming a mechanism and a source",
+      "Russia: rising 'undetermined intent' share masks suicides",
+      "India: police-reported NCRB figures against verbal-autopsy and GBD estimates",
+      "UK deliberately INCLUDES undetermined-intent deaths — the opposite convention",
+      "≥24 countries criminalise suicide or attempts; ~1 in 6 missing globally",
+    ],
+    questions: [
+      "The register cannot say how much of any single country's trend is real and how much is recording. It documents that both are present.",
+    ],
+    references: [{ label: "How much the numbers can be trusted", href: "/data" }],
+    referencesNote: "The data-quality register lists every mechanism with its source.",
+  },
 ];
