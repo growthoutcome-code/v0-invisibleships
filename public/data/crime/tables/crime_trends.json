@@ -1,15 +1,15 @@
 [
   {
-    "topic": "homicide_2020_spike",
-    "statement": "US murder rose 29.4% in 2020 \u2014 the largest single-year increase the FBI has recorded. CDC vital statistics show the same event independently: the age-adjusted homicide death rate went from 6.0 to 7.8 per 100,000.",
-    "tier": "A",
-    "source_id": "cs013"
-  },
-  {
     "topic": "homicide_reversal",
     "statement": "The spike has fully reversed on the police measure. The FBI's final 2025 data records murder down 18.1% and violent crime down 9.3% year-over-year \u2014 the largest year-to-year violent-crime decline since FBI estimation began in 1936 \u2014 at a murder rate of 4.1 per 100,000, tied with 1955 and 1956 for the lowest ever recorded and below the 2019 pre-pandemic rate of 5.0.",
     "tier": "A",
     "source_id": "cs033"
+  },
+  {
+    "topic": "homicide_2020_spike",
+    "statement": "US murder rose 29.4% in 2020 \u2014 the largest single-year increase the FBI has recorded. CDC vital statistics show the same event independently: the age-adjusted homicide death rate went from 6.0 to 7.8 per 100,000.",
+    "tier": "A",
+    "source_id": "cs013"
   },
   {
     "topic": "two_measures_diverge",
@@ -18,15 +18,33 @@
     "source_id": "cs_two_measures"
   },
   {
+    "topic": "clearance_decline",
+    "statement": "The share of homicides cleared by arrest or exceptional means fell from 93% in 1962 to 64% by 1994, reached 61.4% in 2019, dropped sharply to 54% in 2020 and to a reported low of 52.3% in 2022, recovering to 61.4% in 2024. Roughly four in ten US homicides are not cleared.",
+    "tier": "B",
+    "source_id": "cs012"
+  },
+  {
     "topic": "ytd_2026",
     "statement": "2026 so far continues the fall. Across 36 large cities, homicide in the first half of 2026 was 18% below the first half of 2025 \u2014 215 fewer deaths \u2014 with carjacking down 47%, motor vehicle theft down 20% and robbery down 17%. The Real-Time Crime Index, a separate sample of 566 agencies covering about 119 million people, independently records murder down 18.7% through April. Nine of thirteen offences fell. Two rose: domestic violence by 8% and sexual assault by 3%.",
     "tier": "A",
     "source_id": "cs_ccj_2026"
   },
   {
-    "topic": "clearance_decline",
-    "statement": "The share of homicides cleared by arrest or exceptional means fell from 93% in 1962 to 64% by 1994, reached 61.4% in 2019, dropped sharply to 54% in 2020 and to a reported low of 52.3% in 2022, recovering to 61.4% in 2024. Roughly four in ten US homicides are not cleared.",
-    "tier": "B",
-    "source_id": "cs012"
+    "topic": "burglary_us",
+    "statement": "Break-ins have fallen further than anything else this section measures. The police-recorded US burglary rate fell 53% between 2000 and 2019 on the Summary Reporting System basis, and a further 26% between 2020 and 2024 on the NIBRS-based estimates that replaced it. Households asked directly report the same direction: 34.1 burglaries per 1,000 households in 1999 against 12.0 per 1,000 in 2024, across a category BJS redefined in 2017.",
+    "tier": "A",
+    "source_id": "bg_fbi_cde24"
+  },
+  {
+    "topic": "burglary_international",
+    "statement": "The fall is not an American story. Residential burglary is down 79% in the Netherlands since 2009, 54% in Germany since its 2015 peak, and 39% in Spain since 2013; England and Wales record 327,000 domestic burglaries in the year ending December 2025 against 2.4 million in 1993; Canadian breaking and entering is 77% below 1998; Australian household break-ins fell from 2.7% of households in 2014-15 to 1.8% in 2024-25. Italy is the exception, 44% above its 2020 trough.",
+    "tier": "A",
+    "source_id": "bg_eurostat_iccs"
+  },
+  {
+    "topic": "home_invasion",
+    "statement": "'Home invasion' is not an offence anyone counts nationally. It is recorded as burglary \u2014 sorted by location and by whether force was used, not by whether the household was home. Statistics Canada states outright that it cannot be measured from its national survey. So the honest answer to whether home invasions have risen is that no national series exists to say.",
+    "tier": "A",
+    "source_id": "bg_statcan_be02"
   }
 ]

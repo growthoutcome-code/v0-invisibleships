@@ -63,15 +63,6 @@
     "source_id": "cs_ncvs_cv24"
   },
   {
-    "dq_id": "cq09",
-    "geography": "US",
-    "topic": "2026 figures are partial-year and city-sample, not national",
-    "issue": "There is no national 2026 crime statistic yet \u2014 the FBI publishes annually and released final 2025 data on 14 August 2026. What exists for 2026 is a 36-city half-year comparison and a 566-agency index covering about 119 million people, roughly a third of the country. Both are samples of larger urban agencies, which are not representative of national crime.",
-    "effect": "2026 figures are shown as a stated percentage change over a stated period and sample, never as a point on the annual chart. A partial year plotted on an annual series reads as a completed year and would be wrong.",
-    "tier": "A",
-    "source_id": "cs_ccj_2026"
-  },
-  {
     "dq_id": "cq08",
     "geography": "US",
     "topic": "Two recent FBI counts could not be verified",
@@ -79,6 +70,15 @@
     "effect": "The count series has two gaps. The rate series, which is what the charts use, is complete.",
     "tier": "A",
     "source_id": "cs031"
+  },
+  {
+    "dq_id": "cq09",
+    "geography": "US",
+    "topic": "2026 figures are partial-year and city-sample, not national",
+    "issue": "There is no national 2026 crime statistic yet \u2014 the FBI publishes annually and released final 2025 data on 14 August 2026. What exists for 2026 is a 36-city half-year comparison and a 566-agency index covering about 119 million people, roughly a third of the country. Both are samples of larger urban agencies, which are not representative of national crime.",
+    "effect": "2026 figures are shown as a stated percentage change over a stated period and sample, never as a point on the annual chart. A partial year plotted on an annual series reads as a completed year and would be wrong.",
+    "tier": "A",
+    "source_id": "cs_ccj_2026"
   },
   {
     "dq_id": "cq10",
@@ -97,5 +97,41 @@
     "effect": "A reader can see 'sweeping arrests' in agency announcements while the national criminal-arrest chart declines, with no contradiction: the two numbers count different legal events in different systems, on different clocks.",
     "tier": "B",
     "source_id": "ar_jr_ice"
+  },
+  {
+    "dq_id": "cq12",
+    "geography": "US",
+    "topic": "The US burglary series changes basis in 2020",
+    "issue": "The FBI's Summary Reporting System produced a national burglary rate through 2019 and was then retired. Figures from 2020 onward are NIBRS-based national ESTIMATES, built from agencies covering 75.5% of the country and 87.2% of the population in 2024. They are not a continuation of the SRS run.",
+    "effect": "The 2000-2024 fall is real in both halves \u2014 53% under the SRS and 26% under the estimates \u2014 but a single percentage across the break would be quoting two different measurements as one. The chart draws the break rather than joining it.",
+    "tier": "A",
+    "source_id": "bg_fbi_cde24"
+  },
+  {
+    "dq_id": "cq13",
+    "geography": "US",
+    "topic": "Fewer burglaries are reported to police than a decade ago",
+    "issue": "The share of burglary victimisations that victims say they reported to police fell from 58.8% in 2010 to 40.7% in 2024 \u2014 18.1 percentage points. The NCVS asks households directly, so it sees incidents police never record.",
+    "effect": "Any police-recorded burglary decline is measuring two things at once: fewer break-ins, and fewer break-ins being reported. The survey and police series both fall, which is why the direction survives \u2014 but the SIZE of the police-recorded fall is overstated by an unknown margin.",
+    "tier": "A",
+    "source_id": "bg_bjs_cv24"
+  },
+  {
+    "dq_id": "cq14",
+    "geography": "International",
+    "topic": "UNODC has withdrawn burglary as a retrievable indicator",
+    "issue": "UNODC's data portal no longer offers burglary under any property-crime theme: the dashboard URLs redirect to a portal with no such theme, and the legacy CTS_Burglary spreadsheet returns 404. Checked 2026-08-21. The only surviving route to the same collection is Eurostat's crim_off_cat table, which publishes the joint Eurostat\u2013UNODC data \u2014 and covers Europe only.",
+    "effect": "There is no longer a global burglary series to compare against. This is the second live citation on this site to disappear from its publisher's own portal, and it is the argument for archiving every source at the moment it is read.",
+    "tier": "A",
+    "source_id": "bg_unodc_gone"
+  },
+  {
+    "dq_id": "cq15",
+    "geography": "International",
+    "topic": "A shared ICCS code is not a shared definition",
+    "issue": "Eurostat's metadata for the residential-burglary code records that Germany's national correspondence table to ICCS section 05 is INCOMPLETE, and that for France 'there is no correspondence between French and this ICCS classification' at all. Sweden's national category includes cellar and attic storage; Germany's does not.",
+    "effect": "Countries filed under one code are not necessarily counting one thing. France is excluded from the international chart on the publisher's own statement. Sweden's 3.4-to-1 rate against Germany should be read as evidence about the code rather than about either country.",
+    "tier": "A",
+    "source_id": "bg_eurostat_iccs"
   }
 ]

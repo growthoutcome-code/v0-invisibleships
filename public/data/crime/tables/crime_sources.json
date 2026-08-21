@@ -1240,5 +1240,203 @@
     "evidence_tier": "B",
     "accessed": "2026-08-21",
     "archived_url": null
+  },
+  {
+    "source_id": "bg_eurostat_iccs",
+    "publisher": "Eurostat (joint Eurostat\u2013UNODC data collection)",
+    "title": "crim_off_cat \u2014 police-recorded offences, ICCS05012 'Burglary of private residential premises', per 100 000 inhabitants",
+    "url": "https://ec.europa.eu/eurostat/databrowser/view/crim_off_cat/default/table?lang=en",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "bg_eurostat_news",
+    "publisher": "Eurostat",
+    "title": "Burglary in the EU (Eurostat news release, 2026-08-03)",
+    "url": "https://ec.europa.eu/eurostat/web/products-eurostat-news/w/ddn-20260803-1",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "bg_unodc_gone",
+    "publisher": "UNODC",
+    "title": "UNODC data portal \u2014 burglary is no longer offered as a retrievable indicator (checked 2026-08-21)",
+    "url": "https://dataunodc.un.org/",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "bg_fbi_srs2019",
+    "publisher": "FBI Uniform Crime Reporting Program",
+    "title": "Crime in the United States 2019, Table 1 (Summary Reporting System \u2014 final year of the SRS basis)",
+    "url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "bg_fbi_cde24",
+    "publisher": "FBI Crime Data Explorer",
+    "title": "UCR Summary of Reported Crimes in the Nation, 2024 (NIBRS-based national estimates)",
+    "url": "https://cde.ucr.cjis.gov/LATEST/resources/reports/UCR%20Summary%20of%20Reported%20Crimes%20in%20the%20Nation%202024.pdf",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "bg_fbi_quick24",
+    "publisher": "FBI Crime Data Explorer",
+    "title": "Reported Crimes in the Nation \u2014 Quick Stats (clearance rates, 2024)",
+    "url": "https://cde.ucr.cjis.gov/LATEST/resources/reports/Reported%20Crimes%20in%20the%20Nation%20Quick%20Stats.pdf",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "bg_bjs_cv24",
+    "publisher": "Bureau of Justice Statistics",
+    "title": "Criminal Victimization, 2024 (NCVS) \u2014 Tables 2 and 4",
+    "url": "https://bjs.ojp.gov/document/cv24.pdf",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "bg_bjs_cv10",
+    "publisher": "Bureau of Justice Statistics",
+    "title": "Criminal Victimization, 2010 (NCVS) \u2014 Tables 7 and 10",
+    "url": "https://bjs.ojp.gov/content/pub/pdf/cv10.pdf",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "bg_bjs_cv99",
+    "publisher": "Bureau of Justice Statistics",
+    "title": "Criminal Victimization 1999 (NCVS) \u2014 pre-2017 'household burglary' basis",
+    "url": "https://bjs.ojp.gov/content/pub/pdf/cv99.pdf",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "bg_statcan_be02",
+    "publisher": "Statistics Canada",
+    "title": "Juristat: Breaking and Entering in Canada, 2002 \u2014 'home invasion' is not captured by the UCR Survey",
+    "url": "https://www150.statcan.gc.ca/n1/pub/85-002-x/85-002-x2004005-eng.pdf",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "bg_statcan_2025",
+    "publisher": "Statistics Canada",
+    "title": "Police-reported crime statistics, 2025 (The Daily) \u2014 breaking and entering",
+    "url": "https://www150.statcan.gc.ca/n1/daily-quotidien/260722/dq260722a-eng.htm",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "bg_csa_vic",
+    "publisher": "Crime Statistics Agency Victoria",
+    "title": "Spotlight: burglary / break and enter offences recorded in Victoria",
+    "url": "https://www.crimestatistics.vic.gov.au/spotlight-burglarybreak-and-enter-offences-recorded-in-victoria",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "bg_abs_cvs",
+    "publisher": "Australian Bureau of Statistics",
+    "title": "Crime Victimisation, Australia, 2024-25 \u2014 household break-in prevalence",
+    "url": "https://www.abs.gov.au/statistics/people/crime-and-justice/crime-victimisation/latest-release",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "bg_abs_rcv",
+    "publisher": "Australian Bureau of Statistics",
+    "title": "Recorded Crime \u2014 Victims, 2024 (Unlawful Entry With Intent; no national rate published)",
+    "url": "https://www.abs.gov.au/statistics/people/crime-and-justice/recorded-crime-victims/latest-release",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "bg_ons_burglary",
+    "publisher": "Office for National Statistics",
+    "title": "Overview of burglary and other household theft, England and Wales (CSEW)",
+    "url": "https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/articles/overviewofburglaryandotherhouseholdtheft/englandandwales",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "bg_ons_cew25",
+    "publisher": "Office for National Statistics",
+    "title": "Crime in England and Wales, year ending December 2025",
+    "url": "https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/bulletins/crimeinenglandandwales/yearendingdecember2025",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "bg_npa_jp",
+    "publisher": "National Police Agency (Japan)",
+    "title": "\u4ee4\u548c6\u5e74\u306e\u72af\u7f6a\u60c5\u52e2 (Crime Situation in 2024) \u2014 \u4fb5\u5165\u72af\u7f6a intrusion crime",
+    "url": "https://www.npa.go.jp/publications/statistics/kikakubunseki/r6_jyosei.pdf",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "bg_anzsoc",
+    "publisher": "Australian Bureau of Statistics",
+    "title": "ANZSOC 2023, group 061 \u2014 'home invasion' appears only as an INCLUSION TERM under 0611 Aggravated burglary of a dwelling and 0612 Non-aggravated burglary of a dwelling",
+    "url": "https://www.abs.gov.au/statistics/classifications/australian-and-new-zealand-standard-offence-classification-anzsoc/2023/06/061",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "bg_micr_manual",
+    "publisher": "Michigan State Police",
+    "title": "Michigan Incident Crime Reporting (MICR) Manual \u2014 burglary codes 22001/22002/22003; no home-invasion code",
+    "url": "https://www.michigan.gov/msp/-/media/Project/Websites/msp/micr-assets/MICR-Manual_1130.pdf",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "bg_micr_2022",
+    "publisher": "Michigan State Police",
+    "title": "Crime in Michigan 2022 (MICR annual report) \u2014 burglary reported under 22001/22002/22003",
+    "url": "https://www.michigan.gov/msp/-/media/Project/Websites/msp/micr-assets/2022/MICR-Annual-Report-2022.pdf",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "bg_ons_athome",
+    "publisher": "Office for National Statistics",
+    "title": "Overview of burglary and other household theft (20 July 2017) \u2014 someone was at home in over half of domestic burglaries where the offender gained entry",
+    "url": "https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/articles/overviewofburglaryandotherhouseholdtheft/englandandwales",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "bg_csa_vic_stale",
+    "publisher": "Crime Statistics Agency Victoria",
+    "title": "Recorded offences, year ending March 2026 \u2014 burglary/break and enter published; no home-invasion or aggravated-burglary count in the release text",
+    "url": "https://www.crimestatistics.vic.gov.au/media-centre/media-releases/media-release-adult-offending-increases-as-youth-offending-decreases",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
   }
 ]

@@ -202,11 +202,20 @@ verified against a fetched source. The rate series is complete.
         det_path = CHARTS / "detention_capacity.json"
         if det_path.exists():
             dst.writestr(PREFIX + "charts/detention_capacity.json", det_path.read_text())
+        bg_path = CHARTS / "burglary_international.json"
+        if bg_path.exists():
+            dst.writestr(PREFIX + "charts/burglary_international.json", bg_path.read_text())
         dst.writestr(PREFIX + "charts/homicide_us.csv", hom_csv)
 
     shutil.move(str(tmp), str(ZIP))
     print(f"carried {carried} non-crime entries")
-    print(f"crime/: {len(TABLE_FILES)} tables + manifest + README + 2 chart files")
+    n_charts = 1 + sum(  # homicide_us.csv, plus each optional chart doc present
+        1 for f in ("homicide_two_measures", "harm_lanes_indexed",
+                    "homicide_international", "arrests_over_time",
+                    "detention_capacity", "burglary_international")
+        if (CHARTS / f"{f}.json").exists()
+    )
+    print(f"crime/: {len(TABLE_FILES)} tables + manifest + README + {n_charts} chart files")
     print(f"sources: {tier_line}")
     print(f"homicide csv: {hom_years} years")
     print(f"zip: {ZIP.stat().st_size:,} bytes")

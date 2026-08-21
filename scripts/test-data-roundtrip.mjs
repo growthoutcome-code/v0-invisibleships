@@ -442,7 +442,7 @@ const crime = await page.evaluate(() => {
     labels: svg ? [...svg.querySelectorAll("text")].map((t) => t.textContent).filter((t) => /FBI|CDC/.test(t)) : [],
     verdict: heads.some((h) => /Has crime increased during the period/i.test(h)),
     notCounted: heads.some((h) => /What nobody counts/i.test(h)),
-    lanes: [...main.querySelectorAll("figure figcaption")].some((f) => /Five kinds of harm/i.test(f.textContent)),
+    lanes: [...main.querySelectorAll("figure figcaption")].some((f) => /Six kinds of harm/i.test(f.textContent)),
     sweeps: heads.some((h) => /Enforcement in sweeps/i.test(h)),
     clearance: heads.some((h) => /homicides are cleared/i.test(h)),
     dq: heads.some((h) => /numbers can be trusted/i.test(h)),
@@ -470,7 +470,7 @@ if (!crime.notCounted) fail("'What nobody counts' section missing");
 // "What nobody counts" register.
 const layout = await page.evaluate(() => {
   const col = document.getElementById("crime-root");
-  const fig = [...col.querySelectorAll("figure")].find((f) => /Five kinds of harm/i.test(f.querySelector("figcaption")?.textContent || ""));
+  const fig = [...col.querySelectorAll("figure")].find((f) => /Six kinds of harm/i.test(f.querySelector("figcaption")?.textContent || ""));
   // themes render as h3 under each chart (h2 is reserved for sections, so the
   // sidebar does not list a chart's own explainer as a destination)
   const themesH = fig?.closest("section")?.querySelector("h3");
@@ -515,7 +515,7 @@ if (!crime.crossLink) fail("crime -> timeline cross-link missing");
 const r2 = await page.evaluate(() => {
   const main = document.querySelector("main");
   const t = main.innerText;
-  const laneFig = [...main.querySelectorAll("figure")].find((f) => /Five kinds of harm/i.test(f.querySelector("figcaption")?.textContent || ""));
+  const laneFig = [...main.querySelectorAll("figure")].find((f) => /Six kinds of harm/i.test(f.querySelector("figcaption")?.textContent || ""));
   // the legend is the FIRST list, above the svg; the per-lane summary list
   // below the plot also contains buttons and must not be counted here
   const laneLegend = laneFig ? [...(laneFig.querySelector("ul")?.querySelectorAll("button") || [])] : [];
@@ -536,7 +536,7 @@ const r2 = await page.evaluate(() => {
   };
 });
 console.log("round2:", JSON.stringify(r2));
-if (r2.laneLegendEntries !== 5) fail(`lane legend entries: ${r2.laneLegendEntries}, expected 5`);
+if (r2.laneLegendEntries !== 6) fail(`lane legend entries: ${r2.laneLegendEntries}, expected 6`);
 if (!r2.laneLegendPressable) fail("lane legend entries are not interactive");
 if (!r2.noCornerLabels) fail("lane chart still paints corner end-labels");
 if (!r2.arrestsChart) fail("arrests chart missing");
@@ -546,6 +546,84 @@ if (!r2.accomplishments) fail("accomplishments section missing");
 if (!r2.accRescue) fail("World Cup rescue outcome missing from accomplishments");
 if (!r2.accKinds) fail("outcome/activity/commitment kinds not marked");
 if (!r2.accDiscipline) fail("accomplishments discipline line missing");
+
+// Round 3 — break-ins and the offence nobody records (Sean, 2026-08-21:
+// "have home invasions increased in the US and abroad?" / "are they documented
+// or labelled as a burglary?").
+//
+// The guards worth having are the ones protecting the MEASUREMENT discipline,
+// not the prose: a lane whose basis changed must be drawn as two runs, and its
+// summary must state each half rather than quote one percentage across the break.
+const burg = await page.evaluate(() => {
+  const main = document.querySelector("main");
+  const t = main.innerText.replace(/\n/g, " ");
+  const laneFig = [...main.querySelectorAll("figure")]
+    .find((f) => /Six kinds of harm/i.test(f.querySelector("figcaption")?.textContent || ""));
+  const laneSvg = laneFig?.querySelector("svg[viewBox]");
+  // a lane group's FIRST path is its main line; a declared basis change splits
+  // it into two subpaths, so the d attribute carries two move commands
+  const mainPaths = laneSvg
+    ? [...laneSvg.querySelectorAll("g[style*=cursor] > path:first-child")]
+        .map((x) => (x.getAttribute("d") || "").match(/M/g)?.length || 0)
+    : [];
+  const burgFig = [...main.querySelectorAll("figure")]
+    .find((f) => /one code, five countries/i.test(f.querySelector("figcaption")?.textContent || ""));
+  const burgLegend = burgFig ? [...(burgFig.querySelector("ul")?.querySelectorAll("button") || [])]
+    .map((b) => b.textContent.trim()) : [];
+  const burgSvg = burgFig?.querySelector("svg[viewBox]");
+  return {
+    splitLanes: mainPaths.filter((n) => n > 1).length,
+    // the break is marked on the plot, not merely implied by the gap
+    breakMarker: laneSvg ? [...laneSvg.querySelectorAll("line[stroke-dasharray='2 6']")].length : 0,
+    // the summary row states both halves instead of one number across the break
+    twoBasisSummary: /2000.2019: .53% \(SRS\)/.test(t) && /2020.2024: .26% \(NIBRS estimates\)/.test(t),
+    intlChart: !!burgSvg,
+    intlCountries: burgLegend.length,
+    // France is excluded on the publisher's own statement — it must not be drawn
+    franceAbsent: !burgLegend.some((n) => /France/i.test(n)),
+    franceExplained: /no correspondence between the French classification/i.test(t),
+    // the direct answer to the question, with the Canadian statement in it
+    answerHeading: [...main.querySelectorAll("h3")].some((h) => /recorded as a home invasion/i.test(h.textContent)),
+    statcan: /not captured directly by its national survey/i.test(t),
+    victoriaSplit: /105 offences filed under aggravated burglary and 87 under serious assault/i.test(t),
+    // the 2026-08-21 re-check: the classification's own words, the Michigan
+    // law-vs-statistics case, and the one measurement of the occupied case
+    anzsoc: /inclusion term/i.test(t),
+    michigan: /Michigan/.test(t) && /statutory name/i.test(t),
+    onsAtHome: /over half of domestic burglaries where the offender got inside/i.test(t),
+    stale: /most recent published figure anywhere/i.test(t),
+    // a paragraph drawing on five publishers must link all five, not one
+    answerSources: (() => {
+      const h = [...main.querySelectorAll("h3")].find((x) => /recorded as a home invasion/i.test(x.textContent));
+      const p = h?.parentElement?.querySelector("p:last-of-type");
+      return p ? p.querySelectorAll("a").length : 0;
+    })(),
+    // the register entry and the archiving argument
+    nc08: /Home invasion, as an offence/i.test(t),
+    unodcGone: /withdrawn burglary as a retrievable indicator/i.test(t),
+    // the reporting-rate collapse is the caveat every burglary trend needs
+    reporting: /40\.7%/.test(t) && /58\.8%/.test(t),
+  };
+});
+console.log("burglary:", JSON.stringify(burg));
+if (burg.splitLanes !== 1) fail(`lanes drawn with a basis break: ${burg.splitLanes}, expected exactly 1 (burglary)`);
+if (!burg.breakMarker) fail("the burglary lane's basis change is not marked on the plot");
+if (!burg.twoBasisSummary) fail("burglary summary quotes one percentage across a basis change");
+if (!burg.intlChart) fail("international burglary chart missing");
+if (burg.intlCountries !== 5) fail(`international burglary legend: ${burg.intlCountries}, expected 5`);
+if (!burg.franceAbsent) fail("France is drawn on a chart its own publisher says it does not belong on");
+if (!burg.franceExplained) fail("France's exclusion is not explained");
+if (!burg.answerHeading) fail("the home-invasion answer block is missing");
+if (!burg.statcan) fail("Statistics Canada's own statement is missing from the answer");
+if (!burg.victoriaSplit) fail("the Victoria split-across-two-offence-families case is missing");
+if (!burg.anzsoc) fail("ANZSOC's 'inclusion term' wording is missing — it is the mechanism, not a flourish");
+if (!burg.michigan) fail("the Michigan law-vs-statistics case is missing");
+if (!burg.onsAtHome) fail("the ONS occupied-burglary share is missing");
+if (!burg.stale) fail("the recency re-check is not stated — a seven-year-old figure must say so");
+if (burg.answerSources < 4) fail(`answer cites ${burg.answerSources} sources, expected 5 (one per publisher)`);
+if (!burg.nc08) fail("nc08 (home invasion) missing from the register");
+if (!burg.unodcGone) fail("UNODC's withdrawal of the burglary indicator is not recorded");
+if (!burg.reporting) fail("the burglary reporting-rate collapse (58.8% -> 40.7%) is missing");
 
 // Detention chart: three measures kept apart, and the section nav.
 const det = await page.evaluate(() => {
@@ -757,7 +835,7 @@ await page.waitForTimeout(300);
 await page.locator("main figure ul button", { hasText: "Homicide" }).first().hover();
 await page.waitForTimeout(300);
 const laneDim = await page.evaluate(() => {
-  const fig = [...document.querySelectorAll("main figure")].find((f) => /Five kinds of harm/i.test(f.querySelector("figcaption")?.textContent || ""));
+  const fig = [...document.querySelectorAll("main figure")].find((f) => /Six kinds of harm/i.test(f.querySelector("figcaption")?.textContent || ""));
   const ops = [...fig.querySelectorAll("svg g[style*=cursor] > path[stroke]:not([stroke=transparent])")]
     .map((x) => +(x.getAttribute("opacity") || 1));
   return { dimmed: ops.filter((o) => o < 0.3).length, lit: ops.filter((o) => o >= 0.9).length };

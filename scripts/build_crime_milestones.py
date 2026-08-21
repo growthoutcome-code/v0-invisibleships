@@ -87,6 +87,23 @@ MILESTONES = [
      "title": "Freedom House: 1,375 physical transnational-repression incidents since 2014",
      "description": "126 new cases in 2025 by 30 governments; 54 governments implicated since 2014. The only systematic count of TR — private, physical incidents only, self-described as a fraction of the whole.",
      "certainty": "corroborated", "tier": "B", "source_id": "tr_fh_2025", "geo": "Global/US"},
+    # Burglary / home invasion (Sean, 2026-08-21). All three are measurement
+    # events: the thing that changed is what was counted, not what happened.
+    {"milestone_id": "cm15", "track": "G", "category": "measurement",
+     "occurred_on": "2017-01",
+     "title": "NCVS redesign renames and redefines household burglary",
+     "description": "'Household burglary' becomes 'burglary/trespassing'. BJS's own tables note the change; the two sides of 2017 are not one series, so the 1999-2024 fall spans a redefinition.",
+     "certainty": "documented", "tier": "A", "source_id": "bg_bjs_cv24", "geo": "US"},
+    {"milestone_id": "cm16", "track": "G", "category": "measurement",
+     "occurred_on": "2019-12",
+     "title": "The Summary Reporting System publishes its last national burglary rate",
+     "description": "340.5 per 100,000, down 53% from 2000. From 2020 the national figure is a NIBRS-based estimate on a different basis — not a continuation. The harm chart breaks the burglary lane here rather than drawing through it.",
+     "certainty": "documented", "tier": "A", "source_id": "bg_fbi_srs2019", "geo": "US"},
+    {"milestone_id": "cm17", "track": "G", "category": "measurement",
+     "occurred_on": "2026-08",
+     "title": "UNODC withdraws burglary as a retrievable indicator",
+     "description": "Checked 2026-08-21: the property-crime dashboards redirect to a portal with no such theme and the legacy CTS burglary spreadsheet 404s. The only surviving route to the same collection is Eurostat, which covers Europe only. The second live citation on this site to vanish from its own publisher's portal.",
+     "certainty": "documented", "tier": "A", "source_id": "bg_unodc_gone", "geo": "Global"},
 ]
 
 EXTRA_SOURCES = [

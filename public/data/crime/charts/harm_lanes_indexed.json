@@ -1,5 +1,5 @@
 {
-  "title": "Five kinds of harm, indexed",
+  "title": "Six kinds of harm, indexed",
   "unit": "Each lane indexed to its own first year in this window = 100",
   "themes": [
     {
@@ -19,11 +19,15 @@
       "tier": "A"
     },
     {
-      "statement": "The category this site is most concerned with \u2014 harassment \u2014 has no lane, because nobody counts it.",
+      "statement": "Break-ins have fallen further than any other lane: 53% between 2000 and 2019 on the FBI basis that ran until then, and 26% more between 2020 and 2024 on the estimates that replaced it. Part of that is fewer reports rather than fewer break-ins \u2014 40.7% of victimisations reached the police in 2024 against 58.8% in 2010.",
+      "tier": "A"
+    },
+    {
+      "statement": "Two categories this site cares about have no lane at all: harassment, because nobody counts it, and home invasion, because it is not an offence anyone records.",
       "tier": "A"
     }
   ],
-  "note": "These lanes count different things in different units, so each is indexed to its own first year = 100: the chart shows direction, never size. Dotted stretches are years that are not Tier A; hollow points mark a lane sampled with gaps. Click any lane for its raw figures, method and caveats.",
+  "note": "These lanes count different things in different units, so each is indexed to its own first year = 100: the chart shows direction, never size. Dotted stretches are years that are not Tier A; hollow points mark a lane sampled with gaps; a gap with a marked year is a lane whose BASIS changed, drawn as a break rather than joined up. Click any lane for its raw figures, method and caveats.",
   "publisher": "FBI; CDC/NCHS; BJS; US Courts",
   "tier": "A",
   "indexed": true,
@@ -624,6 +628,178 @@
         "THREE POINTS ONLY. BJS's coverage-adjusted national estimates begin in 2022; the FBI publishes no citable national 13C series before that.",
         "NIBRS has no stalking offence code \u2014 the manual folds stalking into Intimidation, so stalking is inside this number and cannot be separated from one-off threats.",
         "2024 is the 'initial' provisional version and will be revised."
+      ]
+    },
+    {
+      "break_after": 2019,
+      "summary": "2000\u20132019: \u221253% (SRS) \u00b7 2020\u20132024: \u221226% (NIBRS estimates)",
+      "name": "Burglary (break-ins)",
+      "counts": "burglary rate per 100,000 people known to police",
+      "publisher": "FBI",
+      "emphasis": false,
+      "base_year": 2000,
+      "base_value": 728.8,
+      "unit_raw": "burglaries per 100,000 inhabitants",
+      "tier": "A",
+      "basis_short": "burglary rate per 100,000 people known to police; indexed to 2000 = 100",
+      "points": [
+        {
+          "year": 2000,
+          "value": 100.0,
+          "raw": 728.8,
+          "tier": "A"
+        },
+        {
+          "year": 2001,
+          "value": 101.8,
+          "raw": 741.8,
+          "tier": "A"
+        },
+        {
+          "year": 2002,
+          "value": 102.5,
+          "raw": 747.0,
+          "tier": "A"
+        },
+        {
+          "year": 2003,
+          "value": 101.7,
+          "raw": 741.0,
+          "tier": "A"
+        },
+        {
+          "year": 2004,
+          "value": 100.2,
+          "raw": 730.3,
+          "tier": "A"
+        },
+        {
+          "year": 2005,
+          "value": 99.7,
+          "raw": 726.9,
+          "tier": "A"
+        },
+        {
+          "year": 2006,
+          "value": 100.6,
+          "raw": 733.1,
+          "tier": "A"
+        },
+        {
+          "year": 2007,
+          "value": 99.6,
+          "raw": 726.1,
+          "tier": "A"
+        },
+        {
+          "year": 2008,
+          "value": 100.6,
+          "raw": 733.0,
+          "tier": "A"
+        },
+        {
+          "year": 2009,
+          "value": 98.5,
+          "raw": 717.7,
+          "tier": "A"
+        },
+        {
+          "year": 2010,
+          "value": 96.2,
+          "raw": 701.0,
+          "tier": "A"
+        },
+        {
+          "year": 2011,
+          "value": 96.2,
+          "raw": 701.3,
+          "tier": "A"
+        },
+        {
+          "year": 2012,
+          "value": 92.2,
+          "raw": 672.2,
+          "tier": "A"
+        },
+        {
+          "year": 2013,
+          "value": 83.8,
+          "raw": 610.5,
+          "tier": "A"
+        },
+        {
+          "year": 2014,
+          "value": 73.7,
+          "raw": 537.2,
+          "tier": "A"
+        },
+        {
+          "year": 2015,
+          "value": 67.9,
+          "raw": 494.7,
+          "tier": "A"
+        },
+        {
+          "year": 2016,
+          "value": 64.3,
+          "raw": 468.9,
+          "tier": "A"
+        },
+        {
+          "year": 2017,
+          "value": 59.0,
+          "raw": 429.7,
+          "tier": "A"
+        },
+        {
+          "year": 2018,
+          "value": 51.9,
+          "raw": 378.0,
+          "tier": "A"
+        },
+        {
+          "year": 2019,
+          "value": 46.7,
+          "raw": 340.5,
+          "tier": "A"
+        },
+        {
+          "year": 2020,
+          "value": 42.4,
+          "raw": 309.2,
+          "tier": "A"
+        },
+        {
+          "year": 2021,
+          "value": 36.3,
+          "raw": 264.2,
+          "tier": "A"
+        },
+        {
+          "year": 2022,
+          "value": 37.5,
+          "raw": 273.1,
+          "tier": "A"
+        },
+        {
+          "year": 2023,
+          "value": 34.8,
+          "raw": 253.3,
+          "tier": "A"
+        },
+        {
+          "year": 2024,
+          "value": 31.4,
+          "raw": 229.2,
+          "tier": "A"
+        }
+      ],
+      "caveats": [
+        "THE BASIS CHANGES IN 2020. Years to 2019 are the FBI's Summary Reporting System, which was then retired; 2020 onward are NIBRS-based national estimates built from agencies covering 87.2% of the population in 2024. The chart breaks the line there rather than drawing through it, and the index across the break is not a single measurement.",
+        "Fewer burglaries are reported to police than a decade ago \u2014 40.7% of victimisations in 2024 against 58.8% in 2010. Some of this police-recorded fall is fewer break-ins and some is fewer reports, and the two cannot be separated.",
+        "Households asked directly report the same DIRECTION: 34.1 burglaries per 1,000 households in 1999 against 12.0 in 2024. That survey category was itself redefined in 2017, so its two halves are not one series either.",
+        "About one burglary in seven is cleared \u2014 15.2% in 2024.",
+        "None of this counts home invasions. No US series does; see the register below."
       ]
     }
   ]

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Build the Crime section's landing chart: five priority lanes on one indexed axis,
+Build the Crime section's landing chart: six priority lanes on one indexed axis,
 plus the "what nobody counts" register.
 
 Sean's priorities are harassment, character defamation, missing people and drug
@@ -45,7 +45,25 @@ LANES = [
      "murder and nonnegligent manslaughter known to police", "FBI", False),
     ("nibrs_intimidation_estimated_offenses", "Intimidation (incl. stalking)",
      "BJS national estimate of NIBRS offence 13C", "BJS", False),
+    # Two indicator ids, one lane. Sean asked whether home invasions have risen
+    # (2026-08-21); the answer runs through burglary, which is the only thing
+    # anyone counts. The FBI's Summary Reporting System ended in 2019 and the
+    # NIBRS-based estimates that replaced it are NOT a continuation, so the lane
+    # carries a declared break at 2019 and the chart draws it as one.
+    (["fbi_ucr_srs_burglary_p100k", "fbi_cde_burglary_p100k_est"], "Burglary (break-ins)",
+     "burglary rate per 100,000 people known to police", "FBI", False),
 ]
+
+# A lane whose basis changes mid-series declares the last year of the old
+# basis here. LaneChart splits the path there rather than drawing through it,
+# and the summary row below the chart states each half separately.
+LANE_BREAKS = {
+    "fbi_ucr_srs_burglary_p100k": 2019,
+}
+LANE_SUMMARY = {
+    "fbi_ucr_srs_burglary_p100k":
+        "2000–2019: −53% (SRS) · 2020–2024: −26% (NIBRS estimates)",
+}
 
 LANE_CAVEATS = {
     "ncic_missing_person_records_entered": [
@@ -77,6 +95,21 @@ LANE_CAVEATS = {
         "NIBRS has no stalking offence code — the manual folds stalking into Intimidation, "
         "so stalking is inside this number and cannot be separated from one-off threats.",
         "2024 is the 'initial' provisional version and will be revised.",
+    ],
+    "fbi_ucr_srs_burglary_p100k": [
+        "THE BASIS CHANGES IN 2020. Years to 2019 are the FBI's Summary Reporting "
+        "System, which was then retired; 2020 onward are NIBRS-based national estimates "
+        "built from agencies covering 87.2% of the population in 2024. The chart breaks "
+        "the line there rather than drawing through it, and the index across the break "
+        "is not a single measurement.",
+        "Fewer burglaries are reported to police than a decade ago — 40.7% of "
+        "victimisations in 2024 against 58.8% in 2010. Some of this police-recorded fall "
+        "is fewer break-ins and some is fewer reports, and the two cannot be separated.",
+        "Households asked directly report the same DIRECTION: 34.1 burglaries per 1,000 "
+        "households in 1999 against 12.0 in 2024. That survey category was itself "
+        "redefined in 2017, so its two halves are not one series either.",
+        "About one burglary in seven is cleared — 15.2% in 2024.",
+        "None of this counts home invasions. No US series does; see the register below.",
     ],
 }
 
@@ -290,18 +323,26 @@ def main():
 
     series = []
     for ind_id, name, counts, publisher, emphasis in LANES:
+        ids = ind_id if isinstance(ind_id, list) else [ind_id]
+        key = ids[0]
         pts = sorted(
             [r for r in pool
-             if r["indicator_id"] == ind_id
+             if r["indicator_id"] in ids
              and WINDOW_FROM <= r["year"] <= WINDOW_TO
              and r.get("value") is not None],
             key=lambda r: r["year"],
         )
         if len(pts) < 2:
-            print(f"  ! {ind_id}: only {len(pts)} points in window, skipped")
+            print(f"  ! {key}: only {len(pts)} points in window, skipped")
             continue
         base = pts[0]["value"]
+        extra = {}
+        if key in LANE_BREAKS:
+            extra["break_after"] = LANE_BREAKS[key]
+        if key in LANE_SUMMARY:
+            extra["summary"] = LANE_SUMMARY[key]
         series.append({
+            **extra,
             "name": name,
             "counts": counts,
             "publisher": publisher,
@@ -316,7 +357,7 @@ def main():
                  "raw": p["value"], "tier": p.get("tier", "A")}
                 for p in pts
             ],
-            "caveats": LANE_CAVEATS.get(ind_id, []),
+            "caveats": LANE_CAVEATS.get(key, []),
         })
 
     # Theme callouts rendered directly under the chart (Sean, 2026-08-21:
@@ -327,18 +368,21 @@ def main():
         {"statement": "Missing-person entries are at their modern low; whether that is fewer cases or less entering cannot be separated.", "tier": "A"},
         {"statement": "Defamation-adjacent federal filings are at a 22-year high, rising sharply since 2023.", "tier": "A"},
         {"statement": "Homicide spiked 29.4% in 2020, then fell to the lowest rate ever recorded.", "tier": "A"},
-        {"statement": "The category this site is most concerned with — harassment — has no lane, because nobody counts it.", "tier": "A"},
+        {"statement": "Break-ins have fallen further than any other lane: 53% between 2000 and 2019 on the FBI basis that ran until then, and 26% more between 2020 and 2024 on the estimates that replaced it. Part of that is fewer reports rather than fewer break-ins — 40.7% of victimisations reached the police in 2024 against 58.8% in 2010.", "tier": "A"},
+        {"statement": "Two categories this site cares about have no lane at all: harassment, because nobody counts it, and home invasion, because it is not an offence anyone records.", "tier": "A"},
     ]
 
     chart = {
-        "title": "Five kinds of harm, indexed",
+        "title": "Six kinds of harm, indexed",
         "unit": "Each lane indexed to its own first year in this window = 100",
         "themes": themes,
         "note": (
             "These lanes count different things in different units, so each is indexed "
             "to its own first year = 100: the chart shows direction, never size. Dotted "
             "stretches are years that are not Tier A; hollow points mark a lane sampled "
-            "with gaps. Click any lane for its raw figures, method and caveats."
+            "with gaps; a gap with a marked year is a lane whose BASIS changed, drawn as "
+            "a break rather than joined up. Click any lane for its raw figures, method "
+            "and caveats."
         ),
         "publisher": "FBI; CDC/NCHS; BJS; US Courts",
         "tier": "A",

@@ -62,6 +62,16 @@ type Lane = {
   base_year: number; base_value: number; unit_raw: string; tier: string;
   basis_short: string; caveats: string[];
   points: { year: number; value: number; raw: number; tier: string }[];
+  /**
+   * Last year of the old basis, for a lane whose MEASUREMENT changed mid-series
+   * (burglary: the FBI's Summary Reporting System ended in 2019 and the
+   * NIBRS-based estimates that replaced it are not a continuation). The path is
+   * split here rather than drawn through, because a continuous line across a
+   * basis change asserts a single measurement that was never taken.
+   */
+  break_after?: number;
+  /** Replaces the computed base→last percentage when one number would span a break. */
+  summary?: string;
 };
 type LaneChart = {
   title: string; unit: string; note: string; publisher: string; tier: string;
@@ -93,7 +103,7 @@ type Sweep = {
 /* ---------------------------------------------------------------- chart --- */
 
 /**
- * Five lanes on one indexed axis.
+ * Six lanes on one indexed axis.
  *
  * The lanes count genuinely different things — deaths, offences known to police,
  * NCIC records entered, federal civil filings — in units that differ by orders
@@ -191,13 +201,20 @@ function LaneChart({ chart, onPick }: { chart: LaneChart; onPick: (l: Lane) => v
         {chart.series.map((s, i) => {
           const pt = (p: { year: number; value: number }) =>
             `${X(p.year).toFixed(1)},${Y(p.value).toFixed(1)}`;
-          const d = s.points.map((p, j) => `${j ? "L" : "M"}${pt(p)}`).join(" ");
+          // A declared basis change splits the path. Everything else about the
+          // lane is unchanged, so the break reads as a break and not as a gap
+          // in the data — the years either side are both published.
+          const brk = s.break_after ?? null;
+          const crosses = (a: { year: number }) => brk !== null && a.year === brk;
+          const d = s.points
+            .map((p, j) => `${j === 0 || crosses(s.points[j - 1]) ? "M" : "L"}${pt(p)}`)
+            .join(" ");
           // Same convention as every other chart: dotted = not Tier A.
           const weak: string[] = [];
           s.points.forEach((p, j) => {
             if (p.tier && p.tier !== "A") {
-              if (j > 0) weak.push(`M${pt(s.points[j - 1])}L${pt(p)}`);
-              if (j < s.points.length - 1) weak.push(`M${pt(p)}L${pt(s.points[j + 1])}`);
+              if (j > 0 && !crosses(s.points[j - 1])) weak.push(`M${pt(s.points[j - 1])}L${pt(p)}`);
+              if (j < s.points.length - 1 && !crosses(p)) weak.push(`M${pt(p)}L${pt(s.points[j + 1])}`);
             }
           });
           const dim = focus !== null && focus !== s.name;
@@ -225,6 +242,18 @@ function LaneChart({ chart, onPick }: { chart: LaneChart; onPick: (l: Lane) => v
                   fill="rgb(var(--background))" stroke="rgb(var(--foreground))"
                   strokeWidth={narrow ? 2 : 1.3} opacity={dim ? 0.18 : 0.85} />
               ))}
+              {/* the basis change, marked where the path splits */}
+              {brk !== null && (
+                <g>
+                  <line x1={X(brk + 0.5)} y1={padT} x2={X(brk + 0.5)} y2={H - padB}
+                    stroke="rgb(var(--muted))" strokeDasharray="2 6" strokeWidth="1"
+                    opacity={dim ? 0.12 : focus === s.name ? 0.9 : 0.35} />
+                  {focus === s.name && !narrow && (
+                    <text x={X(brk + 0.5) + 5} y={padT + 11} fontSize="10.5"
+                      fill="rgb(var(--muted))">basis changes</text>
+                  )}
+                </g>
+              )}
               {/* every lane starts at 100 — mark it so the base year is visible */}
               <circle cx={X(s.points[0].year)} cy={Y(100)} r={narrow ? 4.5 : 3}
                 fill="rgb(var(--foreground))" opacity={dim ? 0.18 : s.emphasis ? 1 : 0.6} />
@@ -294,7 +323,9 @@ function LaneChart({ chart, onPick }: { chart: LaneChart; onPick: (l: Lane) => v
               </button>
               <span className="text-muted">{s.counts}</span>
               <span className="ml-auto tabular-nums text-foreground/85 shrink-0">
-                {s.base_year}&ndash;{last.year}: {pct > 0 ? "+" : ""}{pct}%
+                {/* a lane that changes basis states each half — one percentage
+                    across a break would quote two measurements as one */}
+                {s.summary ?? `${s.base_year}–${last.year}: ${pct > 0 ? "+" : ""}${pct}%`}
               </span>
             </li>
           );
@@ -621,6 +652,11 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
   const sweeps = useTable<Sweep>("/data/crime/tables/crime_sweeps.json");
   const tr = useDoc<TR>("/data/crime/tables/crime_transnational.json");
   const intl = useDoc<IntlChartDoc>("/data/crime/charts/homicide_international.json");
+  const burg = useDoc<IntlChartDoc & {
+    themes?: { statement: string; tier: string }[];
+    answer?: { question: string; body: string; consequence: string; tier: string;
+               source_ids?: string[]; source_id?: string | null };
+  }>("/data/crime/charts/burglary_international.json");
   const arrests = useDoc<Chart>("/data/crime/charts/arrests_over_time.json");
   const accomplishments = useDoc<{ title: string; intro: string; discipline: string;
     rows: { what: string; kind: string; claim: string; corroboration: string; tier: string; source_id: string | null }[];
@@ -788,6 +824,57 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
               </div>
             )}
             <p className="text-muted text-[15px] measure">{intl.note}</p>
+          </>
+        )}
+      </section>
+
+      {/* ---- break-ins abroad, and the offence that is not an offence
+             (Sean, 2026-08-21: "have home invasions increased in the US and
+             abroad?" and "are they documented or labelled as a burglary?").
+             The chart answers the first question; the block under it answers
+             the second, which turns out to be why the first has no answer. ---- */}
+      <section className="mb-14">
+        <h2 className="font-display font-semibold text-foreground text-[21px] mb-4">
+          Break-ins, and the offence nobody records
+        </h2>
+        {burg === null ? <SkeletonChart /> : (
+          <>
+            <IntlLineChart chart={burg} onPick={setIntlPicked} />
+            {!!burg.themes?.length && (
+              <div className="mt-2 mb-5">
+                <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">What this shows</h3>
+                <ul className="list-none p-0 m-0">
+                  {burg.themes.map((t, i) => (
+                    <li key={i} className="flex items-baseline gap-3 py-2 border-b border-edge/60 text-[16px] text-foreground/90">
+                      <TierChip t={t.tier} />
+                      <span className="measure">{t.statement}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            <p className="text-muted text-[15px] measure">{burg.note}</p>
+            {burg.answer && (
+              <div className="mt-8 pt-6 border-t border-edge">
+                <h3 className="font-display font-semibold text-foreground text-[19px] mb-3">
+                  {burg.answer.question}
+                </h3>
+                <p className="body-copy text-foreground/90 measure">{burg.answer.body}</p>
+                <p className="body-copy text-foreground/90 measure">{burg.answer.consequence}</p>
+                {/* one paragraph, several publishers — every one of them files
+                    home invasion under something else, so listing a single
+                    source would hide most of the evidence for the finding */}
+                <p className="flex flex-wrap items-baseline gap-x-3 gap-y-1 text-[15px] mt-4 mb-0">
+                  <TierChip t={burg.answer.tier} />
+                  <span className="text-muted">Recorded in full in the register below.</span>
+                  <span className="ml-auto flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                    {(burg.answer.source_ids ?? [burg.answer.source_id ?? null]).map((id, i) => (
+                      <SourceLink key={i} id={id} sources={srcs} />
+                    ))}
+                  </span>
+                </p>
+              </div>
+            )}
           </>
         )}
       </section>
