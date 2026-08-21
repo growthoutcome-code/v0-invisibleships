@@ -1,7 +1,7 @@
 {
   "title": "US homicide, two official measures",
   "unit": "Deaths per 100,000 people per year",
-  "note": "The FBI counts murder and nonnegligent manslaughter known to police, as a crude rate. The CDC counts deaths certified as homicide, age-adjusted. The gap between them is expected: they count different things. Neither series corrects the other.",
+  "note": "The FBI counts murder and nonnegligent manslaughter known to police, as a crude rate. The CDC counts deaths certified as homicide, age-adjusted. The gap between them is expected: they count different things. Neither series corrects the other. Dotted segments mark years that are not Tier A \u2014 read from a published chart rather than stated in a report, or resting on a collection the publisher itself flagged.",
   "publisher": "FBI; CDC/NCHS",
   "tier": "A",
   "series": [
@@ -14,272 +14,404 @@
       "points": [
         {
           "year": 1960,
-          "value": 5.1
+          "value": 5.1,
+          "tier": "A",
+          "note": "Same source as count."
         },
         {
           "year": 1961,
-          "value": 4.8
+          "value": 4.8,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 1962,
-          "value": 4.6
+          "value": 4.6,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 1963,
-          "value": 4.6
+          "value": 4.6,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 1964,
-          "value": 4.9
+          "value": 4.9,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 1965,
-          "value": 5.1
+          "value": 5.1,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 1966,
-          "value": 5.6
+          "value": 5.6,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 1967,
-          "value": 6.2
+          "value": 6.2,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 1968,
-          "value": 6.9
+          "value": 6.9,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 1969,
-          "value": 7.3
+          "value": 7.3,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 1970,
-          "value": 7.9
+          "value": 7.9,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 1971,
-          "value": 8.6
+          "value": 8.6,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 1972,
-          "value": 9.0
+          "value": 9.0,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 1973,
-          "value": 9.4
+          "value": 9.4,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 1974,
-          "value": 9.8
+          "value": 9.8,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 1975,
-          "value": 9.6
+          "value": 9.6,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 1976,
-          "value": 8.8
+          "value": 8.8,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 1977,
-          "value": 8.8
+          "value": 8.8,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 1978,
-          "value": 9.0
+          "value": 9.0,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 1979,
-          "value": 9.7
+          "value": 9.7,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 1980,
-          "value": 10.2
+          "value": 10.2,
+          "tier": "A",
+          "note": "Highest rate in the entire fetched UCR series."
         },
         {
           "year": 1981,
-          "value": 9.8
+          "value": 9.8,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 1982,
-          "value": 9.1
+          "value": 9.1,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 1983,
-          "value": 8.3
+          "value": 8.3,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 1984,
-          "value": 7.9
+          "value": 7.9,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 1985,
-          "value": 7.9
+          "value": 7.9,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 1986,
-          "value": 8.6
+          "value": 8.6,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 1987,
-          "value": 8.3
+          "value": 8.3,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 1988,
-          "value": 8.4
+          "value": 8.4,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 1989,
-          "value": 8.7
+          "value": 8.7,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 1990,
-          "value": 9.4
+          "value": 9.4,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 1991,
-          "value": 9.8
+          "value": 9.8,
+          "tier": "A",
+          "note": "Confirmed by BJS htius.pdf."
         },
         {
           "year": 1992,
-          "value": 9.3
+          "value": 9.3,
+          "tier": "A",
+          "note": "Confirmed by BJS."
         },
         {
           "year": 1993,
-          "value": 9.5
+          "value": 9.5,
+          "tier": "A",
+          "note": "Confirmed by BJS."
         },
         {
           "year": 1994,
-          "value": 9.0
+          "value": 9.0,
+          "tier": "A",
+          "note": "Confirmed by BJS."
         },
         {
           "year": 1995,
-          "value": 8.2
+          "value": 8.2,
+          "tier": "A",
+          "note": "Confirmed by BJS."
         },
         {
           "year": 1996,
-          "value": 7.4
+          "value": 7.4,
+          "tier": "A",
+          "note": "Confirmed by BJS."
         },
         {
           "year": 1997,
-          "value": 6.8
+          "value": 6.8,
+          "tier": "A",
+          "note": "Confirmed by BJS."
         },
         {
           "year": 1998,
-          "value": 6.3
+          "value": 6.3,
+          "tier": "A",
+          "note": "Confirmed by CIUS 1999."
         },
         {
           "year": 1999,
-          "value": 5.7
+          "value": 5.7,
+          "tier": "A",
+          "note": "Confirmed by CIUS 1999."
         },
         {
           "year": 2000,
-          "value": 5.5
+          "value": 5.5,
+          "tier": "A",
+          "note": "Confirmed by CIUS 2010 and BJS."
         },
         {
           "year": 2001,
-          "value": 5.6
+          "value": 5.6,
+          "tier": "A",
+          "note": "See 9/11 footnote caveat above."
         },
         {
           "year": 2002,
-          "value": 5.6
+          "value": 5.6,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 2003,
-          "value": 5.7
+          "value": 5.7,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 2004,
-          "value": 5.5
+          "value": 5.5,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 2005,
-          "value": 5.6
+          "value": 5.6,
+          "tier": "A",
+          "note": "FBI CDE 2024 summary shows 5.9 for 2005 in its 20-year trend chart. VINTAGE CONFLICT."
         },
         {
           "year": 2006,
-          "value": 5.8
+          "value": 5.8,
+          "tier": "A",
+          "note": "FBI CDE 2025 summary Figure 1 shows 5.7 for 2006. VINTAGE CONFLICT."
         },
         {
           "year": 2007,
-          "value": 5.7
+          "value": 5.7,
+          "tier": "A",
+          "note": "Confirmed by CIUS 2010 and CDE 2025 Figure 1."
         },
         {
           "year": 2008,
-          "value": 5.4
+          "value": 5.4,
+          "tier": "A",
+          "note": "Confirmed by CIUS 2010 and CDE 2025 Figure 1."
         },
         {
           "year": 2009,
-          "value": 5.0
+          "value": 5.0,
+          "tier": "A",
+          "note": "Confirmed by CIUS 2010 and CDE 2025 Figure 1."
         },
         {
           "year": 2010,
-          "value": 4.8
+          "value": 4.8,
+          "tier": "A",
+          "note": "Confirmed by CIUS 2010 and CDE 2025 Figure 1."
         },
         {
           "year": 2011,
-          "value": 4.7
+          "value": 4.7,
+          "tier": "A",
+          "note": "Confirmed by CDE 2025 Figure 1."
         },
         {
           "year": 2012,
-          "value": 4.7
+          "value": 4.7,
+          "tier": "A",
+          "note": "CDE 2025 Figure 1 shows 4.8. VINTAGE CONFLICT."
         },
         {
           "year": 2013,
-          "value": 4.5
+          "value": 4.5,
+          "tier": "A",
+          "note": "Confirmed by CDE 2025 Figure 1."
         },
         {
           "year": 2014,
-          "value": 4.4
+          "value": 4.4,
+          "tier": "A",
+          "note": "Confirmed by CDE 2024 summary (20-year low) and CDE 2025 Figure 1."
         },
         {
           "year": 2015,
-          "value": 4.9
+          "value": 4.9,
+          "tier": "A",
+          "note": "Confirmed by CDE 2025 Figure 1."
         },
         {
           "year": 2016,
-          "value": 5.4
+          "value": 5.4,
+          "tier": "A",
+          "note": "Confirmed by CDE 2025 Figure 1."
         },
         {
           "year": 2017,
-          "value": 5.3
+          "value": 5.3,
+          "tier": "A",
+          "note": "Confirmed by CDE 2025 Figure 1."
         },
         {
           "year": 2018,
-          "value": 5.0
+          "value": 5.0,
+          "tier": "A",
+          "note": "Confirmed by CDE 2025 Figure 1."
         },
         {
           "year": 2019,
-          "value": 5.0
+          "value": 5.0,
+          "tier": "A",
+          "note": "Confirmed by CDE 2025 Figure 1 (also 5.0)."
         },
         {
           "year": 2020,
-          "value": 6.6
+          "value": 6.6,
+          "tier": "A",
+          "note": "CURRENT vintage; stated in report text ('2020 and 2022 peaked at 6.6'). The FBI's 2024 summary gave 6.7 for 2020, and CIUS 2020 as first published gave 6.5. THREE OFFICIAL VALUES FOR ONE YEAR."
         },
         {
           "year": 2021,
-          "value": 6.5
+          "value": 6.5,
+          "tier": "B",
+          "note": "Tier B: read off Figure 1 chart, not confirmed in report text or a second source. Also the weakest data year - see nibrs_* rows."
         },
         {
           "year": 2022,
-          "value": 6.6
+          "value": 6.6,
+          "tier": "A",
+          "note": "Stated in report text: '2020 and 2022 peaked at 6.6 offenses per 100,000 inhabitants.'"
         },
         {
           "year": 2023,
-          "value": 6.0
+          "value": 6.0,
+          "tier": "B",
+          "note": "Tier B: chart read. Corroborated indirectly - CDE Quick Stats says the 2024 rate of 5.0 was 'down 15.8%' from 2023, implying ~5.94. Note Jeff Asher reported 5.7 for 2023 as first published. VINTAGE CONFLICT."
         },
         {
           "year": 2024,
-          "value": 5.0
+          "value": 5.0,
+          "tier": "A",
+          "note": "AS FIRST PUBLISHED (Aug 2025). Revised to 5.1 in the 2025 report cycle - see fbi_murder_rate_revised 2024."
         },
         {
           "year": 2025,
-          "value": 4.1
+          "value": 4.1,
+          "tier": "A",
+          "note": "FBI, released 2026-08-14: 'The 2025 murder rate of 4.1 per 100,000 inhabitants is tied with 1955 and 1956 for the lowest murder rate.' Confirmed in the CDE 2025 summary PDF."
         }
       ],
       "caveats": [
         "Vintages differ between annual reports; see the data-quality register.",
-        "2021 is the weakest year in the series \u2014 NIBRS covered 65.7% of the population."
+        "2021 and 2023 are drawn dotted: both were read from a published chart rather than stated in report text, and 2021 additionally rests on a collection the FBI flagged as not statistically significant (NIBRS covered 65.7% of the population that year)."
       ]
     },
     {
@@ -291,111 +423,165 @@
       "points": [
         {
           "year": 1950,
-          "value": 5.1
+          "value": 5.1,
+          "tier": "A",
+          "note": "Selected years only. Confirmed by Health, United States 2020-2021 SlctMort table."
         },
         {
           "year": 1960,
-          "value": 5.0
+          "value": 5.0,
+          "tier": "A",
+          "note": "Confirmed twice. NOTE: FBI UCR rate for 1960 is 5.1 - nearly identical, unlike later years."
         },
         {
           "year": 1970,
-          "value": 8.8
+          "value": 8.8,
+          "tier": "A",
+          "note": "FBI UCR 1970 = 7.9. Gap of 0.9."
         },
         {
           "year": 1980,
-          "value": 10.4
+          "value": 10.4,
+          "tier": "A",
+          "note": "Highest CDC value in the fetched series. FBI UCR 1980 = 10.2."
         },
         {
           "year": 1990,
-          "value": 9.4
+          "value": 9.4,
+          "tier": "A",
+          "note": "FBI UCR 1990 = 9.4. Coincidentally identical."
         },
         {
           "year": 2000,
-          "value": 5.9
+          "value": 5.9,
+          "tier": "A",
+          "note": "FBI UCR 2000 = 5.5. Gap of 0.4."
         },
         {
           "year": 2003,
-          "value": 6.1
+          "value": 6.1,
+          "tier": "A",
+          "note": "Start of the continuous annual NCHS series I could verify. Confirmed in brief text: 'declined 16% from 2003 (6.1) to 2014'."
         },
         {
           "year": 2004,
-          "value": 5.9
+          "value": 5.9,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 2005,
-          "value": 6.1
+          "value": 6.1,
+          "tier": "A",
+          "note": "Health, United States 2020-2021 SlctMort gives 6.1 for 2005. Confirmed twice."
         },
         {
           "year": 2006,
-          "value": 6.2
+          "value": 6.2,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 2007,
-          "value": 6.1
+          "value": 6.1,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 2008,
-          "value": 5.9
+          "value": 5.9,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 2009,
-          "value": 5.5
+          "value": 5.5,
+          "tier": "A",
+          "note": "Health, United States 2020-2021 SlctMort gives 5.5 for 2009. Confirmed twice."
         },
         {
           "year": 2010,
-          "value": 5.3
+          "value": 5.3,
+          "tier": "A",
+          "note": "Health, United States Table 29 gives 5.3 for 2010. Confirmed twice. FBI UCR 2010 = 4.8 - a 0.5 gap."
         },
         {
           "year": 2011,
-          "value": 5.3
+          "value": 5.3,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 2012,
-          "value": 5.4
+          "value": 5.4,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 2013,
-          "value": 5.2
+          "value": 5.2,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 2014,
-          "value": 5.1
+          "value": 5.1,
+          "tier": "A",
+          "note": "Series low. Confirmed in brief text ('2014 (5.1)'). FBI UCR 2014 = 4.4 - a 0.7 gap."
         },
         {
           "year": 2015,
-          "value": 5.7
+          "value": 5.7,
+          "tier": "A",
+          "note": "Health, United States Table 29 gives 5.7 for 2015. Confirmed twice."
         },
         {
           "year": 2016,
-          "value": 6.2
+          "value": 6.2,
+          "tier": "A",
+          "note": "Health, United States Table 29 gives 6.2 for 2016. Confirmed twice."
         },
         {
           "year": 2017,
-          "value": 6.2
+          "value": 6.2,
+          "tier": "A",
+          "note": ""
         },
         {
           "year": 2018,
-          "value": 5.9
+          "value": 5.9,
+          "tier": "A",
+          "note": "Health, United States 2020-2021 SlctMort gives 5.9 for 2018. Confirmed twice."
         },
         {
           "year": 2019,
-          "value": 6.0
+          "value": 6.0,
+          "tier": "A",
+          "note": "Confirmed three ways: db526 table, db526 text ('2019 (6.0)'), and Health, United States 2020-2021 SlctMort. FBI UCR 2019 = 5.0 - a FULL POINT apart."
         },
         {
           "year": 2020,
-          "value": 7.8
+          "value": 7.8,
+          "tier": "A",
+          "note": "Corroborated by Pew citing CDC (7.8 in 2020, up from 6.0)."
         },
         {
           "year": 2021,
-          "value": 8.2
+          "value": 8.2,
+          "tier": "A",
+          "note": "SERIES PEAK. Confirmed independently by NVSR 'Deaths: Final Data for 2022' (Vol 74 No 4): 'from 8.2 in 2021'. FBI UCR 2021 = 6.5 - a 1.7 gap."
         },
         {
           "year": 2022,
-          "value": 7.7
+          "value": 7.7,
+          "tier": "A",
+          "note": "Confirmed independently by NVSR Vol 74 No 4: 'decreased 6.1%, from 8.2 in 2021 to 7.7 per 100,000 standard population in 2022.'"
         },
         {
           "year": 2023,
-          "value": 7.1
+          "value": 7.1,
+          "tier": "A",
+          "note": "Confirmed in db526 text: 'The rate then declined 13% through 2023 (7.1).' FBI UCR 2023 = 6.0."
         }
       ],
       "caveats": [

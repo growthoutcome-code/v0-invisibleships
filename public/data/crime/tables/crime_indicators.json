@@ -1,5 +1,101 @@
 [
   {
+    "indicator_id": "ccj_h1_agg_assault_pct_change",
+    "year": 2026,
+    "value": -2.0,
+    "unit": "% change, H1 2026 vs H1 2025, 36 large cities",
+    "tier": "A",
+    "publisher": "Council on Criminal Justice",
+    "source_id": "cs_ccj_2026",
+    "note": "",
+    "geography": "US",
+    "workstream": "W1-YTD"
+  },
+  {
+    "indicator_id": "ccj_h1_carjacking_pct_change",
+    "year": 2026,
+    "value": -47.0,
+    "unit": "% change, H1 2026 vs H1 2025, 36 large cities",
+    "tier": "A",
+    "publisher": "Council on Criminal Justice",
+    "source_id": "cs_ccj_2026",
+    "note": "",
+    "geography": "US",
+    "workstream": "W1-YTD"
+  },
+  {
+    "indicator_id": "ccj_h1_domestic_violence_pct_change",
+    "year": 2026,
+    "value": 8.0,
+    "unit": "% change, H1 2026 vs H1 2025, 36 large cities",
+    "tier": "A",
+    "publisher": "Council on Criminal Justice",
+    "source_id": "cs_ccj_2026",
+    "note": "ROSE, and by the largest margin of any offence in the sample.",
+    "geography": "US",
+    "workstream": "W1-YTD"
+  },
+  {
+    "indicator_id": "ccj_h1_gun_assault_pct_change",
+    "year": 2026,
+    "value": -6.0,
+    "unit": "% change, H1 2026 vs H1 2025, 36 large cities",
+    "tier": "A",
+    "publisher": "Council on Criminal Justice",
+    "source_id": "cs_ccj_2026",
+    "note": "",
+    "geography": "US",
+    "workstream": "W1-YTD"
+  },
+  {
+    "indicator_id": "ccj_h1_homicide_pct_change",
+    "year": 2026,
+    "value": -18.0,
+    "unit": "% change, H1 2026 vs H1 2025, 36 large cities",
+    "tier": "A",
+    "publisher": "Council on Criminal Justice",
+    "source_id": "cs_ccj_2026",
+    "note": "215 fewer homicides across the 30 cities reporting homicide data.",
+    "geography": "US",
+    "workstream": "W1-YTD"
+  },
+  {
+    "indicator_id": "ccj_h1_mv_theft_pct_change",
+    "year": 2026,
+    "value": -20.0,
+    "unit": "% change, H1 2026 vs H1 2025, 36 large cities",
+    "tier": "A",
+    "publisher": "Council on Criminal Justice",
+    "source_id": "cs_ccj_2026",
+    "note": "",
+    "geography": "US",
+    "workstream": "W1-YTD"
+  },
+  {
+    "indicator_id": "ccj_h1_robbery_pct_change",
+    "year": 2026,
+    "value": -17.0,
+    "unit": "% change, H1 2026 vs H1 2025, 36 large cities",
+    "tier": "A",
+    "publisher": "Council on Criminal Justice",
+    "source_id": "cs_ccj_2026",
+    "note": "",
+    "geography": "US",
+    "workstream": "W1-YTD"
+  },
+  {
+    "indicator_id": "ccj_h1_sexual_assault_pct_change",
+    "year": 2026,
+    "value": 3.0,
+    "unit": "% change, H1 2026 vs H1 2025, 36 large cities",
+    "tier": "A",
+    "publisher": "Council on Criminal Justice",
+    "source_id": "cs_ccj_2026",
+    "note": "ROSE. One of four offences of thirteen that did not fall.",
+    "geography": "US",
+    "workstream": "W1-YTD"
+  },
+  {
     "indicator_id": "cdc_homicide_count",
     "geography": "US",
     "year": 2014,
@@ -2194,6 +2290,18 @@
     "source_id": "cs031",
     "workstream": "W1",
     "note": "Up from 65.7% in 2021 - the recovery was driven by readmitting SRS submissions."
+  },
+  {
+    "indicator_id": "rtci_ytd_murder_pct_change",
+    "year": 2026,
+    "value": -18.7,
+    "unit": "% change, Jan-Apr 2026 vs 2025, 566 agencies / ~119M people",
+    "tier": "B",
+    "publisher": "Real-Time Crime Index",
+    "source_id": "cs_rtci_2026",
+    "note": "Independent of the CCJ sample and agreeing closely with it.",
+    "geography": "US",
+    "workstream": "W1-YTD"
   },
   {
     "indicator_id": "ucr_agencies_reporting",

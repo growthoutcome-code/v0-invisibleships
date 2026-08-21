@@ -34,6 +34,60 @@ NON_SERIES = {
     "homicide_clearance_rate_annual_series",
 }
 
+# ---------------------------------------------------------------------- YTD ---
+# 2026 year-to-date. Deliberately NOT plotted on the homicide chart: a partial
+# year on an annual series is a category error, and the chart's window ends at
+# the last COMPLETE year so it stays aligned with the other Data-section charts.
+# Rendered instead as a labelled current-position block beneath the chart.
+YTD_2026 = [
+    {"indicator_id": "ccj_h1_homicide_pct_change", "year": 2026, "value": -18.0,
+     "unit": "% change, H1 2026 vs H1 2025, 36 large cities", "tier": "A",
+     "publisher": "Council on Criminal Justice", "source_id": "cs_ccj_2026",
+     "note": "215 fewer homicides across the 30 cities reporting homicide data."},
+    {"indicator_id": "ccj_h1_robbery_pct_change", "year": 2026, "value": -17.0,
+     "unit": "% change, H1 2026 vs H1 2025, 36 large cities", "tier": "A",
+     "publisher": "Council on Criminal Justice", "source_id": "cs_ccj_2026", "note": ""},
+    {"indicator_id": "ccj_h1_carjacking_pct_change", "year": 2026, "value": -47.0,
+     "unit": "% change, H1 2026 vs H1 2025, 36 large cities", "tier": "A",
+     "publisher": "Council on Criminal Justice", "source_id": "cs_ccj_2026", "note": ""},
+    {"indicator_id": "ccj_h1_mv_theft_pct_change", "year": 2026, "value": -20.0,
+     "unit": "% change, H1 2026 vs H1 2025, 36 large cities", "tier": "A",
+     "publisher": "Council on Criminal Justice", "source_id": "cs_ccj_2026", "note": ""},
+    {"indicator_id": "ccj_h1_gun_assault_pct_change", "year": 2026, "value": -6.0,
+     "unit": "% change, H1 2026 vs H1 2025, 36 large cities", "tier": "A",
+     "publisher": "Council on Criminal Justice", "source_id": "cs_ccj_2026", "note": ""},
+    {"indicator_id": "ccj_h1_agg_assault_pct_change", "year": 2026, "value": -2.0,
+     "unit": "% change, H1 2026 vs H1 2025, 36 large cities", "tier": "A",
+     "publisher": "Council on Criminal Justice", "source_id": "cs_ccj_2026", "note": ""},
+    # The two that ROSE. Reporting the eleven that fell without these would be
+    # exactly the selective framing this dataset exists to avoid.
+    {"indicator_id": "ccj_h1_sexual_assault_pct_change", "year": 2026, "value": 3.0,
+     "unit": "% change, H1 2026 vs H1 2025, 36 large cities", "tier": "A",
+     "publisher": "Council on Criminal Justice", "source_id": "cs_ccj_2026",
+     "note": "ROSE. One of four offences of thirteen that did not fall."},
+    {"indicator_id": "ccj_h1_domestic_violence_pct_change", "year": 2026, "value": 8.0,
+     "unit": "% change, H1 2026 vs H1 2025, 36 large cities", "tier": "A",
+     "publisher": "Council on Criminal Justice", "source_id": "cs_ccj_2026",
+     "note": "ROSE, and by the largest margin of any offence in the sample."},
+    {"indicator_id": "rtci_ytd_murder_pct_change", "year": 2026, "value": -18.7,
+     "unit": "% change, Jan-Apr 2026 vs 2025, 566 agencies / ~119M people", "tier": "B",
+     "publisher": "Real-Time Crime Index", "source_id": "cs_rtci_2026",
+     "note": "Independent of the CCJ sample and agreeing closely with it."},
+]
+
+YTD_SOURCES = [
+    {"source_id": "cs_ccj_2026",
+     "url": "https://counciloncj.org/crime-trends-in-u-s-cities-mid-year-2026-update/",
+     "publisher": "Council on Criminal Justice",
+     "title": "Crime Trends in U.S. Cities: Mid-Year 2026 Update (2026-07-22)",
+     "evidence_tier": "A", "accessed": "2026-08-21", "archived_url": None},
+    {"source_id": "cs_rtci_2026",
+     "url": "https://jasher.substack.com/p/murder-in-the-us-fell-dramatically",
+     "publisher": "Jeff Asher / Real-Time Crime Index",
+     "title": "Murder in the US Fell Dramatically in the First Half of 2026 (2026-07-06)",
+     "evidence_tier": "B", "accessed": "2026-08-21", "archived_url": None},
+]
+
 # ---------------------------------------------------------------- registers ---
 
 DATA_QUALITY = [
@@ -166,6 +220,25 @@ DATA_QUALITY = [
         "source_id": "cs_ncvs_cv24",
     },
     {
+        "dq_id": "cq09",
+        "geography": "US",
+        "topic": "2026 figures are partial-year and city-sample, not national",
+        "issue": (
+            "There is no national 2026 crime statistic yet — the FBI publishes annually "
+            "and released final 2025 data on 14 August 2026. What exists for 2026 is a "
+            "36-city half-year comparison and a 566-agency index covering about 119 "
+            "million people, roughly a third of the country. Both are samples of larger "
+            "urban agencies, which are not representative of national crime."
+        ),
+        "effect": (
+            "2026 figures are shown as a stated percentage change over a stated period "
+            "and sample, never as a point on the annual chart. A partial year plotted on "
+            "an annual series reads as a completed year and would be wrong."
+        ),
+        "tier": "A",
+        "source_id": "cs_ccj_2026",
+    },
+    {
         "dq_id": "cq08",
         "geography": "US",
         "topic": "Two recent FBI counts could not be verified",
@@ -221,6 +294,20 @@ TRENDS = [
         "source_id": "cs_two_measures",
     },
     {
+        "topic": "ytd_2026",
+        "statement": (
+            "2026 so far continues the fall. Across 36 large cities, homicide in the first "
+            "half of 2026 was 18% below the first half of 2025 — 215 fewer deaths — with "
+            "carjacking down 47%, motor vehicle theft down 20% and robbery down 17%. The "
+            "Real-Time Crime Index, a separate sample of 566 agencies covering about 119 "
+            "million people, independently records murder down 18.7% through April. Nine "
+            "of thirteen offences fell. Two rose: domestic violence by 8% and sexual "
+            "assault by 3%."
+        ),
+        "tier": "A",
+        "source_id": "cs_ccj_2026",
+    },
+    {
         "topic": "clearance_decline",
         "statement": (
             "The share of homicides cleared by arrest or exceptional means fell from 93% "
@@ -272,7 +359,7 @@ CAVEATS = [
 ]
 
 # Additional sources for figures researched directly rather than via the series pull.
-EXTRA_SOURCES = [
+EXTRA_SOURCES = YTD_SOURCES + [
     {"source_id": "cs_ncvs_cv24", "url": "https://bjs.ojp.gov/document/cv24.pdf",
      "publisher": "Bureau of Justice Statistics", "title": "Criminal Victimization, 2024",
      "evidence_tier": "A", "accessed": "2026-08-20", "archived_url": None},
@@ -352,6 +439,10 @@ def main():
             "workstream": "W1",
             "note": r.get("note", "") or "",
         })
+    for y in YTD_2026:
+        rec = dict(y)
+        rec.update({"geography": "US", "workstream": "W1-YTD"})
+        indicators.append(rec)
     indicators.sort(key=lambda r: (r["indicator_id"], r["year"]))
 
     unresolved = [r for r in indicators if not r["source_id"]]
@@ -375,7 +466,10 @@ def main():
 
     # ---- landing chart: FBI vs CDC homicide rate --------------------------
     def series(ind):
-        return [{"year": r["year"], "value": r["value"]}
+        """Points carry their tier so the chart can dot the un-vetted years —
+        the same convention the Public Health charts use for a weaker basis."""
+        return [{"year": r["year"], "value": r["value"], "tier": r["tier"],
+                 "note": r.get("note", "")}
                 for r in indicators if r["indicator_id"] == ind]
 
     fbi, cdc = series("fbi_murder_rate"), series("cdc_homicide_rate_aa")
@@ -386,7 +480,9 @@ def main():
             "The FBI counts murder and nonnegligent manslaughter known to police, as a "
             "crude rate. The CDC counts deaths certified as homicide, age-adjusted. The "
             "gap between them is expected: they count different things. Neither series "
-            "corrects the other."
+            "corrects the other. Dotted segments mark years that are not Tier A — read "
+            "from a published chart rather than stated in a report, or resting on a "
+            "collection the publisher itself flagged."
         ),
         "publisher": "FBI; CDC/NCHS",
         "tier": "A",
@@ -396,7 +492,10 @@ def main():
              "publisher": "FBI (UCR/NIBRS)", "tier": "A", "points": fbi,
              "caveats": [
                  "Vintages differ between annual reports; see the data-quality register.",
-                 "2021 is the weakest year in the series — NIBRS covered 65.7% of the population.",
+                 "2021 and 2023 are drawn dotted: both were read from a published chart "
+                 "rather than stated in report text, and 2021 additionally rests on a "
+                 "collection the FBI flagged as not statistically significant (NIBRS "
+                 "covered 65.7% of the population that year).",
              ]},
             {"name": "CDC — homicide deaths", "emphasis": False,
              "basis_short": "age-adjusted rate, death certificates",

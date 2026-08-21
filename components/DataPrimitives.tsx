@@ -15,6 +15,35 @@ import { track } from "@/lib/analytics";
  * page is a separate change with a separate risk.
  */
 
+/**
+ * The Data section's ONE chart window (Sean, 2026-08-21).
+ *
+ * Charts had drifted to three different x-axes — crime 1950-2025, overdose
+ * 1999-2025, suicide 2000-2025 — so the same year sat at a different place in
+ * each and a reader scrolling between them could not read across. Every chart
+ * now draws this domain, and a series simply starts wherever its data starts.
+ *
+ * 1999 is the floor because it is the earliest year any current series holds
+ * (the overdose record). Nothing is discarded to fit: a series with a longer
+ * record keeps it and offers a toggle to show it, defaulting to this window so
+ * the aligned view is what a reader meets first.
+ */
+export const DATA_WINDOW = { from: 1999, to: 2025 } as const;
+
+/**
+ * The shared tick years. Matching the domain is not enough — if one chart steps
+ * every four years and another every five, the gridlines still fall in
+ * different places and the eye cannot carry a year across. Every chart drawing
+ * DATA_WINDOW uses these.
+ */
+export function dataWindowTicks(narrow = false): number[] {
+  const step = narrow ? 10 : 5;
+  const out: number[] = [];
+  for (let y = 2000; y <= DATA_WINDOW.to; y += step) out.push(y);
+  if (out[out.length - 1] !== DATA_WINDOW.to) out.push(DATA_WINDOW.to);
+  return out;
+}
+
 export type SourceRec = {
   source_id: string; url: string; publisher?: string; title?: string;
   evidence_tier?: string; accessed?: string; archived_url?: string | null;

@@ -5,6 +5,7 @@ import ListPager from "@/components/ListPager";
 import { DataNoteLine } from "@/components/DataIntro";
 import DisclaimerLink from "@/components/DisclaimerLink";
 import { Skeleton, SkeletonRows, SkeletonChart } from "@/components/Skeleton";
+import { DATA_WINDOW, dataWindowTicks } from "@/components/DataPrimitives";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { track } from "@/lib/analytics";
@@ -167,7 +168,10 @@ function LineChart({
   const padT = narrow ? 26 : 18, padB = narrow ? 46 : 34;
   const xs = points.map((p) => p.year);
   const vs = points.map((p) => p.value);
-  const x0 = Math.min(...xs), x1 = Math.max(...xs);
+  // One shared Data-section window, so the same year sits in the same place on
+  // every chart. A series simply starts where its data starts.
+  const x0 = Math.min(DATA_WINDOW.from, ...xs);
+  const x1 = Math.max(DATA_WINDOW.to, ...xs);
   const vMax = Math.max(...vs), vMin = Math.min(...vs);
   const v0 = vMin - (vMax - vMin) * 0.15, v1 = vMax + (vMax - vMin) * 0.1;
   const X = (y: number) => padL + ((y - x0) / (x1 - x0)) * (W - padL - padR);
@@ -178,9 +182,15 @@ function LineChart({
   const yTicks = Array.from({ length: ticks + 1 }, (_, i) => v0 + ((v1 - v0) * i) / ticks);
   // Anchor x ticks on the most recent year and step backwards, so the latest
   // year is always labelled (the recent end is what readers check first).
-  const xStep = Math.max(1, Math.ceil((x1 - x0) / (narrow ? 3 : 8)));
-  const xTicks: number[] = [];
-  for (let y = x1; y >= x0; y -= xStep) xTicks.push(y);
+  // Shared tick years, so this chart's gridlines fall in the same places as the
+  // suicide and crime charts. Falls back to its own stepping only if a series
+  // ever runs outside the shared window.
+  const shared = x0 === DATA_WINDOW.from && x1 === DATA_WINDOW.to;
+  const xTicks: number[] = shared ? dataWindowTicks(narrow) : [];
+  if (!shared) {
+    const xStep = Math.max(1, Math.ceil((x1 - x0) / (narrow ? 3 : 8)));
+    for (let y = x1; y >= x0; y -= xStep) xTicks.push(y);
+  }
   const h = hover !== null ? points[hover] : null;
   // Endpoint label: below the point when the series is falling into it,
   // above when rising — keeps the label out of the data path.
@@ -302,7 +312,11 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
     indexed ? (v / (base.get(s.country) || 1)) * 100 : v;
   const all = view.flatMap((s) => s.points.map((p) => ({ ...p, value: val(s, p.value) })));
   if (!all.length) return null;
-  const x0 = Math.min(...all.map((p) => p.year)), x1 = Math.max(...all.map((p) => p.year));
+  // Same shared window as every other Data chart (see DATA_WINDOW). The WHO
+  // segment begins in 2000, one tick inside the axis, which is honest: there
+  // is no comparable 1999 estimate to draw.
+  const x0 = Math.min(DATA_WINDOW.from, ...all.map((p) => p.year));
+  const x1 = Math.max(DATA_WINDOW.to, ...all.map((p) => p.year));
   const vMax = Math.max(...all.map((p) => p.value));
   const v0 = 0, v1 = vMax * 1.08;
   // Headline figures are computed over the WHO comparable period only (to 2021),
@@ -355,7 +369,11 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
     });
 
   const yTicks = (indexed ? [0, 50, 100, 150, 200] : [0, 10, 20, 30, 40, 50]).filter((t) => t <= v1);
-  const xTicks = (win === "covid" ? [2017, 2019, 2021, 2023, 2025] : [2000, 2005, 2010, 2015, 2021, 2025]).filter((y) => y >= x0 && y <= x1);
+  // Default view uses the shared Data-section tick years so gridlines line up
+  // with the overdose and crime charts. The COVID window is a deliberate zoom
+  // and keeps its own denser ticks.
+  const xTicks = (win === "covid" ? [2017, 2019, 2021, 2023, 2025] : dataWindowTicks(narrow))
+    .filter((y) => y >= x0 && y <= x1);
 
   return (
     <figure className="m-0 mb-6">

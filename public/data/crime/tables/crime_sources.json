@@ -342,6 +342,24 @@
     "archived_url": null
   },
   {
+    "source_id": "cs_ccj_2026",
+    "url": "https://counciloncj.org/crime-trends-in-u-s-cities-mid-year-2026-update/",
+    "publisher": "Council on Criminal Justice",
+    "title": "Crime Trends in U.S. Cities: Mid-Year 2026 Update (2026-07-22)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs_rtci_2026",
+    "url": "https://jasher.substack.com/p/murder-in-the-us-fell-dramatically",
+    "publisher": "Jeff Asher / Real-Time Crime Index",
+    "title": "Murder in the US Fell Dramatically in the First Half of 2026 (2026-07-06)",
+    "evidence_tier": "B",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
     "source_id": "cs_ncvs_cv24",
     "url": "https://bjs.ojp.gov/document/cv24.pdf",
     "publisher": "Bureau of Justice Statistics",

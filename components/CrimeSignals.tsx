@@ -7,7 +7,7 @@ import DisclaimerLink from "@/components/DisclaimerLink";
 import { SkeletonChart } from "@/components/Skeleton";
 import {
   useTable, useDoc, usePager, useNarrow, TierChip, SourceLink, SectionSkeleton,
-  type SourceRec,
+  DATA_WINDOW, dataWindowTicks, type SourceRec,
 } from "@/components/DataPrimitives";
 import { track } from "@/lib/analytics";
 
@@ -42,7 +42,8 @@ type Verdict = {
 };
 type ChartSeries = {
   name: string; emphasis: boolean; basis_short: string; publisher: string;
-  tier: string; points: { year: number; value: number }[]; caveats?: string[];
+  tier: string; points: { year: number; value: number; tier?: string; note?: string }[];
+  caveats?: string[];
 };
 type Chart = {
   title: string; unit: string; note: string; publisher: string; tier: string;
@@ -64,9 +65,22 @@ function TwoSeriesChart({ chart, onPick }: { chart: Chart; onPick: (s: ChartSeri
   const narrow = useNarrow();
   const [hoverYear, setHoverYear] = useState<number | null>(null);
   const [showMarkers, setShowMarkers] = useState(true);
+  // Defaults to the shared Data-section window so this chart's years line up
+  // with the suicide and overdose charts. The full record is one click away
+  // rather than discarded — the 1980 and 1991 peaks are real and worth seeing,
+  // they just should not set the axis for every other chart on the site.
+  const [fullRecord, setFullRecord] = useState(false);
 
-  const all = chart.series.flatMap((s) => s.points);
+  const view = fullRecord ? chart.series : chart.series.map((s) => ({
+    ...s,
+    points: s.points.filter((p) => p.year >= DATA_WINDOW.from && p.year <= DATA_WINDOW.to),
+  })).filter((s) => s.points.length > 1);
+
+  const all = view.flatMap((s) => s.points);
   if (all.length < 2) return null;
+
+  const beyond = chart.series.flatMap((s) => s.points).filter((p) => p.year < DATA_WINDOW.from);
+  const earliest = beyond.length ? Math.min(...beyond.map((p) => p.year)) : null;
 
   // 900-wide viewBox on a 390px screen is a 0.43x scale, so these are sized to
   // clear the 9px floor the test suite asserts (measured 10.4px at 390px).
@@ -80,21 +94,28 @@ function TwoSeriesChart({ chart, onPick }: { chart: Chart; onPick: (s: ChartSeri
 
   const years = all.map((p) => p.year);
   const vals = all.map((p) => p.value);
-  const x0 = Math.min(...years), x1 = Math.max(...years);
+  const x0 = fullRecord ? Math.min(...years) : DATA_WINDOW.from;
+  const x1 = fullRecord ? Math.max(...years) : DATA_WINDOW.to;
   const v1 = Math.max(...vals) * 1.12;
   const X = (y: number) => padL + ((y - x0) / (x1 - x0)) * (W - padL - padR);
   const Y = (v: number) => padT + (1 - v / v1) * (H - padT - padB);
 
   const yTicks = Array.from({ length: 5 }, (_, i) => (v1 * i) / 4);
-  const xStep = narrow ? 20 : 10;
-  const xTicks: number[] = [];
-  for (let y = Math.ceil(x0 / xStep) * xStep; y <= x1; y += xStep) xTicks.push(y);
+  // Shared tick years in the default window; the full-record view spans 75
+  // years and needs its own coarser stepping.
+  let xTicks: number[] = [];
+  if (fullRecord) {
+    const xStep = narrow ? 20 : 10;
+    for (let y = Math.ceil(x0 / xStep) * xStep; y <= x1; y += xStep) xTicks.push(y);
+  } else {
+    xTicks = dataWindowTicks(narrow);
+  }
 
   /** True when a series has any gap wider than one year between points. */
   const sparse = (s: ChartSeries) =>
     s.points.some((p, i) => i > 0 && p.year - s.points[i - 1].year > 1);
 
-  const hovered = hoverYear === null ? null : chart.series.map((s) => ({
+  const hovered = hoverYear === null ? null : view.map((s) => ({
     s, p: s.points.find((p) => p.year === hoverYear),
   })).filter((h) => h.p);
 
@@ -126,7 +147,7 @@ function TwoSeriesChart({ chart, onPick }: { chart: Chart; onPick: (s: ChartSeri
         ))}
 
         {/* Dated context markers — toggleable so the default view stays clean. */}
-        {showMarkers && chart.markers?.map((m, mi) => {
+        {showMarkers && chart.markers?.filter((m) => m.year >= x0 && m.year <= x1).map((m, mi) => {
           // Adjacent marker years (2020 and 2021) collide once rotated, so each
           // label steps down from the last when its neighbour is within 3 years.
           const prev = chart.markers![mi - 1];
@@ -146,19 +167,46 @@ function TwoSeriesChart({ chart, onPick }: { chart: Chart; onPick: (s: ChartSeri
           );
         })}
 
-        {chart.series.map((s, i) => {
-          const d = s.points
-            .map((p, j) => `${j ? "L" : "M"}${X(p.year).toFixed(1)},${Y(p.value).toFixed(1)}`)
-            .join(" ");
+        {view.map((s, i) => {
+          const pt = (p: { year: number; value: number }) =>
+            `${X(p.year).toFixed(1)},${Y(p.value).toFixed(1)}`;
+          const d = s.points.map((p, j) => `${j ? "L" : "M"}${pt(p)}`).join(" ");
+          // Dotted means UN-VETTED, matching the Public Health charts, where a
+          // dotted run marks a weaker or different basis. It must never carry
+          // series identity — that is what stroke weight and the end label do.
+          // Each non-Tier-A point is dotted together with the segment reaching
+          // it, so the break is visible where the evidence changes.
+          const weak: string[] = [];
+          s.points.forEach((p, j) => {
+            if (p.tier && p.tier !== "A") {
+              if (j > 0) weak.push(`M${pt(s.points[j - 1])}L${pt(p)}`);
+              if (j < s.points.length - 1) weak.push(`M${pt(p)}L${pt(s.points[j + 1])}`);
+            }
+          });
+          const sw = s.emphasis ? (narrow ? 3.5 : 2.4) : (narrow ? 2.4 : 1.5);
           const last = s.points[s.points.length - 1];
           return (
-            <g key={i} onClick={() => onPick(s)} style={{ cursor: "pointer" }}>
+            <g key={i}
+              /* The modal is the supporting-data view, so it always opens the
+                 COMPLETE series — never the windowed slice the axis shows. */
+              onClick={() => onPick(chart.series.find((o) => o.name === s.name) || s)}
+              style={{ cursor: "pointer" }}>
               <path
                 d={d} fill="none" stroke="rgb(var(--foreground))"
-                strokeWidth={s.emphasis ? (narrow ? 3.5 : 2.4) : (narrow ? 2.4 : 1.5)}
-                strokeDasharray={s.emphasis ? undefined : "5 4"}
-                opacity={s.emphasis ? 1 : 0.75}
+                strokeWidth={sw}
+                opacity={s.emphasis ? 1 : 0.62}
               />
+              {/* over-draw the un-vetted stretches in the background colour, then
+                  redraw them dotted — a dashed overlay alone would leave the
+                  solid line showing through beneath it */}
+              {weak.map((w, k) => (
+                <g key={k}>
+                  <path d={w} fill="none" stroke="rgb(var(--background))" strokeWidth={sw + 1.6} />
+                  <path d={w} fill="none" stroke="rgb(var(--foreground))" strokeWidth={sw}
+                    strokeDasharray={narrow ? "2 5" : "1.5 4"} strokeLinecap="round"
+                    opacity={s.emphasis ? 1 : 0.62} />
+                </g>
+              ))}
               {/* fat invisible hit target so the line is clickable on touch */}
               <path d={d} fill="none" stroke="transparent" strokeWidth={narrow ? 26 : 16} />
               {/* A series sampled at intervals (the CDC run is decadal before 2003)
@@ -213,19 +261,37 @@ function TwoSeriesChart({ chart, onPick }: { chart: Chart; onPick: (s: ChartSeri
         >
           {showMarkers ? "Hide" : "Show"} dated markers
         </button>
+        {earliest && (
+          <button
+            type="button"
+            onClick={() => { setFullRecord((v) => !v); track("crime_full_record_toggled"); }}
+            aria-pressed={fullRecord}
+            className="text-[14px] text-muted hover:text-foreground underline underline-offset-4"
+          >
+            {fullRecord
+              ? `Back to ${DATA_WINDOW.from}\u2013${DATA_WINDOW.to}`
+              : `Show the full record (${earliest}\u2013${DATA_WINDOW.to})`}
+          </button>
+        )}
         <span className="text-muted text-[14px]">Click either line for its method and sources.</span>
       </div>
 
       {/* On phones the end labels are dropped, so the key carries identity. */}
       {narrow && (
         <ul className="list-none p-0 mt-3 mb-0">
-          {chart.series.map((s, i) => (
+          {view.map((s, i) => (
             <li key={i} className="text-[15px] text-foreground/85 py-1">
-              <span className="font-semibold">{s.emphasis ? "———" : "– – –"}</span> {s.name}
+              <span className="font-semibold">{s.emphasis ? "———" : "‒‒‒"}</span> {s.name}
             </li>
           ))}
         </ul>
       )}
+      <p className="text-muted text-[14px] measure mt-3 mb-0">
+        <span className="text-foreground">· · ·</span> Dotted stretches are years that are
+        not Tier A — read from a published chart rather than stated in report text, or
+        resting on a collection the publisher itself flagged. Line weight, not dashing,
+        distinguishes the two series.
+      </p>
     </figure>
   );
 }
@@ -258,6 +324,24 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
   const dqP = usePager(dq, 5);
   const srcP = usePager(srcs, 25);
 
+  // 2026 year-to-date. Kept off the chart on purpose (see cq09): a partial year
+  // plotted on an annual series reads as a completed one.
+  const ytd = useMemo(
+    () => (indicators || []).filter((r) => r.workstream === "W1-YTD"),
+    [indicators],
+  );
+  const ytdLabel: Record<string, string> = {
+    ccj_h1_homicide_pct_change: "Homicide",
+    ccj_h1_robbery_pct_change: "Robbery",
+    ccj_h1_carjacking_pct_change: "Carjacking",
+    ccj_h1_mv_theft_pct_change: "Motor vehicle theft",
+    ccj_h1_gun_assault_pct_change: "Gun assault",
+    ccj_h1_agg_assault_pct_change: "Aggravated assault",
+    ccj_h1_sexual_assault_pct_change: "Sexual assault",
+    ccj_h1_domestic_violence_pct_change: "Domestic violence",
+    rtci_ytd_murder_pct_change: "Murder (separate 566-agency index, to April)",
+  };
+
   const clearance = useMemo(
     () => (indicators || [])
       .filter((r) => r.indicator_id === "homicide_clearance_rate")
@@ -281,6 +365,43 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
           </>
         )}
       </section>
+
+      {/* ---- 2026 year to date ---- */}
+      {!!ytd.length && (
+        <section className="mb-16">
+          <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">
+            Where 2026 stands
+          </h2>
+          <p className="text-muted text-[15px] mb-6 measure">
+            The chart above ends at 2025, the last complete year, so it lines up with every
+            other chart in this section. There is no national 2026 statistic yet — the FBI
+            publishes annually. What exists is below: a 36-city half-year comparison and a
+            separate 566-agency index. Both are urban samples, not the country.
+          </p>
+          <ul className="list-none p-0 m-0">
+            {ytd.map((r) => {
+              const up = r.value > 0;
+              return (
+                <li key={r.indicator_id}
+                  className="flex items-baseline gap-3 py-3 border-b border-edge/60 text-[16px] text-foreground/85">
+                  <TierChip t={r.tier} />
+                  <span className="measure">{ytdLabel[r.indicator_id] || r.indicator_id}</span>
+                  <span className={`font-semibold tabular-nums ${up ? "text-foreground" : "text-foreground/70"}`}>
+                    {up ? "+" : ""}{r.value}%
+                  </span>
+                  {up && <span className="text-[13px] uppercase tracking-wide text-foreground">rose</span>}
+                  <span className="ml-auto"><SourceLink id={r.source_id} sources={srcs} /></span>
+                </li>
+              );
+            })}
+          </ul>
+          <p className="text-muted text-[14px] measure mt-4">
+            Nine of thirteen offences fell. The two that rose are listed alongside the rest,
+            not omitted: reporting only the decline would be the selective framing this
+            dataset exists to avoid.
+          </p>
+        </section>
+      )}
 
       {/* ---- verdict ---- */}
       {verdict === null ? <SectionSkeleton title="Is crime rising or falling?" /> : (
@@ -461,7 +582,7 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
               </ul>
             )}
             <h4 className="font-display font-semibold text-foreground text-[16px] mt-6 mb-2">
-              Year by year ({picked.points[0].year}&ndash;{picked.points[picked.points.length - 1].year})
+              Full record, year by year ({picked.points[0].year}&ndash;{picked.points[picked.points.length - 1].year})
             </h4>
             <div className="max-h-[42vh] overflow-y-auto scroll-thin border-t border-edge">
               <table className="w-full text-[15px]">

@@ -18,6 +18,12 @@
     "source_id": "cs_two_measures"
   },
   {
+    "topic": "ytd_2026",
+    "statement": "2026 so far continues the fall. Across 36 large cities, homicide in the first half of 2026 was 18% below the first half of 2025 \u2014 215 fewer deaths \u2014 with carjacking down 47%, motor vehicle theft down 20% and robbery down 17%. The Real-Time Crime Index, a separate sample of 566 agencies covering about 119 million people, independently records murder down 18.7% through April. Nine of thirteen offences fell. Two rose: domestic violence by 8% and sexual assault by 3%.",
+    "tier": "A",
+    "source_id": "cs_ccj_2026"
+  },
+  {
     "topic": "clearance_decline",
     "statement": "The share of homicides cleared by arrest or exceptional means fell from 93% in 1962 to 64% by 1994, reached 61.4% in 2019, dropped sharply to 54% in 2020 and to a reported low of 52.3% in 2022, recovering to 61.4% in 2024. Roughly four in ten US homicides are not cleared.",
     "tier": "B",

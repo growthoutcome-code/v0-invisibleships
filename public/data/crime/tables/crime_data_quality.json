@@ -63,6 +63,15 @@
     "source_id": "cs_ncvs_cv24"
   },
   {
+    "dq_id": "cq09",
+    "geography": "US",
+    "topic": "2026 figures are partial-year and city-sample, not national",
+    "issue": "There is no national 2026 crime statistic yet \u2014 the FBI publishes annually and released final 2025 data on 14 August 2026. What exists for 2026 is a 36-city half-year comparison and a 566-agency index covering about 119 million people, roughly a third of the country. Both are samples of larger urban agencies, which are not representative of national crime.",
+    "effect": "2026 figures are shown as a stated percentage change over a stated period and sample, never as a point on the annual chart. A partial year plotted on an annual series reads as a completed year and would be wrong.",
+    "tier": "A",
+    "source_id": "cs_ccj_2026"
+  },
+  {
     "dq_id": "cq08",
     "geography": "US",
     "topic": "Two recent FBI counts could not be verified",

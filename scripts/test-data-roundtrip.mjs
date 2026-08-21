@@ -430,7 +430,13 @@ const crime = await page.evaluate(() => {
   const txt = main.innerText;
   return {
     chart: !!svg,
-    series: drawn.length,
+    // count series GROUPS, not paths: each series now draws a solid path plus
+    // a background-overdraw and a dotted path for every un-vetted stretch
+    series: svg ? [...svg.querySelectorAll("g")].filter((g) => g.getAttribute("style")?.includes("cursor")).length : 0,
+    // dotted must mean UN-VETTED (not Tier A), never series identity
+    dotted: svg ? [...svg.querySelectorAll("path[stroke-dasharray]")].length : 0,
+    identitySolid: svg ? [...svg.querySelectorAll("g[style*=cursor] > path:first-child")]
+      .every((x) => !x.getAttribute("stroke-dasharray")) : false,
     labels: svg ? [...svg.querySelectorAll("text")].map((t) => t.textContent).filter((t) => /FBI|CDC/.test(t)) : [],
     verdict: heads.some((h) => /rising or falling/i.test(h)),
     clearance: heads.some((h) => /homicides are cleared/i.test(h)),
@@ -441,11 +447,16 @@ const crime = await page.evaluate(() => {
     ncvsGap: /23\.3 per 1,000/.test(txt) && /48%/.test(txt),
     crossLink: /procurement and legislation record/i.test(txt),
     noOverlay: !/\bcaused by\b/i.test(txt),
+    // boolean, not the whole page: logging the text made the run unreadable
+    legendExplained: /Dotted stretches are years that are\s+not Tier A/.test(txt.replace(/\n/g, " ")),
   };
 });
 console.log("crime:", JSON.stringify(crime));
 if (!crime.chart) fail("crime landing chart missing");
 if (crime.series !== 2) fail(`crime chart drew ${crime.series} series, expected 2 (FBI and CDC)`);
+if (!crime.dotted) fail("no dotted stretches — un-vetted years must be dotted, as on the health charts");
+if (!crime.identitySolid) fail("a series' main path is dashed; dashing must mean un-vetted, not series identity");
+if (!crime.legendExplained) fail("dotted-line convention is not explained beneath the chart");
 if (crime.labels.length < 2) fail("crime chart series are not labelled");
 if (!crime.verdict) fail("crime verdict heading missing");
 if (!crime.clearance) fail("clearance section missing");
@@ -501,6 +512,66 @@ if (!crimePhone.found) fail("crime chart missing at phone width");
 if (crimePhone.minPx < 9) fail(`crime chart label paints at ${crimePhone.minPx}px on a phone`);
 if (crimePhone.overflow) fail("crime chart overflows the phone viewport");
 if (!crimePhone.key) fail("crime chart drops end labels on phones without the text key");
+await page.setViewportSize({ width: 1280, height: 900 });
+
+// ---- one shared chart window ------------------------------------------------
+// Charts had drifted to three x-axes (crime 1950-, overdose 1999-, suicide
+// 2000-), so the same year sat in a different place on each. Every Data chart
+// now draws DATA_WINDOW with the same tick years; this guards that.
+const axes = {};
+for (const tab of ["Public Health", "Crime"]) {
+  await page.getByRole("tab", { name: new RegExp(`^${tab}$`, "i") }).click();
+  await page.waitForTimeout(2400);
+  axes[tab] = await page.evaluate(() =>
+    [...document.querySelectorAll("main figure")]
+      .filter((f) => f.offsetParent !== null)
+      .map((f) => {
+        const svg = f.querySelector("svg");
+        if (!svg) return null;
+        // axis ticks only: marker labels are rotated, axis ticks are not
+        const ticks = [...svg.querySelectorAll("text")]
+          .filter((t) => !t.getAttribute("transform"))
+          .map((t) => t.textContent)
+          .filter((t) => /^(19|20)\d\d$/.test(t))
+          .map(Number);
+        return ticks.length ? { cap: (f.querySelector("figcaption")?.textContent || "").slice(0, 40), ticks } : null;
+      })
+      .filter(Boolean));
+}
+const charts = [...axes["Public Health"], ...axes["Crime"]];
+console.log("chart axes:", JSON.stringify(charts.map((c) => ({ cap: c.cap, t: c.ticks.join(",") }))));
+if (charts.length < 3) fail(`expected at least 3 charts to check alignment, saw ${charts.length}`);
+const signature = charts[0].ticks.join(",");
+for (const c of charts) {
+  if (c.ticks.join(",") !== signature) {
+    fail(`chart axes are not aligned: "${c.cap}" ticks ${c.ticks.join(",")} vs ${signature}`);
+  }
+}
+if (Math.min(...charts[0].ticks) < 1999) fail("shared window starts before 1999");
+
+// 2026 YTD must be present, and must NOT be a point on the annual chart.
+await page.getByRole("tab", { name: /^Crime$/i }).click();
+await page.waitForTimeout(2200);
+const ytd = await page.evaluate(() => {
+  const t = document.querySelector("main").innerText;
+  const svg = document.querySelector("main figure svg");
+  const ticks = svg ? [...svg.querySelectorAll("text")].map((x) => x.textContent) : [];
+  return {
+    block: /Where 2026 stands/.test(t),
+    homicide: /-18%|−18%/.test(t),
+    rose: /\+8%/.test(t) && /rose/i.test(t),
+    independent: /18\.7/.test(t),
+    fullRecordToggle: /Show the full record/.test(t),
+    no2026OnChart: !ticks.includes("2026"),
+  };
+});
+console.log("ytd:", JSON.stringify(ytd));
+if (!ytd.block) fail("2026 year-to-date block missing");
+if (!ytd.homicide) fail("2026 homicide YTD figure missing");
+if (!ytd.rose) fail("the offences that ROSE in 2026 are not shown alongside those that fell");
+if (!ytd.independent) fail("the independent 566-agency YTD corroboration is missing");
+if (!ytd.fullRecordToggle) fail("full-record toggle missing — the pre-1999 crime record must stay reachable");
+if (!ytd.no2026OnChart) fail("2026 is plotted on the annual chart; a partial year must not be a chart point");
 await page.setViewportSize({ width: 1280, height: 900 });
 
 await browser.close();
