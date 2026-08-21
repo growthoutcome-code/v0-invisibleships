@@ -438,7 +438,10 @@ const crime = await page.evaluate(() => {
     identitySolid: svg ? [...svg.querySelectorAll("g[style*=cursor] > path:first-child")]
       .every((x) => !x.getAttribute("stroke-dasharray")) : false,
     labels: svg ? [...svg.querySelectorAll("text")].map((t) => t.textContent).filter((t) => /FBI|CDC/.test(t)) : [],
-    verdict: heads.some((h) => /rising or falling/i.test(h)),
+    verdict: heads.some((h) => /Has crime increased during the period/i.test(h)),
+    notCounted: heads.some((h) => /What nobody counts/i.test(h)),
+    lanes: [...main.querySelectorAll("figure figcaption")].some((f) => /Five kinds of harm/i.test(f.textContent)),
+    sweeps: heads.some((h) => /Enforcement in sweeps/i.test(h)),
     clearance: heads.some((h) => /homicides are cleared/i.test(h)),
     dq: heads.some((h) => /numbers can be trusted/i.test(h)),
     // the three figures the section turns on
@@ -459,6 +462,9 @@ if (!crime.identitySolid) fail("a series' main path is dashed; dashing must mean
 if (!crime.legendExplained) fail("dotted-line convention is not explained beneath the chart");
 if (crime.labels.length < 2) fail("crime chart series are not labelled");
 if (!crime.verdict) fail("crime verdict heading missing");
+if (!crime.notCounted) fail("'What nobody counts' lead section missing");
+if (!crime.lanes) fail("indexed lane chart missing");
+if (!crime.sweeps) fail("sweeps register missing");
 if (!crime.clearance) fail("clearance section missing");
 if (!crime.dq) fail("crime data-quality register missing");
 if (!crime.spike2020) fail("2020 spike figure (29.4%) missing");
@@ -473,12 +479,12 @@ await page.evaluate(() => {
 });
 await page.waitForTimeout(700);
 const crimeModal = await page.evaluate(() => {
-  const d = [...document.querySelectorAll("[role=dialog]")].find((x) => /Basis:/.test(x.innerText));
+  const d = [...document.querySelectorAll("[role=dialog]")].find((x) => /Basis:|Counts:/.test(x.innerText));
   return d ? { open: true, rows: d.querySelectorAll("tbody tr").length, caveats: d.querySelectorAll("li").length } : { open: false };
 });
 console.log("crime modal:", JSON.stringify(crimeModal));
 if (!crimeModal.open) fail("crime series modal did not open");
-if (crimeModal.rows < 50) fail(`crime series modal year rows: ${crimeModal.rows}`);
+if (crimeModal.rows < 10) fail(`crime modal year rows: ${crimeModal.rows}`);
 if (!crimeModal.caveats) fail("crime series modal carries no method caveats");
 await page.keyboard.press("Escape");
 

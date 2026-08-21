@@ -1,0 +1,56 @@
+[
+  {
+    "nc_id": "nc01",
+    "category": "Harassment, as a crime",
+    "status": "No national count exists",
+    "detail": "Harassment is not a NIBRS offense. The FBI's NIBRS User Manual lists eleven Group B offence codes and none of them is harassment; harassment charges fall into 90Z, 'All Other Offenses' \u2014 an undifferentiated bucket shared with everything else that has no code of its own. Nothing counts it separately.",
+    "who_would_collect": "FBI Criminal Justice Information Services, via a NIBRS offence code that does not exist.",
+    "tier": "A",
+    "source_id": "hs_nibrs_manual"
+  },
+  {
+    "nc_id": "nc02",
+    "category": "Stalking, as a crime",
+    "status": "No national count exists",
+    "detail": "NIBRS has no stalking code either. The manual states that Intimidation 'includes stalking', so every police-reported stalking figure in the national data is invisible inside offence 13C, mixed with one-off threats. There is no way to recover a stalking count from the published national series.",
+    "who_would_collect": "FBI CJIS. A separate code would be required.",
+    "tier": "A",
+    "source_id": "hs_nibrs_manual"
+  },
+  {
+    "nc_id": "nc03",
+    "category": "Harassment victimisation prevalence",
+    "status": "Measured once, in 2006, then abandoned",
+    "detail": "The 2006 Supplemental Victimization Survey counted 2,432,930 harassment victims \u2014 people who experienced stalking-type conduct without reporting fear. The 2016 and 2019 waves dropped the category entirely. No federal statistical agency has produced a national harassment prevalence estimate in twenty years.",
+    "who_would_collect": "Bureau of Justice Statistics, via the Supplemental Victimization Survey.",
+    "tier": "A",
+    "source_id": "hs_svs"
+  },
+  {
+    "nc_id": "nc04",
+    "category": "Stalking victimisation, since 2019",
+    "status": "Two comparable points, then nothing",
+    "detail": "The Supplemental Victimization Survey has run three times: 2006, 2016 and 2019. BJS states that 2016 and 2019 estimates cannot be compared with 2006 \u2014 the age floor moved from 18 to 16 and the instrument was rewritten. That leaves two comparable points, 1.5% of people aged 16+ in 2016 and 1.3% in 2019, and no wave since. Note that 2006 and 2019 both yield roughly 3.4 million victims; that coincidence is not a flat trend and must not be drawn as one.",
+    "who_would_collect": "Bureau of Justice Statistics. The survey has not been fielded since 2019.",
+    "tier": "A",
+    "source_id": "hs_svs"
+  },
+  {
+    "nc_id": "nc05",
+    "category": "Character defamation",
+    "status": "Not a crime, and not counted as one",
+    "detail": "Defamation is a civil tort in essentially every US jurisdiction. Criminal libel survives in a handful of states and is rarely charged; no body compiles national prosecution counts. The nearest sourceable series is federal civil filings under Nature of Suit 320 \u2014 but that category is 'Assault, Libel & Slander' combined, so defamation cannot be separated out, and it excludes the state courts where most defamation is litigated.",
+    "who_would_collect": "No federal body collects it. State court administrators would each have to, and do not.",
+    "tier": "A",
+    "source_id": "hs_nos320"
+  },
+  {
+    "nc_id": "nc06",
+    "category": "Online harassment, after 2020",
+    "status": "One private survey, discontinued",
+    "detail": "Pew Research's repeated online-harassment survey (2014, 2017, 2020) is the only national measurement of its kind, and it is a private survey rather than an official statistic. It recorded 35% of US adults reporting any online harassment in 2014 and 41% in both 2017 and 2020. There has been no wave since September 2020.",
+    "who_would_collect": "No federal agency measures it. Pew is not obliged to continue.",
+    "tier": "B",
+    "source_id": "hs_pew"
+  }
+]

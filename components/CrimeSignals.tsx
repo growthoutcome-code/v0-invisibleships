@@ -50,8 +50,207 @@ type Chart = {
   series: ChartSeries[];
   markers?: { year: number; label: string }[];
 };
+type Lane = {
+  name: string; counts: string; publisher: string; emphasis: boolean;
+  base_year: number; base_value: number; unit_raw: string; tier: string;
+  basis_short: string; caveats: string[];
+  points: { year: number; value: number; raw: number; tier: string }[];
+};
+type LaneChart = {
+  title: string; unit: string; note: string; publisher: string; tier: string;
+  indexed: boolean; series: Lane[];
+};
+type NotCounted = {
+  nc_id: string; category: string; status: string; detail: string;
+  who_would_collect: string; tier: string; source_id: string | null;
+};
+type Sweep = {
+  sweep_id: string; date: string; operation: string; agency: string;
+  headline: string; what_the_number_is: string; for_scale: string;
+  tier: string; source_id: string | null;
+};
 
 /* ---------------------------------------------------------------- chart --- */
+
+/**
+ * Five lanes on one indexed axis.
+ *
+ * The lanes count genuinely different things — deaths, offences known to police,
+ * NCIC records entered, federal civil filings — in units that differ by orders
+ * of magnitude. Raw values on a shared axis would flatten four of the five
+ * against the floor, so each lane is indexed to its own first year in the
+ * window = 100.
+ *
+ * That trade is stated rather than hidden: the chart shows DIRECTION and
+ * relative change, never magnitude, and each label carries its base year so no
+ * one reads two lanes at the same height as two equal quantities.
+ */
+function LaneChart({ chart, onPick }: { chart: LaneChart; onPick: (l: Lane) => void }) {
+  const narrow = useNarrow();
+  const [hoverYear, setHoverYear] = useState<number | null>(null);
+
+  const all = chart.series.flatMap((s) => s.points);
+  if (all.length < 2) return null;
+
+  const fsTick = narrow ? 24 : 11;
+  const fsLabel = narrow ? 24 : 12;
+  const W = 900, H = 380;
+  const padL = narrow ? 78 : 54;
+  const padR = narrow ? 24 : 210;
+  const padT = narrow ? 30 : 26;
+  const padB = narrow ? 52 : 38;
+
+  const x0 = DATA_WINDOW.from, x1 = DATA_WINDOW.to;
+  const vMax = Math.max(...all.map((p) => p.value)) * 1.08;
+  const X = (y: number) => padL + ((y - x0) / (x1 - x0)) * (W - padL - padR);
+  const Y = (v: number) => padT + (1 - v / vMax) * (H - padT - padB);
+
+  const yTicks = [0, 100, 200, 300, 400].filter((t) => t <= vMax);
+  const xTicks = dataWindowTicks(narrow);
+
+  // End labels de-collide by pushing apart to a minimum spacing, bottom-up.
+  const MIN_GAP = narrow ? 26 : 15;
+  let prevY = -Infinity;
+  const ends = chart.series
+    .map((s) => ({ s, last: s.points[s.points.length - 1] }))
+    .sort((a, b) => b.last.value - a.last.value)
+    .reverse()
+    .map((e) => {
+      const y = Math.max(Y(e.last.value), prevY + MIN_GAP);
+      prevY = y;
+      return { ...e, labelY: y };
+    });
+
+  return (
+    <figure className="m-0 mb-6">
+      <figcaption className="font-display font-semibold text-foreground text-[19px] mb-1">
+        {chart.title}
+      </figcaption>
+      <p className="text-muted text-[13px] m-0 mb-3">{chart.unit}</p>
+
+      <svg viewBox={`0 0 ${W} ${H}`} width="100%" role="img"
+        aria-label={`${chart.title}. ${chart.unit}.`}
+        onMouseLeave={() => setHoverYear(null)}
+        style={{ fontFamily: "inherit", overflow: "visible" }}>
+        {yTicks.map((t) => (
+          <g key={t}>
+            <line x1={padL} y1={Y(t)} x2={W - padR} y2={Y(t)}
+              stroke="rgb(var(--edge))" strokeWidth={t === 100 ? 1.6 : 1} />
+            <text x={padL - 8} y={Y(t) + 4} fontSize={fsTick} fill="rgb(var(--muted))" textAnchor="end">
+              {t}
+            </text>
+          </g>
+        ))}
+        {/* the 100 line is the reference: everything above it has risen */}
+        {!narrow && (
+          <text x={W - padR + 6} y={Y(100) + 4} fontSize="10.5" fill="rgb(var(--muted))">
+            start
+          </text>
+        )}
+        {xTicks.map((y) => (
+          <text key={y} x={X(y)} y={H - (narrow ? 22 : 12)} fontSize={fsTick}
+            fill="rgb(var(--muted))" textAnchor="middle">{y}</text>
+        ))}
+
+        {chart.series.map((s, i) => {
+          const pt = (p: { year: number; value: number }) =>
+            `${X(p.year).toFixed(1)},${Y(p.value).toFixed(1)}`;
+          const d = s.points.map((p, j) => `${j ? "L" : "M"}${pt(p)}`).join(" ");
+          // Same convention as every other chart: dotted = not Tier A.
+          const weak: string[] = [];
+          s.points.forEach((p, j) => {
+            if (p.tier && p.tier !== "A") {
+              if (j > 0) weak.push(`M${pt(s.points[j - 1])}L${pt(p)}`);
+              if (j < s.points.length - 1) weak.push(`M${pt(p)}L${pt(s.points[j + 1])}`);
+            }
+          });
+          const sw = s.emphasis ? (narrow ? 3.4 : 2.3) : (narrow ? 2.4 : 1.4);
+          // A lane sampled with gaps shows its points, so a straight run between
+          // two distant years cannot read as data we do not have.
+          const gappy = s.points.some((p, j) => j > 0 && p.year - s.points[j - 1].year > 1);
+          return (
+            <g key={i} onClick={() => onPick(s)} style={{ cursor: "pointer" }}>
+              <path d={d} fill="none" stroke="rgb(var(--foreground))" strokeWidth={sw}
+                opacity={s.emphasis ? 1 : 0.6} />
+              <path d={d} fill="none" stroke="transparent" strokeWidth={narrow ? 26 : 16} />
+              {weak.map((w, k) => (
+                <g key={k}>
+                  <path d={w} fill="none" stroke="rgb(var(--background))" strokeWidth={sw + 1.6} />
+                  <path d={w} fill="none" stroke="rgb(var(--foreground))" strokeWidth={sw}
+                    strokeDasharray={narrow ? "2 5" : "1.5 4"} strokeLinecap="round"
+                    opacity={s.emphasis ? 1 : 0.6} />
+                </g>
+              ))}
+              {gappy && s.points.map((p) => (
+                <circle key={p.year} cx={X(p.year)} cy={Y(p.value)} r={narrow ? 4 : 2.6}
+                  fill="rgb(var(--background))" stroke="rgb(var(--foreground))"
+                  strokeWidth={narrow ? 2 : 1.3} opacity={0.85} />
+              ))}
+              {/* every lane starts at 100 — mark it so the base year is visible */}
+              <circle cx={X(s.points[0].year)} cy={Y(100)} r={narrow ? 4.5 : 3}
+                fill="rgb(var(--foreground))" opacity={s.emphasis ? 1 : 0.6} />
+            </g>
+          );
+        })}
+
+        {!narrow && ends.map((e, i) => (
+          <text key={i} x={W - padR + 8} y={e.labelY + 4} fontSize={fsLabel}
+            fill="rgb(var(--foreground))" fontWeight={e.s.emphasis ? 700 : 500}
+            opacity={e.s.emphasis ? 1 : 0.75}>
+            {e.s.name} {Math.round(e.last.value)}
+          </text>
+        ))}
+
+        {Array.from({ length: x1 - x0 + 1 }, (_, i) => x0 + i).map((y) => (
+          <rect key={y} x={X(y) - (W - padL - padR) / (x1 - x0) / 2} y={padT}
+            width={Math.max(3, (W - padL - padR) / (x1 - x0))} height={H - padT - padB}
+            fill="transparent" onMouseEnter={() => setHoverYear(y)} />
+        ))}
+        {hoverYear !== null && (
+          <g pointerEvents="none">
+            <line x1={X(hoverYear)} y1={padT} x2={X(hoverYear)} y2={H - padB}
+              stroke="rgb(var(--muted))" strokeDasharray="3 3" />
+            <text x={Math.min(Math.max(X(hoverYear), padL + 40), W - padR - 20)} y={padT - 8}
+              fontSize={fsLabel} fill="rgb(var(--foreground))" textAnchor="middle" fontWeight="600">
+              {hoverYear}
+            </text>
+            {chart.series.map((s, i) => {
+              const p = s.points.find((q) => q.year === hoverYear);
+              return p ? (
+                <circle key={i} cx={X(hoverYear)} cy={Y(p.value)} r={narrow ? 6 : 4.5}
+                  fill="rgb(var(--background))" stroke="rgb(var(--foreground))" strokeWidth="2" />
+              ) : null;
+            })}
+          </g>
+        )}
+      </svg>
+
+      <ul className="list-none p-0 mt-4 mb-0">
+        {chart.series.map((s, i) => {
+          const last = s.points[s.points.length - 1];
+          const pct = Math.round(last.value - 100);
+          return (
+            <li key={i} className="flex flex-wrap items-baseline gap-x-3 gap-y-1 py-2 border-b border-edge/60 text-[15px]">
+              <button type="button" onClick={() => onPick(s)}
+                className="text-foreground font-semibold underline underline-offset-4 hover:text-accent text-left">
+                {s.name}
+              </button>
+              <span className="text-muted">{s.counts}</span>
+              <span className="ml-auto tabular-nums text-foreground/85 shrink-0">
+                {s.base_year}&ndash;{last.year}: {pct > 0 ? "+" : ""}{pct}%
+              </span>
+            </li>
+          );
+        })}
+      </ul>
+      <p className="text-muted text-[14px] measure mt-3 mb-0">
+        Each lane starts at 100 in its own first year, marked with a dot. Heights are not
+        comparable between lanes &mdash; these count different things. Dotted stretches are
+        years that are not Tier A; hollow points mark a lane sampled with gaps.
+      </p>
+    </figure>
+  );
+}
 
 /**
  * Two official series on one axis, deliberately unreconciled.
@@ -306,19 +505,25 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
   const sources = useTable<SourceRec>("/data/crime/tables/crime_sources.json");
   const verdict = useDoc<Verdict>("/data/crime/tables/crime_verdict.json");
   const chart = useDoc<Chart>("/data/crime/charts/homicide_two_measures.json");
+  const lanes = useDoc<LaneChart>("/data/crime/charts/harm_lanes_indexed.json");
+  const notCounted = useTable<NotCounted>("/data/crime/tables/crime_not_counted.json");
+  const sweeps = useTable<Sweep>("/data/crime/tables/crime_sweeps.json");
 
   const srcs = sources || [];
   const [picked, setPicked] = useState<ChartSeries | null>(null);
+  const [lanePicked, setLanePicked] = useState<Lane | null>(null);
 
   // Escape closes the series modal. Caught by the test suite: without this the
   // dialog traps the reader, since the backdrop and the close button were the
   // only exits and neither is reachable from the keyboard.
   useEffect(() => {
-    if (!picked) return;
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setPicked(null); };
+    if (!picked && !lanePicked) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") { setPicked(null); setLanePicked(null); }
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [picked]);
+  }, [picked, lanePicked]);
 
   const trendsP = usePager(trends, 5);
   const dqP = usePager(dq, 5);
@@ -356,8 +561,83 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
         evidence-graded and linked to the source it was read from ·
       </DataNoteLine>
 
-      {/* ---- the chart, first ---- */}
+      {/* ---- what nobody counts: the lead finding (Sean, 2026-08-21) ---- */}
+      {notCounted === null ? <SectionSkeleton title="What nobody counts" /> : !!notCounted.length && (
+        <section className="mb-14">
+          <h2 className="font-display font-semibold text-foreground text-[24px] mb-3">
+            What nobody counts
+          </h2>
+          <p className="body-copy text-foreground/90 measure mb-6">
+            The kinds of harm this site is most concerned with are the ones with no
+            national statistic. That is not a research failure &mdash; it is the finding.
+            Each entry below names what is uncounted, why, and the body that would have
+            to count it and does not.
+          </p>
+          <ul className="list-none p-0 m-0">
+            {notCounted.map((n) => (
+              <li key={n.nc_id} className="py-4 border-b border-edge/60">
+                <div className="flex flex-wrap items-baseline gap-3">
+                  <TierChip t={n.tier} />
+                  <span className="text-foreground text-[17px] font-semibold">{n.category}</span>
+                  <span className="text-muted text-[14px] uppercase tracking-wide">{n.status}</span>
+                  <span className="ml-auto"><SourceLink id={n.source_id} sources={srcs} /></span>
+                </div>
+                <p className="body-copy text-foreground/85 measure mt-2 mb-0 text-[17px]">{n.detail}</p>
+                <p className="text-muted text-[14px] measure mt-2 mb-0">
+                  <em>Who would have to count it:</em> {n.who_would_collect}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {/* ---- the priority lanes, indexed ---- */}
+      <section className="mb-14">
+        {lanes === null ? <SkeletonChart /> : (
+          <>
+            <LaneChart chart={lanes} onPick={setLanePicked} />
+            <p className="body-copy text-foreground/90 measure">{lanes.note}</p>
+          </>
+        )}
+      </section>
+
+      {/* ---- sweeping enforcement: headline arrest numbers ---- */}
+      {!!sweeps?.length && (
+        <section className="mb-14">
+          <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">
+            Enforcement in sweeps
+          </h2>
+          <p className="text-muted text-[15px] mb-6 measure">
+            Arrest counts announced as headline figures. An arrest is an enforcement
+            action, not an adjudicated fact &mdash; each entry records what the number
+            actually counts.
+          </p>
+          <ul className="list-none p-0 m-0">
+            {sweeps.map((w) => (
+              <li key={w.sweep_id} className="py-4 border-b border-edge/60">
+                <div className="flex flex-wrap items-baseline gap-3">
+                  <TierChip t={w.tier} />
+                  <span className="text-foreground text-[17px] font-semibold">{w.operation}</span>
+                  <span className="text-muted text-[14px]">{w.date}</span>
+                  <span className="ml-auto"><SourceLink id={w.source_id} sources={srcs} /></span>
+                </div>
+                <p className="body-copy text-foreground/85 measure mt-2 mb-0 text-[17px]">
+                  {w.headline} <span className="text-muted">&mdash; {w.agency}</span>
+                </p>
+                <p className="text-muted text-[15px] measure mt-2 mb-0">{w.what_the_number_is}</p>
+                <p className="text-muted text-[15px] measure mt-1 mb-0"><em>For scale:</em> {w.for_scale}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {/* ---- homicide: one lens among several, no longer the lead ---- */}
       <section className="mb-12">
+        <h2 className="font-display font-semibold text-foreground text-[21px] mb-4">
+          The homicide lens
+        </h2>
         {chart === null ? <SkeletonChart /> : (
           <>
             <TwoSeriesChart chart={chart} onPick={setPicked} />
@@ -551,6 +831,62 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
           </ul>
           <ListPager page={srcP.page} totalPages={srcP.totalPages} setPage={srcP.setPage} scrollTo={srcP.scrollTo} />
         </section>
+      )}
+
+      {/* ---- per-lane detail ---- */}
+      {lanePicked && (
+        <div role="dialog" aria-modal="true" aria-label={lanePicked.name}
+          className="fixed inset-0 z-50 bg-background/85 overflow-y-auto p-4 sm:p-10"
+          onClick={() => setLanePicked(null)}>
+          <div className="max-w-[720px] mx-auto bg-background border border-edge p-6 sm:p-8"
+            onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-start gap-4">
+              <h3 className="font-display font-semibold text-foreground text-[22px] m-0">{lanePicked.name}</h3>
+              <button type="button" onClick={() => setLanePicked(null)}
+                className="ml-auto text-muted hover:text-foreground text-[22px] leading-none" aria-label="Close">
+                ×
+              </button>
+            </div>
+            <p className="text-muted text-[15px] mt-3 mb-0">
+              <strong className="text-foreground/80">Counts:</strong> {lanePicked.counts} ·{" "}
+              <strong className="text-foreground/80">Publisher:</strong> {lanePicked.publisher} ·{" "}
+              <TierChip t={lanePicked.tier} />
+            </p>
+            <p className="text-muted text-[15px] mt-2 mb-0">
+              Indexed to {lanePicked.base_year} = 100, where the raw figure was{" "}
+              <strong className="text-foreground/85">{lanePicked.base_value.toLocaleString()}</strong>.
+            </p>
+            {!!lanePicked.caveats?.length && (
+              <ul className="list-disc pl-5 mt-4 text-[15px] text-foreground/85">
+                {lanePicked.caveats.map((c, i) => <li key={i} className="mb-1">{c}</li>)}
+              </ul>
+            )}
+            <h4 className="font-display font-semibold text-foreground text-[16px] mt-6 mb-2">
+              Raw figures, year by year
+            </h4>
+            <div className="max-h-[42vh] overflow-y-auto scroll-thin border-t border-edge">
+              <table className="w-full text-[15px]">
+                <thead>
+                  <tr className="text-muted text-[13px] text-left">
+                    <th className="py-1.5 font-normal w-20">Year</th>
+                    <th className="py-1.5 font-normal">Raw</th>
+                    <th className="py-1.5 font-normal">Index</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {lanePicked.points.slice().reverse().map((q) => (
+                    <tr key={q.year} className="border-b border-edge/50">
+                      <td className="py-1.5 text-muted">{q.year}</td>
+                      <td className="py-1.5 text-foreground/90">{q.raw.toLocaleString()}{q.tier !== "A" ? " *" : ""}</td>
+                      <td className="py-1.5 text-foreground/70">{q.value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="text-muted text-[13px] mt-2 mb-0">* not Tier A — drawn dotted on the chart.</p>
+          </div>
+        </div>
       )}
 
       {/* ---- per-series detail ---- */}

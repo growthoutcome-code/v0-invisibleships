@@ -1,41 +1,41 @@
 {
-  "claim": "Is crime in the United States rising or falling after the pandemic?",
-  "summary": "Both answers are defensible, and which one you get depends entirely on which measurement system you use. There was a real and large increase: murder rose 29.4% in 2020, the largest single-year rise the FBI has recorded, and CDC death certificates register the same event independently. On the police measure that increase has now fully reversed \u2014 the FBI's final 2025 data shows the largest year-to-year violent-crime decline since 1936, and a murder rate of 4.1 per 100,000 that is below the pre-pandemic level and tied for the lowest ever recorded. But the survey that asks people directly whether they were victimised shows violent victimisation higher in 2024 than in 2021 and holding near that level, while police-recorded violent crime barely moved across the same decade. Only about half of violent victimisations are reported to police at all, which is how both things can be true at once. The gap between the two measures is not a flaw in the data. On this record it is the most substantial finding.",
+  "claim": "Has crime increased during the period this record covers \u2014 and is there a relationship?",
+  "summary": "Split the question in two, because the record can answer one half and not the other. Has crime increased over the 1999-2025 window this site documents? By category, and honestly: overdose deaths quadrupled \u2014 the largest rise of any lane, peaking in 2022 and falling since. Homicide spiked 29.4% in 2020, the largest single-year rise ever recorded, then reversed to the lowest rate ever recorded by 2025. Defamation-adjacent federal filings are at their highest in the 22-year series, rising sharply since 2023. Missing-person entries fell to their lowest modern level \u2014 though what fell, cases or the entering of them, cannot be separated. And the survey measure of violent victimisation sits higher in 2024 than 2021 while police-recorded crime fell \u2014 the two official measures disagree in direction right now. Harassment, the category this site is most concerned with, cannot be answered at all: nobody counts it. As for a relationship with the events on the master timeline \u2014 procurement, legislation, deployments \u2014 this record cannot establish one. The lanes and the timeline can be read against each other, and the timeline's crime track exists for exactly that reading; but two things happening in the same years is a co-occurrence, and this dataset does not corroborate the Government Cloud record, nor the reverse. Where the counting itself changed mid-window \u2014 NIBRS in 2021 \u2014 even the crime series does not agree with itself.",
   "key_figures": [
     {
-      "figure": "Murder rose 29.4% in 2020 \u2014 the largest single-year increase the FBI has recorded",
+      "figure": "Overdose deaths: 16,849 (1999) to a 107,941 peak (2022) \u2014 the steepest rise of any lane",
       "tier": "A",
-      "source_id": "cs013"
+      "source_id": null
     },
     {
-      "figure": "2025 murder rate 4.1 per 100,000 \u2014 tied with 1955-56 for the lowest ever recorded",
+      "figure": "Murder +29.4% in 2020, then a record reversal to 4.1 per 100,000 by 2025",
       "tier": "A",
-      "source_id": "cs033"
+      "source_id": null
     },
     {
-      "figure": "Violent crime down 9.3% in 2025 \u2014 largest year-to-year decline since FBI estimation began in 1936",
+      "figure": "Federal assault/libel/slander filings at a 22-year high: 848 in 2025, up 47% since 2022",
       "tier": "A",
-      "source_id": "cs033"
+      "source_id": null
     },
     {
-      "figure": "NCVS violent victimisation 23.3 per 1,000 in 2024, against 16.5 in 2021",
+      "figure": "NCIC missing-person entries at the modern low: 498,038 (2025), down from 651,226 (2017)",
+      "tier": "A",
+      "source_id": null
+    },
+    {
+      "figure": "NCVS violent victimisation 23.3 per 1,000 (2024) vs 16.5 (2021) \u2014 the survey and police measures disagree",
       "tier": "A",
       "source_id": "cs_ncvs_cv24"
     },
     {
-      "figure": "Police-recorded violent crime moved only between 3.7 and 4.0 per 1,000 across 2015-2024",
+      "figure": "Harassment: no national count exists to answer the question with",
       "tier": "A",
-      "source_id": "cs_two_measures"
+      "source_id": "hs_nibrs_manual"
     },
     {
-      "figure": "About 48% of violent victimisations were reported to police in 2024",
+      "figure": "Intimidation (incl. stalking) estimates exist only from 2022 \u2014 the record starts where the question needs it oldest",
       "tier": "A",
-      "source_id": "cs_ncvs_cv24"
-    },
-    {
-      "figure": "NIBRS covered 65.7% of the US population in 2021, against 96.2% in 2025",
-      "tier": "A",
-      "source_id": "cs002"
+      "source_id": null
     }
   ]
 }

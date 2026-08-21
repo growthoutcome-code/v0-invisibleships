@@ -1,0 +1,608 @@
+{
+  "title": "Five kinds of harm, indexed",
+  "unit": "Each lane indexed to its own first year in this window = 100",
+  "note": "These five count different things in different units \u2014 deaths, offences known to police, records entered, civil filings \u2014 and differ by orders of magnitude. Putting the raw numbers on one axis would flatten four of the five into the floor, so each lane is indexed to its own first year. The chart shows which are rising and which are falling relative to where each began; it does not, and cannot, show which is larger. Each lane's base year is stated in its label, and clicking a lane gives the raw figures.",
+  "publisher": "FBI; CDC/NCHS; BJS; US Courts",
+  "tier": "A",
+  "indexed": true,
+  "series": [
+    {
+      "name": "Missing persons",
+      "counts": "NCIC missing-person records entered per year",
+      "publisher": "FBI NCIC",
+      "emphasis": true,
+      "base_year": 2014,
+      "base_value": 634155,
+      "unit_raw": "records entered",
+      "tier": "B",
+      "basis_short": "NCIC missing-person records entered per year; indexed to 2014 = 100",
+      "points": [
+        {
+          "year": 2014,
+          "value": 100.0,
+          "raw": 634155,
+          "tier": "B"
+        },
+        {
+          "year": 2015,
+          "value": 100.1,
+          "raw": 634908,
+          "tier": "A"
+        },
+        {
+          "year": 2016,
+          "value": 102.1,
+          "raw": 647435,
+          "tier": "A"
+        },
+        {
+          "year": 2017,
+          "value": 102.7,
+          "raw": 651226,
+          "tier": "A"
+        },
+        {
+          "year": 2018,
+          "value": 96.6,
+          "raw": 612846,
+          "tier": "A"
+        },
+        {
+          "year": 2019,
+          "value": 96.1,
+          "raw": 609275,
+          "tier": "A"
+        },
+        {
+          "year": 2020,
+          "value": 85.6,
+          "raw": 543018,
+          "tier": "A"
+        },
+        {
+          "year": 2022,
+          "value": 86.2,
+          "raw": 546568,
+          "tier": "A"
+        },
+        {
+          "year": 2023,
+          "value": 88.8,
+          "raw": 563389,
+          "tier": "A"
+        },
+        {
+          "year": 2024,
+          "value": 84.2,
+          "raw": 533936,
+          "tier": "A"
+        },
+        {
+          "year": 2025,
+          "value": 78.5,
+          "raw": 498038,
+          "tier": "A"
+        }
+      ],
+      "caveats": [
+        "Counts RECORDS, not people: one person can generate more than one record, and a record is cancelled when the case closes for any reason \u2014 cancellation does not mean found alive.",
+        "Adults are not subject to the same mandatory-entry rules as juveniles, so adult cases are under-entered by an unknown margin.",
+        "Tribal and Indigenous cases are documented as substantially undercounted."
+      ]
+    },
+    {
+      "name": "Drug overdose deaths",
+      "counts": "deaths per year",
+      "publisher": "CDC/NCHS",
+      "emphasis": true,
+      "base_year": 1999,
+      "base_value": 16849,
+      "unit_raw": "drug overdose deaths (final)",
+      "tier": "A",
+      "basis_short": "deaths per year; indexed to 1999 = 100",
+      "points": [
+        {
+          "year": 1999,
+          "value": 100.0,
+          "raw": 16849,
+          "tier": "A"
+        },
+        {
+          "year": 2000,
+          "value": 103.4,
+          "raw": 17415,
+          "tier": "A"
+        },
+        {
+          "year": 2001,
+          "value": 115.1,
+          "raw": 19394,
+          "tier": "A"
+        },
+        {
+          "year": 2002,
+          "value": 139.6,
+          "raw": 23518,
+          "tier": "A"
+        },
+        {
+          "year": 2003,
+          "value": 153.0,
+          "raw": 25785,
+          "tier": "A"
+        },
+        {
+          "year": 2004,
+          "value": 162.8,
+          "raw": 27424,
+          "tier": "A"
+        },
+        {
+          "year": 2005,
+          "value": 176.9,
+          "raw": 29813,
+          "tier": "A"
+        },
+        {
+          "year": 2006,
+          "value": 204.3,
+          "raw": 34425,
+          "tier": "A"
+        },
+        {
+          "year": 2007,
+          "value": 213.7,
+          "raw": 36010,
+          "tier": "A"
+        },
+        {
+          "year": 2008,
+          "value": 216.3,
+          "raw": 36450,
+          "tier": "A"
+        },
+        {
+          "year": 2009,
+          "value": 219.6,
+          "raw": 37004,
+          "tier": "A"
+        },
+        {
+          "year": 2010,
+          "value": 227.5,
+          "raw": 38329,
+          "tier": "A"
+        },
+        {
+          "year": 2011,
+          "value": 245.4,
+          "raw": 41340,
+          "tier": "A"
+        },
+        {
+          "year": 2012,
+          "value": 246.3,
+          "raw": 41502,
+          "tier": "A"
+        },
+        {
+          "year": 2013,
+          "value": 261.0,
+          "raw": 43982,
+          "tier": "A"
+        },
+        {
+          "year": 2014,
+          "value": 279.3,
+          "raw": 47055,
+          "tier": "A"
+        },
+        {
+          "year": 2015,
+          "value": 311.0,
+          "raw": 52404,
+          "tier": "A"
+        },
+        {
+          "year": 2016,
+          "value": 377.7,
+          "raw": 63632,
+          "tier": "A"
+        },
+        {
+          "year": 2017,
+          "value": 416.9,
+          "raw": 70237,
+          "tier": "A"
+        },
+        {
+          "year": 2018,
+          "value": 399.8,
+          "raw": 67367,
+          "tier": "A"
+        },
+        {
+          "year": 2019,
+          "value": 419.2,
+          "raw": 70630,
+          "tier": "A"
+        },
+        {
+          "year": 2020,
+          "value": 544.8,
+          "raw": 91799,
+          "tier": "A"
+        },
+        {
+          "year": 2021,
+          "value": 633.3,
+          "raw": 106699,
+          "tier": "A"
+        },
+        {
+          "year": 2022,
+          "value": 640.6,
+          "raw": 107941,
+          "tier": "A"
+        },
+        {
+          "year": 2023,
+          "value": 623.2,
+          "raw": 105007,
+          "tier": "A"
+        },
+        {
+          "year": 2024,
+          "value": 471.1,
+          "raw": 79384,
+          "tier": "A"
+        },
+        {
+          "year": 2025,
+          "value": 415.3,
+          "raw": 69973,
+          "tier": "A"
+        }
+      ],
+      "caveats": [
+        "2025 is provisional and will revise upward as late certificates are processed.",
+        "Full series and the provisional-versus-final problem are in the Public Health section."
+      ]
+    },
+    {
+      "name": "Defamation filings",
+      "counts": "federal civil cases commenced under Nature of Suit 320",
+      "publisher": "US Courts",
+      "emphasis": true,
+      "base_year": 2004,
+      "base_value": 668,
+      "unit_raw": "civil cases commenced, 12 months ending Sept 30",
+      "tier": "A",
+      "basis_short": "federal civil cases commenced under Nature of Suit 320; indexed to 2004 = 100",
+      "points": [
+        {
+          "year": 2004,
+          "value": 100.0,
+          "raw": 668,
+          "tier": "A"
+        },
+        {
+          "year": 2005,
+          "value": 96.9,
+          "raw": 647,
+          "tier": "A"
+        },
+        {
+          "year": 2006,
+          "value": 87.9,
+          "raw": 587,
+          "tier": "A"
+        },
+        {
+          "year": 2007,
+          "value": 79.8,
+          "raw": 533,
+          "tier": "A"
+        },
+        {
+          "year": 2008,
+          "value": 83.4,
+          "raw": 557,
+          "tier": "A"
+        },
+        {
+          "year": 2011,
+          "value": 88.3,
+          "raw": 590,
+          "tier": "A"
+        },
+        {
+          "year": 2012,
+          "value": 86.7,
+          "raw": 579,
+          "tier": "A"
+        },
+        {
+          "year": 2013,
+          "value": 95.2,
+          "raw": 636,
+          "tier": "A"
+        },
+        {
+          "year": 2014,
+          "value": 74.1,
+          "raw": 495,
+          "tier": "A"
+        },
+        {
+          "year": 2015,
+          "value": 88.5,
+          "raw": 591,
+          "tier": "A"
+        },
+        {
+          "year": 2016,
+          "value": 83.7,
+          "raw": 559,
+          "tier": "A"
+        },
+        {
+          "year": 2017,
+          "value": 82.3,
+          "raw": 550,
+          "tier": "A"
+        },
+        {
+          "year": 2018,
+          "value": 91.6,
+          "raw": 612,
+          "tier": "A"
+        },
+        {
+          "year": 2019,
+          "value": 88.9,
+          "raw": 594,
+          "tier": "A"
+        },
+        {
+          "year": 2020,
+          "value": 89.5,
+          "raw": 598,
+          "tier": "A"
+        },
+        {
+          "year": 2021,
+          "value": 86.4,
+          "raw": 577,
+          "tier": "A"
+        },
+        {
+          "year": 2022,
+          "value": 85.2,
+          "raw": 569,
+          "tier": "A"
+        },
+        {
+          "year": 2023,
+          "value": 97.3,
+          "raw": 650,
+          "tier": "A"
+        },
+        {
+          "year": 2024,
+          "value": 107.5,
+          "raw": 718,
+          "tier": "A"
+        },
+        {
+          "year": 2025,
+          "value": 126.9,
+          "raw": 848,
+          "tier": "A"
+        }
+      ],
+      "caveats": [
+        "THIS IS A PROXY. Nature of Suit 320 is 'Assault, Libel & Slander' COMBINED. Defamation cannot be separated from assault claims in this series.",
+        "Federal civil filings only. Most defamation is litigated in state courts, which publish no comparable national series.",
+        "Defamation is a civil tort, not a crime, in essentially every US jurisdiction."
+      ]
+    },
+    {
+      "name": "Homicide",
+      "counts": "murder and nonnegligent manslaughter known to police",
+      "publisher": "FBI",
+      "emphasis": false,
+      "base_year": 1999,
+      "base_value": 15522,
+      "unit_raw": "offenses",
+      "tier": "A",
+      "basis_short": "murder and nonnegligent manslaughter known to police; indexed to 1999 = 100",
+      "points": [
+        {
+          "year": 1999,
+          "value": 100.0,
+          "raw": 15522,
+          "tier": "A"
+        },
+        {
+          "year": 2000,
+          "value": 100.4,
+          "raw": 15586,
+          "tier": "A"
+        },
+        {
+          "year": 2001,
+          "value": 103.3,
+          "raw": 16037,
+          "tier": "A"
+        },
+        {
+          "year": 2002,
+          "value": 104.6,
+          "raw": 16229,
+          "tier": "A"
+        },
+        {
+          "year": 2003,
+          "value": 106.5,
+          "raw": 16528,
+          "tier": "A"
+        },
+        {
+          "year": 2004,
+          "value": 104.0,
+          "raw": 16148,
+          "tier": "A"
+        },
+        {
+          "year": 2005,
+          "value": 107.8,
+          "raw": 16740,
+          "tier": "A"
+        },
+        {
+          "year": 2006,
+          "value": 111.5,
+          "raw": 17309,
+          "tier": "A"
+        },
+        {
+          "year": 2007,
+          "value": 110.3,
+          "raw": 17128,
+          "tier": "A"
+        },
+        {
+          "year": 2008,
+          "value": 106.1,
+          "raw": 16465,
+          "tier": "A"
+        },
+        {
+          "year": 2009,
+          "value": 99.2,
+          "raw": 15399,
+          "tier": "A"
+        },
+        {
+          "year": 2010,
+          "value": 94.8,
+          "raw": 14722,
+          "tier": "A"
+        },
+        {
+          "year": 2011,
+          "value": 94.5,
+          "raw": 14661,
+          "tier": "A"
+        },
+        {
+          "year": 2012,
+          "value": 95.7,
+          "raw": 14856,
+          "tier": "A"
+        },
+        {
+          "year": 2013,
+          "value": 92.2,
+          "raw": 14319,
+          "tier": "A"
+        },
+        {
+          "year": 2014,
+          "value": 91.3,
+          "raw": 14164,
+          "tier": "A"
+        },
+        {
+          "year": 2015,
+          "value": 102.3,
+          "raw": 15883,
+          "tier": "A"
+        },
+        {
+          "year": 2016,
+          "value": 112.2,
+          "raw": 17413,
+          "tier": "A"
+        },
+        {
+          "year": 2017,
+          "value": 111.4,
+          "raw": 17294,
+          "tier": "A"
+        },
+        {
+          "year": 2018,
+          "value": 105.5,
+          "raw": 16374,
+          "tier": "A"
+        },
+        {
+          "year": 2019,
+          "value": 105.8,
+          "raw": 16425,
+          "tier": "A"
+        },
+        {
+          "year": 2020,
+          "value": 139.0,
+          "raw": 21570,
+          "tier": "B"
+        },
+        {
+          "year": 2024,
+          "value": 109.1,
+          "raw": 16935,
+          "tier": "A"
+        },
+        {
+          "year": 2025,
+          "value": 90.7,
+          "raw": 14085,
+          "tier": "B"
+        }
+      ],
+      "caveats": [
+        "Counts differ between publication vintages; see the data-quality register.",
+        "2022 and 2023 could not be verified against a fetched source and are absent."
+      ]
+    },
+    {
+      "name": "Intimidation (incl. stalking)",
+      "counts": "BJS national estimate of NIBRS offence 13C",
+      "publisher": "BJS",
+      "emphasis": false,
+      "base_year": 2022,
+      "base_value": 800367.58,
+      "unit_raw": "estimated offenses (national)",
+      "tier": "A",
+      "basis_short": "BJS national estimate of NIBRS offence 13C; indexed to 2022 = 100",
+      "points": [
+        {
+          "year": 2022,
+          "value": 100.0,
+          "raw": 800367.58,
+          "tier": "A"
+        },
+        {
+          "year": 2023,
+          "value": 108.1,
+          "raw": 865208.53,
+          "tier": "A"
+        },
+        {
+          "year": 2024,
+          "value": 106.8,
+          "raw": 854837.31,
+          "tier": "B"
+        }
+      ],
+      "caveats": [
+        "THREE POINTS ONLY. BJS's coverage-adjusted national estimates begin in 2022; the FBI publishes no citable national 13C series before that.",
+        "NIBRS has no stalking offence code \u2014 the manual folds stalking into Intimidation, so stalking is inside this number and cannot be separated from one-off threats.",
+        "2024 is the 'initial' provisional version and will be revised."
+      ]
+    }
+  ]
+}

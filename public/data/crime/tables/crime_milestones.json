@@ -1,0 +1,86 @@
+[
+  {
+    "milestone_id": "cm01",
+    "track": "G",
+    "category": "measurement",
+    "occurred_on": "2013-01",
+    "title": "Fentanyl wave begins; overdose becomes the fastest-growing cause of death",
+    "description": "CDC dates the third opioid wave to 2013. The overdose lane on the crime chart accelerates from here.",
+    "certainty": "documented",
+    "tier": "A",
+    "source_id": "cs_ccj_2026",
+    "geo": "US"
+  },
+  {
+    "milestone_id": "cm02",
+    "track": "G",
+    "category": "homicide",
+    "occurred_on": "2020-06",
+    "title": "Murder rises 29.4% \u2014 the largest single-year increase on record",
+    "description": "FBI, 2020 annual data. CDC death certificates register the same event independently (rate 6.0 to 7.8).",
+    "certainty": "documented",
+    "tier": "A",
+    "source_id": null,
+    "geo": "US"
+  },
+  {
+    "milestone_id": "cm03",
+    "track": "G",
+    "category": "measurement",
+    "occurred_on": "2021-01",
+    "title": "NIBRS transition breaks the national crime series",
+    "description": "Agency participation collapses to 65.7% population coverage; the FBI calls its own 2021 trends not statistically significant.",
+    "certainty": "documented",
+    "tier": "A",
+    "source_id": null,
+    "geo": "US"
+  },
+  {
+    "milestone_id": "cm04",
+    "track": "G",
+    "category": "missing",
+    "occurred_on": "2025-12",
+    "title": "NCIC missing-person entries fall to 498,038 \u2014 lowest of the modern record",
+    "description": "Down from 651,226 in 2017. Entries are records, not people; whether the fall is fewer cases or less entering cannot be separated.",
+    "certainty": "documented",
+    "tier": "A",
+    "source_id": null,
+    "geo": "US"
+  },
+  {
+    "milestone_id": "cm05",
+    "track": "G",
+    "category": "homicide",
+    "occurred_on": "2025-12",
+    "title": "Murder rate 4.1 per 100,000 \u2014 tied for the lowest ever recorded",
+    "description": "FBI final 2025 data (released 2026-08-14): violent crime down 9.3%, the largest year-to-year decline since estimation began in 1936.",
+    "certainty": "documented",
+    "tier": "A",
+    "source_id": null,
+    "geo": "US"
+  },
+  {
+    "milestone_id": "cm06",
+    "track": "G",
+    "category": "enforcement",
+    "occurred_on": "2026-07-29",
+    "title": "World Cup sweep: 905 trafficking arrests announced",
+    "description": "HSI-led operation; 180 victims rescued. An arrest count, not charges or convictions \u2014 no breakdown published. Roughly a third of a normal year's HSI trafficking arrests in a few weeks.",
+    "certainty": "documented",
+    "tier": "A",
+    "source_id": "hs_dhs_worldcup",
+    "geo": "US"
+  },
+  {
+    "milestone_id": "cm07",
+    "track": "G",
+    "category": "missing",
+    "occurred_on": "2026-08-18",
+    "title": "FBI 'Voices Not Forgotten': $25,000 minimum rewards for MMIP cases",
+    "description": "New FBI initiative on unsolved homicides, kidnappings and missing persons in Indian country, with a searchable case map. The federal government's own acknowledgement that these cases sit unsolved in numbers worth a program.",
+    "certainty": "documented",
+    "tier": "A",
+    "source_id": "hs_fbi_vnf",
+    "geo": "US"
+  }
+]

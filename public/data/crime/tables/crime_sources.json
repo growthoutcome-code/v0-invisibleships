@@ -376,5 +376,374 @@
     "evidence_tier": "A",
     "accessed": "2026-08-20",
     "archived_url": null
+  },
+  {
+    "source_id": "cs043",
+    "url": "https://api.ojp.gov/bjsdataset/v1/x3sz-eb6y.json",
+    "publisher": "Bureau of Justice Statistics",
+    "title": "Bureau of Justice Statistics",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs044",
+    "url": "https://api.ojp.gov/bjsdataset/v1/cqmi-ycfq.json",
+    "publisher": "Bureau of Justice Statistics",
+    "title": "Bureau of Justice Statistics",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs045",
+    "url": "https://ucr.fbi.gov/nibrs/2015/resource-pages/nibrs-2015_summary_final-1.pdf",
+    "publisher": "FBI UCR Program",
+    "title": "FBI UCR Program",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs046",
+    "url": "https://ucr.fbi.gov/nibrs/2016/resource-pages/nibrs-2016_summary.pdf",
+    "publisher": "FBI UCR Program",
+    "title": "FBI UCR Program",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs047",
+    "url": "https://ucr.fbi.gov/nibrs/2017/resource-pages/nibrs-2017_summary-11-6-2018.pdf",
+    "publisher": "FBI UCR Program",
+    "title": "FBI UCR Program",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs048",
+    "url": "https://ucr.fbi.gov/nibrs/2018/resource-pages/countdown.pdf",
+    "publisher": "FBI UCR Program",
+    "title": "FBI UCR Program",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs049",
+    "url": "https://ucr.fbi.gov/nibrs/2019/resource-pages/summary.pdf",
+    "publisher": "FBI UCR Program",
+    "title": "FBI UCR Program",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs050",
+    "url": "https://www.justice.gov/ovw/docs/bjs-stalking-rpt.pdf",
+    "publisher": "Bureau of Justice Statistics",
+    "title": "Bureau of Justice Statistics",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs051",
+    "url": "https://bjs.ojp.gov/content/pub/pdf/sv16.pdf",
+    "publisher": "Bureau of Justice Statistics",
+    "title": "Bureau of Justice Statistics",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs052",
+    "url": "https://bjs.ojp.gov/content/pub/pdf/sv19.pdf",
+    "publisher": "Bureau of Justice Statistics",
+    "title": "Bureau of Justice Statistics",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs053",
+    "url": "https://www.pewresearch.org/internet/wp-content/uploads/sites/9/2021/01/PI_2021.01.13_Online-Harassment_FINAL-1.pdf",
+    "publisher": "Pew Research Center",
+    "title": "Pew Research Center",
+    "evidence_tier": "B",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs054",
+    "url": "https://www.pewresearch.org/internet/2021/01/13/the-state-of-online-harassment/",
+    "publisher": "Pew Research Center",
+    "title": "Pew Research Center",
+    "evidence_tier": "B",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs055",
+    "url": "https://www.fbi.gov/file-repository/2015-ncic-missing-person-and-unidentified-person-statistics.pdf",
+    "publisher": "FBI CJIS",
+    "title": "FBI CJIS",
+    "evidence_tier": "B",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs056",
+    "url": "https://www.fbi.gov/file-repository/reports-and-publications/2016-ncic-missing-person-and-unidentified-person-statistics.pdf",
+    "publisher": "FBI CJIS",
+    "title": "FBI CJIS",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs057",
+    "url": "https://www.fbi.gov/file-repository/reports-and-publications/2017-ncic-missing-person-and-unidentified-person-statistics.pdf",
+    "publisher": "FBI CJIS",
+    "title": "FBI CJIS",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs058",
+    "url": "https://www.fbi.gov/file-repository/reports-and-publications/2018-ncic-missing-person-and-unidentified-person-statistics.pdf",
+    "publisher": "FBI CJIS",
+    "title": "FBI CJIS",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs059",
+    "url": "https://www.fbi.gov/file-repository/reports-and-publications/2019-ncic-missing-person-and-unidentified-person-statistics.pdf",
+    "publisher": "FBI CJIS",
+    "title": "FBI CJIS",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs060",
+    "url": "https://www.fbi.gov/file-repository/cjis/2020-ncic-missing-person-and-unidentified-person-statistics.pdf",
+    "publisher": "FBI CJIS",
+    "title": "FBI CJIS",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs061",
+    "url": "https://www.fbi.gov/file-repository/cjis/2022-ncic-missing-person-and-unidentified-person-statistics.pdf",
+    "publisher": "FBI CJIS",
+    "title": "FBI CJIS",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs062",
+    "url": "https://le.fbi.gov/file-repository/2023-ncic-missing-person-and-unidentified-person-statistics.pdf",
+    "publisher": "FBI CJIS",
+    "title": "FBI CJIS",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs063",
+    "url": "https://www.fbi.gov/file-repository/cjis/2024-ncic-missing-and-unidentified-person-statistics.pdf",
+    "publisher": "FBI CJIS",
+    "title": "FBI CJIS",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs064",
+    "url": "https://www.fbi.gov/file-repository/2025-ncic-missing-person-and-unidentified-person-statistics.pdf",
+    "publisher": "FBI CJIS",
+    "title": "FBI CJIS",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs065",
+    "url": "https://www.ojp.gov/pdffiles1/nij/310356.pdf",
+    "publisher": "National Institute of Justice / NamUs",
+    "title": "National Institute of Justice / NamUs",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs066",
+    "url": "https://namus.nij.ojp.gov/sites/g/files/xyckuh336/files/media/document/namus-bi-annual-monthly-case-report-january-2025.pdf",
+    "publisher": "NamUs",
+    "title": "NamUs",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs067",
+    "url": "https://www.uscourts.gov/sites/default/files/statistics_import_dir/C02ASep08.pdf",
+    "publisher": "Administrative Office of the U.S. Courts",
+    "title": "Administrative Office of the U.S. Courts",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs068",
+    "url": "https://www.uscourts.gov/sites/default/files/data_tables/C02ASep15.pdf",
+    "publisher": "Administrative Office of the U.S. Courts",
+    "title": "Administrative Office of the U.S. Courts",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs069",
+    "url": "https://www.uscourts.gov/sites/default/files/data_tables/jb_c2a_0930.2019.pdf",
+    "publisher": "Administrative Office of the U.S. Courts",
+    "title": "Administrative Office of the U.S. Courts",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs070",
+    "url": "https://www.uscourts.gov/sites/default/files/2025-01/jb_c2a_0930.2024.pdf",
+    "publisher": "Administrative Office of the U.S. Courts",
+    "title": "Administrative Office of the U.S. Courts",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs071",
+    "url": "https://www.uscourts.gov/sites/default/files/document/jb_c2a_0930.2025.pdf",
+    "publisher": "Administrative Office of the U.S. Courts",
+    "title": "Administrative Office of the U.S. Courts",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs072",
+    "url": "https://www.rcfp.org/introduction-anti-slapp-guide/",
+    "publisher": "Reporters Committee for Freedom of the Press",
+    "title": "Reporters Committee for Freedom of the Press",
+    "evidence_tier": "B",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs073",
+    "url": "https://www.ifs.org/anti-slapp-report/",
+    "publisher": "Institute for Free Speech",
+    "title": "Institute for Free Speech",
+    "evidence_tier": "B",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs074",
+    "url": "https://uwm.edu/journalism-advertising-media-studies/wp-content/uploads/sites/213/2016/04/Rethinking-Criminal-Libel.pdf",
+    "publisher": "David Pritchard, Communication Law and Policy 14(3), 2009",
+    "title": "David Pritchard, Communication Law and Policy 14(3), 2009",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs075",
+    "url": "https://medialaw.org/chapter-3-the-empirical-reality-ofcontemporary-libel-litigation/",
+    "publisher": "Media Law Resource Center",
+    "title": "Media Law Resource Center",
+    "evidence_tier": "B",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs_nibrs_manual",
+    "url": "https://le.fbi.gov/file-repository/ucr/nibrs-user-manual-2025.pdf",
+    "publisher": "FBI CJIS",
+    "title": "NIBRS User Manual 2025.0 (offence code definitions)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs_svs",
+    "url": "https://bjs.ojp.gov/library/publications/stalking-victimization-2019",
+    "publisher": "Bureau of Justice Statistics",
+    "title": "Stalking Victimization, 2019 (Supplemental Victimization Survey)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs_nos320",
+    "url": "https://www.uscourts.gov/statistics-reports/caseload-statistics-data-tables",
+    "publisher": "Administrative Office of the US Courts",
+    "title": "Federal Judicial Caseload Statistics, Table C-2 (Nature of Suit)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs_pew",
+    "url": "https://www.pewresearch.org/internet/2021/01/13/the-state-of-online-harassment/",
+    "publisher": "Pew Research Center",
+    "title": "The State of Online Harassment (Jan 2021, fielded Sept 2020)",
+    "evidence_tier": "B",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs_dhs_worldcup",
+    "url": "https://www.dhs.gov/news/2026/07/29/dhs-highlights-successful-arrests-and-rescues-crackdown-human-trafficking-during",
+    "publisher": "US Department of Homeland Security",
+    "title": "DHS Highlights Successful Arrests and Rescues in Crackdown on Human Trafficking During FIFA World Cup (2026-07-29)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs_dhs_ccht_fy24",
+    "url": "https://www.dhs.gov/news/2025/08/13/dhs-center-countering-human-trafficking-releases-fiscal-year-2024-annual-report",
+    "publisher": "US Department of Homeland Security",
+    "title": "DHS Center for Countering Human Trafficking FY2024 Annual Report (2025-08-13)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs_fbi_vnf",
+    "url": "https://www.fbi.gov/news/press-releases/fbi-announces-voices-not-forgotten",
+    "publisher": "FBI",
+    "title": "FBI Announces Voices Not Forgotten (2026-08-18)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "hs_vera_2026",
+    "url": "https://www.vera.org/news/ten-things-veras-ice-detention-trends-dashboard-reveals-about-ice-detention-through-march-2026",
+    "publisher": "Vera Institute of Justice",
+    "title": "Ten Things Vera's ICE Detention Trends Dashboard Reveals (through March 2026)",
+    "evidence_tier": "B",
+    "accessed": "2026-08-21",
+    "archived_url": null
   }
 ]
