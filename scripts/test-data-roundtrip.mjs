@@ -110,6 +110,7 @@ const tl = await page.evaluate(() => ({
   legislation: document.getElementById("t_tiles")?.textContent.includes("Legislation"),
   noLaw: !document.getElementById("t_tiles")?.textContent.includes("Law"),
   disclaimerLink: [...document.querySelectorAll("button")].some((b) => /full disclaimer/i.test(b.textContent)),
+  scopeNote: /Scope:.*international.*Crime track is United States only/s.test(document.body.textContent),
 }));
 console.log("timeline copy:", JSON.stringify(tl));
 for (const k of Object.keys(tl)) if (!tl[k]) fail("timeline." + k);
@@ -462,9 +463,45 @@ if (!crime.identitySolid) fail("a series' main path is dashed; dashing must mean
 if (!crime.legendExplained) fail("dotted-line convention is not explained beneath the chart");
 if (crime.labels.length < 2) fail("crime chart series are not labelled");
 if (!crime.verdict) fail("crime verdict heading missing");
-if (!crime.notCounted) fail("'What nobody counts' lead section missing");
+if (!crime.notCounted) fail("'What nobody counts' section missing");
+// Chart-first layout (Sean, 2026-08-21): the lane chart must be the first
+// section, with a tier-chipped themes block directly under it, ABOVE the
+// "What nobody counts" register.
+const layout = await page.evaluate(() => {
+  const main = document.querySelector("main");
+  const fig = [...main.querySelectorAll("figure")].find((f) => /Five kinds of harm/i.test(f.querySelector("figcaption")?.textContent || ""));
+  const themesH = [...main.querySelectorAll("h2")].find((h) => /What the chart shows/i.test(h.textContent));
+  const ncH = [...main.querySelectorAll("h2")].find((h) => /What nobody counts/i.test(h.textContent));
+  const themeRows = themesH ? [...themesH.parentElement.querySelectorAll("li")] : [];
+  const y = (el) => el ? el.getBoundingClientRect().top + window.scrollY : -1;
+  return {
+    chartY: y(fig), themesY: y(themesH), ncY: y(ncH),
+    themeCount: themeRows.length,
+    themesChipped: themeRows.length > 0 && themeRows.every((r) => r.querySelector("span[title]")),
+    bridge: themeRows.some((r) => /nobody counts/i.test(r.textContent)),
+  };
+});
+console.log("layout:", JSON.stringify(layout));
+if (layout.chartY < 0) fail("lane chart missing");
+if (!(layout.chartY < layout.themesY && layout.themesY < layout.ncY)) fail("order must be chart -> themes -> nobody-counts");
+if (layout.themeCount < 3) fail(`theme callouts: ${layout.themeCount}, expected 3+`);
+if (!layout.themesChipped) fail("theme callouts missing tier chips");
+if (!layout.bridge) fail("themes block missing the bridge line into 'What nobody counts'");
 if (!crime.lanes) fail("indexed lane chart missing");
 if (!crime.sweeps) fail("sweeps register missing");
+if (!/Transnational repression/.test(await page.evaluate(() => document.querySelector("main").innerText))) fail("transnational repression section missing");
+const trChk = await page.evaluate(() => {
+  const t = document.querySelector("main").innerText;
+  return {
+    fbiDef: /reach beyond their borders to intimidate/.test(t),
+    tactics: /Attempted kidnapping and murder/.test(t),
+    fhCount: /1,375/.test(t),
+    notCountedByGov: /Publishes NO\s+statistics|publishes no statistics/i.test(t.replace(/\n/g, " ")),
+    discipline: /does not establish who uses them in any uncharged case/.test(t),
+  };
+});
+console.log("tr:", JSON.stringify(trChk));
+for (const [k, v] of Object.entries(trChk)) if (!v) fail("tr." + k);
 if (!crime.clearance) fail("clearance section missing");
 if (!crime.dq) fail("crime data-quality register missing");
 if (!crime.spike2020) fail("2020 spike figure (29.4%) missing");

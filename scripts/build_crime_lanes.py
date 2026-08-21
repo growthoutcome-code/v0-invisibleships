@@ -319,17 +319,26 @@ def main():
             "caveats": LANE_CAVEATS.get(ind_id, []),
         })
 
+    # Theme callouts rendered directly under the chart (Sean, 2026-08-21:
+    # chart first, copy consolidated and concise). Each line ties to a visible
+    # lane; the last is the bridge into the "What nobody counts" register.
+    themes = [
+        {"statement": "Overdose deaths quadrupled since 1999 — the steepest rise of any lane — and have fallen since their 2022 peak.", "tier": "A"},
+        {"statement": "Missing-person entries are at their modern low; whether that is fewer cases or less entering cannot be separated.", "tier": "A"},
+        {"statement": "Defamation-adjacent federal filings are at a 22-year high, rising sharply since 2023.", "tier": "A"},
+        {"statement": "Homicide spiked 29.4% in 2020, then fell to the lowest rate ever recorded.", "tier": "A"},
+        {"statement": "The category this site is most concerned with — harassment — has no lane, because nobody counts it.", "tier": "A"},
+    ]
+
     chart = {
         "title": "Five kinds of harm, indexed",
         "unit": "Each lane indexed to its own first year in this window = 100",
+        "themes": themes,
         "note": (
-            "These five count different things in different units — deaths, offences known "
-            "to police, records entered, civil filings — and differ by orders of magnitude. "
-            "Putting the raw numbers on one axis would flatten four of the five into the "
-            "floor, so each lane is indexed to its own first year. The chart shows which "
-            "are rising and which are falling relative to where each began; it does not, "
-            "and cannot, show which is larger. Each lane's base year is stated in its "
-            "label, and clicking a lane gives the raw figures."
+            "These lanes count different things in different units, so each is indexed "
+            "to its own first year = 100: the chart shows direction, never size. Dotted "
+            "stretches are years that are not Tier A; hollow points mark a lane sampled "
+            "with gaps. Click any lane for its raw figures, method and caveats."
         ),
         "publisher": "FBI; CDC/NCHS; BJS; US Courts",
         "tier": "A",

@@ -59,10 +59,23 @@ type Lane = {
 type LaneChart = {
   title: string; unit: string; note: string; publisher: string; tier: string;
   indexed: boolean; series: Lane[];
+  themes?: { statement: string; tier: string }[];
 };
 type NotCounted = {
   nc_id: string; category: string; status: string; detail: string;
   who_would_collect: string; tier: string; source_id: string | null;
+};
+type TRMeasure = { who: string; what: string; status: string; tier: string; source_id: string | null };
+type TR = {
+  what_it_is: {
+    definition: string; definition_source: string;
+    philadelphia_definition: string; philadelphia_note: string;
+    tactics: string[]; tactics_note: string; named_states: string;
+    tier: string; source_id: string | null;
+  };
+  how_it_is_measured: TRMeasure[];
+  the_gap: string;
+  discipline_note: string;
 };
 type Sweep = {
   sweep_id: string; date: string; operation: string; agency: string;
@@ -243,11 +256,6 @@ function LaneChart({ chart, onPick }: { chart: LaneChart; onPick: (l: Lane) => v
           );
         })}
       </ul>
-      <p className="text-muted text-[14px] measure mt-3 mb-0">
-        Each lane starts at 100 in its own first year, marked with a dot. Heights are not
-        comparable between lanes &mdash; these count different things. Dotted stretches are
-        years that are not Tier A; hollow points mark a lane sampled with gaps.
-      </p>
     </figure>
   );
 }
@@ -508,6 +516,7 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
   const lanes = useDoc<LaneChart>("/data/crime/charts/harm_lanes_indexed.json");
   const notCounted = useTable<NotCounted>("/data/crime/tables/crime_not_counted.json");
   const sweeps = useTable<Sweep>("/data/crime/tables/crime_sweeps.json");
+  const tr = useDoc<TR>("/data/crime/tables/crime_transnational.json");
 
   const srcs = sources || [];
   const [picked, setPicked] = useState<ChartSeries | null>(null);
@@ -561,6 +570,32 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
         evidence-graded and linked to the source it was read from ·
       </DataNoteLine>
 
+      {/* ---- the chart, first; themes and how-to-read consolidated under it
+             (Sean, 2026-08-21) ---- */}
+      <section className="mb-14">
+        {lanes === null ? <SkeletonChart /> : (
+          <>
+            <LaneChart chart={lanes} onPick={setLanePicked} />
+            {!!lanes.themes?.length && (
+              <div className="mt-2 mb-5">
+                <h2 className="font-display font-semibold text-foreground text-[19px] mb-2">
+                  What the chart shows
+                </h2>
+                <ul className="list-none p-0 m-0">
+                  {lanes.themes.map((t, i) => (
+                    <li key={i} className="flex items-baseline gap-3 py-2 border-b border-edge/60 text-[16px] text-foreground/90">
+                      <TierChip t={t.tier} />
+                      <span className="measure">{t.statement}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            <p className="text-muted text-[15px] measure">{lanes.note}</p>
+          </>
+        )}
+      </section>
+
       {/* ---- what nobody counts: the lead finding (Sean, 2026-08-21) ---- */}
       {notCounted === null ? <SectionSkeleton title="What nobody counts" /> : !!notCounted.length && (
         <section className="mb-14">
@@ -592,15 +627,6 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
         </section>
       )}
 
-      {/* ---- the priority lanes, indexed ---- */}
-      <section className="mb-14">
-        {lanes === null ? <SkeletonChart /> : (
-          <>
-            <LaneChart chart={lanes} onPick={setLanePicked} />
-            <p className="body-copy text-foreground/90 measure">{lanes.note}</p>
-          </>
-        )}
-      </section>
 
       {/* ---- sweeping enforcement: headline arrest numbers ---- */}
       {!!sweeps?.length && (
@@ -630,6 +656,50 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
               </li>
             ))}
           </ul>
+        </section>
+      )}
+
+      {/* ---- transnational repression (Sean, 2026-08-21) ---- */}
+      {tr && (
+        <section className="mb-14">
+          <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
+            Transnational repression
+          </h2>
+          <p className="body-copy text-foreground/90 measure">
+            <TierChip t={tr.what_it_is.tier} />{" "}
+            &ldquo;{tr.what_it_is.definition}&rdquo;{" "}
+            <span className="text-muted text-[15px]">&mdash; {tr.what_it_is.definition_source}.</span>
+          </p>
+          <p className="text-muted text-[15px] measure mt-3">
+            {tr.what_it_is.named_states} FBI Philadelphia&rsquo;s framing:{" "}
+            &ldquo;{tr.what_it_is.philadelphia_definition}&rdquo; ({tr.what_it_is.philadelphia_note})
+          </p>
+          <h3 className="font-display font-semibold text-foreground text-[17px] mt-6 mb-2">
+            The FBI&rsquo;s own tactic list
+          </h3>
+          <ul className="list-disc pl-5 m-0 text-[16px] text-foreground/85 measure">
+            {tr.what_it_is.tactics.map((t, i) => <li key={i} className="mb-1">{t}</li>)}
+          </ul>
+          <p className="text-muted text-[15px] measure mt-3">{tr.what_it_is.tactics_note}</p>
+
+          <h3 className="font-display font-semibold text-foreground text-[17px] mt-6 mb-2">
+            How it is measured &mdash; if at all
+          </h3>
+          <ul className="list-none p-0 m-0">
+            {tr.how_it_is_measured.map((m, i) => (
+              <li key={i} className="py-4 border-b border-edge/60">
+                <div className="flex flex-wrap items-baseline gap-3">
+                  <TierChip t={m.tier} />
+                  <span className="text-foreground text-[16px] font-semibold">{m.who}</span>
+                  <span className="text-muted text-[14px] uppercase tracking-wide">{m.status}</span>
+                  <span className="ml-auto"><SourceLink id={m.source_id} sources={srcs} /></span>
+                </div>
+                <p className="body-copy text-foreground/85 measure mt-2 mb-0 text-[17px]">{m.what}</p>
+              </li>
+            ))}
+          </ul>
+          <p className="body-copy text-foreground/90 measure mt-5">{tr.the_gap}</p>
+          <p className="text-muted text-[15px] measure mt-3">{tr.discipline_note}</p>
         </section>
       )}
 

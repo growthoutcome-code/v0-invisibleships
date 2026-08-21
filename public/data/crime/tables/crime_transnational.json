@@ -1,0 +1,48 @@
+{
+  "what_it_is": {
+    "definition": "When foreign governments reach beyond their borders to intimidate, silence, coerce, harass, or harm members of their diaspora and exile communities in the United States, that is transnational repression.",
+    "definition_source": "FBI Counterintelligence Division (quoted verbatim)",
+    "philadelphia_definition": "A foreign nation breaching national borders by physical or digital means to silence, coerce, or threaten exiles, dissidents, and members of religious or ethnic minority communities.",
+    "philadelphia_note": "FBI Philadelphia field office awareness release, 2025-03-13.",
+    "tactics": [
+      "Stalking and harassment",
+      "Online disinformation campaigns",
+      "Intimidation or threats",
+      "Coercing victims to return to their country",
+      "Threatening or detaining family members abroad",
+      "Abusive legal practices \u2014 lawsuits, asset freezes, passport withholding",
+      "Cyberhacking",
+      "Assault",
+      "Attempted kidnapping and murder"
+    ],
+    "tactics_note": "The FBI's own tactic list. It is quoted here because it matters for this site: it is the US government stating that organised stalking, harassment and surveillance of individuals on US soil, directed by state actors, is a real and prosecuted category of crime.",
+    "named_states": "The FBI's page references Iran, the People's Republic of China, India and Russia.",
+    "tier": "A",
+    "source_id": "tr_fbi_program"
+  },
+  "how_it_is_measured": [
+    {
+      "who": "FBI / US government",
+      "what": "Defines TR, runs a dedicated task force, maintains field-office awareness programs (including Philadelphia's), and prosecutes cases. Publishes NO statistics: no annual count of TR incidents, investigations, or victims exists in any FBI or DOJ statistical series.",
+      "status": "Defined and prosecuted, not counted",
+      "tier": "A",
+      "source_id": "tr_fbi_program"
+    },
+    {
+      "who": "Freedom House (private research organisation)",
+      "what": "The only systematic count in existence: a database of direct, PHYSICAL incidents \u2014 assassinations, assaults, detentions, unlawful deportations \u2014 recording 1,375 incidents by 54 governments across 107 host countries from 2014 through 2025 (126 in 2025; China, Vietnam and Russia the top perpetrators that year). By design it EXCLUDES the digital and harassment tactics on the FBI's own list, and Freedom House states that reported incidents 'likely represent only a small fraction of the total number of cases that occur.'",
+      "status": "Counted narrowly, by a private body",
+      "tier": "B",
+      "source_id": "tr_fh_2025"
+    },
+    {
+      "who": "Federal courts",
+      "what": "Prosecutions are the hardest record. Examples: 34 officers of a PRC national-police unit charged in the Eastern District of New York with perpetrating a transnational repression scheme targeting US residents; five individuals indicted for a scheme to silence PRC critics in the US; seven state-linked hackers charged with targeting critics of China. Cases establish that the tactics are real and chargeable \u2014 they are not a count of how often they occur.",
+      "status": "Adjudicated cases, not a statistic",
+      "tier": "A",
+      "source_id": "tr_edny_34"
+    }
+  ],
+  "the_gap": "So the measurement answer is: barely. The category most like this site's core subject \u2014 organised, deniable, state-directed harassment of individuals \u2014 is defined by the FBI, prosecuted in federal court, and counted by nobody in government. The one systematic dataset is private, counts only physical incidents, and describes itself as a small fraction of the whole. A person targeted by the tactics on the FBI's own list appears in no national statistic unless their case ends in an indictment.",
+  "discipline_note": "What this register does not do: it does not connect any of these cases or counts to the journal, the Government Cloud record, or any individual's experience. TR's documented existence establishes that such tactics are used; it does not establish who uses them in any uncharged case."
+}

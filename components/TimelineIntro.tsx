@@ -32,6 +32,17 @@ export function TimelineNarrative({ onGo }: { onGo: (tab: "govcloud" | "health")
         Three things this timeline shows
       </h2>
 
+      {/* Scope, per track (Sean, 2026-08-21): the timeline is deliberately
+          mixed-scope, so a blanket "US only" label would be wrong — say what
+          each lane actually covers. */}
+      <p className="text-muted text-[14px] measure mb-6">
+        <strong className="text-foreground/80">Scope:</strong> the Legislation, Release,
+        Deploy/enforcement, Litigation and Investment tracks are international &mdash; the
+        procurement record spans jurisdictions. The Health track mixes United States and
+        global milestones. The Crime track is United States only, except where a marker is
+        explicitly labelled global.
+      </p>
+
       <ol className="list-none p-0 m-0 space-y-6">
         <li>
           <p className="body-copy text-foreground/90 m-0">

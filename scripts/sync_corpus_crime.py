@@ -31,12 +31,14 @@ TABLE_FILES = [
     "crime_not_counted.json",
     "crime_sweeps.json",
     "crime_milestones.json",
+    "crime_transnational.json",
 ]
 
 DESCRIPTIONS = {
     "crime_not_counted.json": "The uncounted categories — what has no national statistic, and who would have to collect it",
     "crime_sweeps.json": "Sweeping enforcement actions and the capacity question — what headline arrest counts actually count",
     "crime_milestones.json": "Dated events behind the master timeline's Crime lane (track G)",
+    "crime_transnational.json": "Transnational repression — what it is (FBI definition and tactic list) and how it is measured, if at all",
     "crime_indicators.json": "Time-series rows: indicator, year, value, unit, tier, source_id, vintage note",
     "crime_data_quality.json": "Counting, coverage and definitional problems — the spine of this dataset",
     "crime_trends.json": "Sourced trend statements",

@@ -745,5 +745,41 @@
     "evidence_tier": "B",
     "accessed": "2026-08-21",
     "archived_url": null
+  },
+  {
+    "source_id": "tr_fbi_program",
+    "url": "https://www.fbi.gov/investigate/counterintelligence/transnational-repression",
+    "publisher": "FBI",
+    "title": "Transnational Repression (counterintelligence program page)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "tr_fbi_phila",
+    "url": "https://www.fbi.gov/contact-us/field-offices/philadelphia/news/fbi-philadelphia-brings-awareness-to-transnational-repression",
+    "publisher": "FBI Philadelphia",
+    "title": "FBI Philadelphia Brings Awareness to Transnational Repression (2025-03-13)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "tr_fh_2025",
+    "url": "https://freedomhouse.org/article/authoritarian-collaboration-fueled-transnational-repression-2025",
+    "publisher": "Freedom House",
+    "title": "Tracking Transnational Repression in 2025 (published 2026-04-16)",
+    "evidence_tier": "B",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "tr_edny_34",
+    "url": "https://www.fbi.gov/contact-us/field-offices/newyork/news/thirty-four-officers-of-peoples-republic-of-china-national-police-charged-with-perpetrating-transnational-repression-scheme-targeting-us-residents",
+    "publisher": "DOJ / EDNY",
+    "title": "34 PRC National Police Officers Charged with Perpetrating Transnational Repression Scheme Targeting U.S. Residents",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
   }
 ]
