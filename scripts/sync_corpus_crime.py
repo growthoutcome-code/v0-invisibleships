@@ -199,6 +199,9 @@ verified against a fetched source. The rate series is complete.
         ar_path = CHARTS / "arrests_over_time.json"
         if ar_path.exists():
             dst.writestr(PREFIX + "charts/arrests_over_time.json", ar_path.read_text())
+        det_path = CHARTS / "detention_capacity.json"
+        if det_path.exists():
+            dst.writestr(PREFIX + "charts/detention_capacity.json", det_path.read_text())
         dst.writestr(PREFIX + "charts/homicide_us.csv", hom_csv)
 
     shutil.move(str(tmp), str(ZIP))

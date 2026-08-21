@@ -1,0 +1,203 @@
+{
+  "title": "Where a sweep goes: ICE detention against its funded ceiling",
+  "unit": "People held in ICE detention",
+  "window": {
+    "from": 2019,
+    "to": 2026
+  },
+  "window_note": "This chart uses its own 2019\u20132026 window rather than the section's shared 1999\u20132025 one: the series does not exist before 2019 in comparable form, and on the shared axis four-fifths of the chart would be empty.",
+  "note": "Three different measures are drawn here and they must not be read as one line. The solid line is AVERAGE DAILY POPULATION by fiscal year \u2014 ICE's own published figure, and it stops at FY2024 because no FY2025 or FY2026 average has been published. The stepped line is the detention beds Congress FUNDS. The separate points are SINGLE-DAY counts during the 2025\u201326 surge: a snapshot, not an average, which is why they sit above any plausible annual mean for those years. Conflating the three is the most common error in reporting on this subject.",
+  "publisher": "ICE; Senate Appropriations; TRAC Syracuse; Austin Kocher",
+  "tier": "A",
+  "series": [
+    {
+      "name": "Average daily population",
+      "emphasis": true,
+      "tier": "A",
+      "measure": "ADP",
+      "unit": "people held, averaged across the fiscal year",
+      "basis_short": "ICE published average daily population, by federal fiscal year",
+      "publisher": "ICE FY2024 Annual Report, Figure 17",
+      "points": [
+        {
+          "year": 2019,
+          "value": 50165,
+          "tier": "A"
+        },
+        {
+          "year": 2020,
+          "value": 33724,
+          "tier": "A"
+        },
+        {
+          "year": 2021,
+          "value": 19461,
+          "tier": "A"
+        },
+        {
+          "year": 2022,
+          "value": 22630,
+          "tier": "A"
+        },
+        {
+          "year": 2023,
+          "value": 28289,
+          "tier": "A"
+        },
+        {
+          "year": 2024,
+          "value": 37721,
+          "tier": "A"
+        }
+      ],
+      "caveats": [
+        "ICE publishes this only as two components (CBP-arrested plus ICE-arrested); the totals here are the sum of the two published rows.",
+        "FY2019 is the peak of this series at 50,165 and FY2021 the low at 19,461 \u2014 a 61% fall driven by COVID and the enforcement-priorities memo.",
+        "The line STOPS at FY2024. No FY2025 or FY2026 average daily population has been published. Two aggregators publish figures that disagree by up to 23,000 and one is demonstrably a single-day count relabelled as an average; neither is used here.",
+        "FY2015\u2013FY2018 are absent: ICE's detention spreadsheets were unreachable, and the only alternative figures are adult-only and partly budget projections rather than outturns."
+      ]
+    },
+    {
+      "name": "Beds funded by Congress",
+      "emphasis": false,
+      "tier": "A",
+      "measure": "funded_beds",
+      "unit": "detention beds funded in appropriations",
+      "basis_short": "Congressionally funded detention bed level",
+      "publisher": "Senate Appropriations Committee; ICE annual reports",
+      "points": [
+        {
+          "year": 2019,
+          "value": 45274,
+          "tier": "A"
+        },
+        {
+          "year": 2021,
+          "value": 34000,
+          "tier": "A"
+        },
+        {
+          "year": 2023,
+          "value": 34000,
+          "tier": "A"
+        },
+        {
+          "year": 2024,
+          "value": 41500,
+          "tier": "A"
+        },
+        {
+          "year": 2026,
+          "value": 41500,
+          "tier": "A"
+        }
+      ],
+      "caveats": [
+        "Selected years \u2014 the level is set in appropriations and is not published as a continuous annual series here.",
+        "THE CEILING STOPPED BINDING. The FY2026 conference bill holds the funded level at 41,500 \u2014 explicitly 'thousands fewer than the current level' \u2014 while the population ran 65,000\u201373,000, because the July 2025 reconciliation act supplied $45 billion for detention outside the annual bed line.",
+        "Funded beds are not usable beds: ICE's own FY2021 report says that while funded for 34,000, 'only approximately 75 percent of bedspace was available for use.'",
+        "FY2020's proposed 52,161 is a Senate subcommittee bill level, not a confirmed enacted figure, and is excluded."
+      ]
+    },
+    {
+      "name": "Single-day counts, 2025\u201326 surge",
+      "emphasis": false,
+      "tier": "B",
+      "measure": "single_day",
+      "unit": "people held on one named day",
+      "basis_short": "Point-in-time counts \u2014 a snapshot, NOT an annual average",
+      "publisher": "TRAC Syracuse; Austin Kocher from ICE detention files; CBS News",
+      "points": [
+        {
+          "year": 2025.03,
+          "value": 39703,
+          "tier": "B",
+          "note": "2025-01-12 \u2014 baseline before the second administration (TRAC, adults)"
+        },
+        {
+          "year": 2025.28,
+          "value": 48056,
+          "tier": "B",
+          "note": "2025-04-13 \u2014 76% of 62,913 contracted beds, yet 45 of 181 facilities over their own contract"
+        },
+        {
+          "year": 2025.49,
+          "value": 57861,
+          "tier": "B",
+          "note": "2025-06-29 \u2014 passes the 2019 single-day peak of 55,654"
+        },
+        {
+          "year": 2025.65,
+          "value": 61200,
+          "tier": "B",
+          "note": "2025-08-24 \u2014 highest on record at the time"
+        },
+        {
+          "year": 2025.87,
+          "value": 65135,
+          "tier": "B",
+          "note": "2025-11-16 \u2014 73.6% held with no criminal conviction"
+        },
+        {
+          "year": 2025.95,
+          "value": 68442,
+          "tier": "B",
+          "note": "2025-12-13"
+        },
+        {
+          "year": 2026.04,
+          "value": 68990,
+          "tier": "B",
+          "note": "2026-01-07 \u2014 across 212 facilities"
+        },
+        {
+          "year": 2026.06,
+          "value": 73000,
+          "tier": "B",
+          "note": "2026-01-16 \u2014 about 73,000; first time above 70,000 in ICE's 23-year history, +84% year over year"
+        },
+        {
+          "year": 2026.07,
+          "value": 70766,
+          "tier": "B",
+          "note": "2026-01-24 \u2014 Kocher's reading of ICE's own file, 225 facilities. Conflicts with the CBS figure eight days earlier; both are shown in the caveats rather than one being silently chosen"
+        },
+        {
+          "year": 2026.53,
+          "value": 65765,
+          "tier": "B",
+          "note": "2026-07-11 \u2014 most recent verified count; 70.6% with no criminal conviction"
+        }
+      ],
+      "caveats": [
+        "A DIFFERENT MEASURE from the solid line. These are counts on one named day and sit above any plausible annual average for the same year, because the population climbed steeply through it.",
+        "The January 2026 record is reported two ways: about 73,000 on 16 January (CBS, citing ICE) and 70,766 on 24 January (Kocher, from ICE's published detention file, across 225 facilities). The likely cause is scope, and both are shown rather than one chosen silently.",
+        "70.6% of those held on 11 July 2026 had no criminal conviction; 92% of FY2026's growth was people with no conviction. A separate figure of ~53% counts 'no charges OR convictions' \u2014 a different definition that must not be plotted against the first.",
+        "Drawn as points, not a line: they are irregular snapshots, and joining them would imply a continuous series that was never published."
+      ]
+    }
+  ],
+  "themes": [
+    {
+      "statement": "Detention has a shape, and it is a V then a spike: a 50,165 average in FY2019, down 61% to 19,461 in FY2021, recovering to 37,721 by FY2024 \u2014 then the 2025\u201326 surge, which is visible only in single-day counts.",
+      "tier": "A"
+    },
+    {
+      "statement": "Is it overcrowded? The funded ceiling is the answer. Congress funds 41,500 beds for FY2026 \u2014 'thousands fewer than the current level' in the bill's own words \u2014 while single-day counts ran 65,000 to 73,000, because $45 billion arrived outside the annual bed line in July 2025.",
+      "tier": "A"
+    },
+    {
+      "statement": "National utilisation hides local overcrowding: on 13 April 2025 the system sat at 76% of contracted beds nationally, yet 45 of 181 facilities were over their own contract that night and 84 exceeded capacity at least once that year.",
+      "tier": "B"
+    },
+    {
+      "statement": "Most people held have no criminal conviction \u2014 70.6% on 11 July 2026 \u2014 and 92% of FY2026's growth was people with none.",
+      "tier": "B"
+    },
+    {
+      "statement": "The average daily population line stops at FY2024 because no later average has been published. That gap is drawn as a gap: the surge is real, but its annual average is not yet an official number.",
+      "tier": "A"
+    }
+  ],
+  "accuracy_note": "This chart draws three measures that are constantly conflated in reporting on this subject: an annual average, a funded ceiling, and single-day snapshots. Each is labelled with which it is. Figures for 2025\u201326 come from FOIA-derived and research compilations because DHS stopped publishing detailed enforcement tables after November 2024."
+}

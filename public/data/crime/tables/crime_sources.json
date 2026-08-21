@@ -1132,5 +1132,113 @@
     "evidence_tier": "A",
     "accessed": "2026-08-21",
     "archived_url": null
+  },
+  {
+    "source_id": "det_ice_fy24",
+    "url": "https://www.ice.gov/doclib/eoy/iceAnnualReportFY2024.pdf",
+    "publisher": "ICE",
+    "title": "ICE FY2024 Annual Report (Figure 17: ADP FY2019-FY2024)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "det_ice_fy21",
+    "url": "https://www.ice.gov/doclib/eoy/iceAnnualReportFY2021.pdf",
+    "publisher": "ICE",
+    "title": "ICE FY2021 Annual Report (34,000 funded beds; ~75% usable)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "det_sen_fy24",
+    "url": "https://www.appropriations.senate.gov/imo/media/doc/Homeland%20Security%20FY24%20Bill%20Highlights.pdf",
+    "publisher": "US Senate Appropriations",
+    "title": "Homeland Security FY24 Bill Highlights (41,500 beds enacted)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "det_sen_fy26",
+    "url": "https://www.appropriations.senate.gov/imo/media/doc/fy26_homeland_security_conference_bill_summary.pdf",
+    "publisher": "US Senate Appropriations",
+    "title": "Homeland Security FY2026 conference bill summary (41,500 maintained)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "det_sen_fy20",
+    "url": "https://www.appropriations.senate.gov/news/minority/summary-fy-2020-homeland-security-appropriations-bill",
+    "publisher": "US Senate Appropriations",
+    "title": "FY2020 Homeland Security Appropriations summary (FY2019 enacted level)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "det_trac_qf",
+    "url": "https://tracreports.org/immigration/quickfacts/",
+    "publisher": "TRAC Syracuse",
+    "title": "Immigration Detention Quick Facts (11 Jul 2026: 65,765; 70.6% no conviction)",
+    "evidence_tier": "B",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "det_trac_762",
+    "url": "https://tracreports.org/reports/762/",
+    "publisher": "TRAC Syracuse",
+    "title": "ICE Contractual Capacity and Number Detained: Overcapacity vs Overcrowding",
+    "evidence_tier": "B",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "det_trac_767",
+    "url": "https://tracreports.org/reports/767/",
+    "publisher": "TRAC Syracuse",
+    "title": "Taking Stock: Detention and Removals (16 Nov 2025: 65,135; 73.6% no conviction)",
+    "evidence_tier": "B",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "det_kocher_fy26",
+    "url": "https://austinkocher.substack.com/p/92-of-ice-detention-growth-in-fy",
+    "publisher": "Austin Kocher (Syracuse)",
+    "title": "92% of ICE Detention Growth in FY2026 Driven by Immigrants with No Criminal Convictions",
+    "evidence_tier": "B",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "det_kocher_record",
+    "url": "https://austinkocher.substack.com/p/ices-delayed-detention-data-is-out",
+    "publisher": "Austin Kocher (Syracuse)",
+    "title": "ICE's Delayed Detention Data is Out, Two Record Highs (70,766 on 24 Jan 2026)",
+    "evidence_tier": "B",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "det_cbs_73k",
+    "url": "https://www.cbsnews.com/news/ices-detainee-population-record-high-of-73000/",
+    "publisher": "CBS News",
+    "title": "ICE detainee population reaches record high of 73,000 (16 Jan 2026)",
+    "evidence_tier": "B",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "det_mpi",
+    "url": "https://www.migrationpolicy.org/article/trump-immigrant-detention",
+    "publisher": "Migration Policy Institute",
+    "title": "US Immigrant Detention Grows to Record Heights",
+    "evidence_tier": "B",
+    "accessed": "2026-08-21",
+    "archived_url": null
   }
 ]

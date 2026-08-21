@@ -10,6 +10,8 @@ import {
   DismissibleNote, DATA_WINDOW, dataWindowTicks, type SourceRec,
 } from "@/components/DataPrimitives";
 import IntlLineChart, { type IntlChartDoc, type IntlSeries } from "@/components/IntlLineChart";
+import DetentionChart, { type DetChart, type DetSeries } from "@/components/DetentionChart";
+import SectionNav, { useSectionNav } from "@/components/SectionNav";
 import { track } from "@/lib/analytics";
 
 /**
@@ -626,6 +628,9 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
   const intlDrugs = useDoc<{ title: string; why_no_chart: string; rows: any[] }>("/data/crime/tables/crime_intl_drug_deaths.json");
   const intlMissing = useDoc<{ title: string; why_no_chart: string; rows: any[] }>("/data/crime/tables/crime_intl_missing.json");
   const [intlPicked, setIntlPicked] = useState<IntlSeries | null>(null);
+  const detention = useDoc<DetChart>("/data/crime/charts/detention_capacity.json");
+  const [detPicked, setDetPicked] = useState<DetSeries | null>(null);
+  const nav = useSectionNav("crime-root");
 
   const srcs = sources || [];
   const [picked, setPicked] = useState<ChartSeries | null>(null);
@@ -635,13 +640,13 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
   // dialog traps the reader, since the backdrop and the close button were the
   // only exits and neither is reachable from the keyboard.
   useEffect(() => {
-    if (!picked && !lanePicked && !intlPicked) return;
+    if (!picked && !lanePicked && !intlPicked && !detPicked) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") { setPicked(null); setLanePicked(null); setIntlPicked(null); }
+      if (e.key === "Escape") { setPicked(null); setLanePicked(null); setIntlPicked(null); setDetPicked(null); }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [picked, lanePicked, intlPicked]);
+  }, [picked, lanePicked, intlPicked, detPicked]);
 
   const trendsP = usePager(trends, 5);
   const dqP = usePager(dq, 5);
@@ -673,7 +678,8 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
   );
 
   return (
-    <div className="w-full">
+    <div className="w-full" id="crime-root">
+      <SectionNav sections={nav.sections} active={nav.active} />
       <DataNoteLine from="crime">
         United States only · AI-assisted research from public records · every figure
         evidence-graded and linked to the source it was read from ·
@@ -767,6 +773,39 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
           </ul>
         </section>
       )}
+
+      {/* ---- detention: where a sweep goes (Sean, 2026-08-21) ---- */}
+      <section className="mb-14">
+        {detention === null ? <SkeletonChart /> : (
+          <>
+            <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
+              Enforcement in sweeps: where the arrests go
+            </h2>
+            {detention.accuracy_note && (
+              <DismissibleNote storageKey="is_crime_detention_accuracy_v1">
+                {detention.accuracy_note}
+              </DismissibleNote>
+            )}
+            <DetentionChart chart={detention} onPick={setDetPicked} />
+            {!!detention.themes?.length && (
+              <div className="mt-2 mb-5">
+                <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">
+                  What the chart shows
+                </h3>
+                <ul className="list-none p-0 m-0">
+                  {detention.themes.map((t, i) => (
+                    <li key={i} className="flex items-baseline gap-3 py-2 border-b border-edge/60 text-[16px] text-foreground/90">
+                      <TierChip t={t.tier} />
+                      <span className="measure">{t.statement}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            <p className="text-muted text-[15px] measure">{detention.note}</p>
+          </>
+        )}
+      </section>
 
       {/* ---- arrests over time (Sean, 2026-08-21): the 1997 peak ---- */}
       <section className="mb-14">
@@ -1180,6 +1219,47 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
               </table>
             </div>
             <p className="text-muted text-[13px] mt-2 mb-0">* not Tier A — drawn dotted on the chart.</p>
+          </div>
+        </div>
+      )}
+
+      {/* ---- per-measure detail (detention) ---- */}
+      {detPicked && (
+        <div role="dialog" aria-modal="true" aria-label={detPicked.name}
+          className="fixed inset-0 z-50 bg-background/85 overflow-y-auto p-4 sm:p-10"
+          onClick={() => setDetPicked(null)}>
+          <div className="max-w-[720px] mx-auto bg-background border border-edge p-6 sm:p-8"
+            onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-start gap-4">
+              <h3 className="font-display font-semibold text-foreground text-[22px] m-0">{detPicked.name}</h3>
+              <button type="button" onClick={() => setDetPicked(null)}
+                className="ml-auto text-muted hover:text-foreground text-[22px] leading-none" aria-label="Close">×</button>
+            </div>
+            <p className="text-muted text-[15px] mt-3 mb-0">
+              <strong className="text-foreground/80">Measure:</strong> {detPicked.basis_short} ·{" "}
+              <strong className="text-foreground/80">Publisher:</strong> {detPicked.publisher} ·{" "}
+              <TierChip t={detPicked.tier} />
+            </p>
+            <ul className="list-disc pl-5 mt-4 text-[15px] text-foreground/85">
+              {detPicked.caveats.map((c, i) => <li key={i} className="mb-1.5">{c}</li>)}
+            </ul>
+            <h4 className="font-display font-semibold text-foreground text-[16px] mt-6 mb-2">
+              The figures
+            </h4>
+            <p className="text-muted text-[14px] mt-0 mb-2">Each row: {detPicked.unit}.</p>
+            <div className="max-h-[42vh] overflow-y-auto scroll-thin border-t border-edge">
+              <table className="w-full text-[15px]">
+                <tbody>
+                  {detPicked.points.slice().reverse().map((q, i) => (
+                    <tr key={i} className="border-b border-edge/50 align-top">
+                      <td className="py-1.5 text-muted w-20">{Math.floor(q.year)}</td>
+                      <td className="py-1.5 text-foreground/90 tabular-nums w-24">{q.value.toLocaleString()}</td>
+                      <td className="py-1.5 text-muted text-[13px]">{q.note || ""}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       )}

@@ -546,6 +546,68 @@ if (!r2.accRescue) fail("World Cup rescue outcome missing from accomplishments")
 if (!r2.accKinds) fail("outcome/activity/commitment kinds not marked");
 if (!r2.accDiscipline) fail("accomplishments discipline line missing");
 
+// Detention chart: three measures kept apart, and the section nav.
+const det = await page.evaluate(() => {
+  const main = document.querySelector("main");
+  const t = main.innerText.replace(/\n/g, " ");
+  const fig = [...main.querySelectorAll("figure")].find((f) => /funded ceiling/i.test(f.querySelector("figcaption")?.textContent || ""));
+  const svg = fig?.querySelector("svg[viewBox]");
+  const legend = fig ? [...(fig.querySelector("ul")?.querySelectorAll("button") || [])] : [];
+  const paths = svg ? [...svg.querySelectorAll("path[stroke]:not([stroke=transparent])")] : [];
+  const yrs = svg ? [...svg.querySelectorAll("text")].map((x) => x.textContent).filter((x) => /^\d{4}$/.test(x)).map(Number) : [];
+  return {
+    chart: !!svg,
+    legend: legend.length,
+    legendNamesMeasures: legend.map((b) => b.textContent.trim()),
+    // ADP + funded beds are lines; single-day must be points only (2 line paths)
+    linePaths: paths.length,
+    ownWindow: yrs.length ? Math.min(...yrs) === 2019 : false,
+    windowExplained: /uses its own 2019.2026 window/.test(t),
+    measuresWarning: /three measures are not interchangeable/i.test(t),
+    adpStops: /line STOPS at FY2024|stops at FY2024/.test(t),
+    ceiling: /41,500/.test(t) && /45 billion/.test(t),
+    noConviction: /70\.6%/.test(t) && /92% of FY2026/.test(t),
+    localOvercrowding: /45 of 181 facilities/.test(t),
+    accuracy: /constantly conflated in reporting/.test(t),
+  };
+});
+console.log("detention:", JSON.stringify(det));
+if (!det.chart) fail("detention chart missing");
+if (det.legend !== 3) fail(`detention legend entries: ${det.legend}, expected 3`);
+if (det.linePaths !== 2) fail(`detention drew ${det.linePaths} line paths; single-day must be POINTS only (expected 2 lines)`);
+if (!det.ownWindow) fail("detention chart does not use its own 2019 window floor");
+if (!det.windowExplained) fail("the window break is not explained on the page");
+if (!det.measuresWarning) fail("the three-measures warning is missing");
+if (!det.adpStops) fail("ADP publication stop not stated");
+if (!det.ceiling) fail("funded-ceiling theme missing the 41,500 / $45B framing");
+if (!det.noConviction) fail("no-criminal-conviction figures missing");
+if (!det.localOvercrowding) fail("local-vs-national overcrowding theme missing");
+if (!det.accuracy) fail("detention accuracy note missing");
+
+// section nav: rail on wide, sheet on narrow, discovered from the DOM
+const navWide = await page.evaluate(() => {
+  const nav = document.querySelector("nav[aria-label='On this page']");
+  const items = nav ? [...nav.querySelectorAll("button")] : [];
+  return { present: !!nav, count: items.length, hasCurrent: items.some((b) => b.getAttribute("aria-current") === "true") };
+});
+console.log("section nav (wide):", JSON.stringify(navWide));
+if (!navWide.present) fail("section nav rail missing at desktop width");
+if (navWide.count < 8) fail(`section nav lists ${navWide.count} sections, expected 8+`);
+if (!navWide.hasCurrent) fail("section nav marks no current section");
+
+// clicking a nav entry moves the viewport to that section
+const beforeY = await page.evaluate(() => window.scrollY);
+await page.evaluate(() => {
+  const nav = document.querySelector("nav[aria-label='On this page']");
+  const b = [...nav.querySelectorAll("button")].find((x) => /Sources/i.test(x.textContent));
+  b?.click();
+});
+await page.waitForTimeout(900);
+const afterY = await page.evaluate(() => window.scrollY);
+if (afterY <= beforeY) fail("section nav click did not scroll to the section");
+await page.evaluate(() => window.scrollTo({ top: 0 }));
+await page.waitForTimeout(400);
+
 // Arrests chart: legible y-axis (no raw 8-digit ticks), connected legend,
 // dismissible accuracy note, themes with the criminal-vs-administrative
 // reconciliation, and click-anywhere opens a modal.
@@ -619,7 +681,8 @@ await page.keyboard.press("Escape");
 await page.waitForTimeout(300);
 
 // dismiss works
-await page.locator("[role=note] button[aria-label=Dismiss]").first().click();
+await page.locator("[role=note]", { hasText: "two official federal criminal-arrest series" })
+  .locator("button[aria-label=Dismiss]").first().click();
 await page.waitForTimeout(300);
 const alertGone = await page.evaluate(() => !/About the accuracy of these figures/.test(document.querySelector("main").innerText));
 if (!alertGone) fail("accuracy note did not dismiss");
@@ -761,7 +824,21 @@ const crimePhone = await page.evaluate(() => {
     key: /FBI . murder known to police/.test(document.querySelector("main").innerText),
   };
 });
+crimePhone.navBar = await page.evaluate(() => {
+  const bar = [...document.querySelectorAll("button[aria-expanded]")]
+    .find((b) => /On this page/i.test(b.textContent));
+  if (!bar) return { present: false };
+  bar.click();
+  return { present: true };
+});
+await page.waitForTimeout(400);
+crimePhone.navSheet = await page.evaluate(() => {
+  const sheet = document.getElementById("section-nav-sheet");
+  return sheet ? sheet.querySelectorAll("button").length : 0;
+});
 console.log("crime phone:", JSON.stringify(crimePhone));
+if (!crimePhone.navBar?.present) fail("section nav bar missing at phone width");
+if (!crimePhone.navSheet || crimePhone.navSheet < 8) fail(`phone nav sheet lists ${crimePhone.navSheet} sections, expected 8+`);
 if (!crimePhone.found) fail("crime chart missing at phone width");
 if (crimePhone.minPx < 9) fail(`crime chart label paints at ${crimePhone.minPx}px on a phone`);
 if (crimePhone.overflow) fail("crime chart overflows the phone viewport");
@@ -779,6 +856,7 @@ for (const tab of ["Public Health", "Crime"]) {
   axes[tab] = await page.evaluate(() =>
     [...document.querySelectorAll("main figure")]
       .filter((f) => f.offsetParent !== null)
+      .filter((f) => !f.hasAttribute("data-own-window"))  // declared opt-outs
       .map((f) => {
         const svg = f.querySelector("svg[viewBox]");
         if (!svg) return null;
