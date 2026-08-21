@@ -1032,5 +1032,55 @@ const jnPageAfter = await page.evaluate(() => document.querySelector("main")?.in
 console.log("journal month jump:", jnPageBefore, "->", jnPageAfter);
 if (jnPageBefore === jnPageAfter) fail("picking a month did not move the feed");
 
+// ---- the five Public Health concepts, and the charts that point at them ----
+await page.setViewportSize({ width: 1440, height: 1000 });
+await page.getByRole("button", { name: /^Concepts$/i }).first().click().catch(() => {});
+await page.waitForTimeout(2000);
+const con = await page.evaluate(() => {
+  const want = ["us-rose-against-the-trend", "low-number-may-mean-low-counting",
+                "prescribing-is-not-prevalence", "the-fentanyl-reversal",
+                "co-occurrence-is-not-cause"];
+  const t = document.querySelector("main").innerText;
+  return {
+    present: want.filter((id) => !!document.getElementById(id)),
+    missing: want.filter((id) => !document.getElementById(id)),
+    // the narrowed theme 3 must NOT assert that illness did not increase
+    narrowed: /Prescribing is not a measure of illness/.test(t) && !/More prescriptions, not more illness/.test(t),
+    // the counter-figure is shown, not hidden
+    counterShown: /13\.5% to 17\.8%/.test(t),
+    // theme 1 must not claim uniqueness
+    notUnique: /South Korea rose further/.test(t),
+    // rendered uppercase via CSS, so innerText reads DOCUMENTED / STRUCTURAL
+    basisLabels: /DOCUMENTED/i.test(t) && /STRUCTURAL/i.test(t),
+    conceptCount: document.querySelectorAll("main li[id]").length,
+  };
+});
+console.log("concepts:", JSON.stringify(con));
+if (con.missing.length) fail(`concepts missing from /concepts: ${con.missing.join(", ")}`);
+if (!con.narrowed) fail("theme 3 is not the narrowed claim");
+if (!con.counterShown) fail("the rising-diagnosis counter-figure is not shown to the reader");
+if (!con.notUnique) fail("theme 1 still reads as a uniqueness claim");
+if (!con.basisLabels) fail("concept basis labels missing");
+if (con.conceptCount < 16) fail(`concepts page shows ${con.conceptCount}, expected 16`);
+
+// Public Health charts link INTO the concepts
+await page.getByRole("button", { name: /^Data$/i }).first().click().catch(() => {});
+// The report must SURVIVE leaving the section and coming back — Data is now
+// mounted-but-hidden once opened. This path (Data -> Concepts -> Data) left
+// the timeline blank until the sticky mount was added.
+await page.waitForTimeout(1500);
+const survivedFullTrip = await page.evaluate(() => document.getElementById("a_tiles")?.innerHTML.length ?? -1);
+console.log("tiles after Concepts -> Data:", survivedFullTrip);
+if (survivedFullTrip < 100) fail("GovCloud report is blank after leaving the Data tab and returning");
+await page.getByRole("tab", { name: /^Public Health$/i }).click();
+await page.waitForTimeout(2200);
+const links = await page.evaluate(() =>
+  [...document.querySelectorAll('main a[href^="/concepts#"]')].map((a) => a.getAttribute("href")));
+console.log("concept links from Public Health:", JSON.stringify(links));
+if (links.length < 4) fail(`only ${links.length} concept links from the health page, expected 4+`);
+for (const id of ["us-rose-against-the-trend", "the-fentanyl-reversal", "co-occurrence-is-not-cause"]) {
+  if (!links.some((h) => h.endsWith(id))) fail(`no chart links to concept ${id}`);
+}
+
 await browser.close();
 console.log(process.exitCode ? "RESULT: FAIL" : "RESULT: PASS");

@@ -85,6 +85,8 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
   const [gcat, setGcat] = useState("");
 
   const [page, setPage] = useState(1);
+  // Sticky mount for the Data tab — see the note by its render below.
+  const [dataMounted, setDataMounted] = useState(false);
   // Feed order. Default matches the entries themselves, which read latest-first.
   const [sort, setSort] = useState<SortDir>("newest");
   const [sel, setSel] = useState<string | null>(null);
@@ -185,6 +187,7 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
   }, [journal, ds, q, dFrom, dTo, part, loc, audioOnly, cat, stype, sort]);
 
   useEffect(() => { setPage(1); }, [q, dFrom, dTo, part, loc, cat, stype, audioOnly, sort]);
+  useEffect(() => { if (tab === "data") setDataMounted(true); }, [tab]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
 
@@ -266,7 +269,7 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
         ) : tab === "documents" ? (
           <DocumentsView />
         ) : tab === "data" ? (
-          <DataView />
+          null   // rendered below the switch so it can stay mounted
         ) : tab === "concepts" ? (
           <ConceptsView />
         ) : tab === "author" ? (
@@ -302,6 +305,18 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
             </div>
           </div>
         )}
+        {/* Data stays mounted once opened. The GovCloud report is script-drawn
+            once per page load and cannot redraw after an unmount — the useMemo
+            guard inside DataView only protected sub-tab switches, so leaving
+            the section entirely (Data -> Concepts -> Data) left the timeline
+            blank. Hiding beats re-rendering; nothing mounts until the reader
+            first opens Data. */}
+        {!loading && dataMounted && (
+          <div className={tab === "data" ? "" : "hidden"} aria-hidden={tab !== "data"}>
+            <DataView />
+          </div>
+        )}
+
         {!loading && tab === "journal" && !selDoc && (
           <GlossaryPeek terms={glossaryTerms} onView={() => { setTab("glossary"); setSel(null); setGsel(null); }} onOpen={(slug: string) => { setTab("glossary"); setSel(null); setGsel(slug); }} />
         )}

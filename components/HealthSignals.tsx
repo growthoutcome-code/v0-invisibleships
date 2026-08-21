@@ -143,6 +143,25 @@ function usePager<T>(items: T[] | null | undefined, size: number) {
   };
 }
 
+/**
+ * Link from a chart or register into the Concept that explains it in plain
+ * language (Sean: charts should have somewhere to point). Concepts render as
+ * anchored list items on /concepts, so a hash deep-links to one.
+ */
+function ConceptLink({ id, children }: { id: string; children: React.ReactNode }) {
+  return (
+    <p className="text-[15px] measure mt-3 mb-0">
+      <a
+        href={`/concepts#${id}`}
+        onClick={() => track("concept_from_data", { id })}
+        className="text-accent underline underline-offset-4 hover:text-foreground"
+      >
+        {children} &rarr;
+      </a>
+    </p>
+  );
+}
+
 /* ---------------------------------------------------------------- chart --- */
 
 function LineChart({
@@ -945,6 +964,12 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
               </li>
             ))}
           </ul>
+          <ConceptLink id="us-rose-against-the-trend">
+            Read the concept: the world&rsquo;s suicide rate fell, the United States&rsquo; rose
+          </ConceptLink>
+          <ConceptLink id="low-number-may-mean-low-counting">
+            Read the concept: a low number can mean low counting
+          </ConceptLink>
         </section>
       )}
 
@@ -985,6 +1010,9 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
           11.9%. Neither figure is wrong &mdash; they compare different vintages of the same year.
           The data-quality register below carries this in full.
         </p>
+        <ConceptLink id="the-fentanyl-reversal">
+          Read the concept: the fentanyl reversal
+        </ConceptLink>
       </section>
 
       {/* Trends */}
@@ -1062,6 +1090,9 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
       {!!overlaps?.length && (
         <section ref={overlapsP.ref} className="mb-16">
           <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">Overlaps with the Government Cloud record</h2>
+          <ConceptLink id="co-occurrence-is-not-cause">
+            Read the concept: next to each other is not because of each other
+          </ConceptLink>
           <p className="text-muted text-[15px] mb-6 measure">
             Co-occurrence in time or place is not evidence of a relationship. Each row says what it
             does <em>not</em> show.
