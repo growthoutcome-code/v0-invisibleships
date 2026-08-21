@@ -7,7 +7,7 @@ import DisclaimerLink from "@/components/DisclaimerLink";
 import { SkeletonChart } from "@/components/Skeleton";
 import {
   useTable, useDoc, usePager, useNarrow, TierChip, SourceLink, SectionSkeleton,
-  DATA_WINDOW, dataWindowTicks, type SourceRec,
+  DismissibleNote, DATA_WINDOW, dataWindowTicks, type SourceRec,
 } from "@/components/DataPrimitives";
 import IntlLineChart, { type IntlChartDoc, type IntlSeries } from "@/components/IntlLineChart";
 import { track } from "@/lib/analytics";
@@ -50,6 +50,9 @@ type Chart = {
   title: string; unit: string; note: string; publisher: string; tier: string;
   series: ChartSeries[];
   markers?: { year: number; label: string }[];
+  y_format?: string;
+  themes?: { statement: string; tier: string }[];
+  accuracy_note?: string;
 };
 type Lane = {
   name: string; counts: string; publisher: string; emphasis: boolean;
@@ -230,7 +233,26 @@ function LaneChart({ chart, onPick }: { chart: LaneChart; onPick: (l: Lane) => v
         {Array.from({ length: x1 - x0 + 1 }, (_, i) => x0 + i).map((y) => (
           <rect key={y} x={X(y) - (W - padL - padR) / (x1 - x0) / 2} y={padT}
             width={Math.max(3, (W - padL - padR) / (x1 - x0))} height={H - padT - padB}
-            fill="transparent" onMouseEnter={() => setHoverYear(y)} />
+            fill="transparent" style={{ cursor: "pointer" }}
+            onMouseEnter={() => setHoverYear(y)}
+            onClick={(e) => {
+              // forward clicks the overlay would otherwise swallow: open the
+              // lane nearest the pointer at this year (focused lane wins)
+              const svg = (e.currentTarget as SVGRectElement).ownerSVGElement!;
+              const r = svg.getBoundingClientRect();
+              const vy = ((e.clientY - r.top) / r.height) * H;
+              let best: Lane | null = null, bd = Infinity;
+              for (const s of chart.series) {
+                const pts = s.points.filter((q) => q.year >= DATA_WINDOW.from && q.year <= DATA_WINDOW.to);
+                if (!pts.length) continue;
+                const p = pts.find((q) => q.year === y) ||
+                  pts.reduce((a, b) => Math.abs(b.year - y) < Math.abs(a.year - y) ? b : a);
+                const d = Math.abs(Y(p.value) - vy);
+                if (d < bd) { bd = d; best = s; }
+              }
+              const target = focus ? chart.series.find((s) => s.name === focus) || best : best;
+              if (target) onPick(target);
+            }} />
         ))}
         {hoverYear !== null && (
           <g pointerEvents="none">
@@ -296,6 +318,12 @@ function TwoSeriesChart({ chart, onPick }: { chart: Chart; onPick: (s: ChartSeri
   // rather than discarded — the 1980 and 1991 peaks are real and worth seeing,
   // they just should not set the axis for every other chart on the site.
   const [fullRecord, setFullRecord] = useState(false);
+  // Connected legend (same contract as the lane and international charts):
+  // hover/focus lights a series, tap once highlights, tap again opens detail.
+  const [focus, setFocus] = useState<string | null>(null);
+
+  const fmtV = (v: number) =>
+    chart.y_format === "millions" ? `${(v / 1e6).toFixed(v >= 10e6 ? 0 : 1)}M` : v.toFixed(0);
 
   const view = fullRecord ? chart.series : chart.series.map((s) => ({
     ...s,
@@ -352,9 +380,35 @@ function TwoSeriesChart({ chart, onPick }: { chart: Chart; onPick: (s: ChartSeri
       </figcaption>
       <p className="text-muted text-[13px] m-0 mb-3">{chart.unit}</p>
 
+      <ul className="list-none p-0 m-0 mb-3 flex flex-wrap gap-x-4 gap-y-1"
+        onMouseLeave={() => setFocus(null)}>
+        {view.map((s) => (
+          <li key={s.name}>
+            <button type="button"
+              onMouseEnter={() => setFocus(s.name)}
+              onFocus={() => setFocus(s.name)}
+              onClick={() => {
+                if (focus === s.name) onPick(chart.series.find((o) => o.name === s.name) || s);
+                else setFocus(s.name);
+              }}
+              aria-pressed={focus === s.name}
+              className={`flex items-center gap-2 text-[15px] py-1 px-1 border-b-2 transition-colors ${
+                focus === s.name ? "border-foreground text-foreground"
+                                 : "border-transparent text-foreground/70 hover:text-foreground"
+              }`}>
+              <svg width="22" height="8" aria-hidden="true">
+                <line x1="0" y1="4" x2="22" y2="4" stroke="currentColor"
+                  strokeWidth={s.emphasis ? 3 : 1.5} />
+              </svg>
+              {s.name.split("\u2014")[0].trim()}
+            </button>
+          </li>
+        ))}
+      </ul>
+
       <svg
         viewBox={`0 0 ${W} ${H}`} width="100%" role="img"
-        aria-label={`${chart.title}. ${chart.unit}.`}
+        aria-label={`${chart.title}. ${chart.unit}. Use the legend buttons to highlight a series and open its detail.`}
         onMouseLeave={() => setHoverYear(null)}
         style={{ fontFamily: "inherit", overflow: "visible" }}
       >
@@ -362,7 +416,7 @@ function TwoSeriesChart({ chart, onPick }: { chart: Chart; onPick: (s: ChartSeri
           <g key={i}>
             <line x1={padL} y1={Y(t)} x2={W - padR} y2={Y(t)} stroke="rgb(var(--edge))" strokeWidth="1" />
             <text x={padL - 8} y={Y(t) + 4} fontSize={fsTick} fill="rgb(var(--muted))" textAnchor="end">
-              {t.toFixed(0)}
+              {fmtV(t)}
             </text>
           </g>
         ))}
@@ -409,18 +463,21 @@ function TwoSeriesChart({ chart, onPick }: { chart: Chart; onPick: (s: ChartSeri
               if (j < s.points.length - 1) weak.push(`M${pt(p)}L${pt(s.points[j + 1])}`);
             }
           });
-          const sw = s.emphasis ? (narrow ? 3.5 : 2.4) : (narrow ? 2.4 : 1.5);
+          const dim = focus !== null && focus !== s.name;
+          const baseSw = s.emphasis ? (narrow ? 3.5 : 2.4) : (narrow ? 2.4 : 1.5);
+          const sw = focus === s.name ? baseSw + 1.2 : baseSw;
           const last = s.points[s.points.length - 1];
           return (
             <g key={i}
               /* The modal is the supporting-data view, so it always opens the
                  COMPLETE series — never the windowed slice the axis shows. */
               onClick={() => onPick(chart.series.find((o) => o.name === s.name) || s)}
-              style={{ cursor: "pointer" }}>
+              onMouseEnter={() => setFocus(s.name)}
+              style={{ cursor: "pointer", transition: "opacity 120ms" }}>
               <path
                 d={d} fill="none" stroke="rgb(var(--foreground))"
                 strokeWidth={sw}
-                opacity={s.emphasis ? 1 : 0.62}
+                opacity={dim ? 0.18 : s.emphasis || focus === s.name ? 1 : 0.62}
               />
               {/* over-draw the un-vetted stretches in the background colour, then
                   redraw them dotted — a dashed overlay alone would leave the
@@ -460,7 +517,26 @@ function TwoSeriesChart({ chart, onPick }: { chart: Chart; onPick: (s: ChartSeri
         {Array.from({ length: x1 - x0 + 1 }, (_, i) => x0 + i).map((y) => (
           <rect key={y} x={X(y) - (W - padL - padR) / (x1 - x0) / 2} y={padT}
             width={Math.max(3, (W - padL - padR) / (x1 - x0))} height={H - padT - padB}
-            fill="transparent" onMouseEnter={() => setHoverYear(y)} />
+            fill="transparent" style={{ cursor: "pointer" }}
+            onMouseEnter={() => setHoverYear(y)}
+            onClick={(e) => {
+              // The hover overlay sits above the lines, so it must forward
+              // clicks: open the series whose value at this year is nearest
+              // the pointer (falling back to the focused one).
+              const svg = (e.currentTarget as SVGRectElement).ownerSVGElement!;
+              const r = svg.getBoundingClientRect();
+              const vy = ((e.clientY - r.top) / r.height) * H;
+              let best: ChartSeries | null = null, bd = Infinity;
+              for (const s of view) {
+                const p = s.points.find((q) => q.year === y) ||
+                  s.points.reduce((a, b) => Math.abs(b.year - y) < Math.abs(a.year - y) ? b : a);
+                if (!p) continue;
+                const d = Math.abs(Y(p.value) - vy);
+                if (d < bd) { bd = d; best = s; }
+              }
+              const target = focus ? view.find((s) => s.name === focus) || best : best;
+              if (target) onPick(chart.series.find((o) => o.name === target.name) || target);
+            }} />
         ))}
         {hoverYear !== null && hovered && hovered.length > 0 && (
           <g pointerEvents="none">
@@ -470,9 +546,14 @@ function TwoSeriesChart({ chart, onPick }: { chart: Chart; onPick: (s: ChartSeri
               <circle key={i} cx={X(hoverYear)} cy={Y(h.p!.value)} r={narrow ? 6 : 4.5}
                 fill="rgb(var(--background))" stroke="rgb(var(--foreground))" strokeWidth="2" />
             ))}
-            <text x={Math.min(Math.max(X(hoverYear), padL + 70), W - padR - 20)} y={padT - 8}
+            <text x={Math.min(Math.max(X(hoverYear), padL + 90), W - padR - 90)} y={padT - 8}
               fontSize={fsLabel} fill="rgb(var(--foreground))" textAnchor="middle" fontWeight="600">
-              {hoverYear}: {hovered.map((h) => h.p!.value.toFixed(1)).join(" / ")}
+              {(() => {
+                const f = focus ? hovered.find((h) => h.s.name === focus) : null;
+                return f
+                  ? `${f.s.name.split("\u2014")[0].trim()} \u00b7 ${hoverYear} \u00b7 ${fmtV(f.p!.value)}`
+                  : `${hoverYear}: ${hovered.map((h) => fmtV(h.p!.value)).join(" / ")}`;
+              })()}
             </text>
           </g>
         )}
@@ -690,8 +771,28 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
       <section className="mb-14">
         {arrests === null ? <SkeletonChart /> : (
           <>
+            {arrests.accuracy_note && (
+              <DismissibleNote storageKey="is_crime_arrests_accuracy_v1">
+                {arrests.accuracy_note}
+              </DismissibleNote>
+            )}
             <TwoSeriesChart chart={arrests} onPick={setPicked} />
-            <p className="body-copy text-foreground/90 measure">{arrests.note}</p>
+            {!!arrests.themes?.length && (
+              <div className="mt-2 mb-5">
+                <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">
+                  What the chart shows
+                </h3>
+                <ul className="list-none p-0 m-0">
+                  {arrests.themes.map((t, i) => (
+                    <li key={i} className="flex items-baseline gap-3 py-2 border-b border-edge/60 text-[16px] text-foreground/90">
+                      <TierChip t={t.tier} />
+                      <span className="measure">{t.statement}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            <p className="text-muted text-[15px] measure">{arrests.note}</p>
           </>
         )}
       </section>

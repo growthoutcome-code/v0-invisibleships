@@ -96,5 +96,25 @@
       "year": 2006,
       "label": "Drug-arrests peak: 1.89M"
     }
-  ]
+  ],
+  "y_format": "millions",
+  "themes": [
+    {
+      "statement": "Criminal arrests peaked in 1997 at 15.3 million; 2024, at 7.5 million, is 51% below that.",
+      "tier": "A"
+    },
+    {
+      "statement": "This chart counts CRIMINAL arrests reported by police agencies. The sweeping arrests in DHS announcements are mostly civil 'administrative arrests' under immigration law \u2014 a separate counting system that never enters these figures. Both are true at once: criminal arrests falling while administrative immigration arrests surge (95,629 by ICE ERO in under five months of 2025 alone).",
+      "tier": "B"
+    },
+    {
+      "statement": "The series ends at 2024 \u2014 before the 2025\u201326 enforcement surge. A national 2025 criminal-arrest figure does not exist yet.",
+      "tier": "A"
+    },
+    {
+      "statement": "Where sweep cases meet courts: of 33 known federal defendants charged with non-immigration crimes in Chicago's Operation Midway Blitz, 25 were cleared \u2014 dismissals, grand juries refusing to indict, one acquittal \u2014 against 2 guilty pleas (tracker as of Aug 2026).",
+      "tier": "B"
+    }
+  ],
+  "accuracy_note": "About the accuracy of these figures: arrest totals are estimates assembled from agency reports, and two official federal series disagree with each other (see the data-quality register). 2016 and 2021 are national data gaps. Civil immigration arrests are counted separately by DHS and never appear in this chart. Every figure is as published by its source on the access date recorded in the source register."
 }

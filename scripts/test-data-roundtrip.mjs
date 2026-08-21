@@ -300,7 +300,8 @@ if (!stageB.modalShowsRaw || !stageB.modalShowsScale) fail("modal does not discl
 if (!stageB.modalUS2024) fail("modal missing US 2024 figure");
 // Only the pre-2021 markers can render while the chart ends at 2021; the
 // booster and emergency-end markers appear once Stage B extends the range.
-if (stageA.covidMarkers < 5) fail(`covid markers: ${stageA.covidMarkers}, expected all 5 now the chart reaches 2025`);
+// COVID markers render only in the pandemic window since the checkbox was
+// removed (Sean, 2026-08-21); the covidWin assertion below covers them.
 if (!stageA.modalOpen) fail("series modal did not open");
 if (!stageA.modalHasMethod || !stageA.modalHasCaveat || !stageA.modalHasSource) fail("series modal incomplete");
 if (stageA.modalRows < 22) fail(`series modal year rows: ${stageA.modalRows}`);
@@ -334,7 +335,7 @@ const od = await page.evaluate(() => {
   const fig = figs.find((f) => /overdose/i.test(f.querySelector("figcaption")?.textContent || ""));
   if (!fig) return { found: false };
   const cap = fig.querySelector("figcaption")?.textContent || "";
-  const svg = fig.querySelector("svg");
+  const svg = fig.querySelector("svg[viewBox]");
   const pts = svg ? svg.querySelectorAll("circle").length / 2 : 0; // mark + hit target
   const xLabels = svg
     ? [...svg.querySelectorAll("text")].map((t) => t.textContent).filter((t) => /^(19|20)\d\d$/.test(t))
@@ -378,7 +379,7 @@ const odPhone = await page.evaluate(() => {
   const f = [...document.querySelectorAll("figure")]
     .find((x) => /overdose deaths, 1999/.test(x.querySelector("figcaption")?.textContent || ""));
   if (!f) return { found: false };
-  const svg = f.querySelector("svg");
+  const svg = f.querySelector("svg[viewBox]");
   const r = svg.getBoundingClientRect();
   const scale = r.width / svg.viewBox.baseVal.width;
   const sizes = [...svg.querySelectorAll("text")].map((t) => +(t.getAttribute("font-size") || 11) * scale);
@@ -425,7 +426,7 @@ const crime = await page.evaluate(() => {
   const main = document.querySelector("main");
   const fig = [...main.querySelectorAll("figure")]
     .find((f) => /two official measures/i.test(f.querySelector("figcaption")?.textContent || ""));
-  const svg = fig?.querySelector("svg");
+  const svg = fig?.querySelector("svg[viewBox]");
   const drawn = svg ? [...svg.querySelectorAll("path")].filter((p) => p.getAttribute("stroke") !== "transparent") : [];
   const heads = [...main.querySelectorAll("h2")].map((h) => h.textContent.trim());
   const txt = main.innerText;
@@ -524,7 +525,7 @@ const r2 = await page.evaluate(() => {
     laneLegendPressable: laneLegend.length > 0 && laneLegend.every((b) => b.hasAttribute("aria-pressed")),
     // the corner cluster must be gone: no lane-name text nodes inside the lane SVG
     noCornerLabels: laneFig ? ![...laneFig.querySelectorAll("svg text")].some((x) => /Missing persons|Defamation/.test(x.textContent)) : false,
-    arrestsChart: !!arrestsFig?.querySelector("svg"),
+    arrestsChart: !!arrestsFig?.querySelector("svg[viewBox]"),
     arrestsPeak: /15\.28|15,284/.test(t),
     arrestsFullRecord: /Show the full record \(1980/.test(t),
     accomplishments: heads.some((h) => /Law enforcement accomplishments/i.test(h)),
@@ -544,6 +545,56 @@ if (!r2.accomplishments) fail("accomplishments section missing");
 if (!r2.accRescue) fail("World Cup rescue outcome missing from accomplishments");
 if (!r2.accKinds) fail("outcome/activity/commitment kinds not marked");
 if (!r2.accDiscipline) fail("accomplishments discipline line missing");
+
+// Arrests chart: legible y-axis (no raw 8-digit ticks), connected legend,
+// dismissible accuracy note, themes with the criminal-vs-administrative
+// reconciliation, and click-anywhere opens a modal.
+const ar = await page.evaluate(() => {
+  const main = document.querySelector("main");
+  const t = main.innerText;
+  const fig = [...main.querySelectorAll("figure")].find((f) => /machine peaked in 1997/i.test(f.querySelector("figcaption")?.textContent || ""));
+  const ticks = fig ? [...fig.querySelectorAll("svg text")].map((x) => x.textContent) : [];
+  const legend = fig ? [...(fig.querySelector("ul")?.querySelectorAll("button") || [])] : [];
+  return {
+    millionTicks: ticks.some((x) => /^\d+(\.\d+)?M$/.test(x)),
+    noRawTicks: !ticks.some((x) => /^\d{7,}$/.test(x)),
+    legend: legend.length,
+    alert: /About the accuracy of these figures/.test(t),
+    alertDismiss: !!document.querySelector("[role=note] button[aria-label=Dismiss]"),
+    reconcile: /administrative arrests/.test(t) && /separate counting system/.test(t),
+    courts: /grand juries\s+refusing to indict/.test(t.replace(/\n/g, " ")),
+    endsAt2024: /series ends at 2024/i.test(t),
+  };
+});
+console.log("arrests:", JSON.stringify(ar));
+if (!ar.millionTicks) fail("arrests y-axis lacks M-formatted ticks");
+if (!ar.noRawTicks) fail("arrests y-axis still shows raw 7+ digit numbers");
+if (ar.legend !== 2) fail(`arrests legend entries: ${ar.legend}, expected 2`);
+if (!ar.alert) fail("accuracy note missing");
+if (!ar.alertDismiss) fail("accuracy note is not dismissible");
+if (!ar.reconcile) fail("criminal-vs-administrative reconciliation missing from themes");
+if (!ar.courts) fail("court-outcomes theme missing");
+if (!ar.endsAt2024) fail("series-ends-2024 theme missing");
+
+// dismiss works
+await page.locator("[role=note] button[aria-label=Dismiss]").first().click();
+await page.waitForTimeout(300);
+const alertGone = await page.evaluate(() => !/About the accuracy of these figures/.test(document.querySelector("main").innerText));
+if (!alertGone) fail("accuracy note did not dismiss");
+
+// clicking directly on the lane chart PLOT opens a modal (the overlay used to
+// swallow these clicks) — click mid-plot on the five-lanes chart
+const laneSvg = page.locator("main figure svg[viewBox]").first();
+await laneSvg.scrollIntoViewIfNeeded();
+const laneBox = await laneSvg.boundingBox();
+await laneSvg.click({ position: { x: laneBox.width * 0.55, y: laneBox.height * 0.45 } });
+await page.waitForTimeout(600);
+const plotClickModal = await page.evaluate(() =>
+  !![...document.querySelectorAll("[role=dialog]")].find((x) => /Counts:|Basis:/.test(x.innerText)));
+console.log("plot-click modal:", plotClickModal);
+if (!plotClickModal) fail("clicking the chart plot did not open a modal");
+await page.keyboard.press("Escape");
+await page.waitForTimeout(300);
 
 // lane legend hover dims the other lanes (real pointer)
 await page.locator("main figure ul button", { hasText: "Homicide" }).first().hover();
@@ -567,7 +618,7 @@ const intl = await page.evaluate(() => {
   const fig = [...main.querySelectorAll("figure")].find((f) => /US against the world/i.test(f.querySelector("figcaption")?.textContent || ""));
   const legend = fig ? [...fig.querySelectorAll("ul button")] : [];
   return {
-    chart: !!fig?.querySelector("svg"),
+    chart: !!fig?.querySelector("svg[viewBox]"),
     legendEntries: legend.length,
     legendPressable: legend.length > 0 && legend.every((b) => b.hasAttribute("aria-pressed")),
     drugPanel: /five ways of counting/i.test(t),
@@ -606,18 +657,23 @@ if (dimCheck.litCount < 1) fail("focused line is not lit");
 // COVID checkbox now zooms the axis to the pandemic window (Sean, 2026-08-21).
 await page.getByRole("tab", { name: /^Public Health$/i }).click();
 await page.waitForTimeout(1600);
-await page.getByRole("checkbox", { name: /Show COVID-19 timeline/i }).check();
+const noCheckbox = await page.evaluate(() => !document.body.textContent.includes("Show COVID-19 timeline"));
+console.log("covid checkbox removed:", noCheckbox);
+if (!noCheckbox) fail("COVID checkbox should be removed");
+await page.getByRole("button", { name: /2017–2021 \(pandemic\)/ }).click();
 await page.waitForTimeout(700);
-const covidZoom = await page.evaluate(() => {
+const covidWin = await page.evaluate(() => {
   const svgs = [...document.querySelectorAll("main figure svg")];
   const svg = svgs.find((x) => [...x.querySelectorAll("text")].some((t) => t.textContent === "2017"));
   if (!svg) return { found: false };
   const yrs = [...svg.querySelectorAll("text")].map((t) => t.textContent).filter((t) => /^(19|20)\d\d$/.test(t)).map(Number);
-  return { found: true, min: Math.min(...yrs), max: Math.max(...yrs) };
+  const markers = [...svg.querySelectorAll("line[stroke-dasharray]")].length;
+  return { found: true, min: Math.min(...yrs), markers };
 });
-console.log("covid zoom:", JSON.stringify(covidZoom));
-if (!covidZoom.found || covidZoom.min < 2017) fail(`COVID checkbox did not zoom to the pandemic window (min year ${covidZoom.min})`);
-await page.getByRole("checkbox", { name: /Show COVID-19 timeline/i }).uncheck();
+console.log("covid window:", JSON.stringify(covidWin));
+if (!covidWin.found || covidWin.min < 2017) fail("pandemic window did not zoom");
+if (covidWin.markers < 3) fail("COVID markers should render automatically in the pandemic window");
+await page.getByRole("button", { name: /2000–2021/ }).click();
 await page.waitForTimeout(500);
 await page.getByRole("tab", { name: /^Crime$/i }).click();
 await page.waitForTimeout(1800);
@@ -651,7 +707,7 @@ await page.waitForTimeout(1800);
 await page.setViewportSize({ width: 390, height: 900 });
 await page.waitForTimeout(1500);
 const crimePhone = await page.evaluate(() => {
-  const svg = document.querySelector("main figure svg");
+  const svg = document.querySelector("main figure svg[viewBox]");
   if (!svg) return { found: false };
   const r = svg.getBoundingClientRect();
   const sc = r.width / svg.viewBox.baseVal.width;
@@ -682,7 +738,7 @@ for (const tab of ["Public Health", "Crime"]) {
     [...document.querySelectorAll("main figure")]
       .filter((f) => f.offsetParent !== null)
       .map((f) => {
-        const svg = f.querySelector("svg");
+        const svg = f.querySelector("svg[viewBox]");
         if (!svg) return null;
         // axis ticks only: marker labels are rotated, axis ticks are not
         const ticks = [...svg.querySelectorAll("text")]
@@ -710,7 +766,7 @@ await page.getByRole("tab", { name: /^Crime$/i }).click();
 await page.waitForTimeout(2200);
 const ytd = await page.evaluate(() => {
   const t = document.querySelector("main").innerText;
-  const svg = document.querySelector("main figure svg");
+  const svg = document.querySelector("main figure svg[viewBox]");
   const ticks = svg ? [...svg.querySelectorAll("text")].map((x) => x.textContent) : [];
   return {
     block: /Where 2026 stands/.test(t),

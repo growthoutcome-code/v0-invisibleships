@@ -997,5 +997,23 @@
     "evidence_tier": "A",
     "accessed": "2026-08-21",
     "archived_url": null
+  },
+  {
+    "source_id": "ar_jr_ice",
+    "url": "https://journalistsresource.org/home/how-to-make-sense-of-ice-arrest-data/",
+    "publisher": "The Journalist's Resource (Harvard Shorenstein)",
+    "title": "How to make sense of ICE arrest data \u2014 administrative vs criminal arrests",
+    "evidence_tier": "B",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "ar_suntimes",
+    "url": "https://chicago.suntimes.com/2026/tracker-federal-prosecutions-chicago-status-trumps-immigration-blitz-ice",
+    "publisher": "Chicago Sun-Times",
+    "title": "Tracker: every known federal prosecution tied to Operation Midway Blitz (updated 2026-08-10)",
+    "evidence_tier": "B",
+    "accessed": "2026-08-21",
+    "archived_url": null
   }
 ]

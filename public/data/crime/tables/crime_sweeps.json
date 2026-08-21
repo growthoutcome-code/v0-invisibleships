@@ -9,5 +9,27 @@
     "for_scale": "HSI's own FY2024 report records 1,686 trafficking investigations producing 2,545 arrests across the whole year \u2014 so one operation produced roughly a third of an annual arrest volume in a few weeks.",
     "tier": "A",
     "source_id": "hs_dhs_worldcup"
+  },
+  {
+    "sweep_id": "sw02",
+    "date": "2026-03",
+    "operation": "The capacity question: where an arrest surge goes",
+    "agency": "ICE detention system (analysed by the Vera Institute from ICE's own published data)",
+    "headline": "A record 73,400 people held in ICE detention on a single day in January 2026 \u2014 above the previous 2019 peak \u2014 with ~444,900 detention bookings since January 2025, and bookings in early 2026 running 61% above the same period of 2025.",
+    "what_the_number_is": "Vera's count of facilities in active use (456, February 2026) is more than double the 220 ICE publicly acknowledges on its website; 152 facilities opened and 170 previously closed ones reopened since January 2025. Whether constitutional standards are being met inside that expansion is litigated, not settled: courts and oversight bodies are the record for conditions and due-process claims, and this register reports filings and rulings, not conclusions of its own.",
+    "for_scale": "An arrest surge is only half a fact. The other half is capacity and process: where people are held, for how long, acknowledged where, and with what access to counsel and hearings. Each of those is a countable quantity some body publishes or conspicuously does not.",
+    "tier": "B",
+    "source_id": "hs_vera_2026"
+  },
+  {
+    "sweep_id": "sw03",
+    "date": "2026-08",
+    "operation": "When sweep cases reach a courtroom",
+    "agency": "US Attorney's Office N.D. Illinois (Operation Midway Blitz prosecutions)",
+    "headline": "Of 33 known federal defendants charged with non-immigration crimes tied to Chicago's Operation Midway Blitz, 25 have been cleared \u2014 charges dismissed, grand juries refusing to indict (at least three refusals), one acquittal at trial \u2014 against 2 guilty pleas and 5 deferred-prosecution agreements.",
+    "what_the_number_is": "Adjudication outcomes for the criminal charges that accompanied one sweep, per the Chicago Sun-Times case tracker (updated 2026-08-10). It is one operation in one district, not a national statistic \u2014 no body publishes one.",
+    "for_scale": "This is the difference between an arrest count and an outcome count in practice: the announcement is the arrest number; what survives a grand jury and a judge is far smaller, and nobody aggregates that nationally.",
+    "tier": "B",
+    "source_id": "ar_suntimes"
   }
 ]

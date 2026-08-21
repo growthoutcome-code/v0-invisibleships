@@ -349,8 +349,23 @@ def main():
     save(CRIME_C / "harm_lanes_indexed.json", chart)
     save(CRIME_T / "crime_indicators.json", crime_ind)
     save(CRIME_T / "crime_sources.json", sources)
-    save(CRIME_T / "crime_not_counted.json", NOT_COUNTED)
-    save(CRIME_T / "crime_sweeps.json", SWEEPS)
+    # MERGE by nc_id — build_crime_intl.py appends nc07 to this file, and a
+    # wholesale save here wiped it once (the same clobber that hit sweeps).
+    nc_path = CRIME_T / "crime_not_counted.json"
+    nc_existing = json.loads(nc_path.read_text()) if nc_path.exists() else []
+    nc_own = {x["nc_id"] for x in NOT_COUNTED}
+    nc_merged = NOT_COUNTED + [x for x in nc_existing if x["nc_id"] not in nc_own]
+    nc_merged.sort(key=lambda x: x["nc_id"])
+    save(nc_path, nc_merged)
+    # MERGE, never clobber: this file is also written to by other steps
+    # (sw02 capacity, sw03 court outcomes). A wholesale save here silently
+    # deleted sw02 once — entries are now replaced by id and the rest kept.
+    sweeps_path = CRIME_T / "crime_sweeps.json"
+    existing = json.loads(sweeps_path.read_text()) if sweeps_path.exists() else []
+    own_ids = {x["sweep_id"] for x in SWEEPS}
+    merged = [x for x in existing if x["sweep_id"] not in own_ids] + SWEEPS
+    merged.sort(key=lambda x: x["sweep_id"])
+    save(sweeps_path, merged)
 
     print(f"indicators : +{added} researched rows (total {len(crime_ind)})")
     print(f"sources    : {len(sources)}")

@@ -108,6 +108,26 @@ export function SourceLink({
   );
 }
 
+/**
+ * A dismissible inline note (localStorage-backed, SSR-safe). Used for the
+ * accuracy note on charts whose figures are estimates with known seams.
+ */
+export function DismissibleNote({ storageKey, children }: { storageKey: string; children: React.ReactNode }) {
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    try { setOpen(window.localStorage.getItem(storageKey) !== "1"); } catch { setOpen(true); }
+  }, [storageKey]);
+  if (!open) return null;
+  return (
+    <div role="note" className="border border-edge bg-panel/40 px-4 py-3 mb-4 flex items-start gap-3">
+      <p className="text-muted text-[14px] m-0 measure">{children}</p>
+      <button type="button" aria-label="Dismiss"
+        onClick={() => { setOpen(false); try { window.localStorage.setItem(storageKey, "1"); } catch {} }}
+        className="ml-auto text-muted hover:text-foreground text-[18px] leading-none shrink-0">×</button>
+    </div>
+  );
+}
+
 export function SectionSkeleton({ title }: { title: string }) {
   return (
     <section className="mb-16" aria-busy="true">

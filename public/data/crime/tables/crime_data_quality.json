@@ -88,5 +88,14 @@
     "effect": "Any chart must stay inside ONE series; mixing them manufactures changes that are artefacts of methodology. The arrests chart here uses the FBI series throughout and draws the 2016/2021 gaps as gaps.",
     "tier": "A",
     "source_id": "cs108"
+  },
+  {
+    "dq_id": "cq11",
+    "geography": "US",
+    "topic": "Criminal arrests and immigration arrests are different counting systems",
+    "issue": "FBI arrest estimates count criminal arrests reported by police agencies. ICE's 'administrative arrest' is an arrest for a CIVIL violation of immigration law \u2014 OHSS's own definition \u2014 adjudicated by an immigration judge, not a criminal court, and it never enters the FBI series. The FBI series also ends at 2024, before the 2025-26 surge.",
+    "effect": "A reader can see 'sweeping arrests' in agency announcements while the national criminal-arrest chart declines, with no contradiction: the two numbers count different legal events in different systems, on different clocks.",
+    "tier": "B",
+    "source_id": "ar_jr_ice"
   }
 ]

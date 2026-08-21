@@ -176,7 +176,25 @@ export default function IntlLineChart({
         {Array.from({ length: x1 - x0 + 1 }, (_, i) => x0 + i).map((y) => (
           <rect key={y} x={X(y) - (W - padL - padR) / (x1 - x0) / 2} y={padT}
             width={Math.max(3, (W - padL - padR) / (x1 - x0))} height={H - padT - padB}
-            fill="transparent" onMouseEnter={() => setHoverYear(y)} />
+            fill="transparent" style={{ cursor: "pointer" }}
+            onMouseEnter={() => setHoverYear(y)}
+            onClick={(e) => {
+              // the overlay sits above the lines; forward clicks to the line
+              // nearest the pointer at this year (the focused country wins)
+              const svg = (e.currentTarget as SVGRectElement).ownerSVGElement!;
+              const r = svg.getBoundingClientRect();
+              const vy = ((e.clientY - r.top) / r.height) * H;
+              let best: IntlSeries | null = null, bd = Infinity;
+              for (const s of chart.series) {
+                const p = s.points.find((q) => q.year === y) ||
+                  s.points.reduce((a, b) => Math.abs(b.year - y) < Math.abs(a.year - y) ? b : a);
+                if (!p) continue;
+                const d = Math.abs(Y(p.value) - vy);
+                if (d < bd) { bd = d; best = s; }
+              }
+              const target = focus ? chart.series.find((s) => s.code === focus) || best : best;
+              if (target) { onPick(target); track("intl_series_opened", { c: target.code }); }
+            }} />
         ))}
         {hoverYear !== null && hovered.length > 0 && (
           <g pointerEvents="none">

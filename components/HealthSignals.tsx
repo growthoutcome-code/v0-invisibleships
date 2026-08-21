@@ -292,7 +292,10 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
   // Window: the full two-decade record, or the pandemic era. Comparable
   // international estimates stop at 2021 — see the note under the chart.
   const [win, setWin] = useState<"full" | "covid">("full");
-  const [showCovid, setShowCovid] = useState(false);
+  // COVID markers follow the window (Sean, 2026-08-21): the checkbox is
+  // gone — the pandemic-window view shows the markers with room to breathe,
+  // and the full view never renders them cramped at the right edge.
+  const showCovid = win === "covid";
   const [open, setOpen] = useState<IntlSeries | null>(null);
   const winFrom = win === "covid" ? 2017 : 0;
   const W = 760, H = 440, padL = 44, padT = 18, padB = 34;
@@ -407,7 +410,6 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
         {([["full", "2000–2021"], ["covid", "2017–2021 (pandemic)"]] as const).map(([w, label]) => (
           <button key={w} type="button" onClick={() => {
             setWin(w);
-            if (w === "full") setShowCovid(false); // markers never render cramped on the full axis
             track("health_chart_window", { win: w });
           }}
             aria-pressed={win === w}
@@ -418,19 +420,6 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
           </button>
         ))}
       </div>
-      <label className="flex items-center gap-2 text-[13px] text-muted cursor-pointer">
-        <input type="checkbox" checked={showCovid}
-          onChange={(e) => {
-            const on = e.target.checked;
-            setShowCovid(on);
-            // The markers span 2019-2023; on the full axis they crowd into the
-            // right edge. Checking the box zooms to the pandemic window so the
-            // COVID era fills the chart; unchecking returns to the full view.
-            setWin(on ? "covid" : "full");
-            track("health_chart_covid", { on });
-          }} />
-        Show COVID-19 timeline
-      </label>
       {showCovid && x1 <= 2021 && (
         <span className="text-muted text-[12px] self-center">
           booster and end-of-emergency markers fall after 2021
