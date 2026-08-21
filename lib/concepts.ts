@@ -234,4 +234,25 @@ export const CONCEPTS: Concept[] = [
     disclaimer:
       "This concept records reported experience and open questions. It does not establish an attack, technology, responsible party, organization, or coordinated campaign.",
   },
+  {
+    id: "us-rose-against-the-trend",
+    origin: "ai",
+    basis: "documented",
+    title: "The world's suicide rate fell. The United States' rose.",
+    body:
+      "Between 2000 and 2021, on the one basis that allows countries to be compared at all, the world's suicide rate fell 27%. Most countries fell with it — Russia by 60%, China by 42%, Israel by 36%, Japan by 28%, India by 21%. Over the same years the United States rose 40%, in a steady climb rather than a spike. It is not alone in rising: South Korea rose further, and the UK, Australia and the West Bank & Gaza were effectively flat. But among large wealthy countries the American direction is the outlier, and the gap is not small — 67 percentage points between the US and the world it is usually compared to.",
+    evidence: [
+      "WHO age-standardised estimates, 2000–2021, world standard population: World −27.0%",
+      "United States +39.9% · South Korea +82.8% · UK +12.2% · Australia +1.9%",
+      "Russia −59.7% · China −42.2% · Israel −36.0% · Japan −27.7% · India −21.2%",
+      "14 series on one comparable basis; national extensions to 2025 held separately",
+    ],
+    questions: [
+      "Why the US direction diverges is not answered here. The claims register records who has attributed it to what, and those attributions contradict each other.",
+      "South Korea rose more but peaked around 2011 and has fallen since. A single percentage across 21 years hides the shape of a curve.",
+    ],
+    references: [{ label: "The suicide comparison chart", href: "/data" }],
+    referencesNote:
+      "The chart carries the per-country method, caveats and source behind each line.",
+  },
 ];
