@@ -469,14 +469,15 @@ if (!crime.notCounted) fail("'What nobody counts' section missing");
 // section, with a tier-chipped themes block directly under it, ABOVE the
 // "What nobody counts" register.
 const layout = await page.evaluate(() => {
-  const main = document.querySelector("main");
-  const fig = [...main.querySelectorAll("figure")].find((f) => /Five kinds of harm/i.test(f.querySelector("figcaption")?.textContent || ""));
-  const themesH = [...main.querySelectorAll("h2")].find((h) => /What the chart shows/i.test(h.textContent));
-  const ncH = [...main.querySelectorAll("h2")].find((h) => /What nobody counts/i.test(h.textContent));
+  const col = document.getElementById("crime-root");
+  const fig = [...col.querySelectorAll("figure")].find((f) => /Five kinds of harm/i.test(f.querySelector("figcaption")?.textContent || ""));
+  // themes render as h3 under each chart (h2 is reserved for sections, so the
+  // sidebar does not list a chart's own explainer as a destination)
+  const themesH = fig?.closest("section")?.querySelector("h3");
   const themeRows = themesH ? [...themesH.parentElement.querySelectorAll("li")] : [];
   const y = (el) => el ? el.getBoundingClientRect().top + window.scrollY : -1;
   return {
-    chartY: y(fig), themesY: y(themesH), ncY: y(ncH),
+    chartY: y(fig), themesY: y(themesH),
     themeCount: themeRows.length,
     themesChipped: themeRows.length > 0 && themeRows.every((r) => r.querySelector("span[title]")),
     bridge: themeRows.some((r) => /nobody counts/i.test(r.textContent)),
@@ -484,7 +485,7 @@ const layout = await page.evaluate(() => {
 });
 console.log("layout:", JSON.stringify(layout));
 if (layout.chartY < 0) fail("lane chart missing");
-if (!(layout.chartY < layout.themesY && layout.themesY < layout.ncY)) fail("order must be chart -> themes -> nobody-counts");
+if (!(layout.chartY < layout.themesY)) fail("the chart's plain-language block must sit under the chart");
 if (layout.themeCount < 3) fail(`theme callouts: ${layout.themeCount}, expected 3+`);
 if (!layout.themesChipped) fail("theme callouts missing tier chips");
 if (!layout.bridge) fail("themes block missing the bridge line into 'What nobody counts'");
@@ -590,7 +591,58 @@ const navWide = await page.evaluate(() => {
   const items = nav ? [...nav.querySelectorAll("button")] : [];
   return { present: !!nav, count: items.length, hasCurrent: items.some((b) => b.getAttribute("aria-current") === "true") };
 });
+navWide.geometry = await page.evaluate(() => {
+  const nav = document.querySelector("nav[aria-label='On this page']");
+  const col = document.getElementById("crime-root");
+  if (!nav || !col) return { ok: false, reason: "missing nav or content column" };
+  const n = nav.getBoundingClientRect(), c = col.getBoundingClientRect();
+  // sidebar is LEFT of the content column and they must not overlap
+  const overlap = n.right > c.left + 1;
+  // no chart may exceed its column
+  const wide = [...col.querySelectorAll("figure svg[viewBox]")]
+    .map((f) => Math.round(f.getBoundingClientRect().width - c.width))
+    .filter((d) => d > 1);
+  return { ok: !overlap && !wide.length, overlap, widest: wide.sort((a, b) => b - a)[0] ?? 0,
+           navRight: Math.round(n.right), colLeft: Math.round(c.left) };
+});
 console.log("section nav (wide):", JSON.stringify(navWide));
+if (!navWide.geometry.ok) {
+  fail(`layout: sidebar/content overlap=${navWide.geometry.overlap} (nav right ${navWide.geometry.navRight} vs col left ${navWide.geometry.colLeft}), widest chart overflow ${navWide.geometry.widest}px`);
+}
+
+// three acts, in order
+const acts = await page.evaluate(() => {
+  // the content column only: main.innerText includes the sidebar, and the
+  // sidebar lists every heading — which would make every index meaningless
+  const t = document.getElementById("crime-root").innerText;
+  const idx = (re) => t.search(re);
+  return {
+    one: idx(/Act one . what is happening/i),
+    two: idx(/Act two . what the state is doing/i),
+    three: idx(/Act three . what cannot be known/i),
+    verdictEarly: idx(/Has crime increased during the period/i),
+    sourcesLate: idx(/^Sources$/m),
+  };
+});
+console.log("acts:", JSON.stringify(acts));
+if (acts.one < 0 || acts.two < 0 || acts.three < 0) fail("act headings missing");
+if (!(acts.one < acts.two && acts.two < acts.three)) fail("acts are out of order");
+if (!(acts.verdictEarly > acts.one && acts.verdictEarly < acts.two)) fail("verdict is not in act one");
+if (!(acts.one < acts.verdictEarly)) fail("verdict precedes act one heading");
+
+// every chart carries a plain-language block
+const plain = await page.evaluate(() => {
+  const figs = [...document.querySelectorAll("main figure")].filter((f) => f.offsetParent !== null);
+  return figs.map((f) => {
+    const cap = (f.querySelector("figcaption")?.textContent || "").slice(0, 34);
+    const sec = f.closest("section");
+    const has = !!sec && [...sec.querySelectorAll("h3")].some((h) => /What (the chart|this) shows/i.test(h.textContent));
+    return { cap, has };
+  });
+});
+console.log("plain-language blocks:", JSON.stringify(plain));
+const missing = plain.filter((x) => !x.has).map((x) => x.cap);
+if (missing.length) fail(`charts without a plain-language block: ${missing.join(" | ")}`);
 if (!navWide.present) fail("section nav rail missing at desktop width");
 if (navWide.count < 8) fail(`section nav lists ${navWide.count} sections, expected 8+`);
 if (!navWide.hasCurrent) fail("section nav marks no current section");
@@ -904,6 +956,44 @@ if (!ytd.rose) fail("the offences that ROSE in 2026 are not shown alongside thos
 if (!ytd.independent) fail("the independent 566-agency YTD corroboration is missing");
 if (!ytd.fullRecordToggle) fail("full-record toggle missing — the pre-1999 crime record must stay reachable");
 if (!ytd.no2026OnChart) fail("2026 is plotted on the annual chart; a partial year must not be a chart point");
+await page.setViewportSize({ width: 1280, height: 900 });
+
+// ---- Glossary uses the same SideNav (Sean, 2026-08-21) --------------------
+await page.setViewportSize({ width: 1440, height: 1000 });
+await page.getByRole("button", { name: /^Glossary$/i }).first().click().catch(() => {});
+await page.waitForTimeout(2000);
+const gl = await page.evaluate(() => {
+  const nav = document.querySelector("nav[aria-label='Terms']");
+  const items = nav ? [...nav.querySelectorAll("button")] : [];
+  const grid = document.querySelector("main .lg\\:grid");
+  const n = nav?.getBoundingClientRect(), g = grid?.getBoundingClientRect();
+  return {
+    present: !!nav,
+    count: items.length,
+    // same component: index mode marks the open term, not a scroll position
+    left: n && g ? Math.round(n.left - g.left) : null,
+    legacyGone: !document.querySelector("aside.w-52"),
+  };
+});
+console.log("glossary nav:", JSON.stringify(gl));
+if (!gl.present) fail("glossary is not using the shared SideNav");
+if (gl.count < 10) fail(`glossary nav lists ${gl.count} terms`);
+if (gl.left === null || gl.left > 40) fail("glossary nav is not the left grid column");
+if (!gl.legacyGone) fail("the old GlossarySidebar markup is still present");
+
+await page.setViewportSize({ width: 390, height: 900 });
+await page.waitForTimeout(1200);
+const glPhone = await page.evaluate(() => {
+  const bar = [...document.querySelectorAll("button[aria-expanded]")].find((b) => /Terms/i.test(b.textContent));
+  if (!bar) return { present: false };
+  bar.click();
+  return { present: true };
+});
+await page.waitForTimeout(500);
+const glSheet = await page.evaluate(() => document.getElementById("section-nav-sheet")?.querySelectorAll("button").length || 0);
+console.log("glossary phone nav:", JSON.stringify({ ...glPhone, items: glSheet }));
+if (!glPhone.present) fail("glossary phone nav trigger missing");
+if (glSheet < 10) fail("glossary phone sheet is empty");
 await page.setViewportSize({ width: 1280, height: 900 });
 
 await browser.close();

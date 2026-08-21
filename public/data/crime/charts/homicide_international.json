@@ -1837,5 +1837,23 @@
         "2024 is not yet published for any country in this series."
       ]
     }
+  ],
+  "themes": [
+    {
+      "statement": "The United States is several times deadlier than comparable countries. In 2023 it was 5.8 per 100,000 against the UK's 1.1, Germany's 0.9, South Korea's 0.5 and Japan's 0.2.",
+      "tier": "A"
+    },
+    {
+      "statement": "The 2020 spike was an American event. The world line barely moved through the same years.",
+      "tier": "A"
+    },
+    {
+      "statement": "Russia fell furthest \u2014 from about 30 per 100,000 to under 7 \u2014 though its series stops in 2021 and researchers dispute how much of that fall is real rather than a change in how deaths are coded.",
+      "tier": "B"
+    },
+    {
+      "statement": "Breaks in a line are years the source does not publish. They are left as breaks rather than joined up.",
+      "tier": "A"
+    }
   ]
 }

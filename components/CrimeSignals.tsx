@@ -11,7 +11,7 @@ import {
 } from "@/components/DataPrimitives";
 import IntlLineChart, { type IntlChartDoc, type IntlSeries } from "@/components/IntlLineChart";
 import DetentionChart, { type DetChart, type DetSeries } from "@/components/DetentionChart";
-import SectionNav, { useSectionNav } from "@/components/SectionNav";
+import SideNav, { useSectionNav } from "@/components/SideNav";
 import { track } from "@/lib/analytics";
 
 /**
@@ -678,12 +678,43 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
   );
 
   return (
-    <div className="w-full" id="crime-root">
-      <SectionNav sections={nav.sections} active={nav.active} />
+    // Grid, not float (Sean, 2026-08-21): a floated rail is ignored by
+    // block-level siblings, so every section rendered underneath it — the
+    // overlap and the vertical gap were the same bug. min-w-0 lets the content
+    // track shrink below its children's intrinsic width, which is what keeps
+    // the 100%-width chart SVGs inside their column.
+    <div className="w-full lg:grid lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-x-10 lg:items-start">
+      <SideNav mode="outline" sections={nav.sections} active={nav.active} />
+      <div id="crime-root" className="min-w-0">
       <DataNoteLine from="crime">
         United States only · AI-assisted research from public records · every figure
         evidence-graded and linked to the source it was read from ·
       </DataNoteLine>
+
+      {/* ================= ACT ONE — WHAT IS HAPPENING ================= */}
+      <div className="mt-2 mb-8 pt-6 border-t-2 border-edge">
+        <p className="text-muted text-[12px] uppercase tracking-[0.14em] mb-1">Act one — what is happening</p>
+        <p className="body-copy text-foreground/85 measure m-0 text-[17px]">The answer first, then the harms it rests on. Every figure here counts something that happened to people.</p>
+      </div>
+
+      {/* ---- verdict ---- */}
+      {verdict === null ? <SectionSkeleton title="Is crime rising or falling?" /> : (
+        <section className="mb-16">
+          <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
+            {verdict.claim}
+          </h2>
+          <p className="body-copy text-foreground/90 measure">{verdict.summary}</p>
+          <ul className="list-none p-0 m-0 mt-4">
+            {verdict.key_figures.map((f, i) => (
+              <li key={i} className="flex items-baseline gap-3 py-2 border-b border-edge/60 text-[16px] text-foreground/85">
+                <TierChip t={f.tier} />
+                <span className="measure">{f.figure}</span>
+                <span className="ml-auto"><SourceLink id={f.source_id} sources={srcs} /></span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       {/* ---- the chart, first; themes and how-to-read consolidated under it
              (Sean, 2026-08-21) ---- */}
@@ -693,9 +724,9 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
             <LaneChart chart={lanes} onPick={setLanePicked} />
             {!!lanes.themes?.length && (
               <div className="mt-2 mb-5">
-                <h2 className="font-display font-semibold text-foreground text-[19px] mb-2">
+                <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">
                   What the chart shows
-                </h2>
+                </h3>
                 <ul className="list-none p-0 m-0">
                   {lanes.themes.map((t, i) => (
                     <li key={i} className="flex items-baseline gap-3 py-2 border-b border-edge/60 text-[16px] text-foreground/90">
@@ -711,30 +742,77 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
         )}
       </section>
 
-      {/* ---- what nobody counts: the lead finding (Sean, 2026-08-21) ---- */}
-      {notCounted === null ? <SectionSkeleton title="What nobody counts" /> : !!notCounted.length && (
+      {/* ---- homicide: one lens among several, no longer the lead ---- */}
+      <section className="mb-12">
+        <h2 className="font-display font-semibold text-foreground text-[21px] mb-4">
+          The homicide lens
+        </h2>
+        {chart === null ? <SkeletonChart /> : (
+          <>
+            <TwoSeriesChart chart={chart} onPick={setPicked} />
+            {!!chart.themes?.length && (
+              <div className="mt-2 mb-5">
+                <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">What this shows</h3>
+                <ul className="list-none p-0 m-0">
+                  {chart.themes.map((t, i) => (
+                    <li key={i} className="flex items-baseline gap-3 py-2 border-b border-edge/60 text-[16px] text-foreground/90">
+                      <TierChip t={t.tier} />
+                      <span className="measure">{t.statement}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            <p className="text-muted text-[15px] measure">{chart.note}</p>
+          </>
+        )}
+      </section>
+
+      {/* ---- international (Sean, 2026-08-21): one honest chart, two honest
+             non-charts ---- */}
+      <section className="mb-14">
+        {intl === null ? <SkeletonChart /> : (
+          <>
+            <IntlLineChart chart={intl} onPick={setIntlPicked} />
+            {!!(intl as any).themes?.length && (
+              <div className="mt-2 mb-5">
+                <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">What this shows</h3>
+                <ul className="list-none p-0 m-0">
+                  {(intl as any).themes.map((t: { statement: string; tier: string }, i: number) => (
+                    <li key={i} className="flex items-baseline gap-3 py-2 border-b border-edge/60 text-[16px] text-foreground/90">
+                      <TierChip t={t.tier} />
+                      <span className="measure">{t.statement}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            <p className="text-muted text-[15px] measure">{intl.note}</p>
+          </>
+        )}
+      </section>
+
+      {intlDrugs && (
         <section className="mb-14">
-          <h2 className="font-display font-semibold text-foreground text-[24px] mb-3">
-            What nobody counts
-          </h2>
-          <p className="body-copy text-foreground/90 measure mb-6">
-            The kinds of harm this site is most concerned with are the ones with no
-            national statistic. That is not a research failure &mdash; it is the finding.
-            Each entry below names what is uncounted, why, and the body that would have
-            to count it and does not.
-          </p>
+          <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">{intlDrugs.title}</h2>
+          <p className="text-muted text-[15px] measure mb-6">{intlDrugs.why_no_chart}</p>
           <ul className="list-none p-0 m-0">
-            {notCounted.map((n) => (
-              <li key={n.nc_id} className="py-4 border-b border-edge/60">
-                <div className="flex flex-wrap items-baseline gap-3">
-                  <TierChip t={n.tier} />
-                  <span className="text-foreground text-[17px] font-semibold">{n.category}</span>
-                  <span className="text-muted text-[14px] uppercase tracking-wide">{n.status}</span>
-                  <span className="ml-auto"><SourceLink id={n.source_id} sources={srcs} /></span>
+            {intlDrugs.rows.map((r, i) => (
+              <li key={i} className="py-3 border-b border-edge/60">
+                <div className="flex flex-wrap items-baseline gap-3 text-[16px]">
+                  <TierChip t={r.tier === "absence" ? "A" : r.tier} />
+                  <span className="text-foreground font-semibold">{r.country}</span>
+                  {r.value !== null ? (
+                    <span className="text-foreground/85 tabular-nums">
+                      {r.value.toLocaleString()} <span className="text-muted">({r.year})</span>
+                    </span>
+                  ) : (
+                    <span className="text-muted uppercase tracking-wide text-[13px]">not counted comparably</span>
+                  )}
+                  <span className="ml-auto"><SourceLink id={r.source_id} sources={srcs} /></span>
                 </div>
-                <p className="body-copy text-foreground/85 measure mt-2 mb-0 text-[17px]">{n.detail}</p>
-                <p className="text-muted text-[14px] measure mt-2 mb-0">
-                  <em>Who would have to count it:</em> {n.who_would_collect}
+                <p className="text-muted text-[14px] measure mt-1 mb-0">
+                  {r.unit ? `${r.unit}. ` : ""}{r.definition}
                 </p>
               </li>
             ))}
@@ -742,6 +820,103 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
         </section>
       )}
 
+      {intlMissing && (
+        <section className="mb-14">
+          <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">{intlMissing.title}</h2>
+          <p className="text-muted text-[15px] measure mb-6">{intlMissing.why_no_chart}</p>
+          <ul className="list-none p-0 m-0">
+            {intlMissing.rows.map((r, i) => (
+              <li key={i} className="py-3 border-b border-edge/60">
+                <div className="flex flex-wrap items-baseline gap-3 text-[16px]">
+                  <TierChip t={r.tier} />
+                  <span className="text-foreground font-semibold">{r.country}</span>
+                  <span className="text-foreground/85 tabular-nums">
+                    {r.value.toLocaleString()} <span className="text-muted">({r.year})</span>
+                  </span>
+                  <span className="ml-auto"><SourceLink id={r.source_id} sources={srcs} /></span>
+                </div>
+                <p className="text-muted text-[14px] measure mt-1 mb-0">{r.unit}. {r.note}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {/* ---- 2026 year to date ---- */}
+      {!!ytd.length && (
+        <section className="mb-16">
+          <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">
+            Where 2026 stands
+          </h2>
+          <p className="text-muted text-[15px] mb-6 measure">
+            The chart above ends at 2025, the last complete year, so it lines up with every
+            other chart in this section. There is no national 2026 statistic yet — the FBI
+            publishes annually. What exists is below: a 36-city half-year comparison and a
+            separate 566-agency index. Both are urban samples, not the country.
+          </p>
+          <ul className="list-none p-0 m-0">
+            {ytd.map((r) => {
+              const up = r.value > 0;
+              return (
+                <li key={r.indicator_id}
+                  className="flex items-baseline gap-3 py-3 border-b border-edge/60 text-[16px] text-foreground/85">
+                  <TierChip t={r.tier} />
+                  <span className="measure">{ytdLabel[r.indicator_id] || r.indicator_id}</span>
+                  <span className={`font-semibold tabular-nums ${up ? "text-foreground" : "text-foreground/70"}`}>
+                    {up ? "+" : ""}{r.value}%
+                  </span>
+                  {up && <span className="text-[13px] uppercase tracking-wide text-foreground">rose</span>}
+                  <span className="ml-auto"><SourceLink id={r.source_id} sources={srcs} /></span>
+                </li>
+              );
+            })}
+          </ul>
+          <p className="text-muted text-[14px] measure mt-4">
+            Nine of thirteen offences fell. The two that rose are listed alongside the rest,
+            not omitted: reporting only the decline would be the selective framing this
+            dataset exists to avoid.
+          </p>
+        </section>
+      )}
+
+      {/* ================= ACT TWO — WHAT THE STATE IS DOING ================= */}
+      <div className="mt-2 mb-8 pt-6 border-t-2 border-edge">
+        <p className="text-muted text-[12px] uppercase tracking-[0.14em] mb-1">Act two — what the state is doing</p>
+        <p className="body-copy text-foreground/85 measure m-0 text-[17px]">Enforcement is a separate record from harm, and it moves for its own reasons. These are arrests, sweeps, detention and the outcomes that follow them.</p>
+      </div>
+
+      {/* ---- arrests over time (Sean, 2026-08-21): the 1997 peak ---- */}
+      <section className="mb-14">
+        {arrests === null ? <SkeletonChart /> : (
+          <>
+            <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
+              Arrests over time
+            </h2>
+            {arrests.accuracy_note && (
+              <DismissibleNote storageKey="is_crime_arrests_accuracy_v1">
+                {arrests.accuracy_note}
+              </DismissibleNote>
+            )}
+            <TwoSeriesChart chart={arrests} onPick={setPicked} />
+            {!!arrests.themes?.length && (
+              <div className="mt-2 mb-5">
+                <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">
+                  What the chart shows
+                </h3>
+                <ul className="list-none p-0 m-0">
+                  {arrests.themes.map((t, i) => (
+                    <li key={i} className="flex items-baseline gap-3 py-2 border-b border-edge/60 text-[16px] text-foreground/90">
+                      <TierChip t={t.tier} />
+                      <span className="measure">{t.statement}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            <p className="text-muted text-[15px] measure">{arrests.note}</p>
+          </>
+        )}
+      </section>
 
       {/* ---- sweeping enforcement: headline arrest numbers ---- */}
       {!!sweeps?.length && (
@@ -803,36 +978,6 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
               </div>
             )}
             <p className="text-muted text-[15px] measure">{detention.note}</p>
-          </>
-        )}
-      </section>
-
-      {/* ---- arrests over time (Sean, 2026-08-21): the 1997 peak ---- */}
-      <section className="mb-14">
-        {arrests === null ? <SkeletonChart /> : (
-          <>
-            {arrests.accuracy_note && (
-              <DismissibleNote storageKey="is_crime_arrests_accuracy_v1">
-                {arrests.accuracy_note}
-              </DismissibleNote>
-            )}
-            <TwoSeriesChart chart={arrests} onPick={setPicked} />
-            {!!arrests.themes?.length && (
-              <div className="mt-2 mb-5">
-                <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">
-                  What the chart shows
-                </h3>
-                <ul className="list-none p-0 m-0">
-                  {arrests.themes.map((t, i) => (
-                    <li key={i} className="flex items-baseline gap-3 py-2 border-b border-edge/60 text-[16px] text-foreground/90">
-                      <TierChip t={t.tier} />
-                      <span className="measure">{t.statement}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            <p className="text-muted text-[15px] measure">{arrests.note}</p>
           </>
         )}
       </section>
@@ -906,74 +1051,43 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
         </section>
       )}
 
-      {/* ---- homicide: one lens among several, no longer the lead ---- */}
-      <section className="mb-12">
-        <h2 className="font-display font-semibold text-foreground text-[21px] mb-4">
-          The homicide lens
-        </h2>
-        {chart === null ? <SkeletonChart /> : (
-          <>
-            <TwoSeriesChart chart={chart} onPick={setPicked} />
-            <p className="body-copy text-foreground/90 measure">{chart.note}</p>
-          </>
-        )}
-      </section>
+      {/* ================= ACT THREE — WHAT CANNOT BE KNOWN ================= */}
+      <div className="mt-2 mb-8 pt-6 border-t-2 border-edge">
+        <p className="text-muted text-[12px] uppercase tracking-[0.14em] mb-1">Act three — what cannot be known</p>
+        <p className="body-copy text-foreground/85 measure m-0 text-[17px]">Where the counting is the problem, the counting is the finding. This act is the limit of everything above it.</p>
+      </div>
 
-      {/* ---- 2026 year to date ---- */}
-      {!!ytd.length && (
-        <section className="mb-16">
-          <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">
-            Where 2026 stands
+      {/* ---- what nobody counts: the lead finding (Sean, 2026-08-21) ---- */}
+      {notCounted === null ? <SectionSkeleton title="What nobody counts" /> : !!notCounted.length && (
+        <section className="mb-14">
+          <h2 className="font-display font-semibold text-foreground text-[24px] mb-3">
+            What nobody counts
           </h2>
-          <p className="text-muted text-[15px] mb-6 measure">
-            The chart above ends at 2025, the last complete year, so it lines up with every
-            other chart in this section. There is no national 2026 statistic yet — the FBI
-            publishes annually. What exists is below: a 36-city half-year comparison and a
-            separate 566-agency index. Both are urban samples, not the country.
+          <p className="body-copy text-foreground/90 measure mb-6">
+            The kinds of harm this site is most concerned with are the ones with no
+            national statistic. That is not a research failure &mdash; it is the finding.
+            Each entry below names what is uncounted, why, and the body that would have
+            to count it and does not.
           </p>
           <ul className="list-none p-0 m-0">
-            {ytd.map((r) => {
-              const up = r.value > 0;
-              return (
-                <li key={r.indicator_id}
-                  className="flex items-baseline gap-3 py-3 border-b border-edge/60 text-[16px] text-foreground/85">
-                  <TierChip t={r.tier} />
-                  <span className="measure">{ytdLabel[r.indicator_id] || r.indicator_id}</span>
-                  <span className={`font-semibold tabular-nums ${up ? "text-foreground" : "text-foreground/70"}`}>
-                    {up ? "+" : ""}{r.value}%
-                  </span>
-                  {up && <span className="text-[13px] uppercase tracking-wide text-foreground">rose</span>}
-                  <span className="ml-auto"><SourceLink id={r.source_id} sources={srcs} /></span>
-                </li>
-              );
-            })}
-          </ul>
-          <p className="text-muted text-[14px] measure mt-4">
-            Nine of thirteen offences fell. The two that rose are listed alongside the rest,
-            not omitted: reporting only the decline would be the selective framing this
-            dataset exists to avoid.
-          </p>
-        </section>
-      )}
-
-      {/* ---- verdict ---- */}
-      {verdict === null ? <SectionSkeleton title="Is crime rising or falling?" /> : (
-        <section className="mb-16">
-          <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
-            {verdict.claim}
-          </h2>
-          <p className="body-copy text-foreground/90 measure">{verdict.summary}</p>
-          <ul className="list-none p-0 m-0 mt-4">
-            {verdict.key_figures.map((f, i) => (
-              <li key={i} className="flex items-baseline gap-3 py-2 border-b border-edge/60 text-[16px] text-foreground/85">
-                <TierChip t={f.tier} />
-                <span className="measure">{f.figure}</span>
-                <span className="ml-auto"><SourceLink id={f.source_id} sources={srcs} /></span>
+            {notCounted.map((n) => (
+              <li key={n.nc_id} className="py-4 border-b border-edge/60">
+                <div className="flex flex-wrap items-baseline gap-3">
+                  <TierChip t={n.tier} />
+                  <span className="text-foreground text-[17px] font-semibold">{n.category}</span>
+                  <span className="text-muted text-[14px] uppercase tracking-wide">{n.status}</span>
+                  <span className="ml-auto"><SourceLink id={n.source_id} sources={srcs} /></span>
+                </div>
+                <p className="body-copy text-foreground/85 measure mt-2 mb-0 text-[17px]">{n.detail}</p>
+                <p className="text-muted text-[14px] measure mt-2 mb-0">
+                  <em>Who would have to count it:</em> {n.who_would_collect}
+                </p>
               </li>
             ))}
           </ul>
         </section>
       )}
+
 
       {/* ---- clearance ---- */}
       {!!clearance.length && (
@@ -1061,67 +1175,6 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
         </section>
       )}
 
-      {/* ---- international (Sean, 2026-08-21): one honest chart, two honest
-             non-charts ---- */}
-      <section className="mb-14">
-        {intl === null ? <SkeletonChart /> : (
-          <>
-            <IntlLineChart chart={intl} onPick={setIntlPicked} />
-            <p className="body-copy text-foreground/90 measure">{intl.note}</p>
-          </>
-        )}
-      </section>
-
-      {intlDrugs && (
-        <section className="mb-14">
-          <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">{intlDrugs.title}</h2>
-          <p className="text-muted text-[15px] measure mb-6">{intlDrugs.why_no_chart}</p>
-          <ul className="list-none p-0 m-0">
-            {intlDrugs.rows.map((r, i) => (
-              <li key={i} className="py-3 border-b border-edge/60">
-                <div className="flex flex-wrap items-baseline gap-3 text-[16px]">
-                  <TierChip t={r.tier === "absence" ? "A" : r.tier} />
-                  <span className="text-foreground font-semibold">{r.country}</span>
-                  {r.value !== null ? (
-                    <span className="text-foreground/85 tabular-nums">
-                      {r.value.toLocaleString()} <span className="text-muted">({r.year})</span>
-                    </span>
-                  ) : (
-                    <span className="text-muted uppercase tracking-wide text-[13px]">not counted comparably</span>
-                  )}
-                  <span className="ml-auto"><SourceLink id={r.source_id} sources={srcs} /></span>
-                </div>
-                <p className="text-muted text-[14px] measure mt-1 mb-0">
-                  {r.unit ? `${r.unit}. ` : ""}{r.definition}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      {intlMissing && (
-        <section className="mb-14">
-          <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">{intlMissing.title}</h2>
-          <p className="text-muted text-[15px] measure mb-6">{intlMissing.why_no_chart}</p>
-          <ul className="list-none p-0 m-0">
-            {intlMissing.rows.map((r, i) => (
-              <li key={i} className="py-3 border-b border-edge/60">
-                <div className="flex flex-wrap items-baseline gap-3 text-[16px]">
-                  <TierChip t={r.tier} />
-                  <span className="text-foreground font-semibold">{r.country}</span>
-                  <span className="text-foreground/85 tabular-nums">
-                    {r.value.toLocaleString()} <span className="text-muted">({r.year})</span>
-                  </span>
-                  <span className="ml-auto"><SourceLink id={r.source_id} sources={srcs} /></span>
-                </div>
-                <p className="text-muted text-[14px] measure mt-1 mb-0">{r.unit}. {r.note}</p>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
       {/* ---- cross-link, not an overlay ---- */}
       {onGoTimeline && (
         <section className="mb-16">
@@ -1166,6 +1219,8 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
           <ListPager page={srcP.page} totalPages={srcP.totalPages} setPage={srcP.setPage} scrollTo={srcP.scrollTo} />
         </section>
       )}
+
+      </div>{/* /content column — modals live outside the grid */}
 
       {/* ---- per-lane detail ---- */}
       {lanePicked && (

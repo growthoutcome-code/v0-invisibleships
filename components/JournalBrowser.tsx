@@ -6,6 +6,7 @@ import type { Dataset, Doc } from "@/lib/types";
 import { track } from "@/lib/analytics";
 import Header, { type Tab } from "@/components/Header";
 import Footer from "@/components/Footer";
+import SideNav from "@/components/SideNav";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
@@ -419,41 +420,21 @@ function GlossarySection({ terms, gcat, setGcat, gsel, setGsel }: any) {
     content = <GlossaryList terms={terms} gcat={gcat} setGcat={setGcat} onOpen={setGsel} />;
   }
   return (
-    <div className="lg:grid lg:grid-cols-[13rem_65%_1fr] lg:gap-x-8 lg:items-start">
-      <GlossarySidebar terms={terms} activeSlug={gsel} onOpen={setGsel} />
+    // One SideNav across the site (Sean, 2026-08-21). Index mode: picking a
+    // term replaces the content, so there is no scroll-spy — the active entry
+    // is whatever is open.
+    <div className="lg:grid lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-x-8 lg:items-start">
+      <SideNav
+        mode="index"
+        label="Terms"
+        sections={terms.map((t: any) => ({ id: t.slug, label: cleanTerm(t.term) }))}
+        active={gsel}
+        onPick={(slug: string) => setGsel(slug)}
+      />
       <div className="min-w-0">
-        <IndexDrawer
-          triggerLabel="Terms"
-          title="Terms"
-          itemClassName="term-title"
-          items={terms.map((t: any) => ({ key: t.slug, label: cleanTerm(t.term), active: gsel === t.slug, onOpen: () => setGsel(t.slug) }))}
-        />
         {content}
       </div>
     </div>
-  );
-}
-
-// Dated day index for the journal — desktop only, mirrors the glossary sidebar.
-// One link per calendar day; clicking opens that day's first entry in-app.
-function GlossarySidebar({ terms, activeSlug, onOpen }: any) {
-  return (
-    <aside className="hidden lg:block w-52 self-start pr-2">
-      <div className="text-[11px] uppercase tracking-wide text-muted mb-3">Terms</div>
-      <ul className="space-y-1.5">
-        {terms.map((t: any) => (
-          <li key={t.slug}>
-            <Link
-              href={glossaryHref(t.slug)}
-              onClick={spaClick(() => onOpen(t.slug))}
-              className={`block text-sm term-title leading-[1.6] transition-colors ${activeSlug === t.slug ? "text-accent" : "text-muted hover:text-foreground"}`}
-            >
-              {cleanTerm(t.term)}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </aside>
   );
 }
 
@@ -511,40 +492,6 @@ function GlossaryTermReader({ term, onBack, onPrev, onNext, onOpenTerm }: any) {
         {onNext && <button onClick={onNext} className="text-accent text-sm ml-auto inline-flex items-center gap-1">Next <ChevronRight size={15} /></button>}
       </div>
     </article>
-  );
-}
-
-// Mobile-only index drawer (shadcn Sheet) mirroring the desktop sidebars.
-// A List-icon trigger opens a left sheet with the same links; hidden on lg+.
-function IndexDrawer({ triggerLabel, title, items, itemClassName }: { triggerLabel: string; title: string; items: { key: string; label: string; active: boolean; onOpen: () => void }[]; itemClassName?: string }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <div className="lg:hidden mb-6">
-      <Sheet open={open} onOpenChange={setOpen}>
-        <SheetTrigger asChild>
-          <button className="inline-flex items-center gap-2 text-sm text-muted hover:text-foreground">
-            <List size={16} /> {triggerLabel}
-          </button>
-        </SheetTrigger>
-        <SheetContent side="left" className="w-72">
-          <SheetHeader className="mb-4">
-            <SheetTitle className="text-[11px] uppercase tracking-wide text-muted">{title}</SheetTitle>
-          </SheetHeader>
-          <ul className="space-y-1.5">
-            {items.map((it) => (
-              <li key={it.key}>
-                <button
-                  onClick={() => { it.onOpen(); setOpen(false); if (typeof window !== "undefined") window.scrollTo({ top: 0 }); }}
-                  className={`block w-full text-left text-sm leading-[1.6] transition-colors ${itemClassName || ""} ${it.active ? "text-accent" : "text-muted hover:text-foreground"}`}
-                >
-                  {it.label}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </SheetContent>
-      </Sheet>
-    </div>
   );
 }
 
