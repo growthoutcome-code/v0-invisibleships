@@ -509,6 +509,69 @@ if (!crime.low2025) fail("2025 record-low rate (4.1 per 100,000) missing");
 if (!crime.ncvsGap) fail("NCVS divergence figures missing — that gap is the section's finding");
 if (!crime.crossLink) fail("crime -> timeline cross-link missing");
 
+// International homicide: legend wired to lines, one honest chart, two
+// honest non-charts, and the nc07 missing-persons entry.
+const intl = await page.evaluate(() => {
+  const main = document.querySelector("main");
+  const t = main.innerText;
+  const fig = [...main.querySelectorAll("figure")].find((f) => /US against the world/i.test(f.querySelector("figcaption")?.textContent || ""));
+  const legend = fig ? [...fig.querySelectorAll("ul button")] : [];
+  return {
+    chart: !!fig?.querySelector("svg"),
+    legendEntries: legend.length,
+    legendPressable: legend.length > 0 && legend.every((b) => b.hasAttribute("aria-pressed")),
+    drugPanel: /five ways of counting/i.test(t),
+    drugNoChart: /cannot share an axis/i.test(t),
+    japanAbsence: /not counted comparably/i.test(t),
+    missingPanel: /no shared unit/i.test(t),
+    yellowNotices: /3,345/.test(t),
+    nc07: /Missing persons, internationally/.test(t),
+  };
+});
+console.log("intl:", JSON.stringify(intl));
+if (!intl.chart) fail("international homicide chart missing");
+if (intl.legendEntries !== 13) fail(`intl legend entries: ${intl.legendEntries}, expected 13`);
+if (!intl.legendPressable) fail("intl legend entries are not interactive buttons");
+if (!intl.drugPanel || !intl.drugNoChart) fail("drug-deaths definition panel missing or unexplained");
+if (!intl.japanAbsence) fail("Japan's verified absence not shown");
+if (!intl.missingPanel || !intl.yellowNotices) fail("international missing-persons panel incomplete");
+if (!intl.nc07) fail("nc07 international missing-persons entry absent from What nobody counts");
+
+// Legend->line interactivity: hovering a legend entry dims the other lines.
+// A real pointer hover: React's onMouseEnter is synthesized from native
+// mouseover, so a dispatched MouseEvent("mouseenter") never reaches it.
+await page.locator("main figure ul button", { hasText: "Japan" }).first().hover();
+await page.waitForTimeout(300);
+const dimCheck = await page.evaluate(() => {
+  const fig = [...document.querySelectorAll("main figure")].find((f) => /US against the world/i.test(f.querySelector("figcaption")?.textContent || ""));
+  const ops = [...fig.querySelectorAll("svg g[style*=cursor] path[stroke]:not([stroke=transparent])")]
+    .map((p) => +(p.getAttribute("opacity") || 1));
+  return { dimmedCount: ops.filter((o) => o < 0.3).length, litCount: ops.filter((o) => o >= 0.9).length };
+});
+await page.mouse.move(5, 5);
+console.log("intl dim:", JSON.stringify(dimCheck));
+if (dimCheck.dimmedCount < 10) fail(`legend hover dims ${dimCheck.dimmedCount} paths; expected most non-focused lines dimmed`);
+if (dimCheck.litCount < 1) fail("focused line is not lit");
+
+// COVID checkbox now zooms the axis to the pandemic window (Sean, 2026-08-21).
+await page.getByRole("tab", { name: /^Public Health$/i }).click();
+await page.waitForTimeout(1600);
+await page.getByRole("checkbox", { name: /Show COVID-19 timeline/i }).check();
+await page.waitForTimeout(700);
+const covidZoom = await page.evaluate(() => {
+  const svgs = [...document.querySelectorAll("main figure svg")];
+  const svg = svgs.find((x) => [...x.querySelectorAll("text")].some((t) => t.textContent === "2017"));
+  if (!svg) return { found: false };
+  const yrs = [...svg.querySelectorAll("text")].map((t) => t.textContent).filter((t) => /^(19|20)\d\d$/.test(t)).map(Number);
+  return { found: true, min: Math.min(...yrs), max: Math.max(...yrs) };
+});
+console.log("covid zoom:", JSON.stringify(covidZoom));
+if (!covidZoom.found || covidZoom.min < 2017) fail(`COVID checkbox did not zoom to the pandemic window (min year ${covidZoom.min})`);
+await page.getByRole("checkbox", { name: /Show COVID-19 timeline/i }).uncheck();
+await page.waitForTimeout(500);
+await page.getByRole("tab", { name: /^Crime$/i }).click();
+await page.waitForTimeout(1800);
+
 // Series modal: method, caveats and the full year table.
 await page.evaluate(() => {
   const g = [...document.querySelectorAll("main figure svg g")].find((x) => x.querySelector("path"));

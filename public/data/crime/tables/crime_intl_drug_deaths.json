@@ -1,0 +1,126 @@
+{
+  "title": "Drug deaths internationally: five ways of counting",
+  "why_no_chart": "These figures cannot share an axis. Germany's headline number is a police count, not vital statistics; Canada publishes opioid-only toxicity deaths; France's usable figure is a non-exhaustive forensic register; Japan publishes nothing comparable at all; and even between vital-statistics countries, the English definition is deliberately broader than the EU standard. A chart would assert a comparability that does not exist \u2014 the definition column is the point.",
+  "rows": [
+    {
+      "country": "United States",
+      "year": 2024,
+      "value": 79384,
+      "unit": "drug overdose deaths (ICD-10 all intents), final",
+      "rate": "23.1/100k age-adj",
+      "tier": "A",
+      "publisher": "CDC NCHS",
+      "source_url": "https://www.cdc.gov/nchs/products/databriefs/db549.htm",
+      "definition": "vital statistics, all drugs, all intents",
+      "source_id": "intl_cdc_549"
+    },
+    {
+      "country": "England & Wales",
+      "year": 2024,
+      "value": 5565,
+      "unit": "drug-poisoning deaths registered",
+      "rate": "93.9/million",
+      "tier": "A",
+      "publisher": "ONS",
+      "source_url": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/bulletins/deathsrelatedtodrugpoisoninginenglandandwales/2024registrations",
+      "definition": "vital statistics, broader than EUDA standard; registration year; E&W only, not UK",
+      "source_id": "intl_ons_drugs"
+    },
+    {
+      "country": "Australia",
+      "year": 2024,
+      "value": 1948,
+      "unit": "drug-induced deaths (preliminary)",
+      "rate": "7.1/100k ASR",
+      "tier": "A",
+      "publisher": "AIHW/ABS",
+      "source_url": "https://www.aihw.gov.au/reports/alcohol/alcohol-drugs-deaths",
+      "definition": "vital statistics, underlying cause; preliminary, revises upward",
+      "source_id": "intl_aihw"
+    },
+    {
+      "country": "Germany",
+      "year": 2024,
+      "value": 2137,
+      "unit": "police-registered drug deaths (Rauschgifttote)",
+      "rate": null,
+      "tier": "B",
+      "publisher": "DHS citing BKA",
+      "source_url": "https://www.dhs.de/suechte/illegale-drogen/zahlen-daten-fakten/",
+      "definition": "POLICE count, not vital statistics \u2014 different basis from every other row",
+      "source_id": "intl_dhs_bka"
+    },
+    {
+      "country": "France",
+      "year": 2023,
+      "value": 793,
+      "unit": "DRAMES forensic-register deaths",
+      "rate": null,
+      "tier": "A",
+      "publisher": "ANSM/CEIP",
+      "source_url": "https://addictovigilance.fr/wp-content/uploads/2025/06/Plaquette-DRAMES-2023.pdf",
+      "definition": "non-exhaustive forensic toxicology register; known undercount",
+      "source_id": "intl_drames"
+    },
+    {
+      "country": "Canada",
+      "year": 2024,
+      "value": 7150,
+      "unit": "apparent opioid toxicity deaths (full year)",
+      "rate": null,
+      "tier": "B",
+      "publisher": "PHAC via CCSA/press",
+      "source_url": "https://globalnews.ca/news/11345931/opioid-deaths-canada-2024/",
+      "definition": "OPIOIDS ONLY, coroner-based; -17% vs 2023; primary page unreadable this session",
+      "source_id": "intl_phac_press"
+    },
+    {
+      "country": "South Korea",
+      "year": 2021,
+      "value": 559,
+      "unit": "drug-induced deaths",
+      "rate": "1.1/100k",
+      "tier": "B",
+      "publisher": "Ewha Med J from Statistics Korea microdata",
+      "source_url": "https://e-emj.org/journal/view.php?number=37",
+      "definition": "research compilation of official data; no standalone official indicator",
+      "source_id": "intl_kor_drugs"
+    },
+    {
+      "country": "Japan",
+      "year": null,
+      "value": null,
+      "unit": null,
+      "rate": null,
+      "tier": "absence",
+      "publisher": null,
+      "source_url": null,
+      "definition": "VERIFIED ABSENCE: no official national series located",
+      "source_id": null
+    },
+    {
+      "country": "EU-27",
+      "year": 2023,
+      "value": 7459,
+      "unit": "drug-induced deaths, minimum estimate",
+      "rate": "24.7/million 15-64",
+      "tier": "A",
+      "publisher": "EUDA EDR 2025",
+      "source_url": "https://www.euda.europa.eu/publications/european-drug-report/2025/drug-induced-deaths_en",
+      "definition": "harmonized EUDA indicator; EUDA itself cautions on national comparison",
+      "source_id": "intl_euda"
+    },
+    {
+      "country": "World",
+      "year": 2021,
+      "value": 450000,
+      "unit": "drug-related deaths, global estimate (>450k)",
+      "rate": null,
+      "tier": "B",
+      "publisher": "UNODC WDR 2025 via IDPC",
+      "source_url": "https://idpc.net/blog/2025/06/evidence-that-cannot-be-contained-the-world-drug-report-2025-reveals-the-ongoing-failure-of-the",
+      "definition": "UNODC estimate; up from >350k in 2011; no post-2021 estimate",
+      "source_id": "intl_unodc_wdr"
+    }
+  ]
+}

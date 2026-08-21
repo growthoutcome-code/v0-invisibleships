@@ -9,6 +9,7 @@ import {
   useTable, useDoc, usePager, useNarrow, TierChip, SourceLink, SectionSkeleton,
   DATA_WINDOW, dataWindowTicks, type SourceRec,
 } from "@/components/DataPrimitives";
+import IntlLineChart, { type IntlChartDoc, type IntlSeries } from "@/components/IntlLineChart";
 import { track } from "@/lib/analytics";
 
 /**
@@ -517,6 +518,10 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
   const notCounted = useTable<NotCounted>("/data/crime/tables/crime_not_counted.json");
   const sweeps = useTable<Sweep>("/data/crime/tables/crime_sweeps.json");
   const tr = useDoc<TR>("/data/crime/tables/crime_transnational.json");
+  const intl = useDoc<IntlChartDoc>("/data/crime/charts/homicide_international.json");
+  const intlDrugs = useDoc<{ title: string; why_no_chart: string; rows: any[] }>("/data/crime/tables/crime_intl_drug_deaths.json");
+  const intlMissing = useDoc<{ title: string; why_no_chart: string; rows: any[] }>("/data/crime/tables/crime_intl_missing.json");
+  const [intlPicked, setIntlPicked] = useState<IntlSeries | null>(null);
 
   const srcs = sources || [];
   const [picked, setPicked] = useState<ChartSeries | null>(null);
@@ -526,13 +531,13 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
   // dialog traps the reader, since the backdrop and the close button were the
   // only exits and neither is reachable from the keyboard.
   useEffect(() => {
-    if (!picked && !lanePicked) return;
+    if (!picked && !lanePicked && !intlPicked) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") { setPicked(null); setLanePicked(null); }
+      if (e.key === "Escape") { setPicked(null); setLanePicked(null); setIntlPicked(null); }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [picked, lanePicked]);
+  }, [picked, lanePicked, intlPicked]);
 
   const trendsP = usePager(trends, 5);
   const dqP = usePager(dq, 5);
@@ -858,6 +863,67 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
         </section>
       )}
 
+      {/* ---- international (Sean, 2026-08-21): one honest chart, two honest
+             non-charts ---- */}
+      <section className="mb-14">
+        {intl === null ? <SkeletonChart /> : (
+          <>
+            <IntlLineChart chart={intl} onPick={setIntlPicked} />
+            <p className="body-copy text-foreground/90 measure">{intl.note}</p>
+          </>
+        )}
+      </section>
+
+      {intlDrugs && (
+        <section className="mb-14">
+          <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">{intlDrugs.title}</h2>
+          <p className="text-muted text-[15px] measure mb-6">{intlDrugs.why_no_chart}</p>
+          <ul className="list-none p-0 m-0">
+            {intlDrugs.rows.map((r, i) => (
+              <li key={i} className="py-3 border-b border-edge/60">
+                <div className="flex flex-wrap items-baseline gap-3 text-[16px]">
+                  <TierChip t={r.tier === "absence" ? "A" : r.tier} />
+                  <span className="text-foreground font-semibold">{r.country}</span>
+                  {r.value !== null ? (
+                    <span className="text-foreground/85 tabular-nums">
+                      {r.value.toLocaleString()} <span className="text-muted">({r.year})</span>
+                    </span>
+                  ) : (
+                    <span className="text-muted uppercase tracking-wide text-[13px]">not counted comparably</span>
+                  )}
+                  <span className="ml-auto"><SourceLink id={r.source_id} sources={srcs} /></span>
+                </div>
+                <p className="text-muted text-[14px] measure mt-1 mb-0">
+                  {r.unit ? `${r.unit}. ` : ""}{r.definition}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {intlMissing && (
+        <section className="mb-14">
+          <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">{intlMissing.title}</h2>
+          <p className="text-muted text-[15px] measure mb-6">{intlMissing.why_no_chart}</p>
+          <ul className="list-none p-0 m-0">
+            {intlMissing.rows.map((r, i) => (
+              <li key={i} className="py-3 border-b border-edge/60">
+                <div className="flex flex-wrap items-baseline gap-3 text-[16px]">
+                  <TierChip t={r.tier} />
+                  <span className="text-foreground font-semibold">{r.country}</span>
+                  <span className="text-foreground/85 tabular-nums">
+                    {r.value.toLocaleString()} <span className="text-muted">({r.year})</span>
+                  </span>
+                  <span className="ml-auto"><SourceLink id={r.source_id} sources={srcs} /></span>
+                </div>
+                <p className="text-muted text-[14px] measure mt-1 mb-0">{r.unit}. {r.note}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       {/* ---- cross-link, not an overlay ---- */}
       {onGoTimeline && (
         <section className="mb-16">
@@ -955,6 +1021,47 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
               </table>
             </div>
             <p className="text-muted text-[13px] mt-2 mb-0">* not Tier A — drawn dotted on the chart.</p>
+          </div>
+        </div>
+      )}
+
+      {/* ---- per-country detail (international homicide) ---- */}
+      {intlPicked && (
+        <div role="dialog" aria-modal="true" aria-label={intlPicked.name}
+          className="fixed inset-0 z-50 bg-background/85 overflow-y-auto p-4 sm:p-10"
+          onClick={() => setIntlPicked(null)}>
+          <div className="max-w-[720px] mx-auto bg-background border border-edge p-6 sm:p-8"
+            onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-start gap-4">
+              <h3 className="font-display font-semibold text-foreground text-[22px] m-0">{intlPicked.name}</h3>
+              <button type="button" onClick={() => setIntlPicked(null)}
+                className="ml-auto text-muted hover:text-foreground text-[22px] leading-none" aria-label="Close">×</button>
+            </div>
+            <p className="text-muted text-[15px] mt-3 mb-0">
+              <strong className="text-foreground/80">Basis:</strong> {intlPicked.basis_short} ·{" "}
+              <strong className="text-foreground/80">Publisher:</strong> {intlPicked.publisher} ·{" "}
+              <TierChip t={intlPicked.tier} />
+            </p>
+            {!!intlPicked.caveats?.length && (
+              <ul className="list-disc pl-5 mt-4 text-[15px] text-foreground/85">
+                {intlPicked.caveats.map((c, i) => <li key={i} className="mb-1">{c}</li>)}
+              </ul>
+            )}
+            <h4 className="font-display font-semibold text-foreground text-[16px] mt-6 mb-2">
+              Year by year ({intlPicked.points[0].year}&ndash;{intlPicked.last.year})
+            </h4>
+            <div className="max-h-[42vh] overflow-y-auto scroll-thin border-t border-edge">
+              <table className="w-full text-[15px]">
+                <tbody>
+                  {intlPicked.points.slice().reverse().map((q) => (
+                    <tr key={q.year} className="border-b border-edge/50">
+                      <td className="py-1.5 text-muted w-24">{q.year}</td>
+                      <td className="py-1.5 text-foreground/90">{q.value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       )}

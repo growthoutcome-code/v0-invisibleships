@@ -52,5 +52,14 @@
     "who_would_collect": "No federal agency measures it. Pew is not obliged to continue.",
     "tier": "B",
     "source_id": "hs_pew"
+  },
+  {
+    "nc_id": "nc07",
+    "category": "Missing persons, internationally",
+    "status": "No comparable basis exists \u2014 verified, not assumed",
+    "detail": "Countries count missing people in units that cannot be reconciled: the United States counts NCIC records entered (533,936 in 2024 \u2014 one person can generate several), Canada counts individuals by the year they were last seen (68,349), the UK counts incidents (roughly 262,000 in 2020/21, against ~128,000 individuals), and Australia publishes only 'about 50,000 reports' with no reference year. Converting any of these to per-capita rates would fake a comparability that does not exist. The only international instrument is Interpol's Yellow Notice \u2014 3,345 issued in 2024 \u2014 which counts notices, not missing people, and Interpol publishes no cross-country statistics.",
+    "who_would_collect": "No body does. UNODC and Interpol publish no cross-country missing-persons series; each national count sits with a different agency on a different unit.",
+    "tier": "A",
+    "source_id": "intl_interpol"
   }
 ]

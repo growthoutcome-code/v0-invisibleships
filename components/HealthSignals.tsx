@@ -405,7 +405,11 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
       <div className="flex flex-wrap gap-x-6 gap-y-2 mb-3">
       <div role="group" aria-label="Chart period" className="flex gap-1">
         {([["full", "2000–2021"], ["covid", "2017–2021 (pandemic)"]] as const).map(([w, label]) => (
-          <button key={w} type="button" onClick={() => { setWin(w); track("health_chart_window", { win: w }); }}
+          <button key={w} type="button" onClick={() => {
+            setWin(w);
+            if (w === "full") setShowCovid(false); // markers never render cramped on the full axis
+            track("health_chart_window", { win: w });
+          }}
             aria-pressed={win === w}
             className={`text-[13px] px-3 py-1 border transition-colors ${
               win === w ? "border-foreground text-foreground font-semibold" : "border-edge text-muted hover:text-foreground"
@@ -416,7 +420,15 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
       </div>
       <label className="flex items-center gap-2 text-[13px] text-muted cursor-pointer">
         <input type="checkbox" checked={showCovid}
-          onChange={(e) => { setShowCovid(e.target.checked); track("health_chart_covid", { on: e.target.checked }); }} />
+          onChange={(e) => {
+            const on = e.target.checked;
+            setShowCovid(on);
+            // The markers span 2019-2023; on the full axis they crowd into the
+            // right edge. Checking the box zooms to the pandemic window so the
+            // COVID era fills the chart; unchecking returns to the full view.
+            setWin(on ? "covid" : "full");
+            track("health_chart_covid", { on });
+          }} />
         Show COVID-19 timeline
       </label>
       {showCovid && x1 <= 2021 && (

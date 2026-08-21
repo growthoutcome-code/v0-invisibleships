@@ -781,5 +781,149 @@
     "evidence_tier": "A",
     "accessed": "2026-08-21",
     "archived_url": null
+  },
+  {
+    "source_id": "intl_wb_homicide",
+    "url": "https://api.worldbank.org/v2/country/USA;KOR;JPN;GBR;AUS;DEU;FRA;CAN;RUS;CHN;IND;ISR;WLD/indicator/VC.IHR.PSRC.P5?format=json&per_page=500&date=1999:2024",
+    "publisher": "World Bank (data source: UNODC)",
+    "title": "Intentional homicides per 100,000 \u2014 UNODC series, World Bank mirror (API extract)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "intl_ons_drugs",
+    "url": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/bulletins/deathsrelatedtodrugpoisoninginenglandandwales/2024registrations",
+    "publisher": "ONS",
+    "title": "Deaths related to drug poisoning in England and Wales: 2024 registrations",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "intl_aihw",
+    "url": "https://www.aihw.gov.au/reports/alcohol/alcohol-drugs-deaths",
+    "publisher": "AIHW/ABS",
+    "title": "Deaths involving alcohol and other drugs in Australia",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "intl_euda",
+    "url": "https://www.euda.europa.eu/publications/european-drug-report/2025/drug-induced-deaths_en",
+    "publisher": "EUDA",
+    "title": "European Drug Report 2025 \u2014 drug-induced deaths",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "intl_phac",
+    "url": "https://www.canada.ca/en/public-health/news/2024/12/joint-statement-from-the-co-chairs-of-the-special-advisory-committee-on-toxic-drug-poisonings--latest-national-data-on-substance-related-harms.html",
+    "publisher": "Public Health Agency of Canada",
+    "title": "Special Advisory Committee on Toxic Drug Poisonings \u2014 joint statement",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "intl_dhs_bka",
+    "url": "https://www.dhs.de/suechte/illegale-drogen/zahlen-daten-fakten/",
+    "publisher": "DHS (citing BKA)",
+    "title": "Rauschgifttote \u2014 police-registered drug deaths, Germany",
+    "evidence_tier": "B",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "intl_drames",
+    "url": "https://addictovigilance.fr/wp-content/uploads/2025/06/Plaquette-DRAMES-2023.pdf",
+    "publisher": "ANSM / CEIP-Addictovigilance",
+    "title": "DRAMES 2023 \u2014 deaths related to substance abuse (forensic register)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "intl_kor_drugs",
+    "url": "https://e-emj.org/journal/view.php?number=37",
+    "publisher": "Ewha Medical Journal (Statistics Korea data)",
+    "title": "Drug-induced death statistics in Korea, 2011-2021",
+    "evidence_tier": "B",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "intl_unodc_wdr",
+    "url": "https://idpc.net/blog/2025/06/evidence-that-cannot-be-contained-the-world-drug-report-2025-reveals-the-ongoing-failure-of-the",
+    "publisher": "UNODC WDR 2025 (via IDPC)",
+    "title": "Global drug-related deaths estimate (>450,000 in 2021)",
+    "evidence_tier": "B",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "intl_ncic_2024",
+    "url": "https://www.fbi.gov/file-repository/cjis/2024-ncic-missing-and-unidentified-person-statistics.pdf",
+    "publisher": "FBI CJIS",
+    "title": "2024 NCIC Missing Person and Unidentified Person Statistics",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "intl_rcmp",
+    "url": "https://canadasmissing.ca/pubs/2025/index-eng.htm",
+    "publisher": "RCMP NCMPUR",
+    "title": "Canada's Missing \u2014 Fast Fact Sheet",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "intl_afp",
+    "url": "https://www.afp.gov.au/news-centre/media-release/national-missing-persons-week-2025-forever-loved",
+    "publisher": "AFP NMPCC",
+    "title": "National Missing Persons Week 2025",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "intl_nca_press",
+    "url": "https://www.nationalworld.com/news/crime/how-many-missing-people-uk-police-data-explained-body-found-nicola-bulley-4033696",
+    "publisher": "NCA UKMPU (via press)",
+    "title": "UK missing incidents 2020/21 (~262,000) \u2014 primary NCA report unreadable this session",
+    "evidence_tier": "B",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "intl_interpol",
+    "url": "https://www.interpol.int/en/How-we-work/Notices/Yellow-Notices",
+    "publisher": "INTERPOL",
+    "title": "Yellow Notices \u2014 the only international missing-persons instrument",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "intl_cdc_549",
+    "url": "https://www.cdc.gov/nchs/products/databriefs/db549.htm",
+    "publisher": "CDC NCHS",
+    "title": "Drug Overdose Deaths in the United States, 2023-2024 (final)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "intl_phac_press",
+    "url": "https://globalnews.ca/news/11345931/opioid-deaths-canada-2024/",
+    "publisher": "PHAC via CCSA/press",
+    "title": "Canada 2024 apparent opioid toxicity deaths (7,150) \u2014 primary Infobase unreadable this session",
+    "evidence_tier": "B",
+    "accessed": "2026-08-21",
+    "archived_url": null
   }
 ]

@@ -1,0 +1,61 @@
+{
+  "title": "Missing persons internationally: no shared unit",
+  "why_no_chart": "Records, individuals, incidents and rounded press figures cannot be drawn on one axis, and no international body publishes a comparable series. Each country's own number is stated in its own unit below.",
+  "rows": [
+    {
+      "country": "United States",
+      "year": 2024,
+      "value": 533936,
+      "unit": "NCIC missing-person RECORDS entered",
+      "tier": "A",
+      "publisher": "FBI CJIS",
+      "source_url": "https://www.fbi.gov/file-repository/cjis/2024-ncic-missing-and-unidentified-person-statistics.pdf",
+      "note": "93,447 active records at year end; records, not people",
+      "source_id": "intl_ncic_2024"
+    },
+    {
+      "country": "Canada",
+      "year": 2025,
+      "value": 68349,
+      "unit": "INDIVIDUALS reported missing (CPIC, by year last seen)",
+      "tier": "A",
+      "publisher": "RCMP NCMPUR",
+      "source_url": "https://canadasmissing.ca/pubs/2025/index-eng.htm",
+      "note": "2024: 69,152. Only ~1% still missing at extraction. Year label needs re-check vs PDF",
+      "source_id": "intl_rcmp"
+    },
+    {
+      "country": "United Kingdom",
+      "year": 2021,
+      "value": 262000,
+      "unit": "missing INCIDENTS recorded 2020/21 (approx)",
+      "tier": "B",
+      "publisher": "NCA UKMPU via press",
+      "source_url": "https://www.nationalworld.com/news/crime/how-many-missing-people-uk-police-data-explained-body-found-nicola-bulley-4033696",
+      "note": ">128,000 individuals same year, incomplete force coverage; NCA primary robots-blocked this session",
+      "source_id": "intl_nca_press"
+    },
+    {
+      "country": "Australia",
+      "year": 2025,
+      "value": 50000,
+      "unit": "missing-person REPORTS per year (approx, no ref year)",
+      "tier": "A",
+      "publisher": "AFP NMPCC",
+      "source_url": "https://www.afp.gov.au/news-centre/media-release/national-missing-persons-week-2025-forever-loved",
+      "note": "~2,700 long-term (>3 months); no precise annual series published",
+      "source_id": "intl_afp"
+    },
+    {
+      "country": "International",
+      "year": 2024,
+      "value": 3345,
+      "unit": "Interpol Yellow Notices issued",
+      "tier": "A",
+      "publisher": "INTERPOL",
+      "source_url": "https://www.interpol.int/en/How-we-work/Notices/Yellow-Notices",
+      "note": "The ONLY international instrument; counts notices, not missing people; no cross-country statistics published",
+      "source_id": "intl_interpol"
+    }
+  ]
+}
