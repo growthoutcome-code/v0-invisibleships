@@ -47,7 +47,8 @@
         "Selected years, not a continuous annual series \u2014 the FBI's own estimates for the years shown, one consistent series (never mixed with the BJS 1980-2009 series, which uses different weights and yields ~11.6M for 1997).",
         "2016 and 2021 are known national data gaps and are not shown.",
         "An arrest is an enforcement action, not a conviction; 82-84% of arrests across this whole period are for lesser (Part II) offences."
-      ]
+      ],
+      "unit": "estimated criminal arrests per calendar year"
     },
     {
       "name": "Drug arrests",
@@ -84,6 +85,96 @@
       "caveats": [
         "Peaked in 2006 at 1,889,810; 2024 (822,488) is still the largest single arrest category.",
         "1980 and 2006-2008 values corroborated via compilations of FBI Table 29 (Tier B where marked)."
+      ],
+      "unit": "estimated drug-abuse violation arrests per calendar year"
+    },
+    {
+      "name": "Civil immigration arrests (ICE)",
+      "emphasis": false,
+      "basis_short": "ICE ERO administrative arrests \u2014 civil immigration violations, federal fiscal year",
+      "publisher": "DHS OHSS annual flow reports (FY2011-2020); ICE annual reports (FY2021-2024)",
+      "tier": "A",
+      "unit": "administrative arrests per federal fiscal year (Oct-Sep)",
+      "points": [
+        {
+          "year": 2011,
+          "value": 322093,
+          "tier": "A"
+        },
+        {
+          "year": 2012,
+          "value": 290622,
+          "tier": "A"
+        },
+        {
+          "year": 2013,
+          "value": 229698,
+          "tier": "A"
+        },
+        {
+          "year": 2014,
+          "value": 181719,
+          "tier": "A"
+        },
+        {
+          "year": 2015,
+          "value": 117983,
+          "tier": "A"
+        },
+        {
+          "year": 2016,
+          "value": 110104,
+          "tier": "A"
+        },
+        {
+          "year": 2017,
+          "value": 143470,
+          "tier": "A"
+        },
+        {
+          "year": 2018,
+          "value": 158581,
+          "tier": "A"
+        },
+        {
+          "year": 2019,
+          "value": 143099,
+          "tier": "A"
+        },
+        {
+          "year": 2020,
+          "value": 103603,
+          "tier": "A"
+        },
+        {
+          "year": 2021,
+          "value": 74082,
+          "tier": "A"
+        },
+        {
+          "year": 2022,
+          "value": 142750,
+          "tier": "A"
+        },
+        {
+          "year": 2023,
+          "value": 170590,
+          "tier": "A"
+        },
+        {
+          "year": 2024,
+          "value": 113431,
+          "tier": "A"
+        }
+      ],
+      "caveats": [
+        "CIVIL arrests under immigration law, adjudicated by immigration judges \u2014 a separate legal system from the criminal arrests on the other two lines.",
+        "Federal FISCAL years (October-September), plotted at the fiscal-year label; the criminal series are calendar years.",
+        "The all-time peak is FY2011 (322,093) \u2014 the Secure Communities era, when most arrests were custodial transfers from jails, not street operations.",
+        "FY2022 and FY2023 are inflated by ICE processing border-encounter backlogs in the interior; ICE itself says so. They overstate interior enforcement.",
+        "FY2015 and FY2022 carry small official revisions (117,983 vs 119,772; 142,750 restated 142,873).",
+        "NO official FY2025 or FY2026 total exists \u2014 DHS stopped publishing detailed enforcement tables after November 2024. The 2025-26 surge is documented only through FOIA'd ICE records: 95,629 arrests Jan 20-Jun 10 2025, roughly 217,500 Jan 20-Oct 15 2025, and a rate 4.4x the late-Biden baseline by January 2026 (street arrests up 11x). This line therefore ENDS at FY2024 not because the surge is small but because no official number exists yet.",
+        "Even the FY2011 peak equals roughly 2-3% of the same year's criminal arrests \u2014 the vertical gap between this line and the others is the scale of the two systems."
       ]
     }
   ],
@@ -104,17 +195,21 @@
       "tier": "A"
     },
     {
-      "statement": "This chart counts CRIMINAL arrests reported by police agencies. The sweeping arrests in DHS announcements are mostly civil 'administrative arrests' under immigration law \u2014 a separate counting system that never enters these figures. Both are true at once: criminal arrests falling while administrative immigration arrests surge (95,629 by ICE ERO in under five months of 2025 alone).",
+      "statement": "Yes, 15.3 million is real \u2014 but an arrest is an EVENT, not a person: one person arrested three times counts three times, and most arrests never become imprisonment. Today's funnel: 7.5M criminal arrests a year sit alongside 7.9M jail admissions, a jail population of 657,500 \u2014 69% of whom are not yet convicted \u2014 and a prison population of 1.25 million.",
+      "tier": "A"
+    },
+    {
+      "statement": "Is the system overcrowded? Not by the trend: jail admissions are 31% below 2014 (11.5M then, 7.9M now) and the prison population sits near 1.25M. Where the record DOES show capacity strain right now is immigration detention: a record 73,400 held in January 2026, in 456 facilities against 220 publicly acknowledged.",
       "tier": "B"
     },
     {
-      "statement": "The series ends at 2024 \u2014 before the 2025\u201326 enforcement surge. A national 2025 criminal-arrest figure does not exist yet.",
-      "tier": "A"
+      "statement": "Civil immigration arrests are now drawn on this chart. The near-floor line is the point: even its FY2011 peak (322,093, mostly jail transfers) is about 2-3% of criminal arrest volume, and the line ends at FY2024 because no official 2025-26 total exists \u2014 the surge (4.4x the late-2024 baseline, street arrests up 11x) is documented only through FOIA'd records.",
+      "tier": "B"
     },
     {
       "statement": "Where sweep cases meet courts: of 33 known federal defendants charged with non-immigration crimes in Chicago's Operation Midway Blitz, 25 were cleared \u2014 dismissals, grand juries refusing to indict, one acquittal \u2014 against 2 guilty pleas (tracker as of Aug 2026).",
       "tier": "B"
     }
   ],
-  "accuracy_note": "About the accuracy of these figures: arrest totals are estimates assembled from agency reports, and two official federal series disagree with each other (see the data-quality register). 2016 and 2021 are national data gaps. Civil immigration arrests are counted separately by DHS and never appear in this chart. Every figure is as published by its source on the access date recorded in the source register."
+  "accuracy_note": "About the accuracy of these figures: arrest totals are estimates assembled from agency reports, and two official federal criminal-arrest series disagree (see the data-quality register); 2016 and 2021 are national gaps. The immigration line is federal FISCAL years and ends at FY2024 \u2014 DHS stopped publishing detailed enforcement tables after November 2024, so the 2025-26 surge exists only in FOIA'd records. An arrest, in either system, is an event \u2014 not a person, and not a conviction."
 }

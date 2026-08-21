@@ -561,20 +561,62 @@ const ar = await page.evaluate(() => {
     legend: legend.length,
     alert: /About the accuracy of these figures/.test(t),
     alertDismiss: !!document.querySelector("[role=note] button[aria-label=Dismiss]"),
-    reconcile: /administrative arrests/.test(t) && /separate counting system/.test(t),
+    reconcile: /Civil immigration arrests are now drawn on this chart/.test(t.replace(/\n/g, " ")) && /2-3% of criminal arrest volume/.test(t.replace(/\n/g, " ")),
     courts: /grand juries\s+refusing to indict/.test(t.replace(/\n/g, " ")),
-    endsAt2024: /series ends at 2024/i.test(t),
+    endsAt2024: /ends at FY2024 because no official/i.test(t.replace(/\n/g, " ")),
   };
 });
+ar.iceLine = await page.evaluate(() => /Civil immigration arrests \(ICE\)/.test(document.querySelector("main").innerText));
+ar.funnel = await page.evaluate(() => {
+  const t = document.querySelector("main").innerText.replace(/\n/g, " ");
+  return /an arrest is an EVENT, not a person/i.test(t) && /7\.9M jail admissions/.test(t) && /69% of whom are not yet convicted/.test(t);
+});
+ar.overcrowding = await page.evaluate(() => {
+  const t = document.querySelector("main").innerText.replace(/\n/g, " ");
+  return /31% below 2014/.test(t) && /record 73,400/.test(t);
+});
 console.log("arrests:", JSON.stringify(ar));
+if (!ar.iceLine) fail("civil immigration (ICE) line missing from arrests chart");
+if (!ar.funnel) fail("arrests-are-events funnel theme missing");
+if (!ar.overcrowding) fail("overcrowding answer missing from themes");
 if (!ar.millionTicks) fail("arrests y-axis lacks M-formatted ticks");
 if (!ar.noRawTicks) fail("arrests y-axis still shows raw 7+ digit numbers");
-if (ar.legend !== 2) fail(`arrests legend entries: ${ar.legend}, expected 2`);
+if (ar.legend !== 3) fail(`arrests legend entries: ${ar.legend}, expected 3 (incl. civil immigration)`);
 if (!ar.alert) fail("accuracy note missing");
 if (!ar.alertDismiss) fail("accuracy note is not dismissible");
 if (!ar.reconcile) fail("criminal-vs-administrative reconciliation missing from themes");
 if (!ar.courts) fail("court-outcomes theme missing");
 if (!ar.endsAt2024) fail("series-ends-2024 theme missing");
+
+// modal columns are labelled and formatted (the bare "2024 7522824" fix)
+const arLegendBtn = page.locator("main figure ul button", { hasText: "All arrests" }).first();
+// tap-until-open: the first tap highlights unless focus is already set, in
+// which case it opens the modal immediately — never click into the dialog
+await arLegendBtn.click();
+await page.waitForTimeout(400);
+if (!(await page.evaluate(() => !!document.querySelector("[role=dialog]")))) {
+  await arLegendBtn.click();
+  await page.waitForTimeout(400);
+}
+const arModal = await page.evaluate(() => {
+  const d = [...document.querySelectorAll("[role=dialog]")].find((x) => /Full record, year by year/.test(x.innerText));
+  if (!d) return { open: false };
+  const t = d.innerText;
+  return {
+    open: true,
+    unitHeader: /criminal arrests per calendar year/i.test(t),
+    formatted: /7,522,824/.test(t),
+    noBare: !/7522824/.test(t.replace(/,/g, "").slice(0, 0) + (t.match(/\b\d{7,}\b/g) || []).join(" ")),
+    peakNote: /PEAK/.test(t),
+  };
+});
+console.log("arrests modal:", JSON.stringify(arModal));
+if (!arModal.open) fail("arrests modal did not open from legend");
+if (!arModal.unitHeader) fail("arrests modal missing unit header");
+if (!arModal.formatted) fail("arrests modal numbers not thousands-formatted");
+if (!arModal.peakNote) fail("arrests modal missing per-year note (PEAK)");
+await page.keyboard.press("Escape");
+await page.waitForTimeout(300);
 
 // dismiss works
 await page.locator("[role=note] button[aria-label=Dismiss]").first().click();

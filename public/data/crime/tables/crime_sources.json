@@ -1015,5 +1015,122 @@
     "evidence_tier": "B",
     "accessed": "2026-08-21",
     "archived_url": null
+  },
+  {
+    "source_id": "ice_ohss_2013",
+    "url": "https://ohss.dhs.gov/sites/default/files/2023-12/Enforcement_Actions_2013.pdf",
+    "publisher": "DHS OHSS",
+    "title": "Immigration Enforcement Actions: 2013 (Annual Flow Report)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "ice_ohss_2016",
+    "url": "https://ohss.dhs.gov/sites/default/files/2023-12/Enforcement_Actions_2016.pdf",
+    "publisher": "DHS OHSS",
+    "title": "Immigration Enforcement Actions: 2016 (Annual Flow Report)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "ice_ohss_2017",
+    "url": "https://ohss.dhs.gov/sites/default/files/2023-12/enforcement_actions_2017.pdf",
+    "publisher": "DHS OHSS",
+    "title": "Immigration Enforcement Actions: 2017 (Annual Report)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "ice_ohss_2020",
+    "url": "https://ohss.dhs.gov/sites/default/files/2023-12/2022_0131_plcy_enforcement_actions_fy2020v2.pdf",
+    "publisher": "DHS OHSS",
+    "title": "Immigration Enforcement Actions: 2020 (Annual Flow Report)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "ice_fy21",
+    "url": "https://www.ice.gov/doclib/eoy/iceAnnualReportFY2021.pdf",
+    "publisher": "ICE",
+    "title": "ICE Annual Report FY2021",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "ice_fy22",
+    "url": "https://www.ice.gov/doclib/eoy/iceAnnualReportFY2022.pdf",
+    "publisher": "ICE",
+    "title": "ICE Annual Report FY2022",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "ice_fy23",
+    "url": "https://www.ice.gov/doclib/eoy/iceAnnualReportFY2023.pdf",
+    "publisher": "ICE",
+    "title": "ICE Annual Report FY2023",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "ice_fy24",
+    "url": "https://www.ice.gov/doclib/eoy/iceAnnualReportFY2024.pdf",
+    "publisher": "ICE",
+    "title": "ICE Annual Report FY2024",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "ice_ddp_kocher",
+    "url": "https://austinkocher.substack.com/p/a-close-look-at-ice-arrest-data-from",
+    "publisher": "Deportation Data Project / Austin Kocher",
+    "title": "ICE arrest FOIA data, Jan 20-Jun 10 2025 (95,629)",
+    "evidence_tier": "B",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "ice_ppi_2025",
+    "url": "https://www.prisonpolicy.org/blog/2025/12/11/ice-jails-update/",
+    "publisher": "Prison Policy Initiative",
+    "title": "ICE arrests Jan 20-Oct 15 2025 (~217,500, FOIA data)",
+    "evidence_tier": "B",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "ice_ddp_year1",
+    "url": "https://deportationdata.org/analysis/immigration-enforcement-first-year.html",
+    "publisher": "Deportation Data Project (UC Berkeley Law)",
+    "title": "One Year of Immigration Enforcement (4.4x baseline; street arrests 11x)",
+    "evidence_tier": "B",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "bjs_jails_2024",
+    "url": "https://bjs.ojp.gov/library/publications/jails-report-series-2024-preliminary-data-release/web-report",
+    "publisher": "Bureau of Justice Statistics",
+    "title": "Jails Report Series: 2024 Preliminary (657,500 held; 7.9M admissions; 69% unconvicted)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "bjs_prisons_2023",
+    "url": "https://bjs.ojp.gov/preliminary-data-release-prisons-2023",
+    "publisher": "Bureau of Justice Statistics",
+    "title": "Prisons 2023 Preliminary (1,254,200 year-end)",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
   }
 ]

@@ -43,7 +43,8 @@ type Verdict = {
 };
 type ChartSeries = {
   name: string; emphasis: boolean; basis_short: string; publisher: string;
-  tier: string; points: { year: number; value: number; tier?: string; note?: string }[];
+  tier: string; unit?: string;
+  points: { year: number; value: number; tier?: string; note?: string }[];
   caveats?: string[];
 };
 type Chart = {
@@ -1255,18 +1256,35 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
             <h4 className="font-display font-semibold text-foreground text-[16px] mt-6 mb-2">
               Full record, year by year ({picked.points[0].year}&ndash;{picked.points[picked.points.length - 1].year})
             </h4>
+            {/* The bare "2024 7522824" rows explained nothing (Sean, 2026-08-21):
+                the table now says what each column is, formats the number as a
+                number, and carries the per-year note where one exists. */}
+            <p className="text-muted text-[14px] mt-0 mb-2">
+              Each row: the year, and {picked.unit || picked.basis_short}.
+            </p>
             <div className="max-h-[42vh] overflow-y-auto scroll-thin border-t border-edge">
               <table className="w-full text-[15px]">
+                <thead>
+                  <tr className="text-muted text-[13px] text-left">
+                    <th className="py-1.5 font-normal w-20">Year</th>
+                    <th className="py-1.5 font-normal">{picked.unit ? picked.unit.charAt(0).toUpperCase() + picked.unit.slice(1) : "Value"}</th>
+                    <th className="py-1.5 font-normal">Note</th>
+                  </tr>
+                </thead>
                 <tbody>
                   {picked.points.slice().reverse().map((p) => (
                     <tr key={p.year} className="border-b border-edge/50">
-                      <td className="py-1.5 text-muted w-24">{p.year}</td>
-                      <td className="py-1.5 text-foreground/90">{p.value}</td>
+                      <td className="py-1.5 text-muted">{p.year}</td>
+                      <td className="py-1.5 text-foreground/90 tabular-nums">
+                        {p.value.toLocaleString()}{p.tier && p.tier !== "A" ? " *" : ""}
+                      </td>
+                      <td className="py-1.5 text-muted text-[13px]">{p.note ? p.note.split(".")[0] : ""}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
+            <p className="text-muted text-[13px] mt-2 mb-0">* not Tier A &mdash; drawn dotted on the chart.</p>
           </div>
         </div>
       )}
