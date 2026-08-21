@@ -28,9 +28,15 @@ TABLE_FILES = [
     "crime_verdict.json",
     "crime_caveats.json",
     "crime_sources.json",
+    "crime_not_counted.json",
+    "crime_sweeps.json",
+    "crime_milestones.json",
 ]
 
 DESCRIPTIONS = {
+    "crime_not_counted.json": "The uncounted categories — what has no national statistic, and who would have to collect it",
+    "crime_sweeps.json": "Sweeping enforcement actions and the capacity question — what headline arrest counts actually count",
+    "crime_milestones.json": "Dated events behind the master timeline's Crime lane (track G)",
     "crime_indicators.json": "Time-series rows: indicator, year, value, unit, tier, source_id, vintage note",
     "crime_data_quality.json": "Counting, coverage and definitional problems — the spine of this dataset",
     "crime_trends.json": "Sourced trend statements",
@@ -176,6 +182,9 @@ verified against a fetched source. The rate series is complete.
         dst.writestr(PREFIX + "manifest.json", json.dumps(manifest, indent=1) + "\n")
         dst.writestr(PREFIX + "README-crime.md", readme)
         dst.writestr(PREFIX + "charts/homicide_two_measures.json", chart_path.read_text())
+        lanes_path = CHARTS / "harm_lanes_indexed.json"
+        if lanes_path.exists():
+            dst.writestr(PREFIX + "charts/harm_lanes_indexed.json", lanes_path.read_text())
         dst.writestr(PREFIX + "charts/homicide_us.csv", hom_csv)
 
     shutil.move(str(tmp), str(ZIP))
