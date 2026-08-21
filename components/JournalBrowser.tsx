@@ -187,7 +187,32 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
   useEffect(() => { setPage(1); }, [q, dFrom, dTo, part, loc, cat, stype, audioOnly, sort]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+
+  // Journal month index for the shared SideNav (Sean, 2026-08-21). One entry
+  // per calendar month rather than per document: 435 entries is not a
+  // navigable list, and a dated journal is browsed by period. Derived from the
+  // FILTERED set, so the index always describes what is actually on screen.
+  const months = useMemo(() => {
+    const seen = new Map<string, number>();          // "2025-03" -> first index
+    filtered.forEach((d: Doc, i: number) => {
+      const m = (d.entry_date || "").slice(0, 7);
+      if (m && !seen.has(m)) seen.set(m, i);
+    });
+    const MONTH = ["January","February","March","April","May","June",
+                   "July","August","September","October","November","December"];
+    return [...seen.entries()].map(([m, i]) => ({
+      id: m,
+      label: `${MONTH[+m.slice(5, 7) - 1]} ${m.slice(0, 4)}`,
+      page: Math.floor(i / PAGE_SIZE) + 1,
+    }));
+  }, [filtered]);
+
   const pageItems = useMemo(() => filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE), [filtered, page]);
+  // the month the current page opens on
+  const activeMonth = useMemo(
+    () => (pageItems[0]?.entry_date || "").slice(0, 7) || null,
+    [pageItems],
+  );
 
   useEffect(() => {
     if (!ds) return; let alive = true;
@@ -249,7 +274,19 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
         ) : tab === "disclaimer" ? (
           <DisclaimerView />
         ) : (
-          <div>
+          <div className={selDoc ? "" : "lg:grid lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-x-8 lg:items-start"}>
+            {!selDoc && months.length > 1 && (
+              <SideNav
+                mode="index"
+                label="Months"
+                sections={months.map((m) => ({ id: m.id, label: m.label }))}
+                active={activeMonth}
+                onPick={(id: string) => {
+                  const m = months.find((x) => x.id === id);
+                  if (m) setPage(m.page);
+                }}
+              />
+            )}
             <div className="min-w-0">
               {selDoc ? (
                 <Reader

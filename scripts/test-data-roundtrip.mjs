@@ -996,5 +996,41 @@ if (!glPhone.present) fail("glossary phone nav trigger missing");
 if (glSheet < 10) fail("glossary phone sheet is empty");
 await page.setViewportSize({ width: 1280, height: 900 });
 
+// ---- Journal adopts the same SideNav (month index) -------------------------
+await page.setViewportSize({ width: 1440, height: 1000 });
+await page.getByRole("button", { name: /^Journal$/i }).first().click().catch(() => {});
+await page.waitForTimeout(2000);
+const jn = await page.evaluate(() => {
+  const nav = document.querySelector("nav[aria-label='Months']");
+  const items = nav ? [...nav.querySelectorAll("button")] : [];
+  const grid = document.querySelector("main .lg\\:grid");
+  const n = nav?.getBoundingClientRect(), g = grid?.getBoundingClientRect();
+  return {
+    present: !!nav,
+    count: items.length,
+    left: n && g ? Math.round(n.left - g.left) : null,
+    labelled: items.slice(0, 2).map((b) => b.textContent.trim()),
+    current: items.filter((b) => b.getAttribute("aria-current") === "true").length,
+  };
+});
+console.log("journal nav:", JSON.stringify(jn));
+if (!jn.present) fail("journal is not using the shared SideNav");
+if (jn.count < 3) fail(`journal month index lists ${jn.count} months`);
+if (jn.left === null || jn.left > 40) fail("journal nav is not the left grid column");
+if (!/^[A-Z][a-z]+ \d{4}$/.test(jn.labelled[0] || "")) fail(`journal months not labelled as month+year: ${jn.labelled[0]}`);
+if (jn.current !== 1) fail("journal nav marks no current month");
+
+// picking a month pages the feed to that month
+const jnPageBefore = await page.evaluate(() => document.querySelector("main")?.innerText.match(/page (\d+) of/)?.[1]);
+await page.evaluate(() => {
+  const nav = document.querySelector("nav[aria-label='Months']");
+  const items = [...nav.querySelectorAll("button")];
+  items[items.length - 1]?.click();
+});
+await page.waitForTimeout(900);
+const jnPageAfter = await page.evaluate(() => document.querySelector("main")?.innerText.match(/page (\d+) of/)?.[1]);
+console.log("journal month jump:", jnPageBefore, "->", jnPageAfter);
+if (jnPageBefore === jnPageAfter) fail("picking a month did not move the feed");
+
 await browser.close();
 console.log(process.exitCode ? "RESULT: FAIL" : "RESULT: PASS");
