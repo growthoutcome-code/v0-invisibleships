@@ -79,5 +79,14 @@
     "effect": "The count series has two gaps. The rate series, which is what the charts use, is complete.",
     "tier": "A",
     "source_id": "cs031"
+  },
+  {
+    "dq_id": "cq10",
+    "geography": "US",
+    "topic": "Two federal arrest series exist, and they disagree",
+    "issue": "The FBI's CIUS/CDE arrest estimates and BJS's 'Arrest in the United States, 1980-2009' series use different estimation weights: the FBI series puts the 1997 peak at 15.28 million, the BJS series at roughly 11.6 million. Both are official. National data gaps exist at 2016 and 2021.",
+    "effect": "Any chart must stay inside ONE series; mixing them manufactures changes that are artefacts of methodology. The arrests chart here uses the FBI series throughout and draws the 2016/2021 gaps as gaps.",
+    "tier": "A",
+    "source_id": "cs108"
   }
 ]

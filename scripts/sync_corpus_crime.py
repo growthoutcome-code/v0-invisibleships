@@ -34,6 +34,7 @@ TABLE_FILES = [
     "crime_transnational.json",
     "crime_intl_drug_deaths.json",
     "crime_intl_missing.json",
+    "crime_accomplishments.json",
 ]
 
 DESCRIPTIONS = {
@@ -43,6 +44,7 @@ DESCRIPTIONS = {
     "crime_transnational.json": "Transnational repression — what it is (FBI definition and tactic list) and how it is measured, if at all",
     "crime_intl_drug_deaths.json": "Drug deaths internationally — five incompatible ways of counting; the definition column is the point",
     "crime_intl_missing.json": "Missing persons internationally — no shared unit exists; each country's figure in its own unit",
+    "crime_accomplishments.json": "Law enforcement accomplishments — agency-attributed claims with corroboration, outcome vs activity marked",
     "crime_indicators.json": "Time-series rows: indicator, year, value, unit, tier, source_id, vintage note",
     "crime_data_quality.json": "Counting, coverage and definitional problems — the spine of this dataset",
     "crime_trends.json": "Sourced trend statements",
@@ -194,6 +196,9 @@ verified against a fetched source. The rate series is complete.
         intl_path = CHARTS / "homicide_international.json"
         if intl_path.exists():
             dst.writestr(PREFIX + "charts/homicide_international.json", intl_path.read_text())
+        ar_path = CHARTS / "arrests_over_time.json"
+        if ar_path.exists():
+            dst.writestr(PREFIX + "charts/arrests_over_time.json", ar_path.read_text())
         dst.writestr(PREFIX + "charts/homicide_us.csv", hom_csv)
 
     shutil.move(str(tmp), str(ZIP))

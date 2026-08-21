@@ -509,6 +509,56 @@ if (!crime.low2025) fail("2025 record-low rate (4.1 per 100,000) missing");
 if (!crime.ncvsGap) fail("NCVS divergence figures missing — that gap is the section's finding");
 if (!crime.crossLink) fail("crime -> timeline cross-link missing");
 
+// Round 2: lane-chart connected legend, arrests chart, accomplishments.
+const r2 = await page.evaluate(() => {
+  const main = document.querySelector("main");
+  const t = main.innerText;
+  const laneFig = [...main.querySelectorAll("figure")].find((f) => /Five kinds of harm/i.test(f.querySelector("figcaption")?.textContent || ""));
+  // the legend is the FIRST list, above the svg; the per-lane summary list
+  // below the plot also contains buttons and must not be counted here
+  const laneLegend = laneFig ? [...(laneFig.querySelector("ul")?.querySelectorAll("button") || [])] : [];
+  const arrestsFig = [...main.querySelectorAll("figure")].find((f) => /machine peaked in 1997/i.test(f.querySelector("figcaption")?.textContent || ""));
+  const heads = [...main.querySelectorAll("h2")].map((h) => h.textContent.trim());
+  return {
+    laneLegendEntries: laneLegend.length,
+    laneLegendPressable: laneLegend.length > 0 && laneLegend.every((b) => b.hasAttribute("aria-pressed")),
+    // the corner cluster must be gone: no lane-name text nodes inside the lane SVG
+    noCornerLabels: laneFig ? ![...laneFig.querySelectorAll("svg text")].some((x) => /Missing persons|Defamation/.test(x.textContent)) : false,
+    arrestsChart: !!arrestsFig?.querySelector("svg"),
+    arrestsPeak: /15\.28|15,284/.test(t),
+    arrestsFullRecord: /Show the full record \(1980/.test(t),
+    accomplishments: heads.some((h) => /Law enforcement accomplishments/i.test(h)),
+    accRescue: /180 trafficking\s+victims|rescued 180/.test(t.replace(/\n/g, " ")),
+    accKinds: /OUTCOME/i.test(t) && /ACTIVITY/i.test(t) && /COMMITMENT/i.test(t),
+    accDiscipline: /start of a process, not the end/.test(t),
+  };
+});
+console.log("round2:", JSON.stringify(r2));
+if (r2.laneLegendEntries !== 5) fail(`lane legend entries: ${r2.laneLegendEntries}, expected 5`);
+if (!r2.laneLegendPressable) fail("lane legend entries are not interactive");
+if (!r2.noCornerLabels) fail("lane chart still paints corner end-labels");
+if (!r2.arrestsChart) fail("arrests chart missing");
+if (!r2.arrestsPeak) fail("1997 arrests peak figure missing");
+if (!r2.arrestsFullRecord) fail("arrests full-record toggle missing");
+if (!r2.accomplishments) fail("accomplishments section missing");
+if (!r2.accRescue) fail("World Cup rescue outcome missing from accomplishments");
+if (!r2.accKinds) fail("outcome/activity/commitment kinds not marked");
+if (!r2.accDiscipline) fail("accomplishments discipline line missing");
+
+// lane legend hover dims the other lanes (real pointer)
+await page.locator("main figure ul button", { hasText: "Homicide" }).first().hover();
+await page.waitForTimeout(300);
+const laneDim = await page.evaluate(() => {
+  const fig = [...document.querySelectorAll("main figure")].find((f) => /Five kinds of harm/i.test(f.querySelector("figcaption")?.textContent || ""));
+  const ops = [...fig.querySelectorAll("svg g[style*=cursor] > path[stroke]:not([stroke=transparent])")]
+    .map((x) => +(x.getAttribute("opacity") || 1));
+  return { dimmed: ops.filter((o) => o < 0.3).length, lit: ops.filter((o) => o >= 0.9).length };
+});
+console.log("lane dim:", JSON.stringify(laneDim));
+if (laneDim.dimmed < 3) fail(`lane legend hover dims ${laneDim.dimmed}; expected most non-focused lanes dimmed`);
+if (laneDim.lit < 1) fail("focused lane not lit");
+await page.mouse.move(5, 5);
+
 // International homicide: legend wired to lines, one honest chart, two
 // honest non-charts, and the nc07 missing-persons entry.
 const intl = await page.evaluate(() => {

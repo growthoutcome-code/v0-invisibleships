@@ -1,0 +1,55 @@
+{
+  "title": "Law enforcement accomplishments",
+  "intro": "The record contains real, sourced wins, and this section reports them straight. Each entry is an agency's own account of its work, with the independent corroboration shown where one exists \u2014 and each entry says whether the number counts an outcome (lives, rescues, cases closed) or activity (arrests, seizures).",
+  "rows": [
+    {
+      "what": "The homicide reversal",
+      "kind": "outcome",
+      "claim": "Violent crime down 9.3% in 2025 \u2014 the largest year-to-year decline since FBI estimation began in 1936 \u2014 with murder at 4.1 per 100,000, tied for the lowest rate ever recorded.",
+      "corroboration": "Independently visible in CDC death-certificate data, which registers the same turn.",
+      "tier": "A",
+      "source_id": null
+    },
+    {
+      "what": "The overdose decline",
+      "kind": "outcome",
+      "claim": "Overdose deaths fell 26.2% in 2024 \u2014 the largest one-year drop on record \u2014 and kept falling in 2025. CDC attributes the decline to naloxone distribution, treatment access, shifts in supply and renewed prevention.",
+      "corroboration": "Reported as attributed; the mortality series itself is final vital-statistics data.",
+      "tier": "A",
+      "source_id": null
+    },
+    {
+      "what": "World Cup anti-trafficking operation: 180 people rescued",
+      "kind": "outcome",
+      "claim": "HSI-led operations around the 2026 FIFA World Cup rescued 180 trafficking victims, 30 of them children \u2014 alongside 905 arrests of suspects.",
+      "corroboration": "The rescue figure is the outcome; the arrest figure counts activity, and DHS publishes no breakdown of eventual charges.",
+      "tier": "A",
+      "source_id": "hs_dhs_worldcup"
+    },
+    {
+      "what": "A full year of trafficking enforcement",
+      "kind": "activity",
+      "claim": "HSI initiated 1,686 sex-trafficking and forced-labour investigations in FY2024, leading to 2,545 arrests.",
+      "corroboration": "Agency annual report; arrest and investigation counts, not convictions.",
+      "tier": "A",
+      "source_id": "hs_dhs_ccht_fy24"
+    },
+    {
+      "what": "Voices Not Forgotten",
+      "kind": "commitment",
+      "claim": "The FBI put a $25,000 minimum reward on every publicly advertised unsolved homicide, kidnapping and missing-person case in Indian country, with a searchable national case map.",
+      "corroboration": "An institutional commitment to cases this record shows are undercounted \u2014 counted here as a commitment, not yet an outcome.",
+      "tier": "A",
+      "source_id": "hs_fbi_vnf"
+    },
+    {
+      "what": "Homicide clearance recovered",
+      "kind": "outcome",
+      "claim": "The share of homicides cleared returned to 61.4% in 2024, back to the 2019 level after the 52.3% low of 2022.",
+      "corroboration": "Corroborated via the Murder Accountability Project's compilation of FBI data; still roughly four in ten uncleared.",
+      "tier": "B",
+      "source_id": null
+    }
+  ],
+  "discipline": "An accomplishment claim is the agency's account. Where a number counts activity rather than outcomes, the entry says so \u2014 an arrest or a seizure is the start of a process, not the end of one."
+}

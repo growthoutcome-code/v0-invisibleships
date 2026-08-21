@@ -925,5 +925,77 @@
     "evidence_tier": "B",
     "accessed": "2026-08-21",
     "archived_url": null
+  },
+  {
+    "source_id": "cs104",
+    "url": "https://bjs.ojp.gov/content/pub/pdf/cv99.pdf",
+    "publisher": "BJS",
+    "title": "BJS",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs105",
+    "url": "https://bjs.ojp.gov/content/pub/pdf/cv10.pdf",
+    "publisher": "BJS",
+    "title": "BJS",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs106",
+    "url": "https://bjs.ojp.gov/document/cv23.pdf",
+    "publisher": "BJS",
+    "title": "BJS",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs107",
+    "url": "https://www.drugpolicyfacts.org/table/total_arrests",
+    "publisher": "FBI CIUS via DrugPolicyFacts",
+    "title": "FBI CIUS via DrugPolicyFacts",
+    "evidence_tier": "B",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs108",
+    "url": "https://ucr.fbi.gov/crime-in-the-u.s/1997/97sec4.pdf",
+    "publisher": "FBI CIUS 1997 T29",
+    "title": "FBI CIUS 1997 T29",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs109",
+    "url": "https://archives.fbi.gov/archives/news/pressrel/press-releases/fbi-releases-2008-crime-statistics",
+    "publisher": "FBI",
+    "title": "FBI",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs110",
+    "url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/persons-arrested",
+    "publisher": "FBI CIUS 2019",
+    "title": "FBI CIUS 2019",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs111",
+    "url": "https://www.justice.gov/archive/mps/strategic2001-2006/d_arrtot.htm",
+    "publisher": "DOJ archive/FBI UCR",
+    "title": "DOJ archive/FBI UCR",
+    "evidence_tier": "A",
+    "accessed": "2026-08-21",
+    "archived_url": null
   }
 ]

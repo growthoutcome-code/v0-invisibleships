@@ -1,0 +1,100 @@
+{
+  "title": "US arrests: the machine peaked in 1997",
+  "unit": "Estimated arrests per year, millions (FBI; excludes traffic)",
+  "note": "US arrests peaked in 1997 at 15.28 million \u2014 a fact most readers do not know \u2014 and 2024 is 51% below that. Drug arrests peaked separately in 2006 (1.89M) and remain the largest single category. Constant across the whole era: 82\u201384% of all arrests are for lesser, non-index offences. Sparse points are drawn as points, not smoothed into a line the data cannot support; dotted stretches are years that are not Tier A. The sweeping operations in the register above \u2014 the World Cup's 905 arrests against HSI's 2,545 for all of FY2024 \u2014 sit inside these annual millions, which is the scale a headline arrest number should be read against.",
+  "publisher": "FBI CIUS/CDE; Council on Criminal Justice corroborating",
+  "tier": "A",
+  "series": [
+    {
+      "name": "All arrests",
+      "emphasis": true,
+      "basis_short": "FBI estimated arrests, all offences, excluding traffic",
+      "publisher": "FBI (CIUS/CDE series, consistent vintage)",
+      "tier": "A",
+      "points": [
+        {
+          "year": 1980,
+          "value": 10441000,
+          "tier": "B",
+          "note": ""
+        },
+        {
+          "year": 1997,
+          "value": 15284300,
+          "tier": "A",
+          "note": "PEAK"
+        },
+        {
+          "year": 2008,
+          "value": 14005615,
+          "tier": "A",
+          "note": ""
+        },
+        {
+          "year": 2019,
+          "value": 10085207,
+          "tier": "A",
+          "note": ""
+        },
+        {
+          "year": 2024,
+          "value": 7522824,
+          "tier": "A",
+          "note": "51% below 1997 peak"
+        }
+      ],
+      "caveats": [
+        "Selected years, not a continuous annual series \u2014 the FBI's own estimates for the years shown, one consistent series (never mixed with the BJS 1980-2009 series, which uses different weights and yields ~11.6M for 1997).",
+        "2016 and 2021 are known national data gaps and are not shown.",
+        "An arrest is an enforcement action, not a conviction; 82-84% of arrests across this whole period are for lesser (Part II) offences."
+      ]
+    },
+    {
+      "name": "Drug arrests",
+      "emphasis": false,
+      "basis_short": "FBI estimated drug-abuse violation arrests",
+      "publisher": "FBI (CIUS/CDE); DOJ archive for 1980",
+      "tier": "A",
+      "points": [
+        {
+          "year": 1980,
+          "value": 580900,
+          "tier": "A",
+          "note": ""
+        },
+        {
+          "year": 1997,
+          "value": 1583600,
+          "tier": "A",
+          "note": ""
+        },
+        {
+          "year": 2006,
+          "value": 1889810,
+          "tier": "B",
+          "note": "PEAK drug arrests"
+        },
+        {
+          "year": 2024,
+          "value": 822488,
+          "tier": "A",
+          "note": "Still the largest single category"
+        }
+      ],
+      "caveats": [
+        "Peaked in 2006 at 1,889,810; 2024 (822,488) is still the largest single arrest category.",
+        "1980 and 2006-2008 values corroborated via compilations of FBI Table 29 (Tier B where marked)."
+      ]
+    }
+  ],
+  "markers": [
+    {
+      "year": 1997,
+      "label": "All-arrests peak: 15.28M"
+    },
+    {
+      "year": 2006,
+      "label": "Drug-arrests peak: 1.89M"
+    }
+  ]
+}

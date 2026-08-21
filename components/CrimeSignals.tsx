@@ -102,6 +102,11 @@ type Sweep = {
 function LaneChart({ chart, onPick }: { chart: LaneChart; onPick: (l: Lane) => void }) {
   const narrow = useNarrow();
   const [hoverYear, setHoverYear] = useState<number | null>(null);
+  // Connected legend (Sean, 2026-08-21): four of the five lanes converge below
+  // index 130, so end-of-line labels collapsed into a corner cluster. The
+  // legend above the plot is now the key AND the control: hover/focus lights a
+  // lane, tap once highlights (phones), tap again opens the detail modal.
+  const [focus, setFocus] = useState<string | null>(null);
 
   const all = chart.series.flatMap((s) => s.points);
   if (all.length < 2) return null;
@@ -110,7 +115,7 @@ function LaneChart({ chart, onPick }: { chart: LaneChart; onPick: (l: Lane) => v
   const fsLabel = narrow ? 24 : 12;
   const W = 900, H = 380;
   const padL = narrow ? 78 : 54;
-  const padR = narrow ? 24 : 210;
+  const padR = narrow ? 24 : 60;
   const padT = narrow ? 30 : 26;
   const padB = narrow ? 52 : 38;
 
@@ -122,18 +127,6 @@ function LaneChart({ chart, onPick }: { chart: LaneChart; onPick: (l: Lane) => v
   const yTicks = [0, 100, 200, 300, 400].filter((t) => t <= vMax);
   const xTicks = dataWindowTicks(narrow);
 
-  // End labels de-collide by pushing apart to a minimum spacing, bottom-up.
-  const MIN_GAP = narrow ? 26 : 15;
-  let prevY = -Infinity;
-  const ends = chart.series
-    .map((s) => ({ s, last: s.points[s.points.length - 1] }))
-    .sort((a, b) => b.last.value - a.last.value)
-    .reverse()
-    .map((e) => {
-      const y = Math.max(Y(e.last.value), prevY + MIN_GAP);
-      prevY = y;
-      return { ...e, labelY: y };
-    });
 
   return (
     <figure className="m-0 mb-6">
@@ -142,8 +135,31 @@ function LaneChart({ chart, onPick }: { chart: LaneChart; onPick: (l: Lane) => v
       </figcaption>
       <p className="text-muted text-[13px] m-0 mb-3">{chart.unit}</p>
 
+      <ul className="list-none p-0 m-0 mb-3 flex flex-wrap gap-x-4 gap-y-1"
+        onMouseLeave={() => setFocus(null)}>
+        {chart.series.map((s) => (
+          <li key={s.name}>
+            <button type="button"
+              onMouseEnter={() => setFocus(s.name)}
+              onFocus={() => setFocus(s.name)}
+              onClick={() => { if (focus === s.name) onPick(s); else setFocus(s.name); }}
+              aria-pressed={focus === s.name}
+              className={`flex items-center gap-2 text-[15px] py-1 px-1 border-b-2 transition-colors ${
+                focus === s.name ? "border-foreground text-foreground"
+                                 : "border-transparent text-foreground/70 hover:text-foreground"
+              }`}>
+              <svg width="22" height="8" aria-hidden="true">
+                <line x1="0" y1="4" x2="22" y2="4" stroke="currentColor"
+                  strokeWidth={s.emphasis ? 3 : 1.5} />
+              </svg>
+              {s.name}
+            </button>
+          </li>
+        ))}
+      </ul>
+
       <svg viewBox={`0 0 ${W} ${H}`} width="100%" role="img"
-        aria-label={`${chart.title}. ${chart.unit}.`}
+        aria-label={`${chart.title}. ${chart.unit}. Use the legend buttons to highlight a lane and open its detail.`}
         onMouseLeave={() => setHoverYear(null)}
         style={{ fontFamily: "inherit", overflow: "visible" }}>
         {yTicks.map((t) => (
@@ -178,42 +194,38 @@ function LaneChart({ chart, onPick }: { chart: LaneChart; onPick: (l: Lane) => v
               if (j < s.points.length - 1) weak.push(`M${pt(p)}L${pt(s.points[j + 1])}`);
             }
           });
-          const sw = s.emphasis ? (narrow ? 3.4 : 2.3) : (narrow ? 2.4 : 1.4);
+          const dim = focus !== null && focus !== s.name;
+          const base = s.emphasis ? (narrow ? 3.4 : 2.3) : (narrow ? 2.4 : 1.4);
+          const sw = focus === s.name ? base + 1.2 : base;
           // A lane sampled with gaps shows its points, so a straight run between
           // two distant years cannot read as data we do not have.
           const gappy = s.points.some((p, j) => j > 0 && p.year - s.points[j - 1].year > 1);
           return (
-            <g key={i} onClick={() => onPick(s)} style={{ cursor: "pointer" }}>
+            <g key={i} onClick={() => onPick(s)} onMouseEnter={() => setFocus(s.name)}
+              style={{ cursor: "pointer", transition: "opacity 120ms" }}>
               <path d={d} fill="none" stroke="rgb(var(--foreground))" strokeWidth={sw}
-                opacity={s.emphasis ? 1 : 0.6} />
+                opacity={dim ? 0.18 : s.emphasis || focus === s.name ? 1 : 0.6} />
               <path d={d} fill="none" stroke="transparent" strokeWidth={narrow ? 26 : 16} />
               {weak.map((w, k) => (
                 <g key={k}>
                   <path d={w} fill="none" stroke="rgb(var(--background))" strokeWidth={sw + 1.6} />
                   <path d={w} fill="none" stroke="rgb(var(--foreground))" strokeWidth={sw}
                     strokeDasharray={narrow ? "2 5" : "1.5 4"} strokeLinecap="round"
-                    opacity={s.emphasis ? 1 : 0.6} />
+                    opacity={dim ? 0.18 : s.emphasis || focus === s.name ? 1 : 0.6} />
                 </g>
               ))}
               {gappy && s.points.map((p) => (
                 <circle key={p.year} cx={X(p.year)} cy={Y(p.value)} r={narrow ? 4 : 2.6}
                   fill="rgb(var(--background))" stroke="rgb(var(--foreground))"
-                  strokeWidth={narrow ? 2 : 1.3} opacity={0.85} />
+                  strokeWidth={narrow ? 2 : 1.3} opacity={dim ? 0.18 : 0.85} />
               ))}
               {/* every lane starts at 100 — mark it so the base year is visible */}
               <circle cx={X(s.points[0].year)} cy={Y(100)} r={narrow ? 4.5 : 3}
-                fill="rgb(var(--foreground))" opacity={s.emphasis ? 1 : 0.6} />
+                fill="rgb(var(--foreground))" opacity={dim ? 0.18 : s.emphasis ? 1 : 0.6} />
             </g>
           );
         })}
 
-        {!narrow && ends.map((e, i) => (
-          <text key={i} x={W - padR + 8} y={e.labelY + 4} fontSize={fsLabel}
-            fill="rgb(var(--foreground))" fontWeight={e.s.emphasis ? 700 : 500}
-            opacity={e.s.emphasis ? 1 : 0.75}>
-            {e.s.name} {Math.round(e.last.value)}
-          </text>
-        ))}
 
         {Array.from({ length: x1 - x0 + 1 }, (_, i) => x0 + i).map((y) => (
           <rect key={y} x={X(y) - (W - padL - padR) / (x1 - x0) / 2} y={padT}
@@ -224,9 +236,15 @@ function LaneChart({ chart, onPick }: { chart: LaneChart; onPick: (l: Lane) => v
           <g pointerEvents="none">
             <line x1={X(hoverYear)} y1={padT} x2={X(hoverYear)} y2={H - padB}
               stroke="rgb(var(--muted))" strokeDasharray="3 3" />
-            <text x={Math.min(Math.max(X(hoverYear), padL + 40), W - padR - 20)} y={padT - 8}
+            <text x={Math.min(Math.max(X(hoverYear), padL + 90), W - padR - 90)} y={padT - 8}
               fontSize={fsLabel} fill="rgb(var(--foreground))" textAnchor="middle" fontWeight="600">
-              {hoverYear}
+              {(() => {
+                const f = chart.series.find((s) => s.name === focus);
+                const p = f?.points.find((q) => q.year === hoverYear);
+                return f && p
+                  ? `${f.name} \u00b7 ${hoverYear} \u00b7 index ${p.value} \u00b7 ${p.raw.toLocaleString()}`
+                  : `${hoverYear} \u2014 hover the legend to single out a lane`;
+              })()}
             </text>
             {chart.series.map((s, i) => {
               const p = s.points.find((q) => q.year === hoverYear);
@@ -519,6 +537,10 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
   const sweeps = useTable<Sweep>("/data/crime/tables/crime_sweeps.json");
   const tr = useDoc<TR>("/data/crime/tables/crime_transnational.json");
   const intl = useDoc<IntlChartDoc>("/data/crime/charts/homicide_international.json");
+  const arrests = useDoc<Chart>("/data/crime/charts/arrests_over_time.json");
+  const accomplishments = useDoc<{ title: string; intro: string; discipline: string;
+    rows: { what: string; kind: string; claim: string; corroboration: string; tier: string; source_id: string | null }[];
+  }>("/data/crime/tables/crime_accomplishments.json");
   const intlDrugs = useDoc<{ title: string; why_no_chart: string; rows: any[] }>("/data/crime/tables/crime_intl_drug_deaths.json");
   const intlMissing = useDoc<{ title: string; why_no_chart: string; rows: any[] }>("/data/crime/tables/crime_intl_missing.json");
   const [intlPicked, setIntlPicked] = useState<IntlSeries | null>(null);
@@ -661,6 +683,41 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
               </li>
             ))}
           </ul>
+        </section>
+      )}
+
+      {/* ---- arrests over time (Sean, 2026-08-21): the 1997 peak ---- */}
+      <section className="mb-14">
+        {arrests === null ? <SkeletonChart /> : (
+          <>
+            <TwoSeriesChart chart={arrests} onPick={setPicked} />
+            <p className="body-copy text-foreground/90 measure">{arrests.note}</p>
+          </>
+        )}
+      </section>
+
+      {/* ---- law enforcement accomplishments (Sean, 2026-08-21) ---- */}
+      {accomplishments && (
+        <section className="mb-14">
+          <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
+            {accomplishments.title}
+          </h2>
+          <p className="body-copy text-foreground/90 measure mb-6">{accomplishments.intro}</p>
+          <ul className="list-none p-0 m-0">
+            {accomplishments.rows.map((r, i) => (
+              <li key={i} className="py-4 border-b border-edge/60">
+                <div className="flex flex-wrap items-baseline gap-3">
+                  <TierChip t={r.tier} />
+                  <span className="text-foreground text-[17px] font-semibold">{r.what}</span>
+                  <span className="text-muted text-[13px] uppercase tracking-wide">{r.kind}</span>
+                  <span className="ml-auto"><SourceLink id={r.source_id} sources={srcs} /></span>
+                </div>
+                <p className="body-copy text-foreground/85 measure mt-2 mb-0 text-[17px]">{r.claim}</p>
+                <p className="text-muted text-[14px] measure mt-1 mb-0">{r.corroboration}</p>
+              </li>
+            ))}
+          </ul>
+          <p className="text-muted text-[15px] measure mt-4">{accomplishments.discipline}</p>
         </section>
       )}
 
