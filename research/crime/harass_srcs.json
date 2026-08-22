@@ -1,0 +1,324 @@
+[
+ {
+  "url": "https://api.ojp.gov/bjsdataset/v1/x3sz-eb6y.json",
+  "publisher": "Bureau of Justice Statistics",
+  "title": "NIBRS National Estimates API \u2014 Violent Offenses dataset (x3sz-eb6y)",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://api.ojp.gov/bjsdataset/v1/cqmi-ycfq.json",
+  "publisher": "Bureau of Justice Statistics",
+  "title": "NIBRS National Estimates Archive \u2014 Violent Offenses (cqmi-ycfq), original vintages",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://bjs.ojp.gov/national-incident-based-reporting-system-nibrs-national-estimates-api",
+  "publisher": "Bureau of Justice Statistics",
+  "title": "NIBRS National Estimates API documentation",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://bjs.ojp.gov/national-incident-based-reporting-system-nibrs",
+  "publisher": "Bureau of Justice Statistics",
+  "title": "National Incident-Based Reporting System (NIBRS) landing page",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://le.fbi.gov/file-repository/nibrs-user-manual-2025-0-062625.pdf",
+  "publisher": "FBI CJIS",
+  "title": "NIBRS User Manual, version 2025.0",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://ucr.fbi.gov/nibrs/nibrs_dcguide.pdf",
+  "publisher": "FBI UCR Program",
+  "title": "NIBRS Data Collection Guidelines",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://ucr.fbi.gov/nibrs/2015/resource-pages/nibrs-2015_summary_final-1.pdf",
+  "publisher": "FBI UCR Program",
+  "title": "NIBRS 2015 Summary",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://ucr.fbi.gov/nibrs/2016/resource-pages/nibrs-2016_summary.pdf",
+  "publisher": "FBI UCR Program",
+  "title": "NIBRS 2016 Summary",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://ucr.fbi.gov/nibrs/2017/resource-pages/nibrs-2017_summary-11-6-2018.pdf",
+  "publisher": "FBI UCR Program",
+  "title": "NIBRS 2017 Summary",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://ucr.fbi.gov/nibrs/2018/resource-pages/countdown.pdf",
+  "publisher": "FBI UCR Program",
+  "title": "NIBRS 2018 \u2014 Countdown to 2021 resource page",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://ucr.fbi.gov/nibrs/2019/resource-pages/summary.pdf",
+  "publisher": "FBI UCR Program",
+  "title": "NIBRS 2019 Summary",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://www.fbi.gov/news/press-releases/fbi-releases-2022-crime-in-the-nation-statistics",
+  "publisher": "FBI",
+  "title": "FBI Releases 2022 Crime in the Nation Statistics",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://cde.ucr.cjis.gov/LATEST/resources/reports/UCR%20Summary%20of%20Reported%20Crimes%20in%20the%20Nation%202024.pdf",
+  "publisher": "FBI UCR Program",
+  "title": "UCR Summary of Reported Crimes in the Nation, 2024",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://cde.ucr.cjis.gov/LATEST/resources/reports/UCR_Summary_of_Reported_Crimes_in_the_Nation_2025.pdf",
+  "publisher": "FBI UCR Program",
+  "title": "UCR Summary of Reported Crimes in the Nation, 2025",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://www.justice.gov/ovw/docs/bjs-stalking-rpt.pdf",
+  "publisher": "Bureau of Justice Statistics",
+  "title": "Stalking Victimization in the United States (2006 SVS), NCJ 224527, January 2009",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://bjs.ojp.gov/content/pub/pdf/sv16.pdf",
+  "publisher": "Bureau of Justice Statistics",
+  "title": "Stalking Victimization, 2016, NCJ 253526, April 2021",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://bjs.ojp.gov/content/pub/pdf/sv19.pdf",
+  "publisher": "Bureau of Justice Statistics",
+  "title": "Stalking Victimization, 2019",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://bjs.ojp.gov/library/publications/stalking-victimization-2019",
+  "publisher": "Bureau of Justice Statistics",
+  "title": "Stalking Victimization, 2019 \u2014 publication page",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://www.pewresearch.org/internet/wp-content/uploads/sites/9/2021/01/PI_2021.01.13_Online-Harassment_FINAL-1.pdf",
+  "publisher": "Pew Research Center",
+  "title": "The State of Online Harassment (full report PDF), January 13, 2021",
+  "evidence_tier": "B",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://www.pewresearch.org/internet/2021/01/13/the-state-of-online-harassment/",
+  "publisher": "Pew Research Center",
+  "title": "The State of Online Harassment",
+  "evidence_tier": "B",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://www.fbi.gov/file-repository/2015-ncic-missing-person-and-unidentified-person-statistics.pdf",
+  "publisher": "FBI CJIS",
+  "title": "2015 NCIC Missing Person and Unidentified Person Statistics",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://www.fbi.gov/file-repository/reports-and-publications/2016-ncic-missing-person-and-unidentified-person-statistics.pdf",
+  "publisher": "FBI CJIS",
+  "title": "2016 NCIC Missing Person and Unidentified Person Statistics",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://www.fbi.gov/file-repository/reports-and-publications/2017-ncic-missing-person-and-unidentified-person-statistics.pdf",
+  "publisher": "FBI CJIS",
+  "title": "2017 NCIC Missing Person and Unidentified Person Statistics",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://www.fbi.gov/file-repository/reports-and-publications/2018-ncic-missing-person-and-unidentified-person-statistics.pdf",
+  "publisher": "FBI CJIS",
+  "title": "2018 NCIC Missing Person and Unidentified Person Statistics",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://www.fbi.gov/file-repository/reports-and-publications/2019-ncic-missing-person-and-unidentified-person-statistics.pdf",
+  "publisher": "FBI CJIS",
+  "title": "2019 NCIC Missing Person and Unidentified Person Statistics",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://www.fbi.gov/file-repository/cjis/2020-ncic-missing-person-and-unidentified-person-statistics.pdf",
+  "publisher": "FBI CJIS",
+  "title": "2020 NCIC Missing Person and Unidentified Person Statistics",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://www.fbi.gov/file-repository/cjis/2021-ncic-missing-person-and-unidentified-person-statistics.pdf/view",
+  "publisher": "FBI CJIS",
+  "title": "2021 NCIC Missing Person and Unidentified Person Statistics \u2014 UNREADABLE (.docx served as .pdf)",
+  "evidence_tier": "C",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://www.fbi.gov/file-repository/cjis/2022-ncic-missing-person-and-unidentified-person-statistics.pdf",
+  "publisher": "FBI CJIS",
+  "title": "2022 NCIC Missing Person and Unidentified Person Statistics",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://le.fbi.gov/file-repository/2023-ncic-missing-person-and-unidentified-person-statistics.pdf",
+  "publisher": "FBI CJIS",
+  "title": "2023 NCIC Missing Person and Unidentified Person Statistics",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://www.fbi.gov/file-repository/cjis/2024-ncic-missing-and-unidentified-person-statistics.pdf",
+  "publisher": "FBI CJIS",
+  "title": "2024 NCIC Missing and Unidentified Person Statistics",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://www.fbi.gov/file-repository/2025-ncic-missing-person-and-unidentified-person-statistics.pdf",
+  "publisher": "FBI CJIS",
+  "title": "2025 NCIC Missing Person and Unidentified Person Statistics",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://www.justice.gov/otj/page/file/1349421/dl",
+  "publisher": "U.S. Department of Justice, Office of Tribal Justice",
+  "title": "Fact Sheet \u2014 How to Enter Missing Person Records into NCIC",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://www.ojp.gov/pdffiles1/nij/310356.pdf",
+  "publisher": "National Institute of Justice",
+  "title": "NamUs Fiscal Year 2024 Annual Report",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://namus.nij.ojp.gov/sites/g/files/xyckuh336/files/media/document/namus-bi-annual-monthly-case-report-january-2025.pdf",
+  "publisher": "NamUs / NIJ",
+  "title": "NamUs Bi-Annual Report \u2014 January 2025",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://www.uscourts.gov/sites/default/files/document/jb_c2a_0930.2025.pdf",
+  "publisher": "Administrative Office of the U.S. Courts",
+  "title": "Table C-2A \u2014 U.S. District Courts, Civil Cases Commenced by Nature of Suit, FY2021\u2013FY2025",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://www.uscourts.gov/sites/default/files/2025-01/jb_c2a_0930.2024.pdf",
+  "publisher": "Administrative Office of the U.S. Courts",
+  "title": "Table C-2A, FY2020\u2013FY2024",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://www.uscourts.gov/sites/default/files/data_tables/jb_c2a_0930.2019.pdf",
+  "publisher": "Administrative Office of the U.S. Courts",
+  "title": "Table C-2A, FY2015\u2013FY2019",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://www.uscourts.gov/sites/default/files/data_tables/C02ASep15.pdf",
+  "publisher": "Administrative Office of the U.S. Courts",
+  "title": "Table C-2A, FY2011\u2013FY2015",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://www.uscourts.gov/sites/default/files/statistics_import_dir/C02ASep08.pdf",
+  "publisher": "Administrative Office of the U.S. Courts",
+  "title": "Table C-2A, FY2004\u2013FY2008",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://www.uscourts.gov/sites/default/files/document/nos_code_descriptions.pdf",
+  "publisher": "Administrative Office of the U.S. Courts",
+  "title": "Civil Nature of Suit Code Descriptions (JS-44)",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://www.ncsc.org/sites/default/files/media/document/State-Court-Guide-to-Statistical-Reporting.pdf",
+  "publisher": "National Center for State Courts",
+  "title": "State Court Guide to Statistical Reporting (March 2026)",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://www.ncsc.org/resources-courts/data",
+  "publisher": "National Center for State Courts",
+  "title": "Court Statistics Project \u2014 data products",
+  "evidence_tier": "B",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://uwm.edu/journalism-advertising-media-studies/wp-content/uploads/sites/213/2016/04/Rethinking-Criminal-Libel.pdf",
+  "publisher": "Communication Law and Policy 14(3), 2009 (David Pritchard)",
+  "title": "Rethinking Criminal Libel: An Empirical Study",
+  "evidence_tier": "A",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://medialaw.org/chapter-3-the-empirical-reality-ofcontemporary-libel-litigation/",
+  "publisher": "Media Law Resource Center",
+  "title": "Chapter 3: The Empirical Reality of Contemporary Libel Litigation",
+  "evidence_tier": "B",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://www.ifs.org/anti-slapp-report/",
+  "publisher": "Institute for Free Speech",
+  "title": "Anti-SLAPP Statutes: 2025 Report Card",
+  "evidence_tier": "B",
+  "accessed_date": "2026-08-21"
+ },
+ {
+  "url": "https://www.rcfp.org/introduction-anti-slapp-guide/",
+  "publisher": "Reporters Committee for Freedom of the Press",
+  "title": "Anti-SLAPP Laws \u2014 Introduction",
+  "evidence_tier": "B",
+  "accessed_date": "2026-08-21"
+ }
+]

@@ -1,0 +1,1962 @@
+[
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1960,
+  "value": 9110,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": "BJS Homicide Trends in the US, UCR-based series. Overlap years 1991-2000 match FBI CIUS exactly, validating the extraction."
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1960,
+  "value": 5.1,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": "Same source as count."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1961,
+  "value": 8740,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1961,
+  "value": 4.8,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1962,
+  "value": 8530,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1962,
+  "value": 4.6,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1963,
+  "value": 8640,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1963,
+  "value": 4.6,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1964,
+  "value": 9360,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1964,
+  "value": 4.9,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1965,
+  "value": 9960,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1965,
+  "value": 5.1,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1966,
+  "value": 11040,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1966,
+  "value": 5.6,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1967,
+  "value": 12240,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1967,
+  "value": 6.2,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1968,
+  "value": 13800,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1968,
+  "value": 6.9,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1969,
+  "value": 14760,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1969,
+  "value": 7.3,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1970,
+  "value": 16000,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1970,
+  "value": 7.9,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1971,
+  "value": 17780,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1971,
+  "value": 8.6,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1972,
+  "value": 18670,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1972,
+  "value": 9.0,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1973,
+  "value": 19640,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1973,
+  "value": 9.4,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1974,
+  "value": 20710,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1974,
+  "value": 9.8,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1975,
+  "value": 20510,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1975,
+  "value": 9.6,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1976,
+  "value": 18780,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1976,
+  "value": 8.8,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1977,
+  "value": 19120,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1977,
+  "value": 8.8,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1978,
+  "value": 19560,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1978,
+  "value": 9.0,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1979,
+  "value": 21460,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1979,
+  "value": 9.7,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1980,
+  "value": 23040,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": "Peak count of the 1980 cycle."
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1980,
+  "value": 10.2,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": "Highest rate in the entire fetched UCR series."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1981,
+  "value": 22520,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1981,
+  "value": 9.8,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1982,
+  "value": 21010,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1982,
+  "value": 9.1,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1983,
+  "value": 19308,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1983,
+  "value": 8.3,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1984,
+  "value": 18692,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1984,
+  "value": 7.9,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1985,
+  "value": 18976,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1985,
+  "value": 7.9,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1986,
+  "value": 20613,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1986,
+  "value": 8.6,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1987,
+  "value": 20096,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1987,
+  "value": 8.3,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1988,
+  "value": 20675,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1988,
+  "value": 8.4,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1989,
+  "value": 21500,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1989,
+  "value": 8.7,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1990,
+  "value": 23438,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1990,
+  "value": 9.4,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/content/pub/pdf/htius.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1991,
+  "value": 24703,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (UCR, Crime in the United States 2010, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl01.xls",
+  "note": "HIGHEST COUNT in the fetched series. Independently confirmed by BJS htius.pdf."
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1991,
+  "value": 9.8,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (UCR, Crime in the United States 2010, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl01.xls",
+  "note": "Confirmed by BJS htius.pdf."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1992,
+  "value": 23760,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2010, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl01.xls",
+  "note": "Confirmed by BJS."
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1992,
+  "value": 9.3,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2010, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl01.xls",
+  "note": "Confirmed by BJS."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1993,
+  "value": 24526,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2010, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl01.xls",
+  "note": "Confirmed by BJS."
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1993,
+  "value": 9.5,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2010, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl01.xls",
+  "note": "Confirmed by BJS."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1994,
+  "value": 23326,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2010, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl01.xls",
+  "note": "Confirmed by BJS."
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1994,
+  "value": 9.0,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2010, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl01.xls",
+  "note": "Confirmed by BJS."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1995,
+  "value": 21606,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2010, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl01.xls",
+  "note": "Confirmed by BJS."
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1995,
+  "value": 8.2,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2010, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl01.xls",
+  "note": "Confirmed by BJS."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1996,
+  "value": 19645,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2010, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl01.xls",
+  "note": "Confirmed by BJS."
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1996,
+  "value": 7.4,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2010, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl01.xls",
+  "note": "Confirmed by BJS."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1997,
+  "value": 18208,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2010, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl01.xls",
+  "note": "Confirmed by BJS."
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1997,
+  "value": 6.8,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2010, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl01.xls",
+  "note": "Confirmed by BJS."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1998,
+  "value": 16974,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2010, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl01.xls",
+  "note": "Confirmed by BJS and by CIUS 1999 (99sec2.pdf)."
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1998,
+  "value": 6.3,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2010, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl01.xls",
+  "note": "Confirmed by CIUS 1999."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 1999,
+  "value": 15522,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2010, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl01.xls",
+  "note": "CIUS 1999 as first published gave 15,533; revised to 15,522. VINTAGE CONFLICT."
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 1999,
+  "value": 5.7,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2010, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl01.xls",
+  "note": "Confirmed by CIUS 1999."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 2000,
+  "value": 15586,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "Confirmed by CIUS 2010 and BJS."
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 2000,
+  "value": 5.5,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "Confirmed by CIUS 2010 and BJS."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 2001,
+  "value": 16037,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "UCR Table 1 excludes the 2,823 deaths of 9/11 from the murder count; the FBI publishes those separately. Verify the footnote before broadcasting this figure."
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 2001,
+  "value": 5.6,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "See 9/11 footnote caveat above."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 2002,
+  "value": 16229,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "Confirmed by CIUS 2010 and BJS."
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 2002,
+  "value": 5.6,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 2003,
+  "value": 16528,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "BJS htius lists 16,582 for 2003 (earlier vintage). VINTAGE CONFLICT."
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 2003,
+  "value": 5.7,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 2004,
+  "value": 16148,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "BJS htius lists 16,137. VINTAGE CONFLICT."
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 2004,
+  "value": 5.5,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 2005,
+  "value": 16740,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "BJS htius lists 16,692. VINTAGE CONFLICT."
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 2005,
+  "value": 5.6,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "FBI CDE 2024 summary shows 5.9 for 2005 in its 20-year trend chart. VINTAGE CONFLICT."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 2006,
+  "value": 17309,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "Confirmed by CIUS 2010."
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 2006,
+  "value": 5.8,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "FBI CDE 2025 summary Figure 1 shows 5.7 for 2006. VINTAGE CONFLICT."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 2007,
+  "value": 17128,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "Confirmed by CIUS 2010."
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 2007,
+  "value": 5.7,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "Confirmed by CIUS 2010 and CDE 2025 Figure 1."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 2008,
+  "value": 16465,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "Confirmed by CIUS 2010."
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 2008,
+  "value": 5.4,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "Confirmed by CIUS 2010 and CDE 2025 Figure 1."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 2009,
+  "value": 15399,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "Confirmed by CIUS 2010."
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 2009,
+  "value": 5.0,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "Confirmed by CIUS 2010 and CDE 2025 Figure 1."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 2010,
+  "value": 14722,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "CIUS 2010 as first published gave 14,748. VINTAGE CONFLICT - a clean example for the documentary."
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 2010,
+  "value": 4.8,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "Confirmed by CIUS 2010 and CDE 2025 Figure 1."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 2011,
+  "value": 14661,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 2011,
+  "value": 4.7,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "Confirmed by CDE 2025 Figure 1."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 2012,
+  "value": 14856,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 2012,
+  "value": 4.7,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "CDE 2025 Figure 1 shows 4.8. VINTAGE CONFLICT."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 2013,
+  "value": 14319,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 2013,
+  "value": 4.5,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "Confirmed by CDE 2025 Figure 1."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 2014,
+  "value": 14164,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "Lowest count in the modern series."
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 2014,
+  "value": 4.4,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "Confirmed by CDE 2024 summary (20-year low) and CDE 2025 Figure 1."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 2015,
+  "value": 15883,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 2015,
+  "value": 4.9,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "Confirmed by CDE 2025 Figure 1."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 2016,
+  "value": 17413,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 2016,
+  "value": 5.4,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "Confirmed by CDE 2025 Figure 1."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 2017,
+  "value": 17294,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 2017,
+  "value": 5.3,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "Confirmed by CDE 2025 Figure 1."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 2018,
+  "value": 16374,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": ""
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 2018,
+  "value": 5.0,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "Confirmed by CDE 2025 Figure 1."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 2019,
+  "value": 16425,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "AS FIRST PUBLISHED. Revised to 16,669 in CIUS 2020 - which is the base the FBI's 29.4% figure uses. Do not use 16,425 with the 29.4%."
+ },
+ {
+  "indicator_id": "fbi_murder_count_revised",
+  "year": 2019,
+  "value": 16669,
+  "unit": "offenses",
+  "tier": "B",
+  "publisher": "Pew Research Center, citing FBI CIUS 2020",
+  "source_url": "https://www.pewresearch.org/short-reads/2021/10/27/what-we-know-about-the-increase-in-u-s-murders-in-2020/",
+  "note": "REVISED 2019 figure. Could not fetch FBI CIUS 2020 Table 1 directly (CDE is a JS app; FBI API rate-limited). Tier B pending direct FBI confirmation. 21570/16669 = 1.294, consistent with the FBI's stated 29.4%."
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 2019,
+  "value": 5.0,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (UCR, CIUS 2019, Table 1)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1",
+  "note": "Confirmed by CDE 2025 Figure 1 (also 5.0)."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 2020,
+  "value": 21570,
+  "unit": "offenses",
+  "tier": "B",
+  "publisher": "Pew Research Center, citing FBI CIUS 2020",
+  "source_url": "https://www.pewresearch.org/short-reads/2021/10/27/what-we-know-about-the-increase-in-u-s-murders-in-2020/",
+  "note": "SRS/traditional-estimation vintage. Tier B: could not fetch the FBI table directly. Note the FBI's own NIBRS-based estimate for the same year is 22,000 - see fbi_murder_count_nibrs."
+ },
+ {
+  "indicator_id": "fbi_murder_count_nibrs",
+  "year": 2020,
+  "value": 22000,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI",
+  "source_url": "https://www.fbi.gov/news/press-releases/fbi-releases-2021-crime-in-the-nation-statistics",
+  "note": "FBI's NIBRS-based estimate for 2020, published Oct 2022. Differs from the 21,570 SRS estimate for the SAME YEAR by ~430. Two official FBI numbers for one year."
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 2020,
+  "value": 6.6,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (Crime Data Explorer, UCR Summary of Reported Crimes in the Nation, 2025)",
+  "source_url": "https://cde.ucr.cjis.gov/LATEST/resources/reports/UCR_Summary_of_Reported_Crimes_in_the_Nation_2025.pdf",
+  "note": "CURRENT vintage; stated in report text ('2020 and 2022 peaked at 6.6'). The FBI's 2024 summary gave 6.7 for 2020, and CIUS 2020 as first published gave 6.5. THREE OFFICIAL VALUES FOR ONE YEAR."
+ },
+ {
+  "indicator_id": "fbi_murder_count_nibrs",
+  "year": 2021,
+  "value": 22900,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI",
+  "source_url": "https://www.fbi.gov/news/press-releases/fbi-releases-2021-crime-in-the-nation-statistics",
+  "note": "FBI: 'the estimated number of murders increased 4.3% (from 22,000 in 2020 to 22,900 in 2021).' FBI adds this trend is 'not considered statistically significant by NIBRS estimation methods.'"
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 2021,
+  "value": 6.5,
+  "unit": "per 100,000",
+  "tier": "B",
+  "publisher": "FBI (Crime Data Explorer, UCR Summary 2025, Figure 1)",
+  "source_url": "https://cde.ucr.cjis.gov/LATEST/resources/reports/UCR_Summary_of_Reported_Crimes_in_the_Nation_2025.pdf",
+  "note": "Tier B: read off Figure 1 chart, not confirmed in report text or a second source. Also the weakest data year - see nibrs_* rows."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 2022,
+  "value": null,
+  "unit": "offenses",
+  "tier": "C",
+  "publisher": "FBI",
+  "source_url": "https://www.fbi.gov/news/press-releases/fbi-releases-2022-crime-in-the-nation-statistics",
+  "note": "UNVERIFIED. FBI's 2022 press release gives only the percent change (-6.1%), no count. The CDE 2022 summary PDF 404s. Do not fill this in."
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 2022,
+  "value": 6.6,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (Crime Data Explorer, UCR Summary 2025)",
+  "source_url": "https://cde.ucr.cjis.gov/LATEST/resources/reports/UCR_Summary_of_Reported_Crimes_in_the_Nation_2025.pdf",
+  "note": "Stated in report text: '2020 and 2022 peaked at 6.6 offenses per 100,000 inhabitants.'"
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 2023,
+  "value": null,
+  "unit": "offenses",
+  "tier": "C",
+  "publisher": "FBI",
+  "source_url": "https://www.fbi.gov/news/press-releases/fbi-releases-2023-crime-in-the-nation-statistics",
+  "note": "UNVERIFIED. FBI 2023 press release returned HTTP 503 on three attempts; CDE 2023 summary PDF 404s. Derivable from 16,935 / (1-0.149) = ~19,900 but I have NOT verified that against a source."
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 2023,
+  "value": 6.0,
+  "unit": "per 100,000",
+  "tier": "B",
+  "publisher": "FBI (Crime Data Explorer, UCR Summary 2025, Figure 1)",
+  "source_url": "https://cde.ucr.cjis.gov/LATEST/resources/reports/UCR_Summary_of_Reported_Crimes_in_the_Nation_2025.pdf",
+  "note": "Tier B: chart read. Corroborated indirectly - CDE Quick Stats says the 2024 rate of 5.0 was 'down 15.8%' from 2023, implying ~5.94. Note Jeff Asher reported 5.7 for 2023 as first published. VINTAGE CONFLICT."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 2024,
+  "value": 16935,
+  "unit": "offenses",
+  "tier": "A",
+  "publisher": "FBI (Crime Data Explorer, Reported Crimes in the Nation Quick Stats)",
+  "source_url": "https://cde.ucr.cjis.gov/LATEST/resources/reports/Reported%20Crimes%20in%20the%20Nation%20Quick%20Stats.pdf",
+  "note": "FBI: 'In 2024, the estimated number of murders in the nation was 16,935.' Down 14.9% vs 2023, down 23.0% vs 2020, up 6.8% vs 2015."
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 2024,
+  "value": 5.0,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (Crime Data Explorer, Quick Stats + UCR Summary 2024)",
+  "source_url": "https://cde.ucr.cjis.gov/LATEST/resources/reports/Reported%20Crimes%20in%20the%20Nation%20Quick%20Stats.pdf",
+  "note": "AS FIRST PUBLISHED (Aug 2025). Revised to 5.1 in the 2025 report cycle - see fbi_murder_rate_revised 2024."
+ },
+ {
+  "indicator_id": "fbi_murder_rate_revised",
+  "year": 2024,
+  "value": 5.1,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI (Crime Data Explorer, UCR Summary 2025, Figure 1)",
+  "source_url": "https://cde.ucr.cjis.gov/LATEST/resources/reports/UCR_Summary_of_Reported_Crimes_in_the_Nation_2025.pdf",
+  "note": "REVISED. Independently corroborated by FactCheck.org ('dropped from 5.1 per 100,000 to 4.1'). The FBI's headline '-18.5% rate' uses 5.1 as the base, not 5.0."
+ },
+ {
+  "indicator_id": "fbi_murder_count",
+  "year": 2025,
+  "value": 14085,
+  "unit": "offenses",
+  "tier": "B",
+  "publisher": "Jeff Asher (Jeff-alytics), citing FBI 2025 Crime in the United States",
+  "source_url": "https://jasher.substack.com/p/the-fbi-reports-that-murder-officially",
+  "note": "FLAGGED. The FBI's own 2025 press release and CDE 2025 summary PDF give the RATE (4.1) but NOT the count. 14,085 is a secondary citation of FBI data. Tier B until confirmed against an FBI table. Expect upward revision - Asher notes 2023 was revised up 655 and 2022 up 620."
+ },
+ {
+  "indicator_id": "fbi_murder_rate",
+  "year": 2025,
+  "value": 4.1,
+  "unit": "per 100,000",
+  "tier": "A",
+  "publisher": "FBI",
+  "source_url": "https://www.fbi.gov/news/press-releases/fbi-releases-2025-reported-crimes-in-the-nation-statistics",
+  "note": "FBI, released 2026-08-14: 'The 2025 murder rate of 4.1 per 100,000 inhabitants is tied with 1955 and 1956 for the lowest murder rate.' Confirmed in the CDE 2025 summary PDF."
+ },
+ {
+  "indicator_id": "fbi_murder_pct_change",
+  "year": 2025,
+  "value": -18.1,
+  "unit": "percent change vs prior year (volume)",
+  "tier": "A",
+  "publisher": "FBI",
+  "source_url": "https://www.fbi.gov/news/press-releases/fbi-releases-2025-reported-crimes-in-the-nation-statistics",
+  "note": "'Murder and nonnegligent manslaughter offenses decreased an estimated 18.1%.' The RATE fell 18.5% (CDE 2025 summary). Both figures verified - use the right one."
+ },
+ {
+  "indicator_id": "cdc_homicide_rate_aa",
+  "year": 1950,
+  "value": 5.1,
+  "unit": "per 100,000, age-adjusted",
+  "tier": "A",
+  "publisher": "NCHS / CDC (Health, United States, Table 29)",
+  "source_url": "https://www.cdc.gov/nchs/data/hus/2017/029.pdf",
+  "note": "Selected years only. Confirmed by Health, United States 2020-2021 SlctMort table."
+ },
+ {
+  "indicator_id": "cdc_homicide_rate_aa",
+  "year": 1960,
+  "value": 5.0,
+  "unit": "per 100,000, age-adjusted",
+  "tier": "A",
+  "publisher": "NCHS / CDC (Health, United States, Table 29)",
+  "source_url": "https://www.cdc.gov/nchs/data/hus/2017/029.pdf",
+  "note": "Confirmed twice. NOTE: FBI UCR rate for 1960 is 5.1 - nearly identical, unlike later years."
+ },
+ {
+  "indicator_id": "cdc_homicide_rate_aa",
+  "year": 1970,
+  "value": 8.8,
+  "unit": "per 100,000, age-adjusted",
+  "tier": "A",
+  "publisher": "NCHS / CDC (Health, United States, Table 29)",
+  "source_url": "https://www.cdc.gov/nchs/data/hus/2017/029.pdf",
+  "note": "FBI UCR 1970 = 7.9. Gap of 0.9."
+ },
+ {
+  "indicator_id": "cdc_homicide_rate_aa",
+  "year": 1980,
+  "value": 10.4,
+  "unit": "per 100,000, age-adjusted",
+  "tier": "A",
+  "publisher": "NCHS / CDC (Health, United States, Table 29)",
+  "source_url": "https://www.cdc.gov/nchs/data/hus/2017/029.pdf",
+  "note": "Highest CDC value in the fetched series. FBI UCR 1980 = 10.2."
+ },
+ {
+  "indicator_id": "cdc_homicide_rate_aa",
+  "year": 1990,
+  "value": 9.4,
+  "unit": "per 100,000, age-adjusted",
+  "tier": "A",
+  "publisher": "NCHS / CDC (Health, United States, Table 29)",
+  "source_url": "https://www.cdc.gov/nchs/data/hus/2017/029.pdf",
+  "note": "FBI UCR 1990 = 9.4. Coincidentally identical."
+ },
+ {
+  "indicator_id": "cdc_homicide_rate_aa",
+  "year": 2000,
+  "value": 5.9,
+  "unit": "per 100,000, age-adjusted",
+  "tier": "A",
+  "publisher": "NCHS / CDC (Health, United States, Table 29)",
+  "source_url": "https://www.cdc.gov/nchs/data/hus/2017/029.pdf",
+  "note": "FBI UCR 2000 = 5.5. Gap of 0.4."
+ },
+ {
+  "indicator_id": "cdc_homicide_rate_aa",
+  "year": 2003,
+  "value": 6.1,
+  "unit": "per 100,000, age-adjusted",
+  "tier": "A",
+  "publisher": "NCHS / CDC (NCHS Data Brief 526)",
+  "source_url": "https://www.cdc.gov/nchs/data/databriefs/db526.pdf",
+  "note": "Start of the continuous annual NCHS series I could verify. Confirmed in brief text: 'declined 16% from 2003 (6.1) to 2014'."
+ },
+ {
+  "indicator_id": "cdc_homicide_rate_aa",
+  "year": 2004,
+  "value": 5.9,
+  "unit": "per 100,000, age-adjusted",
+  "tier": "A",
+  "publisher": "NCHS / CDC (NCHS Data Brief 526)",
+  "source_url": "https://www.cdc.gov/nchs/data/databriefs/db526.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "cdc_homicide_rate_aa",
+  "year": 2005,
+  "value": 6.1,
+  "unit": "per 100,000, age-adjusted",
+  "tier": "A",
+  "publisher": "NCHS / CDC (NCHS Data Brief 526)",
+  "source_url": "https://www.cdc.gov/nchs/data/databriefs/db526.pdf",
+  "note": "Health, United States 2020-2021 SlctMort gives 6.1 for 2005. Confirmed twice."
+ },
+ {
+  "indicator_id": "cdc_homicide_rate_aa",
+  "year": 2006,
+  "value": 6.2,
+  "unit": "per 100,000, age-adjusted",
+  "tier": "A",
+  "publisher": "NCHS / CDC (NCHS Data Brief 526)",
+  "source_url": "https://www.cdc.gov/nchs/data/databriefs/db526.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "cdc_homicide_rate_aa",
+  "year": 2007,
+  "value": 6.1,
+  "unit": "per 100,000, age-adjusted",
+  "tier": "A",
+  "publisher": "NCHS / CDC (NCHS Data Brief 526)",
+  "source_url": "https://www.cdc.gov/nchs/data/databriefs/db526.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "cdc_homicide_rate_aa",
+  "year": 2008,
+  "value": 5.9,
+  "unit": "per 100,000, age-adjusted",
+  "tier": "A",
+  "publisher": "NCHS / CDC (NCHS Data Brief 526)",
+  "source_url": "https://www.cdc.gov/nchs/data/databriefs/db526.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "cdc_homicide_rate_aa",
+  "year": 2009,
+  "value": 5.5,
+  "unit": "per 100,000, age-adjusted",
+  "tier": "A",
+  "publisher": "NCHS / CDC (NCHS Data Brief 526)",
+  "source_url": "https://www.cdc.gov/nchs/data/databriefs/db526.pdf",
+  "note": "Health, United States 2020-2021 SlctMort gives 5.5 for 2009. Confirmed twice."
+ },
+ {
+  "indicator_id": "cdc_homicide_rate_aa",
+  "year": 2010,
+  "value": 5.3,
+  "unit": "per 100,000, age-adjusted",
+  "tier": "A",
+  "publisher": "NCHS / CDC (NCHS Data Brief 526)",
+  "source_url": "https://www.cdc.gov/nchs/data/databriefs/db526.pdf",
+  "note": "Health, United States Table 29 gives 5.3 for 2010. Confirmed twice. FBI UCR 2010 = 4.8 - a 0.5 gap."
+ },
+ {
+  "indicator_id": "cdc_homicide_rate_aa",
+  "year": 2011,
+  "value": 5.3,
+  "unit": "per 100,000, age-adjusted",
+  "tier": "A",
+  "publisher": "NCHS / CDC (NCHS Data Brief 526)",
+  "source_url": "https://www.cdc.gov/nchs/data/databriefs/db526.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "cdc_homicide_rate_aa",
+  "year": 2012,
+  "value": 5.4,
+  "unit": "per 100,000, age-adjusted",
+  "tier": "A",
+  "publisher": "NCHS / CDC (NCHS Data Brief 526)",
+  "source_url": "https://www.cdc.gov/nchs/data/databriefs/db526.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "cdc_homicide_rate_aa",
+  "year": 2013,
+  "value": 5.2,
+  "unit": "per 100,000, age-adjusted",
+  "tier": "A",
+  "publisher": "NCHS / CDC (NCHS Data Brief 526)",
+  "source_url": "https://www.cdc.gov/nchs/data/databriefs/db526.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "cdc_homicide_rate_aa",
+  "year": 2014,
+  "value": 5.1,
+  "unit": "per 100,000, age-adjusted",
+  "tier": "A",
+  "publisher": "NCHS / CDC (NCHS Data Brief 526)",
+  "source_url": "https://www.cdc.gov/nchs/data/databriefs/db526.pdf",
+  "note": "Series low. Confirmed in brief text ('2014 (5.1)'). FBI UCR 2014 = 4.4 - a 0.7 gap."
+ },
+ {
+  "indicator_id": "cdc_homicide_rate_aa",
+  "year": 2015,
+  "value": 5.7,
+  "unit": "per 100,000, age-adjusted",
+  "tier": "A",
+  "publisher": "NCHS / CDC (NCHS Data Brief 526)",
+  "source_url": "https://www.cdc.gov/nchs/data/databriefs/db526.pdf",
+  "note": "Health, United States Table 29 gives 5.7 for 2015. Confirmed twice."
+ },
+ {
+  "indicator_id": "cdc_homicide_rate_aa",
+  "year": 2016,
+  "value": 6.2,
+  "unit": "per 100,000, age-adjusted",
+  "tier": "A",
+  "publisher": "NCHS / CDC (NCHS Data Brief 526)",
+  "source_url": "https://www.cdc.gov/nchs/data/databriefs/db526.pdf",
+  "note": "Health, United States Table 29 gives 6.2 for 2016. Confirmed twice."
+ },
+ {
+  "indicator_id": "cdc_homicide_rate_aa",
+  "year": 2017,
+  "value": 6.2,
+  "unit": "per 100,000, age-adjusted",
+  "tier": "A",
+  "publisher": "NCHS / CDC (NCHS Data Brief 526)",
+  "source_url": "https://www.cdc.gov/nchs/data/databriefs/db526.pdf",
+  "note": ""
+ },
+ {
+  "indicator_id": "cdc_homicide_rate_aa",
+  "year": 2018,
+  "value": 5.9,
+  "unit": "per 100,000, age-adjusted",
+  "tier": "A",
+  "publisher": "NCHS / CDC (NCHS Data Brief 526)",
+  "source_url": "https://www.cdc.gov/nchs/data/databriefs/db526.pdf",
+  "note": "Health, United States 2020-2021 SlctMort gives 5.9 for 2018. Confirmed twice."
+ },
+ {
+  "indicator_id": "cdc_homicide_rate_aa",
+  "year": 2019,
+  "value": 6.0,
+  "unit": "per 100,000, age-adjusted",
+  "tier": "A",
+  "publisher": "NCHS / CDC (NCHS Data Brief 526)",
+  "source_url": "https://www.cdc.gov/nchs/data/databriefs/db526.pdf",
+  "note": "Confirmed three ways: db526 table, db526 text ('2019 (6.0)'), and Health, United States 2020-2021 SlctMort. FBI UCR 2019 = 5.0 - a FULL POINT apart."
+ },
+ {
+  "indicator_id": "cdc_homicide_rate_aa",
+  "year": 2020,
+  "value": 7.8,
+  "unit": "per 100,000, age-adjusted",
+  "tier": "A",
+  "publisher": "NCHS / CDC (NCHS Data Brief 526)",
+  "source_url": "https://www.cdc.gov/nchs/data/databriefs/db526.pdf",
+  "note": "Corroborated by Pew citing CDC (7.8 in 2020, up from 6.0)."
+ },
+ {
+  "indicator_id": "cdc_homicide_rate_aa",
+  "year": 2021,
+  "value": 8.2,
+  "unit": "per 100,000, age-adjusted",
+  "tier": "A",
+  "publisher": "NCHS / CDC (NCHS Data Brief 526)",
+  "source_url": "https://www.cdc.gov/nchs/data/databriefs/db526.pdf",
+  "note": "SERIES PEAK. Confirmed independently by NVSR 'Deaths: Final Data for 2022' (Vol 74 No 4): 'from 8.2 in 2021'. FBI UCR 2021 = 6.5 - a 1.7 gap."
+ },
+ {
+  "indicator_id": "cdc_homicide_rate_aa",
+  "year": 2022,
+  "value": 7.7,
+  "unit": "per 100,000, age-adjusted",
+  "tier": "A",
+  "publisher": "NCHS / CDC (NCHS Data Brief 526)",
+  "source_url": "https://www.cdc.gov/nchs/data/databriefs/db526.pdf",
+  "note": "Confirmed independently by NVSR Vol 74 No 4: 'decreased 6.1%, from 8.2 in 2021 to 7.7 per 100,000 standard population in 2022.'"
+ },
+ {
+  "indicator_id": "cdc_homicide_rate_aa",
+  "year": 2023,
+  "value": 7.1,
+  "unit": "per 100,000, age-adjusted",
+  "tier": "A",
+  "publisher": "NCHS / CDC (NCHS Data Brief 526)",
+  "source_url": "https://www.cdc.gov/nchs/data/databriefs/db526.pdf",
+  "note": "Confirmed in db526 text: 'The rate then declined 13% through 2023 (7.1).' FBI UCR 2023 = 6.0."
+ },
+ {
+  "indicator_id": "cdc_homicide_rate_aa",
+  "year": 2024,
+  "value": null,
+  "unit": "per 100,000, age-adjusted",
+  "tier": "C",
+  "publisher": "NCHS / CDC",
+  "source_url": "https://www.cdc.gov/nchs/fastats/homicide.htm",
+  "note": "UNVERIFIED as AGE-ADJUSTED. FastStats gives 5.9 per 100,000 for 2024 but that is a CRUDE rate, not age-adjusted, and is NOT comparable to the 7.1 for 2023 above. Do not chart 5.9 against the db526 series. Needs a CDC WONDER age-adjusted query."
+ },
+ {
+  "indicator_id": "cdc_homicide_count",
+  "year": 2024,
+  "value": 20162,
+  "unit": "deaths",
+  "tier": "A",
+  "publisher": "NCHS / CDC (FastStats, via CDC WONDER)",
+  "source_url": "https://www.cdc.gov/nchs/fastats/homicide.htm",
+  "note": "'Number of deaths: 20,162' for 2024, National Vital Statistics System via CDC WONDER."
+ },
+ {
+  "indicator_id": "cdc_homicide_crude_rate",
+  "year": 2024,
+  "value": 5.9,
+  "unit": "per 100,000, CRUDE",
+  "tier": "A",
+  "publisher": "NCHS / CDC (FastStats, via CDC WONDER)",
+  "source_url": "https://www.cdc.gov/nchs/fastats/homicide.htm",
+  "note": "CRUDE rate, not age-adjusted. Different unit from every other cdc_homicide_rate_aa row."
+ },
+ {
+  "indicator_id": "cdc_homicide_count",
+  "year": 2021,
+  "value": 26031,
+  "unit": "deaths",
+  "tier": "B",
+  "publisher": "NCHS / CDC (NCHS Data Brief 526 data tables)",
+  "source_url": "https://www.cdc.gov/nchs/data/databriefs/db526.pdf",
+  "note": "FLAGGED. Reported as the series maximum in the db526 backing tables, but I could not open the standalone tables PDF (db526-tables.pdf returned 404) to confirm the row label. Tier B."
+ },
+ {
+  "indicator_id": "cdc_homicide_count",
+  "year": 2014,
+  "value": 15872,
+  "unit": "deaths",
+  "tier": "B",
+  "publisher": "NCHS / CDC (NCHS Data Brief 526 data tables)",
+  "source_url": "https://www.cdc.gov/nchs/data/databriefs/db526.pdf",
+  "note": "FLAGGED. Reported as the series minimum; same limitation as the 2021 count. Tier B."
+ },
+ {
+  "indicator_id": "cdc_homicide_count",
+  "year": null,
+  "value": null,
+  "unit": "deaths",
+  "tier": "C",
+  "publisher": "NCHS / CDC",
+  "source_url": "https://wonder.cdc.gov/mcd.html",
+  "note": "UNVERIFIED: annual homicide DEATH COUNTS for 2003-2023 could not be obtained. CDC WONDER is a session-based query form and is not fetchable by URL; the db526 backing-table PDF 404s. Only 2024 (20,162) and the flagged 2014/2021 endpoints above are in hand. Recommend a manual WONDER query (ICD-10 X85-Y09, Underlying Cause of Death) to complete this series."
+ },
+ {
+  "indicator_id": "homicide_clearance_rate",
+  "year": 1962,
+  "value": 93,
+  "unit": "percent cleared",
+  "tier": "A",
+  "publisher": "Cook & Mancik, Annual Review of Criminology (peer-reviewed), citing FBI UCR",
+  "source_url": "https://static1.squarespace.com/static/5b7ea2794cde7a79e7c00582/t/65c120d169e0d131b5e53387/1707155666076/cook-mancik-2024-the-sixty-year-trajectory-of-homicide-clearance-rates-toward-a-better-understanding-of-the-great.pdf",
+  "note": "SERIES PEAK. 'In 1962, the FBI reported a national homicide clearance rate of 93%.' Confirmed from the Annual Reviews abstract page as well."
+ },
+ {
+  "indicator_id": "homicide_clearance_rate",
+  "year": 1965,
+  "value": 90,
+  "unit": "percent cleared",
+  "tier": "B",
+  "publisher": "Murder Accountability Project, citing FBI UCR",
+  "source_url": "https://www.murderdata.org/",
+  "note": "'About 90 percent' - approximate, secondary. Prefer the 1962 = 93% tier A figure for the documentary's opening anchor."
+ },
+ {
+  "indicator_id": "homicide_clearance_rate",
+  "year": 1994,
+  "value": 64,
+  "unit": "percent cleared",
+  "tier": "A",
+  "publisher": "Cook & Mancik, Annual Review of Criminology",
+  "source_url": "https://static1.squarespace.com/static/5b7ea2794cde7a79e7c00582/t/65c120d169e0d131b5e53387/1707155666076/cook-mancik-2024-the-sixty-year-trajectory-of-homicide-clearance-rates-toward-a-better-understanding-of-the-great.pdf",
+  "note": "'A near-linear decline through 1994 took the rate down to 64%.' The authors call 1962-1994 the 'Great Decline' - 29 points."
+ },
+ {
+  "indicator_id": "homicide_clearance_rate",
+  "year": 2010,
+  "value": 64.8,
+  "unit": "percent cleared",
+  "tier": "A",
+  "publisher": "FBI (UCR, Crime in the United States 2010)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/clearances",
+  "note": "'64.8 percent of murder offenses were cleared.' Cleared by arrest OR exceptional means."
+ },
+ {
+  "indicator_id": "homicide_clearance_rate",
+  "year": 2018,
+  "value": 62,
+  "unit": "percent cleared",
+  "tier": "B",
+  "publisher": "Murder Accountability Project, citing FBI CJIS",
+  "source_url": "https://www.murderdata.org/",
+  "note": "Secondary. Could be upgraded to A via FBI CIUS 2018 clearances page."
+ },
+ {
+  "indicator_id": "homicide_clearance_rate",
+  "year": 2019,
+  "value": 61.4,
+  "unit": "percent cleared",
+  "tier": "A",
+  "publisher": "FBI (UCR, Crime in the United States 2019)",
+  "source_url": "https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/clearances",
+  "note": "'61.4 percent of murder offenses ... were cleared.' Cook & Mancik round this to 61%. Context: 45.5% of all violent crime and 17.2% of property crime cleared that year."
+ },
+ {
+  "indicator_id": "homicide_clearance_rate",
+  "year": 2020,
+  "value": 54,
+  "unit": "percent cleared",
+  "tier": "A",
+  "publisher": "Cook & Mancik, Annual Review of Criminology",
+  "source_url": "https://static1.squarespace.com/static/5b7ea2794cde7a79e7c00582/t/65c120d169e0d131b5e53387/1707155666076/cook-mancik-2024-the-sixty-year-trajectory-of-homicide-clearance-rates-toward-a-better-understanding-of-the-great.pdf",
+  "note": "'A sharp drop to 54% occurred in 2020.' Independently corroborated by the Murder Accountability Project citing the FBI. The clearance rate fell in the same year murders rose 29.4% - both numerator and denominator moved."
+ },
+ {
+  "indicator_id": "homicide_clearance_rate",
+  "year": 2022,
+  "value": 52.3,
+  "unit": "percent cleared",
+  "tier": "B",
+  "publisher": "Murder Accountability Project, citing FBI CJIS",
+  "source_url": "https://www.murderdata.org/",
+  "note": "MAP: 'the lowest national clearance rate ever reported by the FBI.' Tier B - single secondary source, though MAP is the specialist body on this measure. Note 2022 is a NIBRS-transition-affected year."
+ },
+ {
+  "indicator_id": "homicide_clearance_rate",
+  "year": 2023,
+  "value": 57.8,
+  "unit": "percent cleared",
+  "tier": "B",
+  "publisher": "Murder Accountability Project, citing FBI CJIS",
+  "source_url": "https://www.murderdata.org/2025/10/some-more-good-news-for-homicide.html",
+  "note": "Tier B. Published 2025-10-09."
+ },
+ {
+  "indicator_id": "homicide_clearance_rate",
+  "year": 2024,
+  "value": 61.4,
+  "unit": "percent cleared",
+  "tier": "B",
+  "publisher": "Murder Accountability Project, citing FBI CJIS",
+  "source_url": "https://www.murderdata.org/2025/10/some-more-good-news-for-homicide.html",
+  "note": "Tier B. Coincidentally identical to the 2019 figure. MAP: '61.4 percent of homicides in 2024 were either cleared through the arrest of offenders or through special circumstances.'"
+ },
+ {
+  "indicator_id": "homicide_clearance_rate",
+  "year": 2025,
+  "value": null,
+  "unit": "percent cleared",
+  "tier": "C",
+  "publisher": "FBI",
+  "source_url": "https://www.fbi.gov/news/press-releases/fbi-releases-2025-reported-crimes-in-the-nation-statistics",
+  "note": "UNVERIFIED. The 2025 FBI release covers offense volumes and rates; I found no 2025 clearance figure published yet."
+ },
+ {
+  "indicator_id": "homicide_clearance_rate_annual_series",
+  "year": null,
+  "value": null,
+  "unit": "percent cleared",
+  "tier": "C",
+  "publisher": "FBI / Murder Accountability Project",
+  "source_url": "https://www.murderdata.org/",
+  "note": "UNVERIFIED: a complete YEAR-BY-YEAR clearance series 1960-2025 was not obtainable from fetchable sources. What exists above is nine sourced anchor points. A continuous series would require either MAP's downloadable SHR/clearance file or per-year FBI CIUS clearances pages (1995-2019 each exist as separate URLs and are fetchable one at a time)."
+ },
+ {
+  "indicator_id": "murder_pct_increase_2019_2020",
+  "year": 2020,
+  "value": 29.4,
+  "unit": "percent increase in volume",
+  "tier": "A",
+  "publisher": "FBI",
+  "source_url": "https://www.fbi.gov/news/press-releases/fbi-releases-2020-crime-statistics",
+  "note": "THE headline 2020 figure. FBI, released 2021-09-27: 'the volume of murder and nonnegligent manslaughter offenses increased 29.4 percent.' Computed on the REVISED 2019 base of 16,669, not the 16,425 originally published."
+ },
+ {
+  "indicator_id": "cdc_homicide_pct_increase_2019_2020",
+  "year": 2020,
+  "value": 30,
+  "unit": "percent increase in age-adjusted rate",
+  "tier": "B",
+  "publisher": "Pew Research Center, citing CDC/NCHS",
+  "source_url": "https://www.pewresearch.org/short-reads/2021/10/27/what-we-know-about-the-increase-in-u-s-murders-in-2020/",
+  "note": "CDC rate 6.0 (2019) to 7.8 (2020). The underlying 6.0 and 7.8 are BOTH tier A from db526; only the '30%' rounding is tier B. Useful counterpoint: two agencies, ~29-30% increase, but from different levels and on different denominators."
+ },
+ {
+  "indicator_id": "nibrs_agency_participation_pct",
+  "year": 2021,
+  "value": 67.9,
+  "unit": "percent of crime-reporting agencies",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/nibrs-estimation-program",
+  "note": "BJS: '67.9% of all crime-reporting law enforcement agencies were reporting to NIBRS.'"
+ },
+ {
+  "indicator_id": "nibrs_population_coverage_pct",
+  "year": 2021,
+  "value": 65.7,
+  "unit": "percent of US population",
+  "tier": "A",
+  "publisher": "Bureau of Justice Statistics",
+  "source_url": "https://bjs.ojp.gov/nibrs-estimation-program",
+  "note": "BJS: 'covering 65.7% of the U.S. population.' Compare to 96.2% for 2025."
+ },
+ {
+  "indicator_id": "nibrs_agencies_reporting",
+  "year": 2021,
+  "value": 11500,
+  "unit": "agencies (more than)",
+  "tier": "A",
+  "publisher": "FBI (Crime Data Explorer FAQ)",
+  "source_url": "https://cde.ucr.cjis.gov/LATEST/resources/reports/Reported%20Crimes%20in%20the%20Nation%202024%20FAQs.pdf",
+  "note": "THE KEY FBI ADMISSION. Verbatim: 'Despite more than 11,500 law enforcement agencies submitting NIBRS data for 2021, participation remained below a statistically acceptable level to be nationally representative for trending analyses.'"
+ },
+ {
+  "indicator_id": "nibrs_comparability_statement",
+  "year": 2021,
+  "value": null,
+  "unit": "qualitative",
+  "tier": "A",
+  "publisher": "FBI (Crime Data Explorer FAQ)",
+  "source_url": "https://cde.ucr.cjis.gov/LATEST/resources/reports/Reported%20Crimes%20in%20the%20Nation%202024%20FAQs.pdf",
+  "note": "Verbatim FBI: 'Because not all agencies were represented, traditional methodologies could not be applied to produce 5-, 10-, and 20-year trends comparable to those previously presented.' This is the FBI conceding the break in the series."
+ },
+ {
+  "indicator_id": "nibrs_significance_statement",
+  "year": 2021,
+  "value": null,
+  "unit": "qualitative",
+  "tier": "A",
+  "publisher": "FBI",
+  "source_url": "https://www.fbi.gov/news/press-releases/fbi-releases-2021-crime-in-the-nation-statistics",
+  "note": "Verbatim FBI on the 2021 murder change: 'these estimated trends are not considered statistically significant by NIBRS estimation methods.' The FBI published a 4.3% murder increase and simultaneously said it could not distinguish it from noise."
+ },
+ {
+  "indicator_id": "nibrs_agencies_not_reporting",
+  "year": 2021,
+  "value": 7287,
+  "unit": "agencies",
+  "tier": "B",
+  "publisher": "The Marshall Project",
+  "source_url": "https://www.themarshallproject.org/2022/06/14/what-did-fbi-data-say-about-crime-in-2021-it-s-too-unreliable-to-tell",
+  "note": "7,287 agencies did not report; 11,531 did. Roughly 40% of agencies nationwide missing. Published 2022-06-14. Tier B - the FBI does not publish a non-reporter count."
+ },
+ {
+  "indicator_id": "nibrs_major_departments_missing",
+  "year": 2021,
+  "value": null,
+  "unit": "qualitative",
+  "tier": "B",
+  "publisher": "The Marshall Project",
+  "source_url": "https://www.themarshallproject.org/2022/06/14/what-did-fbi-data-say-about-crime-in-2021-it-s-too-unreliable-to-tell",
+  "note": "FLAGGED AS TIER B. Named as not submitting 2021 data: NYPD, LAPD, San Francisco PD, plus most agencies in California, New York, Illinois, Pennsylvania and Florida. The FBI does NOT itself name departments - I searched and could not find an FBI source listing them, so this cannot be raised to tier A."
+ },
+ {
+  "indicator_id": "nibrs_agencies_reporting",
+  "year": 2022,
+  "value": 15724,
+  "unit": "agencies",
+  "tier": "A",
+  "publisher": "FBI",
+  "source_url": "https://www.fbi.gov/news/press-releases/fbi-releases-2022-crime-in-the-nation-statistics",
+  "note": "15,724 of 18,884 eligible agencies. Split: 13,293 via NIBRS (covering 256M+ inhabitants) and 2,431 non-transitioned agencies via SRS (covering 55,441,278). The FBI REOPENED SRS for 2022 after the 2021 collapse."
+ },
+ {
+  "indicator_id": "nibrs_population_coverage_pct",
+  "year": 2022,
+  "value": 93.5,
+  "unit": "percent of US population",
+  "tier": "A",
+  "publisher": "FBI",
+  "source_url": "https://www.fbi.gov/news/press-releases/fbi-releases-2022-crime-in-the-nation-statistics",
+  "note": "Up from 65.7% in 2021 - the recovery was driven by readmitting SRS submissions."
+ },
+ {
+  "indicator_id": "ucr_agencies_reporting",
+  "year": 2024,
+  "value": 16675,
+  "unit": "agencies",
+  "tier": "A",
+  "publisher": "FBI (Crime Data Explorer)",
+  "source_url": "https://cde.ucr.cjis.gov/LATEST/resources/reports/UCR%20Summary%20of%20Reported%20Crimes%20in%20the%20Nation%202024.pdf",
+  "note": "'16,675 law enforcement agencies ... represent 86.3% of agencies actively enrolled in the FBI's UCR Program and cover a combined population of 325,100,512 (95.6%).'"
+ },
+ {
+  "indicator_id": "ucr_population_coverage_pct",
+  "year": 2024,
+  "value": 95.6,
+  "unit": "percent of US population",
+  "tier": "A",
+  "publisher": "FBI (Crime Data Explorer)",
+  "source_url": "https://cde.ucr.cjis.gov/LATEST/resources/reports/UCR%20Summary%20of%20Reported%20Crimes%20in%20the%20Nation%202024.pdf",
+  "note": "Confirmed in the FBI 2024 press release."
+ },
+ {
+  "indicator_id": "ucr_agencies_reporting",
+  "year": 2025,
+  "value": 17075,
+  "unit": "agencies",
+  "tier": "A",
+  "publisher": "FBI (Crime Data Explorer, UCR Summary 2025)",
+  "source_url": "https://cde.ucr.cjis.gov/LATEST/resources/reports/UCR_Summary_of_Reported_Crimes_in_the_Nation_2025.pdf",
+  "note": "Covering 328,918,006 inhabitants. FBI also notes 'every city agency covering a population of 1,000,000 or more inhabitants' provided complete annual data - a direct contrast with 2021."
+ },
+ {
+  "indicator_id": "ucr_population_coverage_pct",
+  "year": 2025,
+  "value": 96.2,
+  "unit": "percent of US population",
+  "tier": "A",
+  "publisher": "FBI",
+  "source_url": "https://www.fbi.gov/news/press-releases/fbi-releases-2025-reported-crimes-in-the-nation-statistics",
+  "note": "'More than 17,000 ... agencies, covering a combined population of 96.2% inhabitants.' Highest coverage in the fetched record; 2021 was 65.7%."
+ }
+]

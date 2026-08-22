@@ -24,11 +24,22 @@ import json
 import pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
+
+# Research inputs live in the repo, not in /tmp. They were scratch files until
+# 2026-08-22, which meant a rebuild only worked inside the container that did
+# the original research and died with FileNotFoundError anywhere else. The
+# /tmp path is kept as a fallback so an in-flight research session still works.
+def _research(name):
+    repo = ROOT / "research/crime" / name
+    if repo.exists():
+        return repo
+    return pathlib.Path("/tmp") / name
+
 CRIME_T = ROOT / "public/data/crime/tables"
 CRIME_C = ROOT / "public/data/crime/charts"
 HEALTH_T = ROOT / "public/data/health/tables"
-RESEARCH = pathlib.Path("/tmp/harass_rows.json")
-RESEARCH_SRCS = pathlib.Path("/tmp/harass_srcs.json")
+RESEARCH = None  # set in main() via _research()
+RESEARCH_SRCS = None
 
 WINDOW_FROM, WINDOW_TO = 1999, 2025
 
@@ -272,7 +283,7 @@ def save(p, d):
 
 
 def main():
-    research = load(RESEARCH)
+    research = load(_research("harass_rows.json"))
     crime_ind = load(CRIME_T / "crime_indicators.json")
     health_ind = load(HEALTH_T / "health_indicators.json")
     sources = load(CRIME_T / "crime_sources.json")

@@ -20,10 +20,21 @@ import pathlib
 from collections import Counter
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
+
+# Research inputs live in the repo, not in /tmp. They were scratch files until
+# 2026-08-22, which meant a rebuild only worked inside the container that did
+# the original research and died with FileNotFoundError anywhere else. The
+# /tmp path is kept as a fallback so an in-flight research session still works.
+def _research(name):
+    repo = ROOT / "research/crime" / name
+    if repo.exists():
+        return repo
+    return pathlib.Path("/tmp") / name
+
 OUT = ROOT / "public/data/crime/tables"
 CHARTS = ROOT / "public/data/crime/charts"
-RESEARCH_ROWS = pathlib.Path("/tmp/crime_rows.json")
-RESEARCH_SRCS = pathlib.Path("/tmp/crime_srcs.json")
+RESEARCH_ROWS = None  # set in main() via _research()
+RESEARCH_SRCS = None
 
 # Indicators that are statements or one-off facts rather than time series —
 # they belong in the data-quality register and caveats, not the indicator table.
@@ -409,8 +420,8 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     CHARTS.mkdir(parents=True, exist_ok=True)
 
-    rows = json.loads(RESEARCH_ROWS.read_text())
-    raw_srcs = json.loads(RESEARCH_SRCS.read_text())
+    rows = json.loads(_research("crime_rows.json").read_text())
+    raw_srcs = json.loads(_research("crime_srcs.json").read_text())
 
     # ---- sources: stable ids, url-keyed -----------------------------------
     sources, by_url = [], {}

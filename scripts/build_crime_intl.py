@@ -21,9 +21,20 @@ import json
 import pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
+
+# Research inputs live in the repo, not in /tmp. They were scratch files until
+# 2026-08-22, which meant a rebuild only worked inside the container that did
+# the original research and died with FileNotFoundError anywhere else. The
+# /tmp path is kept as a fallback so an in-flight research session still works.
+def _research(name):
+    repo = ROOT / "research/crime" / name
+    if repo.exists():
+        return repo
+    return pathlib.Path("/tmp") / name
+
 TABLES = ROOT / "public/data/crime/tables"
 CHARTS = ROOT / "public/data/crime/charts"
-INTL = pathlib.Path("/tmp/intl")
+INTL = None  # set in main() via _research()
 
 COUNTRY = {
     "USA": ("United States", True), "KOR": ("South Korea", False),
@@ -151,9 +162,9 @@ MISSING_SRC = {
 
 
 def main():
-    wb = json.loads((INTL / "homicide_wb.json").read_text())
-    drugs = json.loads((INTL / "drug_deaths.json").read_text())
-    missing = json.loads((INTL / "missing_persons.json").read_text())
+    wb = json.loads(_research("intl/homicide_wb.json").read_text())
+    drugs = json.loads(_research("intl/drug_deaths.json").read_text())
+    missing = json.loads(_research("intl/missing_persons.json").read_text())
 
     series = []
     for code, (name, emphasis) in COUNTRY.items():
