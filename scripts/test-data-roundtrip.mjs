@@ -448,12 +448,33 @@ const measures = await page.evaluate(() => {
   const w = [...main.querySelectorAll("p.measure.body-copy")]
     .filter((e) => e.getBoundingClientRect().width > 400)
     .map((e) => Math.round(e.getBoundingClientRect().width));
-  return { widths: [...new Set(w)], n: w.length };
+  // Resolve 80ch in the font that ACTUALLY loaded, rather than hardcoding a
+  // pixel count. `ch` is font-relative: with the site's webfonts 80ch is about
+  // 975px, and in an environment where Google Fonts is blocked the fallback
+  // stack gives about 880px. A fixed range encodes whichever environment wrote
+  // the test — this one did, and it failed on a machine where the fonts loaded
+  // correctly. The probe inherits main's computed font, so it is right either way.
+  // The probe must carry the SAME computed font as the paragraphs: `ch` scales
+  // with font-size, and body-copy sets a larger one than main's default, so a
+  // bare div reports a narrower 80ch than the prose actually uses.
+  const sample = [...main.querySelectorAll("p.measure.body-copy")]
+    .find((e) => e.getBoundingClientRect().width > 400);
+  const probe = document.createElement("p");
+  probe.className = sample ? sample.className : "measure body-copy";
+  probe.style.cssText = "width:80ch;max-width:none;position:absolute;visibility:hidden;top:-9999px";
+  (sample?.parentElement || main).appendChild(probe);
+  const expected = Math.round(probe.getBoundingClientRect().width);
+  probe.remove();
+  return { widths: [...new Set(w)], n: w.length, expected };
 });
 console.log("measure:", JSON.stringify(measures));
 if (measures.n === 0) fail("no .measure prose found on the Data section");
+// The real guard: prose had drifted to 70/74/75/80/85ch and unconstrained.
+// Uniformity is the property that matters and it is font-independent.
 if (measures.widths.length > 1) fail(`prose measure is not uniform: ${measures.widths.join(", ")}`);
-if (measures.widths[0] < 820 || measures.widths[0] > 940) fail(`prose measure ${measures.widths[0]}px, expected ~880 (80ch)`);
+if (Math.abs(measures.widths[0] - measures.expected) > 8) {
+  fail(`prose measure ${measures.widths[0]}px, but 80ch resolves to ${measures.expected}px here`);
+}
 const stray = await page.evaluate(() =>
   [...document.querySelectorAll('[class*="max-w-["]')]
     .map((e) => (e.className || "").toString().match(/max-w-\[\d+ch\]/g) || [])
