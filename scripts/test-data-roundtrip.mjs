@@ -757,11 +757,18 @@ for (const [label, cap] of [["incarceration", /the US penal system/i], ["arrests
   if (before.toggle !== 2) fail(`${label}: levels/change toggle missing (found ${before.toggle} buttons)`);
   if (before.pressed !== "Levels") fail(`${label}: chart must open on Levels, opened on "${before.pressed}"`);
 
+  if (before.toggle !== 2) {
+    // Nothing further in this loop can mean anything without the chart, and
+    // throwing here would abort the whole suite and hide every later check.
+    console.log(`${label} change view: skipped, chart or toggle absent`);
+    continue;
+  }
+
   await page.evaluate((capSrc) => {
     const re = new RegExp(capSrc, "i");
     const fig = [...document.querySelectorAll("main figure")]
       .find((f) => re.test(f.querySelector("figcaption")?.textContent || ""));
-    [...fig.parentElement.querySelectorAll("button")]
+    [...(fig?.parentElement?.querySelectorAll("button") || [])]
       .find((b) => b.textContent.trim() === "Year-over-year change")?.click();
   }, cap.source);
   await page.waitForTimeout(400);
@@ -792,7 +799,7 @@ for (const [label, cap] of [["incarceration", /the US penal system/i], ["arrests
     const re = new RegExp(capSrc, "i");
     const fig = [...document.querySelectorAll("main figure")]
       .find((f) => re.test(f.querySelector("figcaption")?.textContent || ""));
-    [...fig.parentElement.querySelectorAll("button")]
+    [...(fig?.parentElement?.querySelectorAll("button") || [])]
       .find((b) => b.textContent.trim() === "Levels")?.click();
   }, cap.source);
   await page.waitForTimeout(300);
