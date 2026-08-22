@@ -1,0 +1,123 @@
+{
+  "title": "Incarceration internationally \u2014 why there is no chart here",
+  "why_no_chart": "There is one obvious chart to draw \u2014 every country's imprisonment rate on a shared axis \u2014 and the source that would supply it says not to. The World Prison Brief's ranking page carries no reference-date column, and behind it the dates run from December 2018 to August 2026: Cuba sits second in the world on a January 2020 figure, China's is nearly eight years old. And China's entry is not a smaller number but a different statistic \u2014 sentenced prisoners in Ministry of Justice prisons only, where WPB's own estimate of the true total is 'at least 2,340,000', plus roughly a million detained in Xinjiang for whom no reliable figures exist. The World Prison Population List states the problem in its own words: the information does not relate to the same date. So the figures are given here as a dated table, each row carrying the day it describes, and never as bars on a shared axis. One thing can be said cleanly: the United States is no longer the world's top jailer by rate. It is fourth.",
+  "rows": [
+    {
+      "country": "El Salvador",
+      "value": 1659,
+      "year": "March 2024",
+      "unit": "per 100,000",
+      "definition": "Rank 1. 109,519 held. Rate more than three times the United States'.",
+      "tier": "B",
+      "source_id": "inc_wpb_rank"
+    },
+    {
+      "country": "Cuba",
+      "value": 794,
+      "year": "January 2020",
+      "unit": "per 100,000",
+      "definition": "Rank 2 \u2014 on a figure more than six years old, and excluding labour camps.",
+      "tier": "C",
+      "source_id": "inc_wpb_rank"
+    },
+    {
+      "country": "Turkmenistan",
+      "value": 576,
+      "year": "early 2021",
+      "unit": "per 100,000",
+      "definition": "Rank 3. Published by WPB as an estimate ('c. 576'), not a count.",
+      "tier": "C",
+      "source_id": "inc_wpb_rank"
+    },
+    {
+      "country": "United States",
+      "value": 542,
+      "year": "2023",
+      "unit": "per 100,000",
+      "definition": "Rank 4. 1,833,700 held. Unusually for this table the US total is explicit about its parts \u2014 664,200 in local jails at 30 June 2023, 1,013,500 in state prisons and 156,000 in federal prisons at 31 December \u2014 so it blends a June and a December count.",
+      "tier": "B",
+      "source_id": "inc_wpb_us"
+    },
+    {
+      "country": "Turkey",
+      "value": 503,
+      "year": "3 August 2026",
+      "unit": "per 100,000",
+      "definition": "433,520 held. The Council of Europe's harmonised count put T\u00fcrkiye at 458 on 31 January 2025 \u2014 a 45-point gap between two respectable sources, which is the reference-date problem measured.",
+      "tier": "B",
+      "source_id": "inc_wpb_rank"
+    },
+    {
+      "country": "Russia",
+      "value": 197,
+      "year": "May 2026",
+      "unit": "per 100,000",
+      "definition": "282,000 held; 30.1% pre-trial.",
+      "tier": "B",
+      "source_id": "inc_wpb_rank"
+    },
+    {
+      "country": "England & Wales",
+      "value": 136,
+      "year": "27 July 2026",
+      "unit": "per 100,000",
+      "definition": "86,267 held. Excludes juveniles in secure training centres and local-authority secure children's homes.",
+      "tier": "B",
+      "source_id": "inc_wpb_rank"
+    },
+    {
+      "country": "France",
+      "value": 131,
+      "year": "1 July 2026",
+      "unit": "per 100,000",
+      "definition": "89,446 held \u2014 and excludes 19,190 \u00e9crou\u00e9s non d\u00e9tenus, people on the prison register who are not in a cell.",
+      "tier": "B",
+      "source_id": "inc_wpb_rank"
+    },
+    {
+      "country": "China",
+      "value": 119,
+      "year": "31 December 2018",
+      "unit": "per 100,000",
+      "definition": "NOT COMPARABLE, and the largest single reason this cannot be a chart. Counts sentenced prisoners in Ministry of Justice prisons only, excluding pre-trial detainees and administrative detention. WPB's own note puts the real total at 'at least 2,340,000' and adds that about a million Uighur Muslims are reported detained in Xinjiang, with no reliable figures available.",
+      "tier": "C",
+      "source_id": "inc_wpb_china"
+    },
+    {
+      "country": "Canada",
+      "value": 98,
+      "year": "year ending 31 March 2024",
+      "unit": "per 100,000",
+      "definition": "39,819 \u2014 but an ANNUAL AVERAGE, where every other row is a single-day count. A different statistic sharing a column.",
+      "tier": "B",
+      "source_id": "inc_wpb_rank"
+    },
+    {
+      "country": "Germany",
+      "value": 69,
+      "year": "31 January 2025",
+      "unit": "per 100,000",
+      "definition": "57,812 held. Sourced by WPB from the Council of Europe's SPACE I, which is the one genuinely harmonised collection here.",
+      "tier": "A",
+      "source_id": "inc_space_i"
+    },
+    {
+      "country": "Japan",
+      "value": 33,
+      "year": "mid-2025",
+      "unit": "per 100,000",
+      "definition": "41,232 held; 15.8% pre-trial. About one sixteenth the US rate.",
+      "tier": "B",
+      "source_id": "inc_wpb_rank"
+    },
+    {
+      "country": "Europe (46 states)",
+      "value": 127,
+      "year": "31 January 2025",
+      "unit": "per 100,000",
+      "definition": "The alternative that works: Council of Europe SPACE I uses ONE reference date for every country and had a 100% response rate across 51 prison administrations. Average 127, median 110, from Norway at 54 to T\u00fcrkiye at 458. It is the harmonised comparison this section would want \u2014 and the United States cannot appear on it.",
+      "tier": "A",
+      "source_id": "inc_space_i"
+    }
+  ]
+}

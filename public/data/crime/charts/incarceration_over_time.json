@@ -1,0 +1,476 @@
+{
+  "title": "Who is held: the US penal system, 1999\u20132024",
+  "unit": "People in prison, in jail, and under correctional control",
+  "window": {
+    "from": 1999,
+    "to": 2025
+  },
+  "window_note": "This chart uses the section's shared 1999\u20132025 window, so its years line up with every other chart on the page.",
+  "y_format": "millions",
+  "change_view": true,
+  "legend_note": "These three counts are nested, not parallel \u2014 the widest line contains the other two, and prison is counted in December where jails are counted in June.",
+  "note": "Three counts of people, on one axis because they share a unit \u2014 but they are nested, not parallel: the widest line CONTAINS the other two, plus everyone on probation or parole. Prison is counted on 31 December, jails at 30 June, so the two are not snapshots of the same day. The widest line BREAKS after 2021 because BJS states its 2022 and 2023 figures are not comparable with earlier years \u2014 the probation survey took on 285 new agencies and about 120,000 people, and California's parole counts have not been updated since 2018. Click any line for its full record, its method and what it cannot show.",
+  "publisher": "Bureau of Justice Statistics (National Prisoner Statistics; Annual Survey of Jails; Correctional Populations)",
+  "tier": "A",
+  "series": [
+    {
+      "name": "Under correctional control",
+      "emphasis": false,
+      "tier": "A",
+      "measure": "stock",
+      "unit": "persons under correctional supervision",
+      "basis_short": "prison + jail + probation + parole, less dual-status persons",
+      "publisher": "BJS Correctional Populations in the United States",
+      "points": [
+        {
+          "year": 2000,
+          "value": 6467900,
+          "tier": "A"
+        },
+        {
+          "year": 2001,
+          "value": 6585000,
+          "tier": "A"
+        },
+        {
+          "year": 2002,
+          "value": 6731100,
+          "tier": "A"
+        },
+        {
+          "year": 2003,
+          "value": 6887000,
+          "tier": "A"
+        },
+        {
+          "year": 2004,
+          "value": 6997200,
+          "tier": "A"
+        },
+        {
+          "year": 2005,
+          "value": 7055800,
+          "tier": "A"
+        },
+        {
+          "year": 2006,
+          "value": 7199800,
+          "tier": "A"
+        },
+        {
+          "year": 2007,
+          "value": 7339900,
+          "tier": "A"
+        },
+        {
+          "year": 2008,
+          "value": 7314400,
+          "tier": "A"
+        },
+        {
+          "year": 2009,
+          "value": 7237100,
+          "tier": "A"
+        },
+        {
+          "year": 2010,
+          "value": 7088500,
+          "tier": "A"
+        },
+        {
+          "year": 2011,
+          "value": 6990400,
+          "tier": "A"
+        },
+        {
+          "year": 2012,
+          "value": 6940500,
+          "tier": "A"
+        },
+        {
+          "year": 2013,
+          "value": 6899700,
+          "tier": "A"
+        },
+        {
+          "year": 2014,
+          "value": 6856900,
+          "tier": "A"
+        },
+        {
+          "year": 2015,
+          "value": 6740300,
+          "tier": "A"
+        },
+        {
+          "year": 2016,
+          "value": 6616200,
+          "tier": "A"
+        },
+        {
+          "year": 2017,
+          "value": 6549700,
+          "tier": "A"
+        },
+        {
+          "year": 2018,
+          "value": 6409200,
+          "tier": "A"
+        },
+        {
+          "year": 2019,
+          "value": 6343200,
+          "tier": "A"
+        },
+        {
+          "year": 2020,
+          "value": 5506400,
+          "tier": "A"
+        },
+        {
+          "year": 2021,
+          "value": 5442300,
+          "tier": "A"
+        },
+        {
+          "year": 2022,
+          "value": 5480600,
+          "tier": "A"
+        },
+        {
+          "year": 2023,
+          "value": 5530300,
+          "tier": "A"
+        }
+      ],
+      "caveats": [
+        "THE LINE BREAKS AFTER 2021 and the break is not cosmetic. BJS states that 2022 and 2023 are not comparable to earlier years for this total, for community supervision, or for probation.",
+        "The 2023 probation survey added 285 agencies supervising misdemeanour probation only \u2014 roughly 120,000 people, about 4%. Most of the apparent 2022\u21922023 rise is that expansion rather than growth.",
+        "The parole fall from 878,700 (2019) to 680,400 (2023) is substantially a California reporting failure: updated post-release community supervision counts have been unavailable since 2018. It is the most misleading movement on this chart if read as a real decline.",
+        "Probation and parole are 68% of this line. Most people under correctional control in America are not behind anything.",
+        "No 2024 or 2025 total has been published."
+      ],
+      "break_after": 2021
+    },
+    {
+      "name": "In prison (state and federal)",
+      "emphasis": true,
+      "tier": "A",
+      "measure": "stock",
+      "unit": "persons under state or federal jurisdiction",
+      "basis_short": "BJS National Prisoner Statistics, 31 December, persons under jurisdiction",
+      "publisher": "BJS Prisoners series",
+      "points": [
+        {
+          "year": 1999,
+          "value": 1363701,
+          "tier": "A"
+        },
+        {
+          "year": 2000,
+          "value": 1391261,
+          "tier": "A"
+        },
+        {
+          "year": 2001,
+          "value": 1404032,
+          "tier": "A"
+        },
+        {
+          "year": 2002,
+          "value": 1440144,
+          "tier": "A"
+        },
+        {
+          "year": 2003,
+          "value": 1468601,
+          "tier": "A"
+        },
+        {
+          "year": 2004,
+          "value": 1497100,
+          "tier": "A"
+        },
+        {
+          "year": 2005,
+          "value": 1527929,
+          "tier": "A"
+        },
+        {
+          "year": 2006,
+          "value": 1569945,
+          "tier": "A"
+        },
+        {
+          "year": 2007,
+          "value": 1598245,
+          "tier": "A"
+        },
+        {
+          "year": 2008,
+          "value": 1609759,
+          "tier": "A"
+        },
+        {
+          "year": 2009,
+          "value": 1615487,
+          "tier": "A"
+        },
+        {
+          "year": 2010,
+          "value": 1613803,
+          "tier": "A"
+        },
+        {
+          "year": 2011,
+          "value": 1598968,
+          "tier": "A"
+        },
+        {
+          "year": 2012,
+          "value": 1570397,
+          "tier": "A"
+        },
+        {
+          "year": 2013,
+          "value": 1576950,
+          "tier": "A"
+        },
+        {
+          "year": 2014,
+          "value": 1562319,
+          "tier": "A"
+        },
+        {
+          "year": 2015,
+          "value": 1526603,
+          "tier": "A"
+        },
+        {
+          "year": 2016,
+          "value": 1508129,
+          "tier": "A"
+        },
+        {
+          "year": 2017,
+          "value": 1489189,
+          "tier": "A"
+        },
+        {
+          "year": 2018,
+          "value": 1464385,
+          "tier": "A"
+        },
+        {
+          "year": 2019,
+          "value": 1430165,
+          "tier": "A"
+        },
+        {
+          "year": 2020,
+          "value": 1221164,
+          "tier": "A"
+        },
+        {
+          "year": 2021,
+          "value": 1205087,
+          "tier": "A"
+        },
+        {
+          "year": 2022,
+          "value": 1230143,
+          "tier": "A"
+        },
+        {
+          "year": 2023,
+          "value": 1254224,
+          "tier": "A",
+          "note": "most recent year BJS has published"
+        }
+      ],
+      "caveats": [
+        "Peak 1,615,487 in 2009; trough 1,205,087 in 2021, a fall of 410,400 \u2014 a quarter of the system. Then up 2.1% in 2022 and 2.0% in 2023.",
+        "THE SERIES ENDS AT 2023. 'Prisoners in 2024' is listed by BJS as forthcoming for Q3 2026 and does not exist as of 22 August 2026 \u2014 so this line, like the arrests chart above it, stops before the enforcement period it is most often asked about.",
+        "The 2020 drop is a collapse in INTAKE, not mass release: admissions fell 40% as courts delayed trials and sentencing. BJS states 2019 and 2020 remain directly comparable.",
+        "'Under jurisdiction' means legal authority, not location \u2014 a prisoner counted here may physically be in a local jail, a private facility, a halfway house, or another state's prison.",
+        "Counts are revised between publication vintages. 2009 moved from 1,613,740 to 1,615,487, 2020 from 1,215,800 to 1,221,164."
+      ]
+    },
+    {
+      "name": "In local jails",
+      "emphasis": true,
+      "tier": "A",
+      "measure": "stock",
+      "unit": "inmates confined at midyear",
+      "basis_short": "BJS Annual Survey of Jails, inmates confined at 30 June",
+      "publisher": "BJS Jail Inmates series",
+      "points": [
+        {
+          "year": 1999,
+          "value": 605943,
+          "tier": "A"
+        },
+        {
+          "year": 2000,
+          "value": 621149,
+          "tier": "A"
+        },
+        {
+          "year": 2001,
+          "value": 631240,
+          "tier": "A"
+        },
+        {
+          "year": 2002,
+          "value": 665475,
+          "tier": "A"
+        },
+        {
+          "year": 2003,
+          "value": 691301,
+          "tier": "A"
+        },
+        {
+          "year": 2004,
+          "value": 713990,
+          "tier": "A"
+        },
+        {
+          "year": 2005,
+          "value": 747529,
+          "tier": "A"
+        },
+        {
+          "year": 2006,
+          "value": 765819,
+          "tier": "A"
+        },
+        {
+          "year": 2007,
+          "value": 780174,
+          "tier": "A"
+        },
+        {
+          "year": 2008,
+          "value": 785556,
+          "tier": "A"
+        },
+        {
+          "year": 2009,
+          "value": 767620,
+          "tier": "A"
+        },
+        {
+          "year": 2010,
+          "value": 748700,
+          "tier": "A"
+        },
+        {
+          "year": 2011,
+          "value": 735600,
+          "tier": "A"
+        },
+        {
+          "year": 2012,
+          "value": 744500,
+          "tier": "A"
+        },
+        {
+          "year": 2013,
+          "value": 731200,
+          "tier": "A"
+        },
+        {
+          "year": 2014,
+          "value": 744600,
+          "tier": "A"
+        },
+        {
+          "year": 2015,
+          "value": 727400,
+          "tier": "A"
+        },
+        {
+          "year": 2016,
+          "value": 740700,
+          "tier": "A"
+        },
+        {
+          "year": 2017,
+          "value": 745200,
+          "tier": "A"
+        },
+        {
+          "year": 2018,
+          "value": 738400,
+          "tier": "A"
+        },
+        {
+          "year": 2019,
+          "value": 734500,
+          "tier": "A"
+        },
+        {
+          "year": 2020,
+          "value": 549100,
+          "tier": "A"
+        },
+        {
+          "year": 2021,
+          "value": 636300,
+          "tier": "A"
+        },
+        {
+          "year": 2022,
+          "value": 663100,
+          "tier": "A"
+        },
+        {
+          "year": 2023,
+          "value": 664200,
+          "tier": "A"
+        },
+        {
+          "year": 2024,
+          "value": 657500,
+          "tier": "A",
+          "note": "preliminary"
+        }
+      ],
+      "caveats": [
+        "THE COMPOSITION INVERTED. Between 2013 and 2023 the CONVICTED jail population fell 29% while the UNCONVICTED population rose 3%. Seventy percent of people in American jails in 2023 had not been convicted of anything. Almost the entire decade-long decline is a decline in sentenced people.",
+        "2019 comes from the Census of Jails, a full enumeration; every other year is a sample-based estimate from the Annual Survey of Jails.",
+        "Jails are collectively UNDER capacity \u2014 73% of rated capacity in 2023, down from 84% in 2013 \u2014 though 12% of individual jurisdictions were over it.",
+        "ICE detainees held in local jails ARE inside this count: 7,000 at midyear 2023, about 1%, and falling while ICE's own detained population set records. The immigration system is almost entirely outside this line.",
+        "2024 is preliminary and may be revised."
+      ]
+    }
+  ],
+  "themes": [
+    {
+      "statement": "American imprisonment peaked in 2009 and fell for twelve years \u2014 1,615,487 people down to 1,205,087, a quarter of the whole system.",
+      "tier": "A"
+    },
+    {
+      "statement": "It is rising again. Up 2.1% in 2022 and 2.0% in 2023, about 49,000 people over two years \u2014 from a base a quarter below the peak.",
+      "tier": "A"
+    },
+    {
+      "statement": "The record then stops. BJS has published nothing for 2024 or 2025, and 'Prisoners in 2024' is listed as forthcoming. This is the second chart in this section whose official series ends just before the years it is most often asked about \u2014 the arrests chart does the same.",
+      "tier": "A"
+    },
+    {
+      "statement": "Seventy percent of people in American jails have not been convicted of anything. Between 2013 and 2023 the convicted jail population fell 29% while the unconvicted population rose 3%: the system did not shrink so much as change who it holds.",
+      "tier": "A"
+    },
+    {
+      "statement": "Most people under correctional control are not behind anything \u2014 probation and parole are 68% of the widest line, and its fall after 2021 is partly a change in what was counted rather than in what happened.",
+      "tier": "A"
+    },
+    {
+      "statement": "Immigration detention is a different system and this chart shows it: ICE detainees inside the jail count numbered 7,000 in 2023, about 1%, and were falling while ICE's own population set records.",
+      "tier": "A"
+    }
+  ],
+  "accuracy_note": "Prison is counted on 31 December and jails at 30 June, so no two lines here are a snapshot of the same day. Every figure is Bureau of Justice Statistics unless marked otherwise, and each line's modal carries its vintage, its breaks and what it cannot show."
+}

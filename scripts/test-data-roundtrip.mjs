@@ -625,6 +625,177 @@ if (!burg.nc08) fail("nc08 (home invasion) missing from the register");
 if (!burg.unodcGone) fail("UNODC's withdrawal of the burglary indicator is not recorded");
 if (!burg.reporting) fail("the burglary reporting-rate collapse (58.8% -> 40.7%) is missing");
 
+// Round 4 — incarceration (Sean, 2026-08-22: can the penal system show a rise
+// or decline that arrests could not?).
+//
+// The guards protect the same discipline as the burglary lane: a series whose
+// publisher declares it non-comparable must be BROKEN, not drawn through; a
+// dated international table must never become a chart; and the section's rule
+// is chart first, plain-language block underneath.
+const inc = await page.evaluate(() => {
+  const main = document.querySelector("main");
+  const t = main.innerText.replace(/\n/g, " ");
+  const heads = [...main.querySelectorAll("h2")].map((h) => h.textContent.trim());
+  const fig = [...main.querySelectorAll("figure")]
+    .find((f) => /the US penal system/i.test(f.querySelector("figcaption")?.textContent || ""));
+  const svg = fig?.querySelector("svg[viewBox]");
+  const legend = fig ? [...(fig.querySelector("ul")?.querySelectorAll("button") || [])]
+    .map((b) => b.textContent.trim()) : [];
+  const mainPaths = svg
+    ? [...svg.querySelectorAll("g[style*=cursor] > path:first-child")]
+        .map((x) => (x.getAttribute("d") || "").match(/M/g)?.length || 0)
+    : [];
+  const y = (el) => el ? el.getBoundingClientRect().top + window.scrollY : -1;
+  const section = fig?.closest("section");
+  const themesH = section?.querySelector("h3");
+  const themeRows = themesH ? [...themesH.parentElement.querySelectorAll("li")] : [];
+  const arrestsFig = [...main.querySelectorAll("figure")]
+    .find((f) => /machine peaked in 1997/i.test(f.querySelector("figcaption")?.textContent || ""));
+  const detFig = [...main.querySelectorAll("figure")]
+    .find((f) => /Where a sweep goes/i.test(f.querySelector("figcaption")?.textContent || ""));
+  return {
+    chart: !!svg,
+    measures: legend.length,
+    // the widest line must break where BJS says its own figures stop comparing
+    splitSeries: mainPaths.filter((n) => n > 1).length,
+    breakMarker: svg ? [...svg.querySelectorAll("line[stroke-dasharray='2 6']")].length : 0,
+    // shares the section window, so it must NOT declare the opt-out
+    sharedWindow: fig ? !fig.hasAttribute("data-own-window") : false,
+    // y axis must be legible at this scale, not a raw 7300000
+    axisMillions: svg ? [...svg.querySelectorAll("text")]
+      .some((x) => /^\d+\.\d+M$/.test(x.textContent)) : false,
+    // chart first, plain-language block under it (Sean's standing rule)
+    chartAboveThemes: y(fig) > 0 && y(fig) < y(themesH),
+    themeCount: themeRows.length,
+    themesChipped: themeRows.length > 0 && themeRows.every((r) => r.querySelector("span[title]")),
+    disclaimer: !!section && [...section.querySelectorAll("button")]
+      .some((b) => /full disclaimer/i.test(b.textContent)),
+    // ordering: arrests -> incarceration -> ICE detention
+    order: y(arrestsFig) < y(fig) && y(fig) < y(detFig),
+    // the findings themselves
+    peak: /1,615,487/.test(t),
+    trough: /1,205,087/.test(t),
+    risingAgain: /2\.1% in 2022 and 2\.0% in 2023/.test(t),
+    seriesEnds: /forthcoming/i.test(t) && /2024 or 2025/.test(t),
+    jailComposition: /Seventy percent of people in American jails/i.test(t)
+      && /convicted jail population fell 29%/i.test(t),
+    capacityStopped: heads.some((h) => /nobody counts/i.test(h)) && /Prison capacity, since 2016/i.test(t),
+    // international is a dated table, never a chart
+    intlTable: heads.some((h) => /Incarceration internationally/i.test(h)),
+    intlNoChart: (() => {
+      const s2 = [...main.querySelectorAll("h2")].find((h) => /Incarceration internationally/i.test(h.textContent))?.closest("section");
+      return s2 ? s2.querySelectorAll("svg[viewBox]").length === 0 : false;
+    })(),
+    intlDated: (t.match(/as at /g) || []).length >= 10,
+    notTopJailer: /no longer the world's top jailer/i.test(t) || /It is fourth/i.test(t),
+    chinaCaveat: /at least 2,340,000/.test(t),
+    // the ICE figure the site could not support has gone
+    noUnsourced73400: !/73,400/.test(t),
+    iceInJails: /7,000 at midyear/i.test(t) || /ICE detainees inside the jail count/i.test(t),
+  };
+});
+console.log("incarceration:", JSON.stringify(inc));
+if (!inc.chart) fail("incarceration chart missing");
+if (inc.measures !== 3) fail(`incarceration legend: ${inc.measures}, expected 3`);
+if (inc.splitSeries !== 1) fail(`series drawn with a declared break: ${inc.splitSeries}, expected exactly 1`);
+if (!inc.breakMarker) fail("the correctional-population basis break is not marked on the plot");
+if (!inc.sharedWindow) fail("incarceration chart fits the shared window and must not declare data-own-window");
+if (!inc.axisMillions) fail("y axis is not formatted in millions — '7300000' is not a legible label");
+if (!inc.chartAboveThemes) fail("chart must sit ABOVE its plain-language block");
+if (inc.themeCount < 4) fail(`incarceration themes: ${inc.themeCount}, expected 4+`);
+if (!inc.themesChipped) fail("incarceration themes missing tier chips");
+if (!inc.disclaimer) fail("incarceration section does not link the disclaimer");
+if (!inc.order) fail("section order must be arrests -> incarceration -> ICE detention");
+if (!inc.peak) fail("2009 prison peak (1,615,487) missing");
+if (!inc.trough) fail("2021 prison trough (1,205,087) missing");
+if (!inc.risingAgain) fail("the post-2021 rise is not stated");
+if (!inc.seriesEnds) fail("the series ending before 2024 is not stated — that is the finding");
+if (!inc.jailComposition) fail("the jail composition inversion is missing");
+if (!inc.capacityStopped) fail("nc09 (prison capacity discontinued after 2016) missing");
+if (!inc.intlTable) fail("international incarceration panel missing");
+if (!inc.intlNoChart) fail("international incarceration must be a dated table, NOT a chart");
+if (!inc.intlDated) fail("international rows must each carry their own reference date");
+if (!inc.notTopJailer) fail("the US-is-fourth correction is missing");
+if (!inc.chinaCaveat) fail("China's 'at least 2,340,000' caveat missing");
+if (!inc.noUnsourced73400) fail("73,400 still appears — no source on the site supports that figure");
+if (!inc.iceInJails) fail("ICE-detainees-inside-the-jail-count reconciliation missing");
+
+// Deltas (Sean, 2026-08-22): both enforcement charts must offer levels vs
+// year-over-year change. The rule that matters is the one about breaks — a
+// percentage computed across a declared change of measurement, or across a
+// publication gap, is not a change in the world and must not be drawn.
+for (const [label, cap] of [["incarceration", /the US penal system/i], ["arrests", /machine peaked in 1997/i]]) {
+  const before = await page.evaluate((capSrc) => {
+    const re = new RegExp(capSrc, "i");
+    const fig = [...document.querySelectorAll("main figure")]
+      .find((f) => re.test(f.querySelector("figcaption")?.textContent || ""));
+    const btns = fig ? [...fig.parentElement.querySelectorAll("button")]
+      .filter((b) => /^(Levels|Year-over-year change)$/.test(b.textContent.trim())) : [];
+    return { toggle: btns.length, pressed: btns.find((b) => b.getAttribute("aria-pressed") === "true")?.textContent.trim() };
+  }, cap.source);
+  if (before.toggle !== 2) fail(`${label}: levels/change toggle missing (found ${before.toggle} buttons)`);
+  if (before.pressed !== "Levels") fail(`${label}: chart must open on Levels, opened on "${before.pressed}"`);
+
+  await page.evaluate((capSrc) => {
+    const re = new RegExp(capSrc, "i");
+    const fig = [...document.querySelectorAll("main figure")]
+      .find((f) => re.test(f.querySelector("figcaption")?.textContent || ""));
+    [...fig.parentElement.querySelectorAll("button")]
+      .find((b) => b.textContent.trim() === "Year-over-year change")?.click();
+  }, cap.source);
+  await page.waitForTimeout(400);
+
+  const after = await page.evaluate((capSrc) => {
+    const re = new RegExp(capSrc, "i");
+    const fig = [...document.querySelectorAll("main figure")]
+      .find((f) => re.test(f.querySelector("figcaption")?.textContent || ""));
+    const svg = fig?.querySelector("svg[viewBox]");
+    const ticks = svg ? [...svg.querySelectorAll("text")].map((x) => x.textContent.trim()) : [];
+    return {
+      // the axis must now be signed percentages with zero on it
+      pctTicks: ticks.filter((x) => /^[+−-]?\d+(\.\d+)?%$/.test(x)).length,
+      hasZero: ticks.some((x) => /^0%?$/.test(x)),
+      signed: ticks.some((x) => /^-|^−/.test(x)) || ticks.some((x) => /^\+/.test(x)),
+      explained: /Showing year-over-year change/i.test(fig?.parentElement.innerText || ""),
+      drawn: svg ? [...svg.querySelectorAll("path")].filter((x) => x.getAttribute("stroke") !== "transparent").length : 0,
+    };
+  }, cap.source);
+  console.log(`${label} change view:`, JSON.stringify(after));
+  if (after.pctTicks < 3) fail(`${label}: change view y-axis is not in percent (${after.pctTicks} pct ticks)`);
+  if (!after.hasZero) fail(`${label}: change view must put zero on the axis, or a fall reads as a rise`);
+  if (!after.explained) fail(`${label}: change view does not say what it is showing`);
+  if (!after.drawn) fail(`${label}: change view drew nothing`);
+
+  // back to levels so later assertions see the default chart
+  await page.evaluate((capSrc) => {
+    const re = new RegExp(capSrc, "i");
+    const fig = [...document.querySelectorAll("main figure")]
+      .find((f) => re.test(f.querySelector("figcaption")?.textContent || ""));
+    [...fig.parentElement.querySelectorAll("button")]
+      .find((b) => b.textContent.trim() === "Levels")?.click();
+  }, cap.source);
+  await page.waitForTimeout(300);
+}
+
+// The break rule, checked arithmetically rather than by eye. The correctional
+// line declares a basis change after 2021, so differencing 2022 against 2021
+// would fabricate a figure across two different measurements. Verified against
+// the published chart doc and the drawn geometry: the change view must hold
+// exactly one fewer point than consecutive-year differencing would give.
+const brkRule = await page.evaluate(async () => {
+  const doc = await (await fetch("/data/crime/charts/incarceration_over_time.json")).json();
+  const s = doc.series.find((x) => x.break_after != null);
+  if (!s) return { ok: false, why: "no series declares a break" };
+  const years = s.points.map((p) => p.year);
+  const naive = years.filter((y, i) => i > 0 && y - years[i - 1] === 1).length;
+  const honest = years.filter((y, i) =>
+    i > 0 && y - years[i - 1] === 1 && years[i - 1] !== s.break_after).length;
+  return { ok: naive - honest === 1, naive, honest, breakAfter: s.break_after, name: s.name };
+});
+console.log("break rule:", JSON.stringify(brkRule));
+if (!brkRule.ok) fail(`change view would difference across the declared break: ${JSON.stringify(brkRule)}`);
+
+
 // Detention chart: three measures kept apart, and the section nav.
 const det = await page.evaluate(() => {
   const main = document.querySelector("main");
@@ -763,9 +934,14 @@ ar.funnel = await page.evaluate(() => {
   const t = document.querySelector("main").innerText.replace(/\n/g, " ");
   return /an arrest is an EVENT, not a person/i.test(t) && /7\.9M jail admissions/.test(t) && /69% of whom are not yet convicted/.test(t);
 });
+// Rewritten 2026-08-22. The old assertion pinned the old answer — a trend plus
+// "a record 73,400" — and so was quietly locking in the one ICE figure nothing
+// on the site supported. The capacity research replaced the trend with the real
+// answer: the federal government stopped counting.
 ar.overcrowding = await page.evaluate(() => {
   const t = document.querySelector("main").innerText.replace(/\n/g, " ");
-  return /31% below 2014/.test(t) && /record 73,400/.test(t);
+  return /stopped counting/i.test(t) && /114% of its lowest reported capacity/i.test(t)
+    && /73% of rated capacity/i.test(t);
 });
 console.log("arrests:", JSON.stringify(ar));
 if (!ar.iceLine) fail("civil immigration (ICE) line missing from arrests chart");

@@ -74,8 +74,13 @@ MILESTONES = [
      "certainty": "corroborated", "tier": "B", "source_id": None, "geo": "US"},
     {"milestone_id": "cm12", "track": "G", "category": "enforcement",
      "occurred_on": "2026-01",
-     "title": "ICE detention hits a record 73,400 held in a single day",
-     "description": "Above the 2019 peak. Vera counts 456 facilities in active use against 220 ICE publicly acknowledges; ~444,900 bookings since January 2025.",
+     # 73,400 was quoted here and in the sweeps register, and nothing on the
+     # site supported it: the detention chart's own caveat gives about 73,000
+     # (CBS, citing ICE) and 70,766 (Kocher, from ICE's published detention
+     # files). Three numbers for one event, one of them sourceless. Corrected
+     # 2026-08-22 to the two figures that have publishers behind them.
+     "title": "ICE detention passes 70,000 held in a single day",
+     "description": "Reported two ways for the same month: about 73,000 on 16 January (CBS, citing ICE) and 70,766 on 24 January (Kocher, from ICE's published detention files). Either way the first time above 70,000 in ICE's 23-year history, and above the 2019 peak. Vera counts 456 facilities in active use against 220 ICE publicly acknowledges; ~444,900 bookings since January 2025. By 11 July 2026 the published count was 65,765, of whom 70.6% had no criminal conviction.",
      "certainty": "corroborated", "tier": "B", "source_id": "hs_vera_2026", "geo": "US"},
     {"milestone_id": "cm13", "track": "G", "category": "enforcement",
      "occurred_on": "2025-08",
@@ -104,6 +109,22 @@ MILESTONES = [
      "title": "UNODC withdraws burglary as a retrievable indicator",
      "description": "Checked 2026-08-21: the property-crime dashboards redirect to a portal with no such theme and the legacy CTS burglary spreadsheet 404s. The only surviving route to the same collection is Eurostat, which covers Europe only. The second live citation on this site to vanish from its own publisher's portal.",
      "certainty": "documented", "tier": "A", "source_id": "bg_unodc_gone", "geo": "Global"},
+    # Incarceration (Sean, 2026-08-22). The stock, where arrests were the flow.
+    {"milestone_id": "cm18", "track": "G", "category": "incarceration",
+     "occurred_on": "2009-12",
+     "title": "American imprisonment peaks at 1,615,487",
+     "description": "The high point of the state and federal prison population. Twelve consecutive years of decline follow, to 1,205,087 in 2021 — a quarter of the system.",
+     "certainty": "documented", "tier": "A", "source_id": "inc_bjs_p19", "geo": "US"},
+    {"milestone_id": "cm19", "track": "G", "category": "measurement",
+     "occurred_on": "2016-12",
+     "title": "BJS publishes its last prison capacity table",
+     "description": "The US stood at 114% of its lowest reported capacity, 26 states at or above 100%. 'Prisoners in 2019' contains no capacity table, and neither does any edition since — so 'is the prison system overcrowded' has no current federal answer.",
+     "certainty": "documented", "tier": "A", "source_id": "inc_bjs_p16", "geo": "US"},
+    {"milestone_id": "cm20", "track": "G", "category": "incarceration",
+     "occurred_on": "2021-12",
+     "title": "Prison population bottoms out at 1,205,087, then turns",
+     "description": "The lowest point since 1996. It rises 2.1% in 2022 and 2.0% in 2023 — and then the record stops: BJS has published nothing for 2024 or 2025.",
+     "certainty": "documented", "tier": "A", "source_id": "inc_bjs_p23st", "geo": "US"},
 ]
 
 EXTRA_SOURCES = [

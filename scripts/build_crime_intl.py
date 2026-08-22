@@ -191,7 +191,20 @@ def main():
         "publisher": wb["publisher"], "tier": "A", "indexed": False,
         "series": series,
     }
-    (CHARTS / "homicide_international.json").write_text(json.dumps(chart, indent=2) + "\n")
+    # Carry hand-authored keys forward. This chart gained `themes` — the
+    # plain-language block the section requires under every chart — after this
+    # builder was written, so a rebuild used to delete them silently. Caught
+    # 2026-08-22 by the roundtrip suite, which asserts every chart has one.
+    _out = CHARTS / "homicide_international.json"
+    if _out.exists():
+        try:
+            _old = json.loads(_out.read_text())
+            for _k in ("themes", "accuracy_note", "change_view"):
+                if _k in _old and _k not in chart:
+                    chart[_k] = _old[_k]
+        except Exception:
+            pass
+    _out.write_text(json.dumps(chart, indent=2) + "\n")
 
     # ---- drug deaths: definition panel, deliberately not a chart ------------
     panel = {

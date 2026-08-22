@@ -199,8 +199,8 @@
       "tier": "A"
     },
     {
-      "statement": "Is the system overcrowded? Not by the trend: jail admissions are 31% below 2014 (11.5M then, 7.9M now) and the prison population sits near 1.25M. Where the record DOES show capacity strain right now is immigration detention: a record 73,400 held in January 2026, in 456 facilities against 220 publicly acknowledged.",
-      "tier": "B"
+      "statement": "Is the system overcrowded? The honest answer is that the federal government stopped counting. BJS last published prison capacity for 2016, when the United States stood at 114% of its lowest reported capacity with 26 states at or above 100%; no edition since carries a capacity table. Jails run the other way \u2014 73% of rated capacity in 2023 \u2014 though 12% of individual jurisdictions were over it. Where the record does show strain now is immigration detention, above 70,000 held in January 2026 against the 41,500 beds Congress funds.",
+      "tier": "A"
     },
     {
       "statement": "Civil immigration arrests are now drawn on this chart. The near-floor line is the point: even its FY2011 peak (322,093, mostly jail transfers) is about 2-3% of criminal arrest volume, and the line ends at FY2024 because no official 2025-26 total exists \u2014 the surge (4.4x the late-2024 baseline, street arrests up 11x) is documented only through FOIA'd records.",
@@ -211,5 +211,6 @@
       "tier": "B"
     }
   ],
-  "accuracy_note": "About the accuracy of these figures: arrest totals are estimates assembled from agency reports, and two official federal criminal-arrest series disagree (see the data-quality register); 2016 and 2021 are national gaps. The immigration line is federal FISCAL years and ends at FY2024 \u2014 DHS stopped publishing detailed enforcement tables after November 2024, so the 2025-26 surge exists only in FOIA'd records. An arrest, in either system, is an event \u2014 not a person, and not a conviction."
+  "accuracy_note": "About the accuracy of these figures: arrest totals are estimates assembled from agency reports, and two official federal criminal-arrest series disagree (see the data-quality register); 2016 and 2021 are national gaps. The immigration line is federal FISCAL years and ends at FY2024 \u2014 DHS stopped publishing detailed enforcement tables after November 2024, so the 2025-26 surge exists only in FOIA'd records. An arrest, in either system, is an event \u2014 not a person, and not a conviction.",
+  "change_view": true
 }

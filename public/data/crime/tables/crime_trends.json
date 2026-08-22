@@ -1,15 +1,15 @@
 [
   {
-    "topic": "homicide_reversal",
-    "statement": "The spike has fully reversed on the police measure. The FBI's final 2025 data records murder down 18.1% and violent crime down 9.3% year-over-year \u2014 the largest year-to-year violent-crime decline since FBI estimation began in 1936 \u2014 at a murder rate of 4.1 per 100,000, tied with 1955 and 1956 for the lowest ever recorded and below the 2019 pre-pandemic rate of 5.0.",
-    "tier": "A",
-    "source_id": "cs033"
-  },
-  {
     "topic": "homicide_2020_spike",
     "statement": "US murder rose 29.4% in 2020 \u2014 the largest single-year increase the FBI has recorded. CDC vital statistics show the same event independently: the age-adjusted homicide death rate went from 6.0 to 7.8 per 100,000.",
     "tier": "A",
     "source_id": "cs013"
+  },
+  {
+    "topic": "homicide_reversal",
+    "statement": "The spike has fully reversed on the police measure. The FBI's final 2025 data records murder down 18.1% and violent crime down 9.3% year-over-year \u2014 the largest year-to-year violent-crime decline since FBI estimation began in 1936 \u2014 at a murder rate of 4.1 per 100,000, tied with 1955 and 1956 for the lowest ever recorded and below the 2019 pre-pandemic rate of 5.0.",
+    "tier": "A",
+    "source_id": "cs033"
   },
   {
     "topic": "two_measures_diverge",
@@ -18,16 +18,16 @@
     "source_id": "cs_two_measures"
   },
   {
-    "topic": "clearance_decline",
-    "statement": "The share of homicides cleared by arrest or exceptional means fell from 93% in 1962 to 64% by 1994, reached 61.4% in 2019, dropped sharply to 54% in 2020 and to a reported low of 52.3% in 2022, recovering to 61.4% in 2024. Roughly four in ten US homicides are not cleared.",
-    "tier": "B",
-    "source_id": "cs012"
-  },
-  {
     "topic": "ytd_2026",
     "statement": "2026 so far continues the fall. Across 36 large cities, homicide in the first half of 2026 was 18% below the first half of 2025 \u2014 215 fewer deaths \u2014 with carjacking down 47%, motor vehicle theft down 20% and robbery down 17%. The Real-Time Crime Index, a separate sample of 566 agencies covering about 119 million people, independently records murder down 18.7% through April. Nine of thirteen offences fell. Two rose: domestic violence by 8% and sexual assault by 3%.",
     "tier": "A",
     "source_id": "cs_ccj_2026"
+  },
+  {
+    "topic": "clearance_decline",
+    "statement": "The share of homicides cleared by arrest or exceptional means fell from 93% in 1962 to 64% by 1994, reached 61.4% in 2019, dropped sharply to 54% in 2020 and to a reported low of 52.3% in 2022, recovering to 61.4% in 2024. Roughly four in ten US homicides are not cleared.",
+    "tier": "B",
+    "source_id": "cs012"
   },
   {
     "topic": "burglary_us",
@@ -46,5 +46,23 @@
     "statement": "'Home invasion' is not an offence anyone counts nationally. It is recorded as burglary \u2014 sorted by location and by whether force was used, not by whether the household was home. Statistics Canada states outright that it cannot be measured from its national survey. So the honest answer to whether home invasions have risen is that no national series exists to say.",
     "tier": "A",
     "source_id": "bg_statcan_be02"
+  },
+  {
+    "topic": "incarceration_us",
+    "statement": "American imprisonment peaked in 2009 at 1,615,487 people under state or federal jurisdiction, fell for twelve years to 1,205,087 in 2021 \u2014 a quarter of the system \u2014 and has risen every year since, by 2.1% in 2022 and 2.0% in 2023. The imprisonment rate followed the same shape, peaking at 506 per 100,000 in 2007 and reaching 360 in 2023. No figure for 2024 or 2025 has been published.",
+    "tier": "A",
+    "source_id": "inc_bjs_p23st"
+  },
+  {
+    "topic": "jail_composition",
+    "statement": "The decade-long fall in the American jail population is almost entirely a fall in convicted people. Between 2013 and 2023 the sentenced jail population fell 29%, from 278,000 to 196,600, while the unconvicted population rose 3%, from 453,200 to 467,600. Seventy percent of people held in local jails in 2023 had not been convicted of anything.",
+    "tier": "A",
+    "source_id": "inc_bjs_ji23st"
+  },
+  {
+    "topic": "incarceration_international",
+    "statement": "The United States is no longer the world's highest incarcerator by rate. The World Prison Brief puts it fourth at 542 per 100,000 for 2023, behind El Salvador (1,659, March 2024), Cuba (794, January 2020) and Turkmenistan (about 576, early 2021). It remains several times above every comparable country \u2014 Germany 69, Japan 33 \u2014 but the ranking itself mixes reference dates across eight years and cannot be drawn as a chart.",
+    "tier": "B",
+    "source_id": "inc_wpb_rank"
   }
 ]

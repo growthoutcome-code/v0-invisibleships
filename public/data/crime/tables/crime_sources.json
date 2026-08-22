@@ -1438,5 +1438,203 @@
     "evidence_tier": "A",
     "accessed": "2026-08-21",
     "archived_url": null
+  },
+  {
+    "source_id": "inc_bjs_p23st",
+    "publisher": "Bureau of Justice Statistics",
+    "title": "Prisoners in 2023 \u2013 Statistical Tables (Sept 2025, NCJ 310197) \u2014 the most recent in the series",
+    "url": "https://bjs.ojp.gov/document/p23st.pdf",
+    "evidence_tier": "A",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "inc_bjs_p19",
+    "publisher": "Bureau of Justice Statistics",
+    "title": "Prisoners in 2019 (Oct 2020, NCJ 255115) \u2014 carries the revised 2009\u20132012 counts",
+    "url": "https://bjs.ojp.gov/content/pub/pdf/p19.pdf",
+    "evidence_tier": "A",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "inc_bjs_p09",
+    "publisher": "Bureau of Justice Statistics",
+    "title": "Prisoners in 2009 (Dec 2010, NCJ 231675) \u2014 the 2000\u20132008 annual series",
+    "url": "https://bjs.ojp.gov/content/pub/pdf/p09.pdf",
+    "evidence_tier": "A",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "inc_bjs_p00",
+    "publisher": "Bureau of Justice Statistics",
+    "title": "Prisoners in 2000 (Aug 2001, NCJ 188207) \u2014 the 1999 count",
+    "url": "https://bjs.ojp.gov/content/pub/pdf/p00.pdf",
+    "evidence_tier": "A",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "inc_bjs_p20st",
+    "publisher": "Bureau of Justice Statistics",
+    "title": "Prisoners in 2020 \u2013 Statistical Tables (Dec 2021, NCJ 302776) \u2014 states the COVID mechanism",
+    "url": "https://bjs.ojp.gov/content/pub/pdf/p20st.pdf",
+    "evidence_tier": "A",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "inc_bjs_p16",
+    "publisher": "Bureau of Justice Statistics",
+    "title": "Prisoners in 2016 (Jan 2018, NCJ 251149), Table 16 \u2014 the LAST prison capacity table BJS published",
+    "url": "https://bjs.ojp.gov/content/pub/pdf/p16.pdf",
+    "evidence_tier": "A",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "inc_bjs_ji23st",
+    "publisher": "Bureau of Justice Statistics",
+    "title": "Jail Inmates in 2023 \u2013 Statistical Tables (Apr 2025, NCJ 309965)",
+    "url": "https://bjs.ojp.gov/document/ji23st.pdf",
+    "evidence_tier": "A",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "inc_bjs_ji19",
+    "publisher": "Bureau of Justice Statistics",
+    "title": "Jail Inmates in 2019 (Mar 2021, NCJ 255608) \u2014 2019 is a Census of Jails year, not a survey year",
+    "url": "https://bjs.ojp.gov/content/pub/pdf/ji19.pdf",
+    "evidence_tier": "A",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "inc_bjs_jim09",
+    "publisher": "Bureau of Justice Statistics",
+    "title": "Jail Inmates at Midyear 2009 \u2013 Statistical Tables (Jun 2010, NCJ 230122)",
+    "url": "https://bjs.ojp.gov/content/pub/pdf/jim09st.pdf",
+    "evidence_tier": "A",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "inc_bjs_pjim00",
+    "publisher": "Bureau of Justice Statistics",
+    "title": "Prison and Jail Inmates at Midyear 2000 (Mar 2001, NCJ 185989)",
+    "url": "https://bjs.ojp.gov/content/pub/pdf/pjim00.pdf",
+    "evidence_tier": "A",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "inc_bjs_pdrj24",
+    "publisher": "Bureau of Justice Statistics",
+    "title": "Jails Report Series: 2024 Preliminary Data Release (Dec 2025) \u2014 PRELIMINARY, may be revised",
+    "url": "https://bjs.ojp.gov/library/publications/jails-report-series-2024-preliminary-data-release/web-report",
+    "evidence_tier": "B",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "inc_bjs_cpus23",
+    "publisher": "Bureau of Justice Statistics",
+    "title": "Correctional Populations in the United States, 2023 \u2013 Statistical Tables (Sept 2025, NCJ 310413)",
+    "url": "https://bjs.ojp.gov/document/cpus23st.pdf",
+    "evidence_tier": "A",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "inc_bjs_cpus13",
+    "publisher": "Bureau of Justice Statistics",
+    "title": "Correctional Populations in the United States, 2013, Appendix Table 5 (Dec 2014, NCJ 248479)",
+    "url": "https://bjs.ojp.gov/content/pub/pdf/cpus13.pdf",
+    "evidence_tier": "A",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "inc_bjs_facilities19",
+    "publisher": "Bureau of Justice Statistics",
+    "title": "Census of State and Federal Adult Correctional Facilities, 2019 (Nov 2021, NCJ 301366)",
+    "url": "https://bjs.ojp.gov/content/pub/pdf/csfacf19st.pdf",
+    "evidence_tier": "A",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "inc_bjs_forthcoming",
+    "publisher": "Bureau of Justice Statistics",
+    "title": "BJS forthcoming publications \u2014 'Prisoners in 2024 \u2013 Statistical Tables' listed for Q3 2026, unpublished as of 22 Aug 2026",
+    "url": "https://bjs.ojp.gov/library/publications/forthcoming",
+    "evidence_tier": "A",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "inc_wpb_rank",
+    "publisher": "World Prison Brief (Institute for Crime & Justice Policy Research, Birkbeck)",
+    "title": "Highest to Lowest \u2014 Prison Population Rate (the ranking page carries NO reference-date column)",
+    "url": "https://www.prisonstudies.org/highest-to-lowest/prison_population_rate",
+    "evidence_tier": "B",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "inc_wpb_us",
+    "publisher": "World Prison Brief",
+    "title": "United States of America \u2014 542 per 100,000 (2023); total built from jails, state and federal prisons",
+    "url": "https://www.prisonstudies.org/country/united-states-america",
+    "evidence_tier": "B",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "inc_wpb_china",
+    "publisher": "World Prison Brief",
+    "title": "China \u2014 sentenced prisoners in Ministry of Justice prisons only; WPB's own estimate is 'at least 2,340,000'",
+    "url": "https://www.prisonstudies.org/country/china",
+    "evidence_tier": "B",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "inc_wppl",
+    "publisher": "Institute for Crime & Justice Policy Research",
+    "title": "World Prison Population List \u2014 'The information does not relate to the same date'",
+    "url": "https://www.prisonstudies.org/sites/default/files/publications/wppl_10.pdf",
+    "evidence_tier": "A",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "inc_space_i",
+    "publisher": "Council of Europe / University of Lausanne",
+    "title": "SPACE I 2025 key findings \u2014 one uniform reference date (31 Jan 2025), 100% response across 51 prison administrations",
+    "url": "https://wp.unil.ch/space/files/2026/06/260626_key-findings-space-i_prisons-europe-2025.pdf",
+    "evidence_tier": "A",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "inc_unodc_prisons",
+    "publisher": "UNODC",
+    "title": "UNODC data portal, prison capacity and persons held \u2014 LIVE, but the legacy dataunodc.un.org/dp-prisons URLs now redirect to the site root",
+    "url": "https://data.unodc.org/datareport/prison-capacity",
+    "evidence_tier": "A",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "inc_vera_2024",
+    "publisher": "Vera Institute of Justice",
+    "title": "People in Jail and Prison in 2024 \u2014 40 states increased prison populations between fall 2022 and spring 2024",
+    "url": "https://vera-institute.files.svdcdn.com/production/downloads/publications/People-in-Jail-and-Prison-in-2024-Full-Reportpdf.pdf",
+    "evidence_tier": "B",
+    "accessed": "2026-08-22",
+    "archived_url": null
   }
 ]

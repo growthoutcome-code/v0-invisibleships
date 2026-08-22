@@ -383,6 +383,28 @@ SOURCE_ALIASES = {
 }
 
 
+
+def preserve(path, chart, keys=("themes", "accuracy_note", "change_view", "answer")):
+    """Carry hand-authored keys forward across a rebuild.
+
+    These chart docs gained `themes` (the plain-language block under every
+    chart) after their builders were written, so a rebuild deleted them and
+    the page lost its summaries. Caught 2026-08-22 by the roundtrip suite.
+    Anything the builder itself sets wins; anything only on disk is kept.
+    """
+    import json as _json
+    p = pathlib.Path(path)
+    if not p.exists():
+        return chart
+    try:
+        old = _json.loads(p.read_text())
+    except Exception:
+        return chart
+    for k in keys:
+        if k in old and k not in chart:
+            chart[k] = old[k]
+    return chart
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     CHARTS.mkdir(parents=True, exist_ok=True)
@@ -519,13 +541,34 @@ def main():
     def save(name, data, folder=OUT):
         (folder / name).write_text(json.dumps(data, indent=2) + "\n")
 
-    save("crime_indicators.json", indicators)
-    save("crime_sources.json", sources)
-    save("crime_data_quality.json", dq)
-    save("crime_trends.json", tr)
+    def merge_save(name, data, key):
+        """Keep rows this script does not own.
+
+        This script was the FIRST crime builder and wrote these four files
+        wholesale, which was correct when it was the only writer. It is now one
+        of seven, and several of the others add rows here — plus the arrests and
+        detention material, which has no builder of its own and lives only in
+        these files. A wholesale write destroyed 36 sources, 42 indicator rows
+        and two data-quality rows (cq10, cq11) the moment every builder was run
+        in sequence. Caught 2026-08-22 by re-running the whole pipeline; the
+        same clobber previously ate sw02 and nc07 in build_crime_lanes.py.
+
+        Rows this script produces are replaced by key; everything else is kept
+        in place, so running any subset of builders in any order is safe.
+        """
+        path = OUT / name
+        existing = json.loads(path.read_text()) if path.exists() else []
+        mine = {r[key] for r in data if key in r}
+        kept = [r for r in existing if r.get(key) not in mine]
+        save(name, data + kept)
+
+    merge_save("crime_indicators.json", indicators, "indicator_id")
+    merge_save("crime_sources.json", sources, "source_id")
+    merge_save("crime_data_quality.json", dq, "dq_id")
+    merge_save("crime_trends.json", tr, "topic")
     save("crime_verdict.json", vd)
     save("crime_caveats.json", CAVEATS)
-    save("homicide_two_measures.json", chart, CHARTS)
+    save("homicide_two_measures.json", preserve(CHARTS / "homicide_two_measures.json", chart), CHARTS)
 
     tiers = Counter(r["tier"] for r in indicators)
     stiers = Counter(s["evidence_tier"] for s in sources)

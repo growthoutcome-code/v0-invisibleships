@@ -133,5 +133,41 @@
     "effect": "Countries filed under one code are not necessarily counting one thing. France is excluded from the international chart on the publisher's own statement. Sweden's 3.4-to-1 rate against Germany should be read as evidence about the code rather than about either country.",
     "tier": "A",
     "source_id": "bg_eurostat_iccs"
+  },
+  {
+    "dq_id": "cq16",
+    "geography": "US",
+    "topic": "The prison series ends before the years it is asked about",
+    "issue": "BJS's most recent Prisoners release covers 2023 and was published in September 2025. 'Prisoners in 2024 \u2013 Statistical Tables' is listed on BJS's forthcoming page for Q3 2026 and does not exist as of 22 August 2026; the direct URL returns 404. There is no preliminary prisons release for 2024 either, though BJS did publish one for jails.",
+    "effect": "This is the second national series in this section to stop just short of the period in question \u2014 criminal arrests end at 2024, imprisonment at 2023. A reader asking whether the enforcement of 2025 and 2026 shows up in the prison population cannot be answered from federal statistics, and the honest response is that the record is not there yet rather than that nothing happened.",
+    "tier": "A",
+    "source_id": "inc_bjs_forthcoming"
+  },
+  {
+    "dq_id": "cq17",
+    "geography": "US",
+    "topic": "BJS declares its own 2022 and 2023 correctional totals non-comparable",
+    "issue": "Three separate problems land in the same two years. BJS states that 2022 and 2023 cannot be compared with earlier years for the total correctional population, community supervision or probation. The 2023 Annual Probation Survey added 285 agencies supervising misdemeanour probation only, about 120,000 people. And California's post-release community supervision counts have not been updated since 2018, which drives much of the parole fall from 878,700 (2019) to 680,400 (2023).",
+    "effect": "The widest line on the incarceration chart is broken after 2021 for this reason. Read as a continuous series it would show correctional control falling and then recovering; in truth part of the recovery is 120,000 people who were always there and are now counted, and part of the earlier fall is a state that stopped reporting.",
+    "tier": "A",
+    "source_id": "inc_bjs_cpus23"
+  },
+  {
+    "dq_id": "cq18",
+    "geography": "US",
+    "topic": "Prison capacity stopped being published in 2016",
+    "issue": "Table 16 of Prisoners in 2016 is the last national prison capacity table BJS published. Prisoners in 2019 and every edition since contain none. Where it did exist it was ambiguous by construction: states report design, rated and operational capacity, many report only some, and BJS published population against both the lowest and the highest reported measure.",
+    "effect": "'Is the prison system overcrowded' cannot be answered from current federal data at all, and where it could be answered the answer depended on which capacity measure was chosen \u2014 Alabama was simultaneously at 175.7% of design capacity and 90.7% of operational capacity in 2016.",
+    "tier": "A",
+    "source_id": "inc_bjs_p16"
+  },
+  {
+    "dq_id": "cq19",
+    "geography": "International",
+    "topic": "The world incarceration ranking mixes eight years of reference dates",
+    "issue": "The World Prison Brief's rate ranking presents countries in a single ordered list with no reference-date column. Retrieved individually, the dates run from 31 December 2018 (China) to 3 August 2026 (Turkey). Cuba is ranked second in the world on a January 2020 figure and Turkmenistan third on a 2021 estimate. WPB's own World Prison Population List states that the information does not relate to the same date.",
+    "effect": "Any bar chart built from that page silently compares 2018 with 2026. This section therefore publishes the figures as a dated table where every row carries its own date, and no international incarceration chart \u2014 the same decision already taken for drug deaths and missing persons.",
+    "tier": "A",
+    "source_id": "inc_wppl"
   }
 ]

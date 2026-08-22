@@ -35,6 +35,7 @@ TABLE_FILES = [
     "crime_intl_drug_deaths.json",
     "crime_intl_missing.json",
     "crime_accomplishments.json",
+    "crime_intl_incarceration.json",
 ]
 
 DESCRIPTIONS = {
@@ -44,6 +45,7 @@ DESCRIPTIONS = {
     "crime_transnational.json": "Transnational repression — what it is (FBI definition and tactic list) and how it is measured, if at all",
     "crime_intl_drug_deaths.json": "Drug deaths internationally — five incompatible ways of counting; the definition column is the point",
     "crime_intl_missing.json": "Missing persons internationally — no shared unit exists; each country's figure in its own unit",
+    "crime_intl_incarceration.json": "Incarceration internationally \u2014 a DATED table, never a chart: the source itself says the figures do not relate to the same date",
     "crime_accomplishments.json": "Law enforcement accomplishments — agency-attributed claims with corroboration, outcome vs activity marked",
     "crime_indicators.json": "Time-series rows: indicator, year, value, unit, tier, source_id, vintage note",
     "crime_data_quality.json": "Counting, coverage and definitional problems — the spine of this dataset",
@@ -205,6 +207,9 @@ verified against a fetched source. The rate series is complete.
         bg_path = CHARTS / "burglary_international.json"
         if bg_path.exists():
             dst.writestr(PREFIX + "charts/burglary_international.json", bg_path.read_text())
+        inc_path = CHARTS / "incarceration_over_time.json"
+        if inc_path.exists():
+            dst.writestr(PREFIX + "charts/incarceration_over_time.json", inc_path.read_text())
         dst.writestr(PREFIX + "charts/homicide_us.csv", hom_csv)
 
     shutil.move(str(tmp), str(ZIP))
@@ -212,7 +217,8 @@ verified against a fetched source. The rate series is complete.
     n_charts = 1 + sum(  # homicide_us.csv, plus each optional chart doc present
         1 for f in ("homicide_two_measures", "harm_lanes_indexed",
                     "homicide_international", "arrests_over_time",
-                    "detention_capacity", "burglary_international")
+                    "detention_capacity", "burglary_international",
+                    "incarceration_over_time")
         if (CHARTS / f"{f}.json").exists()
     )
     print(f"crime/: {len(TABLE_FILES)} tables + manifest + README + {n_charts} chart files")

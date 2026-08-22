@@ -54,6 +54,8 @@ type Chart = {
   series: ChartSeries[];
   markers?: { year: number; label: string }[];
   y_format?: string;
+  /** Offers the levels / year-over-year-change toggle. */
+  change_view?: boolean;
   themes?: { statement: string; tier: string }[];
   accuracy_note?: string;
 };
@@ -356,13 +358,32 @@ function TwoSeriesChart({ chart, onPick }: { chart: Chart; onPick: (s: ChartSeri
   // hover/focus lights a series, tap once highlights, tap again opens detail.
   const [focus, setFocus] = useState<string | null>(null);
 
-  const fmtV = (v: number) =>
-    chart.y_format === "millions" ? `${(v / 1e6).toFixed(v >= 10e6 ? 0 : 1)}M` : v.toFixed(0);
+  // Levels or year-over-year change (Sean, 2026-08-22). Change is computed only
+  // between CONSECUTIVE years: a series with a gap gets no bar across it, since
+  // the difference between 2019 and 2024 is not a year-over-year change.
+  const [mode, setMode] = useState<"level" | "change">("level");
+  const showChange = mode === "change" && !!chart.change_view;
 
-  const view = fullRecord ? chart.series : chart.series.map((s) => ({
+  const fmtV = (v: number) =>
+    showChange
+      ? `${v > 0 ? "+" : ""}${v.toFixed(v === 0 ? 0 : 1)}%`
+      : chart.y_format === "millions" ? `${(v / 1e6).toFixed(v >= 10e6 ? 0 : 1)}M` : v.toFixed(0);
+
+  const windowed = fullRecord ? chart.series : chart.series.map((s) => ({
     ...s,
     points: s.points.filter((p) => p.year >= DATA_WINDOW.from && p.year <= DATA_WINDOW.to),
   })).filter((s) => s.points.length > 1);
+
+  const view = (showChange
+    ? windowed.map((s) => ({
+        ...s,
+        points: s.points.flatMap((p, i) => {
+          const prev = s.points[i - 1];
+          if (!prev || p.year - prev.year !== 1 || !prev.value) return [];
+          return [{ ...p, value: ((p.value - prev.value) / prev.value) * 100 }];
+        }),
+      })).filter((s) => s.points.length > 1)
+    : windowed);
 
   const all = view.flatMap((s) => s.points);
   if (all.length < 2) return null;
@@ -385,10 +406,16 @@ function TwoSeriesChart({ chart, onPick }: { chart: Chart; onPick: (s: ChartSeri
   const x0 = fullRecord ? Math.min(...years) : DATA_WINDOW.from;
   const x1 = fullRecord ? Math.max(...years) : DATA_WINDOW.to;
   const v1 = Math.max(...vals) * 1.12;
+  // Change mode needs zero on the axis, or a fall reads as a rise.
+  const v0 = showChange ? Math.min(...vals, 0) * 1.12 : 0;
   const X = (y: number) => padL + ((y - x0) / (x1 - x0)) * (W - padL - padR);
-  const Y = (v: number) => padT + (1 - v / v1) * (H - padT - padB);
+  const Y = (v: number) => padT + (1 - (v - v0) / (v1 - v0)) * (H - padT - padB);
 
-  const yTicks = Array.from({ length: 5 }, (_, i) => (v1 * i) / 4);
+  const yTicks = (() => {
+    const t = Array.from({ length: 5 }, (_, i) => v0 + ((v1 - v0) * i) / 4);
+    // Zero must be ON the axis in change mode, or a fall reads as a rise.
+    return showChange && !t.some((x) => Math.abs(x) < 1e-9) ? [...t, 0].sort((a, b) => a - b) : t;
+  })();
   // Shared tick years in the default window; the full-record view spans 75
   // years and needs its own coarser stepping.
   let xTicks: number[] = [];
@@ -614,8 +641,31 @@ function TwoSeriesChart({ chart, onPick }: { chart: Chart; onPick: (s: ChartSeri
               : `Show the full record (${earliest}\u2013${DATA_WINDOW.to})`}
           </button>
         )}
+        {chart.change_view && (
+          <span role="group" aria-label="Chart view" className="flex gap-1">
+            {([["level", "Levels"], ["change", "Year-over-year change"]] as const).map(([m, label]) => (
+              <button key={m} type="button"
+                onClick={() => { setMode(m); track("crime_chart_mode", { mode: m }); }}
+                aria-pressed={mode === m}
+                className={`text-[13px] px-3 py-1 border transition-colors ${
+                  mode === m ? "border-foreground text-foreground font-semibold"
+                             : "border-edge text-muted hover:text-foreground"
+                }`}>
+                {label}
+              </button>
+            ))}
+          </span>
+        )}
         <span className="text-muted text-[14px]">Click either line for its method and sources.</span>
       </div>
+      {showChange && (
+        <p className="text-muted text-[14px] measure mt-2 mb-0">
+          <strong className="text-foreground">Showing year-over-year change.</strong>{" "}
+          Each point is one year against the one before it, so a year with no
+          published predecessor has no point — the difference between 2019 and 2024
+          is not a year-over-year change and is not drawn as one.
+        </p>
+      )}
 
       {/* On phones the end labels are dropped, so the key carries identity. */}
       {narrow && (
@@ -666,6 +716,12 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
   const [intlPicked, setIntlPicked] = useState<IntlSeries | null>(null);
   const detention = useDoc<DetChart>("/data/crime/charts/detention_capacity.json");
   const [detPicked, setDetPicked] = useState<DetSeries | null>(null);
+  // Incarceration (Sean, 2026-08-22): arrests are a flow counted by police,
+  // this is the stock counted by corrections — a genuinely independent check
+  // on whether the enforcement story shows up anywhere else.
+  const incarc = useDoc<DetChart>("/data/crime/charts/incarceration_over_time.json");
+  const intlIncarc = useDoc<{ title: string; why_no_chart: string; rows: any[] }>(
+    "/data/crime/tables/crime_intl_incarceration.json");
   const nav = useSectionNav("crime-root");
 
   const srcs = sources || [];
@@ -1030,6 +1086,75 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
                 </p>
                 <p className="text-muted text-[15px] measure mt-2 mb-0">{w.what_the_number_is}</p>
                 <p className="text-muted text-[15px] measure mt-1 mb-0"><em>For scale:</em> {w.for_scale}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {/* ---- incarceration: the stock, where arrests were the flow
+             (Sean, 2026-08-22). Sits between arrests and ICE detention on
+             purpose: who gets arrested, who ends up held, and the separate
+             civil system running alongside. Chart first, plain-language block
+             underneath, per the section's standing rule. ---- */}
+      <section className="mb-14">
+        <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
+          Who is held: prison, jail, and everyone else under supervision
+        </h2>
+        {incarc === null ? <SkeletonChart /> : (
+          <>
+            {incarc.accuracy_note && (
+              <DismissibleNote storageKey="is_crime_incarceration_accuracy_v1">
+                {incarc.accuracy_note}
+              </DismissibleNote>
+            )}
+            <DetentionChart chart={incarc} onPick={setDetPicked} />
+            {!!incarc.themes?.length && (
+              <div className="mt-2 mb-5">
+                <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">
+                  What the chart shows
+                </h3>
+                <ul className="list-none p-0 m-0">
+                  {incarc.themes.map((t, i) => (
+                    <li key={i} className="flex items-baseline gap-3 py-2 border-b border-edge/60 text-[16px] text-foreground/90">
+                      <TierChip t={t.tier} />
+                      <span className="measure">{t.statement}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            <p className="text-muted text-[15px] measure">{incarc.note}</p>
+            <p className="text-muted text-[15px] measure mt-3">
+              Every figure here is Bureau of Justice Statistics, read from the publication
+              named in each line&rsquo;s detail panel. See the{" "}
+              <DisclaimerLink from="crime">full disclaimer</DisclaimerLink> for how this
+              research was gathered and what it is not.
+            </p>
+          </>
+        )}
+      </section>
+
+      {/* ---- incarceration internationally: the third documented non-chart ---- */}
+      {intlIncarc && (
+        <section className="mb-14">
+          <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">{intlIncarc.title}</h2>
+          <p className="text-muted text-[15px] measure mb-6">{intlIncarc.why_no_chart}</p>
+          <ul className="list-none p-0 m-0">
+            {intlIncarc.rows.map((r, i) => (
+              <li key={i} className="py-3 border-b border-edge/60">
+                <div className="flex flex-wrap items-baseline gap-3 text-[16px]">
+                  <TierChip t={r.tier} />
+                  <span className="text-foreground font-semibold">{r.country}</span>
+                  <span className="text-foreground/85 tabular-nums">
+                    {r.value.toLocaleString()}{" "}
+                    <span className="text-muted">{r.unit}</span>
+                  </span>
+                  {/* the date is the point of this table, so it is never a footnote */}
+                  <span className="text-muted text-[14px] italic">as at {r.year}</span>
+                  <span className="ml-auto"><SourceLink id={r.source_id} sources={srcs} /></span>
+                </div>
+                <p className="text-muted text-[14px] measure mt-1 mb-0">{r.definition}</p>
               </li>
             ))}
           </ul>

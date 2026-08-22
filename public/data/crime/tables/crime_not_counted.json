@@ -70,5 +70,23 @@
     "who_would_collect": "FBI CJIS in the US, via a NIBRS data element that does not exist \u2014 occupancy is not recorded, so the count could not be produced from the returns even in principle; Statistics Canada, which states it cannot; the ABS, whose classification defines home invasion into burglary by design.",
     "tier": "A",
     "source_id": "bg_anzsoc"
+  },
+  {
+    "nc_id": "nc09",
+    "category": "Prison capacity, since 2016",
+    "status": "Measured, published, then discontinued",
+    "detail": "'Is the prison system overcrowded?' has a federal answer only up to 2016. Table 16 of Prisoners in 2016 put the United States at 114.0% of its lowest reported capacity, with 26 states at or above 100% \u2014 Alabama 175.7%, Illinois 164.1%, Nebraska 157.8%, Delaware 154.8%. Prisoners in 2019 contains no capacity table. Neither does any edition since. The nearest surviving federal measurement is the 2019 facilities census, which found 292 confinement facilities operating over capacity, holding 36.0% of all prisoners \u2014 and the next census is still forthcoming. Even the 2016 table came with a trap worth keeping: states report up to three capacity measures and many report only one, so Alabama was at 175.7% of DESIGN capacity and 90.7% of OPERATIONAL capacity in the same row. The same state, the same year, opposite answers.",
+    "who_would_collect": "Bureau of Justice Statistics, which collected it until 2016 and stopped. No federal body has published a national prison capacity series since.",
+    "tier": "A",
+    "source_id": "inc_bjs_p16"
+  },
+  {
+    "nc_id": "nc10",
+    "category": "Incarceration, compared between countries",
+    "status": "No shared reference date \u2014 the publisher says so itself",
+    "detail": "The World Prison Brief is the standard international source and it does not claim to be a same-date comparison. Its ranking page carries no date column at all, while the figures behind it run from December 2018 to August 2026; Cuba ranks second in the world on a January 2020 number. The World Prison Population List states it plainly: the information does not relate to the same date, and comparability is further compromised by different practice in different countries. Beneath the dates sit definitional gaps that no axis can absorb \u2014 China's figure counts sentenced prisoners in Ministry of Justice prisons only, against WPB's own estimate of 'at least 2,340,000'; Canada publishes an annual average where others publish a single day; France excludes 19,190 people on the prison register who are not in a cell. WPB's own two products disagree with each other, giving El Salvador 1,086 in the 14th edition and 1,659 in the live database for overlapping periods. The Council of Europe's SPACE I does it properly \u2014 one reference date, 31 January 2025, and a 100% response rate \u2014 and covers Europe only.",
+    "who_would_collect": "No one currently does, at global scale, on one date. UNODC's prison indicators are live but the legacy dataunodc.un.org/dp-prisons URLs now redirect to the site root; SPACE I is the model, and it is regional.",
+    "tier": "A",
+    "source_id": "inc_wppl"
   }
 ]
