@@ -549,19 +549,23 @@
   ],
   "themes": [
     {
-      "statement": "Four of the five countries are below where they started in 2008. The Netherlands fell furthest by a wide margin \u2014 79% below its 2009 peak \u2014 while Sweden and Spain fell around 20%.",
+      "statement": "Four of the five countries are below where they started in 2008. The Netherlands fell furthest \u2014 79% below its 2009 peak.",
       "tier": "A"
     },
     {
-      "statement": "Italy is the exception: 44% above its 2020 trough and still climbing. Germany has also risen 44% since its 2021 low, though it remains half its 2015 peak.",
+      "statement": "Italy is the exception: 44% above its 2020 trough and still climbing.",
       "tier": "A"
     },
     {
-      "statement": "Sweden records 3.4 times Germany's rate on the same code. That gap is mostly the code: Sweden counts break-ins to cellars and attic storage, Germany does not.",
+      "statement": "Germany has also risen 44% since its 2021 low, though it remains half its 2015 peak.",
       "tier": "A"
     },
     {
-      "statement": "Across the EU as a whole, residential burglary is 38% below 2014 \u2014 but 12% above its 2021 low.",
+      "statement": "Sweden records 3.4 times Germany's rate on the same code. That gap is mostly the code: Sweden counts cellars and attic storage, Germany does not.",
+      "tier": "A"
+    },
+    {
+      "statement": "Across the EU, residential burglary is 38% below 2014 \u2014 but 12% above its 2021 low.",
       "tier": "A"
     },
     {
@@ -569,7 +573,11 @@
       "tier": "A"
     },
     {
-      "statement": "There is no global line to draw. UNODC has withdrawn burglary as a retrievable indicator from its own portal \u2014 the property-crime dashboards redirect and the legacy spreadsheet returns 404, checked 21 August 2026. These European figures survive only because Eurostat publishes the same joint collection.",
+      "statement": "There is no global line to draw. UNODC has withdrawn burglary as a retrievable indicator from its own portal.",
+      "tier": "A"
+    },
+    {
+      "statement": "Its dashboards redirect and the legacy spreadsheet returns 404, checked 21 August 2026. These European figures survive only because Eurostat publishes the same collection.",
       "tier": "A"
     }
   ],

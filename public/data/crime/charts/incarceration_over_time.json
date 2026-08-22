@@ -452,23 +452,35 @@
       "tier": "A"
     },
     {
-      "statement": "It is rising again. Up 2.1% in 2022 and 2.0% in 2023, about 49,000 people over two years \u2014 from a base a quarter below the peak.",
+      "statement": "It is rising again: up 2.1% in 2022 and 2.0% in 2023, about 49,000 people over two years.",
       "tier": "A"
     },
     {
-      "statement": "The record then stops. BJS has published nothing for 2024 or 2025, and 'Prisoners in 2024' is listed as forthcoming. This is the second chart in this section whose official series ends just before the years it is most often asked about \u2014 the arrests chart does the same.",
+      "statement": "The record then stops. BJS has published nothing for 2024 or 2025, and 'Prisoners in 2024' is listed as forthcoming.",
       "tier": "A"
     },
     {
-      "statement": "Seventy percent of people in American jails have not been convicted of anything. Between 2013 and 2023 the convicted jail population fell 29% while the unconvicted population rose 3%: the system did not shrink so much as change who it holds.",
+      "statement": "This is the second chart here whose official series ends just before the years it is most often asked about. The arrests chart does the same.",
       "tier": "A"
     },
     {
-      "statement": "Most people under correctional control are not behind anything \u2014 probation and parole are 68% of the widest line, and its fall after 2021 is partly a change in what was counted rather than in what happened.",
+      "statement": "Seventy percent of people in American jails have not been convicted of anything.",
       "tier": "A"
     },
     {
-      "statement": "Immigration detention is a different system and this chart shows it: ICE detainees inside the jail count numbered 7,000 in 2023, about 1%, and were falling while ICE's own population set records.",
+      "statement": "From 2013 to 2023 the convicted jail population fell 29% while the unconvicted rose 3%. The system changed who it holds more than it shrank.",
+      "tier": "A"
+    },
+    {
+      "statement": "Most people under correctional control are not behind anything \u2014 probation and parole are 68% of the widest line.",
+      "tier": "A"
+    },
+    {
+      "statement": "Its fall after 2021 is partly a change in what was counted, not in what happened.",
+      "tier": "A"
+    },
+    {
+      "statement": "Immigration detention is a different system, and this chart shows it. ICE detainees inside the jail count numbered 7,000 in 2023, about 1%.",
       "tier": "A"
     }
   ],

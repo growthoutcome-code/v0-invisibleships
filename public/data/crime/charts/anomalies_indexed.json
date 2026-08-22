@@ -3,27 +3,51 @@
   "unit": "Each lane indexed to its own first year = 100 \u2014 direction only, never size",
   "themes": [
     {
-      "statement": "Missing-person records are at their modern low, about a fifth below 2014. Whether that is fewer people going missing or fewer records being entered cannot be separated.",
+      "statement": "Missing-person records are at their modern low, about a fifth below 2014.",
       "tier": "A"
     },
     {
-      "statement": "Home invasion has no lane here, because no country counts it as an offence. It is filed as burglary, and burglary has fallen almost everywhere for twenty years.",
+      "statement": "Whether that is fewer people going missing or fewer records being entered cannot be separated.",
       "tier": "A"
     },
     {
-      "statement": "In England, adults reporting a psychotic symptom in the past year went from 5.6% to 6.8% between 2000 and 2014 \u2014 and then the survey stopped publishing that figure. No United States federal survey asks the question at all.",
+      "statement": "Home invasion has no lane here, because no country counts it as an offence. It is filed as burglary, and burglary has fallen for twenty years.",
       "tier": "A"
     },
     {
-      "statement": "The haunting line is BELIEF, not experience. Gallup has asked Americans whether they believe in ghosts since 1990 and has never asked whether they have seen one; Pew asked the experience question twice and then declared its own two readings incomparable after it moved from telephone to online.",
+      "statement": "In England, adults reporting a psychotic symptom in the past year went from 5.6% to 6.8% between 2000 and 2014. Then the survey stopped publishing it.",
       "tier": "A"
     },
     {
-      "statement": "Reports to the federal UAP office rose sharply and then fell \u2014 and the office attributes the rise to reduced stigma and to the FAA beginning to forward reports weekly. It is a picture of a reporting system being built, not of the sky changing.",
+      "statement": "No United States federal survey asks about hallucinations at all.",
       "tier": "A"
     },
     {
-      "statement": "Four lanes, four different things: records entered, symptoms reported, beliefs held, reports received. They are drawn together because each is what exists \u2014 not because any one of them corroborates another. Nothing here establishes a relationship between them.",
+      "statement": "The haunting line measures belief, not experience \u2014 what people think is possible, not what has happened to them.",
+      "tier": "A"
+    },
+    {
+      "statement": "Gallup has asked Americans whether they believe in ghosts since 1990, and has never once asked whether they have seen one.",
+      "tier": "A"
+    },
+    {
+      "statement": "Pew asked the experience question twice, then declared its own two readings incomparable after moving from telephone to online.",
+      "tier": "A"
+    },
+    {
+      "statement": "Reports to the federal UAP office rose sharply, then fell.",
+      "tier": "A"
+    },
+    {
+      "statement": "The office attributes the rise to reduced stigma and to the FAA starting to forward reports weekly \u2014 a reporting system being built, not the sky changing.",
+      "tier": "A"
+    },
+    {
+      "statement": "Four lanes, four different things: records entered, symptoms reported, beliefs held, reports received.",
+      "tier": "A"
+    },
+    {
+      "statement": "They are drawn together because each is what exists \u2014 not because any one corroborates another. Nothing here establishes a relationship.",
       "tier": "A"
     }
   ],

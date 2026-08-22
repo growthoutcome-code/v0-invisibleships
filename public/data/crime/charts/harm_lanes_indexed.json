@@ -7,7 +7,7 @@
       "tier": "A"
     },
     {
-      "statement": "Missing-person entries are at their modern low; whether that is fewer cases or less entering cannot be separated.",
+      "statement": "Homicide spiked 29.4% in 2020, then fell to the lowest rate ever recorded.",
       "tier": "A"
     },
     {
@@ -15,15 +15,19 @@
       "tier": "A"
     },
     {
-      "statement": "Homicide spiked 29.4% in 2020, then fell to the lowest rate ever recorded.",
+      "statement": "Missing-person entries are at their modern low. Whether that is fewer cases or less entering cannot be separated.",
       "tier": "A"
     },
     {
-      "statement": "Break-ins have fallen further than any other lane: 53% between 2000 and 2019 on the FBI basis that ran until then, and 26% more between 2020 and 2024 on the estimates that replaced it. Part of that is fewer reports rather than fewer break-ins \u2014 40.7% of victimisations reached the police in 2024 against 58.8% in 2010.",
+      "statement": "Break-ins have fallen further than any other lane \u2014 53% from 2000 to 2019, and 26% more from 2020 to 2024 on the basis that replaced it.",
       "tier": "A"
     },
     {
-      "statement": "Two categories this site cares about have no lane at all: harassment, because nobody counts it, and home invasion, because it is not an offence anyone records.",
+      "statement": "Part of that is fewer reports, not fewer break-ins: 40.7% of victimisations reached the police in 2024, against 58.8% in 2010.",
+      "tier": "A"
+    },
+    {
+      "statement": "Two categories this site cares about have no lane at all \u2014 harassment, because nobody counts it, and home invasion, because it is not an offence anyone records.",
       "tier": "A"
     }
   ],

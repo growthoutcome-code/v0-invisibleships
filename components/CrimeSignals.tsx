@@ -782,42 +782,20 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
     <div className="w-full lg:grid lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-x-10 lg:items-start">
       <SideNav mode="outline" sections={nav.sections} active={nav.active} />
       <div id="crime-root" className="min-w-0">
-      <DataNoteLine from="crime">
-        United States only unless a chart says otherwise · AI-assisted research from public
-        records · every figure evidence-graded and linked to the source it was read from ·
-        dotted, hollow, broken and points-only lines all mean specific things, set out under
-        &ldquo;How to read the charts&rdquo; in the{" "}
-        <DisclaimerLink from="crime">full disclaimer</DisclaimerLink> ·
-      </DataNoteLine>
+      {/* ================= THE OPENING =================
+          Sean, 2026-08-22: "Do not begin the Data/Crime page with text. Use a
+          chart." So the six-lane chart is the first thing rendered — no note
+          line, no act banner, no verdict above it.
 
-      {/* ================= ACT ONE — WHAT IS HAPPENING ================= */}
-      <div className="mt-2 mb-8 pt-6 border-t-2 border-edge">
-        <p className="text-muted text-[12px] uppercase tracking-[0.14em] mb-1">Act one — what is happening</p>
-        <p className="body-copy text-foreground/85 measure m-0 text-[17px]">The answer first, then the harms it rests on. Every figure here counts something that happened to people.</p>
-      </div>
-
-      {/* ---- verdict ---- */}
-      {verdict === null ? <SectionSkeleton title="Is crime rising or falling?" /> : (
-        <section className="mb-16">
-          <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
-            {verdict.claim}
-          </h2>
-          <p className="body-copy text-foreground/90 measure">{verdict.summary}</p>
-          <ul className="list-none p-0 m-0 mt-4">
-            {verdict.key_figures.map((f, i) => (
-              <li key={i} className="flex items-baseline gap-3 py-2 border-b border-edge/60 text-[16px] text-foreground/85">
-                <TierChip t={f.tier} />
-                <span className="measure">{f.figure}</span>
-                <span className="ml-auto"><SourceLink id={f.source_id} sources={srcs} /></span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      {/* ---- the chart, first; themes and how-to-read consolidated under it
-             (Sean, 2026-08-21) ---- */}
-      <section className="mb-14">
+          The verdict moved under the chart at the same time, and that fixed a
+          duplication as well as an ordering problem: the old verdict summary
+          enumerated overdoses, homicide, defamation and missing persons, which
+          are the first four rows of this chart's own summary block a screen
+          below. The reader met the same four findings twice before seeing a
+          line drawn. The verdict now answers the question instead, and the
+          lanes are left to the chart. Scope note follows the chart per Sean's
+          choice of option B. ================================================ */}
+      <section className="mb-10">
         {lanes === null ? <SkeletonChart /> : (
           <>
             <LaneChart chart={lanes} onPick={setLanePicked} />
@@ -840,6 +818,41 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
           </>
         )}
       </section>
+
+      <DataNoteLine from="crime">
+        United States only unless a chart says otherwise · AI-assisted research from public
+        records · every figure evidence-graded and linked to the source it was read from ·
+        dotted, hollow, broken and points-only lines all mean specific things, set out under
+        &ldquo;How to read the charts&rdquo; in the{" "}
+        <DisclaimerLink from="crime">full disclaimer</DisclaimerLink> ·
+      </DataNoteLine>
+
+      {/* ---- the verdict: the considered answer, under the chart it rests on ---- */}
+      {verdict === null ? <SectionSkeleton title="Is crime rising or falling?" /> : (
+        <section className="mb-16">
+          <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
+            {verdict.claim}
+          </h2>
+          {verdict.summary.split("\n\n").map((para, i) => (
+            <p key={i} className="body-copy text-foreground/90 measure">{para}</p>
+          ))}
+          <ul className="list-none p-0 m-0 mt-4">
+            {verdict.key_figures.map((f, i) => (
+              <li key={i} className="flex items-baseline gap-3 py-2 border-b border-edge/60 text-[16px] text-foreground/85">
+                <TierChip t={f.tier} />
+                <span className="measure">{f.figure}</span>
+                <span className="ml-auto"><SourceLink id={f.source_id} sources={srcs} /></span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {/* ================= ACT ONE — WHAT IS HAPPENING ================= */}
+      <div className="mt-2 mb-8 pt-6 border-t-2 border-edge">
+        <p className="text-muted text-[12px] uppercase tracking-[0.14em] mb-1">Act one — what is happening</p>
+        <p className="body-copy text-foreground/85 measure m-0 text-[17px]">The harms the answer rests on, one measure at a time. Every figure here counts something that happened to people.</p>
+      </div>
 
       {/* ---- homicide: one lens among several, no longer the lead ---- */}
       <section className="mb-12">

@@ -1840,7 +1840,11 @@
   ],
   "themes": [
     {
-      "statement": "The United States is several times deadlier than comparable countries. In 2023 it was 5.8 per 100,000 against the UK's 1.1, Germany's 0.9, South Korea's 0.5 and Japan's 0.2.",
+      "statement": "The United States is several times deadlier than comparable countries.",
+      "tier": "A"
+    },
+    {
+      "statement": "In 2023 it was 5.8 per 100,000, against the UK's 1.1, Germany's 0.9, South Korea's 0.5 and Japan's 0.2.",
       "tier": "A"
     },
     {
@@ -1848,7 +1852,7 @@
       "tier": "A"
     },
     {
-      "statement": "Russia fell furthest \u2014 from about 30 per 100,000 to under 7 \u2014 though its series stops in 2021 and researchers dispute how much of that fall is real rather than a change in how deaths are coded.",
+      "statement": "Russia fell furthest, from about 30 per 100,000 to under 7. Its series stops in 2021, and researchers dispute how much of that fall is real.",
       "tier": "B"
     },
     {

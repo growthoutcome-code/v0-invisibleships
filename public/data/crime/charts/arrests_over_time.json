@@ -191,23 +191,47 @@
   "y_format": "millions",
   "themes": [
     {
-      "statement": "Criminal arrests peaked in 1997 at 15.3 million; 2024, at 7.5 million, is 51% below that.",
+      "statement": "Criminal arrests peaked in 1997 at 15.3 million. 2024, at 7.5 million, is 51% below that.",
       "tier": "A"
     },
     {
-      "statement": "Yes, 15.3 million is real \u2014 but an arrest is an EVENT, not a person: one person arrested three times counts three times, and most arrests never become imprisonment. Today's funnel: 7.5M criminal arrests a year sit alongside 7.9M jail admissions, a jail population of 657,500 \u2014 69% of whom are not yet convicted \u2014 and a prison population of 1.25 million.",
+      "statement": "Yes, 15.3 million is real \u2014 but an arrest is an event, not a person. One person arrested three times counts three times.",
       "tier": "A"
     },
     {
-      "statement": "Is the system overcrowded? The honest answer is that the federal government stopped counting. BJS last published prison capacity for 2016, when the United States stood at 114% of its lowest reported capacity with 26 states at or above 100%; no edition since carries a capacity table. Jails run the other way \u2014 73% of rated capacity in 2023 \u2014 though 12% of individual jurisdictions were over it. Where the record does show strain now is immigration detention, above 70,000 held in January 2026 against the 41,500 beds Congress funds.",
+      "statement": "Most arrests never become imprisonment: 7.5 million criminal arrests a year sit alongside 7.9 million jail admissions.",
       "tier": "A"
     },
     {
-      "statement": "Civil immigration arrests are now drawn on this chart. The near-floor line is the point: even its FY2011 peak (322,093, mostly jail transfers) is about 2-3% of criminal arrest volume, and the line ends at FY2024 because no official 2025-26 total exists \u2014 the surge (4.4x the late-2024 baseline, street arrests up 11x) is documented only through FOIA'd records.",
+      "statement": "On any given day 657,500 people are in jail \u2014 69% not yet convicted \u2014 and 1.25 million are in prison.",
+      "tier": "A"
+    },
+    {
+      "statement": "Is the system overcrowded? The federal government stopped counting in 2016.",
+      "tier": "A"
+    },
+    {
+      "statement": "That year the US stood at 114% of its lowest reported prison capacity, with 26 states over 100%. No edition since carries the table.",
+      "tier": "A"
+    },
+    {
+      "statement": "Jails run the other way \u2014 73% of rated capacity in 2023 \u2014 though 12% of individual jurisdictions were over their own.",
+      "tier": "A"
+    },
+    {
+      "statement": "The strain the record does show is in immigration detention: above 70,000 held in January 2026, against 41,500 funded beds.",
+      "tier": "A"
+    },
+    {
+      "statement": "Civil immigration arrests are the near-floor line, and that is the point. Even its FY2011 peak of 322,093 is about 2\u20133% of criminal arrest volume.",
       "tier": "B"
     },
     {
-      "statement": "Where sweep cases meet courts: of 33 known federal defendants charged with non-immigration crimes in Chicago's Operation Midway Blitz, 25 were cleared \u2014 dismissals, grand juries refusing to indict, one acquittal \u2014 against 2 guilty pleas (tracker as of Aug 2026).",
+      "statement": "It ends at FY2024 because no official 2025\u201326 total exists. The surge is documented only through FOIA'd records.",
+      "tier": "B"
+    },
+    {
+      "statement": "Of 33 federal defendants charged with non-immigration crimes in Chicago's Operation Midway Blitz, 25 were cleared, against 2 guilty pleas.",
       "tier": "B"
     }
   ],

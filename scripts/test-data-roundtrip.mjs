@@ -505,7 +505,7 @@ const crime = await page.evaluate(() => {
     identitySolid: svg ? [...svg.querySelectorAll("g[style*=cursor] > path:first-child")]
       .every((x) => !x.getAttribute("stroke-dasharray")) : false,
     labels: svg ? [...svg.querySelectorAll("text")].map((t) => t.textContent).filter((t) => /FBI|CDC/.test(t)) : [],
-    verdict: heads.some((h) => /Has crime increased during the period/i.test(h)),
+    verdict: heads.some((h) => /Is crime rising or falling/i.test(h)),
     notCounted: heads.some((h) => /What nobody counts/i.test(h)),
     lanes: [...main.querySelectorAll("figure figcaption")].some((f) => /Six kinds of harm/i.test(f.textContent)),
     sweeps: heads.some((h) => /Enforcement in sweeps/i.test(h)),
@@ -888,7 +888,7 @@ const anom = await page.evaluate(() => {
     themeCount: rows.length,
     // the three absences must be stated in the plain-language block itself
     saysHomeInvasionAbsent: rows.some((r) => /no country counts it as an offence/i.test(r.textContent)),
-    saysNoUsSurvey: rows.some((r) => /No United States federal survey asks the question/i.test(r.textContent)),
+    saysNoUsSurvey: rows.some((r) => /No United States federal survey asks about hallucinations/i.test(r.textContent)),
     saysBeliefNotExperience: rows.some((r) => /BELIEF, not experience/i.test(r.textContent)),
     saysReportingNotEvents: rows.some((r) => /reporting system being built/i.test(r.textContent)),
     // and the chart must refuse to imply the lanes corroborate each other
@@ -927,6 +927,78 @@ const disc = await page.evaluate(() => {
 });
 console.log("disclaimer pointer:", JSON.stringify(disc));
 if (!disc.pointer) fail("the Crime section does not point at the disclaimer's chart-reading rules");
+
+// Round 6 — chart-led page and the copy standard (Sean, 2026-08-22).
+//
+// "Do not begin the Data/Crime page with text. Use a chart." That is a
+// structural property, so it gets a structural test: the first rendered thing
+// inside crime-root must be a figure, and it must sit above every heading and
+// paragraph on the page.
+const opening = await page.evaluate(() => {
+  const col = document.getElementById("crime-root");
+  const y = (el) => el ? el.getBoundingClientRect().top + window.scrollY : Infinity;
+  const firstFig = col.querySelector("figure");
+  // the earliest prose of any kind: heading, body paragraph, or the note line
+  const prose = [...col.querySelectorAll("h1,h2,h3,p")]
+    .filter((el) => el.textContent.trim().length > 40 && el.offsetParent !== null);
+  const firstProse = prose.sort((a, b) => y(a) - y(b))[0];
+  return {
+    hasFigure: !!firstFig,
+    figureY: y(firstFig),
+    firstProseY: y(firstProse),
+    firstProseText: firstProse ? firstProse.textContent.trim().slice(0, 70) : null,
+    caption: firstFig?.querySelector("figcaption")?.textContent.trim().slice(0, 40) || null,
+  };
+});
+console.log("opening:", JSON.stringify(opening));
+if (!opening.hasFigure) fail("no chart in the crime column at all");
+if (!(opening.figureY < opening.firstProseY)) {
+  fail(`the page opens with text, not a chart — "${opening.firstProseText}" sits above the first figure`);
+}
+if (!/Six kinds of harm/i.test(opening.caption || "")) {
+  fail(`the opening chart is "${opening.caption}", expected the six-lane harm chart`);
+}
+
+// Every plain-language statement stays short enough to repeat. Prose drifts one
+// clause at a time; before this guard the longest ran to 90 words and carried
+// three separate findings in one sentence.
+const copy = await page.evaluate(async () => {
+  const charts = ["harm_lanes_indexed", "homicide_two_measures", "homicide_international",
+    "burglary_international", "arrests_over_time", "incarceration_over_time",
+    "detention_capacity", "anomalies_indexed"];
+  const out = [];
+  for (const c of charts) {
+    const doc = await (await fetch(`/data/crime/charts/${c}.json`)).json();
+    for (const t of (doc.themes || [])) {
+      out.push({ chart: c, words: t.statement.split(/\s+/).length, s: t.statement.slice(0, 60) });
+    }
+  }
+  return out;
+});
+const over = copy.filter((x) => x.words > 35);
+const longest = copy.reduce((a, b) => (b.words > a.words ? b : a), { words: 0 });
+console.log("copy:", JSON.stringify({ statements: copy.length, longest: longest.words, over: over.length }));
+if (copy.length < 40) fail(`only ${copy.length} plain-language statements found across the charts`);
+if (over.length) {
+  fail(`${over.length} statement(s) over 35 words — longest ${longest.words}w in ${longest.chart}: "${longest.s}…"`);
+}
+
+// The verdict must answer the question rather than restate the chart above it.
+const verdictCopy = await page.evaluate(async () => {
+  const v = await (await fetch("/data/crime/tables/crime_verdict.json")).json();
+  const lanes = await (await fetch("/data/crime/charts/harm_lanes_indexed.json")).json();
+  // the lane summaries' distinctive figures must NOT all reappear in the verdict
+  const marks = ["quadrupled", "29.4%", "22-year high", "modern low"];
+  return {
+    claim: v.claim,
+    restates: marks.filter((m) => v.summary.includes(m)).length,
+    laneMarks: marks.filter((m) => lanes.themes.some((t) => t.statement.includes(m))).length,
+  };
+});
+console.log("verdict:", JSON.stringify(verdictCopy));
+if (verdictCopy.restates >= 3) {
+  fail(`the verdict restates ${verdictCopy.restates} of the chart's own findings — it should answer the question, not repeat the lanes`);
+}
 if (disc.longCaveat > 0) fail(`the long caveat paragraph still appears ${disc.longCaveat} time(s); its reasoning belongs in the disclaimer, not under every chart`);
 
 
@@ -1003,15 +1075,18 @@ const acts = await page.evaluate(() => {
     one: idx(/Act one . what is happening/i),
     two: idx(/Act two . what the state is doing/i),
     three: idx(/Act three . what cannot be known/i),
-    verdictEarly: idx(/Has crime increased during the period/i),
+    verdictEarly: idx(/Is crime rising or falling/i),
     sourcesLate: idx(/^Sources$/m),
   };
 });
 console.log("acts:", JSON.stringify(acts));
 if (acts.one < 0 || acts.two < 0 || acts.three < 0) fail("act headings missing");
 if (!(acts.one < acts.two && acts.two < acts.three)) fail("acts are out of order");
-if (!(acts.verdictEarly > acts.one && acts.verdictEarly < acts.two)) fail("verdict is not in act one");
-if (!(acts.one < acts.verdictEarly)) fail("verdict precedes act one heading");
+// The verdict now sits ABOVE the act-one banner, directly under the opening
+// chart (Sean, 2026-08-22: lead with a chart). It answers the question the
+// chart raises; the acts organise the body that follows.
+if (!(acts.verdictEarly < acts.one)) fail("verdict should sit above the act-one banner, under the opening chart");
+if (!(acts.verdictEarly < acts.two)) fail("verdict is not in the opening");
 
 // every chart carries a plain-language block
 const plain = await page.evaluate(() => {
@@ -1058,15 +1133,19 @@ const ar = await page.evaluate(() => {
     legend: legend.length,
     alert: /About the accuracy of these figures/.test(t),
     alertDismiss: !!document.querySelector("[role=note] button[aria-label=Dismiss]"),
-    reconcile: /Civil immigration arrests are now drawn on this chart/.test(t.replace(/\n/g, " ")) && /2-3% of criminal arrest volume/.test(t.replace(/\n/g, " ")),
-    courts: /grand juries\s+refusing to indict/.test(t.replace(/\n/g, " ")),
+    reconcile: /Civil immigration arrests are the near-floor line/i.test(t.replace(/\n/g, " "))
+      && /322,093/.test(t) && /2.3% of criminal arrest volume/i.test(t.replace(/\n/g, " ")),
+    courts: /33 federal defendants/i.test(t.replace(/\n/g, " ")) && /25 were cleared/i.test(t.replace(/\n/g, " ")),
     endsAt2024: /ends at FY2024 because no official/i.test(t.replace(/\n/g, " ")),
   };
 });
 ar.iceLine = await page.evaluate(() => /Civil immigration arrests \(ICE\)/.test(document.querySelector("main").innerText));
 ar.funnel = await page.evaluate(() => {
   const t = document.querySelector("main").innerText.replace(/\n/g, " ");
-  return /an arrest is an EVENT, not a person/i.test(t) && /7\.9M jail admissions/.test(t) && /69% of whom are not yet convicted/.test(t);
+  // assert the figures, not the sentence they sit in
+  return /an arrest is an event, not a person/i.test(t)
+    && /7\.9 million jail admissions/i.test(t)
+    && /657,500/.test(t) && /69% not yet convicted/i.test(t);
 });
 // Rewritten 2026-08-22. The old assertion pinned the old answer — a trend plus
 // "a record 73,400" — and so was quietly locking in the one ICE figure nothing
@@ -1074,7 +1153,7 @@ ar.funnel = await page.evaluate(() => {
 // answer: the federal government stopped counting.
 ar.overcrowding = await page.evaluate(() => {
   const t = document.querySelector("main").innerText.replace(/\n/g, " ");
-  return /stopped counting/i.test(t) && /114% of its lowest reported capacity/i.test(t)
+  return /stopped counting/i.test(t) && /114%/.test(t) && /26 states over 100%/i.test(t)
     && /73% of rated capacity/i.test(t);
 });
 console.log("arrests:", JSON.stringify(ar));

@@ -716,38 +716,17 @@ def fix_ice_figure():
     return changed
 
 
-def fix_overcrowding_theme():
-    """The arrests chart answered "is the system overcrowded?" with a trend.
-
-    That was the best available answer before this research; now there is a
-    real one, and it is better: BJS stopped publishing prison capacity after
-    2016, jails run well under capacity, and the strain is in a different
-    system entirely. Patched here rather than in the arrests chart's own file
-    because these are this builder's facts, and it keeps one owner per claim.
+def enable_arrests_change_view():
+    """The arrests chart has no builder of its own — it predates them — so its
+    doc-level flags are set here. Its THEMES used to be rewritten here too; that
+    now belongs to build_crime_copy.py, which owns the plain-language layer for
+    every chart and enforces the word ceiling.
     """
     path = CRIME_C / "arrests_over_time.json"
     chart = load(path)
-    replacement = (
-        "Is the system overcrowded? The honest answer is that the federal government "
-        "stopped counting. BJS last published prison capacity for 2016, when the United "
-        "States stood at 114% of its lowest reported capacity with 26 states at or above "
-        "100%; no edition since carries a capacity table. Jails run the other way — 73% "
-        "of rated capacity in 2023 — though 12% of individual jurisdictions were over it. "
-        "Where the record does show strain now is immigration detention, above 70,000 "
-        "held in January 2026 against the 41,500 beds Congress funds."
-    )
-    # The levels/change toggle, enabled here so it survives any future rebuild
-    # of that file (which currently has no builder of its own — see the clobber
-    # note in build_crime_tables.py).
     chart["change_view"] = True
-    hit = True
-    for t in chart.get("themes", []):
-        if "overcrowded" in t.get("statement", "").lower():
-            t["statement"] = replacement
-            t["tier"] = "A"
-    if hit:
-        save(path, chart)
-    return hit
+    save(path, chart)
+    return True
 
 
 def main():
@@ -774,7 +753,7 @@ def main():
     n_dq = merge(CRIME_T / "crime_data_quality.json", DATA_QUALITY, "dq_id")
     n_tr = merge(CRIME_T / "crime_trends.json", TRENDS, "topic", keep_order=True)
     fixed = fix_ice_figure()
-    theme_fixed = fix_overcrowding_theme()
+    theme_fixed = enable_arrests_change_view()
 
     print(f"sources    : +{added} (total {len(sources)})")
     print(f"indicators : +{len(ROWS)} incarceration rows (total {len(kept) + len(ROWS)})")
@@ -789,7 +768,7 @@ def main():
     print(f"data qual. : {n_dq} rows (cq16-cq19 added)")
     print(f"trends     : {n_tr} rows")
     print(f"ICE 73,400 -> sourced figures in: {', '.join(fixed) or 'nothing (already fixed)'}")
-    print(f"overcrowding theme rewritten with the capacity record: {theme_fixed}")
+    print(f"arrests chart change_view enabled: {theme_fixed}")
 
 
 if __name__ == "__main__":

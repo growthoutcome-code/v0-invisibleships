@@ -76,7 +76,49 @@ def homicide_csv(indicators):
     return buf.getvalue(), len(years)
 
 
-def main():
+def check():
+    """Rebuild into a temp file and compare the crime/ entries with the committed
+    zip. Exits non-zero on drift. Nothing is written to public/.
+    """
+    import shutil as _shutil, tempfile as _tempfile
+    if not ZIP.exists():
+        print("FAIL: no corpus zip at " + str(ZIP))
+        return 1
+    with _tempfile.TemporaryDirectory() as tmp:
+        keep = pathlib.Path(tmp) / "committed.zip"
+        _shutil.copy2(ZIP, keep)
+        before = {}
+        with zipfile.ZipFile(keep) as z:
+            for n in z.namelist():
+                if n.startswith(PREFIX):
+                    before[n] = z.read(n)
+        main(quiet=True)
+        after = {}
+        with zipfile.ZipFile(ZIP) as z:
+            for n in z.namelist():
+                if n.startswith(PREFIX):
+                    after[n] = z.read(n)
+        _shutil.copy2(keep, ZIP)  # restore, so --check never mutates the tree
+
+    missing = sorted(set(before) - set(after))
+    added = sorted(set(after) - set(before))
+    # the manifest carries a build date, so it differs on every rebuild by design
+    changed = sorted(n for n in set(before) & set(after)
+                     if before[n] != after[n] and not n.endswith("manifest.json"))
+    if missing or added or changed:
+        print("FAIL: the committed corpus is out of date. Run:  python3 scripts/sync_corpus_crime.py")
+        for n in added:
+            print("   only in a fresh build: " + n)
+        for n in missing:
+            print("   only in the committed zip: " + n)
+        for n in changed:
+            print("   contents differ: " + n)
+        return 1
+    print(f"corpus is current — {len(after)} crime/ entries match a fresh build")
+    return 0
+
+
+def main(quiet=False):
     if not ZIP.exists():
         raise SystemExit(f"corpus zip not found at {ZIP}")
 
@@ -216,7 +258,7 @@ verified against a fetched source. The rate series is complete.
         dst.writestr(PREFIX + "charts/homicide_us.csv", hom_csv)
 
     shutil.move(str(tmp), str(ZIP))
-    print(f"carried {carried} non-crime entries")
+    quiet or print(f"carried {carried} non-crime entries")
     n_charts = 1 + sum(  # homicide_us.csv, plus each optional chart doc present
         1 for f in ("homicide_two_measures", "harm_lanes_indexed",
                     "homicide_international", "arrests_over_time",
@@ -224,11 +266,12 @@ verified against a fetched source. The rate series is complete.
                     "incarceration_over_time", "anomalies_indexed")
         if (CHARTS / f"{f}.json").exists()
     )
-    print(f"crime/: {len(TABLE_FILES)} tables + manifest + README + {n_charts} chart files")
-    print(f"sources: {tier_line}")
-    print(f"homicide csv: {hom_years} years")
-    print(f"zip: {ZIP.stat().st_size:,} bytes")
+    quiet or print(f"crime/: {len(TABLE_FILES)} tables + manifest + README + {n_charts} chart files")
+    quiet or print(f"sources: {tier_line}")
+    quiet or print(f"homicide csv: {hom_years} years")
+    quiet or print(f"zip: {ZIP.stat().st_size:,} bytes")
 
 
 if __name__ == "__main__":
-    main()
+    import sys as _sys
+    raise SystemExit(check() if "--check" in _sys.argv else (main() or 0))

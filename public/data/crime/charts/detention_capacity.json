@@ -179,15 +179,23 @@
   ],
   "themes": [
     {
-      "statement": "Detention has a shape, and it is a V then a spike: a 50,165 average in FY2019, down 61% to 19,461 in FY2021, recovering to 37,721 by FY2024 \u2014 then the 2025\u201326 surge, which is visible only in single-day counts.",
+      "statement": "Detention has a shape: a V, then a spike. A 50,165 average in FY2019, down 61% to 19,461 in FY2021, back to 37,721 by FY2024.",
       "tier": "A"
     },
     {
-      "statement": "Is it overcrowded? The funded ceiling is the answer. Congress funds 41,500 beds for FY2026 \u2014 'thousands fewer than the current level' in the bill's own words \u2014 while single-day counts ran 65,000 to 73,000, because $45 billion arrived outside the annual bed line in July 2025.",
+      "statement": "Then the 2025\u201326 surge, which is visible only in single-day counts.",
       "tier": "A"
     },
     {
-      "statement": "National utilisation hides local overcrowding: on 13 April 2025 the system sat at 76% of contracted beds nationally, yet 45 of 181 facilities were over their own contract that night and 84 exceeded capacity at least once that year.",
+      "statement": "Is it overcrowded? The funded ceiling is the answer. Congress funds 41,500 beds for FY2026 \u2014 'thousands fewer than the current level', in the bill's own words.",
+      "tier": "A"
+    },
+    {
+      "statement": "Single-day counts ran 65,000 to 73,000, because $45 billion arrived outside the annual bed line in July 2025.",
+      "tier": "A"
+    },
+    {
+      "statement": "National utilisation hides local overcrowding. On 13 April 2025 the system sat at 76% of contracted beds, yet 45 of 181 facilities were over their own contract that night.",
       "tier": "B"
     },
     {
@@ -195,7 +203,7 @@
       "tier": "B"
     },
     {
-      "statement": "The average daily population line stops at FY2024 because no later average has been published. That gap is drawn as a gap: the surge is real, but its annual average is not yet an official number.",
+      "statement": "The average daily population line stops at FY2024 because no later average has been published. That gap is drawn as a gap.",
       "tier": "A"
     }
   ],

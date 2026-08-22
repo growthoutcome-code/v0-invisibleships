@@ -607,7 +607,11 @@
   ],
   "themes": [
     {
-      "statement": "Two official bodies count US homicide and they never agree \u2014 the FBI counts what police record, the CDC counts what death certificates say. The gap between them is normal, not an error.",
+      "statement": "Two official bodies count US homicide and they never agree. The FBI counts what police record; the CDC counts what death certificates say.",
+      "tier": "A"
+    },
+    {
+      "statement": "The gap between them is normal, not an error.",
       "tier": "A"
     },
     {
