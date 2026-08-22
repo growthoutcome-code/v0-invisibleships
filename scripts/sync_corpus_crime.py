@@ -210,6 +210,9 @@ verified against a fetched source. The rate series is complete.
         inc_path = CHARTS / "incarceration_over_time.json"
         if inc_path.exists():
             dst.writestr(PREFIX + "charts/incarceration_over_time.json", inc_path.read_text())
+        an_path = CHARTS / "anomalies_indexed.json"
+        if an_path.exists():
+            dst.writestr(PREFIX + "charts/anomalies_indexed.json", an_path.read_text())
         dst.writestr(PREFIX + "charts/homicide_us.csv", hom_csv)
 
     shutil.move(str(tmp), str(ZIP))
@@ -218,7 +221,7 @@ verified against a fetched source. The rate series is complete.
         1 for f in ("homicide_two_measures", "harm_lanes_indexed",
                     "homicide_international", "arrests_over_time",
                     "detention_capacity", "burglary_international",
-                    "incarceration_over_time")
+                    "incarceration_over_time", "anomalies_indexed")
         if (CHARTS / f"{f}.json").exists()
     )
     print(f"crime/: {len(TABLE_FILES)} tables + manifest + README + {n_charts} chart files")

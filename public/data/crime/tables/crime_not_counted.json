@@ -88,5 +88,23 @@
     "who_would_collect": "No one currently does, at global scale, on one date. UNODC's prison indicators are live but the legacy dataunodc.un.org/dp-prisons URLs now redirect to the site root; SPACE I is the model, and it is regional.",
     "tier": "A",
     "source_id": "inc_wppl"
+  },
+  {
+    "nc_id": "nc11",
+    "category": "Anomalous EXPERIENCE, as opposed to belief",
+    "status": "Asked twice in thirty years, and the two readings have been declared incomparable",
+    "detail": "Polling organisations have asked Americans whether they BELIEVE in ghosts every few years since 1990. They have almost never asked whether they have SEEN one. Gallup's paranormal battery \u2014 the longest-running series of its kind \u2014 contains no personal-experience question at all, in thirty-five years. Pew is the one body that asked properly and repeatedly: the share of Americans reporting they had been in the presence of a ghost went from 9% in 1996 to 18% in 2009, and the share who had felt in touch with someone who had died from 18% to 29%. Pew has since closed that door itself. Its 2023 study moved from telephone to an online panel, and Pew states that because the earlier surveys were conducted by telephone 'it is not clear whether those earlier results can be directly compared with the new estimates'. The organisation best placed to say whether anomalous experience is becoming more common says it cannot. YouGov's two readings of a 13-item experience battery \u2014 67% in October 2022, 60% in October 2025 \u2014 are the only recent repeat, and two points are not a trend.",
+    "who_would_collect": "Any of the major survey organisations, by adding an experience question to a belief battery they already run. Gallup has had the opportunity annually since 1990.",
+    "tier": "A",
+    "source_id": "an_pew_mode"
+  },
+  {
+    "nc_id": "nc12",
+    "category": "Hallucinations, in the United States",
+    "status": "No federal survey asks the question",
+    "detail": "The instruments the National Survey on Drug Use and Health administers to every respondent are a psychological-distress scale, a functional-impairment scale, a depression module and suicidality items. None contains a hallucination or voice-hearing question. Psychosis appears only through clinical interviews in a validation subsample, which produces no published prevalence series. So the one real repeated measurement of psychotic experience in the English-speaking world is English: the Adult Psychiatric Morbidity Survey found 5.6% of adults screening positive in 2000, 5.9% in 2007 and 6.8% in 2014 \u2014 and then stopped reporting that figure as an outcome. The only large repeated instrument that scores hallucinations anonymously and annually is a private one, the Global Mind Project, whose respondents are recruited through Meta and Google advertising and whose only representativeness assessment was written by its own staff. It is recorded here as an existence proof, not as a population estimate.",
+    "who_would_collect": "SAMHSA, by adding an item to NSDUH's self-administered section \u2014 the part respondents answer to a machine rather than to an interviewer, which is where a stigmatised question belongs.",
+    "tier": "A",
+    "source_id": "an_nsduh_methods"
   }
 ]

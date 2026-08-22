@@ -315,14 +315,11 @@ CHART = {
         "two, and prison is counted in December where jails are counted in June."
     ),
     "note": (
-        "Three counts of people, on one axis because they share a unit — but they are "
-        "nested, not parallel: the widest line CONTAINS the other two, plus everyone on "
-        "probation or parole. Prison is counted on 31 December, jails at 30 June, so the "
-        "two are not snapshots of the same day. The widest line BREAKS after 2021 because "
-        "BJS states its 2022 and 2023 figures are not comparable with earlier years — the "
-        "probation survey took on 285 new agencies and about 120,000 people, and "
-        "California's parole counts have not been updated since 2018. Click any line for "
-        "its full record, its method and what it cannot show."
+        "Three counts of people, nested rather than parallel: the widest line CONTAINS the "
+        "other two, plus everyone on probation or parole. Prison is counted on 31 December, "
+        "jails on 30 June. The widest line breaks after 2021 because BJS states its own 2022 "
+        "and 2023 figures are not comparable with earlier years. Click any line for its full "
+        "record, its method and what it cannot show."
     ),
     "publisher": "Bureau of Justice Statistics (National Prisoner Statistics; Annual Survey of Jails; Correctional Populations)",
     "tier": "A",

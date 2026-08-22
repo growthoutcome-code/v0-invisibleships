@@ -1,7 +1,7 @@
 {
   "title": "Break-ins abroad: one code, five countries",
   "unit": "Police-recorded burglary of private residential premises, per 100,000 inhabitants (Eurostat/UNODC ICCS05012)",
-  "note": "Every line here is filed under the same International Classification of Crime for Statistical Purposes code, ICCS05012. That makes the DIRECTION of each line comparable and the DISTANCE between lines much less so: Eurostat's own metadata records that Germany's mapping to the ICCS is incomplete, and Sweden's national category includes cellar and attic storage where Germany's does not. France is absent because Eurostat states there is no correspondence between the French classification and this code at all. The United States is absent because it publishes nothing on this basis \u2014 its survey counts households and its police series changed basis in 2020.",
+  "note": "Every line is filed under the same ICCS code, which makes each line's DIRECTION comparable and the distance between lines much less so \u2014 Eurostat records that Germany's mapping is incomplete and Sweden counts cellar and attic storage where Germany does not. France is absent because Eurostat states there is no correspondence between the French classification and this code at all. The United States publishes nothing on this basis.",
   "publisher": "Eurostat (joint Eurostat\u2013UNODC data collection)",
   "tier": "A",
   "indexed": false,

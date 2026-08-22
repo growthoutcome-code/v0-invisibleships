@@ -668,7 +668,8 @@ const inc = await page.evaluate(() => {
     chartAboveThemes: y(fig) > 0 && y(fig) < y(themesH),
     themeCount: themeRows.length,
     themesChipped: themeRows.length > 0 && themeRows.every((r) => r.querySelector("span[title]")),
-    disclaimer: !!section && [...section.querySelectorAll("button")]
+    // the pointer is section-level now (one per page, not one per chart)
+    disclaimer: [...document.getElementById("crime-root").querySelectorAll("button")]
       .some((b) => /full disclaimer/i.test(b.textContent)),
     // ordering: arrests -> incarceration -> ICE detention
     order: y(arrestsFig) < y(fig) && y(fig) < y(detFig),
@@ -704,7 +705,7 @@ if (!inc.axisMillions) fail("y axis is not formatted in millions — '7300000' i
 if (!inc.chartAboveThemes) fail("chart must sit ABOVE its plain-language block");
 if (inc.themeCount < 4) fail(`incarceration themes: ${inc.themeCount}, expected 4+`);
 if (!inc.themesChipped) fail("incarceration themes missing tier chips");
-if (!inc.disclaimer) fail("incarceration section does not link the disclaimer");
+if (!inc.disclaimer) fail("the Crime section does not link the disclaimer");
 if (!inc.order) fail("section order must be arrests -> incarceration -> ICE detention");
 if (!inc.peak) fail("2009 prison peak (1,615,487) missing");
 if (!inc.trough) fail("2021 prison trough (1,205,087) missing");
@@ -794,6 +795,67 @@ const brkRule = await page.evaluate(async () => {
 });
 console.log("break rule:", JSON.stringify(brkRule));
 if (!brkRule.ok) fail(`change view would difference across the declared break: ${JSON.stringify(brkRule)}`);
+
+// Round 5 — reports of the unexplained (Sean, 2026-08-22), and the disclaimer
+// consolidation. The rule being protected: the ABSENCES carry the same weight
+// as the lines, and the caveat grammar lives in the disclaimer rather than
+// being repeated under every chart.
+const anom = await page.evaluate(() => {
+  const main = document.querySelector("main");
+  const t = main.innerText.replace(/\n/g, " ");
+  const fig = [...main.querySelectorAll("figure")]
+    .find((f) => /Reports of the unexplained/i.test(f.querySelector("figcaption")?.textContent || ""));
+  const legend = fig ? [...(fig.querySelector("ul")?.querySelectorAll("button") || [])]
+    .map((b) => b.textContent.trim()) : [];
+  const sec = fig?.closest("section");
+  const themesH = sec ? [...sec.querySelectorAll("h3")].find((h) => /What the chart shows/i.test(h.textContent)) : null;
+  const rows = themesH ? [...themesH.parentElement.querySelectorAll("li")] : [];
+  return {
+    chart: !!fig?.querySelector("svg[viewBox]"),
+    lanes: legend.length,
+    themeCount: rows.length,
+    // the three absences must be stated in the plain-language block itself
+    saysHomeInvasionAbsent: rows.some((r) => /no country counts it as an offence/i.test(r.textContent)),
+    saysNoUsSurvey: rows.some((r) => /No United States federal survey asks the question/i.test(r.textContent)),
+    saysBeliefNotExperience: rows.some((r) => /BELIEF, not experience/i.test(r.textContent)),
+    saysReportingNotEvents: rows.some((r) => /reporting system being built/i.test(r.textContent)),
+    // and the chart must refuse to imply the lanes corroborate each other
+    saysNoRelation: rows.some((r) => /Nothing here establishes a relationship/i.test(r.textContent)),
+    nc11: /Anomalous EXPERIENCE, as opposed to belief/i.test(t),
+    nc12: /Hallucinations, in the United States/i.test(t),
+    pewMode: /not clear whether those earlier results can be directly compared/i.test(t)
+      || /declared its own two readings incomparable/i.test(t)
+      || /moved from telephone to an online panel/i.test(t),
+  };
+});
+console.log("anomalies:", JSON.stringify(anom));
+if (!anom.chart) fail("anomalies chart missing");
+if (anom.lanes !== 4) fail(`anomalies legend: ${anom.lanes}, expected 4`);
+if (anom.themeCount < 5) fail(`anomalies plain-language rows: ${anom.themeCount}, expected 5+`);
+if (!anom.saysHomeInvasionAbsent) fail("the home-invasion absence is not stated in the plain-language block");
+if (!anom.saysNoUsSurvey) fail("the missing US hallucination survey is not stated");
+if (!anom.saysBeliefNotExperience) fail("the belief-vs-experience distinction is not stated");
+if (!anom.saysReportingNotEvents) fail("the UAP lane is not labelled as reporting rather than events");
+if (!anom.saysNoRelation) fail("the chart does not refuse the co-occurrence reading");
+if (!anom.nc11) fail("nc11 (anomalous experience) missing from the register");
+if (!anom.nc12) fail("nc12 (US hallucination survey) missing from the register");
+
+// The disclaimer consolidation: the grammar lives there, and the section points
+// to it once instead of repeating it under each chart.
+const disc = await page.evaluate(() => {
+  const t = document.querySelector("main").innerText.replace(/\n/g, " ");
+  return {
+    pointer: /How to read the charts/i.test(t),
+    // A compact KEY at a chart is legitimate — a mark's meaning belongs beside
+    // the mark. What was consolidated into the disclaimer is the REASONING, so
+    // that is what must no longer appear under every chart.
+    longCaveat: (t.match(/read from a published chart rather than stated in report text/gi) || []).length,
+    grammarKeys: (t.match(/Dotted stretches are years that are\s+not Tier A/gi) || []).length,
+  };
+});
+console.log("disclaimer pointer:", JSON.stringify(disc));
+if (!disc.pointer) fail("the Crime section does not point at the disclaimer's chart-reading rules");
+if (disc.longCaveat > 0) fail(`the long caveat paragraph still appears ${disc.longCaveat} time(s); its reasoning belongs in the disclaimer, not under every chart`);
 
 
 // Detention chart: three measures kept apart, and the section nav.

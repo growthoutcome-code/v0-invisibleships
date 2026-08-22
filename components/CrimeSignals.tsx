@@ -677,11 +677,11 @@ function TwoSeriesChart({ chart, onPick }: { chart: Chart; onPick: (s: ChartSeri
           ))}
         </ul>
       )}
+      {/* A compact KEY, not a caveat paragraph: what a mark means belongs at
+          the chart. The reasoning behind the grammar lives in the disclaimer. */}
       <p className="text-muted text-[14px] measure mt-3 mb-0">
         <span className="text-foreground">· · ·</span> Dotted stretches are years that are
-        not Tier A — read from a published chart rather than stated in report text, or
-        resting on a collection the publisher itself flagged. Line weight, not dashing,
-        distinguishes the two series.
+        not Tier A. Weight, not dashing, separates the two series.
       </p>
     </figure>
   );
@@ -698,6 +698,10 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
   const verdict = useDoc<Verdict>("/data/crime/tables/crime_verdict.json");
   const chart = useDoc<Chart>("/data/crime/charts/homicide_two_measures.json");
   const lanes = useDoc<LaneChart>("/data/crime/charts/harm_lanes_indexed.json");
+  // Reports of the unexplained (Sean, 2026-08-22). Sits in Act 3, with the
+  // limits, because three of its four lanes are really findings about what is
+  // and is not counted.
+  const anomalies = useDoc<LaneChart>("/data/crime/charts/anomalies_indexed.json");
   const notCounted = useTable<NotCounted>("/data/crime/tables/crime_not_counted.json");
   const sweeps = useTable<Sweep>("/data/crime/tables/crime_sweeps.json");
   const tr = useDoc<TR>("/data/crime/tables/crime_transnational.json");
@@ -779,8 +783,11 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
       <SideNav mode="outline" sections={nav.sections} active={nav.active} />
       <div id="crime-root" className="min-w-0">
       <DataNoteLine from="crime">
-        United States only · AI-assisted research from public records · every figure
-        evidence-graded and linked to the source it was read from ·
+        United States only unless a chart says otherwise · AI-assisted research from public
+        records · every figure evidence-graded and linked to the source it was read from ·
+        dotted, hollow, broken and points-only lines all mean specific things, set out under
+        &ldquo;How to read the charts&rdquo; in the{" "}
+        <DisclaimerLink from="crime">full disclaimer</DisclaimerLink> ·
       </DataNoteLine>
 
       {/* ================= ACT ONE — WHAT IS HAPPENING ================= */}
@@ -1125,12 +1132,7 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
               </div>
             )}
             <p className="text-muted text-[15px] measure">{incarc.note}</p>
-            <p className="text-muted text-[15px] measure mt-3">
-              Every figure here is Bureau of Justice Statistics, read from the publication
-              named in each line&rsquo;s detail panel. See the{" "}
-              <DisclaimerLink from="crime">full disclaimer</DisclaimerLink> for how this
-              research was gathered and what it is not.
-            </p>
+
           </>
         )}
       </section>
@@ -1270,6 +1272,35 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
       </div>
 
       {/* ---- what nobody counts: the lead finding (Sean, 2026-08-21) ---- */}
+      {/* ---- reports of the unexplained: chart first, plain-language block
+             underneath, absences carried at the same weight as the lines ---- */}
+      <section className="mb-14">
+        <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
+          Reports of the unexplained
+        </h2>
+        {anomalies === null ? <SkeletonChart /> : (
+          <>
+            <LaneChart chart={anomalies} onPick={setLanePicked} />
+            {!!anomalies.themes?.length && (
+              <div className="mt-2 mb-5">
+                <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">
+                  What the chart shows
+                </h3>
+                <ul className="list-none p-0 m-0">
+                  {anomalies.themes.map((t, i) => (
+                    <li key={i} className="flex items-baseline gap-3 py-2 border-b border-edge/60 text-[16px] text-foreground/90">
+                      <TierChip t={t.tier} />
+                      <span className="measure">{t.statement}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            <p className="text-muted text-[15px] measure">{anomalies.note}</p>
+          </>
+        )}
+      </section>
+
       {notCounted === null ? <SectionSkeleton title="What nobody counts" /> : !!notCounted.length && (
         <section className="mb-14">
           <h2 className="font-display font-semibold text-foreground text-[24px] mb-3">

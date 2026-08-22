@@ -169,5 +169,23 @@
     "effect": "Any bar chart built from that page silently compares 2018 with 2026. This section therefore publishes the figures as a dated table where every row carries its own date, and no international incarceration chart \u2014 the same decision already taken for drug deaths and missing persons.",
     "tier": "A",
     "source_id": "inc_wppl"
+  },
+  {
+    "dq_id": "cq20",
+    "geography": "US",
+    "topic": "Removing the interviewer does not produce agreement",
+    "issue": "Three anonymous or self-administered instruments measured young Americans over the same years and moved in three directions. Adolescent major depressive episode in NSDUH, answered to a machine, fell from 20.8% (2021) to 15.4% (2024). Persistent sadness or hopelessness in the Youth Risk Behavior Survey, anonymous and in-school, sat at 40\u201342%. Frequent suicidal ideation among young people using Mental Health America's anonymous online screening rose from 48% to 51%.",
+    "effect": "Anonymity is often treated as the fix for stigma on sensitive questions. These three instruments are all anonymous or self-administered and they disagree, so anonymity is not sufficient on its own \u2014 sampling, recruitment and question wording still dominate. Any single 'anonymous index' cited as the true picture should be read against this.",
+    "tier": "A",
+    "source_id": "an_yrbs_trend"
+  },
+  {
+    "dq_id": "cq21",
+    "geography": "International",
+    "topic": "A rise in reports is not a rise in events",
+    "issue": "The federal UAP office's report counts rose from 247 to 757 and then fell to 319. Its own publications attribute the rise to reporting rather than to phenomena: ODNI records it as 'partially due to reduced stigma surrounding UAP reporting', and AARO records that the FAA began forwarding reports weekly, which it calls 'a significant increase from the previous reporting period'. The reporting periods are also 18, 8, 13 and 12 months long, and each count mixes in-period events with back-reports of older ones.",
+    "effect": "This is the clearest case on the site of a curve that measures an institution rather than the world. It is drawn because it is the only official count of anomalous reports that exists \u2014 and it is labelled as intake, with the publisher's own explanation attached, rather than presented as a rate.",
+    "tier": "A",
+    "source_id": "an_odni_2022"
   }
 ]

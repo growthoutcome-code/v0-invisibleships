@@ -62,6 +62,40 @@ export default function CopyrightTerms({ variant = "full" }: { variant?: "gate" 
             Tier C is claimed but not verified — market-research forecasts, for example. A grade
             describes how well sourced a figure is, not how true its interpretation might be.
           </p>
+          {/* Sean, 2026-08-22: bolster the disclaimer and point people to it,
+              rather than repeating caveat text under every chart. Everything
+              here was previously stated section by section. */}
+          <p className="mt-3 font-semibold text-foreground">How to read the charts</p>
+          <p className="mt-1">
+            The charts use a fixed visual grammar, and it is the same everywhere on the site.
+            A <strong>dotted stretch</strong> means those years are not Tier A. <strong>Hollow
+            points</strong> mean the series is sampled with gaps, so the straight run between
+            two distant years is not data. <strong>Points with no line</strong> are irregular
+            snapshots, which would become a fiction if joined up. A <strong>gap</strong> is a
+            year the publisher does not publish, left as a gap rather than bridged. A{" "}
+            <strong>break with a marked year</strong> is different again: both sides are
+            published, but the measurement changed between them, so the line is split rather
+            than drawn through — and where that happens the summary states each half
+            separately instead of quoting one percentage across two different measurements.
+          </p>
+          <p className="mt-1">
+            Where lanes are <strong>indexed</strong>, each is set to its own first year = 100.
+            That chart shows direction and relative change only, never size: two lanes at the
+            same height are not two equal quantities. Where a chart offers a{" "}
+            <strong>year-over-year change</strong> view, the change is computed only between
+            consecutive published years, and never across a break or a gap.
+          </p>
+          <p className="mt-3 font-semibold text-foreground">A count of reports is not a count of events</p>
+          <p className="mt-1">
+            Several series on this site count what reached an institution rather than what
+            happened: records entered, reports received, arrests made, screens completed. Those
+            move when reporting rules change, when stigma falls, when an agency builds a new
+            intake channel, or when a survey adds agencies to its universe — and the publishers
+            frequently say so themselves. Where a rise is attributed by its own publisher to
+            reporting rather than to events, that attribution is carried with the figure. A
+            series that stops has not shown that the thing stopped; it has shown that the
+            publishing stopped, and those are recorded separately.
+          </p>
           <p className="mt-3 font-semibold text-foreground">What this data does not do</p>
           <p className="mt-1">
             It does not establish that any organisation did anything wrong. It does not connect any

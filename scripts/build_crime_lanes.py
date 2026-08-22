@@ -378,11 +378,8 @@ def main():
         "themes": themes,
         "note": (
             "These lanes count different things in different units, so each is indexed "
-            "to its own first year = 100: the chart shows direction, never size. Dotted "
-            "stretches are years that are not Tier A; hollow points mark a lane sampled "
-            "with gaps; a gap with a marked year is a lane whose BASIS changed, drawn as "
-            "a break rather than joined up. Click any lane for its raw figures, method "
-            "and caveats."
+            "to its own first year = 100: the chart shows direction, never size. Click any "
+            "lane for its raw figures, method and caveats."
         ),
         "publisher": "FBI; CDC/NCHS; BJS; US Courts",
         "tier": "A",

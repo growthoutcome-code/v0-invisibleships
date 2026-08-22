@@ -64,5 +64,17 @@
     "statement": "The United States is no longer the world's highest incarcerator by rate. The World Prison Brief puts it fourth at 542 per 100,000 for 2023, behind El Salvador (1,659, March 2024), Cuba (794, January 2020) and Turkmenistan (about 576, early 2021). It remains several times above every comparable country \u2014 Germany 69, Japan 33 \u2014 but the ranking itself mixes reference dates across eight years and cannot be drawn as a chart.",
     "tier": "B",
     "source_id": "inc_wpb_rank"
+  },
+  {
+    "topic": "anomalies_what_is_counted",
+    "statement": "Of the things people report when something is wrong, missing persons are counted and falling \u2014 NCIC records entered are at their modern low. Home invasion is not counted anywhere. Hallucinations are measured once a decade in England and not at all by any United States federal survey. Hauntings are measured as belief rather than experience: Gallup has asked Americans whether they believe in ghosts since 1990 and has never asked whether they have seen one.",
+    "tier": "A",
+    "source_id": "an_pew_mode"
+  },
+  {
+    "topic": "anomalies_reporting_not_events",
+    "statement": "The only official count of anomalous reports that exists \u2014 the federal UAP office's \u2014 rose from 247 to 757 and then fell to 319, across reporting periods of 18, 8, 13 and 12 months. The office attributes the rise to reduced stigma and to the FAA beginning to forward reports weekly. It measures a reporting system, not a phenomenon.",
+    "tier": "A",
+    "source_id": "an_aaro_fy24"
   }
 ]

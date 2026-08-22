@@ -1,0 +1,241 @@
+{
+  "title": "Reports of the unexplained, indexed",
+  "unit": "Each lane indexed to its own first year = 100 \u2014 direction only, never size",
+  "themes": [
+    {
+      "statement": "Missing-person records are at their modern low, about a fifth below 2014. Whether that is fewer people going missing or fewer records being entered cannot be separated.",
+      "tier": "A"
+    },
+    {
+      "statement": "Home invasion has no lane here, because no country counts it as an offence. It is filed as burglary, and burglary has fallen almost everywhere for twenty years.",
+      "tier": "A"
+    },
+    {
+      "statement": "In England, adults reporting a psychotic symptom in the past year went from 5.6% to 6.8% between 2000 and 2014 \u2014 and then the survey stopped publishing that figure. No United States federal survey asks the question at all.",
+      "tier": "A"
+    },
+    {
+      "statement": "The haunting line is BELIEF, not experience. Gallup has asked Americans whether they believe in ghosts since 1990 and has never asked whether they have seen one; Pew asked the experience question twice and then declared its own two readings incomparable after it moved from telephone to online.",
+      "tier": "A"
+    },
+    {
+      "statement": "Reports to the federal UAP office rose sharply and then fell \u2014 and the office attributes the rise to reduced stigma and to the FAA beginning to forward reports weekly. It is a picture of a reporting system being built, not of the sky changing.",
+      "tier": "A"
+    },
+    {
+      "statement": "Four lanes, four different things: records entered, symptoms reported, beliefs held, reports received. They are drawn together because each is what exists \u2014 not because any one of them corroborates another. Nothing here establishes a relationship between them.",
+      "tier": "A"
+    }
+  ],
+  "note": "Four different things \u2014 records entered, symptoms reported, beliefs held, reports received \u2014 indexed to direction only. Click any lane for its raw figures and what it cannot show; every one carries a serious limitation, and the UAP lane carries its publisher's own statement that the rise is about reporting.",
+  "publisher": "FBI NCIC; Adult Psychiatric Morbidity Survey; Chapman University; AARO / ODNI",
+  "tier": "A",
+  "indexed": true,
+  "series": [
+    {
+      "name": "Missing-person records",
+      "counts": "NCIC records entered per year",
+      "publisher": "FBI NCIC",
+      "emphasis": true,
+      "base_year": 2014,
+      "base_value": 634155,
+      "unit_raw": "records entered",
+      "tier": "B",
+      "basis_short": "NCIC records entered per year; indexed to 2014 = 100",
+      "points": [
+        {
+          "year": 2014,
+          "value": 100.0,
+          "raw": 634155,
+          "tier": "B"
+        },
+        {
+          "year": 2015,
+          "value": 100.1,
+          "raw": 634908,
+          "tier": "A"
+        },
+        {
+          "year": 2016,
+          "value": 102.1,
+          "raw": 647435,
+          "tier": "A"
+        },
+        {
+          "year": 2017,
+          "value": 102.7,
+          "raw": 651226,
+          "tier": "A"
+        },
+        {
+          "year": 2018,
+          "value": 96.6,
+          "raw": 612846,
+          "tier": "A"
+        },
+        {
+          "year": 2019,
+          "value": 96.1,
+          "raw": 609275,
+          "tier": "A"
+        },
+        {
+          "year": 2020,
+          "value": 85.6,
+          "raw": 543018,
+          "tier": "A"
+        },
+        {
+          "year": 2022,
+          "value": 86.2,
+          "raw": 546568,
+          "tier": "A"
+        },
+        {
+          "year": 2023,
+          "value": 88.8,
+          "raw": 563389,
+          "tier": "A"
+        },
+        {
+          "year": 2024,
+          "value": 84.2,
+          "raw": 533936,
+          "tier": "A"
+        },
+        {
+          "year": 2025,
+          "value": 78.5,
+          "raw": 498038,
+          "tier": "A"
+        }
+      ],
+      "caveats": [
+        "Counts RECORDS, not people: one person can generate more than one, and a record is cancelled when a case closes for any reason \u2014 cancellation does not mean found alive.",
+        "Adults are not subject to the same mandatory-entry rules as juveniles, so adult cases are under-entered by an unknown margin."
+      ]
+    },
+    {
+      "name": "Psychotic symptoms (England)",
+      "counts": "adults screening positive in the past year",
+      "publisher": "APMS",
+      "emphasis": true,
+      "base_year": 2000,
+      "base_value": 5.6,
+      "unit_raw": "percent of adults screening positive for a psychotic symptom in the past year",
+      "tier": "A",
+      "basis_short": "adults screening positive in the past year; indexed to 2000 = 100",
+      "points": [
+        {
+          "year": 2000,
+          "value": 100.0,
+          "raw": 5.6,
+          "tier": "A"
+        },
+        {
+          "year": 2007,
+          "value": 105.4,
+          "raw": 5.9,
+          "tier": "A"
+        },
+        {
+          "year": 2014,
+          "value": 121.4,
+          "raw": 6.8,
+          "tier": "A"
+        }
+      ],
+      "caveats": [
+        "ENGLAND ONLY, ages 16\u201374. There is no equivalent United States series: no federal survey asks all respondents about hallucinations or voice-hearing at all.",
+        "THE QUESTION STOPPED BEING PUBLISHED. The 2023/24 survey still uses the screening instrument but no longer reports the screen-positive rate as an outcome, so the series ends in 2014 and cannot be extended.",
+        "Response rate fell from just under 70% in 2000 to 57% in 2007 and 2014. On a question about a stigmatised experience, that is a live confounder.",
+        "The published figure is 'any psychotic symptom', which folds hallucinations in with paranoia and thought interference. No item-level breakdown is published, so hallucinations cannot be separated out."
+      ]
+    },
+    {
+      "name": "Belief that places can be haunted",
+      "counts": "percent agreeing, US adults",
+      "publisher": "Chapman University",
+      "emphasis": false,
+      "base_year": 2016,
+      "base_value": 46.6,
+      "unit_raw": "percent agreeing 'places can be haunted by spirits'",
+      "tier": "B",
+      "basis_short": "percent agreeing, US adults; indexed to 2016 = 100",
+      "points": [
+        {
+          "year": 2016,
+          "value": 100.0,
+          "raw": 46.6,
+          "tier": "B"
+        },
+        {
+          "year": 2017,
+          "value": 112.2,
+          "raw": 52.3,
+          "tier": "B"
+        },
+        {
+          "year": 2018,
+          "value": 123.8,
+          "raw": 57.7,
+          "tier": "B"
+        },
+        {
+          "year": 2021,
+          "value": 113.1,
+          "raw": 52.7,
+          "tier": "B"
+        }
+      ],
+      "caveats": [
+        "THIS IS BELIEF, NOT EXPERIENCE. The item is agreement with the statement 'places can be haunted by spirits'. It measures what people think is possible, not what has happened to them.",
+        "The 2019 wave exists but published only subgroup figures, so 2019 is a genuine gap rather than a smoothed line.",
+        "Online panel. No paranormal results have been published since the January 2021 wave, though the survey itself continues."
+      ]
+    },
+    {
+      "name": "UAP reports received",
+      "counts": "reports received by AARO per reporting period",
+      "publisher": "AARO / ODNI",
+      "emphasis": false,
+      "base_year": 2022,
+      "base_value": 247,
+      "unit_raw": "UAP reports received by AARO in the reporting period",
+      "tier": "A",
+      "basis_short": "reports received by AARO per reporting period; indexed to 2022 = 100",
+      "points": [
+        {
+          "year": 2022,
+          "value": 100.0,
+          "raw": 247,
+          "tier": "A"
+        },
+        {
+          "year": 2023,
+          "value": 117.8,
+          "raw": 291,
+          "tier": "A"
+        },
+        {
+          "year": 2024,
+          "value": 306.5,
+          "raw": 757,
+          "tier": "A"
+        },
+        {
+          "year": 2025,
+          "value": 129.1,
+          "raw": 319,
+          "tier": "A"
+        }
+      ],
+      "caveats": [
+        "THIS IS AN INTAKE COUNT, NOT A RATE. The reporting periods are 18 months, 8 months, 13 months and 12 months \u2014 unequal, and not aligned to calendar years. The 2021 figure of 144 covers SEVENTEEN years and is excluded from this lane for that reason.",
+        "The counts mix in-period events with back-reports of older ones: 272 of the 757 in the FY2024 report were events from 2021\u20132022.",
+        "AARO AND ODNI ATTRIBUTE THE RISE TO REPORTING, NOT TO EVENTS. ODNI records it as 'partially due to reduced stigma surrounding UAP reporting'; AARO records that the FAA began forwarding reports weekly, 'a significant increase from the previous reporting period'. This lane is a picture of a reporting office being built.",
+        "AARO also records a collection bias favouring the continental United States and US military operational areas, and diagnosed one of its own prior-year distributions as an artefact of a batch of FAA paperwork."
+      ]
+    }
+  ]
+}

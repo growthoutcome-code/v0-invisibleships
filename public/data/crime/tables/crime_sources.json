@@ -1636,5 +1636,140 @@
     "evidence_tier": "B",
     "accessed": "2026-08-22",
     "archived_url": null
+  },
+  {
+    "source_id": "an_apms_trends",
+    "publisher": "Schizophrenia Research (Shoham, Cooper, Lewis, Bebbington, McManus)",
+    "title": "Temporal trends in psychotic symptoms: repeated cross-sectional surveys of the population in England 2000\u201314",
+    "url": "https://openaccess.city.ac.uk/id/eprint/25570/8/APMS%20Psychotic%20Symptoms%20Temporal%20trends%206.8.20.pdf",
+    "evidence_tier": "A",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "an_apms_2324",
+    "publisher": "NHS England / Adult Psychiatric Morbidity Survey",
+    "title": "Survey of Mental Health and Wellbeing, England 2023/24 \u2014 psychotic disorder chapter (the PSQ screen-positive rate is no longer reported as an outcome)",
+    "url": "https://digital.nhs.uk/data-and-information/publications/statistical/adult-psychiatric-morbidity-survey/survey-of-mental-health-and-wellbeing-england-2023-24/psychotic-disorder",
+    "evidence_tier": "A",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "an_psq",
+    "publisher": "Bebbington & Nayani",
+    "title": "Psychosis Screening Questionnaire \u2014 the instrument, unchanged across APMS waves",
+    "url": "https://nccred.org.au/uploads/documents/Psychosis-screening-questionnaire.pdf",
+    "evidence_tier": "A",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "an_chapman_2018",
+    "publisher": "Chapman University Survey of American Fears",
+    "title": "Paranormal America 2018 \u2014 'Places can be haunted by spirits'",
+    "url": "http://blogs.chapman.edu/wilkinson/2018/10/16/paranormal-america-2018/",
+    "evidence_tier": "B",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "an_chapman_2021",
+    "publisher": "Chapman University Survey of American Fears",
+    "title": "Wave 7, fielded 5\u201315 January 2021 \u2014 the last paranormal battery published",
+    "url": "https://blogs.chapman.edu/wilkinson/2021/10/14/government-corruption-fear-for-loved-ones-civil-unrest-top/",
+    "evidence_tier": "B",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "an_gallup_2025",
+    "publisher": "Gallup",
+    "title": "Paranormal phenomena met with skepticism (fieldwork 1\u201318 May 2025) \u2014 'largely unchanged' since 2001",
+    "url": "https://news.gallup.com/poll/692738/paranormal-phenomena-met-skepticism.aspx",
+    "evidence_tier": "B",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "an_gallup_2005",
+    "publisher": "Gallup",
+    "title": "Three in four Americans believe in the paranormal (1990, 2001, 2005 series)",
+    "url": "https://news.gallup.com/poll/16915/three-four-americans-believe-paranormal.aspx",
+    "evidence_tier": "B",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "an_pew_mode",
+    "publisher": "Pew Research Center",
+    "title": "Spiritual experiences (2023) \u2014 Pew states its telephone-era and online-era readings may not be comparable",
+    "url": "https://www.pewresearch.org/religion/2023/12/07/spiritual-experiences/",
+    "evidence_tier": "A",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "an_yougov_2025",
+    "publisher": "YouGov",
+    "title": "Most Americans say they have experienced at least one paranormal event (Oct 2025) \u2014 60%, down from 67% in 2022",
+    "url": "https://yougov.com/en-us/articles/53258-most-americans-say-they-have-experienced-at-least-one-paranormal-event",
+    "evidence_tier": "B",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "an_aaro_fy25",
+    "publisher": "All-domain Anomaly Resolution Office (AARO)",
+    "title": "FY2025 Consolidated Annual Report on UAP",
+    "url": "https://www.aaro.mil/Portals/136/PDFs/FY25%20UAP%20Annual%20Report/AARO_FY2025_Consolidated_Annual_Report_on_UAP.pdf",
+    "evidence_tier": "A",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "an_aaro_fy24",
+    "publisher": "All-domain Anomaly Resolution Office (AARO)",
+    "title": "FY2024 Consolidated Annual Report on UAP \u2014 records the FAA now reporting weekly",
+    "url": "https://media.defense.gov/2024/Nov/14/2003583603/-1/-1/0/FY24-CONSOLIDATED-ANNUAL-REPORT-ON-UAP-508.PDF",
+    "evidence_tier": "A",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "an_odni_2022",
+    "publisher": "Office of the Director of National Intelligence",
+    "title": "2022 Annual Report on UAP \u2014 attributes the increase partly to 'reduced stigma surrounding UAP reporting'",
+    "url": "https://archive.dni.gov/files/ODNI/documents/assessments/Unclassified-2022-Annual-Report-UAP.pdf",
+    "evidence_tier": "A",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "an_nsduh_methods",
+    "publisher": "SAMHSA / NCBI",
+    "title": "NSDUH instrument comparison \u2014 no hallucination or voice-hearing items in the questions asked of all respondents",
+    "url": "https://www.ncbi.nlm.nih.gov/books/NBK390286/",
+    "evidence_tier": "A",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "an_sapien_2025",
+    "publisher": "Sapien Labs, Global Mind Project",
+    "title": "Global Mind Health in 2025 \u2014 an anonymous annual instrument whose 47 items include 'Hallucinations' and 'Sense of being detached from reality'",
+    "url": "https://sapienlabs.org/wp-content/uploads/2026/02/Global-Mind-Health-in-2025-Report.pdf",
+    "evidence_tier": "C",
+    "accessed": "2026-08-22",
+    "archived_url": null
+  },
+  {
+    "source_id": "an_yrbs_trend",
+    "publisher": "CDC, Youth Risk Behavior Survey",
+    "title": "YRBS Data Summary & Trends Report 2013\u20132023 \u2014 anonymous, in-school, unchanged wording",
+    "url": "https://www.cdc.gov/yrbs/dstr/pdf/YRBS-2023-Data-Summary-Trend-Report.pdf",
+    "evidence_tier": "A",
+    "accessed": "2026-08-22",
+    "archived_url": null
   }
 ]
