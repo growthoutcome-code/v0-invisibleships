@@ -26,6 +26,30 @@ try {
 const page = await browser.newPage();
 const fail = (m) => { console.error("FAIL:", m); process.exitCode = 1; };
 
+// Wait for the server rather than assuming it is up. `next start &` returns
+// immediately and takes a second or so to listen, so running this straight
+// after it raced and died with ERR_CONNECTION_REFUSED. Polling here means the
+// caller does not have to remember a sleep.
+{
+  const deadline = Date.now() + 45000;
+  let up = false, lastErr;
+  while (Date.now() < deadline) {
+    try {
+      const r = await fetch(BASE + "/data", { method: "HEAD" });
+      if (r.ok || r.status === 405) { up = true; break; }
+      lastErr = `HTTP ${r.status}`;
+    } catch (e) { lastErr = e.message; }
+    await new Promise((r) => setTimeout(r, 500));
+  }
+  if (!up) {
+    console.error(`FAIL: no server at ${BASE} after 45s (${lastErr}).`);
+    console.error(`      Start one first:  npx next start -p 3100 &`);
+    console.error(`      Or point elsewhere:  TEST_BASE=http://localhost:3000 node scripts/test-data-roundtrip.mjs`);
+    await browser.close();
+    process.exit(1);
+  }
+}
+
 await page.goto(BASE + "/data", { waitUntil: "networkidle" });
 
 // Gate: 4 steps
