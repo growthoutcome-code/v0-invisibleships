@@ -1,8 +1,28 @@
 // Verifies the Data sub-tab round-trip keeps the GovCloud report drawn.
+import { existsSync } from "node:fs";
 import { chromium } from "playwright-core";
 
-const BASE = "http://localhost:3100";
-const browser = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium" });
+const BASE = process.env.TEST_BASE || "http://localhost:3100";
+
+// The browser path used to be hardcoded to /opt/pw-browsers/chromium, which is
+// the container this suite was written in and exists nowhere else — so the
+// script could never run on a normal machine. Now: an explicit override wins,
+// then that container path if it happens to exist, and otherwise Playwright
+// resolves its own install (~/Library/Caches/ms-playwright on macOS), which is
+// where `npx playwright install chromium` puts it.
+const CONTAINER_CHROMIUM = "/opt/pw-browsers/chromium";
+const executablePath = process.env.PW_CHROMIUM
+  || (existsSync(CONTAINER_CHROMIUM) ? CONTAINER_CHROMIUM : undefined);
+
+let browser;
+try {
+  browser = await chromium.launch(executablePath ? { executablePath } : {});
+} catch (e) {
+  console.error("FAIL: could not launch Chromium.", e.message);
+  console.error("      Install it with:  npx playwright install chromium");
+  console.error("      Or point at an existing binary:  PW_CHROMIUM=/path/to/chrome node scripts/test-data-roundtrip.mjs");
+  process.exit(1);
+}
 const page = await browser.newPage();
 const fail = (m) => { console.error("FAIL:", m); process.exitCode = 1; };
 
