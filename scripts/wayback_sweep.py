@@ -97,9 +97,9 @@ def save_json(p: pathlib.Path, data) -> None:
     p.write_text(json.dumps(data, indent=2) + "\n")
 
 
-def get(url: str, headers: dict | None = None, timeout: int = TIMEOUT):
-    """One HTTP GET. Returns (status, body_text). Never raises for HTTP errors."""
-    req = urllib.request.Request(url, headers={"User-Agent": UA, **(headers or {})})
+def get(url: str, headers: dict | None = None, timeout: int = TIMEOUT, data: bytes | None = None):
+    """One HTTP request. Returns (status, body_text, headers). Never raises for HTTP errors."""
+    req = urllib.request.Request(url, data=data, headers={"User-Agent": UA, **(headers or {})})
     try:
         with urllib.request.urlopen(req, timeout=timeout) as r:
             return r.status, r.read().decode("utf-8", "replace"), r.headers
@@ -171,30 +171,73 @@ def snapshot_before(url: str, since: str) -> tuple[str | None, str]:
 
 
 def request_save(url: str, keys: tuple[str, str] | None) -> tuple[str | None, str]:
-    """Ask Save Page Now for a capture. Returns (archived_url, note)."""
+    """Ask Save Page Now for a capture. Returns (archived_url, timestamp-or-note).
+
+    This function used to scrape the snapshot timestamp out of whatever HTML SPN
+    handed back. That was wrong, and the first ten-URL run showed it: three
+    "fresh captures" came back dated 1, 16 and 18 August when the run was on the
+    23rd. The first `/web/<timestamp>/` in an archived page is very often the
+    Wayback TOOLBAR's link to a DIFFERENT, older snapshot — so rows were being
+    recorded as current captures while pointing at older ones, which is exactly
+    the distinction the "predates access" marking exists to make.
+
+    So the timestamp now comes from the only place that actually knows it: the
+    SPN2 job API, which returns the capture's own timestamp when the job
+    finishes. Everything else is treated as "not captured" rather than guessed
+    at, and the caller falls back to a marked older snapshot.
+    """
     headers = {"Accept": "application/json"}
     if keys:
         headers["Authorization"] = f"LOW {keys[0]}:{keys[1]}"
-    status, body, resp_headers = get(SAVE + url, headers=headers, timeout=120)
+
+    payload = urllib.parse.urlencode({"url": url, "skip_first_archive": "1"}).encode()
+    status, body, resp_headers = get(
+        "https://web.archive.org/save",
+        headers={**headers, "Content-Type": "application/x-www-form-urlencoded"},
+        timeout=120, data=payload)
 
     if status == 429:
         return None, "rate limited"
-    if status in (403, 401):
+    if status in (401, 403):
         return None, f"refused ({status})"
     if status == 0:
-        return None, body[:80]
+        return None, body[:60]
 
-    # SPN answers in several shapes depending on keys and load: a redirect to the
-    # snapshot, an HTML page containing its path, or JSON with a job id.
-    for candidate in (resp_headers.get("Content-Location", ""),
-                      resp_headers.get("Location", ""), body[:20000]):
-        m = re.search(r"/web/(\d{14})/(https?://[^\s\"'<>]+)", candidate or "")
+    job = None
+    try:
+        job = (json.loads(body) or {}).get("job_id")
+    except json.JSONDecodeError:
+        pass
+
+    if not job:
+        # No job id means SPN did not accept the submission. The Content-Location
+        # header is the one header SPN sets to the capture it just made, so it is
+        # trustworthy where the body is not.
+        m = re.search(r"/web/(\d{14})/(https?://\S+)", resp_headers.get("Content-Location", "") or "")
         if m:
             return f"https://web.archive.org/web/{m.group(1)}/{m.group(2)}", m.group(1)
+        return None, "not accepted"
 
-    if status == 200:
-        return None, "submitted, no snapshot url yet"
-    return None, f"save {status}"
+    # Poll the job. Captures usually land in 5-30s; a slow publisher can take longer.
+    for _ in range(40):
+        time.sleep(3)
+        s, b, _h = get(f"https://web.archive.org/save/status/{job}", headers=headers)
+        if s != 200:
+            continue
+        try:
+            r = json.loads(b)
+        except json.JSONDecodeError:
+            continue
+        state = r.get("status")
+        if state == "success":
+            stamp = str(r.get("timestamp") or "")
+            original = r.get("original_url") or url
+            if len(stamp) == 14:
+                return f"https://web.archive.org/web/{stamp}/{original}", stamp
+            return None, "success without timestamp"
+        if state == "error":
+            return None, str(r.get("status_ext") or r.get("message") or "spn error")[:40]
+    return None, "capture timed out"
 
 
 # ------------------------------------------------------------------- the sweep
@@ -311,11 +354,21 @@ def main() -> int:
                 continue
 
             snap, stamp = request_save(url, keys)
-            if snap:
+            if snap and stamp[:8] >= w["since"]:
                 ledger[url] = {"archived_url": snap, "archived_at": stamp,
                                "how": "saved"}
                 saved += 1
                 print(f"[{i}/{len(todo)}] SAVED  {stamp[:8]}  {url[:70]}")
+            elif snap:
+                # A "capture" dated before we read the page is not a capture of
+                # what we read. This cannot happen through the SPN2 job API,
+                # which reports the timestamp of the job it just ran — it is here
+                # because the earlier body-scraping implementation DID produce
+                # this, silently, and a guard costs nothing.
+                ledger[url] = {"archived_url": snap, "archived_at": stamp,
+                               "how": "predates", "note": "save returned an older capture"}
+                stale += 1
+                print(f"[{i}/{len(todo)}] older  {stamp[:8]}  {url[:70]}")
             else:
                 note = stamp
                 # Save Page Now would not take it. An older capture is weaker
