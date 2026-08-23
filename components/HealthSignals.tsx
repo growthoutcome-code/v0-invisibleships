@@ -5,7 +5,7 @@ import ListPager from "@/components/ListPager";
 import { DataNoteLine } from "@/components/DataIntro";
 import DisclaimerLink from "@/components/DisclaimerLink";
 import { Skeleton, SkeletonRows, SkeletonChart } from "@/components/Skeleton";
-import { DATA_WINDOW, dataWindowTicks } from "@/components/DataPrimitives";
+import { DATA_WINDOW, dataWindowTicks, ArchivedLink } from "@/components/DataPrimitives";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { track } from "@/lib/analytics";
@@ -51,6 +51,7 @@ type Trend = { topic: string; statement: string; tier: string; source_id: string
 type Source = {
   source_id: string; url: string; publisher?: string; title?: string;
   evidence_tier?: string; accessed?: string; archived_url?: string | null;
+  archived_at?: string | null; archive_note?: string | null;
 };
 type IntlSeries = {
   country: string; emphasis: boolean; kind?: string; change_pct: number;
@@ -1206,6 +1207,7 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
               >
                 {s.title || s.url}
               </a>
+              <ArchivedLink rec={s} />
               <span className="text-muted text-[14px]">{s.publisher}</span>
               <span className="text-muted text-[13px] uppercase tracking-wide ml-auto">Tier {s.evidence_tier}</span>
             </li>

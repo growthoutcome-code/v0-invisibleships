@@ -1549,6 +1549,51 @@ for (const id of ["us-rose-against-the-trend", "the-fentanyl-reversal", "co-occu
   if (!links.some((h) => h.endsWith(id))) fail(`no chart links to concept ${id}`);
 }
 
+// ---------------------------------------------------------------------------
+// ROUND 8 — the archive links.
+//
+// Publishers withdraw pages; three did during the crime section. Every source
+// row carries an archived_url, and the guard is that whatever is IN the data
+// actually reaches the page — a filled field that renders nowhere is the same
+// as an empty one to a reader holding a dead link.
+//
+// Deliberately proportional: it asserts one link per archived row, so it passes
+// at zero coverage (before the sweep has run) and tightens automatically as
+// scripts/wayback_sweep.py fills the field.
+// ---------------------------------------------------------------------------
+await page.getByRole("tab", { name: /^Crime$/i }).click();
+await page.waitForTimeout(2200);
+const archive = await page.evaluate(async () => {
+  const rows = await fetch("/data/crime/tables/crime_sources.json").then((r) => r.json());
+  const archived = rows.filter((s) => (s.archived_url || "").trim());
+  // The register is paged, so only compare against what is on the visible page.
+  const shown = [...document.querySelectorAll("main li")]
+    .map((li) => li.querySelector('a[href]:not([data-archived])'))
+    .filter(Boolean).map((a) => a.getAttribute("href"));
+  const shownArchived = archived.filter((s) => shown.includes(s.url));
+  const links = [...document.querySelectorAll("main a[data-archived]")];
+  return {
+    inData: archived.length,
+    ofWhichOnThisPage: shownArchived.length,
+    linksRendered: links.length,
+    predates: links.filter((a) => a.dataset.archived === "predates").length,
+    dottedOnPredates: links.filter((a) => a.dataset.archived === "predates"
+      && /decoration-dotted/.test(a.className)).length,
+    allPointAtWayback: links.every((a) => /^https:\/\/web\.archive\.org\/web\/\d{14}\//.test(a.href)),
+    sampleText: links.slice(0, 2).map((a) => a.textContent.trim()),
+  };
+});
+console.log("archive links:", JSON.stringify(archive));
+if (archive.linksRendered < archive.ofWhichOnThisPage) {
+  fail(`${archive.ofWhichOnThisPage} sources on this page carry an archive url but only ${archive.linksRendered} rendered a link`);
+}
+if (archive.linksRendered && !archive.allPointAtWayback) {
+  fail("an archive link does not resolve to a timestamped Wayback snapshot");
+}
+if (archive.predates !== archive.dottedOnPredates) {
+  fail("a snapshot that predates access is not marked dotted — it reads as stronger evidence than it is");
+}
+
 await browser.close();
 
 // ---------------------------------------------------------------------------

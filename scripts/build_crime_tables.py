@@ -571,6 +571,24 @@ def main():
         existing = json.loads(path.read_text()) if path.exists() else []
         mine = {r[key] for r in data if key in r}
         kept = [r for r in existing if r.get(key) not in mine]
+
+        # Sticky fields are filled OUT OF BAND, by something that is not a
+        # builder — archived_url comes from scripts/wayback_sweep.py, which
+        # takes hours to run against the Internet Archive. This script rebuilds
+        # its own rows from research/ and would hand every one of them back with
+        # archived_url: None, silently erasing the entire sweep on the next
+        # pipeline run. Eight of the nine builders only append sources they do
+        # not already have and never touch the field; this one replaces by key,
+        # so this is the single place the loss could happen.
+        prior = {r.get(key): r for r in existing}
+        for row in data:
+            was = prior.get(row.get(key))
+            if not was:
+                continue
+            for field in ("archived_url", "archived_at", "local_copy"):
+                if not (row.get(field) or "") and (was.get(field) or ""):
+                    row[field] = was[field]
+
         save(name, data + kept)
 
     merge_save("crime_indicators.json", indicators, "indicator_id")

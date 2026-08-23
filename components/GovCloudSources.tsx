@@ -5,6 +5,7 @@ import ListPager from "@/components/ListPager";
 import { SkeletonRows, Skeleton } from "@/components/Skeleton";
 import { Input } from "@/components/ui/input";
 import { track } from "@/lib/analytics";
+import { ArchivedLink } from "@/components/DataPrimitives";
 
 type Source = {
   id: string;
@@ -14,6 +15,8 @@ type Source = {
   published_on?: string;
   evidence_tier?: "A" | "B" | "C" | string;
   archived_url?: string;
+  archived_at?: string;
+  archive_note?: string;
 };
 
 /**
@@ -99,6 +102,7 @@ export default function GovCloudSources() {
             >
               {r.title || r.url}
             </a>
+            <ArchivedLink rec={r} />
             <span className="text-muted text-[14px]">{r.publisher}</span>
             {r.published_on && <span className="text-muted text-[14px]">{r.published_on}</span>}
             <span className="text-muted text-[13px] uppercase tracking-wide ml-auto">

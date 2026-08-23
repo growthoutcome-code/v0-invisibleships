@@ -7,7 +7,7 @@ import DisclaimerLink from "@/components/DisclaimerLink";
 import { SkeletonChart } from "@/components/Skeleton";
 import {
   useTable, useDoc, usePager, useNarrow, TierChip, SourceLink, SectionSkeleton,
-  DismissibleNote, DATA_WINDOW, dataWindowTicks, type SourceRec,
+  DismissibleNote, ArchivedLink, DATA_WINDOW, dataWindowTicks, type SourceRec,
 } from "@/components/DataPrimitives";
 import IntlLineChart, { type IntlChartDoc, type IntlSeries } from "@/components/IntlLineChart";
 import DetentionChart, { type DetChart, type DetSeries } from "@/components/DetentionChart";
@@ -1468,6 +1468,7 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
                   className="text-foreground/85 underline underline-offset-4 hover:text-accent measure">
                   {s.title || s.url}
                 </a>
+                <ArchivedLink rec={s} />
                 <span className="ml-auto text-muted text-[13px] shrink-0">{s.publisher}</span>
               </li>
             ))}

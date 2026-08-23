@@ -47,7 +47,55 @@ export function dataWindowTicks(narrow = false): number[] {
 export type SourceRec = {
   source_id: string; url: string; publisher?: string; title?: string;
   evidence_tier?: string; accessed?: string; archived_url?: string | null;
+  archived_at?: string | null; archive_note?: string | null;
 };
+
+/** '20260312...' -> '12 Mar 2026'. Wayback stamps are YYYYMMDDhhmmss. */
+export function archiveDate(stamp?: string | null): string {
+  const s = (stamp || "").replace(/\D/g, "");
+  if (s.length < 8) return "";
+  const d = new Date(`${s.slice(0, 4)}-${s.slice(4, 6)}-${s.slice(6, 8)}T00:00:00Z`);
+  if (Number.isNaN(d.getTime())) return "";
+  return d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+}
+
+/**
+ * The second link on a source row: where the snapshot is.
+ *
+ * Publishers withdraw pages. Three did during the crime section alone — UNODC's
+ * burglary indicator, the BJS capacity table, SAMHSA's 988 metrics — and a Tier A
+ * citation whose URL has stopped resolving is indistinguishable, to a reader,
+ * from one that was never good. So every source carries a capture, and the
+ * capture's DATE is shown rather than hidden: a snapshot taken before we read
+ * the page is weaker evidence than one taken after, and the row says which it is
+ * instead of letting the word "archived" imply more than it earns.
+ *
+ * Dotted underline for the weaker case, matching the charts' convention that a
+ * dotted line is something less than documented.
+ */
+export function ArchivedLink({ rec }: { rec: Pick<SourceRec, "archived_url" | "archived_at" | "archive_note"> }) {
+  const href = (rec.archived_url || "").trim();
+  if (!href) return null;
+  const when = archiveDate(rec.archived_at);
+  const predates = (rec.archive_note || "") === "predates access";
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer noopener"
+      data-archived={predates ? "predates" : "current"}
+      title={predates
+        ? `Snapshot taken ${when || "before"} — earlier than the date this page was read, so it may not show the figures cited`
+        : `Snapshot taken ${when || "after this page was read"}`}
+      className={`shrink-0 text-muted hover:text-accent text-[13px] underline-offset-4 ${
+        predates ? "underline decoration-dotted" : "underline"
+      }`}
+    >
+      {predates ? "archived earlier" : "archived"}
+      {when ? ` ${when}` : ""}
+    </a>
+  );
+}
 
 /** Loads a JSON table, null while in flight, [] on failure. */
 export function useTable<T>(path: string): T[] | null {
