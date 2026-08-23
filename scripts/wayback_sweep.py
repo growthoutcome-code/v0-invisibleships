@@ -86,6 +86,11 @@ MAX_RETRY = 3
 # day this site's data pipeline began, rather than accepting any snapshot ever.
 FLOOR = "20250101"
 
+# "we could not confirm a capture" is NOT the same as "the publisher refused".
+# Recording an older snapshot for the first case would mark a page as predating
+# access when we may have just captured it fine and the index had not caught up.
+UNCONFIRMED = "unconfirmed"
+
 
 # --------------------------------------------------------------------------- io
 def load(p: pathlib.Path):
@@ -210,13 +215,19 @@ def request_save(url: str, keys: tuple[str, str] | None) -> tuple[str | None, st
         pass
 
     if not job:
-        # No job id means SPN did not accept the submission. The Content-Location
-        # header is the one header SPN sets to the capture it just made, so it is
-        # trustworthy where the body is not.
-        m = re.search(r"/web/(\d{14})/(https?://\S+)", resp_headers.get("Content-Location", "") or "")
-        if m:
-            return f"https://web.archive.org/web/{m.group(1)}/{m.group(2)}", m.group(1)
-        return None, "not accepted"
+        # No job id. The JSON API did not take the submission — but the plain
+        # GET form demonstrably DOES capture (it made four real captures on the
+        # first trial run), so fall back to it and then confirm the result the
+        # only trustworthy way: ask the index whether a capture from today now
+        # exists. Never scrape the body again.
+        get(SAVE + url, headers={"Accept": "text/html"}, timeout=120)
+        today = time.strftime("%Y%m%d", time.gmtime())
+        for _ in range(6):
+            time.sleep(5)
+            rows = cdx(url, **{"from": today, "limit": 1})
+            if rows:
+                return f"https://web.archive.org/web/{rows[0][0]}/{rows[0][1]}", rows[0][0]
+        return None, UNCONFIRMED
 
     # Poll the job. Captures usually land in 5-30s; a slow publisher can take longer.
     for _ in range(40):
@@ -294,9 +305,27 @@ def main() -> int:
     ap.add_argument("--limit", type=int, help="stop after this many URLs")
     ap.add_argument("--dry-run", action="store_true", help="show the work, change nothing")
     ap.add_argument("--check", action="store_true", help="report coverage and exit")
+    ap.add_argument("--debug", metavar="URL",
+                    help="submit one URL and print exactly what the archive says")
     ap.add_argument("--recheck", action="store_true",
                     help="re-query URLs the ledger already answered")
     args = ap.parse_args()
+
+    if args.debug:
+        keys = None
+        if os.environ.get("IA_ACCESS_KEY") and os.environ.get("IA_SECRET_KEY"):
+            keys = (os.environ["IA_ACCESS_KEY"], os.environ["IA_SECRET_KEY"])
+        hdr = {"Accept": "application/json",
+               "Content-Type": "application/x-www-form-urlencoded"}
+        if keys:
+            hdr["Authorization"] = f"LOW {keys[0]}:{keys[1]}"
+        body = urllib.parse.urlencode({"url": args.debug, "skip_first_archive": "1"}).encode()
+        st, bd, hh = get("https://web.archive.org/save", headers=hdr, timeout=120, data=body)
+        print(f"POST /save -> HTTP {st}")
+        print("content-type:", hh.get("Content-Type", "?") if hh else "?")
+        print("body (first 400 chars):")
+        print(bd[:400].replace("\n", " ") or "(empty)")
+        return 0
 
     ledger = {}
     if LEDGER.exists():
@@ -369,6 +398,13 @@ def main() -> int:
                                "how": "predates", "note": "save returned an older capture"}
                 stale += 1
                 print(f"[{i}/{len(todo)}] older  {stamp[:8]}  {url[:70]}")
+            elif stamp == UNCONFIRMED:
+                # Left OUT of the ledger on purpose, so the next run retries it.
+                # Do not fall back to an older snapshot here: we may well have
+                # captured this page and simply not seen it indexed yet, and
+                # marking it "predates access" would be a claim we cannot support.
+                failed += 1
+                print(f"[{i}/{len(todo)}] retry  not yet indexed        {url[:58]}")
             else:
                 note = stamp
                 # Save Page Now would not take it. An older capture is weaker
