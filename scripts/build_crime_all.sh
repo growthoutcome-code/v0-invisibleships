@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+#
+# The Data/Crime pipeline, in the one order that produces correct output.
+#
+# Why this file exists
+# --------------------
+# On 2026-08-23 the deployed corpus shipped stale: it carried the pre-rewrite
+# verdict and six-theme summaries while the site served seven. Nothing was
+# broken — the ORDER was. build_crime_copy.py rewrites every plain-language
+# block, and the corpus had been synced before it ran. The freshness guard
+# passed because it too was run upstream of the thing that changes the files.
+#
+# So: the order is no longer something either of us remembers. It is here, the
+# sync is the last step and not optional, and the check runs after the sync.
+#
+# Usage:  bash scripts/build_crime_all.sh
+# Then:   npm run build && node scripts/test-data-roundtrip.mjs
+#
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+run () {
+  printf '\n\033[1m▸ %s\033[0m\n' "$1"
+  python3 "scripts/$1" > /tmp/crime-pipeline.log 2>&1 || {
+    echo "FAILED — last 30 lines:"; tail -30 /tmp/crime-pipeline.log; exit 1; }
+  tail -3 /tmp/crime-pipeline.log
+}
+
+# ---- data builders -------------------------------------------------------
+# Order matters: tables first (it owns the shared source and indicator files
+# and merges rather than clobbers), then the chart builders, then copy.
+run build_crime_tables.py           # research/crime/crime_rows.json + crime_srcs.json
+run build_crime_lanes.py            # research/crime/harass_rows.json
+run build_crime_intl.py             # research/crime/intl/*.json
+run build_crime_tr.py
+run build_crime_milestones.py
+run build_crime_burglary.py
+run build_crime_incarceration.py
+run build_crime_anomalies.py
+
+# ---- the copy layer ------------------------------------------------------
+# LAST of the content steps. Owns every plain-language statement on the page
+# and enforces the word ceiling at build time. Anything that runs after this
+# and touches chart JSON will silently undo it.
+run build_crime_copy.py
+
+# ---- downstream ----------------------------------------------------------
+run inject_crime_track.py
+run build_govcloud_report.py
+
+# ---- the corpus, and only then the guard ---------------------------------
+# Not optional, and not before build_crime_copy.py. This is the step whose
+# absence shipped a stale download.
+run sync_corpus_crime.py
+
+printf '\n\033[1m▸ freshness check\033[0m\n'
+python3 scripts/sync_corpus_crime.py --check
+
+printf '\n\033[1;32mPipeline complete.\033[0m Next: npm run build && node scripts/test-data-roundtrip.mjs\n'

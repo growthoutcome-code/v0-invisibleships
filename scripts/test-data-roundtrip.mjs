@@ -1550,4 +1550,25 @@ for (const id of ["us-rose-against-the-trend", "the-fentanyl-reversal", "co-occu
 }
 
 await browser.close();
+
+// ---------------------------------------------------------------------------
+// ROUND 7 — the corpus people actually download must match the data they see.
+//
+// 2026-08-23: the deployed zip carried the pre-rewrite verdict and six-theme
+// summaries while the site served seven. The freshness guard existed and was
+// correct; it simply wasn't run at the end. So it runs here, inside the one
+// command we run before shipping, where forgetting is no longer possible.
+// ---------------------------------------------------------------------------
+try {
+  const { execFileSync } = await import("node:child_process");
+  const out = execFileSync("python3", ["scripts/sync_corpus_crime.py", "--check"], {
+    cwd: new URL("..", import.meta.url).pathname, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"],
+  });
+  console.log("corpus:", out.trim().split("\n").pop());
+} catch (e) {
+  const msg = [e.stdout, e.stderr].filter(Boolean).join("\n").trim();
+  console.log("corpus:\n" + msg);
+  fail("downloadable corpus has drifted from the data the site serves — run: python3 scripts/sync_corpus_crime.py");
+}
+
 console.log(process.exitCode ? "RESULT: FAIL" : "RESULT: PASS");
