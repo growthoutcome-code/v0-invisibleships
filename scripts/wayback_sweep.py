@@ -91,6 +91,12 @@ FLOOR = "20250101"
 # access when we may have just captured it fine and the index had not caught up.
 UNCONFIRMED = "unconfirmed"
 
+# Save Page Now caps captures per URL per day by resource type — PDFs at one.
+# Hitting that cap is NOT a refusal: it is the archive telling us a capture from
+# today already exists. Sean's trial run met it on the second pass and the old
+# code read it as "this publisher will not be captured", which is backwards.
+ALREADY_TODAY = "too-many-daily-captures"
+
 
 # --------------------------------------------------------------------------- io
 def load(p: pathlib.Path):
@@ -175,6 +181,25 @@ def snapshot_before(url: str, since: str) -> tuple[str | None, str]:
     return f"https://web.archive.org/web/{stamp}/{original}", stamp
 
 
+def captured_today(url: str) -> tuple[str | None, str]:
+    """Find today's capture in the index, waiting for it to be indexed.
+
+    Called when the archive has told us a capture from today exists — either
+    because it just made one, or because the daily cap says it already had. The
+    index is the only authority on where that capture lives, and it lags. If it
+    still has not appeared, the caller must retry on a later run: recording an
+    older snapshot here would mark a freshly captured page as predating access.
+    """
+    today = time.strftime("%Y%m%d", time.gmtime())
+    for wait in (0, 5, 10, 20, 30):
+        if wait:
+            time.sleep(wait)
+        rows = cdx(url, **{"from": today, "limit": 1})
+        if rows:
+            return f"https://web.archive.org/web/{rows[0][0]}/{rows[0][1]}", rows[0][0]
+    return None, UNCONFIRMED
+
+
 def request_save(url: str, keys: tuple[str, str] | None) -> tuple[str | None, str]:
     """Ask Save Page Now for a capture. Returns (archived_url, timestamp-or-note).
 
@@ -195,7 +220,14 @@ def request_save(url: str, keys: tuple[str, str] | None) -> tuple[str | None, st
     if keys:
         headers["Authorization"] = f"LOW {keys[0]}:{keys[1]}"
 
-    payload = urllib.parse.urlencode({"url": url, "skip_first_archive": "1"}).encode()
+    # if_not_archived_within asks SPN to hand back an existing recent capture
+    # instead of spending a daily allowance making a duplicate. It is what stops
+    # a re-run from burning the cap and then having to go looking for what it
+    # already had.
+    payload = urllib.parse.urlencode({
+        "url": url, "skip_first_archive": "1",
+        "if_not_archived_within": "86400",
+    }).encode()
     status, body, resp_headers = get(
         "https://web.archive.org/save",
         headers={**headers, "Content-Type": "application/x-www-form-urlencoded"},
@@ -208,11 +240,21 @@ def request_save(url: str, keys: tuple[str, str] | None) -> tuple[str | None, st
     if status == 0:
         return None, body[:60]
 
-    job = None
+    job, immediate = None, {}
     try:
-        job = (json.loads(body) or {}).get("job_id")
+        immediate = json.loads(body) or {}
+        job = immediate.get("job_id")
     except json.JSONDecodeError:
         pass
+
+    ext = str(immediate.get("status_ext") or "")
+    if ALREADY_TODAY in ext:
+        # A capture from today exists. Go and find it rather than treating the
+        # cap as a refusal — indexing lags the capture by anything from seconds
+        # to several minutes, so this is patient.
+        return captured_today(url)
+    if immediate.get("status") == "error":
+        return None, ext.replace("error:", "")[:40] or "spn error"
 
     if not job:
         # No job id. The JSON API did not take the submission — but the plain
@@ -221,13 +263,7 @@ def request_save(url: str, keys: tuple[str, str] | None) -> tuple[str | None, st
         # only trustworthy way: ask the index whether a capture from today now
         # exists. Never scrape the body again.
         get(SAVE + url, headers={"Accept": "text/html"}, timeout=120)
-        today = time.strftime("%Y%m%d", time.gmtime())
-        for _ in range(6):
-            time.sleep(5)
-            rows = cdx(url, **{"from": today, "limit": 1})
-            if rows:
-                return f"https://web.archive.org/web/{rows[0][0]}/{rows[0][1]}", rows[0][0]
-        return None, UNCONFIRMED
+        return captured_today(url)
 
     # Poll the job. Captures usually land in 5-30s; a slow publisher can take longer.
     for _ in range(40):
@@ -247,7 +283,10 @@ def request_save(url: str, keys: tuple[str, str] | None) -> tuple[str | None, st
                 return f"https://web.archive.org/web/{stamp}/{original}", stamp
             return None, "success without timestamp"
         if state == "error":
-            return None, str(r.get("status_ext") or r.get("message") or "spn error")[:40]
+            ext = str(r.get("status_ext") or "")
+            if ALREADY_TODAY in ext:
+                return captured_today(url)
+            return None, (ext.replace("error:", "") or "spn error")[:40]
     return None, "capture timed out"
 
 

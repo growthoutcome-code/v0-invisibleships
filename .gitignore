@@ -6,3 +6,7 @@
 *.tsbuildinfo
 next-env.d.ts
 .vercel
+
+# python bytecode from running the build scripts
+__pycache__/
+*.pyc
