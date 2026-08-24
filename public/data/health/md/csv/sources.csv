@@ -1,0 +1,105 @@
+accessed,archived_url,evidence_tier,publisher,source_id,title,url
+2026-08-19,,A,CDC/NCHS,hs001,FastStats: Suicide and Self-Harm Injury (2024 final data),https://www.cdc.gov/nchs/fastats/suicide.htm
+2026-08-19,,A,CDC/NCHS,hs002,"Data tables for NCHS Data Brief 464: Suicide Mortality in the United States, 2001-2021",https://www.cdc.gov/nchs/data/databriefs/db464-tables.pdf
+2026-08-19,,A,CDC/NCHS,hs003,"NCHS Data Brief 464: Suicide Mortality in the United States, 2001-2021 (Apr 2023)",https://www.cdc.gov/nchs/data/databriefs/db464.pdf
+2026-08-19,,A,CDC/NCHS,hs004,"NCHS Data Brief 509: Suicide Mortality in the United States, 2002-2022 (Sept 2024)",https://www.cdc.gov/nchs/products/databriefs/db509.htm
+2026-08-19,,A,CDC/NCHS,hs005,NCHS Data Brief 541: Changes in Suicide Rates in the United States From 2022 to 2023 (Sept 2025),https://www.cdc.gov/nchs/products/databriefs/db541.htm
+2026-08-19,,A,CDC/NCHS,hs006,"NCHS Data Brief 548: Mortality in the United States, 2024 (Jan 29, 2026)",https://www.cdc.gov/nchs/products/databriefs/db548.htm
+2026-08-19,,A,CDC/NCHS,hs007,"NCHS Data Brief 362: Increase in Suicide Mortality in the United States, 1999-2018 (Apr 2020)",https://www.cdc.gov/nchs/products/databriefs/db362.htm
+2026-08-19,,A,CDC MMWR,hs008,"Vital Signs: Trends in State Suicide Rates — United States, 1999-2016 (June 8, 2018)",https://www.cdc.gov/mmwr/volumes/67/wr/mm6722a1.htm
+2026-08-19,,A,UK Office for National Statistics,hs009,"Suicides in England and Wales: 2024 registrations (Oct 3, 2025)",https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/bulletins/suicidesintheunitedkingdom/latest
+2026-08-19,,A,Australian Bureau of Statistics,hs010,"Intentional self-harm (suicide) deaths, 2024 (Nov 14, 2025)",https://www.abs.gov.au/statistics/health/causes-death/intentional-self-harm-suicide-deaths/2024
+2026-08-19,,A,Public Health Agency of Canada,hs011,Suicide mortality (Health Infobase),https://health-infobase.canada.ca/mental-health/suicide-self-harm/suicide-mortality.html
+2026-08-19,,A,"Japan Ministry of Health, Labour and Welfare",hs012,2024 White Paper on Suicide Prevention (provisional English translation),https://www.mhlw.go.jp/content/001464705.pdf
+2026-08-19,,B,Nippon.com (citing MHLW/National Police Agency),hs013,"Number of Suicides in Japan Falls Below 20,000 (2025 data)",https://www.nippon.com/en/japan-data/h02690/
+2026-08-19,,A,Destatis,hs014,"Press release N046: Jeder 100. Todesfall in Deutschland ist ein Suizid (Sept 2024, 2023 data)",https://www.destatis.de/DE/Presse/Pressemitteilungen/2024/09/PD24_N046_23211.html
+2026-08-19,,A,Santé publique France,hs015,Suicide et tentatives de suicide : données nationales et régionales,https://www.santepubliquefrance.fr/les-actualites/suicide-et-tentative-de-suicides-donnees-nationales-et-regionales
+2026-08-19,,B,WHO Global Health Estimates via World Bank API,hs016,"Suicide mortality rate, age-standardized (SH.STA.SUIC.P5): US, UK, Canada, Australia",https://api.worldbank.org/v2/country/USA;GBR;CAN;AUS/indicator/SH.STA.SUIC.P5?format=json&per_page=120&date=2000:2021
+2026-08-19,,B,WHO Global Health Estimates via World Bank API,hs017,"Suicide mortality rate, age-standardized (SH.STA.SUIC.P5): Japan, Germany, France, Korea",https://api.worldbank.org/v2/country/JPN;DEU;FRA;KOR/indicator/SH.STA.SUIC.P5?format=json&per_page=120&date=2000:2021
+2026-08-19,,B,Korea Herald (citing Korea Foundation for Suicide Prevention / Statistics Korea),hs018,Suicide deaths in S. Korea hit 13-yr high in 2024,https://www.koreaherald.com/article/10429652
+2026-08-19,,A,World Health Organization,hs019,One in 100 deaths is by suicide (launch of 'Suicide worldwide in 2019'),https://www.who.int/news/item/17-06-2021-one-in-100-deaths-is-by-suicide
+2026-08-19,,A,US Federal Communications Commission,hs020,U.S. Transition to 988 Suicide & Crisis Lifeline Begins July 16,https://www.fcc.gov/document/us-transition-988-suicide-crisis-lifeline-begins-july-16
+2026-08-19,,A,World Bank (mirroring WHO GHE),hs021,"Suicide mortality rate — World, China, Russia, India",https://api.worldbank.org/v2/country/WLD;CHN;RUS;IND/indicator/SH.STA.SUIC.P5?format=json&per_page=400
+2026-08-19,,A,WHO,hs022,Suicide — fact sheet,https://www.who.int/news-room/fact-sheets/detail/suicide
+2026-08-19,,A,WHO,hs023,Suicide data,https://www.who.int/teams/mental-health-and-substance-use/data-research/suicide-data
+2026-08-19,,A,WHO,hs024,Global Health Estimates,https://www.who.int/data/global-health-estimates
+2026-08-19,,A,WHO,hs025,Suicide worldwide in 2019 (publication page; PDF 403),https://www.who.int/publications/i/item/9789240026643
+2026-08-19,,A,The Lancet,hs026,"Phillips, Li & Zhang — Suicide rates in China, 1995-99",https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(02)07954-0/abstract
+2026-08-19,,A,BMC Public Health,hs027,Long-term changing patterns of suicide mortality in China 1987-2020,https://link.springer.com/article/10.1186/s12889-024-18743-z
+2026-08-19,,A,European Journal of Public Health,hs028,Semyonova et al. — Russian suicide mortality: official and actual rates,https://academic.oup.com/eurpub/article/30/Supplement_5/ckaa166.1371/5915576
+2026-08-19,,A,Population and Economics,hs029,"Semyonova, Zubko & Sabgayda — Undercounting of Age-Specific Suicide Mortality",https://populationandeconomics.pensoft.net/article/107534/
+2026-08-19,,A,AJPH via PMC,hs030,Pridemore et al. — 2006 Russian Alcohol Policy and Male Suicide Mortality,https://pmc.ncbi.nlm.nih.gov/articles/PMC3828708/
+2026-08-19,,A,Indian J Psychological Medicine,hs031,Abhijita et al. — NCRB Suicide in India 2022 Report: Key Time Trends,https://journals.sagepub.com/doi/10.1177/02537176241240699
+2026-08-19,,B,CMHLP,hs032,Takeaways from the NCRB data on suicide for 2022,https://cmhlp.org/imho/blog/takeaways-from-the-ncrb-data-on-suicide-for-2022/
+2026-08-19,,B,CMHLP,hs033,Is India's suicide data accurate? NCRB vs GBD,https://cmhlp.org/blogs/data-is-the-new-oil-but-not-when-it-comes-to-suicides-in-india/
+2026-08-19,,A,Shanghai Archives of Psychiatry,hs034,Indian suicide data review (Million Death Study),https://shanghaiarchivesofpsychiatry.org/en/2014.02.003.html
+2026-08-19,,B,Wikipedia,hs035,"Mental Healthcare Act, 2017","https://en.wikipedia.org/wiki/Mental_Healthcare_Act,_2017"
+2026-08-19,,B,United for Global Mental Health,hs036,Suicide Decriminalisation,https://unitedgmh.org/suicide-decriminalisation/
+2026-08-19,,A,ONS,hs037,Change in the standard of proof used by coroners,https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/articles/changeinthestandardofproofusedbycoronersandtheimpactonsuicidedeathregistrationsdatainenglandandwales/2020-12-08
+2026-08-19,,B,Samaritans,hs038,Understanding UK and ROI suicide statistics,https://media.samaritans.org/documents/Understanding_UK_and_ROI_Suicide_Statistics.pdf
+2026-08-19,,A,Frontiers in Psychiatry,hs039,"Meda et al. — How many people die by suicide each year? Not 727,000",https://www.frontiersin.org/journals/psychiatry/articles/10.3389/fpsyt.2025.1609580/full
+2026-08-19,,B,Our World in Data,hs040,How do global statistics on suicide differ between sources?,https://ourworldindata.org/how-do-global-statistics-on-suicide-differ-between-sources
+2026-08-19,,A,American Cancer Society,hs041,Annual Cancer Statistics Report 2026,https://pressroom.cancer.org/cancer-statistics-report-2026
+2026-08-19,,A,American Cancer Society,hs042,ACS Annual Report 2025: Cancer Mortality Continues to Drop Despite Rising Incidence in Women,https://pressroom.cancer.org/2025CancerFactsandFigures
+2026-08-19,,A,NCI SEER,hs043,Cancer Stat Facts: Cancer of Any Site,https://seer.cancer.gov/statfacts/html/all.html
+2026-08-19,,A,American Cancer Society,hs044,Colorectal Cancer Drops in Older Adults and Rises in Younger Ones (CRC Statistics 2026),https://www.cancer.org/research/acs-research-news/colorectal-cancer-drops-in-older-adults-and-rises-in-young-ones.html
+2026-08-19,,A,BMJ Group (BMJ Oncology),hs045,Global surge in cancers among the under 50s over past three decades,https://bmjgroup.com/global-surge-in-cancers-among-the-under-50s-over-past-three-decades/
+2026-08-19,,B,Docwire News,hs046,2026 Cancer Statistics Report: Breast Cancer Incidence Continues to Rise,https://www.docwirenews.com/post/2026-cancer-statistics-report-breast-cancer-incidence-continues-to-rise-driven-by-increases-among-younger-women
+2026-08-19,,A,NIMH (NIH),hs047,Major Depression Statistics (2021 NSDUH),https://www.nimh.nih.gov/health/statistics/major-depression
+2026-08-19,,B,NACo (citing SAMHSA 2024 NSDUH),hs048,SAMHSA releases new 2024 data on rates of mental illness and substance use disorder,https://www.naco.org/news/samhsa-releases-new-2024-data-rates-mental-illness-and-substance-use-disorder-us
+2026-08-19,,A,SAMHSA,hs049,2024 NSDUH Releases (2025-07-28),https://www.samhsa.gov/data/data-we-collect/nsduh-national-survey-drug-use-and-health/national-releases/2024
+2026-08-19,,B,Gallup,hs050,U.S. Depression Rates Reach New Highs,https://news.gallup.com/poll/505745/depression-rates-reach-new-highs.aspx
+2026-08-19,,A,CDC/NCHS,hs051,"Symptoms of Anxiety and Depression Among Adults: United States, 2019 and 2022 (NHSR 213)",https://www.cdc.gov/nchs/data/nhsr/nhsr213.pdf
+2026-08-19,,A,WHO,hs052,Depression fact sheet (updated 2025-08-29),https://www.who.int/news-room/fact-sheets/detail/depression
+2026-08-19,,A,WHO,hs053,Anxiety disorders fact sheet (updated 2025-09-08),https://www.who.int/news-room/fact-sheets/detail/anxiety-disorders
+2026-08-19,,A,WHO,hs054,COVID-19 pandemic triggers 25% increase in prevalence of anxiety and depression worldwide,https://www.who.int/news/item/02-03-2022-covid-19-pandemic-triggers-25-increase-in-prevalence-of-anxiety-and-depression-worldwide
+2026-08-19,,A,CDC/NCHS,hs055,"Drug Overdose Deaths in the United States, 2023-2024 (Data Brief 549, Jan 2026)",https://cdc.gov/nchs/products/databriefs/db549.htm
+2026-08-19,,A,NCBI Bookshelf (NCHS),hs056,"Drug Overdose Deaths in the United States, 2023-2024 (verification copy)",https://www.ncbi.nlm.nih.gov/books/NBK621157/
+2026-08-19,,B,CDC/NCHS,hs057,U.S. Overdose Deaths Decrease for Third Consecutive Year in 2025 (provisional),https://www.cdc.gov/nchs/pressroom/releases/20260513.html
+2026-08-19,,B,CDC,hs058,"CDC Reports Nearly 24% Decline in U.S. Drug Overdose Deaths (2025-02-25, provisional)",https://www.cdc.gov/media/releases/2025/2025-cdc-reports-decline-in-us-drug-overdose-deaths.html
+2026-08-19,,A,CDC/NCHS,hs059,"Mortality in the United States, 2024 (Data Brief 548, Jan 2026)",https://cdc.gov/nchs/products/databriefs/db548.htm
+2026-08-19,,A,CDC/NCHS,hs060,"Mortality in the United States, 2023 (Data Brief 521, Dec 2024)",https://www.cdc.gov/nchs/data/databriefs/db521.pdf
+2026-08-19,,A,CDC/NCHS,hs061,"Mortality in the United States, 2021 (Data Brief 456)",https://www.cdc.gov/nchs/products/databriefs/db456.htm
+2026-08-19,,A,CDC/NCHS,hs062,"Mortality in the United States, 2015 (Data Brief 267)",https://www.cdc.gov/nchs/products/databriefs/db267.htm
+2026-08-19,,B,Peterson-KFF Health System Tracker,hs063,How does U.S. life expectancy compare to other countries? (updated 2026-03-31),https://www.healthsystemtracker.org/chart-collection/u-s-life-expectancy-compare-countries/
+2026-08-19,,B,American Hospital Association,hs064,Surgeon general advisory targets youth mental health crisis (2021-12-07),https://www.aha.org/news/headline/2021-12-07-surgeon-general-advisory-targets-youth-mental-health-crisis
+2026-08-19,,C,OECD,hs065,Health at a Glance 2025: United States country note (located but not fetchable — robots/403),https://www.oecd.org/en/publications/health-at-a-glance-2025_15a55280-en/united-states_3517f35e-en.html
+2026-08-19,,A,NHSBSA,hs066,Medicines Used in Mental Health – England – 2015/16 to 2024/25,https://www.nhsbsa.nhs.uk/statistical-collections/medicines-used-mental-health-england/medicines-used-mental-health-england-201516-202425
+2026-08-19,,A,NHSBSA (open data),hs067,MUMH annual summary 2015/16 to 2021/22,https://nhsbsa-opendata.s3.eu-west-2.amazonaws.com/mumh/mumh_annual_2021_22_v002.html
+2026-08-19,,A,NHSBSA,hs068,MUMH 2015/16 to 2023/24,https://www.nhsbsa.nhs.uk/statistical-collections/medicines-used-mental-health-england/medicines-used-mental-health-england-annual/medicines-used-mental-health-england-201516-202324
+2026-08-19,,A,NHSBSA,hs069,"MUMH quarterly, Oct-Dec 2024",https://www.nhsbsa.nhs.uk/statistical-collections/medicines-used-mental-health-england/medicines-used-mental-health-england-quarterly-summary-statistics-20242025/medicines-used-mental-health-england-quarterly-summary-statistics-october-december-2024
+2026-08-19,,B,The Pharmacist,hs070,Mental health prescribing in England reaches new high,https://www.thepharmacist.co.uk/in-practice/mental-health-prescribing-in-england-reaches-new-high-nhsbsa-report-reveals/
+2026-08-19,,A,BJPsych Open,hs071,"Newman et al., Twenty-five year trend in antipsychotic prescribing in England (2025)",https://pmc.ncbi.nlm.nih.gov/articles/PMC12303834/
+2026-08-19,,A,Schizophrenia Bulletin,hs072,"Charlson et al., Global Epidemiology and Burden of Schizophrenia (GBD 2016)",https://pmc.ncbi.nlm.nih.gov/articles/PMC6192504/
+2026-08-19,,A,Frontiers in Psychiatry,hs073,GBD schizophrenia trends 1990-2021 and projections to 2050,https://www.frontiersin.org/journals/psychiatry/articles/10.3389/fpsyt.2025.1629032/full
+2026-08-19,,A,NIMH,hs074,Schizophrenia — statistics,https://www.nimh.nih.gov/health/statistics/schizophrenia
+2026-08-19,,A,Acta Psychiatrica Scandinavica,hs075,"Köhler-Forsberg et al., Schizophrenia spectrum disorders in Denmark 2000-2018",https://onlinelibrary.wiley.com/doi/10.1111/acps.13565
+2026-08-19,,B,J Psychiatric Research (PubMed record),hs076,Hong Kong 11-year antipsychotic utilization study (DOI 10.1016/j.jpsychires.2025.02.017),https://pubmed.ncbi.nlm.nih.gov/39961232/
+2026-08-19,,A,HHS ASPE,hs077,"US Population Prevalence of Psychotropic Medication Use, 2006-2023",https://www.aspe.hhs.gov/sites/default/files/documents/1ef68c455fa5aa5932acf481b0954ddf/DataPoint_PsychRxPrev_BHDAP_20250409%20July%2031%202025.pdf
+2026-08-19,,A,CDC MMWR,hs078,"Danielson et al., Trends in Stimulant Prescription Fills 2016-2021",https://www.cdc.gov/mmwr/volumes/72/wr/mm7213a1.htm
+2026-08-19,,A,IQVIA for DEA,hs079,"Stimulant Prescription Trends in the United States, 2012-2023",https://www.deadiversion.usdoj.gov/pubs/docs/IQVIA-Report-on-Stimulant-Trends-2024.pdf
+2026-08-19,,B,U. Michigan IHPI,hs080,Antidepressant dispensing to adolescents surges during pandemic,https://ihpi.umich.edu/news-events/news/antidepressant-dispensing-adolescents-and-young-adults-surges-during-pandemic
+2026-08-19,,B,Pediatrics,hs081,"Chua et al., Antidepressant Dispensing to US Adolescents and Young Adults: 2016-2022 (page 403 to proxy; verified via IHPI)",https://publications.aap.org/pediatrics/article/153/3/e2023064245/196655/Antidepressant-Dispensing-to-US-Adolescents-and
+2026-08-19,,B,2 Minute Medicine,hs082,"Benzodiazepine use declined then plateaued (IQVIA LRx 2015-2024, 65+)",https://www.2minutemedicine.com/benzodiazepine-use-declined-before-the-covid-19-pandemic-then-plateaued/
+2026-08-19,,B,Euronews (OECD data),hs083,Which country uses the most antidepressants?,https://www.euronews.com/health/2023/09/09/europes-mental-health-crisis-in-data-which-country-uses-the-most-antidepressants
+2026-08-19,,A,OECD,hs084,Health at a Glance 2023 — Pharmaceutical consumption,https://www.oecd.org/en/publications/health-at-a-glance-2023_7a7afb35-en/full-report/pharmaceutical-consumption_4b6cb013.html
+2026-08-19,,A,FDA,hs085,FDA Announces Shortage of Adderall (2022-10-12),https://www.fda.gov/drugs/drug-safety-and-availability/fda-announces-shortage-adderall
+2026-08-19,,A,FDA,hs086,FDA Approves Cobenfy (2024-09-26),https://www.fda.gov/news-events/press-announcements/fda-approves-drug-new-mechanism-action-treatment-schizophrenia
+2026-08-19,,C,Grand View Research,hs087,Antipsychotic Drugs Market To Reach $32.24B By 2033,https://www.grandviewresearch.com/press-release/global-antipsychotic-drugs-market
+2026-08-19,,A,US Surgeon General / HHS,hs088,Our Epidemic of Loneliness and Isolation,https://www.hhs.gov/sites/default/files/surgeon-general-social-connection-advisory.pdf
+2026-08-19,,A,US Surgeon General / HHS,hs089,Protecting Youth Mental Health,https://www.hhs.gov/sites/default/files/surgeon-general-youth-mental-health-advisory.pdf
+2026-08-19,,A,US Surgeon General / HHS,hs090,Social Media and Youth Mental Health,https://www.hhs.gov/sites/default/files/sg-youth-mental-health-social-media-advisory.pdf
+2026-08-19,,A,US Surgeon General / HHS,hs091,Parents Under Pressure,https://www.hhs.gov/sites/default/files/parents-under-pressure.pdf
+2026-08-19,,A,Brookings (BPEA),hs092,Mortality and Morbidity in the 21st Century (Case & Deaton),https://www.brookings.edu/articles/mortality-and-morbidity-in-the-21st-century/
+2026-08-19,,A,NBER,hs093,Deaths of Despair or Drug Problems? (Ruhm),https://www.nber.org/papers/w24188
+2026-08-19,,A,Nature,hs094,The great rewiring (Odgers),https://www.nature.com/articles/d41586-024-00902-2
+2026-08-19,,A,CDC (archived),hs095,CDC Director's Media Statement on U.S. Life Expectancy (2018-11-29),https://archive.cdc.gov/www_cdc_gov/media/releases/2018/s1129-US-life-expectancy.html
+2026-08-19,,A,CDC,hs096,Understanding the Opioid Overdose Epidemic,https://www.cdc.gov/overdose-prevention/about/understanding-the-opioid-overdose-epidemic.html
+2026-08-19,,A,Annals of Internal Medicine (PubMed),hs097,The Accessibility of Firearms and Risk for Suicide and Homicide Victimization (Anglemyer et al.),https://pubmed.ncbi.nlm.nih.gov/24592495/
+2026-08-19,,A,HRSA,hs098,Health Workforce Projections: Behavioral Health,https://bhw.hrsa.gov/data-research/projecting-health-workforce-supply-demand/behavioral-health
+2026-08-19,,A,US DOL/HHS/Treasury,hs099,2022 MHPAEA Report to Congress,https://www.dol.gov/sites/dolgov/files/EBSA/laws-and-regulations/laws/mental-health-parity/report-to-congress-2022-realizing-parity-reducing-stigma-and-raising-awareness.pdf
+2026-08-19,,A,JAMA Network Open,hs100,Overdiagnosis of ADHD in Children and Adolescents (Kazda et al.),https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2778451
+2026-08-19,,A,J Clin Psychiatry (PubMed),hs101,National Trends in Long-Term Use of Antidepressant Medications (Mojtabai & Olfson),https://pubmed.ncbi.nlm.nih.gov/24345349/
+2026-08-19,,A,Clinical Psychological Science,hs102,"Increases in Depressive Symptoms, Suicide-Related Outcomes... After 2010 (Twenge et al.)",https://journals.sagepub.com/doi/10.1177/2167702617723376
+2026-08-20,,A,CDC/NCHS,hs103,"Data tables for NCHS Data Brief 428: Drug Overdose Deaths in the United States, 1999-2020",https://www.cdc.gov/nchs/data/databriefs/db428-tables.pdf
+2026-08-20,,A,CDC/NCHS,hs104,"NCHS Data Brief 522: Drug Overdose Deaths in the United States, 2003-2023",https://www.cdc.gov/nchs/products/databriefs/db522.htm

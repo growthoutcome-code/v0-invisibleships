@@ -43,9 +43,39 @@ import re
 from collections import Counter
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-CRIME_T = ROOT / "public/data/crime/tables"
-CRIME_C = ROOT / "public/data/crime/charts"
-OUT = ROOT / "public/data/crime/md"
+
+# Each research section declares where its tables, charts and output live. The
+# rest of this file is written against that rather than against crime, so Public
+# Health goes through the same machine instead of getting a one-off script —
+# which is exactly how it ended up with one README and eleven JSON files while
+# crime got 23 briefs.
+SECTIONS = {
+    "crime": {
+        "tables": ROOT / "public/data/crime/tables",
+        "charts": ROOT / "public/data/crime/charts",
+        "out": ROOT / "public/data/crime/md",
+        "prefix": "IS_CRIME",
+        "slug": "crime",
+        "label": "Crime",
+        "geography": "United States (unless a row says otherwise)",
+        "sources_file": "crime_sources.json",
+        "verdict_file": "crime_verdict.json",
+    },
+    "health": {
+        "tables": ROOT / "public/data/health/tables",
+        "charts": ROOT / "public/data/health/charts",
+        "out": ROOT / "public/data/health/md",
+        "prefix": "IS_HEALTH",
+        "slug": "public-health",
+        "label": "Public Health",
+        "geography": "United States, with international comparison where a chart says so",
+        "sources_file": "health_sources.json",
+        "verdict_file": "health_verdict.json",
+    },
+}
+
+SEC = SECTIONS["crime"]          # rebound per section by main()
+CRIME_T = CRIME_C = OUT = None   # convenience aliases, set alongside SEC
 
 AUTHOR = "Sean C. Harris"
 COPYRIGHT = "© 2026 Sean C. Harris. All Rights Reserved."
@@ -84,8 +114,8 @@ def header(doc_id: str, title: str, doc_type: str, body: str, extra: dict | None
         f"title: {title}",
         "collection: data",
         f"doc_type: {doc_type}",
-        "section: crime",
-        "geography: United States (unless a row says otherwise)",
+        f"section: {SEC['slug']}",
+        f"geography: {SEC['geography']}",
         "generated_by: scripts/build_corpus_md.py",
     ]
     for k, v in (extra or {}).items():
@@ -237,7 +267,7 @@ def r_milestone(r, s):
             f"{r.get('title', '')} — {r.get('description', '')}{src_of(r.get('source_id'), s)}")
 
 
-def main() -> None:
+def build_crime() -> list:
     sources = load(CRIME_T / "crime_sources.json") or []
     verdict = load(CRIME_T / "crime_verdict.json") or {}
     written = []
@@ -426,36 +456,219 @@ own increase to changed reporting, that attribution travels with the figure.
                     header("IS-CRIME-SOURCES", "Crime — sources", "source-list",
                            "\n".join(b), {"source_count": len(sources)})))
 
-    # ---- write markdown ----------------------------------------------------
-    if OUT.exists():
-        for old in OUT.glob("*.md"):
-            old.unlink()
-    total = 0
-    for name, text in written:
-        total += write(name, text)
+    return written
 
-    # ---- CSVs: row data belongs in a table, not in prose -------------------
+
+# --------------------------------------------------------------- public health
+def r_claim(r, s):
+    """A claim is an ATTRIBUTION, never an assertion — who said it, in what
+    document, on what date, and who contests it. The shape of this renderer is
+    the editorial rule made physical."""
+    out = (f"### {r.get('topic', r.get('claim_id', ''))}\n"
+           f"{tier_chip(r.get('tier'))} **Attributed by:** {r.get('attributed_by', 'not stated')}"
+           f"{src_of(r.get('source_id'), s)}\n\n"
+           f"**Cause attributed:** {r.get('cause_attributed', '')}\n\n"
+           f"*Stated in:* {r.get('document', 'not stated')} ({r.get('doc_date', 'undated')})")
+    if r.get("supporting_line"):
+        out += f"\n\n> {r['supporting_line']}"
+    if r.get("contested_by"):
+        out += f"\n\n**Contested by:** {r['contested_by']}"
+    return out
+
+
+def r_overlap(r, s):
+    """Structural observation only. The non-causal note is not decoration."""
+    return (f"### {r.get('health_signal', '')}\n"
+            f"{tier_chip(r.get('tier'))} {r.get('overlap_type', '')}\n\n"
+            f"**Gov Cloud fact:** {r.get('govcloud_fact', '')}\n\n"
+            f"**Observation:** {r.get('observation', '')}\n\n"
+            f"*Basis:* {r.get('basis', '')}\n\n"
+            f"*Not a causal claim:* {r.get('non_causal_note', '')}")
+
+
+def r_health_dq(r, s):
+    return (f"### {r.get('geography', '')} — {r.get('dq_id', '')}\n"
+            f"{tier_chip(r.get('tier'))} documented by {r.get('documented_by', 'not stated')}"
+            f"{src_of(r.get('source_id'), s)}\n\n"
+            f"{r.get('issue', '')}\n\n"
+            f"*Quantification:* {r.get('quantification', 'none given')}\n\n"
+            f"*Document:* {r.get('document', '')}")
+
+
+def build_health() -> list:
+    sources = load(CRIME_T / "health_sources.json") or []
+    verdict = load(CRIME_T / "health_verdict.json") or {}
+    tiers = Counter(s.get("evidence_tier") for s in sources)
+    charts = sorted(CRIME_C.glob("*.json"))
+    written = []
+
+    start = f"""# Public Health — start here
+
+{STANDING}
+
+## What this is
+
+The Data/Public Health research from invisibleships.com, as Markdown you can
+hand to an assistant. **Site-produced research output — not journal material.**
+It does not corroborate, and is not corroborated by, the journal, the Crime
+dataset or the Government Cloud dataset.
+
+## What is in this folder
+
+| File pattern | What it holds |
+|---|---|
+| `IS_HEALTH_chart_*.md` | One brief per chart: every series, basis and caveat |
+| `IS_HEALTH_register_claims.md` | Attributed causes — who said it, where, who contests it |
+| `IS_HEALTH_register_overlaps.md` | Structural observations against the Gov Cloud record |
+| `IS_HEALTH_register_*.md` | Trends, data quality, milestones, caveats |
+| `IS_HEALTH_sources.md` | All {len(sources)} sources with tier, publisher and link |
+| `csv/*.csv` | Row data — indicators, sources, registers |
+
+{len(charts)} chart file(s) · {len(sources)} sources
+(Tier A {tiers.get('A', 0)} · B {tiers.get('B', 0)} · C {tiers.get('C', 0)})
+
+## What this research found
+
+**{verdict.get('claim', '')}**
+
+{verdict.get('summary', '')}
+
+## Questions worth asking it
+
+- How do US suicide and overdose trends compare with the rest of the world?
+- Which causes are *attributed* by whom, and which of those are contested?
+- Where does a measure change basis mid-series, and what does that prevent
+  anyone concluding?
+- What does this record explicitly refuse to claim, and why?
+
+## A rule that governs this whole folder
+
+**Causes are reported as attributed, never asserted.** Where a body states a
+cause, that body is named and dated. The claims register exists so an attributed
+cause can never be read as an established one. Overlaps with the Government
+Cloud record are structural observations; each carries its own note saying it is
+not a causal claim.
+"""
+    written.append((f"{SEC['prefix']}_00_start-here.md",
+                    header(f"{SEC['prefix'].replace('_', '-')}-00-START-HERE",
+                           "Public Health — start here", "section-overview", start,
+                           {"chart_count": len(charts), "source_count": len(sources)})))
+
+    if verdict:
+        v = [f"# {verdict.get('claim', 'The finding')}", "", STANDING, "",
+             verdict.get("summary", ""), ""]
+        if verdict.get("mapping"):
+            v += ["## How the measures map", "", verdict["mapping"], ""]
+        v += ["## The figures this rests on", ""]
+        for f in verdict.get("key_figures", []):
+            v.append(f"- {tier_chip(f.get('tier'))} {f['figure']}{src_of(f.get('source_id'), sources)}")
+        written.append((f"{SEC['prefix']}_01_finding.md",
+                        header(f"{SEC['prefix'].replace('_', '-')}-01-FINDING",
+                               "Public Health — the finding", "finding", "\n".join(v),
+                               {"figure_count": len(verdict.get("key_figures", []))})))
+
+    for p in charts:
+        n, t = chart_brief(p, sources)
+        if n:
+            written.append((n.replace("IS_CRIME", SEC["prefix"]), t))
+
+    regs = [
+        ("register_claims.md", "REG-CLAIMS", "Attributed causes",
+         "Every cause below is ATTRIBUTED to a named body in a dated document. None "
+         "is asserted by this research. Where a claim is contested, the contesting "
+         "party is named alongside it.",
+         load(CRIME_T / "health_claims.json") or [], r_claim),
+        ("register_overlaps.md", "REG-OVERLAPS", "Overlaps with the Government Cloud record",
+         "Structural and pattern observations only. Two things occurring in the same "
+         "period is a co-occurrence. Each entry carries its own note saying so, and "
+         "neither dataset corroborates the other.",
+         load(CRIME_T / "health_overlaps.json") or [], r_overlap),
+        ("register_trends.md", "REG-TRENDS", "What the series show",
+         "One sourced statement per series.",
+         load(CRIME_T / "health_trends.json") or [], r_trend),
+        ("register_data-quality.md", "REG-DATA-QUALITY", "How much the numbers can be trusted",
+         "Counting, coverage and definitional problems, each documented by a named body.",
+         load(CRIME_T / "health_data_quality.json") or [], r_health_dq),
+        ("register_milestones.md", "REG-MILESTONES", "Dated milestones",
+         "The health track of the site's master timeline. Co-occurrence with anything "
+         "else on that timeline is not relation.",
+         load(CRIME_T / "health_milestones.json") or [], r_milestone),
+        ("register_caveats.md", "REG-CAVEATS", "Read before quoting any figure",
+         "Constraints that apply to everything in this folder.",
+         load(CRIME_T / "health_caveats.json") or [], r_caveat),
+    ]
+    for suffix, did, title, intro, rows, render in regs:
+        if rows:
+            written.append(register(f"{SEC['prefix']}_{suffix}",
+                                    f"{SEC['prefix'].replace('_', '-')}-{did}",
+                                    title, intro, rows, render, sources))
+
+    b = ["# Public Health — sources", "", STANDING, "",
+         f"**{len(sources)} sources.** Tier A {tiers.get('A', 0)} · B {tiers.get('B', 0)} · "
+         f"C {tiers.get('C', 0)}. Every figure in this folder resolves to one of these.", "",
+         "| Tier | Publisher | Title | Accessed | Link | Archived |",
+         "|---|---|---|---|---|---|"]
+    for s in sorted(sources, key=lambda x: (x.get("evidence_tier") or "Z", x.get("publisher") or "")):
+        arch = f"[snapshot]({s['archived_url']})" if (s.get("archived_url") or "").strip() else "—"
+        b.append(f"| {s.get('evidence_tier', '—')} | {(s.get('publisher') or '').replace('|', '/')[:44]} | "
+                 f"{(s.get('title') or '').replace('|', '/')[:90]} | {s.get('accessed', '')} | "
+                 f"<{s.get('url', '')}> | {arch} |")
+    written.append((f"{SEC['prefix']}_sources.md",
+                    header(f"{SEC['prefix'].replace('_', '-')}-SOURCES",
+                           "Public Health — sources", "source-list", "\n".join(b),
+                           {"source_count": len(sources)})))
+    return written
+
+
+# ------------------------------------------------------------------------ emit
+def emit(written: list, csv_stems: list, strip: str) -> None:
+    """Write the markdown, then the CSVs. Old output is cleared first so a
+    removed brief actually disappears instead of lingering in the download."""
+    OUT.mkdir(parents=True, exist_ok=True)
+    for old in OUT.glob("*.md"):
+        old.unlink()
+    total = sum(write(name, text) for name, text in written)
+
     csv_dir = OUT / "csv"
     csv_dir.mkdir(parents=True, exist_ok=True)
     for old in csv_dir.glob("*.csv"):
         old.unlink()
-    csv_files = 0
-    for stem in ["crime_indicators", "crime_sources", "crime_data_quality",
-                 "crime_not_counted", "crime_milestones", "crime_trends"]:
+    n_csv = 0
+    for stem in csv_stems:
         rows = load(CRIME_T / f"{stem}.json")
         if not isinstance(rows, list) or not rows:
             continue
         cols = sorted({k for r in rows for k in r.keys()})
-        with (csv_dir / f"{stem.replace('crime_', '')}.csv").open("w", newline="") as fh:
+        with (csv_dir / f"{stem.replace(strip, '')}.csv").open("w", newline="") as fh:
             w = csv.DictWriter(fh, fieldnames=cols, extrasaction="ignore")
             w.writeheader()
             w.writerows(rows)
-        csv_files += 1
+        n_csv += 1
 
-    print(f"markdown : {len(written)} files, {total:,} bytes -> {OUT.relative_to(ROOT)}")
-    print(f"csv      : {csv_files} files")
     longest = max(written, key=lambda x: len(x[1]))
-    print(f"largest  : {longest[0]} ({len(longest[1]):,} bytes)")
+    print(f"  {SEC['label']:14s} {len(written):2d} markdown ({total:,} bytes) + {n_csv} csv "
+          f"-> {OUT.relative_to(ROOT)}")
+    print(f"  {'':14s} largest: {longest[0]} ({len(longest[1]):,} bytes)")
+
+
+def main() -> None:
+    global SEC, CRIME_T, CRIME_C, OUT
+    plan = [
+        ("crime", build_crime,
+         ["crime_indicators", "crime_sources", "crime_data_quality",
+          "crime_not_counted", "crime_milestones", "crime_trends"], "crime_"),
+        ("health", build_health,
+         ["health_indicators", "health_sources", "health_claims",
+          "health_data_quality", "health_milestones", "health_trends",
+          "health_overlaps"], "health_"),
+    ]
+    for key, builder, stems, strip in plan:
+        SEC = SECTIONS[key]
+        CRIME_T, CRIME_C, OUT = SEC["tables"], SEC["charts"], SEC["out"]
+        if not CRIME_T.exists():
+            print(f"  {SEC['label']:14s} SKIPPED — no tables at {CRIME_T}")
+            continue
+        emit(builder(), stems, strip)
 
 
 if __name__ == "__main__":

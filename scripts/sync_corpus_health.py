@@ -239,6 +239,21 @@ upward. `health_data_quality.json` carries this as row `hq015`.
                     dst.writestr(name, s2.read(name))
         dst.writestr(PREFIX + "charts/overdose_us.csv", od_csv)
 
+        # ---- the AI-readable layer ------------------------------------------
+        # Public Health shipped one README and eleven JSON files while the
+        # journal shipped 448 Markdown chunks. The corpus is what people hand to
+        # an assistant; JSON schemas make a model read the shape of the data
+        # instead of the argument. build_corpus_md.py assembles briefs from the
+        # same tables the site renders, so they cannot drift.
+        md_dir = ROOT / "public/data/health/md"
+        n_md = n_csv = 0
+        for f in sorted(md_dir.glob("*.md")):
+            dst.writestr(PREFIX + f.name, f.read_text())
+            n_md += 1
+        for f in sorted((md_dir / "csv").glob("*.csv")):
+            dst.writestr(PREFIX + "csv/" + f.name, f.read_text())
+            n_csv += 1
+
     shutil.move(str(tmp), str(ZIP))
     print(f"carried {carried} non-health entries")
     print(f"public-health/: {len(TABLE_FILES)} tables + manifest + README + 3 chart files")

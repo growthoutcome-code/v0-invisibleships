@@ -1685,16 +1685,34 @@ await browser.close();
 // correct; it simply wasn't run at the end. So it runs here, inside the one
 // command we run before shipping, where forgetting is no longer possible.
 // ---------------------------------------------------------------------------
-try {
-  const { execFileSync } = await import("node:child_process");
-  const out = execFileSync("python3", ["scripts/sync_corpus_crime.py", "--check"], {
-    cwd: new URL("..", import.meta.url).pathname, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"],
-  });
-  console.log("corpus:", out.trim().split("\n").pop());
-} catch (e) {
-  const msg = [e.stdout, e.stderr].filter(Boolean).join("\n").trim();
-  console.log("corpus:\n" + msg);
-  fail("downloadable corpus has drifted from the data the site serves — run: python3 scripts/sync_corpus_crime.py");
+const { execFileSync } = await import("node:child_process");
+const REPO = new URL("..", import.meta.url).pathname;
+
+// Three checks, because the corpus can be wrong in three different ways:
+//   freshness    — the crime folder no longer matches the data the site serves
+//   site content — concepts, site glossary, documents or research have drifted
+//   completeness — a whole body of work in the repo reaches the download NOT AT
+//                  ALL. This is the one that would have caught sixteen concepts
+//                  going missing for a week after a revert deleted their
+//                  exporter, and the ~19 glossary terms that never had one.
+for (const [label, script, remedy] of [
+  ["corpus freshness", "scripts/sync_corpus_crime.py",
+   "python3 scripts/sync_corpus_crime.py"],
+  ["site content", "scripts/sync_corpus_site.py",
+   "node scripts/export_concepts_md.mjs && node scripts/export_site_content_md.mjs && python3 scripts/sync_corpus_site.py"],
+  ["corpus completeness", "scripts/build_corpus_index.py",
+   "bash scripts/build_crime_all.sh"],
+]) {
+  try {
+    const out = execFileSync("python3", [script, "--check"], {
+      cwd: REPO, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"],
+    });
+    console.log(`${label}:`, out.trim().split("\n").filter(Boolean).pop());
+  } catch (e) {
+    const msg = [e.stdout, e.stderr].filter(Boolean).join("\n").trim();
+    console.log(`${label}:\n` + msg);
+    fail(`${label} check failed — run: ${remedy}`);
+  }
 }
 
 console.log(process.exitCode ? "RESULT: FAIL" : "RESULT: PASS");

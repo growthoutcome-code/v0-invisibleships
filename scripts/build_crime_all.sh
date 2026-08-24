@@ -53,12 +53,26 @@ run build_govcloud_report.py
 # and BEFORE sync_corpus_crime.py (which packs the files it writes).
 run build_corpus_md.py
 
+# ---- everything the site holds that is NOT a data section ----------------
+# Concepts and the site-authored glossary live in TypeScript, so no data-section
+# script owns them — and for a week nothing did, which is why the download
+# carried none of the 16 concepts. They have an owner now.
+printf '\n\033[1m▸ concepts + site glossary\033[0m\n'
+node scripts/export_concepts_md.mjs
+node scripts/export_site_content_md.mjs
+
 # ---- the corpus, and only then the guard ---------------------------------
 # Not optional, and not before build_crime_copy.py. This is the step whose
 # absence shipped a stale download.
 run sync_corpus_crime.py
 
-printf '\n\033[1m▸ freshness check\033[0m\n'
+run sync_corpus_health.py
+run sync_corpus_site.py
+run build_corpus_index.py
+
+printf '\n\033[1m▸ freshness + completeness checks\033[0m\n'
 python3 scripts/sync_corpus_crime.py --check
+python3 scripts/sync_corpus_site.py --check
+python3 scripts/build_corpus_index.py --check
 
 printf '\n\033[1;32mPipeline complete.\033[0m Next: npm run build && node scripts/test-data-roundtrip.mjs\n'
