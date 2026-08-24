@@ -639,8 +639,14 @@ def emit(written: list, csv_stems: list, strip: str) -> None:
         if not isinstance(rows, list) or not rows:
             continue
         cols = sorted({k for r in rows for k in r.keys()})
+        # lineterminator is explicit because Python's csv module defaults to
+        # \r\n. That made every regeneration rewrite all 13 CSVs with only the
+        # line endings changed — a permanently dirty tree, and a corpus
+        # freshness check that could fail for no reason at all on a machine
+        # whose git had normalised the committed copy to \n.
         with (csv_dir / f"{stem.replace(strip, '')}.csv").open("w", newline="") as fh:
-            w = csv.DictWriter(fh, fieldnames=cols, extrasaction="ignore")
+            w = csv.DictWriter(fh, fieldnames=cols, extrasaction="ignore",
+                               lineterminator="\n")
             w.writeheader()
             w.writerows(rows)
         n_csv += 1
