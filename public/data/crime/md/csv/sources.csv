@@ -1,0 +1,198 @@
+accessed,archived_url,evidence_tier,publisher,source_id,title,url
+2026-08-20,,A,Bureau of Justice Statistics,cs001,Homicide Trends in the United States (UCR-based series 1950-2005),https://bjs.ojp.gov/content/pub/pdf/htius.pdf
+2026-08-20,,A,Bureau of Justice Statistics,cs002,NIBRS Estimation Program,https://bjs.ojp.gov/nibrs-estimation-program
+2026-08-20,,A,FBI Crime Data Explorer,cs003,"Reported Crimes in the Nation, 2024 - Frequently Asked Questions",https://cde.ucr.cjis.gov/LATEST/resources/reports/Reported%20Crimes%20in%20the%20Nation%202024%20FAQs.pdf
+2026-08-20,,A,FBI Crime Data Explorer,cs004,Reported Crimes in the Nation Quick Stats (2024),https://cde.ucr.cjis.gov/LATEST/resources/reports/Reported%20Crimes%20in%20the%20Nation%20Quick%20Stats.pdf
+2026-08-20,,A,FBI Crime Data Explorer,cs005,"UCR Summary of Reported Crimes in the Nation, 2024",https://cde.ucr.cjis.gov/LATEST/resources/reports/UCR%20Summary%20of%20Reported%20Crimes%20in%20the%20Nation%202024.pdf
+2026-08-20,,A,FBI Crime Data Explorer,cs006,"UCR Summary of Reported Crimes in the Nation, 2025",https://cde.ucr.cjis.gov/LATEST/resources/reports/UCR_Summary_of_Reported_Crimes_in_the_Nation_2025.pdf
+2026-08-20,,B,Jeff Asher / Jeff-alytics,cs007,Murder Fell At The Fastest Pace Ever Recorded In 2023 (2024-09-23),https://jasher.substack.com/p/murder-fell-at-the-fastest-pace-ever
+2026-08-20,,B,Jeff Asher / Jeff-alytics,cs008,The FBI Reports That Murder Officially Fell At The Fastest Pace Ever Recorded in 2025 (2026-08-14),https://jasher.substack.com/p/the-fbi-reports-that-murder-officially
+2026-08-20,,B,Jeff Asher / Jeff-alytics,cs009,"There Were 14,000 Murders In The United States Last Year (2026-03-09) - documents FBI revision magnitudes",https://jasher.substack.com/p/there-were-14000-murders-in-the-united
+2026-08-20,,A,FBI CJIS,cs010,FBI Releases Data on Crime in the Nation for 2021,https://le.fbi.gov/cjis-division/cjis-link/fbi-releases-data-on-crime-in-the-nation-for-2021
+2026-08-20,,A,FBI Law Enforcement Bulletin,cs011,Crime Data: 2021 Nationwide Crime Statistics,https://leb.fbi.gov/bulletin-highlights/additional-highlights/crime-data-2021-nationwide-crime-statistics
+2026-08-20,,A,Annual Review of Criminology (peer-reviewed),cs012,"Cook PJ, Mancik A. The Sixty-Year Trajectory of Homicide Clearance Rates. Annu Rev Criminol 7:59-83, 2024. DOI 10.1146/annurev-criminol-022422-122744",https://static1.squarespace.com/static/5b7ea2794cde7a79e7c00582/t/65c120d169e0d131b5e53387/1707155666076/cook-mancik-2024-the-sixty-year-trajectory-of-homicide-clearance-rates-toward-a-better-understanding-of-the-great.pdf
+2026-08-20,,A,FBI UCR,cs013,"Crime in the United States 1999, Section II",https://ucr.fbi.gov/crime-in-the-u.s/1999/99sec2.pdf
+2026-08-20,,A,FBI UCR,cs014,Crime in the United States 2010 - Clearances,https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/clearances
+2026-08-20,,A,FBI UCR,cs015,"Crime in the United States 2010, Table 1 (1991-2010)",https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl01.xls
+2026-08-20,,A,FBI UCR,cs016,Crime in the United States 2019 - Clearances,https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/clearances
+2026-08-20,,A,FBI UCR,cs017,"Crime in the United States 2019, Table 1 (1999-2019)",https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1
+2026-08-20,,A,Annual Reviews,cs018,Cook & Mancik 2024 - abstract page (confirmed 93%/1962 and 29-point decline),https://www.annualreviews.org/content/journals/10.1146/annurev-criminol-022422-122744
+2026-08-20,,B,Axios,cs019,FBI data for 2025 show biggest drop in violent crime in 90 years (2026-08-18),https://www.axios.com/2026/08/18/fbi-violent-crime-drop-2025
+2026-08-20,,B,Brennan Center for Justice,cs020,FBI Data Confirms Drop in Most Crimes in 2023 (2024-09-26),https://www.brennancenter.org/our-work/analysis-opinion/fbi-data-confirms-drop-most-crimes-2023-especially-murders
+2026-08-20,,B,CBS News,cs021,"Violent crime plummeted in 2025, with murder rate hitting 20-year low, FBI says (2026-08-14)",https://www.cbsnews.com/news/fbi-crime-data-violent-crime-murder-white-house/
+2026-08-20,,A,NCHS / CDC,cs022,"Curtin SC. Trends in Death Rates for Leading Methods of Injury: United States, 2003-2023. NCHS Data Brief No. 526, March 2025. DOI 10.15620/cdc/174582",https://www.cdc.gov/nchs/data/databriefs/db526.pdf
+2026-08-20,,A,NCHS / CDC,cs023,"Health, United States, Table 29: Death rates for homicide, selected years 1950-2016",https://www.cdc.gov/nchs/data/hus/2017/029.pdf
+2026-08-20,,A,NCHS / CDC,cs024,"Health, United States 2020-2021: Age-adjusted death rates for selected causes, selected years 1950-2019",https://www.cdc.gov/nchs/data/hus/2020-2021/SlctMort.pdf
+2026-08-20,,A,NCHS / CDC,cs025,"Xu J, Murphy SL, Kochanek KD, Arias E. Deaths: Final Data for 2022. NVSR Vol 74 No 4, June 10, 2025",https://www.cdc.gov/nchs/data/nvsr/nvsr74/nvsr74-04.pdf
+2026-08-20,,A,NCHS / CDC,cs026,FastStats - Homicide (2024 data via CDC WONDER),https://www.cdc.gov/nchs/fastats/homicide.htm
+2026-08-20,,A,NCHS / CDC,cs027,NCHS Data Brief 526 landing page (citation + figure data tables),https://www.cdc.gov/nchs/products/databriefs/db526.htm
+2026-08-20,,B,FactCheck.org,cs028,Trump's Misleading Crime Drop Claims (Aug 2026) - corroborates revised 2024 rate of 5.1,https://www.factcheck.org/2026/08/trumps-misleading-crime-drop-claims/
+2026-08-20,,A,FBI,cs029,FBI Releases 2020 Crime Statistics,https://www.fbi.gov/news/press-releases/fbi-releases-2020-crime-statistics
+2026-08-20,,A,FBI,cs030,FBI Releases 2021 Crime in the Nation Statistics,https://www.fbi.gov/news/press-releases/fbi-releases-2021-crime-in-the-nation-statistics
+2026-08-20,,A,FBI,cs031,FBI Releases 2022 Crime in the Nation Statistics,https://www.fbi.gov/news/press-releases/fbi-releases-2022-crime-in-the-nation-statistics
+2026-08-20,,A,FBI,cs032,FBI Releases 2024 Reported Crimes in the Nation Statistics,https://www.fbi.gov/news/press-releases/fbi-releases-2024-reported-crimes-in-the-nation-statistics
+2026-08-20,,A,FBI,cs033,FBI Releases 2025 Reported Crimes in the Nation Statistics,https://www.fbi.gov/news/press-releases/fbi-releases-2025-reported-crimes-in-the-nation-statistics
+2026-08-20,,A,FBI,cs034,FBI Releases Historic Early Look at Annual Crime Data (2026-05-13),https://www.fbi.gov/news/press-releases/fbi-releases-historic-early-look-at-annual-crime-data
+2026-08-20,,B,Murder Accountability Project,cs035,"Murder Accountability Project home (clearance rates, citing FBI CJIS)",https://www.murderdata.org/
+2026-08-20,,B,Murder Accountability Project,cs036,More good news for homicide clearance rates in America (2025-10-09),https://www.murderdata.org/2025/10/some-more-good-news-for-homicide.html
+2026-08-20,,B,Pew Research Center,cs037,What we know about the increase in U.S. murders in 2020,https://www.pewresearch.org/short-reads/2021/10/27/what-we-know-about-the-increase-in-u-s-murders-in-2020/
+2026-08-20,,B,The Marshall Project,cs038,What Can FBI Data Say About Crime in 2021? It's Too Unreliable to Tell,https://www.themarshallproject.org/2022/06/14/what-did-fbi-data-say-about-crime-in-2021-it-s-too-unreliable-to-tell
+2026-08-21,,A,Council on Criminal Justice,cs_ccj_2026,Crime Trends in U.S. Cities: Mid-Year 2026 Update (2026-07-22),https://counciloncj.org/crime-trends-in-u-s-cities-mid-year-2026-update/
+2026-08-21,,B,Jeff Asher / Real-Time Crime Index,cs_rtci_2026,Murder in the US Fell Dramatically in the First Half of 2026 (2026-07-06),https://jasher.substack.com/p/murder-in-the-us-fell-dramatically
+2026-08-20,,A,Bureau of Justice Statistics,cs_ncvs_cv24,"Criminal Victimization, 2024",https://bjs.ojp.gov/document/cv24.pdf
+2026-08-20,,A,Bureau of Justice Statistics,cs_two_measures,"The Nation's Two Crime Measures, 2015-2024",https://bjs.ojp.gov/library/publications/nations-two-crime-measures-2015-2024
+2026-08-21,,A,Bureau of Justice Statistics,cs043,Bureau of Justice Statistics,https://api.ojp.gov/bjsdataset/v1/x3sz-eb6y.json
+2026-08-21,,A,Bureau of Justice Statistics,cs044,Bureau of Justice Statistics,https://api.ojp.gov/bjsdataset/v1/cqmi-ycfq.json
+2026-08-21,,A,FBI UCR Program,cs045,FBI UCR Program,https://ucr.fbi.gov/nibrs/2015/resource-pages/nibrs-2015_summary_final-1.pdf
+2026-08-21,,A,FBI UCR Program,cs046,FBI UCR Program,https://ucr.fbi.gov/nibrs/2016/resource-pages/nibrs-2016_summary.pdf
+2026-08-21,,A,FBI UCR Program,cs047,FBI UCR Program,https://ucr.fbi.gov/nibrs/2017/resource-pages/nibrs-2017_summary-11-6-2018.pdf
+2026-08-21,,A,FBI UCR Program,cs048,FBI UCR Program,https://ucr.fbi.gov/nibrs/2018/resource-pages/countdown.pdf
+2026-08-21,,A,FBI UCR Program,cs049,FBI UCR Program,https://ucr.fbi.gov/nibrs/2019/resource-pages/summary.pdf
+2026-08-21,,A,Bureau of Justice Statistics,cs050,Bureau of Justice Statistics,https://www.justice.gov/ovw/docs/bjs-stalking-rpt.pdf
+2026-08-21,,A,Bureau of Justice Statistics,cs051,Bureau of Justice Statistics,https://bjs.ojp.gov/content/pub/pdf/sv16.pdf
+2026-08-21,,A,Bureau of Justice Statistics,cs052,Bureau of Justice Statistics,https://bjs.ojp.gov/content/pub/pdf/sv19.pdf
+2026-08-21,,B,Pew Research Center,cs053,Pew Research Center,https://www.pewresearch.org/internet/wp-content/uploads/sites/9/2021/01/PI_2021.01.13_Online-Harassment_FINAL-1.pdf
+2026-08-21,,B,Pew Research Center,cs054,Pew Research Center,https://www.pewresearch.org/internet/2021/01/13/the-state-of-online-harassment/
+2026-08-21,,B,FBI CJIS,cs055,FBI CJIS,https://www.fbi.gov/file-repository/2015-ncic-missing-person-and-unidentified-person-statistics.pdf
+2026-08-21,,A,FBI CJIS,cs056,FBI CJIS,https://www.fbi.gov/file-repository/reports-and-publications/2016-ncic-missing-person-and-unidentified-person-statistics.pdf
+2026-08-21,,A,FBI CJIS,cs057,FBI CJIS,https://www.fbi.gov/file-repository/reports-and-publications/2017-ncic-missing-person-and-unidentified-person-statistics.pdf
+2026-08-21,,A,FBI CJIS,cs058,FBI CJIS,https://www.fbi.gov/file-repository/reports-and-publications/2018-ncic-missing-person-and-unidentified-person-statistics.pdf
+2026-08-21,,A,FBI CJIS,cs059,FBI CJIS,https://www.fbi.gov/file-repository/reports-and-publications/2019-ncic-missing-person-and-unidentified-person-statistics.pdf
+2026-08-21,,A,FBI CJIS,cs060,FBI CJIS,https://www.fbi.gov/file-repository/cjis/2020-ncic-missing-person-and-unidentified-person-statistics.pdf
+2026-08-21,,A,FBI CJIS,cs061,FBI CJIS,https://www.fbi.gov/file-repository/cjis/2022-ncic-missing-person-and-unidentified-person-statistics.pdf
+2026-08-21,,A,FBI CJIS,cs062,FBI CJIS,https://le.fbi.gov/file-repository/2023-ncic-missing-person-and-unidentified-person-statistics.pdf
+2026-08-21,,A,FBI CJIS,cs063,FBI CJIS,https://www.fbi.gov/file-repository/cjis/2024-ncic-missing-and-unidentified-person-statistics.pdf
+2026-08-21,,A,FBI CJIS,cs064,FBI CJIS,https://www.fbi.gov/file-repository/2025-ncic-missing-person-and-unidentified-person-statistics.pdf
+2026-08-21,,A,National Institute of Justice / NamUs,cs065,National Institute of Justice / NamUs,https://www.ojp.gov/pdffiles1/nij/310356.pdf
+2026-08-21,,A,NamUs,cs066,NamUs,https://namus.nij.ojp.gov/sites/g/files/xyckuh336/files/media/document/namus-bi-annual-monthly-case-report-january-2025.pdf
+2026-08-21,,A,Administrative Office of the U.S. Courts,cs067,Administrative Office of the U.S. Courts,https://www.uscourts.gov/sites/default/files/statistics_import_dir/C02ASep08.pdf
+2026-08-21,,A,Administrative Office of the U.S. Courts,cs068,Administrative Office of the U.S. Courts,https://www.uscourts.gov/sites/default/files/data_tables/C02ASep15.pdf
+2026-08-21,,A,Administrative Office of the U.S. Courts,cs069,Administrative Office of the U.S. Courts,https://www.uscourts.gov/sites/default/files/data_tables/jb_c2a_0930.2019.pdf
+2026-08-21,,A,Administrative Office of the U.S. Courts,cs070,Administrative Office of the U.S. Courts,https://www.uscourts.gov/sites/default/files/2025-01/jb_c2a_0930.2024.pdf
+2026-08-21,,A,Administrative Office of the U.S. Courts,cs071,Administrative Office of the U.S. Courts,https://www.uscourts.gov/sites/default/files/document/jb_c2a_0930.2025.pdf
+2026-08-21,,B,Reporters Committee for Freedom of the Press,cs072,Reporters Committee for Freedom of the Press,https://www.rcfp.org/introduction-anti-slapp-guide/
+2026-08-21,,B,Institute for Free Speech,cs073,Institute for Free Speech,https://www.ifs.org/anti-slapp-report/
+2026-08-21,,A,"David Pritchard, Communication Law and Policy 14(3), 2009",cs074,"David Pritchard, Communication Law and Policy 14(3), 2009",https://uwm.edu/journalism-advertising-media-studies/wp-content/uploads/sites/213/2016/04/Rethinking-Criminal-Libel.pdf
+2026-08-21,,B,Media Law Resource Center,cs075,Media Law Resource Center,https://medialaw.org/chapter-3-the-empirical-reality-ofcontemporary-libel-litigation/
+2026-08-21,,A,FBI CJIS,hs_nibrs_manual,NIBRS User Manual 2025.0 (offence code definitions),https://le.fbi.gov/file-repository/ucr/nibrs-user-manual-2025.pdf
+2026-08-21,,A,Bureau of Justice Statistics,hs_svs,"Stalking Victimization, 2019 (Supplemental Victimization Survey)",https://bjs.ojp.gov/library/publications/stalking-victimization-2019
+2026-08-21,,A,Administrative Office of the US Courts,hs_nos320,"Federal Judicial Caseload Statistics, Table C-2 (Nature of Suit)",https://www.uscourts.gov/statistics-reports/caseload-statistics-data-tables
+2026-08-21,,B,Pew Research Center,hs_pew,"The State of Online Harassment (Jan 2021, fielded Sept 2020)",https://www.pewresearch.org/internet/2021/01/13/the-state-of-online-harassment/
+2026-08-21,,A,US Department of Homeland Security,hs_dhs_worldcup,DHS Highlights Successful Arrests and Rescues in Crackdown on Human Trafficking During FIFA World Cup (2026-07-29),https://www.dhs.gov/news/2026/07/29/dhs-highlights-successful-arrests-and-rescues-crackdown-human-trafficking-during
+2026-08-21,,A,US Department of Homeland Security,hs_dhs_ccht_fy24,DHS Center for Countering Human Trafficking FY2024 Annual Report (2025-08-13),https://www.dhs.gov/news/2025/08/13/dhs-center-countering-human-trafficking-releases-fiscal-year-2024-annual-report
+2026-08-21,,A,FBI,hs_fbi_vnf,FBI Announces Voices Not Forgotten (2026-08-18),https://www.fbi.gov/news/press-releases/fbi-announces-voices-not-forgotten
+2026-08-21,,B,Vera Institute of Justice,hs_vera_2026,Ten Things Vera's ICE Detention Trends Dashboard Reveals (through March 2026),https://www.vera.org/news/ten-things-veras-ice-detention-trends-dashboard-reveals-about-ice-detention-through-march-2026
+2026-08-21,,A,FBI,tr_fbi_program,Transnational Repression (counterintelligence program page),https://www.fbi.gov/investigate/counterintelligence/transnational-repression
+2026-08-21,,A,FBI Philadelphia,tr_fbi_phila,FBI Philadelphia Brings Awareness to Transnational Repression (2025-03-13),https://www.fbi.gov/contact-us/field-offices/philadelphia/news/fbi-philadelphia-brings-awareness-to-transnational-repression
+2026-08-21,,B,Freedom House,tr_fh_2025,Tracking Transnational Repression in 2025 (published 2026-04-16),https://freedomhouse.org/article/authoritarian-collaboration-fueled-transnational-repression-2025
+2026-08-21,,A,DOJ / EDNY,tr_edny_34,34 PRC National Police Officers Charged with Perpetrating Transnational Repression Scheme Targeting U.S. Residents,https://www.fbi.gov/contact-us/field-offices/newyork/news/thirty-four-officers-of-peoples-republic-of-china-national-police-charged-with-perpetrating-transnational-repression-scheme-targeting-us-residents
+2026-08-21,,A,World Bank (data source: UNODC),intl_wb_homicide,"Intentional homicides per 100,000 — UNODC series, World Bank mirror (API extract)",https://api.worldbank.org/v2/country/USA;KOR;JPN;GBR;AUS;DEU;FRA;CAN;RUS;CHN;IND;ISR;WLD/indicator/VC.IHR.PSRC.P5?format=json&per_page=500&date=1999:2024
+2026-08-21,,A,ONS,intl_ons_drugs,Deaths related to drug poisoning in England and Wales: 2024 registrations,https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths/bulletins/deathsrelatedtodrugpoisoninginenglandandwales/2024registrations
+2026-08-21,,A,AIHW/ABS,intl_aihw,Deaths involving alcohol and other drugs in Australia,https://www.aihw.gov.au/reports/alcohol/alcohol-drugs-deaths
+2026-08-21,,A,EUDA,intl_euda,European Drug Report 2025 — drug-induced deaths,https://www.euda.europa.eu/publications/european-drug-report/2025/drug-induced-deaths_en
+2026-08-21,,A,Public Health Agency of Canada,intl_phac,Special Advisory Committee on Toxic Drug Poisonings — joint statement,https://www.canada.ca/en/public-health/news/2024/12/joint-statement-from-the-co-chairs-of-the-special-advisory-committee-on-toxic-drug-poisonings--latest-national-data-on-substance-related-harms.html
+2026-08-21,,B,DHS (citing BKA),intl_dhs_bka,"Rauschgifttote — police-registered drug deaths, Germany",https://www.dhs.de/suechte/illegale-drogen/zahlen-daten-fakten/
+2026-08-21,,A,ANSM / CEIP-Addictovigilance,intl_drames,DRAMES 2023 — deaths related to substance abuse (forensic register),https://addictovigilance.fr/wp-content/uploads/2025/06/Plaquette-DRAMES-2023.pdf
+2026-08-21,,B,Ewha Medical Journal (Statistics Korea data),intl_kor_drugs,"Drug-induced death statistics in Korea, 2011-2021",https://e-emj.org/journal/view.php?number=37
+2026-08-21,,B,UNODC WDR 2025 (via IDPC),intl_unodc_wdr,"Global drug-related deaths estimate (>450,000 in 2021)",https://idpc.net/blog/2025/06/evidence-that-cannot-be-contained-the-world-drug-report-2025-reveals-the-ongoing-failure-of-the
+2026-08-21,,A,FBI CJIS,intl_ncic_2024,2024 NCIC Missing Person and Unidentified Person Statistics,https://www.fbi.gov/file-repository/cjis/2024-ncic-missing-and-unidentified-person-statistics.pdf
+2026-08-21,,A,RCMP NCMPUR,intl_rcmp,Canada's Missing — Fast Fact Sheet,https://canadasmissing.ca/pubs/2025/index-eng.htm
+2026-08-21,,A,AFP NMPCC,intl_afp,National Missing Persons Week 2025,https://www.afp.gov.au/news-centre/media-release/national-missing-persons-week-2025-forever-loved
+2026-08-21,,B,NCA UKMPU (via press),intl_nca_press,"UK missing incidents 2020/21 (~262,000) — primary NCA report unreadable this session",https://www.nationalworld.com/news/crime/how-many-missing-people-uk-police-data-explained-body-found-nicola-bulley-4033696
+2026-08-21,,A,INTERPOL,intl_interpol,Yellow Notices — the only international missing-persons instrument,https://www.interpol.int/en/How-we-work/Notices/Yellow-Notices
+2026-08-21,,A,CDC NCHS,intl_cdc_549,"Drug Overdose Deaths in the United States, 2023-2024 (final)",https://www.cdc.gov/nchs/products/databriefs/db549.htm
+2026-08-21,,B,PHAC via CCSA/press,intl_phac_press,"Canada 2024 apparent opioid toxicity deaths (7,150) — primary Infobase unreadable this session",https://globalnews.ca/news/11345931/opioid-deaths-canada-2024/
+2026-08-21,,A,BJS,cs104,BJS,https://bjs.ojp.gov/content/pub/pdf/cv99.pdf
+2026-08-21,,A,BJS,cs105,BJS,https://bjs.ojp.gov/content/pub/pdf/cv10.pdf
+2026-08-21,,A,BJS,cs106,BJS,https://bjs.ojp.gov/document/cv23.pdf
+2026-08-21,,B,FBI CIUS via DrugPolicyFacts,cs107,FBI CIUS via DrugPolicyFacts,https://www.drugpolicyfacts.org/table/total_arrests
+2026-08-21,,A,FBI CIUS 1997 T29,cs108,FBI CIUS 1997 T29,https://ucr.fbi.gov/crime-in-the-u.s/1997/97sec4.pdf
+2026-08-21,,A,FBI,cs109,FBI,https://archives.fbi.gov/archives/news/pressrel/press-releases/fbi-releases-2008-crime-statistics
+2026-08-21,,A,FBI CIUS 2019,cs110,FBI CIUS 2019,https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/persons-arrested
+2026-08-21,,A,DOJ archive/FBI UCR,cs111,DOJ archive/FBI UCR,https://www.justice.gov/archive/mps/strategic2001-2006/d_arrtot.htm
+2026-08-21,,B,The Journalist's Resource (Harvard Shorenstein),ar_jr_ice,How to make sense of ICE arrest data — administrative vs criminal arrests,https://journalistsresource.org/home/how-to-make-sense-of-ice-arrest-data/
+2026-08-21,,B,Chicago Sun-Times,ar_suntimes,Tracker: every known federal prosecution tied to Operation Midway Blitz (updated 2026-08-10),https://chicago.suntimes.com/2026/tracker-federal-prosecutions-chicago-status-trumps-immigration-blitz-ice
+2026-08-21,,A,DHS OHSS,ice_ohss_2013,Immigration Enforcement Actions: 2013 (Annual Flow Report),https://ohss.dhs.gov/sites/default/files/2023-12/Enforcement_Actions_2013.pdf
+2026-08-21,,A,DHS OHSS,ice_ohss_2016,Immigration Enforcement Actions: 2016 (Annual Flow Report),https://ohss.dhs.gov/sites/default/files/2023-12/Enforcement_Actions_2016.pdf
+2026-08-21,,A,DHS OHSS,ice_ohss_2017,Immigration Enforcement Actions: 2017 (Annual Report),https://ohss.dhs.gov/sites/default/files/2023-12/enforcement_actions_2017.pdf
+2026-08-21,,A,DHS OHSS,ice_ohss_2020,Immigration Enforcement Actions: 2020 (Annual Flow Report),https://ohss.dhs.gov/sites/default/files/2023-12/2022_0131_plcy_enforcement_actions_fy2020v2.pdf
+2026-08-21,,A,ICE,ice_fy21,ICE Annual Report FY2021,https://www.ice.gov/doclib/eoy/iceAnnualReportFY2021.pdf
+2026-08-21,,A,ICE,ice_fy22,ICE Annual Report FY2022,https://www.ice.gov/doclib/eoy/iceAnnualReportFY2022.pdf
+2026-08-21,,A,ICE,ice_fy23,ICE Annual Report FY2023,https://www.ice.gov/doclib/eoy/iceAnnualReportFY2023.pdf
+2026-08-21,,A,ICE,ice_fy24,ICE Annual Report FY2024,https://www.ice.gov/doclib/eoy/iceAnnualReportFY2024.pdf
+2026-08-21,,B,Deportation Data Project / Austin Kocher,ice_ddp_kocher,"ICE arrest FOIA data, Jan 20-Jun 10 2025 (95,629)",https://austinkocher.substack.com/p/a-close-look-at-ice-arrest-data-from
+2026-08-21,,B,Prison Policy Initiative,ice_ppi_2025,"ICE arrests Jan 20-Oct 15 2025 (~217,500, FOIA data)",https://www.prisonpolicy.org/blog/2025/12/11/ice-jails-update/
+2026-08-21,,B,Deportation Data Project (UC Berkeley Law),ice_ddp_year1,One Year of Immigration Enforcement (4.4x baseline; street arrests 11x),https://deportationdata.org/analysis/immigration-enforcement-first-year.html
+2026-08-21,,A,Bureau of Justice Statistics,bjs_jails_2024,"Jails Report Series: 2024 Preliminary (657,500 held; 7.9M admissions; 69% unconvicted)",https://bjs.ojp.gov/library/publications/jails-report-series-2024-preliminary-data-release/web-report
+2026-08-21,,A,Bureau of Justice Statistics,bjs_prisons_2023,"Prisons 2023 Preliminary (1,254,200 year-end)",https://bjs.ojp.gov/preliminary-data-release-prisons-2023
+2026-08-21,,A,ICE,det_ice_fy24,ICE FY2024 Annual Report (Figure 17: ADP FY2019-FY2024),https://www.ice.gov/doclib/eoy/iceAnnualReportFY2024.pdf
+2026-08-21,,A,ICE,det_ice_fy21,"ICE FY2021 Annual Report (34,000 funded beds; ~75% usable)",https://www.ice.gov/doclib/eoy/iceAnnualReportFY2021.pdf
+2026-08-21,,A,US Senate Appropriations,det_sen_fy24,"Homeland Security FY24 Bill Highlights (41,500 beds enacted)",https://www.appropriations.senate.gov/imo/media/doc/Homeland%20Security%20FY24%20Bill%20Highlights.pdf
+2026-08-21,,A,US Senate Appropriations,det_sen_fy26,"Homeland Security FY2026 conference bill summary (41,500 maintained)",https://www.appropriations.senate.gov/imo/media/doc/fy26_homeland_security_conference_bill_summary.pdf
+2026-08-21,,A,US Senate Appropriations,det_sen_fy20,FY2020 Homeland Security Appropriations summary (FY2019 enacted level),https://www.appropriations.senate.gov/news/minority/summary-fy-2020-homeland-security-appropriations-bill
+2026-08-21,,B,TRAC Syracuse,det_trac_qf,"Immigration Detention Quick Facts (11 Jul 2026: 65,765; 70.6% no conviction)",https://tracreports.org/immigration/quickfacts/
+2026-08-21,,B,TRAC Syracuse,det_trac_762,ICE Contractual Capacity and Number Detained: Overcapacity vs Overcrowding,https://tracreports.org/reports/762/
+2026-08-21,,B,TRAC Syracuse,det_trac_767,"Taking Stock: Detention and Removals (16 Nov 2025: 65,135; 73.6% no conviction)",https://tracreports.org/reports/767/
+2026-08-21,,B,Austin Kocher (Syracuse),det_kocher_fy26,92% of ICE Detention Growth in FY2026 Driven by Immigrants with No Criminal Convictions,https://austinkocher.substack.com/p/92-of-ice-detention-growth-in-fy
+2026-08-21,,B,Austin Kocher (Syracuse),det_kocher_record,"ICE's Delayed Detention Data is Out, Two Record Highs (70,766 on 24 Jan 2026)",https://austinkocher.substack.com/p/ices-delayed-detention-data-is-out
+2026-08-21,,B,CBS News,det_cbs_73k,"ICE detainee population reaches record high of 73,000 (16 Jan 2026)",https://www.cbsnews.com/news/ices-detainee-population-record-high-of-73000/
+2026-08-21,,B,Migration Policy Institute,det_mpi,US Immigrant Detention Grows to Record Heights,https://www.migrationpolicy.org/article/trump-immigrant-detention
+2026-08-21,,A,Eurostat (joint Eurostat–UNODC data collection),bg_eurostat_iccs,"crim_off_cat — police-recorded offences, ICCS05012 'Burglary of private residential premises', per 100 000 inhabitants",https://ec.europa.eu/eurostat/databrowser/view/crim_off_cat/default/table?lang=en
+2026-08-21,,A,Eurostat,bg_eurostat_news,"Burglary in the EU (Eurostat news release, 2026-08-03)",https://ec.europa.eu/eurostat/web/products-eurostat-news/w/ddn-20260803-1
+2026-08-21,,A,UNODC,bg_unodc_gone,UNODC data portal — burglary is no longer offered as a retrievable indicator (checked 2026-08-21),https://dataunodc.un.org/
+2026-08-21,,A,FBI Uniform Crime Reporting Program,bg_fbi_srs2019,"Crime in the United States 2019, Table 1 (Summary Reporting System — final year of the SRS basis)",https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1
+2026-08-21,,A,FBI Crime Data Explorer,bg_fbi_cde24,"UCR Summary of Reported Crimes in the Nation, 2024 (NIBRS-based national estimates)",https://cde.ucr.cjis.gov/LATEST/resources/reports/UCR%20Summary%20of%20Reported%20Crimes%20in%20the%20Nation%202024.pdf
+2026-08-21,,A,FBI Crime Data Explorer,bg_fbi_quick24,"Reported Crimes in the Nation — Quick Stats (clearance rates, 2024)",https://cde.ucr.cjis.gov/LATEST/resources/reports/Reported%20Crimes%20in%20the%20Nation%20Quick%20Stats.pdf
+2026-08-21,,A,Bureau of Justice Statistics,bg_bjs_cv24,"Criminal Victimization, 2024 (NCVS) — Tables 2 and 4",https://bjs.ojp.gov/document/cv24.pdf
+2026-08-21,,A,Bureau of Justice Statistics,bg_bjs_cv10,"Criminal Victimization, 2010 (NCVS) — Tables 7 and 10",https://bjs.ojp.gov/content/pub/pdf/cv10.pdf
+2026-08-21,,A,Bureau of Justice Statistics,bg_bjs_cv99,Criminal Victimization 1999 (NCVS) — pre-2017 'household burglary' basis,https://bjs.ojp.gov/content/pub/pdf/cv99.pdf
+2026-08-21,,A,Statistics Canada,bg_statcan_be02,"Juristat: Breaking and Entering in Canada, 2002 — 'home invasion' is not captured by the UCR Survey",https://www150.statcan.gc.ca/n1/pub/85-002-x/85-002-x2004005-eng.pdf
+2026-08-21,,A,Statistics Canada,bg_statcan_2025,"Police-reported crime statistics, 2025 (The Daily) — breaking and entering",https://www150.statcan.gc.ca/n1/daily-quotidien/260722/dq260722a-eng.htm
+2026-08-21,,A,Crime Statistics Agency Victoria,bg_csa_vic,Spotlight: burglary / break and enter offences recorded in Victoria,https://www.crimestatistics.vic.gov.au/spotlight-burglarybreak-and-enter-offences-recorded-in-victoria
+2026-08-21,,A,Australian Bureau of Statistics,bg_abs_cvs,"Crime Victimisation, Australia, 2024-25 — household break-in prevalence",https://www.abs.gov.au/statistics/people/crime-and-justice/crime-victimisation/latest-release
+2026-08-21,,A,Australian Bureau of Statistics,bg_abs_rcv,"Recorded Crime — Victims, 2024 (Unlawful Entry With Intent; no national rate published)",https://www.abs.gov.au/statistics/people/crime-and-justice/recorded-crime-victims/latest-release
+2026-08-21,,A,Office for National Statistics,bg_ons_burglary,"Overview of burglary and other household theft, England and Wales (CSEW)",https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/articles/overviewofburglaryandotherhouseholdtheft/englandandwales
+2026-08-21,,A,Office for National Statistics,bg_ons_cew25,"Crime in England and Wales, year ending December 2025",https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/bulletins/crimeinenglandandwales/yearendingdecember2025
+2026-08-21,,A,National Police Agency (Japan),bg_npa_jp,令和6年の犯罪情勢 (Crime Situation in 2024) — 侵入犯罪 intrusion crime,https://www.npa.go.jp/publications/statistics/kikakubunseki/r6_jyosei.pdf
+2026-08-21,,A,Australian Bureau of Statistics,bg_anzsoc,"ANZSOC 2023, group 061 — 'home invasion' appears only as an INCLUSION TERM under 0611 Aggravated burglary of a dwelling and 0612 Non-aggravated burglary of a dwelling",https://www.abs.gov.au/statistics/classifications/australian-and-new-zealand-standard-offence-classification-anzsoc/2023/06/061
+2026-08-21,,A,Michigan State Police,bg_micr_manual,Michigan Incident Crime Reporting (MICR) Manual — burglary codes 22001/22002/22003; no home-invasion code,https://www.michigan.gov/msp/-/media/Project/Websites/msp/micr-assets/MICR-Manual_1130.pdf
+2026-08-21,,A,Michigan State Police,bg_micr_2022,Crime in Michigan 2022 (MICR annual report) — burglary reported under 22001/22002/22003,https://www.michigan.gov/msp/-/media/Project/Websites/msp/micr-assets/2022/MICR-Annual-Report-2022.pdf
+2026-08-21,,A,Office for National Statistics,bg_ons_athome,Overview of burglary and other household theft (20 July 2017) — someone was at home in over half of domestic burglaries where the offender gained entry,https://www.ons.gov.uk/peoplepopulationandcommunity/crimeandjustice/articles/overviewofburglaryandotherhouseholdtheft/englandandwales
+2026-08-21,,A,Crime Statistics Agency Victoria,bg_csa_vic_stale,"Recorded offences, year ending March 2026 — burglary/break and enter published; no home-invasion or aggravated-burglary count in the release text",https://www.crimestatistics.vic.gov.au/media-centre/media-releases/media-release-adult-offending-increases-as-youth-offending-decreases
+2026-08-22,,A,Bureau of Justice Statistics,inc_bjs_p23st,"Prisoners in 2023 – Statistical Tables (Sept 2025, NCJ 310197) — the most recent in the series",https://bjs.ojp.gov/document/p23st.pdf
+2026-08-22,,A,Bureau of Justice Statistics,inc_bjs_p19,"Prisoners in 2019 (Oct 2020, NCJ 255115) — carries the revised 2009–2012 counts",https://bjs.ojp.gov/content/pub/pdf/p19.pdf
+2026-08-22,,A,Bureau of Justice Statistics,inc_bjs_p09,"Prisoners in 2009 (Dec 2010, NCJ 231675) — the 2000–2008 annual series",https://bjs.ojp.gov/content/pub/pdf/p09.pdf
+2026-08-22,,A,Bureau of Justice Statistics,inc_bjs_p00,"Prisoners in 2000 (Aug 2001, NCJ 188207) — the 1999 count",https://bjs.ojp.gov/content/pub/pdf/p00.pdf
+2026-08-22,,A,Bureau of Justice Statistics,inc_bjs_p20st,"Prisoners in 2020 – Statistical Tables (Dec 2021, NCJ 302776) — states the COVID mechanism",https://bjs.ojp.gov/content/pub/pdf/p20st.pdf
+2026-08-22,,A,Bureau of Justice Statistics,inc_bjs_p16,"Prisoners in 2016 (Jan 2018, NCJ 251149), Table 16 — the LAST prison capacity table BJS published",https://bjs.ojp.gov/content/pub/pdf/p16.pdf
+2026-08-22,,A,Bureau of Justice Statistics,inc_bjs_ji23st,"Jail Inmates in 2023 – Statistical Tables (Apr 2025, NCJ 309965)",https://bjs.ojp.gov/document/ji23st.pdf
+2026-08-22,,A,Bureau of Justice Statistics,inc_bjs_ji19,"Jail Inmates in 2019 (Mar 2021, NCJ 255608) — 2019 is a Census of Jails year, not a survey year",https://bjs.ojp.gov/content/pub/pdf/ji19.pdf
+2026-08-22,,A,Bureau of Justice Statistics,inc_bjs_jim09,"Jail Inmates at Midyear 2009 – Statistical Tables (Jun 2010, NCJ 230122)",https://bjs.ojp.gov/content/pub/pdf/jim09st.pdf
+2026-08-22,,A,Bureau of Justice Statistics,inc_bjs_pjim00,"Prison and Jail Inmates at Midyear 2000 (Mar 2001, NCJ 185989)",https://bjs.ojp.gov/content/pub/pdf/pjim00.pdf
+2026-08-22,,B,Bureau of Justice Statistics,inc_bjs_pdrj24,"Jails Report Series: 2024 Preliminary Data Release (Dec 2025) — PRELIMINARY, may be revised",https://bjs.ojp.gov/library/publications/jails-report-series-2024-preliminary-data-release/web-report
+2026-08-22,,A,Bureau of Justice Statistics,inc_bjs_cpus23,"Correctional Populations in the United States, 2023 – Statistical Tables (Sept 2025, NCJ 310413)",https://bjs.ojp.gov/document/cpus23st.pdf
+2026-08-22,,A,Bureau of Justice Statistics,inc_bjs_cpus13,"Correctional Populations in the United States, 2013, Appendix Table 5 (Dec 2014, NCJ 248479)",https://bjs.ojp.gov/content/pub/pdf/cpus13.pdf
+2026-08-22,,A,Bureau of Justice Statistics,inc_bjs_facilities19,"Census of State and Federal Adult Correctional Facilities, 2019 (Nov 2021, NCJ 301366)",https://bjs.ojp.gov/content/pub/pdf/csfacf19st.pdf
+2026-08-22,,A,Bureau of Justice Statistics,inc_bjs_forthcoming,"BJS forthcoming publications — 'Prisoners in 2024 – Statistical Tables' listed for Q3 2026, unpublished as of 22 Aug 2026",https://bjs.ojp.gov/library/publications/forthcoming
+2026-08-22,,B,"World Prison Brief (Institute for Crime & Justice Policy Research, Birkbeck)",inc_wpb_rank,Highest to Lowest — Prison Population Rate (the ranking page carries NO reference-date column),https://www.prisonstudies.org/highest-to-lowest/prison_population_rate
+2026-08-22,,B,World Prison Brief,inc_wpb_us,"United States of America — 542 per 100,000 (2023); total built from jails, state and federal prisons",https://www.prisonstudies.org/country/united-states-america
+2026-08-22,,B,World Prison Brief,inc_wpb_china,"China — sentenced prisoners in Ministry of Justice prisons only; WPB's own estimate is 'at least 2,340,000'",https://www.prisonstudies.org/country/china
+2026-08-22,,A,Institute for Crime & Justice Policy Research,inc_wppl,World Prison Population List — 'The information does not relate to the same date',https://www.prisonstudies.org/sites/default/files/publications/wppl_10.pdf
+2026-08-22,,A,Council of Europe / University of Lausanne,inc_space_i,"SPACE I 2025 key findings — one uniform reference date (31 Jan 2025), 100% response across 51 prison administrations",https://wp.unil.ch/space/files/2026/06/260626_key-findings-space-i_prisons-europe-2025.pdf
+2026-08-22,,A,UNODC,inc_unodc_prisons,"UNODC data portal, prison capacity and persons held — LIVE, but the legacy dataunodc.un.org/dp-prisons URLs now redirect to the site root",https://data.unodc.org/datareport/prison-capacity
+2026-08-22,,B,Vera Institute of Justice,inc_vera_2024,People in Jail and Prison in 2024 — 40 states increased prison populations between fall 2022 and spring 2024,https://vera-institute.files.svdcdn.com/production/downloads/publications/People-in-Jail-and-Prison-in-2024-Full-Reportpdf.pdf
+2026-08-22,,A,"Schizophrenia Research (Shoham, Cooper, Lewis, Bebbington, McManus)",an_apms_trends,Temporal trends in psychotic symptoms: repeated cross-sectional surveys of the population in England 2000–14,https://openaccess.city.ac.uk/id/eprint/25570/8/APMS%20Psychotic%20Symptoms%20Temporal%20trends%206.8.20.pdf
+2026-08-22,,A,NHS England / Adult Psychiatric Morbidity Survey,an_apms_2324,"Survey of Mental Health and Wellbeing, England 2023/24 — psychotic disorder chapter (the PSQ screen-positive rate is no longer reported as an outcome)",https://digital.nhs.uk/data-and-information/publications/statistical/adult-psychiatric-morbidity-survey/survey-of-mental-health-and-wellbeing-england-2023-24/psychotic-disorder
+2026-08-22,,A,Bebbington & Nayani,an_psq,"Psychosis Screening Questionnaire — the instrument, unchanged across APMS waves",https://nccred.org.au/uploads/documents/Psychosis-screening-questionnaire.pdf
+2026-08-22,,B,Chapman University Survey of American Fears,an_chapman_2018,Paranormal America 2018 — 'Places can be haunted by spirits',http://blogs.chapman.edu/wilkinson/2018/10/16/paranormal-america-2018/
+2026-08-22,,B,Chapman University Survey of American Fears,an_chapman_2021,"Wave 7, fielded 5–15 January 2021 — the last paranormal battery published",https://blogs.chapman.edu/wilkinson/2021/10/14/government-corruption-fear-for-loved-ones-civil-unrest-top/
+2026-08-22,,B,Gallup,an_gallup_2025,Paranormal phenomena met with skepticism (fieldwork 1–18 May 2025) — 'largely unchanged' since 2001,https://news.gallup.com/poll/692738/paranormal-phenomena-met-skepticism.aspx
+2026-08-22,,B,Gallup,an_gallup_2005,"Three in four Americans believe in the paranormal (1990, 2001, 2005 series)",https://news.gallup.com/poll/16915/three-four-americans-believe-paranormal.aspx
+2026-08-22,,A,Pew Research Center,an_pew_mode,Spiritual experiences (2023) — Pew states its telephone-era and online-era readings may not be comparable,https://www.pewresearch.org/religion/2023/12/07/spiritual-experiences/
+2026-08-22,,B,YouGov,an_yougov_2025,"Most Americans say they have experienced at least one paranormal event (Oct 2025) — 60%, down from 67% in 2022",https://yougov.com/en-us/articles/53258-most-americans-say-they-have-experienced-at-least-one-paranormal-event
+2026-08-22,,A,All-domain Anomaly Resolution Office (AARO),an_aaro_fy25,FY2025 Consolidated Annual Report on UAP,https://www.aaro.mil/Portals/136/PDFs/FY25%20UAP%20Annual%20Report/AARO_FY2025_Consolidated_Annual_Report_on_UAP.pdf
+2026-08-22,,A,All-domain Anomaly Resolution Office (AARO),an_aaro_fy24,FY2024 Consolidated Annual Report on UAP — records the FAA now reporting weekly,https://media.defense.gov/2024/Nov/14/2003583603/-1/-1/0/FY24-CONSOLIDATED-ANNUAL-REPORT-ON-UAP-508.PDF
+2026-08-22,,A,Office of the Director of National Intelligence,an_odni_2022,2022 Annual Report on UAP — attributes the increase partly to 'reduced stigma surrounding UAP reporting',https://archive.dni.gov/files/ODNI/documents/assessments/Unclassified-2022-Annual-Report-UAP.pdf
+2026-08-22,,A,SAMHSA / NCBI,an_nsduh_methods,NSDUH instrument comparison — no hallucination or voice-hearing items in the questions asked of all respondents,https://www.ncbi.nlm.nih.gov/books/NBK390286/
+2026-08-22,,C,"Sapien Labs, Global Mind Project",an_sapien_2025,Global Mind Health in 2025 — an anonymous annual instrument whose 47 items include 'Hallucinations' and 'Sense of being detached from reality',https://sapienlabs.org/wp-content/uploads/2026/02/Global-Mind-Health-in-2025-Report.pdf
+2026-08-22,,A,"CDC, Youth Risk Behavior Survey",an_yrbs_trend,"YRBS Data Summary & Trends Report 2013–2023 — anonymous, in-school, unchanged wording",https://www.cdc.gov/yrbs/dstr/pdf/YRBS-2023-Data-Summary-Trend-Report.pdf

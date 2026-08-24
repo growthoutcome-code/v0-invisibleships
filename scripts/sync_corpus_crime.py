@@ -180,6 +180,14 @@ every count below from the live data files.
 
 **Scope: the United States only.**
 
+## Start here
+
+`IS_CRIME_00_start-here.md` — what this research is, what it found, and questions
+worth asking it. Then the briefs: one Markdown file per chart and per register,
+each self-contained and safe to hand to an assistant on its own. Row data is in
+`csv/`. The `.json` files hold the same content for code.
+
+
 ## The measurement problem
 
 This dataset exists because "is US crime rising?" has more than one defensible answer.
@@ -257,6 +265,23 @@ verified against a fetched source. The rate series is complete.
             dst.writestr(PREFIX + "charts/anomalies_indexed.json", an_path.read_text())
         dst.writestr(PREFIX + "charts/homicide_us.csv", hom_csv)
 
+        # ---- the Markdown the corpus exists for -----------------------------
+        # The corpus README has always said each file should be "a self-contained
+        # chunk ... unambiguous when shared individually with an AI assistant."
+        # The journal, references and glossary follow that. Crime shipped 23 JSON
+        # files and a README — parseable, but a model handed it reads the SHAPE of
+        # the data while the findings stay buried as strings inside arrays.
+        # build_corpus_md.py assembles them into prose from the same tables the
+        # site renders, so they cannot drift from what is published.
+        md_dir = ROOT / "public/data/crime/md"
+        n_md = n_csv = 0
+        for f in sorted(md_dir.glob("*.md")):
+            dst.writestr(PREFIX + f.name, f.read_text())
+            n_md += 1
+        for f in sorted((md_dir / "csv").glob("*.csv")):
+            dst.writestr(PREFIX + "csv/" + f.name, f.read_text())
+            n_csv += 1
+
     shutil.move(str(tmp), str(ZIP))
     quiet or print(f"carried {carried} non-crime entries")
     n_charts = 1 + sum(  # homicide_us.csv, plus each optional chart doc present
@@ -267,6 +292,7 @@ verified against a fetched source. The rate series is complete.
         if (CHARTS / f"{f}.json").exists()
     )
     quiet or print(f"crime/: {len(TABLE_FILES)} tables + manifest + README + {n_charts} chart files")
+    quiet or print(f"         {n_md} markdown briefs + {n_csv} csv (the AI-readable layer)")
     quiet or print(f"sources: {tier_line}")
     quiet or print(f"homicide csv: {hom_years} years")
     quiet or print(f"zip: {ZIP.stat().st_size:,} bytes")

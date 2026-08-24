@@ -48,6 +48,11 @@ run build_crime_copy.py
 run inject_crime_track.py
 run build_govcloud_report.py
 
+# ---- the AI-readable layer ----------------------------------------------
+# Must run AFTER build_crime_copy.py (it reads the plain-language statements)
+# and BEFORE sync_corpus_crime.py (which packs the files it writes).
+run build_corpus_md.py
+
 # ---- the corpus, and only then the guard ---------------------------------
 # Not optional, and not before build_crime_copy.py. This is the step whose
 # absence shipped a stale download.

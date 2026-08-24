@@ -1,0 +1,566 @@
+geography,indicator_id,note,publisher,source_id,tier,unit,value,workstream,year
+US,ccj_h1_agg_assault_pct_change,,Council on Criminal Justice,cs_ccj_2026,A,"% change, H1 2026 vs H1 2025, 36 large cities",-2.0,W1-YTD,2026
+US,ccj_h1_carjacking_pct_change,,Council on Criminal Justice,cs_ccj_2026,A,"% change, H1 2026 vs H1 2025, 36 large cities",-47.0,W1-YTD,2026
+US,ccj_h1_domestic_violence_pct_change,"ROSE, and by the largest margin of any offence in the sample.",Council on Criminal Justice,cs_ccj_2026,A,"% change, H1 2026 vs H1 2025, 36 large cities",8.0,W1-YTD,2026
+US,ccj_h1_gun_assault_pct_change,,Council on Criminal Justice,cs_ccj_2026,A,"% change, H1 2026 vs H1 2025, 36 large cities",-6.0,W1-YTD,2026
+US,ccj_h1_homicide_pct_change,215 fewer homicides across the 30 cities reporting homicide data.,Council on Criminal Justice,cs_ccj_2026,A,"% change, H1 2026 vs H1 2025, 36 large cities",-18.0,W1-YTD,2026
+US,ccj_h1_mv_theft_pct_change,,Council on Criminal Justice,cs_ccj_2026,A,"% change, H1 2026 vs H1 2025, 36 large cities",-20.0,W1-YTD,2026
+US,ccj_h1_robbery_pct_change,,Council on Criminal Justice,cs_ccj_2026,A,"% change, H1 2026 vs H1 2025, 36 large cities",-17.0,W1-YTD,2026
+US,ccj_h1_sexual_assault_pct_change,ROSE. One of four offences of thirteen that did not fall.,Council on Criminal Justice,cs_ccj_2026,A,"% change, H1 2026 vs H1 2025, 36 large cities",3.0,W1-YTD,2026
+US,cdc_homicide_count,FLAGGED. Reported as the series minimum; same limitation as the 2021 count. Tier B.,NCHS / CDC (NCHS Data Brief 526 data tables),cs022,B,deaths,15872,W1,2014
+US,cdc_homicide_count,"FLAGGED. Reported as the series maximum in the db526 backing tables, but I could not open the standalone tables PDF (db526-tables.pdf returned 404) to confirm the row label. Tier B.",NCHS / CDC (NCHS Data Brief 526 data tables),cs022,B,deaths,26031,W1,2021
+US,cdc_homicide_count,"'Number of deaths: 20,162' for 2024, National Vital Statistics System via CDC WONDER.","NCHS / CDC (FastStats, via CDC WONDER)",cs026,A,deaths,20162,W1,2024
+US,cdc_homicide_crude_rate,"CRUDE rate, not age-adjusted. Different unit from every other cdc_homicide_rate_aa row.","NCHS / CDC (FastStats, via CDC WONDER)",cs026,A,"per 100,000, CRUDE",5.9,W1,2024
+US,cdc_homicide_pct_increase_2019_2020,"CDC rate 6.0 (2019) to 7.8 (2020). The underlying 6.0 and 7.8 are BOTH tier A from db526; only the '30%' rounding is tier B. Useful counterpoint: two agencies, ~29-30% increase, but from different levels and on different denominators.","Pew Research Center, citing CDC/NCHS",cs037,B,percent increase in age-adjusted rate,30,W1,2020
+US,cdc_homicide_rate_aa,"Selected years only. Confirmed by Health, United States 2020-2021 SlctMort table.","NCHS / CDC (Health, United States, Table 29)",cs023,A,"per 100,000, age-adjusted",5.1,W1,1950
+US,cdc_homicide_rate_aa,"Confirmed twice. NOTE: FBI UCR rate for 1960 is 5.1 - nearly identical, unlike later years.","NCHS / CDC (Health, United States, Table 29)",cs023,A,"per 100,000, age-adjusted",5.0,W1,1960
+US,cdc_homicide_rate_aa,FBI UCR 1970 = 7.9. Gap of 0.9.,"NCHS / CDC (Health, United States, Table 29)",cs023,A,"per 100,000, age-adjusted",8.8,W1,1970
+US,cdc_homicide_rate_aa,Highest CDC value in the fetched series. FBI UCR 1980 = 10.2.,"NCHS / CDC (Health, United States, Table 29)",cs023,A,"per 100,000, age-adjusted",10.4,W1,1980
+US,cdc_homicide_rate_aa,FBI UCR 1990 = 9.4. Coincidentally identical.,"NCHS / CDC (Health, United States, Table 29)",cs023,A,"per 100,000, age-adjusted",9.4,W1,1990
+US,cdc_homicide_rate_aa,FBI UCR 2000 = 5.5. Gap of 0.4.,"NCHS / CDC (Health, United States, Table 29)",cs023,A,"per 100,000, age-adjusted",5.9,W1,2000
+US,cdc_homicide_rate_aa,Start of the continuous annual NCHS series I could verify. Confirmed in brief text: 'declined 16% from 2003 (6.1) to 2014'.,NCHS / CDC (NCHS Data Brief 526),cs022,A,"per 100,000, age-adjusted",6.1,W1,2003
+US,cdc_homicide_rate_aa,,NCHS / CDC (NCHS Data Brief 526),cs022,A,"per 100,000, age-adjusted",5.9,W1,2004
+US,cdc_homicide_rate_aa,"Health, United States 2020-2021 SlctMort gives 6.1 for 2005. Confirmed twice.",NCHS / CDC (NCHS Data Brief 526),cs022,A,"per 100,000, age-adjusted",6.1,W1,2005
+US,cdc_homicide_rate_aa,,NCHS / CDC (NCHS Data Brief 526),cs022,A,"per 100,000, age-adjusted",6.2,W1,2006
+US,cdc_homicide_rate_aa,,NCHS / CDC (NCHS Data Brief 526),cs022,A,"per 100,000, age-adjusted",6.1,W1,2007
+US,cdc_homicide_rate_aa,,NCHS / CDC (NCHS Data Brief 526),cs022,A,"per 100,000, age-adjusted",5.9,W1,2008
+US,cdc_homicide_rate_aa,"Health, United States 2020-2021 SlctMort gives 5.5 for 2009. Confirmed twice.",NCHS / CDC (NCHS Data Brief 526),cs022,A,"per 100,000, age-adjusted",5.5,W1,2009
+US,cdc_homicide_rate_aa,"Health, United States Table 29 gives 5.3 for 2010. Confirmed twice. FBI UCR 2010 = 4.8 - a 0.5 gap.",NCHS / CDC (NCHS Data Brief 526),cs022,A,"per 100,000, age-adjusted",5.3,W1,2010
+US,cdc_homicide_rate_aa,,NCHS / CDC (NCHS Data Brief 526),cs022,A,"per 100,000, age-adjusted",5.3,W1,2011
+US,cdc_homicide_rate_aa,,NCHS / CDC (NCHS Data Brief 526),cs022,A,"per 100,000, age-adjusted",5.4,W1,2012
+US,cdc_homicide_rate_aa,,NCHS / CDC (NCHS Data Brief 526),cs022,A,"per 100,000, age-adjusted",5.2,W1,2013
+US,cdc_homicide_rate_aa,Series low. Confirmed in brief text ('2014 (5.1)'). FBI UCR 2014 = 4.4 - a 0.7 gap.,NCHS / CDC (NCHS Data Brief 526),cs022,A,"per 100,000, age-adjusted",5.1,W1,2014
+US,cdc_homicide_rate_aa,"Health, United States Table 29 gives 5.7 for 2015. Confirmed twice.",NCHS / CDC (NCHS Data Brief 526),cs022,A,"per 100,000, age-adjusted",5.7,W1,2015
+US,cdc_homicide_rate_aa,"Health, United States Table 29 gives 6.2 for 2016. Confirmed twice.",NCHS / CDC (NCHS Data Brief 526),cs022,A,"per 100,000, age-adjusted",6.2,W1,2016
+US,cdc_homicide_rate_aa,,NCHS / CDC (NCHS Data Brief 526),cs022,A,"per 100,000, age-adjusted",6.2,W1,2017
+US,cdc_homicide_rate_aa,"Health, United States 2020-2021 SlctMort gives 5.9 for 2018. Confirmed twice.",NCHS / CDC (NCHS Data Brief 526),cs022,A,"per 100,000, age-adjusted",5.9,W1,2018
+US,cdc_homicide_rate_aa,"Confirmed three ways: db526 table, db526 text ('2019 (6.0)'), and Health, United States 2020-2021 SlctMort. FBI UCR 2019 = 5.0 - a FULL POINT apart.",NCHS / CDC (NCHS Data Brief 526),cs022,A,"per 100,000, age-adjusted",6.0,W1,2019
+US,cdc_homicide_rate_aa,"Corroborated by Pew citing CDC (7.8 in 2020, up from 6.0).",NCHS / CDC (NCHS Data Brief 526),cs022,A,"per 100,000, age-adjusted",7.8,W1,2020
+US,cdc_homicide_rate_aa,SERIES PEAK. Confirmed independently by NVSR 'Deaths: Final Data for 2022' (Vol 74 No 4): 'from 8.2 in 2021'. FBI UCR 2021 = 6.5 - a 1.7 gap.,NCHS / CDC (NCHS Data Brief 526),cs022,A,"per 100,000, age-adjusted",8.2,W1,2021
+US,cdc_homicide_rate_aa,"Confirmed independently by NVSR Vol 74 No 4: 'decreased 6.1%, from 8.2 in 2021 to 7.7 per 100,000 standard population in 2022.'",NCHS / CDC (NCHS Data Brief 526),cs022,A,"per 100,000, age-adjusted",7.7,W1,2022
+US,cdc_homicide_rate_aa,Confirmed in db526 text: 'The rate then declined 13% through 2023 (7.1).' FBI UCR 2023 = 6.0.,NCHS / CDC (NCHS Data Brief 526),cs022,A,"per 100,000, age-adjusted",7.1,W1,2023
+US,fbi_murder_count,"BJS Homicide Trends in the US, UCR-based series. Overlap years 1991-2000 match FBI CIUS exactly, validating the extraction.",Bureau of Justice Statistics,cs001,A,offenses,9110,W1,1960
+US,fbi_murder_count,,Bureau of Justice Statistics,cs001,A,offenses,8740,W1,1961
+US,fbi_murder_count,,Bureau of Justice Statistics,cs001,A,offenses,8530,W1,1962
+US,fbi_murder_count,,Bureau of Justice Statistics,cs001,A,offenses,8640,W1,1963
+US,fbi_murder_count,,Bureau of Justice Statistics,cs001,A,offenses,9360,W1,1964
+US,fbi_murder_count,,Bureau of Justice Statistics,cs001,A,offenses,9960,W1,1965
+US,fbi_murder_count,,Bureau of Justice Statistics,cs001,A,offenses,11040,W1,1966
+US,fbi_murder_count,,Bureau of Justice Statistics,cs001,A,offenses,12240,W1,1967
+US,fbi_murder_count,,Bureau of Justice Statistics,cs001,A,offenses,13800,W1,1968
+US,fbi_murder_count,,Bureau of Justice Statistics,cs001,A,offenses,14760,W1,1969
+US,fbi_murder_count,,Bureau of Justice Statistics,cs001,A,offenses,16000,W1,1970
+US,fbi_murder_count,,Bureau of Justice Statistics,cs001,A,offenses,17780,W1,1971
+US,fbi_murder_count,,Bureau of Justice Statistics,cs001,A,offenses,18670,W1,1972
+US,fbi_murder_count,,Bureau of Justice Statistics,cs001,A,offenses,19640,W1,1973
+US,fbi_murder_count,,Bureau of Justice Statistics,cs001,A,offenses,20710,W1,1974
+US,fbi_murder_count,,Bureau of Justice Statistics,cs001,A,offenses,20510,W1,1975
+US,fbi_murder_count,,Bureau of Justice Statistics,cs001,A,offenses,18780,W1,1976
+US,fbi_murder_count,,Bureau of Justice Statistics,cs001,A,offenses,19120,W1,1977
+US,fbi_murder_count,,Bureau of Justice Statistics,cs001,A,offenses,19560,W1,1978
+US,fbi_murder_count,,Bureau of Justice Statistics,cs001,A,offenses,21460,W1,1979
+US,fbi_murder_count,Peak count of the 1980 cycle.,Bureau of Justice Statistics,cs001,A,offenses,23040,W1,1980
+US,fbi_murder_count,,Bureau of Justice Statistics,cs001,A,offenses,22520,W1,1981
+US,fbi_murder_count,,Bureau of Justice Statistics,cs001,A,offenses,21010,W1,1982
+US,fbi_murder_count,,Bureau of Justice Statistics,cs001,A,offenses,19308,W1,1983
+US,fbi_murder_count,,Bureau of Justice Statistics,cs001,A,offenses,18692,W1,1984
+US,fbi_murder_count,,Bureau of Justice Statistics,cs001,A,offenses,18976,W1,1985
+US,fbi_murder_count,,Bureau of Justice Statistics,cs001,A,offenses,20613,W1,1986
+US,fbi_murder_count,,Bureau of Justice Statistics,cs001,A,offenses,20096,W1,1987
+US,fbi_murder_count,,Bureau of Justice Statistics,cs001,A,offenses,20675,W1,1988
+US,fbi_murder_count,,Bureau of Justice Statistics,cs001,A,offenses,21500,W1,1989
+US,fbi_murder_count,,Bureau of Justice Statistics,cs001,A,offenses,23438,W1,1990
+US,fbi_murder_count,HIGHEST COUNT in the fetched series. Independently confirmed by BJS htius.pdf.,"FBI (UCR, Crime in the United States 2010, Table 1)",cs015,A,offenses,24703,W1,1991
+US,fbi_murder_count,Confirmed by BJS.,"FBI (UCR, CIUS 2010, Table 1)",cs015,A,offenses,23760,W1,1992
+US,fbi_murder_count,Confirmed by BJS.,"FBI (UCR, CIUS 2010, Table 1)",cs015,A,offenses,24526,W1,1993
+US,fbi_murder_count,Confirmed by BJS.,"FBI (UCR, CIUS 2010, Table 1)",cs015,A,offenses,23326,W1,1994
+US,fbi_murder_count,Confirmed by BJS.,"FBI (UCR, CIUS 2010, Table 1)",cs015,A,offenses,21606,W1,1995
+US,fbi_murder_count,Confirmed by BJS.,"FBI (UCR, CIUS 2010, Table 1)",cs015,A,offenses,19645,W1,1996
+US,fbi_murder_count,Confirmed by BJS.,"FBI (UCR, CIUS 2010, Table 1)",cs015,A,offenses,18208,W1,1997
+US,fbi_murder_count,Confirmed by BJS and by CIUS 1999 (99sec2.pdf).,"FBI (UCR, CIUS 2010, Table 1)",cs015,A,offenses,16974,W1,1998
+US,fbi_murder_count,"CIUS 1999 as first published gave 15,533; revised to 15,522. VINTAGE CONFLICT.","FBI (UCR, CIUS 2010, Table 1)",cs015,A,offenses,15522,W1,1999
+US,fbi_murder_count,Confirmed by CIUS 2010 and BJS.,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,offenses,15586,W1,2000
+US,fbi_murder_count,"UCR Table 1 excludes the 2,823 deaths of 9/11 from the murder count; the FBI publishes those separately. Verify the footnote before broadcasting this figure.","FBI (UCR, CIUS 2019, Table 1)",cs017,A,offenses,16037,W1,2001
+US,fbi_murder_count,Confirmed by CIUS 2010 and BJS.,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,offenses,16229,W1,2002
+US,fbi_murder_count,"BJS htius lists 16,582 for 2003 (earlier vintage). VINTAGE CONFLICT.","FBI (UCR, CIUS 2019, Table 1)",cs017,A,offenses,16528,W1,2003
+US,fbi_murder_count,"BJS htius lists 16,137. VINTAGE CONFLICT.","FBI (UCR, CIUS 2019, Table 1)",cs017,A,offenses,16148,W1,2004
+US,fbi_murder_count,"BJS htius lists 16,692. VINTAGE CONFLICT.","FBI (UCR, CIUS 2019, Table 1)",cs017,A,offenses,16740,W1,2005
+US,fbi_murder_count,Confirmed by CIUS 2010.,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,offenses,17309,W1,2006
+US,fbi_murder_count,Confirmed by CIUS 2010.,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,offenses,17128,W1,2007
+US,fbi_murder_count,Confirmed by CIUS 2010.,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,offenses,16465,W1,2008
+US,fbi_murder_count,Confirmed by CIUS 2010.,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,offenses,15399,W1,2009
+US,fbi_murder_count,"CIUS 2010 as first published gave 14,748. VINTAGE CONFLICT - a clean example for the documentary.","FBI (UCR, CIUS 2019, Table 1)",cs017,A,offenses,14722,W1,2010
+US,fbi_murder_count,,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,offenses,14661,W1,2011
+US,fbi_murder_count,,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,offenses,14856,W1,2012
+US,fbi_murder_count,,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,offenses,14319,W1,2013
+US,fbi_murder_count,Lowest count in the modern series.,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,offenses,14164,W1,2014
+US,fbi_murder_count,,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,offenses,15883,W1,2015
+US,fbi_murder_count,,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,offenses,17413,W1,2016
+US,fbi_murder_count,,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,offenses,17294,W1,2017
+US,fbi_murder_count,,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,offenses,16374,W1,2018
+US,fbi_murder_count,"AS FIRST PUBLISHED. Revised to 16,669 in CIUS 2020 - which is the base the FBI's 29.4% figure uses. Do not use 16,425 with the 29.4%.","FBI (UCR, CIUS 2019, Table 1)",cs017,A,offenses,16425,W1,2019
+US,fbi_murder_count,"SRS/traditional-estimation vintage. Tier B: could not fetch the FBI table directly. Note the FBI's own NIBRS-based estimate for the same year is 22,000 - see fbi_murder_count_nibrs.","Pew Research Center, citing FBI CIUS 2020",cs037,B,offenses,21570,W1,2020
+US,fbi_murder_count,"FBI: 'In 2024, the estimated number of murders in the nation was 16,935.' Down 14.9% vs 2023, down 23.0% vs 2020, up 6.8% vs 2015.","FBI (Crime Data Explorer, Reported Crimes in the Nation Quick Stats)",cs004,A,offenses,16935,W1,2024
+US,fbi_murder_count,"FLAGGED. The FBI's own 2025 press release and CDE 2025 summary PDF give the RATE (4.1) but NOT the count. 14,085 is a secondary citation of FBI data. Tier B until confirmed against an FBI table. Expect upward revision - Asher notes 2023 was revised up 655 and 2022 up 620.","Jeff Asher (Jeff-alytics), citing FBI 2025 Crime in the United States",cs008,B,offenses,14085,W1,2025
+US,fbi_murder_count_nibrs,"FBI's NIBRS-based estimate for 2020, published Oct 2022. Differs from the 21,570 SRS estimate for the SAME YEAR by ~430. Two official FBI numbers for one year.",FBI,cs030,A,offenses,22000,W1,2020
+US,fbi_murder_count_nibrs,"FBI: 'the estimated number of murders increased 4.3% (from 22,000 in 2020 to 22,900 in 2021).' FBI adds this trend is 'not considered statistically significant by NIBRS estimation methods.'",FBI,cs030,A,offenses,22900,W1,2021
+US,fbi_murder_count_revised,"REVISED 2019 figure. Could not fetch FBI CIUS 2020 Table 1 directly (CDE is a JS app; FBI API rate-limited). Tier B pending direct FBI confirmation. 21570/16669 = 1.294, consistent with the FBI's stated 29.4%.","Pew Research Center, citing FBI CIUS 2020",cs037,B,offenses,16669,W1,2019
+US,fbi_murder_pct_change,'Murder and nonnegligent manslaughter offenses decreased an estimated 18.1%.' The RATE fell 18.5% (CDE 2025 summary). Both figures verified - use the right one.,FBI,cs033,A,percent change vs prior year (volume),-18.1,W1,2025
+US,fbi_murder_rate,Same source as count.,Bureau of Justice Statistics,cs001,A,"per 100,000",5.1,W1,1960
+US,fbi_murder_rate,,Bureau of Justice Statistics,cs001,A,"per 100,000",4.8,W1,1961
+US,fbi_murder_rate,,Bureau of Justice Statistics,cs001,A,"per 100,000",4.6,W1,1962
+US,fbi_murder_rate,,Bureau of Justice Statistics,cs001,A,"per 100,000",4.6,W1,1963
+US,fbi_murder_rate,,Bureau of Justice Statistics,cs001,A,"per 100,000",4.9,W1,1964
+US,fbi_murder_rate,,Bureau of Justice Statistics,cs001,A,"per 100,000",5.1,W1,1965
+US,fbi_murder_rate,,Bureau of Justice Statistics,cs001,A,"per 100,000",5.6,W1,1966
+US,fbi_murder_rate,,Bureau of Justice Statistics,cs001,A,"per 100,000",6.2,W1,1967
+US,fbi_murder_rate,,Bureau of Justice Statistics,cs001,A,"per 100,000",6.9,W1,1968
+US,fbi_murder_rate,,Bureau of Justice Statistics,cs001,A,"per 100,000",7.3,W1,1969
+US,fbi_murder_rate,,Bureau of Justice Statistics,cs001,A,"per 100,000",7.9,W1,1970
+US,fbi_murder_rate,,Bureau of Justice Statistics,cs001,A,"per 100,000",8.6,W1,1971
+US,fbi_murder_rate,,Bureau of Justice Statistics,cs001,A,"per 100,000",9.0,W1,1972
+US,fbi_murder_rate,,Bureau of Justice Statistics,cs001,A,"per 100,000",9.4,W1,1973
+US,fbi_murder_rate,,Bureau of Justice Statistics,cs001,A,"per 100,000",9.8,W1,1974
+US,fbi_murder_rate,,Bureau of Justice Statistics,cs001,A,"per 100,000",9.6,W1,1975
+US,fbi_murder_rate,,Bureau of Justice Statistics,cs001,A,"per 100,000",8.8,W1,1976
+US,fbi_murder_rate,,Bureau of Justice Statistics,cs001,A,"per 100,000",8.8,W1,1977
+US,fbi_murder_rate,,Bureau of Justice Statistics,cs001,A,"per 100,000",9.0,W1,1978
+US,fbi_murder_rate,,Bureau of Justice Statistics,cs001,A,"per 100,000",9.7,W1,1979
+US,fbi_murder_rate,Highest rate in the entire fetched UCR series.,Bureau of Justice Statistics,cs001,A,"per 100,000",10.2,W1,1980
+US,fbi_murder_rate,,Bureau of Justice Statistics,cs001,A,"per 100,000",9.8,W1,1981
+US,fbi_murder_rate,,Bureau of Justice Statistics,cs001,A,"per 100,000",9.1,W1,1982
+US,fbi_murder_rate,,Bureau of Justice Statistics,cs001,A,"per 100,000",8.3,W1,1983
+US,fbi_murder_rate,,Bureau of Justice Statistics,cs001,A,"per 100,000",7.9,W1,1984
+US,fbi_murder_rate,,Bureau of Justice Statistics,cs001,A,"per 100,000",7.9,W1,1985
+US,fbi_murder_rate,,Bureau of Justice Statistics,cs001,A,"per 100,000",8.6,W1,1986
+US,fbi_murder_rate,,Bureau of Justice Statistics,cs001,A,"per 100,000",8.3,W1,1987
+US,fbi_murder_rate,,Bureau of Justice Statistics,cs001,A,"per 100,000",8.4,W1,1988
+US,fbi_murder_rate,,Bureau of Justice Statistics,cs001,A,"per 100,000",8.7,W1,1989
+US,fbi_murder_rate,,Bureau of Justice Statistics,cs001,A,"per 100,000",9.4,W1,1990
+US,fbi_murder_rate,Confirmed by BJS htius.pdf.,"FBI (UCR, Crime in the United States 2010, Table 1)",cs015,A,"per 100,000",9.8,W1,1991
+US,fbi_murder_rate,Confirmed by BJS.,"FBI (UCR, CIUS 2010, Table 1)",cs015,A,"per 100,000",9.3,W1,1992
+US,fbi_murder_rate,Confirmed by BJS.,"FBI (UCR, CIUS 2010, Table 1)",cs015,A,"per 100,000",9.5,W1,1993
+US,fbi_murder_rate,Confirmed by BJS.,"FBI (UCR, CIUS 2010, Table 1)",cs015,A,"per 100,000",9.0,W1,1994
+US,fbi_murder_rate,Confirmed by BJS.,"FBI (UCR, CIUS 2010, Table 1)",cs015,A,"per 100,000",8.2,W1,1995
+US,fbi_murder_rate,Confirmed by BJS.,"FBI (UCR, CIUS 2010, Table 1)",cs015,A,"per 100,000",7.4,W1,1996
+US,fbi_murder_rate,Confirmed by BJS.,"FBI (UCR, CIUS 2010, Table 1)",cs015,A,"per 100,000",6.8,W1,1997
+US,fbi_murder_rate,Confirmed by CIUS 1999.,"FBI (UCR, CIUS 2010, Table 1)",cs015,A,"per 100,000",6.3,W1,1998
+US,fbi_murder_rate,Confirmed by CIUS 1999.,"FBI (UCR, CIUS 2010, Table 1)",cs015,A,"per 100,000",5.7,W1,1999
+US,fbi_murder_rate,Confirmed by CIUS 2010 and BJS.,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,"per 100,000",5.5,W1,2000
+US,fbi_murder_rate,See 9/11 footnote caveat above.,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,"per 100,000",5.6,W1,2001
+US,fbi_murder_rate,,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,"per 100,000",5.6,W1,2002
+US,fbi_murder_rate,,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,"per 100,000",5.7,W1,2003
+US,fbi_murder_rate,,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,"per 100,000",5.5,W1,2004
+US,fbi_murder_rate,FBI CDE 2024 summary shows 5.9 for 2005 in its 20-year trend chart. VINTAGE CONFLICT.,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,"per 100,000",5.6,W1,2005
+US,fbi_murder_rate,FBI CDE 2025 summary Figure 1 shows 5.7 for 2006. VINTAGE CONFLICT.,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,"per 100,000",5.8,W1,2006
+US,fbi_murder_rate,Confirmed by CIUS 2010 and CDE 2025 Figure 1.,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,"per 100,000",5.7,W1,2007
+US,fbi_murder_rate,Confirmed by CIUS 2010 and CDE 2025 Figure 1.,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,"per 100,000",5.4,W1,2008
+US,fbi_murder_rate,Confirmed by CIUS 2010 and CDE 2025 Figure 1.,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,"per 100,000",5.0,W1,2009
+US,fbi_murder_rate,Confirmed by CIUS 2010 and CDE 2025 Figure 1.,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,"per 100,000",4.8,W1,2010
+US,fbi_murder_rate,Confirmed by CDE 2025 Figure 1.,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,"per 100,000",4.7,W1,2011
+US,fbi_murder_rate,CDE 2025 Figure 1 shows 4.8. VINTAGE CONFLICT.,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,"per 100,000",4.7,W1,2012
+US,fbi_murder_rate,Confirmed by CDE 2025 Figure 1.,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,"per 100,000",4.5,W1,2013
+US,fbi_murder_rate,Confirmed by CDE 2024 summary (20-year low) and CDE 2025 Figure 1.,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,"per 100,000",4.4,W1,2014
+US,fbi_murder_rate,Confirmed by CDE 2025 Figure 1.,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,"per 100,000",4.9,W1,2015
+US,fbi_murder_rate,Confirmed by CDE 2025 Figure 1.,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,"per 100,000",5.4,W1,2016
+US,fbi_murder_rate,Confirmed by CDE 2025 Figure 1.,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,"per 100,000",5.3,W1,2017
+US,fbi_murder_rate,Confirmed by CDE 2025 Figure 1.,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,"per 100,000",5.0,W1,2018
+US,fbi_murder_rate,Confirmed by CDE 2025 Figure 1 (also 5.0).,"FBI (UCR, CIUS 2019, Table 1)",cs017,A,"per 100,000",5.0,W1,2019
+US,fbi_murder_rate,"CURRENT vintage; stated in report text ('2020 and 2022 peaked at 6.6'). The FBI's 2024 summary gave 6.7 for 2020, and CIUS 2020 as first published gave 6.5. THREE OFFICIAL VALUES FOR ONE YEAR.","FBI (Crime Data Explorer, UCR Summary of Reported Crimes in the Nation, 2025)",cs006,A,"per 100,000",6.6,W1,2020
+US,fbi_murder_rate,"Tier B: read off Figure 1 chart, not confirmed in report text or a second source. Also the weakest data year - see nibrs_* rows.","FBI (Crime Data Explorer, UCR Summary 2025, Figure 1)",cs006,B,"per 100,000",6.5,W1,2021
+US,fbi_murder_rate,"Stated in report text: '2020 and 2022 peaked at 6.6 offenses per 100,000 inhabitants.'","FBI (Crime Data Explorer, UCR Summary 2025)",cs006,A,"per 100,000",6.6,W1,2022
+US,fbi_murder_rate,"Tier B: chart read. Corroborated indirectly - CDE Quick Stats says the 2024 rate of 5.0 was 'down 15.8%' from 2023, implying ~5.94. Note Jeff Asher reported 5.7 for 2023 as first published. VINTAGE CONFLICT.","FBI (Crime Data Explorer, UCR Summary 2025, Figure 1)",cs006,B,"per 100,000",6.0,W1,2023
+US,fbi_murder_rate,AS FIRST PUBLISHED (Aug 2025). Revised to 5.1 in the 2025 report cycle - see fbi_murder_rate_revised 2024.,"FBI (Crime Data Explorer, Quick Stats + UCR Summary 2024)",cs004,A,"per 100,000",5.0,W1,2024
+US,fbi_murder_rate,"FBI, released 2026-08-14: 'The 2025 murder rate of 4.1 per 100,000 inhabitants is tied with 1955 and 1956 for the lowest murder rate.' Confirmed in the CDE 2025 summary PDF.",FBI,cs033,A,"per 100,000",4.1,W1,2025
+US,fbi_murder_rate_revised,"REVISED. Independently corroborated by FactCheck.org ('dropped from 5.1 per 100,000 to 4.1'). The FBI's headline '-18.5% rate' uses 5.1 as the base, not 5.0.","FBI (Crime Data Explorer, UCR Summary 2025, Figure 1)",cs006,A,"per 100,000",5.1,W1,2024
+US,homicide_clearance_rate,"SERIES PEAK. 'In 1962, the FBI reported a national homicide clearance rate of 93%.' Confirmed from the Annual Reviews abstract page as well.","Cook & Mancik, Annual Review of Criminology (peer-reviewed), citing FBI UCR",cs012,A,percent cleared,93,W1,1962
+US,homicide_clearance_rate,"'About 90 percent' - approximate, secondary. Prefer the 1962 = 93% tier A figure for the documentary's opening anchor.","Murder Accountability Project, citing FBI UCR",cs035,B,percent cleared,90,W1,1965
+US,homicide_clearance_rate,'A near-linear decline through 1994 took the rate down to 64%.' The authors call 1962-1994 the 'Great Decline' - 29 points.,"Cook & Mancik, Annual Review of Criminology",cs012,A,percent cleared,64,W1,1994
+US,homicide_clearance_rate,'64.8 percent of murder offenses were cleared.' Cleared by arrest OR exceptional means.,"FBI (UCR, Crime in the United States 2010)",cs014,A,percent cleared,64.8,W1,2010
+US,homicide_clearance_rate,Secondary. Could be upgraded to A via FBI CIUS 2018 clearances page.,"Murder Accountability Project, citing FBI CJIS",cs035,B,percent cleared,62,W1,2018
+US,homicide_clearance_rate,'61.4 percent of murder offenses ... were cleared.' Cook & Mancik round this to 61%. Context: 45.5% of all violent crime and 17.2% of property crime cleared that year.,"FBI (UCR, Crime in the United States 2019)",cs016,A,percent cleared,61.4,W1,2019
+US,homicide_clearance_rate,'A sharp drop to 54% occurred in 2020.' Independently corroborated by the Murder Accountability Project citing the FBI. The clearance rate fell in the same year murders rose 29.4% - both numerator and denominator moved.,"Cook & Mancik, Annual Review of Criminology",cs012,A,percent cleared,54,W1,2020
+US,homicide_clearance_rate,"MAP: 'the lowest national clearance rate ever reported by the FBI.' Tier B - single secondary source, though MAP is the specialist body on this measure. Note 2022 is a NIBRS-transition-affected year.","Murder Accountability Project, citing FBI CJIS",cs035,B,percent cleared,52.3,W1,2022
+US,homicide_clearance_rate,Tier B. Published 2025-10-09.,"Murder Accountability Project, citing FBI CJIS",cs036,B,percent cleared,57.8,W1,2023
+US,homicide_clearance_rate,Tier B. Coincidentally identical to the 2019 figure. MAP: '61.4 percent of homicides in 2024 were either cleared through the arrest of offenders or through special circumstances.',"Murder Accountability Project, citing FBI CJIS",cs036,B,percent cleared,61.4,W1,2024
+US,murder_pct_increase_2019_2020,"THE headline 2020 figure. FBI, released 2021-09-27: 'the volume of murder and nonnegligent manslaughter offenses increased 29.4 percent.' Computed on the REVISED 2019 base of 16,669, not the 16,425 originally published.",FBI,cs029,A,percent increase in volume,29.4,W1,2020
+US,nibrs_agencies_not_reporting,"7,287 agencies did not report; 11,531 did. Roughly 40% of agencies nationwide missing. Published 2022-06-14. Tier B - the FBI does not publish a non-reporter count.",The Marshall Project,cs038,B,agencies,7287,W1,2021
+US,nibrs_agencies_reporting,"THE KEY FBI ADMISSION. Verbatim: 'Despite more than 11,500 law enforcement agencies submitting NIBRS data for 2021, participation remained below a statistically acceptable level to be nationally representative for trending analyses.'",FBI (Crime Data Explorer FAQ),cs003,A,agencies (more than),11500,W1,2021
+US,nibrs_agencies_reporting,"15,724 of 18,884 eligible agencies. Split: 13,293 via NIBRS (covering 256M+ inhabitants) and 2,431 non-transitioned agencies via SRS (covering 55,441,278). The FBI REOPENED SRS for 2022 after the 2021 collapse.",FBI,cs031,A,agencies,15724,W1,2022
+US,nibrs_agency_participation_pct,BJS: '67.9% of all crime-reporting law enforcement agencies were reporting to NIBRS.',Bureau of Justice Statistics,cs002,A,percent of crime-reporting agencies,67.9,W1,2021
+US,nibrs_population_coverage_pct,BJS: 'covering 65.7% of the U.S. population.' Compare to 96.2% for 2025.,Bureau of Justice Statistics,cs002,A,percent of US population,65.7,W1,2021
+US,nibrs_population_coverage_pct,Up from 65.7% in 2021 - the recovery was driven by readmitting SRS submissions.,FBI,cs031,A,percent of US population,93.5,W1,2022
+US,rtci_ytd_murder_pct_change,Independent of the CCJ sample and agreeing closely with it.,Real-Time Crime Index,cs_rtci_2026,B,"% change, Jan-Apr 2026 vs 2025, 566 agencies / ~119M people",-18.7,W1-YTD,2026
+US,ucr_agencies_reporting,"'16,675 law enforcement agencies ... represent 86.3% of agencies actively enrolled in the FBI's UCR Program and cover a combined population of 325,100,512 (95.6%).'",FBI (Crime Data Explorer),cs005,A,agencies,16675,W1,2024
+US,ucr_agencies_reporting,"Covering 328,918,006 inhabitants. FBI also notes 'every city agency covering a population of 1,000,000 or more inhabitants' provided complete annual data - a direct contrast with 2021.","FBI (Crime Data Explorer, UCR Summary 2025)",cs006,A,agencies,17075,W1,2025
+US,ucr_population_coverage_pct,Confirmed in the FBI 2024 press release.,FBI (Crime Data Explorer),cs005,A,percent of US population,95.6,W1,2024
+US,ucr_population_coverage_pct,"'More than 17,000 ... agencies, covering a combined population of 96.2% inhabitants.' Highest coverage in the fetched record; 2021 was 65.7%.",FBI,cs033,A,percent of US population,96.2,W1,2025
+US,nibrs_intimidation_estimated_offenses,"BJS NIBRS National Estimates, 'final' version. SE 15,799.81; 95% bounds 663,589–937,146. Weighted up from reported data covering 77.52% of US population.",Bureau of Justice Statistics,cs043,A,estimated offenses (national),800367.58,W2,2022
+US,nibrs_intimidation_estimated_offenses,"'final'. SE 26,869.05; bounds 800,212–930,205. pop_cov 84.09%.",Bureau of Justice Statistics,cs043,A,estimated offenses (national),865208.53,W2,2023
+US,nibrs_intimidation_estimated_offenses,"'initial' (provisional) version — will be revised. SE 24,202.17; bounds 805,963–903,711. pop_cov 86.64%.",Bureau of Justice Statistics,cs043,B,estimated offenses (national),854837.31,W2,2024
+US,nibrs_intimidation_reported_offenses_unweighted,"Raw NIBRS count underlying the estimate; 11,243 agencies contributed to this indicator. NOT comparable across years without the coverage figure.",Bureau of Justice Statistics,cs043,A,offenses actually reported by participating agencies,574287,W2,2022
+US,nibrs_intimidation_reported_offenses_unweighted,"11,716 agencies. The +26% jump vs 2022 is largely more agencies reporting, not more intimidation: the weighted estimate rose only 8%.",Bureau of Justice Statistics,cs043,A,offenses actually reported by participating agencies,725984,W2,2023
+US,nibrs_intimidation_reported_offenses_unweighted,"11,885 agencies. Initial/provisional.",Bureau of Justice Statistics,cs043,B,offenses actually reported by participating agencies,741547,W2,2024
+US,nibrs_intimidation_estimation_pop_coverage,pop_cov field in BJS estimation file.,Bureau of Justice Statistics,cs043,A,proportion of US population covered,0.775214601384366,W2,2022
+US,nibrs_intimidation_estimation_pop_coverage,pop_cov field.,Bureau of Justice Statistics,cs043,A,proportion of US population covered,0.8409,W2,2023
+US,nibrs_intimidation_estimation_pop_coverage,"pop_cov field, initial version.",Bureau of Justice Statistics,cs043,B,proportion of US population covered,0.8664,W2,2024
+US,nibrs_intimidation_estimated_offenses_original_vintage,"ARCHIVE (original 2022 estimate before revision). Unweighted 554,962; 10,673 agencies; pop_cov 77.75%. Shows the same year restated from 756k to 800k — cite the vintage.",Bureau of Justice Statistics,cs044,A,estimated offenses (national),756367.08,W2,2022
+US,nibrs_intimidation_estimated_offenses_original_vintage,"ARCHIVE original 2023 estimate. Unweighted 701,623; 11,489 agencies; pop_cov 82.63%.",Bureau of Justice Statistics,cs044,A,estimated offenses (national),851453.25,W2,2023
+US,nibrs_simple_assault_estimated_offenses,"Context for #4. Unweighted 2,108,628; 12,908 agencies.",Bureau of Justice Statistics,cs043,A,estimated offenses (national),2790883.26,W2,2022
+US,nibrs_simple_assault_estimated_offenses,"Unweighted 2,315,462; 13,349 agencies.",Bureau of Justice Statistics,cs043,A,estimated offenses (national),2748269.5,W2,2023
+US,nibrs_simple_assault_estimated_offenses,"Initial. Unweighted 2,341,508; 13,489 agencies.",Bureau of Justice Statistics,cs043,B,estimated offenses (national),2730898.46,W2,2024
+US,nibrs_agencies_submitting,'36.1 percent of all law enforcement agencies that participate in the UCR Program'; covered more than 96 million inhabitants.,FBI UCR Program,cs045,A,law enforcement agencies,6648,W2,2015
+US,nibrs_agencies_submitting,37.1% of UCR-participating agencies; coverage of more than 100 million inhabitants.,FBI UCR Program,cs046,A,law enforcement agencies,6849,W2,2016
+US,nibrs_agencies_submitting,'jurisdictions covered more than 105.6 million U.S. inhabitants'; 42.0% of UCR agencies.,FBI UCR Program,cs047,A,law enforcement agencies,6998,W2,2017
+US,nibrs_agencies_submitting,"'covered more than 117.1 million U.S. inhabitants'; 43.7% of the 16,659 agencies submitting to UCR.",FBI UCR Program,cs048,A,law enforcement agencies,7283,W2,2018
+US,nibrs_agencies_submitting,"'more than 146.5 million U.S. inhabitants'; 51.3 percent of the 16,551 UCR agencies. ~44% of US population.",FBI UCR Program,cs049,A,law enforcement agencies,8497,W2,2019
+US,nibrs_agencies_submitting,"'NIBRS data was submitted by 13,293 law enforcement agencies whose jurisdictions covered more than 256 million United States inhabitants.' Separately 15,724 agencies submitted NIBRS+SRS covering 93.5% of population.",FBI,cs031,A,law enforcement agencies,13293,W2,2022
+US,nibrs_agencies_submitting,"DERIVED, not printed: 2024 report states 14,601 agencies, 'an increase of 562 agencies compared to 2023'.",FBI UCR Program,cs005,B,law enforcement agencies,14039,W2,2023
+US,nibrs_agencies_submitting,"Population covered 296,527,998 = 87.2% of US population.",FBI UCR Program,cs005,A,law enforcement agencies,14601,W2,2024
+US,nibrs_agencies_submitting,"Population covered 305,977,619 = 89.5% of US population; 77.2% of enrolled agencies. +498 agencies vs 2024.",FBI UCR Program,cs006,A,law enforcement agencies,15099,W2,2025
+US,nibrs_population_covered,87.2% of US population.,FBI UCR Program,cs005,A,persons,296527998,W2,2024
+US,nibrs_population_covered,89.5% of US population.,FBI UCR Program,cs006,A,persons,305977619,W2,2025
+US,svs_stalking_victims_12mo,"Stalking Victimization in the United States, NCJ 224527, Jan 2009. ~14 per 1,000 persons 18+. NOT comparable to 2016/2019.",Bureau of Justice Statistics,cs050,A,persons age 18 or older,3424100,W2,2006
+US,svs_harassment_victims_12mo,"~10 per 1,000 persons 18+. Harassment = same course of conduct as stalking but victim did not report fear. This is the ONLY national harassment prevalence estimate BJS has ever published; the category was dropped in 2016.",Bureau of Justice Statistics,cs050,A,persons age 18 or older,2432930,W2,2006
+US,svs_stalking_prevalence_pct,"Stalking Victimization, 2016, NCJ 253526, April 2021. 3.8 million persons. 'Due to these changes, estimates from the 2016 SVS cannot be compared to estimates from the 2006 SVS.' Age floor lowered 18→16; instrument redesigned.",Bureau of Justice Statistics,cs051,A,percent of persons age 16 or older,1.5,W2,2016
+US,svs_stalking_victims_12mo,Rounded as published.,Bureau of Justice Statistics,cs051,A,persons age 16 or older,3800000,W2,2016
+US,svs_stalking_prevalence_pct,"Stalking Victimization, 2019. 'an estimated 1.3% (3.4 million) of all U.S. residents age 16 or older were victims of stalking'. 'Minor instrument revisions were made for the 2019 SVS, so estimates from the 2019 SVS can be compared to estimates from the 2016 SVS.'",Bureau of Justice Statistics,cs052,A,percent of persons age 16 or older,1.3,W2,2019
+US,svs_stalking_victims_12mo,"Coincidentally near-identical to the 2006 figure (3,424,100) but measuring a different population and definition — do NOT plot them on one line.",Bureau of Justice Statistics,cs052,A,persons age 16 or older,3400000,W2,2019
+US,pew_online_harassment_any_pct,"Fielded May 30 – June 30, 2014. Tier B: reputable non-governmental survey research, not an official statistical agency.",Pew Research Center,cs053,B,percent of US adults ever experiencing any online harassment,35,W2,2014
+US,pew_online_harassment_any_pct,"Fielded January 9–23, 2017.",Pew Research Center,cs053,B,percent of US adults,41,W2,2017
+US,pew_online_harassment_any_pct,"Fielded September 8–13, 2020, n=10,093, American Trends Panel. Published January 13, 2021. This is the most recent Pew wave — there is no 2024/2025 update.",Pew Research Center,cs053,B,percent of US adults,41,W2,2020
+US,pew_online_harassment_severe_pct,"'More severe' = physical threats, stalking, sexual harassment, or sustained harassment.",Pew Research Center,cs053,B,percent of US adults experiencing 'more severe' online harassment,15,W2,2014
+US,pew_online_harassment_severe_pct,,Pew Research Center,cs053,B,percent of US adults,18,W2,2017
+US,pew_online_harassment_severe_pct,Headline finding: overall prevalence flat 2017→2020 but severity rose 18%→25%.,Pew Research Center,cs053,B,percent of US adults,25,W2,2020
+US,pew_online_stalking_pct,"13% women, 9% men. Behaviour-level splits for 2014/2017 not published in comparable form.",Pew Research Center,cs054,B,percent of US adults reporting being stalked online,11,W2,2020
+US,pew_online_physical_threats_pct,"16% men, 11% women.",Pew Research Center,cs054,B,percent of US adults,14,W2,2020
+US,pew_online_name_calling_pct,"Offensive name-calling: 35% men, 26% women.",Pew Research Center,cs054,B,percent of US adults,31,W2,2020
+US,pew_online_sexual_harassment_pct,"16% women, 5% men.",Pew Research Center,cs054,B,percent of US adults,11,W2,2020
+US,ncic_missing_person_records_entered,"Reported as the prior-year comparison inside the 2015 report, not fetched from the 2014 report itself.",FBI CJIS,cs055,B,records entered,634155,W2,2014
+US,ncic_missing_person_records_entered,"'an increase of .1% from the 634,155 records entered in 2014'.",FBI CJIS,cs055,A,records entered,634908,W2,2015
+US,ncic_missing_person_records_entered,,FBI CJIS,cs056,A,records entered,647435,W2,2016
+US,ncic_missing_person_records_entered,Series peak in the 2015–2025 window.,FBI CJIS,cs057,A,records entered,651226,W2,2017
+US,ncic_missing_person_records_entered,,FBI CJIS,cs058,A,records entered,612846,W2,2018
+US,ncic_missing_person_records_entered,,FBI CJIS,cs059,A,records entered,609275,W2,2019
+US,ncic_missing_person_records_entered,Sharp COVID-year drop of ~11%.,FBI CJIS,cs060,A,records entered,543018,W2,2020
+US,ncic_missing_person_records_entered,,FBI CJIS,cs061,A,records entered,546568,W2,2022
+US,ncic_missing_person_records_entered,,FBI CJIS,cs062,A,records entered,563389,W2,2023
+US,ncic_missing_person_records_entered,Note the report title changes in 2024 to 'Missing and Unidentified Person Statistics'.,FBI CJIS,cs063,A,records entered,533936,W2,2024
+US,ncic_missing_person_records_entered,"Lowest in the fetched series; first time below 500,000.",FBI CJIS,cs064,A,records entered,498038,W2,2025
+US,ncic_missing_person_records_purged,,FBI CJIS,cs055,A,records purged (cancelled + cleared),634742,W2,2015
+US,ncic_missing_person_records_purged,,FBI CJIS,cs056,A,records purged,644294,W2,2016
+US,ncic_missing_person_records_purged,,FBI CJIS,cs057,A,records purged,651215,W2,2017
+US,ncic_missing_person_records_purged,,FBI CJIS,cs058,A,records purged,615629,W2,2018
+US,ncic_missing_person_records_purged,,FBI CJIS,cs059,A,records purged,607104,W2,2019
+US,ncic_missing_person_records_purged,Purges fell far below entries in 2020 — the backlog grew.,FBI CJIS,cs060,A,records purged,480832,W2,2020
+US,ncic_missing_person_records_purged,,FBI CJIS,cs061,A,records purged,543088,W2,2022
+US,ncic_missing_person_records_purged,,FBI CJIS,cs062,A,records purged,563644,W2,2023
+US,ncic_missing_person_records_purged,"Split: 474,366 canceled & cleared + 63,080 locates (found by an agency other than the entering agency).",FBI CJIS,cs063,A,records purged,537446,W2,2024
+US,ncic_missing_person_records_purged,,FBI CJIS,cs064,A,records purged,503409,W2,2025
+US,ncic_missing_person_active_year_end,,FBI CJIS,cs055,A,active records at 12/31,84961,W2,2015
+US,ncic_missing_person_active_year_end,,FBI CJIS,cs056,A,active records at 12/31,88040,W2,2016
+US,ncic_missing_person_active_year_end,,FBI CJIS,cs057,A,active records at 12/31,88089,W2,2017
+US,ncic_missing_person_active_year_end,,FBI CJIS,cs058,A,active records at 12/31,85459,W2,2018
+US,ncic_missing_person_active_year_end,,FBI CJIS,cs059,A,active records at 12/31,87438,W2,2019
+US,ncic_missing_person_active_year_end,,FBI CJIS,cs060,A,active records at 12/31,89637,W2,2020
+US,ncic_missing_person_active_year_end,Highest year-end backlog in the fetched series.,FBI CJIS,cs061,A,active records at 12/31,97127,W2,2022
+US,ncic_missing_person_active_year_end,,FBI CJIS,cs062,A,active records at 12/31,96955,W2,2023
+US,ncic_missing_person_active_year_end,"Of these, 25,493 (27%) were juveniles under 18 and 34,256 (37%) under 21.",FBI CJIS,cs063,A,active records at 12/31,93447,W2,2024
+US,ncic_missing_person_active_year_end,,FBI CJIS,cs064,A,active records at 12/31,88093,W2,2025
+US,ncic_unidentified_person_records_entered,Use of the Unidentified Person File is VOLUNTARY — this is an undercount by design.,FBI CJIS,cs055,A,records entered,850,W2,2015
+US,ncic_unidentified_person_records_entered,,FBI CJIS,cs056,A,records entered,894,W2,2016
+US,ncic_unidentified_person_records_entered,,FBI CJIS,cs057,A,records entered,886,W2,2017
+US,ncic_unidentified_person_records_entered,,FBI CJIS,cs058,A,records entered,801,W2,2018
+US,ncic_unidentified_person_records_entered,,FBI CJIS,cs059,A,records entered,683,W2,2019
+US,ncic_unidentified_person_records_entered,,FBI CJIS,cs060,A,records entered,800,W2,2020
+US,ncic_unidentified_person_records_entered,,FBI CJIS,cs061,A,records entered,902,W2,2022
+US,ncic_unidentified_person_records_entered,,FBI CJIS,cs062,A,records entered,882,W2,2023
+US,ncic_unidentified_person_records_entered,"647 deceased (75%), 198 living (23%), 16 catastrophe victims (2%).",FBI CJIS,cs063,A,records entered,861,W2,2024
+US,ncic_unidentified_person_records_entered,,FBI CJIS,cs064,A,records entered,777,W2,2025
+US,ncic_unidentified_person_active_year_end,"Remarkably flat across 11 years (8,135–8,634) — the unidentified-dead backlog is essentially static.",FBI CJIS,cs055,A,active records at 12/31,8407,W2,2015
+US,ncic_unidentified_person_active_year_end,,FBI CJIS,cs056,A,active records at 12/31,8431,W2,2016
+US,ncic_unidentified_person_active_year_end,,FBI CJIS,cs057,A,active records at 12/31,8634,W2,2017
+US,ncic_unidentified_person_active_year_end,,FBI CJIS,cs058,A,active records at 12/31,8135,W2,2018
+US,ncic_unidentified_person_active_year_end,,FBI CJIS,cs059,A,active records at 12/31,8188,W2,2019
+US,ncic_unidentified_person_active_year_end,,FBI CJIS,cs060,A,active records at 12/31,8284,W2,2020
+US,ncic_unidentified_person_active_year_end,,FBI CJIS,cs061,A,active records at 12/31,8450,W2,2022
+US,ncic_unidentified_person_active_year_end,,https://le.fbi.gov,cs062,A,active records at 12/31,8521,W2,2023
+US,ncic_unidentified_person_active_year_end,,FBI CJIS,cs063,A,active records at 12/31,8546,W2,2024
+US,ncic_unidentified_person_active_year_end,,FBI CJIS,cs064,A,active records at 12/31,8509,W2,2025
+US,namus_missing_cases_entered,"FY2024 = Oct 1 2023 – Sep 30 2024. NamUs entry is voluntary for the public and, in most states, for law enforcement — it is a subset of NCIC, not a superset.",National Institute of Justice / NamUs,cs065,A,cases entered in fiscal year,14720,W2,2024
+US,namus_missing_cases_resolved,"Cumulative resolved since inception: 48,475 missing person cases.",National Institute of Justice / NamUs,cs065,A,cases resolved in fiscal year,11661,W2,2024
+US,namus_missing_cases_active,"Compare with NCIC's 93,447 active records at 12/31/2024 — NamUs holds roughly a quarter as many.",National Institute of Justice / NamUs,cs065,A,active cases at 9/30,25123,W2,2024
+US,namus_unidentified_cases_entered,,National Institute of Justice / NamUs,cs065,A,cases entered in fiscal year,1584,W2,2024
+US,namus_unidentified_cases_resolved,"Cumulative resolved since inception: 7,404.",National Institute of Justice / NamUs,cs065,A,cases resolved in fiscal year,776,W2,2024
+US,namus_unidentified_cases_active,"NamUs holds ~15,031 unidentified cases vs NCIC's 8,546 — NamUs is the LARGER unidentified-decedent database, because medical examiners use it and NCIC entry is voluntary.",National Institute of Justice / NamUs,cs065,A,active cases at 9/30,15031,W2,2024
+US,namus_unclaimed_cases_active,"Entered FY24: 4,422; resolved FY24: 758; cumulative resolved 5,613. 'Unclaimed' = identified but no one claims the body.",National Institute of Justice / NamUs,cs065,A,active cases at 9/30,18098,W2,2024
+US,namus_missing_cases_unresolved,January 2025 bi-annual report; from 55 states and territories.,NamUs,cs066,A,unresolved cases,25478,W2,2025
+US,namus_unidentified_cases_unresolved,From 54 states and territories.,NamUs,cs066,A,unresolved cases,15139,W2,2025
+US,namus_unclaimed_cases_unresolved,From 43 states and territories only.,NamUs,cs066,A,unresolved cases,18757,W2,2025
+US,federal_nos320_assault_libel_slander_filings,"CRITICAL CAVEAT: NOS 320 is 'Assault, Libel, and Slander' — defamation is NOT separable from assault in this code. This is the closest thing to a national defamation filing series and it is not a defamation series.",Administrative Office of the U.S. Courts,cs067,A,"civil cases commenced, 12 months ending Sept 30",668,W2,2004
+US,federal_nos320_assault_libel_slander_filings,,Administrative Office of the U.S. Courts,cs067,A,civil cases commenced,647,W2,2005
+US,federal_nos320_assault_libel_slander_filings,,Administrative Office of the U.S. Courts,cs067,A,civil cases commenced,587,W2,2006
+US,federal_nos320_assault_libel_slander_filings,,Administrative Office of the U.S. Courts,cs067,A,civil cases commenced,533,W2,2007
+US,federal_nos320_assault_libel_slander_filings,,Administrative Office of the U.S. Courts,cs067,A,civil cases commenced,557,W2,2008
+US,federal_nos320_assault_libel_slander_filings,,Administrative Office of the U.S. Courts,cs068,A,civil cases commenced,590,W2,2011
+US,federal_nos320_assault_libel_slander_filings,,Administrative Office of the U.S. Courts,cs068,A,civil cases commenced,579,W2,2012
+US,federal_nos320_assault_libel_slander_filings,,Administrative Office of the U.S. Courts,cs068,A,civil cases commenced,636,W2,2013
+US,federal_nos320_assault_libel_slander_filings,Series low.,Administrative Office of the U.S. Courts,cs068,A,civil cases commenced,495,W2,2014
+US,federal_nos320_assault_libel_slander_filings,Cross-checked: identical value appears in both the FY2015 and FY2019 editions.,Administrative Office of the U.S. Courts,cs069,A,civil cases commenced,591,W2,2015
+US,federal_nos320_assault_libel_slander_filings,,Administrative Office of the U.S. Courts,cs069,A,civil cases commenced,559,W2,2016
+US,federal_nos320_assault_libel_slander_filings,,Administrative Office of the U.S. Courts,cs069,A,civil cases commenced,550,W2,2017
+US,federal_nos320_assault_libel_slander_filings,,Administrative Office of the U.S. Courts,cs069,A,civil cases commenced,612,W2,2018
+US,federal_nos320_assault_libel_slander_filings,,Administrative Office of the U.S. Courts,cs069,A,civil cases commenced,594,W2,2019
+US,federal_nos320_assault_libel_slander_filings,,Administrative Office of the U.S. Courts,cs070,A,civil cases commenced,598,W2,2020
+US,federal_nos320_assault_libel_slander_filings,Cross-checked against the FY2024 edition — identical.,Administrative Office of the U.S. Courts,cs071,A,civil cases commenced,577,W2,2021
+US,federal_nos320_assault_libel_slander_filings,Cross-checked against FY2024 edition.,Administrative Office of the U.S. Courts,cs071,A,civil cases commenced,569,W2,2022
+US,federal_nos320_assault_libel_slander_filings,Cross-checked against FY2024 edition.,Administrative Office of the U.S. Courts,cs071,A,civil cases commenced,650,W2,2023
+US,federal_nos320_assault_libel_slander_filings,Cross-checked against FY2024 edition.,Administrative Office of the U.S. Courts,cs071,A,civil cases commenced,718,W2,2024
+US,federal_nos320_assault_libel_slander_filings,Highest in the 21-year run fetched; +71% over the 2014 low. Still cannot be attributed to defamation alone.,Administrative Office of the U.S. Courts,cs071,A,civil cases commenced,848,W2,2025
+US,states_with_antislapp_statutes,"'As of April 2022, 32 states and the District of Columbia have anti-SLAPP laws.' Advocacy/legal-press source, not a statistical agency.",Reporters Committee for Freedom of the Press,cs072,B,states (plus DC),32,W2,2022
+US,states_with_antislapp_statutes,"'40 states and the District of Columbia have an anti-SLAPP law' as of the Sept 15, 2025 update; ~10 states have adopted UPEPA-modelled statutes. No official body maintains a year-by-year adoption series.",Institute for Free Speech,cs073,B,states (plus DC),40,W2,2025
+US,criminal_libel_prosecutions_wisconsin,Peer-reviewed. ~3.6/year in ONE state. Critically: a prior national study found only 5 Wisconsin cases for 1990-2001 when 44 occurred — a 89% undercount. This is the strongest available evidence that national criminal-libel counts do not exist and prior estimates were badly wrong.,"David Pritchard, Communication Law and Policy 14(3), 2009",cs074,A,"prosecutions, cumulative 1991-2007, Wisconsin only",61,W2,2007
+US,mlrc_libel_trials_media_defendants,"MLRC Trials Database, media defendants only. ~75% decline from 1980s average to 2010s average. Not a filing count and not comprehensive.",Media Law Resource Center,cs075,B,"trials, cumulative 1980s-2017",629,W2,2017
+US,federal_media_libel_cases_nos320,"Approximate; the subset of NOS 320 filings with identifiable media defendants, hand-coded.",Media Law Resource Center / Federal Judicial Center,cs075,B,"cases, cumulative 1970-2020",1871,W2,2020
+US,ncvs_household_burglary_rate,Post-2017 definition,BJS,cs106,A,"victimizations per 1,000 households",11.7,W3,2019
+US,ncvs_household_burglary_rate,,BJS,cs_ncvs_cv24,A,"victimizations per 1,000 households",9.5,W3,2020
+US,ncvs_household_burglary_rate,,BJS,cs_ncvs_cv24,A,"victimizations per 1,000 households",8.8,W3,2021
+US,ncvs_household_burglary_rate,,BJS,cs_ncvs_cv24,A,"victimizations per 1,000 households",10.1,W3,2022
+US,ncvs_household_burglary_rate,,BJS,cs_ncvs_cv24,A,"victimizations per 1,000 households",9.0,W3,2023
+US,ncvs_household_burglary_rate,Lowest of 2020-24; ~75% below 1999 (definition changed 2017),BJS,cs_ncvs_cv24,A,"victimizations per 1,000 households",8.2,W3,2024
+US,burglary_pct_reported_to_police,,BJS,cs105,A,% reported,58.8,W3,2010
+US,burglary_pct_reported_to_police,,BJS,cs_ncvs_cv24,A,% reported,40.7,W3,2024
+US,total_arrests_us,,FBI CIUS via DrugPolicyFacts,cs107,B,estimated arrests,10441000,W3,1980
+US,total_arrests_us,PEAK,FBI CIUS 1997 T29,cs108,A,estimated arrests,15284300,W3,1997
+US,total_arrests_us,,FBI,cs109,A,estimated arrests,14005615,W3,2008
+US,total_arrests_us,,FBI CIUS 2019,cs110,A,estimated arrests,10085207,W3,2019
+US,total_arrests_us,51% below 1997 peak,FBI CDE,cs004,A,estimated arrests,7522824,W3,2024
+US,drug_arrests_us,,DOJ archive/FBI UCR,cs111,A,drug arrests,580900,W3,1980
+US,drug_arrests_us,,FBI CIUS 1997,cs108,A,drug arrests,1583600,W3,1997
+US,drug_arrests_us,PEAK drug arrests,FBI CIUS via DrugPolicyFacts,cs107,B,drug arrests,1889810,W3,2006
+US,drug_arrests_us,Still the largest single category,FBI CDE,cs004,A,drug arrests,822488,W3,2024
+US,ice_admin_arrests,Civil immigration arrests; see arrests chart caveats.,DHS OHSS / ICE,ice_ohss_2013,A,ICE ERO administrative arrests (federal fiscal year),322093,W3,2011
+US,ice_admin_arrests,Civil immigration arrests; see arrests chart caveats.,DHS OHSS / ICE,ice_ohss_2013,A,ICE ERO administrative arrests (federal fiscal year),290622,W3,2012
+US,ice_admin_arrests,Civil immigration arrests; see arrests chart caveats.,DHS OHSS / ICE,ice_ohss_2013,A,ICE ERO administrative arrests (federal fiscal year),229698,W3,2013
+US,ice_admin_arrests,Civil immigration arrests; see arrests chart caveats.,DHS OHSS / ICE,ice_ohss_2016,A,ICE ERO administrative arrests (federal fiscal year),181719,W3,2014
+US,ice_admin_arrests,Civil immigration arrests; see arrests chart caveats.,DHS OHSS / ICE,ice_ohss_2016,A,ICE ERO administrative arrests (federal fiscal year),117983,W3,2015
+US,ice_admin_arrests,Civil immigration arrests; see arrests chart caveats.,DHS OHSS / ICE,ice_ohss_2017,A,ICE ERO administrative arrests (federal fiscal year),110104,W3,2016
+US,ice_admin_arrests,Civil immigration arrests; see arrests chart caveats.,DHS OHSS / ICE,ice_ohss_2017,A,ICE ERO administrative arrests (federal fiscal year),143470,W3,2017
+US,ice_admin_arrests,Civil immigration arrests; see arrests chart caveats.,DHS OHSS / ICE,ice_ohss_2020,A,ICE ERO administrative arrests (federal fiscal year),158581,W3,2018
+US,ice_admin_arrests,Civil immigration arrests; see arrests chart caveats.,DHS OHSS / ICE,ice_ohss_2020,A,ICE ERO administrative arrests (federal fiscal year),143099,W3,2019
+US,ice_admin_arrests,Civil immigration arrests; see arrests chart caveats.,DHS OHSS / ICE,ice_ohss_2020,A,ICE ERO administrative arrests (federal fiscal year),103603,W3,2020
+US,ice_admin_arrests,Civil immigration arrests; see arrests chart caveats.,DHS OHSS / ICE,ice_fy21,A,ICE ERO administrative arrests (federal fiscal year),74082,W3,2021
+US,ice_admin_arrests,Civil immigration arrests; see arrests chart caveats.,DHS OHSS / ICE,ice_fy22,A,ICE ERO administrative arrests (federal fiscal year),142750,W3,2022
+US,ice_admin_arrests,Civil immigration arrests; see arrests chart caveats.,DHS OHSS / ICE,ice_fy23,A,ICE ERO administrative arrests (federal fiscal year),170590,W3,2023
+US,ice_admin_arrests,Civil immigration arrests; see arrests chart caveats.,DHS OHSS / ICE,ice_fy24,A,ICE ERO administrative arrests (federal fiscal year),113431,W3,2024
+US,ice_detention_adp,Sum of ICE's two published components (CBP-arrested + ICE-arrested).,ICE,det_ice_fy24,A,average daily population in ICE detention (federal fiscal year),50165,W4,2019
+US,ice_detention_adp,Sum of ICE's two published components (CBP-arrested + ICE-arrested).,ICE,det_ice_fy24,A,average daily population in ICE detention (federal fiscal year),33724,W4,2020
+US,ice_detention_adp,Sum of ICE's two published components (CBP-arrested + ICE-arrested).,ICE,det_ice_fy24,A,average daily population in ICE detention (federal fiscal year),19461,W4,2021
+US,ice_detention_adp,Sum of ICE's two published components (CBP-arrested + ICE-arrested).,ICE,det_ice_fy24,A,average daily population in ICE detention (federal fiscal year),22630,W4,2022
+US,ice_detention_adp,Sum of ICE's two published components (CBP-arrested + ICE-arrested).,ICE,det_ice_fy24,A,average daily population in ICE detention (federal fiscal year),28289,W4,2023
+US,ice_detention_adp,Sum of ICE's two published components (CBP-arrested + ICE-arrested).,ICE,det_ice_fy24,A,average daily population in ICE detention (federal fiscal year),37721,W4,2024
+US,ice_funded_detention_beds,"Funded level, not usable capacity.",US Senate Appropriations / ICE,det_sen_fy20,A,detention beds funded in appropriations,45274,W4,2019
+US,ice_funded_detention_beds,"Funded level, not usable capacity.",US Senate Appropriations / ICE,det_sen_fy20,A,detention beds funded in appropriations,34000,W4,2021
+US,ice_funded_detention_beds,"Funded level, not usable capacity.",US Senate Appropriations / ICE,det_sen_fy20,A,detention beds funded in appropriations,34000,W4,2023
+US,ice_funded_detention_beds,"Funded level, not usable capacity.",US Senate Appropriations / ICE,det_sen_fy26,A,detention beds funded in appropriations,41500,W4,2024
+US,ice_funded_detention_beds,"Funded level, not usable capacity.",US Senate Appropriations / ICE,det_sen_fy26,A,detention beds funded in appropriations,41500,W4,2026
+US,fbi_ucr_srs_burglary_p100k,,FBI UCR (Summary Reporting System),bg_fbi_srs2019,A,"burglaries per 100,000 inhabitants",728.8,W2,2000
+US,fbi_ucr_srs_burglary_p100k,,FBI UCR (Summary Reporting System),bg_fbi_srs2019,A,"burglaries per 100,000 inhabitants",741.8,W2,2001
+US,fbi_ucr_srs_burglary_p100k,"Series peak in this run; 2,151,252 offences.",FBI UCR (Summary Reporting System),bg_fbi_srs2019,A,"burglaries per 100,000 inhabitants",747.0,W2,2002
+US,fbi_ucr_srs_burglary_p100k,,FBI UCR (Summary Reporting System),bg_fbi_srs2019,A,"burglaries per 100,000 inhabitants",741.0,W2,2003
+US,fbi_ucr_srs_burglary_p100k,,FBI UCR (Summary Reporting System),bg_fbi_srs2019,A,"burglaries per 100,000 inhabitants",730.3,W2,2004
+US,fbi_ucr_srs_burglary_p100k,,FBI UCR (Summary Reporting System),bg_fbi_srs2019,A,"burglaries per 100,000 inhabitants",726.9,W2,2005
+US,fbi_ucr_srs_burglary_p100k,,FBI UCR (Summary Reporting System),bg_fbi_srs2019,A,"burglaries per 100,000 inhabitants",733.1,W2,2006
+US,fbi_ucr_srs_burglary_p100k,,FBI UCR (Summary Reporting System),bg_fbi_srs2019,A,"burglaries per 100,000 inhabitants",726.1,W2,2007
+US,fbi_ucr_srs_burglary_p100k,,FBI UCR (Summary Reporting System),bg_fbi_srs2019,A,"burglaries per 100,000 inhabitants",733.0,W2,2008
+US,fbi_ucr_srs_burglary_p100k,,FBI UCR (Summary Reporting System),bg_fbi_srs2019,A,"burglaries per 100,000 inhabitants",717.7,W2,2009
+US,fbi_ucr_srs_burglary_p100k,,FBI UCR (Summary Reporting System),bg_fbi_srs2019,A,"burglaries per 100,000 inhabitants",701.0,W2,2010
+US,fbi_ucr_srs_burglary_p100k,,FBI UCR (Summary Reporting System),bg_fbi_srs2019,A,"burglaries per 100,000 inhabitants",701.3,W2,2011
+US,fbi_ucr_srs_burglary_p100k,,FBI UCR (Summary Reporting System),bg_fbi_srs2019,A,"burglaries per 100,000 inhabitants",672.2,W2,2012
+US,fbi_ucr_srs_burglary_p100k,,FBI UCR (Summary Reporting System),bg_fbi_srs2019,A,"burglaries per 100,000 inhabitants",610.5,W2,2013
+US,fbi_ucr_srs_burglary_p100k,,FBI UCR (Summary Reporting System),bg_fbi_srs2019,A,"burglaries per 100,000 inhabitants",537.2,W2,2014
+US,fbi_ucr_srs_burglary_p100k,,FBI UCR (Summary Reporting System),bg_fbi_srs2019,A,"burglaries per 100,000 inhabitants",494.7,W2,2015
+US,fbi_ucr_srs_burglary_p100k,,FBI UCR (Summary Reporting System),bg_fbi_srs2019,A,"burglaries per 100,000 inhabitants",468.9,W2,2016
+US,fbi_ucr_srs_burglary_p100k,,FBI UCR (Summary Reporting System),bg_fbi_srs2019,A,"burglaries per 100,000 inhabitants",429.7,W2,2017
+US,fbi_ucr_srs_burglary_p100k,,FBI UCR (Summary Reporting System),bg_fbi_srs2019,A,"burglaries per 100,000 inhabitants",378.0,W2,2018
+US,fbi_ucr_srs_burglary_p100k,Summary Reporting System basis. 2019 is the final year; the SRS was retired.,FBI UCR (Summary Reporting System),bg_fbi_srs2019,A,"burglaries per 100,000 inhabitants",340.5,W2,2019
+US,fbi_cde_burglary_p100k_est,NIBRS-based national estimate — a DIFFERENT basis from the pre-2020 SRS run. 2024 NIBRS covered 75.5% of agencies and 87.2% of the population.,FBI Crime Data Explorer,bg_fbi_cde24,A,"burglaries per 100,000 inhabitants (estimated)",309.2,W2,2020
+US,fbi_cde_burglary_p100k_est,,FBI Crime Data Explorer,bg_fbi_cde24,A,"burglaries per 100,000 inhabitants (estimated)",264.2,W2,2021
+US,fbi_cde_burglary_p100k_est,,FBI Crime Data Explorer,bg_fbi_cde24,A,"burglaries per 100,000 inhabitants (estimated)",273.1,W2,2022
+US,fbi_cde_burglary_p100k_est,,FBI Crime Data Explorer,bg_fbi_cde24,A,"burglaries per 100,000 inhabitants (estimated)",253.3,W2,2023
+US,fbi_cde_burglary_p100k_est,−8.6% against 2023.,FBI Crime Data Explorer,bg_fbi_cde24,A,"burglaries per 100,000 inhabitants (estimated)",229.2,W2,2024
+US,ncvs_household_burglary_rate,Pre-2017 'household burglary' definition — not comparable with the post-2017 category.,"BJS, National Crime Victimization Survey",bg_bjs_cv99,A,"victimizations per 1,000 households",34.1,W2,1999
+US,ncvs_household_burglary_rate,Pre-2017 'household burglary' definition — not comparable with the post-2017 category.,"BJS, National Crime Victimization Survey",bg_bjs_cv10,A,"victimizations per 1,000 households",23.8,W2,2010
+US,ncvs_burglary_trespass_p1000hh,Post-2017 'burglary/trespassing' category; BJS notes it was 'called household burglary in prior reports'.,"BJS, National Crime Victimization Survey",bg_bjs_cv24,A,"victimizations per 1,000 households",13.6,W2,2020
+US,ncvs_burglary_trespass_p1000hh,,"BJS, National Crime Victimization Survey",bg_bjs_cv24,A,"victimizations per 1,000 households",13.9,W2,2021
+US,ncvs_burglary_trespass_p1000hh,,"BJS, National Crime Victimization Survey",bg_bjs_cv24,A,"victimizations per 1,000 households",14.6,W2,2022
+US,ncvs_burglary_trespass_p1000hh,,"BJS, National Crime Victimization Survey",bg_bjs_cv24,A,"victimizations per 1,000 households",13.1,W2,2023
+US,ncvs_burglary_trespass_p1000hh,,"BJS, National Crime Victimization Survey",bg_bjs_cv24,A,"victimizations per 1,000 households",12.0,W2,2024
+US,ncvs_burglary_reported_to_police_pct,,"BJS, National Crime Victimization Survey",bg_bjs_cv10,A,percent of victimizations reported to police,58.8,W2,2010
+US,ncvs_burglary_reported_to_police_pct,,"BJS, National Crime Victimization Survey",bg_bjs_cv24,A,percent of victimizations reported to police,42.7,W2,2023
+US,ncvs_burglary_reported_to_police_pct,18.1 percentage points below 2010 — the single most important caveat on any police-recorded burglary trend.,"BJS, National Crime Victimization Survey",bg_bjs_cv24,A,percent of victimizations reported to police,40.7,W2,2024
+US,fbi_burglary_clearance_rate,Roughly one burglary in seven ends in an arrest or exceptional clearance.,FBI,bg_fbi_quick24,A,percent of burglaries cleared,15.2,W2,2024
+US,fbi_residential_burglary_count,Residential share of the national burglary estimate.,FBI,bg_fbi_cde24,A,estimated residential burglaries,405776,W2,2024
+England & Wales,csew_domestic_burglary_incidents,CSEW series peak.,Office for National Statistics,bg_ons_burglary,A,estimated incidents (Crime Survey for England and Wales),2445000,W2,1993
+England & Wales,csew_domestic_burglary_incidents,Record low at time of publication.,Office for National Statistics,bg_ons_burglary,A,estimated incidents (Crime Survey for England and Wales),650000,W2,2017
+England & Wales,csew_domestic_burglary_incidents,−22% against the year ending December 2024; 87% below the 1993 peak.,Office for National Statistics,bg_ons_cew25,A,estimated incidents (Crime Survey for England and Wales),327000,W2,2025
+Canada,statcan_breaking_entering_p100k,"109,753 incidents. Published as 41% below 2015 and 77% below 1998. All B&E — residential, business and other combined.",Statistics Canada,bg_statcan_2025,A,"breaking-and-entering incidents per 100,000 population",264,W2,2025
+Canada,statcan_residential_robbery_p100k,"865 offences. StatCan's own stated PROXY for 'home invasion', which it says cannot be measured directly.",Statistics Canada,bg_statcan_be02,A,"robberies in private residences per 100,000 population",5,W2,2002
+Australia,abs_cvs_breakin_pct_hh,"196,600 households; 76% of them experienced a single incident. Down from 2.7% in 2014-15.",Australian Bureau of Statistics,bg_abs_cvs,A,percent of households experiencing a break-in (financial year 2024-25),1.8,W2,2025
+Australia (Victoria),vic_home_invasion_offences,A further 87 home-invasion offences were coded to 'A21 Serious assault' and are excluded from burglary counts — so Victoria's own count is split across two offence families.,Crime Statistics Agency Victoria,bg_csa_vic,A,home-invasion offences coded to burglary,105,W2,2018
+Japan,npa_jp_intrusion_crime_count,"−3.1% year on year. The NPA's 'intrusion crime' is a COMPOSITE of intrusion robbery, intrusion theft and residential trespass — not equivalent to burglary.",National Police Agency (Japan),bg_npa_jp,A,recorded 侵入犯罪 (intrusion crime) cases,53568,W2,2024
+European Union,eurostat_eu_res_burglary_count,"60.3% of all EU burglaries were of private residential premises. 38.1% below 2014, but 12.4% above the 2021 low of 642,244.",Eurostat,bg_eurostat_news,A,police-recorded offences,721876,W2,2024
+US,bjs_prison_population,,Bureau of Justice Statistics,inc_bjs_p00,A,"persons under state or federal jurisdiction, 31 December",1363701,W2,1999
+US,bjs_prison_population,,Bureau of Justice Statistics,inc_bjs_p09,A,"persons under state or federal jurisdiction, 31 December",1391261,W2,2000
+US,bjs_prison_population,,Bureau of Justice Statistics,inc_bjs_p09,A,"persons under state or federal jurisdiction, 31 December",1404032,W2,2001
+US,bjs_prison_population,,Bureau of Justice Statistics,inc_bjs_p09,A,"persons under state or federal jurisdiction, 31 December",1440144,W2,2002
+US,bjs_prison_population,,Bureau of Justice Statistics,inc_bjs_p09,A,"persons under state or federal jurisdiction, 31 December",1468601,W2,2003
+US,bjs_prison_population,,Bureau of Justice Statistics,inc_bjs_p09,A,"persons under state or federal jurisdiction, 31 December",1497100,W2,2004
+US,bjs_prison_population,,Bureau of Justice Statistics,inc_bjs_p09,A,"persons under state or federal jurisdiction, 31 December",1527929,W2,2005
+US,bjs_prison_population,,Bureau of Justice Statistics,inc_bjs_p09,A,"persons under state or federal jurisdiction, 31 December",1569945,W2,2006
+US,bjs_prison_population,,Bureau of Justice Statistics,inc_bjs_p09,A,"persons under state or federal jurisdiction, 31 December",1598245,W2,2007
+US,bjs_prison_population,,Bureau of Justice Statistics,inc_bjs_p09,A,"persons under state or federal jurisdiction, 31 December",1609759,W2,2008
+US,bjs_prison_population,"SERIES PEAK. Revised upward from 1,613,740 in the original 2009 publication.",Bureau of Justice Statistics,inc_bjs_p19,A,"persons under state or federal jurisdiction, 31 December",1615487,W2,2009
+US,bjs_prison_population,,Bureau of Justice Statistics,inc_bjs_p19,A,"persons under state or federal jurisdiction, 31 December",1613803,W2,2010
+US,bjs_prison_population,,Bureau of Justice Statistics,inc_bjs_p19,A,"persons under state or federal jurisdiction, 31 December",1598968,W2,2011
+US,bjs_prison_population,,Bureau of Justice Statistics,inc_bjs_p19,A,"persons under state or federal jurisdiction, 31 December",1570397,W2,2012
+US,bjs_prison_population,,Bureau of Justice Statistics,inc_bjs_p23st,A,"persons under state or federal jurisdiction, 31 December",1576950,W2,2013
+US,bjs_prison_population,,Bureau of Justice Statistics,inc_bjs_p23st,A,"persons under state or federal jurisdiction, 31 December",1562319,W2,2014
+US,bjs_prison_population,,Bureau of Justice Statistics,inc_bjs_p23st,A,"persons under state or federal jurisdiction, 31 December",1526603,W2,2015
+US,bjs_prison_population,,Bureau of Justice Statistics,inc_bjs_p23st,A,"persons under state or federal jurisdiction, 31 December",1508129,W2,2016
+US,bjs_prison_population,,Bureau of Justice Statistics,inc_bjs_p23st,A,"persons under state or federal jurisdiction, 31 December",1489189,W2,2017
+US,bjs_prison_population,,Bureau of Justice Statistics,inc_bjs_p23st,A,"persons under state or federal jurisdiction, 31 December",1464385,W2,2018
+US,bjs_prison_population,,Bureau of Justice Statistics,inc_bjs_p23st,A,"persons under state or federal jurisdiction, 31 December",1430165,W2,2019
+US,bjs_prison_population,"BJS attributes the fall to COVID: admissions dropped 40%, from 576,956 to 346,461, as courts delayed trials and sentencing. BJS states 2019 and 2020 remain directly comparable — the change is in the world, not the method.",Bureau of Justice Statistics,inc_bjs_p23st,A,"persons under state or federal jurisdiction, 31 December",1221164,W2,2020
+US,bjs_prison_population,SERIES TROUGH — 25.4% below the 2009 peak.,Bureau of Justice Statistics,inc_bjs_p23st,A,"persons under state or federal jurisdiction, 31 December",1205087,W2,2021
+US,bjs_prison_population,,Bureau of Justice Statistics,inc_bjs_p23st,A,"persons under state or federal jurisdiction, 31 December",1230143,W2,2022
+US,bjs_prison_population,Most recent year published. 'Prisoners in 2024' is listed by BJS as forthcoming for Q3 2026 and does not exist as of 22 August 2026.,Bureau of Justice Statistics,inc_bjs_p23st,A,"persons under state or federal jurisdiction, 31 December",1254224,W2,2023
+US,bjs_imprisonment_rate_p100k,,Bureau of Justice Statistics,inc_bjs_p09,A,"sentenced prisoners per 100,000 US residents",478,W2,2000
+US,bjs_imprisonment_rate_p100k,,Bureau of Justice Statistics,inc_bjs_p09,A,"sentenced prisoners per 100,000 US residents",470,W2,2001
+US,bjs_imprisonment_rate_p100k,,Bureau of Justice Statistics,inc_bjs_p09,A,"sentenced prisoners per 100,000 US residents",476,W2,2002
+US,bjs_imprisonment_rate_p100k,,Bureau of Justice Statistics,inc_bjs_p09,A,"sentenced prisoners per 100,000 US residents",482,W2,2003
+US,bjs_imprisonment_rate_p100k,,Bureau of Justice Statistics,inc_bjs_p09,A,"sentenced prisoners per 100,000 US residents",486,W2,2004
+US,bjs_imprisonment_rate_p100k,,Bureau of Justice Statistics,inc_bjs_p09,A,"sentenced prisoners per 100,000 US residents",491,W2,2005
+US,bjs_imprisonment_rate_p100k,,Bureau of Justice Statistics,inc_bjs_p09,A,"sentenced prisoners per 100,000 US residents",501,W2,2006
+US,bjs_imprisonment_rate_p100k,RATE PEAK.,Bureau of Justice Statistics,inc_bjs_p09,A,"sentenced prisoners per 100,000 US residents",506,W2,2007
+US,bjs_imprisonment_rate_p100k,,Bureau of Justice Statistics,inc_bjs_p09,A,"sentenced prisoners per 100,000 US residents",504,W2,2008
+US,bjs_imprisonment_rate_p100k,,Bureau of Justice Statistics,inc_bjs_p09,A,"sentenced prisoners per 100,000 US residents",502,W2,2009
+US,bjs_imprisonment_rate_p100k,,Bureau of Justice Statistics,inc_bjs_p19,A,"sentenced prisoners per 100,000 US residents",500,W2,2010
+US,bjs_imprisonment_rate_p100k,,Bureau of Justice Statistics,inc_bjs_p19,A,"sentenced prisoners per 100,000 US residents",492,W2,2011
+US,bjs_imprisonment_rate_p100k,,Bureau of Justice Statistics,inc_bjs_p19,A,"sentenced prisoners per 100,000 US residents",480,W2,2012
+US,bjs_imprisonment_rate_p100k,,Bureau of Justice Statistics,inc_bjs_p23st,A,"sentenced prisoners per 100,000 US residents",479,W2,2013
+US,bjs_imprisonment_rate_p100k,,Bureau of Justice Statistics,inc_bjs_p23st,A,"sentenced prisoners per 100,000 US residents",472,W2,2014
+US,bjs_imprisonment_rate_p100k,,Bureau of Justice Statistics,inc_bjs_p23st,A,"sentenced prisoners per 100,000 US residents",459,W2,2015
+US,bjs_imprisonment_rate_p100k,,Bureau of Justice Statistics,inc_bjs_p23st,A,"sentenced prisoners per 100,000 US residents",450,W2,2016
+US,bjs_imprisonment_rate_p100k,,Bureau of Justice Statistics,inc_bjs_p23st,A,"sentenced prisoners per 100,000 US residents",442,W2,2017
+US,bjs_imprisonment_rate_p100k,,Bureau of Justice Statistics,inc_bjs_p23st,A,"sentenced prisoners per 100,000 US residents",431,W2,2018
+US,bjs_imprisonment_rate_p100k,,Bureau of Justice Statistics,inc_bjs_p23st,A,"sentenced prisoners per 100,000 US residents",419,W2,2019
+US,bjs_imprisonment_rate_p100k,,Bureau of Justice Statistics,inc_bjs_p23st,A,"sentenced prisoners per 100,000 US residents",357,W2,2020
+US,bjs_imprisonment_rate_p100k,RATE TROUGH.,Bureau of Justice Statistics,inc_bjs_p23st,A,"sentenced prisoners per 100,000 US residents",350,W2,2021
+US,bjs_imprisonment_rate_p100k,,Bureau of Justice Statistics,inc_bjs_p23st,A,"sentenced prisoners per 100,000 US residents",355,W2,2022
+US,bjs_imprisonment_rate_p100k,,Bureau of Justice Statistics,inc_bjs_p23st,A,"sentenced prisoners per 100,000 US residents",360,W2,2023
+US,bjs_jail_population,,Bureau of Justice Statistics,inc_bjs_pjim00,A,inmates confined at midyear (30 June),605943,W2,1999
+US,bjs_jail_population,,Bureau of Justice Statistics,inc_bjs_pjim00,A,inmates confined at midyear (30 June),621149,W2,2000
+US,bjs_jail_population,,Bureau of Justice Statistics,inc_bjs_jim09,A,inmates confined at midyear (30 June),631240,W2,2001
+US,bjs_jail_population,,Bureau of Justice Statistics,inc_bjs_jim09,A,inmates confined at midyear (30 June),665475,W2,2002
+US,bjs_jail_population,,Bureau of Justice Statistics,inc_bjs_jim09,A,inmates confined at midyear (30 June),691301,W2,2003
+US,bjs_jail_population,,Bureau of Justice Statistics,inc_bjs_jim09,A,inmates confined at midyear (30 June),713990,W2,2004
+US,bjs_jail_population,,Bureau of Justice Statistics,inc_bjs_jim09,A,inmates confined at midyear (30 June),747529,W2,2005
+US,bjs_jail_population,,Bureau of Justice Statistics,inc_bjs_jim09,A,inmates confined at midyear (30 June),765819,W2,2006
+US,bjs_jail_population,,Bureau of Justice Statistics,inc_bjs_jim09,A,inmates confined at midyear (30 June),780174,W2,2007
+US,bjs_jail_population,SERIES PEAK.,Bureau of Justice Statistics,inc_bjs_jim09,A,inmates confined at midyear (30 June),785556,W2,2008
+US,bjs_jail_population,,Bureau of Justice Statistics,inc_bjs_jim09,A,inmates confined at midyear (30 June),767620,W2,2009
+US,bjs_jail_population,,Bureau of Justice Statistics,inc_bjs_ji19,A,inmates confined at midyear (30 June),748700,W2,2010
+US,bjs_jail_population,,Bureau of Justice Statistics,inc_bjs_ji19,A,inmates confined at midyear (30 June),735600,W2,2011
+US,bjs_jail_population,,Bureau of Justice Statistics,inc_bjs_ji19,A,inmates confined at midyear (30 June),744500,W2,2012
+US,bjs_jail_population,,Bureau of Justice Statistics,inc_bjs_ji19,A,inmates confined at midyear (30 June),731200,W2,2013
+US,bjs_jail_population,,Bureau of Justice Statistics,inc_bjs_ji19,A,inmates confined at midyear (30 June),744600,W2,2014
+US,bjs_jail_population,,Bureau of Justice Statistics,inc_bjs_ji19,A,inmates confined at midyear (30 June),727400,W2,2015
+US,bjs_jail_population,,Bureau of Justice Statistics,inc_bjs_ji19,A,inmates confined at midyear (30 June),740700,W2,2016
+US,bjs_jail_population,,Bureau of Justice Statistics,inc_bjs_ji19,A,inmates confined at midyear (30 June),745200,W2,2017
+US,bjs_jail_population,,Bureau of Justice Statistics,inc_bjs_ji19,A,inmates confined at midyear (30 June),738400,W2,2018
+US,bjs_jail_population,"From the Census of Jails, a full enumeration — every other year in this series is a sample-based estimate from the Annual Survey of Jails.",Bureau of Justice Statistics,inc_bjs_ji19,A,inmates confined at midyear (30 June),734500,W2,2019
+US,bjs_jail_population,SERIES TROUGH — a 25% single-year fall BJS attributes mainly to the pandemic.,Bureau of Justice Statistics,inc_bjs_ji23st,A,inmates confined at midyear (30 June),549100,W2,2020
+US,bjs_jail_population,,Bureau of Justice Statistics,inc_bjs_ji23st,A,inmates confined at midyear (30 June),636300,W2,2021
+US,bjs_jail_population,,Bureau of Justice Statistics,inc_bjs_ji23st,A,inmates confined at midyear (30 June),663100,W2,2022
+US,bjs_jail_population,,Bureau of Justice Statistics,inc_bjs_ji23st,A,inmates confined at midyear (30 June),664200,W2,2023
+US,bjs_jail_population,PRELIMINARY. May be revised when the final statistical tables appear.,Bureau of Justice Statistics,inc_bjs_pdrj24,B,inmates confined at midyear (30 June),657500,W2,2024
+US,bjs_jail_unconvicted,,Bureau of Justice Statistics,inc_bjs_ji23st,A,jail inmates not convicted (held pretrial),453200,W2,2013
+US,bjs_jail_unconvicted,,Bureau of Justice Statistics,inc_bjs_ji23st,A,jail inmates not convicted (held pretrial),467500,W2,2014
+US,bjs_jail_unconvicted,,Bureau of Justice Statistics,inc_bjs_ji23st,A,jail inmates not convicted (held pretrial),454400,W2,2015
+US,bjs_jail_unconvicted,,Bureau of Justice Statistics,inc_bjs_ji23st,A,jail inmates not convicted (held pretrial),482100,W2,2016
+US,bjs_jail_unconvicted,,Bureau of Justice Statistics,inc_bjs_ji23st,A,jail inmates not convicted (held pretrial),482000,W2,2017
+US,bjs_jail_unconvicted,,Bureau of Justice Statistics,inc_bjs_ji23st,A,jail inmates not convicted (held pretrial),490000,W2,2018
+US,bjs_jail_unconvicted,,Bureau of Justice Statistics,inc_bjs_ji23st,A,jail inmates not convicted (held pretrial),480700,W2,2019
+US,bjs_jail_unconvicted,,Bureau of Justice Statistics,inc_bjs_ji23st,A,jail inmates not convicted (held pretrial),380700,W2,2020
+US,bjs_jail_unconvicted,,Bureau of Justice Statistics,inc_bjs_ji23st,A,jail inmates not convicted (held pretrial),451400,W2,2021
+US,bjs_jail_unconvicted,,Bureau of Justice Statistics,inc_bjs_ji23st,A,jail inmates not convicted (held pretrial),466100,W2,2022
+US,bjs_jail_unconvicted,"70% of the jail population — and 3% ABOVE 2013, while the convicted population fell 29% over the same years.",Bureau of Justice Statistics,inc_bjs_ji23st,A,jail inmates not convicted (held pretrial),467600,W2,2023
+US,bjs_jail_unconvicted,69% of the jail population.,Bureau of Justice Statistics,inc_bjs_pdrj24,B,jail inmates not convicted (held pretrial),450600,W2,2024
+US,bjs_jail_convicted,,Bureau of Justice Statistics,inc_bjs_ji23st,A,jail inmates convicted,278000,W2,2013
+US,bjs_jail_convicted,,Bureau of Justice Statistics,inc_bjs_ji23st,A,jail inmates convicted,277100,W2,2014
+US,bjs_jail_convicted,,Bureau of Justice Statistics,inc_bjs_ji23st,A,jail inmates convicted,273000,W2,2015
+US,bjs_jail_convicted,,Bureau of Justice Statistics,inc_bjs_ji23st,A,jail inmates convicted,258500,W2,2016
+US,bjs_jail_convicted,,Bureau of Justice Statistics,inc_bjs_ji23st,A,jail inmates convicted,263200,W2,2017
+US,bjs_jail_convicted,,Bureau of Justice Statistics,inc_bjs_ji23st,A,jail inmates convicted,248500,W2,2018
+US,bjs_jail_convicted,,Bureau of Justice Statistics,inc_bjs_ji23st,A,jail inmates convicted,253700,W2,2019
+US,bjs_jail_convicted,,Bureau of Justice Statistics,inc_bjs_ji23st,A,jail inmates convicted,168400,W2,2020
+US,bjs_jail_convicted,,Bureau of Justice Statistics,inc_bjs_ji23st,A,jail inmates convicted,185000,W2,2021
+US,bjs_jail_convicted,,Bureau of Justice Statistics,inc_bjs_ji23st,A,jail inmates convicted,197000,W2,2022
+US,bjs_jail_convicted,29% below 2013. Almost the entire decade-long jail decline is here.,Bureau of Justice Statistics,inc_bjs_ji23st,A,jail inmates convicted,196600,W2,2023
+US,bjs_jail_convicted,,Bureau of Justice Statistics,inc_bjs_pdrj24,B,jail inmates convicted,206900,W2,2024
+US,bjs_correctional_population,,Bureau of Justice Statistics,inc_bjs_cpus13,A,"persons under correctional supervision (prison, jail, probation, parole)",6467900,W2,2000
+US,bjs_correctional_population,,Bureau of Justice Statistics,inc_bjs_cpus13,A,"persons under correctional supervision (prison, jail, probation, parole)",6585000,W2,2001
+US,bjs_correctional_population,,Bureau of Justice Statistics,inc_bjs_cpus13,A,"persons under correctional supervision (prison, jail, probation, parole)",6731100,W2,2002
+US,bjs_correctional_population,,Bureau of Justice Statistics,inc_bjs_cpus13,A,"persons under correctional supervision (prison, jail, probation, parole)",6887000,W2,2003
+US,bjs_correctional_population,,Bureau of Justice Statistics,inc_bjs_cpus13,A,"persons under correctional supervision (prison, jail, probation, parole)",6997200,W2,2004
+US,bjs_correctional_population,,Bureau of Justice Statistics,inc_bjs_cpus13,A,"persons under correctional supervision (prison, jail, probation, parole)",7055800,W2,2005
+US,bjs_correctional_population,,Bureau of Justice Statistics,inc_bjs_cpus13,A,"persons under correctional supervision (prison, jail, probation, parole)",7199800,W2,2006
+US,bjs_correctional_population,SERIES PEAK — one adult in every 31 was under some form of correctional control.,Bureau of Justice Statistics,inc_bjs_cpus13,A,"persons under correctional supervision (prison, jail, probation, parole)",7339900,W2,2007
+US,bjs_correctional_population,,Bureau of Justice Statistics,inc_bjs_cpus13,A,"persons under correctional supervision (prison, jail, probation, parole)",7314400,W2,2008
+US,bjs_correctional_population,,Bureau of Justice Statistics,inc_bjs_cpus13,A,"persons under correctional supervision (prison, jail, probation, parole)",7237100,W2,2009
+US,bjs_correctional_population,,Bureau of Justice Statistics,inc_bjs_cpus13,A,"persons under correctional supervision (prison, jail, probation, parole)",7088500,W2,2010
+US,bjs_correctional_population,,Bureau of Justice Statistics,inc_bjs_cpus13,A,"persons under correctional supervision (prison, jail, probation, parole)",6990400,W2,2011
+US,bjs_correctional_population,,Bureau of Justice Statistics,inc_bjs_cpus13,A,"persons under correctional supervision (prison, jail, probation, parole)",6940500,W2,2012
+US,bjs_correctional_population,,Bureau of Justice Statistics,inc_bjs_cpus23,A,"persons under correctional supervision (prison, jail, probation, parole)",6899700,W2,2013
+US,bjs_correctional_population,,Bureau of Justice Statistics,inc_bjs_cpus23,A,"persons under correctional supervision (prison, jail, probation, parole)",6856900,W2,2014
+US,bjs_correctional_population,,Bureau of Justice Statistics,inc_bjs_cpus23,A,"persons under correctional supervision (prison, jail, probation, parole)",6740300,W2,2015
+US,bjs_correctional_population,,Bureau of Justice Statistics,inc_bjs_cpus23,A,"persons under correctional supervision (prison, jail, probation, parole)",6616200,W2,2016
+US,bjs_correctional_population,,Bureau of Justice Statistics,inc_bjs_cpus23,A,"persons under correctional supervision (prison, jail, probation, parole)",6549700,W2,2017
+US,bjs_correctional_population,,Bureau of Justice Statistics,inc_bjs_cpus23,A,"persons under correctional supervision (prison, jail, probation, parole)",6409200,W2,2018
+US,bjs_correctional_population,,Bureau of Justice Statistics,inc_bjs_cpus23,A,"persons under correctional supervision (prison, jail, probation, parole)",6343200,W2,2019
+US,bjs_correctional_population,,Bureau of Justice Statistics,inc_bjs_cpus23,A,"persons under correctional supervision (prison, jail, probation, parole)",5506400,W2,2020
+US,bjs_correctional_population,,Bureau of Justice Statistics,inc_bjs_cpus23,A,"persons under correctional supervision (prison, jail, probation, parole)",5442300,W2,2021
+US,bjs_correctional_population,"BJS states 2022 is NOT comparable to earlier years for the total, community supervision or probation.",Bureau of Justice Statistics,inc_bjs_cpus23,A,"persons under correctional supervision (prison, jail, probation, parole)",5480600,W2,2022
+US,bjs_correctional_population,"Also not comparable to pre-2022 years. The probation survey added 285 agencies supervising misdemeanour probation only, roughly 120,000 people — most of the apparent 2022→2023 rise is that universe expansion, not growth.",Bureau of Justice Statistics,inc_bjs_cpus23,A,"persons under correctional supervision (prison, jail, probation, parole)",5530300,W2,2023
+US,ice_detainees_in_local_jails,,Bureau of Justice Statistics,inc_bjs_ji23st,A,ICE detainees held in local jails at midyear,17200,W2,2013
+US,ice_detainees_in_local_jails,,Bureau of Justice Statistics,inc_bjs_ji23st,A,ICE detainees held in local jails at midyear,16400,W2,2014
+US,ice_detainees_in_local_jails,,Bureau of Justice Statistics,inc_bjs_ji23st,A,ICE detainees held in local jails at midyear,13700,W2,2015
+US,ice_detainees_in_local_jails,,Bureau of Justice Statistics,inc_bjs_ji23st,A,ICE detainees held in local jails at midyear,16500,W2,2016
+US,ice_detainees_in_local_jails,,Bureau of Justice Statistics,inc_bjs_ji23st,A,ICE detainees held in local jails at midyear,13300,W2,2017
+US,ice_detainees_in_local_jails,,Bureau of Justice Statistics,inc_bjs_ji23st,A,ICE detainees held in local jails at midyear,14900,W2,2018
+US,ice_detainees_in_local_jails,,Bureau of Justice Statistics,inc_bjs_ji23st,A,ICE detainees held in local jails at midyear,17300,W2,2019
+US,ice_detainees_in_local_jails,,Bureau of Justice Statistics,inc_bjs_ji23st,A,ICE detainees held in local jails at midyear,9300,W2,2020
+US,ice_detainees_in_local_jails,,Bureau of Justice Statistics,inc_bjs_ji23st,A,ICE detainees held in local jails at midyear,7400,W2,2021
+US,ice_detainees_in_local_jails,,Bureau of Justice Statistics,inc_bjs_ji23st,A,ICE detainees held in local jails at midyear,6900,W2,2022
+US,ice_detainees_in_local_jails,About 1% of the jail population — and falling while ICE's own detained population hit records. The two systems barely touch in this series.,Bureau of Justice Statistics,inc_bjs_ji23st,A,ICE detainees held in local jails at midyear,7000,W2,2023
+US,bjs_probation_population,56.1% of everyone under correctional control — the largest component by far.,Bureau of Justice Statistics,inc_bjs_cpus23,A,adults on probation,3103400,W2,2023
+US,bjs_parole_population,"Down from 878,700 in 2019, but that fall is substantially a California reporting failure: updated post-release community supervision counts have been unavailable since 2018.",Bureau of Justice Statistics,inc_bjs_cpus23,A,adults on parole,680400,W2,2023
+US,bjs_prison_capacity_pct,"THE LAST YEAR BJS PUBLISHED THIS. 26 states at or above 100% — Alabama 175.7%, Illinois 164.1%, Nebraska 157.8%. 'Prisoners in 2019' and every edition since contain no capacity table at all.",Bureau of Justice Statistics,inc_bjs_p16,A,percent of lowest reported capacity,114.0,W2,2016
+US,bjs_facilities_over_capacity,Holding 36.0% of all prisoners in confinement facilities. The most recent federal facility-capacity figure of any kind; the 2024 census is forthcoming.,Bureau of Justice Statistics,inc_bjs_facilities19,A,confinement facilities operating over capacity,292,W2,2019
+US,bjs_jail_occupancy_pct,"Jails are collectively well UNDER capacity and have been since 2010 — beds grew 5% over the decade while occupancy fell from 84% to 73%. 12% of individual jurisdictions were over capacity, so crowding is a distribution problem, not a system-wide one.",Bureau of Justice Statistics,inc_bjs_ji23st,A,percent of rated jail capacity occupied,73.0,W2,2023
+US,wpb_prison_rate_p100k,"Rank 4 in the world, behind El Salvador, Cuba and Turkmenistan. The US total on this basis includes local jails.",Bureau of Justice Statistics,inc_wpb_us,B,"prisoners per 100,000 population (World Prison Brief)",542,W2,2023
+England,apms_psychotic_symptoms_pct,,Adult Psychiatric Morbidity Survey,an_apms_trends,A,percent of adults screening positive for a psychotic symptom in the past year,5.6,W2,2000
+England,apms_psychotic_symptoms_pct,,Adult Psychiatric Morbidity Survey,an_apms_trends,A,percent of adults screening positive for a psychotic symptom in the past year,5.9,W2,2007
+England,apms_psychotic_symptoms_pct,"Adjusted odds ratio 2014 against 2000: 1.20 (95% CI 1.02–1.40, p=0.026). The same study found antipsychotic prescribing roughly doubled over the period and raises measurement and medicalisation as partial explanations.",Adult Psychiatric Morbidity Survey,an_apms_trends,A,percent of adults screening positive for a psychotic symptom in the past year,6.8,W2,2014
+US,chapman_places_haunted_pct,,Chapman University Survey of American Fears,an_chapman_2018,B,percent agreeing 'places can be haunted by spirits',46.6,W2,2016
+US,chapman_places_haunted_pct,,Chapman University Survey of American Fears,an_chapman_2018,B,percent agreeing 'places can be haunted by spirits',52.3,W2,2017
+US,chapman_places_haunted_pct,,Chapman University Survey of American Fears,an_chapman_2018,B,percent agreeing 'places can be haunted by spirits',57.7,W2,2018
+US,chapman_places_haunted_pct,Fielded 5–15 January 2021. No paranormal battery has been published since.,Chapman University Survey of American Fears,an_chapman_2021,B,percent agreeing 'places can be haunted by spirits',52.7,W2,2021
+US,aaro_uap_reports_received,,AARO / ODNI,an_odni_2022,A,UAP reports received by AARO in the reporting period,247,W2,2022
+US,aaro_uap_reports_received,,AARO / ODNI,an_odni_2022,A,UAP reports received by AARO in the reporting period,291,W2,2023
+US,aaro_uap_reports_received,Includes 272 back-reports of events from 2021–2022; 485 were in-period.,AARO / ODNI,an_aaro_fy24,A,UAP reports received by AARO in the reporting period,757,W2,2024
+US,aaro_uap_reports_received,Includes 35 reports of events outside the period.,AARO / ODNI,an_aaro_fy25,A,UAP reports received by AARO in the reporting period,319,W2,2025
+US,gallup_believe_ghosts_pct,,Gallup,an_gallup_2005,B,percent who believe ghosts exist,38,W2,2001
+US,gallup_believe_ghosts_pct,,Gallup,an_gallup_2005,B,percent who believe ghosts exist,32,W2,2005
+US,gallup_believe_ghosts_pct,Gallup's own summary: beliefs are 'largely unchanged' against 2001. The haunted-houses and ESP items were dropped from the 2025 battery.,Gallup,an_gallup_2025,B,percent who believe ghosts exist,39,W2,2025
