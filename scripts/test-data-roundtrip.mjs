@@ -493,7 +493,7 @@ const crime = await page.evaluate(() => {
     .find((f) => /two official measures/i.test(f.querySelector("figcaption")?.textContent || ""));
   const svg = fig?.querySelector("svg[viewBox]");
   const drawn = svg ? [...svg.querySelectorAll("path")].filter((p) => p.getAttribute("stroke") !== "transparent") : [];
-  const heads = [...main.querySelectorAll("h2")].map((h) => h.textContent.trim());
+  const heads = [...main.querySelectorAll("h2, h3")].map((h) => h.textContent.trim());
   const txt = main.innerText;
   return {
     chart: !!svg,
@@ -585,7 +585,7 @@ const r2 = await page.evaluate(() => {
   // below the plot also contains buttons and must not be counted here
   const laneLegend = laneFig ? [...(laneFig.querySelector("ul")?.querySelectorAll("button") || [])] : [];
   const arrestsFig = [...main.querySelectorAll("figure")].find((f) => /machine peaked in 1997/i.test(f.querySelector("figcaption")?.textContent || ""));
-  const heads = [...main.querySelectorAll("h2")].map((h) => h.textContent.trim());
+  const heads = [...main.querySelectorAll("h2, h3")].map((h) => h.textContent.trim());
   return {
     laneLegendEntries: laneLegend.length,
     laneLegendPressable: laneLegend.length > 0 && laneLegend.every((b) => b.hasAttribute("aria-pressed")),
@@ -700,7 +700,7 @@ if (!burg.reporting) fail("the burglary reporting-rate collapse (58.8% -> 40.7%)
 const inc = await page.evaluate(() => {
   const main = document.querySelector("main");
   const t = main.innerText.replace(/\n/g, " ");
-  const heads = [...main.querySelectorAll("h2")].map((h) => h.textContent.trim());
+  const heads = [...main.querySelectorAll("h2, h3")].map((h) => h.textContent.trim());
   const fig = [...main.querySelectorAll("figure")]
     .find((f) => /the US penal system/i.test(f.querySelector("figcaption")?.textContent || ""));
   const svg = fig?.querySelector("svg[viewBox]");
@@ -749,8 +749,14 @@ const inc = await page.evaluate(() => {
     // international is a dated table, never a chart
     intlTable: heads.some((h) => /Incarceration internationally/i.test(h)),
     intlNoChart: (() => {
-      const s2 = [...main.querySelectorAll("h2")].find((h) => /Incarceration internationally/i.test(h.textContent))?.closest("section");
-      return s2 ? s2.querySelectorAll("svg[viewBox]").length === 0 : false;
+      // Now an h3 sub-block under "Who is held" rather than its own section, so
+      // closest("section") would climb to the parent and find that chart. Scope
+      // to the block itself: from its heading to the end of its container.
+      const h = [...main.querySelectorAll("h2, h3")]
+        .find((x) => /Incarceration internationally/i.test(x.textContent));
+      if (!h) return false;
+      const block = h.parentElement;
+      return block.querySelectorAll("svg[viewBox]").length === 0;
     })(),
     intlDated: (t.match(/as at /g) || []).length >= 10,
     notTopJailer: /no longer the world's top jailer/i.test(t) || /It is fourth/i.test(t),
@@ -1080,13 +1086,16 @@ const acts = await page.evaluate(() => {
   };
 });
 console.log("acts:", JSON.stringify(acts));
-if (acts.one < 0 || acts.two < 0 || acts.three < 0) fail("act headings missing");
-if (!(acts.one < acts.two && acts.two < acts.three)) fail("acts are out of order");
-// The verdict now sits ABOVE the act-one banner, directly under the opening
-// chart (Sean, 2026-08-22: lead with a chart). It answers the question the
-// chart raises; the acts organise the body that follows.
-if (!(acts.verdictEarly < acts.one)) fail("verdict should sit above the act-one banner, under the opening chart");
-if (!(acts.verdictEarly < acts.two)) fail("verdict is not in the opening");
+// Sean, 2026-08-24: the three-act scaffolding is retired. Nine topic sections
+// replace it, each owning a chart (round 9). These assertions now guard that
+// the acts did not survive, and that the verdict is still in the opening.
+if (acts.one >= 0 || acts.two >= 0 || acts.three >= 0) {
+  fail("an act banner is still on the page — the reorganisation retired them");
+}
+if (acts.verdictEarly < 0) fail("the verdict heading is gone from the page");
+if (acts.sourcesLate > 0 && acts.verdictEarly > acts.sourcesLate) {
+  fail("the verdict has drifted below the sources register");
+}
 
 // every chart carries a plain-language block
 const plain = await page.evaluate(() => {
@@ -1548,6 +1557,78 @@ if (links.length < 4) fail(`only ${links.length} concept links from the health p
 for (const id of ["us-rose-against-the-trend", "the-fentanyl-reversal", "co-occurrence-is-not-cause"]) {
   if (!links.some((h) => h.endsWith(id))) fail(`no chart links to concept ${id}`);
 }
+
+// ---------------------------------------------------------------------------
+// ROUND 9 — every sidebar entry owns a chart.
+//
+// This is the rule the reorganisation bought. "Charts first" had been true of
+// the page and false of its structure: twenty sections, six of them with a
+// chart. Now there are nine, and eight open on one. Method is the single
+// declared exception, and it says so in its own copy.
+//
+// Asserting it here is the point of choosing this structure over a plain
+// regroup — a standard the suite can hold does not drift back one section at a
+// time, which is how every other guard on this page came to exist.
+// ---------------------------------------------------------------------------
+await page.getByRole("tab", { name: /^Crime$/i }).click();
+await page.waitForTimeout(2500);
+const shape = await page.evaluate(() => {
+  const root = document.getElementById("crime-root");
+  const secs = [...root.querySelectorAll("section")]
+    .filter((s) => s.querySelector("h2"))
+    .map((s) => ({
+      label: s.querySelector("h2").textContent.trim(),
+      figures: s.querySelectorAll("figure").length,
+      // the plain-language block that must sit under every chart
+      hasSummary: /What (the chart|this) shows/i.test(s.textContent || ""),
+    }));
+  return { count: secs.length, secs };
+});
+console.log("crime sections:", JSON.stringify(shape.secs.map((s) => `${s.label.slice(0, 26)}:${s.figures}`)));
+if (shape.count > 10) fail(`${shape.count} sidebar entries — the reorganisation set the ceiling at 10`);
+for (const s of shape.secs) {
+  const isMethod = /^Method/i.test(s.label);
+  if (!isMethod && s.figures < 1) fail(`section "${s.label}" is in the sidebar but owns no chart`);
+  if (isMethod && s.figures > 0) fail("Method now has a chart — it is the declared chartless exception");
+  if (!isMethod && !s.hasSummary) fail(`section "${s.label}" has a chart but no plain-language block under it`);
+}
+
+// The findings notice: one statement of the result, and it must point at the
+// disclaimer rather than restate it.
+const notice = await page.evaluate(() => {
+  const n = [...document.querySelectorAll('#crime-root [role="note"]')]
+    .find((e) => /What this section found/i.test(e.textContent || ""));
+  if (!n) return null;
+  return {
+    words: (n.textContent || "").trim().split(/\s+/).length,
+    disclaimer: [...n.querySelectorAll("a, button")].some((e) => /disclaimer/i.test(e.textContent || "")),
+    dismissible: !!n.querySelector('button[aria-label="Dismiss"]'),
+    saysNoOverallRise: /did not\s+rise overall/i.test(n.textContent || ""),
+    saysLimit: /only as good as the records/i.test(n.textContent || ""),
+  };
+});
+console.log("findings notice:", JSON.stringify(notice));
+if (!notice) fail("the section-level findings notice is missing");
+else {
+  if (notice.words > 70) fail(`findings notice is ${notice.words} words — the short version was chosen`);
+  if (!notice.disclaimer) fail("findings notice does not link to the disclaimer");
+  if (!notice.dismissible) fail("findings notice cannot be dismissed");
+  if (!notice.saysNoOverallRise) fail("findings notice no longer states the overall result");
+  if (!notice.saysLimit) fail("findings notice dropped the accuracy limit");
+}
+
+// Overdose deaths stay, and are labelled for what they are.
+const overdose = await page.evaluate(() => {
+  const t = document.getElementById("crime-root").textContent || "";
+  return {
+    laneKept: /Overdose deaths quadrupled/i.test(t),
+    notAnOffence: /health outcome, not an offence/i.test(t),
+    pointsAtHealth: /Public Health carries the record|Public Health section carries/i.test(t),
+  };
+});
+console.log("overdose:", JSON.stringify(overdose));
+if (!overdose.laneKept) fail("the overdose lane was removed — Sean asked for it to stay");
+if (!overdose.notAnOffence) fail("overdose deaths are not marked as a health outcome rather than an offence");
 
 // ---------------------------------------------------------------------------
 // ROUND 8 — the archive links.

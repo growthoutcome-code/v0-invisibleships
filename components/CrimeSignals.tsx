@@ -795,7 +795,7 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
           line drawn. The verdict now answers the question instead, and the
           lanes are left to the chart. Scope note follows the chart per Sean's
           choice of option B. ================================================ */}
-      <section className="mb-10">
+      <section className="mb-16">
         {lanes === null ? <SkeletonChart /> : (
           <>
             <LaneChart chart={lanes} onPick={setLanePicked} />
@@ -817,7 +817,17 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
             <p className="text-muted text-[15px] measure">{lanes.note}</p>
           </>
         )}
-      </section>
+
+      {/* The section's overall result, stated once, dismissible. Sean asked for
+          the finding and the limit together — and for the limit to point at the
+          disclaimer rather than repeat it here. */}
+      <DismissibleNote storageKey="is_crime_section_findings_v1">
+        <strong className="text-foreground/80">What this section found:</strong> crime did not
+        rise overall between 1999 and 2025. Overdose deaths and defamation filings did.
+        Harassment cannot be answered &mdash; nobody counts it. These findings are only as good
+        as the records we could reach.{" "}
+        <DisclaimerLink from="crime">Read the full disclaimer</DisclaimerLink>.
+      </DismissibleNote>
 
       <DataNoteLine from="crime">
         United States only unless a chart says otherwise · AI-assisted research from public
@@ -829,7 +839,7 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
 
       {/* ---- the verdict: the considered answer, under the chart it rests on ---- */}
       {verdict === null ? <SectionSkeleton title="Is crime rising or falling?" /> : (
-        <section className="mb-16">
+        <div>
           <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
             {verdict.claim}
           </h2>
@@ -845,19 +855,47 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
               </li>
             ))}
           </ul>
-        </section>
+        </div>
       )}
 
-      {/* ================= ACT ONE — WHAT IS HAPPENING ================= */}
-      <div className="mt-2 mb-8 pt-6 border-t-2 border-edge">
-        <p className="text-muted text-[12px] uppercase tracking-[0.14em] mb-1">Act one — what is happening</p>
-        <p className="body-copy text-foreground/85 measure m-0 text-[17px]">The harms the answer rests on, one measure at a time. Every figure here counts something that happened to people.</p>
-      </div>
+      {intlDrugs && (
+        <div className="mt-10 pt-6 border-t border-edge">
+          <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">{intlDrugs.title}</h3>
+          <p className="text-muted text-[15px] measure mb-6">
+            Overdose deaths are the steepest-rising lane on the chart above, and nobody was
+            charged with any of them. They sit here as a measure of harm, not of crime; the
+            Public Health section carries the substantive record. {intlDrugs.why_no_chart}
+          </p>
+          <ul className="list-none p-0 m-0">
+            {intlDrugs.rows.map((r, i) => (
+              <li key={i} className="py-3 border-b border-edge/60">
+                <div className="flex flex-wrap items-baseline gap-3 text-[16px]">
+                  <TierChip t={r.tier === "absence" ? "A" : r.tier} />
+                  <span className="text-foreground font-semibold">{r.country}</span>
+                  {r.value !== null ? (
+                    <span className="text-foreground/85 tabular-nums">
+                      {r.value.toLocaleString()} <span className="text-muted">({r.year})</span>
+                    </span>
+                  ) : (
+                    <span className="text-muted uppercase tracking-wide text-[13px]">not counted comparably</span>
+                  )}
+                  <span className="ml-auto"><SourceLink id={r.source_id} sources={srcs} /></span>
+                </div>
+                <p className="text-muted text-[14px] measure mt-1 mb-0">
+                  {r.unit ? `${r.unit}. ` : ""}{r.definition}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      </section>
+
 
       {/* ---- homicide: one lens among several, no longer the lead ---- */}
       <section className="mb-12">
         <h2 className="font-display font-semibold text-foreground text-[21px] mb-4">
-          The homicide lens
+          Homicide
         </h2>
         {chart === null ? <SkeletonChart /> : (
           <>
@@ -880,9 +918,37 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
         )}
       </section>
 
+      {/* ---- clearance ---- */}
+      {!!clearance.length && (
+        <section className="mb-16">
+          <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">
+            How many homicides are cleared
+          </h3>
+          <p className="text-muted text-[15px] mb-6 measure">
+            &ldquo;Cleared&rdquo; means closed by arrest or by exceptional means &mdash; which
+            includes cases where the suspect died or could not be extradited. It is not a
+            conviction rate, and it is not a solve rate, though it is reported as both.
+            These are selected years: no continuous national annual series is published.
+          </p>
+          <ul className="list-none p-0 m-0">
+            {clearance.map((r) => (
+              <li key={r.year} className="flex items-baseline gap-3 py-3 border-b border-edge/60 text-[16px] text-foreground/85">
+                <TierChip t={r.tier} />
+                <span className="font-semibold text-foreground w-16 shrink-0">{r.year}</span>
+                <span>{r.value}%</span>
+                <span className="ml-auto"><SourceLink id={r.source_id} sources={srcs} /></span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       {/* ---- international (Sean, 2026-08-21): one honest chart, two honest
              non-charts ---- */}
       <section className="mb-14">
+        <h2 className="font-display font-semibold text-foreground text-[21px] mb-4">
+          Homicide against the world
+        </h2>
         {intl === null ? <SkeletonChart /> : (
           <>
             <IntlLineChart chart={intl} onPick={setIntlPicked} />
@@ -911,7 +977,7 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
              the second, which turns out to be why the first has no answer. ---- */}
       <section className="mb-14">
         <h2 className="font-display font-semibold text-foreground text-[21px] mb-4">
-          Break-ins, and the offence nobody records
+          Break-ins
         </h2>
         {burg === null ? <SkeletonChart /> : (
           <>
@@ -955,105 +1021,12 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
         )}
       </section>
 
-      {intlDrugs && (
-        <section className="mb-14">
-          <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">{intlDrugs.title}</h2>
-          <p className="text-muted text-[15px] measure mb-6">{intlDrugs.why_no_chart}</p>
-          <ul className="list-none p-0 m-0">
-            {intlDrugs.rows.map((r, i) => (
-              <li key={i} className="py-3 border-b border-edge/60">
-                <div className="flex flex-wrap items-baseline gap-3 text-[16px]">
-                  <TierChip t={r.tier === "absence" ? "A" : r.tier} />
-                  <span className="text-foreground font-semibold">{r.country}</span>
-                  {r.value !== null ? (
-                    <span className="text-foreground/85 tabular-nums">
-                      {r.value.toLocaleString()} <span className="text-muted">({r.year})</span>
-                    </span>
-                  ) : (
-                    <span className="text-muted uppercase tracking-wide text-[13px]">not counted comparably</span>
-                  )}
-                  <span className="ml-auto"><SourceLink id={r.source_id} sources={srcs} /></span>
-                </div>
-                <p className="text-muted text-[14px] measure mt-1 mb-0">
-                  {r.unit ? `${r.unit}. ` : ""}{r.definition}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      {intlMissing && (
-        <section className="mb-14">
-          <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">{intlMissing.title}</h2>
-          <p className="text-muted text-[15px] measure mb-6">{intlMissing.why_no_chart}</p>
-          <ul className="list-none p-0 m-0">
-            {intlMissing.rows.map((r, i) => (
-              <li key={i} className="py-3 border-b border-edge/60">
-                <div className="flex flex-wrap items-baseline gap-3 text-[16px]">
-                  <TierChip t={r.tier} />
-                  <span className="text-foreground font-semibold">{r.country}</span>
-                  <span className="text-foreground/85 tabular-nums">
-                    {r.value.toLocaleString()} <span className="text-muted">({r.year})</span>
-                  </span>
-                  <span className="ml-auto"><SourceLink id={r.source_id} sources={srcs} /></span>
-                </div>
-                <p className="text-muted text-[14px] measure mt-1 mb-0">{r.unit}. {r.note}</p>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      {/* ---- 2026 year to date ---- */}
-      {!!ytd.length && (
-        <section className="mb-16">
-          <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">
-            Where 2026 stands
-          </h2>
-          <p className="text-muted text-[15px] mb-6 measure">
-            The chart above ends at 2025, the last complete year, so it lines up with every
-            other chart in this section. There is no national 2026 statistic yet — the FBI
-            publishes annually. What exists is below: a 36-city half-year comparison and a
-            separate 566-agency index. Both are urban samples, not the country.
-          </p>
-          <ul className="list-none p-0 m-0">
-            {ytd.map((r) => {
-              const up = r.value > 0;
-              return (
-                <li key={r.indicator_id}
-                  className="flex items-baseline gap-3 py-3 border-b border-edge/60 text-[16px] text-foreground/85">
-                  <TierChip t={r.tier} />
-                  <span className="measure">{ytdLabel[r.indicator_id] || r.indicator_id}</span>
-                  <span className={`font-semibold tabular-nums ${up ? "text-foreground" : "text-foreground/70"}`}>
-                    {up ? "+" : ""}{r.value}%
-                  </span>
-                  {up && <span className="text-[13px] uppercase tracking-wide text-foreground">rose</span>}
-                  <span className="ml-auto"><SourceLink id={r.source_id} sources={srcs} /></span>
-                </li>
-              );
-            })}
-          </ul>
-          <p className="text-muted text-[14px] measure mt-4">
-            Nine of thirteen offences fell. The two that rose are listed alongside the rest,
-            not omitted: reporting only the decline would be the selective framing this
-            dataset exists to avoid.
-          </p>
-        </section>
-      )}
-
-      {/* ================= ACT TWO — WHAT THE STATE IS DOING ================= */}
-      <div className="mt-2 mb-8 pt-6 border-t-2 border-edge">
-        <p className="text-muted text-[12px] uppercase tracking-[0.14em] mb-1">Act two — what the state is doing</p>
-        <p className="body-copy text-foreground/85 measure m-0 text-[17px]">Enforcement is a separate record from harm, and it moves for its own reasons. These are arrests, sweeps, detention and the outcomes that follow them.</p>
-      </div>
-
       {/* ---- arrests over time (Sean, 2026-08-21): the 1997 peak ---- */}
       <section className="mb-14">
         {arrests === null ? <SkeletonChart /> : (
           <>
             <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
-              Arrests over time
+              Arrests
             </h2>
             {arrests.accuracy_note && (
               <DismissibleNote storageKey="is_crime_arrests_accuracy_v1">
@@ -1084,9 +1057,9 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
       {/* ---- sweeping enforcement: headline arrest numbers ---- */}
       {!!sweeps?.length && (
         <section className="mb-14">
-          <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">
+          <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">
             Enforcement in sweeps
-          </h2>
+          </h3>
           <p className="text-muted text-[15px] mb-6 measure">
             Arrest counts announced as headline figures. An arrest is an enforcement
             action, not an adjudicated fact &mdash; each entry records what the number
@@ -1112,109 +1085,12 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
         </section>
       )}
 
-      {/* ---- incarceration: the stock, where arrests were the flow
-             (Sean, 2026-08-22). Sits between arrests and ICE detention on
-             purpose: who gets arrested, who ends up held, and the separate
-             civil system running alongside. Chart first, plain-language block
-             underneath, per the section's standing rule. ---- */}
-      <section className="mb-14">
-        <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
-          Who is held: prison, jail, and everyone else under supervision
-        </h2>
-        {incarc === null ? <SkeletonChart /> : (
-          <>
-            {incarc.accuracy_note && (
-              <DismissibleNote storageKey="is_crime_incarceration_accuracy_v1">
-                {incarc.accuracy_note}
-              </DismissibleNote>
-            )}
-            <DetentionChart chart={incarc} onPick={setDetPicked} />
-            {!!incarc.themes?.length && (
-              <div className="mt-2 mb-5">
-                <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">
-                  What the chart shows
-                </h3>
-                <ul className="list-none p-0 m-0">
-                  {incarc.themes.map((t, i) => (
-                    <li key={i} className="flex items-baseline gap-3 py-2 border-b border-edge/60 text-[16px] text-foreground/90">
-                      <TierChip t={t.tier} />
-                      <span className="measure">{t.statement}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            <p className="text-muted text-[15px] measure">{incarc.note}</p>
-
-          </>
-        )}
-      </section>
-
-      {/* ---- incarceration internationally: the third documented non-chart ---- */}
-      {intlIncarc && (
-        <section className="mb-14">
-          <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">{intlIncarc.title}</h2>
-          <p className="text-muted text-[15px] measure mb-6">{intlIncarc.why_no_chart}</p>
-          <ul className="list-none p-0 m-0">
-            {intlIncarc.rows.map((r, i) => (
-              <li key={i} className="py-3 border-b border-edge/60">
-                <div className="flex flex-wrap items-baseline gap-3 text-[16px]">
-                  <TierChip t={r.tier} />
-                  <span className="text-foreground font-semibold">{r.country}</span>
-                  <span className="text-foreground/85 tabular-nums">
-                    {r.value.toLocaleString()}{" "}
-                    <span className="text-muted">{r.unit}</span>
-                  </span>
-                  {/* the date is the point of this table, so it is never a footnote */}
-                  <span className="text-muted text-[14px] italic">as at {r.year}</span>
-                  <span className="ml-auto"><SourceLink id={r.source_id} sources={srcs} /></span>
-                </div>
-                <p className="text-muted text-[14px] measure mt-1 mb-0">{r.definition}</p>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      {/* ---- detention: where a sweep goes (Sean, 2026-08-21) ---- */}
-      <section className="mb-14">
-        {detention === null ? <SkeletonChart /> : (
-          <>
-            <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
-              Enforcement in sweeps: where the arrests go
-            </h2>
-            {detention.accuracy_note && (
-              <DismissibleNote storageKey="is_crime_detention_accuracy_v1">
-                {detention.accuracy_note}
-              </DismissibleNote>
-            )}
-            <DetentionChart chart={detention} onPick={setDetPicked} />
-            {!!detention.themes?.length && (
-              <div className="mt-2 mb-5">
-                <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">
-                  What the chart shows
-                </h3>
-                <ul className="list-none p-0 m-0">
-                  {detention.themes.map((t, i) => (
-                    <li key={i} className="flex items-baseline gap-3 py-2 border-b border-edge/60 text-[16px] text-foreground/90">
-                      <TierChip t={t.tier} />
-                      <span className="measure">{t.statement}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            <p className="text-muted text-[15px] measure">{detention.note}</p>
-          </>
-        )}
-      </section>
-
       {/* ---- law enforcement accomplishments (Sean, 2026-08-21) ---- */}
       {accomplishments && (
         <section className="mb-14">
-          <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
+          <h3 className="font-display font-semibold text-foreground text-[19px] mb-3">
             {accomplishments.title}
-          </h2>
+          </h3>
           <p className="body-copy text-foreground/90 measure mb-6">{accomplishments.intro}</p>
           <ul className="list-none p-0 m-0">
             {accomplishments.rows.map((r, i) => (
@@ -1237,9 +1113,9 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
       {/* ---- transnational repression (Sean, 2026-08-21) ---- */}
       {tr && (
         <section className="mb-14">
-          <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
+          <h3 className="font-display font-semibold text-foreground text-[19px] mb-3">
             Transnational repression
-          </h2>
+          </h3>
           <p className="body-copy text-foreground/90 measure">
             <TierChip t={tr.what_it_is.tier} />{" "}
             &ldquo;{tr.what_it_is.definition}&rdquo;{" "}
@@ -1278,11 +1154,102 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
         </section>
       )}
 
-      {/* ================= ACT THREE — WHAT CANNOT BE KNOWN ================= */}
-      <div className="mt-2 mb-8 pt-6 border-t-2 border-edge">
-        <p className="text-muted text-[12px] uppercase tracking-[0.14em] mb-1">Act three — what cannot be known</p>
-        <p className="body-copy text-foreground/85 measure m-0 text-[17px]">Where the counting is the problem, the counting is the finding. This act is the limit of everything above it.</p>
-      </div>
+      {/* ---- incarceration: the stock, where arrests were the flow
+             (Sean, 2026-08-22). Sits between arrests and ICE detention on
+             purpose: who gets arrested, who ends up held, and the separate
+             civil system running alongside. Chart first, plain-language block
+             underneath, per the section's standing rule. ---- */}
+      <section className="mb-14">
+        <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
+          Who is held
+        </h2>
+        {incarc === null ? <SkeletonChart /> : (
+          <>
+            {incarc.accuracy_note && (
+              <DismissibleNote storageKey="is_crime_incarceration_accuracy_v1">
+                {incarc.accuracy_note}
+              </DismissibleNote>
+            )}
+            <DetentionChart chart={incarc} onPick={setDetPicked} />
+            {!!incarc.themes?.length && (
+              <div className="mt-2 mb-5">
+                <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">
+                  What the chart shows
+                </h3>
+                <ul className="list-none p-0 m-0">
+                  {incarc.themes.map((t, i) => (
+                    <li key={i} className="flex items-baseline gap-3 py-2 border-b border-edge/60 text-[16px] text-foreground/90">
+                      <TierChip t={t.tier} />
+                      <span className="measure">{t.statement}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            <p className="text-muted text-[15px] measure">{incarc.note}</p>
+
+          </>
+        )}
+      </section>
+
+      {/* ---- incarceration internationally: the third documented non-chart ---- */}
+      {intlIncarc && (
+        <section className="mb-14">
+          <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">{intlIncarc.title}</h3>
+          <p className="text-muted text-[15px] measure mb-6">{intlIncarc.why_no_chart}</p>
+          <ul className="list-none p-0 m-0">
+            {intlIncarc.rows.map((r, i) => (
+              <li key={i} className="py-3 border-b border-edge/60">
+                <div className="flex flex-wrap items-baseline gap-3 text-[16px]">
+                  <TierChip t={r.tier} />
+                  <span className="text-foreground font-semibold">{r.country}</span>
+                  <span className="text-foreground/85 tabular-nums">
+                    {r.value.toLocaleString()}{" "}
+                    <span className="text-muted">{r.unit}</span>
+                  </span>
+                  {/* the date is the point of this table, so it is never a footnote */}
+                  <span className="text-muted text-[14px] italic">as at {r.year}</span>
+                  <span className="ml-auto"><SourceLink id={r.source_id} sources={srcs} /></span>
+                </div>
+                <p className="text-muted text-[14px] measure mt-1 mb-0">{r.definition}</p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {/* ---- detention: where a sweep goes (Sean, 2026-08-21) ---- */}
+      <section className="mb-14">
+        {detention === null ? <SkeletonChart /> : (
+          <>
+            <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
+              ICE detention
+            </h2>
+            {detention.accuracy_note && (
+              <DismissibleNote storageKey="is_crime_detention_accuracy_v1">
+                {detention.accuracy_note}
+              </DismissibleNote>
+            )}
+            <DetentionChart chart={detention} onPick={setDetPicked} />
+            {!!detention.themes?.length && (
+              <div className="mt-2 mb-5">
+                <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">
+                  What the chart shows
+                </h3>
+                <ul className="list-none p-0 m-0">
+                  {detention.themes.map((t, i) => (
+                    <li key={i} className="flex items-baseline gap-3 py-2 border-b border-edge/60 text-[16px] text-foreground/90">
+                      <TierChip t={t.tier} />
+                      <span className="measure">{t.statement}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            <p className="text-muted text-[15px] measure">{detention.note}</p>
+          </>
+        )}
+      </section>
 
       {/* ---- what nobody counts: the lead finding (Sean, 2026-08-21) ---- */}
       {/* ---- reports of the unexplained: chart first, plain-language block
@@ -1316,9 +1283,9 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
 
       {notCounted === null ? <SectionSkeleton title="What nobody counts" /> : !!notCounted.length && (
         <section className="mb-14">
-          <h2 className="font-display font-semibold text-foreground text-[24px] mb-3">
+          <h3 className="font-display font-semibold text-foreground text-[19px] mb-3">
             What nobody counts
-          </h2>
+          </h3>
           <p className="body-copy text-foreground/90 measure mb-6">
             The kinds of harm this site is most concerned with are the ones with no
             national statistic. That is not a research failure &mdash; it is the finding.
@@ -1344,36 +1311,83 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
         </section>
       )}
 
-
-      {/* ---- clearance ---- */}
-      {!!clearance.length && (
-        <section className="mb-16">
-          <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">
-            How many homicides are cleared
-          </h2>
-          <p className="text-muted text-[15px] mb-6 measure">
-            &ldquo;Cleared&rdquo; means closed by arrest or by exceptional means &mdash; which
-            includes cases where the suspect died or could not be extradited. It is not a
-            conviction rate, and it is not a solve rate, though it is reported as both.
-            These are selected years: no continuous national annual series is published.
-          </p>
+      {intlMissing && (
+        <section className="mb-14">
+          <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">{intlMissing.title}</h3>
+          <p className="text-muted text-[15px] measure mb-6">{intlMissing.why_no_chart}</p>
           <ul className="list-none p-0 m-0">
-            {clearance.map((r) => (
-              <li key={r.year} className="flex items-baseline gap-3 py-3 border-b border-edge/60 text-[16px] text-foreground/85">
-                <TierChip t={r.tier} />
-                <span className="font-semibold text-foreground w-16 shrink-0">{r.year}</span>
-                <span>{r.value}%</span>
-                <span className="ml-auto"><SourceLink id={r.source_id} sources={srcs} /></span>
+            {intlMissing.rows.map((r, i) => (
+              <li key={i} className="py-3 border-b border-edge/60">
+                <div className="flex flex-wrap items-baseline gap-3 text-[16px]">
+                  <TierChip t={r.tier} />
+                  <span className="text-foreground font-semibold">{r.country}</span>
+                  <span className="text-foreground/85 tabular-nums">
+                    {r.value.toLocaleString()} <span className="text-muted">({r.year})</span>
+                  </span>
+                  <span className="ml-auto"><SourceLink id={r.source_id} sources={srcs} /></span>
+                </div>
+                <p className="text-muted text-[14px] measure mt-1 mb-0">{r.unit}. {r.note}</p>
               </li>
             ))}
           </ul>
         </section>
       )}
 
+      {/* ---- method: the one section that owns no chart, and says why ---- */}
+      <section className="mb-10 pt-6 border-t-2 border-edge">
+        <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">
+          Method, limits and sources
+        </h2>
+        <p className="text-muted text-[15px] measure mb-0">
+          Every section above opens with a chart. This one has none, because what follows is
+          how the counting was done and where it fails &mdash; the partial year, the trends,
+          the data-quality register, and the 197 sources every figure resolves to. See the{" "}
+          <DisclaimerLink from="crime">full disclaimer</DisclaimerLink> for how this research
+          was gathered and how to read the charts.
+        </p>
+      </section>
+
+      {/* ---- 2026 year to date ---- */}
+      {!!ytd.length && (
+        <section className="mb-16">
+          <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">
+            Where 2026 stands
+          </h3>
+          <p className="text-muted text-[15px] mb-6 measure">
+            The chart above ends at 2025, the last complete year, so it lines up with every
+            other chart in this section. There is no national 2026 statistic yet — the FBI
+            publishes annually. What exists is below: a 36-city half-year comparison and a
+            separate 566-agency index. Both are urban samples, not the country.
+          </p>
+          <ul className="list-none p-0 m-0">
+            {ytd.map((r) => {
+              const up = r.value > 0;
+              return (
+                <li key={r.indicator_id}
+                  className="flex items-baseline gap-3 py-3 border-b border-edge/60 text-[16px] text-foreground/85">
+                  <TierChip t={r.tier} />
+                  <span className="measure">{ytdLabel[r.indicator_id] || r.indicator_id}</span>
+                  <span className={`font-semibold tabular-nums ${up ? "text-foreground" : "text-foreground/70"}`}>
+                    {up ? "+" : ""}{r.value}%
+                  </span>
+                  {up && <span className="text-[13px] uppercase tracking-wide text-foreground">rose</span>}
+                  <span className="ml-auto"><SourceLink id={r.source_id} sources={srcs} /></span>
+                </li>
+              );
+            })}
+          </ul>
+          <p className="text-muted text-[14px] measure mt-4">
+            Nine of thirteen offences fell. The two that rose are listed alongside the rest,
+            not omitted: reporting only the decline would be the selective framing this
+            dataset exists to avoid.
+          </p>
+        </section>
+      )}
+
       {/* ---- trends ---- */}
       {trends === null ? <SectionSkeleton title="What the series show" /> : !!trends.length && (
         <section ref={trendsP.ref} className="mb-16">
-          <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">What the series show</h2>
+          <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">What the series show</h3>
           <ul className="list-none p-0 m-0">
             {trendsP.slice.map((t, i) => (
               <li key={i} className="flex items-baseline gap-3 py-3 border-b border-edge/60 text-[16px] text-foreground/85">
@@ -1390,9 +1404,9 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
       {/* ---- data quality: the spine ---- */}
       {dq === null ? <SectionSkeleton title="How much the numbers can be trusted" /> : !!dq.length && (
         <section ref={dqP.ref} className="mb-16">
-          <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">
+          <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">
             How much the numbers can be trusted
-          </h2>
+          </h3>
           <p className="text-muted text-[15px] mb-6 measure">
             This register is the section, not a footnote to it. Where the counting is the
             problem, the counting is the finding.
@@ -1417,9 +1431,9 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
       {/* ---- caveats ---- */}
       {!!caveats?.length && (
         <section className="mb-16">
-          <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">
+          <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">
             Read before quoting any figure
-          </h2>
+          </h3>
           <ul className="list-none p-0 m-0">
             {caveats.map((c, i) => (
               <li key={i} className="flex items-baseline gap-3 py-3 border-b border-edge/60 text-[16px] text-foreground/85">
@@ -1451,7 +1465,7 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
       {/* ---- sources ---- */}
       {!!srcs.length && (
         <section ref={srcP.ref} className="mb-16">
-          <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">Sources</h2>
+          <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">Sources</h3>
           <p className="text-muted text-[15px] mb-6 measure">
             {srcs.filter((s) => s.evidence_tier === "A").length} Tier A ·{" "}
             {srcs.filter((s) => s.evidence_tier === "B").length} Tier B ·{" "}

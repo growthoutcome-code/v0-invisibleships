@@ -47,6 +47,12 @@ THEMES = {
     "harm_lanes_indexed.json": [
         t(A, "Overdose deaths quadrupled since 1999 — the steepest rise of any lane — "
              "and have fallen since their 2022 peak."),
+        # Sean, 2026-08-24: keep the lane, but say what it is. A drug-poisoning
+        # death is a cause of death, not an offence, and without this line its
+        # presence in a crime chart reads as crime by adjacency — the exact
+        # inference the disclaimer spends a section warning readers away from.
+        t(A, "But an overdose death is a health outcome, not an offence — nobody was "
+             "charged. It is here as harm; Public Health carries the record."),
         t(A, "Homicide spiked 29.4% in 2020, then fell to the lowest rate ever recorded."),
         t(A, "Defamation-adjacent federal filings are at a 22-year high, rising sharply "
              "since 2023."),
