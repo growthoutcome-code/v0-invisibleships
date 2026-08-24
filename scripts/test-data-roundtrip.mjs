@@ -1,5 +1,5 @@
 // Verifies the Data sub-tab round-trip keeps the GovCloud report drawn.
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { chromium } from "playwright-core";
 
 const BASE = process.env.TEST_BASE || "http://localhost:3100";
@@ -1673,6 +1673,73 @@ if (archive.linksRendered && !archive.allPointAtWayback) {
 }
 if (archive.predates !== archive.dottedOnPredates) {
   fail("a snapshot that predates access is not marked dotted — it reads as stronger evidence than it is");
+}
+
+// ---------------------------------------------------------------------------
+// ROUND 8b — the export dialog describes the archive that actually ships.
+//
+// The old copy named "Government Cloud and Public Health Signals" and stopped
+// there. Crime, Concepts and the research inputs had been in the zip for weeks
+// by the time anyone noticed. A visitor read that sentence and under-counted
+// what they were about to receive, which is a quiet way of hiding your own work.
+//
+// The dialog now renders from lib/corpus-summary.ts. build_corpus_index.py
+// --check proves that file matches the zip; this proves the DIALOG matches the
+// file, and that every research body in the download is named in it.
+// ---------------------------------------------------------------------------
+await page.goto(`${BASE}/`, { waitUntil: "networkidle" });
+const exportDialog = await page.evaluate(async () => {
+  const btn = [...document.querySelectorAll("button")]
+    .find((b) => /^\s*Export\s*$/i.test(b.textContent || ""));
+  if (!btn) return { opened: false };
+  btn.click();
+  await new Promise((r) => setTimeout(r, 500));
+  const dlg = document.querySelector('[role="dialog"]');
+  if (!dlg) return { opened: false };
+  const t = (dlg.textContent || "").replace(/\s+/g, " ");
+  const num = (re) => { const m = t.match(re); return m ? Number(m[1].replace(/,/g, "")) : 0; };
+  return {
+    opened: true,
+    files: num(/([\d,]+) files/),
+    markdown: num(/([\d,]+) are Markdown/),
+    // every research body must be named, not only the two the old copy knew
+    names: {
+      Journal: /Journal/i.test(t),
+      References: /References/i.test(t),
+      Crime: /Crime/i.test(t),
+      "Public Health": /Public Health/i.test(t),
+      "Government Cloud": /Government Cloud/i.test(t),
+      Concepts: /Concepts/i.test(t),
+      Glossary: /Glossary/i.test(t),
+      "Research inputs": /Research inputs/i.test(t),
+    },
+    startHere: /START-HERE\.md/i.test(t),
+    warnsNotAllAtOnce: /Do not try to upload all/i.test(t),
+    saysCsv: /CSV/i.test(t),
+    keepsCopyright: /copyright/i.test(t) && /Disclaimer/i.test(t),
+    downloadHref: dlg.querySelector("a[download]")?.getAttribute("href") || "",
+  };
+});
+console.log("export dialog:", JSON.stringify(exportDialog));
+if (!exportDialog.opened) fail("the Export dialog did not open");
+else {
+  const ts = readFileSync(new URL("../lib/corpus-summary.ts", import.meta.url), "utf8");
+  const field = (k) => Number((ts.match(new RegExp(`${k}: (\\d+)`)) || [])[1] || 0);
+  for (const k of ["files", "markdown"]) {
+    if (exportDialog[k] !== field(k)) {
+      fail(`export dialog says ${exportDialog[k]} ${k}, the corpus holds ${field(k)}`);
+    }
+  }
+  for (const [k, v] of Object.entries(exportDialog.names)) {
+    if (!v) fail(`export dialog never mentions ${k} — the download carries it and the copy hides it`);
+  }
+  if (!exportDialog.startHere) fail("export dialog does not point at START-HERE.md");
+  if (!exportDialog.warnsNotAllAtOnce) fail("export dialog does not warn against uploading everything at once");
+  if (!exportDialog.saysCsv) fail("export dialog does not mention the CSV row data");
+  if (!exportDialog.keepsCopyright) fail("export dialog dropped the copyright and disclaimer notice");
+  if (!/^\/api\/corpus/.test(exportDialog.downloadHref)) {
+    fail("export dialog bypasses /api/corpus — the download would stop being counted");
+  }
 }
 
 await browser.close();
