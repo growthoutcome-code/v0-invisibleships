@@ -1796,7 +1796,14 @@ await browser.close();
 // command we run before shipping, where forgetting is no longer possible.
 // ---------------------------------------------------------------------------
 const { execFileSync } = await import("node:child_process");
-const REPO = new URL("..", import.meta.url).pathname;
+// fileURLToPath, NOT .pathname. On a path containing a space — Sean's repo lives
+// under "Invisible Ships" — .pathname hands back "Invisible%20Ships", a
+// directory that does not exist. execFileSync then fails to launch at all, with
+// no stdout and no stderr, and every corpus check reported failure while
+// actually never running. It passed here only because this container's path has
+// no space in it.
+const { fileURLToPath } = await import("node:url");
+const REPO = fileURLToPath(new URL("..", import.meta.url));
 
 // Three checks, because the corpus can be wrong in three different ways:
 //   freshness    — the crime folder no longer matches the data the site serves
@@ -1824,9 +1831,20 @@ for (const [label, script, remedy] of [
     });
     console.log(`${label}:`, out.trim().split("\n").filter(Boolean).pop());
   } catch (e) {
+    // A check that FAILS prints why. A check that never RAN prints nothing —
+    // and silently reporting the second as the first sent Sean chasing a corpus
+    // problem that did not exist. So: if there is no output, say that the
+    // process did not run and show the reason it gave.
     const msg = [e.stdout, e.stderr].filter(Boolean).join("\n").trim();
-    console.log(`${label}:\n` + msg);
-    fail(`${label} check failed — run: ${remedy}`);
+    if (msg) {
+      console.log(`${label}:\n` + msg);
+      fail(`${label} check failed — run: ${remedy}`);
+    } else {
+      console.log(`${label}: produced no output — the check did not run`);
+      console.log(`   cwd: ${REPO}`);
+      console.log(`   ${e.message}`);
+      fail(`${label} could not be run (see above) — this is a harness problem, not a corpus problem`);
+    }
   }
 }
 
