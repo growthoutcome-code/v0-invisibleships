@@ -5,7 +5,7 @@
 // fails if it drifts, so what the export dialog claims and what a visitor
 // receives cannot come apart.
 export const CORPUS_SUMMARY = {
-  generated: "2026-08-24",
+  generated: "2026-08-25",
   files: 902,
   markdown: 801,
   csv: 28,
