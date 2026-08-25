@@ -35,7 +35,17 @@ function Shell({ children, step, copyright }: { children: React.ReactNode; step:
     <main className="min-h-screen flex flex-col bg-background text-foreground">
       <div className="fixed top-4 right-4 z-50"><ThemeToggle /></div>
       <div className="flex-1 flex items-center justify-center px-4 py-10">
-        <div key={step} className="w-full max-w-2xl h-[560px] max-h-[calc(100vh-9rem)] flex flex-col animate-fade-in">{children}</div>
+        {/* max-w-3xl matches the `lg` dialog step, so the gate reads as the same
+          * product as every modal behind it — it was the narrowest surface on the
+          * site at 2xl. Height is a MINIMUM with a viewport cap, not a fixed
+          * 560px: the terms step scrolls its own box, and a phone in landscape
+          * (or any window under ~700px tall) was being handed a panel taller than
+          * the screen with the agree button below the fold. `dvh` because mobile
+          * Safari's toolbars make `vh` lie about the usable height. */}
+        <div key={step}
+          className="w-full max-w-3xl min-h-[440px] h-[560px] max-h-[calc(100dvh-9rem)] flex flex-col animate-fade-in">
+          {children}
+        </div>
       </div>
       <Progress step={step} />
       <footer className="text-center text-xs text-muted py-6">{copyright}</footer>

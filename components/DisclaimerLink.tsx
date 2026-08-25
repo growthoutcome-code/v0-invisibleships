@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogBody, DialogTitle } from "@/components/ui/dialog";
 import CopyrightTerms from "@/components/CopyrightTerms";
 import { track } from "@/lib/analytics";
 
@@ -38,22 +38,23 @@ export default function DisclaimerLink({
       </button>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-[820px] max-h-[85vh] overflow-y-auto">
+        {/* lg: long prose, no tables. Was a bespoke 820px. */}
+        <DialogContent size="lg">
           <DialogHeader>
             <DialogTitle className="font-display text-2xl">
               Disclaimer, Copyright &amp; Terms of Use
             </DialogTitle>
           </DialogHeader>
-          <div className="mt-2">
+          <DialogBody>
             <CopyrightTerms variant="modal" />
-          </div>
-          <p className="text-muted text-[14px] mt-6 mb-0">
-            This is the same text published at{" "}
-            <a href="/disclaimer" className="underline underline-offset-4 hover:text-foreground">
-              /disclaimer
-            </a>
-            , where it can be linked or shared.
-          </p>
+            <p className="text-muted text-[14px] mb-0">
+              This is the same text published at{" "}
+              <a href="/disclaimer" className="underline underline-offset-4 hover:text-foreground">
+                /disclaimer
+              </a>
+              , where it can be linked or shared.
+            </p>
+          </DialogBody>
         </DialogContent>
       </Dialog>
     </>

@@ -7,7 +7,7 @@ import DisclaimerLink from "@/components/DisclaimerLink";
 import { Skeleton, SkeletonRows, SkeletonChart } from "@/components/Skeleton";
 import { DATA_WINDOW, dataWindowTicks, ArchivedLink } from "@/components/DataPrimitives";
 import { Input } from "@/components/ui/input";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogBody, DialogTitle } from "@/components/ui/dialog";
 import { track } from "@/lib/analytics";
 
 /**
@@ -585,11 +585,13 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
       </svg>
 
       <Dialog open={!!open} onOpenChange={(v) => !v && setOpen(null)}>
-        <DialogContent className="max-w-[720px] max-h-[85vh] overflow-y-auto">
+        {/* md: a single country's provenance. Was a bespoke 720px. */}
+        <DialogContent size="md">
           <DialogHeader>
             <DialogTitle className="font-display text-2xl">{open?.country}</DialogTitle>
           </DialogHeader>
           {open && (
+          <DialogBody>
             <div className="mt-1">
               <p className="body-copy text-foreground/90 m-0 mb-4">
                 {(open.extension
@@ -688,6 +690,7 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
                   className="underline underline-offset-4 hover:text-foreground">open the data</a>
               </p>
             </div>
+          </DialogBody>
           )}
         </DialogContent>
       </Dialog>

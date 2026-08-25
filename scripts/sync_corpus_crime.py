@@ -9,6 +9,7 @@ site. Run after any change under public/data/crime/.
 import csv
 import io
 import json
+import re
 import pathlib
 import shutil
 import zipfile
@@ -76,6 +77,21 @@ def homicide_csv(indicators):
     return buf.getvalue(), len(years)
 
 
+# The README says "Regenerated <today>". That is useful to a reader and useless
+# to a comparison: it makes a fresh build differ from the committed one every
+# single day, on a file whose actual content has not moved. Sean got five
+# consecutive "Restamp corpus index" commits out of exactly this — the guard
+# cried drift, the fix rewrote a date, and nothing was ever really wrong.
+#
+# Normalising the stamp is better than skipping the file: a README whose COUNTS
+# changed still fails, which is the thing the guard is for.
+_DATE_STAMP = re.compile(rb"\b\d{4}-\d{2}-\d{2}\b")
+
+
+def _stable(b: bytes) -> bytes:
+    return _DATE_STAMP.sub(b"<date>", b)
+
+
 def check():
     """Rebuild into a temp file and compare the crime/ entries with the committed
     zip. Exits non-zero on drift. Nothing is written to public/.
@@ -104,7 +120,8 @@ def check():
     added = sorted(set(after) - set(before))
     # the manifest carries a build date, so it differs on every rebuild by design
     changed = sorted(n for n in set(before) & set(after)
-                     if before[n] != after[n] and not n.endswith("manifest.json"))
+                     if _stable(before[n]) != _stable(after[n])
+                     and not n.endswith("manifest.json"))
     if missing or added or changed:
         print("FAIL: the committed corpus is out of date. Run:  python3 scripts/sync_corpus_crime.py")
         for n in added:

@@ -1498,7 +1498,7 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
         <div role="dialog" aria-modal="true" aria-label={lanePicked.name}
           className="fixed inset-0 z-50 bg-background/85 overflow-y-auto p-4 sm:p-10"
           onClick={() => setLanePicked(null)}>
-          <div className="max-w-[720px] mx-auto bg-background border border-edge p-6 sm:p-8"
+          <div className="max-w-3xl mx-auto bg-background border border-edge p-6 sm:p-8"
             onClick={(e) => e.stopPropagation()}>
             <div className="flex items-start gap-4">
               <h3 className="font-display font-semibold text-foreground text-[22px] m-0">{lanePicked.name}</h3>
@@ -1554,7 +1554,7 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
         <div role="dialog" aria-modal="true" aria-label={detPicked.name}
           className="fixed inset-0 z-50 bg-background/85 overflow-y-auto p-4 sm:p-10"
           onClick={() => setDetPicked(null)}>
-          <div className="max-w-[720px] mx-auto bg-background border border-edge p-6 sm:p-8"
+          <div className="max-w-3xl mx-auto bg-background border border-edge p-6 sm:p-8"
             onClick={(e) => e.stopPropagation()}>
             <div className="flex items-start gap-4">
               <h3 className="font-display font-semibold text-foreground text-[22px] m-0">{detPicked.name}</h3>
@@ -1595,7 +1595,7 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
         <div role="dialog" aria-modal="true" aria-label={intlPicked.name}
           className="fixed inset-0 z-50 bg-background/85 overflow-y-auto p-4 sm:p-10"
           onClick={() => setIntlPicked(null)}>
-          <div className="max-w-[720px] mx-auto bg-background border border-edge p-6 sm:p-8"
+          <div className="max-w-3xl mx-auto bg-background border border-edge p-6 sm:p-8"
             onClick={(e) => e.stopPropagation()}>
             <div className="flex items-start gap-4">
               <h3 className="font-display font-semibold text-foreground text-[22px] m-0">{intlPicked.name}</h3>
@@ -1639,7 +1639,7 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
           onClick={() => setPicked(null)}
         >
           <div
-            className="max-w-[720px] mx-auto bg-background border border-edge p-6 sm:p-8"
+            className="max-w-3xl mx-auto bg-background border border-edge p-6 sm:p-8"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-start gap-4">

@@ -1718,6 +1718,7 @@ const exportDialog = await page.evaluate(async () => {
     saysCsv: /CSV/i.test(t),
     keepsCopyright: /copyright/i.test(t) && /Disclaimer/i.test(t),
     downloadHref: dlg.querySelector("a[download]")?.getAttribute("href") || "",
+    width: Math.round(dlg.getBoundingClientRect().width),
   };
 });
 console.log("export dialog:", JSON.stringify(exportDialog));
@@ -1740,7 +1741,49 @@ else {
   if (!/^\/api\/corpus/.test(exportDialog.downloadHref)) {
     fail("export dialog bypasses /api/corpus — the download would stop being counted");
   }
+  if (exportDialog.width < 700) {
+    fail(`export dialog is ${exportDialog.width}px wide — too narrow for the folder list`);
+  }
 }
+
+// Sean, 2026-08-25: "I've got a really tall modal... I can't reach the button
+// to download it." The shared DialogContent centres with -translate-y-1/2 and
+// sets no max-height, so a long body grows off both edges of the window and
+// takes the download button with it. The dialog is now height-bounded with its
+// actions pinned — and the guard is geometric, not structural: on the SHORTEST
+// window we support, the button's box must lie inside the viewport. A dialog
+// whose primary action cannot be clicked has no working primary action.
+for (const [w, h] of [[1440, 900], [1280, 700], [900, 600], [390, 740]]) {
+  await page.setViewportSize({ width: w, height: h });
+  const reach = await page.evaluate(async () => {
+    document.querySelector('[role="dialog"]')
+      ?.querySelector('button[aria-label], button')?.blur?.();
+    const dlg = document.querySelector('[role="dialog"]');
+    if (!dlg) return null;
+    await new Promise((r) => setTimeout(r, 200));
+    const a = dlg.querySelector("a[download]");
+    if (!a) return { found: false };
+    const r = a.getBoundingClientRect();
+    const d = dlg.getBoundingClientRect();
+    return {
+      found: true,
+      inViewport: r.top >= 0 && r.bottom <= innerHeight && r.left >= 0 && r.right <= innerWidth,
+      dialogFits: d.top >= 0 && d.bottom <= innerHeight,
+      btnBottom: Math.round(r.bottom),
+      viewportH: innerHeight,
+      dialogW: Math.round(d.width),
+    };
+  });
+  console.log(`export reach ${w}x${h}:`, JSON.stringify(reach));
+  if (!reach?.found) { fail(`export dialog lost its download link at ${w}x${h}`); continue; }
+  if (!reach.inViewport) {
+    fail(`at ${w}x${h} the download button sits at y=${reach.btnBottom} in a ${reach.viewportH}px window — unreachable`);
+  }
+  if (!reach.dialogFits) {
+    fail(`at ${w}x${h} the dialog itself overflows the window — it must bound its own height`);
+  }
+}
+await page.setViewportSize({ width: 1440, height: 900 });
 
 await browser.close();
 
