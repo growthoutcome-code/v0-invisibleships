@@ -1,3 +1,13 @@
+---
+id: IS-NOTE-GLOSSARY-CLEANUP
+title: Glossary — cleanup & expansion record
+collection: research-notes
+doc_type: working-note
+word_count: 392
+author: Sean C. Harris
+copyright: © 2026 Sean C. Harris. All Rights Reserved.
+---
+
 # Glossary — cleanup & expansion record
 
 *Last updated 2026-08. Maintained with Claude (Cowork). This is the human-readable record of the glossary accuracy pass; the live data lives in the two files noted under "Where the glossary lives."*

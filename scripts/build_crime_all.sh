@@ -67,11 +67,13 @@ node scripts/export_site_content_md.mjs
 run sync_corpus_crime.py
 
 run sync_corpus_health.py
+run sync_corpus_govcloud.py
 run sync_corpus_site.py
 run build_corpus_index.py
 
 printf '\n\033[1m▸ freshness + completeness checks\033[0m\n'
 python3 scripts/sync_corpus_crime.py --check
+python3 scripts/sync_corpus_govcloud.py --check
 python3 scripts/sync_corpus_site.py --check
 python3 scripts/build_corpus_index.py --check
 

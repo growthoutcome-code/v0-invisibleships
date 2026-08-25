@@ -112,6 +112,13 @@ def build(dst: zipfile.ZipFile) -> int:
         # the sweep ledger is working state, not research
         if "wayback-ledger" in f.name:
             continue
+        # research/government-cloud/ is SOURCE for sync_corpus_govcloud.py, which
+        # stamps each brief with a header and an attributed copyright and ships
+        # it under government-cloud/. Copying the raw file here as well would put
+        # an unstamped second copy in the download and give one file two owners —
+        # the exact condition that let those briefs travel unattributed.
+        if "government-cloud" in f.parts:
+            continue
         dst.writestr("research/" + str(f.relative_to(RESEARCH)), f.read_text())
         n_res += 1
     for f in sorted(DOCS_DIR.glob("*.md")) if DOCS_DIR.exists() else []:

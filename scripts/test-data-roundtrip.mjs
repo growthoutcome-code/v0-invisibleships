@@ -1808,6 +1808,11 @@ const REPO = new URL("..", import.meta.url).pathname;
 for (const [label, script, remedy] of [
   ["corpus freshness", "scripts/sync_corpus_crime.py",
    "python3 scripts/sync_corpus_crime.py"],
+  // Government Cloud had no owner until 25 Aug: its briefs were dropped in once
+  // and carried forward, which is how eight files shipped with no header and a
+  // copyright naming nobody.
+  ["government cloud", "scripts/sync_corpus_govcloud.py",
+   "python3 scripts/sync_corpus_govcloud.py"],
   ["site content", "scripts/sync_corpus_site.py",
    "node scripts/export_concepts_md.mjs && node scripts/export_site_content_md.mjs && python3 scripts/sync_corpus_site.py"],
   ["corpus completeness", "scripts/build_corpus_index.py",

@@ -120,13 +120,50 @@ def _research_count() -> int:
     r = ROOT / "research"
     if not r.exists():
         return 0
+    # government-cloud/ lives under research/ in the repo but ships under its own
+    # prefix in the zip, stamped by sync_corpus_govcloud.py. Counting it here too
+    # would demand it appear twice.
     n = sum(1 for f in r.rglob("*")
             if f.is_file() and not f.name.startswith(".")
-            and "wayback-ledger" not in f.name)
+            and "wayback-ledger" not in f.name
+            and "government-cloud" not in f.parts)
     d = ROOT / "docs"
     if d.exists():
         n += len(list(d.glob("*.md")))
     return n
+
+
+# Files that are navigation, not content: an index or a folder README carries no
+# claim of its own and needs no byline. Everything else in the download is work
+# somebody could lift, and must say whose it is.
+NAVIGATIONAL = re.compile(r"(^|/)(START-HERE|README[^/]*)\.md$", re.I)
+ATTRIBUTION = "Sean C. Harris"
+
+
+def well_formed(names: list) -> list:
+    """Counting arrivals was not enough.
+
+    The completeness check asked 'did the file reach the download', and eight
+    Government Cloud briefs answered yes while carrying no metadata header and a
+    copyright reading only '© 2026.' — a notice naming nobody. They passed every
+    guard for weeks because no guard looked INSIDE a file that had arrived.
+
+    So this one does: every content file must open with a YAML header and must
+    name its author somewhere in the text. The second half matters more than it
+    looks — a header is gone the instant the prose is pasted into a chat window,
+    which is precisely what this corpus is built to be used for.
+    """
+    z = zipfile.ZipFile(ZIP)
+    problems = []
+    for n in sorted(names):
+        if not n.endswith(".md") or NAVIGATIONAL.search(n):
+            continue
+        text = z.read(n).decode("utf-8", "replace")
+        if not text.lstrip().startswith("---"):
+            problems.append(f"{n}: no metadata header — it cannot identify itself on its own")
+        if ATTRIBUTION not in text:
+            problems.append(f"{n}: nothing names the author — it would travel unattributed")
+    return problems
 
 
 def audit() -> tuple:
@@ -346,6 +383,7 @@ def check() -> int:
     rows, problems, names = audit()
     if "START-HERE.md" not in names:
         problems.append("START-HERE.md is missing from the corpus")
+    problems += well_formed(names)
     # The export dialog quotes these numbers to the visitor. If the generated
     # summary no longer matches the zip, the dialog is describing an archive
     # that is not the one being served.
