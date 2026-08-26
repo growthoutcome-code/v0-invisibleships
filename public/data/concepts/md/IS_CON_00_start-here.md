@@ -3,9 +3,9 @@ id: IS-CON-00-START-HERE
 title: Concepts — start here
 collection: concepts
 doc_type: section-overview
-concept_count: 18
+concept_count: 19
 generated_by: scripts/export_concepts_md.mjs
-word_count: 382
+word_count: 396
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
@@ -13,7 +13,7 @@ copyright: © 2026 Sean C. Harris. All Rights Reserved.
 
 *Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Every concept below states its BASIS and its ORIGIN: a reader who rejects every `pattern` entry can still rely on every `documented` one, and the two are never blended inside one concept. Causes are reported as attributed, never asserted. See `meta/IS_META_disclaimer.md`.*
 
-**18 concepts.** Each is a self-contained file, safe to hand to
+**19 concepts.** Each is a self-contained file, safe to hand to
 an assistant on its own.
 
 ## How to read the basis label
@@ -29,7 +29,7 @@ A reader who rejects every `pattern` entry can still rely on every
 
 ## The concepts
 
-### documented (11)
+### documented (12)
 
 - **A regulator finding does not stop a deployment** `IS_CON_findings-dont-stop-deployment.md` · origin: ai
 - **Systems built for an emergency get switched off after it** `IS_CON_emergency-systems-withdrawn.md` · origin: ai
@@ -42,6 +42,7 @@ A reader who rejects every `pattern` entry can still rely on every
 - **The fentanyl reversal** `IS_CON_the-fentanyl-reversal.md` · origin: ai
 - **We're keeping you to ourselves** `IS_CON_ruin-first-then-rescue.md` · origin: author — *Not independently verified*
 - **An attack to force acknowledgment** `IS_CON_attack-to-force-acknowledgment.md` · origin: author — *Not independently verified*
+- **Are Denver citizens subject to acoustic weapons?** `IS_CON_denver-acoustic-weapons.md` · origin: author — *Not independently verified*
 
 ### structural (6)
 
