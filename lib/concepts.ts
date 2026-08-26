@@ -334,4 +334,34 @@ export const CONCEPTS: Concept[] = [
     referencesNote:
       "Each row states the structural observation and, separately, what it does not establish.",
   },
+  {
+    id: "ruin-first-then-rescue",
+    origin: "author",
+    basis: "documented",
+    title: "Ruin first, then rescue",
+    body:
+      "A reputation can be destroyed as a means rather than as an end. The tactic appears in several literatures that rarely cite one another. Intelligence tradecraft calls it compromise. East Germany's Stasi called it Zersetzung. Research on domestic abuse calls it isolation. Cult-exit and trafficking studies describe manufactured disgrace used for retention. The mechanism is the same in each. Sever the target's ties to everyone outside the group, and do it publicly, because public damage is self-sustaining — people withdraw on their own once a story circulates, and no further effort is required. The target's own account of what is happening then begins to sound like paranoia, which deepens the isolation again. What remains is a person with no relationships outside the group that ruined them. At that point recruitment needs no persuasion. It needs only to be the last door open. The cruelty is not a side effect of the recruitment. It is the method.",
+    evidence: [
+      "Stasi Richtlinie 1/76: Zersetzung as directed operational doctrine — psychological disintegration of a target without arrest or trial",
+      "Compromise sits alongside money, ideology and ego as one of the four classical recruitment levers in intelligence tradecraft",
+      "Coercive-control research treats isolation from a support network as the precondition for dependency, not as a byproduct of it",
+      "Trafficking and cult-exit studies record manufactured disgrace as a retention mechanism — the induced belief that no one else would now take you",
+      "eBay's campaign against two journalists is a documented civilian instance: seven employees federally charged, a $3m criminal penalty, a $55.7m civil settlement",
+    ],
+    questions: [
+      "Nothing here establishes that such a campaign is running against any particular person, including the author.",
+      "A tactic being historically documented does not make any present-day instance evidenced.",
+      "Separating an organised campaign from ordinary social withdrawal requires records a target generally cannot obtain. That is a property of the tactic, not proof that it is occurring.",
+    ],
+    references: [
+      { label: "Zersetzung tactics", href: "/glossary/zersetzung-tactics" },
+      { label: "Psychological smothering", href: "/glossary/psychological-smothering" },
+      { label: "Organised covert harassment is established fact", href: "/concepts#organised-harassment-is-fact" },
+    ],
+    referencesNote:
+      "The glossary entries define terms used on this site and are not independent evidence. The linked concept records decided and settled cases; this concept describes the mechanism those cases share.",
+    verification: "unverified",
+    disclaimer:
+      "This concept describes a documented tactic and the mechanism connecting its recorded forms. It does not establish that the tactic has been used against any particular person, including the author, or by any named organisation.",
+  },
 ];
