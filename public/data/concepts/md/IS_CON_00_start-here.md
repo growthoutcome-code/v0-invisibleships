@@ -3,9 +3,9 @@ id: IS-CON-00-START-HERE
 title: Concepts — start here
 collection: concepts
 doc_type: section-overview
-concept_count: 17
+concept_count: 18
 generated_by: scripts/export_concepts_md.mjs
-word_count: 369
+word_count: 381
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
@@ -13,7 +13,7 @@ copyright: © 2026 Sean C. Harris. All Rights Reserved.
 
 *Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Every concept below states its BASIS and its ORIGIN: a reader who rejects every `pattern` entry can still rely on every `documented` one, and the two are never blended inside one concept. Causes are reported as attributed, never asserted. See `meta/IS_META_disclaimer.md`.*
 
-**17 concepts.** Each is a self-contained file, safe to hand to
+**18 concepts.** Each is a self-contained file, safe to hand to
 an assistant on its own.
 
 ## How to read the basis label
@@ -29,7 +29,7 @@ A reader who rejects every `pattern` entry can still rely on every
 
 ## The concepts
 
-### documented (10)
+### documented (11)
 
 - **A regulator finding does not stop a deployment** `IS_CON_findings-dont-stop-deployment.md` · origin: ai
 - **Systems built for an emergency get switched off after it** `IS_CON_emergency-systems-withdrawn.md` · origin: ai
@@ -41,6 +41,7 @@ A reader who rejects every `pattern` entry can still rely on every
 - **Prescribing is not a measure of illness** `IS_CON_prescribing-is-not-prevalence.md` · origin: ai
 - **The fentanyl reversal** `IS_CON_the-fentanyl-reversal.md` · origin: ai
 - **Ruin first, then rescue** `IS_CON_ruin-first-then-rescue.md` · origin: author — *Not independently verified*
+- **An attack to force acknowledgment** `IS_CON_attack-to-force-acknowledgment.md` · origin: author — *Not independently verified*
 
 ### structural (6)
 

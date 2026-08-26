@@ -364,4 +364,32 @@ export const CONCEPTS: Concept[] = [
     disclaimer:
       "This concept describes a documented tactic and the mechanism connecting its recorded forms. It does not establish that the tactic has been used against any particular person, including the author, or by any named organisation.",
   },
+  {
+    id: "attack-to-force-acknowledgment",
+    origin: "author",
+    basis: "documented",
+    title: "An attack to force acknowledgment",
+    body:
+      "Violence is sometimes not aimed at a target's capacity. It is aimed at a target's response. Schelling separated two uses of force: deterrence stops an adversary from doing something, while compellence makes them do something, and works by inflicting harm that ends only when a demand is met. The harm is not the objective — it is the bargaining position. Terrorism research names a related form directly. Kydd and Walter catalogue provocation among five strategies: attack in order to goad the target into a reaction that serves the attacker, usually an overreaction that costs them legitimacy. A third variant belongs to gray-zone conflict, where an act is conducted deniably while its authorship is signalled privately. The victim is left without a good exit — acknowledge the attack publicly and concede a vulnerability, or absorb it in silence and let it continue. Attribution itself becomes the thing being fought over. What unites all three is that the demanded response IS the operation, not a side effect of it. An adversary who wants to be named is running a different operation from one who wants to stay hidden, and the difference shows in what they ask for.",
+    evidence: [
+      "Schelling, Arms and Influence (1966) — compellence against deterrence; the diplomacy of violence as bargaining rather than conquest",
+      "Kydd & Walter, 'The Strategies of Terrorism', International Security 31:1 (2006) — provocation as one of five catalogued strategies",
+      "Gray-zone doctrine: deniable action paired with private signalling of authorship, so attribution becomes the contested ground",
+      "Salami tactics — calibrating each act to stay below the threshold that would compel a formal response",
+    ],
+    questions: [
+      "Nothing here identifies any actor, state, campaign, technology or incident.",
+      "The concept describes what such an operation would look like. It does not establish that one is occurring, anywhere, against anyone.",
+      "A pattern fitting a strategic form is not evidence that the form is being executed. The same shape can be produced by unrelated events read together — which is the failure mode this concept is most likely to invite.",
+    ],
+    references: [
+      { label: "Next to each other is not because of each other", href: "/concepts#co-occurrence-is-not-cause" },
+      { label: "Ruin first, then rescue", href: "/concepts#ruin-first-then-rescue" },
+    ],
+    referencesNote:
+      "Both linked concepts are method, not corroboration. The first states why a pattern read across sources cannot establish a relation; the second describes a different documented tactic that shares the logic of harm used as leverage.",
+    verification: "unverified",
+    disclaimer:
+      "This concept describes doctrine recorded in the strategic and academic literature. It does not establish that any such operation has been conducted against the United States, against any other state, or against any individual, and it identifies no actor, technology or campaign.",
+  },
 ];
