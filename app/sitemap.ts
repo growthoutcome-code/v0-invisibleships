@@ -20,6 +20,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const sections: MetadataRoute.Sitemap = [
     { url: `${BASE}/`, lastModified: now, changeFrequency: "weekly", priority: 1.0 },
     { url: `${BASE}/journal`, lastModified: now, changeFrequency: "weekly", priority: 1.0 },
+    // Two URLs, one section. /data is the Research landing; /concepts opens the
+    // same section on its Concepts vertical. Both were indexed before the merge
+    // and both still resolve, so neither is dropped from the sitemap — removing
+    // /concepts would strand 35 anchors that have been shared.
     { url: `${BASE}/data`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/concepts`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/glossary`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },

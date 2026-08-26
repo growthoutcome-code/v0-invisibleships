@@ -12,8 +12,9 @@ const NAV: { t: Tab; label: string }[] = [
   { t: "journal", label: "Journal" },
   { t: "glossary", label: "Glossary" },
   { t: "documents", label: "Documents" },
-  { t: "data", label: "Data" },
-  { t: "concepts", label: "Concepts" },
+  // Data and Concepts merged on 26 Aug. One entry; Concepts is a vertical
+  // inside it, still addressable at /concepts for every link already shared.
+  { t: "data", label: "Research" },
 ];
 
 export default function Header({

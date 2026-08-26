@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import GatedApp from "@/components/GatedApp";
 
 export const metadata: Metadata = {
-  title: "Data — Invisible Ships",
-  description: "Government Cloud research: adoption, procurement, timeline, investment, litigation and capabilities.",
+  title: "Research — Invisible Ships",
+  description: "Government Cloud procurement, public health, crime, the master timeline, and the concepts drawn from all of them.",
   alternates: { canonical: "/data" },
 };
 
