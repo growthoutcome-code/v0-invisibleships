@@ -3,9 +3,9 @@ id: IS-CON-00-START-HERE
 title: Concepts — start here
 collection: concepts
 doc_type: section-overview
-concept_count: 30
+concept_count: 32
 generated_by: scripts/export_concepts_md.mjs
-word_count: 577
+word_count: 604
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
@@ -13,7 +13,7 @@ copyright: © 2026 Sean C. Harris. All Rights Reserved.
 
 *Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Every concept below states its BASIS and its ORIGIN: a reader who rejects every `pattern` entry can still rely on every `documented` one, and the two are never blended inside one concept. Causes are reported as attributed, never asserted. See `meta/IS_META_disclaimer.md`.*
 
-**30 concepts.** Each is a self-contained file, safe to hand to
+**32 concepts.** Each is a self-contained file, safe to hand to
 an assistant on its own.
 
 ## How to read the basis label
@@ -30,7 +30,7 @@ A reader who rejects every `pattern` entry can still rely on every
 
 ## The concepts
 
-### documented (22)
+### documented (24)
 
 - **A regulator finding does not stop a deployment** `IS_CON_findings-dont-stop-deployment.md` · origin: ai
 - **Systems built for an emergency get switched off after it** `IS_CON_emergency-systems-withdrawn.md` · origin: ai
@@ -54,6 +54,8 @@ A reader who rejects every `pattern` entry can still rely on every
 - **If nobody's house is haunted, what produces the feeling?** `IS_CON_what-produces-the-feeling.md` · origin: author — *Not independently verified*
 - **Have private contractors killed civilians and gone free?** `IS_CON_contractors-killed-and-freed.md` · origin: ai — *Not independently verified*
 - **Who profits from a body?** `IS_CON_who-profits-from-a-body.md` · origin: ai — *Not independently verified*
+- **What are children subject to?** `IS_CON_what-children-are-subject-to.md` · origin: ai — *Not independently verified*
+- **Why isn't any of this in the news?** `IS_CON_why-isnt-this-in-the-news.md` · origin: ai — *Not independently verified*
 
 ### structural (7)
 

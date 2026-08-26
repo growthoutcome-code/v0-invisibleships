@@ -790,4 +790,66 @@ export const CONCEPTS: Concept[] = [
     disclaimer:
       "This concept reports a published investigation into a lawful market. It makes no claim that any death was caused, hastened, or procured for the purpose of supplying it.",
   },
+  {
+    id: "what-children-are-subject-to",
+    origin: "ai",
+    basis: "documented",
+    title: "What are children subject to?",
+    body:
+      "In November 2020 the Tampa Bay Times published Targeted, an investigation into the Pasco County Sheriff's Office in Florida. The office had built a list of roughly 420 schoolchildren it considered likely future criminals. The children were not told. Their parents were not told. The school superintendent said he had not known the data was being used this way. The list was assembled from sixteen categories drawn from school records and state child-welfare data, and the categories are the part worth reading twice. A child could be flagged for grades of D or below, for three or more absences in a quarter, for discipline referrals — and for adverse childhood experiences, meaning abuse, witnessing violence, or having a parent incarcerated. A child who had been abused was thereby made more likely to appear on a police list of probable future offenders. The district's early-warning system covered more than thirty thousand middle and high school students, and the district paid the Sheriff's Office $2.3 million a year for thirty-two school resource officers. The programme was the subject of litigation and was settled in December 2024. Whatever else is or is not happening to children, this happened, was documented in detail, and required no capability that anyone would dispute exists.",
+    evidence: [
+      "'Targeted', Tampa Bay Times investigation, 19 November 2020",
+      "~420 children on a Pasco County Sheriff's Office list of likely future criminals; neither children nor parents informed",
+      "Sixteen flagging categories included D grades, three or more absences in a quarter, discipline referrals — and adverse childhood experiences: abuse, witnessing violence, parental incarceration",
+      "School district early-warning data covered 30,000+ middle and high school students",
+      "District paid the Sheriff's Office $2.3m a year for 32 school resource officers",
+      "The programme was litigated and settled in December 2024",
+    ],
+    questions: [
+      "This documents one county's programme. It does not establish how widespread the practice is, and this concept makes no claim about other jurisdictions.",
+      "It concerns lists, monitoring and police contact. It establishes nothing about any child being harmed, taken, or approached by anyone outside that programme.",
+      "The settlement resolved litigation. It is not a finding about what the data did to any individual child's life.",
+    ],
+    references: [
+      { label: "Targeted — Tampa Bay Times (2020)", href: "https://projects.tampabay.com/projects/2020/investigations/police-pasco-sheriff-targeted/school-data/" },
+      { label: "Why isn't any of this in the news?", href: "/concepts#why-isnt-this-in-the-news" },
+      { label: "There is no column for you", href: "/concepts#no-column-for-you" },
+    ],
+    referencesNote:
+      "The Times is cited for its own investigation. The linked concepts are adjacent arguments and neither corroborates this one.",
+    verification: "unverified",
+    disclaimer:
+      "This concept reports a published investigation into one county's programme. It makes no claim about any other jurisdiction, and none about harm to any individual child.",
+  },
+  {
+    id: "why-isnt-this-in-the-news",
+    origin: "ai",
+    basis: "documented",
+    title: "Why isn't any of this in the news?",
+    body:
+      "The usual assumption is that silence means suppression. There is a duller explanation with far better evidence behind it, and anyone reasoning about an absence of coverage should meet it first. Local journalism in the United States has collapsed. Northwestern's Medill School has tracked it annually; its 2025 State of Local News report counts nearly 3,500 newspapers gone since 2005 — close to forty per cent of all local papers in the country — with 136 lost in the last year alone. Two hundred and thirteen counties now have no local news source of any kind. A further 1,524 counties have exactly one, usually a weekly. Roughly fifty million Americans live with limited or no access to local news. More than 270,000 newspaper jobs have disappeared since 2005, a decline of over seventy-five per cent. So for a large part of the country, the question is not why reporters did not cover something. It is that there is no reporter. No one attends the council meeting, reads the court docket, or files the records request. Things do not go uncovered because they were buried; they go uncovered because the institution that used to notice them was dissolved for economic reasons over two decades, in public, with the numbers published every year. An absence of coverage is therefore very weak evidence of anything. It was weak evidence before any particular story existed.",
+    evidence: [
+      "Medill State of Local News report, 2025: nearly 3,500 newspapers lost since 2005, close to 40% of all US local papers",
+      "136 newspapers closed or merged in the last year alone",
+      "213 counties have no local news source at all; nearly 80% of them predominantly rural",
+      "1,524 further counties have only one outlet, usually a weekly",
+      "~50 million Americans live with limited or no access to local news",
+      "270,000+ newspaper jobs lost since 2005, a decline exceeding 75%",
+    ],
+    questions: [
+      "This explains why coverage is absent in general. It does not prove that no specific story was ever suppressed, and it is not offered as proof of that.",
+      "National outlets still exist. The collapse documented here is local, and the concept does not extend to national editorial decisions.",
+      "That an absence has an ordinary explanation does not establish that nothing happened. It establishes that the absence itself carries almost no information.",
+    ],
+    references: [
+      { label: "Medill State of Local News report — Nieman Lab summary (2025)", href: "https://www.niemanlab.org/2025/10/in-medills-latest-state-of-local-news-report-a-festering-20-year-old-problem-looms-larger-than-ever/" },
+      { label: "What are children subject to?", href: "/concepts#what-children-are-subject-to" },
+      { label: "Next to each other is not because of each other", href: "/concepts#co-occurrence-is-not-cause" },
+    ],
+    referencesNote:
+      "Medill is cited for its own annual count. The last link is method: this concept is about what an absence can and cannot support, which is the same discipline applied to a different kind of gap.",
+    verification: "unverified",
+    disclaimer:
+      "This concept reports published research on the decline of local news. It makes no claim about the editorial decisions of any outlet, and does not establish that any particular story was or was not suppressed.",
+  },
 ];
