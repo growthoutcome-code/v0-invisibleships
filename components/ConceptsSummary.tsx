@@ -15,8 +15,9 @@ import {
   type Basis,
   type Theme,
   type Audience,
+  type Filters,
 } from "@/lib/concepts";
-import { type Filters } from "@/components/ConceptsNav";
+import { NO_FILTERS } from "@/lib/concepts";
 
 /**
  * The three summaries a reader meets before the concept list (Sean, 2026-08-26).
@@ -178,7 +179,7 @@ export default function ConceptsSummary({ setFilters }: { setFilters: (f: Filter
   })).filter((r) => r.n > 0), []);
 
   const jump = (patch: Partial<Filters>, evt: string, key: string) => {
-    setFilters({ origin: "all", basis: "all", theme: "all", ...patch });
+    setFilters({ ...NO_FILTERS, ...patch });
     track(evt, { key });
     document.getElementById("concepts-list")?.scrollIntoView({ behavior: "smooth", block: "start" });
   };

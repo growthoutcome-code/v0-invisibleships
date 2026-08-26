@@ -4,10 +4,10 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { track } from "@/lib/analytics";
 import DisclaimerLink from "@/components/DisclaimerLink";
-import ConceptsNav, { type Filters } from "@/components/ConceptsNav";
+import ConceptsToolbar from "@/components/ConceptsToolbar";
 import SideNav, { useSectionNav } from "@/components/SideNav";
 import ConceptsSummary from "@/components/ConceptsSummary";
-import { CONCEPTS, BASIS_LABEL, BASIS_NOTE, ORIGIN_LABEL, ORIGIN_NOTE, VERIFICATION_LABEL, type Basis, type Origin } from "@/lib/concepts";
+import { CONCEPTS, NO_FILTERS, BASIS_LABEL, BASIS_NOTE, ORIGIN_LABEL, ORIGIN_NOTE, VERIFICATION_LABEL, type Basis, type Origin, type Filters } from "@/lib/concepts";
 
 const BASIS_ORDER: Basis[] = ["documented", "structural", "pattern", "testimony"];
 const ORIGIN_ORDER: Origin[] = ["ai", "author"];
@@ -20,7 +20,7 @@ const ORIGIN_ORDER: Origin[] = ["ai", "author"];
  * each claim is weighed on its own basis instead of by its neighbours.
  */
 export default function ConceptsView() {
-  const [filters, setFilters] = useState<Filters>({ origin: "all", basis: "all", theme: "all" });
+  const [filters, setFilters] = useState<Filters>(NO_FILTERS);
 
   useEffect(() => { track("concepts_viewed"); }, []);
 
@@ -28,7 +28,7 @@ export default function ConceptsView() {
   // so an incoming hash clears the filters before the browser scrolls.
   useEffect(() => {
     if (typeof window === "undefined" || !window.location.hash) return;
-    setFilters({ origin: "all", basis: "all", theme: "all" });
+    setFilters(NO_FILTERS);
     const id = window.location.hash.slice(1);
     const t = window.setTimeout(() => {
       document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -37,12 +37,23 @@ export default function ConceptsView() {
   }, []);
 
   const visible = useMemo(
-    () => CONCEPTS.filter(
-      (c) =>
-        (filters.origin === "all" || c.origin === filters.origin) &&
-        (filters.basis === "all" || c.basis === filters.basis) &&
-        (filters.theme === "all" || c.theme === filters.theme)
-    ),
+    () => {
+      // Search reads the parts a person would actually remember: the claim, the
+      // argument, the figures, and what it admits it cannot answer.
+      const q = filters.q.trim().toLowerCase();
+      const hit = (c: (typeof CONCEPTS)[number]) =>
+        !q ||
+        [c.title, c.body, ...(c.evidence ?? []), ...(c.questions ?? [])]
+          .join(" ").toLowerCase().includes(q);
+      return CONCEPTS.filter(
+        (c) =>
+          hit(c) &&
+          (filters.origin === "all" || c.origin === filters.origin) &&
+          (filters.basis === "all" || c.basis === filters.basis) &&
+          (filters.theme === "all" || c.theme === filters.theme) &&
+          (filters.audience === "all" || c.audience.includes(filters.audience))
+      );
+    },
     [filters]
   );
 
@@ -111,7 +122,15 @@ export default function ConceptsView() {
 
       <ConceptsSummary setFilters={setFilters} />
 
-      <ConceptsNav filters={filters} setFilters={setFilters} shown={visible.length} />
+      <h2 className="font-display font-semibold text-foreground text-[26px] md:text-[30px] leading-tight mb-2">
+        The concepts
+      </h2>
+      <p className="body-copy text-foreground/85 measure mb-6">
+        All {CONCEPTS.length}, newest last. Search the text, or filter by what a concept is about,
+        what it rests on, who formed it, and who it is for.
+      </p>
+
+      <ConceptsToolbar filters={filters} setFilters={setFilters} shown={visible.length} />
 
       <ol id="concepts-list" className="list-none p-0 m-0 scroll-mt-28">
         {visible.map((c) => (
@@ -264,7 +283,7 @@ export default function ConceptsView() {
 
       {!visible.length && (
         <p className="body-copy text-muted measure mb-16">
-          No concepts match that combination. Clear a filter to see the rest.
+          Nothing matches that. Clear a filter or the search to see the rest.
         </p>
       )}
 

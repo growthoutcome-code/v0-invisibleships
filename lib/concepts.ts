@@ -108,6 +108,23 @@ export const VERIFICATION_LABEL: Record<Verification, string> = {
   verified: "Independently verified",
 };
 
+/**
+ * The state of the concept list's controls, in one place because three
+ * components read it: the toolbar sets it, the summary jumps into it, and the
+ * view applies it. `q` is free text; the rest are the four axes.
+ */
+export type Filters = {
+  q: string;
+  origin: Origin | "all";
+  basis: Basis | "all";
+  theme: Theme | "all";
+  audience: Audience | "all";
+};
+
+export const NO_FILTERS: Filters = {
+  q: "", origin: "all", basis: "all", theme: "all", audience: "all",
+};
+
 export const AUDIENCE_LABEL: Record<Audience, string> = {
   household: "Households and individuals",
   investigators: "Law enforcement and investigators",
