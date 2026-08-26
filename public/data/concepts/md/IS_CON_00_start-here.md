@@ -3,9 +3,9 @@ id: IS-CON-00-START-HERE
 title: Concepts — start here
 collection: concepts
 doc_type: section-overview
-concept_count: 26
+concept_count: 28
 generated_by: scripts/export_concepts_md.mjs
-word_count: 521
+word_count: 550
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
@@ -13,7 +13,7 @@ copyright: © 2026 Sean C. Harris. All Rights Reserved.
 
 *Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Every concept below states its BASIS and its ORIGIN: a reader who rejects every `pattern` entry can still rely on every `documented` one, and the two are never blended inside one concept. Causes are reported as attributed, never asserted. See `meta/IS_META_disclaimer.md`.*
 
-**26 concepts.** Each is a self-contained file, safe to hand to
+**28 concepts.** Each is a self-contained file, safe to hand to
 an assistant on its own.
 
 ## How to read the basis label
@@ -30,7 +30,7 @@ A reader who rejects every `pattern` entry can still rely on every
 
 ## The concepts
 
-### documented (18)
+### documented (20)
 
 - **A regulator finding does not stop a deployment** `IS_CON_findings-dont-stop-deployment.md` · origin: ai
 - **Systems built for an emergency get switched off after it** `IS_CON_emergency-systems-withdrawn.md` · origin: ai
@@ -50,6 +50,8 @@ A reader who rejects every `pattern` entry can still rely on every
 - **Why did legislatures write laws for neural data?** `IS_CON_law-for-neural-data.md` · origin: ai — *Not independently verified*
 - **Can a machine read what you are thinking?** `IS_CON_can-a-machine-read-thought.md` · origin: ai — *Not independently verified*
 - **Did anyone try to build a way in without surgery?** `IS_CON_nonsurgical-by-design.md` · origin: ai — *Not independently verified*
+- **Does the explanation itself do harm?** `IS_CON_explanation-is-part-of-the-harm.md` · origin: author — *Not independently verified*
+- **If nobody's house is haunted, what produces the feeling?** `IS_CON_what-produces-the-feeling.md` · origin: author — *Not independently verified*
 
 ### structural (7)
 
