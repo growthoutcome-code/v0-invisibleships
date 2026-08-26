@@ -1824,6 +1824,10 @@ for (const [label, script, remedy] of [
    "node scripts/export_concepts_md.mjs && node scripts/export_site_content_md.mjs && python3 scripts/sync_corpus_site.py"],
   ["corpus completeness", "scripts/build_corpus_index.py",
    "bash scripts/build_crime_all.sh"],
+  // Fails only on LOSS, never on addition. Added 26 Aug alongside the Data and
+  // Concepts merge, so that "nothing was deleted" is a test rather than a claim.
+  ["content inventory", "scripts/check_content_inventory.py",
+   "python3 scripts/check_content_inventory.py --update  (only if the removal was intended)"],
 ]) {
   try {
     const out = execFileSync("python3", [script, "--check"], {
