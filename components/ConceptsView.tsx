@@ -6,6 +6,7 @@ import { track } from "@/lib/analytics";
 import DisclaimerLink from "@/components/DisclaimerLink";
 import ConceptsNav, { type Filters } from "@/components/ConceptsNav";
 import SideNav, { useSectionNav } from "@/components/SideNav";
+import ConceptsSummary from "@/components/ConceptsSummary";
 import { CONCEPTS, BASIS_LABEL, BASIS_NOTE, ORIGIN_LABEL, ORIGIN_NOTE, VERIFICATION_LABEL, type Basis, type Origin } from "@/lib/concepts";
 
 const BASIS_ORDER: Basis[] = ["documented", "structural", "pattern", "testimony"];
@@ -108,9 +109,11 @@ export default function ConceptsView() {
       </div>
       )}
 
+      <ConceptsSummary setFilters={setFilters} />
+
       <ConceptsNav filters={filters} setFilters={setFilters} shown={visible.length} />
 
-      <ol className="list-none p-0 m-0">
+      <ol id="concepts-list" className="list-none p-0 m-0 scroll-mt-28">
         {visible.map((c) => (
           <li key={c.id} id={c.id} className="mb-20 scroll-mt-28">
             <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2 mb-3">

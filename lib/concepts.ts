@@ -38,6 +38,9 @@ export type Verification = "unverified" | "partially_verified" | "verified";
  * concern neurotechnology or that nine are really about method. Theme is the
  * subject axis and carries no evidential weight whatever.
  */
+export type Audience =
+  | "household" | "investigators" | "policy" | "clinicians" | "press";
+
 export type Theme =
   | "record" | "procurement" | "surveillance"
   | "neurotech" | "coercion" | "health" | "experience";
@@ -48,6 +51,13 @@ export type Concept = {
   basis: Basis;
   /** Subject axis. Required, so a new concept cannot be added without one. */
   theme: Theme;
+  /**
+   * Who this is USEFUL to — a fourth axis, and the only one about the reader
+   * rather than the claim. Array-valued because a concept usually serves more
+   * than one. Carries no evidential weight; a household entry is not weaker
+   * than a policy one.
+   */
+  audience: Audience[];
   title: string;
   body: string;
   /** Short evidence lines. Kept as text where a stable public URL isn't recorded. */
@@ -96,6 +106,22 @@ export const VERIFICATION_LABEL: Record<Verification, string> = {
   unverified: "Not independently verified",
   partially_verified: "Partially verified",
   verified: "Independently verified",
+};
+
+export const AUDIENCE_LABEL: Record<Audience, string> = {
+  household: "Households and individuals",
+  investigators: "Law enforcement and investigators",
+  policy: "Legislators and regulators",
+  clinicians: "Clinicians",
+  press: "Press and researchers",
+};
+
+export const AUDIENCE_NOTE: Record<Audience, string> = {
+  household: "For a person who thinks something is happening to them, or to someone they live with.",
+  investigators: "For anyone whose job is to establish what happened and to whom.",
+  policy: "For anyone writing or enforcing a rule about any of this.",
+  clinicians: "For anyone a frightened person is likely to reach first.",
+  press: "For anyone who has to decide whether a claim can be published.",
 };
 
 export const THEME_LABEL: Record<Theme, string> = {
@@ -148,6 +174,7 @@ export const CONCEPTS: Concept[] = [
     origin: "ai",
     basis: "structural",
     theme: "record",
+    audience: ["investigators", "press"],
     title: "There is no column for you",
     body:
       "This research can describe who sells the technology, who buys it, what they paid, when the contract renews, which law applies and how mature each rollout is. Across eleven tables and 1,922 records, the person a system is used on appears in exactly one place: as someone who sued. Rollout maturity is even measured on a scale that runs from innovator to laggard — the buyer's vocabulary, end to end.",
@@ -162,6 +189,7 @@ export const CONCEPTS: Concept[] = [
     origin: "ai",
     basis: "structural",
     theme: "procurement",
+    audience: ["investigators", "policy"],
     title: "Accountability isn't wired to deployment, even in the schema",
     body:
       "Litigation records carry a vendor, a domain, a court and an outcome — but nothing links a ruling to the specific systems it concerned. A finding and the deployments it should govern cannot be joined. The accountability gap is not only a policy problem; it is visible as a missing relationship in the data model.",
@@ -175,6 +203,7 @@ export const CONCEPTS: Concept[] = [
     origin: "ai",
     basis: "documented",
     theme: "procurement",
+    audience: ["policy"],
     title: "A regulator finding does not stop a deployment",
     body:
       "Data-protection authorities in seven countries have each found against the same company for collecting people's biometric data without consent. The operation continues. A ruling, on this record, is a cost rather than a stop.",
@@ -188,6 +217,7 @@ export const CONCEPTS: Concept[] = [
     origin: "ai",
     basis: "structural",
     theme: "procurement",
+    audience: ["policy"],
     title: "Systems built for an emergency get switched off after it",
     body:
       "Ten of the fourteen pandemic-response deployments in this record are decommissioned. The arrival of a capability is not a commitment to maintain it — which matters most for anyone who came to depend on one.",
@@ -201,6 +231,7 @@ export const CONCEPTS: Concept[] = [
     origin: "ai",
     basis: "documented",
     theme: "coercion",
+    audience: ["investigators", "press"],
     title: "Organised covert harassment of individuals is established fact",
     body:
       "Not a theory, and not confined to states. Seven decided or settled cases in this record describe sustained, deniable targeting of named people — by police forces and by corporations. Two further entries are included as context and as a contested case, and are labelled as such rather than counted alongside these.",
@@ -218,6 +249,7 @@ export const CONCEPTS: Concept[] = [
     origin: "ai",
     basis: "structural",
     theme: "record",
+    audience: ["press"],
     title: "“Official” is not the same as “independent”",
     body:
       "73 of the 87 vendor-published sources in this research carry the top evidence tier. That is defensible for a fact like which company won which contract, and it is not the same as independent confirmation. Stated here because a reader deserves to weigh it, and because the limits of a record are part of the record.",
@@ -232,6 +264,7 @@ export const CONCEPTS: Concept[] = [
     origin: "ai",
     basis: "documented",
     theme: "procurement",
+    audience: ["policy"],
     title: "Fined in Europe, hired in America",
     body:
       "One facial-recognition company has been fined roughly €90 million by four European regulators for collecting people's faces without asking, and ordered to delete data in Australia and Canada. Over the same period, US Immigration and Customs Enforcement paid it $12.75 million — one of those the largest facial-recognition purchase ICE has made. Its American class-action settlement was paid in company shares rather than cash. One arm of government is penalising what another arm is buying, and nothing in this record shows the two ever meeting.",
@@ -247,6 +280,7 @@ export const CONCEPTS: Concept[] = [
     origin: "ai",
     basis: "structural",
     theme: "procurement",
+    audience: ["policy"],
     title: "A law saying “keep it local” doesn’t keep it local",
     body:
       "Twenty countries in this record have rules requiring government data to stay within their borders. In ten of the countries where we can see actual deployments, most government workloads still run on American companies anyway. The only places where that genuinely changes are the ones that shut those companies out altogether — and even there, the few remaining records are exits rather than operations.",
@@ -262,6 +296,7 @@ export const CONCEPTS: Concept[] = [
     origin: "ai",
     basis: "structural",
     theme: "record",
+    audience: ["policy", "press"],
     title: "The headline spending figure is not what governments spent",
     body:
       "Add up every value in this dataset and you get about $102.8 billion. Roughly a third of that is not government money at all — it is companies announcing their own investments: a data-centre expansion in Saudi Arabia, a stake bought in another firm. And one $9 billion US defence contract is counted four separate times, once for each supplier on it. We are pointing this out about our own dataset because anyone quoting the total as government spending would be wrong.",
@@ -277,6 +312,7 @@ export const CONCEPTS: Concept[] = [
     origin: "ai",
     basis: "structural",
     theme: "record",
+    audience: ["press"],
     title: "We cannot prove which came first, the law or the system",
     body:
       "The timeline shows laws and deployments together, and it is tempting to read cause into the order they appear. The data does not support that reading. The fields built to link one event to another were never filled in, and the deployment records carry no date at all. Thirty-two events are tagged with labels like “law follows capability”, but those tags point at nothing. Treat the timeline as two stories shown side by side, not as one causing the other.",
@@ -292,6 +328,7 @@ export const CONCEPTS: Concept[] = [
     origin: "author",
     basis: "testimony",
     theme: "experience",
+    audience: ["household"],
     title: "Has an attack happened?",
     body:
       "The author reports experiences interpreted as possible unconsented-to auditory or neurological communication, along with perceived coercive messages, including messages related to self-harm. The author does not know the mechanism and raises possible explanations only as hypotheses. This is a dated record of reported experience, not evidence that any particular technology, transmission infrastructure, person, organization, or coordinated campaign is responsible. No conclusion should be drawn without independent technical testing, corroboration, and reliable records.",
@@ -325,6 +362,7 @@ export const CONCEPTS: Concept[] = [
     origin: "ai",
     basis: "documented",
     theme: "health",
+    audience: ["clinicians"],
     title: "The world's suicide rate fell. The United States' rose.",
     body:
       "Between 2000 and 2021, on the one basis that allows countries to be compared at all, the world's suicide rate fell 27%. Most countries fell with it — Russia by 60%, China by 42%, Israel by 36%, Japan by 28%, India by 21%. Over the same years the United States rose 40%, in a steady climb rather than a spike. It is not alone in rising: South Korea rose further, and the UK, Australia and the West Bank & Gaza were effectively flat. But among large wealthy countries the American direction is the outlier, and the gap is not small — 67 percentage points between the US and the world it is usually compared to.",
@@ -347,6 +385,7 @@ export const CONCEPTS: Concept[] = [
     origin: "ai",
     basis: "documented",
     theme: "record",
+    audience: ["clinicians", "press"],
     title: "The numbers under the numbers",
     body:
       "A country reporting few suicides may have few suicides, or may not be counting them. The West Bank & Gaza record 0.65 deaths per 100,000 — which would be the lowest rate on earth by a wide margin, and much more plausibly measures a fragmented registration system in a region where the death is heavily stigmatised. Russia's falling rate runs alongside a rising share of deaths filed as \u201Cundetermined intent\u201D. India's official figures are police reports; verbal-autopsy studies find substantially more. In at least 24 countries suicide or its attempt is a criminal matter, which suppresses both help-seeking and recording. WHO's own position is that most member states lack vital registration good enough for this purpose, and that roughly one suicide in six goes missing worldwide — one in three in lower-income countries. The register that documents this is not a footnote to the chart. It is the finding: a low number is sometimes a fact about a country, and sometimes a fact about its filing.",
@@ -368,6 +407,7 @@ export const CONCEPTS: Concept[] = [
     origin: "ai",
     basis: "documented",
     theme: "record",
+    audience: ["clinicians"],
     title: "Prescribing is not a measure of illness",
     body:
       "It is tempting to read prescription volume as a thermometer for how ill a population is. The record does not support that, in either direction. In England, antidepressant items rose 50% in nine years while hypnotic and anxiolytic items FELL 16% over exactly the same period, from the same prescribers under the same system. In the United States, antipsychotic use among adults rose from 1.9% to 3.0%, while among children and adolescents it fell, 1.3% to 1.1%. And where a national registry lets diagnosis be counted directly, Denmark's new schizophrenia diagnoses went slightly down, 1.8 to 1.6 per 10,000, across eighteen years in which antipsychotic prescribing rose almost everywhere it was measured. Prescribing moves for its own reasons — guidance, capacity, recognition, duration of treatment, the licensing of new drugs, deliberate deprescribing campaigns. Sometimes it tracks illness. Here it demonstrably moves in opposite directions at once.",
@@ -389,6 +429,7 @@ export const CONCEPTS: Concept[] = [
     origin: "ai",
     basis: "documented",
     theme: "health",
+    audience: ["clinicians"],
     title: "The fentanyl reversal",
     body:
       "American overdose deaths went from 16,849 in 1999 to 107,941 in 2022 — more than six times as many in twenty-three years, with the steepest acceleration after illicit fentanyl entered the supply in 2013, and the single largest one-year rise in 2020. Then it turned: down 26.2% in 2024, the largest one-year fall on record, and lower again in 2025. Both directions belong in the record, and the reversal is the more unusual event — this is a curve that had only ever gone one way. But it runs down from a peak that did not exist a generation ago. Provisional 2025 is still roughly four times the 1999 count. A chart that began at the peak would show only the good news; a chart that stopped at the peak would show only the bad.",
@@ -409,6 +450,7 @@ export const CONCEPTS: Concept[] = [
     origin: "author",
     basis: "structural",
     theme: "record",
+    audience: ["press"],
     title: "Next to each other is not because of each other",
     body:
       "This site puts a procurement record and a public-health record on one clock. That is a deliberate choice and a dangerous one, because a timeline is very good at implying something it cannot show. Two things happening in the same year is a co-occurrence. It is not evidence that one caused the other, and no amount of caption underneath undoes what a picture asserts. So the two datasets are kept structurally apart. They do not corroborate each other and the site says so wherever they appear together. The overlaps register states, for every row, what that row does NOT show. Vertical markers for contracts and statutes were proposed for the suicide chart and deliberately left off — the only overlay it carries is the COVID-19 timeline, because that is a global health event with a documented literature on mental health, and even that is a toggle. The discipline costs something. It makes the work less immediately persuasive. That is the trade being made on purpose.",
@@ -430,6 +472,7 @@ export const CONCEPTS: Concept[] = [
     origin: "author",
     basis: "documented",
     theme: "coercion",
+    audience: ["household", "investigators"],
     title: "We're keeping you to ourselves",
     body:
       "A reputation can be destroyed as a means rather than as an end. The tactic appears in several literatures that rarely cite one another. Intelligence tradecraft calls it compromise. East Germany's Stasi called it Zersetzung. Research on domestic abuse calls it isolation. Cult-exit and trafficking studies describe manufactured disgrace used for retention. The mechanism is the same in each. Sever the target's ties to everyone outside the group, and do it publicly, because public damage is self-sustaining — people withdraw on their own once a story circulates, and no further effort is required. The target's own account of what is happening then begins to sound like paranoia, which deepens the isolation again. What remains is a person with no relationships outside the group that ruined them. At that point recruitment needs no persuasion. It needs only to be the last door open. Stated from the inside, the logic is possessive rather than punitive: every tie severed is a tie that cannot compete, and the point of the ruin is not that the target suffers but that nobody else is left. The cruelty is not a side effect of the recruitment. It is the method.",
@@ -461,6 +504,7 @@ export const CONCEPTS: Concept[] = [
     origin: "author",
     basis: "documented",
     theme: "coercion",
+    audience: ["investigators"],
     title: "An attack to force acknowledgment",
     body:
       "Violence is sometimes not aimed at a target's capacity. It is aimed at a target's response. Schelling separated two uses of force: deterrence stops an adversary from doing something, while compellence makes them do something, and works by inflicting harm that ends only when a demand is met. The harm is not the objective — it is the bargaining position. Terrorism research names a related form directly. Kydd and Walter catalogue provocation among five strategies: attack in order to goad the target into a reaction that serves the attacker, usually an overreaction that costs them legitimacy. A third variant belongs to gray-zone conflict, where an act is conducted deniably while its authorship is signalled privately. The victim is left without a good exit — acknowledge the attack publicly and concede a vulnerability, or absorb it in silence and let it continue. Attribution itself becomes the thing being fought over. What unites all three is that the demanded response IS the operation, not a side effect of it. An adversary who wants to be named is running a different operation from one who wants to stay hidden, and the difference shows in what they ask for.",
@@ -490,6 +534,7 @@ export const CONCEPTS: Concept[] = [
     origin: "author",
     basis: "documented",
     theme: "coercion",
+    audience: ["household", "investigators"],
     title: "Are Denver citizens subject to acoustic weapons?",
     body:
       "Acoustic weapons are real, commercially sold, and owned by American police departments. Genasys, formerly LRAD Corporation, markets long-range acoustic devices to law enforcement, and what they do to people has been litigated. In Edrei v. Bratton the Second Circuit held that using one against non-violent, non-resisting protesters can violate the Fourteenth Amendment. The device in that case, a Model 100X, produces up to 136 decibels at one metre; the NYPD's own testing recorded 110 decibels at 320 feet in area-denial mode, and hearing loss can follow short exposure at 110 to 120 decibels. Plaintiffs reported tinnitus, vertigo, migraines, and in one case nerve damage requiring steroid treatment. The court's reasoning was that novel technology does not escape proportionality review. So the general question is settled: the devices exist, police own them, and a federal appeals court has held their use can be excessive force. The Denver question is answered differently by the public record. The largest adjudicated case of Denver police force against citizens is Epps v. City and County of Denver, where a federal jury awarded $14 million in March 2022, upheld by the Tenth Circuit in April 2026 at $14.75 million. The force documented there was shotgun rounds, flash-bang grenades and chemical agents. Acoustic devices are not part of that record. One property matters for anyone trying to answer this for themselves. An acoustic weapon projects ordinary sound through air in a directional beam: everyone in the beam hears it, a phone left recording captures it, and a decibel meter registers it. It is not a covert instrument, which means its use is testable by anyone who suspects it.",
@@ -521,6 +566,7 @@ export const CONCEPTS: Concept[] = [
     origin: "author",
     basis: "documented",
     theme: "surveillance",
+    audience: ["household", "investigators"],
     title: "Are people made into intelligence assets without knowing it?",
     body:
       "Intelligence tradecraft has always separated a witting source from an unwitting one. A person can supply information without knowing who receives it, or that anyone does. What changed is scale, and it required nobody's cooperation. American law enforcement agencies buy location data that phones emit continuously. The Electronic Frontier Foundation's investigation into Fog Data Science documented a company selling local police searchable access to billions of location signals harvested from ordinary apps, at prices small departments could afford. Babel Street's Locate X offered comparable capability, and EPIC obtained records of Customs and Border Protection's use of it. The mechanism is commercial: brokers buy from the advertising ecosystem and agencies buy from brokers. No warrant is involved because no compulsion is involved. The result is a population of unwitting sources. A person carrying a phone generates a record of where they went, who they were near and for how long, and that record is purchasable. They were never approached, never recruited, and are never harassed — because harassment would defeat the purpose. The value of an unwitting asset lies precisely in their not knowing. What this does not describe is access to perception. No documented capability reads a person's eyesight, and the mechanism above does not require one. What people already emit is sufficient.",
@@ -551,6 +597,7 @@ export const CONCEPTS: Concept[] = [
     origin: "author",
     basis: "documented",
     theme: "surveillance",
+    audience: ["press"],
     title: "Does being watched change what people let themselves think?",
     body:
       "Amnesty International's 2023 report Automated Apartheid documented facial-recognition systems, Red Wolf and Blue Wolf among them, used to control Palestinian movement in the occupied territories, with residents describing repeated identification at checkpoints as a condition of ordinary life. Palestinians interviewed described the effect in consistent and non-technical terms: there was no space left in which to think privately. That effect is measurable, and it has been measured in the United States. Jonathon Penney, writing in the Berkeley Technology Law Journal in 2016, examined Wikipedia traffic to privacy-sensitive articles before and after June 2013, when the NSA and PRISM disclosures became public. He found a statistically significant immediate decline, with evidence that it persisted. People stopped looking things up. Nobody instructed them to. The migration of such tools is documented too. Julian Go, in the American Journal of Sociology, traces how instruments and doctrines developed for imperial control returned to domestic American policing; cell-site simulators reached local departments from military origins by the same route. The pattern is old enough to carry a name in the literature. So the question worth asking is not whether America has some particular system. It is narrower and answerable: given that capabilities move from conflict territory to domestic policing, and that surveillance measurably changes what people do, what has already arrived here, and what has it already changed?",
@@ -581,6 +628,7 @@ export const CONCEPTS: Concept[] = [
     origin: "ai",
     basis: "documented",
     theme: "neurotech",
+    audience: ["household", "policy"],
     title: "Who owns what your brain emits?",
     body:
       "Consumer neurotechnology already exists and is already sold: EEG headbands for meditation, focus trackers, sleep monitors, gaming headsets. In April 2024 the Neurorights Foundation published an assessment of the privacy practices of thirty such companies. Twenty-nine of the thirty appeared to have access to the consumer's neural data with no meaningful limitation on that access. Twenty-nine could transfer data to third parties, and twenty said so explicitly. Fewer than half — fourteen of thirty — gave the consumer any stated right to delete it. Only twelve offered both withdrawal of consent and deletion. Eight had no publicly available privacy policy at all. Nothing here was hidden. These are the companies' own published terms, read carefully by people who then counted. The question of who owns what a brain emits is not waiting on some future technology to become urgent. It was answered commercially, in advance, in documents nobody reads.",
@@ -612,6 +660,7 @@ export const CONCEPTS: Concept[] = [
     origin: "ai",
     basis: "documented",
     theme: "neurotech",
+    audience: ["policy"],
     title: "Why did legislatures write laws for neural data?",
     body:
       "Legislatures rarely move early. On neural data, three of them did. Colorado passed HB24-1058 in 2024, amending its consumer privacy act to require express consent before neural data is collected or used, separate consent or an opt-out before it goes to a third party, and a route for a person to have it deleted. California did the same through SB 1223, folding neural data into the categories its privacy act treats as sensitive. Montana went further from a different direction, adding neural data to its genetic information privacy act, effective October 2025. What is notable is not the content but the margins: these passed unanimously or nearly so, in a period when almost nothing does. A category of information most people have never heard of was given statutory protection by bipartisan votes in three states. Either those legislatures were persuaded that a capability exists worth regulating, or they were persuaded one is close enough that waiting was the greater risk. The record shows the votes. It does not show which of those two it was.",
@@ -643,6 +692,7 @@ export const CONCEPTS: Concept[] = [
     origin: "ai",
     basis: "documented",
     theme: "neurotech",
+    audience: ["clinicians"],
     title: "Can a machine read what you are thinking?",
     body:
       "Partly, under conditions that are worth stating precisely. In May 2023 Jerry Tang and Alexander Huth published a semantic decoder in Nature Neuroscience that reconstructed continuous language from non-invasive brain recordings. A person lay in an fMRI scanner; a transformer model turned the blood-flow signal into text that captured the gist of what they were hearing or imagining, matching the intended meaning roughly half the time. It is a real result and it was replicated in the paper across participants. The conditions are as important as the finding. The decoder required about fifteen hours of scanner time per person to train, and it worked only for the individual it was trained on — run against an untrained person, it produced unintelligible output. It worked only with willing participants. And when a trained subject deliberately resisted, by counting, naming animals or telling themselves a different story, the decoder failed entirely. The researchers tested that on purpose and reported it. So the honest answer is that meaning can be partially reconstructed from a cooperative, individually-trained person lying still inside a superconducting magnet the size of a small room. That is a genuine advance in decoding, and it is a long way from reading a mind that does not wish to be read.",
@@ -674,6 +724,7 @@ export const CONCEPTS: Concept[] = [
     origin: "ai",
     basis: "documented",
     theme: "neurotech",
+    audience: ["policy"],
     title: "Did anyone try to build a way in without surgery?",
     body:
       "Yes, openly, and the programme documents say so. DARPA's Next-Generation Nonsurgical Neurotechnology programme — N3 — set out, in its own words, to develop high-performance bi-directional brain-machine interfaces for able-bodied service members. Bi-directional means read and write. Able-bodied means the purpose was not restoring lost function; the stated applications were controlling unmanned vehicles and cyber-defence systems. Six teams were funded in 2019. The published performance targets were specific: sixteen independent channels, within sixteen cubic millimetres of neural tissue, at fifty milliseconds of latency, using light, acoustic or electromagnetic energy rather than implanted electrodes. The programme is now listed as complete and retained for reference. What this establishes is intent and investment, publicly recorded. It does not establish that the targets were met, and the targets themselves describe a person wearing equipment, not a person at a distance.",
@@ -705,6 +756,7 @@ export const CONCEPTS: Concept[] = [
     origin: "ai",
     basis: "structural",
     theme: "record",
+    audience: ["household", "press"],
     title: "What would it actually take to do this without consent?",
     body:
       "The three concepts alongside this one describe what the public record contains: consumer devices whose makers reserve broad rights over neural data, three states legislating that data as sensitive, a decoder that partially reconstructs meaning, and a defence programme that funded a nonsurgical interface with published targets. Setting them side by side makes the boundary visible, and the boundary is the useful part. Every documented capability requires at least one of three things: physical contact with the head, a cooperative and individually trained subject, or equipment the person is inside or wearing. The decoder needed fifteen hours per person and failed against an untrained subject, and failed again when a trained one resisted. The DARPA targets describe sixteen channels within sixteen cubic millimetres — a wearable interface on an operator who put it on. Consumer EEG reads voltage at the scalp through electrodes touching it. Not one documented system operates at distance on a person who has not participated. That is not an argument that nothing could ever be built. It is a statement of where the published record currently stops, offered because a person who suspects something is happening to them deserves to know what the actual state of the art requires — and because a claim that outruns it should be recognisable as doing so.",
@@ -736,6 +788,7 @@ export const CONCEPTS: Concept[] = [
     origin: "author",
     basis: "documented",
     theme: "coercion",
+    audience: ["household", "clinicians"],
     title: "Does the explanation itself do harm?",
     body:
       "An unexplained experience arrives without a label. Whatever attaches to it next does real work: it decides what the person does, who they trust, and whether they seek help. Claiming supernatural or superhuman authority in order to secure compliance is among the oldest documented methods of control. Spiritualist mediums worked bereaved families with cold reading and staged effects, and the Fox sisters, who began the movement, confessed the fraud in 1888. Faith healers have been prosecuted for it. Research on coercive groups records claimed transcendent authority as a standard instrument for overriding a member's own judgment, because an authority that cannot be checked cannot be argued with. The public-safety consequence is separate from whether any given experience has an external cause. A person who attributes what is happening to them to spirits, to extraterrestrials, or to any agency beyond reach will not pursue the remedies that exist for causes within reach: a physician, a lawyer, a police report, a decibel meter, a technical measurement. The explanation forecloses the response, and it does so whether it was handed to the person or arrived at alone. The same logic applies to any framing that places a cause beyond investigation, including the framings on this site. A concept that names this risk and exempts itself from it has not understood it.",
@@ -766,6 +819,7 @@ export const CONCEPTS: Concept[] = [
     origin: "author",
     basis: "documented",
     theme: "experience",
+    audience: ["household", "clinicians"],
     title: "If nobody's house is haunted, what produces the feeling?",
     body:
       "A feeling of presence — someone in the room, standing behind you, touching you — can be produced on demand in a laboratory, in healthy people, with no drug and no external agent. In 2014 Olaf Blanke's group published an experiment in Current Biology using a master-slave robot. A blindfolded participant moved a lever in front of them while a robot arm behind them reproduced the movement against their back. When the reproduction was simultaneous, participants felt themselves touching their own back. When it was delayed by a fraction of a second, the brain could no longer attribute the touch to the person's own movement, and resolved the conflict by generating somebody else. Of thirty healthy participants, roughly a third spontaneously reported feeling someone behind them, touching them. Some reported several people. Two found it distressing enough to ask that the experiment stop. A pooled analysis across twenty-five such experiments has since been published. The direction of that finding is the point. The presence was not detected. It was manufactured by the participant's own nervous system out of a half-second timing error, with nobody there. Other findings converge. Sleep paralysis produces felt presence, chest pressure and an inability to move, and the cross-cultural literature records the same physiology interpreted as demons, witches, spirits or visitors depending on where the sleeper grew up. And when researchers tested the best-known claim that electromagnetic fields induce a sensed presence, it failed to replicate: Granqvist and colleagues reported in 2005 that the experiences tracked suggestibility rather than the fields. None of this establishes the cause of any particular person's experience. What it establishes is that vivid, specific, frightening presence and touch require no external source at all — and that anyone trying to work out what is happening to them deserves to know the brain does this unaided before concluding that something is being done to them.",
@@ -798,6 +852,7 @@ export const CONCEPTS: Concept[] = [
     origin: "ai",
     basis: "documented",
     theme: "procurement",
+    audience: ["investigators", "policy", "press"],
     title: "Have private contractors killed civilians and gone free?",
     body:
       "Yes, and the case is documented from beginning to end, including the end. On 16 September 2007, Blackwater contractors guarding a State Department convoy opened fire in Nisour Square, Baghdad, killing fourteen unarmed Iraqi civilians and wounding others. The United States prosecuted. After years of litigation, four contractors were convicted in federal court — one of first-degree murder, three of voluntary manslaughter and firearms offences. In December 2020 all four were pardoned by presidential act, and the convictions ceased to have effect. United Nations human-rights experts called the pardons an affront to justice and said they violated obligations under international humanitarian law. What makes this worth recording is not that private force killed civilians, which is documented in many places, but the shape of the whole sequence: the killings happened, the justice system worked, and the outcome was undone by an authority the justice system does not reach. Accountability that can be reversed at will is a different thing from accountability, and a reader weighing whether private organisations face consequences has one fully documented answer to work from.",
@@ -828,6 +883,7 @@ export const CONCEPTS: Concept[] = [
     origin: "ai",
     basis: "documented",
     theme: "surveillance",
+    audience: ["policy", "press"],
     title: "Who profits from a body?",
     body:
       "In January 2018 Reuters published an investigation by Brian Grow and John Shiffman into the American body trade. Body brokers — legally, non-transplant tissue banks — acquire bodies donated to science, usually for free, then cut them into parts and sell them. The reporters did not merely describe the market. They entered it: Reuters bought a human cervical spine for three hundred dollars. It had belonged to Cody Saunders, a twenty-four-year-old from Tennessee, whose parents had not known what became of him. Across the investigation, family after family had no idea what happened to the person they donated. The legal position is the part most people find hardest to believe. Federal law prohibits selling body parts for transplant into a living person. Most states say nothing at all about selling body parts for research or education. So the trade is not a black market being policed and failing; it is a lawful market that was never regulated, in which a journalist can buy a spine over the counter and the donating family is told nothing. Whatever a person imagines happens to a body, this is what the record actually documents happening.",
@@ -859,6 +915,7 @@ export const CONCEPTS: Concept[] = [
     origin: "ai",
     basis: "documented",
     theme: "surveillance",
+    audience: ["household", "investigators", "policy"],
     title: "What are children subject to?",
     body:
       "In November 2020 the Tampa Bay Times published Targeted, an investigation into the Pasco County Sheriff's Office in Florida. The office had built a list of roughly 420 schoolchildren it considered likely future criminals. The children were not told. Their parents were not told. The school superintendent said he had not known the data was being used this way. The list was assembled from sixteen categories drawn from school records and state child-welfare data, and the categories are the part worth reading twice. A child could be flagged for grades of D or below, for three or more absences in a quarter, for discipline referrals — and for adverse childhood experiences, meaning abuse, witnessing violence, or having a parent incarcerated. A child who had been abused was thereby made more likely to appear on a police list of probable future offenders. The district's early-warning system covered more than thirty thousand middle and high school students, and the district paid the Sheriff's Office $2.3 million a year for thirty-two school resource officers. What happened next is the part worth recording, because it is the rarest outcome in this entire archive: someone was held to account. Four Pasco residents — Darlene Deegan, Dalanea Taylor, Tammy Heilman and Robert A. Jones III — sued in federal court in 2021, represented by the Institute for Justice. The pattern they described was not dramatic. Deputies arrived repeatedly, at all hours, and wrote citations for overgrown grass, missing house numbers, unvaccinated pets and window tint. The Sheriff's Office discontinued the programme in 2023. On 4 December 2024, with trial about to begin, it settled — and the settlement was not a denial. The Sheriff's Office admitted the programme violated the Fourth Amendment, because the checks exceeded the implied licence any visitor has to knock on a door; the First Amendment, because they directly and substantially interfered with the right of intimate association; and Fourteenth Amendment due process, because they interfered with the plaintiffs' liberty interests. It paid $105,000 in damages and is barred from running a comparable programme again. Whatever else is or is not happening to children, this happened, was documented in detail, required no capability anyone would dispute exists, and ended with a government admitting in writing that it had violated three amendments.",
@@ -898,6 +955,7 @@ export const CONCEPTS: Concept[] = [
     origin: "ai",
     basis: "documented",
     theme: "record",
+    audience: ["press"],
     title: "Why isn't any of this in the news?",
     body:
       "The usual assumption is that silence means suppression. There is a duller explanation with far better evidence behind it, and anyone reasoning about an absence of coverage should meet it first. Local journalism in the United States has collapsed. Northwestern's Medill School has tracked it annually; its 2025 State of Local News report counts nearly 3,500 newspapers gone since 2005 — close to forty per cent of all local papers in the country — with 136 lost in the last year alone. Two hundred and thirteen counties now have no local news source of any kind. A further 1,524 counties have exactly one, usually a weekly. Roughly fifty million Americans live with limited or no access to local news. More than 270,000 newspaper jobs have disappeared since 2005, a decline of over seventy-five per cent. So for a large part of the country, the question is not why reporters did not cover something. It is that there is no reporter. No one attends the council meeting, reads the court docket, or files the records request. Things do not go uncovered because they were buried; they go uncovered because the institution that used to notice them was dissolved for economic reasons over two decades, in public, with the numbers published every year. An absence of coverage is therefore very weak evidence of anything. It was weak evidence before any particular story existed.",
@@ -930,6 +988,7 @@ export const CONCEPTS: Concept[] = [
     origin: "ai",
     basis: "documented",
     theme: "neurotech",
+    audience: ["household", "clinicians"],
     title: "Are children harmed by wireless exposure?",
     body:
       "The question has been asked seriously and tested at scale, and the answer is not the one either side tends to expect. In 2011 the International Agency for Research on Cancer classified radiofrequency electromagnetic fields as Group 2B, possibly carcinogenic to humans. That classification is real and is widely cited. It is worth knowing what the tier means: 2B is the agency's weakest positive category, used where evidence is limited and a link cannot be excluded, and it holds several hundred agents. Since then the question has been examined far harder. A systematic review commissioned by the World Health Organization, published in Environment International in September 2024, screened more than five thousand studies from 1994 to 2022 and included sixty-three. It found no association between mobile phone use and cancers of the head, including among long-term and heavy users. It is the most comprehensive assessment to date. A group of researchers has published a methodological critique of it, and that dispute belongs in the record alongside the finding. Precaution for children persists in policy anyway. France banned mobile phones in schools in 2018, and several national authorities advise limiting children's exposure — on the reasoning that a child's exposure starts earlier and continues longer, not on a demonstrated harm. The documented risks of the devices children actually wear are duller and better established. Headset makers set age floors, Meta's Quest at ten, and the literature on vergence-accommodation conflict records eye strain and post-use balance effects. The American Academy of Pediatrics maintains guidance on children's VR use. One further finding is worth stating because it is so often misread: phantom vibration, the distinct sensation that a phone has buzzed when it has not, is widely reported among ordinary device users and has its own research literature. A device a person carries can produce a vivid felt sensation that did not occur, with nobody doing anything to them. On present evidence the strongest documented harms to children from these devices are not radiological at all. They are what the devices collect, who receives it, and what is done with it afterwards.",
@@ -964,6 +1023,7 @@ export const CONCEPTS: Concept[] = [
     origin: "ai",
     basis: "documented",
     theme: "surveillance",
+    audience: ["household", "policy", "clinicians"],
     title: "How protected is your medical information?",
     body:
       "Less than most people assume, and the gap is structural rather than criminal. HIPAA protects a setting, not a category of information. It binds health plans, clearinghouses and providers who bill electronically. It does not bind most of the places health information is now generated. That distinction is not academic. When the Federal Trade Commission acted against GoodRx in February 2023, it could not use HIPAA at all — it used the Health Breach Notification Rule, and part of its complaint was that GoodRx had falsely suggested to consumers that it complied with HIPAA. What GoodRx had actually done was compile lists of users who bought particular medications and upload their email addresses, phone numbers and mobile advertising identifiers to Facebook, Google, Criteo, Branch and Twilio, so those users could be advertised to on the basis of their prescriptions and health conditions. The penalty was $1.5 million. The FTC brought a comparable action against BetterHelp over mental-health questionnaire data shared with advertisers. Scale is the other half. In 2024 a ransomware attack on Change Healthcare, a UnitedHealth subsidiary that processes a large share of American medical claims, exposed the data of roughly 190 million people — the largest health-data breach in United States history, and not a break-in at a doctor's office but a failure at a clearing house most patients had never heard of and none had chosen. So the honest answer is that medical privacy in America is strong where a clinician is involved and weak nearly everywhere else, and the largest single loss of it was not a violation by anyone treating a patient.",
@@ -996,6 +1056,7 @@ export const CONCEPTS: Concept[] = [
     origin: "ai",
     basis: "documented",
     theme: "surveillance",
+    audience: ["household", "investigators", "policy"],
     title: "What happens to everyone around a target?",
     body:
       "Surveillance aimed at one person is rarely confined to one person, and in at least one widely deployed technology the indiscriminacy is the design. A cell-site simulator, commonly called a Stingray, works by impersonating a mobile network tower. Phones in range cannot tell the difference, so they connect and identify themselves. That includes the phone the operator is looking for and every other phone nearby — neighbours, passers-by, people in adjacent flats, anyone in a hospital or a place of worship within the radius. The bystander collection is not an error; it is how the device locates the target at all. What surrounded that capability is documented too. The FBI required local police departments to sign non-disclosure agreements as a condition of acquiring the equipment, and the American Civil Liberties Union obtained and published them. Departments concealed the technology's use from defence lawyers and from judges, and in some cases prosecutors dropped charges rather than disclose in open court how a defendant had been found. The Pasco County programme shows the same shape without any exotic equipment: the people repeatedly visited were not only those on the list but the households around them — parents, siblings, grandparents cited for uncut grass and missing house numbers because someone under that roof had been designated. Whether or not a given system is aimed at one person, the record shows the burden of it lands on everyone within reach.",
@@ -1023,4 +1084,45 @@ export const CONCEPTS: Concept[] = [
     disclaimer:
       "This concept reports documented capability and published practice. It establishes no surveillance of any individual, and no current practice by any named agency.",
   },
+];
+
+/**
+ * The year of every primary source standing behind the concepts above.
+ *
+ * Hand-maintained, because a citation's year is not machine-readable out of a
+ * prose evidence line. Its only job is the evidence-span chart on /concepts:
+ * the record these concepts rest on is not recent, and the picture says that
+ * faster than a sentence can.
+ */
+export const SOURCE_YEARS: { year: number; label: string }[] = [
+  { year: 1888, label: "Fox sisters confess the spiritualist fraud" },
+  { year: 1966, label: "Schelling, Arms and Influence" },
+  { year: 1976, label: "Stasi Richtlinie 1/76 — Zersetzung doctrine" },
+  { year: 1986, label: "Socialist Workers Party v Attorney General — COINTELPRO" },
+  { year: 2005, label: "Granqvist: sensed presence tracks suggestibility, not fields" },
+  { year: 2006, label: "Kydd & Walter, The Strategies of Terrorism" },
+  { year: 2007, label: "Nisour Square" },
+  { year: 2011, label: "IARC classifies RF-EMF as Group 2B" },
+  { year: 2013, label: "PRISM disclosures" },
+  { year: 2014, label: "Blanke: a robot induces a felt presence" },
+  { year: 2014, label: "Edrei — NYPD LRAD deployment" },
+  { year: 2016, label: "Penney measures the chilling effect" },
+  { year: 2018, label: "Edrei v Bratton, 2d Cir." },
+  { year: 2018, label: "Reuters, The Body Trade" },
+  { year: 2018, label: "France bans phones in schools" },
+  { year: 2020, label: "Tampa Bay Times, Targeted" },
+  { year: 2020, label: "Blackwater pardons" },
+  { year: 2022, label: "EFF exposes Fog Data Science" },
+  { year: 2022, label: "Epps v Denver verdict" },
+  { year: 2023, label: "Amnesty, Automated Apartheid" },
+  { year: 2023, label: "Tang & Huth semantic decoder" },
+  { year: 2023, label: "FTC v GoodRx" },
+  { year: 2024, label: "Neurorights Foundation, Safeguarding Brain Data" },
+  { year: 2024, label: "Colorado HB24-1058" },
+  { year: 2024, label: "WHO-commissioned review finds no cancer link" },
+  { year: 2024, label: "Change Healthcare breach — 190m people" },
+  { year: 2024, label: "Pasco settles, admitting three violations" },
+  { year: 2025, label: "Montana LC0005" },
+  { year: 2025, label: "Medill: 3,500 newspapers gone" },
+  { year: 2026, label: "Tenth Circuit affirms Epps" },
 ];
