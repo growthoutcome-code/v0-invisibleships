@@ -892,4 +892,66 @@ export const CONCEPTS: Concept[] = [
     disclaimer:
       "This concept reports published classifications, a systematic review and its critics, and manufacturer and paediatric guidance. It establishes no harm to any individual child and takes no position on any dispute the cited bodies have not settled.",
   },
+  {
+    id: "how-protected-is-your-medical-record",
+    origin: "ai",
+    basis: "documented",
+    title: "How protected is your medical information?",
+    body:
+      "Less than most people assume, and the gap is structural rather than criminal. HIPAA protects a setting, not a category of information. It binds health plans, clearinghouses and providers who bill electronically. It does not bind most of the places health information is now generated. That distinction is not academic. When the Federal Trade Commission acted against GoodRx in February 2023, it could not use HIPAA at all — it used the Health Breach Notification Rule, and part of its complaint was that GoodRx had falsely suggested to consumers that it complied with HIPAA. What GoodRx had actually done was compile lists of users who bought particular medications and upload their email addresses, phone numbers and mobile advertising identifiers to Facebook, Google, Criteo, Branch and Twilio, so those users could be advertised to on the basis of their prescriptions and health conditions. The penalty was $1.5 million. The FTC brought a comparable action against BetterHelp over mental-health questionnaire data shared with advertisers. Scale is the other half. In 2024 a ransomware attack on Change Healthcare, a UnitedHealth subsidiary that processes a large share of American medical claims, exposed the data of roughly 190 million people — the largest health-data breach in United States history, and not a break-in at a doctor's office but a failure at a clearing house most patients had never heard of and none had chosen. So the honest answer is that medical privacy in America is strong where a clinician is involved and weak nearly everywhere else, and the largest single loss of it was not a violation by anyone treating a patient.",
+    evidence: [
+      "HIPAA binds covered entities — plans, clearinghouses, and providers billing electronically — not most apps, wearables or websites that collect health information",
+      "FTC v. GoodRx, February 2023: $1.5m civil penalty under the Health Breach Notification Rule, not HIPAA",
+      "GoodRx uploaded email addresses, phone numbers and mobile advertising IDs of users of specific medications to Facebook, Google, Criteo, Branch and Twilio",
+      "The FTC complaint stated GoodRx had falsely suggested to consumers that it complied with HIPAA",
+      "The FTC brought a comparable action against BetterHelp over mental-health questionnaire data shared with advertisers",
+      "2024: a ransomware attack on Change Healthcare, a UnitedHealth subsidiary, exposed the records of roughly 190 million people — the largest US health-data breach on record",
+    ],
+    questions: [
+      "These are enforcement actions and a breach. None of them establishes that any individual's records were accessed by any particular party for any particular purpose.",
+      "A breach exposes data. It does not establish what was subsequently done with it, and in most cases that cannot be traced.",
+      "This concept does not address law-enforcement access to medical records, which is governed by different rules and is a separate question.",
+    ],
+    references: [
+      { label: "FTC enforcement action against GoodRx (2023)", href: "https://www.ftc.gov/news-events/news/press-releases/2023/02/ftc-enforcement-action-bar-goodrx-sharing-consumers-sensitive-health-info-advertising" },
+      { label: "What happens to everyone around a target?", href: "/concepts#everyone-around-a-target" },
+      { label: "Are people made into intelligence assets without knowing it?", href: "/concepts#made-into-assets-unknowing" },
+    ],
+    referencesNote:
+      "The FTC is cited for its own enforcement action. The linked concepts describe adjacent collection markets and neither corroborates this one.",
+    verification: "unverified",
+    disclaimer:
+      "This concept reports enforcement actions and a publicly disclosed breach. It establishes no unlawful access to any individual's records, and no conduct by any clinician or care provider.",
+  },
+  {
+    id: "everyone-around-a-target",
+    origin: "ai",
+    basis: "documented",
+    title: "What happens to everyone around a target?",
+    body:
+      "Surveillance aimed at one person is rarely confined to one person, and in at least one widely deployed technology the indiscriminacy is the design. A cell-site simulator, commonly called a Stingray, works by impersonating a mobile network tower. Phones in range cannot tell the difference, so they connect and identify themselves. That includes the phone the operator is looking for and every other phone nearby — neighbours, passers-by, people in adjacent flats, anyone in a hospital or a place of worship within the radius. The bystander collection is not an error; it is how the device locates the target at all. What surrounded that capability is documented too. The FBI required local police departments to sign non-disclosure agreements as a condition of acquiring the equipment, and the American Civil Liberties Union obtained and published them. Departments concealed the technology's use from defence lawyers and from judges, and in some cases prosecutors dropped charges rather than disclose in open court how a defendant had been found. The Pasco County programme shows the same shape without any exotic equipment: the people repeatedly visited were not only those on the list but the households around them — parents, siblings, grandparents cited for uncut grass and missing house numbers because someone under that roof had been designated. Whether or not a given system is aimed at one person, the record shows the burden of it lands on everyone within reach.",
+    evidence: [
+      "A cell-site simulator impersonates a network tower; every phone in range connects and identifies itself, not only the target's",
+      "Bystander collection is intrinsic to how the device locates a target, not an incidental fault",
+      "The FBI required non-disclosure agreements from local departments acquiring the equipment; the ACLU obtained and published them",
+      "Use was concealed from defence counsel and courts, and charges were dropped in some cases rather than disclose the method",
+      "Pasco County: households around a listed person — parents, siblings, grandparents — were repeatedly visited and cited",
+    ],
+    questions: [
+      "This describes capability and documented practice. It does not establish that any particular person was ever incidentally collected.",
+      "Policy has changed in places since the non-disclosure agreements were published, and this concept does not track current practice in any given jurisdiction.",
+      "Nothing here establishes coordination between the technologies described, or that any of them was directed at any individual.",
+    ],
+    references: [
+      { label: "Stingray tracking devices — ACLU", href: "https://www.aclu.org/issues/privacy-technology/surveillance-technologies/stingray-tracking-devices" },
+      { label: "Uncovering the FBI's surveillance tech secrecy agreements — ACLU", href: "https://www.aclu.org/news/privacy-technology/surreal-stingray-secrecy-uncovering-the-fbis-surveillance-tech-secrecy-agreements" },
+      { label: "What are children subject to?", href: "/concepts#what-children-are-subject-to" },
+      { label: "Accountability isn't wired to deployment, even in the schema", href: "/concepts#accountability-not-wired" },
+    ],
+    referencesNote:
+      "The ACLU is cited for documents it obtained and published. The Pasco material is drawn from the linked concept and its own sources.",
+    verification: "unverified",
+    disclaimer:
+      "This concept reports documented capability and published practice. It establishes no surveillance of any individual, and no current practice by any named agency.",
+  },
 ];
