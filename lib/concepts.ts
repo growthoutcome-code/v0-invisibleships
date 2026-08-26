@@ -338,9 +338,9 @@ export const CONCEPTS: Concept[] = [
     id: "ruin-first-then-rescue",
     origin: "author",
     basis: "documented",
-    title: "Ruin first, then rescue",
+    title: "We're keeping you to ourselves",
     body:
-      "A reputation can be destroyed as a means rather than as an end. The tactic appears in several literatures that rarely cite one another. Intelligence tradecraft calls it compromise. East Germany's Stasi called it Zersetzung. Research on domestic abuse calls it isolation. Cult-exit and trafficking studies describe manufactured disgrace used for retention. The mechanism is the same in each. Sever the target's ties to everyone outside the group, and do it publicly, because public damage is self-sustaining — people withdraw on their own once a story circulates, and no further effort is required. The target's own account of what is happening then begins to sound like paranoia, which deepens the isolation again. What remains is a person with no relationships outside the group that ruined them. At that point recruitment needs no persuasion. It needs only to be the last door open. The cruelty is not a side effect of the recruitment. It is the method.",
+      "A reputation can be destroyed as a means rather than as an end. The tactic appears in several literatures that rarely cite one another. Intelligence tradecraft calls it compromise. East Germany's Stasi called it Zersetzung. Research on domestic abuse calls it isolation. Cult-exit and trafficking studies describe manufactured disgrace used for retention. The mechanism is the same in each. Sever the target's ties to everyone outside the group, and do it publicly, because public damage is self-sustaining — people withdraw on their own once a story circulates, and no further effort is required. The target's own account of what is happening then begins to sound like paranoia, which deepens the isolation again. What remains is a person with no relationships outside the group that ruined them. At that point recruitment needs no persuasion. It needs only to be the last door open. Stated from the inside, the logic is possessive rather than punitive: every tie severed is a tie that cannot compete, and the point of the ruin is not that the target suffers but that nobody else is left. The cruelty is not a side effect of the recruitment. It is the method.",
     evidence: [
       "Stasi Richtlinie 1/76: Zersetzung as directed operational doctrine — psychological disintegration of a target without arrest or trial",
       "Compromise sits alongside money, ideology and ego as one of the four classical recruitment levers in intelligence tradecraft",
@@ -384,7 +384,7 @@ export const CONCEPTS: Concept[] = [
     ],
     references: [
       { label: "Next to each other is not because of each other", href: "/concepts#co-occurrence-is-not-cause" },
-      { label: "Ruin first, then rescue", href: "/concepts#ruin-first-then-rescue" },
+      { label: "We're keeping you to ourselves", href: "/concepts#ruin-first-then-rescue" },
     ],
     referencesNote:
       "Both linked concepts are method, not corroboration. The first states why a pattern read across sources cannot establish a relation; the second describes a different documented tactic that shares the logic of harm used as leverage.",

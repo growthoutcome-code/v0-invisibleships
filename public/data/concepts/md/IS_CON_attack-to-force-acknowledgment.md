@@ -7,7 +7,7 @@ basis: documented
 origin: author
 verification: unverified
 generated_by: scripts/export_concepts_md.mjs
-word_count: 519
+word_count: 520
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
@@ -38,7 +38,7 @@ Violence is sometimes not aimed at a target's capacity. It is aimed at a target'
 ## References
 
 - [Next to each other is not because of each other](/concepts#co-occurrence-is-not-cause)
-- [Ruin first, then rescue](/concepts#ruin-first-then-rescue)
+- [We're keeping you to ourselves](/concepts#ruin-first-then-rescue)
 
 *Both linked concepts are method, not corroboration. The first states why a pattern read across sources cannot establish a relation; the second describes a different documented tactic that shares the logic of harm used as leverage.*
 

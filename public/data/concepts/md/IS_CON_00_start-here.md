@@ -5,7 +5,7 @@ collection: concepts
 doc_type: section-overview
 concept_count: 18
 generated_by: scripts/export_concepts_md.mjs
-word_count: 381
+word_count: 382
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
@@ -40,7 +40,7 @@ A reader who rejects every `pattern` entry can still rely on every
 - **The numbers under the numbers** `IS_CON_low-number-may-mean-low-counting.md` · origin: ai
 - **Prescribing is not a measure of illness** `IS_CON_prescribing-is-not-prevalence.md` · origin: ai
 - **The fentanyl reversal** `IS_CON_the-fentanyl-reversal.md` · origin: ai
-- **Ruin first, then rescue** `IS_CON_ruin-first-then-rescue.md` · origin: author — *Not independently verified*
+- **We're keeping you to ourselves** `IS_CON_ruin-first-then-rescue.md` · origin: author — *Not independently verified*
 - **An attack to force acknowledgment** `IS_CON_attack-to-force-acknowledgment.md` · origin: author — *Not independently verified*
 
 ### structural (6)
