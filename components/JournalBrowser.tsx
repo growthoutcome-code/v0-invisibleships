@@ -23,8 +23,7 @@ import GlossaryIllustration from "@/components/GlossaryIllustration";
 import { DOCUMENTS, AUTHOR, EXTRA_GLOSSARY } from "@/lib/site-content";
 import { CORPUS_SUMMARY } from "@/lib/corpus-summary";
 import PageActions, { SortMenu, type SortDir } from "@/components/PageActions";
-import DataView from "@/components/DataView";
-import ConceptsView from "@/components/ConceptsView";
+import DataView, { type SubTab } from "@/components/DataView";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 
@@ -79,6 +78,10 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
   const [ds, setDs] = useState<Dataset | null>(null);
   const [loading, setLoading] = useState(true);
   const [tab, setTab] = useState<Tab>(initialTab);
+  // Which vertical of the merged Research section is showing. `concepts` is the
+  // fifth; it is addressable at /concepts, which is why the sub-tab lives up
+  // here with the URL effect rather than inside DataView.
+  const [dataSub, setDataSub] = useState<SubTab>(initialTab === "concepts" ? "concepts" : "timeline");
 
   const [q, setQ] = useState(""); const [dFrom, setDFrom] = useState(""); const [dTo, setDTo] = useState("");
   const [part, setPart] = useState(""); const [loc, setLoc] = useState("");
@@ -188,7 +191,7 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
   }, [journal, ds, q, dFrom, dTo, part, loc, audioOnly, cat, stype, sort]);
 
   useEffect(() => { setPage(1); }, [q, dFrom, dTo, part, loc, cat, stype, audioOnly, sort]);
-  useEffect(() => { if (tab === "data") setDataMounted(true); }, [tab]);
+  useEffect(() => { if (tab === "data" || tab === "concepts") setDataMounted(true); }, [tab]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
 
@@ -269,10 +272,8 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
           <GlossarySection terms={glossaryTerms} gcat={gcat} setGcat={setGcat} gsel={gsel} setGsel={setGsel} />
         ) : tab === "documents" ? (
           <DocumentsView />
-        ) : tab === "data" ? (
+        ) : tab === "data" || tab === "concepts" ? (
           null   // rendered below the switch so it can stay mounted
-        ) : tab === "concepts" ? (
-          <ConceptsView />
         ) : tab === "author" ? (
           <AuthorView />
         ) : tab === "disclaimer" ? (
@@ -313,8 +314,18 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
             blank. Hiding beats re-rendering; nothing mounts until the reader
             first opens Data. */}
         {!loading && dataMounted && (
-          <div className={tab === "data" ? "" : "hidden"} aria-hidden={tab !== "data"}>
-            <DataView />
+          <div className={tab === "data" || tab === "concepts" ? "" : "hidden"}
+               aria-hidden={!(tab === "data" || tab === "concepts")}>
+            <DataView
+              sub={tab === "concepts" ? "concepts" : dataSub}
+              onSub={(s) => {
+                // The vertical decides the address: concepts keeps /concepts,
+                // everything else is /data. Both were indexed before the merge
+                // and both still resolve after it.
+                setDataSub(s);
+                setTab(s === "concepts" ? "concepts" : "data");
+              }}
+            />
           </div>
         )}
 
@@ -340,7 +351,7 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
   );
 }
 
-const TAB_TITLE: Record<Tab, string> = { journal: "Journal", glossary: "Glossary", documents: "Documents", data: "Data", concepts: "Concepts", author: "Author", disclaimer: "Disclaimer" };
+const TAB_TITLE: Record<Tab, string> = { journal: "Journal", glossary: "Glossary", documents: "Documents", data: "Research", concepts: "Research", author: "Author", disclaimer: "Disclaimer" };
 
 // ~200px page-title band under the nav; its h1 is the current section name,
 // left-aligned and larger than any other heading. 80% width via its parent <main>.

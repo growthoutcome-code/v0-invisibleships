@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { track } from "@/lib/analytics";
 import { DataNotice, DataNoteLine } from "@/components/DataIntro";
 import { TimelineNarrative, TimelineHub } from "@/components/TimelineIntro";
@@ -8,6 +8,7 @@ import GovCloudReport from "@/components/GovCloudReport";
 import GovCloudSources from "@/components/GovCloudSources";
 import HealthSignals from "@/components/HealthSignals";
 import CrimeSignals from "@/components/CrimeSignals";
+import ConceptsView from "@/components/ConceptsView";
 
 /**
  * Data section — three sub-tabs (Sean, 2026-08-20):
@@ -24,7 +25,7 @@ import CrimeSignals from "@/components/CrimeSignals";
  * tab row; .gov-cloud-mode hides the internal Timeline button so the view
  * isn't offered twice).
  */
-type SubTab = "timeline" | "govcloud" | "health" | "crime";
+export type SubTab = "timeline" | "govcloud" | "health" | "crime" | "concepts";
 
 /** Keep asserting the report's internal tab until its script has wired the
  *  buttons (the 185KB drawing script loads after mount). Clicking is
@@ -40,9 +41,20 @@ function setInternalTab(t: "time" | "adopt") {
   attempt();
 }
 
-export default function DataView() {
-  const [sub, setSub] = useState<SubTab>("timeline");
-
+/**
+ * CONTROLLED by JournalBrowser since the Data/Concepts merge (Sean, 2026-08-26).
+ *
+ * The parent owns `sub` because the address bar depends on it: the concepts
+ * vertical is addressable at /concepts, every other vertical at /data, and
+ * those URLs are indexed and deep-linked. Keeping the state here would mean the
+ * URL could not follow a sub-tab click.
+ */
+export default function DataView({
+  sub, onSub,
+}: {
+  sub: SubTab;
+  onSub: (s: SubTab) => void;
+}) {
   useEffect(() => { track("data_report_viewed"); }, []);
 
   // Stable element identity: React bails out of this subtree on re-render,
@@ -55,7 +67,7 @@ export default function DataView() {
   }, [sub]);
 
   const pick = (s: SubTab) => {
-    setSub(s);
+    onSub(s);
     track("data_subtab", { tab: s });
   };
 
@@ -81,6 +93,9 @@ export default function DataView() {
         <button role="tab" aria-selected={sub === "crime"} className={tabCls(sub === "crime")} onClick={() => pick("crime")}>
           Crime
         </button>
+        <button role="tab" aria-selected={sub === "concepts"} className={tabCls(sub === "concepts")} onClick={() => pick("concepts")}>
+          Concepts
+        </button>
       </div>
 
       {/* PRIMARY disclaimer: prominent, once, on the landing view only. */}
@@ -95,7 +110,7 @@ export default function DataView() {
       {/* Chart first, then what it means, then where to go (Sean, 2026-08-20):
           the reader sees the timeline, gets the summary under it, and only then
           meets the sibling sections. */}
-      <div className={sub === "health" || sub === "crime" ? "hidden" : sub === "timeline" ? "gov-timeline-only" : "gov-cloud-mode"}>
+      <div className={sub === "health" || sub === "crime" || sub === "concepts" ? "hidden" : sub === "timeline" ? "gov-timeline-only" : "gov-cloud-mode"}>
         {report}
         {sub === "govcloud" && <GovCloudSources />}
       </div>
@@ -104,6 +119,7 @@ export default function DataView() {
       {sub === "timeline" && <TimelineHub onGo={pick} />}
       {sub === "health" && <HealthSignals onGoTimeline={() => pick("timeline")} />}
       {sub === "crime" && <CrimeSignals onGoTimeline={() => pick("timeline")} />}
+      {sub === "concepts" && <ConceptsView />}
     </div>
   );
 }
