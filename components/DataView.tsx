@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { track } from "@/lib/analytics";
 import { DataNotice, DataNoteLine } from "@/components/DataIntro";
 import { TimelineNarrative, TimelineHub } from "@/components/TimelineIntro";
@@ -9,6 +9,8 @@ import GovCloudSources from "@/components/GovCloudSources";
 import HealthSignals from "@/components/HealthSignals";
 import CrimeSignals from "@/components/CrimeSignals";
 import ConceptsView from "@/components/ConceptsView";
+import ResearchHero from "@/components/ResearchHero";
+import { NO_FILTERS, type Filters } from "@/lib/concepts";
 
 /**
  * Data section — three sub-tabs (Sean, 2026-08-20):
@@ -57,6 +59,15 @@ export default function DataView({
 }) {
   useEffect(() => { track("data_report_viewed"); }, []);
 
+  // The concept list's controls live here because the hero steers them: picking
+  // a reader or a subject up there has to open the list down here already
+  // filtered. Lifting the state is what makes that one click instead of two.
+  const [conceptFilters, setConceptFilters] = useState<Filters>(NO_FILTERS);
+  const explore = (patch: Partial<Filters>) => {
+    setConceptFilters({ ...NO_FILTERS, ...patch });
+    onSub("concepts");
+  };
+
   // Stable element identity: React bails out of this subtree on re-render,
   // which is what keeps the script-drawn charts alive across sub-tab switches.
   const report = useMemo(() => <GovCloudReport />, []);
@@ -80,7 +91,10 @@ export default function DataView({
 
   return (
     <div className="w-full">
-      <div role="tablist" aria-label="Data sub-sections" className="flex gap-8 mb-10 border-b border-edge">
+      {/* The whole body of work, before a reader picks a part of it. */}
+      {sub === "timeline" && <ResearchHero onExplore={explore} />}
+
+      <div role="tablist" aria-label="Research sections" className="flex gap-8 mb-10 border-b border-edge">
         <button role="tab" aria-selected={sub === "timeline"} className={tabCls(sub === "timeline")} onClick={() => pick("timeline")}>
           Timeline
         </button>
@@ -119,7 +133,7 @@ export default function DataView({
       {sub === "timeline" && <TimelineHub onGo={pick} />}
       {sub === "health" && <HealthSignals onGoTimeline={() => pick("timeline")} />}
       {sub === "crime" && <CrimeSignals onGoTimeline={() => pick("timeline")} />}
-      {sub === "concepts" && <ConceptsView />}
+      {sub === "concepts" && <ConceptsView filters={conceptFilters} setFilters={setConceptFilters} />}
     </div>
   );
 }

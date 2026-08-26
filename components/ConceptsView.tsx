@@ -19,8 +19,13 @@ const ORIGIN_ORDER: Origin[] = ["ai", "author"];
  * rely on every Documented entry. Presented inline rather than fenced off, so
  * each claim is weighed on its own basis instead of by its neighbours.
  */
-export default function ConceptsView() {
-  const [filters, setFilters] = useState<Filters>(NO_FILTERS);
+export default function ConceptsView({
+  filters, setFilters,
+}: {
+  /** Controlled by DataView, so the Research hero can filter this list. */
+  filters: Filters;
+  setFilters: (f: Filters) => void;
+}) {
 
   useEffect(() => { track("concepts_viewed"); }, []);
 

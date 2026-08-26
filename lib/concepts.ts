@@ -1143,3 +1143,32 @@ export const SOURCE_YEARS: { year: number; label: string }[] = [
   { year: 2025, label: "Medill: 3,500 newspapers gone" },
   { year: 2026, label: "Tenth Circuit affirms Epps" },
 ];
+
+/**
+ * The headline findings, and the standing limits. Prose, so it lives HERE
+ * rather than in a component: `scripts/check_content_inventory.py` tracks
+ * lib/concepts.ts and cannot see copy buried in JSX. Anything a reader reads
+ * belongs where the guard can count it.
+ */
+export const FINDINGS: { stat: string; line: string; id: string }[] = [
+  { stat: "\u20AC90.5m", line: "in fines against one facial-recognition company across four European regulators. Over the same period US Immigration and Customs Enforcement paid it $12.75m.", id: "fined-in-europe-hired-in-america" },
+  { stat: "190m", line: "people had their records exposed in the 2024 Change Healthcare breach, at a clearing house no patient chose or had heard of.", id: "how-protected-is-your-medical-record" },
+  { stat: "420", line: "schoolchildren were placed on a Florida sheriff's list of likely future criminals. Having been a victim of abuse was one of the things that could put a child on it.", id: "what-children-are-subject-to" },
+  { stat: "3,500", line: "American newspapers have closed since 2005, and 213 counties now have no local news source at all. That is why an absence of coverage proves very little.", id: "why-isnt-this-in-the-news" },
+  { stat: "$300", line: "bought Reuters a human cervical spine. The trade is lawful in most states, and the donating family was never told.", id: "who-profits-from-a-body" },
+  { stat: "40%", line: "rise in the United States suicide rate between 2000 and 2021, while the world's fell 27% on the same measure.", id: "us-rose-against-the-trend" },
+  { stat: "3", line: "constitutional amendments a Florida sheriff's office admitted violating, in writing, to settle a case four residents refused to drop.", id: "what-children-are-subject-to" },
+  { stat: "1 in 3", line: "healthy participants felt somebody standing behind them, touching them, when a robot delayed their own movement by half a second. Nobody was there.", id: "what-produces-the-feeling" },
+];
+
+export const NOT_ESTABLISHED: string[] = [
+  "Nothing here establishes that any specific thing has been done to any specific person, including the author.",
+  "No capability is documented that reads a person's perception, or that reaches them at a distance without their participation. Where a concept touches on that, it says so on its own page.",
+  "An absence of evidence is recorded as an absence of evidence. It is never presented as proof that nothing happened, and never as proof that something did.",
+  "Sources are cited for their own findings. Two sources sitting beside each other do not corroborate one another, and the section says so wherever they appear together.",
+];
+
+export const RESEARCH_INTRO =
+  "Five bodies of work on one page: a procurement record, a public-health record, a crime record, " +
+  "a master timeline, and the concepts drawn from all of them. Every figure resolves to a named " +
+  "source, every claim states what it rests on, and every one of them says what it does not answer.";
