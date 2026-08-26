@@ -3,9 +3,9 @@ id: IS-CON-00-START-HERE
 title: Concepts — start here
 collection: concepts
 doc_type: section-overview
-concept_count: 32
+concept_count: 33
 generated_by: scripts/export_concepts_md.mjs
-word_count: 604
+word_count: 617
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
@@ -13,7 +13,7 @@ copyright: © 2026 Sean C. Harris. All Rights Reserved.
 
 *Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Every concept below states its BASIS and its ORIGIN: a reader who rejects every `pattern` entry can still rely on every `documented` one, and the two are never blended inside one concept. Causes are reported as attributed, never asserted. See `meta/IS_META_disclaimer.md`.*
 
-**32 concepts.** Each is a self-contained file, safe to hand to
+**33 concepts.** Each is a self-contained file, safe to hand to
 an assistant on its own.
 
 ## How to read the basis label
@@ -30,7 +30,7 @@ A reader who rejects every `pattern` entry can still rely on every
 
 ## The concepts
 
-### documented (24)
+### documented (25)
 
 - **A regulator finding does not stop a deployment** `IS_CON_findings-dont-stop-deployment.md` · origin: ai
 - **Systems built for an emergency get switched off after it** `IS_CON_emergency-systems-withdrawn.md` · origin: ai
@@ -56,6 +56,7 @@ A reader who rejects every `pattern` entry can still rely on every
 - **Who profits from a body?** `IS_CON_who-profits-from-a-body.md` · origin: ai — *Not independently verified*
 - **What are children subject to?** `IS_CON_what-children-are-subject-to.md` · origin: ai — *Not independently verified*
 - **Why isn't any of this in the news?** `IS_CON_why-isnt-this-in-the-news.md` · origin: ai — *Not independently verified*
+- **Are children harmed by wireless exposure?** `IS_CON_children-wearables-and-rf.md` · origin: ai — *Not independently verified*
 
 ### structural (7)
 
