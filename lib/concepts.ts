@@ -7,6 +7,10 @@
  *   documented  — a source, ruling or official record supports it directly
  *   structural  — it follows from what the dataset does or does not contain
  *   pattern     — an observation drawn from experience, offered as an observation
+ *   testimony   — a dated first-person report of what the author experienced or
+ *                 was told. Verified by nobody. Distinct from `pattern`: pattern
+ *                 is a generalisation the author drew, testimony is a single
+ *                 thing that was said or happened, on a date.
  *
  * A reader who rejects every `pattern` can still rely on every `documented` entry.
  * That separation is the point; never blend two bases inside one concept.
@@ -22,7 +26,7 @@
  * Figures below are verified against public/data/tables/*.json.
  */
 
-export type Basis = "documented" | "structural" | "pattern";
+export type Basis = "documented" | "structural" | "pattern" | "testimony";
 export type Origin = "ai" | "author";
 export type Verification = "unverified" | "partially_verified" | "verified";
 
@@ -56,6 +60,7 @@ export const BASIS_LABEL: Record<Basis, string> = {
   documented: "Documented",
   structural: "Structural",
   pattern: "Pattern",
+  testimony: "Testimony",
 };
 
 export const ORIGIN_LABEL: Record<Origin, string> = {
@@ -72,6 +77,7 @@ export const BASIS_NOTE: Record<Basis, string> = {
   documented: "A source, ruling, or official record supports this directly.",
   structural: "This follows from what the dataset does — or does not — contain.",
   pattern: "An observation drawn from experience, offered as an observation.",
+  testimony: "A dated first-person report of what the author experienced or was told. Verified by nobody.",
 };
 
 export const CONCEPTS: Concept[] = [
@@ -212,7 +218,7 @@ export const CONCEPTS: Concept[] = [
   {
     id: "has-an-attack-happened",
     origin: "author",
-    basis: "pattern",
+    basis: "testimony",
     title: "Has an attack happened?",
     body:
       "The author reports experiences interpreted as possible unconsented-to auditory or neurological communication, along with perceived coercive messages, including messages related to self-harm. The author does not know the mechanism and raises possible explanations only as hypotheses. This is a dated record of reported experience, not evidence that any particular technology, transmission infrastructure, person, organization, or coordinated campaign is responsible. No conclusion should be drawn without independent technical testing, corroboration, and reliable records.",
@@ -421,5 +427,63 @@ export const CONCEPTS: Concept[] = [
     verification: "unverified",
     disclaimer:
       "This concept reports decided litigation and published device specifications. It does not establish that any acoustic weapon has been deployed in Denver, nor against any individual.",
+  },
+  {
+    id: "made-into-assets-unknowing",
+    origin: "author",
+    basis: "documented",
+    title: "Are people made into intelligence assets without knowing it?",
+    body:
+      "Intelligence tradecraft has always separated a witting source from an unwitting one. A person can supply information without knowing who receives it, or that anyone does. What changed is scale, and it required nobody's cooperation. American law enforcement agencies buy location data that phones emit continuously. The Electronic Frontier Foundation's investigation into Fog Data Science documented a company selling local police searchable access to billions of location signals harvested from ordinary apps, at prices small departments could afford. Babel Street's Locate X offered comparable capability, and EPIC obtained records of Customs and Border Protection's use of it. The mechanism is commercial: brokers buy from the advertising ecosystem and agencies buy from brokers. No warrant is involved because no compulsion is involved. The result is a population of unwitting sources. A person carrying a phone generates a record of where they went, who they were near and for how long, and that record is purchasable. They were never approached, never recruited, and are never harassed — because harassment would defeat the purpose. The value of an unwitting asset lies precisely in their not knowing. What this does not describe is access to perception. No documented capability reads a person's eyesight, and the mechanism above does not require one. What people already emit is sufficient.",
+    evidence: [
+      "EFF investigation into Fog Data Science (2022): searchable location data sold to local police, drawn from billions of signals emitted by ordinary apps",
+      "EPIC obtained FOIA records covering Customs and Border Protection's use of Babel Street's Locate X",
+      "The purchase route avoids the warrant requirement because it involves no compulsion — the data is bought, not seized",
+      "Witting versus unwitting source is a standing distinction in intelligence tradecraft, not a novel category",
+    ],
+    questions: [
+      "The record establishes commercial purchase of bulk location data. It does not establish any programme of deliberate individual targeting.",
+      "No documented capability accesses a person's visual perception, and none is needed for the collection described here.",
+      "Whether any particular person's data has been purchased by any particular agency is not answerable from public records.",
+    ],
+    references: [
+      { label: "Inside Fog Data Science — EFF", href: "https://www.eff.org/deeplinks/2022/08/inside-fog-data-science-secretive-company-selling-mass-surveillance-local-police" },
+      { label: "CBP and Babel Street Locate X — EPIC FOIA", href: "https://epic.org/documents/epic-foia-cbp-babel-street-location-tracking-service/" },
+      { label: "There is no column for you", href: "/concepts#no-column-for-you" },
+    ],
+    referencesNote:
+      "EFF and EPIC are cited for their own documented investigations. The linked concept is method — it records that the person a system is used on appears almost nowhere in the procurement record.",
+    verification: "unverified",
+    disclaimer:
+      "This concept reports documented commercial data sales to law enforcement. It establishes no programme of individual targeting, no access to perception, and no conduct by any named agency beyond what the cited investigations found.",
+  },
+  {
+    id: "no-private-thinking-space",
+    origin: "author",
+    basis: "documented",
+    title: "Does being watched change what people let themselves think?",
+    body:
+      "Amnesty International's 2023 report Automated Apartheid documented facial-recognition systems, Red Wolf and Blue Wolf among them, used to control Palestinian movement in the occupied territories, with residents describing repeated identification at checkpoints as a condition of ordinary life. Palestinians interviewed described the effect in consistent and non-technical terms: there was no space left in which to think privately. That effect is measurable, and it has been measured in the United States. Jonathon Penney, writing in the Berkeley Technology Law Journal in 2016, examined Wikipedia traffic to privacy-sensitive articles before and after June 2013, when the NSA and PRISM disclosures became public. He found a statistically significant immediate decline, with evidence that it persisted. People stopped looking things up. Nobody instructed them to. The migration of such tools is documented too. Julian Go, in the American Journal of Sociology, traces how instruments and doctrines developed for imperial control returned to domestic American policing; cell-site simulators reached local departments from military origins by the same route. The pattern is old enough to carry a name in the literature. So the question worth asking is not whether America has some particular system. It is narrower and answerable: given that capabilities move from conflict territory to domestic policing, and that surveillance measurably changes what people do, what has already arrived here, and what has it already changed?",
+    evidence: [
+      "Amnesty International, Automated Apartheid (2023): Red Wolf and Blue Wolf facial recognition used to control Palestinian movement in the OPT",
+      "Penney, 'Chilling Effects: Online Surveillance and Wikipedia Use', Berkeley Technology Law Journal 31:1 (2016) — statistically significant immediate decline in privacy-sensitive article traffic after June 2013, with persistence",
+      "Go, 'The Imperial Origins of American Policing', American Journal of Sociology 125:5 — instruments of imperial control returning to domestic policing",
+      "Cell-site simulators reached local US police departments from military origins",
+    ],
+    questions: [
+      "Naming a documented migration does not establish that any specific system has migrated. It establishes that the route exists and has been used before.",
+      "Penney measured behaviour, not thought. What a person looks up is observable; what they think is not, and no study here claims otherwise.",
+      "Nothing in this record establishes any capability to observe conversation directly, in any territory.",
+    ],
+    references: [
+      { label: "Automated Apartheid — Amnesty International", href: "https://www.amnesty.org/en/latest/news/2023/05/israel-opt-israeli-authorities-are-using-facial-recognition-technology-to-entrench-apartheid/" },
+      { label: "Chilling Effects: Online Surveillance and Wikipedia Use — Penney (2016)", href: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2769645" },
+      { label: "The Imperial Origins of American Policing — American Journal of Sociology", href: "https://www.journals.uchicago.edu/doi/10.1086/708464" },
+    ],
+    referencesNote:
+      "Each source is cited for its own finding. Amnesty documents one territory, Penney measures one population's behaviour, and Go describes a historical route. None of the three corroborates either of the others, and together they do not establish a present-day American system.",
+    verification: "unverified",
+    disclaimer:
+      "This concept reports published research and human-rights documentation. It does not establish that any system documented in one territory operates in another, nor that any capability exists to observe thought or conversation directly.",
   },
 ];

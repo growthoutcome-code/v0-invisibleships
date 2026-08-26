@@ -3,9 +3,9 @@ id: IS-CON-00-START-HERE
 title: Concepts — start here
 collection: concepts
 doc_type: section-overview
-concept_count: 19
+concept_count: 21
 generated_by: scripts/export_concepts_md.mjs
-word_count: 396
+word_count: 444
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
@@ -13,7 +13,7 @@ copyright: © 2026 Sean C. Harris. All Rights Reserved.
 
 *Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Every concept below states its BASIS and its ORIGIN: a reader who rejects every `pattern` entry can still rely on every `documented` one, and the two are never blended inside one concept. Causes are reported as attributed, never asserted. See `meta/IS_META_disclaimer.md`.*
 
-**19 concepts.** Each is a self-contained file, safe to hand to
+**21 concepts.** Each is a self-contained file, safe to hand to
 an assistant on its own.
 
 ## How to read the basis label
@@ -23,13 +23,14 @@ an assistant on its own.
 | `documented` | A source, ruling or official record supports it directly | Strongest |
 | `structural` | It follows from what the dataset does or does not contain | Strong, but about the data, not the world |
 | `pattern` | An observation drawn from experience | Offered as an observation, not as proof |
+| `testimony` | A dated first-person report of what the author experienced or was told | Verified by nobody |
 
 A reader who rejects every `pattern` entry can still rely on every
 `documented` one. The two are never blended inside a single concept.
 
 ## The concepts
 
-### documented (12)
+### documented (14)
 
 - **A regulator finding does not stop a deployment** `IS_CON_findings-dont-stop-deployment.md` · origin: ai
 - **Systems built for an emergency get switched off after it** `IS_CON_emergency-systems-withdrawn.md` · origin: ai
@@ -43,6 +44,8 @@ A reader who rejects every `pattern` entry can still rely on every
 - **We're keeping you to ourselves** `IS_CON_ruin-first-then-rescue.md` · origin: author — *Not independently verified*
 - **An attack to force acknowledgment** `IS_CON_attack-to-force-acknowledgment.md` · origin: author — *Not independently verified*
 - **Are Denver citizens subject to acoustic weapons?** `IS_CON_denver-acoustic-weapons.md` · origin: author — *Not independently verified*
+- **Are people made into intelligence assets without knowing it?** `IS_CON_made-into-assets-unknowing.md` · origin: author — *Not independently verified*
+- **Does being watched change what people let themselves think?** `IS_CON_no-private-thinking-space.md` · origin: author — *Not independently verified*
 
 ### structural (6)
 
@@ -53,6 +56,6 @@ A reader who rejects every `pattern` entry can still rely on every
 - **We cannot prove which came first, the law or the system** `IS_CON_sequence-cannot-be-proven.md` · origin: ai
 - **Next to each other is not because of each other** `IS_CON_co-occurrence-is-not-cause.md` · origin: author
 
-### pattern (1)
+### testimony (1)
 
 - **Has an attack happened?** `IS_CON_has-an-attack-happened.md` · origin: author — *Not independently verified*

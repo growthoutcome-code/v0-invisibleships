@@ -12,7 +12,7 @@ import {
 export type Filters = { origin: Origin | "all"; basis: Basis | "all" };
 
 const ORIGINS: (Origin | "all")[] = ["all", "ai", "author"];
-const BASES: (Basis | "all")[] = ["all", "documented", "structural", "pattern"];
+const BASES: (Basis | "all")[] = ["all", "documented", "structural", "pattern", "testimony"];
 
 function chipClass(active: boolean) {
   return [

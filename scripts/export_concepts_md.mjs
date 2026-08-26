@@ -10,7 +10,7 @@
  * download lost them, and nothing noticed for a week, because nothing checks.
  *
  * Concepts are the hardest part of this archive to read from raw data: each one
- * carries a BASIS (documented / structural / pattern), an ORIGIN (ai / author),
+ * carries a BASIS (documented / structural / pattern / testimony), an ORIGIN (ai / author),
  * a verification state, open questions it explicitly does not answer, and a
  * scope disclaimer. Those distinctions are the whole point — a reader who
  * rejects every `pattern` must still be able to rely on every `documented` one.
@@ -40,6 +40,7 @@ const BASIS_NOTE = {
   documented: "A source, ruling or official record supports this directly.",
   structural: "This follows from what the dataset does or does not contain.",
   pattern: "An observation drawn from experience, offered as an observation.",
+  testimony: "A dated first-person report of what the author experienced or was told. Verified by nobody.",
 };
 const ORIGIN_NOTE = {
   ai: "Derived by AI analysis of the dataset.",
@@ -175,6 +176,7 @@ const idx = [
   "| `documented` | A source, ruling or official record supports it directly | Strongest |",
   "| `structural` | It follows from what the dataset does or does not contain | Strong, but about the data, not the world |",
   "| `pattern` | An observation drawn from experience | Offered as an observation, not as proof |",
+  "| `testimony` | A dated first-person report of what the author experienced or was told | Verified by nobody |",
   "",
   "A reader who rejects every `pattern` entry can still rely on every",
   "`documented` one. The two are never blended inside a single concept.",
@@ -182,7 +184,7 @@ const idx = [
   "## The concepts",
   "",
 ];
-for (const basis of ["documented", "structural", "pattern"]) {
+for (const basis of ["documented", "structural", "pattern", "testimony"]) {
   if (!byBasis[basis]?.length) continue;
   idx.push(`### ${basis} (${byBasis[basis].length})`, "");
   for (const c of byBasis[basis]) {

@@ -8,7 +8,7 @@ import ConceptsNav, { type Filters } from "@/components/ConceptsNav";
 import SideNav, { useSectionNav } from "@/components/SideNav";
 import { CONCEPTS, BASIS_LABEL, BASIS_NOTE, ORIGIN_LABEL, ORIGIN_NOTE, VERIFICATION_LABEL, type Basis, type Origin } from "@/lib/concepts";
 
-const BASIS_ORDER: Basis[] = ["documented", "structural", "pattern"];
+const BASIS_ORDER: Basis[] = ["documented", "structural", "pattern", "testimony"];
 const ORIGIN_ORDER: Origin[] = ["ai", "author"];
 
 /**
