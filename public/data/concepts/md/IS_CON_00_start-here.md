@@ -3,9 +3,9 @@ id: IS-CON-00-START-HERE
 title: Concepts — start here
 collection: concepts
 doc_type: section-overview
-concept_count: 21
+concept_count: 26
 generated_by: scripts/export_concepts_md.mjs
-word_count: 444
+word_count: 521
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
@@ -13,7 +13,7 @@ copyright: © 2026 Sean C. Harris. All Rights Reserved.
 
 *Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Every concept below states its BASIS and its ORIGIN: a reader who rejects every `pattern` entry can still rely on every `documented` one, and the two are never blended inside one concept. Causes are reported as attributed, never asserted. See `meta/IS_META_disclaimer.md`.*
 
-**21 concepts.** Each is a self-contained file, safe to hand to
+**26 concepts.** Each is a self-contained file, safe to hand to
 an assistant on its own.
 
 ## How to read the basis label
@@ -30,7 +30,7 @@ A reader who rejects every `pattern` entry can still rely on every
 
 ## The concepts
 
-### documented (14)
+### documented (18)
 
 - **A regulator finding does not stop a deployment** `IS_CON_findings-dont-stop-deployment.md` · origin: ai
 - **Systems built for an emergency get switched off after it** `IS_CON_emergency-systems-withdrawn.md` · origin: ai
@@ -46,8 +46,12 @@ A reader who rejects every `pattern` entry can still rely on every
 - **Are Denver citizens subject to acoustic weapons?** `IS_CON_denver-acoustic-weapons.md` · origin: author — *Not independently verified*
 - **Are people made into intelligence assets without knowing it?** `IS_CON_made-into-assets-unknowing.md` · origin: author — *Not independently verified*
 - **Does being watched change what people let themselves think?** `IS_CON_no-private-thinking-space.md` · origin: author — *Not independently verified*
+- **Who owns what your brain emits?** `IS_CON_who-owns-neural-data.md` · origin: ai — *Not independently verified*
+- **Why did legislatures write laws for neural data?** `IS_CON_law-for-neural-data.md` · origin: ai — *Not independently verified*
+- **Can a machine read what you are thinking?** `IS_CON_can-a-machine-read-thought.md` · origin: ai — *Not independently verified*
+- **Did anyone try to build a way in without surgery?** `IS_CON_nonsurgical-by-design.md` · origin: ai — *Not independently verified*
 
-### structural (6)
+### structural (7)
 
 - **There is no column for you** `IS_CON_no-column-for-you.md` · origin: ai
 - **Accountability isn't wired to deployment, even in the schema** `IS_CON_accountability-not-wired.md` · origin: ai
@@ -55,6 +59,7 @@ A reader who rejects every `pattern` entry can still rely on every
 - **The headline spending figure is not what governments spent** `IS_CON_headline-spending-is-not-spending.md` · origin: ai
 - **We cannot prove which came first, the law or the system** `IS_CON_sequence-cannot-be-proven.md` · origin: ai
 - **Next to each other is not because of each other** `IS_CON_co-occurrence-is-not-cause.md` · origin: author
+- **What would it actually take to do this without consent?** `IS_CON_what-it-would-take.md` · origin: ai — *Not independently verified*
 
 ### testimony (1)
 

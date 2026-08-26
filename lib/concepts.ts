@@ -496,4 +496,154 @@ export const CONCEPTS: Concept[] = [
     disclaimer:
       "This concept reports published research and human-rights documentation. It does not establish that any system documented in one territory operates in another, nor that any capability exists to observe thought or conversation directly.",
   },
+  {
+    id: "who-owns-neural-data",
+    origin: "ai",
+    basis: "documented",
+    title: "Who owns what your brain emits?",
+    body:
+      "Consumer neurotechnology already exists and is already sold: EEG headbands for meditation, focus trackers, sleep monitors, gaming headsets. In April 2024 the Neurorights Foundation published an assessment of the privacy practices of thirty such companies. Twenty-nine of the thirty appeared to have access to the consumer's neural data with no meaningful limitation on that access. Twenty-nine could transfer data to third parties, and twenty said so explicitly. Fewer than half — fourteen of thirty — gave the consumer any stated right to delete it. Only twelve offered both withdrawal of consent and deletion. Eight had no publicly available privacy policy at all. Nothing here was hidden. These are the companies' own published terms, read carefully by people who then counted. The question of who owns what a brain emits is not waiting on some future technology to become urgent. It was answered commercially, in advance, in documents nobody reads.",
+    evidence: [
+      "Genser, Damianos & Yuste, 'Safeguarding Brain Data: Assessing the Privacy Practices of Consumer Neurotechnology Companies', Neurorights Foundation, April 2024",
+      "30 companies assessed; 29 appear to have access to neural data with no meaningful limitation",
+      "29 of 30 can transfer data to third parties; 20 state so explicitly",
+      "14 of 30 extend an explicit right to delete; 12 offer both withdrawal of consent and deletion",
+      "8 of 30 publish no accessible privacy policy",
+    ],
+    questions: [
+      "The report assesses published policies, not actual conduct. What a company reserves the right to do is not proof it has done it.",
+      "It does not establish that any neural data has been sold, to whom, or for what.",
+      "Consumer EEG measures electrical activity at the scalp. What can be inferred from that signal is a separate question this concept does not answer.",
+    ],
+    references: [
+      { label: "Safeguarding Brain Data — Neurorights Foundation (2024)", href: "https://perseus-strategies.com/wp-content/uploads/2024/04/FINAL_Consumer_Neurotechnology_Report_Neurorights_Foundation_April-1.pdf" },
+      { label: "Why did legislatures write laws for neural data?", href: "/concepts#law-for-neural-data" },
+      { label: "Are people made into intelligence assets without knowing it?", href: "/concepts#made-into-assets-unknowing" },
+    ],
+    referencesNote:
+      "The report is cited for its own count of published policies. The linked concepts describe adjacent markets and neither corroborates this one.",
+    verification: "unverified",
+    disclaimer:
+      "This concept reports a published assessment of companies' own privacy policies. It does not establish that any company has misused neural data, nor that any transfer has occurred.",
+  },
+  {
+    id: "law-for-neural-data",
+    origin: "ai",
+    basis: "documented",
+    title: "Why did legislatures write laws for neural data?",
+    body:
+      "Legislatures rarely move early. On neural data, three of them did. Colorado passed HB24-1058 in 2024, amending its consumer privacy act to require express consent before neural data is collected or used, separate consent or an opt-out before it goes to a third party, and a route for a person to have it deleted. California did the same through SB 1223, folding neural data into the categories its privacy act treats as sensitive. Montana went further from a different direction, adding neural data to its genetic information privacy act, effective October 2025. What is notable is not the content but the margins: these passed unanimously or nearly so, in a period when almost nothing does. A category of information most people have never heard of was given statutory protection by bipartisan votes in three states. Either those legislatures were persuaded that a capability exists worth regulating, or they were persuaded one is close enough that waiting was the greater risk. The record shows the votes. It does not show which of those two it was.",
+    evidence: [
+      "Colorado HB24-1058 (2024): express consent to collect or use neural data; separate consent or opt-out for third-party disclosure; deletion route",
+      "California SB 1223: neural data added to the sensitive categories of the state consumer privacy act",
+      "Montana LC0005, effective October 2025: neural data added to the state genetic information privacy act",
+      "All three passed unanimously or near-unanimously",
+    ],
+    questions: [
+      "A law existing does not establish that the harm it anticipates has occurred. Legislatures also regulate in advance.",
+      "None of the three statutes names a specific incident as its cause, so the record cannot say what persuaded the votes.",
+      "This concept does not address whether the definitions these laws use are technically adequate, which is itself contested.",
+    ],
+    references: [
+      { label: "Colorado HB24-1058 — bill text", href: "https://content.leg.colorado.gov/sites/default/files/documents/2024A/bills/2024a_1058_01.pdf" },
+      { label: "States pass privacy laws to protect brain data — KFF Health News", href: "https://kffhealthnews.org/mental-health/colorado-california-montana-states-neural-data-privacy-laws-neurorights/" },
+      { label: "Who owns what your brain emits?", href: "/concepts#who-owns-neural-data" },
+      { label: "We cannot prove which came first, the law or the system", href: "/concepts#sequence-cannot-be-proven" },
+    ],
+    referencesNote:
+      "The last link is method, and it applies directly here: this record cannot establish whether law followed capability or anticipated it.",
+    verification: "unverified",
+    disclaimer:
+      "This concept reports enacted legislation. It does not establish that any neural data harm has occurred in any of the three states, nor what motivated any legislator's vote.",
+  },
+  {
+    id: "can-a-machine-read-thought",
+    origin: "ai",
+    basis: "documented",
+    title: "Can a machine read what you are thinking?",
+    body:
+      "Partly, under conditions that are worth stating precisely. In May 2023 Jerry Tang and Alexander Huth published a semantic decoder in Nature Neuroscience that reconstructed continuous language from non-invasive brain recordings. A person lay in an fMRI scanner; a transformer model turned the blood-flow signal into text that captured the gist of what they were hearing or imagining, matching the intended meaning roughly half the time. It is a real result and it was replicated in the paper across participants. The conditions are as important as the finding. The decoder required about fifteen hours of scanner time per person to train, and it worked only for the individual it was trained on — run against an untrained person, it produced unintelligible output. It worked only with willing participants. And when a trained subject deliberately resisted, by counting, naming animals or telling themselves a different story, the decoder failed entirely. The researchers tested that on purpose and reported it. So the honest answer is that meaning can be partially reconstructed from a cooperative, individually-trained person lying still inside a superconducting magnet the size of a small room. That is a genuine advance in decoding, and it is a long way from reading a mind that does not wish to be read.",
+    evidence: [
+      "Tang & Huth et al., 'Semantic reconstruction of continuous language from non-invasive brain recordings', Nature Neuroscience, 1 May 2023 (DOI 10.1038/s41593-023-01304-9)",
+      "~15 hours of fMRI training per individual; decoder is subject-specific",
+      "Applied to an untrained individual it produced unintelligible output",
+      "Trained subjects who deliberately resisted defeated it completely — the authors tested resistance and published the failure",
+      "Reconstruction captures gist, matching intended meaning about half the time, not word for word",
+    ],
+    questions: [
+      "The result is bounded by fMRI. It says nothing about what any other modality can or cannot do.",
+      "That a cooperative, trained subject can be partially decoded does not establish that an unwilling, untrained person can be decoded by anything.",
+      "The resistance finding is a property of this decoder tested in this way. It is not a general guarantee about future systems.",
+    ],
+    references: [
+      { label: "Semantic reconstruction of continuous language — Nature Neuroscience (2023)", href: "https://www.nature.com/articles/s41593-023-01304-9" },
+      { label: "What would it actually take to do this without consent?", href: "/concepts#what-it-would-take" },
+      { label: "Why did legislatures write laws for neural data?", href: "/concepts#law-for-neural-data" },
+    ],
+    referencesNote:
+      "The paper is cited for its own published result, including the limits its authors reported.",
+    verification: "unverified",
+    disclaimer:
+      "This concept reports one peer-reviewed study and the constraints its authors documented. It establishes no capability beyond what that study demonstrated.",
+  },
+  {
+    id: "nonsurgical-by-design",
+    origin: "ai",
+    basis: "documented",
+    title: "Did anyone try to build a way in without surgery?",
+    body:
+      "Yes, openly, and the programme documents say so. DARPA's Next-Generation Nonsurgical Neurotechnology programme — N3 — set out, in its own words, to develop high-performance bi-directional brain-machine interfaces for able-bodied service members. Bi-directional means read and write. Able-bodied means the purpose was not restoring lost function; the stated applications were controlling unmanned vehicles and cyber-defence systems. Six teams were funded in 2019. The published performance targets were specific: sixteen independent channels, within sixteen cubic millimetres of neural tissue, at fifty milliseconds of latency, using light, acoustic or electromagnetic energy rather than implanted electrodes. The programme is now listed as complete and retained for reference. What this establishes is intent and investment, publicly recorded. It does not establish that the targets were met, and the targets themselves describe a person wearing equipment, not a person at a distance.",
+    evidence: [
+      "DARPA N3 stated aim: 'high-performance, bi-directional brain-machine interfaces for able-bodied service members'",
+      "Named applications: unmanned vehicle control and cyber defence — not clinical restoration",
+      "Published targets: 16 independent channels, 16mm³ of tissue, 50ms latency",
+      "Modalities pursued: light, acoustic and electromagnetic energy, rather than implanted electrodes",
+      "Six teams funded from 2019; programme now listed as complete",
+    ],
+    questions: [
+      "A funded programme with published targets is evidence of intent, not of achievement. DARPA funds many things that do not work.",
+      "The targets describe a wearable interface on a consenting operator. Nothing in the programme description concerns action at a distance or without consent.",
+      "Whether any target was met is not established by the programme page, and the results are not reported there.",
+    ],
+    references: [
+      { label: "N3: Next-Generation Nonsurgical Neurotechnology — DARPA", href: "https://www.darpa.mil/research/programs/next-generation-nonsurgical-neurotechnology" },
+      { label: "What would it actually take to do this without consent?", href: "/concepts#what-it-would-take" },
+      { label: "Can a machine read what you are thinking?", href: "/concepts#can-a-machine-read-thought" },
+    ],
+    referencesNote:
+      "DARPA is cited for its own published programme description. That a goal was funded is not evidence the goal was reached.",
+    verification: "unverified",
+    disclaimer:
+      "This concept reports a publicly documented research programme and its stated objectives. It does not establish that any capability was achieved, deployed, or used on any person.",
+  },
+  {
+    id: "what-it-would-take",
+    origin: "ai",
+    basis: "structural",
+    title: "What would it actually take to do this without consent?",
+    body:
+      "The three concepts alongside this one describe what the public record contains: consumer devices whose makers reserve broad rights over neural data, three states legislating that data as sensitive, a decoder that partially reconstructs meaning, and a defence programme that funded a nonsurgical interface with published targets. Setting them side by side makes the boundary visible, and the boundary is the useful part. Every documented capability requires at least one of three things: physical contact with the head, a cooperative and individually trained subject, or equipment the person is inside or wearing. The decoder needed fifteen hours per person and failed against an untrained subject, and failed again when a trained one resisted. The DARPA targets describe sixteen channels within sixteen cubic millimetres — a wearable interface on an operator who put it on. Consumer EEG reads voltage at the scalp through electrodes touching it. Not one documented system operates at distance on a person who has not participated. That is not an argument that nothing could ever be built. It is a statement of where the published record currently stops, offered because a person who suspects something is happening to them deserves to know what the actual state of the art requires — and because a claim that outruns it should be recognisable as doing so.",
+    evidence: [
+      "Semantic decoder: ~15 hours training per subject, subject-specific, defeated by deliberate resistance",
+      "DARPA N3 targets: 16 channels in 16mm³ at 50ms — a wearable interface on a consenting operator",
+      "Consumer EEG: electrodes in contact with the scalp, measuring voltage at the surface",
+      "No system in the documented record operates at a distance on a non-participating person",
+    ],
+    questions: [
+      "Absence from the public record is not proof of absence. Classified capability would not appear here, and this concept cannot speak to it.",
+      "The boundary described is where publication currently stops, not a claim about physics or the future.",
+      "Nothing here rules out harm by the documented means — commercial data, contact devices, or a cooperative subject who did not understand what they consented to.",
+    ],
+    references: [
+      { label: "Can a machine read what you are thinking?", href: "/concepts#can-a-machine-read-thought" },
+      { label: "Did anyone try to build a way in without surgery?", href: "/concepts#nonsurgical-by-design" },
+      { label: "Who owns what your brain emits?", href: "/concepts#who-owns-neural-data" },
+      { label: "Next to each other is not because of each other", href: "/concepts#co-occurrence-is-not-cause" },
+    ],
+    referencesNote:
+      "The first three are the sourced entries this one reads across. The fourth is method: setting findings side by side does not establish a relation between them, and this concept draws a boundary rather than a connection.",
+    verification: "unverified",
+    disclaimer:
+      "This concept describes the limits of publicly documented capability. It makes no claim about classified work, about future capability, or about the cause of any individual's experience.",
+  },
 ];
