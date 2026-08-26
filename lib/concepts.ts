@@ -58,6 +58,24 @@ export type Concept = {
    * Kept separate for the same reason `basis` exists at all.
    */
   comments?: string[];
+  /**
+   * PAIRED STATEMENT AND ASSESSMENT (Sean, 2026-08-26).
+   *
+   * `authorStatement` is the claim in the author's own words, printed verbatim
+   * and attributed to him. `aiAssessment` is the AI's response to that specific
+   * claim, printed directly beneath it and attributed to the AI.
+   *
+   * The pair exists because the alternative was worse. Converting an author's
+   * claim into whatever fraction of it could be sourced produced entries that
+   * were defensible but no longer his, and silently dropped the part he cared
+   * about. This keeps the claim intact, keeps its provenance visible, and puts
+   * the counter-argument on the same page rather than in a disclaimer.
+   *
+   * Neither half may be edited to agree with the other. If they agree, the pair
+   * is pointless; if one is softened to match, the reader is being managed.
+   */
+  authorStatement?: string[];
+  aiAssessment?: string[];
 };
 
 export const VERIFICATION_LABEL: Record<Verification, string> = {

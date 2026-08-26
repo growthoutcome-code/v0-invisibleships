@@ -119,6 +119,16 @@ function toMarkdown(c) {
     for (const q of c.questions) b.push(`- ${q}`);
     b.push("");
   }
+  if (c.authorStatement?.length) {
+    out.push("", "## The author states", "");
+    for (const m of c.authorStatement) out.push(m, "");
+    out.push("*The author's own words, printed as given. Unverified, and not a finding of this research.*", "");
+    if (c.aiAssessment?.length) {
+      out.push("", "## AI assessment", "");
+      for (const m of c.aiAssessment) out.push(m, "");
+      out.push("*Written by an AI model at the author's request, responding to the statement above. Published unedited by the author, and not independent verification.*", "");
+    }
+  }
   if (c.comments?.length) {
     out.push("", "## Author's note", "");
     for (const m of c.comments) out.push(m, "");
