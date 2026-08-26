@@ -32,9 +32,9 @@ function timeline(){const M=mils();document.getElementById('t_tiles').innerHTML=
  let s=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="font-family:inherit">`;for(let y=x0;y<=x1;y++){const x=xs(y);s+=`<line x1="${x}" y1="26" x2="${x}" y2="${H-16}" stroke="var(--grid)"/><text x="${x}" y="${H-4}" font-size="10" fill="var(--text-muted)" text-anchor="middle">${y}</text>`}
  const tx=xs(2026+7.5/12);s+=`<line x1="${tx}" y1="26" x2="${tx}" y2="${H-16}" stroke="var(--text-muted)" stroke-dasharray="3 3"/><text x="${tx}" y="20" font-size="10" fill="var(--text-muted)" text-anchor="middle">today</text>`;
  [['Legislation',lane.A,'--series-2'],['Release',lane.B,'--series-1'],['Deploy/enf',lane.C,'--series-3'],['Litigation',lane.D,'--series-4'],['Investment',lane.E,'--series-5'],['Health',lane.F,'--series-6'],['Crime',lane.G,'--series-7']].forEach(([lab,y,c])=>{s+=`<text x="4" y="${y+3}" font-size="10" fill="var(${c})" font-weight="700">${lab}</text>`});
- const jit={};M.forEach((m,i)=>{const key=m.tk+Math.round(frac(m.o)*6);jit[key]=(jit[key]||0);const off=((jit[key]%6)-2.5)*7;jit[key]++;const cx=xs(frac(m.o)),cy=lane[m.tk]+off,col=`var(${tk2s[m.tk]})`;const proj=m.dc==='projected';s+=`<circle cx="${cx}" cy="${cy}" r="4" fill="${proj?'var(--surface-2)':col}" stroke="${col}" stroke-width="1.5" data-i="${i}" style="cursor:pointer"/>`});
+ const jit={};M.forEach((m,i)=>{const key=m.tk+Math.round(frac(m.o)*6);jit[key]=(jit[key]||0);const off=((jit[key]%6)-2.5)*7;jit[key]++;const cx=xs(frac(m.o)),cy=lane[m.tk]+off,col=`var(${tk2s[m.tk]})`;const proj=m.dc==='projected';s+=`<circle cx="${cx}" cy="${cy}" r="11" fill="transparent" data-i="${i}" style="cursor:pointer"><title>${m.ti}</title></circle><circle cx="${cx}" cy="${cy}" r="4" fill="${proj?'var(--surface-2)':col}" stroke="${col}" stroke-width="1.5" pointer-events="none"/>`});
  s+='</svg>';document.getElementById('tlsvg').innerHTML=s;
- document.querySelectorAll('#tlsvg circle').forEach(c=>{const m=M[+c.dataset.i];c.onmousemove=e=>showTip(e,`<b>${m.o}</b> · ${({A:'Legislation',B:'Release',C:'Deploy/enforcement',D:'Litigation',E:'Investment',F:'Health',G:'Crime'})[m.tk]}${m.dc==='projected'?' (projected)':''}<br>${m.ti}<br><span style="color:var(--text-secondary)">${m.g}${m.v?' · '+(DATA.vname[m.v]||m.v):''}${m.rel?' · '+m.rel:''}</span>`);c.onmouseleave=hideTip});
+ document.querySelectorAll('#tlsvg circle').forEach(c=>{const m=M[+c.dataset.i];c.onmousemove=e=>showTip(e,`<b>${m.o}</b> · ${({A:'Legislation',B:'Release',C:'Deploy/enforcement',D:'Litigation',E:'Investment',F:'Health',G:'Crime'})[m.tk]}${m.dc==='projected'?' (projected)':''}<br>${m.ti}<br><span style="color:var(--text-secondary)">${m.g}${m.v?' · '+(DATA.vname[m.v]||m.v):''}${m.rel?' · '+m.rel:''}</span>`);c.onmouseleave=hideTip;c.onclick=function(){hideTip();if(window.__govOpenMilestone)window.__govOpenMilestone(m)}});
  const rel={};M.forEach(m=>{if(m.rel)rel[m.rel]=(rel[m.rel]||0)+1});hbars(document.getElementById('relbars'),Object.entries(rel).sort((a,b)=>b[1]-a[1]).map(([k,n])=>[k,n,k,k==='law-follows'?'--series-2':k==='capability-follows'?'--series-1':'--series-3']))}
 function invest(){const I=invos();const cf=I.filter(x=>x.k==='capital-flow'&&x.val);const disc=cf.filter(x=>/disclos/i.test(x.note)),pled=cf.filter(x=>/pledge|announced/i.test(x.note));const sd=disc.reduce((s,x)=>s+x.val,0),sp=pled.reduce((s,x)=>s+x.val,0);
  document.getElementById('i_tiles').innerHTML=[['Investment rows',I.length],['Disclosed','$'+(sd/1e9).toFixed(0)+'B'],['Announced pledge','$'+(sp/1e9).toFixed(0)+'B'],['Domains',new Set(I.map(x=>x.d)).size],['Thesis notes',I.filter(x=>x.k==='thesis').length],['Market sizes',I.filter(x=>x.k==='market-size').length]].map(x=>`<div class="tile"><div class="n">${x[1]}</div><div class="l">${x[0]}</div></div>`).join('');
@@ -127,13 +127,18 @@ render();
     loading = Promise.all([
       fetch('/data/tables/deployments.json').then(function(r){ return r.json(); }),
       fetch('/data/tables/sources.json').then(function(r){ return r.json(); }),
-      fetch('/data/tables/vendors.json').then(function(r){ return r.json(); }).catch(function(){ return []; })
+      fetch('/data/tables/vendors.json').then(function(r){ return r.json(); }).catch(function(){ return []; }),
+      /* The inlined DATA.mils carries no source_id — the report's blob predates
+         the published tables. milestones.json does, so resolve at click time and
+         key on date+title, which is unique across the 311 rows. */
+      fetch('/data/tables/milestones.json').then(function(r){ return r.json(); }).catch(function(){ return []; })
     ]).then(function(res){
       var byId = {}; res[1].forEach(function(s){ byId[s.id] = s; });
       var vn = {}; (res[2]||[]).forEach(function(v){ vn[v.id] = v.name || v.id; });
-      db = { deployments: res[0], sources: byId, vendors: vn };
+      var ms = {}; (res[3]||[]).forEach(function(m){ ms[m.occurred_on + '|' + m.title] = m; });
+      db = { deployments: res[0], sources: byId, vendors: vn, mils: ms };
       return db;
-    }).catch(function(){ db = { deployments: [], sources: {}, vendors: {} }; return db; });
+    }).catch(function(){ db = { deployments: [], sources: {}, vendors: {}, mils: {} }; return db; });
     return loading;
   }
 
@@ -179,6 +184,46 @@ render();
       body.innerHTML = html;
     });
   }
+
+  /* ---- 3b. milestone modal --------------------------------------------
+     The timeline was hover-only, which meant it did nothing at all on a phone.
+     Same modal as the heatmap: one dialog in this report, not two. */
+  var TRACK_NAME = { A:'Legislation', B:'Release', C:'Deploy/enforcement',
+                     D:'Litigation', E:'Investment', F:'Health', G:'Crime' };
+
+  window.__govOpenMilestone = function(m){
+    var head = '<h3>' + esc(m.ti) + '</h3>'
+      + '<p class="gm-count">' + esc(m.o) + ' &middot; ' + esc(TRACK_NAME[m.tk] || m.tk)
+      + (m.dc === 'projected' ? ' &middot; projected' : '') + '</p>';
+    body.innerHTML = head + '<p class="gm-load">Loading source&hellip;</p>';
+    modal.classList.add('on');
+    loadDb().then(function(x){
+      var full = x.mils[m.o + '|' + m.ti];
+      var src = full && x.sources[full.source_id];
+      var html = head;
+      if (full && full.description) html += '<p class="gm-desc">' + esc(full.description) + '</p>';
+      html += '<ul class="gm-list"><li><span class="gm-meta">'
+        + [m.g && ('Geography: ' + m.g),
+           m.v && ('Vendor: ' + esc(x.vendors[m.v] || m.v)),
+           m.d && ('Domain: ' + m.d),
+           m.rel && ('Relationship: ' + m.rel)].filter(Boolean).join(' &middot; ')
+        + '</span>';
+      if (src) {
+        html += '<a class="gm-src" href="' + esc(src.url) + '" target="_blank" rel="noreferrer noopener">'
+          + esc(src.publisher || src.title || 'source') + ' &#8599;'
+          + '<span class="gm-tier">Tier ' + esc(src.evidence_tier) + '</span></a>';
+      } else {
+        /* Health and Crime milestones are injected into the timeline from the
+           other sections and are not rows in milestones.json. Say so rather
+           than showing an empty space that reads as a missing citation. */
+        html += '<span class="gm-meta">No linked row in the published milestone table'
+          + (m.tk === 'F' || m.tk === 'G' ? ' — this track is drawn from the Public Health and Crime research.' : '.')
+          + '</span>';
+      }
+      html += '</li></ul>';
+      body.innerHTML = html;
+    });
+  };
 
   /* ---- 4. bind heatmap cells ------------------------------------------- */
   function bind(){

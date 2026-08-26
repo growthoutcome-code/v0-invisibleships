@@ -137,6 +137,21 @@ html.dark .gov-report{
 .gov-report #heat:empty { min-height: 320px; }
 .gov-report .hbars:empty, .gov-report #tline:empty, .gov-report #rcbars:empty { min-height: 160px; }
 @keyframes gr-pulse { 0%,100% { opacity: 1 } 50% { opacity: .45 } }
+
+/* Master timeline on a phone. The SVG is a 1120x580 viewBox at width:100%, so
+   on a 390px screen its 10px lane labels and year ticks render around 3.5px —
+   present, and unreadable. Scroll it instead of shrinking it, which is what the
+   crime charts and the evidence-span chart already do. The dots carry an
+   invisible 11px hit circle, so tapping works once the chart is legible. */
+@media (max-width: 760px) {
+  .gov-report #tlsvg {
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+    /* the shimmer rule above sets border-radius on :empty; keep the scroll
+       container square once it has content so the marks are not clipped */
+    border-radius: 0;
+  }
+  .gov-report #tlsvg svg { min-width: 760px; display: block; }
+}
 @media (prefers-reduced-motion: reduce) {
   .gov-report .tiles:empty, .gov-report #tlsvg:empty, .gov-report .hbars:empty,
   .gov-report #heat:empty, .gov-report #tline:empty, .gov-report #rcbars:empty { animation: none; }

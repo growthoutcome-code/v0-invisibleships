@@ -125,6 +125,21 @@ TYPE_RULES = """
 .gov-report #heat:empty { min-height: 320px; }
 .gov-report .hbars:empty, .gov-report #tline:empty, .gov-report #rcbars:empty { min-height: 160px; }
 @keyframes gr-pulse { 0%,100% { opacity: 1 } 50% { opacity: .45 } }
+
+/* Master timeline on a phone. The SVG is a 1120x580 viewBox at width:100%, so
+   on a 390px screen its 10px lane labels and year ticks render around 3.5px —
+   present, and unreadable. Scroll it instead of shrinking it, which is what the
+   crime charts and the evidence-span chart already do. The dots carry an
+   invisible 11px hit circle, so tapping works once the chart is legible. */
+@media (max-width: 760px) {
+  .gov-report #tlsvg {
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+    /* the shimmer rule above sets border-radius on :empty; keep the scroll
+       container square once it has content so the marks are not clipped */
+    border-radius: 0;
+  }
+  .gov-report #tlsvg svg { min-width: 760px; display: block; }
+}
 @media (prefers-reduced-motion: reduce) {
   .gov-report .tiles:empty, .gov-report #tlsvg:empty, .gov-report .hbars:empty,
   .gov-report #heat:empty, .gov-report #tline:empty, .gov-report #rcbars:empty { animation: none; }
@@ -381,13 +396,18 @@ ENHANCE_JS = """
     loading = Promise.all([
       fetch('/data/tables/deployments.json').then(function(r){ return r.json(); }),
       fetch('/data/tables/sources.json').then(function(r){ return r.json(); }),
-      fetch('/data/tables/vendors.json').then(function(r){ return r.json(); }).catch(function(){ return []; })
+      fetch('/data/tables/vendors.json').then(function(r){ return r.json(); }).catch(function(){ return []; }),
+      /* The inlined DATA.mils carries no source_id — the report's blob predates
+         the published tables. milestones.json does, so resolve at click time and
+         key on date+title, which is unique across the 311 rows. */
+      fetch('/data/tables/milestones.json').then(function(r){ return r.json(); }).catch(function(){ return []; })
     ]).then(function(res){
       var byId = {}; res[1].forEach(function(s){ byId[s.id] = s; });
       var vn = {}; (res[2]||[]).forEach(function(v){ vn[v.id] = v.name || v.id; });
-      db = { deployments: res[0], sources: byId, vendors: vn };
+      var ms = {}; (res[3]||[]).forEach(function(m){ ms[m.occurred_on + '|' + m.title] = m; });
+      db = { deployments: res[0], sources: byId, vendors: vn, mils: ms };
       return db;
-    }).catch(function(){ db = { deployments: [], sources: {}, vendors: {} }; return db; });
+    }).catch(function(){ db = { deployments: [], sources: {}, vendors: {}, mils: {} }; return db; });
     return loading;
   }
 
@@ -433,6 +453,46 @@ ENHANCE_JS = """
       body.innerHTML = html;
     });
   }
+
+  /* ---- 3b. milestone modal --------------------------------------------
+     The timeline was hover-only, which meant it did nothing at all on a phone.
+     Same modal as the heatmap: one dialog in this report, not two. */
+  var TRACK_NAME = { A:'Legislation', B:'Release', C:'Deploy/enforcement',
+                     D:'Litigation', E:'Investment', F:'Health', G:'Crime' };
+
+  window.__govOpenMilestone = function(m){
+    var head = '<h3>' + esc(m.ti) + '</h3>'
+      + '<p class="gm-count">' + esc(m.o) + ' &middot; ' + esc(TRACK_NAME[m.tk] || m.tk)
+      + (m.dc === 'projected' ? ' &middot; projected' : '') + '</p>';
+    body.innerHTML = head + '<p class="gm-load">Loading source&hellip;</p>';
+    modal.classList.add('on');
+    loadDb().then(function(x){
+      var full = x.mils[m.o + '|' + m.ti];
+      var src = full && x.sources[full.source_id];
+      var html = head;
+      if (full && full.description) html += '<p class="gm-desc">' + esc(full.description) + '</p>';
+      html += '<ul class="gm-list"><li><span class="gm-meta">'
+        + [m.g && ('Geography: ' + m.g),
+           m.v && ('Vendor: ' + esc(x.vendors[m.v] || m.v)),
+           m.d && ('Domain: ' + m.d),
+           m.rel && ('Relationship: ' + m.rel)].filter(Boolean).join(' &middot; ')
+        + '</span>';
+      if (src) {
+        html += '<a class="gm-src" href="' + esc(src.url) + '" target="_blank" rel="noreferrer noopener">'
+          + esc(src.publisher || src.title || 'source') + ' &#8599;'
+          + '<span class="gm-tier">Tier ' + esc(src.evidence_tier) + '</span></a>';
+      } else {
+        /* Health and Crime milestones are injected into the timeline from the
+           other sections and are not rows in milestones.json. Say so rather
+           than showing an empty space that reads as a missing citation. */
+        html += '<span class="gm-meta">No linked row in the published milestone table'
+          + (m.tk === 'F' || m.tk === 'G' ? ' — this track is drawn from the Public Health and Crime research.' : '.')
+          + '</span>';
+      }
+      html += '</li></ul>';
+      body.innerHTML = html;
+    });
+  };
 
   /* ---- 4. bind heatmap cells ------------------------------------------- */
   function bind(){
@@ -633,6 +693,32 @@ def main():
     hint = '<span style="color:var(--text-muted);font-size:12px">Hover any mark for detail.</span>'
     if hint in markup:
         markup = markup.replace(hint, "")
+
+    # ---- timeline: make the dots reachable ------------------------------
+    # It was onmousemove/onmouseleave only, so a phone got nothing at all. Two
+    # changes, both minimal so the drawing code stays legible:
+    #   a transparent r=11 hit circle behind every r=4 mark, because a 4px
+    #   target is not tappable and enlarging the visible dot would crowd a chart
+    #   that already jitters overlapping marks;
+    #   an onclick that hands the milestone to the report's existing modal.
+    old_mark = ('s+=`<circle cx="${cx}" cy="${cy}" r="4" fill="${proj?\'var(--surface-2)\':col}" '
+                'stroke="${col}" stroke-width="1.5" data-i="${i}" style="cursor:pointer"/>`')
+    new_mark = ('s+=`<circle cx="${cx}" cy="${cy}" r="11" fill="transparent" data-i="${i}" '
+                'style="cursor:pointer"><title>${m.ti}</title></circle>'
+                '<circle cx="${cx}" cy="${cy}" r="4" fill="${proj?\'var(--surface-2)\':col}" '
+                'stroke="${col}" stroke-width="1.5" pointer-events="none"/>`')
+    if old_mark in js:
+        js = js.replace(old_mark, new_mark)
+    else:
+        raise SystemExit("timeline mark markup changed — fix build_govcloud_report.py")
+
+    old_bind = "c.onmouseleave=hideTip});"
+    new_bind = ("c.onmouseleave=hideTip;"
+                "c.onclick=function(){hideTip();if(window.__govOpenMilestone)window.__govOpenMilestone(m)}});")
+    if old_bind in js:
+        js = js.replace(old_bind, new_bind)
+    else:
+        raise SystemExit("timeline hover binding changed — fix build_govcloud_report.py")
 
     open(OUT_JS, "w", encoding="utf-8").write(js + ENHANCE_JS)
 
