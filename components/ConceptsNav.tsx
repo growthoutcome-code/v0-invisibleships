@@ -5,11 +5,17 @@ import {
   CONCEPTS,
   BASIS_LABEL,
   ORIGIN_LABEL,
+  THEME_LABEL,
   type Basis,
   type Origin,
+  type Theme,
 } from "@/lib/concepts";
 
-export type Filters = { origin: Origin | "all"; basis: Basis | "all" };
+export type Filters = { origin: Origin | "all"; basis: Basis | "all"; theme: Theme | "all" };
+
+const THEMES: (Theme | "all")[] = [
+  "all", "record", "procurement", "surveillance", "neurotech", "coercion", "health", "experience",
+];
 
 const ORIGINS: (Origin | "all")[] = ["all", "ai", "author"];
 const BASES: (Basis | "all")[] = ["all", "documented", "structural", "pattern", "testimony"];
@@ -81,6 +87,20 @@ export default function ConceptsNav({
               className={chipClass(filters.basis === b)}
             >
               {b === "all" ? "All" : BASIS_LABEL[b]}
+            </button>
+          ))}
+        </div>
+
+        <div className="flex flex-wrap items-center gap-1">
+          <span className="text-[13px] uppercase tracking-[0.08em] text-muted mr-2">About</span>
+          {THEMES.map((t) => (
+            <button
+              key={t}
+              onClick={() => set({ theme: t })}
+              aria-pressed={filters.theme === t}
+              className={chipClass(filters.theme === t)}
+            >
+              {t === "all" ? "All" : THEME_LABEL[t]}
             </button>
           ))}
         </div>

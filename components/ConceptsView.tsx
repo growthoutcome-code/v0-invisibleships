@@ -19,7 +19,7 @@ const ORIGIN_ORDER: Origin[] = ["ai", "author"];
  * each claim is weighed on its own basis instead of by its neighbours.
  */
 export default function ConceptsView() {
-  const [filters, setFilters] = useState<Filters>({ origin: "all", basis: "all" });
+  const [filters, setFilters] = useState<Filters>({ origin: "all", basis: "all", theme: "all" });
 
   useEffect(() => { track("concepts_viewed"); }, []);
 
@@ -27,7 +27,7 @@ export default function ConceptsView() {
   // so an incoming hash clears the filters before the browser scrolls.
   useEffect(() => {
     if (typeof window === "undefined" || !window.location.hash) return;
-    setFilters({ origin: "all", basis: "all" });
+    setFilters({ origin: "all", basis: "all", theme: "all" });
     const id = window.location.hash.slice(1);
     const t = window.setTimeout(() => {
       document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -39,7 +39,8 @@ export default function ConceptsView() {
     () => CONCEPTS.filter(
       (c) =>
         (filters.origin === "all" || c.origin === filters.origin) &&
-        (filters.basis === "all" || c.basis === filters.basis)
+        (filters.basis === "all" || c.basis === filters.basis) &&
+        (filters.theme === "all" || c.theme === filters.theme)
     ),
     [filters]
   );

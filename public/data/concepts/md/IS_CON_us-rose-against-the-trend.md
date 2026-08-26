@@ -7,7 +7,7 @@ basis: documented
 origin: ai
 verification: verified
 generated_by: scripts/export_concepts_md.mjs
-word_count: 325
+word_count: 328
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
@@ -16,7 +16,8 @@ copyright: © 2026 Sean C. Harris. All Rights Reserved.
 *Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Every concept below states its BASIS and its ORIGIN: a reader who rejects every `pattern` entry can still rely on every `documented` one, and the two are never blended inside one concept. Causes are reported as attributed, never asserted. See `meta/IS_META_disclaimer.md`.*
 
 **Basis: documented.** A source, ruling or official record supports this directly.  
-**Origin: ai.** Derived by AI analysis of the dataset.
+**Origin: ai.** Derived by AI analysis of the dataset.  
+**Theme: Health outcomes.**
 
 Between 2000 and 2021, on the one basis that allows countries to be compared at all, the world's suicide rate fell 27%. Most countries fell with it — Russia by 60%, China by 42%, Israel by 36%, Japan by 28%, India by 21%. Over the same years the United States rose 40%, in a steady climb rather than a spike. It is not alone in rising: South Korea rose further, and the UK, Australia and the West Bank & Gaza were effectively flat. But among large wealthy countries the American direction is the outlier, and the gap is not small — 67 percentage points between the US and the world it is usually compared to.
 

@@ -7,7 +7,7 @@ basis: documented
 origin: author
 verification: unverified
 generated_by: scripts/export_concepts_md.mjs
-word_count: 507
+word_count: 511
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
@@ -16,7 +16,8 @@ copyright: © 2026 Sean C. Harris. All Rights Reserved.
 *Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Every concept below states its BASIS and its ORIGIN: a reader who rejects every `pattern` entry can still rely on every `documented` one, and the two are never blended inside one concept. Causes are reported as attributed, never asserted. See `meta/IS_META_disclaimer.md`.*
 
 **Basis: documented.** A source, ruling or official record supports this directly.  
-**Origin: author.** The author's own observation, from experience.
+**Origin: author.** The author's own observation, from experience.  
+**Theme: Coercion and control.**
 
 **Not independently verified.**
 

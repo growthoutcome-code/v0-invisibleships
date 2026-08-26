@@ -42,6 +42,15 @@ const BASIS_NOTE = {
   pattern: "An observation drawn from experience, offered as an observation.",
   testimony: "A dated first-person report of what the author experienced or was told. Verified by nobody.",
 };
+const THEME_LABEL = {
+  record: "The record and its limits",
+  procurement: "Procurement and accountability",
+  surveillance: "Surveillance and the person",
+  neurotech: "Neurotechnology",
+  coercion: "Coercion and control",
+  health: "Health outcomes",
+  experience: "Reported experience",
+};
 const ORIGIN_NOTE = {
   ai: "Derived by AI analysis of the dataset.",
   author: "The author's own observation, from experience.",
@@ -102,7 +111,8 @@ function toMarkdown(c) {
   const b = [`# ${c.title}`, "", STANDING, ""];
   b.push(
     `**Basis: ${c.basis}.** ${BASIS_NOTE[c.basis] || ""}  ` +
-    `\n**Origin: ${c.origin}.** ${ORIGIN_NOTE[c.origin] || ""}`
+    `\n**Origin: ${c.origin}.** ${ORIGIN_NOTE[c.origin] || ""}  ` +
+    `\n**Theme: ${THEME_LABEL[c.theme] || c.theme}.**`
   );
   if (c.verification && c.verification !== "verified") {
     b.push("", `**${VERIFICATION_LABEL[c.verification] || c.verification}.**`);

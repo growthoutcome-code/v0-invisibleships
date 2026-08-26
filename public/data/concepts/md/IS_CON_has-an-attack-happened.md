@@ -7,7 +7,7 @@ basis: testimony
 origin: author
 verification: unverified
 generated_by: scripts/export_concepts_md.mjs
-word_count: 625
+word_count: 628
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
@@ -16,7 +16,8 @@ copyright: © 2026 Sean C. Harris. All Rights Reserved.
 *Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Every concept below states its BASIS and its ORIGIN: a reader who rejects every `pattern` entry can still rely on every `documented` one, and the two are never blended inside one concept. Causes are reported as attributed, never asserted. See `meta/IS_META_disclaimer.md`.*
 
 **Basis: testimony.** A dated first-person report of what the author experienced or was told. Verified by nobody.  
-**Origin: author.** The author's own observation, from experience.
+**Origin: author.** The author's own observation, from experience.  
+**Theme: Reported experience.**
 
 **Not independently verified.**
 

@@ -30,12 +30,10 @@ A reader who rejects every `pattern` entry can still rely on every
 
 ## The concepts
 
-### documented (27)
+### documented (25)
 
 - **A regulator finding does not stop a deployment** `IS_CON_findings-dont-stop-deployment.md` · origin: ai
-- **Systems built for an emergency get switched off after it** `IS_CON_emergency-systems-withdrawn.md` · origin: ai
 - **Organised covert harassment of individuals is established fact** `IS_CON_organised-harassment-is-fact.md` · origin: ai
-- **“Official” is not the same as “independent”** `IS_CON_official-is-not-independent.md` · origin: ai
 - **Fined in Europe, hired in America** `IS_CON_fined-in-europe-hired-in-america.md` · origin: ai
 - **The world's suicide rate fell. The United States' rose.** `IS_CON_us-rose-against-the-trend.md` · origin: ai
 - **The numbers under the numbers** `IS_CON_low-number-may-mean-low-counting.md` · origin: ai
@@ -60,10 +58,12 @@ A reader who rejects every `pattern` entry can still rely on every
 - **How protected is your medical information?** `IS_CON_how-protected-is-your-medical-record.md` · origin: ai — *Not independently verified*
 - **What happens to everyone around a target?** `IS_CON_everyone-around-a-target.md` · origin: ai — *Not independently verified*
 
-### structural (7)
+### structural (9)
 
 - **There is no column for you** `IS_CON_no-column-for-you.md` · origin: ai
 - **Accountability isn't wired to deployment, even in the schema** `IS_CON_accountability-not-wired.md` · origin: ai
+- **Systems built for an emergency get switched off after it** `IS_CON_emergency-systems-withdrawn.md` · origin: ai
+- **“Official” is not the same as “independent”** `IS_CON_official-is-not-independent.md` · origin: ai
 - **A law saying “keep it local” doesn’t keep it local** `IS_CON_local-law-does-not-mean-local.md` · origin: ai
 - **The headline spending figure is not what governments spent** `IS_CON_headline-spending-is-not-spending.md` · origin: ai
 - **We cannot prove which came first, the law or the system** `IS_CON_sequence-cannot-be-proven.md` · origin: ai

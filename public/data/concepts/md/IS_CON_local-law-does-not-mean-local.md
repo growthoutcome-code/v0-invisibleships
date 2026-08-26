@@ -7,7 +7,7 @@ basis: structural
 origin: ai
 verification: verified
 generated_by: scripts/export_concepts_md.mjs
-word_count: 226
+word_count: 230
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
@@ -16,7 +16,8 @@ copyright: © 2026 Sean C. Harris. All Rights Reserved.
 *Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Every concept below states its BASIS and its ORIGIN: a reader who rejects every `pattern` entry can still rely on every `documented` one, and the two are never blended inside one concept. Causes are reported as attributed, never asserted. See `meta/IS_META_disclaimer.md`.*
 
 **Basis: structural.** This follows from what the dataset does or does not contain.  
-**Origin: ai.** Derived by AI analysis of the dataset.
+**Origin: ai.** Derived by AI analysis of the dataset.  
+**Theme: Procurement and accountability.**
 
 Twenty countries in this record have rules requiring government data to stay within their borders. In ten of the countries where we can see actual deployments, most government workloads still run on American companies anyway. The only places where that genuinely changes are the ones that shut those companies out altogether — and even there, the few remaining records are exits rather than operations.
 
