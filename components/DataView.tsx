@@ -6,6 +6,7 @@ import { DataNotice, DataNoteLine } from "@/components/DataIntro";
 import { TimelineNarrative, TimelineHub } from "@/components/TimelineIntro";
 import GovCloudReport from "@/components/GovCloudReport";
 import GovCloudSources from "@/components/GovCloudSources";
+import GovCloudBriefs from "@/components/GovCloudBriefs";
 import HealthSignals from "@/components/HealthSignals";
 import CrimeSignals from "@/components/CrimeSignals";
 import ConceptsView from "@/components/ConceptsView";
@@ -145,6 +146,7 @@ export default function DataView({
 
           <div className={sub === "health" || sub === "crime" || sub === "concepts" ? "hidden" : sub === "timeline" ? "gov-timeline-only" : "gov-cloud-mode"}>
             {report}
+            {sub === "govcloud" && <GovCloudBriefs />}
             {sub === "govcloud" && <GovCloudSources />}
           </div>
 
