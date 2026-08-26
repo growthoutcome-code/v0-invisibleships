@@ -51,10 +51,23 @@ export function useSectionNav(
     const scan = () => {
     const found: NavSection[] = [];
     const seen = new Set<string>();
+    // A selector like "section, h2" matches a wrapper AND the heading inside
+    // it, which would list every hero section twice. querySelectorAll returns
+    // document order, so the wrapper is seen first and wins.
+    const claimed = new Set<Element>();
     root.querySelectorAll<HTMLElement>(selector).forEach((el, i) => {
-      const h = el.querySelector(headingSel);
+      // The selector may BE the heading. The Government Cloud report is
+      // generated HTML whose <h2>s are bare siblings inside a tab div, with no
+      // wrapper element to match on.
+      const h = el.matches(headingSel) ? el : el.querySelector(headingSel);
       const label = h?.textContent?.trim();
-      if (!label) return;                       // sections without a heading are layout, not content
+      if (!h || !label) return;                 // sections without a heading are layout, not content
+      // Skip anything not currently rendered. That report keeps five of its six
+      // tab panels in `display:none` and swaps them, so listing every heading
+      // would offer the reader jumps that land on nothing.
+      if (!el.offsetParent && el.offsetHeight === 0) return;
+      if (claimed.has(h)) return;
+      claimed.add(h);
       // An id the PAGE set itself always wins. Concepts carry stable ids that
       // other pages deep-link to (/concepts#us-rose-against-the-trend, four of
       // them in HealthSignals); deriving a fresh one from the label here would
@@ -102,7 +115,10 @@ export function useSectionNav(
       if (t) clearTimeout(t);
       t = setTimeout(scan, 150);
     });
-    mo.observe(root, { childList: true, subtree: true });
+    // attributes too: the Government Cloud report switches panels by toggling a
+    // `hidden` class, which childList/subtree alone never sees, so the outline
+    // would keep describing the panel the reader just left.
+    mo.observe(root, { childList: true, subtree: true, attributes: true, attributeFilter: ["class"] });
 
     return () => {
       mo.disconnect();

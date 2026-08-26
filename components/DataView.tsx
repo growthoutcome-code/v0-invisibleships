@@ -10,6 +10,7 @@ import HealthSignals from "@/components/HealthSignals";
 import CrimeSignals from "@/components/CrimeSignals";
 import ConceptsView from "@/components/ConceptsView";
 import ResearchHero from "@/components/ResearchHero";
+import SideNav, { useSectionNav } from "@/components/SideNav";
 import { NO_FILTERS, type Filters } from "@/lib/concepts";
 
 /**
@@ -63,6 +64,10 @@ export default function DataView({
   // a reader or a subject up there has to open the list down here already
   // filtered. Lifting the state is what makes that one click instead of two.
   const [conceptFilters, setConceptFilters] = useState<Filters>(NO_FILTERS);
+  // Both hero sections and the report's own <h2>s, which are bare siblings
+  // rather than wrapped, hence the selector.
+  const nav = useSectionNav("research-root", { selector: "section, h2", heading: "h2" });
+
   const explore = (patch: Partial<Filters>) => {
     setConceptFilters({ ...NO_FILTERS, ...patch });
     onSub("concepts");
@@ -89,12 +94,19 @@ export default function DataView({
         : "text-muted border-transparent hover:text-foreground"
     }`;
 
+  // Timeline and Government Cloud share one scroll container because they share
+  // the report element, which must never unmount. One outline serves both, and
+  // the hook skips anything not currently rendered — so it always describes the
+  // panel the reader is actually looking at.
+  const ownRail = sub === "timeline" || sub === "govcloud";
+
   return (
     <div className="w-full">
-      {/* The whole body of work, before a reader picks a part of it. */}
-      {sub === "timeline" && <ResearchHero onExplore={explore} />}
-
-      <div role="tablist" aria-label="Research sections" className="flex gap-8 mb-10 border-b border-edge">
+      {/* The sub-navigation is the FIRST thing under the section heading (Sean,
+          2026-08-26). It used to sit below the hero, which put the way out of a
+          view halfway down it. */}
+      <div role="tablist" aria-label="Research sections"
+        className="flex flex-wrap gap-x-8 gap-y-2 mb-10 border-b border-edge">
         <button role="tab" aria-selected={sub === "timeline"} className={tabCls(sub === "timeline")} onClick={() => pick("timeline")}>
           Timeline
         </button>
@@ -124,13 +136,23 @@ export default function DataView({
       {/* Chart first, then what it means, then where to go (Sean, 2026-08-20):
           the reader sees the timeline, gets the summary under it, and only then
           meets the sibling sections. */}
-      <div className={sub === "health" || sub === "crime" || sub === "concepts" ? "hidden" : sub === "timeline" ? "gov-timeline-only" : "gov-cloud-mode"}>
-        {report}
-        {sub === "govcloud" && <GovCloudSources />}
+      <div className={ownRail ? "w-full lg:grid lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-x-10 lg:items-start" : "w-full"}>
+        {ownRail && (
+          <SideNav mode="outline" label="On this page" sections={nav.sections} active={nav.active} />
+        )}
+        <div id="research-root" className="min-w-0">
+          {sub === "timeline" && <ResearchHero onExplore={explore} />}
+
+          <div className={sub === "health" || sub === "crime" || sub === "concepts" ? "hidden" : sub === "timeline" ? "gov-timeline-only" : "gov-cloud-mode"}>
+            {report}
+            {sub === "govcloud" && <GovCloudSources />}
+          </div>
+
+          {sub === "timeline" && <TimelineNarrative onGo={pick} />}
+          {sub === "timeline" && <TimelineHub onGo={pick} />}
+        </div>
       </div>
 
-      {sub === "timeline" && <TimelineNarrative onGo={pick} />}
-      {sub === "timeline" && <TimelineHub onGo={pick} />}
       {sub === "health" && <HealthSignals onGoTimeline={() => pick("timeline")} />}
       {sub === "crime" && <CrimeSignals onGoTimeline={() => pick("timeline")} />}
       {sub === "concepts" && <ConceptsView filters={conceptFilters} setFilters={setConceptFilters} />}
