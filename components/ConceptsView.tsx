@@ -161,35 +161,36 @@ export default function ConceptsView() {
               </div>
             )}
 
-            {/* Claim and counter-claim, attributed, on the same page. Neither
-                half is edited to agree with the other — see lib/concepts.ts. */}
+            {/* Claim and counter-claim, attributed, on the same page. Each half
+                renders independently — an assessment can answer the concept body
+                itself, with no separate author statement above it. Neither half is
+                ever edited to agree with the other; see lib/concepts.ts. */}
             {c.authorStatement && (
-              <div className="measure mb-6">
-                <div className="border-l-2 border-foreground pl-5 py-1 mb-4">
-                  <h4 className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground mb-2">
-                    The author states
-                  </h4>
-                  {c.authorStatement.map((m) => (
-                    <p key={m} className="body-copy text-foreground/85 m-0 mb-2 last:mb-0">{m}</p>
-                  ))}
-                  <p className="text-[14px] text-muted mt-3 m-0">
-                    The author&rsquo;s own words, printed as given. Unverified, and not a finding of this research.
-                  </p>
-                </div>
-                {c.aiAssessment && (
-                  <div className="border-l-2 border-accent pl-5 py-1">
-                    <h4 className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground mb-2">
-                      AI assessment
-                    </h4>
-                    {c.aiAssessment.map((m) => (
-                      <p key={m} className="body-copy text-foreground/85 m-0 mb-2 last:mb-0">{m}</p>
-                    ))}
-                    <p className="text-[14px] text-muted mt-3 m-0">
-                      Written by an AI model at the author&rsquo;s request, responding to the statement above.
-                      It is published unedited by the author, and it is not independent verification.
-                    </p>
-                  </div>
-                )}
+              <div className="measure mb-6 border-l-2 border-foreground pl-5 py-1">
+                <h4 className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground mb-2">
+                  The author states
+                </h4>
+                {c.authorStatement.map((m) => (
+                  <p key={m} className="body-copy text-foreground/85 m-0 mb-2 last:mb-0">{m}</p>
+                ))}
+                <p className="text-[14px] text-muted mt-3 m-0">
+                  The author&rsquo;s own words, printed as given. Unverified, and not a finding of this research.
+                </p>
+              </div>
+            )}
+
+            {c.aiAssessment && (
+              <div className="measure mb-6 border-l-2 border-accent pl-5 py-1">
+                <h4 className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground mb-2">
+                  AI assessment
+                </h4>
+                {c.aiAssessment.map((m) => (
+                  <p key={m} className="body-copy text-foreground/85 m-0 mb-2 last:mb-0">{m}</p>
+                ))}
+                <p className="text-[14px] text-muted mt-3 m-0">
+                  Written by an AI model at the author&rsquo;s request. Published unedited by the author,
+                  and not independent verification.
+                </p>
               </div>
             )}
 

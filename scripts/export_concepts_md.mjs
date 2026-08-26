@@ -120,19 +120,19 @@ function toMarkdown(c) {
     b.push("");
   }
   if (c.authorStatement?.length) {
-    out.push("", "## The author states", "");
-    for (const m of c.authorStatement) out.push(m, "");
-    out.push("*The author's own words, printed as given. Unverified, and not a finding of this research.*", "");
-    if (c.aiAssessment?.length) {
-      out.push("", "## AI assessment", "");
-      for (const m of c.aiAssessment) out.push(m, "");
-      out.push("*Written by an AI model at the author's request, responding to the statement above. Published unedited by the author, and not independent verification.*", "");
-    }
+    b.push("", "## The author states", "");
+    for (const m of c.authorStatement) b.push(m, "");
+    b.push("*The author's own words, printed as given. Unverified, and not a finding of this research.*", "");
+  }
+  if (c.aiAssessment?.length) {
+    b.push("", "## AI assessment", "");
+    for (const m of c.aiAssessment) b.push(m, "");
+    b.push("*Written by an AI model at the author's request. Published unedited by the author, and not independent verification.*", "");
   }
   if (c.comments?.length) {
-    out.push("", "## Author's note", "");
-    for (const m of c.comments) out.push(m, "");
-    out.push("*Commentary by the author. Not evidence, and not a finding of this research.*", "");
+    b.push("", "## Author's note", "");
+    for (const m of c.comments) b.push(m, "");
+    b.push("*Commentary by the author. Not evidence, and not a finding of this research.*", "");
   }
   if (c.references?.length) {
     b.push("## References", "");

@@ -264,6 +264,13 @@ export const CONCEPTS: Concept[] = [
     ],
     referencesNote:
       "The journal is an unverified first-person report. The Guardian article is context about surveillance elsewhere and is not evidence of a connection. Colorado law is relevant only if qualifying data collection or processing is established.",
+    aiAssessment: [
+      "The report above is the author's. Nothing in the public record settles it either way, so what follows is only what that record contains and where it stops.",
+      "No published capability transmits speech or sensation to a person at a distance without their participation. The systems that come closest each require something checkable: contact with the head, equipment the person is wearing, or hours of individual training with a cooperative subject. That is a statement about what has been published — classified work would not appear in it, and absence from the record is not proof of absence.",
+      "At the same time, presence and touch with no external source are among the better-documented findings in neuroscience. A robot and a sub-second delay produced the felt presence of another person in roughly a third of thirty healthy participants. Sleep paralysis produces the same physiology worldwide, read as demons, witches or visitors according to where the sleeper grew up. And the best-known claim that electromagnetic fields induce a sensed presence failed to replicate — suggestibility predicted the effect, the fields did not.",
+      "Neither of those resolves this. The first removes the necessity of an external agent, not the possibility. The second is an absence of published evidence, not evidence of absence.",
+      "What follows practically is narrower and more useful. Every candidate mechanism ever documented leaves a trace something can measure — a recording, a decibel meter, an RF survey, a medical record. An explanation predicting no measurable trace anywhere is not more likely for being unfalsifiable; it is only harder to check. The open questions the author lists above name the right tests, and they remain how this gets resolved.",
+    ],
     verification: "unverified",
     disclaimer:
       "This concept records reported experience and open questions. It does not establish an attack, technology, responsible party, organization, or coordinated campaign.",
@@ -723,5 +730,64 @@ export const CONCEPTS: Concept[] = [
     verification: "unverified",
     disclaimer:
       "This concept reports published neuroscience. It does not establish the cause of any individual's experience, and it does not assert that any reported experience was internally generated.",
+  },
+  {
+    id: "contractors-killed-and-freed",
+    origin: "ai",
+    basis: "documented",
+    title: "Have private contractors killed civilians and gone free?",
+    body:
+      "Yes, and the case is documented from beginning to end, including the end. On 16 September 2007, Blackwater contractors guarding a State Department convoy opened fire in Nisour Square, Baghdad, killing fourteen unarmed Iraqi civilians and wounding others. The United States prosecuted. After years of litigation, four contractors were convicted in federal court — one of first-degree murder, three of voluntary manslaughter and firearms offences. In December 2020 all four were pardoned by presidential act, and the convictions ceased to have effect. United Nations human-rights experts called the pardons an affront to justice and said they violated obligations under international humanitarian law. What makes this worth recording is not that private force killed civilians, which is documented in many places, but the shape of the whole sequence: the killings happened, the justice system worked, and the outcome was undone by an authority the justice system does not reach. Accountability that can be reversed at will is a different thing from accountability, and a reader weighing whether private organisations face consequences has one fully documented answer to work from.",
+    evidence: [
+      "Nisour Square, Baghdad, 16 September 2007: fourteen unarmed Iraqi civilians killed by Blackwater contractors guarding a State Department convoy",
+      "Four contractors convicted in US federal court — one of first-degree murder, three of voluntary manslaughter and firearms offences",
+      "All four pardoned by presidential act in December 2020",
+      "UN human-rights experts publicly described the pardons as an affront to justice and a violation of obligations under international humanitarian law",
+    ],
+    questions: [
+      "One documented case does not establish a pattern, and this concept does not claim one.",
+      "It concerns conduct abroad under a contract with the US government. It says nothing about conduct by private organisations inside the United States.",
+      "A pardon extinguishes a conviction. It does not establish that the underlying findings of fact were wrong, and this concept takes no position on that.",
+    ],
+    references: [
+      { label: "Shock and dismay after the Blackwater pardons — NPR", href: "https://www.npr.org/2020/12/23/949679837/shock-and-dismay-after-trump-pardons-blackwater-guards-who-killed-14-iraqi-civil" },
+      { label: "UN experts: the pardons are an affront to justice", href: "https://news.un.org/en/story/2020/12/1081152" },
+      { label: "Accountability isn't wired to deployment, even in the schema", href: "/concepts#accountability-not-wired" },
+    ],
+    referencesNote:
+      "The news sources are cited for the documented sequence of conviction and pardon. The linked concept is method — it records a structural version of the same gap.",
+    verification: "unverified",
+    disclaimer:
+      "This concept reports a prosecuted and pardoned case. It makes no claim about any other conduct by any private organisation, and none about conduct inside the United States.",
+  },
+  {
+    id: "who-profits-from-a-body",
+    origin: "ai",
+    basis: "documented",
+    title: "Who profits from a body?",
+    body:
+      "In January 2018 Reuters published an investigation by Brian Grow and John Shiffman into the American body trade. Body brokers — legally, non-transplant tissue banks — acquire bodies donated to science, usually for free, then cut them into parts and sell them. The reporters did not merely describe the market. They entered it: Reuters bought a human cervical spine for three hundred dollars. It had belonged to Cody Saunders, a twenty-four-year-old from Tennessee, whose parents had not known what became of him. Across the investigation, family after family had no idea what happened to the person they donated. The legal position is the part most people find hardest to believe. Federal law prohibits selling body parts for transplant into a living person. Most states say nothing at all about selling body parts for research or education. So the trade is not a black market being policed and failing; it is a lawful market that was never regulated, in which a journalist can buy a spine over the counter and the donating family is told nothing. Whatever a person imagines happens to a body, this is what the record actually documents happening.",
+    evidence: [
+      "Grow & Shiffman, 'The Body Trade', Reuters, January 2018",
+      "Body brokers acquire donated bodies, usually at no cost, then sell the parts",
+      "Reuters purchased a human cervical spine for $300 in the course of reporting",
+      "The spine belonged to Cody Saunders, 24, of Tennessee; his parents did not know what had become of his body",
+      "Federal law bars sale of parts for transplant into a living person; most states are silent on sale for research or education",
+    ],
+    questions: [
+      "The investigation documents a lawful and largely unregulated market. It establishes no criminal conduct beyond the cases it names.",
+      "It concerns bodies donated to science. It says nothing about how any person died, and nothing about any death being caused for this purpose.",
+      "State law has moved in places since 2018. This concept does not track the current statute in any given state.",
+    ],
+    references: [
+      { label: "The Body Trade — Reuters (2018)", href: "https://ethics.sjmc.wisc.edu/wp-content/uploads/sites/2130/2024/08/reuters_bodytrade.pdf" },
+      { label: "Have private contractors killed civilians and gone free?", href: "/concepts#contractors-killed-and-freed" },
+      { label: "There is no column for you", href: "/concepts#no-column-for-you" },
+    ],
+    referencesNote:
+      "Reuters is cited for its own investigation. The linked concepts are adjacent arguments about accountability and about the person who appears nowhere in a record; neither corroborates this one.",
+    verification: "unverified",
+    disclaimer:
+      "This concept reports a published investigation into a lawful market. It makes no claim that any death was caused, hastened, or procured for the purpose of supplying it.",
   },
 ];
