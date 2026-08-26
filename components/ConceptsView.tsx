@@ -161,6 +161,22 @@ export default function ConceptsView() {
               </div>
             )}
 
+            {/* The author's own voice, fenced off from the sourced material.
+                Labelled so a reader never mistakes commentary for a finding. */}
+            {c.comments && (
+              <div className="measure mb-6 border-l-2 border-accent/40 pl-5">
+                <h4 className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground mb-2">
+                  Author&rsquo;s note
+                </h4>
+                {c.comments.map((m) => (
+                  <p key={m} className="body-copy text-foreground/75 m-0 mb-2 last:mb-0">{m}</p>
+                ))}
+                <p className="text-[14px] text-muted mt-3 m-0">
+                  Commentary by the author. Not evidence, and not a finding of this research.
+                </p>
+              </div>
+            )}
+
             {c.references && (
               <div className="measure mb-6">
                 <h4 className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground mb-2">

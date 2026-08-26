@@ -48,6 +48,16 @@ export type Concept = {
   verification?: Verification;
   /** Scope limit shown beneath the concept. Verbatim, never paraphrased. */
   disclaimer?: string;
+  /**
+   * The AUTHOR'S own commentary on this concept, in his voice.
+   *
+   * Rendered and labelled as commentary, never as evidence and never as a
+   * finding. This exists so the author can say what he thinks about an entry
+   * without that opinion having to pass as sourced — the alternative was
+   * opinion leaking into `body`, where a reader would read it as established.
+   * Kept separate for the same reason `basis` exists at all.
+   */
+  comments?: string[];
 };
 
 export const VERIFICATION_LABEL: Record<Verification, string> = {

@@ -119,6 +119,11 @@ function toMarkdown(c) {
     for (const q of c.questions) b.push(`- ${q}`);
     b.push("");
   }
+  if (c.comments?.length) {
+    out.push("", "## Author's note", "");
+    for (const m of c.comments) out.push(m, "");
+    out.push("*Commentary by the author. Not evidence, and not a finding of this research.*", "");
+  }
   if (c.references?.length) {
     b.push("## References", "");
     for (const r of c.references) b.push(`- [${r.label}](${r.href})`);
