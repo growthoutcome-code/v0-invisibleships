@@ -5,6 +5,7 @@ import Link from "next/link";
 import { track } from "@/lib/analytics";
 import DisclaimerLink from "@/components/DisclaimerLink";
 import ConceptsNav, { type Filters } from "@/components/ConceptsNav";
+import SideNav, { useSectionNav } from "@/components/SideNav";
 import { CONCEPTS, BASIS_LABEL, BASIS_NOTE, ORIGIN_LABEL, ORIGIN_NOTE, VERIFICATION_LABEL, type Basis, type Origin } from "@/lib/concepts";
 
 const BASIS_ORDER: Basis[] = ["documented", "structural", "pattern"];
@@ -45,8 +46,16 @@ export default function ConceptsView() {
 
   const [labelsOpen, setLabelsOpen] = useState(false);
 
+  // The rail lists the concepts CURRENTLY SHOWN. Filtering removes list items,
+  // the hook's MutationObserver rescans, and the rail follows — no extra wiring.
+  // Concept <li>s already carry the stable ids other pages deep-link to, and
+  // useSectionNav preserves an id the page set itself.
+  const nav = useSectionNav("concepts-root", { selector: "li[id]", heading: "h3" });
+
   return (
-    <div className="w-full">
+    <div className="w-full lg:grid lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-x-10 lg:items-start">
+      <SideNav mode="outline" label="Concepts" sections={nav.sections} active={nav.active} />
+      <div id="concepts-root" className="min-w-0">
       <p className="body-copy text-foreground/85 measure mb-4">
         Ideas drawn from the research. Each one is tagged with who formed it and what it rests on,
         because they are not the same kind of claim: some follow from a document, some from what the
@@ -211,6 +220,7 @@ export default function ConceptsView() {
         <Link href="/data" className="text-accent underline underline-offset-4">Data</Link>{" "}
         section, where each fact links to its own source.
       </p>
+      </div>{/* /content column */}
     </div>
   );
 }

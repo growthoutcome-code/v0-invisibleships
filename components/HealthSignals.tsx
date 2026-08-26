@@ -9,6 +9,7 @@ import { DATA_WINDOW, dataWindowTicks, ArchivedLink } from "@/components/DataPri
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogBody, DialogTitle } from "@/components/ui/dialog";
 import { track } from "@/lib/analytics";
+import SideNav, { useSectionNav } from "@/components/SideNav";
 
 /**
  * Public Health Signals — the Data section's second sub-tab.
@@ -782,8 +783,12 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
     return c;
   }, [srcs]);
 
+  const nav = useSectionNav("health-root");
+
   return (
-    <div className="w-full">
+    <div className="w-full lg:grid lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-x-10 lg:items-start">
+      <SideNav mode="outline" label="Public Health" sections={nav.sections} active={nav.active} />
+      <div id="health-root" className="min-w-0">
       {/* Secondary disclaimer: one line + link. The crisis-resources sentence is
           SAFETY information, not disclaimer language, and stays visible. */}
       <DataNoteLine from="health">
@@ -1223,6 +1228,7 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
           scrollTo={() => srcRef.current?.scrollIntoView({ block: "start" })}
         />
       </section>
+      </div>{/* /content column */}
     </div>
   );
 }

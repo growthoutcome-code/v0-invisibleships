@@ -30,7 +30,12 @@ import { track } from "@/lib/analytics";
 
 export type NavSection = { id: string; label: string };
 
-export function useSectionNav(rootId: string) {
+export function useSectionNav(
+  rootId: string,
+  opts?: { selector?: string; heading?: string },
+) {
+  const selector = opts?.selector ?? "section";
+  const headingSel = opts?.heading ?? "h2";
   const [sections, setSections] = useState<NavSection[]>([]);
   const [active, setActive] = useState<string | null>(null);
 
@@ -46,18 +51,25 @@ export function useSectionNav(rootId: string) {
     const scan = () => {
     const found: NavSection[] = [];
     const seen = new Set<string>();
-    root.querySelectorAll<HTMLElement>("section").forEach((el, i) => {
-      const h = el.querySelector("h2");
+    root.querySelectorAll<HTMLElement>(selector).forEach((el, i) => {
+      const h = el.querySelector(headingSel);
       const label = h?.textContent?.trim();
       if (!label) return;                       // sections without a heading are layout, not content
-      // Deterministic from the LABEL, never the index: React recreates these
-      // elements on re-render, dropping an imperatively-set id, and an
-      // index-derived id would then change — leaving `active` pointing at an
-      // id that no longer exists and no entry marked current.
-      const slug = `sec-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 44)}`;
-      const id = seen.has(slug) ? `${slug}-${i}` : slug;
+      // An id the PAGE set itself always wins. Concepts carry stable ids that
+      // other pages deep-link to (/concepts#us-rose-against-the-trend, four of
+      // them in HealthSignals); deriving a fresh one from the label here would
+      // silently break every inbound link.
+      let id = el.id;
+      if (!id) {
+        // Deterministic from the LABEL, never the index: React recreates these
+        // elements on re-render, dropping an imperatively-set id, and an
+        // index-derived id would then change — leaving `active` pointing at an
+        // id that no longer exists and no entry marked current.
+        const slug = `sec-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 44)}`;
+        id = seen.has(slug) ? `${slug}-${i}` : slug;
+        el.id = id;
+      }
       seen.add(id);
-      if (el.id !== id) el.id = id;
       el.style.scrollMarginTop = "96px";        // clear the sticky header on jump
       found.push({ id, label });
     });
@@ -97,7 +109,7 @@ export function useSectionNav(rootId: string) {
       obs?.disconnect();
       if (t) clearTimeout(t);
     };
-  }, [rootId]);
+  }, [rootId, selector, headingSel]);
 
   return { sections, active };
 }

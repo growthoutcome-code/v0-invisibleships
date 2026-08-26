@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import { ChevronDown } from "lucide-react";
 import { track } from "@/lib/analytics";
 import {
   CONCEPTS,
@@ -26,15 +24,17 @@ function chipClass(active: boolean) {
 }
 
 /**
- * Sticky sub-navigation for the Concepts page.
+ * Filter bar for the Concepts page.
  *
  * Filtering by origin and basis turns the labelling scheme from a disclosure into
  * something the reader can act on: a skeptical reader can read only Documented
  * claims, which quietly demonstrates that the sourced material stands without the
  * subjective material.
  *
- * The jump index is collapsed by default — with eleven long entries an always-open
- * list would push the first concept below the fold.
+ * The jump index that used to live here is gone: /concepts now uses the site's
+ * one SideNav (outline mode), the same rail Crime and Journal use. This is only
+ * a filter bar, and it is sticky on wide screens ONLY — on narrow screens
+ * SideNav has its own sticky trigger at top-[56px] and two stickies collide.
  */
 export default function ConceptsNav({
   filters,
@@ -45,8 +45,6 @@ export default function ConceptsNav({
   setFilters: (f: Filters) => void;
   shown: number;
 }) {
-  const [openIndex, setOpenIndex] = useState(false);
-
   const set = (patch: Partial<Filters>) => {
     const next = { ...filters, ...patch };
     setFilters(next);
@@ -55,8 +53,8 @@ export default function ConceptsNav({
 
   return (
     <nav
-      aria-label="Concept filters and index"
-      className="sticky top-[72px] md:top-[88px] lg:top-[100px] z-20 bg-background/95 backdrop-blur py-3 mb-10"
+      aria-label="Concept filters"
+      className="lg:sticky lg:top-[100px] z-20 bg-background/95 backdrop-blur py-3 mb-10"
     >
       <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
         <div className="flex flex-wrap items-center gap-1">
@@ -91,33 +89,9 @@ export default function ConceptsNav({
           <span className="text-[13px] uppercase tracking-[0.08em] text-muted tabular-nums">
             Showing {shown} of {CONCEPTS.length}
           </span>
-          <button
-            onClick={() => setOpenIndex((v) => !v)}
-            aria-expanded={openIndex}
-            className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground inline-flex items-center gap-1.5"
-          >
-            Index
-            <ChevronDown size={15} className={openIndex ? "rotate-180 transition-transform" : "transition-transform"} />
-          </button>
         </div>
       </div>
 
-      {openIndex && (
-        <ol className="list-none p-0 mt-4 mb-1 grid gap-x-10 gap-y-1 md:grid-cols-2">
-          {CONCEPTS.map((c, i) => (
-            <li key={c.id} className="flex items-baseline gap-3 py-1">
-              <span className="text-[13px] text-muted tabular-nums">{String(i + 1).padStart(2, "0")}</span>
-              <a
-                href={`#${c.id}`}
-                onClick={() => { setOpenIndex(false); track("concept_jumped", { concept: c.id }); }}
-                className="text-[16px] text-foreground hover:text-accent underline underline-offset-4 decoration-transparent hover:decoration-current"
-              >
-                {c.title}
-              </a>
-            </li>
-          ))}
-        </ol>
-      )}
     </nav>
   );
 }
