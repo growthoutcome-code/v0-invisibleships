@@ -106,6 +106,13 @@ export default function DataView({
       {/* The sub-navigation is the FIRST thing under the section heading (Sean,
           2026-08-26). It used to sit below the hero, which put the way out of a
           view halfway down it. */}
+      {/* Concepts has its own top-level nav entry (Sean, 2026-08-27), so it is
+          not offered here as well: a reader who arrived at Concepts from the
+          main menu should not be shown Research's vertical tabs, which would
+          read as though Concepts were a sub-view of something else. The state
+          still exists — the hero routes into it and /concepts resolves to it —
+          it simply has no button and no tab row of its own. */}
+      {sub !== "concepts" && (
       <div role="tablist" aria-label="Research sections"
         className="flex flex-wrap gap-x-8 gap-y-2 mb-10 border-b border-edge">
         <button role="tab" aria-selected={sub === "timeline"} className={tabCls(sub === "timeline")} onClick={() => pick("timeline")}>
@@ -120,10 +127,8 @@ export default function DataView({
         <button role="tab" aria-selected={sub === "crime"} className={tabCls(sub === "crime")} onClick={() => pick("crime")}>
           Crime
         </button>
-        <button role="tab" aria-selected={sub === "concepts"} className={tabCls(sub === "concepts")} onClick={() => pick("concepts")}>
-          Concepts
-        </button>
       </div>
+      )}
 
       {/* PRIMARY disclaimer: prominent, once, on the landing view only. */}
       {sub === "timeline" && <DataNotice />}
