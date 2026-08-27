@@ -12,9 +12,14 @@ const NAV: { t: Tab; label: string }[] = [
   { t: "journal", label: "Journal" },
   { t: "glossary", label: "Glossary" },
   { t: "documents", label: "Documents" },
-  // Data and Concepts merged on 26 Aug. One entry; Concepts is a vertical
-  // inside it, still addressable at /concepts for every link already shared.
+  // Data and Concepts merged on 26 Aug into one Research section with five
+  // verticals. Concepts keeps its own top-level entry anyway (Sean, same day):
+  // it is the part of this archive a reader is most likely to have been sent a
+  // link to, and burying it one click inside Research cost more than the tidier
+  // nav was worth. Both entries land in the same section — Research on its
+  // landing view, Concepts on its vertical — and both addresses already resolve.
   { t: "data", label: "Research" },
+  { t: "concepts", label: "Concepts" },
 ];
 
 export default function Header({

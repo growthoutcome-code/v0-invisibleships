@@ -244,7 +244,15 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       <Header
         tab={tab}
-        onTab={(t) => { setTab(t); setSel(null); setGsel(null); }}
+        onTab={(t) => {
+          setTab(t);
+          // Both nav entries open the same section, so the vertical has to be
+          // set from the entry that was clicked. Without this, Research after a
+          // visit to Concepts would reopen Concepts, because dataSub remembers.
+          if (t === "concepts") setDataSub("concepts");
+          else if (t === "data") setDataSub("timeline");
+          setSel(null); setGsel(null);
+        }}
         onSearch={() => { setPanelOpen(true); track("search_opened"); }}
         onExport={() => { setExportOpen(true); track("export_opened"); }}
         onHome={() => { setTab("journal"); setSel(null); setGsel(null); setPage(1); }}
