@@ -293,7 +293,7 @@ FOLDERS = [
     ("crime", "Crime", "Nine findings, their row data, and every source behind them."),
     ("public-health", "Public Health", "Suicide, overdose and the indicators around them."),
     ("government-cloud", "Government Cloud", "Awards, deployments, litigation and capital flows."),
-    ("concepts", "Concepts", "The archive's arguments, each labelled documented / structural / pattern."),
+    ("concepts", "Concepts", "The archive's arguments, each labelled with a basis, an origin, a theme and the readers it was written for."),
     ("glossary", "Glossary", "Terms from the source series, plus terms written for the site."),
     ("research", "Research inputs", "The raw rows the charts were built from. Not rendered anywhere on the site."),
     ("meta", "Terms", "Copyright, disclaimer, author statement, category vocabulary."),

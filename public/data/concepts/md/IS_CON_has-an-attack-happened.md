@@ -5,19 +5,22 @@ collection: concepts
 doc_type: concept
 basis: testimony
 origin: author
+theme: experience
+audience: [household]
 verification: unverified
 generated_by: scripts/export_concepts_md.mjs
-word_count: 628
+word_count: 670
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
 # Has an attack happened?
 
-*Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Every concept below states its BASIS and its ORIGIN: a reader who rejects every `pattern` entry can still rely on every `documented` one, and the two are never blended inside one concept. Causes are reported as attributed, never asserted. See `meta/IS_META_disclaimer.md`.*
+*Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Every concept states its BASIS, its ORIGIN, its THEME and the readers it was written for. The basis tiers are ranked, and never blended inside a single concept: a reader who accepts only `documented` entries can still rely on every one of those and discard the rest without unpicking anything. `testimony` is a dated first-person report, verified by nobody, and says so on its own face wherever it appears. Causes are reported as attributed, never asserted. See `meta/IS_META_disclaimer.md`.*
 
 **Basis: testimony.** A dated first-person report of what the author experienced or was told. Verified by nobody.  
 **Origin: author.** The author's own observation, from experience.  
-**Theme: Reported experience.**
+**Theme: Reported experience.**  
+**Written for: Households and individuals.**
 
 **Not independently verified.**
 

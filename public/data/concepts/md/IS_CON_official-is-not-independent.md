@@ -5,19 +5,22 @@ collection: concepts
 doc_type: concept
 basis: structural
 origin: ai
+theme: record
+audience: [press]
 verification: verified
 generated_by: scripts/export_concepts_md.mjs
-word_count: 178
+word_count: 220
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
 # “Official” is not the same as “independent”
 
-*Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Every concept below states its BASIS and its ORIGIN: a reader who rejects every `pattern` entry can still rely on every `documented` one, and the two are never blended inside one concept. Causes are reported as attributed, never asserted. See `meta/IS_META_disclaimer.md`.*
+*Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Every concept states its BASIS, its ORIGIN, its THEME and the readers it was written for. The basis tiers are ranked, and never blended inside a single concept: a reader who accepts only `documented` entries can still rely on every one of those and discard the rest without unpicking anything. `testimony` is a dated first-person report, verified by nobody, and says so on its own face wherever it appears. Causes are reported as attributed, never asserted. See `meta/IS_META_disclaimer.md`.*
 
 **Basis: structural.** This follows from what the dataset does or does not contain.  
 **Origin: ai.** Derived by AI analysis of the dataset.  
-**Theme: The record and its limits.**
+**Theme: The record and its limits.**  
+**Written for: Press and researchers.**
 
 73 of the 87 vendor-published sources in this research carry the top evidence tier. That is defensible for a fact like which company won which contract, and it is not the same as independent confirmation. Stated here because a reader deserves to weigh it, and because the limits of a record are part of the record.
 

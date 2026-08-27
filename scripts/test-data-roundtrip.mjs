@@ -1833,6 +1833,13 @@ for (const [label, script, remedy] of [
   // all. Written-down rules decay; a rule that fails the build does not.
   ["chart contract", "scripts/check_chart_contract.py",
    "see the contract at the top of scripts/check_chart_contract.py"],
+  // Added 27 Aug. Every guard above counts files or words, and all of them
+  // passed while the download carried a Gov Cloud timeline 25 milestones short
+  // of the site's, concepts missing two of their four axes, and none of the
+  // summary layer — including the archive's own statement of its limits. This
+  // one compares BYTES, site against download, and fails on any drift.
+  ["download matches site", "scripts/check_download_matches_site.py",
+   "node scripts/export_concepts_md.mjs && python3 scripts/sync_corpus_site.py && python3 scripts/sync_corpus_govcloud.py && python3 scripts/sync_corpus_health.py && python3 scripts/build_corpus_index.py"],
 ]) {
   try {
     const out = execFileSync("python3", [script, "--check"], {

@@ -1,25 +1,25 @@
 {
- "name": "Invisible Ships — Public Health Signals",
- "generated": "2026-08-19",
+ "name": "Invisible Ships \u2014 Public Health Signals",
+ "generated": "2026-08-27",
  "method_note": "All figures verified against fetched primary sources on 2026-08-19; 22 headline figures re-derived by independent second-pass verification (21 confirmed, 1 partially confirmed). Causes reported as attributed, never asserted. Overlaps with the Government Cloud dataset are structural/pattern observations only. This dataset does not corroborate the journal, and the Government Cloud dataset does not corroborate this one.",
  "tier_legend": {
-  "A": "documented — official statistical agency or peer-reviewed source fetched and read",
-  "B": "corroborated — reputable secondary corroboration, provisional or modeled official data",
-  "C": "claimed — could not be verified against a fetched source / proprietary forecast"
+  "A": "documented \u2014 official statistical agency or peer-reviewed source fetched and read",
+  "B": "corroborated \u2014 reputable secondary corroboration, provisional or modeled official data",
+  "C": "claimed \u2014 could not be verified against a fetched source / proprietary forecast"
  },
  "safe_reporting": "Rates and counts only; no method detail. Crisis resources: US 988 Suicide & Crisis Lifeline (call/text 988); international directory at https://findahelpline.com.",
  "tables": {
-  "health_indicators.json": 165,
-  "health_milestones.json": 25,
+  "health_indicators.json": 188,
+  "health_milestones.json": 30,
   "health_claims.json": 36,
-  "health_data_quality.json": 14,
-  "health_trends.json": 30,
+  "health_data_quality.json": 15,
+  "health_trends.json": 31,
   "health_overlaps.json": 12,
-  "health_verdict.json": 1,
   "health_caveats.json": 50,
-  "health_sources.json": 102
+  "health_sources.json": 104
  },
  "charts": {
-  "suicide_international.json": "12 series (11 countries + world) × 22 years, WHO age-standardised — one comparable basis"
+  "suicide_international.json": "14 series x 22 years on the WHO age-standardised basis (2000-2021), plus national-statistics extensions for 5 countries running to 2025 on each country's own method",
+  "overdose_us.csv": "US drug overdose deaths 1999-2025, 27 rows: counts, age-adjusted rates, and final/provisional status per year"
  }
 }

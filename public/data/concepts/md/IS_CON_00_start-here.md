@@ -5,28 +5,67 @@ collection: concepts
 doc_type: section-overview
 concept_count: 35
 generated_by: scripts/export_concepts_md.mjs
-word_count: 644
+word_count: 1094
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
 # Concepts — start here
 
-*Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Every concept below states its BASIS and its ORIGIN: a reader who rejects every `pattern` entry can still rely on every `documented` one, and the two are never blended inside one concept. Causes are reported as attributed, never asserted. See `meta/IS_META_disclaimer.md`.*
+*Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Every concept states its BASIS, its ORIGIN, its THEME and the readers it was written for. The basis tiers are ranked, and never blended inside a single concept: a reader who accepts only `documented` entries can still rely on every one of those and discard the rest without unpicking anything. `testimony` is a dated first-person report, verified by nobody, and says so on its own face wherever it appears. Causes are reported as attributed, never asserted. See `meta/IS_META_disclaimer.md`.*
 
 **35 concepts.** Each is a self-contained file, safe to hand to
 an assistant on its own.
 
 ## How to read the basis label
 
-| Basis | What it means | How much weight it carries |
-|---|---|---|
-| `documented` | A source, ruling or official record supports it directly | Strongest |
-| `structural` | It follows from what the dataset does or does not contain | Strong, but about the data, not the world |
-| `pattern` | An observation drawn from experience | Offered as an observation, not as proof |
-| `testimony` | A dated first-person report of what the author experienced or was told | Verified by nobody |
+| Basis | What it means | How much weight it carries | In this archive |
+|---|---|---|---|
+| `documented` | A source, ruling or official record supports this directly. | Strongest | 25 |
+| `structural` | This follows from what the dataset does or does not contain. | Strong, but about the data, not the world | 9 |
+| `pattern` | An observation drawn from experience, offered as an observation. | Offered as an observation, not as proof | 0 |
+| `testimony` | A dated first-person report of what the author experienced or was told. Verified by nobody. | Verified by nobody | 1 |
 
-A reader who rejects every `pattern` entry can still rely on every
-`documented` one. The two are never blended inside a single concept.
+The tiers are ranked and never blended inside a single concept, so a reader
+can accept the top of the table and discard the rest without unpicking
+anything. The counts above are live: a tier showing 0 has no entries in this
+release, and a tier's presence in the table is a definition, not a claim that
+the archive uses it.
+
+## The themes
+
+| Theme | What it covers | Concepts |
+|---|---|---|
+| The record and its limits | What this archive can and cannot show, and why an absence proves little. | 9 |
+| Procurement and accountability | Who buys what, and what happens when a finding lands against them. | 6 |
+| Surveillance and the person | What is collected about people who never agreed to any of it. | 6 |
+| Neurotechnology | What can actually be read from a brain, and under what conditions. | 5 |
+| Coercion and control | Documented methods for controlling a person without touching them. | 5 |
+| Health outcomes | Population outcomes measured against the rest of the world. | 2 |
+| Reported experience | First-person report, and what is known about experience without an external source. | 2 |
+
+## Who each concept is written for
+
+Concepts carry an `audience` in their frontmatter, and most carry more than
+one. These are routes in, not walls — nothing is hidden from anybody.
+
+| Audience | Who that means | Concepts |
+|---|---|---|
+| Households and individuals | For a person who thinks something is happening to them, or to someone they live with. | 12 |
+| Law enforcement and investigators | For anyone whose job is to establish what happened and to whom. | 10 |
+| Legislators and regulators | For anyone writing or enforcing a rule about any of this. | 14 |
+| Clinicians | For anyone a frightened person is likely to reach first. | 9 |
+| Press and researchers | For anyone who has to decide whether a claim can be published. | 12 |
+
+## What this section does not establish
+
+- Nothing here establishes that any specific thing has been done to any specific person, including the author.
+- No capability is documented that reads a person's perception, or that reaches them at a distance without their participation. Where a concept touches on that, it says so on its own page.
+- An absence of evidence is recorded as an absence of evidence. It is never presented as proof that nothing happened, and never as proof that something did.
+- Sources are cited for their own findings. Two sources sitting beside each other do not corroborate one another, and the section says so wherever they appear together.
+
+Set out in full in `IS_CON_00_not-established.md`. The headline findings are
+in `IS_CON_00_findings.md`, and every dated source behind them is in
+`source-years.csv`.
 
 ## The concepts
 

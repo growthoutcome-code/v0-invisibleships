@@ -56,6 +56,34 @@ ZIP = ROOT / "public/invisible-ships-corpus.zip"
 GROUPS = [("briefs/", "government-cloud/briefs/", "brief"),
           ("", "government-cloud/", "overview")]
 
+# ---------------------------------------------------------------------------
+# The Government Cloud DATA — added 27 August 2026, for the same reason the
+# briefs were: nobody owned it.
+#
+# The site reads these 29 files at runtime. They were dropped into the zip once
+# and carried forward by whichever sync happened to run. An audit on 27 August
+# compared them byte for byte and found 28 identical and one stale:
+# timeline.json held 311 milestones in the download against 336 on the site —
+# the crime and health tracks, injected weeks earlier by inject_crime_track.py
+# and inject_health_track.py, had never reached a reader. Same schema, strict
+# subset, no error anywhere. Somebody downloading the archive to check the
+# timeline was checking an older timeline and had no way to know.
+#
+# No stamping: these are JSON, they cannot carry a YAML header, and rewriting
+# them would break the byte-for-byte comparison that makes the check below
+# worth anything. They are copied exactly as the site serves them.
+DATA = [(ROOT / "public/data/charts", "government-cloud/json/charts/", "*.json"),
+        (ROOT / "public/data/tables", "government-cloud/json/tables/", "*.json")]
+DATA_FILES = [(ROOT / "public/data/manifest.json", "government-cloud/json/manifest.json")]
+
+# In the zip, sourced from the original Government Cloud research and never
+# regenerated in this repository: government-cloud/csv/ (11 tables) and
+# migration.sql. They have no builder here, so this script does not claim to own
+# them and does not report them as orphans. If they ever need to change, they
+# need a source in the repo first.
+IMPORTED = ("government-cloud/csv/", "government-cloud/migration.sql",
+            "government-cloud/README-data.md")
+
 AUTHOR = "Sean C. Harris"
 COPYRIGHT = "© 2026 Sean C. Harris. All Rights Reserved."
 METHOD = "AI-assisted research, author-directed"
@@ -138,8 +166,27 @@ def build() -> dict:
     return out
 
 
+def data() -> dict:
+    """{zip path: exact bytes} for the Government Cloud data the site serves."""
+    out = {}
+    for src_dir, prefix, pattern in DATA:
+        if not src_dir.is_dir():
+            raise SystemExit(f"no Government Cloud data at {src_dir}")
+        found = sorted(src_dir.glob(pattern))
+        if not found:
+            raise SystemExit(f"no {pattern} under {src_dir}")
+        for f in found:
+            out[prefix + f.name] = f.read_bytes()
+    for f, name in DATA_FILES:
+        if not f.exists():
+            raise SystemExit(f"missing {f}")
+        out[name] = f.read_bytes()
+    return out
+
+
 def write(quiet=False) -> int:
     stamped = build()
+    stamped.update(data())
     owned = set(stamped)
     tmp = ZIP.with_suffix(".tmp.zip")
     carried = 0
@@ -149,14 +196,18 @@ def write(quiet=False) -> int:
                 continue          # replaced below — MERGE, never clobber
             dst.writestr(item, src.read(item.filename))
             carried += 1
-        for name, data in stamped.items():
-            dst.writestr(name, data)
+        for name, body in stamped.items():
+            dst.writestr(name, body)
     shutil.move(str(tmp), str(ZIP))
     if not quiet:
         n_brief = len([n for n in stamped if "/briefs/" in n])
+        n_data = len([n for n in stamped if "/json/" in n])
+        n_over = len(stamped) - n_brief - n_data
         print(f"carried {carried} other entries")
-        print(f"government-cloud/: {n_brief} briefs + {len(stamped) - n_brief} overview, "
+        print(f"government-cloud/: {n_brief} briefs + {n_over} overview, "
               f"each stamped with a header and an attributed copyright")
+        print(f"government-cloud/json/: {n_data} data files, copied byte for byte "
+              f"from what the site serves")
         print(f"zip: {ZIP.stat().st_size:,} bytes")
     return 0
 
@@ -165,27 +216,35 @@ def check() -> int:
     if not ZIP.exists():
         print("FAIL: no corpus zip at " + str(ZIP))
         return 1
-    stamped = build()
+    owned = build()
+    owned.update(data())
     problems = []
     with zipfile.ZipFile(ZIP) as z:
-        names = z.namelist()
-        have = {n: z.read(n) for n in names
-                if n.endswith(".md") and n.startswith("government-cloud/")
-                and not n.endswith("README-data.md")}
-    for name, data in stamped.items():
+        have = {n: z.read(n) for n in z.namelist()
+                if n.startswith("government-cloud/")
+                and not n.startswith(IMPORTED)
+                and not n.endswith("/")}
+    for name, body in owned.items():
         if name not in have:
             problems.append(f"{name} is missing from the corpus")
-        elif have[name] != data:
-            problems.append(f"{name} in the corpus differs from a fresh stamp")
+        elif have[name] != body:
+            # Say WHICH way it drifted. "differs" sent an auditor to diff the
+            # files by hand; the sizes alone identified the stale timeline.
+            problems.append(
+                f"{name} in the corpus differs from what the site serves "
+                f"(corpus {len(have[name]):,} bytes, site {len(body):,})"
+            )
     for name in have:
-        if name not in stamped:
-            problems.append(f"{name} is in the corpus but has no source under research/government-cloud/")
+        if name not in owned:
+            problems.append(f"{name} is in the corpus but nothing in this repository produces it")
     if problems:
         print("FAIL: the Government Cloud files are out of date. Run:  python3 scripts/sync_corpus_govcloud.py")
-        for p in problems:
-            print("   " + p)
+        for pr in problems:
+            print("   " + pr)
         return 1
-    print(f"government-cloud briefs are current — {len(have)} stamped and attributed")
+    n_data = len([n for n in have if "/json/" in n])
+    print(f"government-cloud is current — {len(have) - n_data} briefs stamped and "
+          f"attributed, {n_data} data files matching the site byte for byte")
     return 0
 
 

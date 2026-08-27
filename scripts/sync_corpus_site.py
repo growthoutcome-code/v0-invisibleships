@@ -59,23 +59,51 @@ def build(dst: zipfile.ZipFile) -> int:
     for f in files:
         dst.writestr(PREFIX + f.name, f.read_text())
 
+    # The citation index, as data. Written by export_concepts_md.mjs alongside
+    # the Markdown; packed here because this script owns everything under
+    # concepts/. It is a CSV, not Markdown, so the *.md glob above cannot see
+    # it — which is precisely how a file ends up with no owner.
+    csv_src = MD.parent / "source-years.csv"
+    if not csv_src.exists():
+        raise SystemExit(
+            "no source-years.csv at " + str(csv_src) +
+            " — run: node scripts/export_concepts_md.mjs"
+        )
+    dst.writestr(PREFIX + "source-years.csv", csv_src.read_text())
+
+    concept_files = [f for f in files if not f.name.startswith("IS_CON_00_")]
     manifest = {
         "name": "Invisible Ships — Core Concepts",
         "generated": date.today().isoformat(),
-        "count": len(files) - 1,          # the start-here file is not a concept
+        # IS_CON_00_* are the section's own overview files — start-here, the
+        # findings summary and the standing limits. They are not concepts and
+        # counting them as concepts overstates the archive.
+        "count": len(concept_files),
+        "overview_files": sorted(f.name for f in files if f.name.startswith("IS_CON_00_")),
         "source": "lib/concepts.ts, exported by scripts/export_concepts_md.mjs",
         "basis_legend": {
             "documented": "a source, ruling or official record supports it directly",
             "structural": "it follows from what the dataset does or does not contain",
             "pattern": "an observation drawn from experience, offered as an observation",
+            "testimony": "a dated first-person report of what the author experienced or was told, verified by nobody",
+        },
+        "axes": {
+            "basis": "how much weight the entry carries — see basis_legend",
+            "origin": "who produced it — see origin_legend",
+            "theme": "what it is about; seven values, in the frontmatter of every concept",
+            "audience": "who it was written for; five values, and most concepts carry more than one",
         },
         "origin_legend": {
             "ai": "derived by AI analysis of the dataset",
             "author": "the author's own observation, from experience",
         },
+        # Stated as the RULE, not as a claim about which tiers are populated.
+        # The old wording named `pattern` and went stale the day that tier
+        # emptied out and `testimony` opened.
         "reading_rule": (
-            "A reader who rejects every `pattern` entry can still rely on every "
-            "`documented` one. The two are never blended inside a single concept."
+            "The basis tiers are ranked and never blended inside a single concept. "
+            "A reader who accepts only `documented` entries can rely on every one "
+            "of those and discard the rest without unpicking anything."
         ),
     }
     dst.writestr(PREFIX + "manifest.json", json.dumps(manifest, indent=1) + "\n")

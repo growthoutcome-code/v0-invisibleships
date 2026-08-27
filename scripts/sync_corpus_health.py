@@ -113,8 +113,10 @@ def main():
         "name": "Invisible Ships — Public Health Signals",
         "generated": date.today().isoformat(),
         "method_note": (
-            "All figures verified against fetched primary sources. Causes reported as "
-            "attributed, never asserted. Overlaps with the Government Cloud dataset are "
+            "All figures verified against fetched primary sources on 2026-08-19; 22 "
+            "headline figures re-derived by independent second-pass verification "
+            "(21 confirmed, 1 partially confirmed). Causes reported as attributed, "
+            "never asserted. Overlaps with the Government Cloud dataset are "
             "structural/pattern observations only. This dataset does not corroborate the "
             "journal, and the Government Cloud dataset does not corroborate this one."
         ),
@@ -225,7 +227,9 @@ upward. `health_data_quality.json` carries this as row `hq015`.
 
         for f in TABLE_FILES:
             dst.writestr(PREFIX + f, (TABLES / f).read_text())
-        dst.writestr(PREFIX + "manifest.json", json.dumps(manifest, indent=1) + "\n")
+        manifest_json = json.dumps(manifest, indent=1) + "\n"
+        dst.writestr(PREFIX + "manifest.json", manifest_json)
+        (TABLES / "manifest.json").write_text(manifest_json)
         dst.writestr(PREFIX + "README-public-health.md", readme)
         dst.writestr(PREFIX + "charts/suicide_international.json", chart_path.read_text())
         csv_path = CHARTS / "suicide_international.csv"

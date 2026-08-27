@@ -5,19 +5,22 @@ collection: concepts
 doc_type: concept
 basis: documented
 origin: ai
+theme: surveillance
+audience: [policy, press]
 verification: unverified
 generated_by: scripts/export_concepts_md.mjs
-word_count: 521
+word_count: 566
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
 # Who profits from a body?
 
-*Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Every concept below states its BASIS and its ORIGIN: a reader who rejects every `pattern` entry can still rely on every `documented` one, and the two are never blended inside one concept. Causes are reported as attributed, never asserted. See `meta/IS_META_disclaimer.md`.*
+*Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Every concept states its BASIS, its ORIGIN, its THEME and the readers it was written for. The basis tiers are ranked, and never blended inside a single concept: a reader who accepts only `documented` entries can still rely on every one of those and discard the rest without unpicking anything. `testimony` is a dated first-person report, verified by nobody, and says so on its own face wherever it appears. Causes are reported as attributed, never asserted. See `meta/IS_META_disclaimer.md`.*
 
 **Basis: documented.** A source, ruling or official record supports this directly.  
 **Origin: ai.** Derived by AI analysis of the dataset.  
-**Theme: Surveillance and the person.**
+**Theme: Surveillance and the person.**  
+**Written for: Legislators and regulators · Press and researchers.**
 
 **Not independently verified.**
 
