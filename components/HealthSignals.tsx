@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogBody, DialogTitle } from "@/components/ui/dialog";
 import { track } from "@/lib/analytics";
 import SideNav, { useSectionNav } from "@/components/SideNav";
+import { MobileBars } from "@/components/ResearchCharts";
 
 /**
  * Public Health Signals — the Data section's second sub-tab.
@@ -475,6 +476,23 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
         ))}
       </div>
       </div>
+      {/* On a phone fourteen lines are an indistinguishable grey mass — legible
+          and uninformative. Below the breakpoint the chart is REPLACED by a
+          ranked bar list; no duplicate chart underneath (Sean, 2026-08-27). */}
+      {narrow ? (
+        <MobileBars
+          caption={`${chart.title}. Tap a row for that country's figures, method and sources.`}
+          note="A ranked list shows the comparison, not the shape — it cannot show when a curve turned. The full chart is on a wider screen."
+          rows={ends.map(({ s: ser, last }) => ({
+            key: ser.country,
+            label: SHORT_LABEL[ser.country] ?? ser.country,
+            value: indexed ? last.value - 100 : last.value,
+            display: fmtEnd(ser, last.value),
+            emphasis: ser.emphasis || ser.kind === "world",
+            onOpen: () => { setOpen(ser); track("health_chart_series_opened", { country: ser.country, via: "bars" }); },
+          }))}
+        />
+      ) : (
       <svg viewBox={`0 0 ${W} ${H}`} width="100%" role="img" aria-label={chart.title}
         onMouseLeave={() => setHoverYear(null)} style={{ fontFamily: "inherit" }}>
         {yTicks.map((t) => (
@@ -610,6 +628,7 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
           </text>
         )}
       </svg>
+      )}
 
       <Dialog open={!!open} onOpenChange={(v) => !v && setOpen(null)}>
         {/* md: a single country's provenance. Was a bespoke 720px. */}

@@ -121,3 +121,97 @@ export function EvidenceSpan() {
     </figure>
   );
 }
+
+/**
+ * The phone view of a multi-series chart (Sean, 2026-08-27).
+ *
+ * A line chart with six to fourteen series is legible on a phone and says
+ * nothing: the axes read fine, the series are an indistinguishable grey mass.
+ * Padding cannot fix that. So below the narrow breakpoint the chart is REPLACED
+ * by this — one row per series, sorted, each row opening the same sourced modal
+ * the chart's marks open. No duplicate chart underneath.
+ *
+ * The same idiom the Government Cloud heatmap already uses on mobile, and the
+ * same one the theme bars use on the concepts hero. Three places, one shape.
+ *
+ * Zero-centred when any value is negative, because change-over-period is
+ * POLARITY data — a fall and a rise are not two lengths, they are two
+ * directions, and a left-anchored bar would render −27% as merely shorter
+ * than +40% rather than opposite to it.
+ */
+export function MobileBars({
+  rows, caption, note,
+}: {
+  rows: {
+    key: string; label: string;
+    /** Signed magnitude for the bar. */
+    value: number;
+    /** What the reader sees — already formatted, units and all. */
+    display: string;
+    emphasis?: boolean;
+    onOpen?: () => void;
+  }[];
+  caption: string;
+  /** Says what a bar list cannot show. Never omitted. */
+  note?: string;
+}) {
+  if (!rows.length) return null;
+  const diverging = rows.some((r) => r.value < 0);
+  const max = Math.max(...rows.map((r) => Math.abs(r.value)), 1);
+  const sorted = [...rows].sort((a, b) => b.value - a.value);
+
+  return (
+    <figure className="m-0 mb-6">
+      <ul className="list-none p-0 m-0">
+        {sorted.map((r) => {
+          const pct = (Math.abs(r.value) / max) * (diverging ? 50 : 100);
+          const neg = r.value < 0;
+          const bar = (
+            <span className="relative flex-1 min-w-0 h-[12px] bg-edge/40 rounded-[4px]" aria-hidden="true">
+              {diverging && (
+                <span className="absolute inset-y-0 left-1/2 w-px bg-edge" />
+              )}
+              <span
+                className={`absolute inset-y-0 rounded-[4px] ${r.emphasis ? "bg-foreground" : "bg-foreground/55"}`}
+                style={
+                  diverging
+                    ? neg
+                      ? { right: "50%", width: `${Math.max(pct, 1)}%` }
+                      : { left: "50%", width: `${Math.max(pct, 1)}%` }
+                    : { left: 0, width: `${Math.max(pct, 2)}%` }
+                }
+              />
+            </span>
+          );
+          const body = (
+            <>
+              <span className={`text-[15px] w-[8.5rem] shrink-0 truncate ${r.emphasis ? "text-foreground font-semibold" : "text-foreground/85"}`}>
+                {r.label}
+              </span>
+              {bar}
+              <span className={`text-[15px] tabular-nums w-[4.5rem] text-right shrink-0 ${r.emphasis ? "text-foreground font-semibold" : "text-muted"}`}>
+                {r.display}
+              </span>
+            </>
+          );
+          return (
+            <li key={r.key} className="border-b border-edge/60 last:border-0">
+              {r.onOpen ? (
+                <button type="button" onClick={r.onOpen}
+                  className="flex items-center gap-3 w-full text-left py-3 hover:text-accent">
+                  {body}
+                </button>
+              ) : (
+                <div className="flex items-center gap-3 py-3">{body}</div>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+      <figcaption className="text-[14px] text-muted mt-3">
+        {caption}
+        {note ? <> {note}</> : null}
+      </figcaption>
+    </figure>
+  );
+}
