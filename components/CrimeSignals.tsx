@@ -491,6 +491,26 @@ function TwoSeriesChart({ chart, onPick }: { chart: Chart; onPick: (s: ChartSeri
         ))}
       </ul>
 
+      {/* Two official measures of the same thing, and the finding is that they
+          DISAGREE. On a phone the two lines sit on top of one another; two rows
+          show the gap directly. */}
+      {narrow ? (
+        <MobileBars
+          caption={`${chart.title} — the latest year of each official measure. Tap a row for its figures, method and sources.`}
+          note="A ranked list shows the comparison, not the shape — it cannot show when a curve turned. The full chart is on a wider screen."
+          rows={chart.series.map((ser) => {
+            const last = ser.points[ser.points.length - 1];
+            return {
+              key: ser.name,
+              label: ser.name,
+              value: last ? last.value : 0,
+              display: last ? last.value.toLocaleString() : "\u2014",
+              emphasis: ser.emphasis,
+              onOpen: () => { onPick(ser); track("crime_series_opened", { s: ser.name, via: "bars" }); },
+            };
+          })}
+        />
+      ) : (
       <svg
         viewBox={`0 0 ${W} ${H}`} width="100%" role="img"
         aria-label={`${chart.title}. ${chart.unit}. Use the legend buttons to highlight a series and open its detail.`}
@@ -643,6 +663,7 @@ function TwoSeriesChart({ chart, onPick }: { chart: Chart; onPick: (s: ChartSeri
           </g>
         )}
       </svg>
+      )}
 
       <div className="flex flex-wrap items-center gap-4 mt-3">
         <button

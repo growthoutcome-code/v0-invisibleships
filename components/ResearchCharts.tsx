@@ -1,7 +1,11 @@
 "use client";
 
-import { useMemo } from "react";
-import { SOURCE_YEARS } from "@/lib/concepts";
+import { useMemo, useState } from "react";
+import { Dialog, DialogContent, DialogHeader, DialogBody, DialogTitle } from "@/components/ui/dialog";
+import { track } from "@/lib/analytics";
+import { SOURCE_YEARS, CONCEPTS } from "@/lib/concepts";
+
+type Src = (typeof SOURCE_YEARS)[number];
 
 /**
  * The two chart shapes the Research section uses, shared by the hero and the
@@ -61,6 +65,7 @@ export function BarRows({
  * so the axis is not broken to flatter it.
  */
 export function EvidenceSpan() {
+  const [open, setOpen] = useState<Src | null>(null);
   const dots = useMemo(() => {
     const sorted = [...SOURCE_YEARS].sort((a, b) => a.year - b.year);
     const seen = new Map<number, number>();
@@ -98,11 +103,18 @@ export function EvidenceSpan() {
               <text x={x(t)} y={BASE + 26} textAnchor={anchor(t)} className="fill-muted" fontSize={17}>{t}</text>
             </g>
           ))}
+          {/* Every dot IS a citation, so every dot opens it. The visible mark
+              stays 5px — enlarging it would crowd a chart that already stacks
+              same-year sources — and an invisible 11px circle carries the tap. */}
           {dots.map((d, i) => (
-            <circle key={i} cx={x(d.year)} cy={BASE - 10 - d.stack * 13} r={5}
-              className="fill-foreground stroke-background" strokeWidth={2}>
-              <title>{`${d.year} — ${d.label}`}</title>
-            </circle>
+            <g key={i} style={{ cursor: "pointer" }}
+              onClick={() => { setOpen(d); track("evidence_span_source_opened", { year: d.year }); }}>
+              <circle cx={x(d.year)} cy={BASE - 10 - d.stack * 13} r={11} fill="transparent">
+                <title>{`${d.year} — ${d.label}`}</title>
+              </circle>
+              <circle cx={x(d.year)} cy={BASE - 10 - d.stack * 13} r={5}
+                className="fill-foreground stroke-background" strokeWidth={2} pointerEvents="none" />
+            </g>
           ))}
           {labelled.map((yr) => {
             const d = dots.filter((z) => z.year === yr).pop();
@@ -116,8 +128,55 @@ export function EvidenceSpan() {
       </div>
       <figcaption className="text-[14px] text-muted mt-2">
         One dot per primary source behind this research, by year of publication or judgment.
-        Hover a dot to see the source. The record runs {first} to {last} &mdash; {last - first} years.
+        Tap a dot for the source and which concepts rest on it. The record runs {first} to {last}
+        &mdash; {last - first} years.
       </figcaption>
+
+      <Dialog open={!!open} onOpenChange={(v) => !v && setOpen(null)}>
+        <DialogContent size="md">
+          <DialogHeader>
+            <DialogTitle className="font-display text-2xl">{open?.label}</DialogTitle>
+          </DialogHeader>
+          {open && (
+            <DialogBody>
+              <p className="text-[13px] uppercase tracking-[0.08em] font-semibold text-muted m-0 mb-4">
+                {open.year}
+              </p>
+              {open.url ? (
+                <p className="body-copy m-0 mb-6">
+                  <a href={open.url} target="_blank" rel="noreferrer noopener"
+                    className="text-accent underline underline-offset-4">
+                    Read the source &#8599;
+                  </a>
+                </p>
+              ) : (
+                <p className="text-[15px] text-muted m-0 mb-6">
+                  This archive holds no stable public URL for this source. It is cited in the
+                  concepts below, where its evidence line names it in full.
+                </p>
+              )}
+              <h4 className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground mb-2">
+                Concepts that rest on it
+              </h4>
+              <ul className="list-none p-0 m-0">
+                {open.cites.map((id) => {
+                  const c = CONCEPTS.find((k) => k.id === id);
+                  if (!c) return null;
+                  return (
+                    <li key={id} className="py-1.5">
+                      <a href={`/concepts#${id}`}
+                        onClick={() => track("evidence_span_concept_opened", { id })}
+                        className="text-[17px] text-foreground underline underline-offset-4 hover:text-accent">
+                        {c.title}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </DialogBody>
+          )}
+        </DialogContent>
+      </Dialog>
     </figure>
   );
 }

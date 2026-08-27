@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { DATA_WINDOW, dataWindowTicks, useNarrow, TierChip } from "@/components/DataPrimitives";
 import { track } from "@/lib/analytics";
+import { MobileBars } from "@/components/ResearchCharts";
 
 /**
  * ICE detention: population against its funded ceiling.
@@ -189,6 +190,24 @@ export default function DetentionChart({
         ))}
       </ul>
 
+      {/* Three measures that the section warns are NOT interchangeable — an average, a funded ceiling and single-day snapshots. Three rows enforce that warning in a way three lines on one axis never could: separate rows cannot be misread as one series. */}
+      {narrow ? (
+        <MobileBars
+          caption={`${chart.title} — the latest figure for each measure. These are three different things, never one series. Tap a row for its figures, method and sources.`}
+          note="A ranked list shows the comparison, not the shape — it cannot show when a curve turned. The full chart is on a wider screen."
+          rows={chart.series.map((ser) => {
+            const last = ser.points[ser.points.length - 1];
+            return {
+              key: ser.name,
+              label: ser.name,
+              value: last ? last.value : 0,
+              display: last ? last.value.toLocaleString() : "\u2014",
+              emphasis: ser.emphasis,
+              onOpen: () => { onPick(ser); track("detention_series_opened", { s: ser.name, via: "bars" }); },
+            };
+          })}
+        />
+      ) : (
       <svg viewBox={`0 0 ${W} ${H}`} width="100%" role="img"
         aria-label={`${chart.title}. ${chart.unit}. ${chart.series.length} measures drawn separately: ${chart.series.map((s) => s.name).join(", ")}.`}
         onMouseLeave={() => setHover(null)}
@@ -277,6 +296,7 @@ export default function DetentionChart({
           </g>
         )}
       </svg>
+      )}
 
       <p className="text-muted text-[14px] measure mt-3 mb-0">
         Hover or tap a legend entry to single out a measure; tap again (or click the

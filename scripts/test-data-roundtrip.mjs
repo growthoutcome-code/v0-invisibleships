@@ -1828,6 +1828,11 @@ for (const [label, script, remedy] of [
   // Concepts merge, so that "nothing was deleted" is a test rather than a claim.
   ["content inventory", "scripts/check_content_inventory.py",
    "python3 scripts/check_content_inventory.py --update  (only if the removal was intended)"],
+  // Added 27 Aug after an observation pass found a chart with clipped axis
+  // labels the day after it was written, and two charts with no phone view at
+  // all. Written-down rules decay; a rule that fails the build does not.
+  ["chart contract", "scripts/check_chart_contract.py",
+   "see the contract at the top of scripts/check_chart_contract.py"],
 ]) {
   try {
     const out = execFileSync("python3", [script, "--check"], {

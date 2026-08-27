@@ -1111,37 +1111,43 @@ export const CONCEPTS: Concept[] = [
  * the record these concepts rest on is not recent, and the picture says that
  * faster than a sentence can.
  */
-export const SOURCE_YEARS: { year: number; label: string }[] = [
-  { year: 1888, label: "Fox sisters confess the spiritualist fraud" },
-  { year: 1966, label: "Schelling, Arms and Influence" },
-  { year: 1976, label: "Stasi Richtlinie 1/76 — Zersetzung doctrine" },
-  { year: 1986, label: "Socialist Workers Party v Attorney General — COINTELPRO" },
-  { year: 2005, label: "Granqvist: sensed presence tracks suggestibility, not fields" },
-  { year: 2006, label: "Kydd & Walter, The Strategies of Terrorism" },
-  { year: 2007, label: "Nisour Square" },
-  { year: 2011, label: "IARC classifies RF-EMF as Group 2B" },
-  { year: 2013, label: "PRISM disclosures" },
-  { year: 2014, label: "Blanke: a robot induces a felt presence" },
-  { year: 2014, label: "Edrei — NYPD LRAD deployment" },
-  { year: 2016, label: "Penney measures the chilling effect" },
-  { year: 2018, label: "Edrei v Bratton, 2d Cir." },
-  { year: 2018, label: "Reuters, The Body Trade" },
-  { year: 2018, label: "France bans phones in schools" },
-  { year: 2020, label: "Tampa Bay Times, Targeted" },
-  { year: 2020, label: "Blackwater pardons" },
-  { year: 2022, label: "EFF exposes Fog Data Science" },
-  { year: 2022, label: "Epps v Denver verdict" },
-  { year: 2023, label: "Amnesty, Automated Apartheid" },
-  { year: 2023, label: "Tang & Huth semantic decoder" },
-  { year: 2023, label: "FTC v GoodRx" },
-  { year: 2024, label: "Neurorights Foundation, Safeguarding Brain Data" },
-  { year: 2024, label: "Colorado HB24-1058" },
-  { year: 2024, label: "WHO-commissioned review finds no cancer link" },
-  { year: 2024, label: "Change Healthcare breach — 190m people" },
-  { year: 2024, label: "Pasco settles, admitting three violations" },
-  { year: 2025, label: "Montana LC0005" },
-  { year: 2025, label: "Medill: 3,500 newspapers gone" },
-  { year: 2026, label: "Tenth Circuit affirms Epps" },
+export const SOURCE_YEARS: {
+  year: number; label: string;
+  /** Where to read it. Absent where this archive holds no stable public URL. */
+  url?: string;
+  /** Concept ids that rest on this source — the reason the dot is on the chart. */
+  cites: string[];
+}[] = [
+  { year: 1888, label: "Fox sisters confess the spiritualist fraud", cites: ["explanation-is-part-of-the-harm"] },
+  { year: 1966, label: "Schelling, Arms and Influence", cites: ["attack-to-force-acknowledgment"] },
+  { year: 1976, label: "Stasi Richtlinie 1/76 — Zersetzung doctrine", cites: ["ruin-first-then-rescue"] },
+  { year: 1986, label: "Socialist Workers Party v Attorney General — COINTELPRO", cites: ["organised-harassment-is-fact"] },
+  { year: 2005, label: "Granqvist: sensed presence tracks suggestibility, not fields", cites: ["what-produces-the-feeling"] },
+  { year: 2006, label: "Kydd & Walter, The Strategies of Terrorism", cites: ["attack-to-force-acknowledgment"] },
+  { year: 2007, label: "Nisour Square", url: "https://www.npr.org/2020/12/23/949679837/shock-and-dismay-after-trump-pardons-blackwater-guards-who-killed-14-iraqi-civil", cites: ["contractors-killed-and-freed"] },
+  { year: 2011, label: "IARC classifies RF-EMF as Group 2B", url: "https://publications.iarc.who.int/Book-And-Report-Series/Iarc-Monographs-On-The-Identification-Of-Carcinogenic-Hazards-To-Humans/Non-ionizing-Radiation-Part-2-Radiofrequency-Electromagnetic-Fields-2013", cites: ["children-wearables-and-rf"] },
+  { year: 2013, label: "PRISM disclosures", cites: ["no-private-thinking-space"] },
+  { year: 2014, label: "Blanke: a robot induces a felt presence", url: "https://www.eurekalert.org/news-releases/889913", cites: ["what-produces-the-feeling"] },
+  { year: 2014, label: "Edrei — NYPD LRAD deployment", url: "https://law.justia.com/cases/federal/appellate-courts/ca2/17-2065/17-2065-2018-06-13.html", cites: ["denver-acoustic-weapons"] },
+  { year: 2016, label: "Penney measures the chilling effect", url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2769645", cites: ["no-private-thinking-space"] },
+  { year: 2018, label: "Edrei v Bratton, 2d Cir.", url: "https://law.justia.com/cases/federal/appellate-courts/ca2/17-2065/17-2065-2018-06-13.html", cites: ["denver-acoustic-weapons"] },
+  { year: 2018, label: "Reuters, The Body Trade", url: "https://ethics.sjmc.wisc.edu/wp-content/uploads/sites/2130/2024/08/reuters_bodytrade.pdf", cites: ["who-profits-from-a-body"] },
+  { year: 2018, label: "France bans phones in schools", cites: ["children-wearables-and-rf"] },
+  { year: 2020, label: "Tampa Bay Times, Targeted", url: "https://projects.tampabay.com/projects/2020/investigations/police-pasco-sheriff-targeted/school-data/", cites: ["what-children-are-subject-to"] },
+  { year: 2020, label: "Blackwater pardons", url: "https://news.un.org/en/story/2020/12/1081152", cites: ["contractors-killed-and-freed"] },
+  { year: 2022, label: "EFF exposes Fog Data Science", url: "https://www.eff.org/deeplinks/2022/08/inside-fog-data-science-secretive-company-selling-mass-surveillance-local-police", cites: ["made-into-assets-unknowing"] },
+  { year: 2022, label: "Epps v Denver verdict", url: "https://www.aclu-co.org/cases/epps-et-al-v-city-and-county-denver-et-al/", cites: ["denver-acoustic-weapons"] },
+  { year: 2023, label: "Amnesty, Automated Apartheid", url: "https://www.amnesty.org/en/latest/news/2023/05/israel-opt-israeli-authorities-are-using-facial-recognition-technology-to-entrench-apartheid/", cites: ["no-private-thinking-space"] },
+  { year: 2023, label: "Tang & Huth semantic decoder", url: "https://www.nature.com/articles/s41593-023-01304-9", cites: ["can-a-machine-read-thought"] },
+  { year: 2023, label: "FTC v GoodRx", url: "https://www.ftc.gov/news-events/news/press-releases/2023/02/ftc-enforcement-action-bar-goodrx-sharing-consumers-sensitive-health-info-advertising", cites: ["how-protected-is-your-medical-record"] },
+  { year: 2024, label: "Neurorights Foundation, Safeguarding Brain Data", url: "https://perseus-strategies.com/wp-content/uploads/2024/04/FINAL_Consumer_Neurotechnology_Report_Neurorights_Foundation_April-1.pdf", cites: ["who-owns-neural-data"] },
+  { year: 2024, label: "Colorado HB24-1058", url: "https://content.leg.colorado.gov/sites/default/files/documents/2024A/bills/2024a_1058_01.pdf", cites: ["law-for-neural-data"] },
+  { year: 2024, label: "WHO-commissioned review finds no cancer link", url: "https://www.arpansa.gov.au/who-review-finds-no-link-between-mobile-phone-use-and-brain-cancer", cites: ["children-wearables-and-rf"] },
+  { year: 2024, label: "Change Healthcare breach — 190m people", cites: ["how-protected-is-your-medical-record"] },
+  { year: 2024, label: "Pasco settles, admitting three violations", url: "https://ij.org/press-release/case-closed-pasco-sheriff-admits-predictive-policing-program-violated-constitution/", cites: ["what-children-are-subject-to"] },
+  { year: 2025, label: "Montana LC0005", cites: ["law-for-neural-data"] },
+  { year: 2025, label: "Medill: 3,500 newspapers gone", url: "https://www.niemanlab.org/2025/10/in-medills-latest-state-of-local-news-report-a-festering-20-year-old-problem-looms-larger-than-ever/", cites: ["why-isnt-this-in-the-news"] },
+  { year: 2026, label: "Tenth Circuit affirms Epps", cites: ["contractors-killed-and-freed"] },
 ];
 
 /**
