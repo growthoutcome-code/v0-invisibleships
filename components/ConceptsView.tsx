@@ -1,16 +1,13 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import Link from "next/link";
 import { track } from "@/lib/analytics";
-import DisclaimerLink from "@/components/DisclaimerLink";
 import ConceptsToolbar from "@/components/ConceptsToolbar";
 import SideNav, { useSectionNav } from "@/components/SideNav";
 import ConceptsSummary from "@/components/ConceptsSummary";
-import { CONCEPTS, NO_FILTERS, BASIS_LABEL, BASIS_NOTE, ORIGIN_LABEL, ORIGIN_NOTE, VERIFICATION_LABEL, type Basis, type Origin, type Filters } from "@/lib/concepts";
-
-const BASIS_ORDER: Basis[] = ["documented", "structural", "pattern", "testimony"];
-const ORIGIN_ORDER: Origin[] = ["ai", "author"];
+import { ConceptsNotice } from "@/components/DataIntro";
+import { CONCEPTS, NO_FILTERS, BASIS_LABEL, ORIGIN_LABEL, VERIFICATION_LABEL, type Filters } from "@/lib/concepts";
 
 /**
  * Core concepts, each showing the basis it rests on.
@@ -62,7 +59,6 @@ export default function ConceptsView({
     [filters]
   );
 
-  const [labelsOpen, setLabelsOpen] = useState(false);
 
   // The rail lists the concepts CURRENTLY SHOWN. Filtering removes list items,
   // the hook's MutationObserver rescans, and the rail follows — no extra wiring.
@@ -74,66 +70,9 @@ export default function ConceptsView({
     <div className="w-full lg:grid lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-x-10 lg:items-start">
       <SideNav mode="outline" label="Concepts" sections={nav.sections} active={nav.active} />
       <div id="concepts-root" className="min-w-0">
-      <p className="body-copy text-foreground/85 measure mb-4">
-        Ideas drawn from the research. Each one is tagged with who formed it and what it rests on,
-        because they are not the same kind of claim: some follow from a document, some from what the
-        record is missing, some from the author&rsquo;s own experience.
-      </p>
-      <p className="text-muted text-[15px] measure mb-10">
-        None of this establishes wrongdoing by any organisation, and nothing here is independently
-        verified unless it says so.{" "}
-        <DisclaimerLink from="concepts">Read the full disclaimer</DisclaimerLink>{" "}
-        ·{" "}
-        <button
-          type="button"
-          onClick={() => setLabelsOpen((v) => !v)}
-          className="underline underline-offset-4 hover:text-foreground"
-          aria-expanded={labelsOpen}
-        >
-          {labelsOpen ? "Hide" : "What the labels mean"}
-        </button>
-      </p>
-
-      {labelsOpen && (
-      <div className="mb-16 measure grid gap-10 md:grid-cols-2">
-        <div>
-          <h2 className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground mb-3">
-            Who formed it
-          </h2>
-          <dl className="m-0">
-            {ORIGIN_ORDER.map((o) => (
-              <div key={o} className="py-1.5">
-                <dt className="text-[16px] font-semibold text-foreground">{ORIGIN_LABEL[o]}</dt>
-                <dd className="text-[16px] text-muted m-0">{ORIGIN_NOTE[o]}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-        <div>
-          <h2 className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground mb-3">
-            What it rests on
-          </h2>
-          <dl className="m-0">
-            {BASIS_ORDER.map((b) => (
-              <div key={b} className="py-1.5">
-                <dt className="text-[16px] font-semibold text-foreground">{BASIS_LABEL[b]}</dt>
-                <dd className="text-[16px] text-muted m-0">{BASIS_NOTE[b]}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </div>
-      )}
-
-      <ConceptsSummary setFilters={setFilters} />
-
-      <h2 className="font-display font-semibold text-foreground text-[26px] md:text-[30px] leading-tight mb-2">
-        The concepts
-      </h2>
-      <p className="body-copy text-foreground/85 measure mb-6">
-        All {CONCEPTS.length}, newest last. Search the text, or filter by what a concept is about,
-        what it rests on, who formed it, and who it is for.
-      </p>
+      <ConceptsNotice>
+        <ConceptsSummary setFilters={setFilters} />
+      </ConceptsNotice>
 
       <ConceptsToolbar filters={filters} setFilters={setFilters} shown={visible.length} />
 

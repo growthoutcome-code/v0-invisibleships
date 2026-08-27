@@ -56,6 +56,70 @@ export function DataNotice() {
   );
 }
 
+/**
+ * The Concepts section's equivalent of DataNotice (Sean, 2026-08-27).
+ *
+ * Concepts used to open with roughly 2,400 characters before the first entry:
+ * two intro paragraphs, a "what the labels mean" panel, a "what is not
+ * established" heading with four lines, a basis chart and a closing note. All
+ * of it true, none of it read, and the filter sat below the lot.
+ *
+ * So: one dismissable alert the same size and shape as DataNotice, and the
+ * detail behind a single expander rather than deleted. The four standing limits
+ * are the most credible thing on the page — they are what a hostile reader
+ * checks for — and they stay one click away rather than being cut to hit a
+ * character count.
+ */
+const CKEY = "is_concepts_notice_v1";
+
+export function ConceptsNotice({
+  children,
+}: {
+  /** The detail: standing limits, label definitions, basis composition. */
+  children?: React.ReactNode;
+}) {
+  const [show, setShow] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    try { setShow(window.localStorage.getItem(CKEY) !== "1"); }
+    catch { setShow(true); }
+  }, []);
+
+  const dismiss = () => {
+    setShow(false);
+    track("concepts_disclaimer_dismissed");
+    try { window.localStorage.setItem(CKEY, "1"); } catch { /* private mode */ }
+  };
+
+  if (!show) return null;
+
+  return (
+    <aside role="note" className="w-full bg-panel px-6 py-5 mb-10">
+      <div className="flex items-start gap-6">
+        <p className="body-copy text-foreground/85 measure m-0">
+          <strong>About these concepts.</strong> Ideas drawn from the research, each tagged with who
+          formed it and what it rests on, because they are not the same kind of claim. None of this
+          establishes wrongdoing by any organisation, and nothing here is independently verified
+          unless it says so.{" "}
+          <button type="button" onClick={() => { setOpen((v) => !v); if (!open) track("concepts_limits_opened"); }}
+            aria-expanded={open} className="text-accent underline underline-offset-4">
+            {open ? "Hide the detail" : "What these do not establish"}
+          </button>{" "}
+          ·{" "}
+          <DisclaimerLink from="concepts_notice" className="text-accent underline underline-offset-4 whitespace-nowrap">
+            Read the full disclaimer →
+          </DisclaimerLink>
+        </p>
+        <button onClick={dismiss} aria-label="Dismiss notice" className="ml-auto shrink-0 text-muted hover:text-foreground">
+          <X size={20} />
+        </button>
+      </div>
+      {open && children && <div className="mt-6 pt-6 border-t border-edge">{children}</div>}
+    </aside>
+  );
+}
+
 export function DataNoteLine({ children, from }: { children: React.ReactNode; from: string }) {
   return (
     <p className="text-muted text-[15px] mb-10 measure">
