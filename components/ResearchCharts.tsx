@@ -74,20 +74,28 @@ export function EvidenceSpan() {
   const W = 1000, PAD = 10, BASE = 112, MIN_Y = 1880, MAX_Y = 2030;
   const x = (y: number) => PAD + ((y - MIN_Y) / (MAX_Y - MIN_Y)) * (W - PAD * 2);
   const ticks = [1880, 1920, 1960, 2000, 2030];
-  const labelled = [1888, 1976, 2007, 2020, 2024];
+  // Anchor the end ticks inward. With text-anchor="middle" at PAD=10, half of
+  // "1880" and "2030" fell outside the viewBox and rendered as "880" and "203"
+  // on every screen — the kind of thing only visible in a browser.
+  const anchor = (t: number) =>
+    t === ticks[0] ? "start" : t === ticks[ticks.length - 1] ? "end" : "middle";
+  // 2020 and 2024 are 26px apart on this scale and their labels are ~36px wide,
+  // so they collided and 2020 sat under the 2024 stack. Label only years far
+  // enough apart to read; the rest are reachable by hovering a dot.
+  const labelled = [1888, 1976, 2007, 2024];
   const first = dots[0]?.year ?? 0;
   const last = dots[dots.length - 1]?.year ?? 0;
 
   return (
     <figure className="m-0">
       <div className="overflow-x-auto">
-        <svg viewBox={`0 0 ${W} 150`} className="w-full min-w-[520px] h-auto" role="img"
+        <svg viewBox={`0 0 ${W} 150`} className="w-full min-w-[760px] h-auto" role="img"
           aria-label={`Years of the ${SOURCE_YEARS.length} primary sources behind this research, from ${first} to ${last}.`}>
           <line x1={PAD} y1={BASE} x2={W - PAD} y2={BASE} className="stroke-edge" strokeWidth={2} />
           {ticks.map((t) => (
             <g key={t}>
               <line x1={x(t)} y1={BASE} x2={x(t)} y2={BASE + 6} className="stroke-edge" strokeWidth={2} />
-              <text x={x(t)} y={BASE + 26} textAnchor="middle" className="fill-muted" fontSize={17}>{t}</text>
+              <text x={x(t)} y={BASE + 26} textAnchor={anchor(t)} className="fill-muted" fontSize={17}>{t}</text>
             </g>
           ))}
           {dots.map((d, i) => (

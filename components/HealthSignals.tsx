@@ -300,6 +300,18 @@ function useNarrow() {
   return narrow;
 }
 
+/** Phone-width forms for the only series labelled at that size. */
+const SHORT_LABEL: Record<string, string> = {
+  "United States": "US",
+  "World average": "World",
+  "World": "World",
+  "United Kingdom": "UK",
+  "Republic of Korea": "S. Korea",
+  "South Korea": "S. Korea",
+  "West Bank & Gaza": "WB & Gaza",
+  "Russian Federation": "Russia",
+};
+
 function MultiLineChart({ chart }: { chart: IntlChart }) {
   const [hoverYear, setHoverYear] = useState<number | null>(null);
   const narrow = useNarrow();
@@ -319,10 +331,15 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
   const showCovid = win === "covid";
   const [open, setOpen] = useState<IntlSeries | null>(null);
   const winFrom = win === "covid" ? 2017 : 0;
-  const W = 760, H = 440, padL = 44, padT = 18, padB = 34;
+  // padL scales with the tick font. It was a flat 44 at every width while the
+  // ticks grew to 18px on a phone, so "+150%" and "same as 2000" started left of
+  // x=0 and rendered as "00%" and "ame". The sibling chart above already does
+  // `narrow ? 92 : 56`; this one never got the same treatment.
+  const W = 760, H = 440, padT = 18, padB = 34;
   // On a phone the SVG scales to ~47%, which would render 11.5px labels at ~5px.
   // Label only the US and the world there, at a size that survives the scale;
   // every country's numbers are in the ranked table directly below.
+  const padL = narrow ? 64 : 44;
   const padR = narrow ? 96 : 128;
   // The national continuation is part of the full-range view; the pandemic
   // window keeps it too, since 2022-2025 is exactly the period of interest.
@@ -558,7 +575,10 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
               fontWeight={s.emphasis || s.kind === "world" ? 700 : 400}
               style={{ cursor: "pointer" }}
               onClick={() => { setOpen(s); track("health_chart_series_opened", { country: s.country, via: "label" }); }}>
-              {s.country}{" "}
+              {/* 86px of gutter at 22px type fits "US", not "United States" — and
+                  the two series clipped were the two the chart exists to
+                  contrast. Full names are in the ranked table directly below. */}
+              {narrow ? SHORT_LABEL[s.country] ?? s.country : s.country}{" "}
               {hoverYear === null
                 ? fmtEnd(s, last.value)
                 : (() => {

@@ -694,6 +694,19 @@ def main():
     if hint in markup:
         markup = markup.replace(hint, "")
 
+    # ---- timeline: lane labels wear a TEXT token, not the series colour ---
+    # Investment drew in --series-5 (#dddddd) and Litigation in --series-4
+    # (#b6b6b6) on a white surface: two of seven tracks effectively unlabelled,
+    # at every width, since the chart was built. The coloured dots beside a
+    # label already carry its identity — the text does not need to repeat it,
+    # and repeating it is what made two of them invisible.
+    old_lane = 'font-size="10" fill="var(${c})" font-weight="700">${lab}</text>'
+    new_lane = 'font-size="11" fill="var(--text-secondary)" font-weight="700">${lab}</text>'
+    if old_lane in js:
+        js = js.replace(old_lane, new_lane)
+    else:
+        raise SystemExit("timeline lane label markup changed — fix build_govcloud_report.py")
+
     # ---- timeline: make the dots reachable ------------------------------
     # It was onmousemove/onmouseleave only, so a phone got nothing at all. Two
     # changes, both minimal so the drawing code stays legible:
