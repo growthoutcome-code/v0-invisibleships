@@ -13,6 +13,7 @@ import IntlLineChart, { type IntlChartDoc, type IntlSeries } from "@/components/
 import DetentionChart, { type DetChart, type DetSeries } from "@/components/DetentionChart";
 import SideNav, { useSectionNav } from "@/components/SideNav";
 import { track } from "@/lib/analytics";
+import { MobileBars } from "@/components/ResearchCharts";
 
 /**
  * Crime — the Data section's fourth sub-tab. United States only (Sean's scope).
@@ -176,6 +177,28 @@ function LaneChart({ chart, onPick }: { chart: LaneChart; onPick: (l: Lane) => v
         ))}
       </ul>
 
+      {/* Below the breakpoint the plot is REPLACED by a ranked list. Four of
+          the six lanes converge below index 130 and cannot be told apart in a
+          phone's width — the chart stays legible and stops being readable.
+          Values are indexed to each lane's own base, so the list is centred on
+          zero: a fall and a rise are directions, not two lengths. */}
+      {narrow ? (
+        <MobileBars
+          caption={`${chart.title} — each lane against its own first year in this window. Tap a row for its figures, method and sources.`}
+          note="A ranked list shows the comparison, not the shape — it cannot show when a curve turned. The full chart is on a wider screen."
+          rows={chart.series.map((l) => {
+            const last = l.points[l.points.length - 1];
+            return {
+              key: l.name,
+              label: l.name,
+              value: last ? last.value - 100 : 0,
+              display: last ? `${last.value >= 100 ? "+" : "\u2212"}${Math.abs(Math.round(last.value - 100))}%` : "\u2014",
+              emphasis: l.emphasis,
+              onOpen: () => { onPick(l); track("crime_lane_opened", { lane: l.name, via: "bars" }); },
+            };
+          })}
+        />
+      ) : (
       <svg viewBox={`0 0 ${W} ${H}`} width="100%" role="img"
         aria-label={`${chart.title}. ${chart.unit}. Use the legend buttons to highlight a lane and open its detail.`}
         onMouseLeave={() => setHoverYear(null)}
@@ -312,6 +335,7 @@ function LaneChart({ chart, onPick }: { chart: LaneChart; onPick: (l: Lane) => v
           </g>
         )}
       </svg>
+      )}
 
       <ul className="list-none p-0 mt-4 mb-0">
         {chart.series.map((s, i) => {

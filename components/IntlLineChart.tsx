@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { DATA_WINDOW, dataWindowTicks, useNarrow, TierChip } from "@/components/DataPrimitives";
 import { track } from "@/lib/analytics";
+import { MobileBars } from "@/components/ResearchCharts";
 
 /**
  * Multi-country line chart with a CONNECTED legend (Sean, 2026-08-21).
@@ -128,6 +129,24 @@ export default function IntlLineChart({
         ))}
       </ul>
 
+      {/* Below the breakpoint the plot is REPLACED by a ranked list — several
+          series cannot be told apart in a phone's width at any padding, and a
+          chart that is legible but unreadable is worse than one that is neither,
+          because nobody reports it. Same rows, same modal, no duplicate chart. */}
+      {narrow ? (
+        <MobileBars
+          caption={`${chart.title} — ${chart.unit} Tap a row for its figures, method and sources.`}
+          note="A ranked list shows the comparison, not the shape — it cannot show when a curve turned. The full chart is on a wider screen."
+          rows={chart.series.map((ser) => ({
+            key: ser.code,
+            label: ser.name,
+            value: ser.last.value,
+            display: ser.last.value.toLocaleString(undefined, { maximumFractionDigits: 2 }),
+            emphasis: ser.emphasis,
+            onOpen: () => { onPick(ser); track("intl_series_opened", { c: ser.code, via: "bars" }); },
+          }))}
+        />
+      ) : (
       <svg viewBox={`0 0 ${W} ${H}`} width="100%" role="img"
         aria-label={`${chart.title}. ${chart.unit}. Use the legend buttons to highlight a country and open its detail.`}
         onMouseLeave={() => { setHoverYear(null); }}
@@ -214,6 +233,7 @@ export default function IntlLineChart({
           </g>
         )}
       </svg>
+      )}
 
       <p className="text-muted text-[14px] measure mt-3 mb-0">
         Hover or tap a legend entry to light up its line; tap again (or click the line)
