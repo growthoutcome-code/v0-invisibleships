@@ -340,7 +340,7 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
   // Label only the US and the world there, at a size that survives the scale;
   // every country's numbers are in the ranked table directly below.
   const padL = narrow ? 64 : 44;
-  const padR = narrow ? 96 : 128;
+  const padR = narrow ? 128 : 128;
   // The national continuation is part of the full-range view; the pandemic
   // window keeps it too, since 2022-2025 is exactly the period of interest.
   const withExt = chart.series.map((s) => ({
@@ -570,7 +570,13 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
           <g key={s.country}>
             <line x1={X(last.year)} y1={Y(last.value)} x2={W - padR + 6} y2={labelY}
               stroke="rgb(var(--edge))" strokeWidth="1" />
-            <text x={W - padR + 10} y={labelY + 4} fontSize={narrow ? 22 : s.emphasis ? 13 : 11.5}
+            {/* On a phone the gutter holds LABEL + VALUE, not a label — "US +36%"
+                fits, "World −23%" did not, and widening the gutter only moved
+                the cliff. Anchor to the right EDGE at narrow instead: the text
+                grows leftward into the gutter and cannot clip at any length. */}
+            <text x={narrow ? W - 6 : W - padR + 10} y={labelY + 4}
+              textAnchor={narrow ? "end" : "start"}
+              fontSize={narrow ? 22 : s.emphasis ? 13 : 11.5}
               fill={s.emphasis ? "rgb(var(--foreground))" : "rgb(var(--muted))"}
               fontWeight={s.emphasis || s.kind === "world" ? 700 : 400}
               style={{ cursor: "pointer" }}
