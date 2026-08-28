@@ -674,7 +674,7 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
                   ? open.extension.points[open.extension.points.length - 1].year
                   : open.points[open.points.length - 1].year}
                 {open.kind === "world" ? "" : ", against"}{" "}
-                {open.kind === "world" ? "" : `${open.points[0].value.toFixed(1)} in ${open.points[0].year} — a change of ${open.change_pct > 0 ? "+" : ""}${open.change_pct.toFixed(0)}%`}
+                {open.kind === "world" ? "" : `${open.points[0].value.toFixed(1)} in ${open.points[0].year} — a change of ${open.change_pct > 0 ? "+" : ""}${open.change_pct.toFixed(0)}% across the WHO period, ${open.points[0].year}–${open.points[open.points.length - 1].year}`}
                 {open.kind === "world" ? `a change of ${open.change_pct.toFixed(0)}% since ${open.points[0].year}` : ""}.
               </p>
 
@@ -698,6 +698,47 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
                 </>
               )}
 
+              {/* Sean, 2026-08-28, reading South Korea against the United States: "could
+                  this reading be inaccurate because of a population inconsistency?" Age
+                  structure is handled — the WHO series is age-standardised — but he had
+                  picked up 105% and 36% off the chart while this modal said 83% and 40%.
+                  Both were right. The indexed end-label runs to the END of the line,
+                  which for a country with an extension is its own national statistics to
+                  2024; the modal quoted the WHO period. Two numbers for one line on one
+                  screen, and nothing said why.
+              
+                  A cross-country comparison is only valid on the WHO figure. That is now
+                  stated, rather than implied by a dash pattern and a line of caption. */}
+              {open.extension && (() => {
+                const first = open.points[0];
+                const whoLast = open.points[open.points.length - 1];
+                const extLast = open.extension.points[open.extension.points.length - 1];
+                const extPct = ((extLast.value / first.value) - 1) * 100;
+                const sign = (n: number) => (n > 0 ? "+" : "");
+                return (
+                  <div className="border border-edge rounded-lg p-4 mb-4 bg-foreground/[0.03]">
+                    <h4 className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground mb-2">
+                      Which figure to quote
+                    </h4>
+                    <p className="text-[15px] text-foreground/85 m-0 mb-2">
+                      <strong>{sign(open.change_pct)}{open.change_pct.toFixed(0)}% ({first.year}–{whoLast.year})</strong>{" "}
+                      — {first.value.toFixed(1)} to {whoLast.value.toFixed(1)} per 100,000, age-standardised to the
+                      WHO world standard population. This is the figure comparable with every other line on
+                      this chart, because every line is on that one method.
+                    </p>
+                    <p className="text-[15px] text-foreground/85 m-0">
+                      The line continues to {extLast.year} on {open.country}&rsquo;s own national statistics,
+                      which puts the change since {first.year} at{" "}
+                      <strong>{sign(extPct)}{extPct.toFixed(0)}%</strong> — and that is the number the
+                      end-of-line label shows. Do <strong>not</strong> compare it with another country&rsquo;s:
+                      national methods differ from each other and from the WHO basis, so the gap between two
+                      of them is partly a gap of method. For the shape of recent years it is the better
+                      series; for comparing countries, use {sign(open.change_pct)}{open.change_pct.toFixed(0)}%.
+                    </p>
+                  </div>
+                );
+              })()}
+              
               {open.extension && (
                 <div className="border border-edge rounded-lg p-4 mb-4">
                   <h4 className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground mb-2">
