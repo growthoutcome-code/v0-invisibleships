@@ -325,7 +325,12 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
   const indexed = mode === "change";
   // Window: the full two-decade record, or the pandemic era. Comparable
   // international estimates stop at 2021 — see the note under the chart.
-  const [win, setWin] = useState<"full" | "covid">("full");
+  // The pandemic zoom (2017–2021) was removed on 2026-08-28 at Sean's request:
+  // fourteen series compressed into four years is a thicket, and the full
+  // window carries the finding anyway. The state stays so the covid markers and
+  // the denser tick set keep their code path if a narrower window is ever
+  // reinstated with fewer lines on it.
+  const [win] = useState<"full" | "covid">("full");
   // COVID markers follow the window (Sean, 2026-08-21): the checkbox is
   // gone — the pandemic-window view shows the markers with room to breathe,
   // and the full view never renders them cramped at the right edge.
@@ -442,23 +447,9 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
       <p className="text-muted text-[13px] m-0 mb-3">
         Bold line = United States · long-dashed line = world average · dotted after 2021 = each
         country&rsquo;s own national statistics ·{" "}
-        {narrow ? "every country's figures are in the table below" : "hover any year to read all fourteen, or click a line for its sources and method"}.
+        {narrow ? "every country's figures are in the table below" : "hover any year to read all fourteen, or click anywhere on the plot for the nearest line's sources and method"}.
       </p>
       <div className="flex flex-wrap gap-x-6 gap-y-2 mb-3">
-      <div role="group" aria-label="Chart period" className="flex gap-1">
-        {([["full", "2000–2021"], ["covid", "2017–2021 (pandemic)"]] as const).map(([w, label]) => (
-          <button key={w} type="button" onClick={() => {
-            setWin(w);
-            track("health_chart_window", { win: w });
-          }}
-            aria-pressed={win === w}
-            className={`text-[13px] px-3 py-1 border transition-colors ${
-              win === w ? "border-foreground text-foreground font-semibold" : "border-edge text-muted hover:text-foreground"
-            }`}>
-            {label}
-          </button>
-        ))}
-      </div>
       {showCovid && x1 <= 2021 && (
         <span className="text-muted text-[12px] self-center">
           booster and end-of-emergency markers fall after 2021
@@ -563,6 +554,48 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
               opacity={s.emphasis ? 1 : 0.7} />
           );
         })}
+        {/* Hover / pick columns, one per year.
+
+            These are fill="transparent", which RECEIVES pointer events, and they
+            cover the entire plot. Until 2026-08-28 they were rendered LAST — on
+            top of the per-series hit paths — so they silently swallowed every
+            click inside the plot area. The hit paths below were correct all
+            along and simply unreachable: the only clickable things left were the
+            legend and the right-edge labels, both outside the plot. Sean: "I
+            cannot click on those lines."
+
+            They are now the bottom layer, and they carry a click of their own:
+            at a crossing, the series nearest the pointer wins rather than
+            whichever hit path happened to come later in the DOM. That is the
+            case that prompted the report — a line crossing the US line that
+            could not be identified. */}
+        {Array.from({ length: x1 - x0 + 1 }, (_, i) => x0 + i).map((y) => (
+          <rect key={y} x={X(y) - (W - padL - padR) / (x1 - x0) / 2} y={padT}
+            width={(W - padL - padR) / (x1 - x0)} height={H - padT - padB}
+            fill="transparent" style={{ cursor: "pointer" }}
+            onMouseEnter={() => setHoverYear(y)}
+            onClick={(e) => {
+              const svg = e.currentTarget.ownerSVGElement;
+              const ctm = svg?.getScreenCTM();
+              if (!svg || !ctm) return;
+              const pt = svg.createSVGPoint();
+              pt.x = e.clientX;
+              pt.y = e.clientY;
+              const at = pt.matrixTransform(ctm.inverse());
+              let best: (typeof view)[number] | null = null;
+              let bestDist = Infinity;
+              for (const cand of view) {
+                const q = cand.points.find((r) => r.year === y);
+                if (!q) continue;
+                const d = Math.abs(Y(val(cand, q.value)) - at.y);
+                if (d < bestDist) { bestDist = d; best = cand; }
+              }
+              if (best) {
+                setOpen(best);
+                track("health_chart_series_opened", { country: best.country, via: "plot", year: y });
+              }
+            }} />
+        ))}
         {view.map((s) => (
           <path key={s.country}
             d={s.points.filter((p) => !s.extension || p.year <= s.extension.joins_at)
@@ -615,13 +648,7 @@ function MultiLineChart({ chart }: { chart: IntlChart }) {
             </text>
           </g>
         ))}
-        {/* Hover columns: one hit target per year, so every line reads at once. */}
-        {Array.from({ length: x1 - x0 + 1 }, (_, i) => x0 + i).map((y) => (
-          <rect key={y} x={X(y) - (W - padL - padR) / (x1 - x0) / 2} y={padT}
-            width={(W - padL - padR) / (x1 - x0)} height={H - padT - padB}
-            fill="transparent" onMouseEnter={() => setHoverYear(y)} />
-        ))}
-        {hoverYear !== null && (
+                {hoverYear !== null && (
           <text x={X(hoverYear)} y={padT - 2} fontSize={narrow ? 18 : 12} fontWeight="600"
             fill="rgb(var(--foreground))" textAnchor="middle" pointerEvents="none">
             {hoverYear}{narrow ? "" : indexed ? " — change since start" : " — deaths per 100,000"}
