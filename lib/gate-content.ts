@@ -14,7 +14,8 @@ export const GATE = {
     copyright: "© 2026 Sean C. Harris",
   },
   copyright: {
-    intro: "Please read the following before entering.",
+    intro:
+      "Please read the following before entering. It covers what the Journal is and is not, how you may share this work, and what this site measures.",
     cta: "I understand and agree",
   },
   perceptual: {
