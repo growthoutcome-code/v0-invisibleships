@@ -283,6 +283,10 @@ function SignIn({ onDone }: { onDone: (email: string) => void }) {
   const [err, setErr] = useState("");
   const [note, setNote] = useState("");
   const [busy, setBusy] = useState(false);
+  // Set once Supabase tells us Google is not switched on for this project. A
+  // button that errors every time it is pressed is worse than no button: it
+  // reads as the site being broken rather than as a provider being unconfigured.
+  const [googleOff, setGoogleOff] = useState(false);
   const creating = mode === "up";
 
   return (
@@ -296,40 +300,42 @@ function SignIn({ onDone }: { onDone: (email: string) => void }) {
           : "Welcome back."}
       </p>
 
-      <button type="button" disabled={busy}
-        onClick={async () => {
-          setBusy(true); setErr(""); setNote("");
-          try { await signInWithGoogle(); }
-          catch (e) {
-            const raw = e instanceof Error ? e.message : String(e);
-            setErr(
-              /provider is not enabled|Unsupported provider/i.test(raw)
-                ? "Google sign-in is not switched on for this project yet. Enable it in " +
-                  "Supabase under Authentication → Providers → Google, with a Google Cloud " +
-                  "OAuth client whose redirect URI is <project>.supabase.co/auth/v1/callback. " +
-                  "Email and password below works now."
-                : raw
-            );
-            setBusy(false);
-          }
-        }}
-        className="w-full h-11 px-4 border border-edge hover:border-foreground rounded-md
-                   inline-flex items-center justify-center gap-3 text-[15px] font-medium
-                   disabled:opacity-40 transition-colors">
-        <GoogleMark />
-        {creating ? "Sign up with Google" : "Continue with Google"}
-      </button>
-      {/* The one thing a conventional form would not tell you, on a site read by
-          people who assume they are watched. */}
-      <p className="text-[12.5px] text-muted mt-2 mb-5 leading-snug">
-        Google will know you visited this site. Email and password below will not.
-      </p>
+      {!googleOff && (
+        <>
+          <button type="button" disabled={busy}
+            onClick={async () => {
+              setBusy(true); setErr(""); setNote("");
+              try { await signInWithGoogle(); }
+              catch (e) {
+                const raw = e instanceof Error ? e.message : String(e);
+                if (/provider is not enabled|Unsupported provider/i.test(raw)) {
+                  setGoogleOff(true);
+                  setNote("Google sign-in is not switched on for this project yet. Use email and password below — it works now.");
+                } else {
+                  setErr(raw);
+                }
+                setBusy(false);
+              }
+            }}
+            className="w-full h-11 px-4 border border-edge hover:border-foreground rounded-md
+                       inline-flex items-center justify-center gap-3 text-[15px] font-medium
+                       disabled:opacity-40 transition-colors">
+            <GoogleMark />
+            {creating ? "Sign up with Google" : "Continue with Google"}
+          </button>
+          {/* The one thing a conventional form would not tell you, on a site read
+              by people who assume they are watched. */}
+          <p className="text-[12.5px] text-muted mt-2 mb-5 leading-snug">
+            Google will know you visited this site. Email and password below will not.
+          </p>
 
-      <div className="flex items-center gap-3 mb-5" aria-hidden>
-        <span className="h-px flex-1 bg-edge" />
-        <span className="text-[12px] text-muted uppercase tracking-wider">or</span>
-        <span className="h-px flex-1 bg-edge" />
-      </div>
+          <div className="flex items-center gap-3 mb-5" aria-hidden>
+            <span className="h-px flex-1 bg-edge" />
+            <span className="text-[12px] text-muted uppercase tracking-wider">or</span>
+            <span className="h-px flex-1 bg-edge" />
+          </div>
+        </>
+      )}
 
       <form
         onSubmit={async (ev) => {
