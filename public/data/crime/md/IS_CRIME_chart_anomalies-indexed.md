@@ -14,7 +14,7 @@ copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
 # Reports of the unexplained, indexed
 
-*Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Evidence tiers: **A** documented, **B** corroborated, **C** claimed — B and C may not be quoted as established fact. Causes are reported as attributed, never asserted. This dataset does not corroborate, and is not corroborated by, any other dataset in this corpus. See `meta/IS_META_disclaimer.md`.*
+*Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Evidence tiers: **A** documented, **B** corroborated, **C** claimed — B and C may not be quoted as established fact. Causes are reported as attributed, never asserted. This dataset does not corroborate, and is not corroborated by, any other dataset in this corpus. See `meta/IS_META_terms.md`.*
 
 **Unit.** Each lane indexed to its own first year = 100 — direction only, never size · **Publisher.** FBI NCIC; Adult Psychiatric Morbidity Survey; Chapman University; AARO / ODNI · **Evidence tier.** A
 

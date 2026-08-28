@@ -13,7 +13,7 @@ copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
 # ~30% increase in US suicide
 
-*Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Evidence tiers: **A** documented, **B** corroborated, **C** claimed — B and C may not be quoted as established fact. Causes are reported as attributed, never asserted. This dataset does not corroborate, and is not corroborated by, any other dataset in this corpus. See `meta/IS_META_disclaimer.md`.*
+*Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Evidence tiers: **A** documented, **B** corroborated, **C** claimed — B and C may not be quoted as established fact. Causes are reported as attributed, never asserted. This dataset does not corroborate, and is not corroborated by, any other dataset in this corpus. See `meta/IS_META_terms.md`.*
 
 The '~30% increase' is real but describes a two-decade climb, not a post-2021 surge. Post-2021: 14.1 (2021) -> 14.2 (2022, record 49,476 deaths, highest rate since 1941) -> 14.1 (2023, -0.7%, not significant) -> 13.7 final 2024 (48,824 deaths, -2.8%, genuine decline; suicide returned to 10th leading cause). Recent single-year moves all under 5%.
 

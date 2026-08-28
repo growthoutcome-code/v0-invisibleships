@@ -103,7 +103,7 @@ const STANDING =
   "`documented` entries can still rely on every one of those and discard the rest " +
   "without unpicking anything. `testimony` is a dated first-person report, " +
   "verified by nobody, and says so on its own face wherever it appears. Causes are " +
-  "reported as attributed, never asserted. See `meta/IS_META_disclaimer.md`.*";
+  "reported as attributed, never asserted. See `meta/IS_META_terms.md`.*";
 
 // ---------------------------------------------------------------- extract
 const src = readFileSync(SRC, "utf8");
@@ -465,7 +465,7 @@ const limitsBody = [
   "alongside any concept, without the concept's author choosing which parts",
   "come along.",
   "",
-  "See also `meta/IS_META_disclaimer.md` for the full legal notice, and",
+  "See also `meta/IS_META_terms.md` for the full legal notice, and",
   "`IS_CON_00_findings.md` for the claims these limits apply to.",
 ].join("\n");
 

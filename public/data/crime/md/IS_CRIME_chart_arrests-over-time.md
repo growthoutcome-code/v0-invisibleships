@@ -14,7 +14,7 @@ copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
 # US arrests: the machine peaked in 1997
 
-*Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Evidence tiers: **A** documented, **B** corroborated, **C** claimed — B and C may not be quoted as established fact. Causes are reported as attributed, never asserted. This dataset does not corroborate, and is not corroborated by, any other dataset in this corpus. See `meta/IS_META_disclaimer.md`.*
+*Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Evidence tiers: **A** documented, **B** corroborated, **C** claimed — B and C may not be quoted as established fact. Causes are reported as attributed, never asserted. This dataset does not corroborate, and is not corroborated by, any other dataset in this corpus. See `meta/IS_META_terms.md`.*
 
 **Unit.** Estimated arrests per year, millions (FBI; excludes traffic) · **Publisher.** FBI CIUS/CDE; Council on Criminal Justice corroborating · **Evidence tier.** A
 

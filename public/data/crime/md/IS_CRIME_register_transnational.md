@@ -12,7 +12,7 @@ copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
 # Transnational repression
 
-*Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Evidence tiers: **A** documented, **B** corroborated, **C** claimed — B and C may not be quoted as established fact. Causes are reported as attributed, never asserted. This dataset does not corroborate, and is not corroborated by, any other dataset in this corpus. See `meta/IS_META_disclaimer.md`.*
+*Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Evidence tiers: **A** documented, **B** corroborated, **C** claimed — B and C may not be quoted as established fact. Causes are reported as attributed, never asserted. This dataset does not corroborate, and is not corroborated by, any other dataset in this corpus. See `meta/IS_META_terms.md`.*
 
 [A] "When foreign governments reach beyond their borders to intimidate, silence, coerce, harass, or harm members of their diaspora and exile communities in the United States, that is transnational repression." — FBI Counterintelligence Division (quoted verbatim)
 

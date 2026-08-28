@@ -14,7 +14,7 @@ copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
 # Where a sweep goes: ICE detention against its funded ceiling
 
-*Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Evidence tiers: **A** documented, **B** corroborated, **C** claimed — B and C may not be quoted as established fact. Causes are reported as attributed, never asserted. This dataset does not corroborate, and is not corroborated by, any other dataset in this corpus. See `meta/IS_META_disclaimer.md`.*
+*Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Evidence tiers: **A** documented, **B** corroborated, **C** claimed — B and C may not be quoted as established fact. Causes are reported as attributed, never asserted. This dataset does not corroborate, and is not corroborated by, any other dataset in this corpus. See `meta/IS_META_terms.md`.*
 
 **Unit.** People held in ICE detention · **Publisher.** ICE; Senate Appropriations; TRAC Syracuse; Austin Kocher · **Evidence tier.** A
 

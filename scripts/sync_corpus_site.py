@@ -45,7 +45,19 @@ DOC = ROOT / "public/data/site/documents"
 RESEARCH = ROOT / "research"
 DOCS_DIR = ROOT / "docs"
 ZIP = ROOT / "public/invisible-ships-corpus.zip"
-PREFIXES = ("concepts/", "glossary-site/", "documents/", "research/")
+# Everything this script owns. A prefix here is DROPPED from the carried-forward
+# zip before being rewritten, so a rename or a deletion upstream cannot leave an
+# orphan behind. meta/IS_META_terms.md is an exact filename rather than a
+# prefix: the rest of meta/ is source-document extracts owned by nobody, and
+# claiming the whole folder would delete them.
+#
+# 28 Aug: the terms file was added to build() without being added here, so the
+# previous copy was carried forward AND a new one written — zipfile allows
+# duplicate names and only warns. Two copies of the terms in one archive, the
+# stale one first. Found by a duplicate-name warning, not by a guard; the
+# site-vs-download check matches by name and was satisfied by either copy.
+PREFIXES = ("concepts/", "glossary-site/", "documents/", "research/",
+            "meta/IS_META_terms.md")
 PREFIX = "concepts/"
 
 
@@ -121,6 +133,20 @@ def build(dst: zipfile.ZipFile) -> int:
                      "source-document id. Terms drawn from the primary record are in\n"
                      "`glossary/` and do carry one. Both sets appear on the site together.\n")
 
+    # The canonical terms, generated from lib/terms.ts by
+    # scripts/export_terms_md.mjs. Packed under meta/ beside the two historical
+    # extracts it supersedes, which are left untouched: they carry source_doc_id
+    # and record what the terms said in August. Until 28 August the corpus had
+    # ONLY those two, and 75 files pointed readers at them, so a reader who
+    # downloaded the archive got terms the site had already replaced.
+    terms_src = ROOT / "public/data/site/terms/IS_META_terms.md"
+    if not terms_src.exists():
+        raise SystemExit(
+            "no canonical terms at " + str(terms_src) +
+            " — run: node scripts/export_terms_md.mjs"
+        )
+    dst.writestr("meta/IS_META_terms.md", terms_src.read_text())
+
     # the source-document register
     n_doc = 0
     for f in sorted(DOC.glob("*.md")):
@@ -160,7 +186,7 @@ def build(dst: zipfile.ZipFile) -> int:
                      "whole input is here so the findings can be rebuilt and checked rather\n"
                      "than taken on trust.\n\n"
                      "These are working files. They carry the same terms as everything else\n"
-                     "in this corpus — see `meta/IS_META_disclaimer.md`. Evidence tiers apply:\n"
+                     "in this corpus — see `meta/IS_META_terms.md`. Evidence tiers apply:\n"
                      "a row present here is not, by itself, a verified fact.\n")
 
     return len(files), n_glo, n_doc, n_res

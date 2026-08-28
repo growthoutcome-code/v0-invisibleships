@@ -14,7 +14,7 @@ copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
 # Who is held: the US penal system, 1999–2024
 
-*Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Evidence tiers: **A** documented, **B** corroborated, **C** claimed — B and C may not be quoted as established fact. Causes are reported as attributed, never asserted. This dataset does not corroborate, and is not corroborated by, any other dataset in this corpus. See `meta/IS_META_disclaimer.md`.*
+*Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Evidence tiers: **A** documented, **B** corroborated, **C** claimed — B and C may not be quoted as established fact. Causes are reported as attributed, never asserted. This dataset does not corroborate, and is not corroborated by, any other dataset in this corpus. See `meta/IS_META_terms.md`.*
 
 **Unit.** People in prison, in jail, and under correctional control · **Publisher.** Bureau of Justice Statistics (National Prisoner Statistics; Annual Survey of Jails; Correctional Populations) · **Evidence tier.** A
 

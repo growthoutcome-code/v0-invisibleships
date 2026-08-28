@@ -11,7 +11,7 @@ copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
 # What this research does not establish
 
-*Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Every concept states its BASIS, its ORIGIN, its THEME and the readers it was written for. The basis tiers are ranked, and never blended inside a single concept: a reader who accepts only `documented` entries can still rely on every one of those and discard the rest without unpicking anything. `testimony` is a dated first-person report, verified by nobody, and says so on its own face wherever it appears. Causes are reported as attributed, never asserted. See `meta/IS_META_disclaimer.md`.*
+*Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Every concept states its BASIS, its ORIGIN, its THEME and the readers it was written for. The basis tiers are ranked, and never blended inside a single concept: a reader who accepts only `documented` entries can still rely on every one of those and discard the rest without unpicking anything. `testimony` is a dated first-person report, verified by nobody, and says so on its own face wherever it appears. Causes are reported as attributed, never asserted. See `meta/IS_META_terms.md`.*
 
 These four limits stand over every concept, every chart and every table in
 this archive. They are not a disclaimer bolted on at the end; they are the
@@ -34,5 +34,5 @@ the download, and so they can be handed to an assistant on their own,
 alongside any concept, without the concept's author choosing which parts
 come along.
 
-See also `meta/IS_META_disclaimer.md` for the full legal notice, and
+See also `meta/IS_META_terms.md` for the full legal notice, and
 `IS_CON_00_findings.md` for the claims these limits apply to.

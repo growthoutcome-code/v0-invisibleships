@@ -13,7 +13,7 @@ copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
 # Law enforcement accomplishments
 
-*Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Evidence tiers: **A** documented, **B** corroborated, **C** claimed — B and C may not be quoted as established fact. Causes are reported as attributed, never asserted. This dataset does not corroborate, and is not corroborated by, any other dataset in this corpus. See `meta/IS_META_disclaimer.md`.*
+*Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Evidence tiers: **A** documented, **B** corroborated, **C** claimed — B and C may not be quoted as established fact. Causes are reported as attributed, never asserted. This dataset does not corroborate, and is not corroborated by, any other dataset in this corpus. See `meta/IS_META_terms.md`.*
 
 The record contains real, sourced wins, and this section reports them straight. Each entry is an agency's own account of its work, with the independent corroboration shown where one exists — and each entry says whether the number counts an outcome (lives, rescues, cases closed) or activity (arrests, seizures).
 

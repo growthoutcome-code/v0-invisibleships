@@ -14,7 +14,7 @@ copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
 # Homicide: the US against the world
 
-*Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Evidence tiers: **A** documented, **B** corroborated, **C** claimed — B and C may not be quoted as established fact. Causes are reported as attributed, never asserted. This dataset does not corroborate, and is not corroborated by, any other dataset in this corpus. See `meta/IS_META_disclaimer.md`.*
+*Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Evidence tiers: **A** documented, **B** corroborated, **C** claimed — B and C may not be quoted as established fact. Causes are reported as attributed, never asserted. This dataset does not corroborate, and is not corroborated by, any other dataset in this corpus. See `meta/IS_META_terms.md`.*
 
 **Unit.** Intentional homicides per 100,000 people (UNODC basis) · **Publisher.** World Bank (mirror of UNODC International Homicide Statistics) · **Evidence tier.** A
 

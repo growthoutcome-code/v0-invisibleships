@@ -271,7 +271,10 @@ content is established.
 © 2026 Sean C. Harris. All Rights Reserved. Distribute the complete original;
 do not republish parts. Independent research from public records, for
 informational purposes only — not legal, medical, or investment advice. Full
-terms in `meta/IS_META_copyright.md` and `meta/IS_META_disclaimer.md`.
+terms in `meta/IS_META_terms.md` — the canonical version, generated from the
+same source the website renders. `meta/IS_META_copyright.md` and
+`meta/IS_META_disclaimer.md` are verbatim extracts of the original source
+document, kept as historical record; where they differ, the terms file governs.
 """
 
 

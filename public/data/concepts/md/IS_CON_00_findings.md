@@ -11,7 +11,7 @@ copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
 # What this research found
 
-*Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Every concept states its BASIS, its ORIGIN, its THEME and the readers it was written for. The basis tiers are ranked, and never blended inside a single concept: a reader who accepts only `documented` entries can still rely on every one of those and discard the rest without unpicking anything. `testimony` is a dated first-person report, verified by nobody, and says so on its own face wherever it appears. Causes are reported as attributed, never asserted. See `meta/IS_META_disclaimer.md`.*
+*Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Every concept states its BASIS, its ORIGIN, its THEME and the readers it was written for. The basis tiers are ranked, and never blended inside a single concept: a reader who accepts only `documented` entries can still rely on every one of those and discard the rest without unpicking anything. `testimony` is a dated first-person report, verified by nobody, and says so on its own face wherever it appears. Causes are reported as attributed, never asserted. See `meta/IS_META_terms.md`.*
 
 Five bodies of work on one page: a procurement record, a public-health record, a crime record, a master timeline, and the concepts drawn from all of them. Every figure resolves to a named source, every claim states what it rests on, and every one of them says what it does not answer.
 

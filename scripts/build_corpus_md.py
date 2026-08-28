@@ -89,7 +89,7 @@ STANDING = (
     "**B** corroborated, **C** claimed — B and C may not be quoted as established fact. "
     "Causes are reported as attributed, never asserted. This dataset does not "
     "corroborate, and is not corroborated by, any other dataset in this corpus. "
-    "See `meta/IS_META_disclaimer.md`.*"
+    "See `meta/IS_META_terms.md`.*"
 )
 
 
