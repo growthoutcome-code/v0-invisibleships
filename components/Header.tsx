@@ -2,8 +2,9 @@
 // Slim, full-width main navigation (~100px tall, shrinks on tablet/mobile).
 // The logo is a link home — NOT the page <h1>. The page title lives in the
 // TitleBand below the nav.
-import { useState } from "react";
-import { Menu, X, Download } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Menu, X, Download, Mic } from "lucide-react";
+import { currentUser } from "@/lib/capture";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ThemeToggle";
 
@@ -32,6 +33,20 @@ export default function Header({
   onHome: () => void;
 }) {
   const [open, setOpen] = useState(false);
+
+  // Capture is a signed-in tool on its own route, not a tab in this shell, so
+  // it is a link rather than a nav button. The label changes because the two
+  // states want different things from the reader: someone signed out is being
+  // offered a door, someone signed in is being offered the record button.
+  const [signedIn, setSignedIn] = useState<boolean | null>(null);
+  useEffect(() => { currentUser().then((u) => setSignedIn(!!u)).catch(() => setSignedIn(false)); }, []);
+  const captureLink = (extra = "") => (
+    <a href="/capture"
+       className={`px-2.5 py-1.5 text-[13px] uppercase tracking-wide text-muted hover:text-foreground inline-flex items-center gap-1.5 ${extra}`}>
+      <Mic size={15} /> {signedIn ? "Capture" : "Sign in"}
+    </a>
+  );
+
   const btn = (t: Tab, label: string, extra = "") => (
     <button
       key={t}
@@ -56,6 +71,7 @@ export default function Header({
           <div className="hidden lg:flex items-center gap-1.5">
             <ThemeToggle />
             <Button variant="ghost" size="sm" onClick={onExport} className="uppercase tracking-wide text-[13px]"><Download size={15} /> Export</Button>
+            {captureLink()}
           </div>
           <div className="lg:hidden flex items-center gap-1">
             <ThemeToggle />
@@ -69,6 +85,7 @@ export default function Header({
         <div className="lg:hidden px-4 py-3 flex flex-col gap-1">
           {NAV.map((n) => btn(n.t, n.label, "text-left"))}
           <button onClick={() => { onExport(); setOpen(false); }} className="text-left px-2.5 py-1.5 text-[13px] uppercase tracking-wide text-muted hover:text-foreground inline-flex items-center gap-1.5"><Download size={15} /> Export</button>
+          {captureLink("justify-start")}
         </div>
       )}
     </header>

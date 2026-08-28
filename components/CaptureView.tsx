@@ -23,7 +23,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   type CaptureEntry, audioUrl, currentUser, deleteEntry, listEntries, queue,
-  saveEdits, signIn, signOut, signUp, syncAll, transcriptOf,
+  requestPasswordReset, saveEdits, signIn, signOut, signUpDetailed, syncAll, transcriptOf,
 } from "@/lib/capture";
 import { getSupabase } from "@/lib/supabase";
 import { track } from "@/lib/analytics";
@@ -261,11 +261,23 @@ function SignIn({ onDone }: { onDone: (email: string) => void }) {
         ev.preventDefault();
         setBusy(true); setErr("");
         try {
-          if (mode === "in") await signIn(email, password);
-          else await signUp(email, password);
+          if (mode === "in") {
+            await signIn(email, password);
+          } else if ((await signUpDetailed(email, password)) === "confirm-email") {
+            // Supabase issued no session, so the project requires confirmation.
+            // Say what to do rather than leaving a form that rejects the account
+            // that was just created.
+            setErr(
+              "Account created. Check your email for a confirmation link, then sign in. " +
+              "If it does not arrive, turn off Authentication → Providers → Email → " +
+              "Confirm email in the Supabase dashboard."
+            );
+            setBusy(false);
+            return;
+          }
           const u = await currentUser();
           if (u?.email) onDone(u.email);
-          else setErr("Check your email to confirm the account, then sign in.");
+          else setErr("Signed up, but no session was returned. Try signing in.");
         } catch (e) {
           setErr(e instanceof Error ? e.message : String(e));
         } finally { setBusy(false); }
@@ -287,6 +299,17 @@ function SignIn({ onDone }: { onDone: (email: string) => void }) {
         className="ml-4 text-[14px] underline underline-offset-4 text-muted hover:text-foreground">
         {mode === "in" ? "Create an account" : "I already have an account"}
       </button>
+      <p className="mt-4">
+        <button type="button"
+          onClick={async () => {
+            if (!email) { setErr("Enter your email address first."); return; }
+            try { await requestPasswordReset(email); setErr("If that address has an account, a reset link is on its way."); }
+            catch (e) { setErr(e instanceof Error ? e.message : String(e)); }
+          }}
+          className="text-[14px] underline underline-offset-4 text-muted hover:text-foreground">
+          Forgot your password?
+        </button>
+      </p>
       {err && <p className="mt-3 text-[14px] text-foreground/85">{err}</p>}
     </form>
   );

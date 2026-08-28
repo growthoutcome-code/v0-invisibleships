@@ -124,6 +124,43 @@ export async function signUp(email: string, password: string) {
   if (error) throw error;
 }
 
+/**
+ * Sign up, and say which of the two things happened.
+ *
+ * Supabase returns a user with NO session when the project requires email
+ * confirmation. Treating that as success leaves someone staring at a sign-in
+ * form that rejects the account they just made, with nothing explaining why.
+ */
+export async function signUpDetailed(email: string, password: string): Promise<"signed-in" | "confirm-email"> {
+  const sb = getSupabase();
+  if (!sb) throw new Error("Sign-up is unavailable: this deployment has no Supabase configuration.");
+  const { data, error } = await sb.auth.signUp({ email, password });
+  if (error) throw error;
+  return data.session ? "signed-in" : "confirm-email";
+}
+
+/**
+ * Password reset. Not a nicety: this is a tool someone reaches for while
+ * something is happening to them, and being locked out at that moment is the
+ * worst failure it can have.
+ */
+export async function requestPasswordReset(email: string) {
+  const sb = getSupabase();
+  if (!sb) throw new Error("This deployment has no Supabase configuration.");
+  const { error } = await sb.auth.resetPasswordForEmail(email, {
+    redirectTo: typeof window !== "undefined" ? `${window.location.origin}/capture` : undefined,
+  });
+  if (error) throw error;
+}
+
+/** Set a new password once a reset link has established a session. */
+export async function setPassword(password: string) {
+  const sb = getSupabase();
+  if (!sb) throw new Error("This deployment has no Supabase configuration.");
+  const { error } = await sb.auth.updateUser({ password });
+  if (error) throw error;
+}
+
 export async function signOut() {
   await getSupabase()?.auth.signOut();
 }
