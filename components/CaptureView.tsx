@@ -1,0 +1,350 @@
+"use client";
+/**
+ * Capture — record what is being said, as it is being said.
+ *
+ * The whole design serves one sequence: harassment starts, you hit one button,
+ * you speak what you can hear, you hit it again. Everything else — sign-in,
+ * transcription, upload, metadata — happens around that without ever standing
+ * in front of it.
+ *
+ * Consequences of that, which are deliberate:
+ *
+ *   * The record button is the largest thing on the page and is reachable in
+ *     one tap from a signed-in session. No dialog, no "new entry" step.
+ *   * Recording never waits on the network. Audio is written to IndexedDB the
+ *     moment it stops; upload and transcription happen afterwards and can fail
+ *     without losing anything.
+ *   * Transcription is on-device (public/whisper-worker.js). The audio does not
+ *     leave the machine to be read.
+ *   * Nothing here publishes. There is no publish button, deliberately: this
+ *     stream is private, and the path into the public journal is a separate,
+ *     explicit act that does not exist yet.
+ */
+import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  type CaptureEntry, audioUrl, currentUser, deleteEntry, listEntries, queue,
+  saveEdits, signIn, signOut, signUp, syncAll, transcriptOf,
+} from "@/lib/capture";
+import { getSupabase } from "@/lib/supabase";
+import { track } from "@/lib/analytics";
+
+type Phase = "idle" | "recording" | "working";
+
+/** Decode any recorded blob to the mono 16kHz float samples Whisper expects. */
+async function toWhisperAudio(blob: Blob): Promise<Float32Array> {
+  const buf = await blob.arrayBuffer();
+  const ctx = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
+  const decoded = await ctx.decodeAudioData(buf);
+  const offline = new OfflineAudioContext(1, Math.ceil(decoded.duration * 16000), 16000);
+  const src = offline.createBufferSource();
+  src.buffer = decoded;
+  src.connect(offline.destination);
+  src.start();
+  const out = await offline.startRendering();
+  void ctx.close();
+  return out.getChannelData(0);
+}
+
+function clock(s: number) {
+  return `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+}
+
+export default function CaptureView() {
+  const configured = !!getSupabase();
+  const [email, setEmail] = useState<string | null>(null);
+  const [checking, setChecking] = useState(true);
+  const [phase, setPhase] = useState<Phase>("idle");
+  const [elapsed, setElapsed] = useState(0);
+  const [entries, setEntries] = useState<CaptureEntry[]>([]);
+  const [status, setStatus] = useState("");
+  const [modelPct, setModelPct] = useState<number | null>(null);
+  const [pending, setPending] = useState(0);
+
+  const worker = useRef<Worker | null>(null);
+  const recorder = useRef<MediaRecorder | null>(null);
+  const chunks = useRef<Blob[]>([]);
+  const startedAt = useRef<number>(0);
+  const timer = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const refresh = useCallback(async () => {
+    try {
+      setEntries(await listEntries());
+      setPending((await queue.all()).length);
+    } catch { /* offline: the local queue is still intact */ }
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      const u = await currentUser();
+      setEmail(u?.email ?? null);
+      setChecking(false);
+      if (u) { await syncAll(); await refresh(); }
+    })();
+  }, [refresh]);
+
+  // The worker is started as soon as somebody is signed in, not when they press
+  // record. The model download is ~40MB and must never sit between a person and
+  // a recording that is happening right now.
+  useEffect(() => {
+    if (!email || worker.current) return;
+    const w = new Worker("/whisper-worker.js", { type: "module" });
+    w.onmessage = async (e) => {
+      const m = e.data || {};
+      if (m.type === "progress" && m.total) setModelPct(Math.round((m.loaded / m.total) * 100));
+      if (m.type === "ready") { setModelPct(null); setStatus(""); }
+      if (m.type === "result") {
+        const all = await queue.all();
+        const rec = all.find((r) => r.id === m.id);
+        if (rec) await queue.put({ ...rec, transcript: m.text });
+        setStatus("Saving…");
+        await syncAll();
+        await refresh();
+        setStatus("");
+        setPhase("idle");
+      }
+      if (m.type === "error") {
+        // The audio is already in IndexedDB. Say so plainly — a transcription
+        // failure must never read as a lost recording.
+        setStatus(`Transcription failed (${m.message}). The recording is saved and will upload without a transcript.`);
+        await syncAll();
+        await refresh();
+        setPhase("idle");
+      }
+    };
+    worker.current = w;
+    w.postMessage({ type: "load" });
+    setStatus("Preparing the transcriber (one time)…");
+    return () => { w.terminate(); worker.current = null; };
+  }, [email, refresh]);
+
+  async function start() {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mime = MediaRecorder.isTypeSupported("audio/webm") ? "audio/webm" : "audio/mp4";
+      const rec = new MediaRecorder(stream, { mimeType: mime });
+      chunks.current = [];
+      rec.ondataavailable = (e) => { if (e.data.size) chunks.current.push(e.data); };
+      rec.onstop = async () => {
+        stream.getTracks().forEach((t) => t.stop());
+        const blob = new Blob(chunks.current, { type: mime });
+        const durationS = (Date.now() - startedAt.current) / 1000;
+        const id = crypto.randomUUID();
+        // occurred_at is the moment recording STARTED. Not now, not upload time.
+        const occurredAt = new Date(startedAt.current).toISOString();
+        await queue.put({ id, occurredAt, blob, durationS, mime });
+        setPending((await queue.all()).length);
+        setPhase("working");
+        setStatus("Transcribing on this device…");
+        try {
+          const audio = await toWhisperAudio(blob);
+          worker.current?.postMessage({ type: "transcribe", id, audio }, [audio.buffer]);
+        } catch (err) {
+          setStatus(`Could not read the audio (${String(err)}). The recording is saved.`);
+          await syncAll(); await refresh(); setPhase("idle");
+        }
+      };
+      startedAt.current = Date.now();
+      rec.start();
+      recorder.current = rec;
+      setPhase("recording");
+      setElapsed(0);
+      timer.current = setInterval(() => setElapsed((s) => s + 1), 1000);
+      track("capture_started");
+    } catch {
+      setStatus("Microphone access was refused. Allow it in your browser's site settings and try again.");
+    }
+  }
+
+  function stop() {
+    if (timer.current) { clearInterval(timer.current); timer.current = null; }
+    recorder.current?.stop();
+    recorder.current = null;
+  }
+
+  if (!configured) {
+    return (
+      <Shell>
+        <p className="body-copy text-foreground/85">
+          Capture is unavailable on this deployment: no database is configured. Set{" "}
+          <code>NEXT_PUBLIC_SUPABASE_URL</code> and <code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code>{" "}
+          for the Production environment and redeploy.
+        </p>
+      </Shell>
+    );
+  }
+  if (checking) return <Shell><p className="text-muted">…</p></Shell>;
+  if (!email) return <Shell><SignIn onDone={async (e) => { setEmail(e); await refresh(); }} /></Shell>;
+
+  return (
+    <Shell>
+      <div className="flex items-baseline justify-between gap-4 mb-6">
+        <p className="text-[15px] text-muted m-0">Signed in as {email}</p>
+        <button type="button" onClick={async () => { await signOut(); setEmail(null); }}
+          className="text-[14px] underline underline-offset-4 text-muted hover:text-foreground">
+          Sign out
+        </button>
+      </div>
+
+      {/* One button. Everything else is arranged around not being in its way. */}
+      <div className="flex flex-col items-center py-8 border border-edge rounded-lg mb-6">
+        <button
+          type="button"
+          onClick={phase === "recording" ? stop : start}
+          disabled={phase === "working"}
+          aria-label={phase === "recording" ? "Stop recording" : "Start recording"}
+          className={`w-32 h-32 rounded-full grid place-items-center transition-colors disabled:opacity-40 ${
+            phase === "recording"
+              ? "bg-foreground text-background animate-pulse"
+              : "border-2 border-foreground text-foreground hover:bg-foreground hover:text-background"
+          }`}>
+          <span className="text-[15px] font-semibold tracking-wide">
+            {phase === "recording" ? "STOP" : phase === "working" ? "…" : "RECORD"}
+          </span>
+        </button>
+        <p className="mt-4 text-[28px] font-display tabular-nums">
+          {phase === "recording" ? clock(elapsed) : "0:00"}
+        </p>
+        <p className="mt-1 text-[14px] text-muted text-center max-w-sm">
+          {phase === "recording"
+            ? "Say what you are hearing. Stop when it stops."
+            : "Press record and repeat what is being said. It is timestamped from the moment you press it."}
+        </p>
+        {modelPct !== null && (
+          <p className="mt-3 text-[13px] text-muted">Downloading the transcriber — {modelPct}%. One time only.</p>
+        )}
+        {status && <p className="mt-3 text-[14px] text-foreground/85 text-center max-w-md">{status}</p>}
+        {pending > 0 && (
+          <button type="button" onClick={async () => { setStatus("Uploading…"); await syncAll(); await refresh(); setStatus(""); }}
+            className="mt-3 text-[13px] underline underline-offset-4">
+            {pending} recording{pending === 1 ? "" : "s"} waiting to upload — retry now
+          </button>
+        )}
+      </div>
+
+      <p className="text-[13px] text-muted mb-6">
+        Transcription runs on this device. The audio is not sent to any transcription
+        service. Recordings are private to this account and nothing here is published.
+      </p>
+
+      <h3 className="font-display text-xl font-semibold mb-3">Entries</h3>
+      {entries.length === 0 && <p className="text-muted text-[15px]">Nothing recorded yet.</p>}
+      <ul className="list-none p-0 m-0 space-y-4">
+        {entries.map((e) => <EntryRow key={e.id} entry={e} onChanged={refresh} />)}
+      </ul>
+    </Shell>
+  );
+}
+
+function Shell({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="w-full lg:w-[65%] lg:mx-auto">
+      <h2 className="font-display text-3xl font-semibold text-foreground mb-2">Capture</h2>
+      <p className="body-copy text-foreground/85 mb-6">
+        A private, dated record. Press record while something is happening and say what
+        you are hearing — a contemporaneous account, not a recollection written afterwards.
+      </p>
+      {children}
+    </div>
+  );
+}
+
+function SignIn({ onDone }: { onDone: (email: string) => void }) {
+  const [mode, setMode] = useState<"in" | "up">("in");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [err, setErr] = useState("");
+  const [busy, setBusy] = useState(false);
+  return (
+    <form
+      className="max-w-sm"
+      onSubmit={async (ev) => {
+        ev.preventDefault();
+        setBusy(true); setErr("");
+        try {
+          if (mode === "in") await signIn(email, password);
+          else await signUp(email, password);
+          const u = await currentUser();
+          if (u?.email) onDone(u.email);
+          else setErr("Check your email to confirm the account, then sign in.");
+        } catch (e) {
+          setErr(e instanceof Error ? e.message : String(e));
+        } finally { setBusy(false); }
+      }}>
+      <label className="block text-[14px] mb-1" htmlFor="cap-email">Email</label>
+      <input id="cap-email" type="email" required autoComplete="email" value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className="w-full border border-edge bg-transparent px-3 py-2 mb-3" />
+      <label className="block text-[14px] mb-1" htmlFor="cap-pw">Password</label>
+      <input id="cap-pw" type="password" required minLength={8}
+        autoComplete={mode === "in" ? "current-password" : "new-password"} value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        className="w-full border border-edge bg-transparent px-3 py-2 mb-4" />
+      <button type="submit" disabled={busy}
+        className="px-4 py-2 border border-foreground text-foreground hover:bg-foreground hover:text-background disabled:opacity-40">
+        {busy ? "…" : mode === "in" ? "Sign in" : "Create account"}
+      </button>
+      <button type="button" onClick={() => { setMode(mode === "in" ? "up" : "in"); setErr(""); }}
+        className="ml-4 text-[14px] underline underline-offset-4 text-muted hover:text-foreground">
+        {mode === "in" ? "Create an account" : "I already have an account"}
+      </button>
+      {err && <p className="mt-3 text-[14px] text-foreground/85">{err}</p>}
+    </form>
+  );
+}
+
+function EntryRow({ entry, onChanged }: { entry: CaptureEntry; onChanged: () => void }) {
+  const [open, setOpen] = useState(false);
+  const [text, setText] = useState(transcriptOf(entry));
+  const [url, setUrl] = useState<string | null>(null);
+  const [saved, setSaved] = useState(false);
+  const when = new Date(entry.occurred_at);
+
+  useEffect(() => {
+    if (open && entry.audio_path && !url) audioUrl(entry.audio_path).then(setUrl);
+  }, [open, entry.audio_path, url]);
+
+  return (
+    <li className="border border-edge rounded-lg p-4">
+      <button type="button" onClick={() => setOpen(!open)} className="w-full text-left">
+        <span className="block text-[13px] text-muted">
+          {when.toLocaleString(undefined, { dateStyle: "full", timeStyle: "short" })}
+          {entry.audio_duration_s ? ` · ${clock(entry.audio_duration_s)}` : ""}
+          {entry.status !== "transcribed" ? ` · ${entry.status}` : ""}
+        </span>
+        <span className="block body-copy text-foreground/90 mt-1">
+          {transcriptOf(entry) || <em className="text-muted">No transcript — the audio is saved.</em>}
+        </span>
+      </button>
+
+      {open && (
+        <div className="mt-4 border-t border-edge pt-4">
+          {url && <audio controls src={url} className="w-full mb-3" />}
+          <label className="block text-[13px] uppercase tracking-[0.08em] font-semibold mb-2">
+            Transcript
+          </label>
+          <textarea value={text} onChange={(e) => { setText(e.target.value); setSaved(false); }} rows={6}
+            className="w-full border border-edge bg-transparent p-3 text-[15px]" />
+          <p className="text-[13px] text-muted mt-1">
+            Corrections are stored separately; the original transcription is kept unchanged.
+          </p>
+          <div className="mt-3 flex items-center gap-4">
+            <button type="button"
+              onClick={async () => { await saveEdits(entry.id, { transcript_edited: text, needs_review: false }); setSaved(true); onChanged(); }}
+              className="px-3 py-1.5 border border-foreground hover:bg-foreground hover:text-background text-[14px]">
+              Save
+            </button>
+            {saved && <span className="text-[14px] text-muted">Saved.</span>}
+            <button type="button"
+              onClick={async () => {
+                if (!confirm("Delete this entry and its audio? This cannot be undone.")) return;
+                await deleteEntry(entry); onChanged();
+              }}
+              className="ml-auto text-[14px] underline underline-offset-4 text-muted hover:text-foreground">
+              Delete
+            </button>
+          </div>
+        </div>
+      )}
+    </li>
+  );
+}
