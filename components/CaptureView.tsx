@@ -249,89 +249,171 @@ function Shell({ children }: { children: React.ReactNode }) {
   );
 }
 
+/**
+ * The account screen.
+ *
+ * Conventional on purpose. Someone arriving here is being asked to trust a site
+ * about surveillance with an account; an unfamiliar-looking sign-up form is a
+ * reason to hesitate, and hesitation is the thing this page can least afford.
+ * So: a centred card, the provider button first with its real mark, a labelled
+ * divider, real form labels, a visible password toggle, one primary action.
+ *
+ * SIGN UP IS THE DEFAULT MODE. Almost everyone who reaches this page does not
+ * have an account — there is one user today. Defaulting to sign-in shows the
+ * majority a form that will reject them.
+ */
+function GoogleMark() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden focusable="false">
+      <path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.92c1.7-1.57 2.68-3.88 2.68-6.62z" />
+      <path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.92-2.26c-.8.54-1.84.86-3.04.86-2.34 0-4.32-1.58-5.03-3.7H.96v2.33A9 9 0 0 0 9 18z" />
+      <path fill="#FBBC05" d="M3.97 10.72a5.4 5.4 0 0 1 0-3.44V4.95H.96a9 9 0 0 0 0 8.1l3.01-2.33z" />
+      <path fill="#EA4335" d="M9 3.58c1.32 0 2.5.45 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0A9 9 0 0 0 .96 4.95l3.01 2.33C4.68 5.16 6.66 3.58 9 3.58z" />
+    </svg>
+  );
+}
+
 function SignIn({ onDone }: { onDone: (email: string) => void }) {
-  const [mode, setMode] = useState<"in" | "up">("in");
+  // Sign up first: there is one account today, so nearly everyone arriving here
+  // needs to create one.
+  const [mode, setMode] = useState<"up" | "in">("up");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPw, setShowPw] = useState(false);
   const [err, setErr] = useState("");
+  const [note, setNote] = useState("");
   const [busy, setBusy] = useState(false);
+  const creating = mode === "up";
+
   return (
-    <form
-      className="max-w-sm"
-      onSubmit={async (ev) => {
-        ev.preventDefault();
-        setBusy(true); setErr("");
-        try {
-          if (mode === "in") {
-            await signIn(email, password);
-          } else if ((await signUpDetailed(email, password)) === "confirm-email") {
-            // Supabase issued no session, so the project requires confirmation.
-            // Say what to do rather than leaving a form that rejects the account
-            // that was just created.
-            setErr(
-              "Account created. Check your email for a confirmation link, then sign in. " +
-              "If it does not arrive, turn off Authentication → Providers → Email → " +
-              "Confirm email in the Supabase dashboard."
-            );
-            setBusy(false);
-            return;
-          }
-          const u = await currentUser();
-          if (u?.email) onDone(u.email);
-          else setErr("Signed up, but no session was returned. Try signing in.");
-        } catch (e) {
-          setErr(e instanceof Error ? e.message : String(e));
-        } finally { setBusy(false); }
-      }}>
-      {/* Google first for speed, email first in emphasis. Someone who does not
-          want Google to know they were here must not have to hunt for the
-          alternative. */}
+    <div className="mx-auto w-full max-w-[400px] border border-edge rounded-lg p-7">
+      <h3 className="font-display text-2xl font-semibold text-foreground m-0">
+        {creating ? "Create an account" : "Sign in"}
+      </h3>
+      <p className="text-[15px] text-foreground/75 mt-2 mb-6">
+        {creating
+          ? "An account gives you a private, dated record that only you can read. Nothing you record is published."
+          : "Welcome back."}
+      </p>
+
       <button type="button" disabled={busy}
         onClick={async () => {
-          setBusy(true); setErr("");
+          setBusy(true); setErr(""); setNote("");
           try { await signInWithGoogle(); }
-          catch (e) { setErr(e instanceof Error ? e.message : String(e)); setBusy(false); }
+          catch (e) {
+            const raw = e instanceof Error ? e.message : String(e);
+            setErr(
+              /provider is not enabled|Unsupported provider/i.test(raw)
+                ? "Google sign-in is not switched on for this project yet. Enable it in " +
+                  "Supabase under Authentication → Providers → Google, with a Google Cloud " +
+                  "OAuth client whose redirect URI is <project>.supabase.co/auth/v1/callback. " +
+                  "Email and password below works now."
+                : raw
+            );
+            setBusy(false);
+          }
         }}
-        className="w-full px-4 py-2 border border-edge hover:border-foreground text-[15px] mb-3">
-        Continue with Google
+        className="w-full h-11 px-4 border border-edge hover:border-foreground rounded-md
+                   inline-flex items-center justify-center gap-3 text-[15px] font-medium
+                   disabled:opacity-40 transition-colors">
+        <GoogleMark />
+        {creating ? "Sign up with Google" : "Continue with Google"}
       </button>
-      <p className="text-[13px] text-muted mb-4">
-        Signing in with Google tells Google you visited this site. Email and password
-        below does not.
+      {/* The one thing a conventional form would not tell you, on a site read by
+          people who assume they are watched. */}
+      <p className="text-[12.5px] text-muted mt-2 mb-5 leading-snug">
+        Google will know you visited this site. Email and password below will not.
       </p>
-      <div className="flex items-center gap-3 mb-4" aria-hidden>
-        <span className="h-px flex-1 bg-edge" /><span className="text-[12px] text-muted uppercase tracking-wide">or</span><span className="h-px flex-1 bg-edge" />
+
+      <div className="flex items-center gap-3 mb-5" aria-hidden>
+        <span className="h-px flex-1 bg-edge" />
+        <span className="text-[12px] text-muted uppercase tracking-wider">or</span>
+        <span className="h-px flex-1 bg-edge" />
       </div>
-      <label className="block text-[14px] mb-1" htmlFor="cap-email">Email</label>
-      <input id="cap-email" type="email" required autoComplete="email" value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className="w-full border border-edge bg-transparent px-3 py-2 mb-3" />
-      <label className="block text-[14px] mb-1" htmlFor="cap-pw">Password</label>
-      <input id="cap-pw" type="password" required minLength={8}
-        autoComplete={mode === "in" ? "current-password" : "new-password"} value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className="w-full border border-edge bg-transparent px-3 py-2 mb-4" />
-      <button type="submit" disabled={busy}
-        className="px-4 py-2 border border-foreground text-foreground hover:bg-foreground hover:text-background disabled:opacity-40">
-        {busy ? "…" : mode === "in" ? "Sign in" : "Create account"}
-      </button>
-      <button type="button" onClick={() => { setMode(mode === "in" ? "up" : "in"); setErr(""); }}
-        className="ml-4 text-[14px] underline underline-offset-4 text-muted hover:text-foreground">
-        {mode === "in" ? "Create an account" : "I already have an account"}
-      </button>
-      <p className="mt-4">
+
+      <form
+        onSubmit={async (ev) => {
+          ev.preventDefault();
+          setBusy(true); setErr(""); setNote("");
+          try {
+            if (!creating) {
+              await signIn(email, password);
+            } else if ((await signUpDetailed(email, password)) === "confirm-email") {
+              setNote(
+                "Account created. Check your email for a confirmation link, then sign in. " +
+                "If it does not arrive, turn off Authentication → Providers → Email → " +
+                "Confirm email in the Supabase dashboard."
+              );
+              setBusy(false);
+              return;
+            }
+            const u = await currentUser();
+            if (u?.email) onDone(u.email);
+            else setErr("Signed up, but no session was returned. Try signing in.");
+          } catch (e) {
+            setErr(e instanceof Error ? e.message : String(e));
+          } finally { setBusy(false); }
+        }}>
+        <label className="block text-[13.5px] font-medium mb-1.5" htmlFor="cap-email">Email</label>
+        <input id="cap-email" type="email" required autoComplete="email" value={email}
+          onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com"
+          className="w-full h-11 border border-edge rounded-md bg-transparent px-3 mb-4
+                     focus:outline-none focus:border-foreground" />
+
+        <label className="block text-[13.5px] font-medium mb-1.5" htmlFor="cap-pw">Password</label>
+        <div className="relative mb-2">
+          <input id="cap-pw" type={showPw ? "text" : "password"} required minLength={8}
+            autoComplete={creating ? "new-password" : "current-password"} value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full h-11 border border-edge rounded-md bg-transparent px-3 pr-16
+                       focus:outline-none focus:border-foreground" />
+          <button type="button" onClick={() => setShowPw((v) => !v)}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-[13px] text-muted hover:text-foreground"
+            aria-label={showPw ? "Hide password" : "Show password"}>
+            {showPw ? "Hide" : "Show"}
+          </button>
+        </div>
+        <p className="text-[12.5px] text-muted mb-5">
+          {creating ? "At least 8 characters." : " "}
+        </p>
+
+        <button type="submit" disabled={busy}
+          className="w-full h-11 rounded-md bg-foreground text-background text-[15px] font-medium
+                     hover:opacity-90 disabled:opacity-40 transition-opacity">
+          {busy ? "…" : creating ? "Create account" : "Sign in"}
+        </button>
+      </form>
+
+      {!creating && (
+        <p className="mt-4 text-center">
+          <button type="button"
+            onClick={async () => {
+              if (!email) { setErr("Enter your email address first."); return; }
+              setErr(""); setNote("");
+              try { await requestPasswordReset(email); setNote("If that address has an account, a reset link is on its way."); }
+              catch (e) { setErr(e instanceof Error ? e.message : String(e)); }
+            }}
+            className="text-[14px] underline underline-offset-4 text-muted hover:text-foreground">
+            Forgot your password?
+          </button>
+        </p>
+      )}
+
+      {(err || note) && (
+        <p className="mt-4 text-[14px] text-foreground/85 border border-edge rounded-md p-3">
+          {err || note}
+        </p>
+      )}
+
+      <p className="mt-6 pt-5 border-t border-edge text-[14px] text-muted text-center">
+        {creating ? "Already have an account?" : "No account yet?"}{" "}
         <button type="button"
-          onClick={async () => {
-            if (!email) { setErr("Enter your email address first."); return; }
-            try { await requestPasswordReset(email); setErr("If that address has an account, a reset link is on its way."); }
-            catch (e) { setErr(e instanceof Error ? e.message : String(e)); }
-          }}
-          className="text-[14px] underline underline-offset-4 text-muted hover:text-foreground">
-          Forgot your password?
+          onClick={() => { setMode(creating ? "in" : "up"); setErr(""); setNote(""); }}
+          className="underline underline-offset-4 text-foreground">
+          {creating ? "Sign in" : "Create one"}
         </button>
       </p>
-      {err && <p className="mt-3 text-[14px] text-foreground/85">{err}</p>}
-    </form>
+    </div>
   );
 }
 

@@ -35,15 +35,22 @@ export default function Header({
   const [open, setOpen] = useState(false);
 
   // Capture is a signed-in tool on its own route, not a tab in this shell, so
-  // it is a link rather than a nav button. The label changes because the two
-  // states want different things from the reader: someone signed out is being
-  // offered a door, someone signed in is being offered the record button.
+  // it is a link rather than a nav button.
+  //
+  // The label changes because the two states want different things from the
+  // reader. Signed out, "Sign in" describes a mechanism nobody wants; the thing
+  // being offered is a way to add your own account, so it says Contribute.
+  // Signed in, the offer is the record button, so it says Capture.
+  //
+  // Contribute is a promise the site does not fully keep yet — there is no
+  // publication path — so the page it leads to says plainly that an account
+  // gives you a private record and that nothing is published.
   const [signedIn, setSignedIn] = useState<boolean | null>(null);
   useEffect(() => { currentUser().then((u) => setSignedIn(!!u)).catch(() => setSignedIn(false)); }, []);
   const captureLink = (extra = "") => (
     <a href="/capture"
        className={`px-2.5 py-1.5 text-[13px] uppercase tracking-wide text-muted hover:text-foreground inline-flex items-center gap-1.5 ${extra}`}>
-      <Mic size={15} /> {signedIn ? "Capture" : "Sign in"}
+      <Mic size={15} /> {signedIn ? "Capture" : "Contribute"}
     </a>
   );
 
