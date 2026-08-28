@@ -47,6 +47,7 @@ condition that produced three of the four gaps above; it should be loud.
 Run:  python3 scripts/check_download_matches_site.py
       python3 scripts/check_download_matches_site.py --check   (same thing)
 """
+import collections
 import json
 import pathlib
 import re
@@ -137,9 +138,25 @@ def main() -> int:
         return 1
 
     with zipfile.ZipFile(ZIP) as z:
-        have = {n: z.read(n) for n in z.namelist() if not n.endswith("/")}
+        entries = [n for n in z.namelist() if not n.endswith("/")]
+        have = {n: z.read(n) for n in entries}
 
     problems, unmapped, checked, exempted = [], [], 0, 0
+
+    # ---- 0. no path appears twice ---------------------------------------
+    # zipfile permits duplicate names and only WARNS. On 28 August the terms
+    # file was added to sync_corpus_site.py's build() without being added to its
+    # PREFIXES, so the stale copy was carried forward and a fresh one appended:
+    # the archive shipped two meta/IS_META_terms.md, stale one first, and which
+    # a reader's unzip tool picked was its own business. Every check below
+    # matches by name and was satisfied by either copy, so none of them saw it.
+    seen = collections.Counter(entries)
+    for name, n in sorted(seen.items()):
+        if n > 1:
+            problems.append(
+                f"{name} appears {n} times in the download — a sync script is "
+                "writing a path it does not also drop from the carried-forward zip"
+            )
 
     # ---- 1. every site file, byte for byte -----------------------------
     for f in site_files():
