@@ -8,7 +8,7 @@ supersedes: [IS_META_copyright.md, IS_META_disclaimer.md]
 source: lib/terms.ts (the same source the website renders)
 generated_by: scripts/export_terms_md.mjs
 section_count: 7
-word_count: 1609
+word_count: 1613
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
@@ -28,7 +28,7 @@ historical record. Where they differ from this file, **this file governs.**
 
 *This applies to the Journal — the dated entries and verbatim transcripts. It does not apply to the Research or Concepts sections, which are drawn from public records and carry their own basis and origin labels.*
 
-The Journal records communications the author received without consent. The transcripts are preserved as documentation of what was said to him. Their content is *external communication* and does NOT represent the author's beliefs, views, or intent. The author denies any affiliation with, or belief in, the content of those messages — particularly any promoting illegal activity, narcotic use, or violence.
+The Journal records communications the author received without consent. The transcripts are preserved as documentation of what was said to him. Their content is *external communication* and does NOT represent the author’s beliefs, views, or intent. The author denies any affiliation with, or belief in, the content of those messages — particularly any promoting illegal activity, narcotic use, or violence.
 
 ### Why accusations appear in this record
 
@@ -68,7 +68,7 @@ Several series on this site count what reached an institution rather than what h
 
 ### What this data does not do
 
-It does not establish that any organisation did anything wrong. It does not connect any system, deployment, or statistic to the author's experience or to any individual's. Where two things appear near each other in time or place, that is a co-occurrence and nothing more; the site says so wherever such pairings are shown. Causes are reported only as *attributed* — who claimed what, in which document — never asserted by this site.
+It does not establish that any organisation did anything wrong. It does not connect any system, deployment, or statistic to the author’s experience or to any individual’s. Where two things appear near each other in time or place, that is a co-occurrence and nothing more; the site says so wherever such pairings are shown. Causes are reported only as *attributed* — who claimed what, in which document — never asserted by this site.
 
 ### What is missing is also a finding
 
@@ -102,7 +102,7 @@ Not permitted:
 
 ## What this site measures
 
-This site records usage analytics — pages opened, sections viewed, and which sources readers follow — using cookies, and it may record a session replay: a playback of how a page was used, with all typed input masked. This is processed on the author's behalf by PostHog and Google Analytics. It is never sold, and no attempt is made to identify individual readers.
+This site records usage analytics — pages opened, sections viewed, and which sources readers follow — using cookies, and it may record a session replay: a playback of how a page was used, with all typed input masked. This is processed on the author’s behalf by PostHog and Google Analytics. It is never sold, and no attempt is made to identify individual readers.
 
 Given what this archive is about, that is stated plainly rather than buried. If you would rather not be measured at all, open any page with [?analytics=off](/?analytics=off) — this browser then stops being recorded on this device, and stays that way.
 

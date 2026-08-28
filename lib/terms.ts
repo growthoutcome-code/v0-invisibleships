@@ -72,7 +72,7 @@ export const TERMS: TermsSection[] = [
       {
         kind: "p",
         text:
-          "The Journal records communications the author received without consent. The transcripts are preserved as documentation of what was said to him. Their content is *external communication* and does NOT represent the author's beliefs, views, or intent. The author denies any affiliation with, or belief in, the content of those messages — particularly any promoting illegal activity, narcotic use, or violence.",
+          "The Journal records communications the author received without consent. The transcripts are preserved as documentation of what was said to him. Their content is *external communication* and does NOT represent the author’s beliefs, views, or intent. The author denies any affiliation with, or belief in, the content of those messages — particularly any promoting illegal activity, narcotic use, or violence.",
       },
       { kind: "subhead", text: "Why accusations appear in this record" },
       {
@@ -150,7 +150,7 @@ export const TERMS: TermsSection[] = [
       {
         kind: "p",
         text:
-          "It does not establish that any organisation did anything wrong. It does not connect any system, deployment, or statistic to the author's experience or to any individual's. Where two things appear near each other in time or place, that is a co-occurrence and nothing more; the site says so wherever such pairings are shown. Causes are reported only as *attributed* — who claimed what, in which document — never asserted by this site.",
+          "It does not establish that any organisation did anything wrong. It does not connect any system, deployment, or statistic to the author’s experience or to any individual’s. Where two things appear near each other in time or place, that is a co-occurrence and nothing more; the site says so wherever such pairings are shown. Causes are reported only as *attributed* — who claimed what, in which document — never asserted by this site.",
       },
       { kind: "subhead", text: "What is missing is also a finding" },
       {
@@ -223,7 +223,7 @@ export const TERMS: TermsSection[] = [
       {
         kind: "p",
         text:
-          "This site records usage analytics — pages opened, sections viewed, and which sources readers follow — using cookies, and it may record a session replay: a playback of how a page was used, with all typed input masked. This is processed on the author's behalf by PostHog and Google Analytics. It is never sold, and no attempt is made to identify individual readers.",
+          "This site records usage analytics — pages opened, sections viewed, and which sources readers follow — using cookies, and it may record a session replay: a playback of how a page was used, with all typed input masked. This is processed on the author’s behalf by PostHog and Google Analytics. It is never sold, and no attempt is made to identify individual readers.",
       },
       {
         kind: "p",
