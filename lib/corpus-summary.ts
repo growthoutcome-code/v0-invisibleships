@@ -6,13 +6,13 @@
 // receives cannot come apart.
 export const CORPUS_SUMMARY = {
   generated: "2026-08-28",
-  files: 925,
-  markdown: 823,
+  files: 928,
+  markdown: 826,
   csv: 29,
-  words: 944246,
-  medianWords: 460,
+  words: 944803,
+  medianWords: 456,
   largestWords: 10185,
-  zipBytes: 3304313,
+  zipBytes: 3306659,
   folders: [
   { key: "journal", label: "Journal", blurb: "The primary record — dated entries and verbatim transcripts.", markdown: 448, data: 0 },
   { key: "references", label: "References", blurb: "The analysis and reference documents, chunked by section.", markdown: 242, data: 0 },
@@ -22,6 +22,6 @@ export const CORPUS_SUMMARY = {
   { key: "concepts", label: "Concepts", blurb: "The archive's arguments, each labelled with a basis, an origin, a theme and the readers it was written for.", markdown: 38, data: 2 },
   { key: "glossary", label: "Glossary", blurb: "Terms from the source series, plus terms written for the site.", markdown: 39, data: 0 },
   { key: "research", label: "Research inputs", blurb: "The raw rows the charts were built from. Not rendered anywhere on the site.", markdown: 4, data: 7 },
-  { key: "meta", label: "Terms", blurb: "Copyright, disclaimer, author statement, category vocabulary.", markdown: 5, data: 0 },
+  { key: "meta", label: "Terms", blurb: "Copyright, disclaimer, author statement, category vocabulary.", markdown: 8, data: 0 },
   ],
 } as const;

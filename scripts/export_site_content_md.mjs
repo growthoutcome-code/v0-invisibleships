@@ -11,8 +11,11 @@
  *                   the site shows around 37. These are the difference.
  *   DOCUMENTS       the register of the source document series, with what each
  *                   one is and where it lives.
- *   AUTHOR          the author statement (a version is already in meta/, so only
- *                   the parts that differ are exported).
+ *   AUTHOR          the author statement shown on /author. NOTE: until
+ *                   28 August this line claimed AUTHOR was exported and it
+ *                   was not — meta/ carried only IS_META_about-author.md, a
+ *                   verbatim extract of the original series, which is a
+ *                   different and earlier text. It is exported now.
  *
  * None of it had an owner. The corpus is assembled by scripts that each know
  * about their own folder, and content written into a .ts file matched none of
@@ -158,3 +161,152 @@ writeFileSync(
 
 console.log(`glossary : ${TERMS.length} site-authored terms (${gBytes.toLocaleString()} bytes) -> public/data/site/glossary`);
 console.log(`documents: 1 register covering ${DOCS.length} documents -> public/data/site/documents`);
+
+/* ---------------------------------------------------------------------------
+ * GATE and AUTHOR — added 2026-08-28.
+ *
+ * Sean asked whether the download carries everything the site has. It did not.
+ * Three bodies of prose were missing, all for the same reason as the four gaps
+ * before them: they live in a .ts file, and no script owned them.
+ *
+ *   lib/gate-content.ts   The perceptual-set essay, the invisible-ships story
+ *                         and its own caveat, the content warning, and the
+ *                         safety note. This is the archive explaining its own
+ *                         name and its own premise — arguably the most
+ *                         important framing it has — and it was visible only on
+ *                         a screen a reader passes through once and a
+ *                         downloader never sees at all.
+ *
+ *   lib/site-content.ts   AUTHOR: the statement on /author. The docstring at
+ *                         the top of this file has claimed since it was written
+ *                         that AUTHOR was exported "so only the parts that
+ *                         differ are exported". Nothing was. meta/ carries
+ *                         IS_META_about-author.md, a verbatim extract of the
+ *                         original document series, which is a different text.
+ *
+ * These ship under meta/ beside the terms, as documents rather than as UI copy,
+ * because that is what they are.
+ * ------------------------------------------------------------------------- */
+
+const OUT_META = join(ROOT, "public/data/site/meta");
+
+/** Lift one `export const NAME = <object literal>` and evaluate it. */
+function liftObject(file, name) {
+  const text = readFileSync(file, "utf8");
+  const at = text.indexOf(`export const ${name}`);
+  if (at < 0) throw new Error(`${name} not found in ${file}`);
+  const open = text.indexOf("{", text.indexOf("=", at));
+  let depth = 0, end = -1, inStr = null, esc = false;
+  for (let i = open; i < text.length; i++) {
+    const c = text[i];
+    if (inStr) {
+      if (esc) esc = false;
+      else if (c === "\\") esc = true;
+      else if (c === inStr) inStr = null;
+      continue;
+    }
+    if (c === '"' || c === "'" || c === "`") { inStr = c; continue; }
+    if (c === "{") depth++;
+    else if (c === "}") { depth--; if (depth === 0) { end = i + 1; break; } }
+  }
+  if (end < 0) throw new Error(`could not find the end of ${name} in ${file}`);
+  try {
+    return new Function(`"use strict"; return (${text.slice(open, end)});`)();
+  } catch (e) {
+    throw new Error(
+      `${name} in ${file} no longer evaluates as plain data. Fix the exporter ` +
+      `rather than shipping a corpus without it.\n` + e.message
+    );
+  }
+}
+
+const GATE = liftObject(join(ROOT, "lib/gate-content.ts"), "GATE");
+const AUTHOR_INFO = liftObject(join(ROOT, "lib/site-content.ts"), "AUTHOR");
+
+function metaDoc(id, title, docType, lines) {
+  const text = lines.join("\n").trim() + "\n";
+  return [
+    "---",
+    `id: ${id}`,
+    `title: ${title}`,
+    "collection: meta",
+    `doc_type: ${docType}`,
+    "source: the site's entry sequence, exported from lib/",
+    "generated_by: scripts/export_site_content_md.mjs",
+    `word_count: ${(text.match(/\b[\w'-]+\b/g) || []).length}`,
+    `author: ${AUTHOR}`,
+    `copyright: ${COPYRIGHT}`,
+    "---",
+    "",
+  ].join("\n") + text;
+}
+
+fresh(OUT_META);
+
+writeFileSync(
+  join(OUT_META, "IS_META_why-invisible-ships.md"),
+  metaDoc("IS-META-WHY-INVISIBLE-SHIPS", "Why “Invisible Ships”", "framing", [
+    "# Why “Invisible Ships”",
+    "",
+    "*Shown to every reader on the way into the archive. It is the archive's",
+    "account of its own name and its own premise.*",
+    "",
+    `## ${GATE.perceptual.title}`,
+    "",
+    GATE.perceptual.definition,
+    "",
+    GATE.perceptual.story,
+    "",
+    `**${GATE.perceptual.caveat}**`,
+    "",
+    GATE.perceptual.tie,
+  ])
+);
+
+writeFileSync(
+  join(OUT_META, "IS_META_entry-and-safety.md"),
+  metaDoc("IS-META-ENTRY-AND-SAFETY", "Content warning and a note on safety", "safety", [
+    "# Content warning, and a note on safety",
+    "",
+    "*Shown to every reader before entry. It applies to the whole archive and to",
+    "every file in this download.*",
+    "",
+    `**${GATE.welcome.contentWarning}**`,
+    "",
+    `## ${GATE.safety.title}`,
+    "",
+    GATE.safety.body,
+    "",
+    GATE.safety.distress,
+    "",
+    GATE.safety.crisis,
+    "",
+    GATE.safety.guidance,
+    "",
+    "---",
+    "",
+    `*${GATE.welcome.ageLine}*`,
+  ])
+);
+
+writeFileSync(
+  join(OUT_META, "IS_META_author-statement.md"),
+  metaDoc("IS-META-AUTHOR-STATEMENT", "About the author", "author-statement", [
+    "# About the author",
+    "",
+    "*As published on invisibleships.com/author. `IS_META_about-author.md`, also",
+    "in this folder, is a verbatim extract of the original document series and is",
+    "a different, earlier text.*",
+    "",
+    AUTHOR_INFO.summary,
+    "",
+    AUTHOR_INFO.bio,
+    "",
+    `Contact: ${AUTHOR_INFO.contact}`,
+  ])
+);
+
+console.log(
+  `site meta: 3 documents -> public/data/site/meta ` +
+  `(why invisible ships, content warning and safety, author statement)`
+);

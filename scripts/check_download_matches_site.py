@@ -75,7 +75,7 @@ MAP = [
     ("health/md",          "public-health/"),
     ("health/charts",      "public-health/charts/"),
     ("health/tables",      "public-health/"),
-    ("site/terms",         "meta/"),
+    ("site/meta",          "meta/"),
     ("site/glossary",      "glossary-site/"),
     ("site/documents",     "documents/"),
     (".",                  "government-cloud/json/"),   # manifest.json

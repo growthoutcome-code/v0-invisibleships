@@ -30,7 +30,7 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SRC = join(ROOT, "lib/terms.ts");
-const OUT_DIR = join(ROOT, "public/data/site/terms");
+const OUT_DIR = join(ROOT, "public/data/site/meta");
 const OUT = join(OUT_DIR, "IS_META_terms.md");
 
 const AUTHOR = "Sean C. Harris";
@@ -121,4 +121,4 @@ writeFileSync(
   ].join("\n") + text
 );
 
-console.log(`terms    : ${TERMS.length} sections, ${words.toLocaleString()} words -> public/data/site/terms/IS_META_terms.md`);
+console.log(`terms    : ${TERMS.length} sections, ${words.toLocaleString()} words -> public/data/site/meta/IS_META_terms.md`);

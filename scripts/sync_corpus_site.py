@@ -56,8 +56,21 @@ ZIP = ROOT / "public/invisible-ships-corpus.zip"
 # duplicate names and only warns. Two copies of the terms in one archive, the
 # stale one first. Found by a duplicate-name warning, not by a guard; the
 # site-vs-download check matches by name and was satisfied by either copy.
-PREFIXES = ("concepts/", "glossary-site/", "documents/", "research/",
-            "meta/IS_META_terms.md")
+PREFIXES = ("concepts/", "glossary-site/", "documents/", "research/")
+
+# The corpus meta/ folder is SHARED: most of it is verbatim extracts of the
+# original document series, owned by nobody, and rewriting those would falsify
+# the extraction. This repository owns only the files it generates, so ownership
+# is computed from the directory rather than hand-listed. Hand-listing is what
+# shipped two copies of the terms on 28 August — the file was added to build()
+# and not to the skip set, and zipfile permits duplicate names with a warning.
+SITE_META = ROOT / "public/data/site/meta"
+
+
+def owned_meta() -> set:
+    if not SITE_META.is_dir():
+        return set()
+    return {"meta/" + f.name for f in SITE_META.glob("*.md")}
 PREFIX = "concepts/"
 
 
@@ -139,13 +152,18 @@ def build(dst: zipfile.ZipFile) -> int:
     # and record what the terms said in August. Until 28 August the corpus had
     # ONLY those two, and 75 files pointed readers at them, so a reader who
     # downloaded the archive got terms the site had already replaced.
-    terms_src = ROOT / "public/data/site/terms/IS_META_terms.md"
-    if not terms_src.exists():
+    # Everything this repository contributes to the corpus's meta/ folder, as a
+    # directory rather than a list of filenames. The first version named one
+    # file here and in PREFIXES; the second file added would have shipped twice.
+    meta_files = sorted(SITE_META.glob("*.md")) if SITE_META.is_dir() else []
+    if not meta_files:
         raise SystemExit(
-            "no canonical terms at " + str(terms_src) +
-            " — run: node scripts/export_terms_md.mjs"
+            "no site-authored meta documents at " + str(SITE_META) +
+            " — run: node scripts/export_terms_md.mjs && "
+            "node scripts/export_site_content_md.mjs"
         )
-    dst.writestr("meta/IS_META_terms.md", terms_src.read_text())
+    for f in meta_files:
+        dst.writestr("meta/" + f.name, f.read_text())
 
     # the source-document register
     n_doc = 0
@@ -199,7 +217,7 @@ def main(quiet: bool = False) -> None:
     with zipfile.ZipFile(ZIP, "r") as src, zipfile.ZipFile(tmp, "w", zipfile.ZIP_DEFLATED) as dst:
         carried = 0
         for item in src.infolist():
-            if item.filename.startswith(PREFIXES):
+            if item.filename.startswith(PREFIXES) or item.filename in owned_meta():
                 continue
             dst.writestr(item, src.read(item.filename))
             carried += 1
