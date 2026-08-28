@@ -23,7 +23,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   type CaptureEntry, audioUrl, currentUser, deleteEntry, listEntries, queue,
-  requestPasswordReset, saveEdits, signIn, signOut, signUpDetailed, syncAll, transcriptOf,
+  requestPasswordReset, saveEdits, signIn, signInWithGoogle, signOut, signUpDetailed,
+  syncAll, transcriptOf,
 } from "@/lib/capture";
 import { getSupabase } from "@/lib/supabase";
 import { track } from "@/lib/analytics";
@@ -282,6 +283,25 @@ function SignIn({ onDone }: { onDone: (email: string) => void }) {
           setErr(e instanceof Error ? e.message : String(e));
         } finally { setBusy(false); }
       }}>
+      {/* Google first for speed, email first in emphasis. Someone who does not
+          want Google to know they were here must not have to hunt for the
+          alternative. */}
+      <button type="button" disabled={busy}
+        onClick={async () => {
+          setBusy(true); setErr("");
+          try { await signInWithGoogle(); }
+          catch (e) { setErr(e instanceof Error ? e.message : String(e)); setBusy(false); }
+        }}
+        className="w-full px-4 py-2 border border-edge hover:border-foreground text-[15px] mb-3">
+        Continue with Google
+      </button>
+      <p className="text-[13px] text-muted mb-4">
+        Signing in with Google tells Google you visited this site. Email and password
+        below does not.
+      </p>
+      <div className="flex items-center gap-3 mb-4" aria-hidden>
+        <span className="h-px flex-1 bg-edge" /><span className="text-[12px] text-muted uppercase tracking-wide">or</span><span className="h-px flex-1 bg-edge" />
+      </div>
       <label className="block text-[14px] mb-1" htmlFor="cap-email">Email</label>
       <input id="cap-email" type="email" required autoComplete="email" value={email}
         onChange={(e) => setEmail(e.target.value)}

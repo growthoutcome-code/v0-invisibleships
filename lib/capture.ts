@@ -161,6 +161,31 @@ export async function setPassword(password: string) {
   if (error) throw error;
 }
 
+/**
+ * Google sign-in.
+ *
+ * No callback route is needed: supabase-js defaults to the implicit flow in the
+ * browser and picks the session out of the URL fragment on load, which is why
+ * redirectTo points straight back at /capture.
+ *
+ * Worth knowing before this is offered to contributors: signing in with Google
+ * tells Google that this person visited this site. For an archive read by people
+ * who believe they are being watched, that is a real disclosure — which is why
+ * email and password stays as the first option on the form rather than the
+ * fallback, and why neither is removed in favour of the other.
+ */
+export async function signInWithGoogle() {
+  const sb = getSupabase();
+  if (!sb) throw new Error("Sign-in is unavailable: this deployment has no Supabase configuration.");
+  const { error } = await sb.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: typeof window !== "undefined" ? `${window.location.origin}/capture` : undefined,
+    },
+  });
+  if (error) throw error;
+}
+
 export async function signOut() {
   await getSupabase()?.auth.signOut();
 }
