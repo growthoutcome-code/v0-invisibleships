@@ -18,13 +18,30 @@
 const nextConfig = {
   reactStrictMode: true,
   async rewrites() {
-    return [
-      {
-        source: "/invisible-ships-corpus.zip",
-        missing: [{ type: "query", key: "dl" }],
-        destination: "/api/corpus?from=direct_link",
-      },
-    ];
+    // beforeFiles, NOT a bare array.
+    //
+    // A bare array is `afterFiles`, which Next.js evaluates AFTER filesystem
+    // routes. /invisible-ships-corpus.zip is a real file in public/, so it was
+    // always matched first and the rewrite never ran — the download stayed
+    // uncounted exactly as before. Confirmed against the deployed site: a
+    // request for the zip produced no /api/corpus entry in the runtime logs at
+    // all. The config was right, the phase was wrong, and nothing in the build
+    // or the type system says so.
+    //
+    // beforeFiles runs ahead of the static file, so the bare path reaches the
+    // counter. `missing` keeps ?dl=1 out of it, which is how the route hands the
+    // reader on to the real file without looping.
+    return {
+      beforeFiles: [
+        {
+          source: "/invisible-ships-corpus.zip",
+          missing: [{ type: "query", key: "dl" }],
+          destination: "/api/corpus?from=direct_link",
+        },
+      ],
+      afterFiles: [],
+      fallback: [],
+    };
   },
 };
 
