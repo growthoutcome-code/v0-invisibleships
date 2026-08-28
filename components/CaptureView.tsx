@@ -27,6 +27,7 @@ import {
   syncAll, transcriptOf,
 } from "@/lib/capture";
 import { getSupabase } from "@/lib/supabase";
+import AfterCapture from "@/components/AfterCapture";
 import { track } from "@/lib/analytics";
 
 type Phase = "idle" | "recording" | "working";
@@ -60,6 +61,10 @@ export default function CaptureView() {
   const [status, setStatus] = useState("");
   const [modelPct, setModelPct] = useState<number | null>(null);
   const [pending, setPending] = useState(0);
+  // The entry just recorded, if the guided questions have not been dismissed.
+  // Metadata is worth more in the twenty seconds after a recording than it will
+  // ever be again, and a list row is not going to prompt anyone for it.
+  const [justMade, setJustMade] = useState<CaptureEntry | null>(null);
 
   const worker = useRef<Worker | null>(null);
   const recorder = useRef<MediaRecorder | null>(null);
@@ -99,7 +104,10 @@ export default function CaptureView() {
         if (rec) await queue.put({ ...rec, transcript: m.text });
         setStatus("Saving…");
         await syncAll();
-        await refresh();
+        const fresh = await listEntries();
+        setEntries(fresh);
+        setPending((await queue.all()).length);
+        setJustMade(fresh.find((x) => x.id === m.id) ?? null);
         setStatus("");
         setPhase("idle");
       }
@@ -226,6 +234,10 @@ export default function CaptureView() {
         Transcription runs on this device. The audio is not sent to any transcription
         service. Recordings are private to this account and nothing here is published.
       </p>
+
+      {justMade && (
+        <AfterCapture entry={justMade} onClose={() => { setJustMade(null); void refresh(); }} />
+      )}
 
       <h3 className="font-display text-xl font-semibold mb-3">Entries</h3>
       {entries.length === 0 && <p className="text-muted text-[15px]">Nothing recorded yet.</p>}
@@ -423,57 +435,122 @@ function SignIn({ onDone }: { onDone: (email: string) => void }) {
   );
 }
 
+/**
+ * One entry, editable and deletable in place.
+ *
+ * Sean, 28 August: "once they sign up they may have thoughts, and those
+ * thoughts they share may or may not be acceptable to the person. They may want
+ * to delete the thoughts."
+ *
+ * That is the principle the whole row is built on. A person owns their account
+ * of their own experience, including the right to change their mind about it an
+ * hour later. If revising or removing something takes more than a moment, they
+ * stop recording honestly — and a record somebody is afraid to be honest in is
+ * worth nothing.
+ *
+ * So the transcript is a text field, always, not a read-only block with an edit
+ * button behind a disclosure. It saves when you click away. Delete is visible
+ * on every row without opening anything. Neither asks permission.
+ *
+ * What is NOT editable: transcript_raw. Whisper's original stays untouched in
+ * the database, which is what makes a correction a correction rather than a
+ * rewrite. Nothing in this UI can reach it.
+ */
 function EntryRow({ entry, onChanged }: { entry: CaptureEntry; onChanged: () => void }) {
-  const [open, setOpen] = useState(false);
   const [text, setText] = useState(transcriptOf(entry));
   const [url, setUrl] = useState<string | null>(null);
-  const [saved, setSaved] = useState(false);
+  const [detail, setDetail] = useState(false);
+  const [saving, setSaving] = useState<"idle" | "saving" | "saved">("idle");
   const when = new Date(entry.occurred_at);
 
   useEffect(() => {
-    if (open && entry.audio_path && !url) audioUrl(entry.audio_path).then(setUrl);
-  }, [open, entry.audio_path, url]);
+    if (detail && entry.audio_path && !url) audioUrl(entry.audio_path).then(setUrl);
+  }, [detail, entry.audio_path, url]);
+
+  async function commit() {
+    if (text === transcriptOf(entry)) return;
+    setSaving("saving");
+    try {
+      await saveEdits(entry.id, { transcript_edited: text, needs_review: false });
+      setSaving("saved");
+      setTimeout(() => setSaving("idle"), 1500);
+      onChanged();
+    } catch { setSaving("idle"); }
+  }
+
+  async function field(key: "location" | "context" | "witnesses", v: string) {
+    try { await saveEdits(entry.id, { [key]: v.trim() || null } as never); onChanged(); } catch { /* noop */ }
+  }
 
   return (
     <li className="border border-edge rounded-lg p-4">
-      <button type="button" onClick={() => setOpen(!open)} className="w-full text-left">
-        <span className="block text-[13px] text-muted">
-          {when.toLocaleString(undefined, { dateStyle: "full", timeStyle: "short" })}
+      <div className="flex items-baseline gap-3 mb-2">
+        <span className="text-[13px] text-muted">
+          {when.toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" })}
           {entry.audio_duration_s ? ` · ${clock(entry.audio_duration_s)}` : ""}
           {entry.status !== "transcribed" ? ` · ${entry.status}` : ""}
+          {entry.wants_publish ? " · marked to publish" : ""}
         </span>
-        <span className="block body-copy text-foreground/90 mt-1">
-          {transcriptOf(entry) || <em className="text-muted">No transcript — the audio is saved.</em>}
+        <span className="ml-auto text-[12px] text-muted">
+          {saving === "saving" ? "Saving…" : saving === "saved" ? "Saved" : ""}
         </span>
-      </button>
+      </div>
 
-      {open && (
-        <div className="mt-4 border-t border-edge pt-4">
-          {url && <audio controls src={url} className="w-full mb-3" />}
-          <label className="block text-[13px] uppercase tracking-[0.08em] font-semibold mb-2">
-            Transcript
-          </label>
-          <textarea value={text} onChange={(e) => { setText(e.target.value); setSaved(false); }} rows={6}
-            className="w-full border border-edge bg-transparent p-3 text-[15px]" />
-          <p className="text-[13px] text-muted mt-1">
-            Corrections are stored separately; the original transcription is kept unchanged.
-          </p>
-          <div className="mt-3 flex items-center gap-4">
-            <button type="button"
-              onClick={async () => { await saveEdits(entry.id, { transcript_edited: text, needs_review: false }); setSaved(true); onChanged(); }}
-              className="px-3 py-1.5 border border-foreground hover:bg-foreground hover:text-background text-[14px]">
-              Save
-            </button>
-            {saved && <span className="text-[14px] text-muted">Saved.</span>}
-            <button type="button"
-              onClick={async () => {
-                if (!confirm("Delete this entry and its audio? This cannot be undone.")) return;
-                await deleteEntry(entry); onChanged();
-              }}
-              className="ml-auto text-[14px] underline underline-offset-4 text-muted hover:text-foreground">
-              Delete
-            </button>
-          </div>
+      {/* Editable in place. No edit button, no mode, no confirmation. */}
+      <textarea
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        onBlur={commit}
+        rows={Math.min(12, Math.max(2, Math.ceil((text.length || 1) / 78)))}
+        placeholder="No transcript — the audio is saved. You can type what was said."
+        aria-label="Transcript"
+        className="w-full bg-transparent border border-transparent hover:border-edge focus:border-foreground
+                   rounded-md p-2 -m-2 text-[15px] leading-relaxed resize-y focus:outline-none transition-colors"
+      />
+
+      <div className="flex items-center gap-4 mt-3">
+        <button type="button" onClick={() => setDetail(!detail)}
+          className="text-[13px] text-muted hover:text-foreground underline underline-offset-4">
+          {detail ? "Hide details" : "Details, audio and metadata"}
+        </button>
+        <button type="button"
+          onClick={async () => {
+            if (!confirm("Delete this entry and its audio? This cannot be undone.")) return;
+            await deleteEntry(entry); onChanged();
+          }}
+          className="ml-auto text-[13px] text-muted hover:text-foreground underline underline-offset-4">
+          Delete
+        </button>
+      </div>
+
+      {detail && (
+        <div className="mt-4 border-t border-edge pt-4 space-y-3">
+          {url && <audio controls src={url} className="w-full" />}
+
+          {(["location", "context", "witnesses"] as const).map((k) => (
+            <div key={k}>
+              <label className="block text-[12px] uppercase tracking-wider text-muted mb-1" htmlFor={`${entry.id}-${k}`}>
+                {k === "location" ? "Where" : k === "context" ? "What was happening just before" : "Who else could hear it"}
+              </label>
+              <input id={`${entry.id}-${k}`} defaultValue={entry[k] ?? ""}
+                onBlur={(e) => field(k, e.target.value)}
+                className="w-full h-10 border border-edge rounded-md bg-transparent px-3 text-[15px]
+                           focus:outline-none focus:border-foreground" />
+            </div>
+          ))}
+
+          {entry.transcript_edited && entry.transcript_raw && entry.transcript_edited !== entry.transcript_raw && (
+            <details className="text-[14px]">
+              <summary className="cursor-pointer text-muted hover:text-foreground">
+                What the transcription originally said
+              </summary>
+              <p className="mt-2 text-foreground/70 whitespace-pre-wrap">{entry.transcript_raw}</p>
+              <p className="mt-2 text-[13px] text-muted">
+                Kept unchanged. A correction beside its original is evidence; a correction
+                on its own is a claim.
+              </p>
+            </details>
+          )}
         </div>
       )}
     </li>

@@ -38,9 +38,14 @@ export type CaptureEntry = {
   audio_duration_s: number | null;
   audio_mime: string | null;
   location: string | null;
+  context: string | null;
+  witnesses: string | null;
   categories: string[];
   source_type: string | null;
   notes: string | null;
+  /** Author intent, captured after recording. null means never asked. */
+  wants_publish: boolean | null;
+  asked_at: string | null;
   agent_questions: unknown | null;
   needs_review: boolean;
   status: CaptureStatus;
@@ -266,7 +271,9 @@ export async function syncAll(): Promise<{ synced: number; failed: number }> {
  */
 export async function saveEdits(
   id: string,
-  patch: Partial<Pick<CaptureEntry, "transcript_edited" | "location" | "categories" | "source_type" | "notes" | "needs_review">>
+  patch: Partial<Pick<CaptureEntry,
+    "transcript_edited" | "location" | "context" | "witnesses" | "categories" |
+    "source_type" | "notes" | "needs_review" | "wants_publish" | "asked_at">>
 ) {
   const sb = getSupabase();
   if (!sb) throw new Error("No Supabase configuration.");
