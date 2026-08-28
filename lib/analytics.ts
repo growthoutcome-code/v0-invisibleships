@@ -57,9 +57,20 @@ function excluded(): string | null {
   if (h === "localhost" || h === "127.0.0.1" || h === "::1" || h.endsWith(".local")) {
     return "local development";
   }
-  // Chrome sets navigator.webdriver whenever the browser is under automation —
-  // Playwright, Puppeteer, or an AI assistant driving the page. It is never set
-  // for a person browsing normally.
+  // Chrome sets navigator.webdriver under WebDriver-protocol automation —
+  // Playwright, Puppeteer, Selenium. Cheap to check and never set for a person.
+  //
+  // It does NOT catch an assistant driving the browser through an extension.
+  // Measured 28 August in Claude in Chrome: navigator.webdriver === false, and
+  // the user agent is an ordinary Chrome string. The first version of this
+  // comment claimed otherwise and was wrong.
+  //
+  // That turns out not to matter, because an extension-driven assistant IS the
+  // author's own browser, on the author's own profile and network. There is no
+  // separate traffic to detect: whatever excludes the author excludes it too.
+  // The durable exclusion is the project-level filter in PostHog (author's home
+  // /64, the AT&T range, the VPN exits, and any host that is not production),
+  // set 28 August. This function is the cheap first line, not the guarantee.
   if (navigator.webdriver) return "browser automation";
   // A standing per-device opt-out. Set it on any device, phone included, by
   // visiting any page with ?analytics=off — see below.
@@ -97,6 +108,16 @@ export function initAnalytics() {
     console.info(`[analytics] not counting this visit — ${why}`);
     disabled = true;
     inited = true;
+    // Belt and braces: PostHog's own opt-out persists in its storage and also
+    // stops session replay, which the localStorage flag alone does not. Safe to
+    // call before init — posthog-js records the preference and honours it.
+    if (KEY) {
+      try {
+        posthog.opt_out_capturing();
+      } catch {
+        /* no-op */
+      }
+    }
     return;
   }
   if (KEY) {
