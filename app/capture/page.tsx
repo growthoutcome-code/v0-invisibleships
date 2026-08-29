@@ -20,8 +20,24 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <main className="mx-auto max-w-6xl px-5 sm:px-8 py-10">
-      <CaptureView />
-    </main>
+    <>
+      {/* Not the site header — that one is bound to the journal shell's tab
+          state and would drag the whole browser in. This is the minimum a
+          person needs: what site they are on, and a way back to it. Landing
+          here from a link with no route out was the first thing wrong with
+          this page. */}
+      <header className="w-full px-5 sm:px-8 h-[72px] flex items-center gap-4 border-b border-edge">
+        <a href="/" className="font-display font-semibold tracking-tight text-foreground text-lg">
+          Invisible Ships
+        </a>
+        <a href="/journal"
+           className="ml-auto text-[13px] uppercase tracking-wide text-muted hover:text-foreground">
+          The archive
+        </a>
+      </header>
+      <main className="mx-auto max-w-3xl px-5 sm:px-8 py-10">
+        <CaptureView />
+      </main>
+    </>
   );
 }

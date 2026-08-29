@@ -176,7 +176,8 @@ export default function CaptureView() {
         <p className="body-copy text-foreground/85">
           Capture is unavailable on this deployment: no database is configured. Set{" "}
           <code>NEXT_PUBLIC_SUPABASE_URL</code> and <code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code>{" "}
-          for the Production environment and redeploy.
+          in Vercel for <strong>this</strong> environment — Preview and Production are
+          separate, and a variable set for one is absent in the other — then redeploy.
         </p>
       </Shell>
     );
