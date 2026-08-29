@@ -102,6 +102,83 @@ export function getGlossaryItem(param: string): GlossaryItem | null {
   };
 }
 
+/**
+ * Material for the home page, read from the bundled corpus at build time.
+ *
+ * DELIBERATELY NOT EXCERPTS. The home page is ungated; the journal is not. Of
+ * the 438 journal documents, 89 carry euthanasia, self-harm or violence
+ * language inside their first 220 characters — including two of the eight most
+ * recent. An auto-populated carousel of excerpts would put "come outside and
+ * raise your hand for euthanization" in front of anyone who lands on the site,
+ * with no warning, which is precisely what the gate in front of the journal
+ * exists to prevent.
+ *
+ * So a card carries the date, the place, and the glossary terms that entry
+ * actually uses. That is real content — it shows the archive is specific,
+ * located and dated — and the text itself stays behind the warning. Swap in
+ * hand-picked excerpts when somebody has chosen which entries are safe to quote
+ * openly; the shape does not need to change.
+ */
+export type HomeEntry = {
+  id: string;
+  date: string;
+  weekday: string | null;
+  location: string | null;
+  hasAudio: boolean;
+  terms: { slug: string; term: string }[];
+};
+
+export function homeJournal(limit = 10): HomeEntry[] {
+  const L = load();
+  const out: HomeEntry[] = [];
+  // Newest first, and entries rather than individual recordings: a day is the
+  // unit a reader recognises.
+  //
+  // Only entries that carry at least one glossary term. The home section IS the
+  // journal-to-glossary intersection, so an entry with no term has nothing to
+  // show there; 121 of 140 entries qualify, and skipping the other 19 changes
+  // which days appear, never their dates or their order. "All 140 entries" sits
+  // under the carousel so the selection is never mistaken for the whole.
+  for (let i = L.journal.length - 1; i >= 0 && out.length < limit; i--) {
+    const d = L.journal[i];
+    if (d.doc_type !== "entry" || !d.entry_date) continue;
+    const slugs = (L.docGloss[d.id] || []).slice(0, 3);
+    if (slugs.length === 0) continue;
+    out.push({
+      id: d.id.toLowerCase(),
+      date: d.entry_date,
+      weekday: d.weekday ?? null,
+      location: d.location ?? null,
+      hasAudio: Boolean(d.audio_url || d.audio_file),
+      terms: slugs
+        .map((sl) => L.glossBySlug.get(sl.toLowerCase()))
+        .filter((t): t is GlossaryTerm => Boolean(t))
+        .map((t) => ({ slug: t.slug.toLowerCase(), term: t.term })),
+    });
+  }
+  return out;
+}
+
+/** Glossary terms with a usable one-line summary, for the home page strip. */
+export function homeGlossary(slugs: string[]): { slug: string; term: string; summary: string }[] {
+  const L = load();
+  return slugs
+    .map((sl) => L.glossBySlug.get(sl.toLowerCase()))
+    .filter((t): t is GlossaryTerm => Boolean(t))
+    .map((t) => ({
+      slug: t.slug.toLowerCase(),
+      term: t.term,
+      summary: glossarySummary(t.definition || "", 150),
+    }));
+}
+
+export function journalStats() {
+  const L = load();
+  const days = new Set(L.journal.filter((d) => d.doc_type === "entry").map((d) => d.entry_date)).size;
+  const recordings = L.journal.filter((d) => d.doc_type === "recording").length;
+  return { days, recordings, docs: L.journal.length };
+}
+
 // Plain-text excerpt for meta descriptions (strips timestamps, audio lines, markdown).
 export function excerptOf(md: string, n = 200): string {
   const lines = (md || "")

@@ -1,243 +1,251 @@
 {
  "concepts-md": {
+  "public/data/concepts/md/IS_CON_00_findings.md": {
+   "sha": "f4b52018ff65d81d",
+   "words": 591
+  },
+  "public/data/concepts/md/IS_CON_00_not-established.md": {
+   "sha": "653372d4cc845a36",
+   "words": 374
+  },
   "public/data/concepts/md/IS_CON_00_start-here.md": {
-   "sha": "05ce48ede6aa2fdd",
-   "words": 674
+   "sha": "a38ff9404e560bc2",
+   "words": 1124
   },
   "public/data/concepts/md/IS_CON_accountability-not-wired.md": {
-   "sha": "76aea065f1217b4e",
-   "words": 209
+   "sha": "540db4f9b230d319",
+   "words": 260
   },
   "public/data/concepts/md/IS_CON_attack-to-force-acknowledgment.md": {
-   "sha": "8844b84cc81c69bf",
-   "words": 561
+   "sha": "a34680a5585e638f",
+   "words": 608
   },
   "public/data/concepts/md/IS_CON_can-a-machine-read-thought.md": {
-   "sha": "4a343a6a03924d27",
-   "words": 554
+   "sha": "45e5e7f25282730c",
+   "words": 598
   },
   "public/data/concepts/md/IS_CON_children-wearables-and-rf.md": {
-   "sha": "45650aa664e6cda8",
-   "words": 848
+   "sha": "596b7b493149ec79",
+   "words": 896
   },
   "public/data/concepts/md/IS_CON_co-occurrence-is-not-cause.md": {
-   "sha": "77e790bbff5e1123",
-   "words": 400
+   "sha": "3f97a61df92c3817",
+   "words": 446
   },
   "public/data/concepts/md/IS_CON_contractors-killed-and-freed.md": {
-   "sha": "1a4a1673a10c7daf",
-   "words": 550
+   "sha": "abfd47278e43b6d1",
+   "words": 605
   },
   "public/data/concepts/md/IS_CON_denver-acoustic-weapons.md": {
-   "sha": "101dfbff7fd05f38",
-   "words": 694
+   "sha": "8fea22a38013561c",
+   "words": 745
   },
   "public/data/concepts/md/IS_CON_emergency-systems-withdrawn.md": {
-   "sha": "0e8c26e55424c9b9",
-   "words": 194
+   "sha": "0087cdaa3bd7be49",
+   "words": 240
   },
   "public/data/concepts/md/IS_CON_everyone-around-a-target.md": {
-   "sha": "3d8d9f68d02f1186",
-   "words": 611
+   "sha": "0538e11371e2c60b",
+   "words": 666
   },
   "public/data/concepts/md/IS_CON_explanation-is-part-of-the-harm.md": {
-   "sha": "61609a785d04daa6",
-   "words": 549
+   "sha": "298b4920dd651a6d",
+   "words": 597
   },
   "public/data/concepts/md/IS_CON_findings-dont-stop-deployment.md": {
-   "sha": "83f19c5126a3d9a9",
-   "words": 196
+   "sha": "620cd62d56322d53",
+   "words": 242
   },
   "public/data/concepts/md/IS_CON_fined-in-europe-hired-in-america.md": {
-   "sha": "9ba77ca588b6bf46",
-   "words": 267
+   "sha": "60265738eb5b0b01",
+   "words": 313
   },
   "public/data/concepts/md/IS_CON_has-an-attack-happened.md": {
-   "sha": "21a51022c4ff6836",
-   "words": 664
+   "sha": "52b043e6a629cb00",
+   "words": 710
   },
   "public/data/concepts/md/IS_CON_headline-spending-is-not-spending.md": {
-   "sha": "75a844330d502b01",
-   "words": 283
+   "sha": "8e9440e1211b64cf",
+   "words": 333
   },
   "public/data/concepts/md/IS_CON_how-protected-is-your-medical-record.md": {
-   "sha": "b7927ae0ba794c97",
-   "words": 672
+   "sha": "291a07e586f3d252",
+   "words": 724
   },
   "public/data/concepts/md/IS_CON_law-for-neural-data.md": {
-   "sha": "6dfa9bf6d64c1a6b",
-   "words": 532
+   "sha": "2dbac027ae53f946",
+   "words": 578
   },
   "public/data/concepts/md/IS_CON_local-law-does-not-mean-local.md": {
-   "sha": "e4be00c2b911e913",
-   "words": 273
+   "sha": "141f66ae355faad6",
+   "words": 319
   },
   "public/data/concepts/md/IS_CON_low-number-may-mean-low-counting.md": {
-   "sha": "d8066165d1c6a9de",
-   "words": 388
+   "sha": "9c43c4a785a4d3f5",
+   "words": 436
   },
   "public/data/concepts/md/IS_CON_made-into-assets-unknowing.md": {
-   "sha": "de08d8080dd5ed42",
-   "words": 581
+   "sha": "8293c43618e600ca",
+   "words": 632
   },
   "public/data/concepts/md/IS_CON_no-column-for-you.md": {
-   "sha": "1c2b7781f8ee097b",
-   "words": 231
+   "sha": "c42c0bc8fdbeb36a",
+   "words": 282
   },
   "public/data/concepts/md/IS_CON_no-private-thinking-space.md": {
-   "sha": "7068bff69f978166",
-   "words": 633
+   "sha": "b5055aa37d742af1",
+   "words": 679
   },
   "public/data/concepts/md/IS_CON_nonsurgical-by-design.md": {
-   "sha": "b3289d6318b311e9",
-   "words": 478
+   "sha": "4b17bc02d3c32366",
+   "words": 524
   },
   "public/data/concepts/md/IS_CON_official-is-not-independent.md": {
-   "sha": "336bd0e836f889f7",
-   "words": 217
+   "sha": "c51bfb28a6db6569",
+   "words": 263
   },
   "public/data/concepts/md/IS_CON_organised-harassment-is-fact.md": {
-   "sha": "16c14e2b7217db4e",
-   "words": 232
+   "sha": "f8a93070db7a0f4e",
+   "words": 283
   },
   "public/data/concepts/md/IS_CON_prescribing-is-not-prevalence.md": {
-   "sha": "97f037ad3664598a",
-   "words": 402
+   "sha": "4b6a85a1feb1efa3",
+   "words": 446
   },
   "public/data/concepts/md/IS_CON_ruin-first-then-rescue.md": {
-   "sha": "787f69264ce46d45",
-   "words": 565
+   "sha": "c9d61ecfa801c817",
+   "words": 616
   },
   "public/data/concepts/md/IS_CON_sequence-cannot-be-proven.md": {
-   "sha": "1e6fb3c77bbaa215",
-   "words": 257
+   "sha": "31432c5f83644e18",
+   "words": 303
   },
   "public/data/concepts/md/IS_CON_the-fentanyl-reversal.md": {
-   "sha": "d93d1714f70d7b8f",
-   "words": 378
+   "sha": "2d5a631619e54e9c",
+   "words": 422
   },
   "public/data/concepts/md/IS_CON_us-rose-against-the-trend.md": {
-   "sha": "c1fda44007b9eeae",
-   "words": 369
+   "sha": "7352e7dfc95c6210",
+   "words": 413
   },
   "public/data/concepts/md/IS_CON_what-children-are-subject-to.md": {
-   "sha": "fa01fb7ca4223d43",
-   "words": 934
+   "sha": "c6d55d32d21da1c9",
+   "words": 989
   },
   "public/data/concepts/md/IS_CON_what-it-would-take.md": {
-   "sha": "800c1868c6651440",
-   "words": 590
+   "sha": "0f6bbf2880ad3ab4",
+   "words": 640
   },
   "public/data/concepts/md/IS_CON_what-produces-the-feeling.md": {
-   "sha": "ae16e6c6b8436cc7",
-   "words": 722
+   "sha": "70cc679a864c5cdf",
+   "words": 770
   },
   "public/data/concepts/md/IS_CON_who-owns-neural-data.md": {
-   "sha": "e35887ab4eb5c92d",
-   "words": 503
+   "sha": "82d80c28d7b979e9",
+   "words": 553
   },
   "public/data/concepts/md/IS_CON_who-profits-from-a-body.md": {
-   "sha": "fb249efad449aa07",
-   "words": 558
+   "sha": "d431c190724c2e3e",
+   "words": 608
   },
   "public/data/concepts/md/IS_CON_why-isnt-this-in-the-news.md": {
-   "sha": "0ec5f68fc32b2c5b",
-   "words": 635
+   "sha": "0b4369d42e5d4011",
+   "words": 681
   }
  },
  "concepts-source": {
   "lib/concepts.ts": {
-   "sha": "25808d5428091c7b",
-   "words": 14210
+   "sha": "edb10b944e137bdb",
+   "words": 14927
   }
  },
  "crime": {
   "public/data/crime/md/IS_CRIME_00_start-here.md": {
-   "sha": "b44a9bd8dd05ceae",
+   "sha": "7314a940f42bc1d2",
    "words": 582
   },
   "public/data/crime/md/IS_CRIME_01_finding.md": {
-   "sha": "f9760afae43dce67",
+   "sha": "d61668f4956826c9",
    "words": 439
   },
   "public/data/crime/md/IS_CRIME_chart_anomalies-indexed.md": {
-   "sha": "6e4aa18cc53f9bc0",
+   "sha": "737b0a76050816cb",
    "words": 970
   },
   "public/data/crime/md/IS_CRIME_chart_arrests-over-time.md": {
-   "sha": "07f826c2d11d64f5",
+   "sha": "f70f1180550a6ef4",
    "words": 895
   },
   "public/data/crime/md/IS_CRIME_chart_burglary-international.md": {
-   "sha": "a1bf77f7f4b54421",
+   "sha": "383e3cae21fda825",
    "words": 1125
   },
   "public/data/crime/md/IS_CRIME_chart_detention-capacity.md": {
-   "sha": "d364ddd25fb99a6a",
+   "sha": "bba1de2b40ac1b1e",
    "words": 1019
   },
   "public/data/crime/md/IS_CRIME_chart_harm-lanes-indexed.md": {
-   "sha": "c490ae95af5ce795",
+   "sha": "b7176065b3cf75cc",
    "words": 944
   },
   "public/data/crime/md/IS_CRIME_chart_homicide-international.md": {
-   "sha": "f1896ce9e5a9e00c",
+   "sha": "44171f8f3a8cb42c",
    "words": 1165
   },
   "public/data/crime/md/IS_CRIME_chart_homicide-two-measures.md": {
-   "sha": "8cb53e1db0a07623",
+   "sha": "745f31811cf2ffd1",
    "words": 462
   },
   "public/data/crime/md/IS_CRIME_chart_incarceration-over-time.md": {
-   "sha": "94a88d34d257a9d6",
+   "sha": "d19031bd6b515012",
    "words": 1019
   },
   "public/data/crime/md/IS_CRIME_international_drug-deaths.md": {
-   "sha": "fd85b52da9a62ffd",
+   "sha": "dfff16e0840d2ec2",
    "words": 545
   },
   "public/data/crime/md/IS_CRIME_international_incarceration.md": {
-   "sha": "69203ff335aa9e2e",
+   "sha": "1853b5f084c45008",
    "words": 1132
   },
   "public/data/crime/md/IS_CRIME_international_missing-persons.md": {
-   "sha": "82ce155ee577f052",
+   "sha": "343fbcd68aecfcbd",
    "words": 360
   },
   "public/data/crime/md/IS_CRIME_register_accomplishments.md": {
-   "sha": "13ede527ebbce6ed",
+   "sha": "8f7decf0f2516644",
    "words": 535
   },
   "public/data/crime/md/IS_CRIME_register_caveats.md": {
-   "sha": "0b1c04418381084a",
+   "sha": "096354c17ca216ba",
    "words": 260
   },
   "public/data/crime/md/IS_CRIME_register_data-quality.md": {
-   "sha": "fd739360dff1abf4",
+   "sha": "7b49ca89b15c57ae",
    "words": 2836
   },
   "public/data/crime/md/IS_CRIME_register_milestones.md": {
-   "sha": "5fec922ff0ea5dd8",
+   "sha": "787da3a9e4890f41",
    "words": 1197
   },
   "public/data/crime/md/IS_CRIME_register_not-counted.md": {
-   "sha": "bdbcad7bab489ed2",
+   "sha": "81866263019e9ebc",
    "words": 2322
   },
   "public/data/crime/md/IS_CRIME_register_sweeps.md": {
-   "sha": "1b36a37ceb4c4bca",
+   "sha": "90ec77a3dbf5cac3",
    "words": 620
   },
   "public/data/crime/md/IS_CRIME_register_transnational.md": {
-   "sha": "35d84e5cf93b5dd8",
+   "sha": "3534d8fc2eb82bb3",
    "words": 636
   },
   "public/data/crime/md/IS_CRIME_register_trends.md": {
-   "sha": "84ec907f23ade98f",
+   "sha": "9e00825469731a87",
    "words": 1338
   },
   "public/data/crime/md/IS_CRIME_sources.md": {
-   "sha": "70174429d6e4fd44",
+   "sha": "e5b37478b951e7da",
    "words": 4648
   },
   "public/data/crime/md/csv/data_quality.csv": {
@@ -301,43 +309,43 @@
  },
  "health": {
   "public/data/health/md/IS_HEALTH_00_start-here.md": {
-   "sha": "db1d64a119103151",
+   "sha": "f1086f54f540ed24",
    "words": 418
   },
   "public/data/health/md/IS_HEALTH_01_finding.md": {
-   "sha": "2f00386cb0745686",
+   "sha": "4142f721d961002a",
    "words": 499
   },
   "public/data/health/md/IS_HEALTH_chart_suicide-international.md": {
-   "sha": "2a3e0dbdae510bbb",
+   "sha": "5263ef249ec21943",
    "words": 1361
   },
   "public/data/health/md/IS_HEALTH_register_caveats.md": {
-   "sha": "11bbcef4df6ec155",
+   "sha": "15dc9e78863afced",
    "words": 1289
   },
   "public/data/health/md/IS_HEALTH_register_claims.md": {
-   "sha": "896dad4f870d8f6d",
+   "sha": "d78667232a6d1d8c",
    "words": 2715
   },
   "public/data/health/md/IS_HEALTH_register_data-quality.md": {
-   "sha": "43a684ee9f92d82f",
+   "sha": "cf7f017c210a66dc",
    "words": 1286
   },
   "public/data/health/md/IS_HEALTH_register_milestones.md": {
-   "sha": "fbcee511a143d45d",
+   "sha": "acc1d32d7fb745ae",
    "words": 1686
   },
   "public/data/health/md/IS_HEALTH_register_overlaps.md": {
-   "sha": "b1485f628e941101",
+   "sha": "8fa045d333127d28",
    "words": 1580
   },
   "public/data/health/md/IS_HEALTH_register_trends.md": {
-   "sha": "b4c264aa7668f01e",
+   "sha": "18a1277e30dedb21",
    "words": 1939
   },
   "public/data/health/md/IS_HEALTH_sources.md": {
-   "sha": "f7a827a09498cbdd",
+   "sha": "5b3755f3e913cfd8",
    "words": 2445
   },
   "public/data/health/md/csv/claims.csv": {
