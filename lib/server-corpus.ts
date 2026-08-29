@@ -131,6 +131,7 @@ export type HomeEntry = {
 export function homeJournal(limit = 10): HomeEntry[] {
   const L = load();
   const out: HomeEntry[] = [];
+
   // Newest first, and entries rather than individual recordings: a day is the
   // unit a reader recognises.
   //
@@ -142,7 +143,10 @@ export function homeJournal(limit = 10): HomeEntry[] {
   for (let i = L.journal.length - 1; i >= 0 && out.length < limit; i--) {
     const d = L.journal[i];
     if (d.doc_type !== "entry" || !d.entry_date) continue;
-    const slugs = (L.docGloss[d.id] || []).slice(0, 3);
+    // Deduped, in the corpus's own order. Ordering by rarity was tried and
+    // dropped: it puts an editorial thumb on which word leads, and it changed
+    // nothing here because most recent entries carry exactly one term.
+    const slugs = [...new Set(L.docGloss[d.id] || [])].slice(0, 3);
     if (slugs.length === 0) continue;
     out.push({
       id: d.id.toLowerCase(),
