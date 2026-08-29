@@ -251,7 +251,7 @@ export default function CaptureView() {
 
 function Shell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="w-full lg:w-[65%] lg:mx-auto">
+    <div className="w-full">
       <h2 className="font-display text-3xl font-semibold text-foreground mb-2">Capture</h2>
       <p className="body-copy text-foreground/85 mb-6">
         A private, dated record. Press record while something is happening and say what
