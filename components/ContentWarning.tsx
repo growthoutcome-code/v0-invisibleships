@@ -35,6 +35,7 @@
  * computer shows it to the next person.
  */
 import { useEffect, useState } from "react";
+import { SafetyDialog } from "@/components/LegalDialogs";
 import { GATE } from "@/lib/gate-content";
 
 const KEY = "is_content_warning_v1";
@@ -107,9 +108,16 @@ export default function ContentWarning() {
         >
           I understand
         </button>
-        <a href="/safety" className="text-[13px] text-muted underline underline-offset-4 hover:text-foreground">
-          The full safety note
-        </a>
+        {/* Opens in place. A warning that navigates you away from what you
+            were about to read is a second gate wearing different clothes. */}
+        <SafetyDialog>
+          <button
+            type="button"
+            className="text-[13px] text-muted underline underline-offset-4 hover:text-foreground"
+          >
+            The full safety note
+          </button>
+        </SafetyDialog>
       </div>
 
       {/* Sourced from the gate's own wording so the two cannot drift. If this

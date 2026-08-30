@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Footer from "@/components/Footer";
 import { GATE } from "@/lib/gate-content";
 
 /**
@@ -61,6 +62,8 @@ export default function Page() {
           </a>
         </div>
       </main>
+
+      <Footer />
     </>
   );
 }

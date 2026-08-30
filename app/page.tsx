@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Footer from "@/components/Footer";
 import GateAnimation from "@/components/GateAnimation";
 import HomeJournalCarousel from "@/components/HomeJournalCarousel";
 import { CONCEPTS, FINDINGS, NOT_ESTABLISHED, SOURCE_YEARS } from "@/lib/concepts";
@@ -55,12 +56,14 @@ export const metadata: Metadata = {
   },
 };
 
+// The header carries what a reader came for. The disclaimer moved to the
+// footer, where the convention says to look for it and where it opens as a
+// modal — it was spending a nav slot on a document almost nobody clicks first.
 const NAV = [
   { href: "/journal", label: "Journal" },
   { href: "/concepts", label: "Concepts" },
   { href: "/data", label: "Research" },
   { href: "/glossary", label: "Glossary" },
-  { href: "/disclaimer", label: "Disclaimer" },
 ];
 
 export default function Page() {
@@ -405,7 +408,7 @@ export default function Page() {
         </section>
 
         {/* --------------------------------------- corpus + why the name */}
-        <section className="border-b border-edge">
+        <section>
           <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-2">
             <div>
               <h2 className="font-display m-0 text-2xl font-semibold text-foreground">
@@ -445,24 +448,9 @@ export default function Page() {
           </div>
         </section>
 
-        <footer>
-          <div className="mx-auto max-w-7xl px-5 py-10 text-[14px] text-muted sm:px-8">
-            <p className="m-0">
-              Compiled by Sean C. Harris. Independent research from public sources, for
-              information only — not legal, medical or investment advice.{" "}
-              <a href="/disclaimer" className="underline underline-offset-4">
-                Disclaimer, copyright and terms
-              </a>
-              {" · "}
-              <a href="/safety" className="underline underline-offset-4">
-                A note on safety
-              </a>
-              .
-            </p>
-            <p className="m-0 mt-2">© 2026 Sean C. Harris. All Rights Reserved.</p>
-          </div>
-        </footer>
       </main>
+
+      <Footer />
     </>
   );
 }

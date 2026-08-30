@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Footer from "@/components/Footer";
+import SafetyNote from "@/components/SafetyNote";
 import { GATE } from "@/lib/gate-content";
 
 /**
@@ -42,16 +44,7 @@ export default function Page() {
         </p>
         <h1 className="font-display mt-2 mb-8 text-4xl font-semibold text-foreground">{s.title}</h1>
 
-        <div className="body-copy space-y-5 text-[17px] leading-relaxed text-foreground/90">
-          <p className="m-0">{s.body}</p>
-          <p className="m-0">{s.distress}</p>
-          {/* The crisis line is the reason this page exists. It is emphasised
-              rather than set as one paragraph among four. */}
-          <p className="m-0 border-l-2 border-foreground pl-5 font-semibold text-foreground">
-            {s.crisis}
-          </p>
-          <p className="m-0">{s.guidance}</p>
-        </div>
+        <SafetyNote />
 
         <div className="mt-10 flex flex-wrap gap-4 border-t border-edge pt-8">
           <a
@@ -68,6 +61,8 @@ export default function Page() {
           </a>
         </div>
       </main>
+
+      <Footer />
     </>
   );
 }

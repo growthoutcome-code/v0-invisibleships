@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Footer from "@/components/Footer";
 
 /**
  * /contribute — where the nav's register call-to-action lands.
@@ -155,6 +156,8 @@ export default function Page() {
           </div>
         </section>
       </main>
+
+      <Footer />
     </>
   );
 }
