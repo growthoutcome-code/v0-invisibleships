@@ -163,6 +163,59 @@ export function homeJournal(limit = 10): HomeEntry[] {
   return out;
 }
 
+/**
+ * One journal entry, hand-picked, with its quoted passage VERIFIED against the
+ * corpus at render time.
+ *
+ * WHY THE PASSAGE IS HAND-PICKED AND NOT DERIVED. "/" is ungated. 89 of 438
+ * journal documents open with euthanasia, self-harm or violence language inside
+ * their first 220 characters, including two of the eight most recent. An
+ * automatic excerpt would eventually publish one of those on the front page, to
+ * somebody who arrived from a link with no warning ahead of it. There is no
+ * filter that is safe enough here; a person has to choose.
+ *
+ * WHY IT IS STILL CHECKED. A hand-picked quote is a second copy of the record,
+ * and a second copy that stops matching the first is this project's oldest
+ * failure. So the quote is verified as a substring of the entry it claims to
+ * come from, whitespace-normalised, and a mismatch throws during the build
+ * rather than shipping a misquote of the archive's own primary source. If the
+ * entry is edited, the home page fails loudly instead of quietly lying.
+ */
+export type FeaturedEntry = {
+  id: string;
+  date: string;
+  weekday: string | null;
+  location: string | null;
+  hasAudio: boolean;
+  /** The quoted passage, exactly as it appears in the entry. */
+  quote: string;
+};
+
+export function featuredEntry(id: string, quote: string): FeaturedEntry {
+  const L = load();
+  const doc = L.byId.get(id.toLowerCase());
+  if (!doc) throw new Error(`featuredEntry: no journal document with id ${id}`);
+
+  const flat = (t: string) => t.replace(/\s+/g, " ").trim();
+  const body = flat(doc.body_markdown || "");
+  if (!body.includes(flat(quote))) {
+    throw new Error(
+      `featuredEntry: the quoted passage is not present in ${id}. ` +
+        `The entry has changed, or the quote was mistyped. Fix the quote against ` +
+        `the entry rather than removing this check.`
+    );
+  }
+
+  return {
+    id: doc.id.toLowerCase(),
+    date: doc.entry_date || "",
+    weekday: doc.weekday ?? null,
+    location: doc.location ?? null,
+    hasAudio: Boolean(doc.audio_url || doc.audio_file),
+    quote,
+  };
+}
+
 /** Glossary terms with a usable one-line summary, for the home page strip. */
 export function homeGlossary(slugs: string[]): { slug: string; term: string; summary: string }[] {
   const L = load();

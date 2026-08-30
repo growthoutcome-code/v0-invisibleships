@@ -3,10 +3,11 @@ import Footer from "@/components/Footer";
 import { ChevronDown } from "lucide-react";
 import GateAnimation from "@/components/GateAnimation";
 import Header from "@/components/Header";
-import HomeJournalCarousel from "@/components/HomeJournalCarousel";
+import HomeCarousel, { type Slide } from "@/components/HomeCarousel";
 import { CONCEPTS, FINDINGS, NOT_ESTABLISHED, SOURCE_YEARS } from "@/lib/concepts";
 import { CORPUS_SUMMARY } from "@/lib/corpus-summary";
-import { homeGlossary, homeJournal, journalStats } from "@/lib/server-corpus";
+import { GLOSSARY_PICKS, JOURNAL_PICKS } from "@/lib/home-picks";
+import { featuredEntry, homeGlossary, journalStats } from "@/lib/server-corpus";
 
 /**
  * The home page.
@@ -134,9 +135,31 @@ const CITY_QUOTES: { date: string; id: string; text: string }[] = [
 ];
 
 export default function Page() {
-  const entries = homeJournal(9);
-  const gloss = homeGlossary([...new Set(entries.flatMap((e) => e.terms.map((t) => t.slug)))]);
   const stats = journalStats();
+
+  // Each quote is checked against its entry here. A mismatch throws during the
+  // build rather than shipping a misquote of the archive's own primary source.
+  const journalSlides: Slide[] = JOURNAL_PICKS.map((pick) => {
+    const e = featuredEntry(pick.id, pick.quote);
+    const when = new Date(`${e.date}T00:00:00Z`).toLocaleDateString("en-US", {
+      month: "long", day: "numeric", year: "numeric", timeZone: "UTC",
+    });
+    return {
+      href: `/journal/${e.id}`,
+      eyebrow: [e.weekday, when, e.location].filter(Boolean).join(" · "),
+      body: `“${e.quote}”`,
+      meta: pick.why,
+      cta: "Read the full entry",
+    };
+  });
+
+  const glossarySlides: Slide[] = homeGlossary(GLOSSARY_PICKS).map((g) => ({
+    href: `/glossary/${g.slug}`,
+    eyebrow: "Glossary",
+    title: g.term,
+    body: g.summary,
+    cta: "Full definition and every entry that uses it",
+  }));
   const sourcesWithUrl = SOURCE_YEARS.filter((s) => s.url).length;
   const earliest = Math.min(...SOURCE_YEARS.map((s) => s.year));
   const conceptTitles = CONCEPTS.slice(0, 6);
@@ -237,34 +260,58 @@ export default function Page() {
 
         {/* -------------------------------------------------------- journal */}
         <section id="record" className="scroll-mt-24 border-b border-edge">
-          <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
-            <div className="mb-8 flex flex-wrap items-end gap-4">
-              <div>
-                <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">The record</p>
-                {/* Not "From the journal", which labels a topic. Under the scan
-                    rule a heading has to carry its beat alone, and this beat is
-                    "it is real, and it is specific". Numbers derived at render. */}
-                <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground">
-                  {stats.days} dated days, {stats.recordings} recordings, one city
-                </h2>
-              </div>
+          <div className="mx-auto max-w-5xl px-5 py-16 sm:px-8">
+            <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
+              The record
+            </p>
+            {/* Not "From the journal", which labels a topic. Under the scan rule
+                a heading carries its beat alone, and this beat is "it is real,
+                and it is specific". Every number derived at render. */}
+            <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground">
+              {stats.days} dated days, {stats.recordings} recordings, one city
+            </h2>
+
+            {/* WHAT THE RECORD TELLS PEOPLE — Sean asked for this to be said
+                rather than assumed. Three claims, each of which the five slides
+                below then demonstrate instead of asserting. */}
+            <div className="body-copy mt-5 max-w-2xl space-y-4 text-[17px] text-foreground/85">
+              <p className="m-0">
+                Every entry carries a date. Most carry a place, and a time of day. What
+                is written down is what was heard, as it was heard &mdash; including the
+                parts that contradict each other and the parts that make no sense.
+                Nothing is smoothed afterwards.
+              </p>
+              <p className="m-0">
+                The method is in the entries themselves: statements repeated aloud into a
+                phone recorder as they arrived, the recordings transcribed, {stats.recordings}{" "}
+                of them linked to the audio they came from. Where the author was unsure,
+                the entry says he was unsure.
+              </p>
+              <p className="m-0">
+                It is testimony &mdash; a dated first-person report, verified by nobody,
+                and labelled that way everywhere it appears. What makes it worth reading
+                is not that it is proven. It is that it is specific enough to be checked.
+              </p>
+            </div>
+
+            <div className="mt-10">
+              <HomeCarousel slides={journalSlides} label="Selected journal entries" />
+            </div>
+
+            <div className="mt-10 flex flex-wrap items-center gap-4">
               <a
                 href="/journal"
-                className="ml-auto text-[14px] underline underline-offset-4 text-muted hover:text-foreground"
+                className="inline-flex h-12 items-center rounded-md bg-foreground px-6 text-[15px] font-medium text-background"
               >
-                All {stats.days} days, {stats.docs} documents
+                More journal entries
               </a>
+              <span className="text-[14px] text-muted">
+                All {stats.days} days and {stats.docs} documents, oldest to newest.
+              </span>
             </div>
-            <p className="body-copy mb-8 max-w-2xl text-foreground/85">
-              Dated entries and verbatim transcripts, with {stats.recordings} audio-linked
-              recordings. Each card shows the day, where it was recorded when that was
-              noted, and the glossary terms that entry uses. The entries themselves sit
-              behind a content warning, which is where they belong.
-            </p>
-
-            <HomeJournalCarousel entries={entries} glossary={gloss} />
           </div>
         </section>
+
 
         {/* ------------------------------- what this does NOT establish */}
         {/* Addressable since the hero became a question about a named city:
@@ -542,6 +589,46 @@ export default function Page() {
                 </li>
               ))}
             </ul>
+          </div>
+        </section>
+
+        {/* ------------------------------------------------------ glossary */}
+        {/* Its own section now (Sean, 30 August). It was a panel inside the
+            record, where it read as a footnote to the journal. It is not: it is
+            the vocabulary this subject is argued in, and half these words are
+            used against people who have no definition for them. Placed with the
+            concepts, in the "what you would learn" beat, rather than beside the
+            record — the two are different asks of a reader. */}
+        <section className="border-b border-edge">
+          <div className="mx-auto max-w-5xl px-5 py-16 sm:px-8">
+            <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
+              The glossary
+            </p>
+            <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground">
+              The words this subject is argued in
+            </h2>
+            <p className="body-copy mt-5 max-w-2xl text-[17px] text-foreground/85">
+              Some are dictionary terms used precisely. Some are technical, and a reader
+              is expected to have no prior grip on them. Every one is defined here rather
+              than assumed, because an argument conducted in words the reader cannot check
+              is not an argument they can disagree with.
+            </p>
+
+            <div className="mt-10">
+              <HomeCarousel slides={glossarySlides} label="Selected glossary terms" />
+            </div>
+
+            <div className="mt-10 flex flex-wrap items-center gap-4">
+              <a
+                href="/glossary"
+                className="inline-flex h-12 items-center rounded-md bg-foreground px-6 text-[15px] font-medium text-background"
+              >
+                More glossary terms
+              </a>
+              <span className="text-[14px] text-muted">
+                Every term, with the entries that use it.
+              </span>
+            </div>
           </div>
         </section>
 
