@@ -74,17 +74,40 @@ export default function Page() {
   return (
     <>
       {/* ------------------------------------------------------------- nav */}
+      {/* TYPOGRAPHY. The links were Inter — the body face — at 13px with
+          Tailwind's default `tracking-wide`, which is what "plain" looked like:
+          the navigation was set in the same voice as a paragraph.
+
+          They are Space Grotesk now, the display face the headlines already
+          use. Nothing new is downloaded; it is in the same Google Fonts request
+          as the rest. Space Grotesk's letterforms are geometric and slightly
+          squared, which is unremarkable at headline size and does real work in
+          small caps — it reads as a plate on a cabinet rather than as body
+          text, which is the register an archive wants.
+
+          The other half is spacing. Uppercase text needs more of it than
+          lowercase does, because capitals have no ascenders or descenders to
+          separate them; 0.14em is enough to let the words breathe without
+          drifting into a fashion-house wordmark. Dropping to 12px pays for the
+          extra width so the row does not grow.
+
+          Hover is a 1px rule under the word rather than a colour change alone.
+          A colour shift on already-muted text is easy to miss; a rule is
+          unambiguous and it is how the rest of the site marks a link. */}
       <header className="sticky top-0 z-30 w-full border-b border-edge bg-background/95 backdrop-blur">
         <div className="mx-auto flex h-[64px] max-w-7xl items-center gap-6 px-5 sm:px-8">
-          <a href="/" className="font-display text-lg font-semibold tracking-tight text-foreground">
+          <a
+            href="/"
+            className="font-display text-lg font-semibold tracking-[-0.01em] text-foreground"
+          >
             Invisible Ships
           </a>
-          <nav className="ml-auto hidden items-center gap-5 lg:flex">
+          <nav className="ml-auto hidden items-center gap-7 lg:flex">
             {NAV.map((n) => (
               <a
                 key={n.href}
                 href={n.href}
-                className="text-[13px] uppercase tracking-wide text-muted hover:text-foreground"
+                className="font-display border-b border-transparent pb-0.5 text-[12px] font-medium uppercase tracking-[0.14em] text-muted transition-colors hover:border-foreground hover:text-foreground"
               >
                 {n.label}
               </a>
@@ -94,7 +117,7 @@ export default function Page() {
               not on a sign-up form, because accounts are not open yet. */}
           <a
             href="/contribute"
-            className="ml-auto inline-flex h-10 items-center rounded-md bg-foreground px-4 text-[14px] font-medium text-background lg:ml-0"
+            className="font-display ml-auto inline-flex h-10 items-center rounded-md bg-foreground px-4 text-[12px] font-medium uppercase tracking-[0.14em] text-background lg:ml-0"
           >
             Contribute
           </a>
@@ -175,7 +198,7 @@ export default function Page() {
           <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
             <div className="mb-8 flex flex-wrap items-end gap-4">
               <div>
-                <p className="m-0 text-[12px] uppercase tracking-[0.1em] text-muted">The record</p>
+                <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">The record</p>
                 <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground">
                   From the journal
                 </h2>
@@ -201,7 +224,7 @@ export default function Page() {
         {/* ------------------------------------- what the technology can do */}
         <section className="border-b border-edge">
           <div className="mx-auto max-w-3xl px-5 py-16 sm:px-8">
-            <p className="m-0 text-[12px] uppercase tracking-[0.1em] text-muted">
+            <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
               Before anything else
             </p>
             <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground">
@@ -276,7 +299,7 @@ export default function Page() {
           <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
             <div className="mb-8 flex flex-wrap items-end gap-4">
               <div>
-                <p className="m-0 text-[12px] uppercase tracking-[0.1em] text-muted">The research</p>
+                <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">The research</p>
                 <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground">
                   Eight things the record already says
                 </h2>
@@ -318,7 +341,7 @@ export default function Page() {
           <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
             <div className="mb-8 flex flex-wrap items-end gap-4">
               <div>
-                <p className="m-0 text-[12px] uppercase tracking-[0.1em] text-muted">
+                <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
                   The questions
                 </p>
                 <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground">

@@ -99,7 +99,7 @@ export default function HomeJournalCarousel({
                   {e.terms.map((t) => (
                     <span
                       key={t.slug}
-                      className="rounded-full border border-edge px-2.5 py-1 text-[12px] uppercase tracking-wide text-muted"
+                      className="font-display rounded-full border border-edge px-2.5 py-1 text-[11px] uppercase tracking-[0.12em] text-muted"
                     >
                       {t.term}
                     </span>
@@ -120,7 +120,7 @@ export default function HomeJournalCarousel({
       {/* The intersection. Same row of information, other side. */}
       {term && (
         <div className="mt-8 rounded-lg border border-edge bg-foreground/[0.03] p-6">
-          <p className="m-0 text-[12px] uppercase tracking-[0.08em] text-muted">
+          <p className="font-display m-0 text-[12px] uppercase tracking-[0.14em] text-muted">
             A word this entry uses
           </p>
           <h3 className="font-display mt-2 text-2xl font-semibold text-foreground">

@@ -58,13 +58,13 @@ export default function Page() {
         <a href="/" className="font-display font-semibold tracking-tight text-foreground text-lg">
           Invisible Ships
         </a>
-        <a href="/disclaimer" className="ml-auto text-[13px] uppercase tracking-wide text-muted hover:text-foreground">
+        <a href="/disclaimer" className="ml-auto font-display border-b border-transparent pb-0.5 text-[12px] font-medium uppercase tracking-[0.14em] text-muted transition-colors hover:border-foreground hover:text-foreground">
           Disclaimer and terms
         </a>
       </header>
 
       <main className="mx-auto max-w-3xl px-5 sm:px-8 py-14">
-        <p className="m-0 text-[13px] uppercase tracking-[0.08em] text-muted">Contribute</p>
+        <p className="font-display m-0 text-[12px] uppercase tracking-[0.14em] text-muted">Contribute</p>
         <h1 className="font-display mt-2 mb-6 text-4xl font-semibold text-foreground">
           Adding your own account
         </h1>
