@@ -50,14 +50,14 @@ export const metadata: Metadata = {
   // The headline is the title. A shared link should carry the question, since
   // the question is what this archive is organised around — and a question
   // carries its question mark with it, which an assertion never would.
-  title: "Are you being subjected to unconsented to neurotechnological communication and experimentation?",
+  title: "Has an unintended neurotechnological terrorist attack happened in the United States of America?",
   description:
-    "This archive cannot answer that for you. It can show you what neurotechnology has actually been shown to do, under what conditions, and where the documented record stops. Colorado has required consent to collect neural data since 2024, the first law of its kind anywhere. One resident's dated record from Denver — 120 days, 298 recordings — sits beside the public procurement record. Every figure resolves to a named source.",
+    "This archive does not answer that. It holds one resident's dated record from Denver — 120 days of entries, 298 recordings — the public procurement record, and what regulators found when they looked. Colorado has required consent to collect neural data since 2024, the first law of its kind anywhere. Every figure resolves to a named source, and the archive states plainly what none of it establishes.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Are you being subjected to unconsented to neurotechnological communication and experimentation?",
+    title: "Has an unintended neurotechnological terrorist attack happened in the United States of America?",
     description:
-      "This archive cannot answer that for you. It can show what neurotechnology has been shown to do, and where the documented record stops.",
+      "This archive does not answer that. It holds the dated record, the procurement record, and what regulators found — and what none of it establishes.",
     images: ["/og-default.png"],
   },
 };
@@ -65,45 +65,52 @@ export const metadata: Metadata = {
 /**
  * THE HERO HEADLINE.
  *
- * Sean's sentence, verbatim and by explicit instruction: "I want it exactly
- * that." Including "unconsented to", which is his own published register — the
- * series' executive summary reads "unconsented to criminal coercion" and "the
- * unconsented breaching of the human body". It is his voice, not a slip, and it
- * is not corrected here.
+ * Sean's sentence, as instructed:
+ *   "Has an unintended neurotechnological terrorist attack happened in the
+ *    United States of America?"
  *
- * IT IS A LEADING QUESTION, AND THE SUBLINE IS WHAT MAKES IT SAFE. Asked of a
- * stranger the archive knows nothing about, "are you being subjected to this"
- * plants the answer. The site's own first limit says nothing here establishes
- * that any specific thing has been done to any specific person, and a share of
- * the people who search these words are unwell in ways a bare "yes" makes worse.
+ * THIS IS THE SERIES' OWN CLAIM, MOVED TO THE FRONT. It is not a new assertion
+ * invented for a landing page. The Invisible Ships executive summary — in the
+ * corpus, dated, downloadable — already describes "an unacknowledged terrorist
+ * attack" and "a technology-driven phenomenon of communication targeting
+ * citizens", and states that the author's role "is not to accuse any single
+ * entity but to present patterns of perceived communication for further
+ * investigation". A question mark is the posture those documents already take.
  *
- * So the first sentence under it declines to answer, in as many words. "This
- * archive cannot answer that for you" is doing more work than any other line on
- * the page: it lets the headline ask the question that reaches the frightened
- * reader, while refusing to be the thing that confirms it to them. What follows
- * is what the archive CAN do, and it is all checkable one section down —
- * Neuralink's trial needs a surgeon, the fMRI decoder needed sixteen hours per
- * person and failed when participants resisted, Colorado has required consent
- * for neural data since 2024, and there the documented record stops.
+ * WHAT THE QUESTION DOES AND DOES NOT DO. It asks whether something happened.
+ * It names no perpetrator, no agency and no company, which is what keeps it
+ * inside the Critical Disclaimer's own rule: the archive records that names were
+ * said and makes no finding about any of them. A question about an event is a
+ * different act from an accusation against a party, and this is the first.
  *
- * The buttons are gone at Sean's instruction. The scroll hint is now the only
- * affordance out of the hero, which is why it is a labelled link and not a bare
- * chevron.
+ * "UNINTENDED" IS DOING SOMETHING SPECIFIC, and it is worth not losing. The
+ * series' word is "unacknowledged". "Unintended" says something else and
+ * something stranger: that the harm may be real and nobody may have meant it —
+ * a system with effects its operators did not choose. That is the reading most
+ * protective of the law-enforcement and technology people Sean has said
+ * repeatedly he does not want to accuse, and it is the reading the archive's
+ * structural findings actually support: no column for the person a system is
+ * used on, no route to individual review in 99 regulations. Nobody has to have
+ * intended that for it to be true.
  *
- * Subline alternates, one line to swap:
- *   B  "Not a reassurance — a record. What the technology has been shown to do,
- *       what it needs to do it, and where the documented record stops."
- *   C  "One resident's dated record from Denver, and the public evidence beside
- *       it. Colorado has required consent to collect neural data since 2024 —
- *       the first law of its kind anywhere."
+ * THE SUBLINE DECLINES, as it did before, and that is what makes a question this
+ * large publishable. The headline may ask; the next sentence refuses to answer,
+ * and hands the reader what the archive actually holds so they can.
+ *
+ * Alternates, one line to swap:
+ *   B  "Has an unacknowledged neurotechnological terrorist attack happened in
+ *       the United States of America?" — the series' own word.
+ *   C  "Are you being subjected to unconsented to neurotechnological
+ *       communication and experimentation?" — the second-person version.
+ *   D  "Is the world being exposed to unconsented neurotech experimentation?"
  */
 const HERO = {
   question:
-    "Are you being subjected to unconsented to neurotechnological communication and experimentation?",
+    "Has an unintended neurotechnological terrorist attack happened in the United States of America?",
   answer:
-    "This archive cannot answer that for you. It can show you what neurotechnology has " +
-    "actually been shown to do, under what conditions, and where the documented record " +
-    "stops.",
+    "This archive does not answer that. It holds one resident's dated record from Denver, " +
+    "the public procurement record, and what regulators found when they looked — and it " +
+    "states plainly what none of it establishes.",
 };
 
 /**
