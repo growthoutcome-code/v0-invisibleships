@@ -45,16 +45,61 @@ import { homeGlossary, homeJournal, journalStats } from "@/lib/server-corpus";
  */
 
 export const metadata: Metadata = {
-  title: "Invisible Ships — a dated record, and the research behind it",
+  // The headline is the title. A shared link should carry the question, since
+  // the question is what this archive is organised around — and a question
+  // carries its question mark with it, which an assertion never would.
+  title: "Is Denver, Colorado the site of unconsented neurotechnological research?",
   description:
-    "A first-person journal kept day by day, and a documented research archive beside it: court rulings, regulator decisions, statistical agencies and published investigations. Every figure resolves to a named source, and the archive states what it does not establish.",
+    "One resident's dated record — 120 days of entries and 298 recordings — and a documented research archive assembled to test it: court rulings, regulator decisions, statistical agencies and published investigations. Every figure resolves to a named source, and the archive states plainly what it does not establish.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Invisible Ships",
+    title: "Is Denver, Colorado the site of unconsented neurotechnological research?",
     description:
-      "Your house is not haunted. A dated record, and the research behind it.",
+      "A dated first-person record, and the public-record research assembled to test it.",
     images: ["/og-default.png"],
   },
+};
+
+/**
+ * THE HERO HEADLINE, AS A QUESTION.
+ *
+ * Sean, 30 August: use "a heading that is similar to the Invisible Ships
+ * document series, and let's pose it as a question just like it is in the
+ * document cover page."
+ *
+ * The series' own executive summary is the source of this register: a
+ * "technology-driven phenomenon of communication targeting citizens in Denver,
+ * Colorado", presented as "third-party allegations that require official
+ * verification", by an author whose stated role "is not to accuse any single
+ * entity but to present patterns of perceived communication for further
+ * investigation". A question mark is not decoration here. It is the same
+ * posture the documents already take, carried onto the front page.
+ *
+ * Two alternates are kept below rather than discarded. Swapping the headline
+ * should cost one line, not a rewrite, and the runners-up are the record of
+ * what was considered.
+ *
+ *   B — the method as the headline. Safest and the most distinctive; it makes
+ *       the archive's discipline the first thing a stranger meets.
+ *         h: "What would it take to establish that this is happening?"
+ *         p: "A Denver resident's dated record of unconsented neurotechnological
+ *             contact — 120 days, 298 recordings — and the public-record research
+ *             assembled to test it against."
+ *
+ *   C — addressed to the reader who arrives frightened. The warmest of the
+ *       three, and the one most likely to hold somebody who found this at 3am.
+ *         h: "If you are hearing something nobody else can hear, is there a
+ *             technology that explains it?"
+ *         p: "A dated first-person record from Denver, Colorado, and a research
+ *             archive of what neurotechnology has actually been shown to do —
+ *             including where the documented record stops."
+ */
+const HERO = {
+  question: "Is Denver, Colorado the site of unconsented neurotechnological research?",
+  answer:
+    "One resident's dated record, and the public-record research assembled to test it. " +
+    "The research is documented and sourced. The question is not — which is what the " +
+    "question mark is for, and why this archive states plainly what it does not establish.",
 };
 
 export default function Page() {
@@ -78,26 +123,23 @@ export default function Page() {
             narrowed from the gate's 40% to 25% so the animation carries more of
             the screen.
 
-            min-w-[360px] is the floor, and it is what makes 25% safe: at 1440px
-            the rail IS 25%, and on a narrower desktop the floor takes over
-            rather than crushing the headline into a column of one-word lines.
+            30/70 now, up from 25/75: the headline became a full question and a
+            question needs line length. min-w-[380px] is the floor that makes a
+            percentage safe — at 1280px the rail IS 30%, and on anything
+            narrower the floor takes over rather than breaking a nine-word
+            question into a column of one-word lines.
 
             order-1 / order-2 is the gate's behaviour too — on a phone the
             animation is on top and the copy reads beneath it. */}
         <section className="flex min-h-[calc(100vh-72px)] lg:min-h-[calc(100vh-88px)] flex-col border-b border-edge md:flex-row">
           {/* Left 25% — the copy rail */}
-          <div className="order-2 flex flex-col px-8 py-12 sm:px-12 md:order-1 md:w-[25%] md:min-w-[360px] lg:px-14">
+          <div className="order-2 flex flex-col px-8 py-12 sm:px-12 md:order-1 md:w-[30%] md:min-w-[380px] lg:px-14">
             <div className="animate-fade-in flex max-w-md flex-1 flex-col justify-center">
-              <h1 className="font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-                Your house is not haunted.
+              <h1 className="font-display text-[32px] font-bold leading-[1.12] tracking-tight text-foreground sm:text-[40px]">
+                {HERO.question}
               </h1>
-              <p className="mt-4 font-serif text-xl leading-snug text-foreground/80 sm:text-2xl">
-                It may be neurotechnology &mdash; and there is a public record of who is
-                building it and who is buying it.
-              </p>
-              <p className="mt-3 text-sm text-muted">
-                A journal kept day by day, and the research assembled beside it. Every
-                figure resolves to a named source.
+              <p className="mt-5 font-serif text-lg leading-snug text-foreground/80 sm:text-xl">
+                {HERO.answer}
               </p>
 
               <div className="mt-7 flex flex-wrap items-center gap-3">
@@ -114,9 +156,13 @@ export default function Page() {
                   See the research
                 </a>
               </div>
-              <p className="mt-4 text-[13px] text-foreground/70">
-                The journal carries a content warning and sits behind it. The research
-                does not.
+              <p className="mt-4 text-[13px] leading-relaxed text-foreground/70">
+                The journal carries a content warning. Nothing here asks you to agree to
+                anything before reading it.{" "}
+                <a href="#not-established" className="underline underline-offset-4">
+                  What this archive does not establish
+                </a>
+                .
               </p>
             </div>
 
@@ -133,7 +179,7 @@ export default function Page() {
           </div>
 
           {/* Right 75% — animation panel */}
-          <div className="relative order-1 min-h-[42vh] overflow-hidden bg-background md:order-2 md:min-h-[calc(100vh-72px)] lg:min-h-[calc(100vh-88px)] md:w-[75%]">
+          <div className="relative order-1 min-h-[42vh] overflow-hidden bg-background md:order-2 md:min-h-[calc(100vh-72px)] lg:min-h-[calc(100vh-88px)] md:w-[70%]">
             <GateAnimation fill />
           </div>
         </section>
@@ -170,14 +216,21 @@ export default function Page() {
         <section className="border-b border-edge">
           <div className="mx-auto max-w-3xl px-5 py-16 sm:px-8">
             <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
-              Before anything else
+              Neurotechnology
             </p>
-            <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground">
-              What neurotechnology can actually do
+            {/* This line was the hero headline until Sean moved it here, and it
+                belongs here: it is a claim about what the technology can and
+                cannot do, so it should sit on top of the evidence for that
+                rather than on top of the whole archive. As a hero it asked the
+                reader to take reassurance on trust. Here they can check it. */}
+            <h2 className="font-display m-0 mt-2 text-4xl font-semibold text-foreground">
+              Your house is not haunted.
             </h2>
-            <p className="body-copy mt-4 text-foreground/85">
-              Precisely, with the conditions attached. The conditions are the part that
-              lets you rule something in or out.
+            <p className="body-copy mt-4 text-[17px] text-foreground/85">
+              What the documented record actually shows a machine can do to a person, and
+              under what conditions. The conditions are the part that lets you rule
+              something in or out &mdash; and every capability below needed a surgeon, a
+              scanner, or hours of the person&rsquo;s own cooperation.
             </p>
 
             <div className="mt-8 space-y-8">
@@ -322,9 +375,12 @@ export default function Page() {
         </section>
 
         {/* ------------------------------- what this does NOT establish */}
+        {/* Addressable since the hero became a question about a named city:
+            the limits that question is asked under must be one click from it,
+            not four screens down. */}
         {/* On a home page, above everything else it might claim. Most sites
             would never do this; it is the single strongest thing here. */}
-        <section className="border-b border-edge">
+        <section id="not-established" className="scroll-mt-24 border-b border-edge">
           <div className="mx-auto max-w-3xl px-5 py-16 sm:px-8">
             <h2 className="font-display m-0 text-3xl font-semibold text-foreground">
               What this does not establish
