@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 import { DisclaimerDialog } from "@/components/LegalDialogs";
+import SiteSection, { Figure } from "@/components/SiteSection";
 import { ChevronDown } from "lucide-react";
 import GateAnimation from "@/components/GateAnimation";
 import Header from "@/components/Header";
@@ -9,7 +10,9 @@ import { CONCEPTS, FINDINGS, SOURCE_YEARS } from "@/lib/concepts";
 import { CORPUS_SUMMARY } from "@/lib/corpus-summary";
 import JournalQuotes from "@/components/JournalQuotes";
 import { GLOSSARY_PICKS } from "@/lib/home-picks";
+import { CRIME_FIGURES, HEALTH_FIGURES } from "@/lib/home-data-sections";
 import { homeGlossary, journalQuotes, journalStats } from "@/lib/server-corpus";
+import { accomplishments, govCloud, usd } from "@/lib/server-data";
 
 /**
  * The home page.
@@ -176,6 +179,8 @@ export default function Page() {
   const stats = journalStats();
 
   const entries = journalQuotes(8);
+  const gc = govCloud();
+  const wins = accomplishments();
 
   // One concept at a time, like the journal. Ordered as lib/concepts.ts orders
   // them — the first six, not a selection — and the body trimmed to a lead-in.
@@ -399,6 +404,131 @@ export default function Page() {
             </div>
           </div>
         </section>
+
+        {/* ------------------------------------------------ government cloud */}
+        {/* Surfaced at Sean's request. Every figure read from the same tables
+            the Research charts use — see lib/server-data.ts — so the front page
+            cannot drift from the section it points at. */}
+        <SiteSection
+          eyebrow="Government cloud"
+          heading="Somebody bought this, from somebody, for a price that is on the record."
+          meta={
+            <>
+              {gc.awards} awards · {gc.vendors} vendors · {gc.deployments} deployments ·{" "}
+              {gc.regulations} regulations · {gc.sources} sources
+            </>
+          }
+          actions={[
+            { href: "/data/government-cloud", label: "Go to government cloud", primary: true },
+          ]}
+          aside={
+            <DisclaimerDialog>
+              <button type="button" className="text-[14px] text-muted underline underline-offset-4 hover:text-foreground">
+                How to read the research
+              </button>
+            </DisclaimerDialog>
+          }
+        >
+          <div className="grid gap-x-12 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+            <Figure
+              stat={usd(gc.totalUsd)}
+              line={`across the ${gc.valued} awards in this record that carry a published value. Contract vehicles, scopes, funding statutes and recompete dates, each one linked to its source.`}
+              href="/data/government-cloud"
+            />
+            <Figure
+              stat={usd(gc.topUsd)}
+              line={`is the largest single award here${gc.topBuyer ? `, to ${gc.topBuyer}` : ""}. Procurement at this scale is public by design — the record exists precisely so it can be read.`}
+              href="/data/government-cloud"
+            />
+            <Figure
+              stat={`0 of ${gc.regulations}`}
+              line="regulations record a route to individual review. Across the whole register, the person a system is used on has nowhere to ask anything."
+              href="/concepts#no-column-for-you"
+            />
+          </div>
+        </SiteSection>
+
+        {/* ------------------------------------------------------ public health */}
+        <SiteSection
+          eyebrow="Public health"
+          heading="A twenty-year climb the United States made alone."
+          meta="CDC, NCHS and WHO figures · every chart states its evidence tier and what it cannot show"
+          actions={[{ href: "/data/public-health", label: "Go to public health", primary: true }]}
+          aside={
+            <DisclaimerDialog>
+              <button type="button" className="text-[14px] text-muted underline underline-offset-4 hover:text-foreground">
+                How to read the research
+              </button>
+            </DisclaimerDialog>
+          }
+        >
+          <div className="grid gap-x-12 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+            {HEALTH_FIGURES.map((f) => (
+              <Figure key={f.stat} stat={f.stat} line={f.line} source={f.source} />
+            ))}
+          </div>
+        </SiteSection>
+
+        {/* ---------------------------------------------------------- crime */}
+        <SiteSection
+          eyebrow="Crime"
+          heading="Six lanes moving in different directions, and two that nobody counts."
+          meta="FBI, BJS and CDC series · where the counting changed mid-window, the series does not agree with itself, and the section says so"
+          actions={[{ href: "/data/crime", label: "Go to crime", primary: true }]}
+          aside={
+            <DisclaimerDialog>
+              <button type="button" className="text-[14px] text-muted underline underline-offset-4 hover:text-foreground">
+                How to read the research
+              </button>
+            </DisclaimerDialog>
+          }
+        >
+          <div className="grid gap-x-12 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+            {CRIME_FIGURES.map((f) => (
+              <Figure key={f.stat} stat={f.stat} line={f.line} source={f.source} />
+            ))}
+          </div>
+        </SiteSection>
+
+        {/* ------------------------------------------------ what is working */}
+        {/* Sean, 30 August: "we are not here to trash law enforcement. We're
+            not here to throw law enforcement under the bus."
+
+            The register this reads from already existed — six entries, tier A,
+            with sources — inside the Crime vertical, where only a reader who
+            went three clicks deep would ever find it. It belongs on the front
+            page, and putting it there is the single strongest signal that this
+            archive is not an indictment. */}
+        <SiteSection
+          eyebrow="What is working"
+          heading="The same record shows enforcement doing what it is for."
+          meta="From the crime register · agency reports and press releases · arrests and rescues are counts, not convictions"
+          actions={[{ href: "/data/crime", label: "See the full register", primary: true }]}
+        >
+          <div className="grid gap-x-12 gap-y-12 sm:grid-cols-2">
+            {wins.map(({ row, source }) => (
+              <div key={row.what}>
+                <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
+                  {row.what} · tier {row.tier}
+                </p>
+                <p className="body-copy m-0 mt-3 text-[17px] leading-relaxed text-foreground">
+                  {row.claim}
+                </p>
+                {source?.url && (
+                  <a
+                    href={source.url}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="mt-3 inline-block text-[13px] text-muted underline underline-offset-4 hover:text-foreground"
+                  >
+                    {source.publisher}
+                    {source.title ? ` · ${source.title}` : ""}
+                  </a>
+                )}
+              </div>
+            ))}
+          </div>
+        </SiteSection>
 
         {/* ------------------------------------- what the technology can do */}
         {/* Addressable: the hero asks a second-person question and this is the
