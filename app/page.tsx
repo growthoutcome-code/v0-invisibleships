@@ -48,59 +48,80 @@ export const metadata: Metadata = {
   // The headline is the title. A shared link should carry the question, since
   // the question is what this archive is organised around — and a question
   // carries its question mark with it, which an assertion never would.
-  title: "Is Denver, Colorado the site of unconsented neurotechnological research?",
+  title: "Is anyone in the US subjected to unconsented neurotechnology — and would there be a record?",
   description:
-    "One resident's dated record — 120 days of entries and 298 recordings — and a documented research archive assembled to test it: court rulings, regulator decisions, statistical agencies and published investigations. Every figure resolves to a named source, and the archive states plainly what it does not establish.",
+    "One resident's dated record from Denver, Colorado — 120 days of entries, 298 recordings — beside a documented archive of what governments bought and what regulators found. Across 1,922 procurement records and 99 regulations, no route for the person a system is used on to ask. Every figure resolves to a named source.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Is Denver, Colorado the site of unconsented neurotechnological research?",
+    title: "Is anyone being subjected to unconsented neurotechnology — and would there be a record?",
     description:
-      "A dated first-person record, and the public-record research assembled to test it.",
+      "A dated first-person record, and the procurement archive that says nobody would be able to check.",
     images: ["/og-default.png"],
   },
 };
 
 /**
- * THE HERO HEADLINE, AS A QUESTION.
+ * THE HERO HEADLINE, AS A QUESTION — AND WHY IT WIDENED THE WAY IT DID.
  *
- * Sean, 30 August: use "a heading that is similar to the Invisible Ships
- * document series, and let's pose it as a question just like it is in the
- * document cover page."
+ * Sean asked to widen past Denver, on the strength of statements naming
+ * Guadalajara, Portland, Seattle and Cincinnati. Those statements are bullhorn
+ * testimony: a dated first-person report, verified by nobody. The transcripts
+ * hedge themselves — "Seattle's been suggested", "Cincinnati has been mentioned
+ * recently", "the problem seems local to Denver" — and the corpus is a fraction
+ * of the audio, so it can support no claim about spread in either direction.
  *
- * The series' own executive summary is the source of this register: a
- * "technology-driven phenomenon of communication targeting citizens in Denver,
- * Colorado", presented as "third-party allegations that require official
- * verification", by an author whose stated role "is not to accuse any single
- * entity but to present patterns of perceived communication for further
- * investigation". A question mark is not decoration here. It is the same
- * posture the documents already take, carried onto the front page.
+ * A headline resting on that would make the site's own framing the one place
+ * this archive breaks the rule it applies everywhere else.
  *
- * Two alternates are kept below rather than discarded. Swapping the headline
- * should cost one line, not a rewrite, and the runners-up are the record of
- * what was considered.
+ * So the widening rests on the RESEARCH, which is national by nature: 1,922
+ * procurement records, 99 regulations, four European regulators, a company ICE
+ * was paying while they fined it. The second clause is the archive's own
+ * strongest finding — across all of that, no route for the person a system is
+ * used on to ask anything. That is documented, it is national, and it survives
+ * a hostile reading.
  *
- *   B — the method as the headline. Safest and the most distinctive; it makes
- *       the archive's discipline the first thing a stranger meets.
- *         h: "What would it take to establish that this is happening?"
- *         p: "A Denver resident's dated record of unconsented neurotechnological
- *             contact — 120 days, 298 recordings — and the public-record research
- *             assembled to test it against."
- *
- *   C — addressed to the reader who arrives frightened. The warmest of the
- *       three, and the one most likely to hold somebody who found this at 3am.
- *         h: "If you are hearing something nobody else can hear, is there a
- *             technology that explains it?"
- *         p: "A dated first-person record from Denver, Colorado, and a research
- *             archive of what neurotechnology has actually been shown to do —
- *             including where the documented record stops."
+ * Alternates kept so swapping costs one line:
+ *   B  "If this were happening to you, is there anywhere the record would
+ *       show it?"  — most likely to hold a frightened reader.
+ *   C  "Governments bought the surveillance. Who checks what it is used for?"
+ *       — least personal, loses the first-person urgency.
  */
 const HERO = {
-  question: "Is Denver, Colorado the site of unconsented neurotechnological research?",
+  question:
+    "Is anyone in the United States being subjected to unconsented neurotechnology — and would there be a record if they were?",
   answer:
-    "One resident's dated record, and the public-record research assembled to test it. " +
-    "The research is documented and sourced. The question is not — which is what the " +
-    "question mark is for, and why this archive states plainly what it does not establish.",
+    "One resident's dated record from Denver, Colorado. A procurement archive of what " +
+    "governments actually bought. And, across 1,922 records and 99 regulations, no route " +
+    "for the person a system is used on to ask.",
 };
+
+/**
+ * THE CITIES, AS TESTIMONY.
+ *
+ * This section exists so the multi-city pattern can appear on the front page
+ * without being asserted. It quotes what was said, dates it, and says what it is
+ * not. It sits immediately after "What this does not establish" so a scanner
+ * meets it under those limits rather than before them.
+ *
+ * The quotes are verbatim from the corpus, and they were chosen because they
+ * hedge themselves — the speakers say "suggested" and "mentioned", and one says
+ * the problem seems local to Denver. Presenting the record's own most
+ * conservative reading is stronger than presenting its boldest.
+ */
+const CITY_QUOTES: { date: string; id: string; text: string }[] = [
+  {
+    date: "23 August 2025",
+    id: "is-j01-20250823-entry",
+    text:
+      "There is the method of communication and its reach, Denver, Seattle's been suggested, Portland's been suggested, Los Angeles has been suggested, many cities, Houston, Kansas City, the East Coast, not so much.",
+  },
+  {
+    date: "26 January 2026",
+    id: "is-j04-20260126-entry",
+    text:
+      "I wouldn't be surprised if they lived in Denver because the problem seems local to Denver but Cincinnati has been mentioned recently.",
+  },
+];
 
 export default function Page() {
   const entries = homeJournal(9);
@@ -190,8 +211,11 @@ export default function Page() {
             <div className="mb-8 flex flex-wrap items-end gap-4">
               <div>
                 <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">The record</p>
+                {/* Not "From the journal", which labels a topic. Under the scan
+                    rule a heading has to carry its beat alone, and this beat is
+                    "it is real, and it is specific". Numbers derived at render. */}
                 <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground">
-                  From the journal
+                  {stats.days} dated days, {stats.recordings} recordings, one city
                 </h2>
               </div>
               <a
@@ -209,6 +233,89 @@ export default function Page() {
             </p>
 
             <HomeJournalCarousel entries={entries} glossary={gloss} />
+          </div>
+        </section>
+
+        {/* ------------------------------- what this does NOT establish */}
+        {/* Addressable since the hero became a question about a named city:
+            the limits that question is asked under must be one click from it,
+            not four screens down. */}
+        {/* On a home page, above everything else it might claim. Most sites
+            would never do this; it is the single strongest thing here. */}
+        <section id="not-established" className="scroll-mt-24 border-b border-edge">
+          <div className="mx-auto max-w-3xl px-5 py-16 sm:px-8">
+            <h2 className="font-display m-0 text-3xl font-semibold text-foreground">
+              What this does not establish
+            </h2>
+            <p className="body-copy mt-4 text-foreground/85">
+              These four limits stand over every concept, chart and table in this archive.
+              They are the conditions under which all of it was written.
+            </p>
+            <ol className="m-0 mt-6 list-none space-y-4 p-0">
+              {NOT_ESTABLISHED.map((limit, i) => (
+                <li key={i} className="body-copy relative pl-8 text-foreground/85">
+                  <span
+                    aria-hidden
+                    className="font-display absolute left-0 top-0 font-semibold text-foreground"
+                  >
+                    {i + 1}.
+                  </span>
+                  {limit}
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        {/* ------------------------------------------------- the cities */}
+        {/* Beat four. Placed here on purpose: a scanner reaches it having just
+            read the four limits, so the hedging below is read under them. */}
+        <section className="border-b border-edge">
+          <div className="mx-auto max-w-3xl px-5 py-16 sm:px-8">
+            <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
+              Testimony · verified by nobody
+            </p>
+            <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground">
+              Cities keep being named. None of them are verified.
+            </h2>
+            <p className="body-copy mt-4 text-foreground/85">
+              Denver is where this record was kept. Other cities appear in the transcripts
+              &mdash; Seattle, Portland, Los Angeles, Houston, Kansas City, Cincinnati,
+              Cleveland &mdash; and the archive records that they were named. It makes no
+              finding that anything has happened in any of them.
+            </p>
+
+            <div className="mt-8 space-y-6">
+              {CITY_QUOTES.map((q) => (
+                <figure key={q.id} className="m-0 border-l-2 border-edge pl-5">
+                  <blockquote className="body-copy m-0 text-[17px] leading-relaxed text-foreground/90">
+                    &ldquo;{q.text}&rdquo;
+                  </blockquote>
+                  <figcaption className="mt-2 text-[13px] text-muted">
+                    {q.date} ·{" "}
+                    <a href={`/journal/${q.id}`} className="underline underline-offset-4">
+                      read the entry
+                    </a>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+
+            {/* The two facts that keep this section honest in both directions.
+                It must not assert spread, and it must not deny it either. */}
+            <div className="mt-8 border border-edge p-6">
+              <p className="body-copy m-0 text-[15px] leading-relaxed text-foreground/85">
+                Note the speakers&rsquo; own words: <em>suggested</em>,{" "}
+                <em>mentioned recently</em>, <em>seems local to Denver</em>. The record&rsquo;s
+                most cautious reading is inside the record.
+              </p>
+              <p className="body-copy m-0 mt-3 text-[15px] leading-relaxed text-foreground/85">
+                And the transcripts are a small fraction of what was heard &mdash; a
+                sample, not a census. That cuts both ways: it is why no count here
+                measures how often anything was said, and why a city&rsquo;s absence from
+                these pages is not evidence it was never named.
+              </p>
+            </div>
           </div>
         </section>
 
@@ -374,75 +481,48 @@ export default function Page() {
           </div>
         </section>
 
-        {/* ------------------------------- what this does NOT establish */}
-        {/* Addressable since the hero became a question about a named city:
-            the limits that question is asked under must be one click from it,
-            not four screens down. */}
-        {/* On a home page, above everything else it might claim. Most sites
-            would never do this; it is the single strongest thing here. */}
-        <section id="not-established" className="scroll-mt-24 border-b border-edge">
+        {/* ----------------------------------------------------- the ask */}
+        {/* Beat five. Every section above earns the right to make it, and it is
+            the last thing on the page for the same reason a pitch ends on the
+            ask rather than on a fact. */}
+        <section className="border-b border-edge">
           <div className="mx-auto max-w-3xl px-5 py-16 sm:px-8">
-            <h2 className="font-display m-0 text-3xl font-semibold text-foreground">
-              What this does not establish
-            </h2>
-            <p className="body-copy mt-4 text-foreground/85">
-              These four limits stand over every concept, chart and table in this archive.
-              They are the conditions under which all of it was written.
+            <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
+              What you can do
             </p>
-            <ol className="m-0 mt-6 list-none space-y-4 p-0">
-              {NOT_ESTABLISHED.map((limit, i) => (
-                <li key={i} className="body-copy relative pl-8 text-foreground/85">
-                  <span
-                    aria-hidden
-                    className="font-display absolute left-0 top-0 font-semibold text-foreground"
-                  >
-                    {i + 1}.
-                  </span>
-                  {limit}
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
-
-        {/* --------------------------------------- corpus + why the name */}
-        <section>
-          <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-2">
-            <div>
-              <h2 className="font-display m-0 text-2xl font-semibold text-foreground">
-                Take the whole archive
-              </h2>
-              <p className="body-copy mt-3 text-foreground/85">
-                {CORPUS_SUMMARY.files} files, {CORPUS_SUMMARY.words.toLocaleString()} words,
-                as plain Markdown and CSV. Share it, quote it with attribution, hand it to
-                an AI and ask it to check the findings against the sources.
-              </p>
-              <p className="mt-5">
-                <a
-                  href="/api/corpus?from=home"
-                  className="inline-flex h-11 items-center rounded-md border border-edge px-5 text-[15px] hover:border-foreground"
-                >
-                  Download the corpus
-                </a>
-              </p>
+            <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground">
+              Add your own account
+            </h2>
+            <p className="body-copy mt-4 text-[17px] text-foreground/85">
+              A second dated record, kept to the same standard, is worth more than either
+              one alone &mdash; not because two accounts corroborate each other, they do
+              not, but because a pattern that survives independent description is a
+              different kind of object from a story. That includes officers and public
+              employees describing what they are being asked to do.
+            </p>
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <a
+                href="/contribute"
+                className="inline-flex h-12 items-center rounded-md bg-foreground px-6 text-[15px] font-medium text-background"
+              >
+                What contributing means
+              </a>
+              <a
+                href="/api/corpus?from=home"
+                className="inline-flex h-12 items-center rounded-md border border-edge px-6 text-[15px] hover:border-foreground"
+              >
+                Download the whole archive
+              </a>
             </div>
-            <div>
-              <h2 className="font-display m-0 text-2xl font-semibold text-foreground">
+            <p className="mt-5 text-[14px] text-muted">
+              {CORPUS_SUMMARY.files} files, {CORPUS_SUMMARY.words.toLocaleString()} words,
+              as plain Markdown and CSV. Share it, quote it with attribution, hand it to
+              an AI and ask it to check the findings against the sources.{" "}
+              <a href="/why" className="underline underline-offset-4">
                 Why &ldquo;Invisible Ships&rdquo;
-              </h2>
-              <p className="body-copy mt-3 text-foreground/85">
-                Perceptual set is a documented principle in cognitive psychology: our
-                expectations and prior experience shape what we perceive, and can keep us
-                from registering something we have no concept for. This archive is an
-                attempt to describe, in plain and dated detail, something that is easy to
-                look past precisely because most people have no framework for it yet.
-              </p>
-              <p className="mt-5">
-                <a href="/why" className="text-foreground underline underline-offset-4">
-                  The story the name comes from, and why it is almost certainly apocryphal
-                </a>
-              </p>
-            </div>
+              </a>
+              .
+            </p>
           </div>
         </section>
 
