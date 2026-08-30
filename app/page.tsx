@@ -25,13 +25,18 @@ import { homeGlossary, homeJournal, journalStats } from "@/lib/server-corpus";
  * that follows reads as what was assembled to make sense of it rather than as
  * the main event.
  *
- * THE ANIMATION IS THE PAGE
- * -------------------------
- * Full viewport width, sixteen-by-nine, and it runs. The headline sits over its
- * bottom edge at roughly a seventh of its visual weight, which is the ratio
- * Sean asked for: the picture makes the argument and the words label it. The
- * scene's own background is the page background (see .ga-bg in globals.css), so
- * the letterboxing on a narrow screen is invisible rather than a black bar.
+ * THE HERO IS THE GATE'S OWN LAYOUT
+ * ---------------------------------
+ * Not a new composition. AccessGate's welcome screen is a full-height split —
+ * a fixed copy rail beside a panel the animation fills — and people who came in
+ * through the gate have already seen it. Reusing it means the front door and
+ * the room behind it are recognisably the same building, and it means the one
+ * layout gets looked after rather than two drifting apart.
+ *
+ * The only change is the ratio: the gate gives its copy 40%, this gives it 25%,
+ * because the picture is what makes the case to somebody who has not read a
+ * word. An overlay was tried first and dropped — text over the artwork needs a
+ * scrim, and a scrim over a line drawing eats the drawing.
  *
  * Every number on this page is derived at render from lib/, never typed in, so
  * it cannot drift from the archive it describes.
@@ -98,49 +103,70 @@ export default function Page() {
 
       <main>
         {/* ------------------------------------------------------------ hero */}
-        <section className="relative w-full overflow-hidden border-b border-edge">
-          {/* 16:9 at full width, floored so it never collapses on a phone and
-              capped so the headline is on screen without scrolling. */}
-          <div className="relative h-[56.25vw] min-h-[440px] max-h-[80vh] w-full">
-            <GateAnimation fill />
+        {/* THE GATE'S OWN LAYOUT, REUSED.
+            AccessGate's welcome screen is a full-height two-column split: copy
+            in a fixed-width left rail, GateAnimation filling the panel beside
+            it. Sean asked for that same skeleton here, with the left rail
+            narrowed from the gate's 40% to 25% so the animation carries more of
+            the screen.
 
-            {/* Scrim: the scenes are line drawings on the page background, so a
-                short gradient is enough to hold text without hiding the art. */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-background via-background/90 to-transparent"
-            />
+            min-w-[360px] is the floor, and it is what makes 25% safe: at 1440px
+            the rail IS 25%, and on a narrower desktop the floor takes over
+            rather than crushing the headline into a column of one-word lines.
 
-            <div className="absolute inset-x-0 bottom-0 px-5 pb-8 sm:px-8 sm:pb-10">
-              <div className="mx-auto max-w-7xl">
-                <p className="m-0 text-[12px] uppercase tracking-[0.1em] text-muted">
-                  {stats.days} dated days · {stats.recordings} recordings · {SOURCE_YEARS.length} sourced findings
-                </p>
-                <h1 className="font-display mt-2 text-[26px] font-semibold leading-[1.15] text-foreground sm:text-[32px] lg:text-[38px]">
-                  Your house is not haunted.
-                </h1>
-                <p className="body-copy mt-3 max-w-2xl text-[15px] leading-relaxed text-foreground/85 sm:text-[17px]">
-                  It may be neurotechnology &mdash; and there is a public record of who is
-                  building it, who is buying it, and what regulators found when they
-                  looked. This is a journal kept day by day, and the research assembled
-                  beside it.
-                </p>
-                <div className="mt-5 flex flex-wrap items-center gap-3">
-                  <a
-                    href="/journal"
-                    className="inline-flex h-11 items-center rounded-md bg-foreground px-5 text-[15px] font-medium text-background"
-                  >
-                    Read the journal
-                  </a>
-                  <a
-                    href="/data"
-                    className="inline-flex h-11 items-center rounded-md border border-edge px-5 text-[15px] hover:border-foreground"
-                  >
-                    See the research
-                  </a>
-                </div>
+            order-1 / order-2 is the gate's behaviour too — on a phone the
+            animation is on top and the copy reads beneath it. */}
+        <section className="flex min-h-[calc(100vh-64px)] flex-col border-b border-edge md:flex-row">
+          {/* Left 25% — the copy rail */}
+          <div className="order-2 flex flex-col px-8 py-12 sm:px-12 md:order-1 md:w-[25%] md:min-w-[360px] lg:px-14">
+            <div className="animate-fade-in flex max-w-md flex-1 flex-col justify-center">
+              <h1 className="font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
+                Your house is not haunted.
+              </h1>
+              <p className="mt-4 font-serif text-xl leading-snug text-foreground/80 sm:text-2xl">
+                It may be neurotechnology &mdash; and there is a public record of who is
+                building it and who is buying it.
+              </p>
+              <p className="mt-3 text-sm text-muted">
+                A journal kept day by day, and the research assembled beside it. Every
+                figure resolves to a named source.
+              </p>
+
+              <div className="mt-7 flex flex-wrap items-center gap-3">
+                <a
+                  href="/journal"
+                  className="inline-flex h-12 items-center rounded-md bg-foreground px-6 text-[15px] font-medium text-background"
+                >
+                  Read the journal
+                </a>
+                <a
+                  href="/data"
+                  className="inline-flex h-12 items-center rounded-md border border-edge px-6 text-[15px] hover:border-foreground"
+                >
+                  See the research
+                </a>
               </div>
+              <p className="mt-4 text-[13px] text-foreground/70">
+                The journal carries a content warning and sits behind it. The research
+                does not.
+              </p>
             </div>
+
+            {/* The gate puts its progress dots and copyright here. This page has
+                no steps, so the slot carries the size of the thing instead —
+                derived, never typed. */}
+            <div className="mt-8 max-w-md">
+              <div className="h-1.5 w-6 bg-accent" aria-hidden />
+              <p className="m-0 pt-4 text-xs text-muted">
+                {stats.days} dated days · {stats.recordings} audio-linked recordings ·{" "}
+                {SOURCE_YEARS.length} sourced findings
+              </p>
+            </div>
+          </div>
+
+          {/* Right 75% — animation panel */}
+          <div className="relative order-1 min-h-[42vh] overflow-hidden bg-background md:order-2 md:min-h-[calc(100vh-64px)] md:w-[75%]">
+            <GateAnimation fill />
           </div>
         </section>
 
