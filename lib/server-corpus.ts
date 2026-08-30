@@ -211,6 +211,41 @@ export function latestEntry(): LatestEntry | null {
   return null;
 }
 
+/**
+ * The entries immediately before the last one — pointers, not selections.
+ *
+ * Sean: "a rotating carousel that points to the next journals." Date order,
+ * newest first, skipping whichever entry is already displayed above. No
+ * curation and no excerpts: a card carries the day, the place where one was
+ * noted, and whether there is audio. The words stay in the entry.
+ */
+export type EntryPointer = {
+  id: string;
+  date: string;
+  weekday: string | null;
+  location: string | null;
+  hasAudio: boolean;
+};
+
+export function recentEntries(count = 8, excludeId?: string): EntryPointer[] {
+  const L = load();
+  const skip = excludeId?.toLowerCase();
+  const out: EntryPointer[] = [];
+  for (let i = L.journal.length - 1; i >= 0 && out.length < count; i--) {
+    const d = L.journal[i];
+    if (d.doc_type !== "entry" || !d.entry_date) continue;
+    if (skip && d.id.toLowerCase() === skip) continue;
+    out.push({
+      id: d.id.toLowerCase(),
+      date: d.entry_date,
+      weekday: d.weekday ?? null,
+      location: d.location ?? null,
+      hasAudio: Boolean(d.audio_url || d.audio_file),
+    });
+  }
+  return out;
+}
+
 /** Glossary terms with a usable one-line summary, for the home page strip. */
 export function homeGlossary(slugs: string[]): { slug: string; term: string; summary: string }[] {
   const L = load();

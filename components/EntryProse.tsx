@@ -40,7 +40,18 @@ function inline(text: string, key: string): ReactNode[] {
     });
 }
 
-export default function EntryProse({ body, className = "" }: { body: string; className?: string }) {
+export default function EntryProse({
+  body,
+  className = "",
+  limit,
+}: {
+  body: string;
+  className?: string;
+  /** Truncate to roughly this many characters, at a word boundary. The section
+   *  is a fixed-height panel now, so the entry is a lead-in with a link to the
+   *  rest rather than the whole document. */
+  limit?: number;
+}) {
   const paras = body
     .split(/\n{2,}/)
     .map((b) => b.trim())
@@ -48,6 +59,24 @@ export default function EntryProse({ body, className = "" }: { body: string; cla
     // Drop bare heading and rule lines; keep headings that carry text, as text.
     .filter((b) => !/^#{1,6}\s*$/.test(b) && !/^([-*_]\s*){3,}$/.test(b))
     .map((b) => b.replace(/^#{1,6}\s*/, ""));
+
+  if (limit) {
+    const kept: string[] = [];
+    let used = 0;
+    for (const b of paras) {
+      if (used + b.length <= limit || kept.length === 0) {
+        // Cut the first paragraph mid-way if it alone exceeds the budget,
+        // rather than showing nothing at all.
+        kept.push(
+          used + b.length <= limit ? b : b.slice(0, limit).replace(/\s+\S*$/, "") + "…"
+        );
+        used += b.length;
+      }
+      if (used >= limit) break;
+    }
+    paras.length = 0;
+    paras.push(...kept);
+  }
 
   return (
     <div className={className}>

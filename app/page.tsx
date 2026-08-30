@@ -8,7 +8,7 @@ import { CONCEPTS, FINDINGS, NOT_ESTABLISHED, SOURCE_YEARS } from "@/lib/concept
 import { CORPUS_SUMMARY } from "@/lib/corpus-summary";
 import EntryProse from "@/components/EntryProse";
 import { GLOSSARY_PICKS } from "@/lib/home-picks";
-import { homeGlossary, journalStats, latestEntry } from "@/lib/server-corpus";
+import { homeGlossary, journalStats, latestEntry, recentEntries } from "@/lib/server-corpus";
 
 /**
  * The home page.
@@ -153,6 +153,19 @@ export default function Page() {
       })
     : "";
 
+  const nextSlides: Slide[] = recentEntries(8, last?.id).map((e) => {
+    const when = new Date(`${e.date}T00:00:00Z`).toLocaleDateString("en-US", {
+      weekday: "short", month: "short", day: "numeric", year: "numeric", timeZone: "UTC",
+    });
+    return {
+      href: `/journal/${e.id}`,
+      eyebrow: e.hasAudio ? "Entry · audio" : "Entry",
+      title: when,
+      body: e.location ?? "Location not recorded",
+      cta: "Read",
+    };
+  });
+
   const glossarySlides: Slide[] = homeGlossary(GLOSSARY_PICKS).map((g) => ({
     href: `/glossary/${g.slug}`,
     eyebrow: "Glossary",
@@ -258,21 +271,20 @@ export default function Page() {
           </div>
         </section>
 
-        {/* NAMING. Journal, everywhere. The nav says Journal, the route is
-            /journal, the section says Journal — a reader should never have to
-            work out that three names are one place. The id stays #record only
-            because the hero's scroll hint points at it.
+        {/* THE SHAPE OF EVERY SECTION FROM HERE.
+            Sean, 30 August: "one hundred percent width container, not sixty…
+            like six hundred pixel high areas with very clean text. We don't
+            want a huge blurb." So: header, one sentence, the thing itself, a
+            carousel through to more of it, and a button out. Nothing else.
 
-            NO SUGGESTED ENTRIES, and no curation of any kind (Sean, 30 August).
-            This is the last entry in the record, whatever it happens to be. It
-            changes when the record changes and nobody chooses which face the
-            archive shows — which is a stronger claim than any set of picks.
+            100% WIDTH means the content too, not just the section. The measured
+            columns are gone — the text runs the full width of the container
+            inside the 100px gutters.
 
-            FULLY EXPOSED, and set as the reading column rather than a card: no
-            outline, no tint, no fixed height, no negative space held open
-            around it. The entry is the content, not an item inside a component.
-            The author's decision about his own words, with the site-wide
-            content warning in front of them. */}
+            The entry is TRUNCATED now rather than fully exposed. The panel is a
+            fixed height and a lead-in with a link, which is what keeps a
+            600-pixel area clean instead of running the whole document down the
+            page. */}
         <section id="record" className="scroll-mt-24">
           <div className="w-full px-5 py-20 sm:px-8 lg:px-[100px]">
             <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
@@ -281,25 +293,23 @@ export default function Page() {
             <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground sm:text-4xl">
               {stats.days} dated days, {stats.recordings} recordings, one city
             </h2>
-            <p className="body-copy mt-5 max-w-3xl text-[19px] leading-relaxed text-foreground/85">
+            <p className="body-copy mt-4 text-[19px] leading-relaxed text-foreground/85">
               Journal entries: subjective and qualitative accounts of the bullhorn
               surveillance system experience in Denver, Colorado.
             </p>
 
             {last && (
-              <article className="mt-12 max-w-3xl">
+              <article className="mt-10 flex min-h-[380px] flex-col">
                 <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
                   The last entry · {lastWhen}
                   {last.location ? ` · ${last.location}` : ""}
                 </p>
-                {/* The reading face at reading size. This is the archive's
-                    primary source and it should look like a document, not like
-                    a pull quote from one. */}
                 <EntryProse
                   body={last.body}
-                  className="mt-6 font-serif text-[19px] leading-[1.65] text-foreground sm:text-[21px]"
+                  limit={620}
+                  className="mt-6 font-serif text-[20px] leading-[1.6] text-foreground sm:text-[23px]"
                 />
-                <p className="mt-8">
+                <p className="mt-6">
                   <a
                     href={`/journal/${last.id}`}
                     className="text-[15px] text-foreground underline underline-offset-4"
@@ -310,16 +320,24 @@ export default function Page() {
               </article>
             )}
 
-            <div className="mt-14 flex flex-wrap items-center gap-4">
+            {/* The way through, not a place to read. Dates and places only. */}
+            <div className="mt-12">
+              <HomeCarousel slides={nextSlides} label="More journal entries" compact />
+            </div>
+
+            <div className="mt-12 flex flex-wrap items-center gap-4">
               <a
                 href="/journal"
                 className="inline-flex h-12 items-center rounded-md bg-foreground px-6 text-[15px] font-medium text-background"
               >
-                More journal entries
+                Go to the journal
               </a>
-              <span className="text-[14px] text-muted">
-                All {stats.days} days and {stats.docs} documents, newest first.
-              </span>
+              <a
+                href="/contribute"
+                className="inline-flex h-12 items-center rounded-md bg-foreground/[0.07] px-6 text-[15px] hover:bg-foreground/[0.12]"
+              >
+                Contribute to the journal
+              </a>
             </div>
           </div>
         </section>
@@ -336,11 +354,11 @@ export default function Page() {
             <h2 className="font-display m-0 text-3xl font-semibold text-foreground">
               What this does not establish
             </h2>
-            <p className="body-copy mt-4 max-w-2xl text-foreground/85">
+            <p className="body-copy mt-4 text-foreground/85">
               These four limits stand over every concept, chart and table in this archive.
               They are the conditions under which all of it was written.
             </p>
-            <ol className="m-0 mt-6 max-w-3xl list-none space-y-4 p-0">
+            <ol className="m-0 mt-6 list-none space-y-4 p-0">
               {NOT_ESTABLISHED.map((limit, i) => (
                 <li key={i} className="body-copy relative pl-8 text-foreground/85">
                   <span
@@ -367,14 +385,14 @@ export default function Page() {
             <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground sm:text-4xl">
               Cities keep being named. None of them are verified.
             </h2>
-            <p className="body-copy mt-4 max-w-2xl text-foreground/85">
+            <p className="body-copy mt-4 text-foreground/85">
               Denver is where this record was kept. Other cities appear in the transcripts
               &mdash; Seattle, Portland, Los Angeles, Houston, Kansas City, Cincinnati,
               Cleveland &mdash; and the archive records that they were named. It makes no
               finding that anything has happened in any of them.
             </p>
 
-            <div className="mt-8 max-w-3xl space-y-6">
+            <div className="mt-8 space-y-6">
               {CITY_QUOTES.map((q) => (
                 <figure key={q.id} className="m-0 border-l-2 border-edge pl-5">
                   <blockquote className="body-copy m-0 text-[17px] leading-relaxed text-foreground/90">
@@ -392,7 +410,7 @@ export default function Page() {
 
             {/* The two facts that keep this section honest in both directions.
                 It must not assert spread, and it must not deny it either. */}
-            <div className="mt-10 max-w-3xl border-l-2 border-foreground pl-5">
+            <div className="mt-10 border-l-2 border-foreground pl-5">
               <p className="body-copy m-0 text-[15px] leading-relaxed text-foreground/85">
                 Note the speakers&rsquo; own words: <em>suggested</em>,{" "}
                 <em>mentioned recently</em>, <em>seems local to Denver</em>. The record&rsquo;s
@@ -425,14 +443,14 @@ export default function Page() {
             <h2 className="font-display m-0 mt-2 text-4xl font-semibold text-foreground">
               Your house is not haunted.
             </h2>
-            <p className="body-copy mt-4 max-w-2xl text-[17px] text-foreground/85">
+            <p className="body-copy mt-4 text-[17px] text-foreground/85">
               What the documented record actually shows a machine can do to a person, and
               under what conditions. The conditions are the part that lets you rule
               something in or out &mdash; and every capability below needed a surgeon, a
               scanner, or hours of the person&rsquo;s own cooperation.
             </p>
 
-            <div className="mt-8 max-w-3xl space-y-8">
+            <div className="mt-8 space-y-8">
               <div>
                 <h3 className="font-display m-0 text-xl font-semibold text-foreground">
                   A man with ALS is speaking again by thinking
@@ -583,7 +601,7 @@ export default function Page() {
                 All {CONCEPTS.length}
               </a>
             </div>
-            <p className="body-copy mb-8 max-w-2xl text-foreground/85">
+            <p className="body-copy mb-8 text-foreground/85">
               Each one is labelled with what it rests on, who produced it, and the readers
               it was written for &mdash; so you can weigh it before you read it.
             </p>
@@ -605,37 +623,33 @@ export default function Page() {
         </section>
 
         {/* ------------------------------------------------------ glossary */}
-        {/* Its own section now (Sean, 30 August). It was a panel inside the
-            record, where it read as a footnote to the journal. It is not: it is
-            the vocabulary this subject is argued in, and half these words are
-            used against people who have no definition for them. Placed with the
-            concepts, in the "what you would learn" beat, rather than beside the
-            record — the two are different asks of a reader. */}
-        <section>
+        {/* Same shape as Journal: header, one sentence, the thing, a carousel
+            through to more of it, a button out. Its own section since 30
+            August — as a panel inside the record it read as a footnote to the
+            journal, and it is not one. */}
+        <section className="scroll-mt-24">
           <div className="w-full px-5 py-20 sm:px-8 lg:px-[100px]">
             <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
-              The glossary
+              Glossary
             </p>
             <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground sm:text-4xl">
               The words this subject is argued in
             </h2>
-            <p className="body-copy mt-5 max-w-2xl text-[17px] text-foreground/85">
-              Some are dictionary terms used precisely. Some are technical, and a reader
-              is expected to have no prior grip on them. Every one is defined here rather
-              than assumed, because an argument conducted in words the reader cannot check
-              is not an argument they can disagree with.
+            <p className="body-copy mt-4 text-[19px] leading-relaxed text-foreground/85">
+              Plain definitions for the technical and clinical terms this record uses, so
+              an argument is never conducted in words the reader cannot check.
             </p>
 
-            <div className="mt-12">
-              <HomeCarousel slides={glossarySlides} label="Selected glossary terms" />
+            <div className="mt-10">
+              <HomeCarousel slides={glossarySlides} label="Glossary terms" />
             </div>
 
-            <div className="mt-10 flex flex-wrap items-center gap-4">
+            <div className="mt-12 flex flex-wrap items-center gap-4">
               <a
                 href="/glossary"
                 className="inline-flex h-12 items-center rounded-md bg-foreground px-6 text-[15px] font-medium text-background"
               >
-                More glossary terms
+                Go to the glossary
               </a>
               <span className="text-[14px] text-muted">
                 Every term, with the entries that use it.
@@ -643,6 +657,7 @@ export default function Page() {
             </div>
           </div>
         </section>
+
 
         {/* ----------------------------------------------------- the ask */}
         {/* Beat five. Every section above earns the right to make it, and it is
@@ -656,7 +671,7 @@ export default function Page() {
             <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground sm:text-4xl">
               Add your own account
             </h2>
-            <p className="body-copy mt-4 max-w-2xl text-[17px] text-foreground/85">
+            <p className="body-copy mt-4 text-[17px] text-foreground/85">
               A second dated record, kept to the same standard, is worth more than either
               one alone &mdash; not because two accounts corroborate each other, they do
               not, but because a pattern that survives independent description is a

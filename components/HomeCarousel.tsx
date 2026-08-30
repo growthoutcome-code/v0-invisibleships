@@ -62,9 +62,14 @@ export type Slide = {
 export default function HomeCarousel({
   slides,
   label,
+  compact = false,
 }: {
   slides: Slide[];
   label: string;
+  /** Pointer mode: three or four to a screen, short, no long body text. Used
+   *  for "the next journals" — the carousel is a way through the record, not a
+   *  place to read it. */
+  compact?: boolean;
 }) {
   const [api, setApi] = useState<CarouselApi>();
   const [i, setI] = useState(0);
@@ -101,14 +106,20 @@ export default function HomeCarousel({
       >
         <CarouselContent>
           {slides.map((s) => (
-            <CarouselItem key={s.href} className="basis-full">
-              <article className="flex min-h-[300px] flex-col pr-10 md:min-h-[340px]">
+            <CarouselItem key={s.href} className={compact ? "basis-[78%] sm:basis-1/2 lg:basis-1/3 xl:basis-1/4" : "basis-full"}>
+              <article className={`flex flex-col pr-10 ${compact ? "min-h-[150px]" : "min-h-[260px] md:min-h-[300px]"}`}>
                 <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
                   {s.eyebrow}
                 </p>
 
                 {s.title && (
-                  <h3 className="font-display m-0 mt-3 text-3xl font-semibold text-foreground sm:text-4xl">
+                  <h3
+                    className={
+                      compact
+                        ? "font-display m-0 mt-2 text-xl font-semibold text-foreground"
+                        : "font-display m-0 mt-3 text-3xl font-semibold text-foreground sm:text-4xl"
+                    }
+                  >
                     {s.title}
                   </h3>
                 )}
@@ -116,8 +127,14 @@ export default function HomeCarousel({
                 {/* flex-1 + justify-center: short quotes sit in the middle of the
                     panel instead of stranded at the top, long ones simply fill
                     it. This is what lets one height serve both. */}
-                <div className="flex flex-1 flex-col justify-start py-6">
-                  <p className="m-0 font-serif text-[19px] leading-[1.6] text-foreground sm:text-[22px] sm:leading-[1.55]">
+                <div className={`flex flex-1 flex-col justify-start ${compact ? "py-3" : "py-6"}`}>
+                  <p
+                    className={
+                      compact
+                        ? "m-0 font-serif text-[17px] leading-[1.55] text-foreground/90"
+                        : "m-0 font-serif text-[19px] leading-[1.6] text-foreground sm:text-[21px] sm:leading-[1.55]"
+                    }
+                  >
                     {s.body}
                   </p>
                 </div>
