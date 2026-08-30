@@ -113,6 +113,49 @@ export const TERMS: TermsSection[] = [
     ],
   },
   {
+    // Moved here from the home page on 30 August. Sean: "language like what this
+    // does not establish belongs in the disclaimer. Including cities keeping a
+    // name, none of them are verified, belongs in the disclaimer." He is right
+    // that a landing page should not argue with its reader — but the words do
+    // not get deleted, they get kept in the one document that is maintained.
+    id: "limits",
+    heading: "What this archive does not establish",
+    toc: "What it does not establish",
+    gate: true,
+    blocks: [
+      {
+        kind: "p",
+        text:
+          "These limits stand over every entry, concept, chart and table on this site. They are the conditions under which all of it was written.",
+      },
+      {
+        kind: "ul",
+        items: [
+          "Nothing here establishes that any specific thing has been done to any specific person, including the author.",
+          "No capability is documented that reads a person’s perception, or that reaches them at a distance without their participation. Where a concept touches on that, it says so on its own page.",
+          "An absence of evidence is recorded as an absence of evidence. It is never presented as proof that nothing happened, and never as proof that something did.",
+          "Sources are cited for their own findings. Two sources sitting beside each other do not corroborate one another, and the section says so wherever they appear together.",
+        ],
+      },
+      { kind: "subhead", text: "On places, and on the cities named in the transcripts" },
+      {
+        kind: "p",
+        text:
+          "Denver, Colorado is where this record was kept. Other cities are named in the transcripts — Seattle, Portland, Los Angeles, Houston, Kansas City, Cincinnati, Cleveland among them — and this archive records that they were named. It makes no finding that anything has happened in any of them.",
+      },
+      {
+        kind: "p",
+        text:
+          "The speakers hedge in their own words. One transcript reads *“Seattle’s been suggested, Portland’s been suggested, Los Angeles has been suggested”*; another reads *“the problem seems local to Denver but Cincinnati has been mentioned recently.”* The record’s most cautious reading is inside the record.",
+      },
+      {
+        kind: "note",
+        text:
+          "The transcripts are a small fraction of what was heard — a sample, not a census. That cuts both ways: no count here measures how often anything was said, and a place’s absence from these pages is not evidence it was never named.",
+      },
+    ],
+  },
+  {
     id: "research",
     heading: "How the research data was gathered",
     toc: "How the research data was gathered",

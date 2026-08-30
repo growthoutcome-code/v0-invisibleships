@@ -5,7 +5,7 @@ import { ChevronDown } from "lucide-react";
 import GateAnimation from "@/components/GateAnimation";
 import Header from "@/components/Header";
 import HomeCarousel, { type Slide } from "@/components/HomeCarousel";
-import { CONCEPTS, FINDINGS, NOT_ESTABLISHED, SOURCE_YEARS } from "@/lib/concepts";
+import { CONCEPTS, FINDINGS, SOURCE_YEARS } from "@/lib/concepts";
 import { CORPUS_SUMMARY } from "@/lib/corpus-summary";
 import JournalQuotes from "@/components/JournalQuotes";
 import { GLOSSARY_PICKS } from "@/lib/home-picks";
@@ -142,10 +142,50 @@ const CITY_QUOTES: { date: string; id: string; text: string }[] = [
   },
 ];
 
+/**
+ * SIX FINDINGS, NOT EIGHT, AND ORDERED.
+ *
+ * Sean: "consolidate it to six, and let's really pull the most important data
+ * to the top." Selected by id from lib/concepts.ts rather than sliced, so the
+ * home page keeps its choice if FINDINGS is reordered — and so the two that
+ * were dropped are named here rather than silently disappearing.
+ *
+ * Order is an argument. A regulator finding against a company its own
+ * government keeps paying is the hardest single fact in the archive, so it
+ * leads. The robot experiment is second because it is the one finding that
+ * explains a reader's own experience to them, which is what most of them came
+ * for. Then scale, then children, then the trend, then why nobody heard.
+ *
+ * Dropped: "$300 bought Reuters a human cervical spine" — visceral, and the
+ * furthest from this archive's subject. And the duplicate sheriff finding
+ * ("3 constitutional amendments"), which pointed at the same concept page as
+ * the 420 children figure and spent a tile to say the same thing twice.
+ */
+const HOME_FINDINGS = [
+  "fined-in-europe-hired-in-america",
+  "what-produces-the-feeling",
+  "how-protected-is-your-medical-record",
+  "what-children-are-subject-to",
+  "us-rose-against-the-trend",
+  "why-isnt-this-in-the-news",
+]
+  .map((id) => FINDINGS.find((f) => f.id === id))
+  .filter((f): f is (typeof FINDINGS)[number] => Boolean(f));
+
 export default function Page() {
   const stats = journalStats();
 
   const entries = journalQuotes(8);
+
+  // One concept at a time, like the journal. Ordered as lib/concepts.ts orders
+  // them — the first six, not a selection — and the body trimmed to a lead-in.
+  const conceptSlides: Slide[] = CONCEPTS.slice(0, 6).map((c) => ({
+    href: `/concepts#${c.id}`,
+    eyebrow: `${c.basis} · ${c.theme}`,
+    title: c.title,
+    body: c.body.length > 320 ? c.body.slice(0, 320).replace(/\s+\S*$/, "") + "…" : c.body,
+    cta: "Read the concept",
+  }));
 
   const glossarySlides: Slide[] = homeGlossary(GLOSSARY_PICKS).map((g) => ({
     href: `/glossary/${g.slug}`,
@@ -310,85 +350,52 @@ export default function Page() {
         </section>
 
 
-        {/* ------------------------------- what this does NOT establish */}
-        {/* Addressable since the hero became a question about a named city:
-            the limits that question is asked under must be one click from it,
-            not four screens down. */}
-        {/* On a home page, above everything else it might claim. Most sites
-            would never do this; it is the single strongest thing here. */}
-        <section id="not-established" className="scroll-mt-24">
-          <div className="w-full px-5 py-20 sm:px-8 lg:px-[200px]">
-            <h2 className="font-display m-0 text-3xl font-semibold text-foreground">
-              What this does not establish
-            </h2>
-            <p className="body-copy mt-4 text-foreground/85">
-              These four limits stand over every concept, chart and table in this archive.
-              They are the conditions under which all of it was written.
-            </p>
-            <ol className="m-0 mt-6 list-none space-y-4 p-0">
-              {NOT_ESTABLISHED.map((limit, i) => (
-                <li key={i} className="body-copy relative pl-8 text-foreground/85">
-                  <span
-                    aria-hidden
-                    className="font-display absolute left-0 top-0 font-semibold text-foreground"
-                  >
-                    {i + 1}.
-                  </span>
-                  {limit}
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
-
-        {/* ------------------------------------------------- the cities */}
-        {/* Beat four. Placed here on purpose: a scanner reaches it having just
-            read the four limits, so the hedging below is read under them. */}
-        <section>
+        {/* ------------------------------------------------------- research */}
+        {/* Moved directly under the journal (Sean, 30 August): the record, then
+            the public evidence assembled beside it. Six findings, not eight,
+            and ordered rather than sliced — see HOME_FINDINGS. */}
+        <section className="scroll-mt-24">
           <div className="w-full px-5 py-20 sm:px-8 lg:px-[200px]">
             <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
-              Testimony · verified by nobody
+              Research
             </p>
-            <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground sm:text-4xl">
-              Cities keep being named. None of them are verified.
+            <h2 className="font-display m-0 mt-3 text-[26px] font-semibold leading-[1.25] text-foreground sm:text-[34px]">
+              Six things the public record already says.
             </h2>
-            <p className="body-copy mt-4 text-foreground/85">
-              Denver is where this record was kept. Other cities appear in the transcripts
-              &mdash; Seattle, Portland, Los Angeles, Houston, Kansas City, Cincinnati,
-              Cleveland &mdash; and the archive records that they were named. It makes no
-              finding that anything has happened in any of them.
+            <p className="mt-4 text-[15px] text-muted">
+              Government cloud procurement, public health and crime · every figure
+              resolves to a named source · {SOURCE_YEARS.length} dated sources, the
+              earliest from {earliest}
             </p>
 
-            <div className="mt-8 space-y-6">
-              {CITY_QUOTES.map((q) => (
-                <figure key={q.id} className="m-0 border-l-2 border-edge pl-5">
-                  <blockquote className="body-copy m-0 text-[17px] leading-relaxed text-foreground/90">
-                    &ldquo;{q.text}&rdquo;
-                  </blockquote>
-                  <figcaption className="mt-2 text-[13px] text-muted">
-                    {q.date} ·{" "}
-                    <a href={`/journal/${q.id}`} className="underline underline-offset-4">
-                      read the entry
-                    </a>
-                  </figcaption>
-                </figure>
+            <div className="mt-14 grid gap-x-12 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+
+              {HOME_FINDINGS.map((f, n) => (
+                <a
+                  key={`${f.id}-${n}`}
+                  href={`/concepts#${f.id}`}
+                  className="group block"
+                >
+                  <span className="font-display block text-4xl font-semibold text-foreground">
+                    {f.stat}
+                  </span>
+                  <span className="body-copy mt-3 block text-[15px] text-foreground/80 transition-colors group-hover:text-foreground">
+                    {f.line}
+                  </span>
+                </a>
               ))}
             </div>
 
-            {/* The two facts that keep this section honest in both directions.
-                It must not assert spread, and it must not deny it either. */}
-            <div className="mt-10 border-l-2 border-foreground pl-5">
-              <p className="body-copy m-0 text-[15px] leading-relaxed text-foreground/85">
-                Note the speakers&rsquo; own words: <em>suggested</em>,{" "}
-                <em>mentioned recently</em>, <em>seems local to Denver</em>. The record&rsquo;s
-                most cautious reading is inside the record.
-              </p>
-              <p className="body-copy m-0 mt-3 text-[15px] leading-relaxed text-foreground/85">
-                And the transcripts are a small fraction of what was heard &mdash; a
-                sample, not a census. That cuts both ways: it is why no count here
-                measures how often anything was said, and why a city&rsquo;s absence from
-                these pages is not evidence it was never named.
-              </p>
+            <div className="mt-14 flex flex-wrap items-center gap-4">
+              <a
+                href="/data"
+                className="inline-flex h-12 items-center rounded-md bg-foreground px-6 text-[15px] font-medium text-background"
+              >
+                Go to the research
+              </a>
+              <span className="text-[14px] text-muted">
+                {sourcesWithUrl} of {SOURCE_YEARS.length} sources carry a public link.
+              </span>
             </div>
           </div>
         </section>
@@ -507,87 +514,49 @@ export default function Page() {
           </div>
         </section>
 
-        {/* ------------------------------------------------------- research */}
-        <section>
-          <div className="w-full px-5 py-20 sm:px-8 lg:px-[200px]">
-            <div className="mb-8 flex flex-wrap items-end gap-4">
-              <div>
-                <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">The research</p>
-                <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground sm:text-4xl">
-                  Eight things the record already says
-                </h2>
-              </div>
-              <a
-                href="/data"
-                className="ml-auto text-[14px] underline underline-offset-4 text-muted hover:text-foreground"
-              >
-                Government cloud, public health and crime
-              </a>
-            </div>
-
-            <div className="grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
-              {FINDINGS.map((f, n) => (
-                <a
-                  key={`${f.id}-${n}`}
-                  href={`/concepts#${f.id}`}
-                  className="group block"
-                >
-                  <span className="font-display block text-4xl font-semibold text-foreground">
-                    {f.stat}
-                  </span>
-                  <span className="body-copy mt-3 block text-[15px] text-foreground/80 transition-colors group-hover:text-foreground">
-                    {f.line}
-                  </span>
-                </a>
-              ))}
-            </div>
-
-            <p className="mt-6 text-[14px] text-muted">
-              {SOURCE_YEARS.length} dated sources behind the concepts, {sourcesWithUrl} with a
-              public link, the earliest from {earliest}.
-            </p>
-          </div>
-        </section>
-
         {/* ------------------------------------------------------- concepts */}
-        <section>
+        {/* One at a time and rotating, like the journal (Sean, 30 August). A
+            grid of six titles asked a reader to choose before they knew what
+            any of them were; a slide gives them one, with enough of it to
+            decide. Autoplay is on — see HomeCarousel for how it gives up the
+            moment anyone touches it. */}
+        <section className="scroll-mt-24">
           <div className="w-full px-5 py-20 sm:px-8 lg:px-[200px]">
-            <div className="mb-8 flex flex-wrap items-end gap-4">
-              <div>
-                <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
-                  The questions
-                </p>
-                <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground sm:text-4xl">
-                  {CONCEPTS.length} concepts drawn from all of it
-                </h2>
-              </div>
+            <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
+              Concepts
+            </p>
+            <h2 className="font-display m-0 mt-3 text-[26px] font-semibold leading-[1.25] text-foreground sm:text-[34px]">
+              What the record raises, once you put the journal and the research beside
+              each other.
+            </h2>
+            <p className="mt-4 text-[15px] text-muted">
+              {CONCEPTS.length} concepts · each labelled with what it rests on, who wrote
+              it, and who it is for · {SOURCE_YEARS.length} dated sources
+            </p>
+
+            <div className="mt-14">
+              <HomeCarousel slides={conceptSlides} label="Concepts" />
+            </div>
+
+            <div className="mt-14 flex flex-wrap items-center gap-4">
               <a
                 href="/concepts"
-                className="ml-auto text-[14px] underline underline-offset-4 text-muted hover:text-foreground"
+                className="inline-flex h-12 items-center rounded-md bg-foreground px-6 text-[15px] font-medium text-background"
               >
-                All {CONCEPTS.length}
+                Go to the concepts
               </a>
+              <DisclaimerDialog>
+                <button
+                  type="button"
+                  className="text-[14px] text-muted underline underline-offset-4 hover:text-foreground"
+                >
+                  How to read the concepts
+                </button>
+              </DisclaimerDialog>
             </div>
-            <p className="body-copy mb-8 text-foreground/85">
-              Each one is labelled with what it rests on, who produced it, and the readers
-              it was written for &mdash; so you can weigh it before you read it.
-            </p>
-            <ul className="m-0 grid list-none gap-x-8 gap-y-4 p-0 sm:grid-cols-2 lg:grid-cols-3">
-              {conceptTitles.map((c) => (
-                <li key={c.id} className="pt-4">
-                  <a href={`/concepts#${c.id}`} className="group block">
-                    <span className="font-display block text-[17px] font-semibold text-foreground group-hover:underline group-hover:underline-offset-4">
-                      {c.title}
-                    </span>
-                    <span className="mt-1 block text-[12px] uppercase tracking-wide text-muted">
-                      {c.basis} · {c.theme}
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
           </div>
         </section>
+
 
         {/* ------------------------------------------------------ glossary */}
         {/* Same shape as Journal: header, one sentence, the thing, a carousel
@@ -599,12 +568,17 @@ export default function Page() {
             <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
               Glossary
             </p>
-            <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground sm:text-4xl">
-              The words this subject is argued in
+            {/* Sean: "it's not the words the subject is arguing. The glossary
+                is really important. These are — bring yourself up to speed."
+                Right, and the old heading described the glossary's function to
+                somebody who already understood it. This one addresses the
+                reader instead, which is who it is actually for. */}
+            <h2 className="font-display m-0 mt-3 text-[26px] font-semibold leading-[1.25] text-foreground sm:text-[34px]">
+              Bring yourself up to speed.
             </h2>
-            <p className="body-copy mt-4 text-[19px] leading-relaxed text-foreground/85">
-              Plain definitions for the technical and clinical terms this record uses, so
-              an argument is never conducted in words the reader cannot check.
+            <p className="mt-4 text-[15px] text-muted">
+              The technical, legal and clinical vocabulary this subject is conducted in —
+              defined plainly, with the entries and sources that use each one.
             </p>
 
             <div className="mt-10">
