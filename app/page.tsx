@@ -49,59 +49,58 @@ export const metadata: Metadata = {
   // The headline is the title. A shared link should carry the question, since
   // the question is what this archive is organised around — and a question
   // carries its question mark with it, which an assertion never would.
-  title: "Is the world being exposed to unconsented neurotech experimentation?",
+  title: "Are you being contacted by something you never consented to?",
   description:
-    "Colorado has required consent to collect neural data since 2024 — the first law of its kind anywhere. This archive asks what it was written against: one resident's dated record from Denver, 120 days of entries and 298 recordings, beside a documented archive of what governments bought and what regulators found. Every figure resolves to a named source, and the archive states plainly what it does not establish.",
+    "Not a reassurance — a record. What neurotechnology has actually been shown to do, under what conditions, and where the documented record stops. Colorado has required consent to collect neural data since 2024, the first law of its kind anywhere. One resident's dated record from Denver — 120 days, 298 recordings — sits beside the public procurement record. Every figure resolves to a named source.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Is the world being exposed to unconsented neurotech experimentation?",
+    title: "Are you being contacted by something you never consented to?",
     description:
-      "A dated first-person record, and the procurement archive that says nobody would be able to check.",
+      "Not a reassurance — a record. What neurotechnology has been shown to do, and where the documented record stops.",
     images: ["/og-default.png"],
   },
 };
 
 /**
- * THE HERO HEADLINE.
+ * THE HERO HEADLINE, IN THE SECOND PERSON.
  *
- * Sean's line, tightened: "Is the world being exposed to unconsented neurotech
- * experimentation?" ("the world's population" trimmed to "the world" — the rail
- * is 30% and the headline has to hold on two or three lines.)
+ * Sean asked to make it personal: "are you being exposed to unconsented
+ * neurotechnological communication and experimentation?"
  *
- * WHAT MAKES A GLOBAL QUESTION SURVIVE A HOSTILE READING. On its own it would
- * not: this archive holds nothing about the world's population, and a scope
- * that large with nothing under it is the register Sean rejected outright —
- * "I don't need a hocus pocus mumbo jumbo bullshit website."
+ * The direction is right and the audience is real — somebody who found this at
+ * three in the morning is the reader this archive can help most. But that
+ * sentence as a whole headline is a leading question: it affirms the belief to a
+ * stranger the archive knows nothing about, before the page has said one
+ * careful word. The site's own first limit is "nothing here establishes that any
+ * specific thing has been done to any specific person," and a fraction of the
+ * people who search these words are unwell in ways that a bare "yes, you are"
+ * makes worse. It also loses the journalist and the lawyer in one line.
  *
- * The subheading is what carries it, and it carries it on a verified fact
- * rather than on assertion. Colorado HB24-1058, signed 17 April 2024 and in
- * force since 6 August 2024, amended the Colorado Privacy Act to classify
- * NEURAL DATA as sensitive and to require affirmative consent before it is
- * processed — the first US state comprehensive privacy law to do so, and
- * reported at the time as the first such protection anywhere. Its definition
- * does not even require that the data identify anyone; the legislature treated
- * neural data as inherently sensitive.
+ * So the question stays in the second person and stops one clause earlier, and
+ * the subheading does the work the missing clause was doing. Asking somebody
+ * whether they are being contacted without consent is a real question with a
+ * checkable answer. Telling them they ARE is not.
  *
- * That does three things at once. "Unconsented" stops being rhetoric and
- * becomes a legal term with a statute behind it. The question becomes one a
- * legislature has already decided is worth answering. And the law was passed in
- * Sean's own state — the archive's local record and its global question meet in
- * one dated, checkable fact.
+ * "Not a reassurance — a record" is the load-bearing phrase. It promises exactly
+ * what the neurotechnology section below delivers: Neuralink's trial needs a
+ * surgeon, the fMRI decoder needed sixteen hours per person and failed when
+ * participants resisted, and there the documented record stops. A frightened
+ * reader can check that. They cannot check a comforting sentence, and they
+ * should not have to take one on trust from a stranger's website.
  *
- * Alternates, kept so swapping costs one line:
- *   B  "Who is consenting to neurotechnology — and who would ever know?"
- *      Shortest, claims no scope at all, keeps the record-keeping clause that
- *      made the previous headline defensible.
- *   C  "Colorado made neural data require consent. Who is asking?"
- *      Leads with the statute. Most defensible of the three and the most
- *      surprising; gives up the global reach Sean is after.
+ * Alternates, one line to swap:
+ *   B  Sean's line in full: "Are you being exposed to unconsented
+ *      neurotechnological communication and experimentation?"
+ *   C  "Is the world being exposed to unconsented neurotech experimentation?"
+ *      — the previous headline; global rather than personal.
+ *   D  "Who is consenting to neurotechnology — and who would ever know?"
  */
 const HERO = {
-  question: "Is the world being exposed to unconsented neurotech experimentation?",
+  question: "Are you being contacted by something you never consented to?",
   answer:
-    "Colorado has required consent to collect neural data since 2024 — the first law of " +
-    "its kind anywhere. This archive asks what it was written against: one resident's " +
-    "dated record, and the public procurement record beside it.",
+    "Not a reassurance — a record. What neurotechnology has actually been shown to do, " +
+    "under what conditions, and where the documented record stops. Colorado has required " +
+    "consent to collect neural data since 2024.",
 };
 
 /**
@@ -180,10 +179,10 @@ export default function Page() {
                   Read the journal
                 </a>
                 <a
-                  href="/data"
+                  href="#neurotechnology"
                   className="inline-flex h-12 items-center rounded-md border border-edge px-6 text-[15px] hover:border-foreground"
                 >
-                  See the research
+                  What the technology can do
                 </a>
               </div>
               <p className="mt-4 text-[13px] leading-relaxed text-foreground/70">
@@ -354,7 +353,10 @@ export default function Page() {
         </section>
 
         {/* ------------------------------------- what the technology can do */}
-        <section className="border-b border-edge">
+        {/* Addressable: the hero asks a second-person question and this is the
+            section that answers it. A reader who arrived frightened should be
+            one click from the conditions, not five sections down. */}
+        <section id="neurotechnology" className="scroll-mt-24 border-b border-edge">
           <div className="mx-auto max-w-3xl px-5 py-16 sm:px-8">
             <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
               Neurotechnology
