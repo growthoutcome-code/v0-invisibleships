@@ -49,58 +49,60 @@ export const metadata: Metadata = {
   // The headline is the title. A shared link should carry the question, since
   // the question is what this archive is organised around — and a question
   // carries its question mark with it, which an assertion never would.
-  title: "Are you being contacted by something you never consented to?",
+  title: "Are you being subjected to unconsented to neurotechnological communication and experimentation?",
   description:
-    "Not a reassurance — a record. What neurotechnology has actually been shown to do, under what conditions, and where the documented record stops. Colorado has required consent to collect neural data since 2024, the first law of its kind anywhere. One resident's dated record from Denver — 120 days, 298 recordings — sits beside the public procurement record. Every figure resolves to a named source.",
+    "This archive cannot answer that for you. It can show you what neurotechnology has actually been shown to do, under what conditions, and where the documented record stops. Colorado has required consent to collect neural data since 2024, the first law of its kind anywhere. One resident's dated record from Denver — 120 days, 298 recordings — sits beside the public procurement record. Every figure resolves to a named source.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Are you being contacted by something you never consented to?",
+    title: "Are you being subjected to unconsented to neurotechnological communication and experimentation?",
     description:
-      "Not a reassurance — a record. What neurotechnology has been shown to do, and where the documented record stops.",
+      "This archive cannot answer that for you. It can show what neurotechnology has been shown to do, and where the documented record stops.",
     images: ["/og-default.png"],
   },
 };
 
 /**
- * THE HERO HEADLINE, IN THE SECOND PERSON.
+ * THE HERO HEADLINE.
  *
- * Sean asked to make it personal: "are you being exposed to unconsented
- * neurotechnological communication and experimentation?"
+ * Sean's sentence, verbatim and by explicit instruction: "I want it exactly
+ * that." Including "unconsented to", which is his own published register — the
+ * series' executive summary reads "unconsented to criminal coercion" and "the
+ * unconsented breaching of the human body". It is his voice, not a slip, and it
+ * is not corrected here.
  *
- * The direction is right and the audience is real — somebody who found this at
- * three in the morning is the reader this archive can help most. But that
- * sentence as a whole headline is a leading question: it affirms the belief to a
- * stranger the archive knows nothing about, before the page has said one
- * careful word. The site's own first limit is "nothing here establishes that any
- * specific thing has been done to any specific person," and a fraction of the
- * people who search these words are unwell in ways that a bare "yes, you are"
- * makes worse. It also loses the journalist and the lawyer in one line.
+ * IT IS A LEADING QUESTION, AND THE SUBLINE IS WHAT MAKES IT SAFE. Asked of a
+ * stranger the archive knows nothing about, "are you being subjected to this"
+ * plants the answer. The site's own first limit says nothing here establishes
+ * that any specific thing has been done to any specific person, and a share of
+ * the people who search these words are unwell in ways a bare "yes" makes worse.
  *
- * So the question stays in the second person and stops one clause earlier, and
- * the subheading does the work the missing clause was doing. Asking somebody
- * whether they are being contacted without consent is a real question with a
- * checkable answer. Telling them they ARE is not.
+ * So the first sentence under it declines to answer, in as many words. "This
+ * archive cannot answer that for you" is doing more work than any other line on
+ * the page: it lets the headline ask the question that reaches the frightened
+ * reader, while refusing to be the thing that confirms it to them. What follows
+ * is what the archive CAN do, and it is all checkable one section down —
+ * Neuralink's trial needs a surgeon, the fMRI decoder needed sixteen hours per
+ * person and failed when participants resisted, Colorado has required consent
+ * for neural data since 2024, and there the documented record stops.
  *
- * "Not a reassurance — a record" is the load-bearing phrase. It promises exactly
- * what the neurotechnology section below delivers: Neuralink's trial needs a
- * surgeon, the fMRI decoder needed sixteen hours per person and failed when
- * participants resisted, and there the documented record stops. A frightened
- * reader can check that. They cannot check a comforting sentence, and they
- * should not have to take one on trust from a stranger's website.
+ * The buttons are gone at Sean's instruction. The scroll hint is now the only
+ * affordance out of the hero, which is why it is a labelled link and not a bare
+ * chevron.
  *
- * Alternates, one line to swap:
- *   B  Sean's line in full: "Are you being exposed to unconsented
- *      neurotechnological communication and experimentation?"
- *   C  "Is the world being exposed to unconsented neurotech experimentation?"
- *      — the previous headline; global rather than personal.
- *   D  "Who is consenting to neurotechnology — and who would ever know?"
+ * Subline alternates, one line to swap:
+ *   B  "Not a reassurance — a record. What the technology has been shown to do,
+ *       what it needs to do it, and where the documented record stops."
+ *   C  "One resident's dated record from Denver, and the public evidence beside
+ *       it. Colorado has required consent to collect neural data since 2024 —
+ *       the first law of its kind anywhere."
  */
 const HERO = {
-  question: "Are you being contacted by something you never consented to?",
+  question:
+    "Are you being subjected to unconsented to neurotechnological communication and experimentation?",
   answer:
-    "Not a reassurance — a record. What neurotechnology has actually been shown to do, " +
-    "under what conditions, and where the documented record stops. Colorado has required " +
-    "consent to collect neural data since 2024.",
+    "This archive cannot answer that for you. It can show you what neurotechnology has " +
+    "actually been shown to do, under what conditions, and where the documented record " +
+    "stops.",
 };
 
 /**
@@ -155,39 +157,32 @@ export default function Page() {
             30/70 now, up from 25/75: the headline became a full question and a
             question needs line length. min-w-[380px] is the floor that makes a
             percentage safe — at 1280px the rail IS 30%, and on anything
-            narrower the floor takes over rather than breaking a nine-word
+            narrower the floor takes over rather than breaking a twelve-word
             question into a column of one-word lines.
+
+            The hero has no buttons (Sean, 30 August). The scroll hint at the
+            bottom is the only affordance out of this screen, which is why it is
+            a labelled link rather than a bare chevron.
 
             order-1 / order-2 is the gate's behaviour too — on a phone the
             animation is on top and the copy reads beneath it. */}
         <section className="relative flex min-h-[calc(100vh-72px)] lg:min-h-[calc(100vh-88px)] flex-col border-b border-edge md:flex-row">
-          {/* Left 25% — the copy rail */}
+          {/* Left 30% — the copy rail */}
           <div className="order-2 flex flex-col px-8 py-12 sm:px-12 md:order-1 md:w-[30%] md:min-w-[380px] lg:px-14">
             <div className="animate-fade-in flex max-w-md flex-1 flex-col justify-center">
-              <h1 className="font-display text-[32px] font-bold leading-[1.12] tracking-tight text-foreground sm:text-[40px]">
+              {/* Sized down from 40px: the headline is now twelve words of long
+                  words in a 30% rail, and at 40px it ran to six lines and
+                  pushed the subline off a laptop screen. The subline is the
+                  part that must not be missed. */}
+              <h1 className="font-display text-[27px] font-bold leading-[1.15] tracking-tight text-foreground sm:text-[32px] lg:text-[34px]">
                 {HERO.question}
               </h1>
-              <p className="mt-5 font-serif text-lg leading-snug text-foreground/80 sm:text-xl">
+              {/* The first sentence declines to answer. See the note on HERO. */}
+              <p className="mt-5 font-serif text-lg leading-snug text-foreground/80">
                 {HERO.answer}
               </p>
-
-              <div className="mt-7 flex flex-wrap items-center gap-3">
-                <a
-                  href="/journal"
-                  className="inline-flex h-12 items-center rounded-md bg-foreground px-6 text-[15px] font-medium text-background"
-                >
-                  Read the journal
-                </a>
-                <a
-                  href="#neurotechnology"
-                  className="inline-flex h-12 items-center rounded-md border border-edge px-6 text-[15px] hover:border-foreground"
-                >
-                  What the technology can do
-                </a>
-              </div>
-              <p className="mt-4 text-[13px] leading-relaxed text-foreground/70">
-                The journal carries a content warning. Nothing here asks you to agree to
-                anything before reading it.{" "}
+              <p className="mt-5 text-[13px] leading-relaxed text-foreground/70">
+                Nothing here asks you to agree to anything before reading it.{" "}
                 <a href="#not-established" className="underline underline-offset-4">
                   What this archive does not establish
                 </a>
@@ -213,11 +208,13 @@ export default function Page() {
               fold with nothing on screen to say so. NN/g's point about scanners
               applies here too: people miss content because of where it sits.
 
-              It is a link to the first section, not an icon. Keyboard users get
-              it, screen readers get a labelled destination, and a click lands
-              somewhere real rather than scrolling a guessed distance. Centred on
-              the PAGE rather than on the animation panel, because the eye reads
-              a bottom-centre arrow as belonging to the whole screen.
+              Since the buttons came out of the rail this is the ONLY way
+              forward from the hero, which raises the stakes on it being a real
+              link: keyboard users get it, screen readers get a labelled
+              destination, and a click lands somewhere real rather than
+              scrolling a guessed distance. Centred on the PAGE rather than on
+              the animation panel, because the eye reads a bottom-centre arrow
+              as belonging to the whole screen.
 
               md and up only: on a phone the hero stacks and the copy already
               runs to the bottom edge, which says "more below" by itself. */}
