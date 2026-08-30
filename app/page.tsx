@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Footer from "@/components/Footer";
+import { ChevronDown } from "lucide-react";
 import GateAnimation from "@/components/GateAnimation";
 import Header from "@/components/Header";
 import HomeJournalCarousel from "@/components/HomeJournalCarousel";
@@ -160,7 +161,7 @@ export default function Page() {
 
             order-1 / order-2 is the gate's behaviour too — on a phone the
             animation is on top and the copy reads beneath it. */}
-        <section className="flex min-h-[calc(100vh-72px)] lg:min-h-[calc(100vh-88px)] flex-col border-b border-edge md:flex-row">
+        <section className="relative flex min-h-[calc(100vh-72px)] lg:min-h-[calc(100vh-88px)] flex-col border-b border-edge md:flex-row">
           {/* Left 25% — the copy rail */}
           <div className="order-2 flex flex-col px-8 py-12 sm:px-12 md:order-1 md:w-[30%] md:min-w-[380px] lg:px-14">
             <div className="animate-fade-in flex max-w-md flex-1 flex-col justify-center">
@@ -207,6 +208,31 @@ export default function Page() {
             </div>
           </div>
 
+          {/* SCROLL HINT.
+              The hero is a full viewport height, so everything that earns the
+              page belief — the record, the limits, the findings — is below the
+              fold with nothing on screen to say so. NN/g's point about scanners
+              applies here too: people miss content because of where it sits.
+
+              It is a link to the first section, not an icon. Keyboard users get
+              it, screen readers get a labelled destination, and a click lands
+              somewhere real rather than scrolling a guessed distance. Centred on
+              the PAGE rather than on the animation panel, because the eye reads
+              a bottom-centre arrow as belonging to the whole screen.
+
+              md and up only: on a phone the hero stacks and the copy already
+              runs to the bottom edge, which says "more below" by itself. */}
+          <a
+            href="#record"
+            aria-label="Skip to the record"
+            className="absolute inset-x-0 bottom-6 z-10 mx-auto hidden w-max flex-col items-center gap-1.5 text-muted transition-colors hover:text-foreground md:flex"
+          >
+            <span className="font-display text-[11px] uppercase tracking-[0.14em]">
+              The record
+            </span>
+            <ChevronDown className="scroll-hint" size={20} aria-hidden />
+          </a>
+
           {/* Right 75% — animation panel */}
           <div className="relative order-1 min-h-[42vh] overflow-hidden bg-background md:order-2 md:min-h-[calc(100vh-72px)] lg:min-h-[calc(100vh-88px)] md:w-[70%]">
             <GateAnimation fill />
@@ -214,7 +240,7 @@ export default function Page() {
         </section>
 
         {/* -------------------------------------------------------- journal */}
-        <section className="border-b border-edge">
+        <section id="record" className="scroll-mt-24 border-b border-edge">
           <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
             <div className="mb-8 flex flex-wrap items-end gap-4">
               <div>

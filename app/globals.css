@@ -98,9 +98,21 @@ body {
 @keyframes ga-second { 0% { opacity: 0; } 11% { opacity: 0; } 20% { opacity: 1; } 33% { opacity: 1; } 43% { opacity: 0; } 100% { opacity: 0; } }
 @keyframes ga-third  { 0% { opacity: 0; } 33% { opacity: 0; } 43% { opacity: 1; } 56% { opacity: 1; } 65% { opacity: 0; } 100% { opacity: 0; } }
 @keyframes ga-final  { 0% { opacity: 0; } 56% { opacity: 0; } 65% { opacity: 1; } 86% { opacity: 1; } 100% { opacity: 0; } }
+/* Scroll hint under a full-height hero. Six pixels, two seconds, ease-in-out —
+   enough to read as "there is more" in peripheral vision and not enough to
+   compete with the animation beside it. It is a real link, not decoration, so
+   the movement is the only thing this rule adds. */
+@keyframes scroll-hint {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(6px); }
+}
+.scroll-hint { animation: scroll-hint 2s ease-in-out infinite; }
+
 @media (prefers-reduced-motion: reduce) {
   .gate-anim .ga-scene { animation: none !important; }
   .gate-anim .ga-sq { opacity: 1; } /* hold the final scene statically */
+  /* The arrow still points down and still works; it simply stops moving. */
+  .scroll-hint { animation: none !important; }
 }
 
 /* Data sub-tab modes (DataView). Timeline mode shows only the master timeline:
