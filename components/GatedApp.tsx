@@ -22,7 +22,11 @@
 // from it.
 import JournalBrowser from "@/components/JournalBrowser";
 import type { Tab } from "@/components/Header";
+import type { SubTab } from "@/components/DataView";
 
-export default function GatedApp({ initialTab = "journal" }: { initialTab?: Tab }) {
-  return <JournalBrowser initialTab={initialTab} />;
+export default function GatedApp({
+  initialTab = "journal",
+  initialSub,
+}: { initialTab?: Tab; initialSub?: SubTab }) {
+  return <JournalBrowser initialTab={initialTab} initialSub={initialSub} />;
 }

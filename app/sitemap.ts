@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { allJournalParams, allGlossaryParams } from "@/lib/server-corpus";
+import { DATA_SECTIONS } from "@/lib/routes";
 
 /**
  * Sitemap covering every addressable page.
@@ -26,6 +27,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // /concepts would strand 35 anchors that have been shared.
     { url: `${BASE}/data`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/concepts`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
+    // The three Research verticals. They existed as views for months with no
+    // address, so nothing outside a live session could reach them.
+    ...DATA_SECTIONS.map((sec) => ({
+      url: `${BASE}/data/${sec.slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.85,
+    })),
     { url: `${BASE}/glossary`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE}/documents`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${BASE}/author`, lastModified: now, changeFrequency: "yearly", priority: 0.4 },

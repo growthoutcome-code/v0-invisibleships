@@ -6,6 +6,7 @@ import type { Dataset, Doc } from "@/lib/types";
 import { track } from "@/lib/analytics";
 import Header, { type Tab } from "@/components/Header";
 import Footer from "@/components/Footer";
+import { pathForSub } from "@/lib/routes";
 import SideNav from "@/components/SideNav";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -74,14 +75,21 @@ function firstSentences(text: string, n = 2): string {
   return out.length > 220 ? out.slice(0, 220).trim() + "…" : out;
 }
 
-export default function JournalBrowser({ initialTab = "journal" }: { initialTab?: Tab } = {}) {
+export default function JournalBrowser({
+  initialTab = "journal",
+  initialSub,
+}: { initialTab?: Tab; initialSub?: SubTab } = {}) {
   const [ds, setDs] = useState<Dataset | null>(null);
   const [loading, setLoading] = useState(true);
   const [tab, setTab] = useState<Tab>(initialTab);
   // Which vertical of the merged Research section is showing. `concepts` is the
   // fifth; it is addressable at /concepts, which is why the sub-tab lives up
   // here with the URL effect rather than inside DataView.
-  const [dataSub, setDataSub] = useState<SubTab>(initialTab === "concepts" ? "concepts" : "timeline");
+  // initialSub arrives from /data/[section]: a reader who was linked straight to
+  // Crime lands on Crime, not on the Timeline with their vertical thrown away.
+  const [dataSub, setDataSub] = useState<SubTab>(
+    initialSub ?? (initialTab === "concepts" ? "concepts" : "timeline")
+  );
 
   const [q, setQ] = useState(""); const [dFrom, setDFrom] = useState(""); const [dTo, setDTo] = useState("");
   const [part, setPart] = useState(""); const [loc, setLoc] = useState("");
@@ -138,13 +146,13 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
       if (sel) path = `/journal/${sel.toLowerCase()}`;
       else if (tab === "glossary") path = gsel ? `/glossary/${gsel.toLowerCase()}` : "/glossary";
       else if (tab === "documents") path = "/documents";
-      else if (tab === "data") path = "/data";
+      else if (tab === "data") path = pathForSub(dataSub);
       else if (tab === "concepts") path = "/concepts";
       else if (tab === "author") path = "/author";
       else if (tab === "disclaimer") path = "/disclaimer";
       window.history.replaceState(null, "", path + window.location.hash);
     } catch { /* ignore */ }
-  }, [tab, sel, gsel, deepLinked]);
+  }, [tab, sel, gsel, dataSub, deepLinked]);
 
   // Section-level analytics: replaceState alone doesn't emit a pageview, so record
   // in-app section switches explicitly for tracking.
@@ -255,7 +263,12 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
         }}
         onSearch={() => { setPanelOpen(true); track("search_opened"); }}
         onExport={() => { setExportOpen(true); track("export_opened"); }}
-        onHome={() => { setTab("journal"); setSel(null); setGsel(null); setPage(1); }}
+        // The wordmark is a link home, and "/" is the home page now — it used
+        // to be the gate, which is why this reset to the journal feed instead
+        // of navigating. Same bug shape as the nav redirect: correct until the
+        // front door moved, then quietly wrong. A real navigation, because the
+        // home page is a different route and not a tab of this app.
+        onHome={() => { if (typeof window !== "undefined") window.location.assign("/"); }}
       />
 
       <main className="flex-1 w-full max-w-[1400px] mx-auto px-4 sm:px-6 py-6">

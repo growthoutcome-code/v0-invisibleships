@@ -25,6 +25,7 @@
  */
 import Link from "next/link";
 import { DisclaimerDialog, SafetyDialog } from "@/components/LegalDialogs";
+import { DATA_SECTIONS } from "@/lib/routes";
 
 type NavTab = "journal" | "data" | "concepts" | "glossary" | "documents" | "author";
 
@@ -33,6 +34,7 @@ const COLUMNS: { heading: string; links: { t?: NavTab; href: string; label: stri
     heading: "The record",
     links: [
       { t: "journal", href: "/journal", label: "Journal" },
+      { t: "glossary", href: "/glossary", label: "Glossary" },
       { t: "documents", href: "/documents", label: "Documents" },
       { href: "/api/corpus?from=footer", label: "Download the corpus" },
     ],
@@ -40,9 +42,13 @@ const COLUMNS: { heading: string; links: { t?: NavTab; href: string; label: stri
   {
     heading: "The research",
     links: [
-      { t: "data", href: "/data", label: "Research" },
+      { t: "data", href: "/data", label: "Timeline" },
+      // Built from lib/routes.ts, so a new vertical appears in the footer, in
+      // the sitemap and in the address bar together or not at all. These carry
+      // no `t`: they are real routes, and inside the app a plain link is what
+      // gets a reader to a vertical the tab state alone cannot address.
+      ...DATA_SECTIONS.map((sec) => ({ href: `/data/${sec.slug}`, label: sec.label })),
       { t: "concepts", href: "/concepts", label: "Concepts" },
-      { t: "glossary", href: "/glossary", label: "Glossary" },
     ],
   },
   {
