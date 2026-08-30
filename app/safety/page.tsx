@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 import SafetyNote from "@/components/SafetyNote";
 import { GATE } from "@/lib/gate-content";
 
@@ -26,17 +27,7 @@ export default function Page() {
   const s = GATE.safety;
   return (
     <>
-      <header className="flex h-[72px] w-full items-center gap-4 border-b border-edge px-5 sm:px-8">
-        <a href="/" className="font-display text-lg font-semibold tracking-[-0.01em] text-foreground">
-          Invisible Ships
-        </a>
-        <a
-          href="/disclaimer"
-          className="font-display ml-auto border-b border-transparent pb-0.5 text-[12px] font-medium uppercase tracking-[0.14em] text-muted transition-colors hover:border-foreground hover:text-foreground"
-        >
-          Disclaimer and terms
-        </a>
-      </header>
+      <Header />
 
       <main className="mx-auto max-w-3xl px-5 py-14 sm:px-8">
         <p className="font-display m-0 text-[12px] uppercase tracking-[0.14em] text-muted">

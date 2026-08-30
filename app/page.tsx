@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 import GateAnimation from "@/components/GateAnimation";
+import Header from "@/components/Header";
 import HomeJournalCarousel from "@/components/HomeJournalCarousel";
 import { CONCEPTS, FINDINGS, NOT_ESTABLISHED, SOURCE_YEARS } from "@/lib/concepts";
 import { CORPUS_SUMMARY } from "@/lib/corpus-summary";
@@ -56,16 +57,6 @@ export const metadata: Metadata = {
   },
 };
 
-// The header carries what a reader came for. The disclaimer moved to the
-// footer, where the convention says to look for it and where it opens as a
-// modal — it was spending a nav slot on a document almost nobody clicks first.
-const NAV = [
-  { href: "/journal", label: "Journal" },
-  { href: "/concepts", label: "Concepts" },
-  { href: "/data", label: "Research" },
-  { href: "/glossary", label: "Glossary" },
-];
-
 export default function Page() {
   const entries = homeJournal(9);
   const gloss = homeGlossary([...new Set(entries.flatMap((e) => e.terms.map((t) => t.slug)))]);
@@ -76,56 +67,7 @@ export default function Page() {
 
   return (
     <>
-      {/* ------------------------------------------------------------- nav */}
-      {/* TYPOGRAPHY. The links were Inter — the body face — at 13px with
-          Tailwind's default `tracking-wide`, which is what "plain" looked like:
-          the navigation was set in the same voice as a paragraph.
-
-          They are Space Grotesk now, the display face the headlines already
-          use. Nothing new is downloaded; it is in the same Google Fonts request
-          as the rest. Space Grotesk's letterforms are geometric and slightly
-          squared, which is unremarkable at headline size and does real work in
-          small caps — it reads as a plate on a cabinet rather than as body
-          text, which is the register an archive wants.
-
-          The other half is spacing. Uppercase text needs more of it than
-          lowercase does, because capitals have no ascenders or descenders to
-          separate them; 0.14em is enough to let the words breathe without
-          drifting into a fashion-house wordmark. Dropping to 12px pays for the
-          extra width so the row does not grow.
-
-          Hover is a 1px rule under the word rather than a colour change alone.
-          A colour shift on already-muted text is easy to miss; a rule is
-          unambiguous and it is how the rest of the site marks a link. */}
-      <header className="sticky top-0 z-30 w-full border-b border-edge bg-background/95 backdrop-blur">
-        <div className="mx-auto flex h-[64px] max-w-7xl items-center gap-6 px-5 sm:px-8">
-          <a
-            href="/"
-            className="font-display text-lg font-semibold tracking-[-0.01em] text-foreground"
-          >
-            Invisible Ships
-          </a>
-          <nav className="ml-auto hidden items-center gap-7 lg:flex">
-            {NAV.map((n) => (
-              <a
-                key={n.href}
-                href={n.href}
-                className="font-display border-b border-transparent pb-0.5 text-[12px] font-medium uppercase tracking-[0.14em] text-muted transition-colors hover:border-foreground hover:text-foreground"
-              >
-                {n.label}
-              </a>
-            ))}
-          </nav>
-          {/* The register call to action. It lands on what contributing costs,
-              not on a sign-up form, because accounts are not open yet. */}
-          <a
-            href="/contribute"
-            className="font-display ml-auto inline-flex h-10 items-center rounded-md bg-foreground px-4 text-[12px] font-medium uppercase tracking-[0.14em] text-background lg:ml-0"
-          >
-            Contribute
-          </a>
-        </div>
-      </header>
+      <Header />
 
       <main>
         {/* ------------------------------------------------------------ hero */}
@@ -142,7 +84,7 @@ export default function Page() {
 
             order-1 / order-2 is the gate's behaviour too — on a phone the
             animation is on top and the copy reads beneath it. */}
-        <section className="flex min-h-[calc(100vh-64px)] flex-col border-b border-edge md:flex-row">
+        <section className="flex min-h-[calc(100vh-72px)] lg:min-h-[calc(100vh-88px)] flex-col border-b border-edge md:flex-row">
           {/* Left 25% — the copy rail */}
           <div className="order-2 flex flex-col px-8 py-12 sm:px-12 md:order-1 md:w-[25%] md:min-w-[360px] lg:px-14">
             <div className="animate-fade-in flex max-w-md flex-1 flex-col justify-center">
@@ -191,7 +133,7 @@ export default function Page() {
           </div>
 
           {/* Right 75% — animation panel */}
-          <div className="relative order-1 min-h-[42vh] overflow-hidden bg-background md:order-2 md:min-h-[calc(100vh-64px)] md:w-[75%]">
+          <div className="relative order-1 min-h-[42vh] overflow-hidden bg-background md:order-2 md:min-h-[calc(100vh-72px)] lg:min-h-[calc(100vh-88px)] md:w-[75%]">
             <GateAnimation fill />
           </div>
         </section>

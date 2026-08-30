@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 
 /**
  * /contribute — where the nav's register call-to-action lands.
@@ -55,14 +56,7 @@ const PRACTICES: string[] = [
 export default function Page() {
   return (
     <>
-      <header className="w-full px-5 sm:px-8 h-[72px] flex items-center gap-4 border-b border-edge">
-        <a href="/" className="font-display font-semibold tracking-tight text-foreground text-lg">
-          Invisible Ships
-        </a>
-        <a href="/disclaimer" className="ml-auto font-display border-b border-transparent pb-0.5 text-[12px] font-medium uppercase tracking-[0.14em] text-muted transition-colors hover:border-foreground hover:text-foreground">
-          Disclaimer and terms
-        </a>
-      </header>
+      <Header />
 
       <main className="mx-auto max-w-3xl px-5 sm:px-8 py-14">
         <p className="font-display m-0 text-[12px] uppercase tracking-[0.14em] text-muted">Contribute</p>
@@ -124,22 +118,35 @@ export default function Page() {
           </ol>
         </section>
 
-        <section className="mt-12 border-t border-edge pt-10">
+        {/* The Contribute button in the header points here, so this section is
+            what that call to action resolves to. When accounts open it becomes
+            the sign-up form and nothing above it has to change. Until then it
+            says plainly that it is not open, because a call to action that
+            lands on a promise is worse than one that lands on an explanation. */}
+        <section id="account" className="mt-12 border-t border-edge pt-10">
           <h2 className="font-display m-0 text-2xl font-semibold text-foreground">
-            Where this stands today
+            Creating an account
           </h2>
           <p className="body-copy mt-3 text-foreground/85">
-            Accounts and the in-browser recorder are built and being tested. They are not
-            open yet, and this page will say so until they are &mdash; there is no waiting
-            list and no address to leave, because a list of people interested in this
-            subject is itself a risk to those people and it would buy them nothing before
-            the recorder works.
+            An account gives you a private, dated record that only you can read, an
+            in-browser recorder that transcribes on your own device rather than sending
+            your voice to a transcription service, and the right to edit or delete any
+            word of it at any time without asking anyone.
           </p>
-          <p className="body-copy mt-3 text-foreground/85">
-            When it opens, transcription will run on your own device rather than being
-            sent to a transcription service, every entry will be private by default, and
-            every word of it will be editable and deletable by you without asking anyone.
-          </p>
+          <div className="mt-6 border border-edge p-6">
+            <p className="font-display m-0 text-[12px] uppercase tracking-[0.14em] text-muted">
+              Not open yet
+            </p>
+            <p className="body-copy m-0 mt-3 text-[15px] text-foreground/85">
+              Accounts and the recorder are built and being tested. This page will carry
+              the sign-up form the day they open, and this notice will be gone.
+            </p>
+            <p className="m-0 mt-3 text-[14px] text-muted">
+              There is no waiting list and no address to leave. A list of people
+              interested in this subject is itself a risk to those people, and it would
+              buy them nothing before the recorder works.
+            </p>
+          </div>
           <div className="mt-8 flex flex-wrap gap-4">
             <a
               href="/disclaimer#copyright"
@@ -155,6 +162,7 @@ export default function Page() {
             </a>
           </div>
         </section>
+
       </main>
 
       <Footer />

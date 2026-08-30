@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Footer from "@/components/Footer";
+import Header from "@/components/Header";
 import { GATE } from "@/lib/gate-content";
 
 /**
@@ -26,14 +27,7 @@ export default function Page() {
   const p = GATE.perceptual;
   return (
     <>
-      <header className="w-full px-5 sm:px-8 h-[72px] flex items-center gap-4 border-b border-edge">
-        <a href="/" className="font-display font-semibold tracking-tight text-foreground text-lg">
-          Invisible Ships
-        </a>
-        <a href="/concepts" className="ml-auto text-[13px] uppercase tracking-wide text-muted hover:text-foreground">
-          The concepts
-        </a>
-      </header>
+      <Header />
 
       <main className="mx-auto max-w-3xl px-5 sm:px-8 py-14">
         <p className="text-[13px] uppercase tracking-[0.08em] text-muted m-0">{p.eyebrow}</p>
