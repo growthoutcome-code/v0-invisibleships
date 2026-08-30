@@ -164,56 +164,51 @@ export function homeJournal(limit = 10): HomeEntry[] {
 }
 
 /**
- * One journal entry, hand-picked, with its quoted passage VERIFIED against the
- * corpus at render time.
+ * The last journal entry, in full.
  *
- * WHY THE PASSAGE IS HAND-PICKED AND NOT DERIVED. "/" is ungated. 89 of 438
- * journal documents open with euthanasia, self-harm or violence language inside
- * their first 220 characters, including two of the eight most recent. An
- * automatic excerpt would eventually publish one of those on the front page, to
- * somebody who arrived from a link with no warning ahead of it. There is no
- * filter that is safe enough here; a person has to choose.
+ * Sean, 30 August: "lead with the last known journal entry for the journal
+ * section. It needs to be fully exposed… and do not suggest any journal
+ * entries."
  *
- * WHY IT IS STILL CHECKED. A hand-picked quote is a second copy of the record,
- * and a second copy that stops matching the first is this project's oldest
- * failure. So the quote is verified as a substring of the entry it claims to
- * come from, whitespace-normalised, and a mismatch throws during the build
- * rather than shipping a misquote of the archive's own primary source. If the
- * entry is edited, the home page fails loudly instead of quietly lying.
+ * So there is no curation here any more, and that is the point. A hand-picked
+ * set was a set of choices about what the archive looks like; the last entry is
+ * simply where the record currently stands. It changes when the record changes
+ * and nobody decides which face it shows.
+ *
+ * FULLY EXPOSED means the entry's own body, not an excerpt of it. The home page
+ * is ungated, so this is a deliberate decision by the author about his own
+ * words, taken with the site-wide content warning in front of it.
+ *
+ * Ordering: L.journal is sorted ascending by entry_date, so the last "entry"
+ * document in that array is the newest day. Recordings are skipped — a day is
+ * the unit a reader recognises, and a lone recording has no date header of its
+ * own.
  */
-export type FeaturedEntry = {
+export type LatestEntry = {
   id: string;
   date: string;
   weekday: string | null;
   location: string | null;
   hasAudio: boolean;
-  /** The quoted passage, exactly as it appears in the entry. */
-  quote: string;
+  /** The entry's body markdown, unedited. */
+  body: string;
 };
 
-export function featuredEntry(id: string, quote: string): FeaturedEntry {
+export function latestEntry(): LatestEntry | null {
   const L = load();
-  const doc = L.byId.get(id.toLowerCase());
-  if (!doc) throw new Error(`featuredEntry: no journal document with id ${id}`);
-
-  const flat = (t: string) => t.replace(/\s+/g, " ").trim();
-  const body = flat(doc.body_markdown || "");
-  if (!body.includes(flat(quote))) {
-    throw new Error(
-      `featuredEntry: the quoted passage is not present in ${id}. ` +
-        `The entry has changed, or the quote was mistyped. Fix the quote against ` +
-        `the entry rather than removing this check.`
-    );
+  for (let i = L.journal.length - 1; i >= 0; i--) {
+    const d = L.journal[i];
+    if (d.doc_type !== "entry" || !d.entry_date) continue;
+    return {
+      id: d.id.toLowerCase(),
+      date: d.entry_date,
+      weekday: d.weekday ?? null,
+      location: d.location ?? null,
+      hasAudio: Boolean(d.audio_url || d.audio_file),
+      body: d.body_markdown || "",
+    };
   }
-
-  return {
-    id: doc.id.toLowerCase(),
-    date: doc.entry_date || "",
-    weekday: doc.weekday ?? null,
-    location: doc.location ?? null,
-    hasAudio: Boolean(doc.audio_url || doc.audio_file),
-    quote,
-  };
+  return null;
 }
 
 /** Glossary terms with a usable one-line summary, for the home page strip. */

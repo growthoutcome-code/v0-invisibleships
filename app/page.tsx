@@ -6,8 +6,9 @@ import Header from "@/components/Header";
 import HomeCarousel, { type Slide } from "@/components/HomeCarousel";
 import { CONCEPTS, FINDINGS, NOT_ESTABLISHED, SOURCE_YEARS } from "@/lib/concepts";
 import { CORPUS_SUMMARY } from "@/lib/corpus-summary";
-import { GLOSSARY_PICKS, JOURNAL_PICKS } from "@/lib/home-picks";
-import { featuredEntry, homeGlossary, journalStats } from "@/lib/server-corpus";
+import EntryProse from "@/components/EntryProse";
+import { GLOSSARY_PICKS } from "@/lib/home-picks";
+import { homeGlossary, journalStats, latestEntry } from "@/lib/server-corpus";
 
 /**
  * The home page.
@@ -144,21 +145,13 @@ const CITY_QUOTES: { date: string; id: string; text: string }[] = [
 export default function Page() {
   const stats = journalStats();
 
-  // Each quote is checked against its entry here. A mismatch throws during the
-  // build rather than shipping a misquote of the archive's own primary source.
-  const journalSlides: Slide[] = JOURNAL_PICKS.map((pick) => {
-    const e = featuredEntry(pick.id, pick.quote);
-    const when = new Date(`${e.date}T00:00:00Z`).toLocaleDateString("en-US", {
-      month: "long", day: "numeric", year: "numeric", timeZone: "UTC",
-    });
-    return {
-      href: `/journal/${e.id}`,
-      eyebrow: [e.weekday, when, e.location].filter(Boolean).join(" · "),
-      body: `“${e.quote}”`,
-      meta: pick.why,
-      cta: "Read the full entry",
-    };
-  });
+  // No selection: the last entry in the record, whatever it is.
+  const last = latestEntry();
+  const lastWhen = last
+    ? new Date(`${last.date}T00:00:00Z`).toLocaleDateString("en-US", {
+        weekday: "long", month: "long", day: "numeric", year: "numeric", timeZone: "UTC",
+      })
+    : "";
 
   const glossarySlides: Slide[] = homeGlossary(GLOSSARY_PICKS).map((g) => ({
     href: `/glossary/${g.slug}`,
@@ -265,12 +258,21 @@ export default function Page() {
           </div>
         </section>
 
-        {/* NAMING. "The record" is gone. Sean: "let's keep the naming
-            consistent. It's journal." The nav says Journal, the route is
-            /journal, the section is Journal — a reader should never have to
+        {/* NAMING. Journal, everywhere. The nav says Journal, the route is
+            /journal, the section says Journal — a reader should never have to
             work out that three names are one place. The id stays #record only
-            because the hero's scroll hint points at it; renaming that is a
-            separate, checkable change. */}
+            because the hero's scroll hint points at it.
+
+            NO SUGGESTED ENTRIES, and no curation of any kind (Sean, 30 August).
+            This is the last entry in the record, whatever it happens to be. It
+            changes when the record changes and nobody chooses which face the
+            archive shows — which is a stronger claim than any set of picks.
+
+            FULLY EXPOSED, and set as the reading column rather than a card: no
+            outline, no tint, no fixed height, no negative space held open
+            around it. The entry is the content, not an item inside a component.
+            The author's decision about his own words, with the site-wide
+            content warning in front of them. */}
         <section id="record" className="scroll-mt-24">
           <div className="w-full px-5 py-20 sm:px-8 lg:px-[100px]">
             <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
@@ -279,20 +281,36 @@ export default function Page() {
             <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground sm:text-4xl">
               {stats.days} dated days, {stats.recordings} recordings, one city
             </h2>
-
-            {/* One sentence, as asked. It has to carry what the record IS and
-                what it is not, because nothing else in this section will. */}
             <p className="body-copy mt-5 max-w-3xl text-[19px] leading-relaxed text-foreground/85">
-              Dated first-person entries and verbatim transcripts, written down as they
-              were heard and left unsmoothed &mdash; testimony, verified by nobody, and
-              specific enough to be checked.
+              Journal entries: subjective and qualitative accounts of the bullhorn
+              surveillance system experience in Denver, Colorado.
             </p>
 
-            <div className="mt-12">
-              <HomeCarousel slides={journalSlides} label="Selected journal entries" />
-            </div>
+            {last && (
+              <article className="mt-12 max-w-3xl">
+                <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
+                  The last entry · {lastWhen}
+                  {last.location ? ` · ${last.location}` : ""}
+                </p>
+                {/* The reading face at reading size. This is the archive's
+                    primary source and it should look like a document, not like
+                    a pull quote from one. */}
+                <EntryProse
+                  body={last.body}
+                  className="mt-6 font-serif text-[19px] leading-[1.65] text-foreground sm:text-[21px]"
+                />
+                <p className="mt-8">
+                  <a
+                    href={`/journal/${last.id}`}
+                    className="text-[15px] text-foreground underline underline-offset-4"
+                  >
+                    Read the full entry
+                  </a>
+                </p>
+              </article>
+            )}
 
-            <div className="mt-10 flex flex-wrap items-center gap-4">
+            <div className="mt-14 flex flex-wrap items-center gap-4">
               <a
                 href="/journal"
                 className="inline-flex h-12 items-center rounded-md bg-foreground px-6 text-[15px] font-medium text-background"
@@ -374,7 +392,7 @@ export default function Page() {
 
             {/* The two facts that keep this section honest in both directions.
                 It must not assert spread, and it must not deny it either. */}
-            <div className="mt-8 max-w-3xl bg-foreground/[0.035] p-6">
+            <div className="mt-10 max-w-3xl border-l-2 border-foreground pl-5">
               <p className="body-copy m-0 text-[15px] leading-relaxed text-foreground/85">
                 Note the speakers&rsquo; own words: <em>suggested</em>,{" "}
                 <em>mentioned recently</em>, <em>seems local to Denver</em>. The record&rsquo;s
@@ -522,17 +540,17 @@ export default function Page() {
               </a>
             </div>
 
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
               {FINDINGS.map((f, n) => (
                 <a
                   key={`${f.id}-${n}`}
                   href={`/concepts#${f.id}`}
-                  className="block bg-foreground/[0.035] p-5 transition-colors hover:bg-foreground/[0.07]"
+                  className="group block"
                 >
-                  <span className="font-display block text-3xl font-semibold text-foreground">
+                  <span className="font-display block text-4xl font-semibold text-foreground">
                     {f.stat}
                   </span>
-                  <span className="body-copy mt-2 block text-[15px] text-foreground/80">
+                  <span className="body-copy mt-3 block text-[15px] text-foreground/80 transition-colors group-hover:text-foreground">
                     {f.line}
                   </span>
                 </a>

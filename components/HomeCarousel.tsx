@@ -20,17 +20,16 @@
  * carousel; the rotation is there to show a second slide exists, not to set the
  * pace. Under prefers-reduced-motion it never starts.
  *
- * HEIGHT. min-h-[560px] on desktop as asked, and deliberately NOT a fixed
- * height: a slide whose quote runs long must grow rather than clip the record.
- * On mobile the floor drops to 420px, because a 560px block on a small screen
- * is a wall.
+ * NO BOX AT ALL. Sean, 30 August: "get rid of the lines and the gray
+ * background… we don't want a bunch of empty space, a bunch of negative space
+ * around it." So a slide is no longer an object on the page — no outline, no
+ * tint, no padding holding a shape open, and the height floor dropped from
+ * 560px to 340px. It is text on the page, and the carousel is only the
+ * mechanism that changes which text.
  *
- * NO OUTLINE. Sean, 30 August: "let's get rid of all the hairline outlines and
- * borders." A slide still has to read as one object, so what was a 1px rule is
- * now a 3.5% wash of the foreground colour — it holds the shape in both themes,
- * it does not draw a line, and the quote inside it gains contrast rather than
- * losing it. The internal divider above the footer row is gone entirely; the
- * space does that job.
+ * The floor is not zero because slides of different lengths would otherwise
+ * make the page jump on every advance. It is set just under the shortest
+ * definition so the tallest ones set the real height.
  */
 import { useEffect, useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
@@ -103,7 +102,7 @@ export default function HomeCarousel({
         <CarouselContent>
           {slides.map((s) => (
             <CarouselItem key={s.href} className="basis-full">
-              <article className="flex min-h-[420px] flex-col bg-foreground/[0.035] p-6 sm:p-10 md:min-h-[560px]">
+              <article className="flex min-h-[300px] flex-col pr-10 md:min-h-[340px]">
                 <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
                   {s.eyebrow}
                 </p>
@@ -117,13 +116,13 @@ export default function HomeCarousel({
                 {/* flex-1 + justify-center: short quotes sit in the middle of the
                     panel instead of stranded at the top, long ones simply fill
                     it. This is what lets one height serve both. */}
-                <div className="flex flex-1 flex-col justify-center py-8">
+                <div className="flex flex-1 flex-col justify-start py-6">
                   <p className="m-0 font-serif text-[19px] leading-[1.6] text-foreground sm:text-[22px] sm:leading-[1.55]">
                     {s.body}
                   </p>
                 </div>
 
-                <div className="mt-auto flex flex-wrap items-baseline gap-x-4 gap-y-2 pt-5">
+                <div className="mt-auto flex flex-wrap items-baseline gap-x-4 gap-y-2">
                   {s.meta && <span className="text-[13px] text-muted">{s.meta}</span>}
                   <a
                     href={s.href}
@@ -138,8 +137,8 @@ export default function HomeCarousel({
           ))}
         </CarouselContent>
 
-        <CarouselPrevious className="-left-2 shadow-sm sm:-left-5" />
-        <CarouselNext className="-right-2 shadow-sm sm:-right-5" />
+        <CarouselPrevious className="-left-1 -top-8 translate-y-0 sm:-left-2" />
+        <CarouselNext className="-right-1 -top-8 translate-y-0 sm:-right-2" />
       </Carousel>
 
       {/* Dots are buttons, not decoration: they say how many there are, which
