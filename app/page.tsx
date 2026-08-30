@@ -48,12 +48,12 @@ export const metadata: Metadata = {
   // The headline is the title. A shared link should carry the question, since
   // the question is what this archive is organised around — and a question
   // carries its question mark with it, which an assertion never would.
-  title: "Is anyone in the US subjected to unconsented neurotechnology — and would there be a record?",
+  title: "Is the world being exposed to unconsented neurotech experimentation?",
   description:
-    "One resident's dated record from Denver, Colorado — 120 days of entries, 298 recordings — beside a documented archive of what governments bought and what regulators found. Across 1,922 procurement records and 99 regulations, no route for the person a system is used on to ask. Every figure resolves to a named source.",
+    "Colorado has required consent to collect neural data since 2024 — the first law of its kind anywhere. This archive asks what it was written against: one resident's dated record from Denver, 120 days of entries and 298 recordings, beside a documented archive of what governments bought and what regulators found. Every figure resolves to a named source, and the archive states plainly what it does not establish.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Is anyone being subjected to unconsented neurotechnology — and would there be a record?",
+    title: "Is the world being exposed to unconsented neurotech experimentation?",
     description:
       "A dated first-person record, and the procurement archive that says nobody would be able to check.",
     images: ["/og-default.png"],
@@ -61,38 +61,46 @@ export const metadata: Metadata = {
 };
 
 /**
- * THE HERO HEADLINE, AS A QUESTION — AND WHY IT WIDENED THE WAY IT DID.
+ * THE HERO HEADLINE.
  *
- * Sean asked to widen past Denver, on the strength of statements naming
- * Guadalajara, Portland, Seattle and Cincinnati. Those statements are bullhorn
- * testimony: a dated first-person report, verified by nobody. The transcripts
- * hedge themselves — "Seattle's been suggested", "Cincinnati has been mentioned
- * recently", "the problem seems local to Denver" — and the corpus is a fraction
- * of the audio, so it can support no claim about spread in either direction.
+ * Sean's line, tightened: "Is the world being exposed to unconsented neurotech
+ * experimentation?" ("the world's population" trimmed to "the world" — the rail
+ * is 30% and the headline has to hold on two or three lines.)
  *
- * A headline resting on that would make the site's own framing the one place
- * this archive breaks the rule it applies everywhere else.
+ * WHAT MAKES A GLOBAL QUESTION SURVIVE A HOSTILE READING. On its own it would
+ * not: this archive holds nothing about the world's population, and a scope
+ * that large with nothing under it is the register Sean rejected outright —
+ * "I don't need a hocus pocus mumbo jumbo bullshit website."
  *
- * So the widening rests on the RESEARCH, which is national by nature: 1,922
- * procurement records, 99 regulations, four European regulators, a company ICE
- * was paying while they fined it. The second clause is the archive's own
- * strongest finding — across all of that, no route for the person a system is
- * used on to ask anything. That is documented, it is national, and it survives
- * a hostile reading.
+ * The subheading is what carries it, and it carries it on a verified fact
+ * rather than on assertion. Colorado HB24-1058, signed 17 April 2024 and in
+ * force since 6 August 2024, amended the Colorado Privacy Act to classify
+ * NEURAL DATA as sensitive and to require affirmative consent before it is
+ * processed — the first US state comprehensive privacy law to do so, and
+ * reported at the time as the first such protection anywhere. Its definition
+ * does not even require that the data identify anyone; the legislature treated
+ * neural data as inherently sensitive.
  *
- * Alternates kept so swapping costs one line:
- *   B  "If this were happening to you, is there anywhere the record would
- *       show it?"  — most likely to hold a frightened reader.
- *   C  "Governments bought the surveillance. Who checks what it is used for?"
- *       — least personal, loses the first-person urgency.
+ * That does three things at once. "Unconsented" stops being rhetoric and
+ * becomes a legal term with a statute behind it. The question becomes one a
+ * legislature has already decided is worth answering. And the law was passed in
+ * Sean's own state — the archive's local record and its global question meet in
+ * one dated, checkable fact.
+ *
+ * Alternates, kept so swapping costs one line:
+ *   B  "Who is consenting to neurotechnology — and who would ever know?"
+ *      Shortest, claims no scope at all, keeps the record-keeping clause that
+ *      made the previous headline defensible.
+ *   C  "Colorado made neural data require consent. Who is asking?"
+ *      Leads with the statute. Most defensible of the three and the most
+ *      surprising; gives up the global reach Sean is after.
  */
 const HERO = {
-  question:
-    "Is anyone in the United States being subjected to unconsented neurotechnology — and would there be a record if they were?",
+  question: "Is the world being exposed to unconsented neurotech experimentation?",
   answer:
-    "One resident's dated record from Denver, Colorado. A procurement archive of what " +
-    "governments actually bought. And, across 1,922 records and 99 regulations, no route " +
-    "for the person a system is used on to ask.",
+    "Colorado has required consent to collect neural data since 2024 — the first law of " +
+    "its kind anywhere. This archive asks what it was written against: one resident's " +
+    "dated record, and the public procurement record beside it.",
 };
 
 /**
@@ -380,6 +388,37 @@ export default function Page() {
                     className="underline underline-offset-4"
                   >
                     Tang &amp; Huth, Nature Neuroscience, 2023
+                  </a>
+                </p>
+              </div>
+
+              {/* The hero asserts this law, so the page has to resolve it to a
+                  named source. Cited here rather than in the rail because the
+                  rail is 30% wide and a citation does not belong in a headline.
+                  TODO: this belongs in lib/concepts.ts SOURCE_YEARS as a dated
+                  source so the corpus carries it too. */}
+              <div>
+                <h3 className="font-display m-0 text-xl font-semibold text-foreground">
+                  Colorado already requires your consent to collect neural data
+                </h3>
+                <p className="body-copy mt-2 text-foreground/85">
+                  HB24-1058 was signed on 17 April 2024 and took effect on 6 August 2024.
+                  It amended the Colorado Privacy Act to treat neural data &mdash;
+                  &ldquo;information generated by the measurement of the activity of an
+                  individual&rsquo;s central or peripheral nervous systems&rdquo; &mdash;
+                  as sensitive, requiring affirmative consent before it is processed. The
+                  definition does not require that the data identify anyone. The
+                  legislature treated it as inherently sensitive, and it was the first
+                  state privacy law anywhere to do so.
+                </p>
+                <p className="mt-2 text-[14px] text-muted">
+                  <a
+                    href="https://content.leg.colorado.gov/sites/default/files/documents/2024A/bills/2024a_1058_01.pdf"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="underline underline-offset-4"
+                  >
+                    Colorado HB24-1058, as introduced (General Assembly)
                   </a>
                 </p>
               </div>
