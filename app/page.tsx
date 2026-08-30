@@ -189,7 +189,7 @@ export default function Page() {
 
             order-1 / order-2 is the gate's behaviour too — on a phone the
             animation is on top and the copy reads beneath it. */}
-        <section className="relative flex min-h-[calc(100vh-72px)] lg:min-h-[calc(100vh-88px)] flex-col border-b border-edge md:flex-row">
+        <section className="relative flex min-h-[calc(100vh-72px)] lg:min-h-[calc(100vh-88px)] flex-col md:flex-row">
           {/* Left 30% — the copy rail */}
           <div className="order-2 flex flex-col px-8 py-12 sm:px-12 md:order-1 md:w-[30%] md:min-w-[380px] lg:px-14">
             <div className="animate-fade-in flex max-w-md flex-1 flex-col justify-center">
@@ -252,49 +252,36 @@ export default function Page() {
             <ChevronDown className="scroll-hint" size={20} aria-hidden />
           </a>
 
-          {/* Right 75% — animation panel */}
-          <div className="relative order-1 min-h-[42vh] overflow-hidden bg-background md:order-2 md:min-h-[calc(100vh-72px)] lg:min-h-[calc(100vh-88px)] md:w-[70%]">
+          {/* Right 70% — animation panel */}
+          <div className="relative order-1 min-h-[42vh] overflow-hidden bg-background md:order-2 md:min-h-[calc(100vh-72px)] md:w-[70%] lg:min-h-[calc(100vh-88px)]">
             <GateAnimation fill />
           </div>
         </section>
 
-        {/* -------------------------------------------------------- journal */}
-        <section id="record" className="scroll-mt-24 border-b border-edge">
-          <div className="mx-auto max-w-5xl px-5 py-16 sm:px-8">
+        {/* NAMING. "The record" is gone. Sean: "let's keep the naming
+            consistent. It's journal." The nav says Journal, the route is
+            /journal, the section is Journal — a reader should never have to
+            work out that three names are one place. The id stays #record only
+            because the hero's scroll hint points at it; renaming that is a
+            separate, checkable change. */}
+        <section id="record" className="scroll-mt-24">
+          <div className="w-full px-5 py-20 sm:px-8 lg:px-[100px]">
             <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
-              The record
+              Journal
             </p>
-            {/* Not "From the journal", which labels a topic. Under the scan rule
-                a heading carries its beat alone, and this beat is "it is real,
-                and it is specific". Every number derived at render. */}
-            <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground">
+            <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground sm:text-4xl">
               {stats.days} dated days, {stats.recordings} recordings, one city
             </h2>
 
-            {/* WHAT THE RECORD TELLS PEOPLE — Sean asked for this to be said
-                rather than assumed. Three claims, each of which the five slides
-                below then demonstrate instead of asserting. */}
-            <div className="body-copy mt-5 max-w-2xl space-y-4 text-[17px] text-foreground/85">
-              <p className="m-0">
-                Every entry carries a date. Most carry a place, and a time of day. What
-                is written down is what was heard, as it was heard &mdash; including the
-                parts that contradict each other and the parts that make no sense.
-                Nothing is smoothed afterwards.
-              </p>
-              <p className="m-0">
-                The method is in the entries themselves: statements repeated aloud into a
-                phone recorder as they arrived, the recordings transcribed, {stats.recordings}{" "}
-                of them linked to the audio they came from. Where the author was unsure,
-                the entry says he was unsure.
-              </p>
-              <p className="m-0">
-                It is testimony &mdash; a dated first-person report, verified by nobody,
-                and labelled that way everywhere it appears. What makes it worth reading
-                is not that it is proven. It is that it is specific enough to be checked.
-              </p>
-            </div>
+            {/* One sentence, as asked. It has to carry what the record IS and
+                what it is not, because nothing else in this section will. */}
+            <p className="body-copy mt-5 max-w-3xl text-[19px] leading-relaxed text-foreground/85">
+              Dated first-person entries and verbatim transcripts, written down as they
+              were heard and left unsmoothed &mdash; testimony, verified by nobody, and
+              specific enough to be checked.
+            </p>
 
-            <div className="mt-10">
+            <div className="mt-12">
               <HomeCarousel slides={journalSlides} label="Selected journal entries" />
             </div>
 
@@ -306,7 +293,7 @@ export default function Page() {
                 More journal entries
               </a>
               <span className="text-[14px] text-muted">
-                All {stats.days} days and {stats.docs} documents, oldest to newest.
+                All {stats.days} days and {stats.docs} documents, newest first.
               </span>
             </div>
           </div>
@@ -319,16 +306,16 @@ export default function Page() {
             not four screens down. */}
         {/* On a home page, above everything else it might claim. Most sites
             would never do this; it is the single strongest thing here. */}
-        <section id="not-established" className="scroll-mt-24 border-b border-edge">
-          <div className="mx-auto max-w-3xl px-5 py-16 sm:px-8">
+        <section id="not-established" className="scroll-mt-24">
+          <div className="w-full px-5 py-20 sm:px-8 lg:px-[100px]">
             <h2 className="font-display m-0 text-3xl font-semibold text-foreground">
               What this does not establish
             </h2>
-            <p className="body-copy mt-4 text-foreground/85">
+            <p className="body-copy mt-4 max-w-2xl text-foreground/85">
               These four limits stand over every concept, chart and table in this archive.
               They are the conditions under which all of it was written.
             </p>
-            <ol className="m-0 mt-6 list-none space-y-4 p-0">
+            <ol className="m-0 mt-6 max-w-3xl list-none space-y-4 p-0">
               {NOT_ESTABLISHED.map((limit, i) => (
                 <li key={i} className="body-copy relative pl-8 text-foreground/85">
                   <span
@@ -347,22 +334,22 @@ export default function Page() {
         {/* ------------------------------------------------- the cities */}
         {/* Beat four. Placed here on purpose: a scanner reaches it having just
             read the four limits, so the hedging below is read under them. */}
-        <section className="border-b border-edge">
-          <div className="mx-auto max-w-3xl px-5 py-16 sm:px-8">
+        <section>
+          <div className="w-full px-5 py-20 sm:px-8 lg:px-[100px]">
             <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
               Testimony · verified by nobody
             </p>
-            <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground">
+            <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground sm:text-4xl">
               Cities keep being named. None of them are verified.
             </h2>
-            <p className="body-copy mt-4 text-foreground/85">
+            <p className="body-copy mt-4 max-w-2xl text-foreground/85">
               Denver is where this record was kept. Other cities appear in the transcripts
               &mdash; Seattle, Portland, Los Angeles, Houston, Kansas City, Cincinnati,
               Cleveland &mdash; and the archive records that they were named. It makes no
               finding that anything has happened in any of them.
             </p>
 
-            <div className="mt-8 space-y-6">
+            <div className="mt-8 max-w-3xl space-y-6">
               {CITY_QUOTES.map((q) => (
                 <figure key={q.id} className="m-0 border-l-2 border-edge pl-5">
                   <blockquote className="body-copy m-0 text-[17px] leading-relaxed text-foreground/90">
@@ -380,7 +367,7 @@ export default function Page() {
 
             {/* The two facts that keep this section honest in both directions.
                 It must not assert spread, and it must not deny it either. */}
-            <div className="mt-8 border border-edge p-6">
+            <div className="mt-8 max-w-3xl bg-foreground/[0.035] p-6">
               <p className="body-copy m-0 text-[15px] leading-relaxed text-foreground/85">
                 Note the speakers&rsquo; own words: <em>suggested</em>,{" "}
                 <em>mentioned recently</em>, <em>seems local to Denver</em>. The record&rsquo;s
@@ -400,8 +387,8 @@ export default function Page() {
         {/* Addressable: the hero asks a second-person question and this is the
             section that answers it. A reader who arrived frightened should be
             one click from the conditions, not five sections down. */}
-        <section id="neurotechnology" className="scroll-mt-24 border-b border-edge">
-          <div className="mx-auto max-w-3xl px-5 py-16 sm:px-8">
+        <section id="neurotechnology" className="scroll-mt-24">
+          <div className="w-full px-5 py-20 sm:px-8 lg:px-[100px]">
             <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
               Neurotechnology
             </p>
@@ -413,14 +400,14 @@ export default function Page() {
             <h2 className="font-display m-0 mt-2 text-4xl font-semibold text-foreground">
               Your house is not haunted.
             </h2>
-            <p className="body-copy mt-4 text-[17px] text-foreground/85">
+            <p className="body-copy mt-4 max-w-2xl text-[17px] text-foreground/85">
               What the documented record actually shows a machine can do to a person, and
               under what conditions. The conditions are the part that lets you rule
               something in or out &mdash; and every capability below needed a surgeon, a
               scanner, or hours of the person&rsquo;s own cooperation.
             </p>
 
-            <div className="mt-8 space-y-8">
+            <div className="mt-8 max-w-3xl space-y-8">
               <div>
                 <h3 className="font-display m-0 text-xl font-semibold text-foreground">
                   A man with ALS is speaking again by thinking
@@ -511,12 +498,12 @@ export default function Page() {
         </section>
 
         {/* ------------------------------------------------------- research */}
-        <section className="border-b border-edge">
-          <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
+        <section>
+          <div className="w-full px-5 py-20 sm:px-8 lg:px-[100px]">
             <div className="mb-8 flex flex-wrap items-end gap-4">
               <div>
                 <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">The research</p>
-                <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground">
+                <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground sm:text-4xl">
                   Eight things the record already says
                 </h2>
               </div>
@@ -533,7 +520,7 @@ export default function Page() {
                 <a
                   key={`${f.id}-${n}`}
                   href={`/concepts#${f.id}`}
-                  className="block rounded-lg border border-edge p-5 transition-colors hover:border-foreground"
+                  className="block bg-foreground/[0.035] p-5 transition-colors hover:bg-foreground/[0.07]"
                 >
                   <span className="font-display block text-3xl font-semibold text-foreground">
                     {f.stat}
@@ -553,14 +540,14 @@ export default function Page() {
         </section>
 
         {/* ------------------------------------------------------- concepts */}
-        <section className="border-b border-edge">
-          <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
+        <section>
+          <div className="w-full px-5 py-20 sm:px-8 lg:px-[100px]">
             <div className="mb-8 flex flex-wrap items-end gap-4">
               <div>
                 <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
                   The questions
                 </p>
-                <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground">
+                <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground sm:text-4xl">
                   {CONCEPTS.length} concepts drawn from all of it
                 </h2>
               </div>
@@ -577,7 +564,7 @@ export default function Page() {
             </p>
             <ul className="m-0 grid list-none gap-x-8 gap-y-4 p-0 sm:grid-cols-2 lg:grid-cols-3">
               {conceptTitles.map((c) => (
-                <li key={c.id} className="border-t border-edge pt-4">
+                <li key={c.id} className="pt-4">
                   <a href={`/concepts#${c.id}`} className="group block">
                     <span className="font-display block text-[17px] font-semibold text-foreground group-hover:underline group-hover:underline-offset-4">
                       {c.title}
@@ -599,12 +586,12 @@ export default function Page() {
             used against people who have no definition for them. Placed with the
             concepts, in the "what you would learn" beat, rather than beside the
             record — the two are different asks of a reader. */}
-        <section className="border-b border-edge">
-          <div className="mx-auto max-w-5xl px-5 py-16 sm:px-8">
+        <section>
+          <div className="w-full px-5 py-20 sm:px-8 lg:px-[100px]">
             <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
               The glossary
             </p>
-            <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground">
+            <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground sm:text-4xl">
               The words this subject is argued in
             </h2>
             <p className="body-copy mt-5 max-w-2xl text-[17px] text-foreground/85">
@@ -614,7 +601,7 @@ export default function Page() {
               is not an argument they can disagree with.
             </p>
 
-            <div className="mt-10">
+            <div className="mt-12">
               <HomeCarousel slides={glossarySlides} label="Selected glossary terms" />
             </div>
 
@@ -636,15 +623,15 @@ export default function Page() {
         {/* Beat five. Every section above earns the right to make it, and it is
             the last thing on the page for the same reason a pitch ends on the
             ask rather than on a fact. */}
-        <section className="border-b border-edge">
-          <div className="mx-auto max-w-3xl px-5 py-16 sm:px-8">
+        <section>
+          <div className="w-full px-5 py-20 sm:px-8 lg:px-[100px]">
             <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
               What you can do
             </p>
-            <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground">
+            <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground sm:text-4xl">
               Add your own account
             </h2>
-            <p className="body-copy mt-4 text-[17px] text-foreground/85">
+            <p className="body-copy mt-4 max-w-2xl text-[17px] text-foreground/85">
               A second dated record, kept to the same standard, is worth more than either
               one alone &mdash; not because two accounts corroborate each other, they do
               not, but because a pattern that survives independent description is a
@@ -660,7 +647,7 @@ export default function Page() {
               </a>
               <a
                 href="/api/corpus?from=home"
-                className="inline-flex h-12 items-center rounded-md border border-edge px-6 text-[15px] hover:border-foreground"
+                className="inline-flex h-12 items-center rounded-md bg-foreground/[0.07] px-6 text-[15px] hover:bg-foreground/[0.12]"
               >
                 Download the whole archive
               </a>

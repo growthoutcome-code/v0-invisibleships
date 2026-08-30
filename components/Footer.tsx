@@ -66,8 +66,8 @@ const legalLink =
 
 export default function Footer({ onNav }: { onNav?: (t: NavTab) => void }) {
   return (
-    <footer className="mt-16 border-t border-edge">
-      <div className="mx-auto max-w-7xl px-5 py-12 sm:px-8">
+    <footer className="mt-16 bg-foreground/[0.035]">
+      <div className="w-full px-5 py-14 sm:px-8 lg:px-[100px]">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <p className="font-display m-0 text-lg font-semibold tracking-[-0.01em] text-foreground">
@@ -112,7 +112,7 @@ export default function Footer({ onNav }: { onNav?: (t: NavTab) => void }) {
 
         {/* The legal row. Both open in place; both name the page they can also
             be read as, because a modal is not a citable address. */}
-        <div className="mt-12 flex flex-col gap-4 border-t border-edge pt-6 sm:flex-row sm:items-center">
+        <div className="mt-12 flex flex-col gap-4 pt-6 sm:flex-row sm:items-center">
           <p className="m-0 text-[13px] text-muted">© 2026 Sean C. Harris. All Rights Reserved.</p>
           <div className="flex flex-wrap items-center gap-5 sm:ml-auto">
             <DisclaimerDialog>

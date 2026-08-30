@@ -86,7 +86,7 @@ export default function Header({
 
   return (
     <header className="sticky top-0 z-30 border-b border-edge bg-background/90 backdrop-blur">
-      <div className="flex h-[72px] w-full items-center gap-3 px-4 sm:px-6 lg:h-[88px]">
+      <div className="flex h-[72px] w-full items-center gap-3 px-5 sm:px-8 lg:h-[88px] lg:px-[100px]">
         {/* Left group */}
         <div className="flex min-w-0 flex-1 items-center">
           {onHome ? (

@@ -24,6 +24,13 @@
  * height: a slide whose quote runs long must grow rather than clip the record.
  * On mobile the floor drops to 420px, because a 560px block on a small screen
  * is a wall.
+ *
+ * NO OUTLINE. Sean, 30 August: "let's get rid of all the hairline outlines and
+ * borders." A slide still has to read as one object, so what was a 1px rule is
+ * now a 3.5% wash of the foreground colour — it holds the shape in both themes,
+ * it does not draw a line, and the quote inside it gains contrast rather than
+ * losing it. The internal divider above the footer row is gone entirely; the
+ * space does that job.
  */
 import { useEffect, useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
@@ -96,7 +103,7 @@ export default function HomeCarousel({
         <CarouselContent>
           {slides.map((s) => (
             <CarouselItem key={s.href} className="basis-full">
-              <article className="flex min-h-[420px] flex-col border border-edge p-6 sm:p-10 md:min-h-[560px]">
+              <article className="flex min-h-[420px] flex-col bg-foreground/[0.035] p-6 sm:p-10 md:min-h-[560px]">
                 <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
                   {s.eyebrow}
                 </p>
@@ -116,7 +123,7 @@ export default function HomeCarousel({
                   </p>
                 </div>
 
-                <div className="mt-auto flex flex-wrap items-baseline gap-x-4 gap-y-2 border-t border-edge pt-5">
+                <div className="mt-auto flex flex-wrap items-baseline gap-x-4 gap-y-2 pt-5">
                   {s.meta && <span className="text-[13px] text-muted">{s.meta}</span>}
                   <a
                     href={s.href}
@@ -131,8 +138,8 @@ export default function HomeCarousel({
           ))}
         </CarouselContent>
 
-        <CarouselPrevious className="-left-3 border border-edge sm:-left-5" />
-        <CarouselNext className="-right-3 border border-edge sm:-right-5" />
+        <CarouselPrevious className="-left-2 shadow-sm sm:-left-5" />
+        <CarouselNext className="-right-2 shadow-sm sm:-right-5" />
       </Carousel>
 
       {/* Dots are buttons, not decoration: they say how many there are, which
