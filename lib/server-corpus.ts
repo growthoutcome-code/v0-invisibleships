@@ -212,35 +212,40 @@ export function latestEntry(): LatestEntry | null {
 }
 
 /**
- * The entries immediately before the last one — pointers, not selections.
+ * The newest entries, with their bodies — the home page slides THROUGH the
+ * record rather than listing it.
  *
- * Sean: "a rotating carousel that points to the next journals." Date order,
- * newest first, skipping whichever entry is already displayed above. No
- * curation and no excerpts: a card carries the day, the place where one was
- * noted, and whether there is audio. The words stay in the entry.
+ * Sean, 30 August: "those don't add any value. We just wanna slide through
+ * entries." The cards of dates and places were navigation furniture; a reader
+ * moving to the next slide should get the next entry's words, not a link to
+ * them. So each slide is an entry, newest first, and the carousel is how you
+ * move back through the record.
+ *
+ * Still no curation: date order, nothing chosen. Truncation happens at render.
  */
-export type EntryPointer = {
+export type JournalQuote = {
   id: string;
   date: string;
   weekday: string | null;
   location: string | null;
   hasAudio: boolean;
+  body: string;
 };
 
-export function recentEntries(count = 8, excludeId?: string): EntryPointer[] {
+export function journalQuotes(count = 8): JournalQuote[] {
   const L = load();
-  const skip = excludeId?.toLowerCase();
-  const out: EntryPointer[] = [];
+  const out: JournalQuote[] = [];
   for (let i = L.journal.length - 1; i >= 0 && out.length < count; i--) {
     const d = L.journal[i];
     if (d.doc_type !== "entry" || !d.entry_date) continue;
-    if (skip && d.id.toLowerCase() === skip) continue;
+    if (!(d.body_markdown || "").trim()) continue;
     out.push({
       id: d.id.toLowerCase(),
       date: d.entry_date,
       weekday: d.weekday ?? null,
       location: d.location ?? null,
       hasAudio: Boolean(d.audio_url || d.audio_file),
+      body: d.body_markdown || "",
     });
   }
   return out;

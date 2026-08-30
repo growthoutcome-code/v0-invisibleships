@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
 import Footer from "@/components/Footer";
+import { DisclaimerDialog } from "@/components/LegalDialogs";
 import { ChevronDown } from "lucide-react";
 import GateAnimation from "@/components/GateAnimation";
 import Header from "@/components/Header";
 import HomeCarousel, { type Slide } from "@/components/HomeCarousel";
 import { CONCEPTS, FINDINGS, NOT_ESTABLISHED, SOURCE_YEARS } from "@/lib/concepts";
 import { CORPUS_SUMMARY } from "@/lib/corpus-summary";
-import EntryProse from "@/components/EntryProse";
+import JournalQuotes from "@/components/JournalQuotes";
 import { GLOSSARY_PICKS } from "@/lib/home-picks";
-import { homeGlossary, journalStats, latestEntry, recentEntries } from "@/lib/server-corpus";
+import { homeGlossary, journalQuotes, journalStats } from "@/lib/server-corpus";
 
 /**
  * The home page.
@@ -144,26 +145,7 @@ const CITY_QUOTES: { date: string; id: string; text: string }[] = [
 export default function Page() {
   const stats = journalStats();
 
-  // No selection: the last entry in the record, whatever it is.
-  const last = latestEntry();
-  const lastWhen = last
-    ? new Date(`${last.date}T00:00:00Z`).toLocaleDateString("en-US", {
-        weekday: "long", month: "long", day: "numeric", year: "numeric", timeZone: "UTC",
-      })
-    : "";
-
-  const nextSlides: Slide[] = recentEntries(8, last?.id).map((e) => {
-    const when = new Date(`${e.date}T00:00:00Z`).toLocaleDateString("en-US", {
-      weekday: "short", month: "short", day: "numeric", year: "numeric", timeZone: "UTC",
-    });
-    return {
-      href: `/journal/${e.id}`,
-      eyebrow: e.hasAudio ? "Entry · audio" : "Entry",
-      title: when,
-      body: e.location ?? "Location not recorded",
-      cta: "Read",
-    };
-  });
+  const entries = journalQuotes(8);
 
   const glossarySlides: Slide[] = homeGlossary(GLOSSARY_PICKS).map((g) => ({
     href: `/glossary/${g.slug}`,
@@ -270,76 +252,37 @@ export default function Page() {
           </div>
         </section>
 
-        {/* THE SHAPE OF EVERY SECTION FROM HERE.
-            Sean, 30 August: "one hundred percent width container, not sixty…
-            like six hundred pixel high areas with very clean text. We don't
-            want a huge blurb." So: header, one sentence, the thing itself, a
-            carousel through to more of it, and a button out. Nothing else.
+        {/* JOURNAL.
+            Header, one sentence, the entry, slide to the next, buttons out.
 
-            100% WIDTH means the content too, not just the section. The measured
-            columns are gone — the text runs the full width of the container
-            inside the 100px gutters.
+            THE SENTENCE IS THE HEADING now (Sean, 30 August): "I would much
+            rather have just the line underneath be the heading… you could put
+            the hundred and twenty eight days and two hundred and ninety eight
+            recordings etcetera underneath it." Right call — what the journal IS
+            outranks how much of it there is, and the metrics read better as
+            evidence for the claim than as the claim itself.
 
-            The entry is TRUNCATED now rather than fully exposed. The panel is a
-            fixed height and a lead-in with a link, which is what keeps a
-            600-pixel area clean instead of running the whole document down the
-            page. */}
+            The cards of dates and places are gone. Sliding now moves to the
+            next ENTRY, words and all, rather than to a link to one. */}
         <section id="record" className="scroll-mt-24">
-          <div className="w-full px-5 py-20 sm:px-8 lg:px-[100px]">
+          <div className="w-full px-5 py-20 sm:px-8 lg:px-[200px]">
             <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
               Journal
             </p>
-            <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground sm:text-4xl">
-              {stats.days} dated days, {stats.recordings} recordings, one city
-            </h2>
-            <p className="body-copy mt-4 text-[19px] leading-relaxed text-foreground/85">
+            <h2 className="font-display m-0 mt-3 text-[26px] font-semibold leading-[1.25] text-foreground sm:text-[34px]">
               Journal entries: subjective and qualitative accounts of the bullhorn
               surveillance system experience in Denver, Colorado.
+            </h2>
+            <p className="mt-4 text-[15px] text-muted">
+              {stats.days} dated days · {stats.recordings} audio-linked recordings ·{" "}
+              {stats.docs} documents · one city
             </p>
 
-            {last && (
-              <figure className="m-0 mt-12">
-                <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
-                  The last entry · {lastWhen}
-                  {last.location ? ` · ${last.location}` : ""}
-                </p>
-
-                {/* Hanging open quote, hard left indent. The mark sits in the
-                    margin rather than in the first line, so the text block
-                    keeps a straight left edge and the quote reads as a mark on
-                    the page instead of a character in the sentence. */}
-                <blockquote className="relative m-0 mt-8 pl-12 sm:pl-16">
-                  <span
-                    aria-hidden
-                    className="font-serif absolute left-0 top-[-0.22em] select-none text-[76px] leading-none text-foreground/25 sm:text-[92px]"
-                  >
-                    &ldquo;
-                  </span>
-                  <EntryProse
-                    body={last.body}
-                    limit={420}
-                    className="font-serif text-[21px] leading-[1.65] text-foreground sm:text-[24px]"
-                  />
-                </blockquote>
-
-                <figcaption className="mt-8 pl-12 text-[15px] sm:pl-16">
-                  <a
-                    href={`/journal/${last.id}`}
-                    className="text-foreground underline underline-offset-4"
-                  >
-                    Read the full entry
-                  </a>
-                </figcaption>
-              </figure>
-            )}
-
-
-            {/* The way through, not a place to read. Dates and places only. */}
-            <div className="mt-12">
-              <HomeCarousel slides={nextSlides} label="More journal entries" compact />
+            <div className="mt-14">
+              <JournalQuotes entries={entries} />
             </div>
 
-            <div className="mt-12 flex flex-wrap items-center gap-4">
+            <div className="mt-14 flex flex-wrap items-center gap-4">
               <a
                 href="/journal"
                 className="inline-flex h-12 items-center rounded-md bg-foreground px-6 text-[15px] font-medium text-background"
@@ -352,14 +295,16 @@ export default function Page() {
               >
                 Contribute to the journal
               </a>
-              {/* The pointer, not a paragraph. Every section gets one of these
-                  instead of carrying its own caveats. */}
-              <a
-                href="/disclaimer"
-                className="text-[14px] text-muted underline underline-offset-4 hover:text-foreground"
-              >
-                How to read the journal
-              </a>
+              {/* Opens in place rather than navigating. A caveat that costs a
+                  reader their position on the page is a caveat they skip. */}
+              <DisclaimerDialog>
+                <button
+                  type="button"
+                  className="text-[14px] text-muted underline underline-offset-4 hover:text-foreground"
+                >
+                  How to read the journal
+                </button>
+              </DisclaimerDialog>
             </div>
           </div>
         </section>
@@ -372,7 +317,7 @@ export default function Page() {
         {/* On a home page, above everything else it might claim. Most sites
             would never do this; it is the single strongest thing here. */}
         <section id="not-established" className="scroll-mt-24">
-          <div className="w-full px-5 py-20 sm:px-8 lg:px-[100px]">
+          <div className="w-full px-5 py-20 sm:px-8 lg:px-[200px]">
             <h2 className="font-display m-0 text-3xl font-semibold text-foreground">
               What this does not establish
             </h2>
@@ -400,7 +345,7 @@ export default function Page() {
         {/* Beat four. Placed here on purpose: a scanner reaches it having just
             read the four limits, so the hedging below is read under them. */}
         <section>
-          <div className="w-full px-5 py-20 sm:px-8 lg:px-[100px]">
+          <div className="w-full px-5 py-20 sm:px-8 lg:px-[200px]">
             <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
               Testimony · verified by nobody
             </p>
@@ -453,7 +398,7 @@ export default function Page() {
             section that answers it. A reader who arrived frightened should be
             one click from the conditions, not five sections down. */}
         <section id="neurotechnology" className="scroll-mt-24">
-          <div className="w-full px-5 py-20 sm:px-8 lg:px-[100px]">
+          <div className="w-full px-5 py-20 sm:px-8 lg:px-[200px]">
             <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
               Neurotechnology
             </p>
@@ -564,7 +509,7 @@ export default function Page() {
 
         {/* ------------------------------------------------------- research */}
         <section>
-          <div className="w-full px-5 py-20 sm:px-8 lg:px-[100px]">
+          <div className="w-full px-5 py-20 sm:px-8 lg:px-[200px]">
             <div className="mb-8 flex flex-wrap items-end gap-4">
               <div>
                 <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">The research</p>
@@ -606,7 +551,7 @@ export default function Page() {
 
         {/* ------------------------------------------------------- concepts */}
         <section>
-          <div className="w-full px-5 py-20 sm:px-8 lg:px-[100px]">
+          <div className="w-full px-5 py-20 sm:px-8 lg:px-[200px]">
             <div className="mb-8 flex flex-wrap items-end gap-4">
               <div>
                 <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
@@ -650,7 +595,7 @@ export default function Page() {
             August — as a panel inside the record it read as a footnote to the
             journal, and it is not one. */}
         <section className="scroll-mt-24">
-          <div className="w-full px-5 py-20 sm:px-8 lg:px-[100px]">
+          <div className="w-full px-5 py-20 sm:px-8 lg:px-[200px]">
             <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
               Glossary
             </p>
@@ -686,7 +631,7 @@ export default function Page() {
             the last thing on the page for the same reason a pitch ends on the
             ask rather than on a fact. */}
         <section>
-          <div className="w-full px-5 py-20 sm:px-8 lg:px-[100px]">
+          <div className="w-full px-5 py-20 sm:px-8 lg:px-[200px]">
             <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
               What you can do
             </p>
