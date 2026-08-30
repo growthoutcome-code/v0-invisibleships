@@ -30,6 +30,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/documents`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${BASE}/author`, lastModified: now, changeFrequency: "yearly", priority: 0.4 },
     { url: `${BASE}/disclaimer`, lastModified: now, changeFrequency: "yearly", priority: 0.4 },
+    // Added when the age gate was replaced by a dismissible warning: the safety
+    // note and the crisis line it carries are now a page, and a safety page
+    // nobody can find is not a safety note.
+    { url: `${BASE}/safety`, lastModified: now, changeFrequency: "yearly", priority: 0.5 },
+    { url: `${BASE}/why`, lastModified: now, changeFrequency: "yearly", priority: 0.5 },
+    { url: `${BASE}/contribute`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
   ];
 
   const journal: MetadataRoute.Sitemap = allJournalParams().map(({ id }) => ({

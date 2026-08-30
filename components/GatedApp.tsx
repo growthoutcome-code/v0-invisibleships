@@ -1,39 +1,28 @@
 "use client";
-// Client wrapper: shows the AccessGate until the visitor enters, then renders
-// the SPA at the requested section.
+// The section router for the SPA. It used to be the gate.
 //
-// Gate passage persists for the browser session (lib/gate.ts, sessionStorage),
-// so a refresh or a deep link no longer replays the gate within a session.
+// Sean, 30 August: "the gate is still protecting all of the other navigation
+// items. You can remove that protection." So there is no gate here any more —
+// this renders the requested section directly, and the site's only warning is
+// the dismissible ContentWarning mounted in app/layout.tsx.
 //
-// THE GATE OPENS IN PLACE. It used to redirect a visitor who had not entered
-// back to "/", because "/" WAS the gate — sending them to the front door was
-// the whole point. The home page took that URL, and the redirect silently
-// became a bug: every main-navigation click bounced off the gate and landed on
-// the marketing page, so the site looked like its nav was dead. Nothing failed
-// and no guard noticed, because the redirect still did exactly what it said.
+// The name and the seam are kept deliberately. Ten route files mount this
+// component; leaving it in place meant changing one file rather than ten, and
+// it is where gating would go back if a subset of the archive ever needs it.
 //
-// So there is no redirect now. A visitor who has not entered gets the gate at
-// the URL they asked for, and enters onto that section. The link somebody was
-// sent still resolves to the thing it pointed at, which is what a deep link is
-// for.
+// WHAT REMOVING IT ACTUALLY CHANGED, and what it did not: the gate never
+// protected this material from anything except a person. robots.ts allows the
+// whole site and sitemap.ts advertises all 438 journal URLs, so search engines
+// were never held back — the gate stopped precisely the readers Sean was
+// sending links to, and nobody else.
 //
-// The entered check reads sessionStorage, which does not exist during SSR, so
-// it runs in an effect after mount: `null` renders one blank frame instead of
-// flashing the gate at returning visitors.
-import { useState, useEffect } from "react";
-import AccessGate from "@/components/AccessGate";
+// Its four screens were not deleted. Welcome is the home page, Copyright is
+// /disclaimer, the perceptual-set essay is /why, and the safety note with the
+// crisis line is /safety. lib/gate-content.ts is untouched and those pages read
+// from it.
 import JournalBrowser from "@/components/JournalBrowser";
 import type { Tab } from "@/components/Header";
-import { hasEntered, markEntered } from "@/lib/gate";
 
 export default function GatedApp({ initialTab = "journal" }: { initialTab?: Tab }) {
-  const [entered, setEntered] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    setEntered(hasEntered());
-  }, []);
-
-  if (entered === null) return null;
-  if (!entered) return <AccessGate onEnter={() => { markEntered(); setEntered(true); }} />;
   return <JournalBrowser initialTab={initialTab} />;
 }

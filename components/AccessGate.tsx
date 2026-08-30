@@ -1,4 +1,12 @@
 "use client";
+// NO LONGER MOUNTED ANYWHERE. Kept for its wording and for the four-screen flow
+// itself, in case an interstitial is ever wanted again.
+//
+// The age gate was removed on 30 August 2026 (Sean: "no eighteen restriction
+// for the site"). Nothing it said was lost: the welcome copy is the home page,
+// Copyright & Terms is /disclaimer, the perceptual-set essay is /why, and the
+// safety note is /safety. All four still read from lib/gate-content.ts, which
+// is unchanged. The site's warning is now components/ContentWarning.tsx.
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import CopyrightTerms from "@/components/CopyrightTerms";

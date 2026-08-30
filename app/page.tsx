@@ -453,6 +453,10 @@ export default function Page() {
               <a href="/disclaimer" className="underline underline-offset-4">
                 Disclaimer, copyright and terms
               </a>
+              {" · "}
+              <a href="/safety" className="underline underline-offset-4">
+                A note on safety
+              </a>
               .
             </p>
             <p className="m-0 mt-2">© 2026 Sean C. Harris. All Rights Reserved.</p>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import AnalyticsInit from "@/components/AnalyticsInit";
+import ContentWarning from "@/components/ContentWarning";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.invisibleships.com"),
@@ -49,6 +50,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <AnalyticsInit />
         {children}
+        {/* The site's only content warning, now that the age gate is gone.
+            Mounted in the root layout so it covers every route including the
+            item pages people are linked to directly, and dismissed for the
+            browser session. */}
+        <ContentWarning />
       </body>
     </html>
   );
