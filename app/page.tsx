@@ -110,8 +110,7 @@ const HERO = {
     "Has an unintended neurotechnological terrorist attack happened in the United States of America?",
   answer:
     "This archive does not answer that. It holds one resident's dated record from Denver, " +
-    "the public procurement record, and what regulators found when they looked — and it " +
-    "states plainly what none of it establishes.",
+    "the public procurement record, and what regulators found when they looked.",
 };
 
 /**
@@ -299,26 +298,41 @@ export default function Page() {
             </p>
 
             {last && (
-              <article className="mt-10 flex min-h-[380px] flex-col">
+              <figure className="m-0 mt-12">
                 <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
                   The last entry · {lastWhen}
                   {last.location ? ` · ${last.location}` : ""}
                 </p>
-                <EntryProse
-                  body={last.body}
-                  limit={620}
-                  className="mt-6 font-serif text-[20px] leading-[1.6] text-foreground sm:text-[23px]"
-                />
-                <p className="mt-6">
+
+                {/* Hanging open quote, hard left indent. The mark sits in the
+                    margin rather than in the first line, so the text block
+                    keeps a straight left edge and the quote reads as a mark on
+                    the page instead of a character in the sentence. */}
+                <blockquote className="relative m-0 mt-8 pl-12 sm:pl-16">
+                  <span
+                    aria-hidden
+                    className="font-serif absolute left-0 top-[-0.22em] select-none text-[76px] leading-none text-foreground/25 sm:text-[92px]"
+                  >
+                    &ldquo;
+                  </span>
+                  <EntryProse
+                    body={last.body}
+                    limit={420}
+                    className="font-serif text-[21px] leading-[1.65] text-foreground sm:text-[24px]"
+                  />
+                </blockquote>
+
+                <figcaption className="mt-8 pl-12 text-[15px] sm:pl-16">
                   <a
                     href={`/journal/${last.id}`}
-                    className="text-[15px] text-foreground underline underline-offset-4"
+                    className="text-foreground underline underline-offset-4"
                   >
                     Read the full entry
                   </a>
-                </p>
-              </article>
+                </figcaption>
+              </figure>
             )}
+
 
             {/* The way through, not a place to read. Dates and places only. */}
             <div className="mt-12">
@@ -337,6 +351,14 @@ export default function Page() {
                 className="inline-flex h-12 items-center rounded-md bg-foreground/[0.07] px-6 text-[15px] hover:bg-foreground/[0.12]"
               >
                 Contribute to the journal
+              </a>
+              {/* The pointer, not a paragraph. Every section gets one of these
+                  instead of carrying its own caveats. */}
+              <a
+                href="/disclaimer"
+                className="text-[14px] text-muted underline underline-offset-4 hover:text-foreground"
+              >
+                How to read the journal
               </a>
             </div>
           </div>
