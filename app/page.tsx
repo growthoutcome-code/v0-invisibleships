@@ -11,6 +11,7 @@ import { CORPUS_SUMMARY } from "@/lib/corpus-summary";
 import JournalQuotes from "@/components/JournalQuotes";
 import { GLOSSARY_PICKS } from "@/lib/home-picks";
 import { CRIME_FIGURES, HEALTH_FIGURES } from "@/lib/home-data-sections";
+import { TRAFFICKING_OPS } from "@/lib/enforcement";
 import { homeGlossary, journalQuotes, journalStats } from "@/lib/server-corpus";
 import { accomplishments, govCloud, usd } from "@/lib/server-data";
 
@@ -488,6 +489,64 @@ export default function Page() {
               <Figure key={f.stat} stat={f.stat} line={f.line} source={f.source} />
             ))}
           </div>
+        </SiteSection>
+
+        {/* -------------------------------------- anti-trafficking record */}
+        {/* Sean asked for a chart rewarding arrest data. The honest version is
+            this one: no national series here shows arrests rising — the FBI's
+            own 2025 release has violent crime falling 9.3%, the largest decline
+            since estimation began in 1936 — but the DHS subscription carries
+            OPERATION-LEVEL counts, dated and named. So the section shows what
+            the record contains and says plainly that it is not a trend.
+
+            Bars are widths, not a plot: five counts on one scale, no axis to
+            misread, and nothing that implies a series where there is none. */}
+        <SiteSection
+          eyebrow="Anti-trafficking"
+          heading="No national series shows arrests rising. These specific operations are on the record."
+          meta="US Department of Homeland Security releases · arrests and investigations are counts, not convictions · not a national trend"
+          actions={[{ href: "/data/crime", label: "Go to the crime record", primary: true }]}
+        >
+          <div className="space-y-8">
+            {TRAFFICKING_OPS.map((op) => (
+              <div key={op.label}>
+                <div className="flex flex-wrap items-baseline gap-x-4">
+                  <span className="font-display text-3xl font-semibold text-foreground">
+                    {op.value.toLocaleString()}
+                  </span>
+                  <span className="font-display text-[12px] uppercase tracking-[0.14em] text-muted">
+                    {op.unit} · {op.label} · {op.when}
+                  </span>
+                </div>
+                <div className="mt-3 h-2 w-full bg-foreground/10">
+                  <div
+                    className="h-2 bg-foreground"
+                    style={{ width: `${Math.max(2, (op.value / 2545) * 100)}%` }}
+                  />
+                </div>
+                <p className="body-copy m-0 mt-3 text-[15px] text-foreground/80">
+                  {op.note}{" "}
+                  <a
+                    href={op.source.href}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="text-muted underline underline-offset-4 hover:text-foreground"
+                  >
+                    {op.source.publisher} · {op.source.title}
+                  </a>
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <p className="body-copy mt-10 border-l-2 border-foreground pl-5 text-[15px] leading-relaxed text-foreground/85">
+            These are counts from named operations on dated agency releases, not a
+            national arrest series. This archive has not found one that shows arrests
+            rising: the same period&rsquo;s FBI release records violent crime falling
+            9.3% in 2025, the largest year-to-year decline since the Bureau began
+            estimating in 1936. Both things are in the record and neither explains the
+            other.
+          </p>
         </SiteSection>
 
         {/* ------------------------------------------------ what is working */}
