@@ -476,22 +476,7 @@ export default function Page() {
             hours of the person&rsquo;s own cooperation.
           </p>
 
-          <div className="mt-12 grid gap-x-12 gap-y-12 lg:grid-cols-3">
-            <div>
-              <h3 className="font-display m-0 text-[17px] font-semibold text-foreground">
-                A man with ALS is speaking again by thinking
-              </h3>
-              <p className="body-copy mt-2 text-[15px] text-foreground/85">
-                Neuralink&rsquo;s VOICE trial decodes intended speech from the motor cortex.
-                It requires implanted electrodes, neurosurgery, and a consenting participant
-                in a registered clinical trial.
-              </p>
-              <a href="https://neuralink.com/trials/speech-restoration/" target="_blank"
-                 rel="noreferrer noopener"
-                 className="mt-3 inline-block text-[13px] text-muted underline underline-offset-4 hover:text-foreground">
-                Neuralink — Speech Restoration trial
-              </a>
-            </div>
+          <div className="mt-12 grid gap-x-12 gap-y-12 lg:grid-cols-2">
             <div>
               <h3 className="font-display m-0 text-[17px] font-semibold text-foreground">
                 A machine reconstructed language without surgery
@@ -546,6 +531,124 @@ export default function Page() {
               <HomeCarousel slides={glossarySlides} label="Glossary terms" />
             </div>
           </div>
+        </SiteSection>
+
+        {/* ------------------------------------- 6 · what it would be worth */}
+        {/* Sean, 1 September: a section on "what a future without Zersetzung
+            looks like." He is right that it is missing and right that it
+            matters. Every other section on this page describes a problem; a
+            reader who believes all of it has nowhere to put that belief except
+            fear, and an archive that only frightens people is not the one he
+            set out to build.
+
+            It is also the strongest thing available for the audience he keeps
+            saying he does not want to lose. A page that can name what this
+            technology is FOR is a page an engineer or an officer can finish.
+
+            WHAT IS DOCUMENTED, AND WHAT IS NOT.
+
+            Speech restoration and bilingual decoding are published, dated and
+            cited here. Both required a surgical implant and a consenting
+            participant, and both say so.
+
+            The third column is Sean's crime-prevention point, and it is an
+            ARGUMENT rather than a finding, so it is written as one — the
+            deterrent he describes only exists if people are told, and this
+            archive holds the best documented account of what gets built when
+            they are not: 420 children on a sheriff's predictive list, and
+            three constitutional amendments that office admitted violating in
+            writing. His own corpus is the evidence for his own condition.
+
+            NOT INCLUDED: "automatic language translation in efference-copy
+            space." Efference copy is real neuroscience — the internal copy of
+            a motor command the brain uses to predict its own sensory
+            consequences — and there is published work on a corollary-discharge
+            circuit in human speech. But nothing documents translation
+            happening in it. The bilingual prosthesis below is the nearest
+            published thing, and what it actually found is more interesting
+            than the claim: the articulatory representation is SHARED between
+            languages, so one implant trained on a bilingual speaker decoded
+            both. */}
+        <SiteSection
+          eyebrow="What it is for"
+          heading="What would this technology be worth if people consented to it?"
+          meta="Published, dated, and cited · every capability here required a surgical implant and a participant who agreed to it"
+          actions={[{ href: "/concepts", label: "Read the concepts", primary: true }]}
+          aside={
+            <DisclaimerDialog>
+              <button type="button" className="text-[14px] text-muted underline underline-offset-4 hover:text-foreground">
+                How to read this archive
+              </button>
+            </DisclaimerDialog>
+          }
+        >
+          <p className="body-copy text-[19px] leading-relaxed text-foreground/85">
+            This archive is about a technology used without consent. It is not an argument
+            that the technology should not exist. The same decade that produced the
+            procurement record produced these.
+          </p>
+
+          <div className="mt-12 grid gap-x-12 gap-y-12 lg:grid-cols-3">
+            <div>
+              <h3 className="font-display m-0 text-[17px] font-semibold text-foreground">
+                People who cannot speak are speaking
+              </h3>
+              <p className="body-copy mt-2 text-[15px] text-foreground/85">
+                Neuralink&rsquo;s VOICE trial decodes intended speech from the motor cortex
+                for participants who have lost the ability to talk. It needs implanted
+                electrodes, neurosurgery, and a person who enrolled in a registered clinical
+                trial &mdash; which is the whole difference between this and the subject of
+                the rest of this page.
+              </p>
+              <a href="https://neuralink.com/trials/speech-restoration/" target="_blank"
+                 rel="noreferrer noopener"
+                 className="mt-3 inline-block text-[13px] text-muted underline underline-offset-4 hover:text-foreground">
+                Neuralink — Speech Restoration trial
+              </a>
+            </div>
+
+            <div>
+              <h3 className="font-display m-0 text-[17px] font-semibold text-foreground">
+                One implant, two languages
+              </h3>
+              <p className="body-copy mt-2 text-[15px] text-foreground/85">
+                A bilingual speech neuroprosthesis decoded Spanish and English in real time
+                for a man who could not speak coherently &mdash; from one implant, because
+                the cortical articulatory representations are <em>shared between the two
+                languages</em>. Translation was not a step that had to be added. The
+                representation was never language-specific to begin with.
+              </p>
+              <a href="https://www.nature.com/articles/s41551-024-01207-5" target="_blank"
+                 rel="noreferrer noopener"
+                 className="mt-3 inline-block text-[13px] text-muted underline underline-offset-4 hover:text-foreground">
+                Silva et al., Nature Biomedical Engineering, May 2024
+              </a>
+            </div>
+
+            <div>
+              <h3 className="font-display m-0 text-[17px] font-semibold text-foreground">
+                A deterrent that only works if people are told
+              </h3>
+              <p className="body-copy mt-2 text-[15px] text-foreground/85">
+                A system nobody knows about deters nobody. Disclosed, the argument goes, it
+                could prevent harm rather than record it. That argument is only available to
+                a system that announces itself &mdash; and this archive holds what gets
+                built instead: 420 schoolchildren placed on a sheriff&rsquo;s list of likely
+                future criminals, and three constitutional amendments that office admitted
+                violating, in writing, to settle a case four residents refused to drop.
+              </p>
+              <a href="/concepts#what-children-are-subject-to"
+                 className="mt-3 inline-block text-[13px] text-muted underline underline-offset-4 hover:text-foreground">
+                What children are subject to
+              </a>
+            </div>
+          </div>
+
+          <p className="body-copy mt-14 border-l-2 border-foreground pl-5 text-[15px] leading-relaxed text-foreground/85">
+            Two of these are findings. The third is an argument, and this archive does not
+            settle it &mdash; consent is the line every one of them turns on, and it is the
+            only thing the record consistently shows missing.
+          </p>
         </SiteSection>
 
         {/* --------------------------------------------- 6 · what you can do */}
