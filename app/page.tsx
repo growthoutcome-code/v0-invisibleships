@@ -346,6 +346,85 @@ export default function Page() {
             left unsmoothed.
           </p>
           <JournalQuotes entries={entries} />
+
+          {/* WHAT ELSE A DAY CONTAINS (Sean, 1 September). The entries record
+              more than speech, and a section that only quotes talk describes
+              half of what he says is happening.
+
+              THE LABELLING IS THE WHOLE JOB HERE. These are physical
+              experiences reported by one person and referred to in statements —
+              testimony twice over, diagnosed by nobody, connected to no
+              mechanism this archive can demonstrate. So they are written as
+              reports, never as effects, and no sentence puts a cause beside a
+              symptom.
+
+              ONE DOCUMENTED ANCHOR, and it is a good one. Long-range acoustic
+              devices are commercial products sold to police forces, and in
+              Edrei v. Maguire (2018) the Second Circuit held that using one
+              against people can constitute excessive force. That establishes
+              that a sound weapon exists, is deployed, and has been found
+              injurious by a federal appeals court. It establishes nothing about
+              this record, and the copy says so.
+
+              SEAN'S QUESTION IS THE POINT, and it has a real answer: nobody
+              counts. Harassment has no offence code, stalking is folded into
+              intimidation, and no agency records a person reporting these
+              experiences. His question turns out to be the archive's own
+              structural finding, which is a stronger place to end than any
+              number would have been. */}
+          <div className="mt-16 max-w-3xl">
+            <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
+              Reported alongside it
+            </p>
+            <p className="body-copy mt-4 text-[17px] leading-relaxed text-foreground/85">
+              A day is not only what was said. The author reports physical experience during
+              these events &mdash; gastrointestinal distress, pressure and ringing in the
+              ears, disrupted sleep, skin and eye irritation &mdash; and statements in the
+              transcripts refer to the same things, sometimes before he does. All of it is
+              testimony: reported by one person, diagnosed by nobody, and connected to no
+              mechanism this archive can demonstrate.
+            </p>
+            <p className="body-copy mt-4 text-[17px] leading-relaxed text-foreground/85">
+              One instrument in that vocabulary is neither theoretical nor rare. Long-range
+              acoustic devices are commercial products sold to police forces and navies, and
+              in 2018 a federal appeals court held that using one against people can
+              constitute excessive force. That establishes that a sound weapon exists, is
+              deployed, and has injured people. It establishes nothing about this record.
+            </p>
+            <p className="mt-3">
+              <a
+                href="https://www.courthousenews.com/second-circuit-gets-loud-with-nypd-on-sound-cannons/"
+                target="_blank"
+                rel="noreferrer noopener"
+                className="text-[13px] text-muted underline underline-offset-4 hover:text-foreground"
+              >
+                Edrei v. Maguire, US Court of Appeals for the Second Circuit, 2018
+              </a>
+            </p>
+
+            <p className="font-display mt-12 text-[21px] font-semibold leading-snug text-foreground sm:text-[25px]">
+              How many citizens are going through this?
+            </p>
+            <p className="body-copy mt-4 text-[17px] leading-relaxed text-foreground/85">
+              There is no answer, and the absence is the finding. Harassment has no offence
+              code in the federal system. Stalking is folded into intimidation. No agency
+              counts a person reporting these experiences at all, so the number could be one
+              or it could be very many &mdash; and nothing on this site, or anywhere we have
+              looked, can tell you which.
+            </p>
+            <p className="mt-4">
+              <a href="/data/crime" className="text-[15px] text-foreground underline underline-offset-4">
+                What nobody counts
+              </a>
+            </p>
+
+            {/* Not a hedge. Somebody reading this who has these symptoms should
+                see a doctor, and most of these have ordinary treatable causes. */}
+            <p className="mt-8 text-[14px] leading-relaxed text-muted">
+              If you are experiencing any of this, it is worth seeing a doctor. These
+              symptoms have ordinary causes too, and those causes are treatable.
+            </p>
+          </div>
         </SiteSection>
 
         {/* ------------------------------------------------- 3 · who bought it */}
