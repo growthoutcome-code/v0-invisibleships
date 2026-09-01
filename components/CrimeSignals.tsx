@@ -1099,6 +1099,48 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
         )}
       </section>
 
+      {/* ---- two directions (Sean, 2026-09-01) ----
+             The contrast the arrests chart contains but never states: criminal
+             arrests down 51% from their 1997 peak while civil immigration
+             arrests run the other way.
+
+             It sits UNDER the arrests chart and points back at it rather than
+             drawing a second one. The two series are already on that chart and
+             its indexed view ("Change") is what makes them comparable at all —
+             7.5 million against 113,431 is 66 to 1, and on a shared raw axis the
+             immigration line is a flat smear along the bottom.
+
+             The prose does the work a chart cannot: these are two legal systems,
+             not two measures of one thing. ---- */}
+      <section className="mb-14">
+        <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
+          Two directions
+        </h2>
+        <p className="body-copy text-foreground/90 measure mb-4 text-[17px]">
+          Criminal arrests peaked in 1997 at 15.28 million and stood at 7.52 million in
+          2024 &mdash; 51% below peak. Over the same period crime fell too: violent crime
+          dropped 9.3% in 2025, the largest year-to-year decline since the FBI began
+          estimating in 1936. American policing is producing a better outcome with
+          roughly half the coercion, and that decline is the least-reported
+          accomplishment in the record.
+        </p>
+        <p className="body-copy text-foreground/90 measure mb-4 text-[17px]">
+          Civil immigration arrests run the other way. They fell to 74,082 in FY2021 and
+          then rose: roughly 217,500 between 20 January and 15 October 2025, and nearly
+          50,000 in July 2026 alone. Both lines are on the arrests chart above &mdash;
+          switch it to <em>Change</em> to see the two shapes on one scale, because raw
+          they are 66 to 1 and one of them disappears.
+        </p>
+        <p className="text-muted text-[15px] measure mb-0">
+          These are separate legal systems, counted by different agencies on different
+          calendars. One is a criminal process; the other is administrative, adjudicated
+          by immigration judges. Neither series explains the other and nothing here
+          claims it does. Everything after FY2024 is FOIA-derived or press-reported,
+          marked tier B, and drawn dotted &mdash; no official FY2025 total has been
+          published, which is its own entry in what nobody counts.
+        </p>
+      </section>
+
       {/* ---- sweeping enforcement: headline arrest numbers ---- */}
       {!!sweeps?.length && (
         <section className="mb-14">

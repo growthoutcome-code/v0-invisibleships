@@ -1,5 +1,47 @@
 [
   {
+    "topic": "anomalies_reporting_not_events",
+    "statement": "The only official count of anomalous reports that exists \u2014 the federal UAP office's \u2014 rose from 247 to 757 and then fell to 319, across reporting periods of 18, 8, 13 and 12 months. The office attributes the rise to reduced stigma and to the FAA beginning to forward reports weekly. It measures a reporting system, not a phenomenon.",
+    "tier": "A",
+    "source_id": "an_aaro_fy24"
+  },
+  {
+    "topic": "anomalies_what_is_counted",
+    "statement": "Of the things people report when something is wrong, missing persons are counted and falling \u2014 NCIC records entered are at their modern low. Home invasion is not counted anywhere. Hallucinations are measured once a decade in England and not at all by any United States federal survey. Hauntings are measured as belief rather than experience: Gallup has asked Americans whether they believe in ghosts since 1990 and has never asked whether they have seen one.",
+    "tier": "A",
+    "source_id": "an_pew_mode"
+  },
+  {
+    "topic": "burglary_international",
+    "statement": "The fall is not an American story. Residential burglary is down 79% in the Netherlands since 2009, 54% in Germany since its 2015 peak, and 39% in Spain since 2013; England and Wales record 327,000 domestic burglaries in the year ending December 2025 against 2.4 million in 1993; Canadian breaking and entering is 77% below 1998; Australian household break-ins fell from 2.7% of households in 2014-15 to 1.8% in 2024-25. Italy is the exception, 44% above its 2020 trough.",
+    "tier": "A",
+    "source_id": "bg_eurostat_iccs"
+  },
+  {
+    "topic": "burglary_us",
+    "statement": "Break-ins have fallen further than anything else this section measures. The police-recorded US burglary rate fell 53% between 2000 and 2019 on the Summary Reporting System basis, and a further 26% between 2020 and 2024 on the NIBRS-based estimates that replaced it. Households asked directly report the same direction: 34.1 burglaries per 1,000 households in 1999 against 12.0 per 1,000 in 2024, across a category BJS redefined in 2017.",
+    "tier": "A",
+    "source_id": "bg_fbi_cde24"
+  },
+  {
+    "topic": "clearance_decline",
+    "statement": "The share of homicides cleared by arrest or exceptional means fell from 93% in 1962 to 64% by 1994, reached 61.4% in 2019, dropped sharply to 54% in 2020 and to a reported low of 52.3% in 2022, recovering to 61.4% in 2024. Roughly four in ten US homicides are not cleared.",
+    "tier": "B",
+    "source_id": "cs012"
+  },
+  {
+    "topic": "fbi_domestic_violence_2026",
+    "statement": "The FBI published Domestic Relationships and Violent Crimes, 2020-2024 in February 2026 \u2014 a five-year special report on violence between people who know each other. It is the nearest thing to a federal measurement in the space this section's lead finding says is unmeasured, and it does not close the gap: harassment still has no offence code, and stalking is still folded into Intimidation.",
+    "tier": "A",
+    "source_id": "cs_fbi_dv_2026"
+  },
+  {
+    "topic": "home_invasion",
+    "statement": "'Home invasion' is not an offence anyone counts nationally. It is recorded as burglary \u2014 sorted by location and by whether force was used, not by whether the household was home. Statistics Canada states outright that it cannot be measured from its national survey. So the honest answer to whether home invasions have risen is that no national series exists to say.",
+    "tier": "A",
+    "source_id": "bg_statcan_be02"
+  },
+  {
     "topic": "homicide_2020_spike",
     "statement": "US murder rose 29.4% in 2020 \u2014 the largest single-year increase the FBI has recorded. CDC vital statistics show the same event independently: the age-adjusted homicide death rate went from 6.0 to 7.8 per 100,000.",
     "tier": "A",
@@ -12,40 +54,10 @@
     "source_id": "cs033"
   },
   {
-    "topic": "two_measures_diverge",
-    "statement": "The victimisation survey does not show the same recovery. NCVS violent victimisation was 23.3 per 1,000 persons age 12+ in 2024 against 16.5 in 2021, and has stayed near that level since 2022, while NIBRS-estimated police-recorded violent crime fluctuated only between 3.7 and 4.0 per 1,000 across 2015-2024. About 48% of violent victimisations were reported to police in 2024.",
-    "tier": "A",
-    "source_id": "cs_two_measures"
-  },
-  {
-    "topic": "ytd_2026",
-    "statement": "2026 so far continues the fall. Across 36 large cities, homicide in the first half of 2026 was 18% below the first half of 2025 \u2014 215 fewer deaths \u2014 with carjacking down 47%, motor vehicle theft down 20% and robbery down 17%. The Real-Time Crime Index, a separate sample of 566 agencies covering about 119 million people, independently records murder down 18.7% through April. Nine of thirteen offences fell. Two rose: domestic violence by 8% and sexual assault by 3%.",
-    "tier": "A",
-    "source_id": "cs_ccj_2026"
-  },
-  {
-    "topic": "clearance_decline",
-    "statement": "The share of homicides cleared by arrest or exceptional means fell from 93% in 1962 to 64% by 1994, reached 61.4% in 2019, dropped sharply to 54% in 2020 and to a reported low of 52.3% in 2022, recovering to 61.4% in 2024. Roughly four in ten US homicides are not cleared.",
+    "topic": "incarceration_international",
+    "statement": "The United States is no longer the world's highest incarcerator by rate. The World Prison Brief puts it fourth at 542 per 100,000 for 2023, behind El Salvador (1,659, March 2024), Cuba (794, January 2020) and Turkmenistan (about 576, early 2021). It remains several times above every comparable country \u2014 Germany 69, Japan 33 \u2014 but the ranking itself mixes reference dates across eight years and cannot be drawn as a chart.",
     "tier": "B",
-    "source_id": "cs012"
-  },
-  {
-    "topic": "burglary_us",
-    "statement": "Break-ins have fallen further than anything else this section measures. The police-recorded US burglary rate fell 53% between 2000 and 2019 on the Summary Reporting System basis, and a further 26% between 2020 and 2024 on the NIBRS-based estimates that replaced it. Households asked directly report the same direction: 34.1 burglaries per 1,000 households in 1999 against 12.0 per 1,000 in 2024, across a category BJS redefined in 2017.",
-    "tier": "A",
-    "source_id": "bg_fbi_cde24"
-  },
-  {
-    "topic": "burglary_international",
-    "statement": "The fall is not an American story. Residential burglary is down 79% in the Netherlands since 2009, 54% in Germany since its 2015 peak, and 39% in Spain since 2013; England and Wales record 327,000 domestic burglaries in the year ending December 2025 against 2.4 million in 1993; Canadian breaking and entering is 77% below 1998; Australian household break-ins fell from 2.7% of households in 2014-15 to 1.8% in 2024-25. Italy is the exception, 44% above its 2020 trough.",
-    "tier": "A",
-    "source_id": "bg_eurostat_iccs"
-  },
-  {
-    "topic": "home_invasion",
-    "statement": "'Home invasion' is not an offence anyone counts nationally. It is recorded as burglary \u2014 sorted by location and by whether force was used, not by whether the household was home. Statistics Canada states outright that it cannot be measured from its national survey. So the honest answer to whether home invasions have risen is that no national series exists to say.",
-    "tier": "A",
-    "source_id": "bg_statcan_be02"
+    "source_id": "inc_wpb_rank"
   },
   {
     "topic": "incarceration_us",
@@ -60,21 +72,21 @@
     "source_id": "inc_bjs_ji23st"
   },
   {
-    "topic": "incarceration_international",
-    "statement": "The United States is no longer the world's highest incarcerator by rate. The World Prison Brief puts it fourth at 542 per 100,000 for 2023, behind El Salvador (1,659, March 2024), Cuba (794, January 2020) and Turkmenistan (about 576, early 2021). It remains several times above every comparable country \u2014 Germany 69, Japan 33 \u2014 but the ranking itself mixes reference dates across eight years and cannot be drawn as a chart.",
+    "topic": "two_directions",
+    "statement": "Two arrest series move in opposite directions. Criminal arrests fell from 15.28 million in 1997 to 7.52 million in 2024, 51% below peak, while violent crime fell 9.3% in 2025 \u2014 the largest year-to-year decline since the FBI began estimating in 1936. Civil immigration arrests fell to 74,082 in FY2021 and then rose, reaching about 217,500 between 20 January and 15 October 2025. They are separate legal systems counted by different agencies on different calendars, and neither series explains the other.",
     "tier": "B",
-    "source_id": "inc_wpb_rank"
+    "source_id": "cs_ddp_ppi_2025"
   },
   {
-    "topic": "anomalies_what_is_counted",
-    "statement": "Of the things people report when something is wrong, missing persons are counted and falling \u2014 NCIC records entered are at their modern low. Home invasion is not counted anywhere. Hallucinations are measured once a decade in England and not at all by any United States federal survey. Hauntings are measured as belief rather than experience: Gallup has asked Americans whether they believe in ghosts since 1990 and has never asked whether they have seen one.",
+    "topic": "two_measures_diverge",
+    "statement": "The victimisation survey does not show the same recovery. NCVS violent victimisation was 23.3 per 1,000 persons age 12+ in 2024 against 16.5 in 2021, and has stayed near that level since 2022, while NIBRS-estimated police-recorded violent crime fluctuated only between 3.7 and 4.0 per 1,000 across 2015-2024. About 48% of violent victimisations were reported to police in 2024.",
     "tier": "A",
-    "source_id": "an_pew_mode"
+    "source_id": "cs_two_measures"
   },
   {
-    "topic": "anomalies_reporting_not_events",
-    "statement": "The only official count of anomalous reports that exists \u2014 the federal UAP office's \u2014 rose from 247 to 757 and then fell to 319, across reporting periods of 18, 8, 13 and 12 months. The office attributes the rise to reduced stigma and to the FAA beginning to forward reports weekly. It measures a reporting system, not a phenomenon.",
+    "topic": "ytd_2026",
+    "statement": "2026 so far continues the fall. Across 36 large cities, homicide in the first half of 2026 was 18% below the first half of 2025 \u2014 215 fewer deaths \u2014 with carjacking down 47%, motor vehicle theft down 20% and robbery down 17%. The Real-Time Crime Index, a separate sample of 566 agencies covering about 119 million people, independently records murder down 18.7% through April. Nine of thirteen offences fell. Two rose: domestic violence by 8% and sexual assault by 3%.",
     "tier": "A",
-    "source_id": "an_aaro_fy24"
+    "source_id": "cs_ccj_2026"
   }
 ]

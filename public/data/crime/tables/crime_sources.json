@@ -1771,5 +1771,59 @@
     "evidence_tier": "A",
     "accessed": "2026-08-22",
     "archived_url": null
+  },
+  {
+    "source_id": "cs_ddp_ppi_2025",
+    "url": "https://www.prisonpolicy.org/blog/2025/10/21/ice-arrests/",
+    "publisher": "Prison Policy Initiative (from Deportation Data Project ICE FOIA files)",
+    "title": "ICE arrests, 20 January - 15 October 2025",
+    "evidence_tier": "B",
+    "accessed": "2026-09-01",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs_ap_ice_jul2026",
+    "url": "https://apnews.com/article/border-immigration-customs-enforcement-data-statistics-f07f56a34bda225e5afa356781ac1740",
+    "publisher": "Associated Press",
+    "title": "ICE arrests jumped to nearly 50,000 in July, the highest monthly total of Trump's second term (25 Aug 2026)",
+    "evidence_tier": "B",
+    "accessed": "2026-09-01",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs_ohss_hist",
+    "url": "https://ohss.dhs.gov/topics/immigration/immigration-enforcement/annual-flow-report/historical",
+    "publisher": "DHS Office of Homeland Security Statistics",
+    "title": "Immigration Enforcement Actions annual flow reports (historical index)",
+    "evidence_tier": "A",
+    "accessed": "2026-09-01",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs_fbi_dv_2026",
+    "url": "https://www.fbi.gov/news/press-releases/fbi-releases-domestic-violence-special-report",
+    "publisher": "FBI Uniform Crime Reporting Program",
+    "title": "Domestic Relationships and Violent Crimes, 2020-2024 (special report, 12 Feb 2026)",
+    "evidence_tier": "A",
+    "accessed": "2026-09-01",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs_fbi_vc_2025",
+    "url": "https://www.fbi.gov/news/press-releases/violent-crime-falls-at-historic-rate-new-fbi-data-show",
+    "publisher": "FBI",
+    "title": "Violent Crime Falls at Historic Rate, New FBI Data Show (24 Aug 2026)",
+    "evidence_tier": "A",
+    "accessed": "2026-09-01",
+    "archived_url": null
+  },
+  {
+    "source_id": "cs_cdc_od_2024",
+    "url": "https://www.cdc.gov/nchs/nvss/vsrr/drug-overdose-data.htm",
+    "publisher": "CDC/NCHS",
+    "title": "Provisional drug overdose death counts",
+    "evidence_tier": "A",
+    "accessed": "2026-09-01",
+    "archived_url": null
   }
 ]

@@ -106,5 +106,14 @@
     "who_would_collect": "SAMHSA, by adding an item to NSDUH's self-administered section \u2014 the part respondents answer to a machine rather than to an interviewer, which is where a stigmatised question belongs.",
     "tier": "A",
     "source_id": "an_nsduh_methods"
+  },
+  {
+    "nc_id": "nc13",
+    "category": "Civil immigration arrests, after FY2024",
+    "status": "No official annual total is published",
+    "detail": "DHS stopped publishing its detailed monthly immigration-enforcement tables after November 2024 data, and no official FY2025 administrative-arrest total exists. Every figure for 2025 and 2026 on this page is FOIA-derived or press-reported and is marked tier B for that reason. The series that runs FY2011 to FY2024 as published federal statistics simply stops, in the years it is most asked about.",
+    "who_would_collect": "DHS Office of Homeland Security Statistics, in the Immigration Enforcement Actions annual flow report.",
+    "tier": "A",
+    "source_id": "cs_ohss_hist"
   }
 ]
