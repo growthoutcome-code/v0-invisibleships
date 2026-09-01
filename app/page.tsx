@@ -321,6 +321,7 @@ export default function Page() {
         <SiteSection
           id="record"
           eyebrow="Journal"
+          motif="carry"
           heading="What does one day of it look like?"
           meta={
             <>
@@ -430,6 +431,7 @@ export default function Page() {
         {/* ------------------------------------------------- 3 · who bought it */}
         <SiteSection
           eyebrow="Government cloud"
+          motif="ledger"
           heading="Who bought the systems, and for how much?"
           meta={
             <>
@@ -469,6 +471,7 @@ export default function Page() {
             would be dishonest without them. */}
         <SiteSection
           eyebrow="Public health · crime · enforcement"
+          motif="drift"
           heading="Is anything moving in the data?"
           meta="CDC, NCHS, WHO, FBI, BJS and DHS series · every figure resolves to a named source · none of these records explains another"
           actions={[
@@ -533,6 +536,7 @@ export default function Page() {
         <SiteSection
           id="neurotechnology"
           eyebrow="Neurotechnology"
+          motif="lattice"
           heading="What can the technology actually do?"
           meta={
             <>
@@ -650,6 +654,7 @@ export default function Page() {
             both. */}
         <SiteSection
           eyebrow="What it is for"
+          motif="bloom"
           heading="What would this technology be worth if people consented to it?"
           meta="Published, dated, and cited · every capability here required a surgical implant and a participant who agreed to it"
           actions={[{ href: "/concepts", label: "Read the concepts", primary: true }]}
@@ -733,6 +738,7 @@ export default function Page() {
         {/* --------------------------------------------- 6 · what you can do */}
         <SiteSection
           eyebrow="Contribute"
+          motif="room"
           heading="What can you do?"
           meta={`${CORPUS_SUMMARY.files} files · ${CORPUS_SUMMARY.words.toLocaleString()} words · plain Markdown and CSV`}
           actions={[

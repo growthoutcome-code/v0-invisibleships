@@ -19,12 +19,20 @@
  */
 import type { ReactNode } from "react";
 
+import SectionMotif, { type MotifName } from "@/components/SectionMotif";
+import { cn } from "@/lib/utils";
+
 export type Action = { href: string; label: string; primary?: boolean };
 
 export default function SiteSection({
-  id, eyebrow, heading, meta, actions = [], aside, children,
+  id, eyebrow, heading, meta, actions = [], aside, children, motif,
 }: {
   id?: string;
+  /**
+   * Named background motion. One word, and the section moves.
+   * See components/SectionMotif.tsx for the seven names and what each is for.
+   */
+  motif?: MotifName;
   eyebrow: string;
   /** A sentence, not a label. It has to carry its beat with the body hidden. */
   heading: ReactNode;
@@ -36,8 +44,12 @@ export default function SiteSection({
   children?: ReactNode;
 }) {
   return (
-    <section id={id} className={id ? "scroll-mt-24" : undefined}>
-      <div className="w-full px-5 py-20 sm:px-8 lg:px-[200px]">
+    <section
+      id={id}
+      className={cn("relative isolate overflow-hidden", id && "scroll-mt-24")}
+    >
+      {motif && <SectionMotif name={motif} />}
+      <div className="relative z-10 w-full px-5 py-20 sm:px-8 lg:px-[200px]">
         <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
           {eyebrow}
         </p>
