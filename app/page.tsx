@@ -58,12 +58,12 @@ export const metadata: Metadata = {
   // carries its question mark with it, which an assertion never would.
   title: "Has a neurotech terrorist attack happened?",
   description:
-    "Zersetzung was East Germany's method for breaking a person without ever arresting them: covert harassment, run by the state, under a 1976 directive. Could that be done now through a government cloud platform — and whose? This archive holds $102.8bn of public procurement, 399 deployments and 99 regulations, and not one of those regulations records a route for the person a system is used on to ask anything.",
+    "Is there a government cloud platform — anywhere — running a risk-mitigation layer that could do what Zersetzung did: isolate and discredit a person without ever arresting them? And would any public record show it? A dated first-person record, the public procurement record, and what regulators found when they looked.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Has a neurotech terrorist attack happened?",
     description:
-      "Zersetzung was East Germany's method for breaking a person without arresting them. Could it be done now through a government cloud platform — and whose?",
+      "Is there a government cloud platform running a risk-mitigation layer that could do what Zersetzung did — and would any public record show it?",
     images: ["/og-default.png"],
   },
 };
@@ -81,51 +81,46 @@ export const metadata: Metadata = {
  * larger and easier to defend. Nothing was added to make it international — a
  * country was removed.
  *
- * ZERSETZUNG, IN ONE SENTENCE. Sean, 1 September: define it, drop the "around
- * 5,000 people persistently targeted" figure — "that information is out of
- * context. The context is a surveillance system." He is right. A victim count
- * from 1980s East Germany invites the reader to compare scale with a place that
- * no longer exists, which is not the comparison this archive is making. What
- * carries over is the METHOD, not the tally.
+ * ALL QUESTIONS, HALF THE WORDS, NO COUNTRY. Sean, 1 September: cut the subline
+ * by 40-50%, use "risk mitigation software" and tie it to Zersetzung, "it needs
+ * to not sound like we're blaming America", and "everything needs to be a
+ * question." 85 words became 47, in three questions and no statements.
  *
- * THE SUBLINE IS NOW A QUESTION ABOUT A PLATFORM. That is the tie to the rest
- * of the page Sean asked for: could this method run through a government cloud
- * platform, and whose? Every figure in that clause is read from the same tables
- * the Research section charts — $102.8bn of public procurement, 399 deployments,
- * 99 regulations — and the last of them is the archive's own strongest finding:
- * not one of those 99 records a route for the person a system is used on to ask
- * anything.
+ * WHAT THE BLAME WAS. The old subline put "$102.8bn of public procurement"
+ * beside "The United States rose 40%" — two American facts, adjacent, one about
+ * money and one about death. However the sentence after them was worded, that
+ * is an accusation, and it was aimed at the one country whose law-enforcement
+ * readers this archive is trying not to lose. Both country names are gone. The
+ * platform question now asks "anywhere", and the health question asks why SOME
+ * wealthy countries moved against the world trend without naming which.
  *
- * THE SUICIDE DIVERGENCE, AND WHAT WAS LEFT OUT. Sean suggested South Korea,
- * America, and the West Bank & Gaza. The first two are in: +39.9% and +82.8%
- * against a world that fell 27% on the same WHO basis, 2000-2021.
+ * "RISK-MITIGATION LAYER" IS NOT INVENTED, which is what makes the question
+ * askable. The capabilities register already carries watsonx.governance —
+ * "model risk, bias, drift, compliance monitoring for AI" — Microsoft Sentinel
+ * and Google Chronicle as cloud-scale SIEMs ingesting telemetry for detection
+ * and response, Amazon Comprehend for sentiment and PII detection, and acoustic
+ * event detection that "links audio to video/LPR". Seven of 73 capabilities in
+ * the record are risk, threat or behaviour layers. The question is whether such
+ * a layer could be pointed at a person the way Zersetzung was — and that is a
+ * question, not a finding.
  *
- * The West Bank & Gaza is NOT, and the reason is in this archive's own words:
- * lib/concepts.ts records them as "effectively flat" — 0.63 to 0.65 per 100,000,
- * a move of two hundredths — and says that 0.65 "would be the lowest rate on
- * earth by a wide margin, and much more plausibly measures a fragmented
- * registration system." Listing them as a rise would have put the home page in
- * direct contradiction with the concept page it links to.
- *
- * "These are separate records. Neither explains the other." Seven words, and
- * they are what make the juxtaposition publishable at all. Procurement spending
- * beside a suicide rate is a causal claim by adjacency unless something says it
- * is not — and the archive's own fourth limit is that two sources sitting beside
- * each other do not corroborate one another. Same sentence pattern as the crime
- * section's Two directions, deliberately: one voice for one discipline.
+ * The suicide clause survives because Sean asked for it, but stripped of the
+ * country: "why did some wealthy countries' suicide rates rise while the
+ * world's fell 27%?" The West Bank & Gaza stays out for the reason recorded on
+ * 1 September — this archive's own concept page calls them effectively flat.
  *
  * Alternates, one line to swap:
  *   HEADLINE B  "Has a neurotechnological terrorist attack already happened?"
  *   HEADLINE C  "Has a neurotech terrorist attack happened, and would anyone
  *                have counted it?"  — adds the archive's real finding, costs
  *                the brevity.
- *   SUBLINE B   "Zersetzung — decomposition — was the Stasi's name for breaking
- *                a person without arresting them: Directive 1/76, around 5,000
- *                people persistently targeted. A dated record from Denver,
- *                Colorado, and the public evidence beside it."
- *   SUBLINE C   "A dated first-person record, the procurement record, and what
- *                regulators found. The Stasi had a word for breaking a person
- *                without arresting them: Zersetzung — decomposition."
+ *   SUBLINE B   "Zersetzung broke people without arresting them. If a
+ *                risk-mitigation layer inside a government cloud could do that
+ *                now, which government would it belong to — and who would be
+ *                able to check?"  (31 words)
+ *   SUBLINE C   "What would Zersetzung look like as risk-mitigation software?
+ *                And if a government cloud were running it, would anyone
+ *                outside that cloud know?"  (23 words, the shortest)
  */
 const HERO = {
   question: "Has a neurotech terrorist attack happened?",
@@ -256,34 +251,24 @@ export default function Page() {
                 {HERO.question}
               </h1>
 
-              {/* One sentence on the method — not the victim count, which
-                  belongs to a country that no longer exists. */}
+              {/* Three questions, no statements, no country named. */}
               <p className="mt-6 font-serif text-lg leading-snug text-foreground/85">
+                Is there a government cloud platform &mdash; anywhere &mdash; running a
+                risk-mitigation layer that could do what{" "}
                 <a
                   href="/glossary/zersetzung-tactics"
                   className="text-foreground underline underline-offset-4"
                 >
                   Zersetzung
                 </a>{" "}
-                was East Germany&rsquo;s method for breaking a person without ever
-                arresting them: covert harassment, run by the state, under a 1976
-                directive.
+                did: isolate and discredit a person without ever arresting them?
               </p>
-
-              {/* The tie to the rest of the page. Every figure derived from the
-                  same tables the Research charts read. */}
               <p className="mt-4 font-serif text-lg leading-snug text-foreground/85">
-                Could that be done now through a government cloud platform &mdash; and
-                whose? This archive holds {usd(gc.totalUsd)} of public procurement,{" "}
-                {gc.deployments} deployments and {gc.regulations} regulations. Not one of
-                those regulations records a route for the person a system is used on to
-                ask anything.
+                And would any public record show it?
               </p>
-
               <p className="mt-4 font-serif text-lg leading-snug text-foreground/85">
-                Over the same decades the world&rsquo;s suicide rate fell 27%. The United
-                States rose 40%. South Korea rose 83%. These are separate records.
-                Neither explains the other.
+                Why did some wealthy countries&rsquo; suicide rates rise while the
+                world&rsquo;s fell 27%?
               </p>
 
               <p className="mt-6 text-[13px] leading-relaxed text-foreground/70">
