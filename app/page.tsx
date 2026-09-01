@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   // carries its question mark with it, which an assertion never would.
   title: "Has a neurotech terrorist attack happened?",
   description:
-    "Is there a government cloud platform — anywhere — running a risk-mitigation layer that could do what Zersetzung did: isolate and discredit a person without ever arresting them? And would any public record show it? A dated first-person record, the public procurement record, and what regulators found when they looked.",
+    "Is there a government cloud platform — anywhere — running a risk-mitigation layer that could do what Zersetzung did: isolate and discredit a person without ever arresting them? Would any public record show it? And why, while the world's suicide rate fell 27%, did the United States rise 40% and South Korea 83%?",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Has a neurotech terrorist attack happened?",
@@ -104,10 +104,23 @@ export const metadata: Metadata = {
  * a layer could be pointed at a person the way Zersetzung was — and that is a
  * question, not a finding.
  *
- * The suicide clause survives because Sean asked for it, but stripped of the
- * country: "why did some wealthy countries' suicide rates rise while the
- * world's fell 27%?" The West Bank & Gaza stays out for the reason recorded on
- * 1 September — this archive's own concept page calls them effectively flat.
+ * THE SUICIDE FIGURES, AND WHY NOT THE ONES SEAN ASKED FOR. He asked for
+ * "America has a 36% increase, and South Korea has a 105% increase."
+ *
+ * Those are real and they are on this site — but they are the pair the site
+ * tells readers NOT to put beside each other. HealthSignals' "Which figure to
+ * quote" panel exists because Sean himself hit this on 28 August: 105% and 36%
+ * are each country's own NATIONAL statistics, run to different end years on
+ * different national methods, and the panel says in as many words: "Do not
+ * compare it with another country's: national methods differ from each other
+ * and from the WHO basis, so the gap between two of them is partly a gap of
+ * method. For comparing countries, use..." the WHO figure.
+ *
+ * So the hero uses the comparable pair — United States +40%, South Korea +83%,
+ * both age-standardised to the WHO world standard population, 2000-2021, the
+ * same basis as the world's -27% they are set against. Same specificity Sean
+ * wanted, and it does not put the front page in contradiction with the modal
+ * three clicks below it.
  *
  * Alternates, one line to swap:
  *   HEADLINE B  "Has a neurotechnological terrorist attack already happened?"
@@ -251,7 +264,10 @@ export default function Page() {
                 {HERO.question}
               </h1>
 
-              {/* Three questions, no statements, no country named. */}
+              {/* ONE PARAGRAPH, three questions, no line breaks (Sean, 1 Sept).
+                  The figures are the WHO age-standardised pair — see the note on
+                  HERO for why these and not the ones off the chart's end
+                  labels. */}
               <p className="mt-6 font-serif text-lg leading-snug text-foreground/85">
                 Is there a government cloud platform &mdash; anywhere &mdash; running a
                 risk-mitigation layer that could do what{" "}
@@ -261,14 +277,9 @@ export default function Page() {
                 >
                   Zersetzung
                 </a>{" "}
-                did: isolate and discredit a person without ever arresting them?
-              </p>
-              <p className="mt-4 font-serif text-lg leading-snug text-foreground/85">
-                And would any public record show it?
-              </p>
-              <p className="mt-4 font-serif text-lg leading-snug text-foreground/85">
-                Why did some wealthy countries&rsquo; suicide rates rise while the
-                world&rsquo;s fell 27%?
+                did: isolate and discredit a person without ever arresting them? Would any
+                public record show it? And why, while the world&rsquo;s suicide rate fell
+                27%, did the United States rise 40% and South Korea 83%?
               </p>
 
               <p className="mt-6 text-[13px] leading-relaxed text-foreground/70">
