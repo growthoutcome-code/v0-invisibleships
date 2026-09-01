@@ -140,12 +140,12 @@ function Carry() {
   return (
     <svg
       viewBox="0 0 1200 620"
-      preserveAspectRatio="xMidYMid slice"
+      preserveAspectRatio="xMidYMid meet"
       fill="none"
       stroke="currentColor"
       strokeWidth={1.6}
       aria-hidden="true"
-      className={cn(SVG, "origin-[0%_78%] scale-[0.60]")}
+      className={cn(SVG, "origin-[0%_78%] scale-[2.1] sm:scale-[1.35] lg:scale-[0.92]")}
     >
       <g className="[transform:translateX(calc((var(--motif-p)_-_0.5)_*_44%))]">
         <path d="M-40 310 m 90 -60 a 60 60 0 0 1 0 120" />
@@ -168,12 +168,12 @@ function Recede() {
   return (
     <svg
       viewBox="0 0 1200 620"
-      preserveAspectRatio="xMidYMax slice"
+      preserveAspectRatio="xMidYMax meet"
       fill="none"
       stroke="currentColor"
       strokeWidth={1.4}
       aria-hidden="true"
-      className={cn(SVG, "origin-[50%_100%] scale-[0.58]")}
+      className={cn(SVG, "origin-[50%_100%] scale-[2.0] sm:scale-[1.3] lg:scale-[0.88]")}
     >
       <g className="[transform-box:fill-box] origin-bottom [transform:scale(calc(1_+_var(--motif-p)_*_0.22))]">
         <path d="M600 40 L-120 600" />
@@ -198,12 +198,12 @@ function Room() {
   return (
     <svg
       viewBox="0 0 1200 620"
-      preserveAspectRatio="xMidYMid slice"
+      preserveAspectRatio="xMidYMid meet"
       fill="none"
       stroke="currentColor"
       strokeWidth={1.6}
       aria-hidden="true"
-      className={cn(SVG, "origin-[50%_50%] scale-[0.58]")}
+      className={cn(SVG, "origin-[50%_50%] scale-[2.0] sm:scale-[1.3] lg:scale-[0.88]")}
     >
       <g className="[transform:translateY(calc(var(--motif-p)_*_-26px))]">
         <path d="M120 96 L740 40 L740 470" />
@@ -235,12 +235,12 @@ function Drift() {
   return (
     <svg
       viewBox="0 0 1200 620"
-      preserveAspectRatio="xMidYMid slice"
+      preserveAspectRatio="xMidYMid meet"
       fill="none"
       stroke="currentColor"
       strokeWidth={1.6}
       aria-hidden="true"
-      className={cn(SVG, "origin-[50%_50%] scale-[0.62]")}
+      className={cn(SVG, "origin-[50%_50%] scale-[2.05] sm:scale-[1.32] lg:scale-[0.90]")}
     >
       {/* the plot floor and its tick field, arriving before the lines */}
       <g className="[opacity:calc(0.45_+_var(--motif-p)_*_0.55)]">
@@ -297,12 +297,12 @@ function Lattice() {
   return (
     <svg
       viewBox="0 0 1200 620"
-      preserveAspectRatio="xMidYMid slice"
+      preserveAspectRatio="xMidYMid meet"
       fill="none"
       stroke="currentColor"
       strokeWidth={1.6}
       aria-hidden="true"
-      className={cn(SVG, "origin-[50%_50%] scale-[0.58]")}
+      className={cn(SVG, "origin-[50%_50%] scale-[2.0] sm:scale-[1.3] lg:scale-[0.88]")}
     >
       <circle cx="170" cy="310" r="9" opacity="0.85" />
 
@@ -365,12 +365,12 @@ function Ledger() {
   return (
     <svg
       viewBox="0 0 1200 620"
-      preserveAspectRatio="xMidYMid slice"
+      preserveAspectRatio="xMidYMid meet"
       fill="none"
       stroke="currentColor"
       strokeWidth={1.6}
       aria-hidden="true"
-      className={cn(SVG, "origin-[50%_100%] scale-[0.60]")}
+      className={cn(SVG, "origin-[50%_100%] scale-[2.05] sm:scale-[1.32] lg:scale-[0.90]")}
     >
       <path d="M60 540 L1140 540" opacity="0.80" />
       {bars.map(([x, h, rate], i) => (
@@ -410,12 +410,12 @@ function Bloom() {
   return (
     <svg
       viewBox="0 0 1200 620"
-      preserveAspectRatio="xMidYMax slice"
+      preserveAspectRatio="xMidYMax meet"
       fill="none"
       stroke="currentColor"
       strokeWidth={1.5}
       aria-hidden="true"
-      className={cn(SVG, "origin-[50%_100%] scale-[0.60]")}
+      className={cn(SVG, "origin-[50%_100%] scale-[2.05] sm:scale-[1.32] lg:scale-[0.90]")}
     >
       {arcs.map(([r, rate, op]) => (
         <path
@@ -464,8 +464,18 @@ export default function SectionMotif({
       data-motif={name}
       aria-hidden="true"
       className={cn(
-        "pointer-events-none absolute inset-0 z-0 select-none overflow-hidden",
-        "text-foreground opacity-[0.14] dark:opacity-[0.18]",
+        "pointer-events-none absolute z-0 select-none overflow-hidden",
+        // Phone sections are tall and narrow, so a fitted 1200x620 drawing
+        // becomes a thin band floating in the middle of a 1800px section and
+        // the reader scrolls past nothing. Below sm the motif is a band along
+        // the bottom instead — predictable, and it lands in the space a
+        // section already has under its last line.
+        "inset-x-0 bottom-0 h-[58%] sm:inset-0 sm:h-auto",
+        "text-foreground opacity-[0.14] dark:opacity-[0.11]",
+        // No stroke crosses a heading: the wash starts below the eyebrow and
+        // the question, which are the two things that must never fight art.
+        "[-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,black_34%)]",
+        "[mask-image:linear-gradient(to_bottom,transparent_0%,black_34%)]",
         "[--motif-p:0]",
         className,
       )}
