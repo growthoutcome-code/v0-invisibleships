@@ -58,12 +58,12 @@ export const metadata: Metadata = {
   // carries its question mark with it, which an assertion never would.
   title: "Has a neurotech terrorist attack happened?",
   description:
-    "East Germany's Stasi formalised Zersetzung — decomposition — in Directive 1/76: covert harassment designed to break a person without ever arresting them. Around 5,000 people were persistently targeted. This archive asks what that would look like now, with a dated first-person record from Denver, Colorado and the public procurement and regulator record beside it.",
+    "Zersetzung was East Germany's method for breaking a person without ever arresting them: covert harassment, run by the state, under a 1976 directive. Could that be done now through a government cloud platform — and whose? This archive holds $102.8bn of public procurement, 399 deployments and 99 regulations, and not one of those regulations records a route for the person a system is used on to ask anything.",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Has a neurotech terrorist attack happened?",
     description:
-      "The Stasi formalised Zersetzung — decomposition — in 1976: breaking a person without arresting them. This archive asks what that would look like now.",
+      "Zersetzung was East Germany's method for breaking a person without arresting them. Could it be done now through a government cloud platform — and whose?",
     images: ["/og-default.png"],
   },
 };
@@ -81,30 +81,38 @@ export const metadata: Metadata = {
  * larger and easier to defend. Nothing was added to make it international — a
  * country was removed.
  *
- * ZERSETZUNG IS THE BEST MOVE ON THIS PAGE, and it is Sean's, not mine. A
- * headline that size normally has nothing under it. This one now stands on a
- * documented state programme: East Germany's Stasi formalised Zersetzung —
- * literally decomposition — in Directive 1/76, January 1976. The tactics are on
- * the record: degrading a reputation with true and false information,
- * engineering professional failure, breaking up relationships, entering homes
- * and leaving visible traces. Around 5,000 people were persistently targeted.
+ * ZERSETZUNG, IN ONE SENTENCE. Sean, 1 September: define it, drop the "around
+ * 5,000 people persistently targeted" figure — "that information is out of
+ * context. The context is a surveillance system." He is right. A victim count
+ * from 1980s East Germany invites the reader to compare scale with a place that
+ * no longer exists, which is not the comparison this archive is making. What
+ * carries over is the METHOD, not the tally.
  *
- * What that buys: it establishes that organised covert harassment of named
- * individuals, run by a state, to break a person WITHOUT ARRESTING THEM, is a
- * historical fact rather than a thing this archive is asserting. The question
- * stops being "could such a thing exist" and becomes "what would it look like
- * now" — which is a question a stranger can hold without deciding anything.
+ * THE SUBLINE IS NOW A QUESTION ABOUT A PLATFORM. That is the tie to the rest
+ * of the page Sean asked for: could this method run through a government cloud
+ * platform, and whose? Every figure in that clause is read from the same tables
+ * the Research section charts — $102.8bn of public procurement, 399 deployments,
+ * 99 regulations — and the last of them is the archive's own strongest finding:
+ * not one of those 99 records a route for the person a system is used on to ask
+ * anything.
  *
- * It is also the author's own register: the series is titled "The Discovery of
- * Decomposition Tactics Facilitated with Neurotech", spoken on the record on
- * 6 April 2026, and /glossary/zersetzung-tactics has carried the definition —
- * with the eBay v. Steiner prosecution as a documented modern instance — since
- * before this page existed. The subline links to it.
+ * THE SUICIDE DIVERGENCE, AND WHAT WAS LEFT OUT. Sean suggested South Korea,
+ * America, and the West Bank & Gaza. The first two are in: +39.9% and +82.8%
+ * against a world that fell 27% on the same WHO basis, 2000-2021.
  *
- * THE SUBLINE NO LONGER DECLINES. It used to open "This archive does not answer
- * that." Sean asked for supporting information and a link to the disclaimer
- * instead, and he is right that the refusal was doing the disclaimer's job in
- * the disclaimer's place. The pointer under it carries that weight now.
+ * The West Bank & Gaza is NOT, and the reason is in this archive's own words:
+ * lib/concepts.ts records them as "effectively flat" — 0.63 to 0.65 per 100,000,
+ * a move of two hundredths — and says that 0.65 "would be the lowest rate on
+ * earth by a wide margin, and much more plausibly measures a fragmented
+ * registration system." Listing them as a rise would have put the home page in
+ * direct contradiction with the concept page it links to.
+ *
+ * "These are separate records. Neither explains the other." Seven words, and
+ * they are what make the juxtaposition publishable at all. Procurement spending
+ * beside a suicide rate is a causal claim by adjacency unless something says it
+ * is not — and the archive's own fourth limit is that two sources sitting beside
+ * each other do not corroborate one another. Same sentence pattern as the crime
+ * section's Two directions, deliberately: one voice for one discipline.
  *
  * Alternates, one line to swap:
  *   HEADLINE B  "Has a neurotechnological terrorist attack already happened?"
@@ -248,32 +256,36 @@ export default function Page() {
                 {HERO.question}
               </h1>
 
-              {/* The subline is the ground the question stands on: a documented
-                  state programme that did this, with a date and a directive
-                  number. Zersetzung links to its own glossary entry, which has
-                  carried the definition and the eBay v. Steiner prosecution
-                  since before this page existed. */}
+              {/* One sentence on the method — not the victim count, which
+                  belongs to a country that no longer exists. */}
               <p className="mt-6 font-serif text-lg leading-snug text-foreground/85">
-                East Germany&rsquo;s Stasi formalised{" "}
                 <a
                   href="/glossary/zersetzung-tactics"
                   className="text-foreground underline underline-offset-4"
                 >
                   Zersetzung
                 </a>{" "}
-                &mdash; decomposition &mdash; in Directive 1/76: covert harassment
-                designed to break a person without ever arresting them. Around 5,000
-                people were persistently targeted.
-              </p>
-              <p className="mt-4 font-serif text-lg leading-snug text-foreground/85">
-                This archive asks what that would look like now &mdash; a dated
-                first-person record from Denver, Colorado, and the public procurement
-                and regulator record beside it.
+                was East Germany&rsquo;s method for breaking a person without ever
+                arresting them: covert harassment, run by the state, under a 1976
+                directive.
               </p>
 
-              {/* Was "This archive does not answer that." The refusal was doing
-                  the disclaimer's job in the disclaimer's place; the pointer
-                  does it properly and opens without losing the page. */}
+              {/* The tie to the rest of the page. Every figure derived from the
+                  same tables the Research charts read. */}
+              <p className="mt-4 font-serif text-lg leading-snug text-foreground/85">
+                Could that be done now through a government cloud platform &mdash; and
+                whose? This archive holds {usd(gc.totalUsd)} of public procurement,{" "}
+                {gc.deployments} deployments and {gc.regulations} regulations. Not one of
+                those regulations records a route for the person a system is used on to
+                ask anything.
+              </p>
+
+              <p className="mt-4 font-serif text-lg leading-snug text-foreground/85">
+                Over the same decades the world&rsquo;s suicide rate fell 27%. The United
+                States rose 40%. South Korea rose 83%. These are separate records.
+                Neither explains the other.
+              </p>
+
               <p className="mt-6 text-[13px] leading-relaxed text-foreground/70">
                 <DisclaimerDialog>
                   <button type="button" className="underline underline-offset-4">
