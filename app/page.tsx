@@ -11,9 +11,8 @@ import { CORPUS_SUMMARY } from "@/lib/corpus-summary";
 import JournalQuotes from "@/components/JournalQuotes";
 import { GLOSSARY_PICKS } from "@/lib/home-picks";
 import { CRIME_FIGURES, HEALTH_FIGURES } from "@/lib/home-data-sections";
-import { TRAFFICKING_OPS } from "@/lib/enforcement";
 import { homeGlossary, journalQuotes, journalStats } from "@/lib/server-corpus";
-import { accomplishments, govCloud, usd } from "@/lib/server-data";
+import { govCloud, usd } from "@/lib/server-data";
 
 /**
  * The home page.
@@ -167,52 +166,12 @@ const CITY_QUOTES: { date: string; id: string; text: string }[] = [
   },
 ];
 
-/**
- * SIX FINDINGS, NOT EIGHT, AND ORDERED.
- *
- * Sean: "consolidate it to six, and let's really pull the most important data
- * to the top." Selected by id from lib/concepts.ts rather than sliced, so the
- * home page keeps its choice if FINDINGS is reordered — and so the two that
- * were dropped are named here rather than silently disappearing.
- *
- * Order is an argument. A regulator finding against a company its own
- * government keeps paying is the hardest single fact in the archive, so it
- * leads. The robot experiment is second because it is the one finding that
- * explains a reader's own experience to them, which is what most of them came
- * for. Then scale, then children, then the trend, then why nobody heard.
- *
- * Dropped: "$300 bought Reuters a human cervical spine" — visceral, and the
- * furthest from this archive's subject. And the duplicate sheriff finding
- * ("3 constitutional amendments"), which pointed at the same concept page as
- * the 420 children figure and spent a tile to say the same thing twice.
- */
-const HOME_FINDINGS = [
-  "fined-in-europe-hired-in-america",
-  "what-produces-the-feeling",
-  "how-protected-is-your-medical-record",
-  "what-children-are-subject-to",
-  "us-rose-against-the-trend",
-  "why-isnt-this-in-the-news",
-]
-  .map((id) => FINDINGS.find((f) => f.id === id))
-  .filter((f): f is (typeof FINDINGS)[number] => Boolean(f));
-
 export default function Page() {
   const stats = journalStats();
 
   const entries = journalQuotes(8);
   const gc = govCloud();
-  const wins = accomplishments();
-
-  // One concept at a time, like the journal. Ordered as lib/concepts.ts orders
-  // them — the first six, not a selection — and the body trimmed to a lead-in.
-  const conceptSlides: Slide[] = CONCEPTS.slice(0, 6).map((c) => ({
-    href: `/concepts#${c.id}`,
-    eyebrow: `${c.basis} · ${c.theme}`,
-    title: c.title,
-    body: c.body.length > 320 ? c.body.slice(0, 320).replace(/\s+\S*$/, "") + "…" : c.body,
-    cta: "Read the concept",
-  }));
+  const euFine = FINDINGS.find((f) => f.id === "fined-in-europe-hired-in-america");
 
   const glossarySlides: Slide[] = homeGlossary(GLOSSARY_PICKS).map((g) => ({
     href: `/glossary/${g.slug}`,
@@ -337,130 +296,69 @@ export default function Page() {
           </div>
         </section>
 
-        {/* JOURNAL.
-            Header, one sentence, the entry, slide to the next, buttons out.
+        {/* ============================================================
+             CONCEPT B — EVERY HEADING A QUESTION
+             Sean, 1 September, choosing from four wireframes.
 
-            THE SENTENCE IS THE HEADING now (Sean, 30 August): "I would much
-            rather have just the line underneath be the heading… you could put
-            the hundred and twenty eight days and two hundred and ninety eight
-            recordings etcetera underneath it." Right call — what the journal IS
-            outranks how much of it there is, and the metrics read better as
-            evidence for the claim than as the claim itself.
+             Twelve sections became six. The scan test is now literal: read
+             only the headings, top to bottom, and you get six questions in
+             order, each answered by the section beneath it. The archive is
+             organised around a question, so the page is too.
 
-            The cards of dates and places are gone. Sliding now moves to the
-            next ENTRY, words and all, rather than to a link to one. */}
-        <section id="record" className="scroll-mt-24">
-          <div className="w-full px-5 py-20 sm:px-8 lg:px-[200px]">
-            <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
-              Journal
-            </p>
-            <h2 className="font-display m-0 mt-3 text-[26px] font-semibold leading-[1.25] text-foreground sm:text-[34px]">
-              Journal entries: subjective and qualitative accounts of the bullhorn
-              surveillance system experience in Denver, Colorado.
-            </h2>
-            <p className="mt-4 text-[15px] text-muted">
+             MERGED, NOT DELETED. Public health, crime, anti-trafficking and
+             "what is working" were four sections asking one question — is
+             anything moving in the data — and they are now three columns
+             under it. The concepts and glossary carousels fold into "what can
+             the technology actually do", which is the question they both
+             answer. Every route out of the page survives; only the headings
+             above them were spent.
+
+             Nothing new was built. SiteSection, JournalQuotes, HomeCarousel
+             and Figure carry all six, over the shadcn Carousel and Dialog.
+             ============================================================ */}
+
+        {/* ------------------------------------------- 2 · what it looks like */}
+        <SiteSection
+          id="record"
+          eyebrow="Journal"
+          heading="What does one day of it look like?"
+          meta={
+            <>
               {stats.days} dated days · {stats.recordings} audio-linked recordings ·{" "}
               {stats.docs} documents · one city
-            </p>
+            </>
+          }
+          actions={[
+            { href: "/journal", label: "Go to the journal", primary: true },
+            { href: "/contribute", label: "Contribute to the journal" },
+          ]}
+          aside={
+            <DisclaimerDialog>
+              <button type="button" className="text-[14px] text-muted underline underline-offset-4 hover:text-foreground">
+                How to read the journal
+              </button>
+            </DisclaimerDialog>
+          }
+        >
+          <p className="body-copy mb-10 text-[19px] leading-relaxed text-foreground/85">
+            Subjective and qualitative accounts of the bullhorn surveillance system
+            experience in Denver, Colorado &mdash; written down as they were heard, and
+            left unsmoothed.
+          </p>
+          <JournalQuotes entries={entries} />
+        </SiteSection>
 
-            <div className="mt-14">
-              <JournalQuotes entries={entries} />
-            </div>
-
-            <div className="mt-14 flex flex-wrap items-center gap-4">
-              <a
-                href="/journal"
-                className="inline-flex h-12 items-center rounded-md bg-foreground px-6 text-[15px] font-medium text-background"
-              >
-                Go to the journal
-              </a>
-              <a
-                href="/contribute"
-                className="inline-flex h-12 items-center rounded-md bg-foreground/[0.07] px-6 text-[15px] hover:bg-foreground/[0.12]"
-              >
-                Contribute to the journal
-              </a>
-              {/* Opens in place rather than navigating. A caveat that costs a
-                  reader their position on the page is a caveat they skip. */}
-              <DisclaimerDialog>
-                <button
-                  type="button"
-                  className="text-[14px] text-muted underline underline-offset-4 hover:text-foreground"
-                >
-                  How to read the journal
-                </button>
-              </DisclaimerDialog>
-            </div>
-          </div>
-        </section>
-
-
-        {/* ------------------------------------------------------- research */}
-        {/* Moved directly under the journal (Sean, 30 August): the record, then
-            the public evidence assembled beside it. Six findings, not eight,
-            and ordered rather than sliced — see HOME_FINDINGS. */}
-        <section className="scroll-mt-24">
-          <div className="w-full px-5 py-20 sm:px-8 lg:px-[200px]">
-            <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
-              Research
-            </p>
-            <h2 className="font-display m-0 mt-3 text-[26px] font-semibold leading-[1.25] text-foreground sm:text-[34px]">
-              Six things the public record already says.
-            </h2>
-            <p className="mt-4 text-[15px] text-muted">
-              Government cloud procurement, public health and crime · every figure
-              resolves to a named source · {SOURCE_YEARS.length} dated sources, the
-              earliest from {earliest}
-            </p>
-
-            <div className="mt-14 grid gap-x-12 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
-
-              {HOME_FINDINGS.map((f, n) => (
-                <a
-                  key={`${f.id}-${n}`}
-                  href={`/concepts#${f.id}`}
-                  className="group block"
-                >
-                  <span className="font-display block text-4xl font-semibold text-foreground">
-                    {f.stat}
-                  </span>
-                  <span className="body-copy mt-3 block text-[15px] text-foreground/80 transition-colors group-hover:text-foreground">
-                    {f.line}
-                  </span>
-                </a>
-              ))}
-            </div>
-
-            <div className="mt-14 flex flex-wrap items-center gap-4">
-              <a
-                href="/data"
-                className="inline-flex h-12 items-center rounded-md bg-foreground px-6 text-[15px] font-medium text-background"
-              >
-                Go to the research
-              </a>
-              <span className="text-[14px] text-muted">
-                {sourcesWithUrl} of {SOURCE_YEARS.length} sources carry a public link.
-              </span>
-            </div>
-          </div>
-        </section>
-
-        {/* ------------------------------------------------ government cloud */}
-        {/* Surfaced at Sean's request. Every figure read from the same tables
-            the Research charts use — see lib/server-data.ts — so the front page
-            cannot drift from the section it points at. */}
+        {/* ------------------------------------------------- 3 · who bought it */}
         <SiteSection
           eyebrow="Government cloud"
-          heading="Somebody bought this, from somebody, for a price that is on the record."
+          heading="Who bought the systems, and for how much?"
           meta={
             <>
               {gc.awards} awards · {gc.vendors} vendors · {gc.deployments} deployments ·{" "}
               {gc.regulations} regulations · {gc.sources} sources
             </>
           }
-          actions={[
-            { href: "/data/government-cloud", label: "Go to government cloud", primary: true },
-          ]}
+          actions={[{ href: "/data/government-cloud", label: "Go to government cloud", primary: true }]}
           aside={
             <DisclaimerDialog>
               <button type="button" className="text-[14px] text-muted underline underline-offset-4 hover:text-foreground">
@@ -472,28 +370,32 @@ export default function Page() {
           <div className="grid gap-x-12 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
             <Figure
               stat={usd(gc.totalUsd)}
-              line={`across the ${gc.valued} awards in this record that carry a published value. Contract vehicles, scopes, funding statutes and recompete dates, each one linked to its source.`}
+              line={`across the ${gc.valued} awards here that carry a published value. Vehicles, scopes, funding statutes and recompete dates, each linked to its source.`}
               href="/data/government-cloud"
             />
-            <Figure
-              stat={usd(gc.topUsd)}
-              line={`is the largest single award here${gc.topBuyer ? `, to ${gc.topBuyer}` : ""}. Procurement at this scale is public by design — the record exists precisely so it can be read.`}
-              href="/data/government-cloud"
-            />
+            {euFine && <Figure stat={euFine.stat} line={euFine.line} href={`/concepts#${euFine.id}`} />}
             <Figure
               stat={`0 of ${gc.regulations}`}
-              line="regulations record a route to individual review. Across the whole register, the person a system is used on has nowhere to ask anything."
+              line="regulations record a route to individual review. Across the whole register, the person a system is used on has nowhere to ask."
               href="/concepts#no-column-for-you"
             />
           </div>
         </SiteSection>
 
-        {/* ------------------------------------------------------ public health */}
+        {/* ------------------------------------------ 4 · is anything moving */}
+        {/* Four sections became three columns. They were all answering this
+            one question, and giving each its own heading spent three of the
+            page's six on the same beat. "What is working" is the third column
+            on purpose: enforcement outcomes are data too, and the section
+            would be dishonest without them. */}
         <SiteSection
-          eyebrow="Public health"
-          heading="A twenty-year climb the United States made alone."
-          meta="CDC, NCHS and WHO figures · every chart states its evidence tier and what it cannot show"
-          actions={[{ href: "/data/public-health", label: "Go to public health", primary: true }]}
+          eyebrow="Public health · crime · enforcement"
+          heading="Is anything moving in the data?"
+          meta="CDC, NCHS, WHO, FBI, BJS and DHS series · every figure resolves to a named source · none of these records explains another"
+          actions={[
+            { href: "/data/public-health", label: "Public health", primary: true },
+            { href: "/data/crime", label: "Crime" },
+          ]}
           aside={
             <DisclaimerDialog>
               <button type="button" className="text-[14px] text-muted underline underline-offset-4 hover:text-foreground">
@@ -502,376 +404,178 @@ export default function Page() {
             </DisclaimerDialog>
           }
         >
-          <div className="grid gap-x-12 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
-            {HEALTH_FIGURES.map((f) => (
-              <Figure key={f.stat} stat={f.stat} line={f.line} source={f.source} />
-            ))}
-          </div>
-        </SiteSection>
-
-        {/* ---------------------------------------------------------- crime */}
-        <SiteSection
-          eyebrow="Crime"
-          heading="Six lanes moving in different directions, and two that nobody counts."
-          meta="FBI, BJS and CDC series · where the counting changed mid-window, the series does not agree with itself, and the section says so"
-          actions={[{ href: "/data/crime", label: "Go to crime", primary: true }]}
-          aside={
-            <DisclaimerDialog>
-              <button type="button" className="text-[14px] text-muted underline underline-offset-4 hover:text-foreground">
-                How to read the research
-              </button>
-            </DisclaimerDialog>
-          }
-        >
-          <div className="grid gap-x-12 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
-            {CRIME_FIGURES.map((f) => (
-              <Figure key={f.stat} stat={f.stat} line={f.line} source={f.source} />
-            ))}
-          </div>
-        </SiteSection>
-
-        {/* -------------------------------------- anti-trafficking record */}
-        {/* Sean asked for a chart rewarding arrest data. The honest version is
-            this one: no national series here shows arrests rising — the FBI's
-            own 2025 release has violent crime falling 9.3%, the largest decline
-            since estimation began in 1936 — but the DHS subscription carries
-            OPERATION-LEVEL counts, dated and named. So the section shows what
-            the record contains and says plainly that it is not a trend.
-
-            Bars are widths, not a plot: five counts on one scale, no axis to
-            misread, and nothing that implies a series where there is none. */}
-        <SiteSection
-          eyebrow="Anti-trafficking"
-          heading="No national series shows arrests rising. These specific operations are on the record."
-          meta="US Department of Homeland Security releases · arrests and investigations are counts, not convictions · not a national trend"
-          actions={[{ href: "/data/crime", label: "Go to the crime record", primary: true }]}
-        >
-          <div className="space-y-8">
-            {TRAFFICKING_OPS.map((op) => (
-              <div key={op.label}>
-                <div className="flex flex-wrap items-baseline gap-x-4">
-                  <span className="font-display text-3xl font-semibold text-foreground">
-                    {op.value.toLocaleString()}
-                  </span>
-                  <span className="font-display text-[12px] uppercase tracking-[0.14em] text-muted">
-                    {op.unit} · {op.label} · {op.when}
-                  </span>
-                </div>
-                <div className="mt-3 h-2 w-full bg-foreground/10">
-                  <div
-                    className="h-2 bg-foreground"
-                    style={{ width: `${Math.max(2, (op.value / 2545) * 100)}%` }}
-                  />
-                </div>
-                <p className="body-copy m-0 mt-3 text-[15px] text-foreground/80">
-                  {op.note}{" "}
-                  <a
-                    href={op.source.href}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    className="text-muted underline underline-offset-4 hover:text-foreground"
-                  >
-                    {op.source.publisher} · {op.source.title}
-                  </a>
-                </p>
+          <div className="grid gap-x-12 gap-y-14 lg:grid-cols-3">
+            <div>
+              <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
+                Public health
+              </p>
+              <div className="mt-6">
+                {/* Deliberately NOT the percentage. The hero already states the
+                    US rise as +40% on the WHO basis; HEALTH_FIGURES[0] states
+                    it as +30% on the CDC basis over a different window. Both
+                    are right and both are sourced, but two different US
+                    percentages on one page reads as an error to anyone who is
+                    not going to check. This column carries the count instead. */}
+                <Figure stat={HEALTH_FIGURES[1].stat} line={HEALTH_FIGURES[1].line} source={HEALTH_FIGURES[1].source} />
               </div>
-            ))}
+            </div>
+            <div>
+              <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
+                Crime
+              </p>
+              <div className="mt-6">
+                <Figure stat={CRIME_FIGURES[2].stat} line={CRIME_FIGURES[2].line} source={CRIME_FIGURES[2].source} />
+              </div>
+            </div>
+            <div>
+              <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
+                What is working
+              </p>
+              <div className="mt-6">
+                <Figure
+                  stat="180"
+                  line="trafficking victims recovered, 30 of them children, in HSI-led operations around the 2026 World Cup. Arrests are activity; this is an outcome."
+                  source={{ label: "DHS, 29 July 2026", href: "https://www.dhs.gov/news/2026/07/29/dhs-highlights-successful-arrests-and-rescues-crackdown-human-trafficking-during" }}
+                />
+              </div>
+            </div>
           </div>
 
-          <p className="body-copy mt-10 border-l-2 border-foreground pl-5 text-[15px] leading-relaxed text-foreground/85">
-            These are counts from named operations on dated agency releases, not a
-            national arrest series. This archive has not found one that shows arrests
-            rising: the same period&rsquo;s FBI release records violent crime falling
-            9.3% in 2025, the largest year-to-year decline since the Bureau began
-            estimating in 1936. Both things are in the record and neither explains the
-            other.
+          {/* The one line that keeps three columns from reading as an argument. */}
+          <p className="body-copy mt-14 border-l-2 border-foreground pl-5 text-[15px] leading-relaxed text-foreground/85">
+            Criminal arrests are 51% below their 1997 peak and violent crime fell 9.3% in
+            2025, the largest decline since the FBI began estimating in 1936. Three
+            separate records sit in this section. None of them explains another, and this
+            archive does not claim they do.
           </p>
         </SiteSection>
 
-        {/* ------------------------------------------------ what is working */}
-        {/* Sean, 30 August: "we are not here to trash law enforcement. We're
-            not here to throw law enforcement under the bus."
-
-            The register this reads from already existed — six entries, tier A,
-            with sources — inside the Crime vertical, where only a reader who
-            went three clicks deep would ever find it. It belongs on the front
-            page, and putting it there is the single strongest signal that this
-            archive is not an indictment. */}
+        {/* ------------------------------------------ 5 · what it can do */}
         <SiteSection
-          eyebrow="What is working"
-          heading="The same record shows enforcement doing what it is for."
-          meta="From the crime register · agency reports and press releases · arrests and rescues are counts, not convictions"
-          actions={[{ href: "/data/crime", label: "See the full register", primary: true }]}
+          id="neurotechnology"
+          eyebrow="Neurotechnology"
+          heading="What can the technology actually do?"
+          meta={
+            <>
+              {CONCEPTS.length} concepts · {SOURCE_YEARS.length} dated sources, the earliest
+              from {earliest} · {sourcesWithUrl} carry a public link
+            </>
+          }
+          actions={[
+            { href: "/concepts", label: "Go to the concepts", primary: true },
+            { href: "/glossary", label: "Go to the glossary" },
+          ]}
         >
-          <div className="grid gap-x-12 gap-y-12 sm:grid-cols-2">
-            {wins.map(({ row, source }) => (
-              <div key={row.what}>
-                <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
-                  {row.what} · tier {row.tier}
-                </p>
-                <p className="body-copy m-0 mt-3 text-[17px] leading-relaxed text-foreground">
-                  {row.claim}
-                </p>
-                {source?.url && (
-                  <a
-                    href={source.url}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    className="mt-3 inline-block text-[13px] text-muted underline underline-offset-4 hover:text-foreground"
-                  >
-                    {source.publisher}
-                    {source.title ? ` · ${source.title}` : ""}
-                  </a>
-                )}
-              </div>
-            ))}
+          <p className="body-copy text-[19px] font-semibold leading-relaxed text-foreground">
+            Your house is not haunted.
+          </p>
+          <p className="body-copy mt-4 text-[17px] leading-relaxed text-foreground/85">
+            Precisely what the documented record shows a machine can do to a person, and
+            under what conditions &mdash; because the conditions are what let you rule
+            something in or out. Every capability below needed a surgeon, a scanner, or
+            hours of the person&rsquo;s own cooperation.
+          </p>
+
+          <div className="mt-12 grid gap-x-12 gap-y-12 lg:grid-cols-3">
+            <div>
+              <h3 className="font-display m-0 text-[17px] font-semibold text-foreground">
+                A man with ALS is speaking again by thinking
+              </h3>
+              <p className="body-copy mt-2 text-[15px] text-foreground/85">
+                Neuralink&rsquo;s VOICE trial decodes intended speech from the motor cortex.
+                It requires implanted electrodes, neurosurgery, and a consenting participant
+                in a registered clinical trial.
+              </p>
+              <a href="https://neuralink.com/trials/speech-restoration/" target="_blank"
+                 rel="noreferrer noopener"
+                 className="mt-3 inline-block text-[13px] text-muted underline underline-offset-4 hover:text-foreground">
+                Neuralink — Speech Restoration trial
+              </a>
+            </div>
+            <div>
+              <h3 className="font-display m-0 text-[17px] font-semibold text-foreground">
+                A machine reconstructed language without surgery
+              </h3>
+              <p className="body-copy mt-2 text-[15px] text-foreground/85">
+                A semantic decoder recovered the gist of what a person was hearing or
+                imagining from an fMRI scanner and no implant. It needed roughly sixteen
+                hours of training per person, and{" "}
+                <strong>it failed when participants resisted it.</strong>
+              </p>
+              <a href="https://www.nature.com/articles/s41593-023-01304-9" target="_blank"
+                 rel="noreferrer noopener"
+                 className="mt-3 inline-block text-[13px] text-muted underline underline-offset-4 hover:text-foreground">
+                Tang &amp; Huth, Nature Neuroscience, 2023
+              </a>
+            </div>
+            <div>
+              <h3 className="font-display m-0 text-[17px] font-semibold text-foreground">
+                Colorado already requires consent for neural data
+              </h3>
+              <p className="body-copy mt-2 text-[15px] text-foreground/85">
+                HB24-1058 took effect on 6 August 2024, treating neural data as sensitive
+                and requiring affirmative consent before it is processed. The definition
+                does not require that the data identify anyone.
+              </p>
+              <a href="https://content.leg.colorado.gov/sites/default/files/documents/2024A/bills/2024a_1058_01.pdf"
+                 target="_blank" rel="noreferrer noopener"
+                 className="mt-3 inline-block text-[13px] text-muted underline underline-offset-4 hover:text-foreground">
+                Colorado HB24-1058, as introduced
+              </a>
+            </div>
+          </div>
+
+          <div className="mt-14 border-l-2 border-foreground pl-5">
+            <h3 className="font-display m-0 text-[17px] font-semibold text-foreground">
+              And there the record stops
+            </h3>
+            <p className="body-copy mt-2 max-w-3xl text-[15px] text-foreground/85">
+              Nothing documented reads a person&rsquo;s perception, or reaches them, at a
+              distance and without their participation. That is not a claim that such a
+              thing cannot exist. It is a statement about what has been shown.
+            </p>
+          </div>
+
+          {/* The glossary, folded in — it answers the same question, one word
+              at a time, and no longer needs a heading of its own. */}
+          <div className="mt-16">
+            <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
+              Bring yourself up to speed
+            </p>
+            <div className="mt-6">
+              <HomeCarousel slides={glossarySlides} label="Glossary terms" />
+            </div>
           </div>
         </SiteSection>
 
-        {/* ------------------------------------- what the technology can do */}
-        {/* Addressable: the hero asks a second-person question and this is the
-            section that answers it. A reader who arrived frightened should be
-            one click from the conditions, not five sections down. */}
-        <section id="neurotechnology" className="scroll-mt-24">
-          <div className="w-full px-5 py-20 sm:px-8 lg:px-[200px]">
-            <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
-              Neurotechnology
-            </p>
-            {/* This line was the hero headline until Sean moved it here, and it
-                belongs here: it is a claim about what the technology can and
-                cannot do, so it should sit on top of the evidence for that
-                rather than on top of the whole archive. As a hero it asked the
-                reader to take reassurance on trust. Here they can check it. */}
-            <h2 className="font-display m-0 mt-2 text-4xl font-semibold text-foreground">
-              Your house is not haunted.
-            </h2>
-            <p className="body-copy mt-4 text-[17px] text-foreground/85">
-              What the documented record actually shows a machine can do to a person, and
-              under what conditions. The conditions are the part that lets you rule
-              something in or out &mdash; and every capability below needed a surgeon, a
-              scanner, or hours of the person&rsquo;s own cooperation.
-            </p>
+        {/* --------------------------------------------- 6 · what you can do */}
+        <SiteSection
+          eyebrow="Contribute"
+          heading="What can you do?"
+          meta={`${CORPUS_SUMMARY.files} files · ${CORPUS_SUMMARY.words.toLocaleString()} words · plain Markdown and CSV`}
+          actions={[
+            { href: "/contribute", label: "Add your own account", primary: true },
+            { href: "/api/corpus?from=home", label: "Download the whole archive" },
+          ]}
+          aside={
+            <a href="/why" className="text-[14px] text-muted underline underline-offset-4 hover:text-foreground">
+              Why &ldquo;Invisible Ships&rdquo;
+            </a>
+          }
+        >
+          <p className="body-copy text-[19px] leading-relaxed text-foreground/85">
+            A second dated record, kept to the same standard, is worth more than either one
+            alone &mdash; not because two accounts corroborate each other, they do not, but
+            because a pattern that survives independent description is a different kind of
+            object from a story. That includes officers and public employees describing
+            what they are being asked to do.
+          </p>
+          <p className="body-copy mt-4 text-[17px] leading-relaxed text-foreground/85">
+            Or take the whole thing: share it, quote it with attribution, hand it to an AI
+            and ask it to check the findings against the sources.
+          </p>
+        </SiteSection>
 
-            <div className="mt-8 space-y-8">
-              <div>
-                <h3 className="font-display m-0 text-xl font-semibold text-foreground">
-                  A man with ALS is speaking again by thinking
-                </h3>
-                <p className="body-copy mt-2 text-foreground/85">
-                  Neuralink&rsquo;s VOICE trial decodes intended speech from the motor
-                  cortex. It requires implanted electrodes, neurosurgery, and a consenting
-                  participant in a registered clinical trial.
-                </p>
-                <p className="mt-2 text-[14px] text-muted">
-                  <a
-                    href="https://neuralink.com/trials/speech-restoration/"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    className="underline underline-offset-4"
-                  >
-                    Neuralink — Speech Restoration trial
-                  </a>
-                </p>
-              </div>
-
-              <div>
-                <h3 className="font-display m-0 text-xl font-semibold text-foreground">
-                  A machine has reconstructed language from brain activity without surgery
-                </h3>
-                <p className="body-copy mt-2 text-foreground/85">
-                  A semantic decoder recovered the gist of what a person was hearing or
-                  imagining, from an fMRI scanner and no implant at all. It needed roughly
-                  sixteen hours of training data per person, and{" "}
-                  <strong>it failed when participants resisted it.</strong>
-                </p>
-                <p className="mt-2 text-[14px] text-muted">
-                  <a
-                    href="https://www.nature.com/articles/s41593-023-01304-9"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    className="underline underline-offset-4"
-                  >
-                    Tang &amp; Huth, Nature Neuroscience, 2023
-                  </a>
-                </p>
-              </div>
-
-              {/* The hero asserts this law, so the page has to resolve it to a
-                  named source. Cited here rather than in the rail because the
-                  rail is 30% wide and a citation does not belong in a headline.
-                  TODO: this belongs in lib/concepts.ts SOURCE_YEARS as a dated
-                  source so the corpus carries it too. */}
-              <div>
-                <h3 className="font-display m-0 text-xl font-semibold text-foreground">
-                  Colorado already requires your consent to collect neural data
-                </h3>
-                <p className="body-copy mt-2 text-foreground/85">
-                  HB24-1058 was signed on 17 April 2024 and took effect on 6 August 2024.
-                  It amended the Colorado Privacy Act to treat neural data &mdash;
-                  &ldquo;information generated by the measurement of the activity of an
-                  individual&rsquo;s central or peripheral nervous systems&rdquo; &mdash;
-                  as sensitive, requiring affirmative consent before it is processed. The
-                  definition does not require that the data identify anyone. The
-                  legislature treated it as inherently sensitive, and it was the first
-                  state privacy law anywhere to do so.
-                </p>
-                <p className="mt-2 text-[14px] text-muted">
-                  <a
-                    href="https://content.leg.colorado.gov/sites/default/files/documents/2024A/bills/2024a_1058_01.pdf"
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    className="underline underline-offset-4"
-                  >
-                    Colorado HB24-1058, as introduced (General Assembly)
-                  </a>
-                </p>
-              </div>
-
-              <div className="border-l-2 border-foreground pl-5">
-                <h3 className="font-display m-0 text-xl font-semibold text-foreground">
-                  And there the record stops
-                </h3>
-                <p className="body-copy mt-2 text-foreground/85">
-                  Nothing documented reads a person&rsquo;s perception, or reaches them,
-                  at a distance and without their participation. That is not a claim that
-                  such a thing cannot exist. It is a statement about what has been shown —
-                  and this archive keeps the two apart everywhere.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ------------------------------------------------------- concepts */}
-        {/* One at a time and rotating, like the journal (Sean, 30 August). A
-            grid of six titles asked a reader to choose before they knew what
-            any of them were; a slide gives them one, with enough of it to
-            decide. Autoplay is on — see HomeCarousel for how it gives up the
-            moment anyone touches it. */}
-        <section className="scroll-mt-24">
-          <div className="w-full px-5 py-20 sm:px-8 lg:px-[200px]">
-            <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
-              Concepts
-            </p>
-            <h2 className="font-display m-0 mt-3 text-[26px] font-semibold leading-[1.25] text-foreground sm:text-[34px]">
-              What the record raises, once you put the journal and the research beside
-              each other.
-            </h2>
-            <p className="mt-4 text-[15px] text-muted">
-              {CONCEPTS.length} concepts · each labelled with what it rests on, who wrote
-              it, and who it is for · {SOURCE_YEARS.length} dated sources
-            </p>
-
-            <div className="mt-14">
-              <HomeCarousel slides={conceptSlides} label="Concepts" />
-            </div>
-
-            <div className="mt-14 flex flex-wrap items-center gap-4">
-              <a
-                href="/concepts"
-                className="inline-flex h-12 items-center rounded-md bg-foreground px-6 text-[15px] font-medium text-background"
-              >
-                Go to the concepts
-              </a>
-              <DisclaimerDialog>
-                <button
-                  type="button"
-                  className="text-[14px] text-muted underline underline-offset-4 hover:text-foreground"
-                >
-                  How to read the concepts
-                </button>
-              </DisclaimerDialog>
-            </div>
-          </div>
-        </section>
-
-
-        {/* ------------------------------------------------------ glossary */}
-        {/* Same shape as Journal: header, one sentence, the thing, a carousel
-            through to more of it, a button out. Its own section since 30
-            August — as a panel inside the record it read as a footnote to the
-            journal, and it is not one. */}
-        <section className="scroll-mt-24">
-          <div className="w-full px-5 py-20 sm:px-8 lg:px-[200px]">
-            <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
-              Glossary
-            </p>
-            {/* Sean: "it's not the words the subject is arguing. The glossary
-                is really important. These are — bring yourself up to speed."
-                Right, and the old heading described the glossary's function to
-                somebody who already understood it. This one addresses the
-                reader instead, which is who it is actually for. */}
-            <h2 className="font-display m-0 mt-3 text-[26px] font-semibold leading-[1.25] text-foreground sm:text-[34px]">
-              Bring yourself up to speed.
-            </h2>
-            <p className="mt-4 text-[15px] text-muted">
-              The technical, legal and clinical vocabulary this subject is conducted in —
-              defined plainly, with the entries and sources that use each one.
-            </p>
-
-            <div className="mt-10">
-              <HomeCarousel slides={glossarySlides} label="Glossary terms" />
-            </div>
-
-            <div className="mt-12 flex flex-wrap items-center gap-4">
-              <a
-                href="/glossary"
-                className="inline-flex h-12 items-center rounded-md bg-foreground px-6 text-[15px] font-medium text-background"
-              >
-                Go to the glossary
-              </a>
-              <span className="text-[14px] text-muted">
-                Every term, with the entries that use it.
-              </span>
-            </div>
-          </div>
-        </section>
-
-
-        {/* ----------------------------------------------------- the ask */}
-        {/* Beat five. Every section above earns the right to make it, and it is
-            the last thing on the page for the same reason a pitch ends on the
-            ask rather than on a fact. */}
-        <section>
-          <div className="w-full px-5 py-20 sm:px-8 lg:px-[200px]">
-            <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
-              What you can do
-            </p>
-            <h2 className="font-display m-0 mt-2 text-3xl font-semibold text-foreground sm:text-4xl">
-              Add your own account
-            </h2>
-            <p className="body-copy mt-4 text-[17px] text-foreground/85">
-              A second dated record, kept to the same standard, is worth more than either
-              one alone &mdash; not because two accounts corroborate each other, they do
-              not, but because a pattern that survives independent description is a
-              different kind of object from a story. That includes officers and public
-              employees describing what they are being asked to do.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <a
-                href="/contribute"
-                className="inline-flex h-12 items-center rounded-md bg-foreground px-6 text-[15px] font-medium text-background"
-              >
-                What contributing means
-              </a>
-              <a
-                href="/api/corpus?from=home"
-                className="inline-flex h-12 items-center rounded-md bg-foreground/[0.07] px-6 text-[15px] hover:bg-foreground/[0.12]"
-              >
-                Download the whole archive
-              </a>
-            </div>
-            <p className="mt-5 text-[14px] text-muted">
-              {CORPUS_SUMMARY.files} files, {CORPUS_SUMMARY.words.toLocaleString()} words,
-              as plain Markdown and CSV. Share it, quote it with attribution, hand it to
-              an AI and ask it to check the findings against the sources.{" "}
-              <a href="/why" className="underline underline-offset-4">
-                Why &ldquo;Invisible Ships&rdquo;
-              </a>
-              .
-            </p>
-          </div>
-        </section>
 
       </main>
 
