@@ -59,10 +59,29 @@ export default function IntlLineChart({
   const X = (y: number) => padL + ((y - x0) / (x1 - x0)) * (W - padL - padR);
   const Y = (v: number) => padT + (1 - v / vMax) * (H - padT - padB);
 
+  // Sean, 1 September: the break-ins chart's vertical axis was "all stacked on
+  // each other, and it's illegible."
+  //
+  // It was. The old rule was `vMax > 20 ? 10 : vMax > 8 ? 5 : 2` — a step
+  // written for suicide rates in the twenties, where a step of 10 gives three
+  // gridlines. Burglary is police-recorded offences per 100,000 and tops out at
+  // 573.7, so the same rule stepped by 10 from zero to 608: SIXTY-ONE
+  // gridlines and sixty-one labels, printed on top of one another.
+  //
+  // A fixed step cannot serve a component whose charts range from single-digit
+  // homicide rates to offences in the hundreds. This is the same 1/2/5 x 10^n
+  // rule DetentionChart already uses to span a 65,000-person detention chart
+  // and a 7,300,000-person incarceration one: pick the smallest of those steps
+  // that yields at most ~5 gridlines, whatever the magnitude.
+  //
+  // Burglary now draws 0/200/400/600. Homicide is unchanged at 0/10/20/30 —
+  // the fix costs the charts that were already fine nothing.
   const yTicks = useMemo(() => {
-    const step = vMax > 20 ? 10 : vMax > 8 ? 5 : 2;
-    const out = [];
-    for (let t = 0; t <= vMax; t += step) out.push(t);
+    const raw = vMax / 5;
+    const mag = Math.pow(10, Math.floor(Math.log10(Math.max(raw, 1e-9))));
+    const step = [1, 2, 5, 10].map((m) => m * mag).find((c) => c >= raw) ?? mag * 10;
+    const out: number[] = [];
+    for (let t = 0; t <= vMax; t += step) out.push(Number(t.toFixed(6)));
     return out;
   }, [vMax]);
 
