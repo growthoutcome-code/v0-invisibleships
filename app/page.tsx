@@ -352,27 +352,25 @@ export default function Page() {
               more than speech, and a section that only quotes talk describes
               half of what he says is happening.
 
-              THE LABELLING IS THE WHOLE JOB HERE. These are physical
-              experiences reported by one person and referred to in statements —
-              testimony twice over, diagnosed by nobody, connected to no
-              mechanism this archive can demonstrate. So they are written as
-              reports, never as effects, and no sentence puts a cause beside a
-              symptom.
+              ONE SENTENCE, THEN A LINK (Sean, 4 September). This block used to
+              carry two paragraphs qualifying what the symptoms do and do not
+              establish. Both were true and both are now in the disclaimer,
+              under "What this archive does not establish". The rule is the
+              same one applied to the home page on 30 August: the caveat is
+              never deleted, it is moved to the one document that is
+              maintained, and the page carries a single line to it. A page
+              that argues with an imaginary critic in every section reads as
+              defensive, and the reader stops believing the parts that are
+              load-bearing.
 
-              ONE DOCUMENTED ANCHOR, and it is a good one. Long-range acoustic
-              devices are commercial products sold to police forces, and in
-              Edrei v. Maguire (2018) the Second Circuit held that using one
-              against people can constitute excessive force. That establishes
-              that a sound weapon exists, is deployed, and has been found
-              injurious by a federal appeals court. It establishes nothing about
-              this record, and the copy says so.
+              WHAT STAYS ON THE PAGE: the report itself, and the one documented
+              anchor with its citation — Edrei v. Maguire is an adjudicated
+              public record and belongs in the open, not behind a modal. What
+              it does and does not establish is reasoning, and reasoning goes
+              to the disclaimer.
 
-              SEAN'S QUESTION IS THE POINT, and it has a real answer: nobody
-              counts. Harassment has no offence code, stalking is folded into
-              intimidation, and no agency records a person reporting these
-              experiences. His question turns out to be the archive's own
-              structural finding, which is a stronger place to end than any
-              number would have been. */}
+              THE DOCTOR LINE ALSO STAYS, and is not protective language. It is
+              the most useful sentence here for anyone it applies to. */}
           <div className="mt-16 max-w-3xl">
             <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
               Reported alongside it
@@ -381,18 +379,14 @@ export default function Page() {
               A day is not only what was said. The author reports physical experience during
               these events &mdash; gastrointestinal distress, pressure and ringing in the
               ears, disrupted sleep, skin and eye irritation &mdash; and statements in the
-              transcripts refer to the same things, sometimes before he does. All of it is
-              testimony: reported by one person, diagnosed by nobody, and connected to no
-              mechanism this archive can demonstrate.
+              transcripts refer to the same things, sometimes before he does.
             </p>
             <p className="body-copy mt-4 text-[17px] leading-relaxed text-foreground/85">
-              One instrument in that vocabulary is neither theoretical nor rare. Long-range
-              acoustic devices are commercial products sold to police forces and navies, and
-              in 2018 a federal appeals court held that using one against people can
-              constitute excessive force. That establishes that a sound weapon exists, is
-              deployed, and has injured people. It establishes nothing about this record.
+              Long-range acoustic devices are commercial products sold to police forces and
+              navies, and in 2018 a federal appeals court held that using one against people
+              can constitute excessive force.
             </p>
-            <p className="mt-3">
+            <p className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2">
               <a
                 href="https://www.courthousenews.com/second-circuit-gets-loud-with-nypd-on-sound-cannons/"
                 target="_blank"
@@ -401,6 +395,14 @@ export default function Page() {
               >
                 Edrei v. Maguire, US Court of Appeals for the Second Circuit, 2018
               </a>
+              <DisclaimerDialog>
+                <button
+                  type="button"
+                  className="text-[13px] text-muted underline underline-offset-4 hover:text-foreground"
+                >
+                  What this establishes, and what it does not
+                </button>
+              </DisclaimerDialog>
             </p>
 
             <p className="font-display mt-12 text-[21px] font-semibold leading-snug text-foreground sm:text-[25px]">

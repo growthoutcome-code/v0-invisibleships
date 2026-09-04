@@ -8,7 +8,7 @@ supersedes: [IS_META_copyright.md, IS_META_disclaimer.md]
 source: lib/terms.ts (the same source the website renders)
 generated_by: scripts/export_terms_md.mjs
 section_count: 8
-word_count: 1893
+word_count: 2110
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
@@ -64,6 +64,14 @@ Denver, Colorado is where this record was kept. Other cities are named in the tr
 The speakers hedge in their own words. One transcript reads *“Seattle’s been suggested, Portland’s been suggested, Los Angeles has been suggested”*; another reads *“the problem seems local to Denver but Cincinnati has been mentioned recently.”* The record’s most cautious reading is inside the record.
 
 *The transcripts are a small fraction of what was heard — a sample, not a census. That cuts both ways: no count here measures how often anything was said, and a place’s absence from these pages is not evidence it was never named.*
+
+### On physical symptoms reported alongside the record
+
+The author reports physical experience during these events — gastrointestinal distress, pressure and ringing in the ears, disrupted sleep, skin and eye irritation — and statements in the transcripts refer to the same things, sometimes before he does. All of it is **testimony twice over**: reported by one person, referred to by unidentified speakers, diagnosed by nobody. No sentence on this site places a cause beside a symptom, because this archive can demonstrate no mechanism that would connect them.
+
+One instrument named in that vocabulary is neither theoretical nor rare. Long-range acoustic devices are commercial products sold to police forces and navies, and in *Edrei v. Maguire* (2018) the US Court of Appeals for the Second Circuit held that using one against people can constitute excessive force. That establishes that a sound weapon exists, is deployed, and has been found injurious by a federal appeals court. **It establishes nothing about this record.** A documented device and an undocumented experience sitting on the same page do not corroborate one another.
+
+*If you are experiencing any of this, it is worth seeing a doctor. These symptoms have ordinary causes too, and those causes are treatable. That is not a hedge — it is the most useful sentence on the page for anyone it applies to.*
 
 ## How the research data was gathered
 
