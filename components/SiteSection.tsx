@@ -49,7 +49,12 @@ export default function SiteSection({
       className={cn("relative isolate overflow-hidden", id && "scroll-mt-24")}
     >
       {motif && <SectionMotif name={motif} />}
-      <div className="relative z-10 w-full px-5 py-20 sm:px-8 lg:px-[200px]">
+      {/* Sean, 5 September: "we don't need a ton of negative space, but we do
+          need some top and bottom between each section." 80px each side was
+          generous when sections were long essays; the journal section is now a
+          quotation and a way in, and the gap was doing more work than the
+          content between it. 56px on a phone, 72 from sm up. */}
+      <div className="relative z-10 w-full px-5 py-14 sm:px-8 sm:py-[72px] lg:px-[200px]">
         <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
           {eyebrow}
         </p>
@@ -58,10 +63,10 @@ export default function SiteSection({
         </h2>
         {meta && <p className="mt-4 text-[15px] text-muted">{meta}</p>}
 
-        {children && <div className="mt-14">{children}</div>}
+        {children && <div className="mt-10">{children}</div>}
 
         {(actions.length > 0 || aside) && (
-          <div className="mt-14 flex flex-wrap items-center gap-4">
+          <div className="mt-10 flex flex-wrap items-center gap-4">
             {actions.map((a) => (
               <a
                 key={a.href}

@@ -3,20 +3,33 @@
 /**
  * The journal section's entries, as quotations you slide through.
  *
- * Sean: get rid of the cards underneath, bump the text, "we just wanna slide
- * through entries." So the carousel IS the entry now. Each slide is one day of
- * the record, set as a quotation; moving to the next slide moves back through
- * the archive rather than to a link to it.
+ * Sean: "we just wanna slide through entries." So the carousel IS the entry —
+ * each slide is one moment from the record, set as a quotation.
  *
- * NEWEST FIRST, NOTHING CHOSEN. Date order straight out of the corpus. The
- * front page shows where the record stands, and nobody picks which face it
- * shows.
+ * CURATED, NOT CHRONOLOGICAL (Sean, 5 September). This used to show the five
+ * newest entries, which is an arbitrary selection that happened to be whatever
+ * was written last. Thirteen chosen moments now run in an arc: the first day,
+ * the speakers noticing they are being written down, the mechanism they let
+ * slip, the tactic and what it costs, the process named, and the future those
+ * same voices describe. See lib/home-quotes.ts for what was excluded and why.
+ *
+ * IT ROTATES ON ITS OWN (Sean, same day): "people might not see all of these
+ * slides, but with the auto rotate going, let's make sure that is going." Seven
+ * seconds a slide, looping, and it stops the moment a reader touches it or
+ * hovers — advancing a quotation out from under someone who is reading it is
+ * worse than never advancing at all. Under prefers-reduced-motion it does not
+ * autoplay, full stop.
+ *
+ * TWO WAYS OUT OF EVERY SLIDE, also his: this entry, or the whole journal. A
+ * reader who is gripped by one moment and a reader who wants the archive are
+ * two different people, and the slide should not have to guess which it has.
  *
  * The opening quote mark hangs in the left margin rather than sitting inline,
  * so every slide keeps a straight left edge and the mark reads as a mark on the
  * page instead of a character in the first sentence.
  */
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Autoplay from "embla-carousel-autoplay";
 import {
   Carousel,
   CarouselContent,
@@ -39,6 +52,17 @@ export default function JournalQuotes({ entries }: { entries: JournalQuote[] }) 
   const [api, setApi] = useState<CarouselApi>();
   const [i, setI] = useState(0);
 
+  // Built once. Re-creating the plugin on every render restarts the timer, so
+  // the carousel would either never advance or advance twice.
+  const autoplay = useRef(
+    Autoplay({ delay: 7000, stopOnInteraction: true, stopOnMouseEnter: true })
+  );
+
+  const [reduced, setReduced] = useState(false);
+  useEffect(() => {
+    setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }, []);
+
   useEffect(() => {
     if (!api) return;
     const on = () => setI(api.selectedScrollSnap());
@@ -47,22 +71,31 @@ export default function JournalQuotes({ entries }: { entries: JournalQuote[] }) 
     return () => { api.off("select", on); };
   }, [api]);
 
+  useEffect(() => {
+    if (reduced) autoplay.current.stop();
+  }, [reduced]);
+
   if (!entries.length) return null;
 
   return (
     <div>
-      <Carousel setApi={setApi} opts={{ align: "start", loop: false }} aria-label="Journal entries">
+      <Carousel
+        setApi={setApi}
+        opts={{ align: "start", loop: true }}
+        plugins={reduced ? [] : [autoplay.current]}
+        aria-label="Journal entries"
+      >
         <CarouselContent>
-          {entries.map((e, n) => (
+          {entries.map((e) => (
             <CarouselItem key={e.id} className="basis-full">
-              <figure className="m-0 flex min-h-[240px] flex-col sm:min-h-[260px]">
+              <figure className="m-0 flex min-h-[260px] flex-col sm:min-h-[280px]">
                 <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
-                  {n === 0 ? "The last entry" : "Entry"} · {longDate(e.date)}
+                  {longDate(e.date)}
                   {e.location ? ` · ${e.location}` : ""}
                   {e.hasAudio ? " · audio" : ""}
                 </p>
 
-                <blockquote className="relative m-0 mt-8 pl-9 sm:pl-16">
+                <blockquote className="relative m-0 mt-7 pl-9 sm:pl-16">
                   <span
                     aria-hidden
                     className="font-serif absolute left-0 top-[-0.2em] select-none text-[60px] leading-none text-foreground/25 sm:text-[96px]"
@@ -71,14 +104,23 @@ export default function JournalQuotes({ entries }: { entries: JournalQuote[] }) 
                   </span>
                   <EntryProse
                     body={e.body}
-                    limit={420}
-                    className="font-serif text-[22px] leading-[1.6] text-foreground sm:text-[27px] sm:leading-[1.55]"
+                    limit={460}
+                    className="font-serif text-[21px] leading-[1.55] text-foreground sm:text-[25px] sm:leading-[1.5]"
                   />
                 </blockquote>
 
-                <figcaption className="mt-auto pt-8 pl-9 text-[15px] sm:pl-16">
+                {e.note && (
+                  <p className="mt-5 pl-9 text-[14px] leading-relaxed text-muted sm:pl-16">
+                    {e.note}
+                  </p>
+                )}
+
+                <figcaption className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-2 pt-7 pl-9 text-[15px] sm:pl-16">
                   <a href={`/journal/${e.id}`} className="text-foreground underline underline-offset-4">
-                    Read the full entry
+                    Read this entry
+                  </a>
+                  <a href="/journal" className="text-muted underline underline-offset-4 hover:text-foreground">
+                    Go to the journal
                   </a>
                 </figcaption>
               </figure>
@@ -93,12 +135,12 @@ export default function JournalQuotes({ entries }: { entries: JournalQuote[] }) 
         <CarouselNext className="-top-10 right-0 translate-y-0" />
       </Carousel>
 
-      <div className="mt-8 flex items-center gap-2">
+      <div className="mt-7 flex flex-wrap items-center gap-2">
         {entries.map((e, n) => (
           <button
             key={e.id}
             type="button"
-            onClick={() => api?.scrollTo(n)}
+            onClick={() => { autoplay.current.stop(); api?.scrollTo(n); }}
             aria-label={`Entry ${n + 1} of ${entries.length}`}
             aria-current={n === i}
             className={`h-1.5 transition-all ${n === i ? "w-7 bg-foreground" : "w-2.5 bg-foreground/20 hover:bg-foreground/40"}`}

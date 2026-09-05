@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 import { DisclaimerDialog } from "@/components/LegalDialogs";
 import SiteSection, { Figure } from "@/components/SiteSection";
+import { MotifStage } from "@/components/SectionMotif";
 import { ChevronDown } from "lucide-react";
 import GateAnimation from "@/components/GateAnimation";
 import Header from "@/components/Header";
@@ -320,10 +321,16 @@ export default function Page() {
              ============================================================ */}
 
         {/* ------------------------------------------- 2 · what it looks like */}
+        {/* NO SECTION-LEVEL MOTIF HERE (Sean, 5 September): "I want that
+            animation, these motifs to be directly behind the journal entry."
+            At section scale the wavefronts washed the whole block, including
+            the heading and the actions. Behind the carousel they sit under the
+            quotation itself — which is also what `carry` was drawn for: sound
+            leaving a source and crossing a street, under the words that were
+            heard crossing it. */}
         <SiteSection
           id="record"
           eyebrow="Journal"
-          motif="carry"
           heading="What does one day of it look like?"
           meta={
             <>
@@ -345,12 +352,14 @@ export default function Page() {
             </DisclaimerDialog>
           }
         >
-          <p className="body-copy mb-10 text-[19px] leading-relaxed text-foreground/85">
+          <p className="body-copy mb-8 text-[19px] leading-relaxed text-foreground/85">
             Subjective and qualitative accounts of the bullhorn surveillance system
             experience in Denver, Colorado &mdash; written down as they were heard, and
             left unsmoothed.
           </p>
-          <JournalQuotes entries={entries} />
+          <MotifStage name="carry" className="-mx-4 px-4 py-6 sm:-mx-8 sm:px-8">
+            <JournalQuotes entries={entries} />
+          </MotifStage>
 
           {/* CUT TO THE QUOTATIONS (Sean, 4 September): "let's get rid of all
               of the other disclaimer copy, including how many citizens are

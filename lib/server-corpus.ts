@@ -231,6 +231,8 @@ export type JournalQuote = {
   location: string | null;
   hasAudio: boolean;
   body: string;
+  /** One line of editorial context. Empty for the uncurated feed quotes. */
+  note?: string;
 };
 
 export function journalQuotes(count = 8): JournalQuote[] {
@@ -280,10 +282,38 @@ export function curatedQuotes(picks: HomeQuotePick[]): JournalQuote[] {
     const quoteAt = Math.max(body.lastIndexOf("\u201c", at), body.lastIndexOf('"', at));
     const from = quoteAt >= 0 && at - quoteAt < 200 ? quoteAt : body.lastIndexOf("\n", at) + 1;
     let cut = body.slice(from, from + pick.chars);
-    // Trim back to the last closing quotation mark, so no slide ends on half a
-    // line or on a dangling speaker tag.
-    const close = Math.max(cut.lastIndexOf("\u201d"), cut.lastIndexOf('"'));
-    if (close > 40) cut = cut.slice(0, close + 1);
+    // End on a sentence, not on whatever character the budget landed on.
+    // A straight " is ambiguous — opening and closing look identical — so
+    // cutting at the last one used to leave slides ending on a dangling
+    // opening quote. Match punctuation FOLLOWED by a quote instead, which only
+    // ever closes.
+    // Three fallbacks, in order of how clean the ending is:
+    //   1. punctuation + closing quote  — a quoted sentence, the common case
+    //   2. a bare closing curly quote   — a quote with no terminal punctuation
+    //   3. a sentence end               — for prose entries that are not quotes
+    // The floor is 24 rather than 40 because several of the strongest lines in
+    // the corpus are shorter than forty characters.
+    const at24 = (i: number) => i > 24;
+    const quoted = [...cut.matchAll(/[.?!\u2026]["\u201d]/g)];
+    const lastQuoted = quoted[quoted.length - 1];
+    const curly = cut.lastIndexOf("\u201d");
+    const sentences = [...cut.matchAll(/[.?!\u2026](\s|$)/g)];
+    const lastSentence = sentences[sentences.length - 1];
+    if (lastQuoted && at24(lastQuoted.index ?? 0)) {
+      cut = cut.slice(0, (lastQuoted.index ?? 0) + 2);
+    } else if (at24(curly)) {
+      cut = cut.slice(0, curly + 1);
+    } else if (lastSentence && at24(lastSentence.index ?? 0)) {
+      cut = cut.slice(0, (lastSentence.index ?? 0) + 1);
+    }
+    // Strip the transcript timecodes — [00:04:25], [ 8m33s ], (17:08). They are
+    // load-bearing inside an entry, where a reader is checking a recording
+    // against its transcript, and pure noise on a home page slide. Stripping
+    // here rather than in the corpus keeps the record itself untouched.
+    cut = cut
+      .replace(/\s*[[(]\s*\d{1,2}(?:[:m]\d{1,2}){1,2}s?\s*[\])]/g, "")
+      .replace(/[ \t]+\n/g, "\n")
+      .replace(/\n{3,}/g, "\n\n");
     if (!d.entry_date) {
       throw new Error(`home quote: ${pick.id} has no entry_date`);
     }
@@ -294,6 +324,7 @@ export function curatedQuotes(picks: HomeQuotePick[]): JournalQuote[] {
       location: d.location ?? null,
       hasAudio: Boolean(d.audio_url || d.audio_file),
       body: cut.trim(),
+      note: pick.note,
     };
   });
 }
