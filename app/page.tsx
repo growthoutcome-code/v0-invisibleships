@@ -13,6 +13,7 @@ import { GLOSSARY_PICKS } from "@/lib/home-picks";
 import { CRIME_FIGURES, HEALTH_FIGURES } from "@/lib/home-data-sections";
 import { curatedQuotes, homeGlossary, journalStats } from "@/lib/server-corpus";
 import { HOME_QUOTES } from "@/lib/home-quotes";
+import { ACCOUNTS_READY } from "@/lib/flags";
 import { govCloud, usd } from "@/lib/server-data";
 
 /**
@@ -332,6 +333,9 @@ export default function Page() {
           }
           actions={[
             { href: "/journal", label: "Go to the journal", primary: true },
+            ...(ACCOUNTS_READY
+              ? [{ href: "/contribute", label: "Contribute to the journal" }]
+              : []),
           ]}
           aside={
             <DisclaimerDialog>
@@ -693,9 +697,14 @@ export default function Page() {
           motif="room"
           heading="What can you do?"
           meta={`${CORPUS_SUMMARY.files} files · ${CORPUS_SUMMARY.words.toLocaleString()} words · plain Markdown and CSV`}
-          actions={[
-            { href: "/api/corpus?from=home", label: "Download the whole archive", primary: true },
-          ]}
+          actions={
+            ACCOUNTS_READY
+              ? [
+                  { href: "/contribute", label: "Add your own account", primary: true },
+                  { href: "/api/corpus?from=home", label: "Download the whole archive" },
+                ]
+              : [{ href: "/api/corpus?from=home", label: "Download the whole archive", primary: true }]
+          }
           aside={
             <a href="/why" className="text-[14px] text-muted underline underline-offset-4 hover:text-foreground">
               Why &ldquo;Invisible Ships&rdquo;

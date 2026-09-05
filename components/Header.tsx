@@ -35,6 +35,7 @@ import { Menu, X, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ExportModal from "@/components/ExportModal";
 import ThemeToggle from "@/components/ThemeToggle";
+import { ACCOUNTS_READY } from "@/lib/flags";
 
 export type Tab = "journal" | "glossary" | "documents" | "data" | "concepts" | "author" | "disclaimer";
 
@@ -127,6 +128,19 @@ export default function Header({
             >
               <Download size={15} /> Export
             </Button>
+            {/* CONTRIBUTE, NOT SIGN UP. The word says what the account is FOR —
+                everyone knows what signing up is, nobody knows what signing up
+                HERE gets them. Kept in the source and switched off at
+                lib/flags.ts rather than deleted, because the moment accounts
+                ship this is the call to action again. */}
+            {ACCOUNTS_READY && (
+              <a
+                href="/contribute"
+                className="font-display inline-flex h-9 items-center rounded-md bg-foreground px-4 text-[12px] font-medium uppercase tracking-[0.14em] text-background"
+              >
+                Contribute
+              </a>
+            )}
           </div>
 
           <div className="flex items-center gap-1 lg:hidden">
@@ -152,6 +166,14 @@ export default function Header({
           >
             <Download size={15} /> Export
           </button>
+          {ACCOUNTS_READY && (
+            <a
+              href="/contribute"
+              className="font-display mt-2 inline-flex h-10 items-center justify-center rounded-md bg-foreground px-4 text-[12px] font-medium uppercase tracking-[0.14em] text-background"
+            >
+              Contribute
+            </a>
+          )}
         </div>
       )}
 

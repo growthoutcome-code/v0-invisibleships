@@ -24,6 +24,7 @@
  * their position in the archive to read the terms.
  */
 import Link from "next/link";
+import { ACCOUNTS_READY } from "@/lib/flags";
 import { DisclaimerDialog, SafetyDialog } from "@/components/LegalDialogs";
 import { DATA_SECTIONS } from "@/lib/routes";
 
@@ -56,7 +57,7 @@ const COLUMNS: { heading: string; links: { t?: NavTab; href: string; label: stri
     links: [
       { t: "author", href: "/author", label: "The author" },
       { href: "/why", label: "Why “Invisible Ships”" },
-      { href: "/contribute", label: "Contribute an account" },
+      ...(ACCOUNTS_READY ? [{ href: "/contribute", label: "Contribute an account" }] : []),
     ],
   },
 ];
