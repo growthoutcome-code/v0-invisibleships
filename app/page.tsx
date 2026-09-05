@@ -331,7 +331,11 @@ export default function Page() {
         <SiteSection
           id="record"
           eyebrow="Journal"
-          heading="What does one day of it look like?"
+          {/* "sound", not "look" (Sean picked this on 5 September). The record
+              is speech — thirteen slides of people talking, and the only thing
+              a reader can do with it is listen. A one-word change, and it stops
+              the section promising something visual that never arrives. */}
+          heading="What does one day of it sound like?"
           meta={
             <>
               {stats.days} dated days · {stats.recordings} audio-linked recordings ·{" "}
