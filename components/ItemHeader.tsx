@@ -4,10 +4,25 @@
 import Link from "next/link";
 import ThemeToggle from "@/components/ThemeToggle";
 
+// MUST MATCH components/Header.tsx (Sean, 5 September: "in one state I find
+// that only journal glossary and documents are present, and it needs to be all
+// five menu options"). This list had three entries while the shared header had
+// five, so every standalone item route — /journal/[id] and /glossary/[slug] —
+// showed a different menu from the rest of the site. "Journal" also pointed at
+// "/" rather than "/journal", which on this branch lands a reader on the gate
+// instead of the feed.
+//
+// THE REAL FIX IS ONE HEADER, NOT TWO IN STEP. Item routes render ItemHeader
+// and the SPA shell renders Header, so any nav change has to be made twice and
+// nothing catches it when it is not. That consolidation belongs on `homepage`,
+// where Header is already the single site header. This keeps the two in step
+// in the meantime.
 const NAV: { href: string; label: string }[] = [
-  { href: "/", label: "Journal" },
+  { href: "/journal", label: "Journal" },
   { href: "/glossary", label: "Glossary" },
   { href: "/documents", label: "Documents" },
+  { href: "/data", label: "Research" },
+  { href: "/concepts", label: "Concepts" },
 ];
 
 export default function ItemHeader() {
