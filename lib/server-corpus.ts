@@ -1,6 +1,7 @@
 // Server-only corpus reader. Reads the bundled JSON corpus from public/corpus
 // at build/request time (fs) so item routes can statically generate pages and
 // emit per-item preview metadata. Memoized so all pages share one parse.
+import type { HomeQuotePick } from "@/lib/home-quotes";
 import fs from "fs";
 import path from "path";
 import type { Doc, GlossaryTerm } from "./types";
@@ -249,6 +250,52 @@ export function journalQuotes(count = 8): JournalQuote[] {
     });
   }
   return out;
+}
+
+/**
+ * The curated home-page quotations, cut from the live corpus.
+ *
+ * The build FAILS if an anchor no longer matches its document — see
+ * lib/home-quotes.ts for why that is the point rather than an inconvenience.
+ * A quotation that cannot be located in the entry it cites must never render.
+ */
+export function curatedQuotes(picks: HomeQuotePick[]): JournalQuote[] {
+  const L = load();
+  return picks.map((pick) => {
+    const d = L.byId.get(pick.id.toLowerCase());
+    if (!d) {
+      throw new Error(`home quote: no journal document with id ${pick.id}`);
+    }
+    const body = d.body_markdown || "";
+    const at = body.indexOf(pick.anchor);
+    if (at < 0) {
+      throw new Error(
+        `home quote: anchor ${JSON.stringify(pick.anchor)} no longer appears in ${pick.id}. ` +
+          `The entry was edited. Re-cut the anchor in lib/home-quotes.ts.`
+      );
+    }
+    // Open on the speaker's own quotation mark. Falling back to the start of
+    // the line puts whatever preamble shares that line in front of the quote,
+    // which buries the line that actually lands.
+    const quoteAt = Math.max(body.lastIndexOf("\u201c", at), body.lastIndexOf('"', at));
+    const from = quoteAt >= 0 && at - quoteAt < 200 ? quoteAt : body.lastIndexOf("\n", at) + 1;
+    let cut = body.slice(from, from + pick.chars);
+    // Trim back to the last closing quotation mark, so no slide ends on half a
+    // line or on a dangling speaker tag.
+    const close = Math.max(cut.lastIndexOf("\u201d"), cut.lastIndexOf('"'));
+    if (close > 40) cut = cut.slice(0, close + 1);
+    if (!d.entry_date) {
+      throw new Error(`home quote: ${pick.id} has no entry_date`);
+    }
+    return {
+      id: d.id.toLowerCase(),
+      date: d.entry_date,
+      weekday: d.weekday ?? null,
+      location: d.location ?? null,
+      hasAudio: Boolean(d.audio_url || d.audio_file),
+      body: cut.trim(),
+    };
+  });
 }
 
 /** Glossary terms with a usable one-line summary, for the home page strip. */

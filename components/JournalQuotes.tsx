@@ -55,7 +55,7 @@ export default function JournalQuotes({ entries }: { entries: JournalQuote[] }) 
         <CarouselContent>
           {entries.map((e, n) => (
             <CarouselItem key={e.id} className="basis-full">
-              <figure className="m-0 flex min-h-[420px] flex-col sm:min-h-[460px]">
+              <figure className="m-0 flex min-h-[240px] flex-col sm:min-h-[260px]">
                 <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
                   {n === 0 ? "The last entry" : "Entry"} · {longDate(e.date)}
                   {e.location ? ` · ${e.location}` : ""}
@@ -71,7 +71,7 @@ export default function JournalQuotes({ entries }: { entries: JournalQuote[] }) 
                   </span>
                   <EntryProse
                     body={e.body}
-                    limit={380}
+                    limit={420}
                     className="font-serif text-[22px] leading-[1.6] text-foreground sm:text-[27px] sm:leading-[1.55]"
                   />
                 </blockquote>

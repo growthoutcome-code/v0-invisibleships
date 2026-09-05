@@ -11,7 +11,8 @@ import { CORPUS_SUMMARY } from "@/lib/corpus-summary";
 import JournalQuotes from "@/components/JournalQuotes";
 import { GLOSSARY_PICKS } from "@/lib/home-picks";
 import { CRIME_FIGURES, HEALTH_FIGURES } from "@/lib/home-data-sections";
-import { homeGlossary, journalQuotes, journalStats } from "@/lib/server-corpus";
+import { curatedQuotes, homeGlossary, journalStats } from "@/lib/server-corpus";
+import { HOME_QUOTES } from "@/lib/home-quotes";
 import { govCloud, usd } from "@/lib/server-data";
 
 /**
@@ -169,7 +170,7 @@ const CITY_QUOTES: { date: string; id: string; text: string }[] = [
 export default function Page() {
   const stats = journalStats();
 
-  const entries = journalQuotes(8);
+  const entries = curatedQuotes(HOME_QUOTES);
   const gc = govCloud();
   const euFine = FINDINGS.find((f) => f.id === "fined-in-europe-hired-in-america");
 
@@ -331,7 +332,6 @@ export default function Page() {
           }
           actions={[
             { href: "/journal", label: "Go to the journal", primary: true },
-            { href: "/contribute", label: "Contribute to the journal" },
           ]}
           aside={
             <DisclaimerDialog>
@@ -348,86 +348,28 @@ export default function Page() {
           </p>
           <JournalQuotes entries={entries} />
 
-          {/* WHAT ELSE A DAY CONTAINS (Sean, 1 September). The entries record
-              more than speech, and a section that only quotes talk describes
-              half of what he says is happening.
+          {/* CUT TO THE QUOTATIONS (Sean, 4 September): "let's get rid of all
+              of the other disclaimer copy, including how many citizens are
+              going through this. Let's remove that. We can talk about how many
+              citizens are going through this in the journal area of the
+              website, not the home page."
 
-              ONE SENTENCE, THEN A LINK (Sean, 4 September). This block used to
-              carry two paragraphs qualifying what the symptoms do and do not
-              establish. Both were true and both are now in the disclaimer,
-              under "What this archive does not establish". The rule is the
-              same one applied to the home page on 30 August: the caveat is
-              never deleted, it is moved to the one document that is
-              maintained, and the page carries a single line to it. A page
-              that argues with an imaginary critic in every section reads as
-              defensive, and the reader stops believing the parts that are
-              load-bearing.
+              WHAT LEFT, AND WHERE IT WENT. The physical-symptoms paragraph and
+              the Edrei v. Maguire reasoning are in the disclaimer under "What
+              this archive does not establish" — moved on 4 September, not
+              deleted. "How many citizens are going through this?" is a real
+              finding (nobody counts: harassment has no offence code, stalking
+              folds into intimidation) and belongs where a reader has already
+              decided to engage — the journal and /data/crime — not in front of
+              someone deciding whether to keep scrolling.
 
-              WHAT STAYS ON THE PAGE: the report itself, and the one documented
-              anchor with its citation — Edrei v. Maguire is an adjudicated
-              public record and belongs in the open, not behind a modal. What
-              it does and does not establish is reasoning, and reasoning goes
-              to the disclaimer.
+              WHAT IS LEFT IS THE POINT: one sentence saying what the journal
+              is, four quotations, and a way in. The section is now roughly
+              half its former height.
 
-              THE DOCTOR LINE ALSO STAYS, and is not protective language. It is
-              the most useful sentence here for anyone it applies to. */}
-          <div className="mt-16 max-w-3xl">
-            <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
-              Reported alongside it
-            </p>
-            <p className="body-copy mt-4 text-[17px] leading-relaxed text-foreground/85">
-              A day is not only what was said. The author reports physical experience during
-              these events &mdash; gastrointestinal distress, pressure and ringing in the
-              ears, disrupted sleep, skin and eye irritation &mdash; and statements in the
-              transcripts refer to the same things, sometimes before he does.
-            </p>
-            <p className="body-copy mt-4 text-[17px] leading-relaxed text-foreground/85">
-              Long-range acoustic devices are commercial products sold to police forces and
-              navies, and in 2018 a federal appeals court held that using one against people
-              can constitute excessive force.
-            </p>
-            <p className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2">
-              <a
-                href="https://www.courthousenews.com/second-circuit-gets-loud-with-nypd-on-sound-cannons/"
-                target="_blank"
-                rel="noreferrer noopener"
-                className="text-[13px] text-muted underline underline-offset-4 hover:text-foreground"
-              >
-                Edrei v. Maguire, US Court of Appeals for the Second Circuit, 2018
-              </a>
-              <DisclaimerDialog>
-                <button
-                  type="button"
-                  className="text-[13px] text-muted underline underline-offset-4 hover:text-foreground"
-                >
-                  What this establishes, and what it does not
-                </button>
-              </DisclaimerDialog>
-            </p>
-
-            <p className="font-display mt-12 text-[21px] font-semibold leading-snug text-foreground sm:text-[25px]">
-              How many citizens are going through this?
-            </p>
-            <p className="body-copy mt-4 text-[17px] leading-relaxed text-foreground/85">
-              There is no answer, and the absence is the finding. Harassment has no offence
-              code in the federal system. Stalking is folded into intimidation. No agency
-              counts a person reporting these experiences at all, so the number could be one
-              or it could be very many &mdash; and nothing on this site, or anywhere we have
-              looked, can tell you which.
-            </p>
-            <p className="mt-4">
-              <a href="/data/crime" className="text-[15px] text-foreground underline underline-offset-4">
-                What nobody counts
-              </a>
-            </p>
-
-            {/* Not a hedge. Somebody reading this who has these symptoms should
-                see a doctor, and most of these have ordinary treatable causes. */}
-            <p className="mt-8 text-[14px] leading-relaxed text-muted">
-              If you are experiencing any of this, it is worth seeing a doctor. These
-              symptoms have ordinary causes too, and those causes are treatable.
-            </p>
-          </div>
+              The single line to the disclaimer is the `aside` on SiteSection
+              above — "How to read the journal". That is the whole caveat
+              surface for this section, by design. */}
         </SiteSection>
 
         {/* ------------------------------------------------- 3 · who bought it */}
@@ -738,14 +680,21 @@ export default function Page() {
         </SiteSection>
 
         {/* --------------------------------------------- 6 · what you can do */}
+        {/* NO ACCOUNT BUTTON UNTIL THERE ARE ACCOUNTS (Sean, 4 September):
+            "we don't have user's registration done." Sign-up lives on the
+            `capture` branch and is unfinished, so nothing in production may
+            advertise it. The download becomes the primary action here for
+            the same reason it did in the header — it is the one thing this
+            site can actually hand a visitor today. The invitation in the
+            copy below stands on its own; /contribute remains as a page and
+            gets its button back the day accounts ship. */}
         <SiteSection
           eyebrow="Contribute"
           motif="room"
           heading="What can you do?"
           meta={`${CORPUS_SUMMARY.files} files · ${CORPUS_SUMMARY.words.toLocaleString()} words · plain Markdown and CSV`}
           actions={[
-            { href: "/contribute", label: "Add your own account", primary: true },
-            { href: "/api/corpus?from=home", label: "Download the whole archive" },
+            { href: "/api/corpus?from=home", label: "Download the whole archive", primary: true },
           ]}
           aside={
             <a href="/why" className="text-[14px] text-muted underline underline-offset-4 hover:text-foreground">

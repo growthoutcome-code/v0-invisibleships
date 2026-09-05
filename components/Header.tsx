@@ -113,27 +113,20 @@ export default function Header({
         <div className="flex flex-1 items-center justify-end gap-2">
           <div className="hidden items-center gap-2 lg:flex">
             <ThemeToggle />
+            {/* EXPORT IS THE PRIMARY ACTION NOW (Sean, 4 September). Contribute
+                was the solid button and it promised an account that does not
+                exist yet — accounts are unfinished on `capture`, so production
+                must not advertise them. The corpus download is the one thing
+                this site can actually give a visitor today, so it takes the
+                primary slot beside the light/dark toggle. /contribute still
+                exists as a page; nothing links to it from the chrome. */}
             <Button
-              variant="outline"
               size="sm"
               onClick={() => setExportOpen(true)}
               className="font-display text-[12px] uppercase tracking-[0.14em]"
             >
               <Download size={15} /> Export
             </Button>
-            {/* CONTRIBUTE, NOT SIGN UP. It is the sign-up call to action and it
-                will carry the account form the moment accounts open. The word
-                stays "Contribute" because it says what the account is FOR —
-                everyone knows what signing up is, nobody knows what signing up
-                HERE gets them — and because the button must not promise a form
-                that does not exist yet. The people this is aimed at are the
-                least tolerant of a bait-and-switch there are. */}
-            <a
-              href="/contribute"
-              className="font-display inline-flex h-9 items-center rounded-md bg-foreground px-4 text-[12px] font-medium uppercase tracking-[0.14em] text-background"
-            >
-              Contribute
-            </a>
           </div>
 
           <div className="flex items-center gap-1 lg:hidden">
@@ -159,12 +152,6 @@ export default function Header({
           >
             <Download size={15} /> Export
           </button>
-          <a
-            href="/contribute"
-            className="font-display mt-2 inline-flex h-10 items-center justify-center rounded-md bg-foreground px-4 text-[12px] font-medium uppercase tracking-[0.14em] text-background"
-          >
-            Contribute
-          </a>
         </div>
       )}
 
