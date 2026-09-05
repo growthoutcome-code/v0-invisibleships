@@ -55,7 +55,12 @@ export default function SiteSection({
           quotation and a way in, and the gap was doing more work than the
           content between it. 56px on a phone, 72 from sm up. */}
       <div className="relative z-10 w-full px-5 py-14 sm:px-8 sm:py-[72px] lg:px-[200px]">
-        <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
+        {/* Sean, 5 September: "we've got the word journal in very small type… at
+          least sixteen pixels on desktop." The eyebrow names the section and was
+          set smaller than the meta line under the heading, which inverted the
+          hierarchy — the label a reader uses to know where they are was the
+          quietest thing in the block. */}
+        <p className="m-0 font-display text-[14px] uppercase tracking-[0.14em] text-muted sm:text-[16px]">
           {eyebrow}
         </p>
         <h2 className="font-display m-0 mt-3 text-[26px] font-semibold leading-[1.25] text-foreground sm:text-[34px]">

@@ -293,7 +293,8 @@ export function curatedQuotes(picks: HomeQuotePick[]): JournalQuote[] {
     //   3. a sentence end               — for prose entries that are not quotes
     // The floor is 24 rather than 40 because several of the strongest lines in
     // the corpus are shorter than forty characters.
-    const at24 = (i: number) => i > 24;
+    const floor = Math.max(24, pick.min ?? 24);
+    const at24 = (i: number) => i > floor;
     const quoted = [...cut.matchAll(/[.?!\u2026]["\u201d]/g)];
     const lastQuoted = quoted[quoted.length - 1];
     const curly = cut.lastIndexOf("\u201d");

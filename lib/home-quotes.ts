@@ -38,6 +38,10 @@ export type HomeQuotePick = {
   /** Characters to take from the opening quotation mark. Trimmed back to the
    *  last closing mark so a slide never ends mid-sentence. */
   chars: number;
+  /** Do not end the excerpt before this many characters. Without it the
+   *  boundary rule stops at the first closing quote, which on a slide whose
+   *  opening line is a short quotation leaves one line where two were wanted. */
+  min?: number;
   /** One line under the quote saying why this one is here. */
   note: string;
 };
@@ -49,7 +53,8 @@ export const HOME_QUOTES: HomeQuotePick[] = [
     // Comments block written specifically to sit under an accusation.
     id: "IS-J01-20250227-ENTRY",
     anchor: "This is a terrorist attack on America",
-    chars: 60,
+    chars: 300,
+    min: 240,
     note: "The first entry in the record.",
   },
 
@@ -93,7 +98,7 @@ export const HOME_QUOTES: HomeQuotePick[] = [
   {
     id: "IS-J01-20250717-R02",
     anchor: "Make them look like a crazy person",
-    chars: 60,
+    chars: 130,
     note: "The objective, stated plainly.",
   },
   {
@@ -105,7 +110,7 @@ export const HOME_QUOTES: HomeQuotePick[] = [
   {
     id: "IS-J02-20250924-R01",
     anchor: "destroyed this person's reputation in the city of Denver",
-    chars: 70,
+    chars: 230,
     note: "First person plural. The outcome, described by the people producing it.",
   },
 
@@ -113,7 +118,7 @@ export const HOME_QUOTES: HomeQuotePick[] = [
   {
     id: "IS-J04-20251119-R05",
     anchor: "have become muscle memory",
-    chars: 340,
+    chars: 430,
     note: "Diving, described in the first person. The glossary definition, performed.",
   },
 
@@ -121,19 +126,19 @@ export const HOME_QUOTES: HomeQuotePick[] = [
   {
     id: "IS-J02-20250928-R05",
     anchor: "mother of all police brutality events",
-    chars: 300,
+    chars: 415,
     note: "This archive is not an argument against law enforcement.",
   },
   {
     id: "IS-J04-20251206-R03",
     anchor: "stand in defense of law enforcement 200%",
-    chars: 200,
+    chars: 285,
     note: "Said after ten months of it, and still said.",
   },
   {
     id: "IS-J02-20250823-R01",
     anchor: "imagine this with me for a moment",
-    chars: 220,
+    chars: 250,
     note: "Consent first. The future the same voices describe.",
   },
 ];

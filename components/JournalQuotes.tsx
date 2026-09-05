@@ -128,14 +128,16 @@ export default function JournalQuotes({ entries }: { entries: JournalQuote[] }) 
           ))}
         </CarouselContent>
 
-        {/* Above the quote on desktop so the arrows never sit over the text or
-            in the gutter; inline under it on a phone, where there is no margin
-            to put them in. */}
-        <CarouselPrevious className="-top-10 left-auto right-11 translate-y-0" />
-        <CarouselNext className="-top-10 right-0 translate-y-0" />
-      </Carousel>
-
+      {/* ARROWS LIVE IN THE CONTROL ROW (Sean, 5 September: "I don't see a way
+          to do next and back"). They used to be absolutely positioned at
+          -top-10, hanging above the carousel — which worked until the carousel
+          moved inside MotifStage, whose overflow-hidden clipped them clean off
+          the page. Anything positioned outside its own container is one layout
+          change away from vanishing, so they now sit in normal flow beside the
+          dots, where nothing can crop them. */}
       <div className="mt-7 flex flex-wrap items-center gap-2">
+        <CarouselPrevious className="static mr-1 h-9 w-9 translate-y-0" />
+        <CarouselNext className="static mr-3 h-9 w-9 translate-y-0" />
         {entries.map((e, n) => (
           <button
             key={e.id}
@@ -150,6 +152,7 @@ export default function JournalQuotes({ entries }: { entries: JournalQuote[] }) 
           {i + 1} / {entries.length}
         </span>
       </div>
+      </Carousel>
     </div>
   );
 }
