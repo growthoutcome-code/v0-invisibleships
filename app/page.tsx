@@ -321,7 +321,12 @@ export default function Page() {
              ============================================================ */}
 
         {/* ------------------------------------------- 2 · what it looks like */}
-        {/* NO SECTION-LEVEL MOTIF HERE (Sean, 5 September): "I want that
+        {/* "SOUND", NOT "LOOK" (Sean, 5 September). The record is speech —
+            thirteen slides of people talking, and the only thing a reader can
+            do with it is listen. "Look like" promised something visual the
+            section never delivers.
+
+            NO SECTION-LEVEL MOTIF HERE (Sean, 5 September): "I want that
             animation, these motifs to be directly behind the journal entry."
             At section scale the wavefronts washed the whole block, including
             the heading and the actions. Behind the carousel they sit under the
@@ -331,10 +336,6 @@ export default function Page() {
         <SiteSection
           id="record"
           eyebrow="Journal"
-          {/* "sound", not "look" (Sean picked this on 5 September). The record
-              is speech — thirteen slides of people talking, and the only thing
-              a reader can do with it is listen. A one-word change, and it stops
-              the section promising something visual that never arrives. */}
           heading="What does one day of it sound like?"
           meta={
             <>
