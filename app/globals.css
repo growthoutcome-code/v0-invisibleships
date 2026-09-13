@@ -108,8 +108,49 @@ body {
 }
 .scroll-hint { animation: scroll-hint 2s ease-in-out infinite; }
 
+/* INDETERMINATE PROCESSING (components/Processing.tsx).
+   Sean, 10 September: "we need a processing state for loading the corpus...
+   let's build an animation that is an indeterminate processing state that we
+   can use that is desktop and mobile friendly."
+
+   Indeterminate on purpose. The corpus arrives as sixteen JSON shards and the
+   browser cannot know how many are in flight, so a percentage would be a lie
+   and a spinner says only "wait". A bar that sweeps says "something is moving",
+   which is the one true thing there is to say.
+
+   Two sweeps out of phase: the leader crosses fast and the trailer follows,
+   which is what stops a single bar from reading as a stalled loop on a slow
+   connection. Percentages, not pixels, so it fits a 320px phone and a 1600px
+   desktop from the same rule.
+
+   The track is currentColor at low alpha, so the bar inherits whatever text
+   colour it is placed in and needs no theme handling of its own. */
+@keyframes proc-lead {
+  0%   { left: -35%; right: 100%; }
+  60%  { left: 100%;  right: -90%; }
+  100% { left: 100%;  right: -90%; }
+}
+@keyframes proc-trail {
+  0%   { left: -100%; right: 100%; }
+  60%  { left: 107%;  right: -8%; }
+  100% { left: 107%;  right: -8%; }
+}
+.proc-bar { position: relative; overflow: hidden; }
+.proc-bar::before,
+.proc-bar::after {
+  content: ""; position: absolute; top: 0; bottom: 0;
+  background: rgb(var(--accent));
+}
+.proc-bar::before { animation: proc-lead  2.1s cubic-bezier(.65,.815,.735,.395) infinite; }
+.proc-bar::after  { animation: proc-trail 2.1s cubic-bezier(.165,.84,.44,1) 1.15s infinite; }
+
 @media (prefers-reduced-motion: reduce) {
   .gate-anim .ga-scene { animation: none !important; }
+  /* No sweep. A third of the track, held still, so the element still reads as
+     "in progress" rather than disappearing for the readers who asked for less
+     motion - and the live region still announces it either way. */
+  .proc-bar::before { animation: none !important; left: 0; right: 66%; }
+  .proc-bar::after  { animation: none !important; display: none; }
   .gate-anim .ga-sq { opacity: 1; } /* hold the final scene statically */
   /* The arrow still points down and still works; it simply stops moving. */
   .scroll-hint { animation: none !important; }

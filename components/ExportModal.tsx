@@ -23,13 +23,25 @@ const approx = (n: number) =>
 
 export default function ExportModal({ open, onOpenChange }: { open: boolean; onOpenChange: (o: boolean) => void }) {
   const c = CORPUS_SUMMARY;
+  /* WHY A PAGE COUNT AND NOT A WORD COUNT. Sean, 10 September: "it is very
+     important that people understand downloading it is meant to provide them
+     with the opportunity to analyse the transcripts." Nobody has a feel for
+     945,000 words. Everybody has a feel for two thousand pages, and for the
+     fact that they are not going to read two thousand pages. That is the
+     sentence that turns a download into a reason. Derived at 450 words to the
+     page and rounded to the nearest hundred, like every other number here. */
+  const pages = Math.round(c.words / 450 / 100) * 100;
+  const journalFiles = c.folders.find((f) => f.key === "journal")?.markdown ?? 0;
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       {/* xl: this is the one modal with tabular content, so it earns the widest
         * step. Height bounding and the pinned footer now come from the primitive. */}
       <DialogContent size="xl">
         <DialogHeader>
-          <DialogTitle>Export the corpus</DialogTitle>
+          {/* Matches the button that opened it (EXPORT_LABEL, "Transcripts"). A
+              dialog whose title renames the thing you just clicked reads as a
+              different destination. */}
+          <DialogTitle>Download the transcripts</DialogTitle>
         </DialogHeader>
 
         <DialogBody>
@@ -40,6 +52,18 @@ export default function ExportModal({ open, onOpenChange }: { open: boolean; onO
             assistant: every file opens with a metadata header and holds one
             coherent unit, so a single file still identifies itself when pasted
             into a chat on its own.
+          </p>
+
+          <p className="body-copy text-foreground/80">
+            It is here so you can check the record instead of taking this
+            site&rsquo;s word for it. The journal folder alone holds{" "}
+            <strong>{journalFiles} files</strong> of dated entries and verbatim
+            transcripts, and the archive as a whole runs to roughly{" "}
+            <strong>{pages.toLocaleString()} printed pages</strong> &mdash; more
+            than anyone works through by hand. Hand the zip to an AI assistant and
+            ask it to search the transcripts, check the findings on this site
+            against the sources shipped beside them, and argue with the
+            conclusions.
           </p>
 
           <div className="grid sm:grid-cols-2 gap-x-6 gap-y-px rounded border border-border p-px text-sm">

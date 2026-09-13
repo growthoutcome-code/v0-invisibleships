@@ -37,7 +37,7 @@ const COLUMNS: { heading: string; links: { t?: NavTab; href: string; label: stri
       { t: "journal", href: "/journal", label: "Journal" },
       { t: "glossary", href: "/glossary", label: "Glossary" },
       { t: "documents", href: "/documents", label: "Documents" },
-      { href: "/api/corpus?from=footer", label: "Download the corpus" },
+      { href: "/api/corpus?from=footer", label: "Download the transcripts" },
     ],
   },
   {

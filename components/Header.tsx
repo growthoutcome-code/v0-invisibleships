@@ -25,15 +25,19 @@
  * equal width whatever they contain, so adding a second button on the right
  * does not shove the nav off-centre.
  *
- * WHY THE RIGHT-HAND BUTTONS ARE THESE TWO. Export is the corpus — the thing
- * this archive most wants a serious reader to take away — and it opens the
- * dialog that explains what is in it rather than firing a bare download.
+ * WHY THE RIGHT-HAND BUTTONS ARE THESE TWO. The download is the corpus — the
+ * thing this archive most wants a serious reader to take away — and it opens
+ * the dialog that explains what is in it rather than firing a bare zip. It was
+ * labelled "Export" until 10 September; the word describes what an owner does
+ * to their own data, not what a visitor does here, and it did not match the
+ * button further down the page. Both now read from EXPORT_LABEL.
  * Contribute is the sign-up: see the note on its label below.
  */
 import { useState } from "react";
 import { Menu, X, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ExportModal from "@/components/ExportModal";
+import { EXPORT_LABEL } from "@/components/ExportButton";
 import ThemeToggle from "@/components/ThemeToggle";
 import { ACCOUNTS_READY } from "@/lib/flags";
 
@@ -126,7 +130,15 @@ export default function Header({
               onClick={() => setExportOpen(true)}
               className="font-display text-[12px] uppercase tracking-[0.14em]"
             >
-              <Download size={15} /> Export
+              {/* ONE LABEL, TWO PLACES (Sean, 10 September): "export might seem
+                  a bit vague… it needs to be shorter, and it needs to be
+                  consistent." EXPORT_LABEL is the same string the Contribute
+                  section's button carries, beside the same icon, so a reader who
+                  saw it down the page recognises it up here. At one word it
+                  needs no responsive collapse — the earlier attempt showed a
+                  different label between 1024 and 1280, which is the opposite of
+                  what was asked for. */}
+              <Download size={15} /> {EXPORT_LABEL}
             </Button>
             {/* CONTRIBUTE, NOT SIGN UP. The word says what the account is FOR —
                 everyone knows what signing up is, nobody knows what signing up
@@ -164,7 +176,7 @@ export default function Header({
             onClick={() => { setExportOpen(true); setOpen(false); }}
             className="font-display inline-flex items-center gap-1.5 px-2.5 py-1.5 text-left text-[12px] font-medium uppercase tracking-[0.14em] text-muted hover:text-foreground"
           >
-            <Download size={15} /> Export
+            <Download size={15} /> {EXPORT_LABEL}
           </button>
           {ACCOUNTS_READY && (
             <a

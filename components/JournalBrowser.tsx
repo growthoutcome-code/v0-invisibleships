@@ -18,7 +18,7 @@ import { ChevronLeft, ChevronRight, Volume2, List } from "lucide-react";
 import CopyrightTerms from "@/components/CopyrightTerms";
 import ShareMenu from "@/components/ShareMenu";
 import { Transcript } from "@/components/Transcript";
-import { cleanTerm, cleanDef, splitDef } from "@/lib/glossary-format";
+import { cleanTerm, cleanDef, splitDef, firstSentences } from "@/lib/glossary-format";
 import GlossaryBody from "@/components/GlossaryBody";
 import GlossaryIllustration from "@/components/GlossaryIllustration";
 import { DOCUMENTS, AUTHOR, EXTRA_GLOSSARY } from "@/lib/site-content";
@@ -27,6 +27,7 @@ import PageActions, { SortMenu, type SortDir } from "@/components/PageActions";
 import DataView, { type SubTab } from "@/components/DataView";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
+import Processing from "@/components/Processing";
 
 const journalHref = (id: string) => `/journal/${id.toLowerCase()}`;
 const glossaryHref = (slug: string) => `/glossary/${slug.toLowerCase()}`;
@@ -65,16 +66,6 @@ function excerpt(md: string): string {
 
 // First N sentences of a string (falls back to the whole text if it has no
 // sentence punctuation). Used to cap the glossary peek at 2 sentences.
-function firstSentences(text: string, n = 2): string {
-  // Strip any leading dictionary-style ":" and collapse whitespace.
-  const clean = (text || "").replace(/^[\s:]+/, "").trim();
-  const matches = clean.match(/[^.!?]+[.!?]+(\s|$)/g);
-  const out = (matches ? matches.slice(0, n).join(" ").replace(/\s+/g, " ").trim() : clean) || clean;
-  // Hard char cap so definitions with no early period (colon-delimited entries)
-  // can't overflow the card.
-  return out.length > 220 ? out.slice(0, 220).trim() + "…" : out;
-}
-
 export default function JournalBrowser({
   initialTab = "journal",
   initialSub,
@@ -285,7 +276,7 @@ export default function JournalBrowser({
           />
         )}
         {loading ? (
-          <div className="text-muted text-center py-20">Loading corpus…</div>
+          <Processing label="Loading the archive" />
         ) : tab === "glossary" ? (
           <GlossarySection terms={glossaryTerms} gcat={gcat} setGcat={setGcat} gsel={gsel} setGsel={setGsel} />
         ) : tab === "documents" ? (
@@ -462,7 +453,7 @@ function Reader({ doc, body, bodyLoading, cats, gloss, onBack, onPrev, onNext }:
         {doc.source_url && <> · <a className="text-accent underline" href={doc.source_url} target="_blank" rel="noreferrer">source ↗</a></>}
       </div>
       {gloss.length > 0 && <div className="text-xs text-muted mb-5">Glossary: {gloss.map(cap).join(", ")}</div>}
-      {bodyLoading ? <div className="text-muted text-sm">Loading…</div> : <Transcript md={body} />}
+      {bodyLoading ? <Processing label="Opening the transcript" variant="inline" /> : <Transcript md={body} />}
       <div className="flex gap-3 mt-12 pt-6">
         {onPrev ? <button onClick={onPrev} className="text-accent text-sm inline-flex items-center gap-1"><ChevronLeft size={15} /> Previous</button> : <span />}
         {onNext && <button onClick={onNext} className="text-accent text-sm ml-auto inline-flex items-center gap-1">Next <ChevronRight size={15} /></button>}

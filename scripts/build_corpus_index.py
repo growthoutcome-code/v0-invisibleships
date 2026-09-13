@@ -196,6 +196,27 @@ def build_index(names: list) -> str:
         return len([x for x in names if x.startswith(prefix) and x.endswith(suffix)])
 
     total = len([x for x in names if not x.endswith("/")])
+
+    # The basis tiers, counted out of the concept frontmatter in the zip that
+    # actually ships. This line is where the fifth stale-prose failure lived:
+    # it told a reader they could reject every `pattern` entry months after that
+    # tier emptied out and `testimony` opened, and check_download_matches_site's
+    # empty-tier guard could not see it because that guard reads concept files
+    # and this one is at the root. State the RULE, which cannot go stale, and
+    # count the tiers, which are read from the archive rather than remembered.
+    tiers = {}
+    with zipfile.ZipFile(ZIP) as z:
+        for n in names:
+            if not (n.startswith("concepts/IS_CON_") and n.endswith(".md")):
+                continue
+            if "IS_CON_00_" in n:
+                continue
+            m = re.search(r"^basis:\s*(\w+)",
+                          z.read(n).decode("utf8", "replace"), re.M)
+            if m:
+                tiers[m.group(1)] = tiers.get(m.group(1), 0) + 1
+    basis_line = " · ".join(f"{t} {c}" for t, c in
+                            sorted(tiers.items(), key=lambda kv: (-kv[1], kv[0])))
     return f"""# Invisible Ships — start here
 
 *Generated {date.today().isoformat()} · {total} files*
@@ -208,7 +229,7 @@ header and holds one coherent unit — a journal day, one recording's transcript
 one chart's findings, one concept — so a single file still identifies itself when
 pasted into a chat on its own.
 
-**Nobody can upload 800 files at once.** Do not try. Pick the folder that answers
+**Nobody can upload {total} files at once.** Do not try. Pick the folder that answers
 your question; each is sized to fit.
 
 ## Where to start, by question
@@ -227,9 +248,11 @@ your question; each is sized to fit.
 
 ## The folders
 
-- **`concepts/`** — the archive's arguments, each labelled with its BASIS
-  (documented / structural / pattern) and ORIGIN (ai / author). *A reader who
-  rejects every `pattern` entry can still rely on every `documented` one.*
+- **`concepts/`** — the archive's arguments, each labelled with a BASIS
+  ({basis_line}), an ORIGIN (ai / author), a THEME, and the readers it was
+  written for. *The tiers are ranked and never blended inside a single concept:
+  a reader who accepts only `documented` entries can rely on every one of those
+  and discard the rest without unpicking anything.*
 - **`journal/`** — the primary record: dated entries and verbatim transcripts.
 - **`references/`** — the analysis and reference documents, chunked by section.
 - **`crime/`, `public-health/`, `government-cloud/`** — site-produced research.

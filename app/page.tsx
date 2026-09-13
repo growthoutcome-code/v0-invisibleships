@@ -1,21 +1,24 @@
 import type { Metadata } from "next";
 import Footer from "@/components/Footer";
-import { DisclaimerDialog } from "@/components/LegalDialogs";
+import { DisclaimerDialog, SafetyDialog } from "@/components/LegalDialogs";
 import SiteSection, { Figure } from "@/components/SiteSection";
 import { MotifStage } from "@/components/SectionMotif";
 import { ChevronDown } from "lucide-react";
 import GateAnimation from "@/components/GateAnimation";
 import Header from "@/components/Header";
+import ExportButton from "@/components/ExportButton";
 import HomeCarousel, { type Slide } from "@/components/HomeCarousel";
+import HomeSuicideChart from "@/components/HomeSuicideChart";
 import { CONCEPTS, FINDINGS, SOURCE_YEARS } from "@/lib/concepts";
-import { CORPUS_SUMMARY } from "@/lib/corpus-summary";
 import JournalQuotes from "@/components/JournalQuotes";
-import { GLOSSARY_PICKS } from "@/lib/home-picks";
-import { CRIME_FIGURES, HEALTH_FIGURES } from "@/lib/home-data-sections";
-import { curatedQuotes, homeGlossary, journalStats } from "@/lib/server-corpus";
+import { CONCEPT_PICKS, GLOSSARY_PICKS } from "@/lib/home-picks";
+import { firstSentences } from "@/lib/glossary-format";
+import { CRIME_FIGURES } from "@/lib/home-data-sections";
+import { curatedQuotes, glossaryCount, homeGlossary, journalStats } from "@/lib/server-corpus";
 import { HOME_QUOTES } from "@/lib/home-quotes";
 import { ACCOUNTS_READY } from "@/lib/flags";
-import { govCloud, usd } from "@/lib/server-data";
+import { capabilityShape, deploymentMix, govCloud, suicideChartDoc, topVendors, usd } from "@/lib/server-data";
+import type { IntlChart } from "@/components/SuicideChart";
 
 /**
  * The home page.
@@ -60,12 +63,12 @@ export const metadata: Metadata = {
   // carries its question mark with it, which an assertion never would.
   title: "Has a neurotech terrorist attack happened?",
   description:
-    "Is there a government cloud platform — anywhere — running a risk-mitigation layer that could do what Zersetzung did: isolate and discredit a person without ever arresting them? Would any public record show it? And why, while the world's suicide rate fell 27%, did the United States rise 40% and South Korea 83%?",
+    "Is there a government cloud platform anywhere running a Zersetzung German disintegration tactics layer that is isolating and discrediting a person without ever arresting them? Are those people being harassed through neurotechnology and forced to accept euthanasia? Are they being experimented on without consent by an unacknowledged union of approximately two hundred unknown organizations?",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Has a neurotech terrorist attack happened?",
     description:
-      "Is there a government cloud platform running a risk-mitigation layer that could do what Zersetzung did — and would any public record show it?",
+      "Is there a government cloud platform anywhere running a Zersetzung German disintegration tactics layer that is isolating and discrediting a person without ever arresting them? Are those people being harassed through neurotechnology and forced to accept euthanasia? Are they being experimented on without consent by an unacknowledged union of approximately two hundred unknown organizations?",
     images: ["/og-default.png"],
   },
 };
@@ -106,8 +109,67 @@ export const metadata: Metadata = {
  * a layer could be pointed at a person the way Zersetzung was — and that is a
  * question, not a finding.
  *
- * THE SUICIDE FIGURES, AND WHY NOT THE ONES SEAN ASKED FOR. He asked for
- * "America has a 36% increase, and South Korea has a 105% increase."
+ * WHAT THE SUBLINE SAYS NOW (Sean, 8 September). It was "a risk-mitigation
+ * layer that COULD DO what Zersetzung did: isolate and discredit a person
+ * without ever arresting them" — conditional, and vaguer than the record it
+ * introduces. It now names what the archive actually describes, in the present
+ * tense: neurotechnological experimentation and communication without consent,
+ * demanding obedience, and for those who disobey, harassment and pressure to
+ * accept euthanasia.
+ *
+ * THE THIRD QUESTION, LABELLED (Sean's standing rule 2: mark what he says as
+ * backed by the corpus or not). Two halves, two answers.
+ *
+ * "Unacknowledged union" — BACKED. It is the record's own word, in 24 documents.
+ * "a union that includes countries like India and other Middle Eastern
+ * countries, China"; "rotating groups of observers, a union"; "a so-called union
+ * in the Middle East, including China, India".
+ *
+ * "Approximately two hundred unknown organizations" — NOT BACKED, and Sean said
+ * so himself on 9 September: "I don't name a hundred and sixty organizations…
+ * this is just a subjective statement based on bullhorn statements." No corpus
+ * passage pairs a count near 200 with organisations, agencies or entities.
+ * AUTHOR EXPERIENCE AND SPECULATION, and it must never be re-labelled.
+ *
+ * It is NOT the procurement register's count and must never be conflated with
+ * it: that register names 107 vendors and 53 distinct government buyers — 160
+ * organisations, all of them known and published. An earlier draft of this line
+ * derived 160 and said "organisations this record names", which was a different
+ * and much smaller claim wearing the same words. "Unknown" is the load-bearing
+ * word in Sean's version and is why the two cannot be swapped.
+ *
+ * THE EUTHANASIA CLAUSE IS THE SERIOUS ONE, so it was checked before it was
+ * written. 122 of the 712 corpus documents mention euthanasia; 39 carry a
+ * coercion construction. IS-J01-20250711-R01 is explicit and sustained: "When
+ * they ask me to accept euthanasia, they sound compelling." "Their words are an
+ * attempt to compel me to describe how euthanasia is valuable to me as a
+ * homeless person, as a person being tormented." "So, this person is never
+ * going to accept this euthanasia." "Yes, because we believe Euthanasia is
+ * ethical." This is testimony, not verification — but it is not a stray line
+ * either, and understating it in the hero misdescribed the archive.
+ *
+ * IT IS STILL A QUESTION, AND THAT IS THE WHOLE PROTECTION.
+ * claude/landing-page-rule-and-section-order.md warns that an unverified claim
+ * in the H1 makes the site's own framing the one place the archive breaks its
+ * rule. A question does not make the claim; it asks whether the thing is
+ * happening and points at what would answer it. Every clause here stays inside
+ * the question mark, and "would any public record show it?" is what turns the
+ * whole sentence into an investigation rather than an accusation.
+ *
+ * THE SAFETY NOTICE IS NOW ONE CLICK FROM THE HERO. The sitewide content
+ * warning is dismissible per session; once dismissed, a reader meeting the word
+ * euthanasia in the first paragraph had no route to help from this screen. It
+ * sits beside "How to read this archive" now.
+ *
+ * THE SUICIDE PAIR LEFT THE HERO, and did not go missing. Consolidating to one
+ * paragraph of the same length meant losing something, and those figures are
+ * now stated outright on the chart itself — "Suicide is rising in the United
+ * States and South Korea" — where they are drawn rather than merely asserted.
+ *
+ * THE SUICIDE FIGURES, AND WHY NOT THE ONES SEAN ASKED FOR (kept for the record,
+ * since the same trap will come back the next time these numbers are quoted).
+ * He asked for "America has a 36% increase, and South Korea has a 105%
+ * increase."
  *
  * Those are real and they are on this site — but they are the pair the site
  * tells readers NOT to put beside each other. HealthSignals' "Which figure to
@@ -174,18 +236,61 @@ export default function Page() {
 
   const entries = curatedQuotes(HOME_QUOTES);
   const gc = govCloud();
+  const suicide = suicideChartDoc() as IntlChart;
+  const vendors = topVendors(4);
+  const cap = capabilityShape();
+  const mix = deploymentMix();
+  const glossaryTerms = glossaryCount();
   const euFine = FINDINGS.find((f) => f.id === "fined-in-europe-hired-in-america");
 
+  /* THE PRONUNCIATION GOES WHERE A DICTIONARY PUTS IT — above the word, not
+     beside it. splitDef has always computed it and the site had nowhere to show
+     it; a slide whose title IS the term is that place. Terms without one fall
+     back to the section label rather than rendering an empty line. */
   const glossarySlides: Slide[] = homeGlossary(GLOSSARY_PICKS).map((g) => ({
     href: `/glossary/${g.slug}`,
-    eyebrow: "Glossary",
+    eyebrow: g.pron || "Glossary",
     title: g.term,
     body: g.summary,
     cta: "Full definition and every entry that uses it",
   }));
+
+
+  /* CONCEPT SLIDES, DERIVED. Same discipline as the quotations and the chart:
+     an id that stops resolving fails the build rather than quietly rendering a
+     four-slide carousel nobody notices is short. Bodies run 313-2,004 characters
+     in the register, so they are cut to three complete sentences for a slide —
+     the full concept is one click away. */
+  const conceptSlides: Slide[] = CONCEPT_PICKS.map((id) => {
+    const c = CONCEPTS.find((x) => x.id === id);
+    if (!c) {
+      throw new Error(
+        `home concepts: no concept with id ${JSON.stringify(id)} in lib/concepts.ts. ` +
+          `Re-pick it in lib/home-picks.ts.`
+      );
+    }
+    return {
+      href: `/concepts#${c.id}`,
+      eyebrow: `${c.basis} · ${c.theme}`,
+      title: c.title,
+      // FIVE SENTENCES AT 840. Each raise here was forced by a slide stopping
+      // one sentence before its point: at three, the newspapers concept ended on
+      // "Local journalism in the United States has collapsed" and left the 3,500
+      // closed papers behind it; at four and 520, the haunting concept stopped
+      // after naming what is described and dropped the sentence saying what the
+      // terror is FOR — 805 characters, five over the cap. A concept slide that
+      // asserts and then withholds its own payoff is worse than no slide.
+      // 900, and only slide two moves: at 840 the prevention concept lost its
+      // closing sentence by thirty characters — the one saying a system
+      // justified by the worst thing that could happen to your child cannot be
+      // argued with. Every other slide is unchanged between 840 and 900.
+      body: firstSentences(c.body, 5, 900),
+      cta: "Read the concept",
+    };
+  });
+
   const sourcesWithUrl = SOURCE_YEARS.filter((s) => s.url).length;
   const earliest = Math.min(...SOURCE_YEARS.map((s) => s.year));
-  const conceptTitles = CONCEPTS.slice(0, 6);
 
   return (
     <>
@@ -226,31 +331,39 @@ export default function Page() {
                 {HERO.question}
               </h1>
 
-              {/* ONE PARAGRAPH, three questions, no line breaks (Sean, 1 Sept).
-                  The figures are the WHO age-standardised pair — see the note on
-                  HERO for why these and not the ones off the chart's end
-                  labels. */}
+              {/* ONE PARAGRAPH, TWO QUESTIONS, no line breaks. It carried three
+                  and a pair of percentages until 8 September; the suicide figures
+                  moved onto the chart that draws them. See the note on HERO for
+                  what this says now and why every clause of it stays inside a
+                  question mark. */}
               <p className="mt-6 font-serif text-lg leading-snug text-foreground/85">
-                Is there a government cloud platform &mdash; anywhere &mdash; running a
-                risk-mitigation layer that could do what{" "}
+                Is there a government cloud platform anywhere running a{" "}
                 <a
                   href="/glossary/zersetzung-tactics"
                   className="text-foreground underline underline-offset-4"
                 >
                   Zersetzung
                 </a>{" "}
-                did: isolate and discredit a person without ever arresting them? Would any
-                public record show it? And why, while the world&rsquo;s suicide rate fell
-                27%, did the United States rise 40% and South Korea 83%?
+                German disintegration tactics layer that is isolating and discrediting a
+                person without ever arresting them? Are those people being harassed
+                through neurotechnology and forced to accept euthanasia? Are they being
+                experimented on without consent by an unacknowledged union of
+                approximately two hundred unknown organizations?
               </p>
 
-              <p className="mt-6 text-[13px] leading-relaxed text-foreground/70">
+              <p className="mt-6 text-[16px] leading-relaxed text-foreground/70">
                 <DisclaimerDialog>
                   <button type="button" className="underline underline-offset-4">
                     How to read this archive
                   </button>
                 </DisclaimerDialog>{" "}
-                &mdash; what it rests on, and what it does not establish.
+                &mdash; what it rests on, and what it does not establish.{" "}
+                <SafetyDialog>
+                  <button type="button" className="underline underline-offset-4">
+                    Safety notice
+                  </button>
+                </SafetyDialog>
+                .
               </p>
             </div>
 
@@ -259,7 +372,7 @@ export default function Page() {
                 derived, never typed. */}
             <div className="mt-8 max-w-md">
               <div className="h-1.5 w-6 bg-accent" aria-hidden />
-              <p className="m-0 pt-4 text-xs text-muted">
+              <p className="m-0 pt-4 text-[15px] text-muted">
                 {stats.days} dated days · {stats.recordings} audio-linked recordings ·{" "}
                 {SOURCE_YEARS.length} sourced findings
               </p>
@@ -287,7 +400,7 @@ export default function Page() {
             aria-label="Skip to the record"
             className="absolute inset-x-0 bottom-6 z-10 mx-auto hidden w-max flex-col items-center gap-1.5 text-muted transition-colors hover:text-foreground md:flex"
           >
-            <span className="font-display text-[11px] uppercase tracking-[0.14em]">
+            <span className="font-display text-[15px] uppercase tracking-[0.14em]">
               The record
             </span>
             <ChevronDown className="scroll-hint" size={20} aria-hidden />
@@ -321,8 +434,28 @@ export default function Page() {
              ============================================================ */}
 
         {/* ------------------------------------------- 2 · what it looks like */}
-        {/* "SOUND", NOT "LOOK" (Sean, 5 September). The record is speech —
-            thirteen slides of people talking, and the only thing a reader can
+        {/* NAME THE THING (Sean, 8 September): "change the headline to what does
+            the neurotech harassment sound like. Let's be more specific." The
+            heading was "What does one day of it sound like?" — and "it" had no
+            antecedent for anyone who had not already read the hero.
+
+            AND THEN "UNVERIFIED" SOLVED IT (Sean, later the same day): "call it
+            unverified statements from the neurotech bullhorn." The earlier draft
+            — "What does the neurotech harassment sound like?" — was the one
+            heading on the page asserting the subject rather than asking about
+            it, while the hero deliberately asks "HAS a neurotech terrorist
+            attack happened?". One word fixes it. The heading now labels the
+            testimony AS testimony, which is the archive's whole discipline, and
+            it still tells a stranger exactly what they are looking at.
+
+            It is not a question, and it is the only section heading that is not.
+            That is a deliberate departure from Concept B: a label that says
+            "unverified" does the scan test's job better here than a question
+            would, because the thing a reader most needs to know about this
+            section is its evidentiary status.
+
+            "SOUND", NOT "LOOK" (Sean, 5 September). The record is speech —
+            five slides of people talking, and the only thing a reader can
             do with it is listen. "Look like" promised something visual the
             section never delivers.
 
@@ -336,7 +469,7 @@ export default function Page() {
         <SiteSection
           id="record"
           eyebrow="Journal"
-          heading="What does one day of it sound like?"
+          heading="Unverified statements from the neurotech bullhorn"
           meta={
             <>
               {stats.days} dated days · {stats.recordings} audio-linked recordings ·{" "}
@@ -351,16 +484,30 @@ export default function Page() {
           ]}
           aside={
             <DisclaimerDialog>
-              <button type="button" className="text-[14px] text-muted underline underline-offset-4 hover:text-foreground">
+              <button type="button" className="text-[16px] text-muted underline underline-offset-4 hover:text-foreground">
                 How to read the journal
               </button>
             </DisclaimerDialog>
           }
         >
-          <p className="body-copy mb-8 text-[19px] leading-relaxed text-foreground/85">
-            Subjective and qualitative accounts of the bullhorn surveillance system
-            experience in Denver, Colorado &mdash; written down as they were heard, and
-            left unsmoothed.
+          {/* Shrunk from the section lead size (Sean, 8 September: "you can
+              probably shrink this line here a little bit") — the quotations are
+              what this section is for, and this line only has to say what they
+              are before getting out of their way.
+
+              THE LAST SENTENCE IS A QUESTION, and deliberately conditional.
+              Sean: "it's a government cloud surveillance system, but whose
+              government cloud is it?" The archive does not establish that a
+              government cloud is running any of this — that is the open question
+              the whole site is organised around — so asserting it here would
+              break the one rule that makes the rest credible. Phrased as "if…
+              whose", it asks his question without answering one the record
+              cannot, and it hands the reader straight to the next section, which
+              is about who bought what. */}
+          <p className="body-copy measure mb-8 text-[20px] leading-relaxed text-foreground/85">
+            Subjective and qualitative accounts of the bullhorn surveillance system,
+            in Denver, Colorado &mdash; written down as they were heard, and left
+            unsmoothed. If a government cloud is running it, whose is it?
           </p>
           <MotifStage name="carry" className="-mx-4 px-4 py-6 sm:-mx-8 sm:px-8">
             <JournalQuotes entries={entries} />
@@ -391,37 +538,126 @@ export default function Page() {
         </SiteSection>
 
         {/* ------------------------------------------------- 3 · who bought it */}
+        {/* "What is go to the register?" (Sean, 8 September) — exactly the
+            question a label should never provoke. The figure links said "Go to
+            the register" while the button said "Go to government cloud": two
+            names for one destination. One button now, named for what it opens. */}
         <SiteSection
           eyebrow="Government cloud"
           motif="ledger"
-          heading="Who bought the systems, and for how much?"
+          heading="What is a government cloud?"
           meta={
             <>
               {gc.awards} awards · {gc.vendors} vendors · {gc.deployments} deployments ·{" "}
               {gc.regulations} regulations · {gc.sources} sources
             </>
           }
-          actions={[{ href: "/data/government-cloud", label: "Go to government cloud", primary: true }]}
+          actions={[{ href: "/data/government-cloud", label: "Go to the government cloud research", primary: true }]}
           aside={
             <DisclaimerDialog>
-              <button type="button" className="text-[14px] text-muted underline underline-offset-4 hover:text-foreground">
+              <button type="button" className="text-[16px] text-muted underline underline-offset-4 hover:text-foreground">
                 How to read the research
               </button>
             </DisclaimerDialog>
           }
         >
-          <div className="grid gap-x-12 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+          {/* TWO SENTENCES (Sean, 8 September: "consolidate the two first
+              paragraphs into a two sentence descriptor… we need the section to be
+              small"). The definition and the buyers were separate paragraphs under
+              separate headings; they answer one question and now share one. The
+              vendor names and figures are still derived, never typed. */}
+          {/* WHAT IT INTENDS TO BE, THEN WHAT IT WORKS OUT TO BE (Sean, 10
+              September: "let's do a better job of describing what government
+              cloud technology intends to be and what it works out to be. Let's
+              reward law enforcement in this paragraph").
+
+              He also said "it's a way of monitoring people", and the register
+              does not support that as a definition — 151 of the 399 deployments
+              are ordinary digital government against 31 in law enforcement, and
+              59 of the 73 capabilities are not surveillance of any kind. Writing
+              it that way would have put the section's first sentence in
+              contradiction with its own figures two inches below.
+
+              The version he reached for in the same breath is both true and
+              worse. A platform that were only surveillance could simply be
+              refused. One that runs the benefits system and the face matching on
+              the same accreditation cannot be, and that is the whole argument.
+
+              THE REWARD IS REAL AND SOURCED. Evidence management is a documented
+              capability in the register, and the 180 recovered — thirty of them
+              children — is a tier-A DHS figure the crime section already carries.
+              A section that could not credit anything would not be believed when
+              it criticises. */}
+          <p className="body-copy measure text-[24px] leading-relaxed text-foreground/85">
+            One accredited place where a state can run everything it does &mdash; and
+            mostly, that is what it is. Of the {mix.total} deployments in this record,{" "}
+            {mix.admin} are ordinary digital government &mdash; health, tax, benefits,
+            education, emergency response &mdash; against {mix.police} in law
+            enforcement. It earns that keep: digital evidence management moves a case
+            faster, and HSI-led operations around the 2026 World Cup recovered 180
+            trafficking victims, thirty of them children. The question here is not
+            whether that value is real. It is what else the same accreditation admits,
+            and what the person underneath it can do about it.
+          </p>
+
+          <p className="body-copy measure mt-5 leading-relaxed text-foreground/85">
+            {usd(gc.totalUsd)} has been bought across the {gc.valued} awards carrying a
+            published value, and four companies hold nearly all of it:{" "}
+            {vendors.map((v, n) => (
+              <span key={v.name}>
+                {n > 0 ? (n === vendors.length - 1 ? " and " : ", ") : ""}
+                <strong>{v.name}</strong> at {usd(v.usd)}
+              </span>
+            ))}
+            .
+          </p>
+
+          <div className="mt-12 grid gap-x-12 gap-y-14 xl:grid-cols-3">
+            {/* NOT THE TOTAL AGAIN. This figure used to repeat usd(gc.totalUsd)
+                and most of its sentence, which the descriptor above now carries —
+                the same number stated twice, two inches apart. Deployments is the
+                other half of the story and appears nowhere else on the page: what
+                was sold versus what was actually placed. */}
             <Figure
-              stat={usd(gc.totalUsd)}
-              line={`across the ${gc.valued} awards here that carry a published value. Vehicles, scopes, funding statutes and recompete dates, each linked to its source.`}
+              stat={String(gc.deployments)}
+              line={`recorded deployments of these platforms into government use, across every geography in the register. What was actually placed, rather than what was sold.`}
               href="/data/government-cloud"
             />
-            {euFine && <Figure stat={euFine.stat} line={euFine.line} href={`/concepts#${euFine.id}`} />}
             <Figure
               stat={`0 of ${gc.regulations}`}
               line="regulations record a route to individual review. Across the whole register, the person a system is used on has nowhere to ask."
               href="/concepts#no-column-for-you"
             />
+            {euFine && <Figure stat={euFine.stat} line={euFine.line} href={`/concepts#${euFine.id}`} />}
+          </div>
+
+          {/* WHAT THEY CAN DO, IN TWO SENTENCES (Sean, 8 September: "let's
+              rephrase it to describe what they can do, hypothetically speaking
+              and based on documentation. And let's make it two sentences.").
+
+              This replaces a whole "What can it already do?" block — a heading, a
+              lead and four question-and-answer panels — which he cut outright to
+              keep the section small. Nothing in it is lost that mattered: the
+              capability register is one click away, and the two facts that do the
+              work are the reach and the limit, which are what these two sentences
+              carry.
+
+              THE SECOND SENTENCE IS THE POINT, and it is why the first is safe to
+              write. Naming what these platforms can do only reads as evidence
+              rather than insinuation because the same breath says where the
+              documentation stops. Checked, not asserted: all 73 capabilities were
+              searched for wearable, haptic, stimulation, neural and
+              phantom-sensation terms. Zero matches. */}
+          <div className="mt-14 border-l-2 border-foreground pl-5">
+            <p className="body-copy measure m-0 leading-relaxed text-foreground/85">
+              Documented, these platforms can already see, hear, transcribe and rank a
+              person at national scale &mdash; face matching across image and video,
+              acoustic arrays that tie a sound to a camera and a licence plate, sentiment
+              detection, and data fusion that profiles people and prioritises them.
+              Hypothetically that is most of what an unconsented surveillance system
+              would need; what none of the {cap.total} documented capabilities describes
+              is any way of reaching back &mdash; of causing something to be felt.
+            </p>
           </div>
         </SiteSection>
 
@@ -434,310 +670,418 @@ export default function Page() {
         <SiteSection
           eyebrow="Public health · crime · enforcement"
           motif="drift"
-          heading="Is anything moving in the data?"
+          heading="What does the research show?"
           meta="CDC, NCHS, WHO, FBI, BJS and DHS series · every figure resolves to a named source · none of these records explains another"
           actions={[
-            { href: "/data/public-health", label: "Public health", primary: true },
+            { href: "/data", label: "Go to all research", primary: true },
+            { href: "/data/public-health", label: "Public health" },
             { href: "/data/crime", label: "Crime" },
           ]}
           aside={
             <DisclaimerDialog>
-              <button type="button" className="text-[14px] text-muted underline underline-offset-4 hover:text-foreground">
+              <button type="button" className="text-[16px] text-muted underline underline-offset-4 hover:text-foreground">
                 How to read the research
               </button>
             </DisclaimerDialog>
           }
         >
-          <div className="grid gap-x-12 gap-y-14 lg:grid-cols-3">
-            <div>
-              <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
-                Public health
-              </p>
-              <div className="mt-6">
-                {/* Deliberately NOT the percentage. The hero already states the
-                    US rise as +40% on the WHO basis; HEALTH_FIGURES[0] states
-                    it as +30% on the CDC basis over a different window. Both
-                    are right and both are sourced, but two different US
-                    percentages on one page reads as an error to anyone who is
-                    not going to check. This column carries the count instead. */}
-                <Figure stat={HEALTH_FIGURES[1].stat} line={HEALTH_FIGURES[1].line} source={HEALTH_FIGURES[1].source} />
-              </div>
-            </div>
-            <div>
-              <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
-                Crime
-              </p>
-              <div className="mt-6">
-                <Figure stat={CRIME_FIGURES[2].stat} line={CRIME_FIGURES[2].line} source={CRIME_FIGURES[2].source} />
-              </div>
-            </div>
-            <div>
-              <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
-                What is working
-              </p>
-              <div className="mt-6">
+          {/* ONE HEADING, ONE PARAGRAPH (Sean, 8 September: "we have two headings
+              and two paragraphs. Let's consolidate that"). There was a section
+              heading with a framing paragraph, then a sub-heading with a second
+              paragraph saying much the same thing in a narrower way, and the chart
+              underneath both. The chart is the thing; two run-ups to it is one too
+              many.
+
+              IT SPEAKS TO THE CONCERN, WITHOUT CLAIMING IT (his "we will need to
+              speak to a potential suicide crisis"). The honest form of that is a
+              question the archive says plainly it cannot answer, followed by the
+              three figures that make it a real question rather than a worry. His
+              earlier draft, "has there been a huge spike in suicide
+              internationally?", would have been answered no by the chart directly
+              beneath it — the world rate FELL 27%. The rise is real and it is
+              located, which is the more troubling version of the same point. */}
+          <p className="body-copy measure text-[24px] leading-relaxed text-foreground/85">
+            Three records assembled to make sense of the journal, not to prove it:
+            public health, crime, and what enforcement accomplishes. The public health
+            record raises a question this archive cannot answer &mdash; against a world
+            suicide rate that <em>fell</em> 27% between 2000 and 2021, the United States
+            rose 40% and South Korea 83%.
+          </p>
+
+          <div className="mt-12">
+            <HomeSuicideChart chart={suicide} />
+          </div>
+
+          {/* THE CRIME METRICS, REPLACED (Sean, 8 September: "replace the no
+              count and the six lanes metrics with more relevant information…
+              criminal arrests are 51% below their 1997 peak, violent crime
+              fell").
+
+              Both of the old ones were about the SHAPE of crime measurement —
+              that there are six lanes, that harassment has no lane at all. True,
+              and the right material for the crime vertical, but this section now
+              sits under a suicide chart and the question a reader is holding is
+              simply "is crime up or down". These two answer it, and the third
+              says what enforcement actually recovered. */}
+          <div className="mt-20">
+            <h3 className="font-display m-0 text-[26px] font-semibold text-foreground">
+              And in the crime record?
+            </h3>
+            <div className="mt-10 grid gap-x-12 gap-y-14 xl:grid-cols-3">
+              <div>
                 <Figure
-                  stat="180"
-                  line="trafficking victims recovered, 30 of them children, in HSI-led operations around the 2026 World Cup. Arrests are activity; this is an outcome."
-                  source={{ label: "DHS, 29 July 2026", href: "https://www.dhs.gov/news/2026/07/29/dhs-highlights-successful-arrests-and-rescues-crackdown-human-trafficking-during" }}
+                  stat="51% below"
+                  line="its 1997 peak: criminal arrests fell from 15.28 million that year to 7.52 million in 2024. Civil immigration arrests, counted by a different agency on a different calendar, moved the other way."
+                  source={{ label: "Crime — the finding", href: "/data/crime" }}
+                />
+              </div>
+              <div>
+                <Figure
+                  stat="−9.3%"
+                  line="violent crime in 2025, the largest year-to-year decline since the FBI began estimating in 1936, with murder down 18.1% to the lowest rate ever recorded."
+                  source={{
+                    label: "FBI, 2025 Reported Crimes in the Nation",
+                    href: "https://www.fbi.gov/news/press-releases/fbi-releases-2025-reported-crimes-in-the-nation-statistics",
+                  }}
+                />
+              </div>
+              <div>
+                {/* 905, NOT 900 (Sean asked for "nine hundred"). The register row
+                    — crime_accomplishments, "World Cup anti-trafficking operation"
+                    — says 905 arrests alongside 180 rescued, 30 of them children,
+                    tier A, one DHS release for both. Rounding a sourced figure
+                    down to a spoken one is the small drift this archive cannot
+                    afford, so the exact number ships.
+
+                    THE ORDER IS SEAN'S, THE CAVEAT IS THE REGISTER'S. He wants
+                    arrests as the headline with the rescues immediately under it.
+                    Worth flagging that the register's own corroboration note says
+                    the opposite about which number carries weight: "The rescue
+                    figure is the outcome; the arrest figure counts activity, and
+                    DHS publishes no breakdown of eventual charges." So the stat
+                    leads with 905 as asked, the 180 sits directly beneath it, and
+                    the distinction between activity and outcome stays in the line
+                    rather than being quietly dropped with it. */}
+                <Figure
+                  stat="905"
+                  line="arrests, and 180 trafficking victims recovered — 30 of them children — in HSI-led operations around the 2026 World Cup. Arrests count activity, and DHS publishes no breakdown of eventual charges; the 180 recovered is the outcome."
+                  source={{
+                    label: "DHS, 29 July 2026",
+                    href: "https://www.dhs.gov/news/2026/07/29/dhs-highlights-successful-arrests-and-rescues-crackdown-human-trafficking-during",
+                  }}
                 />
               </div>
             </div>
           </div>
 
-          {/* The one line that keeps three columns from reading as an argument. */}
-          <p className="body-copy mt-14 border-l-2 border-foreground pl-5 text-[15px] leading-relaxed text-foreground/85">
-            Criminal arrests are 51% below their 1997 peak and violent crime fell 9.3% in
-            2025, the largest decline since the FBI began estimating in 1936. Three
-            separate records sit in this section. None of them explains another, and this
-            archive does not claim they do.
-          </p>
+          {/* THE QUESTION THE SECTION EXISTS TO REFUSE TO ANSWER (Sean, 8
+              September: "is there any connection between government cloud use and
+              a reduction in crime? If there's not, then let's say it's not being
+              measured and point people to the overall research section.").
+
+              He is right that a reader puts those two things together, and right
+              that the archive must not. CHECKED, not assumed: the deployment table
+              carries geography, vendor, domain, workload, status, accreditation,
+              adoption stage, maturity and TRL. The awards table carries value,
+              vehicle, scope, dates and funding statute. Across all 489 rows there
+              is no field for an outcome of any kind, and exactly one row mentions
+              "evaluation" — a sovereign cloud being evaluated for government use,
+              not a crime result.
+
+              The second half matters as much. "Crime fell" is a POLICE measure,
+              and the Bureau of Justice Statistics' own victimisation survey does
+              not agree with it. Publishing the fall without that would be the same
+              failure as publishing the suicide peak without the decline. */}
+          <div className="mt-16 border-l-2 border-foreground pl-5">
+            <p className="body-copy measure m-0 leading-relaxed text-foreground/85">
+              Did any of that come from the systems in the section above? Nothing here
+              measures it. The procurement register records what was bought, deployed
+              and accredited &mdash; vendor, geography, workload, maturity &mdash; and
+              carries no field for whether crime rose or fell anywhere a system landed.
+              No record in this archive connects the two, and this archive does not
+              claim they are connected.
+            </p>
+            <p className="body-copy measure mt-5 leading-relaxed text-foreground/85">
+              The fall is also a police measure. The Bureau of Justice Statistics&rsquo;
+              victimisation survey does not show the same recovery &mdash; 23.3 violent
+              victimisations per 1,000 people in 2024 against 16.5 in 2021 &mdash; and
+              about 48% of them were reported to police at all.{" "}
+              <a
+                href="https://bjs.ojp.gov/library/publications/nations-two-crime-measures-2015-2024"
+                target="_blank" rel="noreferrer noopener"
+                className="text-foreground underline underline-offset-4"
+              >
+                BJS, The Nation&rsquo;s Two Crime Measures
+              </a>
+            </p>
+          </div>
         </SiteSection>
 
-        {/* ------------------------------------------ 5 · what it can do */}
+        {/* ------------------------------------------------- 5 · concepts */}
+        {/* TWO SECTIONS BECAME ONE (Sean, 10 September). "What can the technology
+            actually do?" and "What would this technology be worth if people
+            consented to it?" both drew on the concepts register and neither said
+            so, which left the page arguing with itself about where a reader
+            should go for the underlying thinking.
+
+            FIVE CONCEPTS, TWO CONSTRUCTIVE AND THREE CHALLENGING — his split, and
+            the right one: a page that only frightens people is not the archive he
+            set out to build, and a page that only reassures them is not either.
+            Picks and reasoning in lib/home-picks.ts.
+
+            WHAT THIS COST, recorded so it is not forgotten: the VOICE speech
+            restoration trial and the bilingual neuroprosthesis were authored
+            slides in the old section, and nothing in the concepts register covers
+            beneficial neurotechnology — zero mentions across all 35. They are
+            gone from the page until that concept is written. Shipping without
+            them was deliberate rather than accidental. */}
         <SiteSection
           id="neurotechnology"
-          eyebrow="Neurotechnology"
+          eyebrow="Concepts"
           motif="lattice"
-          heading="What can the technology actually do?"
+          heading="What does the record actually establish?"
           meta={
             <>
-              {CONCEPTS.length} concepts · {SOURCE_YEARS.length} dated sources, the earliest
-              from {earliest} · {sourcesWithUrl} carry a public link
+              {CONCEPTS.length} concepts · {SOURCE_YEARS.length} dated sources, the
+              earliest from {earliest} · {sourcesWithUrl} carry a public link
             </>
           }
-          actions={[
-            { href: "/concepts", label: "Go to the concepts", primary: true },
-            { href: "/glossary", label: "Go to the glossary" },
-          ]}
-        >
-          <p className="body-copy text-[19px] font-semibold leading-relaxed text-foreground">
-            Your house is not haunted.
-          </p>
-          <p className="body-copy mt-4 text-[17px] leading-relaxed text-foreground/85">
-            Precisely what the documented record shows a machine can do to a person, and
-            under what conditions &mdash; because the conditions are what let you rule
-            something in or out. Every capability below needed a surgeon, a scanner, or
-            hours of the person&rsquo;s own cooperation.
-          </p>
-
-          <div className="mt-12 grid gap-x-12 gap-y-12 lg:grid-cols-2">
-            <div>
-              <h3 className="font-display m-0 text-[17px] font-semibold text-foreground">
-                A machine reconstructed language without surgery
-              </h3>
-              <p className="body-copy mt-2 text-[15px] text-foreground/85">
-                A semantic decoder recovered the gist of what a person was hearing or
-                imagining from an fMRI scanner and no implant. It needed roughly sixteen
-                hours of training per person, and{" "}
-                <strong>it failed when participants resisted it.</strong>
-              </p>
-              <a href="https://www.nature.com/articles/s41593-023-01304-9" target="_blank"
-                 rel="noreferrer noopener"
-                 className="mt-3 inline-block text-[13px] text-muted underline underline-offset-4 hover:text-foreground">
-                Tang &amp; Huth, Nature Neuroscience, 2023
-              </a>
-            </div>
-            <div>
-              <h3 className="font-display m-0 text-[17px] font-semibold text-foreground">
-                Colorado already requires consent for neural data
-              </h3>
-              <p className="body-copy mt-2 text-[15px] text-foreground/85">
-                HB24-1058 took effect on 6 August 2024, treating neural data as sensitive
-                and requiring affirmative consent before it is processed. The definition
-                does not require that the data identify anyone.
-              </p>
-              <a href="https://content.leg.colorado.gov/sites/default/files/documents/2024A/bills/2024a_1058_01.pdf"
-                 target="_blank" rel="noreferrer noopener"
-                 className="mt-3 inline-block text-[13px] text-muted underline underline-offset-4 hover:text-foreground">
-                Colorado HB24-1058, as introduced
-              </a>
-            </div>
-          </div>
-
-          <div className="mt-14 border-l-2 border-foreground pl-5">
-            <h3 className="font-display m-0 text-[17px] font-semibold text-foreground">
-              And there the record stops
-            </h3>
-            <p className="body-copy mt-2 max-w-3xl text-[15px] text-foreground/85">
-              Nothing documented reads a person&rsquo;s perception, or reaches them, at a
-              distance and without their participation. That is not a claim that such a
-              thing cannot exist. It is a statement about what has been shown.
-            </p>
-          </div>
-
-          {/* The glossary, folded in — it answers the same question, one word
-              at a time, and no longer needs a heading of its own. */}
-          <div className="mt-16">
-            <p className="m-0 font-display text-[12px] uppercase tracking-[0.14em] text-muted">
-              Bring yourself up to speed
-            </p>
-            <div className="mt-6">
-              <HomeCarousel slides={glossarySlides} label="Glossary terms" />
-            </div>
-          </div>
-        </SiteSection>
-
-        {/* ------------------------------------- 6 · what it would be worth */}
-        {/* Sean, 1 September: a section on "what a future without Zersetzung
-            looks like." He is right that it is missing and right that it
-            matters. Every other section on this page describes a problem; a
-            reader who believes all of it has nowhere to put that belief except
-            fear, and an archive that only frightens people is not the one he
-            set out to build.
-
-            It is also the strongest thing available for the audience he keeps
-            saying he does not want to lose. A page that can name what this
-            technology is FOR is a page an engineer or an officer can finish.
-
-            WHAT IS DOCUMENTED, AND WHAT IS NOT.
-
-            Speech restoration and bilingual decoding are published, dated and
-            cited here. Both required a surgical implant and a consenting
-            participant, and both say so.
-
-            The third column is Sean's crime-prevention point, and it is an
-            ARGUMENT rather than a finding, so it is written as one — the
-            deterrent he describes only exists if people are told, and this
-            archive holds the best documented account of what gets built when
-            they are not: 420 children on a sheriff's predictive list, and
-            three constitutional amendments that office admitted violating in
-            writing. His own corpus is the evidence for his own condition.
-
-            NOT INCLUDED: "automatic language translation in efference-copy
-            space." Efference copy is real neuroscience — the internal copy of
-            a motor command the brain uses to predict its own sensory
-            consequences — and there is published work on a corollary-discharge
-            circuit in human speech. But nothing documents translation
-            happening in it. The bilingual prosthesis below is the nearest
-            published thing, and what it actually found is more interesting
-            than the claim: the articulatory representation is SHARED between
-            languages, so one implant trained on a bilingual speaker decoded
-            both. */}
-        <SiteSection
-          eyebrow="What it is for"
-          motif="bloom"
-          heading="What would this technology be worth if people consented to it?"
-          meta="Published, dated, and cited · every capability here required a surgical implant and a participant who agreed to it"
-          actions={[{ href: "/concepts", label: "Read the concepts", primary: true }]}
+          actions={[{ href: "/concepts", label: "Go to the concepts", primary: true }]}
           aside={
             <DisclaimerDialog>
-              <button type="button" className="text-[14px] text-muted underline underline-offset-4 hover:text-foreground">
+              <button type="button" className="text-[16px] text-muted underline underline-offset-4 hover:text-foreground">
                 How to read this archive
               </button>
             </DisclaimerDialog>
           }
         >
-          <p className="body-copy text-[19px] leading-relaxed text-foreground/85">
-            This archive is about a technology used without consent. It is not an argument
-            that the technology should not exist. The same decade that produced the
-            procurement record produced these.
+          {/* ONE HEADING, NOT TWO (Sean, 10 September). This lead was
+              "Your house is not haunted." in heading weight, directly above a
+              slide titled "If nobody's house is haunted, what produces the
+              feeling?" — the same thought twice, in two different registers,
+              which read as the section arguing with itself.
+
+              The statement won and moved into the slide, where it is now the
+              concept's title and its opening sentence. What is left here does
+              what every other section lead on this page does: says what the
+              section is, and names the one term the slides use without defining.
+
+              NEURO-ENGAGEMENT KEEPS ITS LINK. It is the record's own word for
+              the process, it is not among the six glossary terms carried below,
+              and a reader meeting it inside a slide has nowhere to go. */}
+          <p className="body-copy measure text-[24px] leading-relaxed text-foreground/85">
+            What the record establishes, what it does not, and what could be built
+            instead. The process this archive names for producing these effects
+            deliberately is{" "}
+            <a
+              href="/glossary/neuro-engagement"
+              className="text-foreground underline underline-offset-4"
+            >
+              neuro-engagement
+            </a>
+            .
           </p>
 
-          <div className="mt-12 grid gap-x-12 gap-y-12 lg:grid-cols-3">
-            <div>
-              <h3 className="font-display m-0 text-[17px] font-semibold text-foreground">
-                People who cannot speak are speaking
-              </h3>
-              <p className="body-copy mt-2 text-[15px] text-foreground/85">
-                Neuralink&rsquo;s VOICE trial decodes intended speech from the motor cortex
-                for participants who have lost the ability to talk. It needs implanted
-                electrodes, neurosurgery, and a person who enrolled in a registered clinical
-                trial &mdash; which is the whole difference between this and the subject of
-                the rest of this page.
-              </p>
-              <a href="https://neuralink.com/trials/speech-restoration/" target="_blank"
-                 rel="noreferrer noopener"
-                 className="mt-3 inline-block text-[13px] text-muted underline underline-offset-4 hover:text-foreground">
-                Neuralink — Speech Restoration trial
-              </a>
-            </div>
-
-            <div>
-              <h3 className="font-display m-0 text-[17px] font-semibold text-foreground">
-                One implant, two languages
-              </h3>
-              <p className="body-copy mt-2 text-[15px] text-foreground/85">
-                A bilingual speech neuroprosthesis decoded Spanish and English in real time
-                for a man who could not speak coherently &mdash; from one implant, because
-                the cortical articulatory representations are <em>shared between the two
-                languages</em>. Translation was not a step that had to be added. The
-                representation was never language-specific to begin with.
-              </p>
-              <a href="https://www.nature.com/articles/s41551-024-01207-5" target="_blank"
-                 rel="noreferrer noopener"
-                 className="mt-3 inline-block text-[13px] text-muted underline underline-offset-4 hover:text-foreground">
-                Silva et al., Nature Biomedical Engineering, May 2024
-              </a>
-            </div>
-
-            <div>
-              <h3 className="font-display m-0 text-[17px] font-semibold text-foreground">
-                A deterrent that only works if people are told
-              </h3>
-              <p className="body-copy mt-2 text-[15px] text-foreground/85">
-                A system nobody knows about deters nobody. Disclosed, the argument goes, it
-                could prevent harm rather than record it. That argument is only available to
-                a system that announces itself &mdash; and this archive holds what gets
-                built instead: 420 schoolchildren placed on a sheriff&rsquo;s list of likely
-                future criminals, and three constitutional amendments that office admitted
-                violating, in writing, to settle a case four residents refused to drop.
-              </p>
-              <a href="/concepts#what-children-are-subject-to"
-                 className="mt-3 inline-block text-[13px] text-muted underline underline-offset-4 hover:text-foreground">
-                What children are subject to
-              </a>
-            </div>
+          <div className="mt-12">
+            <HomeCarousel slides={conceptSlides} label="Concepts" titleSize="heading" />
           </div>
-
-          <p className="body-copy mt-14 border-l-2 border-foreground pl-5 text-[15px] leading-relaxed text-foreground/85">
-            Two of these are findings. The third is an argument, and this archive does not
-            settle it &mdash; consent is the line every one of them turns on, and it is the
-            only thing the record consistently shows missing.
-          </p>
         </SiteSection>
 
-        {/* --------------------------------------------- 6 · what you can do */}
-        {/* NO ACCOUNT BUTTON UNTIL THERE ARE ACCOUNTS (Sean, 4 September):
-            "we don't have user's registration done." Sign-up lives on the
-            `capture` branch and is unfinished, so nothing in production may
-            advertise it. The download becomes the primary action here for
-            the same reason it did in the header — it is the one thing this
-            site can actually hand a visitor today. The invitation in the
-            copy below stands on its own; /contribute remains as a page and
-            gets its button back the day accounts ship. */}
+        {/* ----------------------------------------------- 7 · the glossary */}
+        {/* ITS OWN SECTION, SECOND TO LAST (Sean, 9 September: "move the glossary
+            above the contribute section… it needs to be the second to last
+            section"). It had been a sub-block at the foot of the neurotechnology
+            section under a 12px label, which made it read as an appendix to that
+            argument rather than as a way into the whole archive.
+
+            A FULL SiteSection, deliberately (Sean, same day: "the section
+            headings are all consistent… glossary as a section does not match the
+            neurotechnology section. We need to make sure it matches"). Eyebrow,
+            accent rule, question heading, derived meta line, primary action —
+            the same six parts every other section on this page has, from the
+            same component, so it cannot drift out of step with them.
+
+            `recede` is the one motif of the seven this page had never used. */}
+        <SiteSection
+          eyebrow="Glossary"
+          motif="recede"
+          heading="What do these words actually mean?"
+          meta={`${glossaryTerms} terms · pronunciation, definition, and every entry in the record that uses them`}
+          actions={[{ href: "/glossary", label: "Go to the glossary", primary: true }]}
+        >
+          <p className="body-copy measure text-[24px] leading-relaxed text-foreground/85">
+            Some of these name something documented and some name something claimed,
+            and telling them apart is most of the work. A reader who cannot say which
+            is which cannot evaluate anything else on this page &mdash; so the order
+            below puts a historically documented tactic first, and sets a published
+            physical effect directly beside the claim that resembles it.
+          </p>
+
+          <div className="mt-12">
+            <HomeCarousel slides={glossarySlides} label="Glossary terms" />
+          </div>
+        </SiteSection>
+
+        {/* ----------------------------------------------- 6 · what you can do */}
+        {/* NOT A SIGN-UP, AND NOT YET (Sean, 10 September: "the what you can do
+            section is going to be present, but it won't be about signing up for
+            an account initially").
+
+            The section used to invite a second dated record and then have
+            nowhere to put one — accounts live on `capture`, unfinished, so the
+            button is correctly switched off and the invitation was landing in a
+            dead end. Taking sign-up off the table forces the section to offer
+            what it can actually deliver today, which turns out to be more
+            useful than the thing it was promising.
+
+            NO PROTECTIVE ADVICE, deliberately, and this is a standing decision
+            rather than a judgement call made here: "The site cannot protect
+            anyone physically and must not say it can." Hypothetical framing does
+            not get around it — a frightened reader takes a suggestion as a
+            suggestion whatever label sits above it. All three things below are
+            concrete and none of them is a claim about safety.
+
+            THE SAFETY NOTICE IS THE ASIDE HERE. Everywhere else on this page the
+            aside is the disclaimer. This is the section a distressed reader is
+            most likely to reach, and one link in the hero is not enough
+            prominence for the only thing on the site that can point at help. */}
+        {/* NO META LINE ON THIS SECTION (Sean, 10 September): "I don't
+            understand what nine hundred and twenty eight files means under what
+            you can do. Is that the corpus? We don't need to include that...
+            That's speaking to the downloadable corpus. It is not relevant to
+            what you can do."
+
+            Correct, and it had been there since the section was a download
+            pitch: the archive's meta line sitting under a heading about the
+            reader, describing a different thing entirely. The counts now appear
+            once, inside the dialog the button opens, where they are about the
+            file the reader is deciding whether to take. */}
         <SiteSection
           eyebrow="Contribute"
           motif="room"
           heading="What can you do?"
-          meta={`${CORPUS_SUMMARY.files} files · ${CORPUS_SUMMARY.words.toLocaleString()} words · plain Markdown and CSV`}
-          actions={
-            ACCOUNTS_READY
-              ? [
-                  { href: "/contribute", label: "Add your own account", primary: true },
-                  { href: "/api/corpus?from=home", label: "Download the whole archive" },
-                ]
-              : [{ href: "/api/corpus?from=home", label: "Download the whole archive", primary: true }]
-          }
+          actionsExtra={<ExportButton />}
           aside={
-            <a href="/why" className="text-[14px] text-muted underline underline-offset-4 hover:text-foreground">
-              Why &ldquo;Invisible Ships&rdquo;
-            </a>
+            <SafetyDialog>
+              <button type="button" className="text-[16px] text-muted underline underline-offset-4 hover:text-foreground">
+                Safety notice
+              </button>
+            </SafetyDialog>
           }
         >
-          <p className="body-copy text-[19px] leading-relaxed text-foreground/85">
-            A second dated record, kept to the same standard, is worth more than either one
-            alone &mdash; not because two accounts corroborate each other, they do not, but
-            because a pattern that survives independent description is a different kind of
-            object from a story. That includes officers and public employees describing
-            what they are being asked to do.
-          </p>
-          <p className="body-copy mt-4 text-[17px] leading-relaxed text-foreground/85">
-            Or take the whole thing: share it, quote it with attribution, hand it to an AI
-            and ask it to check the findings against the sources.
-          </p>
-        </SiteSection>
+          {/* THE FIRST THING, AND THE HARDEST (Sean, 10 September): "the most
+              important thing you can do is know that you are not communicating
+              with the spirit world or extraterrestrials."
 
+              It leads the section because it is the one thing here that changes
+              what a frightened reader does next, and because it costs this
+              archive nothing to say. Every explanation this site takes
+              seriously — documented or claimed — involves people and equipment.
+              Ruling out the supernatural is not a concession to the sceptics;
+              it is the precondition for the whole record being worth reading.
+
+              Note what it does NOT do: it does not tell the reader what IS
+              happening to them. Nobody here can know that. */}
+          <p className="body-copy measure text-[24px] leading-relaxed text-foreground/85">
+            The most important thing is also the hardest to hold on to: you are not
+            communicating with the spirit world, and you are not communicating with
+            extraterrestrials. Nothing in this archive points anywhere but at people
+            &mdash; people with equipment, working for organisations, for reasons that
+            are ordinary even when what they do is not.
+          </p>
+
+          <div className="mt-14 grid gap-x-12 gap-y-12 xl:grid-cols-3">
+            <div>
+              <h3 className="font-display m-0 text-[21px] font-semibold text-foreground">
+                Meet the documented explanations first
+              </h3>
+              <p className="body-copy mt-2 text-[18px] text-foreground/85">
+                A feeling of presence can be produced in a laboratory in healthy people.
+                Pulsed radio-frequency energy is genuinely heard as clicks inside the head
+                &mdash; a published effect since 1961. Neither fact settles anything about
+                what you have experienced. Both are worth knowing before the frightening
+                explanations, because they are the ones that can be checked.
+              </p>
+            </div>
+            {/* PROTECT YOUR HOUSEHOLD (Sean, 10 September): "never go outside
+                looking for the people communicating and never ever invite
+                someone in your home."
+
+                Both rules work whatever is actually happening, which is the only
+                reason they belong on a page that will not say what is happening.
+                A person who goes outside at night to find a voice, or opens the
+                door to someone who says they can explain it, is exposed to
+                ordinary danger from ordinary people — and that is true whether
+                the voice is a neighbour, a transmitter, or an illness.
+
+                WHAT THIS DELIBERATELY DOES NOT SAY. It does not tell a reader
+                what might be done to them if they ask for help. Naming those
+                consequences would frighten the exact person least able to carry
+                it, and would put a reason not to call an ambulance on a page
+                read by people in crisis. The standing decision holds: the site
+                cannot protect anyone physically and must not say it can — so
+                this points at the people who can and stops there. */}
+            <div>
+              <h3 className="font-display m-0 text-[21px] font-semibold text-foreground">
+                Protect your household
+              </h3>
+              <p className="body-copy mt-2 text-[18px] text-foreground/85">
+                Do not go outside looking for whoever you believe is speaking to you, and
+                do not let anyone into your home who turns up offering to explain it or to
+                deal with it. Do not answer or signal back. You cannot identify who you
+                would be answering, and everything that follows from being wrong about
+                that lands on your household. If you are frightened for your immediate
+                safety, that is what emergency services are for &mdash; this site cannot
+                see you or reach you, and the{" "}
+                <SafetyDialog>
+                  <button type="button" className="text-foreground underline underline-offset-4">
+                    safety notice
+                  </button>
+                </SafetyDialog>{" "}
+                is where the people who can are listed.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-display m-0 text-[21px] font-semibold text-foreground">
+                Keep your own record
+              </h3>
+              <p className="body-copy mt-2 text-[18px] text-foreground/85">
+                You do not need an account, permission, or this site to begin. Date every
+                entry, note where you were, write what was said in the words it was said
+                in, and leave it unsmoothed. That is the entire standard the archive in
+                front of you was built to &mdash; and a contemporaneous record is what
+                separates testimony from recollection later on.
+              </p>
+            </div>
+          </div>
+
+          {/* SAY THE ABSENCE OUT LOUD, but no longer at the top. A visitor
+              already suspects nobody has acknowledged this, and a page that will
+              not say so forfeits the credibility it needs for everything else.
+              It moves below the three actions because it is context, not
+              something the reader can do. */}
+          <p className="body-copy measure mt-16 text-[18px] leading-relaxed text-foreground/80">
+            No news organisation has reported this. No agency has acknowledged it. Before
+            reaching for what that might mean, there is a duller explanation with far
+            better evidence behind it &mdash; nearly 3,500 American newspapers have closed
+            since 2005, roughly forty per cent of the country&rsquo;s local press.{" "}
+            <a href="/concepts#why-isnt-this-in-the-news" className="text-foreground underline underline-offset-4">
+              Why isn&rsquo;t any of this in the news?
+            </a>
+          </p>
+
+          {/* WHAT IS COMING, LABELLED AS NOT READY. A button that lies is worse
+              than an absence a reader can plan around. Shortened 10 September —
+              the reasoning behind the delay was longer than the fact of it. */}
+          <div className="mt-10 border-l-2 border-foreground pl-5">
+            <p className="body-copy measure m-0 leading-relaxed text-foreground/85">
+              A way to send your own transcripts to this archive is being built and is not
+              finished. There is no sign-up yet, and there will not be one until it can
+              receive an account safely. Until then the record you keep is yours, and it
+              will still be yours when there is somewhere to send it.
+            </p>
+          </div>
+        </SiteSection>
 
       </main>
 

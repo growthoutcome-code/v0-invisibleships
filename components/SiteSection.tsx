@@ -25,7 +25,7 @@ import { cn } from "@/lib/utils";
 export type Action = { href: string; label: string; primary?: boolean };
 
 export default function SiteSection({
-  id, eyebrow, heading, meta, actions = [], aside, children, motif,
+  id, eyebrow, heading, meta, actions = [], actionsExtra, aside, children, motif,
 }: {
   id?: string;
   /**
@@ -39,6 +39,13 @@ export default function SiteSection({
   /** One line of counts, derived. Optional. */
   meta?: ReactNode;
   actions?: Action[];
+  /**
+   * A control that lives in the actions row but is not a link — the corpus
+   * download button, which has to open a dialog rather than navigate. Actions
+   * are anchors by design and stay that way; this is the escape hatch for the
+   * one case where the row needs a client component instead.
+   */
+  actionsExtra?: ReactNode;
   /** Sits beside the actions — usually the disclaimer modal trigger. */
   aside?: ReactNode;
   children?: ReactNode;
@@ -54,37 +61,49 @@ export default function SiteSection({
           generous when sections were long essays; the journal section is now a
           quotation and a way in, and the gap was doing more work than the
           content between it. 56px on a phone, 72 from sm up. */}
-      <div className="relative z-10 w-full px-5 py-14 sm:px-8 sm:py-[72px] lg:px-[200px]">
+      <div className="relative z-10 w-full px-5 py-16 sm:px-8 sm:py-20 lg:px-[200px]">
         {/* Sean, 5 September: "we've got the word journal in very small type… at
           least sixteen pixels on desktop." The eyebrow names the section and was
           set smaller than the meta line under the heading, which inverted the
           hierarchy — the label a reader uses to know where they are was the
           quietest thing in the block. */}
-        <p className="m-0 font-display text-[14px] uppercase tracking-[0.14em] text-muted sm:text-[16px]">
-          {eyebrow}
-        </p>
+        {/* THE SECTION NAME, WITH PRESENCE (Sean, 8 September): "let's increase
+            the presence of the name of the section… some kind of treatment to
+            make it a little larger. You might include a rule next to it, like a
+            short rule."
+
+            The accent bar is not a new invention — it is the same `h-1.5 w-6
+            bg-accent` marker the hero already uses above its stats line, so the
+            front door and every section under it are speaking one language. */}
+        <div className="flex items-center gap-3">
+          <span className="h-1.5 w-6 shrink-0 bg-accent" aria-hidden />
+          <p className="m-0 font-display text-[20px] font-semibold uppercase tracking-[0.14em] text-foreground">
+            {eyebrow}
+          </p>
+        </div>
         <h2 className="font-display m-0 mt-3 text-[26px] font-semibold leading-[1.25] text-foreground sm:text-[34px]">
           {heading}
         </h2>
-        {meta && <p className="mt-4 text-[15px] text-muted">{meta}</p>}
+        {meta && <p className="mt-4 text-[17px] text-muted">{meta}</p>}
 
-        {children && <div className="mt-10">{children}</div>}
+        {children && <div className="mt-12">{children}</div>}
 
-        {(actions.length > 0 || aside) && (
-          <div className="mt-10 flex flex-wrap items-center gap-4">
+        {(actions.length > 0 || actionsExtra || aside) && (
+          <div className="mt-12 flex flex-wrap items-center gap-4">
             {actions.map((a) => (
               <a
                 key={a.href}
                 href={a.href}
                 className={
                   a.primary
-                    ? "inline-flex h-12 items-center rounded-md bg-foreground px-6 text-[15px] font-medium text-background"
-                    : "inline-flex h-12 items-center rounded-md bg-foreground/[0.07] px-6 text-[15px] hover:bg-foreground/[0.12]"
+                    ? "inline-flex h-12 items-center rounded-md bg-foreground px-6 text-[17px] font-medium text-background"
+                    : "inline-flex h-12 items-center rounded-md bg-foreground/[0.07] px-6 text-[17px] hover:bg-foreground/[0.12]"
                 }
               >
                 {a.label}
               </a>
             ))}
+            {actionsExtra}
             {aside}
           </div>
         )}
@@ -105,7 +124,7 @@ export function Figure({
   const inner = (
     <>
       <span className="font-display block text-4xl font-semibold text-foreground">{stat}</span>
-      <span className="body-copy mt-3 block text-[15px] leading-relaxed text-foreground/80">
+      <span className="body-copy mt-3 block text-[18px] leading-relaxed text-foreground/80">
         {line}
       </span>
     </>
@@ -124,7 +143,7 @@ export function Figure({
           href={source.href}
           target="_blank"
           rel="noreferrer noopener"
-          className="mt-3 inline-block text-[13px] text-muted underline underline-offset-4 hover:text-foreground"
+          className="mt-3 inline-block text-[15px] text-muted underline underline-offset-4 hover:text-foreground"
         >
           {source.label}
         </a>

@@ -6,7 +6,7 @@ import fs from "fs";
 import path from "path";
 import type { Doc, GlossaryTerm } from "./types";
 import { EXTRA_GLOSSARY } from "./site-content";
-import { cleanDef } from "./glossary-format";
+import { cleanDef, splitDef, firstSentences } from "./glossary-format";
 
 type Loaded = {
   journal: Doc[];                       // sorted feed order, includes body_markdown
@@ -231,8 +231,8 @@ export type JournalQuote = {
   location: string | null;
   hasAudio: boolean;
   body: string;
-  /** One line of editorial context. Empty for the uncurated feed quotes. */
-  note?: string;
+  /** The archive's own open question for this slide. Curated picks only. */
+  question?: string;
 };
 
 export function journalQuotes(count = 8): JournalQuote[] {
@@ -269,52 +269,117 @@ export function curatedQuotes(picks: HomeQuotePick[]): JournalQuote[] {
       throw new Error(`home quote: no journal document with id ${pick.id}`);
     }
     const body = d.body_markdown || "";
-    const at = body.indexOf(pick.anchor);
-    if (at < 0) {
-      throw new Error(
-        `home quote: anchor ${JSON.stringify(pick.anchor)} no longer appears in ${pick.id}. ` +
-          `The entry was edited. Re-cut the anchor in lib/home-quotes.ts.`
-      );
-    }
-    // Open on the speaker's own quotation mark. Falling back to the start of
-    // the line puts whatever preamble shares that line in front of the quote,
-    // which buries the line that actually lands.
-    const quoteAt = Math.max(body.lastIndexOf("\u201c", at), body.lastIndexOf('"', at));
-    const from = quoteAt >= 0 && at - quoteAt < 200 ? quoteAt : body.lastIndexOf("\n", at) + 1;
-    let cut = body.slice(from, from + pick.chars);
-    // End on a sentence, not on whatever character the budget landed on.
-    // A straight " is ambiguous — opening and closing look identical — so
-    // cutting at the last one used to leave slides ending on a dangling
-    // opening quote. Match punctuation FOLLOWED by a quote instead, which only
-    // ever closes.
-    // Three fallbacks, in order of how clean the ending is:
-    //   1. punctuation + closing quote  — a quoted sentence, the common case
-    //   2. a bare closing curly quote   — a quote with no terminal punctuation
-    //   3. a sentence end               — for prose entries that are not quotes
-    // The floor is 24 rather than 40 because several of the strongest lines in
-    // the corpus are shorter than forty characters.
-    const floor = Math.max(24, pick.min ?? 24);
-    const at24 = (i: number) => i > floor;
-    const quoted = [...cut.matchAll(/[.?!\u2026]["\u201d]/g)];
-    const lastQuoted = quoted[quoted.length - 1];
-    const curly = cut.lastIndexOf("\u201d");
-    const sentences = [...cut.matchAll(/[.?!\u2026](\s|$)/g)];
-    const lastSentence = sentences[sentences.length - 1];
-    if (lastQuoted && at24(lastQuoted.index ?? 0)) {
-      cut = cut.slice(0, (lastQuoted.index ?? 0) + 2);
-    } else if (at24(curly)) {
-      cut = cut.slice(0, curly + 1);
-    } else if (lastSentence && at24(lastSentence.index ?? 0)) {
-      cut = cut.slice(0, (lastSentence.index ?? 0) + 1);
-    }
-    // Strip the transcript timecodes — [00:04:25], [ 8m33s ], (17:08). They are
-    // load-bearing inside an entry, where a reader is checking a recording
-    // against its transcript, and pure noise on a home page slide. Stripping
-    // here rather than in the corpus keeps the record itself untouched.
+
+    /** Cut one anchored passage. Called once for `anchor`, once per `also`. */
+    const passage = (anchor: string, chars: number, min?: number): string => {
+      const at = body.indexOf(anchor);
+      if (at < 0) {
+        throw new Error(
+          `home quote: anchor ${JSON.stringify(anchor)} no longer appears in ${pick.id}. ` +
+            `The entry was edited. Re-cut the anchor in lib/home-quotes.ts.`
+        );
+      }
+      // Open on the speaker's own quotation mark. Falling back to the start of
+      // the line puts whatever preamble shares that line in front of the quote,
+      // which buries the line that actually lands.
+      //
+      // ONLY IF THAT QUOTE MARK IS ON THE ANCHOR'S OWN LINE. Without that
+      // condition the search walks backwards past line breaks and opens on a
+      // completely different quotation: the first `also` passage written, which
+      // anchors on "Additional information was suggested telepathically",
+      // snapped back to the preceding line and rendered the self-identification
+      // quote instead of the sentence it was pointed at. An anchor is either
+      // inside a quotation — in which case its opening mark shares its line — or
+      // it is prose, and prose starts where its line starts.
+      const quoteAt = Math.max(body.lastIndexOf("\u201c", at), body.lastIndexOf('"', at));
+      const sameLine = quoteAt >= 0 && !body.slice(quoteAt, at).includes("\n");
+      const from = sameLine && at - quoteAt < 200 ? quoteAt : body.lastIndexOf("\n", at) + 1;
+      let cut = body.slice(from, from + chars);
+      // End on a sentence, not on whatever character the budget landed on.
+      //   1. punctuation + closing quote  — a quoted sentence, the common case
+      //   2. a bare closing curly quote   — a quote with no terminal punctuation
+      //   3. a sentence end               — for prose entries that are not quotes
+      const floor = Math.max(24, min ?? 24);
+      const above = (i: number) => i > floor;
+      const quoted = [...cut.matchAll(/[.?!\u2026]["\u201d]/g)];
+      const lastQuoted = quoted[quoted.length - 1];
+      const curly = cut.lastIndexOf("\u201d");
+      const sentences = [...cut.matchAll(/[.?!\u2026](\s|$)/g)];
+      const lastSentence = sentences[sentences.length - 1];
+      if (lastQuoted && above(lastQuoted.index ?? 0)) {
+        cut = cut.slice(0, (lastQuoted.index ?? 0) + 2);
+      } else if (above(curly)) {
+        cut = cut.slice(0, curly + 1);
+      } else if (lastSentence && above(lastSentence.index ?? 0)) {
+        cut = cut.slice(0, (lastSentence.index ?? 0) + 1);
+      } else {
+        // NO BOUNDARY ABOVE THE FLOOR — without this the excerpt is left as the
+        // raw slice, cut mid-word with no ellipsis. `min` is a preference for a
+        // longer excerpt, never a licence to publish a broken one.
+        const best = Math.max(
+          lastQuoted ? (lastQuoted.index ?? 0) + 2 : -1,
+          curly >= 0 ? curly + 1 : -1,
+          lastSentence ? (lastSentence.index ?? 0) + 1 : -1,
+        );
+        if (best > 24) cut = cut.slice(0, best);
+      }
+      // Strip transcript timecodes — [00:04:25], [ 8m33s ], (17:08). Load-bearing
+      // inside an entry, pure noise on a slide. Stripped here rather than in the
+      // corpus, which stays untouched.
+      return cut
+        .replace(/\s*[[(]\s*\d{1,2}(?:[:m]\d{1,2}){1,2}s?\s*[\])]/g, "")
+        .replace(/[ \t]+\n/g, "\n")
+        .replace(/\n{3,}/g, "\n\n")
+        .trim();
+    };
+
+    let cut = [
+      passage(pick.anchor, pick.chars, pick.min),
+      ...(pick.also ?? []).map((x) => passage(x.anchor, x.chars, x.min)),
+    ].join("\n\n");
+
+    // THE AUTHOR'S NAME COMES OUT (Sean, 8 September): "please remove my name
+    // Sean Harris from any quote. You can keep the quote. Just remove my name."
+    //
+    // Done here rather than in the corpus, which stays byte-identical to what
+    // the archive publishes — this is a presentation rule for the front page,
+    // not an edit to the record. It is also the same rule the archive already
+    // applies to everyone else: anonymise the person, never degrade the record.
+    //
+    // Only the vocative forms are handled, because those are the ones that
+    // delete cleanly: "Sean Harris! Stop typing…" and "I'm a female, Sean."
+    // A name used as a subject or object ("I told Sean about it") cannot be
+    // deleted without breaking the sentence, so rather than quietly shipping
+    // broken prose the build FAILS and says to re-cut the anchor — the same
+    // discipline the anchors themselves run under.
+    // ONLY THE VOCATIVE FORMS ARE TOUCHED, and that restriction is the whole
+    // safety of this. Deleting the name wherever it appears looks like it works
+    // and quietly does not: "This is the voice of Sean Christopher Harris and I
+    // am being asked to repeat a statement" becomes "This is the voice of and I
+    // am…", which is broken prose that no longer contains the word the check
+    // was looking for. So the name is removed ONLY where it is being addressed —
+    // opening a quotation, or set off by a comma — and every other appearance
+    // fails the build instead of shipping a mangled sentence.
     cut = cut
-      .replace(/\s*[[(]\s*\d{1,2}(?:[:m]\d{1,2}){1,2}s?\s*[\])]/g, "")
-      .replace(/[ \t]+\n/g, "\n")
-      .replace(/\n{3,}/g, "\n\n");
+      // "Sean Harris! Stop typing…" / "“Sean, please stop."  — opening address
+      .replace(/(^|[“"‘'\n])\s*Sean(?:\s+Christopher)?(?:\s+Harris)?\b\s*[!,]\s*/g, "$1")
+      // "I'm a female, Sean." — trailing address, comma and all
+      .replace(/,\s*Sean(?:\s+Christopher)?(?:\s+Harris)?\b(?=\s*[.!?,”"]|$)/g, "")
+      .replace(/[ \t]{2,}/g, " ")
+      .replace(/\s+([.!?,])/g, "$1");
+    // WHERE THE NAME CANNOT BE DELETED, IT IS MARKED (8 September). Until now
+    // this threw, on the grounds that "This is the voice of Sean Christopher
+    // Harris and I am…" cannot have the name cut out of it without producing
+    // "the voice of and I am…". That was right about the danger and wrong about
+    // the remedy: the first entry's strongest continuation runs straight through
+    // exactly that sentence, and refusing to render it meant the slide stopped
+    // three sentences early.
+    //
+    // A bracketed marker is the ordinary scholarly form for this and it is more
+    // honest than either alternative — it neither leaves the name in nor hides
+    // that something was taken out. The vocative forms above still delete
+    // cleanly, because "Sean Harris! Stop typing" loses nothing without them.
+    cut = cut.replace(/\bSean(?:\s+Christopher)?(?:\s+Harris)?\b/g, "[name removed]");
     if (!d.entry_date) {
       throw new Error(`home quote: ${pick.id} has no entry_date`);
     }
@@ -325,13 +390,24 @@ export function curatedQuotes(picks: HomeQuotePick[]): JournalQuote[] {
       location: d.location ?? null,
       hasAudio: Boolean(d.audio_url || d.audio_file),
       body: cut.trim(),
-      note: pick.note,
+      question: pick.question,
     };
   });
 }
 
-/** Glossary terms with a usable one-line summary, for the home page strip. */
-export function homeGlossary(slugs: string[]): { slug: string; term: string; summary: string }[] {
+/**
+ * Glossary terms for the home page carousel, as COMPLETE statements.
+ *
+ * Two things were wrong here before 8 September. It cut at a hard 150
+ * characters, so every slide ended mid-word; and it used cleanDef alone, which
+ * strips markdown headings but NOT the dictionary head matter — so the home
+ * page was the one surface in the site rendering "per·SEP·choo·uhl set, noun A
+ * perceptual set is a tendency to…" with the term repeated as the slide title
+ * directly above it. Every other glossary surface already used splitDef.
+ */
+export function homeGlossary(
+  slugs: string[],
+): { slug: string; term: string; pron: string; summary: string }[] {
   const L = load();
   return slugs
     .map((sl) => L.glossBySlug.get(sl.toLowerCase()))
@@ -339,8 +415,24 @@ export function homeGlossary(slugs: string[]): { slug: string; term: string; sum
     .map((t) => ({
       slug: t.slug.toLowerCase(),
       term: t.term,
-      summary: glossarySummary(t.definition || "", 150),
+      // Three sentences at 460, not two at 320 — Sean, 9 September: "we need
+      // more meat under the glossary section… three to four lines of text."
+      // The pronunciation was already being computed by splitDef and thrown
+      // away; it is the one piece of a dictionary entry the site had nowhere to
+      // put, and a slide with the term as its heading is where it belongs.
+      pron: splitDef(t.definition || "").pron.replace(/\s+/g, " ").trim(),
+      // 500, not 460: "cognitive liberty" opens with a 122-character sentence
+      // followed by a 370-character one, and at 460 the pair did not fit, so the
+      // slide rendered two lines where the others rendered five. The cap has to
+      // clear the longest real sentence in the set or it silently truncates the
+      // entry that most needs the room.
+      summary: firstSentences(cleanDef(splitDef(t.definition || "").body), 3, 500),
     }));
+}
+
+/** How many terms the glossary holds, for the home page's meta line. */
+export function glossaryCount(): number {
+  return load().glossBySlug.size;
 }
 
 export function journalStats() {

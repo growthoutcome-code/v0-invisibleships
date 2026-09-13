@@ -837,9 +837,21 @@ export const CONCEPTS: Concept[] = [
     basis: "documented",
     theme: "experience",
     audience: ["household", "clinicians"],
-    title: "If nobody's house is haunted, what produces the feeling?",
+    // MERGED 10 September. The home page carried "Your house is not haunted" as
+    // a section lead and this concept's question as the first slide title —
+    // two headings saying one thing, which is what Sean asked to collapse. The
+    // statement is the better title: it is the sentence a frightened person
+    // needs first, and the question is answered in the body anyway.
+    title: "Your house is not haunted",
     body:
-      "A feeling of presence — someone in the room, standing behind you, touching you — can be produced on demand in a laboratory, in healthy people, with no drug and no external agent. In 2014 Olaf Blanke's group published an experiment in Current Biology using a master-slave robot. A blindfolded participant moved a lever in front of them while a robot arm behind them reproduced the movement against their back. When the reproduction was simultaneous, participants felt themselves touching their own back. When it was delayed by a fraction of a second, the brain could no longer attribute the touch to the person's own movement, and resolved the conflict by generating somebody else. Of thirty healthy participants, roughly a third spontaneously reported feeling someone behind them, touching them. Some reported several people. Two found it distressing enough to ask that the experiment stop. A pooled analysis across twenty-five such experiments has since been published. The direction of that finding is the point. The presence was not detected. It was manufactured by the participant's own nervous system out of a half-second timing error, with nobody there. Other findings converge. Sleep paralysis produces felt presence, chest pressure and an inability to move, and the cross-cultural literature records the same physiology interpreted as demons, witches, spirits or visitors depending on where the sleeper grew up. And when researchers tested the best-known claim that electromagnetic fields induce a sensed presence, it failed to replicate: Granqvist and colleagues reported in 2005 that the experiences tracked suggestibility rather than the fields. None of this establishes the cause of any particular person's experience. What it establishes is that vivid, specific, frightening presence and touch require no external source at all — and that anyone trying to work out what is happening to them deserves to know the brain does this unaided before concluding that something is being done to them.",
+      // FIVE SENTENCES CARRY THE WHOLE THING, because the home page shows the
+      // first five and Sean wanted one body rather than a lead plus a slide.
+      // They run: the statement, the published experiment that validates it,
+      // that nobody was there, what this record claims is done deliberately,
+      // and what the terror is FOR. The documented half and the claimed half
+      // are separated by four words — "what this record describes" — and that
+      // separation is the only reason the last two sentences are publishable.
+      "Your house is not haunted, and that is a finding rather than a reassurance. In 2014 Olaf Blanke's group manufactured the feeling of a presence in healthy people: a blindfolded participant moved a lever, a robot reproduced the movement against their back, and a half-second delay was enough that one in three felt someone standing behind them — two asked for the experiment to stop. Nobody was ever in the room with them. What this record describes is that effect imposed rather than induced: phantom sensations across every sense, and visuals reproducing what a haunting is supposed to look like. The terror is the mechanism — a household driven outside will accept help from whoever is waiting, and what this record says waits there is a facilitator of Zersetzung tactics and a suggestion of euthanasia.\n\nThe published work stands on its own. Blanke's experiment ran on thirty healthy participants; roughly a third spontaneously reported someone behind them, some reported several, and a pooled analysis across twenty-five such experiments has since been published. When the reproduction was simultaneous, participants felt themselves touching their own back; when it was delayed, the brain could no longer attribute the touch to the person's own movement and resolved the conflict by generating somebody else. Of thirty healthy participants, roughly a third spontaneously reported feeling someone behind them, touching them. Some reported several people. Two found it distressing enough to ask that the experiment stop. A pooled analysis across twenty-five such experiments has since been published. The direction of that finding is the point. The presence was not detected. It was manufactured by the participant's own nervous system out of a half-second timing error, with nobody there. Other findings converge. Sleep paralysis produces felt presence, chest pressure and an inability to move, and the cross-cultural literature records the same physiology interpreted as demons, witches, spirits or visitors depending on where the sleeper grew up. And when researchers tested the best-known claim that electromagnetic fields induce a sensed presence, it failed to replicate: Granqvist and colleagues reported in 2005 that the experiences tracked suggestibility rather than the fields. None of this establishes the cause of any particular person's experience. What it establishes is that vivid, specific, frightening presence and touch require no external source at all — and that anyone trying to work out what is happening to them deserves to know the brain does this unaided before concluding that something is being done to them.",
     evidence: [
       "Blanke et al., Current Biology, 6 November 2014: robotically induced presence hallucination in 30 healthy participants; ~1 in 3 spontaneously reported someone behind them touching them; some reported several; two asked to stop",
       "The effect depends on a sub-second delay between the participant's own movement and the touch — a sensorimotor timing conflict, not a stimulus",
@@ -1100,6 +1112,81 @@ export const CONCEPTS: Concept[] = [
     verification: "unverified",
     disclaimer:
       "This concept reports documented capability and published practice. It establishes no surveillance of any individual, and no current practice by any named agency.",
+  },
+
+  /* ------------------------------------------------------------------------
+     TWO CONSTRUCTIVE CONCEPTS (Sean, 10 September). Both are ARGUMENTS, not
+     findings, and both are labelled `structural` and `unverified` so they can
+     never be quoted as things this record establishes. They exist because the
+     register held 35 concepts and not one of them described a system worth
+     building — an archive that only catalogues harm gives a reader who believes
+     all of it nowhere to put that belief except fear.
+     --------------------------------------------------------------------- */
+  {
+    id: "prevention-as-the-product",
+    origin: "author",
+    basis: "structural",
+    theme: "surveillance",
+    audience: ["policy", "household"],
+    title: "Who could refuse a system that saved their child?",
+    body:
+      // EMBELLISHED 10 September at Sean's request — it was the shortest slide
+      // of the seven at 298 characters, and the scenario that makes the argument
+      // worth having was entirely below the fold.
+      //
+      // KEPT ANALYTICAL, DELIBERATELY. The mechanism is the whole point, and
+      // detail about what an offender intends toward a named child adds nothing
+      // to it while costing the archive its seriousness. What the scenario needs
+      // to establish is the SEQUENCE — flagged in seconds, reviewed by a person,
+      // decided by a person, steered away — and the outcome, which is a child
+      // who never learns anything happened.
+      "Imagine the terms inverted: you are told whenever you are observed, harassment is a crime rather than a method, and law enforcement is paid for harm that did not happen rather than arrests that did. Now the hard case: someone on a registry is present where children are, and the system flags it in seconds rather than after a report — an automation raises it, a person reviews it, a person decides. The intervention is closer to social work than policing; the individual is steered away, no crime occurs, and a child goes home that afternoon never knowing there was an afternoon to survive. The family is told a harm was prevented, and invited to review the service. What they feel is relief so total it forecloses argument, and that is the finding: a system justified by the worst thing that could happen to your child cannot be argued with by anyone who loves a child.\n\nWhat that family feels is the finding. Relief so total that it forecloses argument, and then, for anyone who thinks about it later, the knowledge that a mind was read and a life rearranged before anything was done — and that they are glad. A system justified by the worst thing that could happen to your child cannot be argued with by anyone who loves a child. That makes the consent it collects the most powerful instrument in it, and the least examined.",
+    evidence: [
+      "420 schoolchildren placed on a sheriff's list of likely future criminals — what predictive intervention has actually produced on this record",
+      "0 of 99 regulations record a route to individual review",
+      "Colorado HB24-1058 (2024): express consent before neural data is collected, and a route for a person to have it deleted",
+    ],
+    questions: [
+      "Whose consent is it? The family's is asked for. The observed person's is not.",
+      "What is the remedy when the inference is wrong and no act ever occurred?",
+      "Is there any point at which a grateful public says stop?",
+    ],
+    references: [
+      { label: "What are children subject to?", href: "/concepts#what-children-are-subject-to" },
+      { label: "Why did legislatures write laws for neural data?", href: "/concepts#law-for-neural-data" },
+      { label: "Organised covert harassment of individuals is established fact", href: "/concepts#organised-harassment-is-fact" },
+    ],
+    referencesNote:
+      "The first is a counter-example, not support: it is what prevention-before-the-act has produced where it has been tried on this record.",
+    verification: "unverified",
+  },
+  {
+    id: "whose-eyesight-is-it",
+    origin: "author",
+    basis: "structural",
+    theme: "surveillance",
+    audience: ["household", "policy"],
+    title: "Why does the camera on your door not answer to you?",
+    body:
+      "A doorbell camera watches your street and answers to its manufacturer. You can look at what it recorded; you do not hold it, and you cannot say who else can. The proposal here is narrower than a privacy argument and harder to dismiss: give a citizen their own eyesight — one recording that belongs to the person the way a body camera belongs to an officer.\n\nThe procurement record gives that proposal an uncomfortable shape. Amazon Web Services is the largest government cloud vendor in this register by a wide margin: $42.9bn across 27 awards, and 93 deployments in 21 of the 35 geographies tracked. Its GovCloud capability list includes Amazon Rekognition — face detection and comparison across image and video. The company that sells the doorbell also sells the platform.\n\nThat is a statement about concentration, not a connection between the two, and nothing in this record shows one. What it does show is who has a column. Across 1,922 procurement entries, ten describe an individual. All ten are litigants.",
+    evidence: [
+      "AWS: $42.9bn across 27 awards; 93 deployments across 21 of the 35 geographies in the register",
+      "Amazon Rekognition — face detection/comparison and image/video analysis — listed under AWS GovCloud (US)",
+      "10 of 1,922 procurement records describe an individual; every one of them is a litigant",
+      "Ring appears nowhere in this register: the consumer product sits outside the procurement record entirely",
+    ],
+    questions: [
+      "Who would hold a citizen-owned recording, and on whose infrastructure?",
+      "Is a record you own but cannot take off the platform really yours?",
+      "What would it take for the observed person to appear in a procurement register at all?",
+    ],
+    references: [
+      { label: "There is no column for you", href: "/concepts#no-column-for-you" },
+      { label: "Who profits from a body?", href: "/concepts#who-profits-from-a-body" },
+    ],
+    referencesNote:
+      "Both describe the gap this proposal is aimed at. Neither shows that a consumer camera and a government platform are linked.",
+    verification: "unverified",
   },
 ];
 

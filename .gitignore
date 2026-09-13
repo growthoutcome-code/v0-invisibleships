@@ -10,3 +10,6 @@ next-env.d.ts
 # python bytecode from running the build scripts
 __pycache__/
 *.pyc
+
+# transient dev-server capture, never committed
+dev-error.log
