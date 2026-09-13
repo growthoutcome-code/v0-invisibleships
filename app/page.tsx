@@ -14,7 +14,7 @@ import { CONCEPTS, FINDINGS, SOURCE_YEARS } from "@/lib/concepts";
 import JournalQuotes from "@/components/JournalQuotes";
 import { CONCEPT_PICKS, GLOSSARY_PICKS } from "@/lib/home-picks";
 import { firstSentences } from "@/lib/glossary-format";
-import { CRIME_FIGURES } from "@/lib/home-data-sections";
+import { TRAFFICKING_OPS } from "@/lib/enforcement";
 import { curatedQuotes, glossaryCount, homeGlossary, journalStats } from "@/lib/server-corpus";
 import { HOME_QUOTES } from "@/lib/home-quotes";
 import { ACCOUNTS_READY } from "@/lib/flags";
@@ -234,6 +234,25 @@ const CITY_QUOTES: { date: string; id: string; text: string }[] = [
 
 export default function Page() {
   const stats = journalStats();
+
+  /* THE DHS TRAFFICKING FIGURES, DERIVED (Sean, 13 September \u2014 DHS prominent,
+     905 leading the metric row). They were three typed literals inside the JSX
+     while lib/enforcement.ts already carried all three, which is the exact thing
+     this file's header forbids. Looked up by label and thrown on rather than
+     defaulted: a silently missing figure would render an empty stat and nobody
+     would notice, where a build failure names the row that moved. */
+  const op = (label: string) => {
+    const row = TRAFFICKING_OPS.find((o) => o.label === label);
+    if (!row) {
+      throw new Error(
+        `home crime metrics: no TRAFFICKING_OPS row labelled ${JSON.stringify(label)} in lib/enforcement.ts.`
+      );
+    }
+    return row;
+  };
+  const arrests905 = op("World Cup operation arrests");
+  const rescued180 = op("People rescued");
+  const children30 = op("Children among them");
 
   const entries = curatedQuotes(HOME_QUOTES);
   const gc = govCloud();
@@ -829,46 +848,63 @@ export default function Page() {
               And in the crime record?
             </h3>
             <div className="mt-10 grid gap-x-12 gap-y-14 xl:grid-cols-3">
+              {/* DHS LEADS, AND LEADS THE ROW (Sean, 13 September): "I want nine
+                  hundred and five human trafficking arrests to be called out. I
+                  want it on the left hand side of the three metrics, and I want
+                  DHS to be prominent."
+
+                  It was third of three. Moved to first, which on this grid is the
+                  position a reader's eye reaches before any other, and DHS now
+                  names itself in the stat line rather than only in the source
+                  link underneath.
+
+                  905, NOT 900 (Sean originally said "nine hundred"). The register
+                  row — crime_accomplishments, "World Cup anti-trafficking
+                  operation" — says 905 arrests alongside 180 recovered, 30 of
+                  them children, tier A, one DHS release for all three. Rounding a
+                  sourced figure down to a spoken one is the small drift this
+                  archive cannot afford, so the exact number ships.
+
+                  NOW DERIVED, NOT TYPED. All three figures were literals here
+                  while lib/enforcement.ts already held them — and the same facts
+                  were typed again in words further up this page, so one fact
+                  appeared on one page in two formats. The file header promises
+                  "every number on this page is derived at render from lib/, never
+                  typed in"; these three now keep that promise.
+
+                  THE ORDER IS SEAN'S, THE CAVEAT IS THE REGISTER'S. He wants
+                  arrests as the headline with the rescues immediately under it.
+                  The register's own corroboration note says the opposite about
+                  which number carries weight: "The rescue figure is the outcome;
+                  the arrest figure counts activity, and DHS publishes no breakdown
+                  of eventual charges." So the stat leads with 905 as asked, the
+                  180 sits directly beneath it, and the distinction between
+                  activity and outcome stays in the line rather than being quietly
+                  dropped with it. */}
               <div>
                 <Figure
-                  stat="51% below"
-                  line="its 1997 peak: criminal arrests fell from 15.28 million that year to 7.52 million in 2024. Civil immigration arrests, counted by a different agency on a different calendar, moved the other way."
-                  source={{ label: "Crime — the finding", href: "/data/crime" }}
-                />
-              </div>
-              <div>
-                <Figure
-                  stat="−9.3%"
-                  line="violent crime in 2025, the largest year-to-year decline since the FBI began estimating in 1936, with murder down 18.1% to the lowest rate ever recorded."
+                  stat={arrests905.value.toLocaleString()}
+                  line={`DHS human trafficking arrests in HSI-led operations around the 2026 World Cup, and ${rescued180.value} trafficking victims recovered \u2014 ${children30.value} of them children. Arrests count activity, and DHS publishes no breakdown of eventual charges; the ${rescued180.value} recovered is the outcome.`}
                   source={{
-                    label: "FBI, 2025 Reported Crimes in the Nation",
-                    href: "https://www.fbi.gov/news/press-releases/fbi-releases-2025-reported-crimes-in-the-nation-statistics",
+                    label: "DHS, 29 July 2026",
+                    href: "https://www.dhs.gov/news/2026/07/29/dhs-highlights-successful-arrests-and-rescues-crackdown-human-trafficking-during",
                   }}
                 />
               </div>
               <div>
-                {/* 905, NOT 900 (Sean asked for "nine hundred"). The register row
-                    — crime_accomplishments, "World Cup anti-trafficking operation"
-                    — says 905 arrests alongside 180 rescued, 30 of them children,
-                    tier A, one DHS release for both. Rounding a sourced figure
-                    down to a spoken one is the small drift this archive cannot
-                    afford, so the exact number ships.
-
-                    THE ORDER IS SEAN'S, THE CAVEAT IS THE REGISTER'S. He wants
-                    arrests as the headline with the rescues immediately under it.
-                    Worth flagging that the register's own corroboration note says
-                    the opposite about which number carries weight: "The rescue
-                    figure is the outcome; the arrest figure counts activity, and
-                    DHS publishes no breakdown of eventual charges." So the stat
-                    leads with 905 as asked, the 180 sits directly beneath it, and
-                    the distinction between activity and outcome stays in the line
-                    rather than being quietly dropped with it. */}
                 <Figure
-                  stat="905"
-                  line="arrests, and 180 trafficking victims recovered — 30 of them children — in HSI-led operations around the 2026 World Cup. Arrests count activity, and DHS publishes no breakdown of eventual charges; the 180 recovered is the outcome."
+                  stat="51% below"
+                  line="its 1997 peak: criminal arrests fell from 15.28 million that year to 7.52 million in 2024. Civil immigration arrests, counted by a different agency on a different calendar, moved the other way."
+                  source={{ label: "Crime \u2014 the finding", href: "/data/crime" }}
+                />
+              </div>
+              <div>
+                <Figure
+                  stat="\u22129.3%"
+                  line="violent crime in 2025, the largest year-to-year decline since the FBI began estimating in 1936, with murder down 18.1% to the lowest rate ever recorded."
                   source={{
-                    label: "DHS, 29 July 2026",
-                    href: "https://www.dhs.gov/news/2026/07/29/dhs-highlights-successful-arrests-and-rescues-crackdown-human-trafficking-during",
+                    label: "FBI, 2025 Reported Crimes in the Nation",
+                    href: "https://www.fbi.gov/news/press-releases/fbi-releases-2025-reported-crimes-in-the-nation-statistics",
                   }}
                 />
               </div>
