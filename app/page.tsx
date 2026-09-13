@@ -8,6 +8,7 @@ import GateAnimation from "@/components/GateAnimation";
 import Header from "@/components/Header";
 import ExportButton from "@/components/ExportButton";
 import HomeCarousel, { type Slide } from "@/components/HomeCarousel";
+import RelatedLinks from "@/components/RelatedLinks";
 import HomeSuicideChart from "@/components/HomeSuicideChart";
 import { CONCEPTS, FINDINGS, SOURCE_YEARS } from "@/lib/concepts";
 import JournalQuotes from "@/components/JournalQuotes";
@@ -63,12 +64,12 @@ export const metadata: Metadata = {
   // carries its question mark with it, which an assertion never would.
   title: "Has a neurotech terrorist attack happened?",
   description:
-    "Is there a government cloud platform anywhere running a Zersetzung German disintegration tactics layer that is isolating and discrediting a person without ever arresting them? Are those people being harassed through neurotechnology and forced to accept euthanasia? Are they being experimented on without consent by an unacknowledged union of approximately two hundred unknown organizations?",
+    "Is there a government cloud platform anywhere running a Zersetzung German disintegration tactics layer that is isolating and discrediting a person? Are those people being harassed through neurotechnology and forced to accept euthanasia? Are they being experimented on without consent by an unacknowledged union of approximately two hundred unknown organizations?",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Has a neurotech terrorist attack happened?",
     description:
-      "Is there a government cloud platform anywhere running a Zersetzung German disintegration tactics layer that is isolating and discrediting a person without ever arresting them? Are those people being harassed through neurotechnology and forced to accept euthanasia? Are they being experimented on without consent by an unacknowledged union of approximately two hundred unknown organizations?",
+      "Is there a government cloud platform anywhere running a Zersetzung German disintegration tactics layer that is isolating and discrediting a person? Are those people being harassed through neurotechnology and forced to accept euthanasia? Are they being experimented on without consent by an unacknowledged union of approximately two hundred unknown organizations?",
     images: ["/og-default.png"],
   },
 };
@@ -331,6 +332,26 @@ export default function Page() {
                 {HERO.question}
               </h1>
 
+              {/* "WITHOUT EVER ARRESTING THEM" IS GONE, and this was a factual
+                  correction rather than a trim. Sean, 13 September: "let's remove
+                  without ever arresting them. And here's why. Because the
+                  discrediting includes asking local law enforcement to arrest
+                  people outside of the judicial system."
+
+                  The clause was inherited from the Zersetzung literature, where
+                  avoiding arrest was the point — the Stasi method was to ruin a
+                  person while leaving no charge to contest. This archive
+                  describes something else: arrest as one of the instruments of
+                  the discrediting. So the clause did not merely overclaim, it
+                  described the opposite of the record, and it ruled out the
+                  thing the record actually alleges. The question is stronger
+                  without it, because "isolating and discrediting a person" covers
+                  an arrest and the absence of one equally.
+
+                  Both metadata descriptions carry the same sentence and were
+                  changed with it — they are copies of this paragraph, and a
+                  shared link that still said "without ever arresting them" would
+                  contradict the page it opens. */}
               {/* ONE PARAGRAPH, TWO QUESTIONS, no line breaks. It carried three
                   and a pair of percentages until 8 September; the suicide figures
                   moved onto the chart that draws them. See the note on HERO for
@@ -345,7 +366,7 @@ export default function Page() {
                   Zersetzung
                 </a>{" "}
                 German disintegration tactics layer that is isolating and discrediting a
-                person without ever arresting them? Are those people being harassed
+                person? Are those people being harassed
                 through neurotechnology and forced to accept euthanasia? Are they being
                 experimented on without consent by an unacknowledged union of
                 approximately two hundred unknown organizations?
@@ -449,10 +470,31 @@ export default function Page() {
             it still tells a stranger exactly what they are looking at.
 
             It is not a question, and it is the only section heading that is not.
-            That is a deliberate departure from Concept B: a label that says
-            "unverified" does the scan test's job better here than a question
-            would, because the thing a reader most needs to know about this
-            section is its evidentiary status.
+
+            "UNVERIFIED" CAME OUT OF IT, 13 September. Sean: "does unverified
+            need to be in it? No. It does not. Let's remember to just point
+            people to the disclaimer. We need to focus on delivering a message,
+            and we want ninety five percent of that message to be the message we
+            intend to deliver and five percent to be pointing people to the
+            disclaimer and the copyright."
+
+            That is a ratio, and it is worth holding to elsewhere on this page.
+            The word was the third guard on the same idea: the meta line under
+            the heading already gives dated days, audio-linked recordings and
+            document counts, and the aside beside the actions already says "How
+            to read the journal". Leading with the disclaimer meant the first
+            word a stranger read about the archive was a hedge about it.
+
+            "ONE CITY" CAME OUT OF THE META LINE the same day, and that was a
+            correction rather than a trim. It read as a limitation — a sample of
+            one — while also implying the phenomenon is confined to one place,
+            which the record does not say. The journal corpus names Denver 1,202
+            times against Portland 34, Seattle 22 and a long tail below that, so
+            Denver is where the record was KEPT, not the boundary of what it
+            describes. lib/terms.ts already states that distinction properly and
+            is the place that should carry it. The lead paragraph below still
+            says Denver, which is correct there: it is describing where the
+            writing happened.
 
             "SOUND", NOT "LOOK" (Sean, 5 September). The record is speech —
             five slides of people talking, and the only thing a reader can
@@ -469,11 +511,27 @@ export default function Page() {
         <SiteSection
           id="record"
           eyebrow="Journal"
-          heading="Unverified statements from the neurotech bullhorn"
+          heading={
+            <>
+              {/* LINKED, NOT EXPLAINED (Sean, 13 September): "we would only want
+                  to link to it and not explain it in the section." The term is
+                  the author's coinage and appears zero times in the 930-file
+                  corpus, which made it the one unanchored phrase on this page.
+                  The link is the anchor; the concept carries the definition, the
+                  author's claims and the assessment of them. */}
+              Statements from the{" "}
+              <a
+                href="/concepts#the-neurotech-bullhorn"
+                className="underline decoration-accent decoration-2 underline-offset-[6px] hover:decoration-foreground"
+              >
+                neurotech bullhorn
+              </a>
+            </>
+          }
           meta={
             <>
               {stats.days} dated days · {stats.recordings} audio-linked recordings ·{" "}
-              {stats.docs} documents · one city
+              {stats.docs} documents
             </>
           }
           actions={[
@@ -512,6 +570,49 @@ export default function Page() {
           <MotifStage name="carry" className="-mx-4 px-4 py-6 sm:-mx-8 sm:px-8">
             <JournalQuotes entries={entries} />
           </MotifStage>
+
+          {/* THE WAY OUT, NOT MORE WORDS (Sean, 13 September): "we don't want to
+              generate a bunch of text in this section, but we need to provide
+              the ability to tease out to both glossary and concepts."
+
+              Everything the research produced sits behind these nine links. The
+              section says none of it: a reader who wants to know what could
+              physically produce a voice has somewhere to go, and a reader who
+              came for the record is not made to read an essay about mechanisms
+              first.
+
+              ORDER IS AN ARGUMENT. Under Glossary, the two documented and
+              purchasable mechanisms come before the claimed one — structure-borne
+              audio and the parametric array ahead of voice-to-skull. A reader
+              who follows the list in order meets the cheap explanations first,
+              which is the archive's whole posture. */}
+          <RelatedLinks
+            groups={[
+              {
+                label: "Concepts",
+                links: [
+                  { href: "/concepts#the-neurotech-bullhorn", label: "What is the neurotech bullhorn?" },
+                  { href: "/concepts#can-you-record-it", label: "Can you record it?" },
+                  { href: "/concepts#only-you-can-hear-it", label: "\u201cOnly I can hear it\u201d is not, by itself, unusual" },
+                  { href: "/concepts#what-produces-the-feeling", label: "Your house is not haunted" },
+                  { href: "/concepts#organised-harassment-is-fact", label: "Organised covert harassment is established fact" },
+                ],
+              },
+              {
+                label: "Glossary",
+                links: [
+                  { href: "/glossary/structure-borne-audio", label: "Structure-borne audio" },
+                  { href: "/glossary/parametric-array", label: "Parametric array" },
+                  { href: "/glossary/mosquito-device", label: "The Mosquito" },
+                  { href: "/glossary/microwave-auditory-effect", label: "Microwave auditory effect" },
+                  { href: "/glossary/voice-to-skull", label: "Voice-to-skull (V2K)" },
+                  { href: "/glossary/contact-microphone", label: "Contact microphone" },
+                  { href: "/glossary/sampling-limit", label: "Sampling limit" },
+                  { href: "/glossary/zersetzung-tactics", label: "Zersetzung tactics" },
+                ],
+              },
+            ]}
+          />
 
           {/* CUT TO THE QUOTATIONS (Sean, 4 September): "let's get rid of all
               of the other disclaimer copy, including how many citizens are
