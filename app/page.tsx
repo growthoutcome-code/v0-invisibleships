@@ -900,8 +900,8 @@ export default function Page() {
               </div>
               <div>
                 <Figure
-                  stat="\u22129.3%"
-                  line="violent crime in 2025, the largest year-to-year decline since the FBI began estimating in 1936, with murder down 18.1% to the lowest rate ever recorded."
+                  stat="Down 9.3%"
+                  line="in violent crime in 2025 \u2014 the largest year-to-year decline since the FBI began estimating in 1936. Murder fell 18.1%, to the lowest rate ever recorded."
                   source={{
                     label: "FBI, 2025 Reported Crimes in the Nation",
                     href: "https://www.fbi.gov/news/press-releases/fbi-releases-2025-reported-crimes-in-the-nation-statistics",
