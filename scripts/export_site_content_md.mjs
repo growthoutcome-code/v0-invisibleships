@@ -82,14 +82,33 @@ function lift(name) {
   }
 }
 
-function fresh(dir) {
-  if (existsSync(dir)) for (const f of readdirSync(dir)) rmSync(join(dir, f));
+// WRITE FIRST, THEN REMOVE ORPHANS \u2014 13 September, matching the same change in
+// scripts/export_concepts_md.mjs. `fresh()` used to empty each output directory
+// and write everything back, so ADDING one glossary term deleted every file in
+// the folder to recreate identical copies. Sean, on being asked for a delete
+// permission to add a single concept: "I'm only asking to add a concept."
+//
+// The guard the clear provided is real \u2014 rename a term and its stale file would
+// otherwise ship in the download forever \u2014 so it is kept, applied to the files
+// that are actually orphaned rather than to all of them. Steady state: N writes,
+// zero unlinks, and the exporter runs where deletes are not permitted.
+function prepare(dir) {
   mkdirSync(dir, { recursive: true });
+}
+
+function sweep(dir, written) {
+  const orphans = readdirSync(dir).filter((f) => f.endsWith(".md") && !written.has(f));
+  for (const f of orphans) rmSync(join(dir, f));
+  if (orphans.length) {
+    console.log(`removed  : ${orphans.length} orphaned file(s) in ${dir.split("/").slice(-2).join("/")} \u2014 ${orphans.join(", ")}`);
+  }
+  return orphans.length;
 }
 
 // ------------------------------------------------------------------ glossary
 const TERMS = lift("EXTRA_GLOSSARY");
-fresh(OUT_GLO);
+prepare(OUT_GLO);
+const gWritten = new Set();
 let gBytes = 0;
 for (const t of TERMS) {
   // The definition's first line is the pronunciation, by convention.
@@ -119,12 +138,14 @@ for (const t of TERMS) {
   ].join("\n") + body.trim() + "\n";
   const fname = `IS_GLO_SITE_${(t.slug || t.term).replace(/[^a-z0-9]+/gi, "-").toLowerCase()}.md`;
   writeFileSync(join(OUT_GLO, fname), text);
+  gWritten.add(fname);
   gBytes += text.length;
 }
+sweep(OUT_GLO, gWritten);
 
 // ----------------------------------------------------------------- documents
 const DOCS = lift("DOCUMENTS");
-fresh(OUT_DOC);
+prepare(OUT_DOC);
 const db = [
   "# The source document series",
   "",
@@ -241,7 +262,7 @@ function metaDoc(id, title, docType, lines) {
   ].join("\n") + text;
 }
 
-fresh(OUT_META);
+prepare(OUT_META);
 
 writeFileSync(
   join(OUT_META, "IS_META_why-invisible-ships.md"),

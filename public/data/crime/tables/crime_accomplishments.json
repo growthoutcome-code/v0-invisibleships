@@ -8,7 +8,7 @@
       "claim": "Violent crime down 9.3% in 2025 \u2014 the largest year-to-year decline since FBI estimation began in 1936 \u2014 with murder at 4.1 per 100,000, tied for the lowest rate ever recorded.",
       "corroboration": "Independently visible in CDC death-certificate data, which registers the same turn.",
       "tier": "A",
-      "source_id": null
+      "source_id": "cs_fbi_vc_2025"
     },
     {
       "what": "The overdose decline",
@@ -16,7 +16,7 @@
       "claim": "Overdose deaths fell 26.2% in 2024 \u2014 the largest one-year drop on record \u2014 and kept falling in 2025. CDC attributes the decline to naloxone distribution, treatment access, shifts in supply and renewed prevention.",
       "corroboration": "Reported as attributed; the mortality series itself is final vital-statistics data.",
       "tier": "A",
-      "source_id": null
+      "source_id": "cs_cdc_od_2024"
     },
     {
       "what": "World Cup anti-trafficking operation: 180 people rescued",

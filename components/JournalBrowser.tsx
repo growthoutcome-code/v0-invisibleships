@@ -6,6 +6,7 @@ import type { Dataset, Doc } from "@/lib/types";
 import { track } from "@/lib/analytics";
 import Header, { type Tab } from "@/components/Header";
 import Footer from "@/components/Footer";
+import { pathForSub } from "@/lib/routes";
 import SideNav from "@/components/SideNav";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -17,7 +18,7 @@ import { ChevronLeft, ChevronRight, Volume2, List } from "lucide-react";
 import CopyrightTerms from "@/components/CopyrightTerms";
 import ShareMenu from "@/components/ShareMenu";
 import { Transcript } from "@/components/Transcript";
-import { cleanTerm, cleanDef, splitDef } from "@/lib/glossary-format";
+import { cleanTerm, cleanDef, splitDef, firstSentences } from "@/lib/glossary-format";
 import GlossaryBody from "@/components/GlossaryBody";
 import GlossaryIllustration from "@/components/GlossaryIllustration";
 import { DOCUMENTS, AUTHOR, EXTRA_GLOSSARY } from "@/lib/site-content";
@@ -26,6 +27,7 @@ import PageActions, { SortMenu, type SortDir } from "@/components/PageActions";
 import DataView, { type SubTab } from "@/components/DataView";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
+import Processing from "@/components/Processing";
 
 const journalHref = (id: string) => `/journal/${id.toLowerCase()}`;
 const glossaryHref = (slug: string) => `/glossary/${slug.toLowerCase()}`;
@@ -64,24 +66,21 @@ function excerpt(md: string): string {
 
 // First N sentences of a string (falls back to the whole text if it has no
 // sentence punctuation). Used to cap the glossary peek at 2 sentences.
-function firstSentences(text: string, n = 2): string {
-  // Strip any leading dictionary-style ":" and collapse whitespace.
-  const clean = (text || "").replace(/^[\s:]+/, "").trim();
-  const matches = clean.match(/[^.!?]+[.!?]+(\s|$)/g);
-  const out = (matches ? matches.slice(0, n).join(" ").replace(/\s+/g, " ").trim() : clean) || clean;
-  // Hard char cap so definitions with no early period (colon-delimited entries)
-  // can't overflow the card.
-  return out.length > 220 ? out.slice(0, 220).trim() + "…" : out;
-}
-
-export default function JournalBrowser({ initialTab = "journal" }: { initialTab?: Tab } = {}) {
+export default function JournalBrowser({
+  initialTab = "journal",
+  initialSub,
+}: { initialTab?: Tab; initialSub?: SubTab } = {}) {
   const [ds, setDs] = useState<Dataset | null>(null);
   const [loading, setLoading] = useState(true);
   const [tab, setTab] = useState<Tab>(initialTab);
   // Which vertical of the merged Research section is showing. `concepts` is the
   // fifth; it is addressable at /concepts, which is why the sub-tab lives up
   // here with the URL effect rather than inside DataView.
-  const [dataSub, setDataSub] = useState<SubTab>(initialTab === "concepts" ? "concepts" : "timeline");
+  // initialSub arrives from /data/[section]: a reader who was linked straight to
+  // Crime lands on Crime, not on the Timeline with their vertical thrown away.
+  const [dataSub, setDataSub] = useState<SubTab>(
+    initialSub ?? (initialTab === "concepts" ? "concepts" : "timeline")
+  );
 
   const [q, setQ] = useState(""); const [dFrom, setDFrom] = useState(""); const [dTo, setDTo] = useState("");
   const [part, setPart] = useState(""); const [loc, setLoc] = useState("");
@@ -98,7 +97,6 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
   const [body, setBody] = useState(""); const [bodyLoading, setBodyLoading] = useState(false);
   const [excerpts, setExcerpts] = useState<Record<string, string>>({});
   const [panelOpen, setPanelOpen] = useState(false);
-  const [exportOpen, setExportOpen] = useState(false);
   const [deepLinked, setDeepLinked] = useState(false);
 
   useEffect(() => { loadDataset().then((d) => { setDs(d); setLoading(false); }).catch(() => setLoading(false)); }, []);
@@ -138,13 +136,13 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
       if (sel) path = `/journal/${sel.toLowerCase()}`;
       else if (tab === "glossary") path = gsel ? `/glossary/${gsel.toLowerCase()}` : "/glossary";
       else if (tab === "documents") path = "/documents";
-      else if (tab === "data") path = "/data";
+      else if (tab === "data") path = pathForSub(dataSub);
       else if (tab === "concepts") path = "/concepts";
       else if (tab === "author") path = "/author";
       else if (tab === "disclaimer") path = "/disclaimer";
       window.history.replaceState(null, "", path + window.location.hash);
     } catch { /* ignore */ }
-  }, [tab, sel, gsel, deepLinked]);
+  }, [tab, sel, gsel, dataSub, deepLinked]);
 
   // Section-level analytics: replaceState alone doesn't emit a pageview, so record
   // in-app section switches explicitly for tracking.
@@ -253,9 +251,12 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
           else if (t === "data") setDataSub("timeline");
           setSel(null); setGsel(null);
         }}
-        onSearch={() => { setPanelOpen(true); track("search_opened"); }}
-        onExport={() => { setExportOpen(true); track("export_opened"); }}
-        onHome={() => { setTab("journal"); setSel(null); setGsel(null); setPage(1); }}
+        // The wordmark is a link home, and "/" is the home page now — it used
+        // to be the gate, which is why this reset to the journal feed instead
+        // of navigating. Same bug shape as the nav redirect: correct until the
+        // front door moved, then quietly wrong. A real navigation, because the
+        // home page is a different route and not a tab of this app.
+        onHome={() => { if (typeof window !== "undefined") window.location.assign("/"); }}
       />
 
       <main className="flex-1 w-full max-w-[1400px] mx-auto px-4 sm:px-6 py-6">
@@ -275,7 +276,7 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
           />
         )}
         {loading ? (
-          <div className="text-muted text-center py-20">Loading corpus…</div>
+          <Processing label="Loading the archive" />
         ) : tab === "glossary" ? (
           <GlossarySection terms={glossaryTerms} gcat={gcat} setGcat={setGcat} gsel={gsel} setGsel={setGsel} />
         ) : tab === "documents" ? (
@@ -354,7 +355,6 @@ export default function JournalBrowser({ initialTab = "journal" }: { initialTab?
         stype={stype} setSType={setSType} audioOnly={audioOnly} setAudioOnly={setAudioOnly}
         parts={parts} locs={locs} topics={topics} stypes={stypes} onReset={resetFilters}
       />
-      <ExportModal open={exportOpen} onOpenChange={setExportOpen} />
     </div>
   );
 }
@@ -453,7 +453,7 @@ function Reader({ doc, body, bodyLoading, cats, gloss, onBack, onPrev, onNext }:
         {doc.source_url && <> · <a className="text-accent underline" href={doc.source_url} target="_blank" rel="noreferrer">source ↗</a></>}
       </div>
       {gloss.length > 0 && <div className="text-xs text-muted mb-5">Glossary: {gloss.map(cap).join(", ")}</div>}
-      {bodyLoading ? <div className="text-muted text-sm">Loading…</div> : <Transcript md={body} />}
+      {bodyLoading ? <Processing label="Opening the transcript" variant="inline" /> : <Transcript md={body} />}
       <div className="flex gap-3 mt-12 pt-6">
         {onPrev ? <button onClick={onPrev} className="text-accent text-sm inline-flex items-center gap-1"><ChevronLeft size={15} /> Previous</button> : <span />}
         {onNext && <button onClick={onNext} className="text-accent text-sm ml-auto inline-flex items-center gap-1">Next <ChevronRight size={15} /></button>}
@@ -699,71 +699,6 @@ function FilterPanel(p: any) {
  * Concepts, or the research inputs — so it under-described the download for
  * weeks. A sentence about generated content has to be generated too.
  */
-const approx = (n: number) =>
-  n >= 1000 ? `${Math.round(n / 1000).toLocaleString()},000` : String(n);
-
-function ExportModal({ open, onOpenChange }: { open: boolean; onOpenChange: (o: boolean) => void }) {
-  const c = CORPUS_SUMMARY;
-  return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      {/* xl: this is the one modal with tabular content, so it earns the widest
-        * step. Height bounding and the pinned footer now come from the primitive. */}
-      <DialogContent size="xl">
-        <DialogHeader>
-          <DialogTitle>Export the corpus</DialogTitle>
-        </DialogHeader>
-
-        <DialogBody>
-          <p className="body-copy text-foreground/80">
-            The complete research archive behind this site — <strong>{c.files} files</strong>,
-            of which <strong>{c.markdown} are Markdown</strong>, about{" "}
-            <strong>{approx(c.words)} words</strong>. Built to be handed to an AI
-            assistant: every file opens with a metadata header and holds one
-            coherent unit, so a single file still identifies itself when pasted
-            into a chat on its own.
-          </p>
-
-          <div className="grid sm:grid-cols-2 gap-x-6 gap-y-px rounded border border-border p-px text-sm">
-            {c.folders.map((f) => (
-              <div key={f.key} className="flex gap-3 px-3 py-2.5">
-                <div className="min-w-0 flex-1">
-                  <div className="font-medium">{f.label}</div>
-                  <div className="text-xs text-muted">{f.blurb}</div>
-                </div>
-                <div className="shrink-0 text-right text-xs text-muted tabular-nums pt-0.5">
-                  {f.markdown} md
-                  {f.data > 0 && <div className="opacity-70">{f.data} data</div>}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="grid sm:grid-cols-2 gap-x-6 gap-y-3">
-            <p className="text-xs text-muted">
-              Sized to be usable: the typical file is about {c.medianWords} words
-              and the longest is around {approx(c.largestWords)}. <strong>Do not
-              try to upload all {c.files} at once</strong> — open{" "}
-              <code className="text-[11px]">START-HERE.md</code> in the zip and it
-              names the folder that answers your question. The row data is also
-              included as CSV for your own analysis.
-            </p>
-            <p className="text-xs text-muted">
-              The files carry the author&rsquo;s copyright and Critical Disclaimer. Please use them in their complete, original form.
-            </p>
-          </div>
-        </DialogBody>
-
-        <DialogFooter>
-          <Button variant="outline" onClick={() => onOpenChange(false)}>Cancel</Button>
-          <a className="sm:ml-auto" href="/api/corpus?from=export_dialog" download onClick={() => track("export_downloaded")}>
-            <Button className="w-full sm:w-auto">Download .zip ({(c.zipBytes / 1e6).toFixed(1)} MB)</Button>
-          </a>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-  );
-}
-
 /* ---------- Documents ---------- */
 function DocumentsView() {
   return (

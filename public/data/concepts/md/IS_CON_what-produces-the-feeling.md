@@ -1,6 +1,6 @@
 ---
 id: IS-CON-WHAT-PRODUCES-THE-FEELING
-title: Concept — If nobody's house is haunted, what produces the feeling?
+title: Concept — Your house is not haunted
 collection: concepts
 doc_type: concept
 basis: documented
@@ -9,11 +9,11 @@ theme: experience
 audience: [household, clinicians]
 verification: unverified
 generated_by: scripts/export_concepts_md.mjs
-word_count: 724
+word_count: 816
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
-# If nobody's house is haunted, what produces the feeling?
+# Your house is not haunted
 
 *Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Every concept states its BASIS, its ORIGIN, its THEME and the readers it was written for. The basis tiers are ranked, and never blended inside a single concept: a reader who accepts only `documented` entries can still rely on every one of those and discard the rest without unpicking anything. `testimony` is a dated first-person report, verified by nobody, and says so on its own face wherever it appears. Causes are reported as attributed, never asserted. See `meta/IS_META_terms.md`.*
 
@@ -24,7 +24,9 @@ copyright: © 2026 Sean C. Harris. All Rights Reserved.
 
 **Not independently verified.**
 
-A feeling of presence — someone in the room, standing behind you, touching you — can be produced on demand in a laboratory, in healthy people, with no drug and no external agent. In 2014 Olaf Blanke's group published an experiment in Current Biology using a master-slave robot. A blindfolded participant moved a lever in front of them while a robot arm behind them reproduced the movement against their back. When the reproduction was simultaneous, participants felt themselves touching their own back. When it was delayed by a fraction of a second, the brain could no longer attribute the touch to the person's own movement, and resolved the conflict by generating somebody else. Of thirty healthy participants, roughly a third spontaneously reported feeling someone behind them, touching them. Some reported several people. Two found it distressing enough to ask that the experiment stop. A pooled analysis across twenty-five such experiments has since been published. The direction of that finding is the point. The presence was not detected. It was manufactured by the participant's own nervous system out of a half-second timing error, with nobody there. Other findings converge. Sleep paralysis produces felt presence, chest pressure and an inability to move, and the cross-cultural literature records the same physiology interpreted as demons, witches, spirits or visitors depending on where the sleeper grew up. And when researchers tested the best-known claim that electromagnetic fields induce a sensed presence, it failed to replicate: Granqvist and colleagues reported in 2005 that the experiences tracked suggestibility rather than the fields. None of this establishes the cause of any particular person's experience. What it establishes is that vivid, specific, frightening presence and touch require no external source at all — and that anyone trying to work out what is happening to them deserves to know the brain does this unaided before concluding that something is being done to them.
+Your house is not haunted, and that is a finding rather than a reassurance. In 2014 Olaf Blanke's group manufactured the feeling of a presence in healthy people: a blindfolded participant moved a lever, a robot reproduced the movement against their back, and a half-second delay was enough that one in three felt someone standing behind them — two asked for the experiment to stop. Nobody was ever in the room with them. What this record describes is that effect imposed rather than induced: phantom sensations across every sense, and visuals reproducing what a haunting is supposed to look like. The terror is the mechanism — a household driven outside will accept help from whoever is waiting, and what this record says waits there is a facilitator of Zersetzung tactics and a suggestion of euthanasia.
+
+The published work stands on its own. Blanke's experiment ran on thirty healthy participants; roughly a third spontaneously reported someone behind them, some reported several, and a pooled analysis across twenty-five such experiments has since been published. When the reproduction was simultaneous, participants felt themselves touching their own back; when it was delayed, the brain could no longer attribute the touch to the person's own movement and resolved the conflict by generating somebody else. Of thirty healthy participants, roughly a third spontaneously reported feeling someone behind them, touching them. Some reported several people. Two found it distressing enough to ask that the experiment stop. A pooled analysis across twenty-five such experiments has since been published. The direction of that finding is the point. The presence was not detected. It was manufactured by the participant's own nervous system out of a half-second timing error, with nobody there. Other findings converge. Sleep paralysis produces felt presence, chest pressure and an inability to move, and the cross-cultural literature records the same physiology interpreted as demons, witches, spirits or visitors depending on where the sleeper grew up. And when researchers tested the best-known claim that electromagnetic fields induce a sensed presence, it failed to replicate: Granqvist and colleagues reported in 2005 that the experiences tracked suggestibility rather than the fields. None of this establishes the cause of any particular person's experience. What it establishes is that vivid, specific, frightening presence and touch require no external source at all — and that anyone trying to work out what is happening to them deserves to know the brain does this unaided before concluding that something is being done to them.
 
 ## Evidence
 

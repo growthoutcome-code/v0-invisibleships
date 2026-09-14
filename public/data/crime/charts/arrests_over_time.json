@@ -165,6 +165,12 @@
           "year": 2024,
           "value": 113431,
           "tier": "A"
+        },
+        {
+          "year": 2025,
+          "value": 217500,
+          "tier": "B",
+          "note": "20 January - 15 October 2025, from ICE FOIA files via the Deportation Data Project. NOT an official fiscal-year total: no FY2025 figure has been published, and this window overshoots the fiscal year by 15 days. Drawn dotted for that reason."
         }
       ],
       "caveats": [
@@ -174,7 +180,8 @@
         "FY2022 and FY2023 are inflated by ICE processing border-encounter backlogs in the interior; ICE itself says so. They overstate interior enforcement.",
         "FY2015 and FY2022 carry small official revisions (117,983 vs 119,772; 142,750 restated 142,873).",
         "NO official FY2025 or FY2026 total exists \u2014 DHS stopped publishing detailed enforcement tables after November 2024. The 2025-26 surge is documented only through FOIA'd ICE records: 95,629 arrests Jan 20-Jun 10 2025, roughly 217,500 Jan 20-Oct 15 2025, and a rate 4.4x the late-Biden baseline by January 2026 (street arrests up 11x). This line therefore ENDS at FY2024 not because the surge is small but because no official number exists yet.",
-        "Even the FY2011 peak equals roughly 2-3% of the same year's criminal arrests \u2014 the vertical gap between this line and the others is the scale of the two systems."
+        "Even the FY2011 peak equals roughly 2-3% of the same year's criminal arrests \u2014 the vertical gap between this line and the others is the scale of the two systems.",
+        "FY2025 onward is not official. DHS stopped publishing monthly enforcement tables after November 2024 data; the 2025 point is FOIA-derived and dotted, and July 2026's ~50,000 is carried as a statement rather than plotted, because one month is not a year."
       ]
     }
   ],
@@ -190,6 +197,18 @@
   ],
   "y_format": "millions",
   "themes": [
+    {
+      "statement": "Criminal arrests are down 51% from their 1997 peak. Over the same period crime fell too \u2014 American policing is getting a better outcome with roughly half the coercion.",
+      "tier": "A"
+    },
+    {
+      "statement": "Civil immigration arrests run the other way: a FY2021 trough of 74,082, then about 217,500 between January and October 2025, and nearly 50,000 in July 2026 alone.",
+      "tier": "B"
+    },
+    {
+      "statement": "The two are different legal systems on different calendars \u2014 one criminal, one administrative \u2014 and neither series explains the other.",
+      "tier": "A"
+    },
     {
       "statement": "Criminal arrests peaked in 1997 at 15.3 million. 2024, at 7.5 million, is 51% below that.",
       "tier": "A"
@@ -235,6 +254,6 @@
       "tier": "B"
     }
   ],
-  "accuracy_note": "About the accuracy of these figures: arrest totals are estimates assembled from agency reports, and two official federal criminal-arrest series disagree (see the data-quality register); 2016 and 2021 are national gaps. The immigration line is federal FISCAL years and ends at FY2024 \u2014 DHS stopped publishing detailed enforcement tables after November 2024, so the 2025-26 surge exists only in FOIA'd records. An arrest, in either system, is an event \u2014 not a person, and not a conviction.",
+  "accuracy_note": "About the accuracy of these figures: arrest totals are estimates assembled from agency reports, and two official federal criminal-arrest series disagree (see the data-quality register); 2016 and 2021 are national gaps. The immigration line is federal FISCAL years. It is published federal statistics through FY2024 and nothing official after that \u2014 the 2025 point is FOIA-derived, marked tier B and drawn dotted.",
   "change_view": true
 }

@@ -186,6 +186,176 @@ export const BASIS_NOTE: Record<Basis, string> = {
 };
 
 export const CONCEPTS: Concept[] = [
+  /**
+   * TWO CONCEPTS THE READER CAN ACT ON, both basis `documented`, which almost
+   * nothing else in the neurotech part of this archive is.
+   *
+   * They exist because Sean asked, on 13 September, whether pointing V2K AT a
+   * person differs from pointing it NEAR one \u2014 at a house, so that windows
+   * become diaphragms. It does, and the difference is physical rather than
+   * semantic: two of the three candidate mechanisms make real sound in air and
+   * one does not. That is a test, and a test is the rarest thing this archive
+   * can offer, because it costs nothing and requires believing nothing.
+   *
+   * THE SECOND CONCEPT IS THE SAFETY RAIL ON THE FIRST. "Can you record it?"
+   * invites a reader to run an experiment, and an experiment with no account of
+   * how it fails is a trap: a phone whose encoder low-passes at 17,000 Hz
+   * returns silence for a 17.4 kHz tone, with no error and no warning. A reader
+   * who concluded from that file that nothing happened would have been misled
+   * BY THIS SITE. So the recording limits ship with the test, never after it.
+   */
+  {
+    id: "can-you-record-it",
+    origin: "ai",
+    basis: "documented",
+    theme: "neurotech",
+    audience: ["household", "investigators", "clinicians"],
+    title: "Can you record it?",
+    body:
+      "Three things could put a voice where no speaker is, and they differ in a way that can be checked rather than argued. Two of them make real sound in air: a transducer bonded to a window or wall drives the surface as a loudspeaker, and an ultrasonic beam demodulates into audible sound along its path. Both are commercial products. Anyone standing in the room hears them, and any recorder captures them. The third \u2014 the claimed delivery of speech by pulsed radio-frequency energy \u2014 produces its pressure wave inside the skull, at a tenth of a pascal to three pascals, conducted through bone to the inner ear. If that is what is happening, there is no sound in the room at all: a person beside you hears nothing, and a microphone records nothing, not because the equipment failed but because there is nothing in the air to capture. So the question is not whether you believe any of this. It is whether a second person and a cheap recorder find something, and that is a question with an answer.",
+    evidence: [
+      "Structure-borne audio \u2014 a surface exciter bonded to glass or plasterboard makes the panel itself radiate. Real airborne sound: a bystander hears it, a microphone records it. Sold with adhesive pads from about $33.",
+      "Parametric array \u2014 an ultrasonic carrier around 40 kHz self-demodulates in air. Real airborne sound inside the beam: a bystander standing in the beam hears it, a microphone in the beam records it; off-axis level falls below a tenth.",
+      "Microwave auditory effect \u2014 thermoelastic expansion produces 0.1 to 3 pascals of pressure INSIDE the head. No airborne sound exists. Not audible to anyone else and not recordable, by physics rather than by equipment failure.",
+      "Foster, Garrett and Ziskin (2021) add that equipment capable of the third at any useful range would be, in their words, large and very obvious.",
+    ],
+    questions: [
+      "Does a second person in the room hear it, and does an ordinary recorder capture it?",
+      "If a surface seems to be the source, does a contact microphone on that surface register more than an air microphone beside it?",
+      "If nothing is captured, was the recording uncompressed \u2014 and was the equipment capable of the frequency in question?",
+      "Does any published work demonstrate intelligible speech, rather than clicks or tones, delivered by radio-frequency means at a distance?",
+    ],
+    references: [
+      { label: "Structure-borne audio", href: "/glossary/structure-borne-audio" },
+      { label: "Parametric array", href: "/glossary/parametric-array" },
+      { label: "Microwave auditory effect", href: "/glossary/microwave-auditory-effect" },
+      { label: "Contact microphone", href: "/glossary/contact-microphone" },
+      { label: "Sampling limit", href: "/glossary/sampling-limit" },
+      { label: "What is the neurotech bullhorn?", href: "/concepts#the-neurotech-bullhorn" },
+    ],
+    referencesNote:
+      "Read the sampling limit before trusting a negative result. A recording that captured nothing may only mean the recorder was not built to hear it.",
+    disclaimer:
+      "This is a way to tell mechanisms apart, not a way to establish what happened. A negative result rules out the two airborne mechanisms; it does not establish the third, which remains unverified.",
+  },
+  {
+    id: "only-you-can-hear-it",
+    origin: "ai",
+    basis: "documented",
+    theme: "neurotech",
+    audience: ["household", "clinicians", "press"],
+    title: "\u201cOnly I can hear it\u201d is not, by itself, unusual",
+    body:
+      "A sound that one person hears and the person beside them does not is often treated \u2014 by the person experiencing it, and by whoever they tell \u2014 as the strangest part of the account, and therefore as the part that demands an exotic explanation. It is the opposite. High-frequency hearing declines with age, steadily and in everyone, and the highest frequencies go first. A tone can sit precisely where one person hears it easily and another, ten years older, hears nothing at all. This is ordinary biology with a name, and it has been built into a commercial product deployed on public streets for two decades. None of this establishes what any particular person has heard. It establishes something narrower and more useful: that this specific feature of an account \u2014 that others did not hear it \u2014 carries far less weight as evidence than it seems to, and should not be the thing that convinces anyone, in either direction.",
+    evidence: [
+      "Presbycusis: in 162 adults aged 21 to 70, thresholds at 16 kHz averaged about 25 dB HL at ages 21\u201330 and 50\u201355 dB HL from 31 to 60. In the 61\u201370 group, fewer than one in five responded at 16 kHz and none at 18 kHz.",
+      "The Mosquito, sold since 2005, emits roughly 17.4 kHz for exactly this reason \u2014 to be unbearable to younger people and unnoticed by older ones. Deployed on streets in the UK, Canada, Australia, Belgium, France and Ireland.",
+      "The Council of Europe\u2019s Parliamentary Assembly called on governments to ban it in 2010; the UN Committee on the Rights of the Child called on the UK to ban it in 2016. The Home Office declined. No national statutory ban has been enacted anywhere.",
+      "The vendor\u2019s own framing overstates the effect: hearing loss at these frequencies is a continuous slope, not a cutoff at 25.",
+    ],
+    questions: [
+      "Is the sound at a frequency a younger person would hear and an older one would not \u2014 and were the people who heard nothing older?",
+      "Has anyone tried a recorder capable of the frequency, rather than a second pair of ears?",
+      "If the sound carries words rather than a tone, does presbycusis explain it at all?",
+    ],
+    references: [
+      { label: "Presbycusis", href: "/glossary/presbycusis" },
+      { label: "The Mosquito", href: "/glossary/mosquito-device" },
+      { label: "Sampling limit", href: "/glossary/sampling-limit" },
+      { label: "Can you record it?", href: "/concepts#can-you-record-it" },
+    ],
+    referencesNote:
+      "The third question above is the important one, and this concept does not answer it. Age-related hearing loss explains a tone that some people miss. It does not explain speech.",
+    disclaimer:
+      "This concept narrows what one feature of an account can be taken to show. It makes no finding about what anyone has experienced.",
+  },
+  /**
+   * THE BULLHORN IS A CONCEPT, NOT A GLOSSARY TERM (Sean, 13 September:
+   * "I suggest it's a concept because it does not technically exist in the real
+   * world. It's a hypothesis based on unverified technology.").
+   *
+   * The rule this settled, which applies to every future term: if a word has an
+   * anchor OUTSIDE this archive it can be a glossary entry — gang-stalking has
+   * the eBay convictions, voice-to-skull has Frey 1961 and a named Army
+   * reference. If the archive is the only place the word exists, it is a
+   * concept. "Bullhorn" has no anchor of its own; it borrows theirs.
+   *
+   * The word appears ZERO times in the 930-file corpus, and the body says so in
+   * its first sentence. A reader can establish that from the download in about a
+   * minute, so discovering it unaided would cost more than saying it costs.
+   *
+   * WHY IT IS ABSENT, STATED AS A DATE RANGE (Sean, 13 September). The term is
+   * not missing because it was invented for the website. It is missing because
+   * the transcripts stop before it appeared: the journal runs 2025-02-27 to
+   * 2026-05-06, 120 dated days across 448 files, and the bullhorn belongs to
+   * what came after. That is a fact about the record\u2019s coverage rather than a
+   * confession about the term, and it reads completely differently.
+   *
+   * THESE TWO DATES ARE TYPED, WHICH IS A DEBT. Every number on the home page is
+   * derived at render precisely so it cannot drift, and `body` is a plain string
+   * with nowhere to derive into. The moment a transcript dated after 2026-05-06
+   * is added, this sentence becomes false. Deriving it needs `body` to accept a
+   * function, or a build-time check that fails when the journal outgrows the
+   * range quoted here. Until then this comment is the only guard.
+   *
+   * WHY THE PAIR IS USED HERE. The military-deployment and Palestinian claims are
+   * NOT in `body`, where they would read as the archive's own account. They are
+   * in `authorStatement`, prefixed so that what is asserted is that the claim was
+   * MADE — which is true, checkable, and defensible. `aiAssessment` answers them
+   * without softening, per the rule on the type: "if one is softened to match,
+   * the reader is being managed." A claim about people in an active conflict is
+   * the one place on this site where the labelling has to be on the page rather
+   * than one click away, which is what `disclaimer` is for.
+   */
+  {
+    id: "the-neurotech-bullhorn",
+    origin: "author",
+    basis: "testimony",
+    theme: "neurotech",
+    audience: ["household", "investigators", "press"],
+    verification: "unverified",
+    title: "What is the neurotech bullhorn?",
+    body:
+      "You will not find the neurotech bullhorn in the transcripts. This archive runs from 27 February 2025 to 6 May 2026, and the term belongs to what came after it \u2014 it names something the record has not caught up with, which is the reason it needs naming rather than a reason to leave it out. What it names is a civilian experience rather than a private one: less a voice in one head than a loudspeaker mounted at every intersection, putting the same disintegration conversation in front of everyone in earshot, subject or not. The nearest named thing is voice-to-skull, or V2K \u2014 a claimed one-to-one channel, speech delivered to a single head with no external acoustic source. The bullhorn is what V2K would be if it stopped being private: the same claimed delivery, addressed to a street rather than to a person. That is why bullhorn and not implant, transmitter or voice \u2014 the word is about reach and the absence of consent, not about hardware. And it runs both ways, which is the part most easily missed: a channel a population can hear is a channel that population can talk on, local law enforcement included. One distinction decides everything else here. Aimed AT a person, the claim is V2K: nothing sounds in the room, and nothing could be recorded there. Aimed NEAR a person \u2014 at a house, so that windows and walls are driven and the conversation becomes a whisper through the building \u2014 the claim is something else entirely, because that is a real technology that costs thirty-three dollars, and it makes real sound that a neighbour hears and a phone records. The two cannot both be true of the same event.",
+    authorStatement: [
+      "Statements surfacing through the bullhorn describe what America is experiencing as a military deployment of a telepathic surveillance system, whose purpose is to give an invading force complete transparency of enemy communication inside enemy territory.",
+      "Those statements include the claim that it was deployed on Palestinian people, and that America should never be experiencing this type of surveillance deployment.",
+      "The benefit, and it is a real one: the same channel lets the domestic population and law enforcement speculate openly and share what they are learning. As strange as it sounds, that is information worth publishing.",
+    ],
+    aiAssessment: [
+      "No public record supports the existence of a telepathic surveillance system, and none supports its deployment anywhere. This is not an absence of confirmation \u2014 it is an absence of any evidence that the capability exists.",
+      "Surveillance in Gaza has been documented by news organisations, and what that reporting describes is conventional: facial recognition, phone and signals data, and AI-assisted target lists built from records. Those are databases and cameras, not access to thought. The documented systems and the claimed one are different in kind, and the first does not make the second likelier.",
+      "The claim about Palestinian people is recorded here because it was said, and because what the record contains is itself a fact. It is not evidence that anything was done to anyone. Claims about an active conflict carry weight for real people, and this archive makes no finding about that conflict.",
+      "The two-way point stands on its own logic and does not depend on the rest being true: any broadcast channel a population can hear is a channel that population can talk on.",
+      "The record proposes piezoelectric street sensors as a possible mechanism, hedged as a guess in the author\u2019s own voice and by the bullhorn itself. The sources do not support it. No city anywhere has adopted electricity-generating pavement as working infrastructure; California\u2019s independent assessment measured piezoelectric roadway output at 44 to 440 watts per kilometre against vendor claims above 100 kilowatts. A harvesting or sensing element is wired to a rectifier and storage circuit, which is electrically the opposite of a drive amplifier, and no documented instance exists of road-embedded piezo producing sound. Where piezoelectric elements genuinely are in roads, they read traffic.",
+      "That is not a dead end. The mechanism the sources DO support is cheaper and closer: a transducer bonded to a pane of glass turns the window into a loudspeaker, and such devices are sold with adhesive pads for thirty-three dollars. It requires physical contact with the surface, and it produces sound anyone present can hear and any recorder can capture \u2014 which makes it, unlike the alternatives, testable tonight.",
+    ],
+    evidence: [
+      "The microwave auditory effect is a published physical effect: pulsed radio-frequency energy is perceived as clicks or buzzing inside the head. Allan Frey, 1961.",
+      "Voice-to-skull (V2K) appeared in a US Army non-lethal weapons reference as a named concept. A named concept is not a fielded device, and V2K itself is a claim rather than a demonstrated capability.",
+      "Neither establishes that intelligible sentences have been delivered to a person this way, which is the specific claim the record makes.",
+    ],
+    questions: [
+      "Does any published work demonstrate intelligible speech \u2014 not clicks or tones \u2014 delivered by radio-frequency means at a distance?",
+      "What would distinguish an external voice from an internally generated one, to the person hearing it and to an examiner?",
+      "If no device is involved, what else produces sustained, dated, situation-specific speech across years?",
+    ],
+    references: [
+      { label: "Voice-to-skull (V2K)", href: "/glossary/voice-to-skull" },
+      { label: "Microwave auditory effect", href: "/glossary/microwave-auditory-effect" },
+      { label: "Structure-borne audio", href: "/glossary/structure-borne-audio" },
+      { label: "Parametric array", href: "/glossary/parametric-array" },
+      { label: "The Mosquito", href: "/glossary/mosquito-device" },
+      { label: "Presbycusis", href: "/glossary/presbycusis" },
+      { label: "Piezoelectricity", href: "/glossary/piezoelectricity" },
+      { label: "Energy harvesting", href: "/glossary/energy-harvesting" },
+      { label: "Zersetzung tactics", href: "/glossary/zersetzung-tactics" },
+    ],
+    referencesNote:
+      "Two of these are claims (voice-to-skull, and the bullhorn itself). The rest are documented, purchasable or measured, and they are listed because they bound the question rather than because they answer it. Two in particular are worth a reader\u2019s time before the exotic explanations: structure-borne audio, which makes a window into a loudspeaker for thirty-three dollars, and the Mosquito, which shows that a sound only some people hear needs no unusual technology at all.",
+    disclaimer:
+      "Every statement attributed to the bullhorn on this page is unverified testimony. This archive makes no finding that any device delivered speech to anyone, and no finding about events in any conflict. See How to read this archive.",
+  },
   {
     id: "no-column-for-you",
     origin: "ai",
@@ -837,9 +1007,21 @@ export const CONCEPTS: Concept[] = [
     basis: "documented",
     theme: "experience",
     audience: ["household", "clinicians"],
-    title: "If nobody's house is haunted, what produces the feeling?",
+    // MERGED 10 September. The home page carried "Your house is not haunted" as
+    // a section lead and this concept's question as the first slide title —
+    // two headings saying one thing, which is what Sean asked to collapse. The
+    // statement is the better title: it is the sentence a frightened person
+    // needs first, and the question is answered in the body anyway.
+    title: "Your house is not haunted",
     body:
-      "A feeling of presence — someone in the room, standing behind you, touching you — can be produced on demand in a laboratory, in healthy people, with no drug and no external agent. In 2014 Olaf Blanke's group published an experiment in Current Biology using a master-slave robot. A blindfolded participant moved a lever in front of them while a robot arm behind them reproduced the movement against their back. When the reproduction was simultaneous, participants felt themselves touching their own back. When it was delayed by a fraction of a second, the brain could no longer attribute the touch to the person's own movement, and resolved the conflict by generating somebody else. Of thirty healthy participants, roughly a third spontaneously reported feeling someone behind them, touching them. Some reported several people. Two found it distressing enough to ask that the experiment stop. A pooled analysis across twenty-five such experiments has since been published. The direction of that finding is the point. The presence was not detected. It was manufactured by the participant's own nervous system out of a half-second timing error, with nobody there. Other findings converge. Sleep paralysis produces felt presence, chest pressure and an inability to move, and the cross-cultural literature records the same physiology interpreted as demons, witches, spirits or visitors depending on where the sleeper grew up. And when researchers tested the best-known claim that electromagnetic fields induce a sensed presence, it failed to replicate: Granqvist and colleagues reported in 2005 that the experiences tracked suggestibility rather than the fields. None of this establishes the cause of any particular person's experience. What it establishes is that vivid, specific, frightening presence and touch require no external source at all — and that anyone trying to work out what is happening to them deserves to know the brain does this unaided before concluding that something is being done to them.",
+      // FIVE SENTENCES CARRY THE WHOLE THING, because the home page shows the
+      // first five and Sean wanted one body rather than a lead plus a slide.
+      // They run: the statement, the published experiment that validates it,
+      // that nobody was there, what this record claims is done deliberately,
+      // and what the terror is FOR. The documented half and the claimed half
+      // are separated by four words — "what this record describes" — and that
+      // separation is the only reason the last two sentences are publishable.
+      "Your house is not haunted, and that is a finding rather than a reassurance. In 2014 Olaf Blanke's group manufactured the feeling of a presence in healthy people: a blindfolded participant moved a lever, a robot reproduced the movement against their back, and a half-second delay was enough that one in three felt someone standing behind them — two asked for the experiment to stop. Nobody was ever in the room with them. What this record describes is that effect imposed rather than induced: phantom sensations across every sense, and visuals reproducing what a haunting is supposed to look like. The terror is the mechanism — a household driven outside will accept help from whoever is waiting, and what this record says waits there is a facilitator of Zersetzung tactics and a suggestion of euthanasia.\n\nThe published work stands on its own. Blanke's experiment ran on thirty healthy participants; roughly a third spontaneously reported someone behind them, some reported several, and a pooled analysis across twenty-five such experiments has since been published. When the reproduction was simultaneous, participants felt themselves touching their own back; when it was delayed, the brain could no longer attribute the touch to the person's own movement and resolved the conflict by generating somebody else. Of thirty healthy participants, roughly a third spontaneously reported feeling someone behind them, touching them. Some reported several people. Two found it distressing enough to ask that the experiment stop. A pooled analysis across twenty-five such experiments has since been published. The direction of that finding is the point. The presence was not detected. It was manufactured by the participant's own nervous system out of a half-second timing error, with nobody there. Other findings converge. Sleep paralysis produces felt presence, chest pressure and an inability to move, and the cross-cultural literature records the same physiology interpreted as demons, witches, spirits or visitors depending on where the sleeper grew up. And when researchers tested the best-known claim that electromagnetic fields induce a sensed presence, it failed to replicate: Granqvist and colleagues reported in 2005 that the experiences tracked suggestibility rather than the fields. None of this establishes the cause of any particular person's experience. What it establishes is that vivid, specific, frightening presence and touch require no external source at all — and that anyone trying to work out what is happening to them deserves to know the brain does this unaided before concluding that something is being done to them.",
     evidence: [
       "Blanke et al., Current Biology, 6 November 2014: robotically induced presence hallucination in 30 healthy participants; ~1 in 3 spontaneously reported someone behind them touching them; some reported several; two asked to stop",
       "The effect depends on a sub-second delay between the participant's own movement and the touch — a sensorimotor timing conflict, not a stimulus",
@@ -1100,6 +1282,81 @@ export const CONCEPTS: Concept[] = [
     verification: "unverified",
     disclaimer:
       "This concept reports documented capability and published practice. It establishes no surveillance of any individual, and no current practice by any named agency.",
+  },
+
+  /* ------------------------------------------------------------------------
+     TWO CONSTRUCTIVE CONCEPTS (Sean, 10 September). Both are ARGUMENTS, not
+     findings, and both are labelled `structural` and `unverified` so they can
+     never be quoted as things this record establishes. They exist because the
+     register held 35 concepts and not one of them described a system worth
+     building — an archive that only catalogues harm gives a reader who believes
+     all of it nowhere to put that belief except fear.
+     --------------------------------------------------------------------- */
+  {
+    id: "prevention-as-the-product",
+    origin: "author",
+    basis: "structural",
+    theme: "surveillance",
+    audience: ["policy", "household"],
+    title: "Who could refuse a system that saved their child?",
+    body:
+      // EMBELLISHED 10 September at Sean's request — it was the shortest slide
+      // of the seven at 298 characters, and the scenario that makes the argument
+      // worth having was entirely below the fold.
+      //
+      // KEPT ANALYTICAL, DELIBERATELY. The mechanism is the whole point, and
+      // detail about what an offender intends toward a named child adds nothing
+      // to it while costing the archive its seriousness. What the scenario needs
+      // to establish is the SEQUENCE — flagged in seconds, reviewed by a person,
+      // decided by a person, steered away — and the outcome, which is a child
+      // who never learns anything happened.
+      "Imagine the terms inverted: you are told whenever you are observed, harassment is a crime rather than a method, and law enforcement is paid for harm that did not happen rather than arrests that did. Now the hard case: someone on a registry is present where children are, and the system flags it in seconds rather than after a report — an automation raises it, a person reviews it, a person decides. The intervention is closer to social work than policing; the individual is steered away, no crime occurs, and a child goes home that afternoon never knowing there was an afternoon to survive. The family is told a harm was prevented, and invited to review the service. What they feel is relief so total it forecloses argument, and that is the finding: a system justified by the worst thing that could happen to your child cannot be argued with by anyone who loves a child.\n\nWhat that family feels is the finding. Relief so total that it forecloses argument, and then, for anyone who thinks about it later, the knowledge that a mind was read and a life rearranged before anything was done — and that they are glad. A system justified by the worst thing that could happen to your child cannot be argued with by anyone who loves a child. That makes the consent it collects the most powerful instrument in it, and the least examined.",
+    evidence: [
+      "420 schoolchildren placed on a sheriff's list of likely future criminals — what predictive intervention has actually produced on this record",
+      "0 of 99 regulations record a route to individual review",
+      "Colorado HB24-1058 (2024): express consent before neural data is collected, and a route for a person to have it deleted",
+    ],
+    questions: [
+      "Whose consent is it? The family's is asked for. The observed person's is not.",
+      "What is the remedy when the inference is wrong and no act ever occurred?",
+      "Is there any point at which a grateful public says stop?",
+    ],
+    references: [
+      { label: "What are children subject to?", href: "/concepts#what-children-are-subject-to" },
+      { label: "Why did legislatures write laws for neural data?", href: "/concepts#law-for-neural-data" },
+      { label: "Organised covert harassment of individuals is established fact", href: "/concepts#organised-harassment-is-fact" },
+    ],
+    referencesNote:
+      "The first is a counter-example, not support: it is what prevention-before-the-act has produced where it has been tried on this record.",
+    verification: "unverified",
+  },
+  {
+    id: "whose-eyesight-is-it",
+    origin: "author",
+    basis: "structural",
+    theme: "surveillance",
+    audience: ["household", "policy"],
+    title: "Why does the camera on your door not answer to you?",
+    body:
+      "A doorbell camera watches your street and answers to its manufacturer. You can look at what it recorded; you do not hold it, and you cannot say who else can. The proposal here is narrower than a privacy argument and harder to dismiss: give a citizen their own eyesight — one recording that belongs to the person the way a body camera belongs to an officer.\n\nThe procurement record gives that proposal an uncomfortable shape. Amazon Web Services is the largest government cloud vendor in this register by a wide margin: $42.9bn across 27 awards, and 93 deployments in 21 of the 35 geographies tracked. Its GovCloud capability list includes Amazon Rekognition — face detection and comparison across image and video. The company that sells the doorbell also sells the platform.\n\nThat is a statement about concentration, not a connection between the two, and nothing in this record shows one. What it does show is who has a column. Across 1,922 procurement entries, ten describe an individual. All ten are litigants.",
+    evidence: [
+      "AWS: $42.9bn across 27 awards; 93 deployments across 21 of the 35 geographies in the register",
+      "Amazon Rekognition — face detection/comparison and image/video analysis — listed under AWS GovCloud (US)",
+      "10 of 1,922 procurement records describe an individual; every one of them is a litigant",
+      "Ring appears nowhere in this register: the consumer product sits outside the procurement record entirely",
+    ],
+    questions: [
+      "Who would hold a citizen-owned recording, and on whose infrastructure?",
+      "Is a record you own but cannot take off the platform really yours?",
+      "What would it take for the observed person to appear in a procurement register at all?",
+    ],
+    references: [
+      { label: "There is no column for you", href: "/concepts#no-column-for-you" },
+      { label: "Who profits from a body?", href: "/concepts#who-profits-from-a-body" },
+    ],
+    referencesNote:
+      "Both describe the gap this proposal is aimed at. Neither shows that a consumer camera and a government platform are linked.",
+    verification: "unverified",
   },
 ];
 

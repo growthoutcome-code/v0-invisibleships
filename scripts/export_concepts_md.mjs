@@ -143,6 +143,31 @@ function lift(name) {
 
   const opener = src[i];
   let end = -1, inStr = null, esc = false;
+
+  // COMMENTS MUST BE SKIPPED, NOT SCANNED. This walker tracks strings so that a
+  // bracket inside one does not move the depth counter. Until 13 September it
+  // did not know what a comment was, so the apostrophe in a `//` or `/* */`
+  // comment — "it's", "the author's" — opened a string that never closed, and
+  // every bracket after it was invisible. The failure mode is the worst kind:
+  // the exporter throws, the corpus silently keeps the LAST good concepts, and
+  // the checker compares that stale staging dir against the zip and passes.
+  //
+  // scripts/build_corpus_index.py:count_ts_array() had the identical bug on the
+  // same day and is fixed in the same commit. Outside a string, a `/` in a data
+  // literal can only begin a comment, so this is unambiguous here.
+  const skipComment = (j) => {
+    if (src[j] !== "/") return j;
+    if (src[j + 1] === "/") {
+      const nl = src.indexOf("\n", j);
+      return nl < 0 ? src.length : nl;
+    }
+    if (src[j + 1] === "*") {
+      const close = src.indexOf("*/", j + 2);
+      return close < 0 ? src.length : close + 2;
+    }
+    return j;
+  };
+
   if (opener === "[" || opener === "{") {
     const close = opener === "[" ? "]" : "}";
     let d = 0;
@@ -154,6 +179,8 @@ function lift(name) {
         else if (c === inStr) inStr = null;
         continue;
       }
+      const skipped = skipComment(j);
+      if (skipped !== j) { j = skipped - 1; continue; }
       if (c === '"' || c === "'" || c === "`") { inStr = c; continue; }
       if (c === opener) d++;
       else if (c === close) { d--; if (d === 0) { end = j + 1; break; } }
@@ -169,6 +196,8 @@ function lift(name) {
         else if (c === inStr) inStr = null;
         continue;
       }
+      const skipped2 = skipComment(j);
+      if (skipped2 !== j) { j = skipped2 - 1; continue; }
       if (c === '"' || c === "'" || c === "`") { inStr = c; continue; }
       if (c === ";") { end = j; break; }
     }
@@ -299,13 +328,30 @@ function toMarkdown(c) {
 }
 
 // ---------------------------------------------------------------- write
-if (existsSync(OUT)) for (const f of readdirSync(OUT)) rmSync(join(OUT, f));
+//
+// WRITE FIRST, THEN REMOVE ORPHANS. Until 13 September this emptied the output
+// directory and wrote everything back — which deleted forty files in order to
+// recreate forty identical ones, every time, whatever had changed. Adding one
+// concept should not be a delete operation, and Sean was right to ask why it
+// was ("I'm only asking to add a concept").
+//
+// The clear was guarding something real: rename or remove a concept under the
+// old scheme and its stale file lingers here, then ships in the download
+// forever, describing something the site no longer says. That guard is kept —
+// it is just applied to the files that are ACTUALLY orphaned rather than to all
+// of them. Steady state now touches nothing: N writes, zero unlinks.
+//
+// This also makes the exporter runnable where deletes are not permitted, which
+// is most automated contexts.
 mkdirSync(OUT, { recursive: true });
 
 let bytes = 0;
+const written = new Set();
 for (const c of CONCEPTS) {
   const text = toMarkdown(c);
-  writeFileSync(join(OUT, `IS_CON_${c.id}.md`), text);
+  const name = `IS_CON_${c.id}.md`;
+  writeFileSync(join(OUT, name), text);
+  written.add(name);
   bytes += text.length;
 }
 
@@ -506,6 +552,24 @@ console.log(
   `source-years.csv (${SOURCE_YEARS.length} dated sources, ` +
   `${SOURCE_YEARS.filter((r) => r.url).length} with a public URL)`
 );
+
+// ------------------------------------------------------- orphan sweep
+// Everything this run intends to ship is now on disk. Anything ELSE in the
+// directory is a leftover from a concept that has since been renamed or
+// removed, and must go — a stale file here ships in the download and describes
+// something the site no longer says.
+//
+// In steady state this removes nothing, which is the point: adding a concept
+// performs no deletes at all. It only bites on a rename, which is exactly when
+// a delete is the correct and intended operation.
+for (const name of ["IS_CON_00_start-here.md", "IS_CON_00_findings.md",
+                    "IS_CON_00_not-established.md"]) written.add(name);
+
+const orphans = readdirSync(OUT).filter((f) => f.endsWith(".md") && !written.has(f));
+for (const f of orphans) rmSync(join(OUT, f));
+if (orphans.length) {
+  console.log(`removed  : ${orphans.length} orphaned concept file(s) — ${orphans.join(", ")}`);
+}
 
 const counts = Object.entries(byBasis).map(([k, v]) => `${k} ${v.length}`).join(" · ");
 console.log(`concepts : ${CONCEPTS.length + 1} markdown (${bytes.toLocaleString()} bytes) -> public/data/concepts/md`);
