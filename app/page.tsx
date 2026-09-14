@@ -1219,6 +1219,26 @@ export default function Page() {
                 what you have experienced. Both are worth knowing before the frightening
                 explanations, because they are the ones that can be checked.
               </p>
+              {/* A WAY ON FROM EACH COLUMN (Sean, 14 September): "we need a
+                  button for each of the three column callouts... let's point
+                  each of those three columns to a specific glossary term or
+                  idea."
+
+                  LABELLED WITH THE DESTINATION, not "Learn more". Three
+                  identical buttons reading "Learn more" tell a reader nothing
+                  about which one is worth the click, and on a page this dense
+                  that is a wasted trip. The button says where it goes.
+
+                  ALL THREE GO TO CONCEPTS, not the glossary. A glossary entry
+                  defines a word; each of these columns needs the argument
+                  behind it. The glossary is reachable from the links-out block
+                  at the foot of the section. */}
+                <a
+                  href="/concepts#what-produces-the-feeling"
+                  className="mt-5 inline-flex h-10 items-center rounded-md bg-foreground/[0.07] px-4 text-[15px] font-medium text-foreground hover:bg-foreground/[0.12]"
+                >
+                  Your house is not haunted
+                </a>
             </div>
             {/* PROTECT YOUR HOUSEHOLD (Sean, 10 September): "never go outside
                 looking for the people communicating and never ever invite
@@ -1257,6 +1277,12 @@ export default function Page() {
                 </SafetyDialog>{" "}
                 is where the people who can are listed.
               </p>
+                <a
+                  href="/concepts#can-you-record-it"
+                  className="mt-5 inline-flex h-10 items-center rounded-md bg-foreground/[0.07] px-4 text-[15px] font-medium text-foreground hover:bg-foreground/[0.12]"
+                >
+                  Can you record it?
+                </a>
             </div>
             <div>
               <h3 className="font-display m-0 text-[21px] font-semibold text-foreground">
@@ -1269,6 +1295,12 @@ export default function Page() {
                 front of you was built to &mdash; and a contemporaneous record is what
                 separates testimony from recollection later on.
               </p>
+                <a
+                  href="/concepts#no-column-for-you"
+                  className="mt-5 inline-flex h-10 items-center rounded-md bg-foreground/[0.07] px-4 text-[15px] font-medium text-foreground hover:bg-foreground/[0.12]"
+                >
+                  There is no column for you
+                </a>
             </div>
           </div>
 
