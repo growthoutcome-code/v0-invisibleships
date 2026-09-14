@@ -779,6 +779,32 @@ export default function Page() {
               is any way of reaching back &mdash; of causing something to be felt.
             </p>
           </div>
+
+          {/* THE WAY OUT (Sean, 13 September, on the journal section: "we don't
+              want to generate a bunch of text in this section, but we need to
+              provide the ability to tease out to both glossary and concepts").
+              Same unit, applied here. No prose added. */}
+          <RelatedLinks
+            groups={[
+              {
+                label: "Concepts",
+                links: [
+                  { href: "/concepts#prevention-as-the-product", label: "Prevention as the product" },
+                  { href: "/concepts#whose-eyesight-is-it", label: "Whose eyesight is it?" },
+                  { href: "/concepts#no-column-for-you", label: "There is no column for you" },
+                  { href: "/concepts#local-law-does-not-mean-local", label: "Local law does not mean local" },
+                ],
+              },
+              {
+                label: "Glossary",
+                links: [
+                  { href: "/glossary/image-based-search", label: "Image-based search" },
+                  { href: "/glossary/cognitive-liberty", label: "Cognitive liberty" },
+                  { href: "/glossary/laser-microphone", label: "Laser microphone" },
+                ],
+              },
+            ]}
+          />
         </SiteSection>
 
         {/* ------------------------------------------ 4 · is anything moving */}
@@ -952,6 +978,25 @@ export default function Page() {
               </a>
             </p>
           </div>
+
+          {/* THE WAY OUT (Sean, 13 September, on the journal section: "we don't
+              want to generate a bunch of text in this section, but we need to
+              provide the ability to tease out to both glossary and concepts").
+              Same unit, applied here. No prose added. */}
+          <RelatedLinks
+            groups={[
+              {
+                label: "Concepts",
+                links: [
+                  { href: "/concepts#co-occurrence-is-not-cause", label: "Co-occurrence is not cause" },
+                  { href: "/concepts#low-number-may-mean-low-counting", label: "A low number may mean low counting" },
+                  { href: "/concepts#us-rose-against-the-trend", label: "The US rose against the trend" },
+                  { href: "/concepts#the-fentanyl-reversal", label: "The fentanyl reversal" },
+                  { href: "/concepts#prescribing-is-not-prevalence", label: "Prescribing is not prevalence" },
+                ],
+              },
+            ]}
+          />
         </SiteSection>
 
         {/* ------------------------------------------------- 5 · concepts */}
@@ -1022,6 +1067,24 @@ export default function Page() {
           <div className="mt-12">
             <HomeCarousel slides={conceptSlides} label="Concepts" titleSize="heading" />
           </div>
+
+          {/* THE WAY OUT (Sean, 13 September, on the journal section: "we don't
+              want to generate a bunch of text in this section, but we need to
+              provide the ability to tease out to both glossary and concepts").
+              Same unit, applied here. No prose added. */}
+          <RelatedLinks
+            groups={[
+              {
+                label: "Glossary",
+                links: [
+                  { href: "/glossary/neuro-engagement", label: "Neuro-engagement" },
+                  { href: "/glossary/phantom-sensations", label: "Phantom sensations" },
+                  { href: "/glossary/perceptual-set", label: "Perceptual set" },
+                  { href: "/glossary/cognitive-liberty", label: "Cognitive liberty" },
+                ],
+              },
+            ]}
+          />
         </SiteSection>
 
         {/* ----------------------------------------------- 7 · the glossary */}
@@ -1057,6 +1120,23 @@ export default function Page() {
           <div className="mt-12">
             <HomeCarousel slides={glossarySlides} label="Glossary terms" />
           </div>
+
+          {/* THE WAY OUT (Sean, 13 September, on the journal section: "we don't
+              want to generate a bunch of text in this section, but we need to
+              provide the ability to tease out to both glossary and concepts").
+              Same unit, applied here. No prose added. */}
+          <RelatedLinks
+            groups={[
+              {
+                label: "Concepts",
+                links: [
+                  { href: "/concepts#the-neurotech-bullhorn", label: "What is the neurotech bullhorn?" },
+                  { href: "/concepts#can-you-record-it", label: "Can you record it?" },
+                  { href: "/concepts#organised-harassment-is-fact", label: "Organised covert harassment is established fact" },
+                ],
+              },
+            ]}
+          />
         </SiteSection>
 
         {/* ----------------------------------------------- 6 · what you can do */}
