@@ -123,12 +123,23 @@ const NAMES = Object.keys(DRAWINGS) as Name[];
  * its own Math.random(). A reader saw the branch, then the lattice, in a single
  * visit, which reads as two unrelated animations rather than one identity.
  *
- * The pick now lives at module scope, decided by whichever instance mounts
- * first and reused by every instance after it. It is deliberately NOT reset on
- * navigation: within one session the loader is one drawing, and the variety is
- * across sessions. Null at import so nothing random happens during SSR.
+ * The pick lives on `window`, decided by whichever instance mounts first and
+ * reused by every instance after it, for the life of the page. Window and not
+ * module scope on purpose: a module can be instantiated more than once across
+ * chunks, and Fast Refresh resets module state on every edit, either of which
+ * would let a second drawing through. `window` survives both.
+ *
+ * It is deliberately NOT reset on client navigation: within one page load the
+ * loader is one drawing, and the variety is across visits.
  */
-let PICKED: Name | null = null;
+function pickOnce(): Name | null {
+  if (typeof window === "undefined") return null;
+  const w = window as unknown as { __isProcessingPick?: Name };
+  if (!w.__isProcessingPick) {
+    w.__isProcessingPick = NAMES[Math.floor(Math.random() * NAMES.length)];
+  }
+  return w.__isProcessingPick;
+}
 
 /**
  * Hold a loading flag true for a minimum duration.
@@ -183,15 +194,23 @@ export default function Processing({
 }) {
   const inline = variant === "inline";
 
-  // The pick cannot happen during render: Math.random() runs once on the server
-  // and again on the client, the two disagree, and React throws a hydration
-  // mismatch. So the first frame is NAMES[0] and the effect settles it - except
-  // for a second instance mounting later, which reads PICKED straight away and
-  // never shows a different drawing at all.
-  const [pick, setPick] = useState<Name>(() => PICKED ?? NAMES[0]);
+  /* NOTHING IS DRAWN UNTIL THE PICK IS SETTLED, and that is the whole point.
+     Sean, 15 September: "there should be only one processing state design per
+     interaction. Never ever load two different designs."
+
+     The earlier attempt rendered NAMES[0] on the first frame and let an effect
+     swap in the real pick. That first frame is not theoretical - the reader saw
+     converge begin drawing and turn into branch, which is precisely the two
+     designs being complained about. The blank frame below is invisible; a frame
+     of the WRONG drawing is not.
+
+     The pick still cannot happen during render - Math.random() runs once on the
+     server and again on the client, the two disagree, and React throws a
+     hydration mismatch. So the SVG is empty on the server and for one client
+     frame, then fills. The viewBox holds the box open, so nothing shifts. */
+  const [pick, setPick] = useState<Name | null>(null);
   useEffect(() => {
-    if (!PICKED) PICKED = NAMES[Math.floor(Math.random() * NAMES.length)];
-    setPick(PICKED);
+    setPick(pickOnce());
   }, []);
 
   return (
@@ -209,7 +228,7 @@ export default function Processing({
           preserveAspectRatio="xMidYMid meet"
           aria-hidden="true"
         >
-          {DRAWINGS[pick]}
+          {pick && DRAWINGS[pick]}
         </svg>
         <p className={`m-0 mt-5 text-[15px] text-muted ${inline ? "" : "text-center"}`}>
           {label}
