@@ -199,7 +199,7 @@ export default function EntryGate() {
               the longest step; anything longer scrolls inside its own panel
               rather than resizing the frame around it. Released below `sm`,
               where a fixed box fights the keyboard and the address bar. */}
-          <div className="min-h-0 flex-1 overflow-hidden sm:h-[484px] sm:flex-none">
+          <div className="min-h-0 flex-1 overflow-hidden sm:h-[484px] sm:flex-none lg:h-[576px]">
             <div
               className="flex h-full transition-transform duration-[450ms] ease-[cubic-bezier(.4,0,.2,1)]"
               style={{ transform: `translateX(-${step * 100}%)` }}
