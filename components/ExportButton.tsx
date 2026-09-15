@@ -41,20 +41,32 @@ import ExportModal from "@/components/ExportModal";
  * download icon and download transcripts... It needs to be shorter, and it
  * needs to be consistent."
  *
- * ONE WORD, BECAUSE THE ICON CARRIES THE VERB. "Download the corpus" said the
- * verb twice — once as a glyph and once as a word — and "corpus" is a word a
- * first-time reader has to translate. The arrow means download. What is left to
- * say is what comes down, and the answer a reader actually wants is the
- * transcripts.
+ * THE ICON CARRIES THE VERB, so no word is spent on "download". What the label
+ * has to supply is the NOUN and the REASON, and it now supplies both.
  *
- * ACCURACY, AND WHY THE DIALOG IS NOT OPTIONAL. The download is the whole
- * archive, not only transcripts — 448 of its 828 Markdown files are journal
- * entries and recordings. A one-word button naming the headline content is fair
- * only because clicking it opens a dialog that states the full contents BEFORE
- * anything is fetched. Wire this button to a bare href and the label starts
- * under-describing what the reader gets.
+ * "TRANSCRIPTS" WAS WRONG, AND THIS CORRECTS IT (Sean, 15 September: "corpus
+ * means body of work... it includes concepts, it includes research"). The
+ * journal folder is 448 of 840 Markdown files — 53%. A button reading
+ * "Transcripts" named barely half the download and silently omitted the
+ * research, the concepts, the glossary, the registers and the CSVs. On a site
+ * whose credibility rests on not overstating, understating is the same failure
+ * pointed the other way.
+ *
+ * WHY "CORPUS" SURVIVES THE JARGON TEST. It needs translating, which normally
+ * costs clicks. Two things pay for it: the audience self-selects — nobody
+ * downloads 942 files casually, and a reader who has decided to go deeper is
+ * reassured by a precise noun rather than put off by it — and it is already the
+ * site’s own word, in the footer, the dialog and START-HERE.md inside the zip.
+ *
+ * WHY "FOR AI" AND NOT "AI CORPUS". English reads adjective-noun compounds as
+ * attribution — "police report", "weather data" — so "AI corpus" parses as a
+ * corpus MADE BY or ABOUT an AI. This archive spends real effort separating
+ * `origin: ai` from `origin: author` on every concept and labelling which
+ * assessments a model wrote; a button implying the whole body of work is
+ * AI-generated undercuts exactly that. The preposition is load-bearing: it makes
+ * the AI the recipient, not the source. The cost is four characters.
  */
-export const EXPORT_LABEL = "Transcripts";
+export const EXPORT_LABEL = "Corpus for AI";
 
 export default function ExportButton({ className }: { className?: string }) {
   const [open, setOpen] = useState(false);

@@ -38,10 +38,12 @@ export default function ExportModal({ open, onOpenChange }: { open: boolean; onO
         * step. Height bounding and the pinned footer now come from the primitive. */}
       <DialogContent size="xl">
         <DialogHeader>
-          {/* Matches the button that opened it (EXPORT_LABEL, "Transcripts"). A
-              dialog whose title renames the thing you just clicked reads as a
-              different destination. */}
-          <DialogTitle>Download the transcripts</DialogTitle>
+          {/* Contains the button that opened it (EXPORT_LABEL, "Corpus for AI")
+              verbatim. A dialog whose title renames the thing you just clicked
+              reads as a different destination. The body\u2019s opening line \u2014 "built
+              to be handed to an AI assistant" \u2014 stops being a surprise here and
+              becomes the promise being kept. */}
+          <DialogTitle>The corpus, for AI</DialogTitle>
         </DialogHeader>
 
         <DialogBody>

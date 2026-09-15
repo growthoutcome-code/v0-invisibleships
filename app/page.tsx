@@ -1264,8 +1264,7 @@ export default function Page() {
               </h3>
               <p className="body-copy mt-2 text-[18px] text-foreground/85">
                 Do not go outside looking for whoever you believe is speaking to you, and
-                do not let anyone into your home who turns up offering to explain it or to
-                deal with it. Do not answer or signal back. You cannot identify who you
+                do not let anyone into your home. Do not answer or signal back. You cannot identify who you
                 would be answering, and everything that follows from being wrong about
                 that lands on your household. If you are frightened for your immediate
                 safety, that is what emergency services are for &mdash; this site cannot

@@ -27,7 +27,7 @@ import PageActions, { SortMenu, type SortDir } from "@/components/PageActions";
 import DataView, { type SubTab } from "@/components/DataView";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import Processing from "@/components/Processing";
+import Processing, { useHeldLoading } from "@/components/Processing";
 
 const journalHref = (id: string) => `/journal/${id.toLowerCase()}`;
 const glossaryHref = (slug: string) => `/glossary/${slug.toLowerCase()}`;
@@ -100,6 +100,30 @@ export default function JournalBrowser({
   const [deepLinked, setDeepLinked] = useState(false);
 
   useEffect(() => { loadDataset().then((d) => { setDs(d); setLoading(false); }).catch(() => setLoading(false)); }, []);
+
+  /* FOUR SECONDS, FLOOR NOT CEILING (Sean, 15 September: "one Mississippi, two
+     Mississippi, three Mississippi would be ideal. Regardless of
+     how long it takes to load").
+
+     `loading` tracks the fetch; `showLoader` tracks what the reader sees. On a
+     warm connection the shards resolve in under 200ms and the processing state
+     was a flicker - present in the code, absent from the experience. The floor
+     makes it a state rather than a stutter.
+
+     The third argument makes it unconditional: "it doesn't matter if it's
+     already loaded. We need to run the animation and load in the background."
+     A warm cache resolves in milliseconds and would otherwise skip the state
+     entirely; now it runs its full four seconds either way (raised from three on 15 September).
+
+     It never delays the work. The fetch runs behind the loader throughout, and
+     a fetch slower than three seconds adds nothing at all. */
+  const showLoader = useHeldLoading(loading, 4000, true);
+
+  /* The transcript body is a different case: it opens inside a page the reader
+     is already on, so a three-second gate would make the site feel slow. 400ms
+     is only enough to stop a sub-frame flicker. Same drawing either way - the
+     pick is shared across every instance. */
+  const showBodyLoader = useHeldLoading(bodyLoading, 400);
 
   // Back-compat IN: the current section comes from the route (initialTab), but
   // still honor any LEGACY query params (?entry= / ?term= / ?view=) on already
@@ -260,7 +284,37 @@ export default function JournalBrowser({
       />
 
       <main className="flex-1 w-full max-w-[1400px] mx-auto px-4 sm:px-6 py-6">
-        {!loading && (
+        {/* A STAGE OF ITS OWN, AND A CROSS-FADE OUT OF IT (Sean, 15 September:
+            "we need some kind of fade in or transition between the loader, the
+            processor, and the content").
+
+            The loader is no longer one branch of the content's ternary, where
+            anything mounting nearby could move it. It is its own block holding a
+            fixed share of the viewport, centred, for the whole three seconds.
+
+            The page below is present but display:none until the loader stands
+            down, then fades in. `hidden` rather than unmounting on purpose: the
+            Data section is script-drawn once per page load and cannot redraw
+            after an unmount, which is the same reason dataMounted exists. */}
+        {showLoader && (
+          <div className="grid min-h-[52vh] place-items-center px-4 animate-fade-in sm:min-h-[58vh]">
+            <Processing label="Loading the corpus" />
+          </div>
+        )}
+        <div className={showLoader ? "hidden" : "animate-fade-in"}>
+
+        {/* ONE FLAG FOR THE WHOLE SCREEN (Sean, 15 September: "once the rest of
+            the page came in, it was pushed down, and so the loading state was
+            interrupted").
+
+            This read `!loading` while the loader below read `showLoader`. Two
+            flags, and they disagree for most of the wait: the fetch resolves in
+            about 200ms, `loading` flips, the title band mounts ABOVE the loader
+            and shoves it down mid-animation. The processing state was being
+            interrupted by the page it was standing in for.
+
+            Nothing renders above the loader until the loader is finished. */}
+        {!showLoader && (
           <TitleBand
             title={TAB_TITLE[tab]}
             actions={
@@ -275,9 +329,7 @@ export default function JournalBrowser({
             }
           />
         )}
-        {loading ? (
-          <Processing label="Loading the archive" />
-        ) : tab === "glossary" ? (
+        {tab === "glossary" ? (
           <GlossarySection terms={glossaryTerms} gcat={gcat} setGcat={setGcat} gsel={gsel} setGsel={setGsel} />
         ) : tab === "documents" ? (
           <DocumentsView />
@@ -304,7 +356,7 @@ export default function JournalBrowser({
             <div className="min-w-0">
               {selDoc ? (
                 <Reader
-                  doc={selDoc} body={body} bodyLoading={bodyLoading} cats={ds?.docCats[selDoc.id] || []} gloss={ds?.docGloss[selDoc.id] || []}
+                  doc={selDoc} body={body} bodyLoading={showBodyLoader} cats={ds?.docCats[selDoc.id] || []} gloss={ds?.docGloss[selDoc.id] || []}
                   onBack={() => setSel(null)}
                   onPrev={selIdx > 0 ? () => setSel(filtered[selIdx - 1].id) : undefined}
                   onNext={selIdx >= 0 && selIdx < filtered.length - 1 ? () => setSel(filtered[selIdx + 1].id) : undefined}
@@ -322,7 +374,7 @@ export default function JournalBrowser({
             the section entirely (Data -> Concepts -> Data) left the timeline
             blank. Hiding beats re-rendering; nothing mounts until the reader
             first opens Data. */}
-        {!loading && dataMounted && (
+        {!showLoader && dataMounted && (
           <div className={tab === "data" || tab === "concepts" ? "" : "hidden"}
                aria-hidden={!(tab === "data" || tab === "concepts")}>
             <DataView
@@ -338,12 +390,13 @@ export default function JournalBrowser({
           </div>
         )}
 
-        {!loading && tab === "journal" && !selDoc && (
+        {!showLoader && tab === "journal" && !selDoc && (
           <GlossaryPeek terms={glossaryTerms} onView={() => { setTab("glossary"); setSel(null); setGsel(null); }} onOpen={(slug: string) => { setTab("glossary"); setSel(null); setGsel(slug); }} />
         )}
-        {!loading && tab === "glossary" && !gsel && (
+        {!showLoader && tab === "glossary" && !gsel && (
           <JournalPeek items={journal} source={ds?.source} onView={() => { setTab("journal"); setSel(null); setGsel(null); }} onOpen={(id: string) => { setTab("journal"); setGsel(null); setSel(id); }} />
         )}
+        </div>
       </main>
 
       <Footer onNav={(t) => { setTab(t); setSel(null); setGsel(null); }} />
