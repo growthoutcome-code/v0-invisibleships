@@ -27,7 +27,7 @@ import PageActions, { SortMenu, type SortDir } from "@/components/PageActions";
 import DataView, { type SubTab } from "@/components/DataView";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import Processing from "@/components/Processing";
+import Processing, { useHeldLoading } from "@/components/Processing";
 
 const journalHref = (id: string) => `/journal/${id.toLowerCase()}`;
 const glossaryHref = (slug: string) => `/glossary/${slug.toLowerCase()}`;
@@ -100,6 +100,25 @@ export default function JournalBrowser({
   const [deepLinked, setDeepLinked] = useState(false);
 
   useEffect(() => { loadDataset().then((d) => { setDs(d); setLoading(false); }).catch(() => setLoading(false)); }, []);
+
+  /* THREE SECONDS, FLOOR NOT CEILING (Sean, 15 September: "one Mississippi, two
+     Mississippi, three Mississippi would be ideal, three seconds. Regardless of
+     how long it takes to load").
+
+     `loading` tracks the fetch; `showLoader` tracks what the reader sees. On a
+     warm connection the shards resolve in under 200ms and the processing state
+     was a flicker - present in the code, absent from the experience. The floor
+     makes it a state rather than a stutter.
+
+     It never delays the work. The dataset is already in hand behind the loader,
+     and a fetch slower than three seconds adds nothing at all. */
+  const showLoader = useHeldLoading(loading, 3000);
+
+  /* The transcript body is a different case: it opens inside a page the reader
+     is already on, so a three-second gate would make the site feel slow. 400ms
+     is only enough to stop a sub-frame flicker. Same drawing either way - the
+     pick is shared across every instance. */
+  const showBodyLoader = useHeldLoading(bodyLoading, 400);
 
   // Back-compat IN: the current section comes from the route (initialTab), but
   // still honor any LEGACY query params (?entry= / ?term= / ?view=) on already
@@ -275,7 +294,7 @@ export default function JournalBrowser({
             }
           />
         )}
-        {loading ? (
+        {showLoader ? (
           <Processing label="Loading the corpus" />
         ) : tab === "glossary" ? (
           <GlossarySection terms={glossaryTerms} gcat={gcat} setGcat={setGcat} gsel={gsel} setGsel={setGsel} />
@@ -304,7 +323,7 @@ export default function JournalBrowser({
             <div className="min-w-0">
               {selDoc ? (
                 <Reader
-                  doc={selDoc} body={body} bodyLoading={bodyLoading} cats={ds?.docCats[selDoc.id] || []} gloss={ds?.docGloss[selDoc.id] || []}
+                  doc={selDoc} body={body} bodyLoading={showBodyLoader} cats={ds?.docCats[selDoc.id] || []} gloss={ds?.docGloss[selDoc.id] || []}
                   onBack={() => setSel(null)}
                   onPrev={selIdx > 0 ? () => setSel(filtered[selIdx - 1].id) : undefined}
                   onNext={selIdx >= 0 && selIdx < filtered.length - 1 ? () => setSel(filtered[selIdx + 1].id) : undefined}

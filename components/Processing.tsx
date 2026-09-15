@@ -39,7 +39,7 @@
  * non-scaling strokes, so a 1.6px line stays 1.6px at 64px wide and at 400.
  * The wrapper caps width and centres; nothing here carries a pixel size.
  */
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /** The three drawings, as viewBox children. Kept here so the CSS stays generic. */
 const DRAWINGS = {
@@ -109,7 +109,67 @@ const DRAWINGS = {
   ),
 } as const;
 
-const NAMES = Object.keys(DRAWINGS) as (keyof typeof DRAWINGS)[];
+type Name = keyof typeof DRAWINGS;
+const NAMES = Object.keys(DRAWINGS) as Name[];
+
+/**
+ * ONE DRAWING PER PAGE LOAD, NOT PER COMPONENT.
+ *
+ * Sean, 15 September: "two types of animations happened for one page. We only
+ * want one to run for each instance."
+ *
+ * Correct, and the cause was mine: this page mounts Processing twice - once for
+ * the corpus fetch, once when a transcript body opens - and each instance rolled
+ * its own Math.random(). A reader saw the branch, then the lattice, in a single
+ * visit, which reads as two unrelated animations rather than one identity.
+ *
+ * The pick now lives at module scope, decided by whichever instance mounts
+ * first and reused by every instance after it. It is deliberately NOT reset on
+ * navigation: within one session the loader is one drawing, and the variety is
+ * across sessions. Null at import so nothing random happens during SSR.
+ */
+let PICKED: Name | null = null;
+
+/**
+ * Hold a loading flag true for a minimum duration.
+ *
+ * Sean, 15 September: "it runs for at least two seconds. One Mississippi, two
+ * Mississippi, three Mississippi would be ideal, three seconds. Regardless of
+ * how long it takes to load."
+ *
+ * Without this the state is invisible on any warm connection - the sixteen
+ * shards can resolve in under 200ms, and the reader sees a flicker rather than
+ * a processing state. Deliberately slowing a fast path is normally wrong; here
+ * the state IS part of what the page says, so it gets a floor.
+ *
+ * Only the wait is extended, never the work: the data is already in hand and
+ * the timer only governs when the loader stands down. If the fetch takes longer
+ * than the floor, nothing is added at all.
+ */
+export function useHeldLoading(active: boolean, minMs = 3000) {
+  const [held, setHeld] = useState(active);
+  const startedAt = useRef<number | null>(null);
+
+  useEffect(() => {
+    if (active) {
+      if (startedAt.current === null) startedAt.current = Date.now();
+      setHeld(true);
+      return;
+    }
+    if (startedAt.current === null) {
+      setHeld(false);
+      return;
+    }
+    const remaining = Math.max(0, minMs - (Date.now() - startedAt.current));
+    const t = setTimeout(() => {
+      startedAt.current = null;
+      setHeld(false);
+    }, remaining);
+    return () => clearTimeout(t);
+  }, [active, minMs]);
+
+  return held;
+}
 
 export default function Processing({
   label = "Loading the corpus",
@@ -123,11 +183,15 @@ export default function Processing({
 }) {
   const inline = variant === "inline";
 
-  // See the note above on why this is an effect. NAMES[0] renders on the server
-  // and for the first client frame; the pick lands immediately after.
-  const [pick, setPick] = useState<keyof typeof DRAWINGS>(NAMES[0]);
+  // The pick cannot happen during render: Math.random() runs once on the server
+  // and again on the client, the two disagree, and React throws a hydration
+  // mismatch. So the first frame is NAMES[0] and the effect settles it - except
+  // for a second instance mounting later, which reads PICKED straight away and
+  // never shows a different drawing at all.
+  const [pick, setPick] = useState<Name>(() => PICKED ?? NAMES[0]);
   useEffect(() => {
-    setPick(NAMES[Math.floor(Math.random() * NAMES.length)]);
+    if (!PICKED) PICKED = NAMES[Math.floor(Math.random() * NAMES.length)];
+    setPick(PICKED);
   }, []);
 
   return (
