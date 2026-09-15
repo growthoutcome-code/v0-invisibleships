@@ -205,8 +205,6 @@ export default function EntryGate() {
               style={{ transform: `translateX(-${step * 100}%)` }}
             >
               <Step active={step === 0}>
-              <div className="grid gap-7 md:grid-cols-[1.05fr_0.95fr] md:gap-10">
-              <div>
                 {/* The welcome leads; the warning is a secondary note beneath it,
                     carrying the same left-rule treatment the crisis line had.
                     Sean, 15 September: "this first thing should be welcome to the
@@ -249,22 +247,21 @@ export default function EntryGate() {
                     .
                   </p>
                 </div>
-              </div>
 
-              {/* The question gets its own column rather than a row of tags
-                  under the copy. Sean, 15 September: "what is important is that
-                  they select who they are or they do not." A column makes it the
-                  second thing on the screen instead of a footnote, without
-                  taking the welcome's place as the first. */}
-              <div className="md:border-l md:border-edge md:pl-10">
+              {/* Full width beneath the welcome, as a row of tags rather than a
+                  sidebar. Sean, 15 September: "no sidebar... load those options
+                  as pills underneath the main content area." Square-cornered
+                  because the whole site is — every rounded-* utility resolves to
+                  0 in tailwind.config, deliberately. */}
+              <div className="mt-7 border-t border-edge pt-5">
                 <p className="font-display m-0 text-[11.5px] uppercase tracking-[0.16em] text-muted">
                   Who is reading? &middot; optional
                 </p>
-                <p className="m-0 mt-2.5 text-[13.5px] leading-relaxed text-muted">
+                <p className="m-0 mt-2 text-[13.5px] leading-relaxed text-muted">
                   Not required, not checked, and not a condition of entry. Skip it and
                   continue &mdash; it costs you nothing.
                 </p>
-                <div className="mt-4 flex flex-col gap-2">
+                <div className="mt-3.5 flex flex-wrap gap-2">
                   {ROLES.map((r) => {
                     const on = role === r;
                     return (
@@ -273,7 +270,7 @@ export default function EntryGate() {
                         type="button"
                         aria-pressed={on}
                         onClick={() => setRole(on ? null : r)}
-                        className={`border px-4 py-2.5 text-left text-[14px] leading-snug transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                        className={`border px-4 py-2 text-[13.5px] leading-snug transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                           on
                             ? "border-foreground bg-foreground text-background"
                             : "border-edge text-foreground/85 hover:border-foreground hover:text-foreground"
@@ -285,11 +282,35 @@ export default function EntryGate() {
                   })}
                 </div>
               </div>
-              </div>
               </Step>
 
               <Step active={step === 1}>
-                <div className="body-copy max-w-[74ch] space-y-3.5 text-[16px] leading-relaxed text-foreground/90 sm:text-[16.5px]">
+                {/* The wake arrives first and holds alone; the fleet resolves
+                    above it afterwards. That order IS the story — the islanders
+                    read the displaced water before they could see the ships — so
+                    it is the order of the animation rather than a flourish on
+                    top of it. Four vessels, not one: the site is called Invisible
+                    Ships. Keyframes live in globals.css beside the loaders. */}
+                <svg className="gate-plate" viewBox="0 0 640 104" role="img"
+                     aria-label="A figure on a shore. Disturbed water appears first; a line of ships resolves above it afterwards.">
+                  <line className="gsea" x1="16" y1="56" x2="624" y2="56" />
+                  <line className="gfig" x1="52" y1="78" x2="52" y2="94" />
+                  <circle className="gfig" cx="52" cy="71" r="4.5" />
+                  {[
+                    [296, 330, 66], [372, 414, 74], [322, 356, 82],
+                    [436, 470, 64], [486, 524, 78], [540, 572, 70],
+                  ].map(([x1, x2, y], i) => (
+                    <line key={`w${i}`} className="gwake" x1={x1} y1={y} x2={x2} y2={y}
+                          style={{ animationDelay: `${i * 0.14}s` }} />
+                  ))}
+                  {[300, 388, 474, 558].map((x, i) => (
+                    <path key={`s${i}`} className="gship"
+                          style={{ animationDelay: `${i * 0.22}s` }}
+                          d={`M ${x - 19} 56 q 19 11 38 0 M ${x} 56 l 0 -19 M ${x} 37 l 16 6 l -16 6`} />
+                  ))}
+                  <line className="gsight" x1="60" y1="70" x2="470" y2="48" />
+                </svg>
+                <div className="body-copy mt-6 space-y-3.5 text-[16px] leading-relaxed text-foreground/90 sm:text-[16.5px]">
                   <p className="m-0">
                     <strong className="font-semibold">Perceptual set</strong>{" "}
                     {GATE.perceptual.definition.replace(/^Perceptual set /, "")}
@@ -313,15 +334,15 @@ export default function EntryGate() {
                     tabIndex={0}
                     role="region"
                     aria-label="Full disclaimer and terms"
-                    className="h-full max-h-[52vh] overflow-y-auto overscroll-contain border border-edge bg-foreground/[0.02] px-4 py-4 text-[15px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:max-h-none sm:px-5"
+                    className="h-full max-h-[52vh] overflow-y-auto overscroll-contain pr-3 text-[15px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:max-h-none"
                   >
-                    <div className="mx-auto max-w-[76ch]">
+                    <div className="max-w-[80ch]">
                       <CopyrightTerms variant="gate" />
                     </div>
                   </div>
                   <div
                     aria-hidden
-                    className={`pointer-events-none absolute inset-x-px bottom-px h-8 bg-gradient-to-t from-panel transition-opacity duration-200 ${
+                    className={`pointer-events-none absolute inset-x-0 bottom-0 h-9 bg-gradient-to-t from-panel transition-opacity duration-200 ${
                       readAll ? "opacity-0" : "opacity-100"
                     }`}
                   />

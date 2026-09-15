@@ -207,3 +207,41 @@ body {
    isn't offered in two places. */
 .gov-timeline-only .gov-report .tabs { display: none; }
 .gov-cloud-mode .gov-report .tab[data-t="time"] { display: none; }
+
+/* ---------------------------------------------------------------------------
+   The gate's perceptual-set drawing (components/EntryGate.tsx, step 2).
+
+   A cousin of the .proc-* loaders: line only, no fill, no colour, currentColor
+   so it inverts with the theme. It breaks the SectionMotif rule the same way
+   they do — motifs move on scroll driven by --motif-p, and this has nothing to
+   scroll, so it runs on a timer.
+
+   The ORDER is the content. The wake appears and holds ALONE for a beat before
+   any hull resolves above it, because that is the whole of the story the site
+   is named for: the disturbance on the water was legible before the ships were.
+   Shortening that beat would make it decoration.
+--------------------------------------------------------------------------- */
+.gate-plate { display: block; width: 100%; height: auto; color: currentColor; }
+.gate-plate line,
+.gate-plate path,
+.gate-plate circle { fill: none; stroke: currentColor; stroke-linecap: round; }
+
+.gate-plate .gsea { stroke-width: 1.1; opacity: .3; }
+.gate-plate .gfig { stroke-width: 1.3; opacity: .5; }
+
+.gate-plate .gwake { stroke-width: 1.3; opacity: 0; animation: gate-wake 9s ease-in-out infinite; }
+@keyframes gate-wake { 0%, 4% { opacity: 0 } 13%, 86% { opacity: .8 } 94%, 100% { opacity: 0 } }
+
+.gate-plate .gship { stroke-width: 1.4; opacity: 0; animation: gate-ship 9s ease-in-out infinite; }
+@keyframes gate-ship { 0%, 42% { opacity: 0 } 56%, 86% { opacity: .95 } 94%, 100% { opacity: 0 } }
+
+.gate-plate .gsight { stroke-width: 1; stroke-dasharray: 2 5; opacity: 0; animation: gate-sight 9s ease-in-out infinite; }
+@keyframes gate-sight { 0%, 64% { opacity: 0 } 74%, 88% { opacity: .45 } 95%, 100% { opacity: 0 } }
+
+/* Reduced motion holds the composed frame — everything visible, nothing moving —
+   the same idea as pinning --motif-p at 0.5 for the section motifs. */
+@media (prefers-reduced-motion: reduce) {
+  .gate-plate .gwake,
+  .gate-plate .gship,
+  .gate-plate .gsight { animation: none !important; opacity: .8 !important; }
+}
