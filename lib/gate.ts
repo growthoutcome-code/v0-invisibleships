@@ -5,7 +5,8 @@
 //     links no longer re-show it (Sean, 2026-08-20: the opening animation now
 //     lives in the glossary, so the front door doesn't need to replay).
 //   • A new browser session (or a new device) still meets the full gate:
-//     age attestation, terms, and the safety note keep doing their work.
+//     the content warning, the perceptual-set note, and the terms keep doing
+//     their work. (There is no age attestation any more; it went on 30 August.)
 //   • Bump the _v suffix whenever the gate wording changes materially, so
 //     returning visitors meet the updated terms once more.
 //
@@ -14,7 +15,7 @@
 // All storage access is wrapped, so this module is SSR-safe: on the server
 // `window` is undefined and hasEntered() reports false.
 
-const KEY = "is_gate_entered_v1";
+const KEY = "is_gate_entered_v2";  // v2: the merged three-step gate, 15 Sep 2026
 
 let entered = false;
 

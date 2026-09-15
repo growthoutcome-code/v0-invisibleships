@@ -1,6 +1,12 @@
 "use client";
 
 /**
+ * NO LONGER MOUNTED ANYWHERE. Superseded by components/EntryGate.tsx on
+ * 15 September 2026 (Sean: "merge the content warning pop up with the original
+ * gate"). Its wording was not lost — the warning below is step 1 of that gate,
+ * 988 and all. Kept, like AccessGate, for the wording and in case a
+ * non-blocking notice is ever wanted again.
+ *
  * The content warning that replaced the age gate.
  *
  * WHY THE GATE WENT

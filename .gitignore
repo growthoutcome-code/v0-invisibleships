@@ -13,3 +13,7 @@ __pycache__/
 
 # transient dev-server capture, never committed
 dev-error.log
+
+# scratch that must never be committed
+_to_delete/
+Claude outputs/
