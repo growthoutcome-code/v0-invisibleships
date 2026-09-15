@@ -297,7 +297,7 @@ export default function JournalBrowser({
             Data section is script-drawn once per page load and cannot redraw
             after an unmount, which is the same reason dataMounted exists. */}
         {showLoader && (
-          <div className="grid min-h-[58vh] place-items-center animate-fade-in">
+          <div className="grid min-h-[52vh] place-items-center px-4 animate-fade-in sm:min-h-[58vh]">
             <Processing label="Loading the corpus" />
           </div>
         )}

@@ -254,15 +254,23 @@ export default function Processing({
   return (
     <div role="status" aria-live="polite" className={`${inline ? "py-6" : "py-16"} ${className}`}>
       <div
-        /* +50% on 15 September, at Sean's request. The block state is the one
-           a reader sits with for three seconds, so it can afford the room;
-           420px from tablet width and 560px on a desktop, still 72vw on a phone so the gutters
-           hold. The inline state grows with it but stays modest - it appears
-           inside a page the reader is already reading. */
+        /* SIZED PER BREAKPOINT, +50% on desktop again on 15 September. A reader
+           sits with this for four seconds, so on a large screen it can carry
+           real presence rather than hovering apologetically in the middle.
+             phone   82vw, capped at 420 - fills the column, keeps its gutters
+             tablet  520
+             desktop 840
+           The vw cap is what makes it work on a phone: it is a share of the
+           screen, not a fixed number, so a 320px device gets 262px with room
+           either side and a 430px device gets 352px. Nothing is ever wider than
+           the screen, and the page never scrolls sideways.
+
+           The inline state grows more modestly - it appears inside a page the
+           reader is already reading, where presence would be an interruption. */
         className={
           inline
-            ? "max-w-[270px]"
-            : "mx-auto w-full max-w-[min(420px,72vw)] px-5 md:max-w-[560px]"
+            ? "max-w-[300px]"
+            : "mx-auto w-full max-w-[min(420px,82vw)] px-5 sm:max-w-[520px] lg:max-w-[840px]"
         }
       >
         <svg
