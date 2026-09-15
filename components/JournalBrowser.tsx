@@ -110,9 +110,14 @@ export default function JournalBrowser({
      was a flicker - present in the code, absent from the experience. The floor
      makes it a state rather than a stutter.
 
-     It never delays the work. The dataset is already in hand behind the loader,
-     and a fetch slower than three seconds adds nothing at all. */
-  const showLoader = useHeldLoading(loading, 3000);
+     The third argument makes it unconditional: "it doesn't matter if it's
+     already loaded. We need to run the animation and load in the background."
+     A warm cache resolves in milliseconds and would otherwise skip the state
+     entirely; now it runs its full three seconds either way.
+
+     It never delays the work. The fetch runs behind the loader throughout, and
+     a fetch slower than three seconds adds nothing at all. */
+  const showLoader = useHeldLoading(loading, 3000, true);
 
   /* The transcript body is a different case: it opens inside a page the reader
      is already on, so a three-second gate would make the site feel slow. 400ms
@@ -279,6 +284,25 @@ export default function JournalBrowser({
       />
 
       <main className="flex-1 w-full max-w-[1400px] mx-auto px-4 sm:px-6 py-6">
+        {/* A STAGE OF ITS OWN, AND A CROSS-FADE OUT OF IT (Sean, 15 September:
+            "we need some kind of fade in or transition between the loader, the
+            processor, and the content").
+
+            The loader is no longer one branch of the content's ternary, where
+            anything mounting nearby could move it. It is its own block holding a
+            fixed share of the viewport, centred, for the whole three seconds.
+
+            The page below is present but display:none until the loader stands
+            down, then fades in. `hidden` rather than unmounting on purpose: the
+            Data section is script-drawn once per page load and cannot redraw
+            after an unmount, which is the same reason dataMounted exists. */}
+        {showLoader && (
+          <div className="grid min-h-[58vh] place-items-center animate-fade-in">
+            <Processing label="Loading the corpus" />
+          </div>
+        )}
+        <div className={showLoader ? "hidden" : "animate-fade-in"}>
+
         {/* ONE FLAG FOR THE WHOLE SCREEN (Sean, 15 September: "once the rest of
             the page came in, it was pushed down, and so the loading state was
             interrupted").
@@ -305,16 +329,7 @@ export default function JournalBrowser({
             }
           />
         )}
-        {showLoader ? (
-          /* A STAGE OF ITS OWN. The loader used to sit in the content flow at
-             its natural height, so anything mounting around it moved it. It now
-             holds a fixed share of the viewport and centres inside it: the
-             drawing is in the same place for the whole three seconds, whatever
-             else the page is doing behind it. */
-          <div className="grid min-h-[58vh] place-items-center">
-            <Processing label="Loading the corpus" />
-          </div>
-        ) : tab === "glossary" ? (
+        {tab === "glossary" ? (
           <GlossarySection terms={glossaryTerms} gcat={gcat} setGcat={setGcat} gsel={gsel} setGsel={setGsel} />
         ) : tab === "documents" ? (
           <DocumentsView />
@@ -381,6 +396,7 @@ export default function JournalBrowser({
         {!showLoader && tab === "glossary" && !gsel && (
           <JournalPeek items={journal} source={ds?.source} onView={() => { setTab("journal"); setSel(null); setGsel(null); }} onOpen={(id: string) => { setTab("journal"); setGsel(null); setSel(id); }} />
         )}
+        </div>
       </main>
 
       <Footer onNav={(t) => { setTab(t); setSel(null); setGsel(null); }} />

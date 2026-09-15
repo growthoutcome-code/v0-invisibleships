@@ -153,13 +153,25 @@ function pickOnce(): Name | null {
  * a processing state. Deliberately slowing a fast path is normally wrong; here
  * the state IS part of what the page says, so it gets a floor.
  *
- * Only the wait is extended, never the work: the data is already in hand and
- * the timer only governs when the loader stands down. If the fetch takes longer
- * than the floor, nothing is added at all.
+ * `fromMount` makes the floor unconditional. Sean, 15 September: "it doesn't
+ * matter if it's already loaded. We need to run the animation and load in the
+ * background." With it, the state runs its full three seconds even when the
+ * data was already cached and there was never anything to wait for - the
+ * animation is part of what the page says, not a report on network latency.
+ *
+ * Only the wait is extended, never the work: the fetch runs behind the loader
+ * throughout, and a fetch slower than the floor adds nothing at all.
  */
-export function useHeldLoading(active: boolean, minMs = 3000) {
-  const [held, setHeld] = useState(active);
-  const startedAt = useRef<number | null>(null);
+export function useHeldLoading(active: boolean, minMs = 3000, fromMount = false) {
+  /* THE CLOCK STARTS AT FIRST RENDER, NOT AT FIRST EFFECT. This was the bug
+     that kept the hold from firing: the ref was initialised to null and only
+     set inside the effect, so if the fetch resolved before effects ran - a warm
+     cache does exactly that - the effect's first run saw active=false with no
+     start time recorded and stood the loader down immediately. Initialising
+     during render closes the race; there is no moment where the clock has not
+     started. */
+  const startedAt = useRef<number | null>(active || fromMount ? Date.now() : null);
+  const [held, setHeld] = useState(active || fromMount);
 
   useEffect(() => {
     if (active) {
@@ -167,11 +179,17 @@ export function useHeldLoading(active: boolean, minMs = 3000) {
       setHeld(true);
       return;
     }
+    // Never started, and not asked to run on mount: nothing to hold.
     if (startedAt.current === null) {
       setHeld(false);
       return;
     }
     const remaining = Math.max(0, minMs - (Date.now() - startedAt.current));
+    if (remaining === 0) {
+      startedAt.current = null;
+      setHeld(false);
+      return;
+    }
     const t = setTimeout(() => {
       startedAt.current = null;
       setHeld(false);
@@ -218,13 +236,13 @@ export default function Processing({
       <div
         /* +50% on 15 September, at Sean's request. The block state is the one
            a reader sits with for three seconds, so it can afford the room;
-           420px on a desktop, and still 70vw on a phone so the side gutters
+           420px from tablet width and 560px on a desktop, still 72vw on a phone so the gutters
            hold. The inline state grows with it but stays modest - it appears
            inside a page the reader is already reading. */
         className={
           inline
             ? "max-w-[270px]"
-            : "mx-auto w-full max-w-[min(420px,70vw)] px-5"
+            : "mx-auto w-full max-w-[min(420px,72vw)] px-5 md:max-w-[560px]"
         }
       >
         <svg
