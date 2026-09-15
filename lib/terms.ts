@@ -287,6 +287,11 @@ export const TERMS: TermsSection[] = [
       {
         kind: "p",
         text:
+          "The entry screen asks, optionally, how you would describe yourself as a reader. Answering is **never required** — you can enter without choosing, and declining costs you nothing. If you do answer, that one word is attached to the rest of your visit so the author can tell which sections matter to which readers. It is stored with the analytics above and nowhere else. It is a self-description, checked by nobody, and it is not treated as a fact about you. Bear in mind that an answer alongside a session replay is more identifying together than either is alone; if that matters to you, decline, or turn measurement off entirely with the link below.",
+      },
+      {
+        kind: "p",
+        text:
           "Given what this archive is about, that is stated plainly rather than buried. If you would rather not be measured at all, open any page with [?analytics=off](/?analytics=off) — this browser then stops being recorded on this device, and stays that way.",
       },
     ],

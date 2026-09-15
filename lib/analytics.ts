@@ -135,6 +135,36 @@ export function initAnalytics() {
 
 type Gtag = (command: string, event: string, params?: Record<string, unknown>) => void;
 
+/**
+ * Attach a property to EVERY subsequent event this session, in PostHog and GA.
+ *
+ * This is how the gate's optional "who is reading" answer becomes useful: the
+ * count itself means little (the professionals least likely to answer honestly
+ * are precisely the ones worth knowing about), but a super property turns every
+ * later funnel and page metric into a segmentable one.
+ *
+ * Super properties, NOT a person property: PostHog runs here with
+ * `person_profiles: "identified_only"`, so a person property would not stick —
+ * and identifying a reader of this archive is exactly what we will not do.
+ * Nothing here is written to a profile and nothing is written to storage we own.
+ */
+export function registerVisitorProps(props: Record<string, unknown>) {
+  if (typeof window === "undefined" || disabled) return;
+  if (KEY) {
+    try {
+      posthog.register(props);
+    } catch {
+      /* no-op */
+    }
+  }
+  try {
+    const gtag = (window as unknown as { gtag?: Gtag }).gtag;
+    if (typeof gtag === "function") gtag("set", "user_properties", props);
+  } catch {
+    /* no-op */
+  }
+}
+
 export function track(event: string, props?: Record<string, unknown>) {
   if (typeof window === "undefined" || disabled) return;
   // PostHog (no-op without a key)

@@ -47,15 +47,37 @@ import { Button } from "@/components/ui/button";
 import CopyrightTerms from "@/components/CopyrightTerms";
 import { GATE } from "@/lib/gate-content";
 import { hasEntered, markEntered } from "@/lib/gate";
-import { track } from "@/lib/analytics";
+import { track, registerVisitorProps } from "@/lib/analytics";
 
 const STEPS = [
-  { title: "Content warning", cta: "I understand", event: "gate_warning_viewed" },
+  { title: "Welcome to Invisible Ships", cta: "Continue", event: "gate_welcome_viewed" },
   { title: "Perceptual set", cta: "Continue", event: "gate_perceptual_viewed" },
   { title: "Disclaimer and copyright", cta: "Enter the corpus", event: "gate_terms_viewed" },
 ] as const;
 
 const TERMS_STEP = 2;
+
+/**
+ * The optional "who is reading" question.
+ *
+ * Nobody is required to answer and nothing is verified, so the counts are not a
+ * census and must never be quoted as one — the professionals most worth knowing
+ * about are the least likely to identify themselves on an archive about covert
+ * harassment. What it buys is SEGMENTATION: the answer rides along as a super
+ * property, so every later metric can be read per audience.
+ *
+ * "This is happening to me or someone I know" is here because it was missing
+ * from the first list and is the answer most likely to be given honestly — and
+ * the readers it describes are the ones the site most needs to understand.
+ */
+const ROLES = [
+  "Law enforcement",
+  "Government or policy",
+  "Journalist or researcher",
+  "This is happening to me, or someone I know",
+  "Just curious",
+  "Prefer not to say",
+] as const;
 
 export default function EntryGate() {
   // Starts closed and is opened in an effect: sessionStorage does not exist
@@ -63,9 +85,18 @@ export default function EntryGate() {
   // who has already passed it this session.
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState(0);
+  const [role, setRole] = useState<string | null>(null);
 
+  // The page paints FIRST, then the gate arrives over it. Sean, 15 September:
+  // "the site loads quickly, the first part of the site, and then the warning
+  // shows up." A reader seeing where they have landed before being asked
+  // anything is the whole difference between a welcome and a bouncer. The card
+  // then trails the scrim by 180ms (below) so the page is seen to be held back
+  // before the panel lands on top of it.
   useEffect(() => {
-    if (!hasEntered()) setOpen(true);
+    if (hasEntered()) return;
+    const t = setTimeout(() => setOpen(true), 350);
+    return () => clearTimeout(t);
   }, []);
 
   useEffect(() => {
@@ -97,6 +128,17 @@ export default function EntryGate() {
   const locked = step === TERMS_STEP && !readAll;
 
   function advance() {
+    if (step === 0) {
+      // Recorded once, on the way out of the welcome. Declining is recorded too:
+      // the decline rate is the only thing here that says how much to trust the
+      // rest of it.
+      if (role && role !== "Prefer not to say") {
+        track("gate_role_selected", { visitor_role: role });
+        registerVisitorProps({ visitor_role: role });
+      } else {
+        track("gate_role_declined", { visitor_role: role ?? "no answer" });
+      }
+    }
     if (step < STEPS.length - 1) {
       setStep(step + 1);
       return;
@@ -122,8 +164,16 @@ export default function EntryGate() {
           onEscapeKeyDown={(e) => e.preventDefault()}
           onPointerDownOutside={(e) => e.preventDefault()}
           onInteractOutside={(e) => e.preventDefault()}
-          className="fixed left-1/2 top-1/2 z-[61] flex w-[calc(100vw-1.5rem)] max-w-[640px] -translate-x-1/2 -translate-y-1/2 flex-col border border-edge bg-panel shadow-2xl animate-fade-in max-h-[calc(100dvh-1.5rem)]"
+          className="fixed inset-0 z-[61] flex items-start justify-center overflow-y-auto p-3 focus:outline-none sm:p-4"
         >
+          {/* The card is a child rather than the Content element itself.
+              Tailwind's -translate-x/y-1/2 centring and the fade-in keyframe
+              both write `transform`, and the animation wins (fill-mode both) —
+              which left the card uncentred with its footer below the fold on a
+              924px window. Centring comes from this flex container now, so
+              nothing competes for `transform`, and a window shorter than the
+              card scrolls rather than clipping it. */}
+          <div className="my-auto flex w-[92vw] flex-col border border-edge bg-panel shadow-2xl animate-fade-in [animation-delay:180ms] sm:w-[78vw] sm:max-w-[1040px]">
           <div className="shrink-0 px-5 pt-5 sm:px-8 sm:pt-6">
             <div className="flex gap-1.5" aria-hidden>
               {STEPS.map((s, n) => (
@@ -155,19 +205,34 @@ export default function EntryGate() {
               style={{ transform: `translateX(-${step * 100}%)` }}
             >
               <Step active={step === 0}>
+              <div className="grid gap-7 md:grid-cols-[1.05fr_0.95fr] md:gap-10">
+              <div>
+                {/* The welcome leads; the warning is a secondary note beneath it,
+                    carrying the same left-rule treatment the crisis line had.
+                    Sean, 15 September: "this first thing should be welcome to the
+                    Invisible Ships website... content warning should be a subline."
+                    Nothing the warning said was cut - it was demoted, not softened. */}
                 <p className="body-copy m-0 text-[16px] leading-relaxed text-foreground/90 sm:text-[16.5px]">
-                  This archive preserves communications the author received without
-                  consent, including material that references coercion, self-harm and
-                  euthanasia. It is documentation of what was said to him. It does not
-                  reflect his beliefs, and he does not endorse or encourage harm to
-                  anyone.
+                  This is a documentary archive: a dated journal, verbatim transcripts of
+                  communications received without consent, and research drawn entirely
+                  from public records &mdash; court rulings, procurement awards,
+                  statistical releases.
                 </p>
-                <p className="m-0 mt-4 text-[14px] leading-relaxed text-muted">
-                  If this material is difficult for you, step away and come back only if
-                  you want to.
+                <p className="body-copy m-0 mt-3.5 text-[16px] leading-relaxed text-foreground/90 sm:text-[16.5px]">
+                  Three short screens before you go in: this one, what the name means, and
+                  the disclaimer. Take them at your own pace.
                 </p>
-                <div className="mt-5 border-l-2 border-accent pl-4">
-                  <p className="m-0 text-[14px] leading-relaxed text-muted">
+                <div className="mt-5 border-l-2 border-edge pl-4">
+                  <p className="font-display m-0 text-[11.5px] uppercase tracking-[0.14em] text-muted">
+                    Content warning
+                  </p>
+                  <p className="m-0 mt-2 text-[13.5px] leading-relaxed text-muted">
+                    Some of this material references coercion, self-harm and euthanasia. It
+                    is documentation of what was said to the author; it does not reflect
+                    his beliefs, and he does not endorse or encourage harm to anyone. If it
+                    is difficult for you, step away and come back only if you want to.
+                  </p>
+                  <p className="m-0 mt-2 text-[13.5px] leading-relaxed text-muted">
                     In the US you can call or text{" "}
                     <a href="tel:988" className="font-medium text-foreground underline underline-offset-4">
                       988
@@ -184,10 +249,47 @@ export default function EntryGate() {
                     .
                   </p>
                 </div>
+              </div>
+
+              {/* The question gets its own column rather than a row of tags
+                  under the copy. Sean, 15 September: "what is important is that
+                  they select who they are or they do not." A column makes it the
+                  second thing on the screen instead of a footnote, without
+                  taking the welcome's place as the first. */}
+              <div className="md:border-l md:border-edge md:pl-10">
+                <p className="font-display m-0 text-[11.5px] uppercase tracking-[0.16em] text-muted">
+                  Who is reading? &middot; optional
+                </p>
+                <p className="m-0 mt-2.5 text-[13.5px] leading-relaxed text-muted">
+                  Not required, not checked, and not a condition of entry. Skip it and
+                  continue &mdash; it costs you nothing.
+                </p>
+                <div className="mt-4 flex flex-col gap-2">
+                  {ROLES.map((r) => {
+                    const on = role === r;
+                    return (
+                      <button
+                        key={r}
+                        type="button"
+                        aria-pressed={on}
+                        onClick={() => setRole(on ? null : r)}
+                        className={`border px-4 py-2.5 text-left text-[14px] leading-snug transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                          on
+                            ? "border-foreground bg-foreground text-background"
+                            : "border-edge text-foreground/85 hover:border-foreground hover:text-foreground"
+                        }`}
+                      >
+                        {r}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+              </div>
               </Step>
 
               <Step active={step === 1}>
-                <div className="body-copy space-y-3.5 text-[16px] leading-relaxed text-foreground/90 sm:text-[16.5px]">
+                <div className="body-copy max-w-[74ch] space-y-3.5 text-[16px] leading-relaxed text-foreground/90 sm:text-[16.5px]">
                   <p className="m-0">
                     <strong className="font-semibold">Perceptual set</strong>{" "}
                     {GATE.perceptual.definition.replace(/^Perceptual set /, "")}
@@ -213,7 +315,9 @@ export default function EntryGate() {
                     aria-label="Full disclaimer and terms"
                     className="h-full max-h-[52vh] overflow-y-auto overscroll-contain border border-edge bg-foreground/[0.02] px-4 py-4 text-[15px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:max-h-none sm:px-5"
                   >
-                    <CopyrightTerms variant="gate" />
+                    <div className="mx-auto max-w-[76ch]">
+                      <CopyrightTerms variant="gate" />
+                    </div>
                   </div>
                   <div
                     aria-hidden
@@ -251,6 +355,7 @@ export default function EntryGate() {
             </Button>
           </div>
           <p className="m-0 shrink-0 px-5 pb-5 text-[12px] text-muted sm:px-8">{GATE.copyrightLine}</p>
+          </div>
         </DialogPrimitive.Content>
       </DialogPrimitive.Portal>
     </DialogPrimitive.Root>
