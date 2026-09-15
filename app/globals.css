@@ -136,16 +136,27 @@ body {
 
    MOBILE. Every drawing is one SVG with a viewBox and no fixed dimensions, so
    it scales from a 320px phone to a desktop from the same rule. Stroke widths
-   use vector-effect: non-scaling-stroke, or a 1.6px line becomes a hairline at
-   64px wide and a slab at 400. Nothing here has a pixel width.
+   are in user units and scale with it - see the note below on why they must,
+   and what breaks when they do not. Nothing here has a pixel width.
 
    COLOUR. Strokes and fills are currentColor, so each drawing inherits whatever
    text colour it is placed in and needs no theme handling of its own. */
 
 .proc-svg { display: block; width: 100%; height: auto; }
-.proc-svg line,
-.proc-svg path,
-.proc-svg circle { vector-effect: non-scaling-stroke; }
+
+/* NO vector-effect: non-scaling-stroke HERE, and that is the fix for a real
+   bug rather than a preference. Sean, 15 September: "there's a gap between the
+   lines that connect with the dot... about ten to fifteen percent of the width."
+
+   non-scaling-stroke makes the browser compute the dash pattern in SCREEN units
+   while `pathLength="100"` normalises the path in USER units. The two disagree
+   the moment the SVG is scaled - and at 560px from a 230-unit viewBox it is
+   scaled 2.4x - so `stroke-dasharray: 100` stops covering the whole path and
+   every line is drawn short. The gap grows with the screen, which is why it
+   looked like a fixed percentage of the width.
+
+   Strokes now scale with the drawing, so widths are set low enough to stay
+   sensible on a phone and read as deliberate weight on a desktop. */
 .proc-svg .pstroke {
   fill: none; stroke: currentColor; stroke-linecap: round;
   stroke-dasharray: 100; stroke-dashoffset: 100;
@@ -153,13 +164,14 @@ body {
 }
 .proc-svg .pdot { fill: currentColor; opacity: 0; animation: proc-pop 3.4s ease-out infinite; }
 .proc-svg .pring {
-  fill: none; stroke: currentColor; stroke-width: 1.4; opacity: 0;
+  fill: none; stroke: currentColor; opacity: 0;
   animation: proc-ring 3.4s ease-out infinite;
 }
 /* A branch tapers. Without this it reads as a diagram rather than growth. */
-.proc-svg .g0 { stroke-width: 2.3; } .proc-svg .g1 { stroke-width: 1.9; }
-.proc-svg .g2 { stroke-width: 1.5; } .proc-svg .g3 { stroke-width: 1.2; }
-.proc-svg .gx { stroke-width: 1.6; }
+.proc-svg .g0 { stroke-width: 1.7; } .proc-svg .g1 { stroke-width: 1.4; }
+.proc-svg .g2 { stroke-width: 1.1; } .proc-svg .g3 { stroke-width: 0.9; }
+.proc-svg .gx { stroke-width: 1.2; }
+.proc-svg .pring { stroke-width: 1.0; }
 
 @keyframes proc-draw {
   0%   { stroke-dashoffset: 100; opacity: 1; }

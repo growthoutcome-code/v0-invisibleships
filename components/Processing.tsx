@@ -46,12 +46,12 @@ const DRAWINGS = {
   /* Six lines arrive from off-frame at one point. lattice, reversed. */
   converge: (
     <g>
-      <path className="pstroke gx" pathLength="100" d="M 8 14 L 196 56" style={{ animationDelay: "0s" }} />
-      <path className="pstroke gx" pathLength="100" d="M 8 34 L 196 56" style={{ animationDelay: ".11s" }} />
-      <path className="pstroke gx" pathLength="100" d="M 8 52 L 196 56" style={{ animationDelay: ".22s" }} />
-      <path className="pstroke gx" pathLength="100" d="M 8 68 L 196 56" style={{ animationDelay: ".33s" }} />
-      <path className="pstroke gx" pathLength="100" d="M 8 86 L 196 56" style={{ animationDelay: ".44s" }} />
-      <path className="pstroke gx" pathLength="100" d="M 8 102 L 196 56" style={{ animationDelay: ".55s" }} />
+      <path className="pstroke gx" pathLength="100" d="M 8 14 L 200 56" style={{ animationDelay: "0s" }} />
+      <path className="pstroke gx" pathLength="100" d="M 8 34 L 200 56" style={{ animationDelay: ".11s" }} />
+      <path className="pstroke gx" pathLength="100" d="M 8 52 L 200 56" style={{ animationDelay: ".22s" }} />
+      <path className="pstroke gx" pathLength="100" d="M 8 68 L 200 56" style={{ animationDelay: ".33s" }} />
+      <path className="pstroke gx" pathLength="100" d="M 8 86 L 200 56" style={{ animationDelay: ".44s" }} />
+      <path className="pstroke gx" pathLength="100" d="M 8 102 L 200 56" style={{ animationDelay: ".55s" }} />
       <circle className="pring" cx="200" cy="56" r="11" style={{ animationDelay: ".55s" }} />
       <circle className="pdot" cx="200" cy="56" r="5" style={{ animationDelay: ".55s" }} />
     </g>
@@ -135,9 +135,29 @@ const NAMES = Object.keys(DRAWINGS) as Name[];
 function pickOnce(): Name | null {
   if (typeof window === "undefined") return null;
   const w = window as unknown as { __isProcessingPick?: Name };
-  if (!w.__isProcessingPick) {
-    w.__isProcessingPick = NAMES[Math.floor(Math.random() * NAMES.length)];
+  if (w.__isProcessingPick) return w.__isProcessingPick;
+
+  /* ROTATE, DO NOT ROLL. Sean, 15 September: "I tried the animation on journal.
+     I got conversions. And then on Research. I got convergence again. Can we do
+     a different loader for each page?"
+
+     Random repeats - one time in three, two page loads in a row draw the same
+     one, which reads as a bug rather than as chance. A counter in sessionStorage
+     advances by one per page load, so consecutive pages always differ and the
+     set cycles. It resets when the tab closes, so a returning reader does not
+     always open on the same drawing.
+
+     sessionStorage can throw in a private window or with site data blocked, so
+     the random pick stays as the fallback. */
+  let i: number;
+  try {
+    const prev = Number(window.sessionStorage.getItem("is-proc-i") ?? "-1");
+    i = (Number.isFinite(prev) ? prev + 1 : 0) % NAMES.length;
+    window.sessionStorage.setItem("is-proc-i", String(i));
+  } catch {
+    i = Math.floor(Math.random() * NAMES.length);
   }
+  w.__isProcessingPick = NAMES[i];
   return w.__isProcessingPick;
 }
 

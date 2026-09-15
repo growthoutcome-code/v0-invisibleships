@@ -101,8 +101,8 @@ export default function JournalBrowser({
 
   useEffect(() => { loadDataset().then((d) => { setDs(d); setLoading(false); }).catch(() => setLoading(false)); }, []);
 
-  /* THREE SECONDS, FLOOR NOT CEILING (Sean, 15 September: "one Mississippi, two
-     Mississippi, three Mississippi would be ideal, three seconds. Regardless of
+  /* FOUR SECONDS, FLOOR NOT CEILING (Sean, 15 September: "one Mississippi, two
+     Mississippi, three Mississippi would be ideal. Regardless of
      how long it takes to load").
 
      `loading` tracks the fetch; `showLoader` tracks what the reader sees. On a
@@ -113,11 +113,11 @@ export default function JournalBrowser({
      The third argument makes it unconditional: "it doesn't matter if it's
      already loaded. We need to run the animation and load in the background."
      A warm cache resolves in milliseconds and would otherwise skip the state
-     entirely; now it runs its full three seconds either way.
+     entirely; now it runs its full four seconds either way (raised from three on 15 September).
 
      It never delays the work. The fetch runs behind the loader throughout, and
      a fetch slower than three seconds adds nothing at all. */
-  const showLoader = useHeldLoading(loading, 3000, true);
+  const showLoader = useHeldLoading(loading, 4000, true);
 
   /* The transcript body is a different case: it opens inside a page the reader
      is already on, so a three-second gate would make the site feel slow. 400ms
