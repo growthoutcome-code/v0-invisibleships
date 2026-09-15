@@ -276,7 +276,7 @@ export default function JournalBrowser({
           />
         )}
         {loading ? (
-          <Processing label="Loading the archive" />
+          <Processing label="Loading the corpus" />
         ) : tab === "glossary" ? (
           <GlossarySection terms={glossaryTerms} gcat={gcat} setGcat={setGcat} gsel={gsel} setGsel={setGsel} />
         ) : tab === "documents" ? (
