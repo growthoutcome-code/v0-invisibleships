@@ -216,10 +216,15 @@ export default function Processing({
   return (
     <div role="status" aria-live="polite" className={`${inline ? "py-6" : "py-16"} ${className}`}>
       <div
+        /* +50% on 15 September, at Sean's request. The block state is the one
+           a reader sits with for three seconds, so it can afford the room;
+           420px on a desktop, and still 70vw on a phone so the side gutters
+           hold. The inline state grows with it but stays modest - it appears
+           inside a page the reader is already reading. */
         className={
           inline
-            ? "max-w-[180px]"
-            : "mx-auto w-full max-w-[min(280px,70vw)] px-5"
+            ? "max-w-[270px]"
+            : "mx-auto w-full max-w-[min(420px,70vw)] px-5"
         }
       >
         <svg

@@ -279,7 +279,18 @@ export default function JournalBrowser({
       />
 
       <main className="flex-1 w-full max-w-[1400px] mx-auto px-4 sm:px-6 py-6">
-        {!loading && (
+        {/* ONE FLAG FOR THE WHOLE SCREEN (Sean, 15 September: "once the rest of
+            the page came in, it was pushed down, and so the loading state was
+            interrupted").
+
+            This read `!loading` while the loader below read `showLoader`. Two
+            flags, and they disagree for most of the wait: the fetch resolves in
+            about 200ms, `loading` flips, the title band mounts ABOVE the loader
+            and shoves it down mid-animation. The processing state was being
+            interrupted by the page it was standing in for.
+
+            Nothing renders above the loader until the loader is finished. */}
+        {!showLoader && (
           <TitleBand
             title={TAB_TITLE[tab]}
             actions={
@@ -295,7 +306,14 @@ export default function JournalBrowser({
           />
         )}
         {showLoader ? (
-          <Processing label="Loading the corpus" />
+          /* A STAGE OF ITS OWN. The loader used to sit in the content flow at
+             its natural height, so anything mounting around it moved it. It now
+             holds a fixed share of the viewport and centres inside it: the
+             drawing is in the same place for the whole three seconds, whatever
+             else the page is doing behind it. */
+          <div className="grid min-h-[58vh] place-items-center">
+            <Processing label="Loading the corpus" />
+          </div>
         ) : tab === "glossary" ? (
           <GlossarySection terms={glossaryTerms} gcat={gcat} setGcat={setGcat} gsel={gsel} setGsel={setGsel} />
         ) : tab === "documents" ? (
@@ -341,7 +359,7 @@ export default function JournalBrowser({
             the section entirely (Data -> Concepts -> Data) left the timeline
             blank. Hiding beats re-rendering; nothing mounts until the reader
             first opens Data. */}
-        {!loading && dataMounted && (
+        {!showLoader && dataMounted && (
           <div className={tab === "data" || tab === "concepts" ? "" : "hidden"}
                aria-hidden={!(tab === "data" || tab === "concepts")}>
             <DataView
@@ -357,10 +375,10 @@ export default function JournalBrowser({
           </div>
         )}
 
-        {!loading && tab === "journal" && !selDoc && (
+        {!showLoader && tab === "journal" && !selDoc && (
           <GlossaryPeek terms={glossaryTerms} onView={() => { setTab("glossary"); setSel(null); setGsel(null); }} onOpen={(slug: string) => { setTab("glossary"); setSel(null); setGsel(slug); }} />
         )}
-        {!loading && tab === "glossary" && !gsel && (
+        {!showLoader && tab === "glossary" && !gsel && (
           <JournalPeek items={journal} source={ds?.source} onView={() => { setTab("journal"); setSel(null); setGsel(null); }} onOpen={(id: string) => { setTab("journal"); setGsel(null); setSel(id); }} />
         )}
       </main>
