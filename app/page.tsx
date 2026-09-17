@@ -64,12 +64,12 @@ export const metadata: Metadata = {
   // carries its question mark with it, which an assertion never would.
   title: "Has a neurotech terrorist attack happened?",
   description:
-    "Is there a government cloud platform anywhere running a Zersetzung German disintegration tactics layer that is isolating and discrediting a person? Are those people being harassed through neurotechnology and forced to accept euthanasia? Are they being experimented on without consent by an unacknowledged union of approximately two hundred unknown organizations?",
+    "Is there a government cloud platform anywhere running a Zersetzung German disintegration tactics layer that is isolating and discrediting America's citizens? Are those people being harassed through neurotechnology and forced to accept euthanasia? Are they being experimented on without consent by an unacknowledged union of approximately two hundred unknown organizations?",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Has a neurotech terrorist attack happened?",
     description:
-      "Is there a government cloud platform anywhere running a Zersetzung German disintegration tactics layer that is isolating and discrediting a person? Are those people being harassed through neurotechnology and forced to accept euthanasia? Are they being experimented on without consent by an unacknowledged union of approximately two hundred unknown organizations?",
+      "Is there a government cloud platform anywhere running a Zersetzung German disintegration tactics layer that is isolating and discrediting America's citizens? Are those people being harassed through neurotechnology and forced to accept euthanasia? Are they being experimented on without consent by an unacknowledged union of approximately two hundred unknown organizations?",
     images: ["/og-default.png"],
   },
 };
@@ -364,7 +364,7 @@ export default function Page() {
                   the discrediting. So the clause did not merely overclaim, it
                   described the opposite of the record, and it ruled out the
                   thing the record actually alleges. The question is stronger
-                  without it, because "isolating and discrediting a person" covers
+                  without it, because "isolating and discrediting America's citizens" covers
                   an arrest and the absence of one equally.
 
                   Both metadata descriptions carry the same sentence and were
@@ -384,8 +384,8 @@ export default function Page() {
                 >
                   Zersetzung
                 </a>{" "}
-                German disintegration tactics layer that is isolating and discrediting a
-                person? Are those people being harassed
+                German disintegration tactics layer that is isolating and discrediting
+                America&rsquo;s citizens? Are those people being harassed
                 through neurotechnology and forced to accept euthanasia? Are they being
                 experimented on without consent by an unacknowledged union of
                 approximately two hundred unknown organizations?
