@@ -1,5 +1,12 @@
 import { NextResponse } from "next/server";
 import { CORPUS_SUMMARY } from "@/lib/corpus-summary";
+import {
+  serverDb,
+  excludedRequest,
+  clientHash,
+  distinctIdFromCookie,
+  geoFromHeaders,
+} from "@/lib/server-log";
 
 /**
  * Counted download endpoint for the corpus zip.
@@ -36,47 +43,22 @@ import { CORPUS_SUMMARY } from "@/lib/corpus-summary";
  * build of the archive was taken. When a reader says "my copy shows 311
  * milestones", that identifies the build they have.
  *
+ * 2026-09-17: the same facts are also written to public.corpus_downloads, so the
+ * count survives the analytics vendor. The two writes are independent — the
+ * PostHog capture is fire-and-forget and the insert is awaited — and neither is
+ * allowed to delay or fail the download. The exclusion rules and the cookie
+ * parsing moved to lib/server-log.ts, shared with /api/gate, so the two routes
+ * cannot drift into disagreeing about who gets counted.
+ *
  * Privacy: no IP is forwarded, then or now. `distinct_id` reuses the visitor's
  * existing PostHog cookie when present, so the download joins their funnel;
  * otherwise it is attributed to an anonymous per-request id and joins nothing.
+ * The database row carries only a salted hash of that cookie id.
  */
 
 const FILE = "/invisible-ships-corpus.zip";
 const KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY;
 const HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com";
-const PRODUCTION = "www.invisibleships.com";
-
-/** PostHog stores its distinct_id in a cookie named ph_<key>_posthog. */
-function distinctIdFromCookie(cookie: string | null): string | null {
-  if (!cookie || !KEY) return null;
-  const match = cookie.match(new RegExp(`ph_${KEY}_posthog=([^;]+)`));
-  if (!match) return null;
-  try {
-    const parsed = JSON.parse(decodeURIComponent(match[1]));
-    return typeof parsed?.distinct_id === "string" ? parsed.distinct_id : null;
-  } catch {
-    return null;
-  }
-}
-
-/**
- * posthog.opt_out_capturing() writes __ph_opt_in_out_<key>=0. A reader who has
- * opted out on the site has opted out of this too — an opt-out that stops the
- * pageview but still records the download is not an opt-out.
- */
-function optedOut(cookie: string | null): boolean {
-  if (!cookie || !KEY) return false;
-  return new RegExp(`__ph_opt_in_out_${KEY}=0`).test(cookie);
-}
-
-/** Why this request is not counted, or null to count it. */
-function excluded(request: Request, hostname: string): string | null {
-  if (hostname !== PRODUCTION) return "not production";
-  if (optedOut(request.headers.get("cookie"))) return "reader opted out";
-  const referer = request.headers.get("referer") || "";
-  if (/localhost|127\.0\.0\.1|\.vercel\.app/.test(referer)) return "development referer";
-  return null;
-}
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
@@ -84,12 +66,16 @@ export async function GET(request: Request) {
   // this hands the reader to the real static file instead of back to itself.
   const target = new URL(`${FILE}?dl=1`, url.origin);
 
-  const skip = excluded(request, url.hostname);
+  const skip = excludedRequest(request, url.hostname);
+  if (skip) return NextResponse.redirect(target, 302);
 
-  if (KEY && !skip) {
-    const cookieId = distinctIdFromCookie(request.headers.get("cookie"));
-    const h = request.headers;
+  const h = request.headers;
+  const cookie = h.get("cookie");
+  const cookieId = distinctIdFromCookie(cookie);
+  const geo = geoFromHeaders(h);
+  const entryPoint = url.searchParams.get("from") || "direct";
 
+  if (KEY) {
     // Fire and forget — a download must never wait on, or fail because of, analytics.
     void fetch(`${HOST}/capture/`, {
       method: "POST",
@@ -100,7 +86,7 @@ export async function GET(request: Request) {
         distinct_id: cookieId || `anon_download_${crypto.randomUUID()}`,
         properties: {
           identified: Boolean(cookieId),
-          entry_point: url.searchParams.get("from") || "direct",
+          entry_point: entryPoint,
           referer: h.get("referer") || "",
           $user_agent: h.get("user-agent") || "",
           $lib: "server",
@@ -110,9 +96,9 @@ export async function GET(request: Request) {
           // function's own location, which is how the only recorded download
           // ended up filed under Ashburn, Virginia.
           $geoip_disable: true,
-          country: h.get("x-vercel-ip-country") || "",
-          region: h.get("x-vercel-ip-country-region") || "",
-          city: h.get("x-vercel-ip-city") ? decodeURIComponent(h.get("x-vercel-ip-city")!) : "",
+          country: geo.country || "",
+          region: geo.region || "",
+          city: geo.city || "",
           timezone: h.get("x-vercel-ip-timezone") || "",
 
           // Which build of the archive this reader actually took.
@@ -122,6 +108,20 @@ export async function GET(request: Request) {
         },
       }),
     }).catch(() => { /* never block the download */ });
+  }
+
+  const db = serverDb();
+  if (db) {
+    const { error } = await db.from("corpus_downloads").insert({
+      entry_point: entryPoint,
+      identified: Boolean(cookieId),
+      client_hash: clientHash(cookie),
+      corpus_files: CORPUS_SUMMARY.files,
+      corpus_bytes: CORPUS_SUMMARY.zipBytes,
+      corpus_generated: CORPUS_SUMMARY.generated,
+      ...geo,
+    });
+    if (error) console.error("[corpus-log] insert failed", error.message);
   }
 
   return NextResponse.redirect(target, 302);

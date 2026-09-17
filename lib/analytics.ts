@@ -133,6 +133,18 @@ export function initAnalytics() {
   inited = true;
 }
 
+/**
+ * Whether this visit is being counted at all.
+ *
+ * Exported so other loggers (lib/gate-log.ts) can honour the same exclusions —
+ * local development, browser automation, and the standing ?analytics=off
+ * opt-out — by asking rather than by repeating the test, which is how two
+ * copies of a rule drift apart. Reads false before initAnalytics() has run.
+ */
+export function isCounting(): boolean {
+  return inited && !disabled;
+}
+
 type Gtag = (command: string, event: string, params?: Record<string, unknown>) => void;
 
 /**

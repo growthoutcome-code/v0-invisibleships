@@ -46,8 +46,9 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { Button } from "@/components/ui/button";
 import CopyrightTerms from "@/components/CopyrightTerms";
 import { GATE } from "@/lib/gate-content";
-import { hasEntered, markEntered } from "@/lib/gate";
+import { hasEntered, markEntered, GATE_VERSION, ROLES } from "@/lib/gate";
 import { track, registerVisitorProps } from "@/lib/analytics";
+import { logGate } from "@/lib/gate-log";
 
 const STEPS = [
   { title: "Welcome to Invisible Ships", cta: "Continue", event: "gate_welcome_viewed" },
@@ -70,14 +71,7 @@ const TERMS_STEP = 2;
  * from the first list and is the answer most likely to be given honestly — and
  * the readers it describes are the ones the site most needs to understand.
  */
-const ROLES = [
-  "Law enforcement",
-  "Government or policy",
-  "Journalist or researcher",
-  "This is happening to me, or someone I know",
-  "Just curious",
-  "Prefer not to say",
-] as const;
+// The list itself lives in lib/gate.ts — see the note there.
 
 export default function EntryGate() {
   // Starts closed and is opened in an effect: sessionStorage does not exist
@@ -95,7 +89,12 @@ export default function EntryGate() {
   // before the panel lands on top of it.
   useEffect(() => {
     if (hasEntered()) return;
-    const t = setTimeout(() => setOpen(true), 350);
+    const t = setTimeout(() => {
+      setOpen(true);
+      // The denominator. Without it the funnel starts at "answered the
+      // question", which cannot show how many people met the gate and left.
+      logGate("gate_opened");
+    }, 350);
     return () => clearTimeout(t);
   }, []);
 
@@ -135,8 +134,10 @@ export default function EntryGate() {
       if (role && role !== "Prefer not to say") {
         track("gate_role_selected", { visitor_role: role });
         registerVisitorProps({ visitor_role: role });
+        logGate("role_selected", role);
       } else {
         track("gate_role_declined", { visitor_role: role ?? "no answer" });
+        logGate("role_declined");
       }
     }
     if (step < STEPS.length - 1) {
@@ -145,6 +146,7 @@ export default function EntryGate() {
     }
     markEntered();
     track("gate_entered");
+    logGate("entered");
     setOpen(false);
   }
 

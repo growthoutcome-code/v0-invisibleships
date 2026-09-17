@@ -15,7 +15,31 @@
 // All storage access is wrapped, so this module is SSR-safe: on the server
 // `window` is undefined and hasEntered() reports false.
 
-const KEY = "is_gate_entered_v2";  // v2: the merged three-step gate, 15 Sep 2026
+export const GATE_VERSION = "v2";  // v2: the merged three-step gate, 15 Sep 2026
+
+const KEY = `is_gate_entered_${GATE_VERSION}`;
+
+/**
+ * The options on the gate's optional "who is reading" question.
+ *
+ * Lives here rather than in the component because the server route that logs
+ * the answer validates against this list — an allowlist, so a crafted request
+ * cannot write arbitrary text into the database, and so the stored values stay
+ * comparable with each other. A route may not import a client component, which
+ * is the other reason this is not in EntryGate.tsx.
+ *
+ * Changing this list changes what past answers mean. Bump GATE_VERSION with it.
+ */
+export const ROLES = [
+  "Law enforcement",
+  "Government or policy",
+  "Journalist or researcher",
+  "This is happening to me, or someone I know",
+  "Just curious",
+  "Prefer not to say",
+] as const;
+
+export type VisitorRole = (typeof ROLES)[number];
 
 let entered = false;
 
