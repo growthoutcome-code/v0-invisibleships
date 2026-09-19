@@ -99,3 +99,11 @@ sources; dates at day-granularity are approximate in a few DPA matters.
 
 *Companion: `litigation.csv` / `seed.sql` (ten populated tables, 1,705 inserts) and the
 Litigation tab in the dashboard.*
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

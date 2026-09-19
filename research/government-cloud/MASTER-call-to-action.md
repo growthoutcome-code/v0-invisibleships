@@ -109,3 +109,11 @@ turns on it.
 Research: **done.** Position: **strong and internally consistent.** Clear call to action:
 **yes — harden for publication (A), assemble the master report (B), then publish on live data
 (C).** Nothing else needs researching before this is a finished, defensible work.
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.
