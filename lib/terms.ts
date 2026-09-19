@@ -60,14 +60,14 @@ export type TermsSection = {
 export const TERMS: TermsSection[] = [
   {
     id: "critical",
-    heading: "Critical Disclaimer on the Journal and its Transcripts",
+    heading: "Critical Disclaimer on This Entire Archive",
     toc: "Critical Disclaimer",
     gate: true,
     blocks: [
       {
         kind: "note",
         text:
-          "This applies to the Journal — the dated entries and verbatim transcripts. It does not apply to the Research or Concepts sections, which are drawn from public records and carry their own basis and origin labels.",
+          "This applies to everything in this archive — the Journal and its dated entries and verbatim transcripts, the Research and Concepts sections, every chart and table, and the downloadable corpus. All of it draws on internet sources and on individual, qualitative accounts. No part of this archive stands outside this disclaimer.",
       },
       {
         kind: "p",
@@ -101,14 +101,14 @@ export const TERMS: TermsSection[] = [
   },
   {
     id: "separation",
-    heading: "The Research and Concepts sections are a different standard",
-    toc: "Journal vs Research",
+    heading: "Where the Research and Concepts material comes from",
+    toc: "Where research comes from",
     gate: true,
     blocks: [
       {
         kind: "p",
         text:
-          "They were assembled with AI assistance from public records — court rulings, regulator decisions, statistical agencies, published investigations — and every figure resolves to the document it came from. Where those sources record a finding against a named organisation, this site reports that finding and cites it. That is a citation of an adjudicated public record, not an accusation by the author. The two bodies of work are never blended, and neither corroborates the other.",
+          "They were assembled with AI assistance from public records — court rulings, regulator decisions, statistical agencies, published investigations — and every figure resolves to the document it came from. Where those sources record a finding against a named organisation, this site reports that finding and cites it. That is a citation of an adjudicated public record, not an accusation by the author. Citing a source is not the same as verifying what it says, and one source sitting beside another does not corroborate it. **The disclaimer above applies to this material in full.** Saying where something came from describes its provenance; it does not exempt it.",
       },
     ],
   },

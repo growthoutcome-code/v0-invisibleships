@@ -8,7 +8,7 @@ supersedes: [IS_META_copyright.md, IS_META_disclaimer.md]
 source: lib/terms.ts (the same source the website renders)
 generated_by: scripts/export_terms_md.mjs
 section_count: 8
-word_count: 2110
+word_count: 2266
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
@@ -24,9 +24,9 @@ historical record. Where they differ from this file, **this file governs.**
 
 ---
 
-## Critical Disclaimer on the Journal and its Transcripts
+## Critical Disclaimer on This Entire Archive
 
-*This applies to the Journal — the dated entries and verbatim transcripts. It does not apply to the Research or Concepts sections, which are drawn from public records and carry their own basis and origin labels.*
+*This applies to everything in this archive — the Journal and its dated entries and verbatim transcripts, the Research and Concepts sections, every chart and table, and the downloadable corpus. All of it draws on internet sources and on individual, qualitative accounts. No part of this archive stands outside this disclaimer.*
 
 The Journal records communications the author received without consent. The transcripts are preserved as documentation of what was said to him. Their content is *external communication* and does NOT represent the author’s beliefs, views, or intent. The author denies any affiliation with, or belief in, the content of those messages — particularly any promoting illegal activity, narcotic use, or violence.
 
@@ -44,9 +44,9 @@ A statement in these transcripts is **testimony**: a dated first-person report, 
 
 Law-enforcement agencies, government bodies and technology companies employ large numbers of people. A statement naming an organisation is not a statement about any individual within it, and this archive does not treat it as one. No agency, company or official named anywhere in the Journal has been shown by this archive to have done anything wrong, and the author asserts no such thing.
 
-## The Research and Concepts sections are a different standard
+## Where the Research and Concepts material comes from
 
-They were assembled with AI assistance from public records — court rulings, regulator decisions, statistical agencies, published investigations — and every figure resolves to the document it came from. Where those sources record a finding against a named organisation, this site reports that finding and cites it. That is a citation of an adjudicated public record, not an accusation by the author. The two bodies of work are never blended, and neither corroborates the other.
+They were assembled with AI assistance from public records — court rulings, regulator decisions, statistical agencies, published investigations — and every figure resolves to the document it came from. Where those sources record a finding against a named organisation, this site reports that finding and cites it. That is a citation of an adjudicated public record, not an accusation by the author. Citing a source is not the same as verifying what it says, and one source sitting beside another does not corroborate it. **The disclaimer above applies to this material in full.** Saying where something came from describes its provenance; it does not exempt it.
 
 ## What this archive does not establish
 
@@ -128,6 +128,8 @@ Not permitted:
 ## What this site measures
 
 This site records usage analytics — pages opened, sections viewed, and which sources readers follow — using cookies, and it may record a session replay: a playback of how a page was used, with all typed input masked. This is processed on the author’s behalf by PostHog and Google Analytics. It is never sold, and no attempt is made to identify individual readers.
+
+The entry screen asks, optionally, how you would describe yourself as a reader. Answering is **never required** — you can enter without choosing, and declining costs you nothing. If you do answer, that one word is attached to the rest of your visit so the author can tell which sections matter to which readers. It is stored with the analytics above and nowhere else. It is a self-description, checked by nobody, and it is not treated as a fact about you. Bear in mind that an answer alongside a session replay is more identifying together than either is alone; if that matters to you, decline, or turn measurement off entirely with the link below.
 
 Given what this archive is about, that is stated plainly rather than buried. If you would rather not be measured at all, open any page with [?analytics=off](/?analytics=off) — this browser then stops being recorded on this device, and stays that way.
 
