@@ -12,6 +12,7 @@ generated_by: scripts/export_concepts_md.mjs
 word_count: 567
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # An attack to force acknowledgment
 
@@ -49,3 +50,11 @@ Violence is sometimes not aimed at a target's capacity. It is aimed at a target'
 ## Scope
 
 This concept describes doctrine recorded in the strategic and academic literature. It does not establish that any such operation has been conducted against the United States, against any other state, or against any individual, and it identifies no actor, technology or campaign.
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

@@ -60,7 +60,11 @@ export type TermsSection = {
 export const TERMS: TermsSection[] = [
   {
     id: "critical",
-    heading: "Critical Disclaimer on This Entire Archive",
+    // The ORIGINAL title, from Invisible Ships Pt. 01 (IS-META-DISCLAIMER). Sean,
+    // 19 September: this is the language to cite anywhere the site cites a
+    // disclaimer, so the name travels with the words. The scope note directly
+    // beneath it is what widens the original from one document to all of this.
+    heading: "Critical Disclaimer on Transcripts and Accusations",
     toc: "Critical Disclaimer",
     gate: true,
     blocks: [
@@ -69,10 +73,29 @@ export const TERMS: TermsSection[] = [
         text:
           "This applies to everything in this archive — the Journal and its dated entries and verbatim transcripts, the Research and Concepts sections, every chart and table, and the downloadable corpus. All of it draws on internet sources and on individual, qualitative accounts. No part of this archive stands outside this disclaimer.",
       },
+      // VERBATIM from the source document, not a paraphrase. The August rewrite
+      // said the same thing in the voice of the site; this says it in the words
+      // (a straight apostrophe in a comment inside TERMS breaks the exporter,
+      // which scans for string literals — so comments here stay apostrophe-free)
+      // the archive was written with, which is the version a reader can check
+      // against meta/IS_META_disclaimer.md in the download. Do not tidy the
+      // capitals, the examples, or "this report" — an extract that has been
+      // improved is no longer an extract.
       {
         kind: "p",
         text:
-          "The Journal records communications the author received without consent. The transcripts are preserved as documentation of what was said to him. Their content is *external communication* and does NOT represent the author’s beliefs, views, or intent. The author denies any affiliation with, or belief in, the content of those messages — particularly any promoting illegal activity, narcotic use, or violence.",
+          "The author explicitly states that the content of the transcripts and 'suggestions' recorded in this document are *external communications* and DO NOT represent the author's personal beliefs, views, or intent. The author denies any affiliation with or belief in the content of these messages, especially those promoting illegal activity, narcotic use, or violence.",
+      },
+      {
+        kind: "p",
+        text:
+          "This report does NOT accuse, blame, or allege malfeasance by any specific corporation, technology company (e.g., Neuralink, Google, Microsoft), or government/law enforcement entity (e.g., Denver Police, FBI). All such organizations are mentioned only in the context of the external suggestions or as part of the author's high-level technical speculation and research into potential methodologies.",
+      },
+      // Sean, 19 September: "all of this information requires verification."
+      {
+        kind: "note",
+        text:
+          "**All of this information requires independent verification.** Nothing in this archive has been verified by any authority, and nothing in it should be treated as established fact. It is assembled from internet sources and from individual, qualitative accounts, and every part of it is offered for checking rather than for belief.",
       },
       { kind: "subhead", text: "Why accusations appear in this record" },
       {

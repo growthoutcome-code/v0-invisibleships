@@ -10,6 +10,7 @@ row_count: 10
 word_count: 500
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Drug deaths internationally: five ways of counting
 
@@ -29,3 +30,11 @@ These figures cannot share an axis. Germany's headline number is a police count,
 - [absence] **Japan** — not counted comparably (None) None. VERIFIED ABSENCE: no official national series located
 - [A] **EU-27** — 7,459 (2023) drug-induced deaths, minimum estimate. harmonized EUDA indicator; EUDA itself cautions on national comparison — EUDA · European Drug Report 2025 — drug-induced deaths <https://www.euda.europa.eu/publications/european-drug-report/2025/drug-induced-deaths_en>
 - [B] **World** — 450,000 (2021) drug-related deaths, global estimate (>450k). UNODC estimate; up from >350k in 2011; no post-2021 estimate — UNODC WDR 2025 (via IDPC) · Global drug-related deaths estimate (>450,000 in 2021) <https://idpc.net/blog/2025/06/evidence-that-cannot-be-contained-the-world-drug-report-2025-reveals-the-ongoing-failure-of-the>
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

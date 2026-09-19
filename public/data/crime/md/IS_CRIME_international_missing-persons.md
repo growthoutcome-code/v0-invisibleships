@@ -10,6 +10,7 @@ row_count: 5
 word_count: 316
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Missing persons internationally: no shared unit
 
@@ -24,3 +25,11 @@ Records, individuals, incidents and rounded press figures cannot be drawn on one
 - [B] **United Kingdom** — 262,000 (2021) missing INCIDENTS recorded 2020/21 (approx). >128,000 individuals same year, incomplete force coverage; NCA primary robots-blocked this session — NCA UKMPU (via press) · UK missing incidents 2020/21 (~262,000) — primary NCA report unreadable this session <https://www.nationalworld.com/news/crime/how-many-missing-people-uk-police-data-explained-body-found-nicola-bulley-4033696>
 - [A] **Australia** — 50,000 (2025) missing-person REPORTS per year (approx, no ref year). ~2,700 long-term (>3 months); no precise annual series published — AFP NMPCC · National Missing Persons Week 2025 <https://www.afp.gov.au/news-centre/media-release/national-missing-persons-week-2025-forever-loved>
 - [A] **International** — 3,345 (2024) Interpol Yellow Notices issued. The ONLY international instrument; counts notices, not missing people; no cross-country statistics published — INTERPOL · Yellow Notices — the only international missing-persons instrument <https://www.interpol.int/en/How-we-work/Notices/Yellow-Notices>
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

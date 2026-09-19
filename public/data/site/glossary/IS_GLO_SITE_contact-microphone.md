@@ -9,6 +9,7 @@ categories: [glossary, reference]
 word_count: 321
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # contact microphone
 
@@ -28,3 +29,11 @@ One honest limit: vendor literature on technical surveillance countermeasures li
 Related terms: [structure-borne audio](/glossary/structure-borne-audio), [piezoelectricity](/glossary/piezoelectricity), [laser microphone](/glossary/laser-microphone), [sampling limit](/glossary/sampling-limit)
 
 Sources: [Contact microphone — Wikipedia](https://en.wikipedia.org/wiki/Contact_microphone); [Protection of speech information against laser eavesdropping — Journal of Vibroengineering (2016)](https://www.extrica.com/article/16943); [TSCM threats, detection equipment, practices and procedures — Bastille](https://bastille.net/centers-of-excellence/tscm-threats-detection-equipment-practices-procedures/)
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

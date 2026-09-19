@@ -12,6 +12,7 @@ generated_by: scripts/export_concepts_md.mjs
 word_count: 256
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # We cannot prove which came first, the law or the system
 
@@ -30,3 +31,11 @@ The timeline shows laws and deployments together, and it is tempting to read cau
 - milestones.lag_days: empty in all 311 rows
 - 32 of 311 milestones carry a relationship label with no target
 - The deployments table has no date field of any kind
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

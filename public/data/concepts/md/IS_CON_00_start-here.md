@@ -8,6 +8,7 @@ generated_by: scripts/export_concepts_md.mjs
 word_count: 1158
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Concepts — start here
 
@@ -117,3 +118,11 @@ in `IS_CON_00_findings.md`, and every dated source behind them is in
 
 - **What is the neurotech bullhorn?** `IS_CON_the-neurotech-bullhorn.md` · origin: author — *Not independently verified*
 - **Has an attack happened?** `IS_CON_has-an-attack-happened.md` · origin: author — *Not independently verified*
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

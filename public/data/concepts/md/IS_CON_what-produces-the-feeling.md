@@ -12,6 +12,7 @@ generated_by: scripts/export_concepts_md.mjs
 word_count: 816
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Your house is not haunted
 
@@ -54,3 +55,11 @@ The published work stands on its own. Blanke's experiment ran on thirty healthy 
 ## Scope
 
 This concept reports published neuroscience. It does not establish the cause of any individual's experience, and it does not assert that any reported experience was internally generated.
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

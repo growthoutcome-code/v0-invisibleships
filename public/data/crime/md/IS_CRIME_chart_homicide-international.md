@@ -11,6 +11,7 @@ series_count: 13
 word_count: 1116
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Homicide: the US against the world
 
@@ -145,3 +146,11 @@ World Bank (mirror of UNODC International Homicide Statistics) · tier A · 24 p
 ## Note on reading this
 
 One basis for every line — the UNODC intentional-homicide series — so these ARE comparable, unlike the drug-death and missing-person figures below. The US sits several times above its Western peers and spiked in 2020 while the world line barely moved; Russia fell from 30 to under 7, and its series ends in 2021. Gaps in a line are years the source does not publish; they are drawn as gaps, never bridged.
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

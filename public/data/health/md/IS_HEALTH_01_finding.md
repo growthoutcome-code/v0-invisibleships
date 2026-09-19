@@ -10,6 +10,7 @@ figure_count: 6
 word_count: 455
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # ~30% increase in US suicide
 
@@ -29,3 +30,11 @@ The claim maps to LONG-RUN cumulative increases documented by CDC, not a recent 
 - [A] 2023: 14.1 per 100k, 49,316 deaths (-0.7% vs 2022, not significant) — CDC/NCHS · NCHS Data Brief 541: Changes in Suicide Rates in the United States From 2022 to 2023 (Sept 2025) <https://www.cdc.gov/nchs/products/databriefs/db541.htm>
 - [A] 2024 (final): 13.7 per 100k, 48,824 deaths (-2.8% vs 2023) — CDC/NCHS · NCHS Data Brief 548: Mortality in the United States, 2024 (Jan 29, 2026) <https://www.cdc.gov/nchs/products/databriefs/db548.htm>
 - [A] 2020-2021 rebound: 13.5 -> 14.1 (+4%), largest 1-yr rise of the 2001-2021 period — CDC/NCHS · NCHS Data Brief 464: Suicide Mortality in the United States, 2001-2021 (Apr 2023) <https://www.cdc.gov/nchs/data/databriefs/db464.pdf>
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

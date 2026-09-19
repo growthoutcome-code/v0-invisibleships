@@ -9,6 +9,7 @@ categories: [glossary, reference]
 word_count: 204
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # muon tomography
 
@@ -22,3 +23,11 @@ An imaging technique that uses muons — high-energy subatomic particles created
 Related terms: [non-ionizing radiation](/glossary/non-ionizing-radiation), [hardware](/glossary/hardware-computer), [Directed-energy](/glossary/directed-energy)
 
 Sources: [Muon imaging at an ancient Jerusalem site — AIP, Journal of Applied Physics](https://pubs.aip.org/aip/jap/article/138/8/084504/3361099/First-demonstration-of-underground-muon-imaging-at); [Directional muon beam for imaging — Lawrence Berkeley National Lab](https://atap.lbl.gov/news/directional-muon-beam-shows-potential-for-advanced-imaging-technique/)
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

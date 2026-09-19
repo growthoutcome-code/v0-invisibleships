@@ -9,6 +9,7 @@ categories: [glossary, reference]
 word_count: 225
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Zersetzung tactics
 
@@ -24,3 +25,11 @@ Documented real-world example: eBay's 2019 campaign against journalists David an
 Related terms: [Gaslighting](/glossary/gaslighting), [torment](/glossary/torment), [psychological smothering](/glossary/psychological-smothering), [No-touch torture](/glossary/no-touch-torture), [Gang stalking](/glossary/gang-stalking), [Targeted individual](/glossary/targeted-individual)
 
 Sources: [Zersetzung — Wikipedia](https://en.wikipedia.org/wiki/Zersetzung); [United States v. eBay Inc. — U.S. DOJ](https://www.justice.gov/usao-ma/case/us-v-ebay-inc)
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

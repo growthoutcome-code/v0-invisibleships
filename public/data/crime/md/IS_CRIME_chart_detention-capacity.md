@@ -11,6 +11,7 @@ series_count: 3
 word_count: 966
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Where a sweep goes: ICE detention against its funded ceiling
 
@@ -70,3 +71,11 @@ Three different measures are drawn here and they must not be read as one line. T
 This chart draws three measures that are constantly conflated in reporting on this subject: an annual average, a funded ceiling, and single-day snapshots. Each is labelled with which it is. Figures for 2025–26 come from FOIA-derived and research compilations because DHS stopped publishing detailed enforcement tables after November 2024.
 
 This chart uses its own 2019–2026 window rather than the section's shared 1999–2025 one: the series does not exist before 2019 in comparable form, and on the shared axis four-fifths of the chart would be empty.
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

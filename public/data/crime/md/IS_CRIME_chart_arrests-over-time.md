@@ -11,6 +11,7 @@ series_count: 3
 word_count: 845
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # US arrests: the machine peaked in 1997
 
@@ -69,3 +70,11 @@ DHS OHSS annual flow reports (FY2011-2020); ICE annual reports (FY2021-2024) · 
 US arrests peaked in 1997 at 15.28 million — a fact most readers do not know — and 2024 is 51% below that. Drug arrests peaked separately in 2006 (1.89M) and remain the largest single category. Constant across the whole era: 82–84% of all arrests are for lesser, non-index offences. Sparse points are drawn as points, not smoothed into a line the data cannot support; dotted stretches are years that are not Tier A. The sweeping operations in the register above — the World Cup's 905 arrests against HSI's 2,545 for all of FY2024 — sit inside these annual millions, which is the scale a headline arrest number should be read against.
 
 About the accuracy of these figures: arrest totals are estimates assembled from agency reports, and two official federal criminal-arrest series disagree (see the data-quality register); 2016 and 2021 are national gaps. The immigration line is federal FISCAL years and ends at FY2024 — DHS stopped publishing detailed enforcement tables after November 2024, so the 2025-26 surge exists only in FOIA'd records. An arrest, in either system, is an event — not a person, and not a conviction.
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

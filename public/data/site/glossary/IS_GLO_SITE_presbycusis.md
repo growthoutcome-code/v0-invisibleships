@@ -9,6 +9,7 @@ categories: [glossary, reference]
 word_count: 271
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # presbycusis
 
@@ -26,3 +27,11 @@ Documented real-world example: this ordinary biology is the entire operating pri
 Related terms: [the Mosquito](/glossary/mosquito-device), [microwave auditory effect](/glossary/microwave-auditory-effect), [phantom sensations](/glossary/phantom-sensations)
 
 Sources: [Extended high-frequency hearing thresholds by age — Journal of Otolaryngology, Head & Neck Surgery (2021)](https://link.springer.com/article/10.1186/s40463-021-00534-w)
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

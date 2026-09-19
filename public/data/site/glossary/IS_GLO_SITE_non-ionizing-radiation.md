@@ -9,6 +9,7 @@ categories: [glossary, reference]
 word_count: 168
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # non-ionizing radiation
 
@@ -20,3 +21,11 @@ Electromagnetic radiation with enough energy to move or heat atoms but not enoug
 Related terms: [electromagnetic field](/glossary/electromagnetic-field), [Directed-energy](/glossary/directed-energy), [microwave auditory effect](/glossary/microwave-auditory-effect), [hardware](/glossary/hardware-computer)
 
 Sources: [Wi-Vi: seeing through walls with Wi-Fi — MIT](https://people.csail.mit.edu/fadel/wivi/); [Household radar sees through walls — IEEE Spectrum](https://spectrum.ieee.org/household-radar-can-see-through-walls-and-knows-how-youre-feeling)
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

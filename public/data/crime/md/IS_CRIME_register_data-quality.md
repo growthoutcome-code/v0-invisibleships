@@ -10,6 +10,7 @@ entry_count: 21
 word_count: 2791
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # How much the numbers can be trusted
 
@@ -165,3 +166,11 @@ Three anonymous or self-administered instruments measured young Americans over t
 The federal UAP office's report counts rose from 247 to 757 and then fell to 319. Its own publications attribute the rise to reporting rather than to phenomena: ODNI records it as 'partially due to reduced stigma surrounding UAP reporting', and AARO records that the FAA began forwarding reports weekly, which it calls 'a significant increase from the previous reporting period'. The reporting periods are also 18, 8, 13 and 12 months long, and each count mixes in-period events with back-reports of older ones.
 
 *Effect:* This is the clearest case on the site of a curve that measures an institution rather than the world. It is drawn because it is the only official count of anomalous reports that exists — and it is labelled as intake, with the publisher's own explanation attached, rather than presented as a rate.
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

@@ -10,6 +10,7 @@ source_count: 104
 word_count: 2402
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Public Health — sources
 
@@ -123,3 +124,11 @@ copyright: © 2026 Sean C. Harris. All Rights Reserved.
 | B | Wikipedia | Mental Healthcare Act, 2017 | 2026-08-19 | <https://en.wikipedia.org/wiki/Mental_Healthcare_Act,_2017> | — |
 | C | Grand View Research | Antipsychotic Drugs Market To Reach $32.24B By 2033 | 2026-08-19 | <https://www.grandviewresearch.com/press-release/global-antipsychotic-drugs-market> | — |
 | C | OECD | Health at a Glance 2025: United States country note (located but not fetchable — robots/40 | 2026-08-19 | <https://www.oecd.org/en/publications/health-at-a-glance-2025_15a55280-en/united-states_3517f35e-en.html> | — |
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

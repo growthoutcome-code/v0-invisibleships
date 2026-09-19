@@ -12,6 +12,7 @@ generated_by: scripts/export_concepts_md.mjs
 word_count: 478
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Did anyone try to build a way in without surgery?
 
@@ -51,3 +52,11 @@ Yes, openly, and the programme documents say so. DARPA's Next-Generation Nonsurg
 ## Scope
 
 This concept reports a publicly documented research programme and its stated objectives. It does not establish that any capability was achieved, deployed, or used on any person.
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

@@ -12,6 +12,7 @@ generated_by: scripts/export_concepts_md.mjs
 word_count: 621
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # What happens to everyone around a target?
 
@@ -52,3 +53,11 @@ Surveillance aimed at one person is rarely confined to one person, and in at lea
 ## Scope
 
 This concept reports documented capability and published practice. It establishes no surveillance of any individual, and no current practice by any named agency.
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

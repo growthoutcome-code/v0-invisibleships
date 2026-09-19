@@ -12,6 +12,7 @@ generated_by: scripts/export_concepts_md.mjs
 word_count: 581
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # “Only I can hear it” is not, by itself, unusual
 
@@ -49,3 +50,11 @@ A sound that one person hears and the person beside them does not is often treat
 ## Scope
 
 This concept narrows what one feature of an account can be taken to show. It makes no finding about what anyone has experienced.
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

@@ -10,6 +10,7 @@ row_count: 13
 word_count: 1086
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Incarceration internationally — why there is no chart here
 
@@ -32,3 +33,11 @@ There is one obvious chart to draw — every country's imprisonment rate on a sh
 - [A] **Germany** — 69 (31 January 2025) per 100,000. 57,812 held. Sourced by WPB from the Council of Europe's SPACE I, which is the one genuinely harmonised collection here. — Council of Europe / University of Lausanne · SPACE I 2025 key findings — one uniform reference date (31 Jan 2025), 100% response across 51 prison administrations <https://wp.unil.ch/space/files/2026/06/260626_key-findings-space-i_prisons-europe-2025.pdf>
 - [B] **Japan** — 33 (mid-2025) per 100,000. 41,232 held; 15.8% pre-trial. About one sixteenth the US rate. — World Prison Brief (Institute for Crime & Justice Policy Research, Birkbeck) · Highest to Lowest — Prison Population Rate (the ranking page carries NO reference-date column) <https://www.prisonstudies.org/highest-to-lowest/prison_population_rate>
 - [A] **Europe (46 states)** — 127 (31 January 2025) per 100,000. The alternative that works: Council of Europe SPACE I uses ONE reference date for every country and had a 100% response rate across 51 prison administrations. Average 127, median 110, from Norway at 54 to Türkiye at 458. It is the harmonised comparison this section would want — and the United States cannot appear on it. — Council of Europe / University of Lausanne · SPACE I 2025 key findings — one uniform reference date (31 Jan 2025), 100% response across 51 prison administrations <https://wp.unil.ch/space/files/2026/06/260626_key-findings-space-i_prisons-europe-2025.pdf>
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

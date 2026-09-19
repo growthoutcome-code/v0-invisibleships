@@ -10,6 +10,7 @@ figure_count: 7
 word_count: 399
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Is crime rising or falling?
 
@@ -30,3 +31,11 @@ Is there a relationship between any of this and the procurement and legislation 
 - [A] NCVS violent victimisation 23.3 per 1,000 (2024) vs 16.5 (2021) — the survey and police measures disagree — Bureau of Justice Statistics · Criminal Victimization, 2024 <https://bjs.ojp.gov/document/cv24.pdf>
 - [A] Harassment: no national count exists to answer the question with — FBI CJIS · NIBRS User Manual 2025.0 (offence code definitions) <https://le.fbi.gov/file-repository/ucr/nibrs-user-manual-2025.pdf>
 - [A] Intimidation (incl. stalking) estimates exist only from 2022 — the record starts where the question needs it oldest
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

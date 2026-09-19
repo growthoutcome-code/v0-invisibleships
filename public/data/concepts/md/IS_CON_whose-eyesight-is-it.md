@@ -12,6 +12,7 @@ generated_by: scripts/export_concepts_md.mjs
 word_count: 459
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Why does the camera on your door not answer to you?
 
@@ -49,3 +50,11 @@ That is a statement about concentration, not a connection between the two, and n
 - [Who profits from a body?](/concepts#who-profits-from-a-body)
 
 *Both describe the gap this proposal is aimed at. Neither shows that a consumer camera and a government platform are linked.*
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

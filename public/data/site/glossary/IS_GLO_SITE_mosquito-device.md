@@ -9,6 +9,7 @@ categories: [glossary, reference]
 word_count: 419
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # the Mosquito
 
@@ -26,3 +27,11 @@ Documented real-world example: in 2010 the Parliamentary Assembly of the Council
 Related terms: [presbycusis](/glossary/presbycusis), [parametric array](/glossary/parametric-array), [no-touch torture](/glossary/no-touch-torture), [psychological smothering](/glossary/psychological-smothering)
 
 Sources: [The Mosquito — Wikipedia](https://en.wikipedia.org/wiki/The_Mosquito); [Recommendation 1978 (2011), citing Recommendation 1930 — Parliamentary Assembly of the Council of Europe](https://www.assembly.coe.int/nw/xml/XRef/Xref-XML2HTML-en.asp?fileid=18019&lang=en); [Mosquito devices — Children & Young People’s Commissioner Scotland](https://www.cypcs.org.uk/positions/mosquito-devices/); [Home Office rejects call for ban — BBC News](https://www.bbc.co.uk/news/10429722)
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

@@ -12,6 +12,7 @@ generated_by: scripts/export_concepts_md.mjs
 word_count: 593
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # What would it actually take to do this without consent?
 
@@ -51,3 +52,11 @@ The three concepts alongside this one describe what the public record contains: 
 ## Scope
 
 This concept describes the limits of publicly documented capability. It makes no claim about classified work, about future capability, or about the cause of any individual's experience.
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

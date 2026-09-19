@@ -12,6 +12,7 @@ generated_by: scripts/export_concepts_md.mjs
 word_count: 239
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # There is no column for you
 
@@ -29,3 +30,11 @@ This research can describe who sells the technology, who buys it, what they paid
 - 10 of 1,922 records describe an individual, all of them litigants
 - 0 of 99 regulations record a route to individual review
 - adoption_stage vocabulary: innovator → early-adopter → early-majority → late-majority → laggard
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

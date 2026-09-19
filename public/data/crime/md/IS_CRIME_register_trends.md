@@ -10,6 +10,7 @@ entry_count: 13
 word_count: 1296
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # What the series show
 
@@ -44,3 +45,11 @@ One statement per series, each resolving to a source.
 - [A] **anomalies_what_is_counted** — Of the things people report when something is wrong, missing persons are counted and falling — NCIC records entered are at their modern low. Home invasion is not counted anywhere. Hallucinations are measured once a decade in England and not at all by any United States federal survey. Hauntings are measured as belief rather than experience: Gallup has asked Americans whether they believe in ghosts since 1990 and has never asked whether they have seen one. — Pew Research Center · Spiritual experiences (2023) — Pew states its telephone-era and online-era readings may not be comparable <https://www.pewresearch.org/religion/2023/12/07/spiritual-experiences/>
 
 - [A] **anomalies_reporting_not_events** — The only official count of anomalous reports that exists — the federal UAP office's — rose from 247 to 757 and then fell to 319, across reporting periods of 18, 8, 13 and 12 months. The office attributes the rise to reduced stigma and to the FAA beginning to forward reports weekly. It measures a reporting system, not a phenomenon. — All-domain Anomaly Resolution Office (AARO) · FY2024 Consolidated Annual Report on UAP — records the FAA now reporting weekly <https://media.defense.gov/2024/Nov/14/2003583603/-1/-1/0/FY24-CONSOLIDATED-ANNUAL-REPORT-ON-UAP-508.PDF>
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

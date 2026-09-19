@@ -8,6 +8,7 @@ generated_by: scripts/export_site_content_md.mjs
 word_count: 187
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Why “Invisible Ships”
 
@@ -23,3 +24,11 @@ The work takes its name from an old, often-told story. When European ships first
 **The anecdote is almost certainly apocryphal. The principle it dramatizes is not — perceptual set is real and measurable.**
 
 This archive is an attempt to make something visible: to describe, in plain and dated detail, a phenomenon that is easy to look past precisely because most people have no framework for it yet.
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

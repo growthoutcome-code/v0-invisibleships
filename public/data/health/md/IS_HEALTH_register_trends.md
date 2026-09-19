@@ -10,6 +10,7 @@ entry_count: 31
 word_count: 1894
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # What the series show
 
@@ -80,3 +81,11 @@ One sourced statement per series.
 - [A] **antipsychotic_use_us** — US adult antipsychotic use rose 1.9% (2006) -> 3.0% (2023) of adults — several times the ~0.3-0.6% schizophrenia prevalence, confirming most volume is prescribed for other conditions; youth use slightly declined (1.3% -> 1.1%). — HHS ASPE · US Population Prevalence of Psychotropic Medication Use, 2006-2023 <https://www.aspe.hhs.gov/sites/default/files/documents/1ef68c455fa5aa5932acf481b0954ddf/DataPoint_PsychRxPrev_BHDAP_20250409%20July%2031%202025.pdf>
 
 - [A] **drug_overdose** — US overdose deaths rose from 16,849 in 1999 (rate 6.1) to 107,941 in 2022 (rate 32.6) — a 541% increase in the count over twenty-three years, with the steepest acceleration after 2013 and the largest single-year rise in 2020 (+30.0%). The post-2022 decline runs down from that peak, not from the pre-2000 baseline: provisional 2025 (69,973) is still about four times the 1999 count. — CDC/NCHS · Data tables for NCHS Data Brief 428: Drug Overdose Deaths in the United States, 1999-2020 <https://www.cdc.gov/nchs/data/databriefs/db428-tables.pdf>
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

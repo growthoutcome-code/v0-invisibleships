@@ -73,3 +73,37 @@ See the corpus project's `supabase_schema.sql` and `00_PLAN_*`. Core table `docu
   add it later via an enrichment pass into the reserved `themes` field if wanted.
 - Full-text search (`documents.fts`) and pgvector semantic Q&A are provisioned in the
   schema for a later pass.
+
+## The disclaimer rule — read this before adding content
+
+Every page of the site and **every markdown file in the downloadable corpus**
+carries the Critical Disclaimer on Transcripts and Accusations. This is not a
+style preference. A file lifted out of the corpus is read on its own, and until
+19 September 2026, 715 of the 840 files in the download mentioned no disclaimer
+at all — including 419 journal transcripts that name people.
+
+One source, three lengths:
+
+| What | Where it lives | Rendered by |
+|---|---|---|
+| The full text | `lib/terms.ts`, section `critical` (the original Pt. 01 wording, verbatim) | `/disclaimer`, the entry gate, `meta/IS_META_terms.md` |
+| The standing line | `lib/disclaimer.ts` | `components/StandingDisclaimer.tsx`, mounted on the `ItemGate` and `GatedApp` seams |
+| The file footer | `lib/disclaimer.ts` → `scripts/generated/disclaimer.json` | `scripts/add_disclaimer_footer.py` |
+
+**If you add content of any kind** — a section, an exporter, a folder in the zip,
+a new route — you do not need to add a disclaimer by hand. You need to make sure
+it passes through the pipeline, and then run the check:
+
+```
+npm run corpus     # export → footer → sync → index, in the order that works
+npm run check      # fails if anything ships without the standing disclaimer
+```
+
+`scripts/add_disclaimer_footer.py --check` compares against `lib/disclaimer.ts`
+byte for byte, so a footer that has drifted fails exactly like a missing one.
+Never retype the disclaimer text anywhere; read it from those two modules.
+
+Two files are deliberately exempt: `meta/IS_META_disclaimer.md` and
+`meta/IS_META_copyright.md` are frozen verbatim extracts of the original August
+2025 document, carrying SUPERSEDED banners that point at the operative terms.
+Rewriting an extract would falsify it.

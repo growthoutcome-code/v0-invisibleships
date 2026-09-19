@@ -9,6 +9,7 @@ categories: [glossary, reference]
 word_count: 175
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # electromagnetic field (EMF)
 
@@ -20,3 +21,11 @@ A physical field produced by electrically charged objects and by the flow of ele
 Related terms: [non-ionizing radiation](/glossary/non-ionizing-radiation), [Directed-energy](/glossary/directed-energy), [microwave auditory effect](/glossary/microwave-auditory-effect), [hardware](/glossary/hardware-computer)
 
 Sources: [Electromagnetic fields — World Health Organization](https://www.who.int/news-room/questions-and-answers/item/radiation-electromagnetic-fields); [Electromagnetic field — Britannica](https://www.britannica.com/science/electromagnetic-field)
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

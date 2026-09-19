@@ -10,6 +10,7 @@ source_count: 197
 word_count: 4609
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Crime — sources
 
@@ -216,3 +217,11 @@ copyright: © 2026 Sean C. Harris. All Rights Reserved.
 | B | World Prison Brief (Institute for Crime & Ju | Highest to Lowest — Prison Population Rate (the ranking page carries NO reference-date col | 2026-08-22 | <https://www.prisonstudies.org/highest-to-lowest/prison_population_rate> | — |
 | B | YouGov | Most Americans say they have experienced at least one paranormal event (Oct 2025) — 60%, d | 2026-08-22 | <https://yougov.com/en-us/articles/53258-most-americans-say-they-have-experienced-at-least-one-paranormal-event> | — |
 | C | Sapien Labs, Global Mind Project | Global Mind Health in 2025 — an anonymous annual instrument whose 47 items include 'Halluc | 2026-08-22 | <https://sapienlabs.org/wp-content/uploads/2026/02/Global-Mind-Health-in-2025-Report.pdf> | — |
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

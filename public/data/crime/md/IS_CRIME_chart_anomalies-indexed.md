@@ -11,6 +11,7 @@ series_count: 4
 word_count: 922
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Reports of the unexplained, indexed
 
@@ -79,3 +80,11 @@ AARO / ODNI · tier A · 4 points, 2022–2025
 ## Note on reading this
 
 Four different things — records entered, symptoms reported, beliefs held, reports received — indexed to direction only. Click any lane for its raw figures and what it cannot show; every one carries a serious limitation, and the UAP lane carries its publisher's own statement that the rise is about reporting.
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

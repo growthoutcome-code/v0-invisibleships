@@ -9,6 +9,7 @@ categories: [glossary, reference]
 word_count: 312
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # structure-borne audio
 
@@ -28,3 +29,11 @@ Two properties matter for anyone weighing a claim. Every documented method requi
 Related terms: [parametric array](/glossary/parametric-array), [piezoelectricity](/glossary/piezoelectricity), [Voice-to-skull](/glossary/voice-to-skull), [microwave auditory effect](/glossary/microwave-auditory-effect)
 
 Sources: [Body sound converter — Monacor](https://www.monacor.com/magazine/body-sound-converter); [Whispering Window — Feonic](https://www.feonic.com/blog/whispering-window/window-speaker-retail-store-sound-system/); [DAEX25 Sound Exciter Pair — Dayton Audio](https://www.daytonaudio.com/product/1087/daex25-sound-exciter-pair); [Ac2ated Sound — Continental](https://www.continental.com/en/press/press-releases/20170628-speakerless-audio/)
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

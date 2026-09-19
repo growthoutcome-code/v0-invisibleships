@@ -9,6 +9,7 @@ categories: [glossary, reference]
 word_count: 199
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Neuro-engagement
 
@@ -22,3 +23,11 @@ A term used in this work for a process in which an external party establishes a 
 No capability of this kind appears in the published scientific record. Every documented system for reading or writing neural signals requires contact with the head, equipment the person is wearing, or hours of training with a cooperative subject. The term is retained because the work uses it; it is a term of art within this archive, not an established mechanism. See [What would it actually take to do this without consent?](/concepts#what-it-would-take).
 
 Related terms: [Diving](/glossary/diving), [Breaching](/glossary/breaching), [Phantom sensations](/glossary/phantom-sensations), [No-touch torture](/glossary/no-touch-torture)
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

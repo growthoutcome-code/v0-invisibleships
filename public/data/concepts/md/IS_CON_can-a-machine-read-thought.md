@@ -12,6 +12,7 @@ generated_by: scripts/export_concepts_md.mjs
 word_count: 554
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Can a machine read what you are thinking?
 
@@ -51,3 +52,11 @@ Partly, under conditions that are worth stating precisely. In May 2023 Jerry Tan
 ## Scope
 
 This concept reports one peer-reviewed study and the constraints its authors documented. It establishes no capability beyond what that study demonstrated.
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

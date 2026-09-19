@@ -9,6 +9,7 @@ categories: [glossary, reference]
 word_count: 318
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # parametric array
 
@@ -28,3 +29,11 @@ Its limits matter as much as its capabilities. Demodulation loss is around 60 dB
 Related terms: [structure-borne audio](/glossary/structure-borne-audio), [the Mosquito](/glossary/mosquito-device), [microwave auditory effect](/glossary/microwave-auditory-effect), [Voice-to-skull](/glossary/voice-to-skull)
 
 Sources: [Audio Spotlight — MIT Media Lab](https://www.media.mit.edu/projects/audio-spotlight/overview/); [Products — Holosonics](https://www.holosonics.com/products-x); [Sound from ultrasound — Wikipedia](https://en.wikipedia.org/wiki/Sound_from_ultrasound)
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

@@ -9,6 +9,7 @@ generated_by: scripts/build_corpus_md.py
 word_count: 598
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Transnational repression
 
@@ -54,3 +55,11 @@ Prosecutions are the hardest record. Examples: 34 officers of a PRC national-pol
 So the measurement answer is: barely. The category most like this site's core subject — organised, deniable, state-directed harassment of individuals — is defined by the FBI, prosecuted in federal court, and counted by nobody in government. The one systematic dataset is private, counts only physical incidents, and describes itself as a small fraction of the whole. A person targeted by the tactics on the FBI's own list appears in no national statistic unless their case ends in an indictment.
 
 What this register does not do: it does not connect any of these cases or counts to the journal, the Government Cloud record, or any individual's experience. TR's documented existence establishes that such tactics are used; it does not establish who uses them in any uncharged case.
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

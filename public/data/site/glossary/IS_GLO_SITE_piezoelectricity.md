@@ -9,6 +9,7 @@ categories: [glossary, reference]
 word_count: 303
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # piezoelectricity
 
@@ -26,3 +27,11 @@ Documented real-world example: piezoelectric strips are a standard roadway senso
 Related terms: [energy harvesting](/glossary/energy-harvesting), [structure-borne audio](/glossary/structure-borne-audio), [microwave auditory effect](/glossary/microwave-auditory-effect)
 
 Sources: [Traffic Monitoring Guidebook, chapter 4 — FHWA](https://www.fhwa.dot.gov/clas/ctip/traffic_monitoring_guidebook/ch_4.aspx); [Piezoelectric sensors — International Road Dynamics](https://irdinc.com/products/wim-systems/piezoelectric-sensors/); [Weigh-in-motion project underway in Limon — CDOT](https://www.codot.gov/news/2026/july2026news/weigh-in-motion-project-underway-in-limon)
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

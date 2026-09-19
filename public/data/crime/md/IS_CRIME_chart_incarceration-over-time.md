@@ -11,6 +11,7 @@ series_count: 3
 word_count: 967
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Who is held: the US penal system, 1999–2024
 
@@ -72,3 +73,11 @@ Three counts of people, nested rather than parallel: the widest line CONTAINS th
 Prison is counted on 31 December and jails at 30 June, so no two lines here are a snapshot of the same day. Every figure is Bureau of Justice Statistics unless marked otherwise, and each line's modal carries its vintage, its breaks and what it cannot show.
 
 This chart uses the section's shared 1999–2025 window, so its years line up with every other chart on the page.
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

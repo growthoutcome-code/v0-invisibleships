@@ -10,6 +10,7 @@ entry_count: 12
 word_count: 2281
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # What nobody counts
 
@@ -102,3 +103,11 @@ Polling organisations have asked Americans whether they BELIEVE in ghosts every 
 The instruments the National Survey on Drug Use and Health administers to every respondent are a psychological-distress scale, a functional-impairment scale, a depression module and suicidality items. None contains a hallucination or voice-hearing question. Psychosis appears only through clinical interviews in a validation subsample, which produces no published prevalence series. So the one real repeated measurement of psychotic experience in the English-speaking world is English: the Adult Psychiatric Morbidity Survey found 5.6% of adults screening positive in 2000, 5.9% in 2007 and 6.8% in 2014 — and then stopped reporting that figure as an outcome. The only large repeated instrument that scores hallucinations anonymously and annually is a private one, the Global Mind Project, whose respondents are recruited through Meta and Google advertising and whose only representativeness assessment was written by its own staff. It is recorded here as an existence proof, not as a population estimate.
 
 *Who would have to count it:* SAMHSA, by adding an item to NSDUH's self-administered section — the part respondents answer to a machine rather than to an interviewer, which is where a stigmatised question belongs.
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

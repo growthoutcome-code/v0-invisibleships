@@ -12,6 +12,7 @@ generated_by: scripts/export_concepts_md.mjs
 word_count: 368
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # The world's suicide rate fell. The United States' rose.
 
@@ -41,3 +42,11 @@ Between 2000 and 2021, on the one basis that allows countries to be compared at 
 - [The suicide comparison chart](/data)
 
 *The chart carries the per-country method, caveats and source behind each line.*
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

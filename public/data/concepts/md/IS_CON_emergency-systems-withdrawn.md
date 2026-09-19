@@ -12,6 +12,7 @@ generated_by: scripts/export_concepts_md.mjs
 word_count: 194
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Systems built for an emergency get switched off after it
 
@@ -28,3 +29,11 @@ Ten of the fourteen pandemic-response deployments in this record are decommissio
 
 - 22 of 399 deployments decommissioned; 10 of those are pandemic-response
 - By contrast: health 32 deployments (29 live), law enforcement 31 (27 live)
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

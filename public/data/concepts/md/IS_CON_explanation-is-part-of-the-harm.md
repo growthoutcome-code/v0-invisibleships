@@ -12,6 +12,7 @@ generated_by: scripts/export_concepts_md.mjs
 word_count: 554
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Does the explanation itself do harm?
 
@@ -50,3 +51,11 @@ An unexplained experience arrives without a label. Whatever attaches to it next 
 ## Scope
 
 This concept describes a documented method of control and a documented effect on help-seeking. It establishes no mechanism, no actor, and makes no claim about the origin of any individual's experience.
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

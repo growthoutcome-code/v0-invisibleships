@@ -10,6 +10,7 @@ entry_count: 3
 word_count: 579
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Enforcement in sweeps
 
@@ -45,3 +46,11 @@ Of 33 known federal defendants charged with non-immigration crimes tied to Chica
 *What the number actually counts:* Adjudication outcomes for the criminal charges that accompanied one sweep, per the Chicago Sun-Times case tracker (updated 2026-08-10). It is one operation in one district, not a national statistic — no body publishes one.
 
 *For scale:* This is the difference between an arrest count and an outcome count in practice: the announcement is the arrest number; what survives a grand jury and a judge is far smaller, and nobody aggregates that nationally.
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

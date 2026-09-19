@@ -45,6 +45,18 @@ DOC = ROOT / "public/data/site/documents"
 RESEARCH = ROOT / "research"
 DOCS_DIR = ROOT / "docs"
 ZIP = ROOT / "public/invisible-ships-corpus.zip"
+DISCLAIMER_JSON = ROOT / "scripts/generated/disclaimer.json"
+
+
+def disclaimer_footer() -> str:
+    """The standing notice, from lib/disclaimer.ts via scripts/export_disclaimer.mjs.
+
+    The two READMEs below are written from scratch on every sync, so they have to
+    re-apply it here or the coverage check fails on them every time.
+    """
+    import json
+
+    return json.loads(DISCLAIMER_JSON.read_text())["footer"]
 # Everything this script owns. A prefix here is DROPPED from the carried-forward
 # zip before being rewritten, so a rename or a deletion upstream cannot leave an
 # orphan behind. meta/IS_META_terms.md is an exact filename rather than a
@@ -140,11 +152,12 @@ def build(dst: zipfile.ZipFile) -> int:
         n_glo += 1
     if n_glo:
         dst.writestr("glossary-site/README.md",
+                     (
                      "# Site-authored glossary\n\n"
                      f"{n_glo} terms written for invisibleships.com to explain the work.\n"
                      "They are NOT extracted from the source document series and carry no\n"
                      "source-document id. Terms drawn from the primary record are in\n"
-                     "`glossary/` and do carry one. Both sets appear on the site together.\n")
+                     "`glossary/` and do carry one. Both sets appear on the site together.\n").rstrip("\n") + "\n\n" + disclaimer_footer() + "\n")
 
     # The canonical terms, generated from lib/terms.ts by
     # scripts/export_terms_md.mjs. Packed under meta/ beside the two historical
@@ -198,6 +211,7 @@ def build(dst: zipfile.ZipFile) -> int:
         n_res += 1
     if n_res:
         dst.writestr("research/README-research.md",
+                     (
                      "# Raw research inputs\n\n"
                      "The researched rows and sources the site's builders read from, before\n"
                      "any chart or brief was made. The site renders a selection of this; the\n"
@@ -205,7 +219,7 @@ def build(dst: zipfile.ZipFile) -> int:
                      "than taken on trust.\n\n"
                      "These are working files. They carry the same terms as everything else\n"
                      "in this corpus — see `meta/IS_META_terms.md`. Evidence tiers apply:\n"
-                     "a row present here is not, by itself, a verified fact.\n")
+                     "a row present here is not, by itself, a verified fact.\n").rstrip("\n") + "\n\n" + disclaimer_footer() + "\n")
 
     return len(files), n_glo, n_doc, n_res
 

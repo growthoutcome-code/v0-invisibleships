@@ -37,6 +37,18 @@ from datetime import date
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 ZIP = ROOT / "public/invisible-ships-corpus.zip"
+DISCLAIMER_JSON = ROOT / "scripts/generated/disclaimer.json"
+
+
+def disclaimer_footer() -> str:
+    """The standing notice, from lib/disclaimer.ts via scripts/export_disclaimer.mjs.
+
+    Read rather than retyped: two copies of a disclaimer is how one of them comes
+    to say something the other does not.
+    """
+    import json
+
+    return json.loads(DISCLAIMER_JSON.read_text())["footer"]
 
 
 # --------------------------------------------------------------- expectations
@@ -498,8 +510,11 @@ def main(quiet=False) -> int:
             if item.filename in ("START-HERE.md", "README.md"):
                 continue
             dst.writestr(item, src.read(item.filename))
-        dst.writestr("START-HERE.md", index)
-        dst.writestr("README.md", build_readme(src.namelist()))
+        # Both are rewritten from scratch here, so the standing disclaimer has to
+        # be re-applied in the same breath or the next coverage check fails on the
+        # two files a reader opens first.
+        dst.writestr("START-HERE.md", index.rstrip("\n") + "\n\n" + disclaimer_footer() + "\n")
+        dst.writestr("README.md", build_readme(src.namelist()).rstrip("\n") + "\n\n" + disclaimer_footer() + "\n")
     shutil.move(str(tmp), str(ZIP))
 
     # after the move, so the summary counts the index file it just wrote

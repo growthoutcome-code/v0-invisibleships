@@ -9,6 +9,7 @@ categories: [glossary, reference]
 word_count: 450
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # obedience experiment
 
@@ -30,3 +31,11 @@ Related terms: [cognitive liberty](/glossary/cognitive-liberty), [Gang stalking]
 Sources: [The Obedience Experiments at 50 — Association for Psychological Science](https://www.psychologicalscience.org/observer/online-exclusive-the-obedience-experiments-at-50); [Milgram experiment — Britannica](https://www.britannica.com/science/Milgram-experiment); [Milgram experiment: summary & legacy — SimplyPsychology](https://www.simplypsychology.org/milgram.html)
 
 Further viewing: [Experimenter (2015 film on Stanley Milgram)](https://www.youtube.com/watch?v=o8XriePFEug)
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

@@ -11,6 +11,7 @@ series_count: 2
 word_count: 414
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # US homicide, two official measures
 
@@ -49,3 +50,11 @@ CDC/NCHS · tier A · 27 points, 1950–2023
 ## Note on reading this
 
 The FBI counts murder and nonnegligent manslaughter known to police, as a crude rate. The CDC counts deaths certified as homicide, age-adjusted. The gap between them is expected: they count different things. Neither series corrects the other. Dotted segments mark years that are not Tier A — read from a published chart rather than stated in a report, or resting on a collection the publisher itself flagged.
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

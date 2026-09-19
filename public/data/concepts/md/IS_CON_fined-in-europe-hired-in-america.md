@@ -12,6 +12,7 @@ generated_by: scripts/export_concepts_md.mjs
 word_count: 271
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Fined in Europe, hired in America
 
@@ -30,3 +31,11 @@ One facial-recognition company has been fined roughly €90 million by four Euro
 - Fines: Italy, France, Greece and the Netherlands totalling about €90.5m, plus a €5.2m penalty for non-payment
 - ICE awards recorded FY25 $9m and FY26 $3.75m
 - US settlement paid as roughly 23% of company equity, not cash
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

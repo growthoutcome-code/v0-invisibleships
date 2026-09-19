@@ -12,6 +12,7 @@ generated_by: scripts/export_concepts_md.mjs
 word_count: 403
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Prescribing is not a measure of illness
 
@@ -40,3 +41,11 @@ It is tempting to read prescription volume as a thermometer for how ill a popula
 - [The prescribing and diagnosis series](/data)
 
 *Every figure above is a row in the Public Health indicator table, with its source.*
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

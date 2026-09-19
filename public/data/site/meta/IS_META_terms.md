@@ -8,7 +8,7 @@ supersedes: [IS_META_copyright.md, IS_META_disclaimer.md]
 source: lib/terms.ts (the same source the website renders)
 generated_by: scripts/export_terms_md.mjs
 section_count: 8
-word_count: 2266
+word_count: 2367
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
@@ -24,11 +24,15 @@ historical record. Where they differ from this file, **this file governs.**
 
 ---
 
-## Critical Disclaimer on This Entire Archive
+## Critical Disclaimer on Transcripts and Accusations
 
 *This applies to everything in this archive — the Journal and its dated entries and verbatim transcripts, the Research and Concepts sections, every chart and table, and the downloadable corpus. All of it draws on internet sources and on individual, qualitative accounts. No part of this archive stands outside this disclaimer.*
 
-The Journal records communications the author received without consent. The transcripts are preserved as documentation of what was said to him. Their content is *external communication* and does NOT represent the author’s beliefs, views, or intent. The author denies any affiliation with, or belief in, the content of those messages — particularly any promoting illegal activity, narcotic use, or violence.
+The author explicitly states that the content of the transcripts and 'suggestions' recorded in this document are *external communications* and DO NOT represent the author's personal beliefs, views, or intent. The author denies any affiliation with or belief in the content of these messages, especially those promoting illegal activity, narcotic use, or violence.
+
+This report does NOT accuse, blame, or allege malfeasance by any specific corporation, technology company (e.g., Neuralink, Google, Microsoft), or government/law enforcement entity (e.g., Denver Police, FBI). All such organizations are mentioned only in the context of the external suggestions or as part of the author's high-level technical speculation and research into potential methodologies.
+
+***All of this information requires independent verification.** Nothing in this archive has been verified by any authority, and nothing in it should be treated as established fact. It is assembled from internet sources and from individual, qualitative accounts, and every part of it is offered for checking rather than for belief.*
 
 ### Why accusations appear in this record
 

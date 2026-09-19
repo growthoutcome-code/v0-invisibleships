@@ -10,6 +10,7 @@ entry_count: 6
 word_count: 494
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Law enforcement accomplishments
 
@@ -61,3 +62,11 @@ The share of homicides cleared returned to 61.4% in 2024, back to the 2019 level
 
 
 An accomplishment claim is the agency's account. Where a number counts activity rather than outcomes, the entry says so — an arrest or a seizure is the start of a process, not the end of one.
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

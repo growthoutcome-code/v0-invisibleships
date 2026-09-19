@@ -9,6 +9,7 @@ categories: [glossary, reference]
 word_count: 411
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # energy harvesting
 
@@ -26,3 +27,11 @@ A note on vocabulary, because the marketing and the engineering use different wo
 Related terms: [piezoelectricity](/glossary/piezoelectricity)
 
 Sources: [Assessment of Piezoelectric Materials for Roadway Energy Harvesting, CEC-500-2013-007 — California Energy Commission](https://pop.h-cdn.co/assets/cm/15/06/54d152f0cee9f_-_CEC-500-2013-007.pdf); [This Dupont Circle sidewalk turns footsteps into power — Washington Post](https://www.washingtonpost.com/local/trafficandcommuting/this-dupont-circle-sidewalk-turns-footsteps-into-power/2016/11/30/c69263f8-b020-11e6-8616-52b15787add0_story.html); [Solar Roadways — Wikipedia](https://en.wikipedia.org/wiki/Solar_Roadways); [China’s solar highway was a victim of heavy traffic and bad design — South China Morning Post](https://www.scmp.com/news/china/society/article/2131241/chinas-solar-highway-was-victim-heavy-traffic-and-bad-design-not)
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

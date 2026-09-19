@@ -10,6 +10,7 @@ entry_count: 50
 word_count: 1243
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Read before quoting any figure
 
@@ -118,3 +119,11 @@ Constraints that apply to everything in this folder.
 - [—] WebFetch truncates deployments.json (~148KB); counts were parsed from complete raw JSON, not summarized extractions.
 
 - [—] Every row is structural or pattern only; no row asserts or implies causation; tier grades reflect strength of the documented overlap, never strength of any causal story.
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

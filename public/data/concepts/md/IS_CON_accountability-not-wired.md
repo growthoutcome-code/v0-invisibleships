@@ -12,6 +12,7 @@ generated_by: scripts/export_concepts_md.mjs
 word_count: 214
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Accountability isn't wired to deployment, even in the schema
 
@@ -28,3 +29,11 @@ Litigation records carry a vendor, a domain, a court and an outcome — but noth
 
 - litigation table: no deployment reference on any of 46 records
 - regulations record which domains are affected, not which systems
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

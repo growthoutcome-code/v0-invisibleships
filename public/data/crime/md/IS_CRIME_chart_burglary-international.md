@@ -11,6 +11,7 @@ series_count: 5
 word_count: 1076
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Break-ins abroad: one code, five countries
 
@@ -85,3 +86,11 @@ Every line is filed under the same ICCS code, which makes each line's DIRECTION 
 No. It is recorded as a burglary, and the record keeps the things a filing system can check — where the building was, whether entry was forced, whether anything was taken — rather than the thing that makes it a home invasion, which is that someone was home. The FBI's NIBRS sorts burglary by location type, premises entered and force; it has no data element for an occupied dwelling, so the count could not be produced from the returns even if someone wanted it. Michigan shows how complete the burial is: 'home invasion' is the literal statutory name of its burglary offence, in three degrees, and its state reporting manual codes every one of them as ordinary burglary. Australia and New Zealand are more explicit still — their shared classification, ANZSOC, lists home invasion only as an inclusion term inside aggravated and non-aggravated burglary of a dwelling. It is defined into burglary by the classification authority itself. Statistics Canada says the quiet part outright: because there is no agreed-upon definition, home invasion is difficult to measure and is not captured directly by its national survey — so StatCan reports robberies in private residences instead as a stand-in. The one place we found publishing home-invasion figures is the state of Victoria, where the 2018 total is split across two unrelated offence families — 105 offences filed under aggravated burglary and 87 under serious assault, which never reach any burglary total. Re-checked on 21 August 2026, that remains the most recent published figure anywhere we could find.
 
 So the honest answer to whether home invasions have risen is that no national series exists to say. What can be said is that break-ins overall have fallen sharply almost everywhere they are measured, on every basis, for two decades — and that the occupied case is not rare. The ONS, working from survey responses rather than police codes, found that in over half of domestic burglaries where the offender got inside, someone was at home at the time. That is the closest thing to a measurement of the thing itself that exists, it is nine years old, and it is a share rather than a count.
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

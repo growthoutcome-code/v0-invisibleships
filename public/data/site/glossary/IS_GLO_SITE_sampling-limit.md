@@ -9,6 +9,7 @@ categories: [glossary, reference]
 word_count: 407
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # sampling limit
 
@@ -30,3 +31,11 @@ A failed recording is not evidence that nothing happened. It may only be evidenc
 Related terms: [the Mosquito](/glossary/mosquito-device), [parametric array](/glossary/parametric-array), [presbycusis](/glossary/presbycusis), [contact microphone](/glossary/contact-microphone)
 
 Sources: [LAME — HydrogenAudio](https://wiki.hydrogenaudio.org/index.php/LAME); [Fraunhofer FDK AAC — HydrogenAudio](https://wiki.hydrogenaudio.org/index.php?title=Fraunhofer_FDK_AAC); [RFC 6716: Definition of the Opus Audio Codec](https://www.rfc-editor.org/rfc/rfc6716.html); [Frequency response and latency of MEMS microphones — Knowles](https://www.knowles.com/docs/default-source/default-document-library/frequency-response-and-latency-of-mems-microphones---theory-and-practice.pdf?sfvrsn=4)
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

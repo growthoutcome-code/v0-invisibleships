@@ -9,6 +9,7 @@ categories: [glossary, reference]
 word_count: 313
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # laser microphone
 
@@ -26,3 +27,11 @@ It matters for assessing a claim because it is genuinely remote — unlike every
 Related terms: [structure-borne audio](/glossary/structure-borne-audio), [contact microphone](/glossary/contact-microphone), [piezoelectricity](/glossary/piezoelectricity), [image-based search](/glossary/image-based-search)
 
 Sources: [Speech recovery from vibration: laser, radar and LiDAR sensing — Sensors 26(8):2553](https://www.mdpi.com/1424-8220/26/8/2553); [Protection of speech information against laser eavesdropping — Journal of Vibroengineering (2016)](https://www.extrica.com/article/16943)
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

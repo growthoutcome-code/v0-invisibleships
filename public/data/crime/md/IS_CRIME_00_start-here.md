@@ -11,6 +11,7 @@ source_count: 197
 word_count: 540
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Crime — start here
 
@@ -68,3 +69,11 @@ content is established.
 
 A rise in *reports* is not a rise in *events*. Where a publisher attributes its
 own increase to changed reporting, that attribution travels with the figure.
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

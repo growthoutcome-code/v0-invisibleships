@@ -9,6 +9,7 @@ categories: [glossary, reference]
 word_count: 98
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # image-based search
 
@@ -18,3 +19,11 @@ copyright: © 2026 Sean C. Harris. All Rights Reserved.
 A term used in this work for a method of navigating a person's cognition by searching through mental imagery — the visual content of memory and perception — rather than through words or language. Associated with Diving, where it serves as the means of observation or investigation.
 
 Related terms: [Diving](/glossary/diving), [Neuro-engagement](/glossary/neuro-engagement)
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

@@ -21,6 +21,7 @@
 // crisis line is /safety. lib/gate-content.ts is untouched and those pages read
 // from it.
 import JournalBrowser from "@/components/JournalBrowser";
+import StandingDisclaimer from "@/components/StandingDisclaimer";
 import type { Tab } from "@/components/Header";
 import type { SubTab } from "@/components/DataView";
 
@@ -28,5 +29,12 @@ export default function GatedApp({
   initialTab = "journal",
   initialSub,
 }: { initialTab?: Tab; initialSub?: SubTab }) {
-  return <JournalBrowser initialTab={initialTab} initialSub={initialSub} />;
+  // Ten route files mount this one component, so the standing disclaimer reaches
+  // the journal, the glossary, concepts, data and documents from a single place.
+  return (
+    <>
+      <JournalBrowser initialTab={initialTab} initialSub={initialSub} />
+      <StandingDisclaimer />
+    </>
+  );
 }

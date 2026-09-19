@@ -10,6 +10,17 @@
 //
 // Kept as a seam rather than deleted from both route files: if a subset of the
 // archive ever needs an interstitial, this is the one place it goes.
+import StandingDisclaimer from "@/components/StandingDisclaimer";
+
+// The standing disclaimer rides on this seam rather than on each route file.
+// These are the pages a stranger is most likely to land on directly — a
+// forwarded link to one transcript — and the ones where a verbatim recording
+// with names in it needs the archive's position attached to it.
 export default function ItemGate({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      <StandingDisclaimer />
+    </>
+  );
 }

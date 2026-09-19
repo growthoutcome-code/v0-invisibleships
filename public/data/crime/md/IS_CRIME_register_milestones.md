@@ -10,6 +10,7 @@ entry_count: 20
 word_count: 1157
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Dated milestones
 
@@ -58,3 +59,11 @@ The crime track of the site's master timeline. Dates are when something was publ
 - **2016-12** [A] BJS publishes its last prison capacity table — The US stood at 114% of its lowest reported capacity, 26 states at or above 100%. 'Prisoners in 2019' contains no capacity table, and neither does any edition since — so 'is the prison system overcrowded' has no current federal answer. — Bureau of Justice Statistics · Prisoners in 2016 (Jan 2018, NCJ 251149), Table 16 — the LAST prison capacity table BJS published <https://bjs.ojp.gov/content/pub/pdf/p16.pdf>
 
 - **2021-12** [A] Prison population bottoms out at 1,205,087, then turns — The lowest point since 1996. It rises 2.1% in 2022 and 2.0% in 2023 — and then the record stops: BJS has published nothing for 2024 or 2025. — Bureau of Justice Statistics · Prisoners in 2023 – Statistical Tables (Sept 2025, NCJ 310197) — the most recent in the series <https://bjs.ojp.gov/document/p23st.pdf>
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

@@ -206,7 +206,12 @@ def main() -> int:
     src = CONCEPTS_TS.read_text()
     n_findings = len(re.findall(r'\{\s*stat:\s*"', src))
     if "concepts/IS_CON_00_findings.md" in have:
-        got = have["concepts/IS_CON_00_findings.md"].decode("utf8", "replace").count("\n## ")
+        body = have["concepts/IS_CON_00_findings.md"].decode("utf8", "replace")
+        # Every corpus file carries the standing disclaimer as a fenced h2 footer
+        # (scripts/add_disclaimer_footer.py). It is a notice, not a finding, so it
+        # is cut before counting rather than silently shifting this total by one.
+        body = body.split("\n---\n\n## Critical Disclaimer on Transcripts")[0]
+        got = body.count("\n## ")
         # the findings file carries one h2 per finding plus the closing section
         if got - 1 != n_findings:
             problems.append(

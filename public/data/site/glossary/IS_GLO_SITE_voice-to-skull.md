@@ -9,6 +9,7 @@ categories: [glossary, reference]
 word_count: 206
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Voice-to-skull (V2K)
 
@@ -22,3 +23,11 @@ A claimed method of transmitting brain–computer interface data — signals sen
 Related terms: [microwave auditory effect](/glossary/microwave-auditory-effect), [telepathy](/glossary/telepathy), [Phantom sensations](/glossary/phantom-sensations), [Targeted individual](/glossary/targeted-individual), [Directed-energy](/glossary/directed-energy), [brain–computer interface](/glossary/braincomputer-interface-bci)
 
 Sources: [Auditory brainstem implant — Cleveland Clinic](https://my.clevelandclinic.org/health/treatments/22723-auditory-brainstem-implant); [Evoking artificial speech perception through invasive brain stimulation — PMC/NIH](https://pmc.ncbi.nlm.nih.gov/articles/PMC11234843/)
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

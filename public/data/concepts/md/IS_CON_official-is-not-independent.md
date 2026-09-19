@@ -12,6 +12,7 @@ generated_by: scripts/export_concepts_md.mjs
 word_count: 220
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # “Official” is not the same as “independent”
 
@@ -29,3 +30,11 @@ copyright: © 2026 Sean C. Harris. All Rights Reserved.
 - 660 citations across 604 distinct URLs and 389 publishers
 - Tier A 323 · Tier B 285 · Tier C 52
 - 0 of 660 sources currently hold an archived copy
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

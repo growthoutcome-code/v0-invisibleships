@@ -11,6 +11,7 @@ series_count: 14
 word_count: 1302
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Suicide rate, 2000–2021 — the United States among thirteen countries and the world
 
@@ -146,3 +147,11 @@ WHO Global Health Estimates (via the World Bank open API) · tier B · 22 points
 ## Note on reading this
 
 One comparable basis for every line: WHO modelled estimates age-standardised to the world standard population. These differ in level from each country's own vital registration (WHO puts Canada 2021 at 9.4; Canada's own agency says 11.8), and for several countries — notably Russia and India — the underlying counts are documented undercounts. The US series here ends in 2021 because that is where WHO's comparable estimates end; the United States' own figures run to 2024 and are listed below.
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

@@ -12,6 +12,7 @@ generated_by: scripts/export_concepts_md.mjs
 word_count: 611
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Can you record it?
 
@@ -52,3 +53,11 @@ Three things could put a voice where no speaker is, and they differ in a way tha
 ## Scope
 
 This is a way to tell mechanisms apart, not a way to establish what happened. A negative result rules out the two airborne mechanisms; it does not establish the third, which remains unverified.
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

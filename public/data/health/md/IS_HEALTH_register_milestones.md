@@ -10,6 +10,7 @@ entry_count: 30
 word_count: 1643
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Dated milestones
 
@@ -78,3 +79,11 @@ The health track of the site's master timeline. Co-occurrence with anything else
 - **2026-01-29** [A] Final 2024 US mortality data: suicide rate declines — NCHS Data Brief 548 reports the 2024 age-adjusted suicide rate fell 2.8% to 13.7 (48,824 deaths); suicide replaced COVID-19 as the 10th leading cause of death. — CDC/NCHS · NCHS Data Brief 548: Mortality in the United States, 2024 (Jan 29, 2026) <https://www.cdc.gov/nchs/products/databriefs/db548.htm>
 
 - **2026-05-13** [B] NCHS: overdose deaths fall for third consecutive year — Provisional 2025: 69,973 US overdose deaths, ~14% below 2024, declines across opioids, cocaine, psychostimulants. — CDC/NCHS · U.S. Overdose Deaths Decrease for Third Consecutive Year in 2025 (provisional) <https://www.cdc.gov/nchs/pressroom/releases/20260513.html>
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

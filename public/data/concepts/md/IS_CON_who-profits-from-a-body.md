@@ -12,6 +12,7 @@ generated_by: scripts/export_concepts_md.mjs
 word_count: 566
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Who profits from a body?
 
@@ -51,3 +52,11 @@ In January 2018 Reuters published an investigation by Brian Grow and John Shiffm
 ## Scope
 
 This concept reports a published investigation into a lawful market. It makes no claim that any death was caused, hastened, or procured for the purpose of supplying it.
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

@@ -9,6 +9,7 @@ categories: [glossary, reference]
 word_count: 244
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
+disclaimer: meta/IS_META_terms.md
 ---
 # Gang stalking
 
@@ -24,3 +25,11 @@ Documented real-world example: In 2019, executives and employees of eBay orchest
 Related terms: [Targeted individual](/glossary/targeted-individual), [Zersetzung tactics](/glossary/zersetzung-tactics), [No-touch torture](/glossary/no-touch-torture)
 
 Sources: [United States v. eBay Inc. — U.S. DOJ](https://www.justice.gov/usao-ma/case/us-v-ebay-inc); [$55.7M settlement — Law.com](https://www.law.com/2026/07/28/ebay-former-execs-settle-mass-couples-harassment-cyberstalking-suit-for-557m/)
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.
