@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogBody, DialogTitle } from "@/components/ui/dialog";
 import CopyrightTerms from "@/components/CopyrightTerms";
 import { track } from "@/lib/analytics";
+import { DISCLAIMER_TITLE } from "@/lib/disclaimer";
 
 /**
  * Every in-page reference to the disclaimer (Sean, 2026-08-20).
@@ -42,7 +43,7 @@ export default function DisclaimerLink({
         <DialogContent size="lg">
           <DialogHeader>
             <DialogTitle className="font-display text-2xl">
-              Disclaimer, Copyright &amp; Terms of Use
+              {DISCLAIMER_TITLE}
             </DialogTitle>
           </DialogHeader>
           <DialogBody>

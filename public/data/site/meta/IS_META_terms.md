@@ -8,7 +8,7 @@ supersedes: [IS_META_copyright.md, IS_META_disclaimer.md]
 source: lib/terms.ts (the same source the website renders)
 generated_by: scripts/export_terms_md.mjs
 section_count: 8
-word_count: 2367
+word_count: 2440
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
@@ -32,7 +32,9 @@ The author explicitly states that the content of the transcripts and 'suggestion
 
 This report does NOT accuse, blame, or allege malfeasance by any specific corporation, technology company (e.g., Neuralink, Google, Microsoft), or government/law enforcement entity (e.g., Denver Police, FBI). All such organizations are mentioned only in the context of the external suggestions or as part of the author's high-level technical speculation and research into potential methodologies.
 
-***All of this information requires independent verification.** Nothing in this archive has been verified by any authority, and nothing in it should be treated as established fact. It is assembled from internet sources and from individual, qualitative accounts, and every part of it is offered for checking rather than for belief.*
+***All of this information requires independent verification.** Nothing in this archive — on this website or in the downloadable corpus — has been verified by any authority, and nothing in it should be treated as established fact. It is assembled from internet sources and from individual, qualitative accounts, and every part of it is offered for checking rather than for belief.*
+
+***This website makes no claim against any organization.** Where a company, an agency, a department or a public body is named anywhere in this archive, it is named because a source said that name or a public record contains it — and for no other reason. No finding of wrongdoing by any named organization is asserted here, none should be inferred, and the author asserts none.*
 
 ### Why accusations appear in this record
 

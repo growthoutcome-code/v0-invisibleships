@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import GatedApp from "@/components/GatedApp";
 
 export const metadata: Metadata = {
-  title: "Disclaimer — Invisible Ships",
+  title: "Critical Disclaimer on Transcripts and Accusations — Invisible Ships",
   alternates: { canonical: "/disclaimer" },
 };
 

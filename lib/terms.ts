@@ -91,11 +91,20 @@ export const TERMS: TermsSection[] = [
         text:
           "This report does NOT accuse, blame, or allege malfeasance by any specific corporation, technology company (e.g., Neuralink, Google, Microsoft), or government/law enforcement entity (e.g., Denver Police, FBI). All such organizations are mentioned only in the context of the external suggestions or as part of the author's high-level technical speculation and research into potential methodologies.",
       },
-      // Sean, 19 September: "all of this information requires verification."
+      // The two standing conditions, approved 19 September. They embellish the
+      // original rather than depart from it: the first is what the archive has
+      // always asked of a reader, said plainly; the second is the original
+      // second paragraph widened from "this report" to the whole site and
+      // download, and from the three named companies to any organization at all.
       {
         kind: "note",
         text:
-          "**All of this information requires independent verification.** Nothing in this archive has been verified by any authority, and nothing in it should be treated as established fact. It is assembled from internet sources and from individual, qualitative accounts, and every part of it is offered for checking rather than for belief.",
+          "**All of this information requires independent verification.** Nothing in this archive \u2014 on this website or in the downloadable corpus \u2014 has been verified by any authority, and nothing in it should be treated as established fact. It is assembled from internet sources and from individual, qualitative accounts, and every part of it is offered for checking rather than for belief.",
+      },
+      {
+        kind: "note",
+        text:
+          "**This website makes no claim against any organization.** Where a company, an agency, a department or a public body is named anywhere in this archive, it is named because a source said that name or a public record contains it \u2014 and for no other reason. No finding of wrongdoing by any named organization is asserted here, none should be inferred, and the author asserts none.",
       },
       { kind: "subhead", text: "Why accusations appear in this record" },
       {

@@ -49,11 +49,15 @@ import { GATE } from "@/lib/gate-content";
 import { hasEntered, markEntered, GATE_VERSION, ROLES } from "@/lib/gate";
 import { track, registerVisitorProps } from "@/lib/analytics";
 import { logGate } from "@/lib/gate-log";
+import { DISCLAIMER_TITLE } from "@/lib/disclaimer";
 
 const STEPS = [
   { title: "Welcome to Invisible Ships", cta: "Continue", event: "gate_welcome_viewed" },
   { title: "Perceptual set", cta: "Continue", event: "gate_perceptual_viewed" },
-  { title: "Disclaimer and copyright", cta: "Enter the corpus", event: "gate_terms_viewed" },
+  // Sean, 19 September: the Critical Disclaimer is what has to surface when
+  // somebody enters the site, so the step carries its name rather than a
+  // generic one. Copyright and terms are the same document, below it.
+  { title: DISCLAIMER_TITLE, cta: "Enter the corpus", event: "gate_terms_viewed" },
 ] as const;
 
 const TERMS_STEP = 2;

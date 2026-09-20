@@ -28,6 +28,7 @@ import DataView, { type SubTab } from "@/components/DataView";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import Processing, { useHeldLoading } from "@/components/Processing";
+import { DISCLAIMER_TITLE } from "@/lib/disclaimer";
 
 const journalHref = (id: string) => `/journal/${id.toLowerCase()}`;
 const glossaryHref = (slug: string) => `/glossary/${slug.toLowerCase()}`;
@@ -801,7 +802,10 @@ function AuthorView() {
 function DisclaimerView() {
   return (
     <div className="w-full lg:w-[65%] lg:mx-auto">
-      <h2 className="font-display text-3xl font-semibold text-foreground mb-5">Disclaimer, Copyright &amp; Terms of Use</h2>
+      <h2 className="font-display text-3xl font-semibold text-foreground mb-1">{DISCLAIMER_TITLE}</h2>
+      <p className="font-display text-[13px] uppercase tracking-[0.14em] text-muted mb-5">
+        and the copyright and terms of use
+      </p>
       <CopyrightTerms />
     </div>
   );

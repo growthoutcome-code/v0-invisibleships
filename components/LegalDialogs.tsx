@@ -34,6 +34,7 @@ import {
 import CopyrightTerms from "@/components/CopyrightTerms";
 import SafetyNote from "@/components/SafetyNote";
 import { GATE } from "@/lib/gate-content";
+import { DISCLAIMER_TITLE } from "@/lib/disclaimer";
 
 function CloseButton() {
   return (
@@ -51,7 +52,7 @@ export function DisclaimerDialog({ children }: { children: ReactNode }) {
       <DialogContent size="lg">
         <DialogHeader>
           <DialogTitle className="font-display text-2xl font-semibold">
-            Disclaimer, copyright and terms
+            {DISCLAIMER_TITLE}
           </DialogTitle>
         </DialogHeader>
         <DialogBody>

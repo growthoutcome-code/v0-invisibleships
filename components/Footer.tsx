@@ -118,7 +118,7 @@ export default function Footer({ onNav }: { onNav?: (t: NavTab) => void }) {
           <div className="flex flex-wrap items-center gap-5 sm:ml-auto">
             <DisclaimerDialog>
               <button type="button" className={legalLink}>
-                Disclaimer, copyright and terms
+                Critical Disclaimer
               </button>
             </DisclaimerDialog>
             <SafetyDialog>
