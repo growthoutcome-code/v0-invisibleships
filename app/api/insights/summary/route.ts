@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { serverDb } from "@/lib/server-log";
+import { getTraffic } from "@/lib/insights-posthog";
 
 /**
  * The two numbers the footer shows, as JSON.
@@ -21,7 +22,24 @@ export const revalidate = 300;
 
 export async function GET() {
   const db = serverDb();
-  const body = { visits: 0, downloads: 0, since: null as string | null, ok: false };
+  const body = {
+    visits: 0,
+    downloads: 0,
+    since: null as string | null,
+    // "30d" when the number is real sessions from analytics, "gate" when it is
+    // falling back to how many people met the gate. The footer says which.
+    window: "gate" as "30d" | "gate",
+    ok: false,
+  };
+
+  // Preferred, because it is the number a reader means by "visits" and it has
+  // history — the gate counter starts the day the logging deployed.
+  const traffic = await getTraffic();
+  if (traffic) {
+    body.visits = traffic.visits30d;
+    body.window = "30d";
+    body.ok = true;
+  }
 
   if (db) {
     const [funnel, meta] = await Promise.all([
@@ -29,10 +47,10 @@ export async function GET() {
       db.from("insights_meta").select("*").maybeSingle(),
     ]);
     const opened = (funnel.data ?? []).find((r) => r.event === "gate_opened");
-    body.visits = Number(opened?.n ?? 0);
+    if (!traffic) body.visits = Number(opened?.n ?? 0);
     body.downloads = Number(meta.data?.download_rows ?? 0);
     body.since = meta.data?.first_gate_event ?? null;
-    body.ok = !funnel.error && !meta.error;
+    body.ok = body.ok || (!funnel.error && !meta.error);
   }
 
   return NextResponse.json(body, {

@@ -3,6 +3,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getInsights, FUNNEL_STEPS } from "@/lib/insights";
+import { getTraffic } from "@/lib/insights-posthog";
 import StandingDisclaimer from "@/components/StandingDisclaimer";
 
 /**
@@ -73,7 +74,7 @@ const fmtDate = (iso: string | null) =>
   iso ? new Date(iso).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }) : null;
 
 export default async function Page() {
-  const d = await getInsights();
+  const [d, traffic] = await Promise.all([getInsights(), getTraffic()]);
   const step = (event: string) => d.funnel.find((f) => f.event === event)?.n ?? 0;
   const started = fmtDate(d.firstGateEvent);
 
@@ -131,6 +132,36 @@ export default async function Page() {
           missing number.
         </p>
       ) : null}
+
+      <section className="mt-10">
+        <h2 className="font-display text-xl font-semibold text-foreground">Visits</h2>
+        {traffic ? (
+          <>
+            <p className="mt-2 text-[15px] leading-relaxed text-foreground/85">
+              A visit is one session: everything a person does in a single sitting. The window matters
+              here. Before {new Date(traffic.since + "T00:00:00").toLocaleDateString("en-US", {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              })}{" "}
+              nothing was excluded, and an audit found that almost every visit up to then was the
+              author building the site. Counting from that date is the only version of this number
+              that means what it says.
+            </p>
+            <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
+              <Stat n={traffic.visits30d} label="Visits" note="last 30 days" />
+              <Stat n={traffic.views30d} label="Pages read" note="last 30 days" />
+              <Stat n={traffic.visitsSince} label="Visits" note="since exclusions began" />
+            </div>
+          </>
+        ) : (
+          <p className="mt-2 text-[15px] leading-relaxed text-muted">
+            Visit counts are not connected in this environment. They come from the site&rsquo;s analytics
+            with the author&rsquo;s own networks filtered out, and appear here when that connection is
+            configured.
+          </p>
+        )}
+      </section>
 
       <section className="mt-10">
         <h2 className="font-display text-xl font-semibold text-foreground">The gate</h2>

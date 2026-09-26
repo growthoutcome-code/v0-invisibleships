@@ -60,6 +60,14 @@ const COLUMNS: {
     ],
   },
   {
+    heading: "About",
+    links: [
+      { t: "author", href: "/author", label: "The author" },
+      { href: "/why", label: "Why “Invisible Ships”" },
+      ...(ACCOUNTS_READY ? [{ href: "/contribute", label: "Contribute an account" }] : []),
+    ],
+  },
+  {
     // Sean, 26 September: a fourth column for the measurement page, with a blurb
     // and a live count. The site asks readers to check its sourcing; this is the
     // same courtesy pointed at its own analytics.
@@ -68,14 +76,6 @@ const COLUMNS: {
     blurb:
       "This archive is about being watched, so it publishes what it records about its own readers \u2014 and what it never records.",
     live: true,
-  },
-  {
-    heading: "About",
-    links: [
-      { t: "author", href: "/author", label: "The author" },
-      { href: "/why", label: "Why “Invisible Ships”" },
-      ...(ACCOUNTS_READY ? [{ href: "/contribute", label: "Contribute an account" }] : []),
-    ],
   },
 ];
 
@@ -178,7 +178,12 @@ export default function Footer({ onNav }: { onNav?: (t: NavTab) => void }) {
  * how a site starts lying to itself.
  */
 function InsightsCount() {
-  const [data, setData] = useState<{ visits: number; downloads: number; ok: boolean } | null>(null);
+  const [data, setData] = useState<{
+    visits: number;
+    downloads: number;
+    window: "30d" | "gate";
+    ok: boolean;
+  } | null>(null);
 
   useEffect(() => {
     let live = true;
@@ -205,6 +210,7 @@ function InsightsCount() {
         <>
           <span className="font-display text-foreground">{data.visits.toLocaleString()}</span>{" "}
           {data.visits === 1 ? "visit" : "visits"}
+          {data.window === "30d" && " in 30 days"}
           {data.downloads > 0 && (
             <>
               {" \u00b7 "}
