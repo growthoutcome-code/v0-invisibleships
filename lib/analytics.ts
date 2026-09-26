@@ -74,6 +74,7 @@ function excluded(): string | null {
   if (navigator.webdriver) return "browser automation";
   // A standing per-device opt-out. Set it on any device, phone included, by
   // visiting any page with ?analytics=off — see below.
+  if (cookie(OPT_OUT_COOKIE) === "1") return "opted out on this device";
   try {
     if (localStorage.getItem(OPT_OUT) === "1") return "opted out on this device";
   } catch {
@@ -83,13 +84,46 @@ function excluded(): string | null {
 }
 
 const OPT_OUT = "is:no-analytics";
+/**
+ * The same opt-out as a cookie.
+ *
+ * localStorage alone was fragile in two ways: clearing site data silently
+ * re-enrolls the device, and a SERVER route cannot read it — which is how the
+ * download counter counted its own author for a month. Both flags are written
+ * and either one is honoured.
+ */
+const OPT_OUT_COOKIE = "is_no_analytics";
+const AUTHOR_COOKIE = "is_author";
+
+function cookie(name: string): string | null {
+  try {
+    const m = document.cookie.match(new RegExp(`(?:^|;\\s*)${name}=([^;]*)`));
+    return m ? m[1] : null;
+  } catch {
+    return null;
+  }
+}
+
+/** Ten years, path-wide, lax: a standing preference rather than a session. */
+function setCookie(name: string, value: string, maxAge = 315360000) {
+  try {
+    document.cookie = `${name}=${value}; path=/; max-age=${maxAge}; samesite=lax`;
+  } catch {
+    /* no-op */
+  }
+}
 
 /** ?analytics=off stops counting this device for good; ?analytics=on resumes. */
 function applyOptOutParam() {
   try {
     const v = new URLSearchParams(location.search).get("analytics");
-    if (v === "off") localStorage.setItem(OPT_OUT, "1");
-    else if (v === "on") localStorage.removeItem(OPT_OUT);
+    if (v === "off") {
+      localStorage.setItem(OPT_OUT, "1");
+      setCookie(OPT_OUT_COOKIE, "1");
+    } else if (v === "on") {
+      localStorage.removeItem(OPT_OUT);
+      setCookie(OPT_OUT_COOKIE, "", 0);
+    }
   } catch {
     /* no-op */
   }
@@ -110,10 +144,10 @@ function applyAuthorParam() {
   try {
     const v = new URLSearchParams(location.search).get("author");
     if (v === "1") {
-      document.cookie = "is_author=1; path=/; max-age=315360000; samesite=lax";
+      setCookie(AUTHOR_COOKIE, "1");
       console.info("[analytics] this device is marked as the author — its rows stay out of public numbers");
     } else if (v === "0") {
-      document.cookie = "is_author=; path=/; max-age=0; samesite=lax";
+      setCookie(AUTHOR_COOKIE, "", 0);
       console.info("[analytics] author marking removed from this device");
     }
   } catch {
@@ -157,6 +191,17 @@ export function initAnalytics() {
   }
   initGoogleAnalytics();
   initVercelAnalytics();
+
+  // The author marker rides on every event from a marked device. This is the
+  // backstop for the leak the audit found: an author session from a network the
+  // IP filter does not know about — a hotel, a hotspot, a new VPN exit — used to
+  // count as a reader. A cookie follows the device instead of the address, and
+  // the project's internal-traffic filter now excludes `is_author`.
+  if (cookie(AUTHOR_COOKIE) === "1") {
+    registerVisitorProps({ is_author: true });
+    console.info("[analytics] marked as the author — excluded from reported numbers");
+  }
+
   inited = true;
 }
 
