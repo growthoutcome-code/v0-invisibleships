@@ -6,6 +6,7 @@ import {
   clientHash,
   distinctIdFromCookie,
   geoFromHeaders,
+  isAuthorRequest,
 } from "@/lib/server-log";
 
 /**
@@ -116,6 +117,7 @@ export async function GET(request: Request) {
       entry_point: entryPoint,
       identified: Boolean(cookieId),
       client_hash: clientHash(cookie),
+      is_author: isAuthorRequest(cookie),
       corpus_files: CORPUS_SUMMARY.files,
       corpus_bytes: CORPUS_SUMMARY.zipBytes,
       corpus_generated: CORPUS_SUMMARY.generated,

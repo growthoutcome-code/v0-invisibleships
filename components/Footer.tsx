@@ -116,6 +116,12 @@ export default function Footer({ onNav }: { onNav?: (t: NavTab) => void }) {
         <div className="mt-12 flex flex-col gap-4 pt-6 sm:flex-row sm:items-center">
           <p className="m-0 text-[13px] text-muted">© 2026 Sean C. Harris. All Rights Reserved.</p>
           <div className="flex flex-wrap items-center gap-5 sm:ml-auto">
+            {/* Sean, 26 September: the measurement page is public and linked,
+                because an archive that documents being watched should be able to
+                show what it records about its own readers. */}
+            <a href="/insights" className={legalLink}>
+              What this site can see
+            </a>
             <DisclaimerDialog>
               <button type="button" className={legalLink}>
                 Critical Disclaimer

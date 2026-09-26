@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { ROLES } from "@/lib/gate";
-import { serverDb, excludedRequest, clientHash, geoFromHeaders } from "@/lib/server-log";
+import { serverDb, excludedRequest, clientHash, geoFromHeaders, isAuthorRequest } from "@/lib/server-log";
 
 /**
  * Records one step of the entry gate into public.gate_events.
@@ -69,6 +69,7 @@ export async function POST(request: Request) {
     gate_version,
     path,
     client_hash: clientHash(request.headers.get("cookie")),
+    is_author: isAuthorRequest(request.headers.get("cookie")),
     ...geo,
   });
   if (error) console.error("[gate-log] insert failed", error.message);

@@ -95,12 +95,39 @@ function applyOptOutParam() {
   }
 }
 
+/**
+ * ?author=1 marks this device as the author's, ?author=0 unmarks it.
+ *
+ * A cookie rather than localStorage, because the server routes are what write the
+ * rows and a server cannot read localStorage. Ten years, lax, path-wide: this is
+ * a preference, not a session.
+ *
+ * What it does NOT do is stop anything being recorded. Rows still arrive, marked,
+ * so the write path can be tested by the one person who can test it; the public
+ * views exclude them. ?analytics=off remains the full opt-out.
+ */
+function applyAuthorParam() {
+  try {
+    const v = new URLSearchParams(location.search).get("author");
+    if (v === "1") {
+      document.cookie = "is_author=1; path=/; max-age=315360000; samesite=lax";
+      console.info("[analytics] this device is marked as the author — its rows stay out of public numbers");
+    } else if (v === "0") {
+      document.cookie = "is_author=; path=/; max-age=0; samesite=lax";
+      console.info("[analytics] author marking removed from this device");
+    }
+  } catch {
+    /* no-op */
+  }
+}
+
 /** Set once excluded, so track() stays silent too rather than half-reporting. */
 let disabled = false;
 
 export function initAnalytics() {
   if (inited || typeof window === "undefined") return;
   applyOptOutParam();
+  applyAuthorParam();
   const why = excluded();
   if (why) {
     // Say so out loud. A silent exclusion is how a metric quietly becomes wrong

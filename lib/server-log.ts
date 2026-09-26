@@ -96,6 +96,21 @@ export function excludedRequest(request: Request, hostname: string): string | nu
   return null;
 }
 
+/**
+ * Whether this request carries the author marker (set by visiting any page with
+ * `?author=1`).
+ *
+ * Marked rows are still written — so the write path can be verified end to end by
+ * the one person who needs to verify it — but every public view excludes them.
+ * That is a different tool from `?analytics=off`, which stops the row existing at
+ * all: use the marker on a device Sean also READS the site on, and the opt-out on
+ * a device he only builds it with.
+ */
+export function isAuthorRequest(cookie: string | null): boolean {
+  if (!cookie) return false;
+  return /(?:^|;\s*)is_author=1(?:;|$)/.test(cookie);
+}
+
 export type Geo = { country: string | null; region: string | null; city: string | null };
 
 /** Resolved by Vercel at the edge. The IP that produced it never reaches here. */
