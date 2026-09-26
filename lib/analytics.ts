@@ -3,23 +3,6 @@ import posthog from "posthog-js";
 let inited = false;
 const KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY;
 const HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com";
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "G-VXMCM15XTH";
-
-function initGoogleAnalytics() {
-  if (!GA_ID || typeof window === "undefined") return;
-  const w = window as unknown as { gtag?: unknown };
-  if (w.gtag) return; // already loaded
-  const loader = document.createElement("script");
-  loader.async = true;
-  loader.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
-  document.head.appendChild(loader);
-  const initScript = document.createElement("script");
-  initScript.innerHTML =
-    "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','" +
-    GA_ID +
-    "');";
-  document.head.appendChild(initScript);
-}
 
 function initVercelAnalytics() {
   if (typeof window === "undefined") return;
@@ -33,6 +16,17 @@ function initVercelAnalytics() {
 }
 
 /**
+ * GOOGLE ANALYTICS WAS REMOVED on 26 September, deliberately.
+ *
+ * It gave nothing PostHog did not: the gate's role answer never reached it (no
+ * custom dimension was ever registered), the server-side download event never
+ * reached it at all, and its numbers disagreed with PostHog's because it has none
+ * of the author exclusions. Against that, it carried the real costs — Google's
+ * own terms require consent from EEA and UK visitors, and an archive about being
+ * watched loading an advertising vendor's tag is a contradiction a reader can see
+ * in the network tab. Historical GA data stays in the Google account; nothing is
+ * deleted by this, and re-adding it is one commit.
+ *
  * Who does NOT get counted.
  *
  * Until 27 August 2026, nobody was excluded. AnalyticsInit sits in the root
@@ -40,8 +34,8 @@ function initVercelAnalytics() {
  * reader had agreed to anything — from any browser at all. That included:
  *
  *   - the author's own machine, every time he opened his own site
- *   - `npm run dev` on localhost, because GA_ID carries a hardcoded default and
- *     fires with no environment variable set at all
+ *   - `npm run dev` on localhost, because the GA id used to carry a hardcoded
+ *     default and fired with no environment variable set at all (GA is gone now)
  *   - Chrome driven by automation, every time the site was opened to be built,
  *     checked or QA'd
  *
@@ -189,7 +183,6 @@ export function initAnalytics() {
       person_profiles: "identified_only",
     });
   }
-  initGoogleAnalytics();
   initVercelAnalytics();
 
   // The author marker rides on every event from a marked device. This is the
@@ -217,8 +210,6 @@ export function isCounting(): boolean {
   return inited && !disabled;
 }
 
-type Gtag = (command: string, event: string, params?: Record<string, unknown>) => void;
-
 /**
  * Attach a property to EVERY subsequent event this session, in PostHog and GA.
  *
@@ -241,12 +232,6 @@ export function registerVisitorProps(props: Record<string, unknown>) {
       /* no-op */
     }
   }
-  try {
-    const gtag = (window as unknown as { gtag?: Gtag }).gtag;
-    if (typeof gtag === "function") gtag("set", "user_properties", props);
-  } catch {
-    /* no-op */
-  }
 }
 
 export function track(event: string, props?: Record<string, unknown>) {
@@ -258,12 +243,5 @@ export function track(event: string, props?: Record<string, unknown>) {
     } catch {
       /* no-op */
     }
-  }
-  // Google Analytics (gtag) — dual-write when GA is present on the page
-  try {
-    const gtag = (window as unknown as { gtag?: Gtag }).gtag;
-    if (typeof gtag === "function") gtag("event", event, props);
-  } catch {
-    /* no-op */
   }
 }

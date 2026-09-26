@@ -314,7 +314,7 @@ export const TERMS: TermsSection[] = [
       {
         kind: "p",
         text:
-          "This site records usage analytics — pages opened, sections viewed, and which sources readers follow — using cookies, and it may record a session replay: a playback of how a page was used, with all typed input masked. This is processed on the author’s behalf by PostHog and Google Analytics. It is never sold, and no attempt is made to identify individual readers.",
+          "This site records usage analytics — pages opened, sections viewed, and which sources readers follow — using cookies, and it may record a session replay: a playback of how a page was used, with all typed input masked. This is processed on the author’s behalf by PostHog. Google Analytics was removed on 26 September 2026. Nothing is sold, and no attempt is made to identify individual readers. **Every number the site keeps is published at [what this site can see](/insights), where counting can also be switched off for your device.**",
       },
       {
         kind: "p",

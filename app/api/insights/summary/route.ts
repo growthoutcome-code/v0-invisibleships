@@ -38,7 +38,7 @@ export async function GET() {
   if (traffic) {
     // All time, per Sean on 26 September. The page beside it carries the three
     // windows and the reason they differ; a footer has room for one number.
-    body.visits = traffic.visitsAll;
+    body.visits = traffic.visits;
     body.window = "all";
     body.ok = true;
   }
