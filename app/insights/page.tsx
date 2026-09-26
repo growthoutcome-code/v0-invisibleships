@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import { getInsights, FUNNEL_STEPS } from "@/lib/insights";
 import StandingDisclaimer from "@/components/StandingDisclaimer";
 
@@ -76,7 +78,10 @@ export default async function Page() {
   const started = fmtDate(d.firstGateEvent);
 
   return (
-    <main className="mx-auto max-w-3xl px-5 py-12 sm:px-6">
+    <>
+      <Header />
+
+      <main className="mx-auto max-w-3xl px-5 py-14 sm:px-8">
       <p className="font-display text-[11px] uppercase tracking-[0.16em] text-muted">Measurement</p>
       <h1 className="font-display mt-2 text-[32px] font-bold leading-[1.12] tracking-tight text-foreground sm:text-[40px]">
         What this site can see
@@ -204,7 +209,10 @@ export default async function Page() {
         </p>
       </section>
 
-      <StandingDisclaimer className="mt-12" />
-    </main>
+        <StandingDisclaimer className="mt-12" />
+      </main>
+
+      <Footer />
+    </>
   );
 }

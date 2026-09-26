@@ -23,6 +23,7 @@
  * links never use it: they open modals in both places, so a reader never loses
  * their position in the archive to read the terms.
  */
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ACCOUNTS_READY } from "@/lib/flags";
 import { DisclaimerDialog, SafetyDialog } from "@/components/LegalDialogs";
@@ -30,7 +31,13 @@ import { DATA_SECTIONS } from "@/lib/routes";
 
 type NavTab = "journal" | "data" | "concepts" | "glossary" | "documents" | "author";
 
-const COLUMNS: { heading: string; links: { t?: NavTab; href: string; label: string }[] }[] = [
+const COLUMNS: {
+  heading: string;
+  links: { t?: NavTab; href: string; label: string }[];
+  blurb?: string;
+  /** Renders the live count from /api/insights/summary beneath the links. */
+  live?: boolean;
+}[] = [
   {
     heading: "The record",
     links: [
@@ -53,6 +60,16 @@ const COLUMNS: { heading: string; links: { t?: NavTab; href: string; label: stri
     ],
   },
   {
+    // Sean, 26 September: a fourth column for the measurement page, with a blurb
+    // and a live count. The site asks readers to check its sourcing; this is the
+    // same courtesy pointed at its own analytics.
+    heading: "Insights",
+    links: [{ href: "/insights", label: "What this site can see" }],
+    blurb:
+      "This archive is about being watched, so it publishes what it records about its own readers \u2014 and what it never records.",
+    live: true,
+  },
+  {
     heading: "About",
     links: [
       { t: "author", href: "/author", label: "The author" },
@@ -69,7 +86,7 @@ export default function Footer({ onNav }: { onNav?: (t: NavTab) => void }) {
   return (
     <footer className="mt-16 bg-foreground/[0.035]">
       <div className="w-full px-5 py-14 sm:px-8 lg:px-[100px]">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
           <div>
             <p className="font-display m-0 text-lg font-semibold tracking-[-0.01em] text-foreground">
               Invisible Ships
@@ -107,6 +124,12 @@ export default function Footer({ onNav }: { onNav?: (t: NavTab) => void }) {
                   </li>
                 ))}
               </ul>
+              {col.blurb && (
+                <p className="body-copy m-0 mt-4 max-w-xs text-[13px] leading-relaxed text-muted">
+                  {col.blurb}
+                </p>
+              )}
+              {col.live && <InsightsCount />}
             </nav>
           ))}
         </div>
@@ -116,12 +139,6 @@ export default function Footer({ onNav }: { onNav?: (t: NavTab) => void }) {
         <div className="mt-12 flex flex-col gap-4 pt-6 sm:flex-row sm:items-center">
           <p className="m-0 text-[13px] text-muted">© 2026 Sean C. Harris. All Rights Reserved.</p>
           <div className="flex flex-wrap items-center gap-5 sm:ml-auto">
-            {/* Sean, 26 September: the measurement page is public and linked,
-                because an archive that documents being watched should be able to
-                show what it records about its own readers. */}
-            <a href="/insights" className={legalLink}>
-              What this site can see
-            </a>
             <DisclaimerDialog>
               <button type="button" className={legalLink}>
                 Critical Disclaimer
@@ -143,5 +160,63 @@ export default function Footer({ onNav }: { onNav?: (t: NavTab) => void }) {
         </p>
       </div>
     </footer>
+  );
+}
+
+/**
+ * The live count in the footer's Insights column.
+ *
+ * Fetched rather than passed in: this footer is a client component mounted on
+ * every page, including inside the app shell, so there is no one server boundary
+ * to thread a number through. The endpoint is cached for five minutes at the
+ * edge, so this costs a conditional request per page view and nothing at the
+ * database.
+ *
+ * It renders NOTHING until it has a real answer, and says so in words when the
+ * answer is zero. A footer that flashes "0 visits" on every page while it loads
+ * would be both wrong and dispiriting, and a number with no state behind it is
+ * how a site starts lying to itself.
+ */
+function InsightsCount() {
+  const [data, setData] = useState<{ visits: number; downloads: number; ok: boolean } | null>(null);
+
+  useEffect(() => {
+    let live = true;
+    fetch("/api/insights/summary")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => {
+        if (live && j && j.ok) setData(j);
+      })
+      .catch(() => {
+        /* the footer is not the place to report an analytics outage */
+      });
+    return () => {
+      live = false;
+    };
+  }, []);
+
+  if (!data) return null;
+
+  return (
+    <p className="m-0 mt-3 text-[13px] leading-relaxed text-muted">
+      {data.visits === 0 ? (
+        "No visits recorded yet."
+      ) : (
+        <>
+          <span className="font-display text-foreground">{data.visits.toLocaleString()}</span>{" "}
+          {data.visits === 1 ? "visit" : "visits"}
+          {data.downloads > 0 && (
+            <>
+              {" \u00b7 "}
+              <span className="font-display text-foreground">{data.downloads.toLocaleString()}</span>{" "}
+              {data.downloads === 1 ? "download" : "downloads"}
+            </>
+          )}
+        </>
+      )}{" "}
+      <Link href="/insights" className="underline underline-offset-4 hover:text-foreground">
+        See more
+      </Link>
+    </p>
   );
 }
