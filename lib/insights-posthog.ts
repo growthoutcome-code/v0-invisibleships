@@ -15,10 +15,18 @@
  * sessions as visits. `filterTestAccounts: true` below is the whole reason these
  * numbers are worth publishing.
  *
- * SINCE 28 AUGUST, not all time. Before that date nothing was excluded: the
- * traffic audit found 310 pageviews of which roughly 300 were the author. An
- * all-time figure would be a true number that means something false, so the page
- * states the window instead of quietly spending the credibility.
+ * ALL TIME IS THE HEADLINE. Sean, 26 September: "please count all time visits,
+ * let's start there."
+ *
+ * Safe to do, and I had this wrong first time: the project's test-account filters
+ * match on NETWORK AND HOSTNAME, not on a date, so they remove the author from
+ * the whole history rather than from the day they were written. All-time with the
+ * filter on reads 22 visits across two months, not the 310 pageviews the raw log
+ * holds. The number is already the honest one.
+ *
+ * What the filter cannot remove, and what the page says out loud: a crawler that
+ * renders pages counts as a visit, and so does a session of the author from a
+ * network nobody listed.
  *
  * Needs POSTHOG_PERSONAL_API_KEY (read-only: query:read and project:read are
  * enough). Without it every function here returns null and the page says
@@ -33,6 +41,8 @@ const PROJECT = process.env.POSTHOG_PROJECT_ID || "536751";
 export const EXCLUSIONS_SINCE = "2026-08-28";
 
 export type Traffic = {
+  visitsAll: number;
+  viewsAll: number;
   visits30d: number;
   views30d: number;
   visitsSince: number;
@@ -73,13 +83,19 @@ async function aggregate(math: Math, dateFrom: string): Promise<number | null> {
 /** Null when there is no key, or when PostHog cannot be reached. */
 export async function getTraffic(): Promise<Traffic | null> {
   if (!KEY) return null;
-  const [visits30d, views30d, visitsSince] = await Promise.all([
+  const [visitsAll, viewsAll, visits30d, views30d, visitsSince] = await Promise.all([
+    // "all" is PostHog's own all-time window, so this starts at the first event
+    // the project ever received (31 July 2026) rather than at a date we picked.
+    aggregate("unique_session", "all"),
+    aggregate("total", "all"),
     aggregate("unique_session", "-30d"),
     aggregate("total", "-30d"),
     aggregate("unique_session", EXCLUSIONS_SINCE),
   ]);
-  if (visits30d === null && visitsSince === null) return null;
+  if (visitsAll === null && visits30d === null && visitsSince === null) return null;
   return {
+    visitsAll: visitsAll ?? 0,
+    viewsAll: viewsAll ?? 0,
     visits30d: visits30d ?? 0,
     views30d: views30d ?? 0,
     visitsSince: visitsSince ?? 0,

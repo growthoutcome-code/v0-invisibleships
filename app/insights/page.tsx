@@ -138,21 +138,23 @@ export default async function Page() {
         {traffic ? (
           <>
             <p className="mt-2 text-[15px] leading-relaxed text-foreground/85">
-              A visit is one session: everything a person does in a single sitting. The window matters
-              here. Before {new Date(traffic.since + "T00:00:00").toLocaleDateString("en-US", {
-                month: "long",
-                day: "numeric",
-                year: "numeric",
-              })}{" "}
-              nothing was excluded, and an audit found that almost every visit up to then was the
-              author building the site. Counting from that date is the only version of this number
-              that means what it says.
+              A visit is one session: everything a person does in a single sitting. All three windows
+              are here because they do not mean the same thing, and the difference is the most honest
+              thing on this page.
             </p>
             <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3">
+              <Stat n={traffic.visitsAll} label="Visits" note="all time, from 31 July 2026" />
+              <Stat n={traffic.viewsAll} label="Pages read" note="all time" />
               <Stat n={traffic.visits30d} label="Visits" note="last 30 days" />
-              <Stat n={traffic.views30d} label="Pages read" note="last 30 days" />
-              <Stat n={traffic.visitsSince} label="Visits" note="since exclusions began" />
             </div>
+            <p className="mt-4 text-[14px] leading-relaxed text-muted">
+              The exclusions apply backwards as well as forwards: they match on network and hostname,
+              so the author&rsquo;s own sessions are removed from the whole history, not only from the
+              day the filters were written. Two things they cannot remove. A crawler that renders
+              pages counts as a visit here. And a session of the author&rsquo;s from a network not on
+              the list &mdash; a hotel, a hotspot, a new VPN exit &mdash; counts too; at least one is
+              known to have done so.
+            </p>
           </>
         ) : (
           <p className="mt-2 text-[15px] leading-relaxed text-muted">

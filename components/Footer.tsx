@@ -181,7 +181,7 @@ function InsightsCount() {
   const [data, setData] = useState<{
     visits: number;
     downloads: number;
-    window: "30d" | "gate";
+    window: "all" | "gate";
     ok: boolean;
   } | null>(null);
 
@@ -210,7 +210,7 @@ function InsightsCount() {
         <>
           <span className="font-display text-foreground">{data.visits.toLocaleString()}</span>{" "}
           {data.visits === 1 ? "visit" : "visits"}
-          {data.window === "30d" && " in 30 days"}
+          {data.window === "all" && " all time"}
           {data.downloads > 0 && (
             <>
               {" \u00b7 "}

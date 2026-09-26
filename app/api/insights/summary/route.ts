@@ -28,7 +28,7 @@ export async function GET() {
     since: null as string | null,
     // "30d" when the number is real sessions from analytics, "gate" when it is
     // falling back to how many people met the gate. The footer says which.
-    window: "gate" as "30d" | "gate",
+    window: "gate" as "all" | "gate",
     ok: false,
   };
 
@@ -36,8 +36,10 @@ export async function GET() {
   // history — the gate counter starts the day the logging deployed.
   const traffic = await getTraffic();
   if (traffic) {
-    body.visits = traffic.visits30d;
-    body.window = "30d";
+    // All time, per Sean on 26 September. The page beside it carries the three
+    // windows and the reason they differ; a footer has room for one number.
+    body.visits = traffic.visitsAll;
+    body.window = "all";
     body.ok = true;
   }
 
