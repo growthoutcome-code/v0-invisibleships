@@ -2,8 +2,34 @@
 
 Read this before changing anything. These are settled decisions, not preferences:
 each one was argued out once and re-litigating it costs Sean an hour he has
-already spent. Where a decision has reasoning worth reading, the project doc is
-named — those live in the claude.ai project "Invisible Ships", not in this repo.
+already spent.
+
+## Where the reasoning lives — read this first
+
+This file holds the **rules**. The **reasons** live in `project/`, in this repo, so
+they travel with a clone and survive any session:
+
+| Path | Holds |
+|---|---|
+| `project/roadmap.md` | The whole product in priority order, plus a "not doing, with the reason" table |
+| `project/decisions/` | One numbered record per settled question. Each has a **Rejected** table — read it before proposing an alternative, because it has probably already been examined |
+| `project/features/` | One file per piece of work in flight, named after its branch. Tactics, acceptance criteria, and what is actually verified versus merely written |
+
+**Two standing obligations, not optional:**
+
+1. **A decision that was argued gets a record.** If someone could reasonably propose
+   the opposite next month, copy `project/decisions/TEMPLATE.md`, take the next number,
+   and write it — including what was rejected and what would legitimately reopen it.
+   Never edit a record to reverse it; supersede it, so the history of the reversal
+   stays readable. This project has reversed itself inside a single day and both
+   halves were worth keeping.
+2. **Work in flight gets a feature doc.** Copy `project/features/TEMPLATE.md` to
+   `project/features/<branch>.md` before starting. Keep its "verified / not verified"
+   section honest — it is the difference between handing someone working code and
+   handing them a claim.
+
+Older notes, session logs and audits live in the claude.ai project "Invisible Ships".
+Treat those as a work journal; `project/` is the distilled result, and it wins.
 
 ---
 
