@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MeasurementNotes from "@/components/MeasurementNotes";
+import MeasurementAlert from "@/components/MeasurementAlert";
 import StandingDisclaimer from "@/components/StandingDisclaimer";
 import { getInsights } from "@/lib/insights";
 import { getTraffic, getVisitGroups, getShuffledVisits, automated, type Row } from "@/lib/insights-posthog";
@@ -168,7 +169,13 @@ export default async function Page() {
       <Header />
 
       <main className="w-full max-w-[1400px] mx-auto px-4 py-14 sm:px-6">
-        <div className="flex flex-wrap items-baseline justify-between gap-3">
+        {/* The caveat, once, on the face of the page rather than only behind a link.
+            Dismissible per device; "How this is measured" also lives permanently at
+            the foot of the page, so dismissing removes the banner and not the
+            explanation. */}
+        <MeasurementAlert />
+
+        <div className="flex flex-wrap items-baseline gap-3">
           <div>
             <p className="font-display m-0 text-[11px] uppercase tracking-[0.16em] text-muted">Measurement</p>
             <h1 className="font-display mt-2 text-[32px] font-bold leading-[1.12] tracking-tight text-foreground sm:text-[40px]">
@@ -181,14 +188,6 @@ export default async function Page() {
               All time &middot; every figure since the site launched
             </p>
           </div>
-          <MeasurementNotes>
-            <button
-              type="button"
-              className="font-display text-[12px] uppercase tracking-[0.14em] text-muted underline underline-offset-4 transition-colors hover:text-foreground"
-            >
-              How this is measured
-            </button>
-          </MeasurementNotes>
         </div>
 
         {!t ? (
@@ -337,7 +336,18 @@ export default async function Page() {
           />
         )}
 
-        <StandingDisclaimer className="mt-12 max-w-3xl" />
+        <div className="mt-12 border-t border-edge pt-6">
+          <MeasurementNotes>
+            <button
+              type="button"
+              className="font-display text-[12px] uppercase tracking-[0.14em] text-muted underline underline-offset-4 transition-colors hover:text-foreground"
+            >
+              How this is measured
+            </button>
+          </MeasurementNotes>
+        </div>
+
+        <StandingDisclaimer className="mt-10 max-w-3xl" />
 
         <OptOutSection />
       </main>

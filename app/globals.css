@@ -245,3 +245,30 @@ body {
   .gate-plate .gship,
   .gate-plate .gsight { animation: none !important; opacity: .8 !important; }
 }
+
+/* Used by components/MeasurementAlert.tsx.
+   The banner cannot be server-rendered — the server does not know whether this
+   browser dismissed it — so it appears after mount. Without a fade that reads as a
+   glitch; with one it reads as intentional. Reduced motion gets the banner with no
+   movement, because the banner is the point and the animation is not. */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @keyframes fadeIn {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
