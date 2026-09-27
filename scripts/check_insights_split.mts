@@ -1,18 +1,22 @@
 /**
- * Guard for splitLocations() in lib/insights.ts.
+ * Guard for locationRows() in lib/insights.ts.
  *
- * The rule under test is the point of the whole locations feature: a city appears
- * on /insights only when the network it came over was the reader's own. Everything
- * else is counted and left unplaced. Getting this wrong does not throw, does not
- * fail a build, and looks completely normal on the page — it just quietly prints
- * a VPN exit node as though a reader lived there. So it is pinned here.
+ * ONE RULE: every location rendered on /insights carries a flag saying whether it
+ * is a VPN. An unflagged city asserts that a reader is there, and for a VPN exit
+ * node that assertion is false.
  *
- * The fixture is real: it is the exact output of `select * from
- * public.insights_locations` taken on 27 September 2026 against seeded rows, so
- * this tests the shape the database actually returns rather than an invented one.
+ * This is guarded rather than trusted because it fails silently — a dropped or
+ * blank flag does not throw, does not fail a build, and looks entirely normal on
+ * the page. It also cannot be verified through the page from here: the development
+ * sandbox cannot reach Supabase, so a render proves nothing about data it never
+ * loaded.
+ *
+ * The fixture is real: the exact output of `select * from public.insights_locations`
+ * taken 27 September 2026 against seeded rows, so this tests the shape the database
+ * actually returns rather than an invented one.
  */
 
-import { splitLocations, type Location } from "../lib/insights";
+import { locationRows, type Location } from "../lib/insights";
 
 const FIXTURE: Location[] = [
   { country: "US", region: "MI", city: "Ypsilanti", network: "direct", visitors: 2 },
@@ -23,76 +27,57 @@ const FIXTURE: Location[] = [
 ];
 
 const fail: string[] = [];
-const eq = (got: unknown, want: unknown, what: string) => {
-  const g = JSON.stringify(got);
-  const w = JSON.stringify(want);
-  if (g !== w) fail.push(`${what}: got ${g}, expected ${w}`);
-};
+const rows = locationRows(FIXTURE);
 
-const out = splitLocations(FIXTURE);
-
-// The audience list: readers on their own connections, and nobody else.
-eq(
-  out.placed,
-  [
-    { label: "Ypsilanti, MI, US", n: 2 },
-    { label: "Chicago, IL, US", n: 1 },
-  ],
-  "placed holds only 'direct' rows, in view order",
-);
-
-// THE BUG THIS GUARD EXISTS FOR: an exit node ranked as an audience location.
-for (const city of ["Amsterdam", "Los Angeles"]) {
-  if (out.placed.some((p) => p.label.includes(city))) {
-    fail.push(`${city} appears in placed — it came over a hosting/VPN network and is a server, not a reader`);
+// THE RULE. Checked first and for every row, including any future network value.
+for (const r of rows) {
+  if (!r.flag || !r.flag.trim()) {
+    fail.push(`"${r.label}" has no flag — an unlabelled city implies a reader is there`);
   }
 }
-if (out.placed.some((p) => p.label === "Unknown")) {
-  fail.push("an unclassifiable row appears in placed");
+if (rows.length !== FIXTURE.length) {
+  fail.push(`${FIXTURE.length} rows in, ${rows.length} out — no row may be added or dropped`);
 }
 
-// THE OPPOSITE FAILURE, added 27 Sep after over-correcting: the exit-node cities
-// were deleted rather than separated, which lost information Sean wants to see.
-// They must still be returned, with their city detail intact.
-eq(
-  out.exitNodes,
-  [
-    { label: "Amsterdam, NH, NL", n: 1 },
-    { label: "Los Angeles, CA, US", n: 1 },
-  ],
-  "exitNodes keeps the VPN/datacenter cities rather than reducing them to a number",
-);
-if (out.exitNodes.length === 0 && out.overVpn > 0) {
-  fail.push("overVpn is non-zero but exitNodes is empty — the cities were discarded");
+// VPN rows must say so. This is the error the whole feature exists to prevent:
+// one reader's Los Angeles exit node reading as an audience location.
+for (const city of ["Amsterdam", "Los Angeles"]) {
+  const r = rows.find((x) => x.label.includes(city));
+  if (!r) fail.push(`${city} is missing from the list — VPN rows are shown, not hidden`);
+  else if (r.flag !== "VPN or datacenter") {
+    fail.push(`${city} is flagged "${r.flag}" but came over a hosting/VPN network`);
+  }
 }
 
-eq(out.overVpn, 2, "overVpn totals exitNodes");
-eq(out.unclassified, 1, "unclassified visitors counted");
+// Non-VPN rows must not be mislabelled either: calling a reader's home a VPN
+// understates real traffic, and is just as invisible on the page.
+for (const city of ["Ypsilanti", "Chicago"]) {
+  const r = rows.find((x) => x.label.includes(city));
+  if (!r) fail.push(`${city} is missing from the list`);
+  else if (r.flag !== "not a VPN") {
+    fail.push(`${city} is flagged "${r.flag}" but no hosting network matched it`);
+  }
+}
 
-// Nobody is dropped and nobody is double-counted.
+// Unclassifiable rows say so rather than defaulting either way.
+const unknown = rows.find((r) => r.label === "Unknown");
+if (!unknown) fail.push("the unclassifiable row was dropped");
+else if (unknown.flag !== "network unknown") {
+  fail.push(`unclassifiable row flagged "${unknown.flag}" instead of "network unknown"`);
+}
+
+// Counts are carried through untouched.
 const total = FIXTURE.reduce((a, l) => a + l.visitors, 0);
-const accounted =
-  out.placed.reduce((a, p) => a + p.n, 0) +
-  out.exitNodes.reduce((a, p) => a + p.n, 0) +
-  out.unclassified;
-eq(accounted, total, "every visitor accounted for exactly once");
+const carried = rows.reduce((a, r) => a + r.n, 0);
+if (carried !== total) fail.push(`visit counts changed: ${total} in, ${carried} out`);
 
 // Empty input must not throw or invent rows.
-const empty = splitLocations([]);
-eq(
-  [empty.placed.length, empty.exitNodes.length, empty.overVpn, empty.unclassified],
-  [0, 0, 0, 0],
-  "empty input",
-);
+if (locationRows([]).length !== 0) fail.push("empty input produced rows");
 
 if (fail.length) {
   for (const f of fail) console.error(`FAIL ${f}`);
-  console.error(`\n[insights] ${fail.length} split failure(s).`);
-  console.error("[insights] Rules: a city goes in `placed` only when network === 'direct';");
-  console.error("[insights] VPN/datacenter cities go in `exitNodes` and are NOT discarded.");
+  console.error(`\n[insights] ${fail.length} location-flag failure(s).`);
+  console.error("[insights] Every row must carry a non-empty flag, and it must be the right one.");
   process.exit(1);
 }
-console.log(
-  `[insights] locations split correctly: ${out.placed.length} reader location(s), ` +
-    `${out.exitNodes.length} exit node(s) kept and labelled, ${out.unclassified} unplaceable.`,
-);
+console.log(`[insights] ${rows.length} locations, every one flagged VPN / not-VPN / unknown.`);

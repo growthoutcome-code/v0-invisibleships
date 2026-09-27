@@ -73,19 +73,21 @@ Full reasoning in `claude/measurement-and-privacy-decisions.md`. The rules:
   file and stores only the label — `hosting` / `direct` / `unknown` — on
   `gate_events` and `corpus_downloads`. Never the address, never the ASN, never the
   operator name.
-  - **Geography is split into two lists, and both are shown in full.** `direct`
-    rows are the audience list ("Where readers are"). `hosting` rows keep their
-    cities in a separate section ("Seen over VPN or datacenter networks") stated as
-    exit nodes, not reader locations. `unknown` rows are a count, having no city to
-    show. Nothing is discarded and nothing is mixed.
-    - Two failures to avoid, and this went wrong in both directions on 26–27 Sep.
-      **Do not merge them into one ranked list** — even with per-row labels it reads
-      as an audience map, and the largest row it ever had was one reader's VPN exit.
-      **Do not delete the exit-node cities either** — Sean wants to see that a visit
-      came through Amsterdam, he just needs Amsterdam marked as a server. A bare
-      count throws that away.
-    - `splitLocations()` in `lib/insights.ts` is the single implementation, guarded
-      by `scripts/check_insights_split.mts`, which pins both failure directions.
+  - **One list, a VPN flag on every row.** `locationRows()` in `lib/insights.ts`
+    returns every location with a required `flag`: "VPN or datacenter" / "not a
+    VPN" / "network unknown". Sean, 27 Sep: "it really is as simple as whether or
+    not the location is from a VPN or not."
+    - **The only unrelaxable rule: no row renders without a flag.** An unflagged
+      city asserts a reader is there, which for an exit node is false. `flag` is
+      required in the type and the view coalesces null to `unknown`.
+    - Two earlier versions overshot this and were reverted: one deleted the VPN
+      cities and left a bare count, one gave them a separate section. Do not
+      rebuild either. The label is the whole requirement.
+    - **A filter for non-VPN cities only is the agreed next step, deliberately not
+      built** ("I don't think we need to yet"). The flag is already its data, so it
+      is a UI change and nothing more.
+    - Guarded by `scripts/check_insights_split.mts`, which checks every row is
+      flagged and flagged correctly in both directions.
   - `direct` means "no hosting network matched", NOT "no VPN". Render it as a
     detection, never as a guarantee.
   - **The real location behind a VPN is not obtainable and must not be pursued.**

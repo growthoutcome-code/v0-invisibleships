@@ -105,58 +105,48 @@ export const FUNNEL_STEPS: { event: string; label: string; note: string }[] = [
 ];
 
 /**
- * Split locations into the ones that are readers and the ones that are exit nodes.
+ * Locations as one list, each row carrying whether it is a VPN or not.
  *
- * WHAT THIS IS FOR, in one line: a city may be shown, but never in a way that
- * implies a reader is there when a server is.
+ * Sean, 27 September: "we don't have to have separate sections. It really is as
+ * simple as whether or not the location is from a VPN or not."
  *
- * There were two separate problems with showing geography on this site, and the
- * history matters because the second fix over-corrected for the first.
+ * That is the requirement, and it is met by a label on every row. Two earlier
+ * versions overshot it — one deleted the VPN cities and left a bare count, one
+ * split them into a second section — both solving a presentation problem that the
+ * label already answers for the person reading the page.
  *
- *   1. A MISLEADING RANKING. One sorted list mixing reader cities with VPN exit
- *      cities reads as an audience map. The largest row this table ever had was 11
- *      views from Los Angeles — one reader on a mobile VPN. The biggest number in
- *      the chart was the error, and a small per-row label did not stop it being
- *      read as the top of an audience list.
- *   2. NOT KNOWING WHICH IS WHICH. Already solved by the label itself.
+ * THE ONE RULE THAT CANNOT BE RELAXED: no row is rendered without a flag. An
+ * unflagged city is a claim that a reader is somewhere, and for a VPN exit that
+ * claim is false. This function therefore returns a non-empty flag for every row,
+ * the type makes `flag` required, and the database view coalesces a missing
+ * classification to 'unknown' so there is nothing for a null to flow from.
  *
- * The first version fixed neither properly (one list, small labels). The second
- * fixed (1) by deleting the VPN cities and leaving a bare count — which also threw
- * away (2)'s answer. Sean, 27 September: "if we have insights that are locations,
- * we need to know that they are VPN locations because VPN locations are not
- * accurate locations."
+ * `direct` is rendered as "not a VPN" — a detection, not a guarantee. It means no
+ * hosting or VPN provider matched, which is not proof none was used.
  *
- * So both are returned, separately and equally fully. `placed` is the audience.
- * `exitNodes` carries the same city detail, kept out of the audience ranking and
- * presented as what it is. Neither is a subset of a mixed list, and nothing is
- * discarded: placed + exitNodes + unclassified totals the input exactly. A visit
- * that cannot be located is still a visit.
+ * Guarded by scripts/check_insights_split.mts, because this fails SILENTLY: a
+ * dropped flag does not throw, does not fail a build, and looks entirely normal on
+ * the page. It also cannot be checked through the page from a dev machine — the
+ * sandbox cannot reach Supabase, so a render proves nothing about data it never
+ * loaded.
  *
- * A pure function, separate from the page, because this rule is the substantive
- * commitment of the feature and it fails SILENTLY — a mistake does not throw, does
- * not fail a build, and looks entirely normal on the page. Guarded by
- * scripts/check_insights_split.mts. It also cannot be checked through the page from
- * here: the development sandbox cannot reach Supabase, so a render proves nothing
- * about data it never loaded.
+ * NOT BUILT YET, deliberately: a filter to show only non-VPN cities. Sean, 27
+ * September: "the filtering could be show results from cities that are not VPN
+ * touch points. I don't think we need to yet." The flag is the data that filter
+ * would use, so adding it later is a UI change and nothing more.
  */
-export function splitLocations(locations: Location[]): {
-  placed: { label: string; n: number }[];
-  exitNodes: { label: string; n: number }[];
-  overVpn: number;
-  unclassified: number;
-} {
-  const label = (l: Location) =>
-    [l.city, l.region, l.country].filter((x) => x && x !== "Unknown").join(", ") || "Unknown";
-  const rows = (net: Location["network"]) =>
-    locations.filter((l) => l.network === net).map((l) => ({ label: label(l), n: l.visitors }));
-  const total = (r: { n: number }[]) => r.reduce((a, x) => a + x.n, 0);
-
-  const placed = rows("direct");
-  const exitNodes = rows("hosting");
-  return {
-    placed,
-    exitNodes,
-    overVpn: total(exitNodes),
-    unclassified: total(rows("unknown")),
+export function locationRows(locations: Location[]): { label: string; n: number; flag: string }[] {
+  const FLAG: Record<Location["network"], string> = {
+    hosting: "VPN or datacenter",
+    direct: "not a VPN",
+    unknown: "network unknown",
   };
+  return locations.map((l) => ({
+    label:
+      [l.city, l.region, l.country].filter((x) => x && x !== "Unknown").join(", ") || "Unknown",
+    n: l.visitors,
+    // Never falls through to empty: an unrecognised value is 'network unknown',
+    // which is honest, rather than a blank, which is a false implication.
+    flag: FLAG[l.network] ?? FLAG.unknown,
+  }));
 }

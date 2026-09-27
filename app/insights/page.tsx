@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MeasurementNotes from "@/components/MeasurementNotes";
 import StandingDisclaimer from "@/components/StandingDisclaimer";
-import { getInsights, splitLocations } from "@/lib/insights";
+import { getInsights, locationRows } from "@/lib/insights";
 import { getTraffic, automated, type Row } from "@/lib/insights-posthog";
 import { asnDatasetAvailable } from "@/lib/asn";
 
@@ -58,7 +58,11 @@ function Table({
   flag,
 }: {
   title: string;
-  rows: Row[];
+  // A row may carry its own flag. Preferred over the callback below, which had to
+  // rebuild the label and match on the string — so any formatting change silently
+  // dropped every flag, and for the locations table a dropped flag is the one
+  // failure that must not happen.
+  rows: (Row & { flag?: string })[];
   unit: string;
   note?: string;
   flag?: (label: string) => string | null;
@@ -75,7 +79,7 @@ function Table({
       ) : (
         <ul className="m-0 list-none p-0">
           {rows.map((r) => {
-            const f = flag ? flag(r.label) : null;
+            const f = r.flag ?? (flag ? flag(r.label) : null);
             return (
               <li key={r.label} className="border-b border-edge py-2.5 last:border-b-0">
                 <div className="flex items-baseline justify-between gap-4">
@@ -125,7 +129,7 @@ export default async function Page() {
   //
   // No reader is dropped: placed + overVpn + unclassified is every row the view
   // returns. A visit that cannot be located still counts as a visit.
-  const { placed: placedRows, exitNodes, unclassified } = splitLocations(d.locations);
+  const places = locationRows(d.locations);
   const bots = t ? automated(t.traffic) : { bots: 0, total: 0 };
   // Downloads: our own table once the logging is deployed, PostHog until then.
   const downloads = d.downloadRows || t?.downloads || 0;
@@ -179,56 +183,31 @@ export default async function Page() {
           </>
         )}
 
-        {/* LOCATIONS, with a network label on every row and no exceptions.
-            Sean, 26 September: "I absolutely do not want an analytics page with
-            locations on it that cite VPN touchpoints without a VPN label." The
-            table was withheld for a day for exactly that reason; it returns now
-            because each row carries one of three labels, classified server-side
-            from a local ASN dataset and stored as the label rather than as an
-            address. The rows come from gate_events rather than from PostHog page
-            views, because PostHog resolves geography from a city database with no
-            network data in it and never returns the address, so a PostHog city
-            cannot be labelled at all. */}
+        {/* LOCATIONS: one list, a VPN label on every row, no exceptions.
+            Sean, 27 Sep: "it really is as simple as whether or not the location is
+            from a VPN or not." Two earlier versions overshot that — one removed the
+            VPN cities entirely, one gave them a second section — and both solved a
+            problem the label already answers. What must never come back is an
+            unflagged row: a city with no label asserts a reader is there, which for
+            an exit node is false.
+
+            Rows come from gate_events, not PostHog page views: PostHog resolves
+            geography from a city database with no network data and never returns
+            the address, so a PostHog city cannot be labelled at all.
+
+            A filter for non-VPN cities only is the obvious next step and is
+            deliberately not built ("I don't think we need to yet"). The flag is
+            already the data it would need. */}
         <Table
-          title="Where readers are"
-          unit="readers"
-          rows={placedRows}
+          title="Where visits came from"
+          unit="visits"
+          rows={places}
           note={
             networkLabelsLive
-              ? "Every row here came over a network with no VPN or datacenter provider behind it, so the place is the reader\u2019s own. That is a detection, not a guarantee: it means no such provider matched, which is not the same as proof that none was used. The check runs in memory against a dataset on this site\u2019s own servers \u2014 the address is never sent anywhere and never stored."
-              : "Empty because the network dataset is not loaded in this deployment, so no visit can be confirmed as coming from the reader\u2019s own connection. Every visit is counted below instead. Nothing here is a guess."
+              ? "Every row says whether it is a VPN. \u201cVPN or datacenter\u201d means the address belongs to such a provider, so the place named is the server\u2019s and not the reader\u2019s \u2014 the reader could be anywhere, and no tool recovers where. \u201cNot a VPN\u201d means no such provider matched, which is a detection rather than a guarantee. The check runs in memory against a dataset on this site\u2019s own servers; the address is never sent anywhere and never stored."
+              : "Every row reads \u201cnetwork unknown\u201d because the classification dataset is not loaded in this deployment. Rather than name cities that may be VPN exits without saying so, the page says it does not know which are which."
           }
         />
-
-        {/* The same city data, kept out of the audience ranking and named for what
-            it is. Not a bare count: Sean wants to see that a visit came through an
-            Amsterdam exit node, he just needs Amsterdam unmistakably marked as a
-            server rather than a reader. A separate section does that; a label
-            inside the list above did not. */}
-        {exitNodes.length > 0 && (
-          <Table
-            title="Seen over VPN or datacenter networks"
-            unit="visits"
-            rows={exitNodes}
-            note="These are exit nodes, not reader locations. The place named is where the VPN or datacenter server is; the reader could be anywhere. They are listed separately from the figures above for that reason, and counted in every total on this page. No tool recovers the real location from a request \u2014 the only address the site ever receives is the exit node\u2019s \u2014 so the site shows what it saw and does not guess past it."
-          />
-        )}
-
-        {unclassified > 0 && (
-          <div className="mt-4 border border-edge p-4">
-            <div className="flex items-baseline justify-between gap-4">
-              <span className="text-[15px] text-foreground">Network could not be identified</span>
-              <span className="font-display text-[15px] tabular-nums text-foreground">
-                {nf.format(unclassified)}
-              </span>
-            </div>
-            <p className="m-0 mt-3 text-[13px] leading-relaxed text-muted">
-              Counted in every total, and given no location because none can be stood behind. Either
-              the classification dataset is not loaded in this deployment, or the address was one it
-              does not cover.
-            </p>
-          </div>
-        )}
 
         {d.countries.length > 0 && (
           <Table title="Downloads by country" unit="downloads" rows={d.countries.map((c) => ({ label: c.country, n: c.n }))} />
