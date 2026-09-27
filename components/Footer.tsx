@@ -113,6 +113,25 @@ export default function Footer({ onNav }: { onNav?: (t: NavTab) => void }) {
                       >
                         {l.label}
                       </button>
+                    ) : l.href.startsWith("/api/") ? (
+                      // A PLAIN ANCHOR, DELIBERATELY. next/link prefetches on hover and
+                      // on entering the viewport, and a prefetch is a real request — so
+                      // routing /api/corpus through <Link> meant the download counter
+                      // fired every time this footer scrolled into view or the cursor
+                      // passed over the link. Measured 27 Sep 2026: 18 recorded
+                      // downloads, most of them prefetches, several in millisecond pairs
+                      // where a prefetch and the actual click were both counted. The
+                      // number was not a download count at all.
+                      //
+                      // prefetch={false} is not sufficient in Next 14: it disables the
+                      // automatic viewport prefetch but hover still prefetches. Any href
+                      // with a side effect gets a plain <a>.
+                      <a
+                        href={l.href}
+                        className="text-[14px] text-foreground/80 transition-colors hover:text-foreground"
+                      >
+                        {l.label}
+                      </a>
                     ) : (
                       <Link
                         href={l.href}

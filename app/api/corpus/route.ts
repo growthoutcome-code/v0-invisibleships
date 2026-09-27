@@ -68,7 +68,18 @@ export async function GET(request: Request) {
   // this hands the reader to the real static file instead of back to itself.
   const target = new URL(`${FILE}?dl=1`, url.origin);
 
-  const skip = excludedRequest(request, url.hostname);
+  // A PREFETCH IS NOT A DOWNLOAD. Browsers and frameworks speculatively fetch links,
+  // and this endpoint has a side effect, so it must say no. Chrome and Next.js send
+  // Sec-Purpose: prefetch; older Next sends purpose: prefetch; Moz sends x-moz:
+  // prefetch. The footer no longer routes here through next/link, but that fixed one
+  // caller and this fixes the class — any future link, card or crawler hint that
+  // prefetches will not inflate the count again.
+  const purpose = `${request.headers.get("sec-purpose") ?? ""} ${
+    request.headers.get("purpose") ?? ""
+  } ${request.headers.get("x-moz") ?? ""}`.toLowerCase();
+  const prefetch = purpose.includes("prefetch") || purpose.includes("preview");
+
+  const skip = prefetch || excludedRequest(request, url.hostname);
   if (skip) return NextResponse.redirect(target, 302);
 
   const h = request.headers;
