@@ -115,11 +115,24 @@ export async function GET(request: Request) {
           // corpus_downloaded events since 25 August, all invisible.
           $host: url.hostname,
 
-          // And is_author, so the filter can tell the author's downloads from a
-          // reader's. Without it the two are indistinguishable: a server-side event
-          // comes from Vercel's own address, so the IP conditions in that filter
-          // cannot separate them the way they do for page views. The cookie can.
-          is_author: isAuthorRequest(cookie),
+          // is_author, so the filter can tell the author's downloads from a reader's.
+          // Without it the two are indistinguishable: a server-side event comes from
+          // Vercel's own address, so the IP conditions in that filter cannot separate
+          // them the way they do for page views. The cookie can.
+          //
+          // SET ONLY WHEN TRUE, and this is not a style choice. The project's
+          // internal-traffic filter tests `is_author` with the operator `is_not_set`.
+          // A property that is present with the value `false` is still SET, so writing
+          // `is_author: false` for an ordinary reader would fail that condition and
+          // exclude their download from every filtered figure on /insights — the exact
+          // opposite of the intent. The first version of this line did that. It would
+          // have pinned "not the author's" at zero for ever while the total climbed,
+          // and nothing would have looked broken.
+          //
+          // lib/analytics.ts has always done it this way for page views; this now
+          // matches, which is the point — two copies of a rule that disagree is how
+          // the wrong one survives.
+          ...(isAuthorRequest(cookie) ? { is_author: true } : {}),
 
           // Resolved at Vercel's edge from the visitor's connection. The IP
           // itself is never sent; without these the event carries the serverless
