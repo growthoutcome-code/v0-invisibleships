@@ -43,7 +43,17 @@ export type Traffic = {
   pages: Row[];
   /** PostHog's own classification: "Regular", "Bot", "AI Agent", … */
   traffic: Row[];
+  /** Downloads that survive the internal-traffic filter — a reader's, not the author's. */
   downloads: number;
+  /**
+   * Every download recorded, author included.
+   *
+   * Carried alongside the filtered figure because showing only the filtered one made
+   * the page look broken: 18 downloads had happened, 15 of them the author's, and the
+   * tile said nothing at all. Zero confirmed reader downloads is the honest headline,
+   * but "nothing was ever recorded" is a different claim and it is false.
+   */
+  downloadsAll: number;
 };
 
 type Math = "unique_session" | "total" | "dau";
@@ -79,6 +89,34 @@ function trends(event: string, math: Math, dateFrom: string, breakdowns?: string
   };
 }
 
+/**
+ * The same count with the internal-traffic filter off.
+ *
+ * WHY THIS EXISTS, measured 27 September 2026. `corpus_downloaded` had fired 18 times
+ * since 25 August and the downloads tile read zero. Three wrong diagnoses were made
+ * before the data settled it:
+ *
+ *   1. "Tracking is not wired up."  It is. 18 events, most recent the day before.
+ *   2. "The internal filter drops them for want of $host."  In HogQL all 18 pass
+ *      `{filters}`; only TrendsQuery's filterTestAccounts excludes them, so the two
+ *      do not apply the same conditions.
+ *   3. "They are all the author's."  Fifteen are — two distinct_ids with 106 and 18
+ *      page views, both reporting a Denver browser clock. But three are
+ *      `anon_download_*`: no cookie, no page views, a direct hit on the zip URL. There
+ *      is no evidence those are the author, and the filtered count of zero hid them.
+ *
+ * So the filtered figure stays the headline, because it is the conservative one, and
+ * this exists so the page can also say how many were recorded in total rather than
+ * implying none were.
+ */
+async function totalUnfiltered(event: string, math: Math, dateFrom: string): Promise<number | null> {
+  const body = trends(event, math, dateFrom);
+  (body.query as Record<string, unknown>).filterTestAccounts = false;
+  const json = await query(body);
+  const v = json?.results?.[0]?.aggregated_value;
+  return typeof v === "number" ? v : null;
+}
+
 async function total(event: string, math: Math, dateFrom: string): Promise<number | null> {
   const json = await query(trends(event, math, dateFrom));
   const v = json?.results?.[0]?.aggregated_value;
@@ -103,7 +141,8 @@ async function rows(event: string, math: Math, dateFrom: string, breakdowns: str
 export async function getTraffic(): Promise<Traffic | null> {
   if (!KEY) return null;
 
-  const [visits, visitors, views, visits30, views30, pages, traffic, downloads] = await Promise.all([
+  const [visits, visitors, views, visits30, views30, pages, traffic, downloads, downloadsAll] =
+    await Promise.all([
     total("$pageview", "unique_session", "all"),
     total("$pageview", "dau", "all"),
     total("$pageview", "total", "all"),
@@ -112,6 +151,7 @@ export async function getTraffic(): Promise<Traffic | null> {
     rows("$pageview", "total", "all", ["$pathname"]),
     rows("$pageview", "total", "all", ["$virt_traffic_type"], 6),
     total("corpus_downloaded", "total", "all"),
+    totalUnfiltered("corpus_downloaded", "total", "all"),
   ]);
 
   if (visits === null && views === null) return null;
@@ -125,6 +165,7 @@ export async function getTraffic(): Promise<Traffic | null> {
     pages,
     traffic,
     downloads: downloads ?? 0,
+    downloadsAll: downloadsAll ?? 0,
   };
 }
 

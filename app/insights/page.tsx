@@ -187,7 +187,15 @@ export default async function Page() {
                 sub="clocks agree, address precise"
               />
               <Tile n={t.views} label="Pages viewed" sub={`${nf.format(t.views30)} in 30 days`} />
-              <Tile n={downloads} label="Corpus downloads" sub="server-confirmed" />
+              <Tile
+                n={downloads}
+                label="Corpus downloads"
+                sub={
+                  t.downloadsAll > downloads
+                    ? `${nf.format(t.downloadsAll)} recorded, ${nf.format(t.downloadsAll - downloads)} the author\u2019s`
+                    : "server-confirmed"
+                }
+              />
             </div>
 
             <section className="mt-10">
