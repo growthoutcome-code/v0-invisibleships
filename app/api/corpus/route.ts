@@ -93,6 +93,23 @@ export async function GET(request: Request) {
           $user_agent: h.get("user-agent") || "",
           $lib: "server",
 
+          // WHY $host IS SET EXPLICITLY, and why 18 downloads read as zero without it.
+          //
+          // The project's internal-traffic filter requires `$host` to equal the
+          // production hostname, and posthog-js sets that automatically from the
+          // browser. A server-side capture has no browser, so it never carried one —
+          // which meant every download failed the filter and `filterTestAccounts:
+          // true` dropped all of them. The events were being recorded correctly and
+          // then excluded from every number on /insights. Measured 27 Sep 2026: 18
+          // corpus_downloaded events since 25 August, all invisible.
+          $host: url.hostname,
+
+          // And is_author, so the filter can tell the author's downloads from a
+          // reader's. Without it the two are indistinguishable: a server-side event
+          // comes from Vercel's own address, so the IP conditions in that filter
+          // cannot separate them the way they do for page views. The cookie can.
+          is_author: isAuthorRequest(cookie),
+
           // Resolved at Vercel's edge from the visitor's connection. The IP
           // itself is never sent; without these the event carries the serverless
           // function's own location, which is how the only recorded download

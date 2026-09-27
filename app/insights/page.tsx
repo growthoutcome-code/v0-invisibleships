@@ -155,7 +155,7 @@ export default async function Page() {
     <>
       <Header />
 
-      <main className="w-full px-5 py-14 sm:px-8 lg:px-[100px]">
+      <main className="w-full max-w-[1400px] mx-auto px-4 py-14 sm:px-6">
         <div className="flex flex-wrap items-baseline justify-between gap-3">
           <div>
             <p className="font-display m-0 text-[11px] uppercase tracking-[0.16em] text-muted">Measurement</p>
