@@ -142,21 +142,33 @@ export default async function Page() {
               <Tile n={downloads} label="Corpus downloads" sub="server-confirmed" />
             </div>
 
-            <Table title="Pages viewed" unit="views" rows={t.pages} />
-
             <Table
-              title="Where from"
-              unit="visits"
-              rows={t.places}
-              flag={(label) => (/unknown/i.test(label) ? "unresolved" : null)}
+              title="Pages viewed"
+              unit="views"
+              rows={t.pages}
               note={
                 bots.total > 0
-                  ? `${nf.format(bots.bots)} of ${nf.format(bots.total)} page views were classified as automated — crawlers and link scanners rather than readers. Location is resolved at the network edge; a visitor using a VPN resolves to the VPN's city, not their own.`
+                  ? `${nf.format(bots.bots)} of ${nf.format(bots.total)} page views were classified as automated — crawlers and link scanners rather than readers.`
                   : undefined
               }
             />
+
           </>
         )}
+
+        {/* NO LOCATIONS TABLE, and this is a deliberate omission rather than a gap.
+            Sean, 26 September: "I absolutely do not want an analytics page with
+            locations on it that cite VPN touchpoints without a VPN label." The
+            largest row this table had was 11 views from Los Angeles, which is one
+            reader on a mobile VPN — the error, sitting at the top of the chart.
+            Locations return once a network can be labelled "hosting or VPN",
+            classified server-side from a local ASN dataset and stored as that
+            label rather than as an address. See the plan doc. */}
+        <p className="mt-10 border-t border-edge pt-4 text-[13px] leading-relaxed text-muted">
+          Locations are not shown. A visitor using a VPN resolves to the VPN&rsquo;s city, not their
+          own, and a table that cannot say which is which would be a map of guesses. It returns when
+          each row can be marked as a residential or a hosting network.
+        </p>
 
         {d.countries.length > 0 && (
           <Table title="Downloads by country" unit="downloads" rows={d.countries.map((c) => ({ label: c.country, n: c.n }))} />

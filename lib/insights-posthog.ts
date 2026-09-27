@@ -1,8 +1,16 @@
 /**
  * Everything the measurement dashboard reads, from PostHog.
  *
- * Sean, 26 September: top-line metrics, the pages people read, where they came
- * from, and downloads — a dashboard rather than an essay.
+ * Sean, 26 September: top-line metrics, the pages people read, and downloads — a
+ * dashboard rather than an essay.
+ *
+ * NO GEOGRAPHY HERE, on purpose. PostHog resolves a city from the address, which
+ * for a reader on a VPN is the VPN's city and not theirs — and the largest row
+ * this ever produced was eleven views from Los Angeles, which is one reader on a
+ * mobile VPN app. Locations return when a network can be labelled as residential
+ * or hosting, classified from a local ASN dataset at write time and stored as that
+ * label rather than as an address. That work belongs in our own rows, not here:
+ * PostHog pageviews go browser-to-vendor and never pass through a server of ours.
  *
  * WHY A TYPED TrendsQuery AND NOT HogQL, which is the whole reason these numbers
  * can be published: the project's "filter out internal and test users" setting
@@ -33,7 +41,6 @@ export type Traffic = {
   visits30: number;
   views30: number;
   pages: Row[];
-  places: Row[];
   /** PostHog's own classification: "Regular", "Bot", "AI Agent", … */
   traffic: Row[];
   downloads: number;
@@ -96,17 +103,13 @@ async function rows(event: string, math: Math, dateFrom: string, breakdowns: str
 export async function getTraffic(): Promise<Traffic | null> {
   if (!KEY) return null;
 
-  const [visits, visitors, views, visits30, views30, pages, places, traffic, downloads] = await Promise.all([
+  const [visits, visitors, views, visits30, views30, pages, traffic, downloads] = await Promise.all([
     total("$pageview", "unique_session", "all"),
     total("$pageview", "dau", "all"),
     total("$pageview", "total", "all"),
     total("$pageview", "unique_session", "-30d"),
     total("$pageview", "total", "-30d"),
     rows("$pageview", "total", "all", ["$pathname"]),
-    // Country first so the label reads the way an address does, and because a
-    // city name alone is ambiguous — there is a Melbourne in Florida and one in
-    // Australia, and this archive has had a visit from one of them.
-    rows("$pageview", "unique_session", "all", ["$geoip_country_name", "$geoip_city_name"]),
     rows("$pageview", "total", "all", ["$virt_traffic_type"], 6),
     total("corpus_downloaded", "total", "all"),
   ]);
@@ -120,7 +123,6 @@ export async function getTraffic(): Promise<Traffic | null> {
     visits30: visits30 ?? 0,
     views30: views30 ?? 0,
     pages,
-    places,
     traffic,
     downloads: downloads ?? 0,
   };
