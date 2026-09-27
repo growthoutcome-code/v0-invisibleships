@@ -8,6 +8,7 @@ import {
   geoFromHeaders,
   isAuthorRequest,
 } from "@/lib/server-log";
+import { networkTypeFromHeaders } from "@/lib/asn";
 
 /**
  * Counted download endpoint for the corpus zip.
@@ -121,6 +122,7 @@ export async function GET(request: Request) {
       corpus_files: CORPUS_SUMMARY.files,
       corpus_bytes: CORPUS_SUMMARY.zipBytes,
       corpus_generated: CORPUS_SUMMARY.generated,
+      network_type: networkTypeFromHeaders(request.headers),
       ...geo,
     });
     if (error) console.error("[corpus-log] insert failed", error.message);

@@ -46,23 +46,51 @@ Full reasoning in `claude/measurement-and-privacy-decisions.md`. The rules:
 - **PostHog only.** Google Analytics was removed on 26 Sep 2026 and is not coming
   back without a specific reason. Do not add analytics, tag managers, or
   ad-adjacent scripts.
-- **Nothing initialises before consent.** `initAnalytics()` returns without
-  setting `inited` until the reader has answered the gate's measurement screen.
-  That early return is deliberate and must stay.
+- **There is no consent screen, and adding one is a decision, not a fix.** A
+  fourth gate step asking permission to count page views was built on 26 Sep 2026
+  and deliberately not shipped (Sean: "that seems weird... let people opt out or
+  don't show it at all"). Counting page views is ordinary maintenance; a consent
+  wall overstates it and adds friction to the one thing the site is short of,
+  which is readers getting in. What page views get instead is a plain notice in
+  the terms and a working switch on `/insights`. Do not add a banner or a consent
+  step without revisiting the replay rule below, which depends on this one.
 - **Page views are ordinary operational monitoring.** Do not write copy that
   treats counting them as ethically fraught or ties them to the archive's subject
-  matter. They are unrelated things.
-- **Session replay stays on, behind consent, with `maskAllInputs`.** It is useful
-  for finding UI bugs. The legal exposure (state wiretap claims) is answered by
-  prior consent, not by removing the feature.
-- **No locations on `/insights` until a network can be labelled.** A VPN exit
-  resolves to the VPN's city; a geography table that cannot say which rows are
-  hosting networks is a map of guesses. When it returns: classify server-side from
-  a local ASN dataset (GeoLite2-ASN), store the **label** — residential / hosting
-  or VPN / unknown — plus country, never the address. Not Cloudflare; not a
-  per-request third-party lookup.
-- **Never store an IP.** Geography comes from Vercel's edge headers. The one join
-  key is `client_hash`, a salted SHA-256 of the PostHog cookie id.
+  matter. They are unrelated things. This cuts both ways: it is why no consent
+  screen is needed, and why the `/insights` copy argues from transparency rather
+  than from surveillance.
+- **Session replay is OFF, and that follows from the line above.** Off at the
+  PostHog project level and pinned off in code by `disable_session_recording: true`
+  in `lib/analytics.ts`. Prior consent was the entire defence against state
+  wiretap claims for replay; with no consent screen there is no consent to rely
+  on, so the feature goes rather than the screen. Note what did NOT drive this:
+  CA **SB 690** does not touch CIPA §631, so its fate changes nothing here.
+  Turning replay back on means adding a real consent flow first — and is worth
+  revisiting only when there is traffic worth watching or something is being sold.
+  At 22 filtered visits all time it bought nothing.
+- **Locations on `/insights` must carry a network label on every row.** Live
+  since 26 Sep 2026. `lib/asn.ts` classifies the address in memory from a local
+  GeoLite2-ASN file and stores only the label — `hosting` / `direct` / `unknown` —
+  on `gate_events` and `corpus_downloads`. Never the address, never the ASN, never
+  the operator name. `direct` means "no hosting network matched", NOT "no VPN":
+  render it as such. A row with no label is the one failure this feature exists to
+  prevent, so the view coalesces null to `unknown` and the page has no code path
+  that prints a blank.
+  - Built on `gate_events`, **not** PostHog page views: PostHog resolves geography
+    from a city database with no network data and never returns the address, so a
+    PostHog city cannot be labelled at all.
+  - **Not Cloudflare.** Its visitor-location headers carry no ASN on any plan;
+    getting one means a Worker in front of the site reading `request.cf.asn`, plus
+    Vercel's own geo headers then resolving to Cloudflare's edge.
+  - `MAXMIND_LICENSE_KEY` missing is a supported state: `scripts/fetch_asn_db.mjs`
+    skips, every row reads `unknown`, and the page says why. It never fails a build.
+  - `scripts/check_asn_classification.mts` runs in `npm run check` and pins the
+    traps (Google Fiber and Starlink must not read as hosting). Fix a false
+    positive by adding to `NOT_HOSTING_PATTERNS`, which wins, not by narrowing the
+    hosting list.
+- **Never store an IP.** Geography comes from Vercel's edge headers; the ASN
+  lookup reads `x-forwarded-for` inside one function call and keeps nothing. The
+  one join key is `client_hash`, a salted SHA-256 of the PostHog cookie id.
 
 ### Keeping the author and Claude out of the numbers
 

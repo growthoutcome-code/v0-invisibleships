@@ -17,6 +17,26 @@
  */
 const nextConfig = {
   reactStrictMode: true,
+
+  /**
+   * The ASN dataset has to travel with the two routes that classify networks.
+   *
+   * Next.js traces the imports of each route and bundles what it finds; a file
+   * read at runtime with fs.readFileSync is invisible to that trace, so without
+   * this the routes deploy without the dataset and every location silently
+   * becomes 'unknown'. Vercel's own includeFiles in vercel.json does NOT work for
+   * Next.js projects — outputFileTracingIncludes is the supported route, and in
+   * Next 14 it lives under experimental.
+   *
+   * ~10 MB against a 250 MB uncompressed function limit. Middleware could not do
+   * this: its bundle limit is far smaller and it has no filesystem.
+   */
+  experimental: {
+    outputFileTracingIncludes: {
+      "/api/gate": ["./data/GeoLite2-ASN.mmdb"],
+      "/api/corpus": ["./data/GeoLite2-ASN.mmdb"],
+    },
+  },
   async rewrites() {
     // beforeFiles, NOT a bare array.
     //

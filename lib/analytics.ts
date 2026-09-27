@@ -89,6 +89,9 @@ const OPT_OUT = "is:no-analytics";
 const OPT_OUT_COOKIE = "is_no_analytics";
 const AUTHOR_COOKIE = "is_author";
 
+/** Set once excluded, so track() stays silent too rather than half-reporting. */
+let disabled = false;
+
 function cookie(name: string): string | null {
   try {
     const m = document.cookie.match(new RegExp(`(?:^|;\\s*)${name}=([^;]*)`));
@@ -124,6 +127,52 @@ function applyOptOutParam() {
 }
 
 /**
+ * Read and write the standing per-device opt-out.
+ *
+ * Exported because the control on /insights is the only opt-out the site offers
+ * a reader who is not typing query strings, and it must not keep its own copy of
+ * the rule. It used to: the dialog wrote the cookie and the localStorage key
+ * itself, which is two copies of a preference that `excluded()` above reads a
+ * third way, and the comment on isCounting() already says what happens to rules
+ * kept in two places.
+ *
+ * setDeviceOptOut also tells posthog-js immediately rather than waiting for the
+ * next page load. Without that call the dialog said "nothing about your visits
+ * is recorded" while the already-initialised instance carried on capturing the
+ * rest of the page. The cheapest way to make a privacy control honest is for it
+ * to be true at the moment it is clicked.
+ */
+export function readDeviceOptOut(): boolean {
+  if (typeof window === "undefined") return false;
+  if (cookie(OPT_OUT_COOKIE) === "1") return true;
+  try {
+    return localStorage.getItem(OPT_OUT) === "1";
+  } catch {
+    return false;
+  }
+}
+
+export function setDeviceOptOut(next: boolean) {
+  if (typeof window === "undefined") return;
+  setCookie(OPT_OUT_COOKIE, next ? "1" : "", next ? undefined : 0);
+  try {
+    if (next) localStorage.setItem(OPT_OUT, "1");
+    else localStorage.removeItem(OPT_OUT);
+  } catch {
+    /* no-op */
+  }
+  disabled = next;
+  if (KEY) {
+    try {
+      if (next) posthog.opt_out_capturing();
+      else posthog.opt_in_capturing();
+    } catch {
+      /* no-op */
+    }
+  }
+}
+
+/**
  * ?author=1 marks this device as the author's, ?author=0 unmarks it.
  *
  * A cookie rather than localStorage, because the server routes are what write the
@@ -149,9 +198,6 @@ function applyAuthorParam() {
   }
 }
 
-/** Set once excluded, so track() stays silent too rather than half-reporting. */
-let disabled = false;
-
 export function initAnalytics() {
   if (inited || typeof window === "undefined") return;
   applyOptOutParam();
@@ -163,9 +209,12 @@ export function initAnalytics() {
     console.info(`[analytics] not counting this visit — ${why}`);
     disabled = true;
     inited = true;
-    // Belt and braces: PostHog's own opt-out persists in its storage and also
-    // stops session replay, which the localStorage flag alone does not. Safe to
-    // call before init — posthog-js records the preference and honours it.
+    // Belt and braces: PostHog's own opt-out persists in its own storage, so it
+    // survives a later init that this early return skips. Safe to call before
+    // init — posthog-js records the preference and honours it. This used to be
+    // justified by replay, which the localStorage flag alone could not stop;
+    // replay is off now, and the call is kept because two independent records of
+    // the same refusal is the right number for a refusal.
     if (KEY) {
       try {
         posthog.opt_out_capturing();
@@ -181,6 +230,16 @@ export function initAnalytics() {
       capture_pageview: true,
       capture_pageleave: true,
       person_profiles: "identified_only",
+      // Session replay is off, deliberately, and this line is the reason it
+      // stays off. The PostHog project setting is also off (26 Sep 2026), but a
+      // project setting is a checkbox someone can tick in a browser months from
+      // now without reading anything; this is in the repo, where changing it is
+      // a commit. Replay is the one measurement on this site that records what a
+      // reader did rather than which page they opened, and the archive is read
+      // by people who have reason to care about that difference. If it ever goes
+      // back on it needs consent asked for first, which the site does not ask
+      // for, because nothing here currently needs it.
+      disable_session_recording: true,
     });
   }
   initVercelAnalytics();

@@ -5,14 +5,14 @@
 // fails if it drifts, so what the export dialog claims and what a visitor
 // receives cannot come apart.
 export const CORPUS_SUMMARY = {
-  generated: "2026-09-20",
+  generated: "2026-09-27",
   files: 942,
   markdown: 840,
   csv: 29,
-  words: 1013236,
+  words: 1013292,
   medianWords: 519,
   largestWords: 10257,
-  zipBytes: 3547341,
+  zipBytes: 3547435,
   folders: [
   { key: "journal", label: "Journal", blurb: "The primary record — dated entries and verbatim transcripts.", markdown: 448, data: 0 },
   { key: "references", label: "References", blurb: "The analysis and reference documents, chunked by section.", markdown: 242, data: 0 },

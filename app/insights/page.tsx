@@ -3,8 +3,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MeasurementNotes from "@/components/MeasurementNotes";
 import StandingDisclaimer from "@/components/StandingDisclaimer";
-import { getInsights } from "@/lib/insights";
+import { getInsights, type Location } from "@/lib/insights";
 import { getTraffic, automated, type Row } from "@/lib/insights-posthog";
+import { asnDatasetAvailable } from "@/lib/asn";
 
 /**
  * The public measurement dashboard.
@@ -103,6 +104,27 @@ function Table({
 
 export default async function Page() {
   const [d, t] = await Promise.all([getInsights(), getTraffic()]);
+  // Whether the ASN dataset shipped with this deployment. Drives the wording under
+  // the locations table, so a build with no dataset explains its own blank labels
+  // instead of looking broken.
+  const networkLabelsLive = asnDatasetAvailable();
+
+  // Label and flag are derived together, once, so the two cannot disagree. The
+  // earlier version rebuilt the label inside the flag callback and matched on the
+  // string, which meant any change to the formatting silently dropped every flag —
+  // and a dropped flag is the one failure this table must not have.
+  const NETWORK_LABEL: Record<Location["network"], string> = {
+    hosting: "hosting or VPN",
+    direct: "no VPN detected",
+    unknown: "network unknown",
+  };
+  const placed = d.locations.map((l) => ({
+    label: [l.city, l.region, l.country].filter((x) => x && x !== "Unknown").join(", ") || "Unknown",
+    n: l.visitors,
+    flag: NETWORK_LABEL[l.network],
+  }));
+  const locationRows = placed.map(({ label, n }) => ({ label, n }));
+  const locationFlags = new Map(placed.map((p) => [p.label, p.flag]));
   const bots = t ? automated(t.traffic) : { bots: 0, total: 0 };
   // Downloads: our own table once the logging is deployed, PostHog until then.
   const downloads = d.downloadRows || t?.downloads || 0;
@@ -156,19 +178,27 @@ export default async function Page() {
           </>
         )}
 
-        {/* NO LOCATIONS TABLE, and this is a deliberate omission rather than a gap.
+        {/* LOCATIONS, with a network label on every row and no exceptions.
             Sean, 26 September: "I absolutely do not want an analytics page with
             locations on it that cite VPN touchpoints without a VPN label." The
-            largest row this table had was 11 views from Los Angeles, which is one
-            reader on a mobile VPN — the error, sitting at the top of the chart.
-            Locations return once a network can be labelled "hosting or VPN",
-            classified server-side from a local ASN dataset and stored as that
-            label rather than as an address. See the plan doc. */}
-        <p className="mt-10 border-t border-edge pt-4 text-[13px] leading-relaxed text-muted">
-          Locations are not shown. A visitor using a VPN resolves to the VPN&rsquo;s city, not their
-          own, and a table that cannot say which is which would be a map of guesses. It returns when
-          each row can be marked as a residential or a hosting network.
-        </p>
+            table was withheld for a day for exactly that reason; it returns now
+            because each row carries one of three labels, classified server-side
+            from a local ASN dataset and stored as the label rather than as an
+            address. The rows come from gate_events rather than from PostHog page
+            views, because PostHog resolves geography from a city database with no
+            network data in it and never returns the address, so a PostHog city
+            cannot be labelled at all. */}
+        <Table
+          title="Where readers reached the gate from"
+          unit="readers"
+          rows={locationRows}
+          flag={(label) => locationFlags.get(label) ?? "network unknown"}
+          note={
+            networkLabelsLive
+              ? "Every row says what kind of network it came over. \u201cHosting or VPN\u201d means the address belongs to a datacenter, cloud or VPN provider, so the city is the server\u2019s and not the reader\u2019s. \u201cNo VPN detected\u201d means no such provider matched \u2014 which is not the same as proof that none was used. The classification happens in memory from a dataset on this site\u2019s own servers; the address is never sent anywhere and never stored."
+              : "Every row is marked \u201cnetwork unknown\u201d because the classification dataset is not loaded in this deployment. Rather than print cities that might be VPN exits without saying so, the page says it does not know. Nothing here is a guess."
+          }
+        />
 
         {d.countries.length > 0 && (
           <Table title="Downloads by country" unit="downloads" rows={d.countries.map((c) => ({ label: c.country, n: c.n }))} />

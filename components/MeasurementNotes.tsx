@@ -9,6 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { readDeviceOptOut, setDeviceOptOut } from "@/lib/analytics";
 
 /**
  * Everything the measurement page used to say in prose, behind one link — plus
@@ -18,47 +19,26 @@ import {
  * nothing but a nice clean analytics dashboard." So the page carries numbers and
  * this carries the argument.
  *
- * THE OPT-OUT IS HERE RATHER THAN IN A BANNER, and that is the substantive
- * choice. A cookie banner is a notice people click past, stacked on top of a
- * consent gate they already read. A switch on the page that publishes the
- * numbers is a thing a reader can actually use, and it is the same mechanism the
- * author uses on his own devices: one cookie, honoured by the browser and by
- * every server route.
+ * THIS IS THE ONLY OPT-OUT THE SITE OFFERS, and that is the substantive choice.
+ * A fourth gate screen asking permission to count page views was built on 26
+ * September and deliberately not shipped (Sean: "that seems weird... let people
+ * opt out or don't show it at all"). Counting page views is ordinary site
+ * maintenance; a consent wall in front of an archive overstates what is
+ * happening and adds friction to the one thing the site is short of, which is
+ * readers getting in. The trade was made with eyes open: no consent asked means
+ * no consent to rely on, which is why session replay is off rather than merely
+ * gated. What page views need is a plain notice and a working switch, and this
+ * is the switch, using the same cookie the author uses on his own devices and
+ * honoured by the browser and by every server route.
  */
-const OPT_OUT_COOKIE = "is_no_analytics";
-const OPT_OUT_LS = "is:no-analytics";
-
-function readOptOut(): boolean {
-  try {
-    if (new RegExp(`(?:^|;\\s*)${OPT_OUT_COOKIE}=1`).test(document.cookie)) return true;
-  } catch {
-    /* no-op */
-  }
-  try {
-    return localStorage.getItem(OPT_OUT_LS) === "1";
-  } catch {
-    return false;
-  }
-}
-
 function OptOutControl() {
   // null until mounted: the server does not know this browser's answer, and
   // rendering a guess would flash the wrong state.
   const [out, setOut] = useState<boolean | null>(null);
-  useEffect(() => setOut(readOptOut()), []);
+  useEffect(() => setOut(readDeviceOptOut()), []);
 
   function set(next: boolean) {
-    try {
-      document.cookie = `${OPT_OUT_COOKIE}=${next ? "1" : ""}; path=/; max-age=${next ? 315360000 : 0}; samesite=lax`;
-    } catch {
-      /* no-op */
-    }
-    try {
-      if (next) localStorage.setItem(OPT_OUT_LS, "1");
-      else localStorage.removeItem(OPT_OUT_LS);
-    } catch {
-      /* no-op */
-    }
+    setDeviceOptOut(next);
     setOut(next);
   }
 
@@ -109,7 +89,12 @@ export default function MeasurementNotes({ children }: { children: React.ReactNo
                   table. Country and city are resolved at the network edge, so the address itself does
                   not travel.
                 </li>
-                <li>No cursor tracking, no scroll heatmaps, no advertising or data-broker tags.</li>
+                <li>
+                  No session replay. Nothing plays back what happened inside a page &mdash; no
+                  cursor, no scrolling, no clicks, no typing. Replay was switched off on 26
+                  September 2026 and the site is built so it cannot restart on its own.
+                </li>
+                <li>No scroll heatmaps, no advertising or data-broker tags.</li>
                 <li>
                   The gate&rsquo;s optional question is a count, not a profile. It is attached to no
                   person and verified by nobody &mdash; anyone can pick anything.
@@ -136,10 +121,12 @@ export default function MeasurementNotes({ children }: { children: React.ReactNo
                 Why this page exists
               </p>
               <p className="m-0 mt-2">
-                Because an archive that documents being watched should not quietly watch its own
-                readers. Anything it does record is published here, in the same numbers the author
-                sees. There is no second, better dashboard behind this one. If a future survey is
-                added, its results appear here in the same form: aggregate, anonymous, unverified.
+                Because the numbers are the reader&rsquo;s as much as the author&rsquo;s. Counting
+                page views is ordinary site maintenance &mdash; it is how anyone running a website
+                learns which pages people actually open &mdash; and there is no reason to do it
+                privately. Anything the site records is published here, in the same numbers the
+                author sees. There is no second, better dashboard behind this one. If a future survey
+                is added, its results appear here in the same form: aggregate, anonymous, unverified.
               </p>
             </div>
           </div>

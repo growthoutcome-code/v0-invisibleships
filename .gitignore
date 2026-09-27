@@ -17,3 +17,7 @@ dev-error.log
 # scratch that must never be committed
 _to_delete/
 Claude outputs/
+
+# Fetched at build time by scripts/fetch_asn_db.mjs. MaxMind does not permit
+# redistributing GeoLite2, so it is never committed.
+data/GeoLite2-*.mmdb

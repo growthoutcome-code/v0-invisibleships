@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { ROLES } from "@/lib/gate";
 import { serverDb, excludedRequest, clientHash, geoFromHeaders, isAuthorRequest } from "@/lib/server-log";
+import { networkTypeFromHeaders } from "@/lib/asn";
 
 /**
  * Records one step of the entry gate into public.gate_events.
@@ -70,6 +71,11 @@ export async function POST(request: Request) {
     path,
     client_hash: clientHash(request.headers.get("cookie")),
     is_author: isAuthorRequest(request.headers.get("cookie")),
+    // The label, not the address. This is what lets /insights print a city at
+    // all: an unlabelled city from a VPN exit is a claim about where a reader is
+    // that the site cannot support. Classified here, in memory, from a header
+    // that is never stored.
+    network_type: networkTypeFromHeaders(request.headers),
     ...geo,
   });
   if (error) console.error("[gate-log] insert failed", error.message);

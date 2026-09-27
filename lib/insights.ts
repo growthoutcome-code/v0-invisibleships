@@ -23,6 +23,23 @@ export type Insights = {
   roles: { visitor_role: string; n: number }[];
   countries: { country: string; n: number }[];
   weeks: { week: string; n: number }[];
+  locations: Location[];
+};
+
+/**
+ * One place readers reached the gate from, with the network it came over.
+ *
+ * `network` is never optional and never blank. The page is not allowed to print a
+ * city without saying whether it can be trusted, so the view coalesces a missing
+ * classification to 'unknown' rather than null and this type has no room for
+ * anything else.
+ */
+export type Location = {
+  country: string;
+  region: string;
+  city: string;
+  network: "hosting" | "direct" | "unknown";
+  visitors: number;
 };
 
 const EMPTY: Insights = {
@@ -35,6 +52,7 @@ const EMPTY: Insights = {
   roles: [],
   countries: [],
   weeks: [],
+  locations: [],
 };
 
 export async function getInsights(): Promise<Insights> {
@@ -44,12 +62,15 @@ export async function getInsights(): Promise<Insights> {
   // nothing except that something is broken.
   if (!db) return EMPTY;
 
-  const [meta, funnel, roles, countries, weeks] = await Promise.all([
+  const [meta, funnel, roles, countries, weeks, locations] = await Promise.all([
     db.from("insights_meta").select("*").maybeSingle(),
     db.from("insights_gate_funnel").select("event, n"),
     db.from("insights_gate_roles").select("visitor_role, n"),
     db.from("insights_downloads_by_country").select("country, n"),
     db.from("insights_downloads_by_week").select("week, n"),
+    // Capped: the page is a summary, and a long tail of one-visit cities is both
+    // less useful and more identifying than the head of the list.
+    db.from("insights_locations").select("country, region, city, network_type, visitors").limit(25),
   ]);
 
   return {
@@ -62,6 +83,16 @@ export async function getInsights(): Promise<Insights> {
     roles: (roles.data ?? []).map((r) => ({ visitor_role: String(r.visitor_role), n: Number(r.n) })),
     countries: (countries.data ?? []).map((r) => ({ country: String(r.country), n: Number(r.n) })),
     weeks: (weeks.data ?? []).map((r) => ({ week: String(r.week), n: Number(r.n) })),
+    locations: (locations.data ?? []).map((r) => ({
+      country: String(r.country),
+      region: String(r.region),
+      city: String(r.city),
+      // Anything the database has that this union does not becomes 'unknown'.
+      // A label the page cannot render must not fall through as a blank one.
+      network:
+        r.network_type === "hosting" || r.network_type === "direct" ? r.network_type : "unknown",
+      visitors: Number(r.visitors),
+    })),
   };
 }
 
