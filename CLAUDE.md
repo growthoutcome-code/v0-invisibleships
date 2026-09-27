@@ -43,6 +43,21 @@ rewriting a verbatim extract would falsify it. See
 
 Full reasoning in `claude/measurement-and-privacy-decisions.md`. The rules:
 
+> **IN FLIGHT (27 Sep 2026): `claude/plan-visit-trust-labels.md`.** Read it before
+> touching locations or network classification. Three corrections it carries:
+> 1. **PostHog DOES return the IP** — `$ip` is on every event and is queryable with
+>    the personal API key. An earlier note in this file's history said otherwise. So
+>    visits can be classified retroactively and no client-side super-property is
+>    needed.
+> 2. **`$geoip_time_zone` vs `$timezone` is a free VPN signal** and was demonstrated
+>    on real data: ~150 of 470 events are the author's Denver device behind exits in
+>    Ypsilanti, LA, Chicago and Miami. A UTC browser timezone marks headless
+>    browsers. This needs no dataset at all.
+> 3. **iptoasn.com replaces MaxMind** for IP-to-ASN — public domain, no account, no
+>    licence clock. The MaxMind reader in `lib/asn.ts` is Phase 3 work to swap out;
+>    until then `MAXMIND_LICENSE_KEY` still governs and its absence is a supported
+>    state.
+
 - **PostHog only.** Google Analytics was removed on 26 Sep 2026 and is not coming
   back without a specific reason. Do not add analytics, tag managers, or
   ad-adjacent scripts.
