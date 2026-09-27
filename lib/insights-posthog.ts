@@ -136,3 +136,73 @@ export function automated(traffic: Row[]): { bots: number; total: number } {
     .reduce((sum, r) => sum + r.n, 0);
   return { bots, total };
 }
+
+/**
+ * One row per distinct combination of place and the two clocks, counted in visits.
+ *
+ * This is the query the trust labels are built on. It reads the four properties
+ * PostHog already collects and does no classification itself — `lib/visit-trust.ts`
+ * turns a row into a label, so the rule lives in one testable place rather than in
+ * SQL nobody can run locally.
+ *
+ * HogQL rather than TrendsQuery because this needs six dimensions at once, and
+ * multiple breakdowns do not stretch that far. `{filters}` with
+ * `filterTestAccounts: true` applies the project's own internal-traffic filter, so
+ * this stays consistent with every number above it instead of hand-rolling the
+ * author exclusion and drifting out of sync with the project settings.
+ *
+ * Counted by `count(distinct $session_id)` — VISITS, not page views. A reader who
+ * opens nine pages is one visit, which is what "where did visits come from" means.
+ */
+export type VisitGroup = {
+  city: string | null;
+  region: string | null;
+  country: string | null;
+  ipTimeZone: string | null;
+  browserTimeZone: string | null;
+  accuracyKm: number | null;
+  visits: number;
+};
+
+const VISIT_GROUPS_SQL = `
+select
+  properties.$geoip_city_name,
+  properties.$geoip_subdivision_1_name,
+  properties.$geoip_country_code,
+  properties.$geoip_time_zone,
+  properties.$timezone,
+  properties.$geoip_accuracy_radius,
+  count(distinct properties.$session_id)
+from events
+where event = '$pageview' and {filters}
+group by 1, 2, 3, 4, 5, 6
+order by 7 desc
+limit 80
+`;
+
+/** Empty array on any failure: a transparency page must not 500 over a vendor. */
+export async function getVisitGroups(): Promise<VisitGroup[]> {
+  if (!KEY) return [];
+  const json = await query({
+    query: {
+      kind: "HogQLQuery",
+      query: VISIT_GROUPS_SQL,
+      filters: { filterTestAccounts: true },
+    },
+  });
+  const rows: unknown[] = json?.results ?? [];
+  const str = (v: unknown) => (typeof v === "string" && v !== "" ? v : null);
+  return rows
+    .filter((r): r is unknown[] => Array.isArray(r) && r.length >= 7)
+    .map((r) => ({
+      city: str(r[0]),
+      region: str(r[1]),
+      country: str(r[2]),
+      ipTimeZone: str(r[3]),
+      browserTimeZone: str(r[4]),
+      // Comes back as a number or a numeric string depending on the column type.
+      accuracyKm: r[5] === null || r[5] === undefined || r[5] === "" ? null : Number(r[5]),
+      visits: Number(r[6] ?? 0),
+    }))
+    .filter((g) => g.visits > 0);
+}

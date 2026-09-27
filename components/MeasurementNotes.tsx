@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import {
   Dialog,
   DialogBody,
@@ -9,7 +8,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { readDeviceOptOut, setDeviceOptOut } from "@/lib/analytics";
 
 /**
  * Everything the measurement page used to say in prose, behind one link — plus
@@ -19,7 +17,12 @@ import { readDeviceOptOut, setDeviceOptOut } from "@/lib/analytics";
  * nothing but a nice clean analytics dashboard." So the page carries numbers and
  * this carries the argument.
  *
- * THIS IS THE ONLY OPT-OUT THE SITE OFFERS, and that is the substantive choice.
+ * THE OPT-OUT USED TO LIVE HERE AND NO LONGER DOES. It is at the bottom of
+ * /insights, in components/OptOutSection.tsx, because an opt-out buried as the first
+ * element of a dialog opened from a link near the top of the page is not findable.
+ * Sean, 27 September. This dialog keeps the explanation; the page carries the action.
+ *
+ * THAT OPT-OUT IS THE ONLY ONE THE SITE OFFERS, and that is the substantive choice.
  * A fourth gate screen asking permission to count page views was built on 26
  * September and deliberately not shipped (Sean: "that seems weird... let people
  * opt out or don't show it at all"). Counting page views is ordinary site
@@ -31,41 +34,6 @@ import { readDeviceOptOut, setDeviceOptOut } from "@/lib/analytics";
  * is the switch, using the same cookie the author uses on his own devices and
  * honoured by the browser and by every server route.
  */
-function OptOutControl() {
-  // null until mounted: the server does not know this browser's answer, and
-  // rendering a guess would flash the wrong state.
-  const [out, setOut] = useState<boolean | null>(null);
-  useEffect(() => setOut(readDeviceOptOut()), []);
-
-  function set(next: boolean) {
-    setDeviceOptOut(next);
-    setOut(next);
-  }
-
-  if (out === null) return null;
-
-  return (
-    <div className="border border-edge p-4">
-      <p className="m-0 text-[14px] leading-relaxed text-foreground/85">
-        {out
-          ? "This device is not counted. Nothing about your visits is recorded."
-          : "This device is counted, anonymously, in the numbers on this page."}
-      </p>
-      <button
-        type="button"
-        onClick={() => set(!out)}
-        className="font-display mt-3 inline-flex h-10 items-center border border-edge px-4 text-[12px] font-medium uppercase tracking-[0.14em] text-foreground transition-colors hover:border-foreground"
-      >
-        {out ? "Start counting this device" : "Stop counting this device"}
-      </button>
-      <p className="m-0 mt-3 text-[13px] leading-relaxed text-muted">
-        Stored as one preference on this device and nowhere else. It also stops the
-        download counter and the gate counter, not only the page counts.
-      </p>
-    </div>
-  );
-}
-
 export default function MeasurementNotes({ children }: { children: React.ReactNode }) {
   return (
     <Dialog>
@@ -76,8 +44,6 @@ export default function MeasurementNotes({ children }: { children: React.ReactNo
         </DialogHeader>
         <DialogBody>
           <div className="space-y-5 text-[15px] leading-relaxed text-foreground/85">
-            <OptOutControl />
-
             <div>
               <p className="font-display m-0 text-[13px] uppercase tracking-[0.14em] text-muted">
                 What is never recorded

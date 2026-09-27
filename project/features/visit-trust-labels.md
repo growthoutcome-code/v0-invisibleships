@@ -27,37 +27,52 @@ Pure PostHog. Four properties it already collects: `$geoip_city_name`,
 
 ## Acceptance
 
-- [ ] A visit through Sean's VPN reads **Relay detected** on the live site
-- [ ] A visit from his normal connection reads **Confirmed** or **Probable**
-- [ ] No location renders without a label
-- [ ] A relayed row shows a time zone, never a city
-- [ ] `/insights` matches the width of the header and footer at desktop size
-- [ ] `npm run check` passes
+- [ ] A visit through Sean's VPN reads **Relay detected** on the live site *(needs deploy)*
+- [ ] A visit from his normal connection reads **Confirmed** or **Probable** *(needs deploy)*
+- [x] No location renders without a label
+- [x] A relayed row shows a time zone, never a city — guarded, and the guard was
+      mutation-tested
+- [x] `/insights` matches the width of the header and footer at desktop size
+- [x] `npm run check` passes (five guards)
 
 ## Steps
 
 - [x] `lib/visit-trust.ts` with the four labels and the honest place string
-- [ ] `scripts/check_visit_trust.mts`, fixtured on the real 470-event rows, plus a
-      mutation test that it fails when broken
-- [ ] PostHog query for labelled visit groups
-- [ ] Page width: full width with `lg:px-[100px]`, matching Header/Footer
-- [ ] Donut chart, inline SVG, no charting dependency
-- [ ] Layout: tiles → donut → locations → pages → downloads
-- [ ] Retire the `gate_events` locations table; keep `network_type` on the tables
+- [x] `scripts/check_visit_trust.mts`, fixtured on real production rows, mutation-tested
+- [x] PostHog query for labelled visit groups (`getVisitGroups`, HogQL + `{filters}`)
+- [x] Page width: full width with `lg:px-[100px]`, matching Header/Footer
+- [x] Donut chart, inline SVG, no charting dependency
+- [x] Layout: tiles → donut → locations → pages → downloads
+- [x] Opt-out moved to the bottom of the page, destructive styling
+- [x] Retire the `gate_events` locations read; `network_type` stays on the tables
 - [ ] Push, then `POSTHOG_PERSONAL_API_KEY` into Vercel *(Sean)*
 - [ ] Live proof: one normal visit, one through the VPN *(Sean, 2 min)*
+- [ ] ASN labels via iptoasn, to close the same-time-zone gap *(deferred)*
 
 ## Verified / not verified
 
-**Verified:** the finding itself, by direct query against 470 real events — the
-ordering and counts in `0002` are measured, not estimated. `lib/visit-trust.ts`
-typechecks.
+**Verified:**
 
-**Not verified:** the classifier has no guard yet. The page has not rendered with real
-labelled data and cannot be made to locally — **the development sandbox cannot reach
-PostHog or Supabase** (`getaddrinfo EAI_AGAIN us.posthog.com`). So local render checks
-prove the page compiles and lays out, never that the data path works. Logic gets
-guarded as pure functions; the data path is proven on the deployed site or not at all.
+- The finding, by direct query against real events. The counts in `0002` are measured.
+- The production query, run through the PostHog API with
+  `filters: { filterTestAccounts: true }` — confirmed that HogQL accepts the project's
+  own internal-traffic filter, so these numbers stay consistent with the tiles above
+  them instead of hand-rolling the author exclusion.
+- `classifyVisit()` against 12 cases whose fixtures are **real production rows**,
+  including the null city and the 1000 km radius, both of which occur.
+- The guard genuinely fails when the logic breaks. Two mutations: treating disagreeing
+  clocks as agreement, and printing the relay's own city. **The first attempt at the
+  second mutation silently did not apply and the guard "passed" — a no-op test that
+  proved nothing.** Caught and redone. Worth remembering: a mutation test that cannot
+  be shown to fail is not a test.
+- Server-rendered output contains the donut, the confirmed tile, the locations table,
+  the new width class and the opt-out section.
+
+**Not verified, and not verifiable from here:** that the data path returns anything on
+a real page load. **The development sandbox cannot reach PostHog or Supabase**
+(`getaddrinfo EAI_AGAIN us.posthog.com`), so every local render is against empty data.
+Sean's own machine can reach both, so `npm run dev` there shows real numbers. Live
+behaviour is proven on the deployed site or not at all.
 
 ## Open questions
 
