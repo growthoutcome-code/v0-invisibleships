@@ -149,7 +149,19 @@ export default async function Page() {
 
   const bots = t ? automated(t.traffic) : { bots: 0, total: 0 };
   // Downloads: our own table once the logging is deployed, PostHog until then.
-  const downloads = d.downloadRows || t?.downloads || 0;
+  // ALL-TIME TOTAL, not the author-excluded figure.
+  //
+  // This tile read 0 for weeks while 18 downloads sat in PostHog, because it showed
+  // the count after the internal-traffic filter and every one of those downloads was
+  // excluded by it. A transparency page whose download counter says nothing while
+  // downloads have happened is worse than one that counts the author: the first is
+  // read as "nobody wants this", which is a different and false claim.
+  //
+  // Sean, 27 September, after three rounds of this: "I need to see those corpus
+  // downloads there." So the number shown is every download recorded, and the
+  // caption says whose. The page-level "all time" line says the same for every
+  // figure on the page.
+  const downloads = t?.downloadsAll || d.downloadRows || 0;
 
   return (
     <>
@@ -162,6 +174,12 @@ export default async function Page() {
             <h1 className="font-display mt-2 text-[32px] font-bold leading-[1.12] tracking-tight text-foreground sm:text-[40px]">
               What this site can see
             </h1>
+            {/* Stated once, governing every figure below, rather than repeated per
+                tile — and deliberately not a date-range control. Sean: "We're not
+                going to include a date range filter. It just needs to say all time." */}
+            <p className="font-display m-0 mt-3 text-[12px] uppercase tracking-[0.14em] text-muted">
+              All time &middot; every figure since the site launched
+            </p>
           </div>
           <MeasurementNotes>
             <button
@@ -191,9 +209,9 @@ export default async function Page() {
                 n={downloads}
                 label="Corpus downloads"
                 sub={
-                  t.downloadsAll > downloads
-                    ? `${nf.format(t.downloadsAll)} recorded, ${nf.format(t.downloadsAll - downloads)} the author\u2019s`
-                    : "server-confirmed"
+                  t.downloads > 0
+                    ? `${nf.format(t.downloads)} not the author\u2019s`
+                    : "author included \u2014 see notes"
                 }
               />
             </div>

@@ -70,6 +70,29 @@ export default function MeasurementNotes({ children }: { children: React.ReactNo
 
             <div>
               <p className="font-display m-0 text-[13px] uppercase tracking-[0.14em] text-muted">
+                About the download count
+              </p>
+              <p className="m-0 mt-2">
+                It is an <strong className="font-normal text-foreground">all-time total that
+                includes the author&rsquo;s own downloads</strong>, unlike every other figure here.
+                Shown that way because the alternative was a counter reading zero while downloads had
+                in fact happened, which reads as &ldquo;nobody wanted this&rdquo; and is a different,
+                false claim.
+              </p>
+              <p className="m-0 mt-2">
+                It is also <strong className="font-normal text-foreground">too high for events
+                recorded before 27 September 2026</strong>. Until then the footer&rsquo;s corpus link
+                was rendered in a way that made the browser fetch it speculatively on hover and when
+                it scrolled into view, and each of those fetches was counted as a download. Nobody
+                was downloading anything. Several events sit in millisecond pairs where a speculative
+                fetch and a real click were both recorded. That is fixed at the source, and counting
+                from that date is honest; the earlier figures cannot be corrected, because nothing
+                recorded which were real.
+              </p>
+            </div>
+
+            <div>
+              <p className="font-display m-0 text-[13px] uppercase tracking-[0.14em] text-muted">
                 Who is not counted
               </p>
               <p className="m-0 mt-2">
