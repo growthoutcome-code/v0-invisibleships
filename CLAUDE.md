@@ -68,14 +68,30 @@ Full reasoning in `claude/measurement-and-privacy-decisions.md`. The rules:
   Turning replay back on means adding a real consent flow first — and is worth
   revisiting only when there is traffic worth watching or something is being sold.
   At 22 filtered visits all time it bought nothing.
-- **Locations on `/insights` must carry a network label on every row.** Live
-  since 26 Sep 2026. `lib/asn.ts` classifies the address in memory from a local
-  GeoLite2-ASN file and stores only the label — `hosting` / `direct` / `unknown` —
-  on `gate_events` and `corpus_downloads`. Never the address, never the ASN, never
-  the operator name. `direct` means "no hosting network matched", NOT "no VPN":
-  render it as such. A row with no label is the one failure this feature exists to
-  prevent, so the view coalesces null to `unknown` and the page has no code path
-  that prints a blank.
+- **A location is only printed when it is the reader's own.** Live since 26 Sep
+  2026. `lib/asn.ts` classifies the address in memory from a local GeoLite2-ASN
+  file and stores only the label — `hosting` / `direct` / `unknown` — on
+  `gate_events` and `corpus_downloads`. Never the address, never the ASN, never the
+  operator name.
+  - **Geography is split, not mixed-and-flagged.** Only `direct` rows get a city.
+    `hosting` and `unknown` rows are counted, published as numbers under "counted,
+    but not placed", and given no location at all. An earlier version listed every
+    row with a per-row label; it passed the letter of this rule and still produced
+    a ranked list mixing places readers are with places servers are. Do not
+    reintroduce that, and do not "improve" it by relabelling rather than splitting.
+  - `direct` means "no hosting network matched", NOT "no VPN". Render it as a
+    detection, never as a guarantee.
+  - **The real location behind a VPN is not obtainable and must not be pursued.**
+    Not by Cloudflare, not by a paid IP service, not by WebRTC or fingerprinting.
+    The exit node's address is the only one the site ever receives. Deliberately
+    defeating a reader's privacy tool would also make the terms false ("no attempt
+    is made to identify individual readers") and is the contradiction this archive
+    least needs. Unplaceable visits are reported as a count, never as a place.
+  - **No gate question asking for country.** Considered and rejected 26 Sep 2026:
+    readers breeze through the gate to reach the content, so the answers would be
+    mostly noise presented as data — and the existing role question, live for
+    weeks, has exactly one answer. Do not add fields to the gate to fill gaps in
+    measurement.
   - Built on `gate_events`, **not** PostHog page views: PostHog resolves geography
     from a city database with no network data and never returns the address, so a
     PostHog city cannot be labelled at all.

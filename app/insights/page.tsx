@@ -3,7 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MeasurementNotes from "@/components/MeasurementNotes";
 import StandingDisclaimer from "@/components/StandingDisclaimer";
-import { getInsights, type Location } from "@/lib/insights";
+import { getInsights, splitLocations } from "@/lib/insights";
 import { getTraffic, automated, type Row } from "@/lib/insights-posthog";
 import { asnDatasetAvailable } from "@/lib/asn";
 
@@ -109,22 +109,23 @@ export default async function Page() {
   // instead of looking broken.
   const networkLabelsLive = asnDatasetAvailable();
 
-  // Label and flag are derived together, once, so the two cannot disagree. The
-  // earlier version rebuilt the label inside the flag callback and matched on the
-  // string, which meant any change to the formatting silently dropped every flag —
-  // and a dropped flag is the one failure this table must not have.
-  const NETWORK_LABEL: Record<Location["network"], string> = {
-    hosting: "hosting or VPN",
-    direct: "no VPN detected",
-    unknown: "network unknown",
-  };
-  const placed = d.locations.map((l) => ({
-    label: [l.city, l.region, l.country].filter((x) => x && x !== "Unknown").join(", ") || "Unknown",
-    n: l.visitors,
-    flag: NETWORK_LABEL[l.network],
-  }));
-  const locationRows = placed.map(({ label, n }) => ({ label, n }));
-  const locationFlags = new Map(placed.map((p) => [p.label, p.flag]));
+  // GEOGRAPHY IS SPLIT, NOT MIXED AND FLAGGED.
+  //
+  // The first version of this table listed every location with a per-row label.
+  // That satisfied the rule and still produced the wrong object: a ranked list in
+  // which some rows are places readers are and others are places servers are, with
+  // the reader left to do the sorting. Sean, 26 September: "I don't want a list of
+  // locations that are VPN touchpoints. I just want to know the country, the locale
+  // that the visit came from, legitimately."
+  //
+  // So the untrustworthy rows do not appear as locations at all. They are counted,
+  // and the count is published, but they are not given a city — because we do not
+  // know their city, and printing the exit node's is answering a question nobody
+  // asked. What cannot be placed is reported as a number, not as a place.
+  //
+  // No reader is dropped: placed + overVpn + unclassified is every row the view
+  // returns. A visit that cannot be located still counts as a visit.
+  const { placed: placedRows, overVpn, unclassified } = splitLocations(d.locations);
   const bots = t ? automated(t.traffic) : { bots: 0, total: 0 };
   // Downloads: our own table once the logging is deployed, PostHog until then.
   const downloads = d.downloadRows || t?.downloads || 0;
@@ -189,16 +190,45 @@ export default async function Page() {
             network data in it and never returns the address, so a PostHog city
             cannot be labelled at all. */}
         <Table
-          title="Where readers reached the gate from"
+          title="Where readers are"
           unit="readers"
-          rows={locationRows}
-          flag={(label) => locationFlags.get(label) ?? "network unknown"}
+          rows={placedRows}
           note={
             networkLabelsLive
-              ? "Every row says what kind of network it came over. \u201cHosting or VPN\u201d means the address belongs to a datacenter, cloud or VPN provider, so the city is the server\u2019s and not the reader\u2019s. \u201cNo VPN detected\u201d means no such provider matched \u2014 which is not the same as proof that none was used. The classification happens in memory from a dataset on this site\u2019s own servers; the address is never sent anywhere and never stored."
-              : "Every row is marked \u201cnetwork unknown\u201d because the classification dataset is not loaded in this deployment. Rather than print cities that might be VPN exits without saying so, the page says it does not know. Nothing here is a guess."
+              ? "Every row here came over a network with no VPN or datacenter provider behind it, so the place is the reader\u2019s own. That is a detection, not a guarantee: it means no such provider matched, which is not the same as proof that none was used. The check runs in memory against a dataset on this site\u2019s own servers \u2014 the address is never sent anywhere and never stored."
+              : "Empty because the network dataset is not loaded in this deployment, so no visit can be confirmed as coming from the reader\u2019s own connection. Every visit is counted below instead. Nothing here is a guess."
           }
         />
+
+        {/* Counted, published, and deliberately not given a location. */}
+        {(overVpn > 0 || unclassified > 0) && (
+          <div className="mt-4 border border-edge p-4">
+            <p className="font-display m-0 text-[11px] uppercase tracking-[0.14em] text-muted">
+              Counted, but not placed
+            </p>
+            <ul className="m-0 mt-2 list-none p-0 text-[15px] text-foreground">
+              {overVpn > 0 && (
+                <li className="flex items-baseline justify-between gap-4 py-1">
+                  <span>Reached the site over a VPN or datacenter network</span>
+                  <span className="font-display tabular-nums">{nf.format(overVpn)}</span>
+                </li>
+              )}
+              {unclassified > 0 && (
+                <li className="flex items-baseline justify-between gap-4 py-1">
+                  <span>Network could not be identified</span>
+                  <span className="font-display tabular-nums">{nf.format(unclassified)}</span>
+                </li>
+              )}
+            </ul>
+            <p className="m-0 mt-3 text-[13px] leading-relaxed text-muted">
+              These readers are counted in every total on this page. They are left off the list above
+              because the only address the site sees is the exit node&rsquo;s, and that is where a
+              server is, not where a person is. No tool recovers the real location from a request
+              &mdash; so rather than print a city that is almost certainly wrong, the site reports the
+              number and says it does not know.
+            </p>
+          </div>
+        )}
 
         {d.countries.length > 0 && (
           <Table title="Downloads by country" unit="downloads" rows={d.countries.map((c) => ({ label: c.country, n: c.n }))} />

@@ -103,3 +103,37 @@ export const FUNNEL_STEPS: { event: string; label: string; note: string }[] = [
   { event: "role_declined", label: "Skipped the question", note: "or chose not to say" },
   { event: "entered", label: "Entered the archive", note: "read the disclaimer through" },
 ];
+
+/**
+ * Split locations into the ones that can honestly be shown as places and the ones
+ * that can only be shown as counts.
+ *
+ * A pure function, and separate from the page, for two reasons. The rule it
+ * encodes is the substantive commitment of the whole feature — a city is printed
+ * only when it is the reader's own — and a rule that matters is worth a guard
+ * (scripts/check_insights_split.mts). And it cannot be verified through the page
+ * from a development machine: the sandbox this is built in cannot reach Supabase,
+ * so a render check proves nothing about data it never loaded.
+ *
+ * Every visitor lands in exactly one of the three buckets and none is discarded:
+ * placed totals + overVpn + unclassified equals the input. A visit that cannot be
+ * located is still a visit and is still counted.
+ */
+export function splitLocations(locations: Location[]): {
+  placed: { label: string; n: number }[];
+  overVpn: number;
+  unclassified: number;
+} {
+  const label = (l: Location) =>
+    [l.city, l.region, l.country].filter((x) => x && x !== "Unknown").join(", ") || "Unknown";
+  const sum = (net: Location["network"]) =>
+    locations.filter((l) => l.network === net).reduce((a, l) => a + l.visitors, 0);
+
+  return {
+    placed: locations
+      .filter((l) => l.network === "direct")
+      .map((l) => ({ label: label(l), n: l.visitors })),
+    overVpn: sum("hosting"),
+    unclassified: sum("unknown"),
+  };
+}
