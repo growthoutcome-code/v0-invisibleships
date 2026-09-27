@@ -105,35 +105,58 @@ export const FUNNEL_STEPS: { event: string; label: string; note: string }[] = [
 ];
 
 /**
- * Split locations into the ones that can honestly be shown as places and the ones
- * that can only be shown as counts.
+ * Split locations into the ones that are readers and the ones that are exit nodes.
  *
- * A pure function, and separate from the page, for two reasons. The rule it
- * encodes is the substantive commitment of the whole feature — a city is printed
- * only when it is the reader's own — and a rule that matters is worth a guard
- * (scripts/check_insights_split.mts). And it cannot be verified through the page
- * from a development machine: the sandbox this is built in cannot reach Supabase,
- * so a render check proves nothing about data it never loaded.
+ * WHAT THIS IS FOR, in one line: a city may be shown, but never in a way that
+ * implies a reader is there when a server is.
  *
- * Every visitor lands in exactly one of the three buckets and none is discarded:
- * placed totals + overVpn + unclassified equals the input. A visit that cannot be
- * located is still a visit and is still counted.
+ * There were two separate problems with showing geography on this site, and the
+ * history matters because the second fix over-corrected for the first.
+ *
+ *   1. A MISLEADING RANKING. One sorted list mixing reader cities with VPN exit
+ *      cities reads as an audience map. The largest row this table ever had was 11
+ *      views from Los Angeles — one reader on a mobile VPN. The biggest number in
+ *      the chart was the error, and a small per-row label did not stop it being
+ *      read as the top of an audience list.
+ *   2. NOT KNOWING WHICH IS WHICH. Already solved by the label itself.
+ *
+ * The first version fixed neither properly (one list, small labels). The second
+ * fixed (1) by deleting the VPN cities and leaving a bare count — which also threw
+ * away (2)'s answer. Sean, 27 September: "if we have insights that are locations,
+ * we need to know that they are VPN locations because VPN locations are not
+ * accurate locations."
+ *
+ * So both are returned, separately and equally fully. `placed` is the audience.
+ * `exitNodes` carries the same city detail, kept out of the audience ranking and
+ * presented as what it is. Neither is a subset of a mixed list, and nothing is
+ * discarded: placed + exitNodes + unclassified totals the input exactly. A visit
+ * that cannot be located is still a visit.
+ *
+ * A pure function, separate from the page, because this rule is the substantive
+ * commitment of the feature and it fails SILENTLY — a mistake does not throw, does
+ * not fail a build, and looks entirely normal on the page. Guarded by
+ * scripts/check_insights_split.mts. It also cannot be checked through the page from
+ * here: the development sandbox cannot reach Supabase, so a render proves nothing
+ * about data it never loaded.
  */
 export function splitLocations(locations: Location[]): {
   placed: { label: string; n: number }[];
+  exitNodes: { label: string; n: number }[];
   overVpn: number;
   unclassified: number;
 } {
   const label = (l: Location) =>
     [l.city, l.region, l.country].filter((x) => x && x !== "Unknown").join(", ") || "Unknown";
-  const sum = (net: Location["network"]) =>
-    locations.filter((l) => l.network === net).reduce((a, l) => a + l.visitors, 0);
+  const rows = (net: Location["network"]) =>
+    locations.filter((l) => l.network === net).map((l) => ({ label: label(l), n: l.visitors }));
+  const total = (r: { n: number }[]) => r.reduce((a, x) => a + x.n, 0);
 
+  const placed = rows("direct");
+  const exitNodes = rows("hosting");
   return {
-    placed: locations
-      .filter((l) => l.network === "direct")
-      .map((l) => ({ label: label(l), n: l.visitors })),
-    overVpn: sum("hosting"),
-    unclassified: sum("unknown"),
+    placed,
+    exitNodes,
+    overVpn: total(exitNodes),
+    unclassified: total(rows("unknown")),
   };
 }

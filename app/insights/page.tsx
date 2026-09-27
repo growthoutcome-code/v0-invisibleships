@@ -125,7 +125,7 @@ export default async function Page() {
   //
   // No reader is dropped: placed + overVpn + unclassified is every row the view
   // returns. A visit that cannot be located still counts as a visit.
-  const { placed: placedRows, overVpn, unclassified } = splitLocations(d.locations);
+  const { placed: placedRows, exitNodes, unclassified } = splitLocations(d.locations);
   const bots = t ? automated(t.traffic) : { bots: 0, total: 0 };
   // Downloads: our own table once the logging is deployed, PostHog until then.
   const downloads = d.downloadRows || t?.downloads || 0;
@@ -200,32 +200,32 @@ export default async function Page() {
           }
         />
 
-        {/* Counted, published, and deliberately not given a location. */}
-        {(overVpn > 0 || unclassified > 0) && (
+        {/* The same city data, kept out of the audience ranking and named for what
+            it is. Not a bare count: Sean wants to see that a visit came through an
+            Amsterdam exit node, he just needs Amsterdam unmistakably marked as a
+            server rather than a reader. A separate section does that; a label
+            inside the list above did not. */}
+        {exitNodes.length > 0 && (
+          <Table
+            title="Seen over VPN or datacenter networks"
+            unit="visits"
+            rows={exitNodes}
+            note="These are exit nodes, not reader locations. The place named is where the VPN or datacenter server is; the reader could be anywhere. They are listed separately from the figures above for that reason, and counted in every total on this page. No tool recovers the real location from a request \u2014 the only address the site ever receives is the exit node\u2019s \u2014 so the site shows what it saw and does not guess past it."
+          />
+        )}
+
+        {unclassified > 0 && (
           <div className="mt-4 border border-edge p-4">
-            <p className="font-display m-0 text-[11px] uppercase tracking-[0.14em] text-muted">
-              Counted, but not placed
-            </p>
-            <ul className="m-0 mt-2 list-none p-0 text-[15px] text-foreground">
-              {overVpn > 0 && (
-                <li className="flex items-baseline justify-between gap-4 py-1">
-                  <span>Reached the site over a VPN or datacenter network</span>
-                  <span className="font-display tabular-nums">{nf.format(overVpn)}</span>
-                </li>
-              )}
-              {unclassified > 0 && (
-                <li className="flex items-baseline justify-between gap-4 py-1">
-                  <span>Network could not be identified</span>
-                  <span className="font-display tabular-nums">{nf.format(unclassified)}</span>
-                </li>
-              )}
-            </ul>
+            <div className="flex items-baseline justify-between gap-4">
+              <span className="text-[15px] text-foreground">Network could not be identified</span>
+              <span className="font-display text-[15px] tabular-nums text-foreground">
+                {nf.format(unclassified)}
+              </span>
+            </div>
             <p className="m-0 mt-3 text-[13px] leading-relaxed text-muted">
-              These readers are counted in every total on this page. They are left off the list above
-              because the only address the site sees is the exit node&rsquo;s, and that is where a
-              server is, not where a person is. No tool recovers the real location from a request
-              &mdash; so rather than print a city that is almost certainly wrong, the site reports the
-              number and says it does not know.
+              Counted in every total, and given no location because none can be stood behind. Either
+              the classification dataset is not loaded in this deployment, or the address was one it
+              does not cover.
             </p>
           </div>
         )}

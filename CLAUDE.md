@@ -73,12 +73,19 @@ Full reasoning in `claude/measurement-and-privacy-decisions.md`. The rules:
   file and stores only the label — `hosting` / `direct` / `unknown` — on
   `gate_events` and `corpus_downloads`. Never the address, never the ASN, never the
   operator name.
-  - **Geography is split, not mixed-and-flagged.** Only `direct` rows get a city.
-    `hosting` and `unknown` rows are counted, published as numbers under "counted,
-    but not placed", and given no location at all. An earlier version listed every
-    row with a per-row label; it passed the letter of this rule and still produced
-    a ranked list mixing places readers are with places servers are. Do not
-    reintroduce that, and do not "improve" it by relabelling rather than splitting.
+  - **Geography is split into two lists, and both are shown in full.** `direct`
+    rows are the audience list ("Where readers are"). `hosting` rows keep their
+    cities in a separate section ("Seen over VPN or datacenter networks") stated as
+    exit nodes, not reader locations. `unknown` rows are a count, having no city to
+    show. Nothing is discarded and nothing is mixed.
+    - Two failures to avoid, and this went wrong in both directions on 26–27 Sep.
+      **Do not merge them into one ranked list** — even with per-row labels it reads
+      as an audience map, and the largest row it ever had was one reader's VPN exit.
+      **Do not delete the exit-node cities either** — Sean wants to see that a visit
+      came through Amsterdam, he just needs Amsterdam marked as a server. A bare
+      count throws that away.
+    - `splitLocations()` in `lib/insights.ts` is the single implementation, guarded
+      by `scripts/check_insights_split.mts`, which pins both failure directions.
   - `direct` means "no hosting network matched", NOT "no VPN". Render it as a
     detection, never as a guarantee.
   - **The real location behind a VPN is not obtainable and must not be pursued.**

@@ -31,41 +31,68 @@ const eq = (got: unknown, want: unknown, what: string) => {
 
 const out = splitLocations(FIXTURE);
 
+// The audience list: readers on their own connections, and nobody else.
 eq(
   out.placed,
   [
     { label: "Ypsilanti, MI, US", n: 2 },
     { label: "Chicago, IL, US", n: 1 },
   ],
-  "only 'direct' rows are placed, in view order",
+  "placed holds only 'direct' rows, in view order",
 );
 
-// The specific error this guard exists to catch.
+// THE BUG THIS GUARD EXISTS FOR: an exit node ranked as an audience location.
 for (const city of ["Amsterdam", "Los Angeles"]) {
   if (out.placed.some((p) => p.label.includes(city))) {
-    fail.push(`${city} was placed as a location — it came over a hosting/VPN network`);
+    fail.push(`${city} appears in placed — it came over a hosting/VPN network and is a server, not a reader`);
   }
 }
 if (out.placed.some((p) => p.label === "Unknown")) {
-  fail.push("an unclassified row was placed as a location");
+  fail.push("an unclassifiable row appears in placed");
 }
 
-eq(out.overVpn, 2, "hosting visitors counted");
+// THE OPPOSITE FAILURE, added 27 Sep after over-correcting: the exit-node cities
+// were deleted rather than separated, which lost information Sean wants to see.
+// They must still be returned, with their city detail intact.
+eq(
+  out.exitNodes,
+  [
+    { label: "Amsterdam, NH, NL", n: 1 },
+    { label: "Los Angeles, CA, US", n: 1 },
+  ],
+  "exitNodes keeps the VPN/datacenter cities rather than reducing them to a number",
+);
+if (out.exitNodes.length === 0 && out.overVpn > 0) {
+  fail.push("overVpn is non-zero but exitNodes is empty — the cities were discarded");
+}
+
+eq(out.overVpn, 2, "overVpn totals exitNodes");
 eq(out.unclassified, 1, "unclassified visitors counted");
 
-// Nobody is dropped: every visitor is in exactly one bucket.
+// Nobody is dropped and nobody is double-counted.
 const total = FIXTURE.reduce((a, l) => a + l.visitors, 0);
-const accounted = out.placed.reduce((a, p) => a + p.n, 0) + out.overVpn + out.unclassified;
+const accounted =
+  out.placed.reduce((a, p) => a + p.n, 0) +
+  out.exitNodes.reduce((a, p) => a + p.n, 0) +
+  out.unclassified;
 eq(accounted, total, "every visitor accounted for exactly once");
 
 // Empty input must not throw or invent rows.
 const empty = splitLocations([]);
-eq([empty.placed.length, empty.overVpn, empty.unclassified], [0, 0, 0], "empty input");
+eq(
+  [empty.placed.length, empty.exitNodes.length, empty.overVpn, empty.unclassified],
+  [0, 0, 0, 0],
+  "empty input",
+);
 
 if (fail.length) {
   for (const f of fail) console.error(`FAIL ${f}`);
   console.error(`\n[insights] ${fail.length} split failure(s).`);
-  console.error("[insights] A city must be printed only when network === 'direct'.");
+  console.error("[insights] Rules: a city goes in `placed` only when network === 'direct';");
+  console.error("[insights] VPN/datacenter cities go in `exitNodes` and are NOT discarded.");
   process.exit(1);
 }
-console.log("[insights] locations split correctly: placed only what is the reader's own.");
+console.log(
+  `[insights] locations split correctly: ${out.placed.length} reader location(s), ` +
+    `${out.exitNodes.length} exit node(s) kept and labelled, ${out.unclassified} unplaceable.`,
+);
