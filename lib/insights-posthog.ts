@@ -206,3 +206,70 @@ export async function getVisitGroups(): Promise<VisitGroup[]> {
     }))
     .filter((g) => g.visits > 0);
 }
+
+/**
+ * Visits whose address changed part-way through — IP rotation, in the trade.
+ *
+ * Sean spotted this before it was measured: a visit that appears in one city and
+ * leaves from another. The industry term is **IP rotation** (also "rotating proxy",
+ * or multi-hop on a consumer VPN). Real causes, roughly in order of likelihood here:
+ * a VPN client switching server mid-session, a rotating residential proxy, Apple's
+ * iCloud Private Relay reassigning an egress, a Tor circuit rebuilding every ten
+ * minutes, or a phone moving between carrier gateways.
+ *
+ * WHY IT EARNS ITS OWN SECTION. It is the most conclusive relay evidence available
+ * and the easiest to grasp without knowing anything about time zones: nobody travels
+ * from Denver to Secaucus inside one reading session. The clock comparison in
+ * lib/visit-trust.ts infers a relay; this observes one. Measured 27 Sep 2026 — six
+ * visits crossed cities, one of them three cities over 29 page views, and six more
+ * changed address without changing city.
+ *
+ * `argMin`/`argMax` over the timestamp give the city the visit ENTERED on and the one
+ * it LEFT on, which is what makes the row legible. `groupUniqArray` was tried first
+ * and rejected: it returns no guaranteed order, so "Denver | Chicago | Secaucus" did
+ * not mean the visit went that way.
+ *
+ * No session id is returned. The row is a pair of place names and a count, which is
+ * the same class of data as the locations table above it.
+ */
+export type ShuffledVisit = {
+  enteredAt: string | null;
+  exitedAt: string | null;
+  cities: number;
+  addresses: number;
+  views: number;
+};
+
+const SHUFFLED_SQL = `
+select
+  argMin(properties.$geoip_city_name, timestamp),
+  argMax(properties.$geoip_city_name, timestamp),
+  count(distinct properties.$geoip_city_name),
+  count(distinct properties.$ip),
+  count(*)
+from events
+where event = '$pageview' and {filters}
+group by properties.$session_id
+having count(distinct properties.$geoip_city_name) > 1
+    or count(distinct properties.$ip) > 1
+order by count(distinct properties.$geoip_city_name) desc, count(*) desc
+limit 25
+`;
+
+export async function getShuffledVisits(): Promise<ShuffledVisit[]> {
+  if (!KEY) return [];
+  const json = await query({
+    query: { kind: "HogQLQuery", query: SHUFFLED_SQL, filters: { filterTestAccounts: true } },
+  });
+  const rows: unknown[] = json?.results ?? [];
+  const str = (v: unknown) => (typeof v === "string" && v !== "" ? v : null);
+  return rows
+    .filter((r): r is unknown[] => Array.isArray(r) && r.length >= 5)
+    .map((r) => ({
+      enteredAt: str(r[0]),
+      exitedAt: str(r[1]),
+      cities: Number(r[2] ?? 0),
+      addresses: Number(r[3] ?? 0),
+      views: Number(r[4] ?? 0),
+    }));
+}

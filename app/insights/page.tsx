@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import MeasurementNotes from "@/components/MeasurementNotes";
 import StandingDisclaimer from "@/components/StandingDisclaimer";
 import { getInsights } from "@/lib/insights";
-import { getTraffic, getVisitGroups, automated, type Row } from "@/lib/insights-posthog";
+import { getTraffic, getVisitGroups, getShuffledVisits, automated, type Row } from "@/lib/insights-posthog";
 import { classifyVisit, CONFIDENCE_LABEL, type Confidence } from "@/lib/visit-trust";
 import ConfidenceDonut from "@/components/ConfidenceDonut";
 import OptOutSection from "@/components/OptOutSection";
@@ -107,7 +107,12 @@ function Table({
 }
 
 export default async function Page() {
-  const [d, t, groups] = await Promise.all([getInsights(), getTraffic(), getVisitGroups()]);
+  const [d, t, groups, shuffled] = await Promise.all([
+    getInsights(),
+    getTraffic(),
+    getVisitGroups(),
+    getShuffledVisits(),
+  ]);
 
   // WHERE VISITS CAME FROM, and whether that can be believed.
   //
@@ -231,6 +236,68 @@ export default async function Page() {
           rows={placeRows}
           note="Every row says how much it can be trusted. Confirmed means the device&rsquo;s own clock agreed with its network address and the address was precise, so the visit came from that place. Relay detected means a VPN or proxy sat in between: the row shows the device&rsquo;s time zone, because the city belongs to the relay and no tool recovers the real one. Confirmed detects relays that cross a time zone — a VPN exit inside the reader&rsquo;s own zone would still read as confirmed, which is what network labelling would catch."
         />
+
+        {/* IP ROTATION. Sean spotted this before it was measured: a visit that
+            arrives in one city and leaves from another. The clock comparison above
+            INFERS a relay; this OBSERVES one, and needs no explanation of time zones
+            to land — nobody travels from Denver to Secaucus mid-session.
+
+            Kept as its own short section rather than folded into the table above,
+            because a row here is one visit across two places, while a row up there is
+            one place across many visits. Merging them would mean inventing a shape
+            that is neither. */}
+        {shuffled.length > 0 && (
+          <section className="mt-10">
+            <div className="flex items-baseline justify-between gap-4 border-b border-edge pb-2">
+              <h2 className="font-display m-0 text-[12px] uppercase tracking-[0.14em] text-muted">
+                Visits whose location changed part-way through
+              </h2>
+              <span className="font-display text-[11px] uppercase tracking-[0.14em] text-muted">
+                {shuffled.length} {shuffled.length === 1 ? "visit" : "visits"}
+              </span>
+            </div>
+            <ul className="m-0 list-none p-0">
+              {shuffled.map((v, i) => {
+                const moved = v.cities > 1;
+                return (
+                  <li key={i} className="border-b border-edge py-2.5 last:border-b-0">
+                    <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                      <span className="text-[15px] text-foreground">
+                        {moved ? (
+                          <>
+                            {v.enteredAt ?? "Unknown"} <span className="text-muted">&rarr;</span>{" "}
+                            {v.exitedAt ?? "Unknown"}
+                          </>
+                        ) : (
+                          <>
+                            {v.enteredAt ?? "Unknown"}{" "}
+                            <span className="text-muted">&mdash; same city, new address</span>
+                          </>
+                        )}
+                        <span className="font-display ml-2 align-middle text-[10px] uppercase tracking-[0.12em] text-muted">
+                          {moved ? `shuffled \u00b7 ${v.cities} cities` : "address rotated"}
+                        </span>
+                      </span>
+                      <span className="font-display text-[13px] tabular-nums text-muted">
+                        {v.addresses} addresses &middot; {nf.format(v.views)}{" "}
+                        {v.views === 1 ? "view" : "views"}
+                      </span>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+            <p className="mt-3 max-w-3xl text-[13px] leading-relaxed text-muted">
+              One reading session, more than one network address. The industry term is{" "}
+              <strong className="font-normal text-foreground/85">IP rotation</strong>: a VPN client
+              switching server mid-session, a rotating proxy, Apple&rsquo;s iCloud Private Relay
+              reassigning an egress, a Tor circuit rebuilding, or a phone moving between carrier
+              gateways. Nobody travels between these cities inside one visit, so the places named are
+              the network&rsquo;s and not the reader&rsquo;s. This is the most conclusive evidence of
+              a relay the site has \u2014 the clock comparison above infers one, this observes it.
+            </p>
+          </section>
+        )}
 
         {d.countries.length > 0 && (
           <Table title="Downloads by country" unit="downloads" rows={d.countries.map((c) => ({ label: c.country, n: c.n }))} />

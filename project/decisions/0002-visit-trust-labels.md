@@ -56,6 +56,45 @@ that PostHog "never returns the IP". It does — `$ip` is present on every event
 queryable with the personal API key. That is why visits can be classified
 retroactively and why no client-side super-property is needed.
 
+## IP rotation — observed, not inferred (added 27 Sep 2026)
+
+Sean, before it was measured: *"is there a concept called shuffled VPN… a page view
+coming in from Los Angeles and then another one in the same session from another
+location?"* Yes. The industry term is **IP rotation** (also "rotating proxy", or
+multi-hop on a consumer VPN).
+
+Measured the same day, with the project's internal filter applied — entry and exit city
+per session:
+
+| Entered on | Left on | Cities | Addresses | Views |
+|---|---|---|---|---|
+| Denver | Ypsilanti | 3 | 3 | 29 |
+| Denver | Secaucus | 3 | 3 | 11 |
+| Denver | Chicago | 2 | 2 | 10 |
+| Miami | Denver | 2 | 3 | 7 |
+| Seattle | Denver | 2 | 2 | 3 |
+| Ypsilanti | Denver | 2 | 2 | 2 |
+| Denver | Denver | 1 | 2 | 37 |
+
+Six visits crossed cities; six more changed address without changing city. Causes, in
+rough order of likelihood here: a VPN client switching server mid-session, a rotating
+residential proxy, iCloud Private Relay reassigning an egress, a Tor circuit rebuilding
+every ten minutes, or a phone moving between carrier gateways.
+
+**Why this gets its own section on the page rather than a fifth label.** It is a
+different *shape* of fact. A row in the locations table is one place across many
+visits; a row here is one visit across two places. Merging them would invent a shape
+that is neither. It is also the most conclusive relay evidence the site has and the
+easiest to grasp cold — the clock comparison *infers* a relay, this *observes* one, and
+nobody travels from Denver to Secaucus inside one reading session.
+
+`argMin`/`argMax` over the timestamp give the entry and exit city, which is what makes
+a row legible. `groupUniqArray` was tried first and rejected: it returns no guaranteed
+order, so a list of three cities did not mean the visit went that way.
+
+No session id is published — a row is two place names and a count, the same class of
+data as the locations table.
+
 ## Rejected
 
 | Option | Why not |
