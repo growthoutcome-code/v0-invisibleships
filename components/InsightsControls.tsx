@@ -17,7 +17,14 @@ import { RANGES, type RangeKey } from "@/lib/insights-posthog";
  * component at all, because a native <select> has to push the URL on change.
  */
 
+/**
+ * Both first and by default. Sean: "we can open with both being selected, and then
+ * someone can drop down to just GA data or PostHog data." Both is also the honest
+ * default for this page — the interesting fact about these two tools is that they
+ * disagree, and showing one alone hides it.
+ */
 const SOURCES = [
+  { key: "both", label: "Both" },
   { key: "posthog", label: "PostHog" },
   { key: "ga", label: "Google Analytics" },
 ] as const;
@@ -33,7 +40,7 @@ export default function InsightsControls({
 }) {
   const router = useRouter();
   const href = (s: SourceKey, r: RangeKey) =>
-    `/insights?source=${s}${r === "all" ? "" : `&range=${r}`}`;
+    `/insights${s === "both" ? "" : `?source=${s}`}${r === "all" ? "" : `${s === "both" ? "?" : "&"}range=${r}`}`;
 
   return (
     <div className="mt-6 flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-b border-edge pb-3">

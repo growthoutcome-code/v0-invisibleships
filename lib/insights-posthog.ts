@@ -65,6 +65,9 @@ const SQL_SINCE: Record<RangeKey, string> = {
 
 export type Row = { label: string; n: number };
 
+/** One day of a time series. `day` is YYYY-MM-DD so both sources can align on it. */
+export type DayPoint = { day: string; n: number };
+
 export type Traffic = {
   visits: number;
   visitors: number;
@@ -257,6 +260,37 @@ limit 80
 `;
 
 /** Empty array on any failure: a transparency page must not 500 over a vendor. */
+/**
+ * Daily visits, for the line chart.
+ *
+ * Separate from getTraffic's headline totals because it needs a different display
+ * mode: BoldNumber collapses a series to one aggregate, which is what the tiles
+ * want and the opposite of what a chart wants. Same filterTestAccounts as
+ * everything else, so the PostHog line is the author-excluded one — which is
+ * precisely why it will sit below the GA line, and why the chart says so.
+ */
+export async function getPostHogSeries(range: RangeKey = "all"): Promise<DayPoint[]> {
+  if (!KEY) return [];
+  const json = await query({
+    query: {
+      kind: "TrendsQuery",
+      series: [{ kind: "EventsNode", event: "$pageview", math: "unique_session" }],
+      dateRange: { date_from: RANGES[range].from },
+      interval: "day",
+      filterTestAccounts: true,
+    },
+  });
+  const result = json?.results?.[0];
+  const days: unknown[] = result?.days ?? [];
+  const data: unknown[] = result?.data ?? [];
+  return days.map((d, i) => ({
+    // PostHog returns "2026-09-27" or an ISO timestamp depending on interval; take
+    // the date part either way so this aligns with GA's YYYY-MM-DD.
+    day: String(d).slice(0, 10),
+    n: Number(data[i] ?? 0),
+  }));
+}
+
 export async function getVisitGroups(range: RangeKey = "all"): Promise<VisitGroup[]> {
   if (!KEY) return [];
   const json = await query({

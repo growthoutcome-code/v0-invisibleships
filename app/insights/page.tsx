@@ -9,6 +9,7 @@ import {
   getTraffic,
   getVisitGroups,
   getShuffledVisits,
+  getPostHogSeries,
   automated,
   toRange,
   RANGES,
@@ -16,7 +17,8 @@ import {
 } from "@/lib/insights-posthog";
 import InsightsControls, { type SourceKey } from "@/components/InsightsControls";
 import { classifyVisit, CONFIDENCE_LABEL, type Confidence } from "@/lib/visit-trust";
-import ConfidenceDonut from "@/components/ConfidenceDonut";
+import { getGaTraffic, gaConfigured } from "@/lib/insights-ga";
+import TrafficChart from "@/components/TrafficChart";
 import OptOutSection from "@/components/OptOutSection";
 
 /**
@@ -167,12 +169,17 @@ export default async function Page({
   searchParams?: { source?: string; range?: string };
 }) {
   const range = toRange(searchParams?.range);
-  const source: SourceKey = searchParams?.source === "ga" ? "ga" : "posthog";
-  const [d, t, groups, shuffled] = await Promise.all([
+  const source: SourceKey =
+    searchParams?.source === "ga" ? "ga" : searchParams?.source === "posthog" ? "posthog" : "both";
+  const showPh = source !== "ga";
+  const showGa = source !== "posthog";
+  const [d, t, groups, shuffled, phSeries, ga] = await Promise.all([
     getInsights(),
     getTraffic(range),
     getVisitGroups(range),
     getShuffledVisits(range),
+    getPostHogSeries(range),
+    getGaTraffic(range),
   ]);
 
   // WHERE VISITS CAME FROM, and whether that can be believed.
@@ -255,7 +262,51 @@ export default async function Page({
         <InsightsControls source={source} range={range} />
 
         {source === "ga" ? (
-          <GooglePanel />
+          ga ? (
+            <>
+              {/* GA's own numbers, unfiltered by nature. Deliberately a different set
+                  from the PostHog tiles: GA has no author exclusion to offer and
+                  cannot produce a confirmed-location figure, so pretending to the same
+                  four tiles would imply a parity that does not exist. */}
+              <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+                <Tile n={ga.sessions} label="Sessions" sub="author included" />
+                <Tile n={ga.users} label="Users" sub="distinct browsers" />
+                <Tile n={ga.views} label="Pages viewed" sub="author included" />
+                <Tile
+                  n={ga.downloads}
+                  label="Corpus downloads"
+                  sub={ga.downloads > 0 ? "server-reported" : "from 28 Sep onward"}
+                />
+              </div>
+
+              <section className="mt-10">
+                <div className="flex items-baseline justify-between gap-4 border-b border-edge pb-2">
+                  <h2 className="font-display m-0 text-[12px] uppercase tracking-[0.14em] text-muted">
+                    Visits per day
+                  </h2>
+                  <span className="font-display text-[11px] uppercase tracking-[0.14em] text-muted">
+                    {RANGES[range].label.toLowerCase()}
+                  </span>
+                </div>
+                <TrafficChart
+                  series={[{ key: "ga", label: "Google Analytics", points: ga.series, dashed: true }]}
+                  note="Google Analytics counts every visit, the author&rsquo;s included. There is no author exclusion on this figure, and GA recorded no corpus downloads before 28 September because the download is confirmed on the server, which its browser tag cannot see."
+                />
+              </section>
+
+              <Table title="Pages viewed" unit="views" rows={ga.pages} />
+
+              <p className="mt-10 max-w-3xl border-t border-edge pt-4 text-[13px] leading-relaxed text-muted">
+                Locations and relay detection are not shown here. Those depend on comparing
+                the address&rsquo;s time zone against the device&rsquo;s own clock, and Google
+                Analytics does not publish either signal through its API &mdash; so on this tab
+                a city could not be marked as a reader&rsquo;s or a VPN&rsquo;s. They are on the
+                PostHog tab, where both signals exist.
+              </p>
+            </>
+          ) : (
+            <GooglePanel />
+          )
         ) : (
           <>
         {!t ? (
@@ -283,20 +334,36 @@ export default async function Page({
               />
             </div>
 
+            {/* VISITS OVER TIME, replacing the confidence donut.
+                The donut answered "what share of traffic can be believed", a fair
+                question but a static one. Sean's actual question is whether anyone is
+                arriving, which is a question about time — a ring cannot show a
+                marketing push landing and a line can. The confidence breakdown did
+                not disappear: it is the flag on every row of the locations table. */}
             <section className="mt-10">
               <div className="flex items-baseline justify-between gap-4 border-b border-edge pb-2">
                 <h2 className="font-display m-0 text-[12px] uppercase tracking-[0.14em] text-muted">
-                  How much of this can be believed
+                  Visits per day
                 </h2>
-                <span className="font-display text-[11px] uppercase tracking-[0.14em] text-muted">visits</span>
+                <span className="font-display text-[11px] uppercase tracking-[0.14em] text-muted">
+                  {RANGES[range].label.toLowerCase()}
+                </span>
               </div>
-              <ConfidenceDonut counts={confidenceCounts} />
-              <p className="mt-3 max-w-3xl text-[13px] leading-relaxed text-muted">
-                Every visit carries two independent location signals: one derived from the network
-                address, one reported by the device&rsquo;s own clock. A VPN changes the first and not
-                the second, so when they disagree the city belongs to a relay rather than a reader.
-                That is what separates these four groups.
-              </p>
+              <TrafficChart
+                series={[
+                  ...(showPh ? [{ key: "ph", label: "PostHog", points: phSeries }] : []),
+                  ...(showGa && ga
+                    ? [{ key: "ga", label: "Google Analytics", points: ga.series, dashed: true }]
+                    : []),
+                ]}
+                note={
+                  showPh && showGa && ga
+                    ? "The two lines are not measuring the same population, and the gap is not a dispute about arithmetic. PostHog\u2019s figures have the author, preview deployments and non-production hosts filtered out; Google Analytics has nothing filtered, so it counts the author too \u2014 which on this site is most of the traffic so far. Read the shapes rather than the levels: a real arrival should lift both."
+                    : showGa && !showPh && ga
+                      ? "Google Analytics counts every visit, the author\u2019s included. There is no author exclusion on this line."
+                      : "Author, preview deployments and non-production hosts are excluded from this line."
+                }
+              />
             </section>
 
             <Table
