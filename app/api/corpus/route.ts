@@ -60,6 +60,8 @@ import { networkTypeFromHeaders } from "@/lib/asn";
 
 const FILE = "/invisible-ships-corpus.zip";
 const KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY;
+/** Same id the browser loader uses, so both paths report into one property. */
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_ID || "G-VXMCM15XTH";
 const HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com";
 
 export async function GET(request: Request) {
@@ -151,6 +153,56 @@ export async function GET(request: Request) {
         },
       }),
     }).catch(() => { /* never block the download */ });
+  }
+
+  // GOOGLE ANALYTICS, via the Measurement Protocol.
+  //
+  // GA's gtag runs in the browser and this download is confirmed on the server, so
+  // gtag cannot see it — which is one of the two things GA was structurally blind to.
+  // The Measurement Protocol is the server-side path: same fire-and-forget shape as
+  // the PostHog capture above, different endpoint.
+  //
+  // client_id comes out of the visitor's own _ga cookie, which holds it as
+  // GA1.1.<client_id>.<timestamp>. Without it GA files the event against a fresh
+  // anonymous id and it joins nothing; with it the download lands in the same session
+  // as that reader's page views. If the cookie is absent — a direct link, no prior
+  // page view — a random id is used and the event still counts, which is the same
+  // trade the PostHog path makes.
+  //
+  // Absent GA_MP_API_SECRET this block does nothing at all, which is the supported
+  // state: no crash, no half-sent event, and the download itself never waits on it.
+  const gaSecret = process.env.GA_MP_API_SECRET;
+  if (gaSecret && GA_MEASUREMENT_ID && !skip) {
+    const gaMatch = cookie?.match(/_ga=GA\d\.\d\.(\d+\.\d+)/);
+    const clientId = gaMatch?.[1] ?? `${Math.floor(Math.random() * 1e9)}.${Math.floor(Date.now() / 1000)}`;
+    void fetch(
+      `https://www.google-analytics.com/mp/collect?measurement_id=${GA_MEASUREMENT_ID}&api_secret=${gaSecret}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          client_id: clientId,
+          // Non-zero engagement time, or GA4 can discard the event as having no
+          // session attached. 1ms is the documented minimum that keeps it.
+          events: [
+            {
+              name: "corpus_downloaded",
+              params: {
+                entry_point: entryPoint,
+                corpus_files: CORPUS_SUMMARY.files,
+                corpus_bytes: CORPUS_SUMMARY.zipBytes,
+                engagement_time_msec: 1,
+                // So the author's own downloads can be filtered out in GA4, which has
+                // no equivalent of PostHog's project-level internal-traffic filter.
+                ...(isAuthorRequest(cookie) ? { is_author: true } : {}),
+              },
+            },
+          ],
+        }),
+      },
+    ).catch(() => {
+      /* never block the download */
+    });
   }
 
   const db = serverDb();
