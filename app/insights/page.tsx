@@ -5,7 +5,16 @@ import MeasurementNotes from "@/components/MeasurementNotes";
 import MeasurementAlert from "@/components/MeasurementAlert";
 import StandingDisclaimer from "@/components/StandingDisclaimer";
 import { getInsights } from "@/lib/insights";
-import { getTraffic, getVisitGroups, getShuffledVisits, automated, type Row } from "@/lib/insights-posthog";
+import {
+  getTraffic,
+  getVisitGroups,
+  getShuffledVisits,
+  automated,
+  toRange,
+  RANGES,
+  type Row,
+} from "@/lib/insights-posthog";
+import InsightsControls, { type SourceKey } from "@/components/InsightsControls";
 import { classifyVisit, CONFIDENCE_LABEL, type Confidence } from "@/lib/visit-trust";
 import ConfidenceDonut from "@/components/ConfidenceDonut";
 import OptOutSection from "@/components/OptOutSection";
@@ -28,7 +37,11 @@ import OptOutSection from "@/components/OptOutSection";
  * page that queries on every request is a load test aimed at your own dashboard.
  */
 
-export const revalidate = 300;
+// Dynamic rather than revalidated: the page reads ?source and ?range, so it is
+// rendered per request anyway. At this traffic that costs nothing, and it removes the
+// up-to-five-minutes staleness the old ISR window introduced — numbers are now
+// current at the moment they are read, which is what a page about accuracy should do.
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "What this site can see — Invisible Ships",
@@ -107,12 +120,59 @@ function Table({
   );
 }
 
-export default async function Page() {
+/**
+ * The Google Analytics tab, while its numbers are not readable from here.
+ *
+ * GA4 publishes figures only through its Data API, which needs a Google Cloud
+ * service account with Viewer access on the property. That does not exist yet, so
+ * this tab cannot show numbers — and the one thing it must not do is show numbers
+ * that are not GA's. An empty tab that explains itself is honest; a tab quietly
+ * repeating PostHog's figures under a Google heading would be a lie the page could
+ * not detect.
+ *
+ * It is also not a placeholder for its own sake: the discrepancy Sean found between
+ * the two dashboards has a known cause, and stating it here is most of the value a
+ * side-by-side would have given him.
+ */
+function GooglePanel() {
+  return (
+    <div className="mt-8 max-w-3xl border border-edge p-5">
+      <p className="font-display m-0 text-[11px] uppercase tracking-[0.14em] text-muted">
+        Collecting, not yet readable here
+      </p>
+      <p className="m-0 mt-3 text-[15px] leading-relaxed text-foreground/85">
+        Google Analytics is running on this site and recording page views. Its numbers
+        live in the Google Analytics property and cannot be shown on this page yet:
+        GA4 publishes figures only through its Data API, which needs a Google Cloud
+        service account with read access to the property.
+      </p>
+      <p className="m-0 mt-4 text-[14px] leading-relaxed text-muted">
+        <strong className="font-normal text-foreground/85">
+          The two tools will not agree, and neither is wrong.
+        </strong>{" "}
+        PostHog&rsquo;s figures here exclude the author, preview deployments and
+        non-production hosts. Google Analytics applies none of that, so it counts every
+        visit including the author&rsquo;s &mdash; which is most of the traffic this site
+        has had. Google Analytics also cannot see two things PostHog does: the entry
+        gate&rsquo;s optional reader question, and the corpus download, which is recorded
+        on the server rather than in the browser.
+      </p>
+    </div>
+  );
+}
+
+export default async function Page({
+  searchParams,
+}: {
+  searchParams?: { source?: string; range?: string };
+}) {
+  const range = toRange(searchParams?.range);
+  const source: SourceKey = searchParams?.source === "ga" ? "ga" : "posthog";
   const [d, t, groups, shuffled] = await Promise.all([
     getInsights(),
-    getTraffic(),
-    getVisitGroups(),
-    getShuffledVisits(),
+    getTraffic(range),
+    getVisitGroups(range),
+    getShuffledVisits(range),
   ]);
 
   // WHERE VISITS CAME FROM, and whether that can be believed.
@@ -185,11 +245,19 @@ export default async function Page() {
                 tile — and deliberately not a date-range control. Sean: "We're not
                 going to include a date range filter. It just needs to say all time." */}
             <p className="font-display m-0 mt-3 text-[12px] uppercase tracking-[0.14em] text-muted">
-              All time &middot; every figure since the site launched
+              {range === "all"
+                ? "All time \u00b7 every figure since the site launched"
+                : `${RANGES[range].label} \u00b7 every figure on this page`}
             </p>
           </div>
         </div>
 
+        <InsightsControls source={source} range={range} />
+
+        {source === "ga" ? (
+          <GooglePanel />
+        ) : (
+          <>
         {!t ? (
           <p className="mt-8 border border-edge p-4 text-[15px] text-muted">
             Visit counts are not connected in this environment.
@@ -334,6 +402,9 @@ export default async function Page() {
             rows={d.roles.map((r) => ({ label: r.visitor_role, n: r.n }))}
             note="Optional, anonymous and unverified — not a census."
           />
+        )}
+
+          </>
         )}
 
         <div className="mt-12 border-t border-edge pt-6">

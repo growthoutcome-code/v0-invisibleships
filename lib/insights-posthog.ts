@@ -32,6 +32,37 @@ const HOST = process.env.POSTHOG_API_HOST || "https://us.posthog.com";
 const KEY = process.env.POSTHOG_PERSONAL_API_KEY;
 const PROJECT = process.env.POSTHOG_PROJECT_ID || "536751";
 
+/**
+ * The date ranges /insights offers. Three, deliberately.
+ *
+ * No custom picker and no 90-day option: the site has under two months of history,
+ * so a 90-day range would be all time wearing a different label, and a custom picker
+ * is a control nobody on a page with this much data needs. `all` is the default, and
+ * the page says so under the heading.
+ */
+export const RANGES = {
+  all: { label: "All time", from: "all" },
+  "30d": { label: "Last 30 days", from: "-30d" },
+  "7d": { label: "Last 7 days", from: "-7d" },
+} as const;
+
+export type RangeKey = keyof typeof RANGES;
+
+/** Anything unrecognised becomes all time rather than an error or an empty page. */
+export function toRange(v: unknown): RangeKey {
+  return typeof v === "string" && v in RANGES ? (v as RangeKey) : "all";
+}
+
+/**
+ * HogQL needs a WHERE clause rather than a dateRange, so the same choice is
+ * expressed twice. Kept beside RANGES so the two cannot drift apart.
+ */
+const SQL_SINCE: Record<RangeKey, string> = {
+  all: "",
+  "30d": "and timestamp >= now() - interval 30 day",
+  "7d": "and timestamp >= now() - interval 7 day",
+};
+
 export type Row = { label: string; n: number };
 
 export type Traffic = {
@@ -138,20 +169,24 @@ async function rows(event: string, math: Math, dateFrom: string, breakdowns: str
   return out.filter((r) => r.n > 0).sort((a, b) => b.n - a.n).slice(0, limit);
 }
 
-export async function getTraffic(): Promise<Traffic | null> {
+export async function getTraffic(range: RangeKey = "all"): Promise<Traffic | null> {
   if (!KEY) return null;
+  const from = RANGES[range].from;
 
   const [visits, visitors, views, visits30, views30, pages, traffic, downloads, downloadsAll] =
     await Promise.all([
-    total("$pageview", "unique_session", "all"),
-    total("$pageview", "dau", "all"),
-    total("$pageview", "total", "all"),
+    total("$pageview", "unique_session", from),
+    total("$pageview", "dau", from),
+    total("$pageview", "total", from),
+    // The secondary line under the tiles always compares against 30 days, whatever
+    // the selected range — except when 30 days IS the range, where the page hides it
+    // rather than print a number against itself.
     total("$pageview", "unique_session", "-30d"),
     total("$pageview", "total", "-30d"),
-    rows("$pageview", "total", "all", ["$pathname"]),
-    rows("$pageview", "total", "all", ["$virt_traffic_type"], 6),
-    total("corpus_downloaded", "total", "all"),
-    totalUnfiltered("corpus_downloaded", "total", "all"),
+    rows("$pageview", "total", from, ["$pathname"]),
+    rows("$pageview", "total", from, ["$virt_traffic_type"], 6),
+    total("corpus_downloaded", "total", from),
+    totalUnfiltered("corpus_downloaded", "total", from),
   ]);
 
   if (visits === null && views === null) return null;
@@ -215,19 +250,19 @@ select
   properties.$geoip_accuracy_radius,
   count(distinct properties.$session_id)
 from events
-where event = '$pageview' and {filters}
+where event = '$pageview' and {filters} {SINCE}
 group by 1, 2, 3, 4, 5, 6
 order by 7 desc
 limit 80
 `;
 
 /** Empty array on any failure: a transparency page must not 500 over a vendor. */
-export async function getVisitGroups(): Promise<VisitGroup[]> {
+export async function getVisitGroups(range: RangeKey = "all"): Promise<VisitGroup[]> {
   if (!KEY) return [];
   const json = await query({
     query: {
       kind: "HogQLQuery",
-      query: VISIT_GROUPS_SQL,
+      query: VISIT_GROUPS_SQL.replace("{SINCE}", SQL_SINCE[range]),
       filters: { filterTestAccounts: true },
     },
   });
@@ -289,7 +324,7 @@ select
   count(distinct properties.$ip),
   count(*)
 from events
-where event = '$pageview' and {filters}
+where event = '$pageview' and {filters} {SINCE}
 group by properties.$session_id
 having count(distinct properties.$geoip_city_name) > 1
     or count(distinct properties.$ip) > 1
@@ -297,10 +332,14 @@ order by count(distinct properties.$geoip_city_name) desc, count(*) desc
 limit 25
 `;
 
-export async function getShuffledVisits(): Promise<ShuffledVisit[]> {
+export async function getShuffledVisits(range: RangeKey = "all"): Promise<ShuffledVisit[]> {
   if (!KEY) return [];
   const json = await query({
-    query: { kind: "HogQLQuery", query: SHUFFLED_SQL, filters: { filterTestAccounts: true } },
+    query: {
+      kind: "HogQLQuery",
+      query: SHUFFLED_SQL.replace("{SINCE}", SQL_SINCE[range]),
+      filters: { filterTestAccounts: true },
+    },
   });
   const rows: unknown[] = json?.results ?? [];
   const str = (v: unknown) => (typeof v === "string" && v !== "" ? v : null);
