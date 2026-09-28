@@ -314,7 +314,7 @@ export const TERMS: TermsSection[] = [
       {
         kind: "p",
         text:
-          "This site counts page views — which pages are opened, in what order, and which links out readers follow — using cookies. That is the whole of it. There is no session replay, no recording of how a page was used, no heatmap, and no capture of what happens inside a page. Replay was switched off on 26 September 2026 and the site is now built so that it cannot start again without a change to the code. The counting is processed on the author’s behalf by PostHog. Google Analytics was removed on 26 September 2026. Nothing is sold, and no attempt is made to identify individual readers. **Every number the site keeps is published at [what this site can see](/insights), where counting can also be switched off for your device.**",
+          "This site counts page views — which pages are opened, in what order, and which links out readers follow — using cookies. That is the whole of it. There is no session replay, no recording of how a page was used, no heatmap, and no capture of what happens inside a page. Replay was switched off on 26 September 2026 and the site is now built so that it cannot start again without a change to the code. The counting is processed on the author’s behalf by PostHog and by Google Analytics. Nothing is sold, and no attempt is made to identify individual readers. **Every number the site keeps is published at [what this site can see](/insights), where counting can also be switched off for your device.**",
       },
       {
         kind: "p",

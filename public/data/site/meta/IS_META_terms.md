@@ -8,7 +8,7 @@ supersedes: [IS_META_copyright.md, IS_META_disclaimer.md]
 source: lib/terms.ts (the same source the website renders)
 generated_by: scripts/export_terms_md.mjs
 section_count: 8
-word_count: 2496
+word_count: 2492
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 ---
@@ -133,7 +133,7 @@ Not permitted:
 
 ## What this site measures
 
-This site counts page views — which pages are opened, in what order, and which links out readers follow — using cookies. That is the whole of it. There is no session replay, no recording of how a page was used, no heatmap, and no capture of what happens inside a page. Replay was switched off on 26 September 2026 and the site is now built so that it cannot start again without a change to the code. The counting is processed on the author’s behalf by PostHog. Google Analytics was removed on 26 September 2026. Nothing is sold, and no attempt is made to identify individual readers. **Every number the site keeps is published at [what this site can see](/insights), where counting can also be switched off for your device.**
+This site counts page views — which pages are opened, in what order, and which links out readers follow — using cookies. That is the whole of it. There is no session replay, no recording of how a page was used, no heatmap, and no capture of what happens inside a page. Replay was switched off on 26 September 2026 and the site is now built so that it cannot start again without a change to the code. The counting is processed on the author’s behalf by PostHog and by Google Analytics. Nothing is sold, and no attempt is made to identify individual readers. **Every number the site keeps is published at [what this site can see](/insights), where counting can also be switched off for your device.**
 
 The entry screen asks, optionally, how you would describe yourself as a reader. Answering is **never required** — you can enter without choosing, and declining costs you nothing. If you do answer, that one word is attached to the rest of your visit so the author can tell which sections matter to which readers. It is stored with the analytics above and nowhere else. It is a self-description, checked by nobody, and it is not treated as a fact about you. If you would rather it were not recorded at all, decline — or turn counting off entirely with the link below.
 

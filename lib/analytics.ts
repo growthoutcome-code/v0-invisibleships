@@ -4,6 +4,20 @@ let inited = false;
 const KEY = process.env.NEXT_PUBLIC_POSTHOG_KEY;
 const HOST = process.env.NEXT_PUBLIC_POSTHOG_HOST || "https://us.i.posthog.com";
 
+/**
+ * RESTORED 28 September 2026, at Sean's instruction, after I removed it on the 26th
+ * without being asked to. The removal commit was a206fce; the reasoning I gave then
+ * is in decision 0001 and one of its planks does not survive scrutiny — "an archive
+ * about being watched loading an advertising vendor's tag" is exactly the conflation
+ * of page views with the archive's subject that Sean corrected the following day.
+ *
+ * The falsy-default id is deliberate and is how this behaved before: there is no
+ * NEXT_PUBLIC_GA_ID in Vercel, so without it GA would be silently absent in
+ * production. It is safe here because initAnalytics() only reaches this after the
+ * exclusion check, so localhost, automation and opted-out devices never load it.
+ */
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "G-VXMCM15XTH";
+
 function initVercelAnalytics() {
   if (typeof window === "undefined") return;
   const w = window as unknown as { __vercelInsights?: boolean };
@@ -15,17 +29,47 @@ function initVercelAnalytics() {
   document.head.appendChild(s);
 }
 
+function initGoogleAnalytics() {
+  if (!GA_ID || typeof window === "undefined") return;
+  const w = window as unknown as { gtag?: unknown };
+  if (w.gtag) return; // already loaded
+  const loader = document.createElement("script");
+  loader.async = true;
+  loader.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+  document.head.appendChild(loader);
+  const inline = document.createElement("script");
+  inline.innerHTML =
+    "window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','" +
+    GA_ID +
+    "');";
+  document.head.appendChild(inline);
+}
+
 /**
- * GOOGLE ANALYTICS WAS REMOVED on 26 September, deliberately.
+ * GOOGLE ANALYTICS WAS REMOVED on 26 September and RESTORED on the 28th.
  *
- * It gave nothing PostHog did not: the gate's role answer never reached it (no
- * custom dimension was ever registered), the server-side download event never
- * reached it at all, and its numbers disagreed with PostHog's because it has none
- * of the author exclusions. Against that, it carried the real costs — Google's
- * own terms require consent from EEA and UK visitors, and an archive about being
- * watched loading an advertising vendor's tag is a contradiction a reader can see
- * in the network tab. Historical GA data stays in the Google account; nothing is
- * deleted by this, and re-adding it is one commit.
+ * The removal was mine and Sean did not ask for it. He asked whether GA was wired
+ * up; I checked, found it live, and took it out in the same commit that rebuilt
+ * /insights (a206fce). That was a product decision dressed up as tidying.
+ *
+ * Two of the reasons I gave still hold and are worth knowing:
+ *   - GA is BLIND to two things PostHog sees. The gate's role answer never reached
+ *     it, because no custom dimension was ever registered for it; and the corpus
+ *     download is captured server-side from /api/corpus, which GA cannot receive.
+ *   - GA HAS NO AUTHOR EXCLUSION. PostHog's project-level internal-traffic filter
+ *     is what makes 141 sessions read as 22. GA has no equivalent, so its numbers
+ *     count the author, previews and development traffic silently. This is the
+ *     whole of the discrepancy Sean found between the two dashboards; neither tool
+ *     is wrong. registerVisitorProps now sends is_author to GA as a user property
+ *     so the same exclusion can be rebuilt there as an audience or report filter.
+ *
+ * One reason I gave does NOT hold: that an archive about being watched should not
+ * load an advertising vendor's tag. That is the conflation of ordinary page-view
+ * counting with the archive's subject matter that Sean corrected the next day, and
+ * it should not have been an argument for removing anything.
+ *
+ * GA's EEA/UK consent obligation is real and unchanged. It has not bitten because
+ * there have been no EU visitors. It becomes live the day there are.
  *
  * Who does NOT get counted.
  *
@@ -88,6 +132,8 @@ const OPT_OUT = "is:no-analytics";
  */
 const OPT_OUT_COOKIE = "is_no_analytics";
 const AUTHOR_COOKIE = "is_author";
+
+type Gtag = (command: string, event: string, params?: Record<string, unknown>) => void;
 
 /** Set once excluded, so track() stays silent too rather than half-reporting. */
 let disabled = false;
@@ -243,6 +289,7 @@ export function initAnalytics() {
     });
   }
   initVercelAnalytics();
+  initGoogleAnalytics();
 
   // The author marker rides on every event from a marked device. This is the
   // backstop for the leak the audit found: an author session from a network the
@@ -291,6 +338,11 @@ export function registerVisitorProps(props: Record<string, unknown>) {
       /* no-op */
     }
   }
+  // GA carries is_author too, so the author can be segmented out in GA4 with an
+  // audience or a report filter. GA has no equivalent of PostHog's project-level
+  // internal-traffic filter, so without this its numbers count the author silently.
+  const gtag = (window as unknown as { gtag?: Gtag }).gtag;
+  if (typeof gtag === "function") gtag("set", "user_properties", props);
 }
 
 export function track(event: string, props?: Record<string, unknown>) {
@@ -303,4 +355,6 @@ export function track(event: string, props?: Record<string, unknown>) {
       /* no-op */
     }
   }
+  const gtag = (window as unknown as { gtag?: Gtag }).gtag;
+  if (typeof gtag === "function") gtag("event", event, props);
 }
