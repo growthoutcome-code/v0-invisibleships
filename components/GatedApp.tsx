@@ -21,7 +21,6 @@
 // crisis line is /safety. lib/gate-content.ts is untouched and those pages read
 // from it.
 import JournalBrowser from "@/components/JournalBrowser";
-import StandingDisclaimer from "@/components/StandingDisclaimer";
 import type { Tab } from "@/components/Header";
 import type { SubTab } from "@/components/DataView";
 
@@ -29,12 +28,14 @@ export default function GatedApp({
   initialTab = "journal",
   initialSub,
 }: { initialTab?: Tab; initialSub?: SubTab }) {
-  // Ten route files mount this one component, so the standing disclaimer reaches
-  // the journal, the glossary, concepts, data and documents from a single place.
-  return (
-    <>
-      <JournalBrowser initialTab={initialTab} initialSub={initialSub} />
-      <StandingDisclaimer />
-    </>
-  );
+  // The standing disclaimer used to be mounted here. It rendered AFTER
+  // JournalBrowser, which contains the Footer — so on all ten of these routes it
+  // came out below the footer, hanging under the copyright line like something
+  // that had fallen off the page. Sean, 29 September: "why is the disclaimer
+  // showing up under the footer. Remove all instances of this. Remember we have a
+  // link to the disclaimer in the footer already."
+  //
+  // The footer's own "Critical Disclaimer" link opens the full text, so nothing
+  // was lost but the misplacement.
+  return <JournalBrowser initialTab={initialTab} initialSub={initialSub} />;
 }

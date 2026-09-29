@@ -10,17 +10,12 @@
 //
 // Kept as a seam rather than deleted from both route files: if a subset of the
 // archive ever needs an interstitial, this is the one place it goes.
-import StandingDisclaimer from "@/components/StandingDisclaimer";
 
-// The standing disclaimer rides on this seam rather than on each route file.
-// These are the pages a stranger is most likely to land on directly — a
-// forwarded link to one transcript — and the ones where a verbatim recording
-// with names in it needs the archive's position attached to it.
+// The standing disclaimer used to ride on this seam. It rendered after the page's
+// own content, which on these routes includes the Footer — so it came out below the
+// footer rather than above it, on all 438 item pages. Removed 29 September at Sean's
+// request; the footer already links to the full disclaimer, and every item page still
+// carries the site-wide entry gate, whose third step IS that disclaimer.
 export default function ItemGate({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      {children}
-      <StandingDisclaimer />
-    </>
-  );
+  return <>{children}</>;
 }
