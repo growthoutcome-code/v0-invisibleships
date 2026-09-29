@@ -235,9 +235,9 @@ function InsightsCount() {
   // whole paragraph returned null until the request came back, so a failed or slow
   // analytics call left the footer with no route to /insights at all — and with the
   // column's own link now gone, that would have orphaned the page entirely.
-  return (
+  const line = !data ? null : (
     <p className="m-0 mt-3 text-[13px] leading-relaxed text-muted">
-      {!data ? null : data.visits === 0 ? (
+      {data.visits === 0 ? (
         "No visits recorded yet."
       ) : (
         <>
@@ -252,10 +252,32 @@ function InsightsCount() {
             </>
           )}
         </>
-      )}{" "}
-      <Link href="/insights" className="underline underline-offset-4 hover:text-foreground">
-        {data ? "See more" : "Insights"}
-      </Link>
+      )}
     </p>
+  );
+
+  // THE CALL TO ACTION IS ITS OWN LINE, and follows the site's existing pattern —
+  // accent colour, a verb, an arrow — the same shape as "Read the full disclaimer →"
+  // on the research notice and "Read →" on every journal card. "See more" was neither:
+  // it named nothing, it trailed the numbers as an afterthought, and it was the only
+  // link in the footer a reader had no reason to press.
+  //
+  // It renders whether or not the fetch returns. The column has no link of its own, so
+  // a slow or failed analytics call would otherwise leave /insights unreachable from
+  // the footer entirely.
+  const cta = (
+    <Link
+      href="/insights"
+      className="font-display mt-2 inline-block text-[13px] text-accent underline underline-offset-4"
+    >
+      See what&rsquo;s counted &rarr;
+    </Link>
+  );
+
+  return (
+    <>
+      {line}
+      {cta}
+    </>
   );
 }
