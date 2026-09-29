@@ -155,12 +155,16 @@ export default function Footer({ onNav }: { onNav?: (t: NavTab) => void }) {
                 ))}
               </ul>
               )}
-              {col.blurb && (
+              {col.blurb && !col.live && (
                 <p className="body-copy m-0 mt-4 max-w-xs text-[13px] leading-relaxed text-muted">
                   {col.blurb}
                 </p>
               )}
-              {col.live && <InsightsCount />}
+              {/* A live column hands its blurb to InsightsCount instead, which prints
+                  the sentence and the count as ONE paragraph. Rendered here as two, the
+                  figure started a second line in a different typeface and read as a
+                  stat block bolted under a caption. */}
+              {col.live && <InsightsCount blurb={col.blurb} />}
             </nav>
           ))}
         </div>
@@ -208,10 +212,9 @@ export default function Footer({ onNav }: { onNav?: (t: NavTab) => void }) {
  * would be both wrong and dispiriting, and a number with no state behind it is
  * how a site starts lying to itself.
  */
-function InsightsCount() {
+function InsightsCount({ blurb }: { blurb?: string }) {
   const [data, setData] = useState<{
     visits: number;
-    downloads: number;
     window: "all" | "gate";
     ok: boolean;
   } | null>(null);
@@ -235,26 +238,29 @@ function InsightsCount() {
   // whole paragraph returned null until the request came back, so a failed or slow
   // analytics call left the footer with no route to /insights at all — and with the
   // column's own link now gone, that would have orphaned the page entirely.
-  const line = !data ? null : (
-    <p className="m-0 mt-3 text-[13px] leading-relaxed text-muted">
-      {data.visits === 0 ? (
-        "No visits recorded yet."
-      ) : (
-        <>
-          <span className="font-display text-foreground">{data.visits.toLocaleString()}</span>{" "}
-          {data.visits === 1 ? "visit" : "visits"}
-          {data.window === "all" && " all time"}
-          {data.downloads > 0 && (
-            <>
-              {" \u00b7 "}
-              <span className="font-display text-foreground">{data.downloads.toLocaleString()}</span>{" "}
-              {data.downloads === 1 ? "download" : "downloads"}
-            </>
-          )}
-        </>
-      )}
+  // ONE SENTENCE, ONE STYLE. Sean, 29 September: "move '150 visits all time' after
+  // 'Analytics from Google and PostHog.' using the sentence's styling. Remove
+  // '1 download'."
+  //
+  // So the figure is plain text in the same class as the sentence it joins — no
+  // display typeface, no foreground weight. It was set as a stat before, which made
+  // a footer caption look like a dashboard tile and gave 150 more emphasis than a
+  // number with this many caveats has earned.
+  //
+  // The download count is gone entirely. One download said less than nothing.
+  //
+  // The sentence renders immediately; only the clause after it waits for the fetch,
+  // so a slow or failed analytics call leaves a complete sentence rather than a gap.
+  const count =
+    !data ? "" :
+    data.visits === 0 ? " No visits recorded yet." :
+    ` ${data.visits.toLocaleString()} ${data.visits === 1 ? "visit" : "visits"}${data.window === "all" ? " all time" : ""}.`;
+
+  const line = (blurb || data) ? (
+    <p className="body-copy m-0 mt-4 max-w-xs text-[13px] leading-relaxed text-muted">
+      {blurb}{count}
     </p>
-  );
+  ) : null;
 
   // THE CALL TO ACTION IS ITS OWN LINE, and follows the site's existing pattern —
   // accent colour, a verb, an arrow — the same shape as "Read the full disclaimer →"
