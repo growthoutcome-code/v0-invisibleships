@@ -323,7 +323,6 @@ export default async function Page({
                 title="Where visits came from"
                 unit="sessions"
                 rows={ga.locations}
-                note="Every row is labelled, and on this tab the label says how precisely Google resolved the address &mdash; not whether the place can be believed. City unverified means Google named a city but cannot say whose it is. Country only means it got no further than the country. Not resolved means it got nowhere, which is what relays and corporate proxies usually produce &mdash; an absence of data rather than a detection, which is why the label names what happened instead of what it implies. Google cannot go further: telling a reader&rsquo;s city from a VPN&rsquo;s needs the device&rsquo;s own clock compared against its address, and Google publishes neither. The PostHog tab has both, so its labels answer the question this one cannot."
               />
 
             </>
@@ -386,7 +385,6 @@ export default async function Page({
               title="Where visits came from"
               unit="visits"
               rows={ph.placeRows}
-              note="Every row says how much it can be trusted. Confirmed means the device&rsquo;s own clock agreed with its network address and the address was precise, so the visit came from that place. Relay detected means a VPN or proxy sat in between: the row shows the device&rsquo;s time zone, because the city belongs to the relay and no tool recovers the real one. The test only catches relays that cross a time zone — a VPN exit inside the reader&rsquo;s own zone still reads as confirmed, which is what network labelling would catch."
             />
 
             {/* IP ROTATION. Sean spotted this before it was measured: a visit that
