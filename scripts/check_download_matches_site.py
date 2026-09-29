@@ -78,6 +78,7 @@ MAP = [
     ("site/meta",          "meta/"),
     ("site/glossary",      "glossary-site/"),
     ("site/documents",     "documents/"),
+    ("site/upcoming",      "upcoming/"),   # planning notes, not completed entries
     (".",                  "government-cloud/json/"),   # manifest.json
 ]
 

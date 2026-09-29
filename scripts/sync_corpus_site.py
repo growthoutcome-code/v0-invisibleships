@@ -42,6 +42,10 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 MD = ROOT / "public/data/concepts/md"
 GLO = ROOT / "public/data/site/glossary"
 DOC = ROOT / "public/data/site/documents"
+# Planning notes for content not yet written (Sean, 29 Sep 2026: "labeled as
+# upcoming content notes and not official completed entries"). Their own folder,
+# so the folder name itself says what they are.
+UPCOMING = ROOT / "public/data/site/upcoming"
 RESEARCH = ROOT / "research"
 DOCS_DIR = ROOT / "docs"
 ZIP = ROOT / "public/invisible-ships-corpus.zip"
@@ -68,7 +72,7 @@ def disclaimer_footer() -> str:
 # duplicate names and only warns. Two copies of the terms in one archive, the
 # stale one first. Found by a duplicate-name warning, not by a guard; the
 # site-vs-download check matches by name and was satisfied by either copy.
-PREFIXES = ("concepts/", "glossary-site/", "documents/", "research/")
+PREFIXES = ("concepts/", "glossary-site/", "documents/", "research/", "upcoming/")
 
 # The corpus meta/ folder is SHARED: most of it is verbatim extracts of the
 # original document series, owned by nobody, and rewriting those would falsify
@@ -220,6 +224,28 @@ def build(dst: zipfile.ZipFile) -> int:
                      "These are working files. They carry the same terms as everything else\n"
                      "in this corpus — see `meta/IS_META_terms.md`. Evidence tiers apply:\n"
                      "a row present here is not, by itself, a verified fact.\n").rstrip("\n") + "\n\n" + disclaimer_footer() + "\n")
+
+    # ---- upcoming content notes -----------------------------------------
+    # The author's list of glossary terms, concepts and site changes that are
+    # planned but not written. Kept apart from every completed collection, and
+    # each file opens with a status banner, so nothing here can be mistaken for
+    # an entry, a concept or a definition.
+    n_up = 0
+    for f in sorted(UPCOMING.glob("*.md")) if UPCOMING.is_dir() else []:
+        dst.writestr("upcoming/" + f.name, f.read_text())
+        n_up += 1
+    if n_up:
+        dst.writestr("upcoming/README.md",
+                     (
+                     "# Upcoming content notes\n\n"
+                     "**These are planning notes, not completed entries.**\n\n"
+                     "The author's working lists of glossary terms, concepts and site\n"
+                     "changes planned for Invisible Ships. Nothing in this folder has been\n"
+                     "written up, reviewed or published on the site. Do not quote or cite it\n"
+                     "as a journal entry, a concept, a glossary definition or a finding.\n"
+                     "Items may change, be combined or be dropped.\n\n"
+                     "Completed work is in `journal/`, `concepts/`, `glossary/`,\n"
+                     "`glossary-site/` and the research folders.\n").rstrip("\n") + "\n\n" + disclaimer_footer() + "\n")
 
     return len(files), n_glo, n_doc, n_res
 

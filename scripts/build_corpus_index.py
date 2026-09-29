@@ -335,6 +335,7 @@ FOLDERS = [
     ("glossary", "Glossary", "Terms from the source series, plus terms written for the site."),
     ("research", "Research inputs", "The raw rows the charts were built from. Not rendered anywhere on the site."),
     ("meta", "Terms", "Copyright, disclaimer, author statement, category vocabulary."),
+    ("upcoming", "Upcoming notes", "Planning notes for content not yet written. Not completed entries."),
 ]
 
 WORD_RE = re.compile(r"\b[\w'-]+\b")
@@ -402,6 +403,7 @@ SECTION_BLURB = {
     "research": "The raw researched rows the charts were built from.",
     "meta": "Terms, disclaimer, content warning, author statement, tag vocabulary.",
     "documents": "The register of the source document series.",
+    "upcoming": "Planning notes for content not yet written. Not completed entries — do not cite.",
 }
 
 
