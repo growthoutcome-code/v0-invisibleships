@@ -191,10 +191,6 @@ export default function TrafficChart({
         ))}
       </svg>
 
-      <p className="font-display m-0 mt-3 text-[12px] uppercase tracking-[0.14em] text-muted">
-        {label} &middot; {nf.format(total)} total &middot; tap a day for detail
-      </p>
-
       {note && <p className="mt-3 max-w-3xl text-[13px] leading-relaxed text-muted">{note}</p>}
 
       <Dialog open={picked !== null} onOpenChange={(v) => !v && setOpen(null)}>
