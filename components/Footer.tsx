@@ -72,9 +72,12 @@ const COLUMNS: {
     // and a live count. The site asks readers to check its sourcing; this is the
     // same courtesy pointed at its own analytics.
     heading: "Insights",
-    links: [{ href: "/insights", label: "What this site can see" }],
+    // No link of its own: the live line below carries one, and a link labelled
+    // "What this site can see" under a heading reading "Insights" was the same
+    // phrase twice. It also named a page that no longer calls itself that.
+    links: [],
     blurb:
-      "This archive is about being watched, so it publishes what it records about its own readers \u2014 and what it never records.",
+      "This archive is about being watched, so it publishes what it records about its own readers \u2014 and what it never records. The count below is every visit, the author\u2019s included.",
     live: true,
   },
 ];
@@ -102,6 +105,7 @@ export default function Footer({ onNav }: { onNav?: (t: NavTab) => void }) {
               <p className="font-display m-0 text-[12px] uppercase tracking-[0.14em] text-muted">
                 {col.heading}
               </p>
+              {col.links.length > 0 && (
               <ul className="m-0 mt-4 list-none space-y-2.5 p-0">
                 {col.links.map((l) => (
                   <li key={l.href}>
@@ -143,6 +147,7 @@ export default function Footer({ onNav }: { onNav?: (t: NavTab) => void }) {
                   </li>
                 ))}
               </ul>
+              )}
               {col.blurb && (
                 <p className="body-copy m-0 mt-4 max-w-xs text-[13px] leading-relaxed text-muted">
                   {col.blurb}
@@ -219,11 +224,13 @@ function InsightsCount() {
     };
   }, []);
 
-  if (!data) return null;
-
+  // The LINK always renders; only the numbers wait for the fetch. Previously the
+  // whole paragraph returned null until the request came back, so a failed or slow
+  // analytics call left the footer with no route to /insights at all — and with the
+  // column's own link now gone, that would have orphaned the page entirely.
   return (
     <p className="m-0 mt-3 text-[13px] leading-relaxed text-muted">
-      {data.visits === 0 ? (
+      {!data ? null : data.visits === 0 ? (
         "No visits recorded yet."
       ) : (
         <>
@@ -240,7 +247,7 @@ function InsightsCount() {
         </>
       )}{" "}
       <Link href="/insights" className="underline underline-offset-4 hover:text-foreground">
-        See more
+        {data ? "See more" : "Insights"}
       </Link>
     </p>
   );
