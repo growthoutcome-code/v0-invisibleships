@@ -2,34 +2,26 @@
 
 import { useRouter } from "next/navigation";
 import { RANGES, type RangeKey } from "@/lib/insights-posthog";
+import { SOURCES, DEFAULT_SOURCE, type SourceKey } from "@/lib/insights-source";
+
+// Re-exported so existing imports of the type keep working. Only the TYPE crosses
+// this boundary; the runtime helpers stay in lib/insights-source.ts, because a
+// "use client" module cannot hand a callable function to a server component.
+export type { SourceKey };
 
 /**
  * One row: which tool on the left, which window on the right.
  *
- * BOTH ARE URL STATE, not component state. /insights?source=ga&range=30d is a link
- * Sean can bookmark, send, or paste back to me when a number looks wrong — which on
- * this project has happened often enough to be worth designing for. It also keeps the
- * page a server component: the server reads the params and queries the right window,
- * instead of shipping the data to the browser and filtering it there.
+ * BOTH ARE URL STATE, not component state. /insights?source=posthog&range=30d is a
+ * link Sean can bookmark, send, or paste back to me when a number looks wrong — which
+ * on this project has happened often enough to be worth designing for. It also keeps
+ * the page a server component: the server reads the params and queries the right
+ * window, instead of shipping the data to the browser and filtering it there.
  *
  * The tabs are ANCHORS rather than buttons, so they work with JavaScript off, open in
  * a new tab on a middle click, and are crawlable. Only the range needs a client
  * component at all, because a native <select> has to push the URL on change.
  */
-
-/**
- * Both first and by default. Sean: "we can open with both being selected, and then
- * someone can drop down to just GA data or PostHog data." Both is also the honest
- * default for this page — the interesting fact about these two tools is that they
- * disagree, and showing one alone hides it.
- */
-const SOURCES = [
-  { key: "both", label: "Both" },
-  { key: "posthog", label: "PostHog" },
-  { key: "ga", label: "Google Analytics" },
-] as const;
-
-export type SourceKey = (typeof SOURCES)[number]["key"];
 
 export default function InsightsControls({
   source,
@@ -39,8 +31,18 @@ export default function InsightsControls({
   range: RangeKey;
 }) {
   const router = useRouter();
-  const href = (s: SourceKey, r: RangeKey) =>
-    `/insights${s === "both" ? "" : `?source=${s}`}${r === "all" ? "" : `${s === "both" ? "?" : "&"}range=${r}`}`;
+
+  // Built with URLSearchParams rather than string concatenation. The previous version
+  // worked out "?" versus "&" from whether the source was the default, which is the
+  // kind of thing that silently produces /insights?range=30d&range=30d the moment a
+  // third param appears.
+  const href = (s: SourceKey, r: RangeKey) => {
+    const q = new URLSearchParams();
+    if (s !== DEFAULT_SOURCE) q.set("source", s);
+    if (r !== "all") q.set("range", r);
+    const qs = q.toString();
+    return `/insights${qs ? `?${qs}` : ""}`;
+  };
 
   return (
     <div className="mt-6 flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-b border-edge pb-3">

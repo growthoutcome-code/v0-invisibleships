@@ -44,6 +44,15 @@ export type GaTraffic = {
   /** Daily series for the chart, oldest first. */
   series: DayPoint[];
   pages: Row[];
+  /**
+   * Cities, ranked by sessions. NO CONFIDENCE FLAG, and there cannot be one: the
+   * relay labels on the PostHog tab come from comparing the address's time zone with
+   * the device's own clock, and GA publishes neither signal through its API. So this
+   * is a plain ranked list and the page says where the flags live. Ranked by sessions
+   * rather than page views because the question it answers is "how many people",
+   * not "how much reading".
+   */
+  locations: Row[];
   downloads: number;
 };
 
@@ -98,7 +107,7 @@ export async function getGaTraffic(range: RangeKey = "all"): Promise<GaTraffic |
   const dateRanges = [gaDateRange(range)];
 
   try {
-    const [daily, top, events] = await Promise.all([
+    const [daily, totals, top, places, events] = await Promise.all([
       ga.runReport({
         property,
         dateRanges,
@@ -107,6 +116,21 @@ export async function getGaTraffic(range: RangeKey = "all"): Promise<GaTraffic |
         orderBys: [{ dimension: { dimensionName: "date" } }],
         limit: 400,
       }),
+      // THE HEADLINE NUMBERS COME FROM HERE, not from summing the daily rows above.
+      //
+      // `totalUsers` is not additive across days: somebody who reads on Monday and
+      // again on Thursday is one user and two daily rows, so summing the series
+      // inflates the figure — which is exactly what this page did, reporting more
+      // users than GA's own dashboard showed for the same window. Asking for the range
+      // with no date dimension makes GA do the de-duplication, which only GA can do.
+      //
+      // Sessions and page views ARE additive, but they are taken from here too so
+      // that all four tiles come from one query and cannot disagree with each other.
+      ga.runReport({
+        property,
+        dateRanges,
+        metrics: [{ name: "sessions" }, { name: "screenPageViews" }, { name: "totalUsers" }],
+      }),
       ga.runReport({
         property,
         dateRanges,
@@ -114,6 +138,14 @@ export async function getGaTraffic(range: RangeKey = "all"): Promise<GaTraffic |
         metrics: [{ name: "screenPageViews" }],
         orderBys: [{ metric: { metricName: "screenPageViews" }, desc: true }],
         limit: 10,
+      }),
+      ga.runReport({
+        property,
+        dateRanges,
+        dimensions: [{ name: "city" }, { name: "country" }],
+        metrics: [{ name: "sessions" }],
+        orderBys: [{ metric: { metricName: "sessions" }, desc: true }],
+        limit: 12,
       }),
       ga.runReport({
         property,
@@ -131,22 +163,41 @@ export async function getGaTraffic(range: RangeKey = "all"): Promise<GaTraffic |
       return { day, n: Number(r.metricValues?.[0]?.value ?? 0) };
     });
 
-    const sum = (i: number) =>
-      (daily[0].rows ?? []).reduce((a, r) => a + Number(r.metricValues?.[i]?.value ?? 0), 0);
+    // The single totals row. Absent only if the property has no data at all in the
+    // window, in which case zero is the right answer rather than a crash.
+    const totalsRow = totals[0].rows?.[0];
+    const metric = (i: number) => Number(totalsRow?.metricValues?.[i]?.value ?? 0);
 
     const downloads = (events[0].rows ?? [])
       .filter((r) => r.dimensionValues?.[0]?.value === "corpus_downloaded")
       .reduce((a, r) => a + Number(r.metricValues?.[0]?.value ?? 0), 0);
 
     return {
-      sessions: sum(0),
-      views: sum(1),
-      users: sum(2),
+      sessions: metric(0),
+      views: metric(1),
+      users: metric(2),
       series,
       pages: (top[0].rows ?? []).map((r) => ({
         label: r.dimensionValues?.[0]?.value ?? "Unknown",
         n: Number(r.metricValues?.[0]?.value ?? 0),
       })),
+      locations: (places[0].rows ?? [])
+        .map((r) => {
+          // GA writes "(not set)" for a dimension it could not resolve, which is a real
+          // category and not an error — it is most of what a VPN or a corporate proxy
+          // produces. Named rather than dropped, so the ranked list still adds up.
+          //
+          // BOTH dimensions need this, not just the city. The first version normalised
+          // the city alone and shipped a row labelled literally "(not set)" — the city
+          // had been blanked and the country, also unresolved, became the whole label.
+          const clean = (v: string | null | undefined) =>
+            !v || v === "(not set)" || v === "(none)" ? "" : v;
+          const city = clean(r.dimensionValues?.[0]?.value);
+          const country = clean(r.dimensionValues?.[1]?.value);
+          const label = [city, country].filter(Boolean).join(", ") || "Location not resolved";
+          return { label, n: Number(r.metricValues?.[0]?.value ?? 0) };
+        })
+        .filter((r) => r.n > 0),
       downloads,
     };
   } catch {

@@ -15,6 +15,7 @@ is real but unscheduled. **Not doing** exists so the same suggestions stop comin
 | Work | State | Where |
 |---|---|---|
 | Visit trust labels on `/insights` | In progress | `features/visit-trust-labels.md`, decision `0002` |
+| `/insights` restructure — Google leads, pages lead, locations on both tabs | In progress | `features/insights-page-restructure.md` |
 | Ship the 18 unpushed commits | **Blocking everything measured** — none of the gate logging, download logging or `/insights` work has ever been deployed, which is why `gate_events` has zero rows | — |
 | `POSTHOG_PERSONAL_API_KEY` into Vercel | Missing in production, so the live `/insights` has no traffic numbers at all | Vercel env |
 
