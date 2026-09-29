@@ -112,6 +112,12 @@ export default function DataView({
           read as though Concepts were a sub-view of something else. The state
           still exists — the hero routes into it and /concepts resolves to it —
           it simply has no button and no tab row of its own. */}
+      {/* PRIMARY disclaimer, ABOVE the tabs. Sean, 29 September: "move the
+          disclaimer on the research page to the top of the page above the tabs."
+          It still shows on the landing view only — it is the Timeline's notice,
+          and the other verticals carry their own one-line version below. */}
+      {sub === "timeline" && <DataNotice />}
+
       {sub !== "concepts" && (
       <div role="tablist" aria-label="Research sections"
         className="flex flex-wrap gap-x-8 gap-y-2 mb-10 border-b border-edge">
@@ -130,8 +136,6 @@ export default function DataView({
       </div>
       )}
 
-      {/* PRIMARY disclaimer: prominent, once, on the landing view only. */}
-      {sub === "timeline" && <DataNotice />}
       {sub === "govcloud" && (
         <DataNoteLine from="govcloud">
           AI-assisted research from public records · every fact evidence-graded and linked to its

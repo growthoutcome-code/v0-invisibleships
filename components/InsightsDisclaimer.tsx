@@ -1,72 +1,60 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { X } from "lucide-react";
+import { track } from "@/lib/analytics";
+
+// Bump the suffix to re-show the notice after the wording changes.
+const KEY = "is_insights_disclaimer_v1";
 
 /**
- * The caveat on the face of /insights, dismissible per device.
+ * Dismissable notice for /insights.
  *
- * A banner like this existed until 29 September and Sean had it removed; this is the
- * replacement he asked for the same day, with different words. The earlier one said
- * visits "can be missed, double-counted, or belong to the author rather than a
- * reader". The author clause is deliberately gone: he asked for it out, and it was
- * doing a job that now belongs elsewhere — the footer's own line says the count
- * includes him, and the Google tab captions each figure that does.
+ * SAME SHELL AS DataNotice in components/DataIntro.tsx, deliberately and to the
+ * class: aside/role=note, bg-panel, the same padding and margin, the same
+ * measure on the paragraph, the same lucide X in the same position, the same
+ * localStorage-with-a-version-suffix, the same track() on dismiss. Sean,
+ * 29 September: "use the same styling as the dismissible disclaimer on the
+ * research page." A second notice that is nearly the same reads as a mistake.
  *
- * What is left is the part a reader cannot work out for themselves, and it is the
- * honest half anyway: a count of visits is not a count of people, in both directions
- * at once.
+ * NOT a new UI primitive: this is the site's existing notice pattern, which
+ * DataNotice and ConceptsNotice already share. shadcn's Alert is not installed
+ * here, and installing it would mean restyling those two as well — a change to
+ * the research page that was not asked for.
  *
- * DISMISSAL IS PER DEVICE AND PER VERSION. The key carries a version so that
- * rewording the disclaimer shows it again to somebody who dismissed the last one —
- * otherwise a changed caveat is invisible to exactly the readers who already engaged
- * with it once.
+ * The author is deliberately not mentioned. Sean: "leave 'the author's visits'
+ * out of the disclaimer." The footer's own line says the count includes him and
+ * every Google tile that includes him is captioned, so this says the part a
+ * reader cannot work out unaided instead.
  */
-const KEY = "is:insights-disclaimer-v2-dismissed";
-
 export default function InsightsDisclaimer() {
-  // Starts hidden and appears after mount: the server cannot know whether this
-  // browser dismissed it, and rendering it server-side would flash the banner at
-  // somebody who closed it. Every storage access is wrapped, because localStorage
-  // throws rather than returning null in a private window with site data blocked —
-  // and a disclaimer that takes the page down with it is worse than no disclaimer.
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    try {
-      if (window.localStorage.getItem(KEY) !== "1") setShow(true);
-    } catch {
-      setShow(true);
-    }
+    try { setShow(window.localStorage.getItem(KEY) !== "1"); }
+    catch { setShow(true); }
   }, []);
+
+  const dismiss = () => {
+    setShow(false);
+    track("insights_disclaimer_dismissed");
+    try { window.localStorage.setItem(KEY, "1"); } catch { /* private mode */ }
+  };
 
   if (!show) return null;
 
   return (
-    <div
-      role="note"
-      className="animate-fade-in mb-8 flex items-start justify-between gap-4 border border-edge bg-foreground/[0.03] px-4 py-3"
-    >
-      <p className="body-copy m-0 max-w-3xl text-[13.5px] leading-relaxed text-muted">
-        These figures are estimates, not a headcount. Counting misses anyone who blocks
-        it, and one person can be counted more than once &mdash; a phone and a laptop, a
-        cleared browser, an address that changes part-way through a visit. A visit here
-        is a request that was recorded, which is not the same thing as a reader.
+    <aside role="note" className="w-full flex items-start gap-6 bg-panel px-6 py-5 mb-10">
+      <p className="body-copy text-foreground/85 measure m-0">
+        These figures are estimates, not a headcount.{" "}
+        <strong>Counting misses anyone who blocks it, and counts some people twice</strong> — a
+        phone and a laptop, a cleared browser, an address that changes part-way through a
+        visit. A visit here is a request that was recorded, which is not the same thing as a
+        reader.
       </p>
-      <button
-        type="button"
-        onClick={() => {
-          setShow(false);
-          try {
-            window.localStorage.setItem(KEY, "1");
-          } catch {
-            /* dismissal simply does not persist here; the banner is not worth an error */
-          }
-        }}
-        aria-label="Dismiss this note"
-        className="font-display shrink-0 text-[11px] uppercase tracking-[0.14em] text-muted underline underline-offset-4 transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-      >
-        Dismiss
+      <button onClick={dismiss} aria-label="Dismiss notice" className="ml-auto shrink-0 text-muted hover:text-foreground">
+        <X size={20} />
       </button>
-    </div>
+    </aside>
   );
 }
