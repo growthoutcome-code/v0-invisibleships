@@ -413,7 +413,7 @@ export default function JournalBrowser({
   );
 }
 
-const TAB_TITLE: Record<Tab, string> = { journal: "Journal", glossary: "Glossary", documents: "Documents", data: "Research", concepts: "Concepts", author: "Author", disclaimer: "Disclaimer" };
+const TAB_TITLE: Record<Tab, string> = { journal: "Journal", glossary: "Glossary", documents: "Documents", data: "Research", concepts: "Concepts", author: "About the author", disclaimer: "Disclaimer" };
 
 // ~200px page-title band under the nav; its h1 is the current section name,
 // left-aligned and larger than any other heading. 80% width via its parent <main>.
@@ -834,7 +834,7 @@ function AuthorIntroLine() {
     </a>
   );
   return (
-    <p className="body-copy text-foreground/85 mt-8 measure">
+    <p className="body-copy text-foreground/85 mt-4 measure">
       {at < 0 ? text : <>{text.slice(0, at)}{linked}{text.slice(at + term.label.length)}</>}
     </p>
   );
@@ -842,20 +842,24 @@ function AuthorIntroLine() {
 
 function AuthorView() {
   return (
-    <div className="w-full lg:w-[65%] lg:mx-auto">
-      <h2 className="font-display text-3xl font-semibold text-foreground mb-5">About the Author</h2>
-      <div className="flex flex-col sm:flex-row gap-6">
-        <div className="relative w-40 h-40 bg-panel shrink-0 overflow-hidden">
+    // Full main-container width, matching Documents, the journal feed and the
+    // glossary (Sean, 29 Sep). The page heading is the TitleBand h1, "About the
+    // author"; there is no second heading here.
+    <div className="w-full">
+      <div className="flex flex-col sm:flex-row gap-6 sm:gap-10">
+        <div className="flex-1 min-w-0">
+          <p className="body-copy text-foreground/85 measure">{AUTHOR.summary}</p>
+          <p className="body-copy text-foreground/85 mt-4 measure">{AUTHOR.bio}</p>
+          <AuthorIntroLine />
+        </div>
+        {/* Photo on the right, 30% of the content width (Sean, 29 Sep: at least
+            25%). On phones it stacks above the text at half width. */}
+        <div className="relative order-first sm:order-last w-1/2 sm:w-[30%] aspect-square bg-panel shrink-0 overflow-hidden">
           <span className="absolute inset-0 grid place-items-center text-muted text-xs">Photo</span>
           <img src={AUTHOR.photo} alt="Sean C. Harris" className="relative w-full h-full object-cover"
             onError={(e) => { (e.currentTarget as HTMLImageElement).style.opacity = "0"; }} />
         </div>
-        <div>
-          <p className="body-copy text-foreground/85 measure">{AUTHOR.summary}</p>
-          <p className="body-copy text-foreground/85 mt-4 measure">{AUTHOR.bio}</p>
-        </div>
       </div>
-      <AuthorIntroLine />
       {AUTHOR.sections.map((sec) => (
         <section key={sec.title} className="mt-10 border-t border-edge pt-6">
           <h3 className="font-display text-xl font-semibold text-foreground">{sec.title}</h3>
