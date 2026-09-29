@@ -43,6 +43,7 @@
  */
 import { useCallback, useEffect, useRef, useState } from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
+import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import CopyrightTerms from "@/components/CopyrightTerms";
 import { GATE } from "@/lib/gate-content";
@@ -61,6 +62,9 @@ const STEPS = [
 ] as const;
 
 const TERMS_STEP = 2;
+
+// Shared between the hint paragraph and the footer button's aria-describedby.
+const HINT_ID = "gate-terms-hint";
 
 /**
  * The optional "who is reading" question.
@@ -109,12 +113,33 @@ export default function EntryGate() {
   // --- the scroll condition on step 3 -------------------------------------
   const docRef = useRef<HTMLDivElement>(null);
   const [readAll, setReadAll] = useState(false);
+  // How far down the disclaimer they are, 0-1. Distance, not just direction:
+  // "scroll to continue" with no sense of how much is left is the part people
+  // actually complain about in consent flows.
+  const [progress, setProgress] = useState(0);
 
   const checkRead = useCallback(() => {
     const el = docRef.current;
     if (!el) return;
     const slack = el.scrollHeight - el.clientHeight;
-    if (slack <= 4 || el.scrollTop >= slack - 12) setReadAll(true);
+    // Short enough to need no scrolling (a tall window): already read in full.
+    if (slack <= 4) {
+      setProgress(1);
+      setReadAll(true);
+      return;
+    }
+    setProgress(Math.min(1, Math.max(0, el.scrollTop / slack)));
+    if (el.scrollTop >= slack - 12) setReadAll(true);
+  }, []);
+
+  // Nothing in the gate should be a dead end that only says no. Both the cue
+  // inside the panel and the locked button call this, so a reader who does not
+  // think to drag inside a box inside a dialog is moved along rather than left
+  // pressing a button that refuses to work without explaining itself.
+  const scrollDoc = useCallback(() => {
+    const el = docRef.current;
+    if (!el) return;
+    el.scrollBy({ top: Math.max(140, el.clientHeight * 0.85), behavior: "smooth" });
   }, []);
 
   useEffect(() => {
@@ -131,6 +156,12 @@ export default function EntryGate() {
   const locked = step === TERMS_STEP && !readAll;
 
   function advance() {
+    // aria-disabled keeps this button focusable and clickable (see the footer),
+    // so the locked case is handled here rather than by the browser.
+    if (locked) {
+      scrollDoc();
+      return;
+    }
     if (step === 0) {
       // Recorded once, on the way out of the welcome. Declining is recorded too:
       // the decline rate is the only thing here that says how much to trust the
@@ -346,21 +377,63 @@ export default function EntryGate() {
                       <CopyrightTerms variant="gate" />
                     </div>
                   </div>
+                  {/* The edge cue and the way out of it, in one place. A
+                      gradient alone says "there is more"; it does not say what
+                      is being asked of you, and it cannot be acted on. This
+                      says both and scrolls a panelful when pressed.
+
+                      Hidden from assistive technology on purpose: the region
+                      above is focusable and the hint below is a live region, so
+                      a third voice repeating the same sentence is noise. The
+                      chevron reuses .scroll-hint from globals.css -- the same
+                      six-pixel nudge the home page uses for the same meaning,
+                      reduced-motion rule included. */}
                   <div
                     aria-hidden
-                    className={`pointer-events-none absolute inset-x-0 bottom-0 h-9 bg-gradient-to-t from-panel transition-opacity duration-200 ${
+                    className={`pointer-events-none absolute inset-x-0 bottom-0 flex justify-center bg-gradient-to-t from-panel via-panel/85 to-transparent pt-12 transition-opacity duration-200 ${
                       readAll ? "opacity-0" : "opacity-100"
                     }`}
+                  >
+                    <button
+                      type="button"
+                      tabIndex={-1}
+                      onClick={scrollDoc}
+                      className="pointer-events-auto flex items-center gap-1.5 border border-foreground bg-panel px-3.5 py-2 text-[11.5px] font-medium uppercase tracking-[0.14em] text-foreground transition-colors hover:bg-foreground hover:text-background"
+                    >
+                      Scroll to the end
+                      <ChevronDown className="scroll-hint" size={14} />
+                    </button>
+                  </div>
+                </div>
+
+                {/* How much is left, without a percentage to read. A number
+                    here would have to sit in the live region below to be
+                    announced, and a live region that fires on every scroll tick
+                    is worse than no announcement at all -- so the figure lives
+                    on this bar, which is a progressbar and not a live region. */}
+                <div
+                  role="progressbar"
+                  aria-label="How much of the disclaimer you have read"
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                  aria-valuenow={Math.round(progress * 100)}
+                  className="mt-3 h-[3px] w-full shrink-0 bg-edge"
+                >
+                  <div
+                    className="h-full bg-foreground transition-[width] duration-150 ease-out"
+                    style={{ width: `${Math.round(progress * 100)}%` }}
                   />
                 </div>
 
-                {/* The hint is the button's explanation, so it says what is
-                    being waited for and then says it is done, rather than
-                    vanishing and leaving a dead button with no account of
+                {/* The hint is the button's explanation -- it is what
+                    aria-describedby on the footer button points at -- so it says
+                    what is being waited for and then says it is done, rather
+                    than vanishing and leaving a dead button with no account of
                     itself. */}
                 <p
+                  id={HINT_ID}
                   aria-live="polite"
-                  className={`m-0 mt-2.5 shrink-0 text-[12px] ${readAll ? "text-foreground" : "text-muted"}`}
+                  className={`m-0 mt-2.5 shrink-0 text-[12.5px] ${readAll ? "text-foreground" : "text-muted"}`}
                 >
                   {readAll
                     ? "Read in full — you can enter the corpus"
@@ -377,7 +450,20 @@ export default function EntryGate() {
             <Button variant="outline" disabled={step === 0} onClick={() => setStep(Math.max(0, step - 1))}>
               Back
             </Button>
-            <Button disabled={locked} onClick={advance}>
+            {/* aria-disabled rather than disabled, deliberately. A `disabled`
+                button leaves the tab order, and its description leaves with it:
+                somebody tabbing through this footer with a screen reader would
+                meet nothing at all and get no account of why they cannot go on.
+                Focusable and described, it explains itself -- and pressing it
+                scrolls the disclaimer (see advance) instead of doing nothing.
+                The opacity is spelled out here because shadcn's variant hangs
+                it off `disabled:`, which no longer applies. */}
+            <Button
+              aria-disabled={locked}
+              aria-describedby={step === TERMS_STEP ? HINT_ID : undefined}
+              onClick={advance}
+              className={locked ? "opacity-50 hover:bg-primary" : undefined}
+            >
               {STEPS[step].cta}
             </Button>
           </div>
