@@ -22,6 +22,8 @@ import { toSource, type SourceKey } from "@/lib/insights-source";
 import { classifyVisit, CONFIDENCE_LABEL, type Confidence } from "@/lib/visit-trust";
 import { getGaTraffic, gaConfigured } from "@/lib/insights-ga";
 import TrafficChart from "@/components/TrafficChart";
+import PagesTable, { type PageRow } from "@/components/PagesTable";
+import { previewForPath } from "@/lib/page-preview";
 import OptOutSection from "@/components/OptOutSection";
 
 /**
@@ -67,6 +69,13 @@ export const metadata: Metadata = {
 };
 
 const nf = new Intl.NumberFormat("en-US");
+
+/** Attach a resolved preview to each row. Server-side: previewForPath reads the
+ *  bundled corpus, and doing it here keeps the browser from requesting the site's own
+ *  pages in order to describe them — which would add traffic to the page reporting it. */
+function withPreviews(rows: Row[]): PageRow[] {
+  return rows.map((r) => ({ ...r, preview: previewForPath(r.label) }));
+}
 
 function Tile({ n, label, sub }: { n: number | string; label: string; sub?: string }) {
   return (
@@ -308,7 +317,7 @@ export default async function Page({
                 />
               </section>
 
-              <Table title="Pages viewed" unit="views" rows={ga.pages} />
+              <PagesTable title="Pages viewed" unit="views" rows={withPreviews(ga.pages)} source="Google" />
 
               <Table
                 title="Where visits came from"
@@ -351,10 +360,11 @@ export default async function Page({
               />
             </section>
 
-            <Table
+            <PagesTable
               title="Pages viewed"
               unit="views"
-              rows={ph.t.pages}
+              source="PostHog"
+              rows={withPreviews(ph.t.pages)}
               note={
                 ph.bots.total > 0
                   ? `${nf.format(ph.bots.bots)} of ${nf.format(ph.bots.total)} page views were classified as automated — crawlers and link scanners rather than readers.`
