@@ -21,7 +21,7 @@ import { Transcript } from "@/components/Transcript";
 import { cleanTerm, cleanDef, splitDef, firstSentences } from "@/lib/glossary-format";
 import GlossaryBody from "@/components/GlossaryBody";
 import GlossaryIllustration from "@/components/GlossaryIllustration";
-import { DOCUMENTS, AUTHOR, EXTRA_GLOSSARY } from "@/lib/site-content";
+import { DOCUMENTS, AUTHOR, EXTRA_GLOSSARY, type AuthorItem } from "@/lib/site-content";
 import { CORPUS_SUMMARY } from "@/lib/corpus-summary";
 import PageActions, { SortMenu, type SortDir } from "@/components/PageActions";
 import DataView, { type SubTab } from "@/components/DataView";
@@ -778,6 +778,68 @@ function DocumentsView() {
 }
 
 /* ---------- Author ---------- */
+// Every outside link on this page opens in a new tab, so a reader checking a
+// credential does not lose their place in the archive.
+function AuthorLink({ item, section }: { item: AuthorItem; section: string }) {
+  if (item.links?.length) {
+    return (
+      <>
+        {item.label}{" "}
+        {item.links.map((l, i) => (
+          <span key={l.url}>
+            {i > 0 && (i === item.links!.length - 1 ? " and " : ", ")}
+            <AuthorLink item={l} section={section} />
+          </span>
+        ))}
+      </>
+    );
+  }
+  if (!item.url) return <>{item.label}</>;
+  return (
+    <a
+      href={item.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-accent underline underline-offset-4 hover:text-foreground"
+      onClick={() => track("author_link_opened", { section, href: item.url })}
+    >
+      {item.label}
+      <span aria-hidden="true"> ↗</span>
+      <span className="sr-only"> (opens in a new tab)</span>
+    </a>
+  );
+}
+
+function AuthorList({ items, section }: { items: AuthorItem[]; section: string }) {
+  return (
+    <ul className="mt-3 space-y-2.5">
+      {items.map((item) => (
+        <li key={item.label} className="body-copy text-foreground/85 measure">
+          <AuthorLink item={item} section={section} />
+          {item.detail && <span className="text-muted"> — {item.detail}</span>}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+// The reason the sections exist, with the Zersetzung term linked to its
+// glossary entry. An internal link, so it stays in the same tab.
+function AuthorIntroLine() {
+  const { text, term } = AUTHOR.intro;
+  const at = text.indexOf(term.label);
+  const linked = (
+    <a href={glossaryHref(term.slug)} className="text-accent underline underline-offset-4 hover:text-foreground">
+      {term.label}
+    </a>
+  );
+  return (
+    <p className="body-copy text-foreground/85 mt-8 measure">
+      {at < 0 ? text : <>{text.slice(0, at)}{linked}{text.slice(at + term.label.length)}</>}
+    </p>
+  );
+}
+
 function AuthorView() {
   return (
     <div className="w-full lg:w-[65%] lg:mx-auto">
@@ -791,9 +853,22 @@ function AuthorView() {
         <div>
           <p className="body-copy text-foreground/85 measure">{AUTHOR.summary}</p>
           <p className="body-copy text-foreground/85 mt-4 measure">{AUTHOR.bio}</p>
-          <p className="text-sm text-muted mt-5">{AUTHOR.contact}</p>
         </div>
       </div>
+      <AuthorIntroLine />
+      {AUTHOR.sections.map((sec) => (
+        <section key={sec.title} className="mt-10 border-t border-edge pt-6">
+          <h3 className="font-display text-xl font-semibold text-foreground">{sec.title}</h3>
+          <AuthorList items={sec.items} section={sec.title} />
+          {sec.note && <p className="text-sm text-muted mt-3">{sec.note}</p>}
+          {sec.links && (
+            <div className="mt-5">
+              <h4 className="text-sm font-semibold text-foreground">{sec.links.title}</h4>
+              <AuthorList items={sec.links.items} section={sec.title} />
+            </div>
+          )}
+        </section>
+      ))}
     </div>
   );
 }

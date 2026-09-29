@@ -1,13 +1,118 @@
 // Editable content for the Author, Documents, and Disclaimer sections + extra glossary terms.
 
-export const AUTHOR = {
+// The author page. Sections come from the "Sean Harris Resources" list in the
+// Appendix of the Part 01 Google Doc, Professional through Volunteering, plus
+// the Covid-19 vaccination section Sean added on 29 Sep 2026. Everything after
+// Volunteering in that list is deliberately left off (see
+// project/features/author-page-resources.md). Every url opens in a new tab.
+// This object must stay plain data: scripts/export_site_content_md.mjs
+// evaluates it to write meta/IS_META_author-statement.md.
+export type AuthorLinkRef = { label: string; url: string };
+// `links` puts several linked names in one line, joined with "and", after `label`.
+export type AuthorItem = { label: string; url?: string; links?: AuthorLinkRef[]; detail?: string };
+export type AuthorSection = {
+  title: string;
+  items: AuthorItem[];
+  note?: string;
+  links?: { title: string; items: AuthorItem[] };
+};
+// `intro` sits between the bio and the sections. `term.label` must appear in
+// `text`; that phrase links to the glossary entry `term.slug`.
+export type AuthorIntro = { text: string; term: { label: string; slug: string } };
+export type AuthorInfo = { summary: string; bio: string; intro: AuthorIntro; photo: string; sections: AuthorSection[] };
+
+export const AUTHOR: AuthorInfo = {
   summary:
     "Invisible Ships is a firsthand, in-progress record of what its author describes as neuro-tech terrorism — a daily journal of dated entries and verbatim transcripts alongside technical analysis, spanning 2,800+ pages. It documents external communications and events as they were experienced, preserved as evidence, with the author's copyright and Critical Disclaimer carried throughout.",
   bio:
-    "I'm Sean C. Harris — a displaced tech worker, a father, and a martial-arts black belt. My personal exposure to this threatening phenomenon began in the fall of 2024 and continues through today. This ongoing record is, in part, a request for life-saving assistance; it contains a daily perspective on the neuro-tech terrorism, including manually captured transcripts and technical analysis.",
-  contact: "growthoutcome@gmail.com · +1 (303) 901-2150",
+    "I'm Sean C. Harris, a UX and product designer in Denver with more than 12 years in technology. I'm a father and a martial-arts black belt. Since fall 2024 I have kept a daily record of communications and events I've experienced. Invisible Ships is that record: dated journal entries, transcripts and technical analysis.",
+  // Why the sections below exist. Sean chose this wording on 29 Sep 2026.
+  intro: {
+    text:
+      "The sections below are here so readers can check who I am for themselves. Damaging a person's reputation is a documented part of Zersetzung tactics, and the links are there so anyone can verify these facts directly.",
+    term: { label: "Zersetzung tactics", slug: "zersetzung-tactics" },
+  },
   // Drop a portrait at /public/author.jpg to replace the placeholder.
   photo: "/author.jpg",
+  sections: [
+    {
+      title: "Professional",
+      items: [
+        { label: "UX / Product Designer, lead and senior roles, 12+ years" },
+        { label: "LinkedIn", url: "https://www.linkedin.com/in/growthoutcome" },
+        { label: "Portfolio", url: "https://seanharr.is" },
+        {
+          label: "Founder, Design Leaders meetup, Denver, CO",
+          detail: "Sponsored industry events and workshops on design leadership, 1+ year",
+        },
+      ],
+    },
+    {
+      title: "Self-development",
+      items: [
+        {
+          label: "Graduate, Rick Johnson Private Investigator Academy of the Rockies",
+          detail: "The training was valuable. I have never worked as a PI.",
+        },
+        {
+          label: "Past member, Professional Private Investigators Association of Colorado (PPIAC)",
+          url: "https://ppiac.org",
+        },
+        { label: "Korean martial arts competitor and black belt, Choi Brothers Academy" },
+        {
+          label: "Muay Thai,",
+          links: [
+            { label: "Train Fight Win", url: "https://tfwmma.com" },
+            { label: "Easton Academy", url: "https://eastonbjj.com/" },
+          ],
+          detail: "Denver, CO and Portland, OR, 5–6+ years",
+        },
+        {
+          label: "Spartan Sprint, Breckenridge, CO, 2015",
+          url: "https://www.spartan.com/en/race/profile/3002554",
+          detail: "61st of 1,080",
+        },
+        { label: "Road biking, CrossFit, salsa dancing, photography, writing, volunteering and gardening" },
+        { label: "Salsa classes, La Rumba, Denver, CO", url: "https://larumbadenver.com/dance-lessons/" },
+      ],
+    },
+    {
+      title: "Volunteering",
+      items: [
+        { label: "Althea Center for Engaged Spirituality", url: "https://www.altheacenter.org/" },
+        { label: "Highlands Church of Denver, prayer team, 2 years", url: "https://hchurchdenver.com/" },
+      ],
+    },
+    {
+      title: "Covid-19 vaccination",
+      items: [
+        { label: "Moderna", detail: "2021" },
+        { label: "Pfizer booster", detail: "2022" },
+      ],
+      note: "*Confirmed dates and batch numbers to come",
+      links: {
+        title: "Find a vaccination record",
+        items: [
+          {
+            label: "Immunization record offices by state (CDC)",
+            url: "https://www.cdc.gov/iis/contacts-locate-records/index.html",
+          },
+          {
+            label: "Colorado: myVaccine Record in the myColorado app",
+            url: "https://mycolorado.gov/app-services/myvaccine-record",
+          },
+          {
+            label: "Colorado Immunization Information System (CIIS)",
+            url: "https://cdphe.colorado.gov/immunization/ciis/information-about-ciis-immunization",
+          },
+          {
+            label: "Oregon: Getting immunization records (Oregon Health Authority)",
+            url: "https://www.oregon.gov/oha/ph/preventionwellness/vaccinesimmunization/gettingimmunized/pages/immrecords.aspx",
+          },
+        ],
+      },
+    },
+  ],
 };
 
 export type SiteDoc = { title: string; subline: string; description: string; url: string };

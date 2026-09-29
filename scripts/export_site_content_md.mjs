@@ -262,6 +262,23 @@ function metaDoc(id, title, docType, lines) {
   ].join("\n") + text;
 }
 
+/** The author page's sections as Markdown, links written out in full. */
+function authorSectionLines(sections = []) {
+  const md = (l) => `[${l.label}](${l.url})`;
+  const head = (i) =>
+    i.links?.length
+      ? `${i.label} ${i.links.map(md).join(i.links.length > 2 ? ", " : " and ").replace(/, (?=[^,]*$)/, " and ")}`
+      : i.url ? md(i) : i.label;
+  const item = (i) => `- ${head(i)}${i.detail ? ` — ${i.detail}` : ""}`;
+  const out = [];
+  for (const s of sections) {
+    out.push("", `## ${s.title}`, "", ...s.items.map(item));
+    if (s.note) out.push("", s.note);
+    if (s.links) out.push("", `### ${s.links.title}`, "", ...s.links.items.map(item));
+  }
+  return out;
+}
+
 prepare(OUT_META);
 
 writeFileSync(
@@ -323,7 +340,11 @@ writeFileSync(
     "",
     AUTHOR_INFO.bio,
     "",
-    `Contact: ${AUTHOR_INFO.contact}`,
+    AUTHOR_INFO.intro.text.replace(
+      AUTHOR_INFO.intro.term.label,
+      `[${AUTHOR_INFO.intro.term.label}](https://www.invisibleships.com/glossary/${AUTHOR_INFO.intro.term.slug})`
+    ),
+    ...authorSectionLines(AUTHOR_INFO.sections),
   ])
 );
 

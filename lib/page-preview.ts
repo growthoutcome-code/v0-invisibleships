@@ -147,7 +147,7 @@ const SECTION_BLURB: Partial<Record<PathKind, { title: string; kind: string; blu
   "data-index": { title: "Research", kind: "Section", blurb: "The research verticals and the timeline, drawn from public records and statistical releases." },
   documents: { title: "Documents", kind: "Section", blurb: "Primary documents and filings referenced elsewhere in the archive." },
   disclaimer: { title: "Disclaimer", kind: "Page", blurb: "The Critical Disclaimer on Transcripts and Accusations, in full, plus copyright and terms." },
-  author: { title: "Author", kind: "Page", blurb: "Who compiled the archive and on what basis." },
+  author: { title: "Author", kind: "Page", blurb: "Who compiled the archive: work, training, volunteering and vaccination history." },
   why: { title: "Why", kind: "Page", blurb: "Perceptual set — what the name means and why the framing matters before reading." },
   safety: { title: "Safety", kind: "Page", blurb: "The content warning and crisis resources, on their own page." },
   insights: { title: "Insights", kind: "Page", blurb: "This page: what the site can see about its own traffic, and what it deliberately cannot." },
