@@ -5,7 +5,7 @@ import { X } from "lucide-react";
 import { track } from "@/lib/analytics";
 
 // Bump the suffix to re-show the notice after the wording changes.
-const KEY = "is_insights_disclaimer_v3";
+const KEY = "is_insights_disclaimer_v4";
 
 /**
  * Dismissable notice for /insights.
@@ -32,10 +32,12 @@ const KEY = "is_insights_disclaimer_v3";
  * directly beneath this notice and says GOOGLE and POSTHOG in as many words; a
  * sentence repeating them is a sentence a reader has to get through twice.
  *
- * What is left is the part the page cannot show by itself: that the figures are only
- * as good as the instrumentation behind them, and the one distortion here that is
- * large and specific rather than generic — VPN exits standing in for readers'
- * locations.
+ * Three concepts were drafted and this is the third, chosen 29 September. It covers
+ * the instrumentation, the undercount from blocked counting, and the VPN distortion,
+ * and then does the thing the other two did not: it says how much weight a reader
+ * should put on any one number. That last clause is the point of the notice. A page
+ * of figures invites quoting a figure, and the honest answer here is that the shape
+ * over time survives the measurement error and a single total does not.
  *
  * The author's own visits are deliberately not mentioned, per Sean. That caveat lives
  * on the captions of the Google tiles that carry it, where somebody reading those
@@ -63,10 +65,10 @@ export default function InsightsDisclaimer() {
   return (
     <aside role="note" className="w-full flex items-start gap-6 bg-panel px-6 py-5 mb-10">
       <p className="body-copy text-foreground/85 measure m-0">
-        <strong>About these figures.</strong> They are only as accurate as the way this site
-        was set up to collect them. Locations are read from network addresses, and a visit
-        arriving through a VPN reports the exit point rather than the reader &mdash; so a city
-        on this page is where a connection surfaced, not where somebody is.
+        <strong>About these figures.</strong> They depend on how this site was instrumented,
+        they miss anyone who blocks counting, and they read location from a network address
+        &mdash; which a VPN replaces with its own. Reliable enough to show direction over
+        time, and unreliable enough that no single figure should be quoted on its own.
       </p>
       <button onClick={dismiss} aria-label="Dismiss notice" className="ml-auto shrink-0 text-muted hover:text-foreground">
         <X size={20} />
