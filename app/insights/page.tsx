@@ -300,15 +300,6 @@ export default async function Page({
                 />
               </div>
 
-              <Table title="Pages viewed" unit="views" rows={ga.pages} />
-
-              <Table
-                title="Where visits came from"
-                unit="sessions"
-                rows={ga.locations}
-                note="Google resolves a city from the network address and stops there. It cannot say whether that city is the reader&rsquo;s or a VPN&rsquo;s, because the test for that is comparing the address&rsquo;s time zone against the device&rsquo;s own clock and Google publishes neither signal through its API. The PostHog tab labels every row for exactly that reason. Rows reading &ldquo;Location not resolved&rdquo; are Google&rsquo;s own (not set) &mdash; usually a relay or a corporate proxy, and kept rather than dropped so the list still adds up."
-              />
-
               <section className="mt-10">
                 <SectionHead title="Visits per day" unit={windowLabel} />
                 <TrafficChart
@@ -317,6 +308,16 @@ export default async function Page({
                   note="Google counts every visit, the author&rsquo;s included; there is no author exclusion available on this figure. Downloads are missing before 28 September because the download is confirmed on the server, which a browser tag cannot see."
                 />
               </section>
+
+              <Table title="Pages viewed" unit="views" rows={ga.pages} />
+
+              <Table
+                title="Where visits came from"
+                unit="sessions"
+                rows={ga.locations}
+                note="Every row is labelled, and on this tab the label says how precisely Google resolved the address &mdash; not whether the place can be believed. City unverified means Google named a city but cannot say whose it is. Country only means it got no further than the country. Not resolved means it got nowhere, which is what relays and corporate proxies usually produce &mdash; an absence of data rather than a detection, which is why the label names what happened instead of what it implies. Google cannot go further: telling a reader&rsquo;s city from a VPN&rsquo;s needs the device&rsquo;s own clock compared against its address, and Google publishes neither. The PostHog tab has both, so its labels answer the question this one cannot."
+              />
+
             </>
           ) : (
             <GooglePanel />
@@ -341,6 +342,15 @@ export default async function Page({
                 }
               />
             </div>
+
+            <section className="mt-10">
+              <SectionHead title="Visits per day" unit={windowLabel} />
+              <TrafficChart
+                points={ph.series}
+                label="PostHog"
+                note="The author, preview deployments and non-production hosts are excluded from this line, which is why it sits below Google&rsquo;s for the same days."
+              />
+            </section>
 
             <Table
               title="Pages viewed"
@@ -432,14 +442,6 @@ export default async function Page({
               </section>
             )}
 
-            <section className="mt-10">
-              <SectionHead title="Visits per day" unit={windowLabel} />
-              <TrafficChart
-                points={ph.series}
-                label="PostHog"
-                note="The author, preview deployments and non-production hosts are excluded from this line, which is why it sits below Google&rsquo;s for the same days."
-              />
-            </section>
 
             {ph.d.countries.length > 0 && (
               <Table

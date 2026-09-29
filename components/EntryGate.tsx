@@ -139,7 +139,16 @@ export default function EntryGate() {
   const scrollDoc = useCallback(() => {
     const el = docRef.current;
     if (!el) return;
-    el.scrollBy({ top: Math.max(140, el.clientHeight * 0.85), behavior: "smooth" });
+    // A panelful at a time, and never less than 140px on a short window.
+    //
+    // Instant for readers who asked for less motion: scrollBy's "smooth" does not
+    // consult prefers-reduced-motion on its own, and a control that exists to help
+    // should not be the one thing on the page that ignores that setting.
+    //
+    // Either way this fires onScroll, so the progress rule and the unlock update
+    // exactly as they do when the disclaimer is scrolled by hand.
+    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    el.scrollBy({ top: Math.max(140, el.clientHeight * 0.85), behavior: reduce ? "auto" : "smooth" });
   }, []);
 
   useEffect(() => {

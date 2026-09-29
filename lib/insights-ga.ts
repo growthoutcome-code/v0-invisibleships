@@ -45,14 +45,30 @@ export type GaTraffic = {
   series: DayPoint[];
   pages: Row[];
   /**
-   * Cities, ranked by sessions. NO CONFIDENCE FLAG, and there cannot be one: the
-   * relay labels on the PostHog tab come from comparing the address's time zone with
-   * the device's own clock, and GA publishes neither signal through its API. So this
-   * is a plain ranked list and the page says where the flags live. Ranked by sessions
-   * rather than page views because the question it answers is "how many people",
-   * not "how much reading".
+   * Cities, ranked by sessions, every row carrying a flag.
+   *
+   * THE FLAG GRADES PRECISION, NOT TRUST, and that distinction is the whole design.
+   * The PostHog tab's labels say whether a place is the reader's or a relay's, which
+   * is answered by comparing the address's time zone against the device's own clock.
+   * GA publishes neither signal, so it cannot answer that question for any row, and a
+   * flag here that implied it could would be a lie in the one table where a lie
+   * matters most.
+   *
+   * What GA can be held to is how precisely it resolved the address, which is a real
+   * three-step ladder and worth showing:
+   *
+   *   city unverified — GA named a city. Whose it is, GA cannot say.
+   *   country only    — GA resolved the country and no further.
+   *   not resolved    — GA resolved nothing. This is what relays and corporate
+   *                     proxies usually produce, so it is the closest thing to a
+   *                     relay signal on this tab — but it is an absence of data, not
+   *                     a detection, and the label says so by naming what happened
+   *                     rather than what it implies.
+   *
+   * Ranked by sessions rather than page views because the question it answers is
+   * "how many people", not "how much reading".
    */
-  locations: Row[];
+  locations: (Row & { flag: string })[];
   downloads: number;
 };
 
@@ -195,7 +211,12 @@ export async function getGaTraffic(range: RangeKey = "all"): Promise<GaTraffic |
           const city = clean(r.dimensionValues?.[0]?.value);
           const country = clean(r.dimensionValues?.[1]?.value);
           const label = [city, country].filter(Boolean).join(", ") || "Location not resolved";
-          return { label, n: Number(r.metricValues?.[0]?.value ?? 0) };
+          // Every row gets a flag. An unflagged row in a locations table reads as an
+          // assertion that a reader is in that place, which is exactly what neither
+          // tool can promise — on the PostHog tab that rule is load-bearing, and it
+          // holds here for the same reason.
+          const flag = city ? "city unverified" : country ? "country only" : "not resolved";
+          return { label, flag, n: Number(r.metricValues?.[0]?.value ?? 0) };
         })
         .filter((r) => r.n > 0),
       downloads,
