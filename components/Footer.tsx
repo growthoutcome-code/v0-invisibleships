@@ -76,8 +76,15 @@ const COLUMNS: {
     // "What this site can see" under a heading reading "Insights" was the same
     // phrase twice. It also named a page that no longer calls itself that.
     links: [],
-    blurb:
-      "This archive is about being watched, so it publishes what it records about its own readers \u2014 and what it never records. The count below is every visit, the author\u2019s included.",
+    // PLAIN. Sean, 29 September: "just say something simple... please never say
+    // 'This archive is about being watched...' That sounds crazy." He is right, and
+    // the fault was not only that line: a footer column is a label, not a place to
+    // argue the site's premise. It says which tools produce the number and stops.
+    //
+    // The caveat that went with it is gone too. It lives where somebody reading the
+    // figures will meet it: the note at the top of /insights, and the caption on
+    // every Google tile that includes the author.
+    blurb: "Analytics from Google and PostHog.",
     live: true,
   },
 ];
