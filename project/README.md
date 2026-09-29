@@ -17,6 +17,7 @@ footer, so they live here instead. `project/` is deliberately outside that scan.
 | `project/roadmap.md` | The whole product, in priority order. Where things are going. | Living |
 | `project/decisions/` | One file per settled question, numbered. **Why** things are the way they are. | Permanent |
 | `project/features/` | One file per branch or piece of work in flight. **Tactics.** | Until merged |
+| `project/archive/` | Planning docs that predate this tree, verbatim, with what superseded each. **History, never current state.** | Permanent |
 
 ## The three rules
 

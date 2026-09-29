@@ -18,6 +18,7 @@ is real but unscheduled. **Not doing** exists so the same suggestions stop comin
 | `/insights` restructure — Google leads, pages lead, locations on both tabs | In progress | `features/insights-page-restructure.md` |
 | Ship the 18 unpushed commits | **Blocking everything measured** — none of the gate logging, download logging or `/insights` work has ever been deployed, which is why `gate_events` has zero rows | — |
 | `POSTHOG_PERSONAL_API_KEY` into Vercel | Missing in production, so the live `/insights` has no traffic numbers at all | Vercel env |
+| Push the local `main` | 7 commits unpushed as of 29 Sep, including the whole `/insights` restructure and the gate scroll affordance. Nothing is live. | — |
 
 ## Next
 
