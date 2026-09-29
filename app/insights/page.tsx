@@ -25,6 +25,7 @@ import TrafficChart from "@/components/TrafficChart";
 import PagesTable, { type PageRow } from "@/components/PagesTable";
 import { previewForPath } from "@/lib/page-preview";
 import OptOutSection from "@/components/OptOutSection";
+import InsightsDisclaimer from "@/components/InsightsDisclaimer";
 
 /**
  * The public measurement dashboard.
@@ -282,6 +283,8 @@ export default async function Page({
       <Header />
 
       <main className="w-full max-w-[1400px] mx-auto px-4 py-14 sm:px-6">
+        <InsightsDisclaimer />
+
         <h1 className="font-display m-0 text-[32px] font-bold leading-[1.12] tracking-tight text-foreground sm:text-[40px]">
           Insights
         </h1>
