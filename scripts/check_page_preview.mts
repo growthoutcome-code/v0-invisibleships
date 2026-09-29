@@ -12,7 +12,7 @@
  * sometimes a trailing slash; PostHog reports $pathname. Both see percent-encoding and
  * both see whatever a scanner asks for.
  */
-import { classifyPath } from "../lib/page-preview";
+import { classifyPath, excerptFromMarkdown } from "../lib/page-preview";
 
 let failures = 0;
 const fail = (m: string) => { console.error(`  ✗ ${m}`); failures++; };
@@ -77,8 +77,47 @@ for (const nasty of ["/%zz", "/journal/%e0%a4%a", "/%", "/%%%"]) {
   }
 }
 
+// --- excerpts ----------------------------------------------------------------
+//
+// Guarded because the failures are quiet and land in front of a reader: markup
+// surviving into the panel, a link collapsing to a bare URL, or a cut mid-word.
+const ex: [string, string, string][] = [
+  ["strips bold", "**Thursday 02/27/25** Middle eastern male voice", "Thursday 02/27/25 Middle eastern male voice"],
+  ["strips headings", "### A heading\n\nThe body.", "A heading The body."],
+  ["keeps link text", "See [the ruling](https://example.com/x) for detail.", "See the ruling for detail."],
+  ["drops images", "![alt](a.png) After the image.", "After the image."],
+  ["unwraps autolinks", "Mail <a@b.com> please.", "Mail a@b.com please."],
+  ["drops frontmatter", "---\ntitle: x\n---\nReal text.", "Real text."],
+  ["collapses whitespace", "One.\n\n  Two.\n\n\nThree.", "One. Two. Three."],
+  ["strips bullets", "- first\n- second", "first second"],
+  ["drops code fences", "Before ```js\nvar x=1;\n``` after", "Before after"],
+  ["empty stays empty", "", ""],
+];
+for (const [name, input, expected] of ex) {
+  const got = excerptFromMarkdown(input, 500);
+  if (got !== expected) fail(`excerpt ${name}: got ${JSON.stringify(got)}, expected ${JSON.stringify(expected)}`);
+}
+
+// Truncation: at a word boundary, with an ellipsis, never longer than asked.
+const long = "alpha bravo charlie delta echo foxtrot golf hotel india juliet kilo lima mike";
+for (const max of [10, 20, 40, 60]) {
+  const got = excerptFromMarkdown(long, max);
+  if (got.length > max + 1) fail(`truncate max=${max}: ${got.length} chars for a ${max} limit`);
+  if (!got.endsWith("\u2026")) fail(`truncate max=${max}: no ellipsis on ${JSON.stringify(got)}`);
+  if (/\s\u2026$/.test(got)) fail(`truncate max=${max}: space before the ellipsis`);
+  // The cut must not split a word: everything before the ellipsis must be whole words
+  // of the original.
+  const words = got.slice(0, -1).trim().split(" ");
+  if (words.length > 1 && !long.split(" ").includes(words[words.length - 1])) {
+    fail(`truncate max=${max}: last word ${JSON.stringify(words[words.length - 1])} is cut`);
+  }
+}
+// Text shorter than the limit is returned whole, with no ellipsis.
+if (excerptFromMarkdown("Short enough.", 100) !== "Short enough.") fail("short text was altered");
+if (excerptFromMarkdown("Short enough.", 100).endsWith("\u2026")) fail("short text gained an ellipsis");
+
 if (failures > 0) {
   console.error(`[page-preview] ${failures} failure(s).`);
   process.exit(1);
 }
-console.log(`[page-preview] ${cases.length} paths classified correctly, 4 malformed handled.`);
+console.log(`[page-preview] ${cases.length} paths, 4 malformed, ${ex.length} excerpt rules, 4 truncations.`);

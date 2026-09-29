@@ -86,6 +86,38 @@ export function classifyPath(raw: string): { kind: PathKind; param?: string; pat
   return { kind: "unknown", path: p };
 }
 
+/**
+ * Plain readable prose from a corpus body, cut to length at a word boundary.
+ *
+ * PURE, and guarded — see scripts/check_page_preview.mts. Every failure mode here is
+ * cosmetic until it is not: a stray "**" in a preview is only ugly, but an unclosed
+ * link leaving a bare URL, or a cut landing mid-word, reads as carelessness on a page
+ * whose whole argument is care.
+ */
+export function excerptFromMarkdown(raw: string, max = 320): string {
+  let t = raw || "";
+  t = t.replace(/^\s*---\r?\n[\s\S]*?\r?\n---\r?\n/, "");   // YAML frontmatter
+  t = t.replace(/```[\s\S]*?```/g, " ");                        // fenced code
+  t = t.replace(/!\[[^\]]*\]\([^)]*\)/g, " ");                   // images, before links
+  t = t.replace(/\[([^\]]*)\]\([^)]*\)/g, "$1");                 // links -> their text
+  t = t.replace(/<([^<>\s]+)>/g, "$1");                          // autolinks
+  t = t.replace(/^[ \t]*#{1,6}[ \t]*/gm, "");                    // headings
+  t = t.replace(/^[ \t]*>[ \t]?/gm, "");                         // blockquotes
+  t = t.replace(/^[ \t]*[-*+][ \t]+/gm, "");                     // list bullets
+  t = t.replace(/(\*\*|__|\*|_|`)/g, "");                        // emphasis and inline code
+  t = t.replace(/\s+/g, " ").trim();
+  if (t.length <= max) return t;
+  const cut = t.slice(0, max);
+  const sp = cut.lastIndexOf(" ");
+  // Cut at the last space, whenever there is one. The first version only honoured the
+  // boundary past 60% of the limit, on the theory that an early space meant a very long
+  // token; scripts/check_page_preview.mts showed what that actually does at a small
+  // limit — "alpha bravo" at 10 characters came back as "alpha brav…", splitting a word
+  // to save four characters. A hard cut is for the genuine case only: no space at all.
+  const body = sp > 0 ? cut.slice(0, sp) : cut;
+  return body.replace(/[\s,;:.\u2013\u2014-]+$/, "") + "\u2026";
+}
+
 export type PagePreview = {
   /** The normalised path, which is what the row should display. */
   path: string;
@@ -97,6 +129,10 @@ export type PagePreview = {
   blurb: string;
   /** Small facts worth showing as chips: a date, a location, glossary terms. */
   facts: string[];
+  /** The opening of the page's own text, truncated. Absent where there is no body. */
+  excerpt?: string;
+  /** What the excerpt is, said above it. */
+  excerptLabel?: string;
   /** Where to send the reader, or null when there is nothing to open. */
   href: string | null;
   /** Said plainly when the path is not a page of this site. */
@@ -120,14 +156,14 @@ const SECTION_BLURB: Partial<Record<PathKind, { title: string; kind: string; blu
 /**
  * Resolve one path to something a person can read, and a link to open it.
  *
- * NO JOURNAL EXCERPTS, and that is not an oversight. lib/server-corpus.ts carries the
- * reasoning at length: of the 438 journal documents, 89 open with euthanasia, self-harm
- * or violence language inside their first 220 characters, which is why the home page
- * shows a date, a place and the entry's glossary terms rather than its opening line.
- * The same rule applies here. A preview panel is exactly the surface where an
- * auto-generated first sentence would put that text in front of somebody who asked
- * only "what is this page". Glossary definitions are different and are shown: a
- * definition is written to be read out of context.
+ * EXCERPTS ARE SHOWN, which reverses an earlier call of mine. I had withheld journal
+ * openings because lib/server-corpus.ts withholds them on the home page: 89 of the 438
+ * documents open with euthanasia, self-harm or violence language inside their first 220
+ * characters. Sean, 29 September: "remember, the visitor has already experienced the
+ * gate with disclaimer." That is the distinction the home-page rule actually turns on,
+ * and I had missed it. The gate cannot be dismissed and covers every route, and this
+ * panel opens only on a click made after passing it — unlike the home page, which
+ * paints before the gate arrives over it and is what a crawler sees.
  */
 export function previewForPath(raw: string): PagePreview {
   const { kind, param, path } = classifyPath(raw);
@@ -158,8 +194,9 @@ export function previewForPath(raw: string): PagePreview {
       path,
       title: d.title || d.id,
       kind: "Journal entry",
-      // Deliberately describes rather than quotes — see the note above this function.
-      blurb: "A dated entry in the journal. Its text is not previewed here: journal entries can open on material the site puts a content warning in front of, so this panel names the entry and leaves the reading to the page itself.",
+      blurb: "",
+      excerpt: excerptFromMarkdown(item.body, 340),
+      excerptLabel: "Opening of the entry",
       facts,
       href: path,
     };
@@ -170,13 +207,15 @@ export function previewForPath(raw: string): PagePreview {
     if (!item) {
       return { path, title: param ?? path, kind: "Glossary term", blurb: "No term with this slug is in the glossary.", facts: [], href: null, warning: "This term does not exist." };
     }
-    const def = (item.term.definition || "").trim();
+    const def = excerptFromMarkdown(item.term.definition || "", 340);
     return {
       path,
       title: item.term.term,
       kind: "Glossary term",
-      blurb: def ? (def.length > 320 ? `${def.slice(0, 317)}…` : def) : "This term has no definition recorded yet.",
-      facts: [],
+      blurb: "",
+      excerpt: def || undefined,
+      excerptLabel: "Definition",
+      facts: def ? [] : ["No definition recorded"],
       href: path,
     };
   }

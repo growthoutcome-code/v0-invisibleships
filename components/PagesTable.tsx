@@ -107,7 +107,26 @@ export default function PagesTable({
                   </span>
                 </div>
 
-                <p className="mt-4 text-[15px] leading-relaxed text-foreground/85">{open.preview.blurb}</p>
+                {open.preview.blurb && (
+                  <p className="mt-4 text-[15px] leading-relaxed text-foreground/85">{open.preview.blurb}</p>
+                )}
+
+                {/* The page's own words, truncated. Set apart with a rule rather than
+                    quote marks, because it is an extract and not a quotation — it
+                    begins where the document begins and stops mid-thought, and styling
+                    it as a pull-quote would imply somebody chose it for its meaning. */}
+                {open.preview.excerpt && (
+                  <div className="mt-4 border-l-2 border-edge pl-4">
+                    {open.preview.excerptLabel && (
+                      <p className="font-display m-0 text-[11px] uppercase tracking-[0.14em] text-muted">
+                        {open.preview.excerptLabel}
+                      </p>
+                    )}
+                    <p className="body-copy m-0 mt-2 text-[15px] leading-relaxed text-foreground/90">
+                      {open.preview.excerpt}
+                    </p>
+                  </div>
+                )}
 
                 {open.preview.facts.length > 0 && (
                   <div className="mt-4 flex flex-wrap gap-2">
