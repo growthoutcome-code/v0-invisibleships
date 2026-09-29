@@ -272,9 +272,35 @@ export default async function Page({
   // erroring, so links shared before 29 September still open something sensible.
   const source: SourceKey = toSource(searchParams?.source);
 
-  // ONE TAB, ONE SOURCE. Nothing is fetched for the tab that is not being shown.
-  const ga = source === "ga" ? await getGaTraffic(range) : null;
-  const ph = source === "posthog" ? await loadPostHog(range) : null;
+  // EACH TAB FETCHES ITS OWN SOURCE IN FULL, PLUS THE OTHER ONE'S DAILY SERIES.
+  //
+  // The second series is the faint comparison line on the chart (Sean, 29 September).
+  // Only the series is needed, not the other tool's tiles, tables or locations — so the
+  // Google tab still makes one PostHog query rather than five, and the PostHog tab
+  // reads Google only for its daily numbers.
+  //
+  // Worth knowing if this page ever feels slow: getGaTraffic issues five reports to
+  // answer, and the PostHog tab uses exactly one of them. A series-only variant would
+  // be the first thing to add.
+  const [ga, gaCompare] =
+    source === "ga"
+      ? await Promise.all([getGaTraffic(range), getPostHogSeries(range)])
+      : [null, null];
+  const [ph, phCompare] =
+    source === "posthog"
+      ? await Promise.all([loadPostHog(range), getGaTraffic(range)])
+      : [null, null];
+
+  // Where the comparison panel sends a reader, keeping their date range. Built the
+  // same way InsightsControls builds its tab links — Google is the default source and
+  // so carries no ?source at all, which a hand-spliced query string kept getting wrong.
+  const tabHref = (to: SourceKey) => {
+    const q = new URLSearchParams();
+    if (to !== "ga") q.set("source", to);
+    if (range !== "all") q.set("range", range);
+    const qs = q.toString();
+    return `/insights${qs ? `?${qs}` : ""}`;
+  };
 
   const windowLabel = RANGES[range].label.toLowerCase();
 
@@ -316,6 +342,17 @@ export default async function Page({
                 <TrafficChart
                   points={ga.series}
                   label="Google"
+                  compare={
+                    gaCompare && gaCompare.length > 0
+                      ? {
+                          points: gaCompare,
+                          label: "PostHog",
+                          href: tabHref("posthog"),
+                          blurb:
+                            "PostHog counting the same days. It is the site\u2019s second analytics tool, and it applies filters this line does not \u2014 preview deployments and non-production hosts are kept out of it.",
+                        }
+                      : null
+                  }
                   note="Google counts every visit, the author&rsquo;s included; there is no author exclusion available on this figure. Downloads are missing before 28 September because the download is confirmed on the server, which a browser tag cannot see."
                 />
               </section>
@@ -358,6 +395,17 @@ export default async function Page({
               <TrafficChart
                 points={ph.series}
                 label="PostHog"
+                compare={
+                  phCompare && phCompare.series.length > 0
+                    ? {
+                        points: phCompare.series,
+                        label: "Google",
+                        href: tabHref("ga"),
+                        blurb:
+                          "Google Analytics counting the same days. It is the site\u2019s other analytics tool, and it filters nothing \u2014 every visit it sees is in that line.",
+                      }
+                    : null
+                }
                 note="The author, preview deployments and non-production hosts are excluded from this line, which is why it sits below Google&rsquo;s for the same days."
               />
             </section>
