@@ -16,7 +16,7 @@
  *   - the last tick is at or above the peak, so the line cannot touch the ceiling
  *   - between 3 and 7 ticks, or the axis is either unreadable or useless
  */
-import { axisTicks } from "../components/TrafficChart";
+import { axisTicks, tickIndexes } from "../lib/chart-axis";
 
 let failures = 0;
 const fail = (m: string) => {
@@ -53,8 +53,31 @@ if (thirteen[thirteen.length - 1] < 13) fail(`peak 13 -> [${thirteen.join(", ")}
 const zero = axisTicks(0);
 if (zero[zero.length - 1] < 1) fail(`peak 0 -> [${zero.join(", ")}]: no headroom on an empty chart`);
 
+// --- x axis: which days get a date label -------------------------------------
+//
+// Same reason to guard as the y axis. Sean, 29 September: "we need x tick marks."
+// An off-by-one here does not throw; it silently drops the last date, or repeats one,
+// or returns an index past the end of the array and renders "undefined" on the axis.
+for (const n of [0, 1, 2, 3, 5, 7, 30, 60, 365, 1000]) {
+  for (const want of [2, 3, 5, 8]) {
+    const t = tickIndexes(n, want);
+    const at = `n=${n} want=${want} -> [${t.join(", ")}]`;
+
+    if (n === 0) {
+      if (t.length !== 0) fail(`${at}: no days should mean no ticks`);
+      continue;
+    }
+    if (t[0] !== 0) fail(`${at}: first day is not labelled`);
+    if (t[t.length - 1] !== n - 1) fail(`${at}: last day is not labelled`);
+    if (t.some((v) => !Number.isInteger(v))) fail(`${at}: non-integer index`);
+    if (t.some((v) => v < 0 || v > n - 1)) fail(`${at}: index outside the day array`);
+    if (t.some((v, i) => i > 0 && v <= t[i - 1])) fail(`${at}: not strictly increasing`);
+    if (t.length > Math.max(2, Math.min(want, n))) fail(`${at}: more ticks than asked for`);
+  }
+}
+
 if (failures > 0) {
   console.error(`[axis-ticks] ${failures} failure(s).`);
   process.exit(1);
 }
-console.log(`[axis-ticks] ${cases.length} axis scales correct (0 to 250,000).`);
+console.log(`[axis-ticks] ${cases.length} y scales and 40 x tick sets correct.`);

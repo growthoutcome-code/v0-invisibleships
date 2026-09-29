@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MeasurementNotes from "@/components/MeasurementNotes";
-import StandingDisclaimer from "@/components/StandingDisclaimer";
 import { getInsights } from "@/lib/insights";
 import {
   getTraffic,
@@ -471,8 +470,6 @@ export default async function Page({
             </button>
           </MeasurementNotes>
         </div>
-
-        <StandingDisclaimer className="mt-10 max-w-3xl" />
 
         <OptOutSection />
       </main>
