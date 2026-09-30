@@ -7,6 +7,7 @@ basis: documented
 origin: ai
 theme: procurement
 audience: [investigators, policy, press]
+topics: [violence, law-government]
 verification: unverified
 generated_by: scripts/export_concepts_md.mjs
 word_count: 559

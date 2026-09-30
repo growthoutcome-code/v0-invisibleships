@@ -7,6 +7,7 @@ basis: documented
 origin: author
 theme: coercion
 audience: [household, investigators]
+topics: [harassment, speculation, obedience-coercion, law-government, family-network]
 verification: unverified
 generated_by: scripts/export_concepts_md.mjs
 word_count: 574

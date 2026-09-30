@@ -7,6 +7,7 @@ basis: structural
 origin: ai
 theme: record
 audience: [press]
+topics: [law-government]
 verification: verified
 generated_by: scripts/export_concepts_md.mjs
 word_count: 256

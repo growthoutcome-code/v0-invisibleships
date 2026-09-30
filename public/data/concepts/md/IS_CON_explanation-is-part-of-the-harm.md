@@ -7,6 +7,7 @@ basis: documented
 origin: author
 theme: coercion
 audience: [household, clinicians]
+topics: [proposed-solutions, speculation, obedience-coercion, law-government]
 verification: unverified
 generated_by: scripts/export_concepts_md.mjs
 word_count: 554

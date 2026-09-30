@@ -7,6 +7,7 @@ basis: testimony
 origin: author
 theme: neurotech
 audience: [household, investigators, press]
+topics: [speculation, technology, law-government]
 verification: unverified
 generated_by: scripts/export_concepts_md.mjs
 word_count: 1193

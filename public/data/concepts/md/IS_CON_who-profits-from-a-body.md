@@ -7,6 +7,7 @@ basis: documented
 origin: ai
 theme: surveillance
 audience: [policy, press]
+topics: [law-government]
 verification: unverified
 generated_by: scripts/export_concepts_md.mjs
 word_count: 566

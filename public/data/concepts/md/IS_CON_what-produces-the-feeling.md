@@ -7,6 +7,7 @@ basis: documented
 origin: author
 theme: experience
 audience: [household, clinicians]
+topics: [harassment, speculation, technology, euthanization, obedience-coercion, health-effects]
 verification: unverified
 generated_by: scripts/export_concepts_md.mjs
 word_count: 816

@@ -7,6 +7,7 @@ basis: documented
 origin: ai
 theme: health
 audience: [clinicians]
+topics: [proposed-solutions, health-effects]
 verification: verified
 generated_by: scripts/export_concepts_md.mjs
 word_count: 383

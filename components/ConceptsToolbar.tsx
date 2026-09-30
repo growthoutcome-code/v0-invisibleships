@@ -10,6 +10,8 @@ import {
   ORIGIN_LABEL, BASIS_LABEL, THEME_LABEL, AUDIENCE_LABEL,
   type Filters, type Origin, type Basis, type Theme, type Audience,
 } from "@/lib/concepts";
+import { THEMES } from "@/lib/themes";
+import FilterGroups, { type FilterGroup } from "@/components/FilterGroups";
 
 /**
  * The concept list's controls (Sean, 2026-08-26). Replaces ConceptsNav.
@@ -31,12 +33,23 @@ import {
  * "Search & filter" panel — one idiom on the site, not two.
  */
 
+// Topic = the journal's themes (lib/themes.ts), offered where at least one
+// concept carries it, so a subject can be followed from the journal to here.
+const TOPIC_OPTIONS = Object.keys(THEMES)
+  .filter((t) => CONCEPTS.some((c) => c.topics.includes(t)))
+  .sort((a, b) => CONCEPTS.filter((c) => c.topics.includes(b)).length - CONCEPTS.filter((c) => c.topics.includes(a)).length)
+  .map((v) => ({ v, l: THEMES[v] }));
+
 const GROUPS: {
-  key: "origin" | "basis" | "theme" | "audience";
+  key: "origin" | "basis" | "theme" | "audience" | "topic";
   label: string;
   hint: string;
   options: { v: string; l: string }[];
 }[] = [
+  {
+    key: "topic", label: "Topic", hint: "The journal's themes — the same filter there shows the entries.",
+    options: TOPIC_OPTIONS,
+  },
   {
     key: "theme", label: "What it is about", hint: "Subject. Carries no evidential weight.",
     options: (["record","procurement","surveillance","neurotech","coercion","health","experience"] as Theme[])
@@ -59,7 +72,7 @@ const GROUPS: {
 ];
 
 const LABEL_OF: Record<string, Record<string, string>> = {
-  origin: ORIGIN_LABEL, basis: BASIS_LABEL, theme: THEME_LABEL, audience: AUDIENCE_LABEL,
+  origin: ORIGIN_LABEL, basis: BASIS_LABEL, theme: THEME_LABEL, audience: AUDIENCE_LABEL, topic: THEMES,
 };
 
 export default function ConceptsToolbar({
@@ -77,10 +90,22 @@ export default function ConceptsToolbar({
     track("concepts_filtered", { ...next, q: next.q ? "set" : "" });
   };
 
-  const active = GROUPS
-    .map((g) => ({ key: g.key, value: filters[g.key] }))
-    .filter((a) => a.value !== "all");
+  // One pill per chosen value; groups are multi-select (Sean, 30 Sep 2026).
+  const active = GROUPS.flatMap((g) => (filters[g.key] as string[]).map((v) => ({ key: g.key, value: v })));
   const count = active.length + (filters.q ? 1 : 0);
+  const MATCHABLE = new Set(["audience", "topic"]);
+  const groups: FilterGroup[] = GROUPS.map((g) => {
+    const values = filters[g.key] as string[];
+    const m = MATCHABLE.has(g.key) ? (g.key as "audience" | "topic") : null;
+    return {
+      key: g.key, label: g.label, hint: g.hint, options: g.options, values,
+      toggle: (v: string) => set({ [g.key]: values.includes(v) ? values.filter((x) => x !== v) : [...values, v] } as Partial<Filters>),
+      clear: () => set({ [g.key]: [] } as Partial<Filters>),
+      matchable: !!m,
+      match: m ? filters.match[m] : undefined,
+      setMatch: m ? (mm: "any" | "all") => set({ match: { ...filters.match, [m]: mm } }) : undefined,
+    };
+  });
 
   return (
     <div className="mb-10">
@@ -127,9 +152,9 @@ export default function ConceptsToolbar({
             </button>
           )}
           {active.map((a) => (
-            <button key={a.key} type="button" onClick={() => set({ [a.key]: "all" } as Partial<Filters>)}
+            <button key={`${a.key}:${a.value}`} type="button" onClick={() => set({ [a.key]: (filters[a.key] as string[]).filter((x) => x !== a.value) } as Partial<Filters>)}
               className="inline-flex items-center gap-1.5 px-2.5 py-1 text-[13px] border border-edge text-foreground hover:border-foreground">
-              {LABEL_OF[a.key][a.value as string]} <X size={13} aria-hidden />
+              {LABEL_OF[a.key][a.value]} <X size={13} aria-hidden />
               <span className="sr-only">Remove filter</span>
             </button>
           ))}
@@ -141,37 +166,12 @@ export default function ConceptsToolbar({
       )}
 
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetContent side="right" className="w-full max-w-sm p-5">
+        <SheetContent side="right" className="w-full max-w-sm p-5 overflow-y-auto">
           <SheetHeader className="mb-5">
             <SheetTitle className="text-[20px]">Filter concepts</SheetTitle>
           </SheetHeader>
 
-          <div className="space-y-7">
-            {GROUPS.map((g) => (
-              <fieldset key={g.key} className="border-0 p-0 m-0">
-                <legend className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground mb-1 p-0">
-                  {g.label}
-                </legend>
-                <p className="text-[14px] text-muted m-0 mb-3">{g.hint}</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {[{ v: "all", l: "All" }, ...g.options].map((o) => {
-                    const on = filters[g.key] === o.v;
-                    return (
-                      <button key={o.v} type="button"
-                        onClick={() => set({ [g.key]: o.v } as Partial<Filters>)}
-                        aria-pressed={on}
-                        className={`px-2.5 py-1.5 text-[14px] border transition-colors ${
-                          on ? "bg-foreground text-background border-foreground"
-                             : "border-edge text-muted hover:text-foreground hover:border-foreground"
-                        }`}>
-                        {o.l}
-                      </button>
-                    );
-                  })}
-                </div>
-              </fieldset>
-            ))}
-          </div>
+          <FilterGroups groups={groups} />
 
           <div className="flex items-center gap-3 mt-8 pt-5 border-t border-edge">
             <button type="button" onClick={() => setOpen(false)}

@@ -109,7 +109,7 @@ export default function ResearchHero({
                 </p>
                 <p className="body-copy text-foreground/75 measure m-0 mb-3">{AUDIENCE_NOTE[a.key]}</p>
                 <button type="button"
-                  onClick={() => { track("hero_audience_picked", { audience: a.key }); onExplore({ audience: a.key }); }}
+                  onClick={() => { track("hero_audience_picked", { audience: a.key }); onExplore({ audience: [a.key] }); }}
                   className="text-[16px] text-accent underline underline-offset-4 text-left">
                   Start with: {lead.label}
                 </button>
@@ -129,7 +129,7 @@ export default function ResearchHero({
           section. Pick a subject to open it.
         </p>
         <BarRows rows={themeRows} total={CONCEPTS.length}
-          onPick={(k) => { track("hero_theme_picked", { theme: k }); onExplore({ theme: k as Theme }); }}
+          onPick={(k) => { track("hero_theme_picked", { theme: k }); onExplore({ theme: [k as Theme] }); }}
           caption="Concepts by subject. Hover a row for what it covers" />
       </section>
     </div>

@@ -234,7 +234,9 @@ const AXES = ["basis", "origin", "theme", "audience"];
 {
   const declared = new Set();
   for (const c of CONCEPTS) for (const k of Object.keys(c)) declared.add(k);
-  const known = new Set([...AXES, "id", "title", "body", "evidence", "questions",
+  // `topics` (the journal's themes, lib/themes.ts) is exported as its own
+  // frontmatter line below; it is a subject tag, not a fifth evidential axis.
+  const known = new Set([...AXES, "topics", "id", "title", "body", "evidence", "questions",
     "references", "referencesNote", "verification", "disclaimer", "comments",
     "authorStatement", "aiAssessment"]);
   const unknown = [...declared].filter((k) => !known.has(k));
@@ -316,6 +318,7 @@ function toMarkdown(c) {
     `origin: ${c.origin}`,
     `theme: ${c.theme}`,
     `audience: [${(c.audience || []).join(", ")}]`,
+    `topics: [${(c.topics || []).join(", ")}]`,
     `verification: ${c.verification || "verified"}`,
     "generated_by: scripts/export_concepts_md.mjs",
     `word_count: ${words(body)}`,

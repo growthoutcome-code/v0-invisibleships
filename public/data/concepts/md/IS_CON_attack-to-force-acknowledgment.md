@@ -7,6 +7,7 @@ basis: documented
 origin: author
 theme: coercion
 audience: [investigators]
+topics: [speculation, obedience-coercion, violence, terrorism, rescue-announcements]
 verification: unverified
 generated_by: scripts/export_concepts_md.mjs
 word_count: 567

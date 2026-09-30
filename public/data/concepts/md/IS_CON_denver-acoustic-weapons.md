@@ -7,6 +7,7 @@ basis: documented
 origin: author
 theme: coercion
 audience: [household, investigators]
+topics: [proposed-solutions, technology, violence, law-government, health-effects]
 verification: unverified
 generated_by: scripts/export_concepts_md.mjs
 word_count: 701

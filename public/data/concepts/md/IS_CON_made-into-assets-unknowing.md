@@ -7,6 +7,7 @@ basis: documented
 origin: author
 theme: surveillance
 audience: [household, investigators]
+topics: [technology, surveillance, law-government]
 verification: unverified
 generated_by: scripts/export_concepts_md.mjs
 word_count: 586

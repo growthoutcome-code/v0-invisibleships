@@ -84,6 +84,40 @@ export async function getBody(id: string, source: "supabase" | "bundled"): Promi
 }
 
 /**
+ * Journal documents whose TEXT matches a search (Sean, 30 Sep: bring the journal
+ * search back and make it work). Supabase: the existing `documents.fts` column —
+ * a generated full-text index over title + body, GIN-indexed — queried with
+ * websearch syntax, so "shelter euthanization", "\"exact phrase\"" and "-word"
+ * all work. No outside service is involved. Bundled fallback: the same syntax,
+ * matched as plain text (case-insensitive, no word stemming). Returns ids; the caller also matches
+ * title, id and location itself.
+ */
+export async function searchJournalText(q: string, source: "supabase" | "bundled"): Promise<Set<string>> {
+  const query = q.trim();
+  if (!query) return new Set();
+  if (source === "supabase") {
+    const sb = getSupabase();
+    if (sb) {
+      const { data, error } = await sb.from("documents").select("id")
+        .eq("collection", "journal").textSearch("fts", query, { type: "websearch", config: "english" }).limit(2000);
+      if (!error && data) return new Set((data as { id: string }[]).map((r) => r.id));
+    }
+  }
+  // Same syntax as the Supabase path: "a phrase", -excluded, everything else required.
+  const need: string[] = [], not: string[] = [];
+  for (const m of query.toLowerCase().matchAll(/(-?)"([^"]+)"|(-?)(\S+)/g)) {
+    const neg = (m[1] || m[3]) === "-", term = (m[2] ?? m[4] ?? "").trim();
+    if (term && term !== "or") (neg ? not : need).push(term);
+  }
+  const hits = new Set<string>();
+  for (const [id, body] of Object.entries(_bodies)) {
+    const b = body.toLowerCase();
+    if (need.every((w) => b.includes(w)) && !not.some((w) => b.includes(w))) hits.add(id);
+  }
+  return hits;
+}
+
+/**
  * An entry's text with its recordings' transcripts joined on, for the reader.
  * Anything that is not a journal entry returns its own body, unchanged.
  * See lib/entry-body.ts for why.

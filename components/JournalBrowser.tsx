@@ -1,8 +1,10 @@
 "use client";
-import { entryTypeLabel, withoutEntryType } from "@/lib/entry-type";
+import { entryTypeLabel, withoutEntryType, ENTRY_TYPES } from "@/lib/entry-type";
+import { THEMES, isOrg } from "@/lib/themes";
+import FilterGroups, { passes, type FilterGroup } from "@/components/FilterGroups";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { loadDataset, getBody, getEntryBody } from "@/lib/data";
+import { loadDataset, getBody, getEntryBody, searchJournalText } from "@/lib/data";
 import type { Dataset, Doc } from "@/lib/types";
 import { track } from "@/lib/analytics";
 import Header, { type Tab } from "@/components/Header";
@@ -15,7 +17,7 @@ import { Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle } from "@/co
 import { Dialog, DialogContent, DialogHeader, DialogBody, DialogFooter, DialogTitle } from "@/components/ui/dialog";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationPrevious, PaginationNext, PaginationEllipsis } from "@/components/ui/pagination";
-import { ChevronLeft, ChevronRight, Volume2, List } from "lucide-react";
+import { ChevronLeft, ChevronRight, Volume2, List, SlidersHorizontal, Search, X } from "lucide-react";
 import CopyrightTerms from "@/components/CopyrightTerms";
 import ShareMenu from "@/components/ShareMenu";
 import { Transcript } from "@/components/Transcript";
@@ -84,9 +86,21 @@ export default function JournalBrowser({
     initialSub ?? (initialTab === "concepts" ? "concepts" : "timeline")
   );
 
+  // Journal search + filter (Sean, 30 Sep): the Concepts pattern — the list
+  // follows the search box as you type; the Filter panel holds entry type, part,
+  // year, topic, statement type and audio.
   const [q, setQ] = useState(""); const [dFrom, setDFrom] = useState(""); const [dTo, setDTo] = useState("");
-  const [part, setPart] = useState(""); const [loc, setLoc] = useState("");
-  const [cat, setCat] = useState(""); const [stype, setSType] = useState(""); const [audioOnly, setAudioOnly] = useState(false);
+  // Chosen values per filter group (multi-select, Sean 30 Sep), and Any/All for the
+  // groups where an entry can carry several values. Topic defaults to All: the tags
+  // are broad, so two topics usually mean "entries about both".
+  const [fsel, setFsel] = useState<Record<string, string[]>>({});
+  const [fmatch, setFmatch] = useState<Record<string, "any" | "all">>({ theme: "all", org: "any", gterm: "any", stype: "any" });
+  const toggleF = (k: string, v: string) => setFsel((s) => ({ ...s, [k]: (s[k] || []).includes(v) ? (s[k] || []).filter((x) => x !== v) : [...(s[k] || []), v] }));
+  const clearF = (k: string) => setFsel((s) => ({ ...s, [k]: [] }));
+  // ids whose TEXT matches `q` (lib/data.ts searchJournalText). The previous hits
+  // stay until new ones arrive, so the list does not flash empty while typing.
+  const [textHits, setTextHits] = useState<Set<string>>(new Set());
+  const [searching, setSearching] = useState(false);
   const [gcat, setGcat] = useState("");
 
   // The feed is a window of PAGE_SIZE entries starting at `start` (an index into
@@ -199,27 +213,65 @@ export default function JournalBrowser({
     [ds]
   );
   const parts = useMemo(() => Array.from(new Set(journal.map((d) => d.part).filter((p): p is number => p != null))).sort(), [journal]);
-  const locs = useMemo(() => Array.from(new Set(journal.map((d) => d.location).filter((l): l is string => !!l))).sort(), [journal]);
-  const topics = useMemo(() => (ds?.categories || []).filter((c) => c.kind === "category").map((c) => c.slug).sort(), [ds]);
+  const dateSpan = useMemo(() => {
+    const ds_ = journal.map((d) => d.entry_date || "").filter(Boolean).sort();
+    return { min: ds_[0] || "", max: ds_[ds_.length - 1] || "" };
+  }, [journal]);
+  // Themes and organizations named (Sean, 30 Sep): tags assigned by reading each
+  // document — project/theme-tags.md. Counts decide the order; organizations
+  // named in fewer than 5 documents are left out of the chips (the search finds them).
+  const tagCount = useMemo(() => {
+    const n: Record<string, number> = {};
+    for (const d of journal) for (const c of ds?.docCats[d.id] || []) n[c] = (n[c] || 0) + 1;
+    return n;
+  }, [journal, ds]);
+  const themeOpts = useMemo(() => Object.keys(THEMES).filter((t) => tagCount[t]).sort((a, b) => tagCount[b] - tagCount[a]).map((t) => ({ v: t, l: THEMES[t] })), [tagCount]);
+  const orgOpts = useMemo(() => (ds?.categories || []).filter((c: any) => isOrg(c.slug) && (tagCount[c.slug] || 0) >= 5)
+    .sort((a: any, b: any) => tagCount[b.slug] - tagCount[a.slug]).map((c: any) => ({ v: c.slug, l: c.label })), [ds, tagCount]);
+  // Entry type replaces the old Topic list, whose options were every category in
+  // the archive: 9 of its 16 (legal, analysis, glossary…) matched no journal page.
+  const etypes = useMemo(() => Object.keys(ENTRY_TYPES).filter((t) => journal.some((d) => (ds?.docCats[d.id] || []).includes(t))), [journal, ds]);
+  // Topic = glossary terms the journal mentions, most-mentioned first. Terms on
+  // fewer than 10 pages (three, on 30 Sep) are left out: a chip that finds one
+  // or two entries is noise; the search box finds those.
+  const gterms = useMemo(() => {
+    const n: Record<string, number> = {};
+    for (const d of journal) for (const g of ds?.docGloss[d.id] || []) n[g] = (n[g] || 0) + 1;
+    return (ds?.glossary || []).filter((t: any) => (n[t.slug] || 0) >= 10)
+      .sort((a: any, b: any) => n[b.slug] - n[a.slug]).map((t: any) => ({ v: t.slug, l: cap(t.term) }));
+  }, [journal, ds]);
   const stypes = useMemo(() => (ds?.categories || []).filter((c) => c.kind === "statement_type").map((c) => c.slug).sort(), [ds]);
+
+  useEffect(() => {
+    if (!ds || !q.trim()) { setTextHits(new Set()); setSearching(false); return; }
+    let alive = true; setSearching(true);
+    const t = setTimeout(() => {
+      searchJournalText(q, ds.source)
+        .then((h) => { if (alive) { setTextHits(h); setSearching(false); } })
+        .catch(() => { if (alive) { setTextHits(new Set()); setSearching(false); } });
+      track("journal_search", { length: q.trim().length });
+    }, 300);
+    return () => { alive = false; clearTimeout(t); };
+  }, [q, ds]);
 
   const filtered = useMemo(() => {
     const dc = ds?.docCats || {};
     let r = journal.slice();
-    if (q.trim()) { const s = q.toLowerCase(); r = r.filter((d) => (d.title || "").toLowerCase().includes(s) || d.id.toLowerCase().includes(s) || (d.location || "").toLowerCase().includes(s)); }
+    if (q.trim()) { const s = q.trim().toLowerCase(); r = r.filter((d) => (d.title || "").toLowerCase().includes(s) || d.id.toLowerCase().includes(s) || (d.location || "").toLowerCase().includes(s) || !!textHits?.has(d.id)); }
     if (dFrom) r = r.filter((d) => (d.entry_date || "") >= dFrom);
-    if (dTo) r = r.filter((d) => (d.entry_date || "") <= dTo);
-    if (part) r = r.filter((d) => String(d.part) === part);
-    if (loc) r = r.filter((d) => d.location === loc);
-    if (audioOnly) r = r.filter((d) => !!d.audio_url);
-    if (cat) r = r.filter((d) => (dc[d.id] || []).includes(cat));
-    if (stype) r = r.filter((d) => (dc[d.id] || []).includes(stype));
+    if (dTo) r = r.filter((d) => !!d.entry_date && d.entry_date <= dTo);
+    const valuesOf = (d: Doc, k: string): string[] =>
+      k === "gterm" ? ds?.docGloss[d.id] || []
+      : k === "part" ? (d.part != null ? [String(d.part)] : [])
+      : k === "audio" ? (d.audio_url ? ["1"] : [])
+      : dc[d.id] || [];
+    for (const [k, want] of Object.entries(fsel)) if (want.length) r = r.filter((d) => passes(valuesOf(d, k), want, fmatch[k] || "any"));
     const dir = sort === "newest" ? -1 : 1;
     r.sort((a, b) => dir * ((a.entry_date || "").localeCompare(b.entry_date || "") || (a.recording_index || 0) - (b.recording_index || 0)));
     return r;
-  }, [journal, ds, q, dFrom, dTo, part, loc, audioOnly, cat, stype, sort]);
+  }, [journal, ds, q, textHits, dFrom, dTo, fsel, fmatch, sort]);
 
-  useEffect(() => { setStart(0); }, [q, dFrom, dTo, part, loc, cat, stype, audioOnly, sort]);
+  useEffect(() => { setStart(0); }, [q, dFrom, dTo, fsel, fmatch, sort]);
   useEffect(() => { if (tab === "data" || tab === "concepts") setDataMounted(true); }, [tab]);
 
   // Pages are counted from the window: the entries above it make ceil(start/10)
@@ -273,7 +325,30 @@ export default function JournalBrowser({
   const selDoc = ds?.docs.find((d) => d.id === sel) || null;
   const selIdx = selDoc ? filtered.findIndex((d) => d.id === selDoc.id) : -1;
 
-  const resetFilters = () => { setQ(""); setDFrom(""); setDTo(""); setPart(""); setLoc(""); setCat(""); setSType(""); setAudioOnly(false); };
+  const resetFilters = () => { setQ(""); setDFrom(""); setDTo(""); setFsel({}); };
+  const grp = (key: string, label: string, options: { v: string; l: string }[], extra: Partial<FilterGroup> = {}): FilterGroup => ({
+    key, label, options, values: fsel[key] || [], toggle: (v) => toggleF(key, v), clear: () => clearF(key),
+    match: fmatch[key], setMatch: (m) => setFmatch((s) => ({ ...s, [key]: m })), ...extra,
+  });
+  // The panel's groups. Topic is the same vocabulary as the Concepts panel's Topic.
+  const filterGroups: FilterGroup[] = [
+    grp("theme", "Topic", themeOpts, { matchable: true, hint: "What an entry contains, assigned by reading it. It says what was recorded, not that it is true." }),
+    grp("cat", "Entry type", etypes.map((t) => ({ v: t, l: ENTRY_TYPES[t] }))),
+    grp("dates", "Dates", [], { dates: { from: dFrom, to: dTo, setFrom: setDFrom, setTo: setDTo, min: dateSpan.min, max: dateSpan.max } }),
+    grp("part", "Part", parts.map((x) => ({ v: String(x), l: `Part ${x}` })), { hint: "The four Google Docs. Discovery notes are in none of them." }),
+    grp("org", "Organizations named in statements", orgOpts, { matchable: true, hint: "Named in the text. A name here is not a claim against the organization — see the disclaimer." }),
+    grp("gterm", "Glossary term", gterms, { matchable: true, hint: "Entries that mention a glossary term." }),
+    grp("stype", "Statement type", stypes.map((x) => ({ v: x, l: cap(x) })), { matchable: true }),
+    grp("audio", "Audio", [{ v: "1", l: "Has audio" }]),
+  ];
+  const pills = [
+    ...filterGroups.flatMap((g) => g.values.map((v) => ({
+      key: `${g.key}:${v}`, label: g.options.find((o) => o.v === v)?.l || v, clear: () => toggleF(g.key, v),
+    }))),
+    ...(dFrom ? [{ key: "dFrom", label: `From ${dFrom}`, clear: () => setDFrom("") }] : []),
+    ...(dTo ? [{ key: "dTo", label: `To ${dTo}`, clear: () => setDTo("") }] : []),
+  ];
+  const activeFilters = pills.length + (q.trim() ? 1 : 0);
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
@@ -353,7 +428,7 @@ export default function JournalBrowser({
         ) : tab === "disclaimer" ? (
           <DisclaimerView />
         ) : (
-          <div className={selDoc ? "" : "lg:grid lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-x-8 lg:items-start"}>
+          <div className={selDoc || months.length < 2 ? "" : "lg:grid lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-x-8 lg:items-start"}>
             {!selDoc && months.length > 1 && (
               <SideNav
                 mode="index"
@@ -374,10 +449,16 @@ export default function JournalBrowser({
                   onPrev={selIdx > 0 ? () => setSel(filtered[selIdx - 1].id) : undefined}
                   onNext={selIdx >= 0 && selIdx < filtered.length - 1 ? () => setSel(filtered[selIdx + 1].id) : undefined}
                 />
-              ) : (
+              ) : (<>
+                <JournalToolbar
+                  q={q} setQ={setQ} groups={filterGroups} pills={pills} count={activeFilters}
+                  open={panelOpen} setOpen={(o: boolean) => { setPanelOpen(o); if (o) track("filter_opened", {}); }}
+                  onClearAll={resetFilters} shown={filtered.length} of={journal.length} searching={searching}
+                />
                 <Feed items={pageItems} excerpts={excerpts} docCats={ds?.docCats || {}} total={filtered.length} from={start + 1}
+                  filteredOf={activeFilters ? journal.length : 0} searching={false} onClear={resetFilters}
                   page={page} totalPages={totalPages} setPage={setPage} onOpen={setSel} onSearch={() => setPanelOpen(true)} />
-              )}
+              </>)}
             </div>
           </div>
         )}
@@ -414,13 +495,6 @@ export default function JournalBrowser({
 
       <Footer onNav={(t) => { setTab(t); setSel(null); setGsel(null); }} />
 
-      <FilterPanel
-        open={panelOpen} onOpenChange={setPanelOpen} resultCount={filtered.length}
-        q={q} setQ={setQ} dFrom={dFrom} setDFrom={setDFrom} dTo={dTo} setDTo={setDTo}
-        part={part} setPart={setPart} loc={loc} setLoc={setLoc} cat={cat} setCat={setCat}
-        stype={stype} setSType={setSType} audioOnly={audioOnly} setAudioOnly={setAudioOnly}
-        parts={parts} locs={locs} topics={topics} stypes={stypes} onReset={resetFilters}
-      />
     </div>
   );
 }
@@ -439,13 +513,15 @@ function TitleBand({ title, actions }: { title: string; actions?: React.ReactNod
 }
 
 /* ---------- Feed ---------- */
-function Feed({ items, excerpts, docCats, total, from, page, totalPages, setPage, onOpen, onSearch }: any) {
+function Feed({ items, excerpts, docCats, total, from, filteredOf, searching, onClear, page, totalPages, setPage, onOpen, onSearch }: any) {
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
         <span />
         <div className="flex items-center gap-2">
-          <span className="text-xs text-muted">{total} entries{items.length ? ` · ${from}–${from + items.length - 1}` : ""}</span>
+          <span className="text-xs text-muted">
+            {items.length ? `${from}–${from + items.length - 1} of ${total}` : ""}
+          </span>
           <ShareMenu title={`${SITE} — Journal`} align="right" />
         </div>
       </div>
@@ -461,12 +537,12 @@ function Feed({ items, excerpts, docCats, total, from, page, totalPages, setPage
             <div className="text-[12px] text-muted mt-0.5">{d.entry_date}{d.weekday ? ` · ${d.weekday}` : ""}{d.recording_time ? ` · ${d.recording_time}` : ""}</div>
             <p className="mt-2.5 body-copy text-foreground/80 line-clamp-3">{excerpts[d.id] ?? "…"}</p>
             <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-[11px] uppercase tracking-wide text-muted">
-              {withoutEntryType(docCats[d.id]).slice(0, 4).map((c: string) => <span key={c}>{cap(c)}</span>)}
+              {(docCats[d.id] || []).filter((c: string) => c in THEMES).slice(0, 4).map((c: string) => <span key={c}>{THEMES[c]}</span>)}
             </div>
             <div className="mt-3 text-accent text-sm">Read →</div>
           </Link>
         ))}
-        {items.length === 0 && <div className="text-muted text-sm py-10 text-center">No entries match. <button onClick={onSearch} className="text-accent underline">Adjust filters</button></div>}
+        {items.length === 0 && !searching && <div className="text-muted text-sm py-10 text-center">No entries match. <button onClick={onSearch} className="text-accent underline">Adjust filters</button></div>}
       </div>
       {totalPages > 1 && <Pager page={page} totalPages={totalPages} setPage={setPage} />}
     </div>
@@ -510,7 +586,7 @@ function Reader({ doc, body, bodyLoading, cats, gloss, onBack, onPrev, onNext }:
       </div>
       <div className="flex flex-wrap items-center gap-2 text-[11px] text-muted mb-2">
         <span className="font-mono">{doc.id}</span>
-        {cats.map((c: string) => <span key={c} className="uppercase tracking-wide">{cap(c)}</span>)}
+        {cats.filter((c: string) => !isOrg(c)).map((c: string) => <span key={c} className="uppercase tracking-wide">{THEMES[c] || ENTRY_TYPES[c] || cap(c)}</span>)}
       </div>
       <h1 className="font-display text-[21px] font-semibold text-foreground mb-1 leading-tight">{doc.title || doc.id}</h1>
       <div className="text-sm text-muted mb-5">
@@ -714,47 +790,69 @@ function JournalPeek({ items, source, onView, onOpen }: any) {
 }
 
 /* ---------- Filter panel (slide-over) ---------- */
-const ALL_VALUE = "__all__";
-function Sel({ label, value, onChange, options, all }: any) {
+/* ---------- Journal search + filter toolbar ----------
+ * The Concepts pattern (components/ConceptsToolbar.tsx), so the site has one
+ * idiom (Sean, 30 Sep: "Let's just use the concepts filter"). Search narrows
+ * the list as you type; Filter opens a panel of chip groups; active choices
+ * read back as removable pills; "N of 417" says how much is shown. Not sticky.
+ */
+function JournalToolbar({ q, setQ, groups, pills, count, open, setOpen, onClearAll, shown, of, searching }: any) {
+  const chip = "inline-flex items-center gap-1.5 px-2.5 py-1 text-[13px] border border-edge text-foreground hover:border-foreground";
   return (
-    <label className="block text-xs text-muted">{label}
-      <Select value={value ? value : ALL_VALUE} onValueChange={(v) => onChange(v === ALL_VALUE ? "" : v)}>
-        <SelectTrigger className="mt-1 w-full">
-          <SelectValue placeholder={all} />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value={ALL_VALUE}>{all}</SelectItem>
-          {options.map((o: any) => <SelectItem key={o.v} value={o.v}>{o.l}</SelectItem>)}
-        </SelectContent>
-      </Select>
-    </label>
-  );
-}
-function FilterPanel(p: any) {
-  return (
-    <Sheet open={p.open} onOpenChange={p.onOpenChange}>
-      <SheetContent side="right" className="w-full max-w-sm p-5">
-        <SheetHeader className="mb-4">
-          <SheetTitle>Search &amp; filter</SheetTitle>
-        </SheetHeader>
-        <div className="space-y-3">
-          <Input autoFocus value={p.q} onChange={(e: any) => p.setQ(e.target.value)} placeholder="Search title, id, location" />
-          <div className="grid grid-cols-2 gap-2">
-            <label className="text-xs text-muted">From<Input type="date" value={p.dFrom} onChange={(e: any) => p.setDFrom(e.target.value)} className="mt-1" /></label>
-            <label className="text-xs text-muted">To<Input type="date" value={p.dTo} onChange={(e: any) => p.setDTo(e.target.value)} className="mt-1" /></label>
+    <div className="mb-10">
+      <div className="flex flex-wrap items-center gap-3">
+        <div className="relative flex-1 min-w-[15rem]">
+          <Search size={16} aria-hidden className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
+          <Input type="search" value={q} onChange={(e: any) => setQ(e.target.value)}
+            onKeyDown={(e: any) => { if (e.key === "Enter") e.preventDefault(); }}
+            placeholder={`Search ${of} entries — words, names, places`} aria-label="Search the journal" className="pl-9" />
+        </div>
+        <button type="button" onClick={() => setOpen(true)} aria-expanded={open}
+          className="inline-flex items-center gap-2 px-4 h-10 border border-edge text-[15px] text-foreground hover:border-foreground transition-colors">
+          <SlidersHorizontal size={16} aria-hidden />
+          Filter
+          {pills.length > 0 && <span className="ml-1 px-1.5 text-[13px] font-semibold bg-foreground text-background tabular-nums">{pills.length}</span>}
+        </button>
+        <span className="text-[15px] text-muted tabular-nums whitespace-nowrap" aria-live="polite">
+          {searching ? "Searching…" : `${shown} of ${of}`}
+        </span>
+      </div>
+
+      {count > 0 && (
+        <div className="flex flex-wrap items-center gap-2 mt-3">
+          {q.trim() && (
+            <button type="button" onClick={() => setQ("")} className={chip}>
+              &ldquo;{q.trim()}&rdquo; <X size={13} aria-hidden /><span className="sr-only">Clear search</span>
+            </button>
+          )}
+          {pills.map((f: any) => (
+            <button key={f.key} type="button" onClick={f.clear} className={chip}>
+              {f.label} <X size={13} aria-hidden /><span className="sr-only">Remove filter</span>
+            </button>
+          ))}
+          <button type="button" onClick={onClearAll}
+            className="text-[13px] uppercase tracking-[0.08em] font-semibold text-muted hover:text-foreground ml-1">
+            Clear all
+          </button>
+        </div>
+      )}
+
+      <Sheet open={open} onOpenChange={setOpen}>
+        <SheetContent side="right" className="w-full max-w-sm p-5 overflow-y-auto">
+          <SheetHeader className="mb-5">
+            <SheetTitle className="text-[20px]">Filter the journal</SheetTitle>
+          </SheetHeader>
+          <FilterGroups groups={groups} />
+          <div className="flex items-center gap-3 mt-8 pt-5 border-t border-edge">
+            <button type="button" onClick={() => setOpen(false)}
+              className="px-4 h-10 bg-foreground text-background text-[15px] font-semibold">
+              {searching ? "Searching…" : `Show ${shown}`}
+            </button>
+            <button type="button" onClick={onClearAll} className="text-[14px] text-muted hover:text-foreground">Clear all</button>
           </div>
-          <Sel label="Part" value={p.part} onChange={p.setPart} options={p.parts.map((x: number) => ({ v: String(x), l: `Part ${x}` }))} all="All parts" />
-          <Sel label="Location" value={p.loc} onChange={p.setLoc} options={p.locs.map((x: string) => ({ v: x, l: x }))} all="All locations" />
-          <Sel label="Topic" value={p.cat} onChange={p.setCat} options={p.topics.map((x: string) => ({ v: x, l: cap(x) }))} all="All topics" />
-          <Sel label="Statement type" value={p.stype} onChange={p.setSType} options={p.stypes.map((x: string) => ({ v: x, l: cap(x) }))} all="Any statement type" />
-          <label className="flex items-center gap-2 text-sm text-muted pt-1"><input type="checkbox" checked={p.audioOnly} onChange={(e: any) => p.setAudioOnly(e.target.checked)} /> Has audio only</label>
-        </div>
-        <div className="flex items-center gap-3 mt-6">
-          <button onClick={p.onReset} className="text-xs text-accent hover:underline">Reset</button>
-          <Button className="ml-auto" onClick={() => p.onOpenChange(false)}>Show {p.resultCount} results</Button>
-        </div>
-      </SheetContent>
-    </Sheet>
+        </SheetContent>
+      </Sheet>
+    </div>
   );
 }
 

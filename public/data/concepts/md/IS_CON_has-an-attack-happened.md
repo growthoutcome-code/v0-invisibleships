@@ -7,6 +7,7 @@ basis: testimony
 origin: author
 theme: experience
 audience: [household]
+topics: [proposed-solutions, speculation, technology, obedience-coercion, law-government]
 verification: unverified
 generated_by: scripts/export_concepts_md.mjs
 word_count: 670

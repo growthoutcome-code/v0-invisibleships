@@ -9,6 +9,8 @@ import ShareMenu from "@/components/ShareMenu";
 import { Transcript } from "@/components/Transcript";
 import { track } from "@/lib/analytics";
 import { useEffect } from "react";
+import { THEMES, isOrg } from "@/lib/themes";
+import { ENTRY_TYPES } from "@/lib/entry-type";
 
 const cap = (s?: string | null) => (s ? s.charAt(0).toUpperCase() + s.slice(1).replace(/-/g, " ") : "");
 
@@ -35,7 +37,7 @@ export default function JournalItemReader({ doc, body, cats, gloss, prev, next }
           </div>
           <div className="flex flex-wrap items-center gap-2 text-[11px] text-muted mb-2">
             <span className="font-mono">{doc.id}</span>
-            {cats.map((c) => <span key={c} className="uppercase tracking-wide">{cap(c)}</span>)}
+            {cats.filter((c) => !isOrg(c)).map((c) => <span key={c} className="uppercase tracking-wide">{THEMES[c] || ENTRY_TYPES[c] || cap(c)}</span>)}
           </div>
           <h1 className="font-display text-[21px] font-semibold text-foreground mb-1 leading-tight">{doc.title || doc.id}</h1>
           <div className="text-sm text-muted mb-5">

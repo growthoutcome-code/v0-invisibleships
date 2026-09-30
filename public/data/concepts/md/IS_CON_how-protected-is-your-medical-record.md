@@ -7,6 +7,7 @@ basis: documented
 origin: ai
 theme: surveillance
 audience: [household, policy, clinicians]
+topics: [technology, surveillance, law-government]
 verification: unverified
 generated_by: scripts/export_concepts_md.mjs
 word_count: 680

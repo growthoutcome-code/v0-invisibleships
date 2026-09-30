@@ -7,6 +7,7 @@ basis: documented
 origin: ai
 theme: neurotech
 audience: [policy]
+topics: [proposed-solutions, technology, law-government]
 verification: unverified
 generated_by: scripts/export_concepts_md.mjs
 word_count: 534

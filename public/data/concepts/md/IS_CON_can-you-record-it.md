@@ -7,6 +7,7 @@ basis: documented
 origin: ai
 theme: neurotech
 audience: [household, investigators, clinicians]
+topics: [proposed-solutions, technology]
 verification: verified
 generated_by: scripts/export_concepts_md.mjs
 word_count: 611

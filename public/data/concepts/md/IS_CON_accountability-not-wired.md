@@ -7,6 +7,7 @@ basis: structural
 origin: ai
 theme: procurement
 audience: [investigators, policy]
+topics: [law-government]
 verification: verified
 generated_by: scripts/export_concepts_md.mjs
 word_count: 214

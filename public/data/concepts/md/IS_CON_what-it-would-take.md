@@ -7,6 +7,7 @@ basis: structural
 origin: ai
 theme: record
 audience: [household, press]
+topics: [technology]
 verification: unverified
 generated_by: scripts/export_concepts_md.mjs
 word_count: 593

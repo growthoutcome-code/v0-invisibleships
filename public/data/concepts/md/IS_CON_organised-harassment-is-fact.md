@@ -7,6 +7,7 @@ basis: documented
 origin: ai
 theme: coercion
 audience: [investigators, press]
+topics: [harassment, surveillance, law-government]
 verification: verified
 generated_by: scripts/export_concepts_md.mjs
 word_count: 238

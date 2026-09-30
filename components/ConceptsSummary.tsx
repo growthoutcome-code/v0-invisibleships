@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { BarRows } from "@/components/ResearchCharts";
 import { track } from "@/lib/analytics";
 import {
-  CONCEPTS, NOT_ESTABLISHED,
+  CONCEPTS, NOT_ESTABLISHED, NO_FILTERS,
   BASIS_LABEL, BASIS_NOTE, ORIGIN_LABEL, ORIGIN_NOTE,
   type Basis, type Origin, type Filters,
 } from "@/lib/concepts";
@@ -66,7 +66,7 @@ export default function ConceptsSummary({ setFilters }: { setFilters: (f: Filter
         What these concepts rest on
       </h3>
       <BarRows rows={basisRows} total={CONCEPTS.length}
-        onPick={(k) => { track("summary_basis_picked", { key: k }); setFilters({ q: "", origin: "all", theme: "all", audience: "all", basis: k as Basis }); }}
+        onPick={(k) => { track("summary_basis_picked", { key: k }); setFilters({ ...NO_FILTERS, basis: [k as Basis] }); }}
         caption="Concepts by basis. A reader who rejects every testimony entry can still rely on every documented one" />
       <p className="text-[15px] text-muted measure mt-4 mb-0">
         The distribution is honest rather than flattering: this archive is documented-heavy because

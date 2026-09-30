@@ -5,6 +5,7 @@ import Link from "next/link";
 import { track } from "@/lib/analytics";
 import ConceptsToolbar from "@/components/ConceptsToolbar";
 import SideNav, { useSectionNav } from "@/components/SideNav";
+import { passes } from "@/components/FilterGroups";
 import ConceptsSummary from "@/components/ConceptsSummary";
 import { ConceptsNotice } from "@/components/DataIntro";
 import { CONCEPTS, NO_FILTERS, BASIS_LABEL, ORIGIN_LABEL, VERIFICATION_LABEL, type Filters } from "@/lib/concepts";
@@ -50,10 +51,11 @@ export default function ConceptsView({
       return CONCEPTS.filter(
         (c) =>
           hit(c) &&
-          (filters.origin === "all" || c.origin === filters.origin) &&
-          (filters.basis === "all" || c.basis === filters.basis) &&
-          (filters.theme === "all" || c.theme === filters.theme) &&
-          (filters.audience === "all" || c.audience.includes(filters.audience))
+          passes([c.origin], filters.origin) &&
+          passes([c.basis], filters.basis) &&
+          passes([c.theme], filters.theme) &&
+          passes(c.audience, filters.audience, filters.match.audience) &&
+          passes(c.topics, filters.topic, filters.match.topic)
       );
     },
     [filters]
@@ -69,7 +71,11 @@ export default function ConceptsView({
   return (
     <div className="w-full lg:grid lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-x-10 lg:items-start">
       <SideNav mode="outline" label="Concepts" sections={nav.sections} active={nav.active} />
-      <div id="concepts-root" className="min-w-0">
+      {/* lg:col-start-2 pins the content to its column. When a search matches
+          nothing, the rail has no sections and renders nothing; without the pin
+          the content fell into the 13rem rail column and the page looked gone
+          (Sean, 30 Sep: typed "testt"). */}
+      <div id="concepts-root" className="min-w-0 lg:col-start-2">
       <ConceptsNotice>
         <ConceptsSummary setFilters={setFilters} />
       </ConceptsNotice>
