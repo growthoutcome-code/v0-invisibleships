@@ -284,22 +284,35 @@ export default function JournalBrowser({
 
   // Journal month index for the shared SideNav (Sean, 2026-08-21). One entry
   // per calendar month rather than per document: 435 entries is not a
-  // navigable list, and a dated journal is browsed by period. Derived from the
-  // FILTERED set, so the index always describes what is actually on screen.
+  // navigable list, and a dated journal is browsed by period.
+  // 30 Sep 2026 (Sean: "keep the sidebar on the screen all the time"): every
+  // month of the WHOLE journal is listed, always, so the page never loses its
+  // left column as filters change. Each month shows how many entries match the
+  // current filters; a month with none is greyed out and cannot be picked.
+  // Picking a month keeps the filters and jumps to that month's first match.
   const months = useMemo(() => {
-    const seen = new Map<string, number>();          // "2025-03" -> first index
+    const all = new Set<string>();
+    journal.forEach((d: Doc) => { const m = (d.entry_date || "").slice(0, 7); if (m) all.add(m); });
+    const first = new Map<string, number>(), count = new Map<string, number>();
     filtered.forEach((d: Doc, i: number) => {
       const m = (d.entry_date || "").slice(0, 7);
-      if (m && !seen.has(m)) seen.set(m, i);
+      if (!m) return;
+      if (!first.has(m)) first.set(m, i);
+      count.set(m, (count.get(m) || 0) + 1);
     });
     const MONTH = ["January","February","March","April","May","June",
                    "July","August","September","October","November","December"];
-    return [...seen.entries()].map(([m, i]) => ({
+    // same order as the feed: follow the filtered list when it has entries
+    const order = [...all].sort();
+    const desc = filtered.length > 1 && (filtered[0].entry_date || "") > (filtered[filtered.length - 1].entry_date || "");
+    if (desc) order.reverse();
+    return order.map((m) => ({
       id: m,
       label: `${MONTH[+m.slice(5, 7) - 1]} ${m.slice(0, 4)}`,
-      first: i,
+      first: first.get(m) ?? -1,
+      count: count.get(m) || 0,
     }));
-  }, [filtered]);
+  }, [journal, filtered]);
 
   const pageItems = useMemo(() => filtered.slice(start, start + PAGE_SIZE), [filtered, start]);
   // the month the list currently opens on
@@ -428,20 +441,24 @@ export default function JournalBrowser({
         ) : tab === "disclaimer" ? (
           <DisclaimerView />
         ) : (
-          <div className={selDoc || months.length < 2 ? "" : "lg:grid lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-x-8 lg:items-start"}>
-            {!selDoc && months.length > 1 && (
+          <div className={selDoc ? "" : "lg:grid lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-x-8 lg:items-start"}>
+            {!selDoc && (
               <SideNav
                 mode="index"
                 label="Months"
-                sections={months.map((m) => ({ id: m.id, label: m.label }))}
+                sections={months.map((m) => ({
+                  id: m.id, label: m.label,
+                  count: activeFilters ? m.count : undefined,
+                  disabled: m.count === 0,
+                }))}
                 active={activeMonth}
                 onPick={(id: string) => {
                   const m = months.find((x) => x.id === id);
-                  if (m) setStart(m.first);
+                  if (m && m.first >= 0) setStart(m.first);
                 }}
               />
             )}
-            <div className="min-w-0">
+            <div className="min-w-0 lg:col-start-2">
               {selDoc ? (
                 <Reader
                   doc={selDoc} body={body} bodyLoading={showBodyLoader} cats={ds?.docCats[selDoc.id] || []} gloss={ds?.docGloss[selDoc.id] || []}
@@ -455,7 +472,7 @@ export default function JournalBrowser({
                   open={panelOpen} setOpen={(o: boolean) => { setPanelOpen(o); if (o) track("filter_opened", {}); }}
                   onClearAll={resetFilters} shown={filtered.length} of={journal.length} searching={searching}
                 />
-                <Feed items={pageItems} excerpts={excerpts} docCats={ds?.docCats || {}} total={filtered.length} from={start + 1}
+                <Feed items={pageItems} excerpts={excerpts} docCats={ds?.docCats || {}} lead={fsel.theme || []} total={filtered.length} from={start + 1}
                   filteredOf={activeFilters ? journal.length : 0} searching={false} onClear={resetFilters}
                   page={page} totalPages={totalPages} setPage={setPage} onOpen={setSel} onSearch={() => setPanelOpen(true)} />
               </>)}
@@ -513,7 +530,7 @@ function TitleBand({ title, actions }: { title: string; actions?: React.ReactNod
 }
 
 /* ---------- Feed ---------- */
-function Feed({ items, excerpts, docCats, total, from, filteredOf, searching, onClear, page, totalPages, setPage, onOpen, onSearch }: any) {
+function Feed({ items, excerpts, docCats, lead = [], total, from, filteredOf, searching, onClear, page, totalPages, setPage, onOpen, onSearch }: any) {
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
@@ -537,7 +554,9 @@ function Feed({ items, excerpts, docCats, total, from, filteredOf, searching, on
             <div className="text-[12px] text-muted mt-0.5">{d.entry_date}{d.weekday ? ` · ${d.weekday}` : ""}{d.recording_time ? ` · ${d.recording_time}` : ""}</div>
             <p className="mt-2.5 body-copy text-foreground/80 line-clamp-3">{excerpts[d.id] ?? "…"}</p>
             <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-[11px] uppercase tracking-wide text-muted">
-              {(docCats[d.id] || []).filter((c: string) => c in THEMES).slice(0, 4).map((c: string) => <span key={c}>{THEMES[c]}</span>)}
+              {/* topics being filtered on come first, so the reason a card is listed is never cut off by the four-tag limit */}
+              {(docCats[d.id] || []).filter((c: string) => c in THEMES)
+                .sort((a: string, b: string) => Number(lead.includes(b)) - Number(lead.includes(a))).slice(0, 4).map((c: string) => <span key={c}>{THEMES[c]}</span>)}
             </div>
             <div className="mt-3 text-accent text-sm">Read →</div>
           </Link>

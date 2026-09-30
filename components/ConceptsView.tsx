@@ -67,14 +67,20 @@ export default function ConceptsView({
   // Concept <li>s already carry the stable ids other pages deep-link to, and
   // useSectionNav preserves an id the page set itself.
   const nav = useSectionNav("concepts-root", { selector: "li[id]", heading: "h3" });
+  const shownIds = useMemo(() => new Set(visible.map((c) => c.id)), [visible]);
 
   return (
     <div className="w-full lg:grid lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-x-10 lg:items-start">
-      <SideNav mode="outline" label="Concepts" sections={nav.sections} active={nav.active} />
-      {/* lg:col-start-2 pins the content to its column. When a search matches
-          nothing, the rail has no sections and renders nothing; without the pin
+      {/* Every concept is always listed (Sean, 30 Sep 2026: same as the journal's
+          months). Concepts the current filters leave out are greyed and cannot be
+          picked, so the rail never shrinks or vanishes as filters change. The hook
+          still tracks which shown concept the reader is looking at. */}
+      <SideNav mode="outline" label="Concepts" active={nav.active}
+        sections={CONCEPTS.map((c) => ({ id: c.id, label: c.title, disabled: !shownIds.has(c.id) }))} />
+      {/* lg:col-start-2 pins the content to its column. Before the rail listed
+          every concept, a search matching nothing left it empty; without the pin
           the content fell into the 13rem rail column and the page looked gone
-          (Sean, 30 Sep: typed "testt"). */}
+          (Sean, 30 Sep: typed "testt"). Kept as a guard. */}
       <div id="concepts-root" className="min-w-0 lg:col-start-2">
       <ConceptsNotice>
         <ConceptsSummary setFilters={setFilters} />

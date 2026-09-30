@@ -28,7 +28,10 @@ import { track } from "@/lib/analytics";
  * mounts, so adding a section to a page adds it to the nav with no second edit.
  */
 
-export type NavSection = { id: string; label: string };
+/** count / disabled: index mode only. The journal keeps every month listed while
+ *  filtered, with the number of matching entries, and greys out months with none
+ *  (Sean, 30 Sep 2026: "keep the sidebar on the screen all the time"). */
+export type NavSection = { id: string; label: string; count?: number; disabled?: boolean };
 
 export function useSectionNav(
   rootId: string,
@@ -155,6 +158,7 @@ export default function SideNav({
   if (!sections.length) return null;
 
   const go = (id: string) => {
+    if (sections.find((x) => x.id === id)?.disabled) return;
     setOpen(false);
     if (mode === "index") {
       onPick?.(id);
@@ -186,12 +190,14 @@ export default function SideNav({
             className="list-none p-0 m-0 mt-2 mb-1 max-h-[60vh] overflow-y-auto scroll-thin border-t border-edge">
             {sections.map((s) => (
               <li key={s.id}>
-                <button type="button" onClick={() => go(s.id)}
+                <button type="button" onClick={() => go(s.id)} disabled={s.disabled}
                   aria-current={active === s.id ? "true" : undefined}
-                  className={`block w-full text-left py-2.5 text-[16px] border-b border-edge/50 ${
-                    active === s.id ? "text-foreground font-semibold" : "text-foreground/70"
+                  className={`flex w-full items-baseline gap-2 text-left py-2.5 text-[16px] border-b border-edge/50 ${
+                    s.disabled ? "text-muted/50 cursor-default"
+                      : active === s.id ? "text-foreground font-semibold" : "text-foreground/70"
                   }`}>
-                  {s.label}
+                  <span>{s.label}</span>
+                  {s.count !== undefined && <span className="ml-auto text-[13px] tabular-nums">{s.count}</span>}
                 </button>
               </li>
             ))}
@@ -207,14 +213,17 @@ export default function SideNav({
         <ul className="list-none p-0 m-0 border-l border-edge">
           {sections.map((s) => (
             <li key={s.id}>
-              <button type="button" onClick={() => go(s.id)}
+              <button type="button" onClick={() => go(s.id)} disabled={s.disabled}
                 aria-current={active === s.id ? "true" : undefined}
-                className={`block w-full text-left pl-3 py-1.5 text-[14px] leading-snug border-l-2 -ml-px transition-colors ${
-                  active === s.id
+                className={`flex w-full items-baseline gap-2 text-left pl-3 py-1.5 text-[14px] leading-snug border-l-2 -ml-px transition-colors ${
+                  s.disabled
+                    ? "border-transparent text-muted/40 cursor-default"
+                    : active === s.id
                     ? "border-foreground text-foreground font-semibold"
                     : "border-transparent text-muted hover:text-foreground"
                 }`}>
-                {s.label}
+                <span>{s.label}</span>
+                {s.count !== undefined && <span className="ml-auto text-[12px] tabular-nums font-normal">{s.count}</span>}
               </button>
             </li>
           ))}
