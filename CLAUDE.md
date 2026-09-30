@@ -247,6 +247,9 @@ Rules: `project/data-rules.md`. Reasoning: `project/decisions/0003-where-content
   copies and are listed in data-rules §5 so a re-conversion carries them forward.
 - `npm run check` runs `scripts/sync_site_data_from_download.py --check`. After any
   Supabase write, run the md5 comparison in data-rules §8.
-- **The search index behind Ask** (`document_chunks`) is derived from `documents` and
-  rebuilt after any body change: `project/indexing-rules.md`. Never handle Sean's
-  embedding API key; he runs the embedding batch himself.
+- **The search index behind Ask** (`document_chunks`, `embed_chunks_batch`) belongs to
+  the chat feature on the `ai-chat` branch and is **dormant** (Sean, 30 Sep 2026: "keep
+  that part of the chat feature … I don't know if I'm actually going to do that
+  feature"). Nothing reads it, it is not maintained, and **nothing is sent to Gemini**
+  unless Sean decides to build the chat feature. Never handle Sean's API keys.
+  Details: `project/indexing-rules.md`.

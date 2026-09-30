@@ -159,7 +159,7 @@ completed entries".
 | Supabase = download | For every download file with an `id`: md5 of the body (rule 2) = `md5(body_markdown)` in Supabase; no Supabase row without a download file | after any Supabase write |
 | Audio | `audio_files.drive_id` = `documents.audio_drive_id`; every ID resolves to the file named in `audio_file` | after any audio change |
 | Link = name | every `[<name>.mp3](…/d/<id>)` link in every body uses the ID of the recording whose `audio_file` is `<name>` | after any audio change |
-| Search index | `indexing-rules.md` §6 | after any body change |
+| Search index | dormant — belongs to the chat feature (`indexing-rules.md`) | only if the chat feature goes ahead |
 
 Last full check, 30 Sep 2026 (after the in-progress tabs were removed): **778 of 778
 download documents match Supabase; the 384 journal documents are identical in all
@@ -180,6 +180,7 @@ rows were read from the live site's own files, not pasted.
   standalone `/journal/[id]` and `/glossary/[slug]` pages, the home page, Concepts,
   Timeline and research pages, the Documents list and the author page read site data.
   Switching them is a structural change (rule 3).
-- Search index for Ask: rules in `indexing-rules.md`. 1,571 passages from 774
-  documents (30 Sep); embedding waits on Sean running it with his key. Ask is
-  not live on the site.
+- Search index for Ask: **dormant, part of the chat feature** (`ai-chat` branch), which
+  Sean may or may not build (30 Sep 2026). The passage table and its function stay in
+  Supabase unused and unmaintained; nothing is sent to Gemini. Rules for when it is
+  picked up: `indexing-rules.md`.

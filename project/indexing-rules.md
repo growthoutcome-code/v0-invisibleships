@@ -1,5 +1,15 @@
 # Indexing rules — the search index behind Ask
 
+> **Status, 30 Sep 2026: dormant.** Sean: "Let's not do that yet. Let's keep that part
+> of the chat feature, which is in a separate branch … I don't know if I'm actually
+> going to do that feature." The index belongs to the `ai-chat` branch. Until Sean
+> decides to build the chat feature: nothing is sent to Gemini, no embeddings are run,
+> and the passages are **not** rebuilt when entries change (they may drift — rebuild
+> them first if the feature goes ahead). The `document_chunks` table and
+> `embed_chunks_batch` stay in Supabase unused; removing them is Sean's call. If the
+> feature goes ahead, the Gemini key goes into Vercel's environment settings and the
+> site embeds passages itself — no SQL step for Sean.
+
 *Standing rules. Set 29 Sep 2026 (Sean: "Let's index. Absolutely … make sure that we
 have … some kind of indexing rules document"). Companion to `data-rules.md`: that file
 says what the content is; this one says how it is made searchable.*
