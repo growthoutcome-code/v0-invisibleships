@@ -1,4 +1,5 @@
 import { BetaAnalyticsDataClient } from "@google-analytics/data";
+import { unstable_cache } from "next/cache";
 import { RANGES, type RangeKey, type Row, type DayPoint } from "@/lib/insights-posthog";
 
 /**
@@ -116,7 +117,7 @@ function gaDateRange(range: RangeKey): { startDate: string; endDate: string } {
   return { startDate: `${days}daysAgo`, endDate: "today" };
 }
 
-export async function getGaTraffic(range: RangeKey = "all"): Promise<GaTraffic | null> {
+async function loadGaTraffic(range: RangeKey = "all"): Promise<GaTraffic | null> {
   const ga = getClient();
   if (!ga) return null;
   const property = `properties/${PROPERTY_ID}`;
@@ -228,3 +229,16 @@ export async function getGaTraffic(range: RangeKey = "all"): Promise<GaTraffic |
     return null;
   }
 }
+
+/**
+ * Cached five minutes per range, like the PostHog numbers (lib/insights-posthog.ts).
+ * Uncached, every visit to /insights ran five Google reports through the gRPC client,
+ * and a cold server first had to load that client: 3.5 s for the page on 30 Sep 2026
+ * against 0.5 s warm (Sean: "the insights link took forever to load"). Google's
+ * daily numbers do not move within five minutes.
+ */
+export const getGaTraffic = unstable_cache(
+  async (range: RangeKey = "all") => loadGaTraffic(range),
+  ["insights-ga-traffic"],
+  { revalidate: 300 },
+);

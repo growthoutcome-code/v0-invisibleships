@@ -7,18 +7,37 @@ const INDEX_COLS =
 
 let _bodies: Record<string, string> = {};
 
+// Supabase returns at most 1,000 rows per request whatever .limit() asks for
+// (the API's max-rows setting). document_categories passed 1,000 on 30 Sep 2026
+// and production silently lost most tags: every entry type and, once added, every
+// topic, so both filter groups rendered empty. Read every table in pages.
+const PAGE_ROWS = 1000;
+export async function allRows(q: () => any): Promise<{ data: any[]; error: any }> {
+  const out: any[] = [];
+  for (let from = 0; ; from += PAGE_ROWS) {
+    const { data, error } = await q().range(from, from + PAGE_ROWS - 1);
+    if (error) return { data: out, error };
+    out.push(...(data || []));
+    if (!data || data.length < PAGE_ROWS) return { data: out, error: null };
+  }
+}
+
 async function fromSupabase(): Promise<Dataset | null> {
   const sb = getSupabase();
   if (!sb) return null;
   try {
     const [docsR, catsR, dcR, gloR, dgR] = await Promise.all([
-      sb.from("documents").select(INDEX_COLS).limit(10000),
-      sb.from("categories").select("*").limit(10000),
-      sb.from("document_categories").select("*").limit(20000),
-      sb.from("glossary").select("*").limit(10000),
-      sb.from("document_glossary_refs").select("*").limit(20000),
+      // A stable order is what makes paging correct: without one, two pages can
+      // overlap or skip rows.
+      allRows(() => sb.from("documents").select(INDEX_COLS).order("id")),
+      allRows(() => sb.from("categories").select("*").order("slug")),
+      allRows(() => sb.from("document_categories").select("*").order("document_id").order("category_slug")),
+      allRows(() => sb.from("glossary").select("*").order("slug")),
+      allRows(() => sb.from("document_glossary_refs").select("*").order("document_id").order("glossary_slug")),
     ]);
-    if (docsR.error) throw docsR.error;
+    // A partial read is worse than the bundled copy: fall back rather than show
+    // a filter with missing options.
+    for (const r of [docsR, catsR, dcR, gloR, dgR]) if (r.error) throw r.error;
     const docs = (docsR.data || []) as Doc[];
     if (docs.length === 0) return null; // not yet ingested -> fall back
     const docCats: Record<string, string[]> = {};
