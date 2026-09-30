@@ -1,0 +1,285 @@
+{
+  "_about": "Journal pages that were removed, and where their old addresses now send readers. Temporary (307) so a page can return at the same address. Read by next.config.mjs; checked by scripts/sync_site_data_from_download.py --check. Rules: project/data-rules.md section 2.",
+  "redirects": [
+    {
+      "from": "/journal/is-j03-20250802-entry",
+      "to": "/journal",
+      "why": "day not in the main journal yet; removed with the Transcripts In-Progress tab"
+    },
+    {
+      "from": "/journal/is-j03-20250802-r01",
+      "to": "/journal",
+      "why": "day not in the main journal yet; removed with the Transcripts In-Progress tab"
+    },
+    {
+      "from": "/journal/is-j03-20250802-r02",
+      "to": "/journal",
+      "why": "day not in the main journal yet; removed with the Transcripts In-Progress tab"
+    },
+    {
+      "from": "/journal/is-j03-20250916-entry",
+      "to": "/journal",
+      "why": "day not in the main journal yet; removed with the Transcripts In-Progress tab"
+    },
+    {
+      "from": "/journal/is-j03-20250916-r01",
+      "to": "/journal",
+      "why": "day not in the main journal yet; removed with the Transcripts In-Progress tab"
+    },
+    {
+      "from": "/journal/is-j03-20250916-r02",
+      "to": "/journal",
+      "why": "day not in the main journal yet; removed with the Transcripts In-Progress tab"
+    },
+    {
+      "from": "/journal/is-j03-20250916-r03",
+      "to": "/journal",
+      "why": "day not in the main journal yet; removed with the Transcripts In-Progress tab"
+    },
+    {
+      "from": "/journal/is-j03-20250916-r04",
+      "to": "/journal",
+      "why": "day not in the main journal yet; removed with the Transcripts In-Progress tab"
+    },
+    {
+      "from": "/journal/is-j03-20250916-r05",
+      "to": "/journal",
+      "why": "day not in the main journal yet; removed with the Transcripts In-Progress tab"
+    },
+    {
+      "from": "/journal/is-j03-20250916-r06",
+      "to": "/journal",
+      "why": "day not in the main journal yet; removed with the Transcripts In-Progress tab"
+    },
+    {
+      "from": "/journal/is-j03-20250920-entry",
+      "to": "/journal",
+      "why": "day not in the main journal yet; removed with the Transcripts In-Progress tab"
+    },
+    {
+      "from": "/journal/is-j03-20251002-2-entry",
+      "to": "/journal/is-j03-20251002-entry",
+      "why": "same day in the main journal"
+    },
+    {
+      "from": "/journal/is-j03-20251011-2-entry",
+      "to": "/journal/is-j03-20251011-entry",
+      "why": "same day in the main journal"
+    },
+    {
+      "from": "/journal/is-j03-20251011-2-r01",
+      "to": "/journal/is-j03-20251011-r01",
+      "why": "same day in the main journal"
+    },
+    {
+      "from": "/journal/is-j03-20251011-2-r02",
+      "to": "/journal/is-j03-20251011-r02",
+      "why": "same day in the main journal"
+    },
+    {
+      "from": "/journal/is-j03-20251011-2-r03",
+      "to": "/journal/is-j03-20251011-entry",
+      "why": "same day in the main journal"
+    },
+    {
+      "from": "/journal/is-j03-20251011-2-r04",
+      "to": "/journal/is-j03-20251011-entry",
+      "why": "same day in the main journal"
+    },
+    {
+      "from": "/journal/is-j03-20251011-2-r05",
+      "to": "/journal/is-j03-20251011-entry",
+      "why": "same day in the main journal"
+    },
+    {
+      "from": "/journal/is-j03-20251011-2-r06",
+      "to": "/journal/is-j03-20251011-entry",
+      "why": "same day in the main journal"
+    },
+    {
+      "from": "/journal/is-j03-20251015-entry",
+      "to": "/journal",
+      "why": "day not in the main journal yet; removed with the Transcripts In-Progress tab"
+    },
+    {
+      "from": "/journal/is-j03-20251015-r01",
+      "to": "/journal",
+      "why": "day not in the main journal yet; removed with the Transcripts In-Progress tab"
+    },
+    {
+      "from": "/journal/is-j03-20251015-r02",
+      "to": "/journal",
+      "why": "day not in the main journal yet; removed with the Transcripts In-Progress tab"
+    },
+    {
+      "from": "/journal/is-j03-20251015-r03",
+      "to": "/journal",
+      "why": "day not in the main journal yet; removed with the Transcripts In-Progress tab"
+    },
+    {
+      "from": "/journal/is-j03-20251016-2-entry",
+      "to": "/journal/is-j03-20251016-entry",
+      "why": "same day in the main journal"
+    },
+    {
+      "from": "/journal/is-j03-20251016-2-r01",
+      "to": "/journal/is-j03-20251016-entry",
+      "why": "same day in the main journal"
+    },
+    {
+      "from": "/journal/is-j03-20251017-entry",
+      "to": "/journal",
+      "why": "day not in the main journal yet; removed with the Transcripts In-Progress tab"
+    },
+    {
+      "from": "/journal/is-j03-20251023-entry",
+      "to": "/journal",
+      "why": "day not in the main journal yet; removed with the Transcripts In-Progress tab"
+    },
+    {
+      "from": "/journal/is-j03-20251027-entry",
+      "to": "/journal",
+      "why": "day not in the main journal yet; removed with the Transcripts In-Progress tab"
+    },
+    {
+      "from": "/journal/is-j03-20251106-2-entry",
+      "to": "/journal/is-j03-20251106-entry",
+      "why": "same day in the main journal"
+    },
+    {
+      "from": "/journal/is-j03-20251107-2-entry",
+      "to": "/journal/is-j03-20251107-entry",
+      "why": "same day in the main journal"
+    },
+    {
+      "from": "/journal/is-j03-20251108-2-entry",
+      "to": "/journal/is-j03-20251108-entry",
+      "why": "same day in the main journal"
+    },
+    {
+      "from": "/journal/is-j04-20251119-2-entry",
+      "to": "/journal/is-j04-20251119-entry",
+      "why": "same day in the main journal"
+    },
+    {
+      "from": "/journal/is-j04-20251126-entry",
+      "to": "/journal",
+      "why": "day not in the main journal yet; removed with the Transcripts In-Progress tab"
+    },
+    {
+      "from": "/journal/is-j04-20251126-r01",
+      "to": "/journal",
+      "why": "day not in the main journal yet; removed with the Transcripts In-Progress tab"
+    },
+    {
+      "from": "/journal/is-j04-20251126-r02",
+      "to": "/journal",
+      "why": "day not in the main journal yet; removed with the Transcripts In-Progress tab"
+    },
+    {
+      "from": "/journal/is-j04-20251126-r03",
+      "to": "/journal",
+      "why": "day not in the main journal yet; removed with the Transcripts In-Progress tab"
+    },
+    {
+      "from": "/journal/is-j04-20251126-r04",
+      "to": "/journal",
+      "why": "day not in the main journal yet; removed with the Transcripts In-Progress tab"
+    },
+    {
+      "from": "/journal/is-j04-20251126-r05",
+      "to": "/journal",
+      "why": "day not in the main journal yet; removed with the Transcripts In-Progress tab"
+    },
+    {
+      "from": "/journal/is-j04-20251128-entry",
+      "to": "/journal",
+      "why": "day not in the main journal yet; removed with the Transcripts In-Progress tab"
+    },
+    {
+      "from": "/journal/is-j04-20251128-r01",
+      "to": "/journal",
+      "why": "day not in the main journal yet; removed with the Transcripts In-Progress tab"
+    },
+    {
+      "from": "/journal/is-j04-20251128-r02",
+      "to": "/journal",
+      "why": "day not in the main journal yet; removed with the Transcripts In-Progress tab"
+    },
+    {
+      "from": "/journal/is-j04-20251202-2-entry",
+      "to": "/journal/is-j04-20251202-entry",
+      "why": "same day in the main journal"
+    },
+    {
+      "from": "/journal/is-j04-20251202-2-r01",
+      "to": "/journal/is-j04-20251202-r01",
+      "why": "same day in the main journal"
+    },
+    {
+      "from": "/journal/is-j04-20251202-2-r02",
+      "to": "/journal/is-j04-20251202-r02",
+      "why": "same day in the main journal"
+    },
+    {
+      "from": "/journal/is-j04-20251202-2-r03",
+      "to": "/journal/is-j04-20251202-r03",
+      "why": "same day in the main journal"
+    },
+    {
+      "from": "/journal/is-j04-20251209-2-entry",
+      "to": "/journal/is-j04-20251209-entry",
+      "why": "same day in the main journal"
+    },
+    {
+      "from": "/journal/is-j04-20251209-2-r01",
+      "to": "/journal/is-j04-20251209-r01",
+      "why": "same day in the main journal"
+    },
+    {
+      "from": "/journal/is-j04-20251209-2-r02",
+      "to": "/journal/is-j04-20251209-r02",
+      "why": "same day in the main journal"
+    },
+    {
+      "from": "/journal/is-j04-20251209-2-r03",
+      "to": "/journal/is-j04-20251209-r03",
+      "why": "same day in the main journal"
+    },
+    {
+      "from": "/journal/is-j04-20251209-2-r04",
+      "to": "/journal/is-j04-20251209-r04",
+      "why": "same day in the main journal"
+    },
+    {
+      "from": "/journal/is-j04-20251209-2-r05",
+      "to": "/journal/is-j04-20251209-r05",
+      "why": "same day in the main journal"
+    },
+    {
+      "from": "/journal/is-j04-20251209-2-r06",
+      "to": "/journal/is-j04-20251209-entry",
+      "why": "same day in the main journal"
+    },
+    {
+      "from": "/journal/is-j04-20251209-2-r07",
+      "to": "/journal/is-j04-20251209-entry",
+      "why": "same day in the main journal"
+    },
+    {
+      "from": "/journal/is-j04-20251209-2-r08",
+      "to": "/journal/is-j04-20251209-entry",
+      "why": "same day in the main journal"
+    },
+    {
+      "from": "/journal/is-j04-20251012-entry",
+      "to": "/journal/is-j03-20251012-entry",
+      "why": "administrative comment repeated from Part 03; Part 03 copy kept"
+    },
+    {
+      "from": "/journal/is-j04-20251016-entry",
+      "to": "/journal/is-j03-20251016-entry",
+      "why": "administrative comment repeated from Part 03; Part 03 copy kept"
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 import { getSupabase } from "./supabase";
 import type { Dataset, Doc, Category, GlossaryTerm } from "./types";
+import { composeEntryBody, recordingsFor } from "./entry-body";
 
 const INDEX_COLS =
   "id,path,title,collection,doc_type,part,source_url,entry_date,weekday,recording_index,recording_time,audio_file,audio_url,audio_duration,location,word_count,prev_id,next_id,notes";
@@ -80,4 +81,25 @@ export async function getBody(id: string, source: "supabase" | "bundled"): Promi
   const { data, error } = await sb.from("documents").select("body_markdown").eq("id", id).single();
   if (error || !data) return _bodies[id] || "";
   return data.body_markdown || "";
+}
+
+/**
+ * An entry's text with its recordings' transcripts joined on, for the reader.
+ * Anything that is not a journal entry returns its own body, unchanged.
+ * See lib/entry-body.ts for why.
+ */
+export async function getEntryBody(id: string, ds: Pick<Dataset, "docs" | "source">): Promise<string> {
+  const recIds = recordingsFor(id, ds.docs);
+  if (recIds.length === 0) return getBody(id, ds.source);
+  const ids = [id, ...recIds];
+  let bodies: Record<string, string> = {};
+  if (ds.source === "supabase") {
+    const sb = getSupabase();
+    if (sb) {
+      const { data, error } = await sb.from("documents").select("id,body_markdown").in("id", ids);
+      if (!error && data) for (const r of data as { id: string; body_markdown: string | null }[]) bodies[r.id] = r.body_markdown || "";
+    }
+  }
+  for (const i of ids) if (bodies[i] == null) bodies[i] = _bodies[i] || "";
+  return composeEntryBody(bodies[id], recIds.map((r) => ({ id: r, body: bodies[r] })));
 }

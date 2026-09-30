@@ -7,6 +7,7 @@ import path from "path";
 import type { Doc, GlossaryTerm } from "./types";
 import { EXTRA_GLOSSARY } from "./site-content";
 import { cleanDef, splitDef, firstSentences } from "./glossary-format";
+import { composeEntryBody, recordingsFor } from "./entry-body";
 
 type Loaded = {
   journal: Doc[];                       // sorted feed order, includes body_markdown
@@ -75,7 +76,9 @@ export function getJournalItem(param: string): JournalItem | null {
   const next = idx >= 0 && idx < L.journal.length - 1 ? L.journal[idx + 1] : null;
   return {
     doc,
-    body: doc.body_markdown || "",
+    body: doc.doc_type === "entry"
+      ? composeEntryBody(doc.body_markdown || "", recordingsFor(doc.id, L.journal).map((id) => ({ id, body: L.byId.get(id.toLowerCase())?.body_markdown || "" })))
+      : doc.body_markdown || "",
     cats: L.docCats[doc.id] || [],
     gloss: L.docGloss[doc.id] || [],
     prev: prev ? { id: prev.id.toLowerCase(), title: prev.title || prev.id } : undefined,

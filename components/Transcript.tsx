@@ -8,7 +8,9 @@ export function renderInline(text: string, key: number) {
   let last = 0, m: RegExpExecArray | null, i = 0;
   while ((m = re.exec(text))) {
     if (m.index > last) nodes.push(text.slice(last, m.index));
-    if (m[1]) nodes.push(<a key={`${key}-${i}`} href={m[2]} target="_blank" rel="noreferrer" className="text-accent underline">{m[1]}</a>);
+    if (m[1]) nodes.push(m[2].startsWith("/")
+      ? <a key={`${key}-${i}`} href={m[2]} className="text-accent underline">{m[1]}</a>
+      : <a key={`${key}-${i}`} href={m[2]} target="_blank" rel="noreferrer" className="text-accent underline">{m[1]}</a>);
     else nodes.push(<strong key={`${key}-${i}`}>{m[3]}</strong>);
     last = re.lastIndex; i++;
   }

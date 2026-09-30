@@ -1,3 +1,16 @@
+import { readFileSync } from "node:fs";
+
+/**
+ * Journal pages that were removed keep working addresses (Sean, 30 Sep: make sure
+ * "not found" doesn't happen). Each old /journal/<id> goes to the same day in the
+ * main journal, or to the journal feed when that day is not in it yet. Temporary,
+ * so an entry Sean later moves into the journal tab comes back at its old address.
+ * The list lives in lib/journal-redirects.json and is checked by npm run check.
+ */
+const JOURNAL_REDIRECTS = JSON.parse(
+  readFileSync(new URL("./lib/journal-redirects.json", import.meta.url), "utf8"),
+).redirects;
+
 /** @type {import('next').NextConfig} */
 
 /**
@@ -37,6 +50,10 @@ const nextConfig = {
       "/api/corpus": ["./data/GeoLite2-ASN.mmdb"],
     },
   },
+  async redirects() {
+    return JOURNAL_REDIRECTS.map(({ from, to }) => ({ source: from, destination: to, permanent: false }));
+  },
+
   async rewrites() {
     // beforeFiles, NOT a bare array.
     //

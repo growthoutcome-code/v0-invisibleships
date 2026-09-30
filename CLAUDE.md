@@ -224,3 +224,29 @@ Production** or the feature silently does nothing:
   compiles a route on first request and is the practical check for a new page.
 - Commit messages here carry the reasoning, including what was rejected and why.
   Keep that.
+
+---
+
+## 6. Data: three copies, one text
+
+Rules: `project/data-rules.md`. Reasoning: `project/decisions/0003-where-content-lives.md`.
+
+- Every piece of reader-facing content is in the **download**, in **Supabase
+  `documents`** and in the **site data**, with the same words. Navigation, menus and
+  footer labels are not content and stay out of Supabase.
+- **The download is the reference copy for agreement.** A Supabase row = the download
+  file's body without front matter or the standing footer; header fields go into
+  same-named columns. For the journal, the Google Doc is the record.
+- **No structural changes** (tables, columns, a page's data source) without Sean.
+  New content = new rows.
+- **Never edit the record to make copies agree.** Report word differences; Sean
+  decides. Dead audio links repaired to the same file are link fixes, not edits.
+- **Never publish from a Doc tab titled "Transcripts In-Progress".** Only the dated
+  journal tab is published (data-rules §2).
+- **Never edit a Google Doc, ever.** Approved differences from a Doc live in the three
+  copies and are listed in data-rules §5 so a re-conversion carries them forward.
+- `npm run check` runs `scripts/sync_site_data_from_download.py --check`. After any
+  Supabase write, run the md5 comparison in data-rules §8.
+- **The search index behind Ask** (`document_chunks`) is derived from `documents` and
+  rebuilt after any body change: `project/indexing-rules.md`. Never handle Sean's
+  embedding API key; he runs the embedding batch himself.

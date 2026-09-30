@@ -1,7 +1,8 @@
 "use client";
+import { entryTypeLabel, withoutEntryType } from "@/lib/entry-type";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { loadDataset, getBody } from "@/lib/data";
+import { loadDataset, getBody, getEntryBody } from "@/lib/data";
 import type { Dataset, Doc } from "@/lib/types";
 import { track } from "@/lib/analytics";
 import Header, { type Tab } from "@/components/Header";
@@ -56,7 +57,7 @@ function formatDay(iso: string): string {
 }
 
 function excerpt(md: string): string {
-  const lines = (md || "").split("\n").map((l) => l.trim()).filter(Boolean)
+  const lines = (md || "").split("\n").map((l) => l.trim().replace(/^>\s?/, "")).filter(Boolean)
     .filter((l) => !l.startsWith("#") && !l.startsWith("**Audio") && !/^File duration/i.test(l));
   const text = lines.join(" ")
     .replace(/\[[0-9:]+\]/g, "")
@@ -255,7 +256,7 @@ export default function JournalBrowser({
   useEffect(() => {
     if (!sel || !ds) return;
     setBodyLoading(true); setBody(""); track("entry_opened", { id: sel });
-    getBody(sel, ds.source).then((b) => { setBody(b); setBodyLoading(false); });
+    getEntryBody(sel, ds).then((b) => { setBody(b); setBodyLoading(false); });
   }, [sel, ds]);
 
   const selDoc = ds?.docs.find((d) => d.id === sel) || null;
@@ -441,7 +442,7 @@ function Feed({ items, excerpts, docCats, total, page, totalPages, setPage, onOp
         {items.map((d: Doc) => (
           <Link key={d.id} href={journalHref(d.id)} onClick={spaClick(() => onOpen(d.id))} className="group block w-full text-left">
             <div className="flex items-center gap-2 text-[11px] uppercase tracking-wide text-muted">
-              <span>{d.doc_type}</span>
+              <span>{entryTypeLabel(docCats[d.id], d.doc_type)}</span>
               {d.audio_url && <span className="text-accent inline-flex items-center gap-1"><Volume2 size={12} /> audio</span>}
               {d.part != null && <span className="ml-auto">Part {d.part}</span>}
             </div>
@@ -449,7 +450,7 @@ function Feed({ items, excerpts, docCats, total, page, totalPages, setPage, onOp
             <div className="text-[12px] text-muted mt-0.5">{d.entry_date}{d.weekday ? ` · ${d.weekday}` : ""}{d.recording_time ? ` · ${d.recording_time}` : ""}</div>
             <p className="mt-2.5 body-copy text-foreground/80 line-clamp-3">{excerpts[d.id] ?? "…"}</p>
             <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-[11px] uppercase tracking-wide text-muted">
-              {(docCats[d.id] || []).slice(0, 4).map((c: string) => <span key={c}>{cap(c)}</span>)}
+              {withoutEntryType(docCats[d.id]).slice(0, 4).map((c: string) => <span key={c}>{cap(c)}</span>)}
             </div>
             <div className="mt-3 text-accent text-sm">Read →</div>
           </Link>

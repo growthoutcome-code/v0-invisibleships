@@ -220,7 +220,7 @@ const HERO = {
 const CITY_QUOTES: { date: string; id: string; text: string }[] = [
   {
     date: "23 August 2025",
-    id: "is-j01-20250823-entry",
+    id: "is-j02-20250823-r12",
     text:
       "There is the method of communication and its reach, Denver, Seattle's been suggested, Portland's been suggested, Los Angeles has been suggested, many cities, Houston, Kansas City, the East Coast, not so much.",
   },
