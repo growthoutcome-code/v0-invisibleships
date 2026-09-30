@@ -48,6 +48,11 @@ institutions) a document **names**, normalized to one spelling (e.g. "FBI",
 statements", with the disclaimer, because the site makes no claim against any
 organization (CLAUDE.md §1). There is deliberately no "Accusations" filter.
 
+**Not a filter on the site (Sean, 30 Sep 2026: removed from the journal's Filter
+panel).** The tags stay in the data — `rels.json`, Supabase and the download's
+`organizations_named:` line — for readers and tools working from the corpus. The
+site's journal reader does not show them either.
+
 ## Where tags live
 
 As categories (rows, not columns — no structural change), kind `theme` and kind

@@ -290,7 +290,7 @@ export default function Page() {
       );
     }
     return {
-      href: `/concepts#${c.id}`,
+      href: `/concepts/${c.id}`,
       eyebrow: `${c.basis} · ${c.theme}`,
       title: c.title,
       // FIVE SENTENCES AT 840. Each raise here was forced by a slide stopping
@@ -540,7 +540,7 @@ export default function Page() {
                   author's claims and the assessment of them. */}
               Statements from the{" "}
               <a
-                href="/concepts#the-neurotech-bullhorn"
+                href="/concepts/the-neurotech-bullhorn"
                 className="underline decoration-accent decoration-2 underline-offset-[6px] hover:decoration-foreground"
               >
                 neurotech bullhorn
@@ -610,11 +610,11 @@ export default function Page() {
               {
                 label: "Concepts",
                 links: [
-                  { href: "/concepts#the-neurotech-bullhorn", label: "What is the neurotech bullhorn?" },
-                  { href: "/concepts#can-you-record-it", label: "Can you record it?" },
-                  { href: "/concepts#only-you-can-hear-it", label: "\u201cOnly I can hear it\u201d is not, by itself, unusual" },
-                  { href: "/concepts#what-produces-the-feeling", label: "Your house is not haunted" },
-                  { href: "/concepts#organised-harassment-is-fact", label: "Organised covert harassment is established fact" },
+                  { href: "/concepts/the-neurotech-bullhorn", label: "What is the neurotech bullhorn?" },
+                  { href: "/concepts/can-you-record-it", label: "Can you record it?" },
+                  { href: "/concepts/only-you-can-hear-it", label: "\u201cOnly I can hear it\u201d is not, by itself, unusual" },
+                  { href: "/concepts/what-produces-the-feeling", label: "Your house is not haunted" },
+                  { href: "/concepts/organised-harassment-is-fact", label: "Organised covert harassment is established fact" },
                 ],
               },
               {
@@ -746,9 +746,9 @@ export default function Page() {
             <Figure
               stat={`0 of ${gc.regulations}`}
               line="regulations record a route to individual review. Across the whole register, the person a system is used on has nowhere to ask."
-              href="/concepts#no-column-for-you"
+              href="/concepts/no-column-for-you"
             />
-            {euFine && <Figure stat={euFine.stat} line={euFine.line} href={`/concepts#${euFine.id}`} />}
+            {euFine && <Figure stat={euFine.stat} line={euFine.line} href={`/concepts/${euFine.id}`} />}
           </div>
 
           {/* WHAT THEY CAN DO, IN TWO SENTENCES (Sean, 8 September: "let's
@@ -789,10 +789,10 @@ export default function Page() {
               {
                 label: "Concepts",
                 links: [
-                  { href: "/concepts#prevention-as-the-product", label: "Prevention as the product" },
-                  { href: "/concepts#whose-eyesight-is-it", label: "Whose eyesight is it?" },
-                  { href: "/concepts#no-column-for-you", label: "There is no column for you" },
-                  { href: "/concepts#local-law-does-not-mean-local", label: "Local law does not mean local" },
+                  { href: "/concepts/prevention-as-the-product", label: "Prevention as the product" },
+                  { href: "/concepts/whose-eyesight-is-it", label: "Whose eyesight is it?" },
+                  { href: "/concepts/no-column-for-you", label: "There is no column for you" },
+                  { href: "/concepts/local-law-does-not-mean-local", label: "Local law does not mean local" },
                 ],
               },
               {
@@ -988,11 +988,11 @@ export default function Page() {
               {
                 label: "Concepts",
                 links: [
-                  { href: "/concepts#co-occurrence-is-not-cause", label: "Co-occurrence is not cause" },
-                  { href: "/concepts#low-number-may-mean-low-counting", label: "A low number may mean low counting" },
-                  { href: "/concepts#us-rose-against-the-trend", label: "The US rose against the trend" },
-                  { href: "/concepts#the-fentanyl-reversal", label: "The fentanyl reversal" },
-                  { href: "/concepts#prescribing-is-not-prevalence", label: "Prescribing is not prevalence" },
+                  { href: "/concepts/co-occurrence-is-not-cause", label: "Co-occurrence is not cause" },
+                  { href: "/concepts/low-number-may-mean-low-counting", label: "A low number may mean low counting" },
+                  { href: "/concepts/us-rose-against-the-trend", label: "The US rose against the trend" },
+                  { href: "/concepts/the-fentanyl-reversal", label: "The fentanyl reversal" },
+                  { href: "/concepts/prescribing-is-not-prevalence", label: "Prescribing is not prevalence" },
                 ],
               },
             ]}
@@ -1130,9 +1130,9 @@ export default function Page() {
               {
                 label: "Concepts",
                 links: [
-                  { href: "/concepts#the-neurotech-bullhorn", label: "What is the neurotech bullhorn?" },
-                  { href: "/concepts#can-you-record-it", label: "Can you record it?" },
-                  { href: "/concepts#organised-harassment-is-fact", label: "Organised covert harassment is established fact" },
+                  { href: "/concepts/the-neurotech-bullhorn", label: "What is the neurotech bullhorn?" },
+                  { href: "/concepts/can-you-record-it", label: "Can you record it?" },
+                  { href: "/concepts/organised-harassment-is-fact", label: "Organised covert harassment is established fact" },
                 ],
               },
             ]}
@@ -1234,7 +1234,7 @@ export default function Page() {
                   behind it. The glossary is reachable from the links-out block
                   at the foot of the section. */}
                 <a
-                  href="/concepts#what-produces-the-feeling"
+                  href="/concepts/what-produces-the-feeling"
                   className="mt-5 inline-flex h-10 items-center rounded-md bg-foreground/[0.07] px-4 text-[15px] font-medium text-foreground hover:bg-foreground/[0.12]"
                 >
                   Your house is not haunted
@@ -1277,7 +1277,7 @@ export default function Page() {
                 is where the people who can are listed.
               </p>
                 <a
-                  href="/concepts#can-you-record-it"
+                  href="/concepts/can-you-record-it"
                   className="mt-5 inline-flex h-10 items-center rounded-md bg-foreground/[0.07] px-4 text-[15px] font-medium text-foreground hover:bg-foreground/[0.12]"
                 >
                   Can you record it?
@@ -1295,7 +1295,7 @@ export default function Page() {
                 separates testimony from recollection later on.
               </p>
                 <a
-                  href="/concepts#no-column-for-you"
+                  href="/concepts/no-column-for-you"
                   className="mt-5 inline-flex h-10 items-center rounded-md bg-foreground/[0.07] px-4 text-[15px] font-medium text-foreground hover:bg-foreground/[0.12]"
                 >
                   There is no column for you
@@ -1313,7 +1313,7 @@ export default function Page() {
             reaching for what that might mean, there is a duller explanation with far
             better evidence behind it &mdash; nearly 3,500 American newspapers have closed
             since 2005, roughly forty per cent of the country&rsquo;s local press.{" "}
-            <a href="/concepts#why-isnt-this-in-the-news" className="text-foreground underline underline-offset-4">
+            <a href="/concepts/why-isnt-this-in-the-news" className="text-foreground underline underline-offset-4">
               Why isn&rsquo;t any of this in the news?
             </a>
           </p>

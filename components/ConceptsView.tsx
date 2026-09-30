@@ -1,254 +1,127 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { track } from "@/lib/analytics";
-import ConceptsToolbar from "@/components/ConceptsToolbar";
-import SideNav, { useSectionNav } from "@/components/SideNav";
-import { passes } from "@/components/FilterGroups";
+import { conceptPills } from "@/components/ConceptsToolbar";
+import { ActiveLine } from "@/components/ListControls";
+import Pager from "@/components/Pager";
 import ConceptsSummary from "@/components/ConceptsSummary";
 import { ConceptsNotice } from "@/components/DataIntro";
-import { CONCEPTS, NO_FILTERS, BASIS_LABEL, ORIGIN_LABEL, VERIFICATION_LABEL, type Filters } from "@/lib/concepts";
+import {
+  CONCEPTS, NO_FILTERS, BASIS_LABEL, ORIGIN_LABEL,
+  filterConcepts, sortConcepts, type Filters, type ConceptSort,
+} from "@/lib/concepts";
+import { THEMES } from "@/lib/themes";
 
 /**
- * Core concepts, each showing the basis it rests on.
+ * Core concepts as tiles, two across, twelve to a page (Sean, 30 Sep 2026:
+ * "Concepts need to be truncated and the page itself needs pagination").
  *
- * The labels are the whole point: a reader who rejects every Pattern can still
- * rely on every Documented entry. Presented inline rather than fenced off, so
- * each claim is weighed on its own basis instead of by its neighbours.
+ * Each tile carries what decides whether to read on: the number, who formed it
+ * and what it rests on (origin first, so a reader knows who is speaking before
+ * weighing the basis), the title, the opening of the argument, and its topics.
+ * The whole concept is on its own page, /concepts/<id>, so it can be linked,
+ * cited and shared (ConceptArticle.tsx).
+ *
+ * The side rail is gone: with tiles, search, filters and page numbers, a list
+ * of forty titles down the side had nothing left to do.
  */
+const PAGE = 12;
+
 export default function ConceptsView({
-  filters, setFilters,
+  filters, setFilters, sort,
 }: {
-  /** Controlled by DataView, so the Research hero can filter this list. */
+  /** Controlled by JournalBrowser (title-band controls) and the Research hero. */
   filters: Filters;
   setFilters: (f: Filters) => void;
+  sort: ConceptSort;
 }) {
+  const router = useRouter();
+  const [page, setPage] = useState(1);
+  const listRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => { track("concepts_viewed"); }, []);
 
-  // A shared anchor must always resolve, even if the target is filtered out —
-  // so an incoming hash clears the filters before the browser scrolls.
+  // Old addresses were anchors on one long page (/concepts#can-you-record-it);
+  // other pages and outside links still use them. Forward to the concept's page.
   useEffect(() => {
     if (typeof window === "undefined" || !window.location.hash) return;
-    setFilters(NO_FILTERS);
-    const id = window.location.hash.slice(1);
-    const t = window.setTimeout(() => {
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 60);
-    return () => window.clearTimeout(t);
+    const id = decodeURIComponent(window.location.hash.slice(1));
+    if (CONCEPTS.some((c) => c.id === id)) router.replace(`/concepts/${id}`);
+    else setFilters(NO_FILTERS);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const visible = useMemo(
-    () => {
-      // Search reads the parts a person would actually remember: the claim, the
-      // argument, the figures, and what it admits it cannot answer.
-      const q = filters.q.trim().toLowerCase();
-      const hit = (c: (typeof CONCEPTS)[number]) =>
-        !q ||
-        [c.title, c.body, ...(c.evidence ?? []), ...(c.questions ?? [])]
-          .join(" ").toLowerCase().includes(q);
-      return CONCEPTS.filter(
-        (c) =>
-          hit(c) &&
-          passes([c.origin], filters.origin) &&
-          passes([c.basis], filters.basis) &&
-          passes([c.theme], filters.theme) &&
-          passes(c.audience, filters.audience, filters.match.audience) &&
-          passes(c.topics, filters.topic, filters.match.topic)
-      );
-    },
-    [filters]
-  );
-
-
-  // The rail lists the concepts CURRENTLY SHOWN. Filtering removes list items,
-  // the hook's MutationObserver rescans, and the rail follows — no extra wiring.
-  // Concept <li>s already carry the stable ids other pages deep-link to, and
-  // useSectionNav preserves an id the page set itself.
-  const nav = useSectionNav("concepts-root", { selector: "li[id]", heading: "h3" });
-  const shownIds = useMemo(() => new Set(visible.map((c) => c.id)), [visible]);
+  const visible = useMemo(() => sortConcepts(filterConcepts(filters), sort), [filters, sort]);
+  useEffect(() => { setPage(1); }, [filters, sort]);
+  const totalPages = Math.max(1, Math.ceil(visible.length / PAGE));
+  const shown = visible.slice((page - 1) * PAGE, page * PAGE);
+  const lead = filters.topic;
 
   return (
-    <div className="w-full lg:grid lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-x-10 lg:items-start">
-      {/* Every concept is always listed (Sean, 30 Sep 2026: same as the journal's
-          months). Concepts the current filters leave out are greyed and cannot be
-          picked, so the rail never shrinks or vanishes as filters change. The hook
-          still tracks which shown concept the reader is looking at. */}
-      <SideNav mode="outline" label="Concepts" active={nav.active}
-        sections={CONCEPTS.map((c) => ({ id: c.id, label: c.title, disabled: !shownIds.has(c.id) }))} />
-      {/* lg:col-start-2 pins the content to its column. Before the rail listed
-          every concept, a search matching nothing left it empty; without the pin
-          the content fell into the 13rem rail column and the page looked gone
-          (Sean, 30 Sep: typed "testt"). Kept as a guard. */}
-      <div id="concepts-root" className="min-w-0 lg:col-start-2">
+    <div className="w-full">
+      {/* One standing sentence (Sean, 30 Sep 2026); the notice below can be
+          dismissed, this cannot. Replaces the closing line about the Data section. */}
+      <p className="body-copy text-foreground/85 measure mt-0 mb-8">
+        Concepts are short arguments built on this archive&rsquo;s research and journal, each one either
+        the author&rsquo;s own speculation or generated by AI, and labelled as such.
+      </p>
       <ConceptsNotice>
         <ConceptsSummary setFilters={setFilters} />
       </ConceptsNotice>
 
-      <ConceptsToolbar filters={filters} setFilters={setFilters} shown={visible.length} />
+      <div ref={listRef} className="scroll-mt-28">
+        <ActiveLine shown={visible.length} of={CONCEPTS.length} noun="concepts" q={filters.q}
+          clearQ={() => setFilters({ ...filters, q: "" })} pills={conceptPills(filters, setFilters)}
+          onClearAll={() => setFilters(NO_FILTERS)} />
 
-      <ol id="concepts-list" className="list-none p-0 m-0 scroll-mt-28">
-        {visible.map((c) => (
-          <li key={c.id} id={c.id} className="mb-20 scroll-mt-28">
-            <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2 mb-3">
-              <span className="text-[13px] uppercase tracking-[0.08em] font-semibold text-muted tabular-nums">
-                {String(CONCEPTS.indexOf(c) + 1).padStart(2, "0")}
-              </span>
-              {/* Origin reads first — a reader should know who formed a claim before
-                  they weigh what it rests on. */}
-              <span className="text-[13px] uppercase tracking-[0.08em] font-semibold text-background bg-foreground px-2.5 py-1">
-                {ORIGIN_LABEL[c.origin]}
-              </span>
-              <span className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground">
-                {BASIS_LABEL[c.basis]}
-              </span>
-            </div>
+        <ol className="list-none p-0 m-0 grid grid-cols-1 md:grid-cols-2 gap-5">
+          {shown.map((c) => {
+            const n = CONCEPTS.indexOf(c) + 1;
+            const topics = [...c.topics].sort((a, b) => Number(lead.includes(b)) - Number(lead.includes(a))).slice(0, 3);
+            return (
+              <li key={c.id} className="flex">
+                <Link href={`/concepts/${c.id}`} onClick={() => track("concept_opened", { id: c.id, from: "tile" })}
+                  className="group flex flex-col w-full border border-edge p-6 hover:border-foreground transition-colors">
+                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-2 mb-4">
+                    <span className="text-[13px] uppercase tracking-[0.08em] font-semibold text-muted tabular-nums">
+                      {String(n).padStart(2, "0")}
+                    </span>
+                    <span className="text-[12px] uppercase tracking-[0.08em] font-semibold text-background bg-foreground px-2 py-0.5">
+                      {ORIGIN_LABEL[c.origin]}
+                    </span>
+                    <span className="text-[12px] uppercase tracking-[0.08em] font-semibold text-foreground">
+                      {BASIS_LABEL[c.basis]}
+                    </span>
+                  </div>
+                  <h3 className="font-display font-semibold text-foreground text-[22px] md:text-[24px] leading-tight mb-3 group-hover:underline underline-offset-4">
+                    {c.title}
+                  </h3>
+                  <p className="text-[17px] leading-[1.55] text-foreground/80 line-clamp-3 m-0 mb-5">{c.body}</p>
+                  <div className="mt-auto flex flex-wrap items-center gap-x-3 gap-y-1 text-[12px] uppercase tracking-[0.06em] text-muted">
+                    {topics.map((t) => <span key={t}>{THEMES[t]}</span>)}
+                    <span className="ml-auto normal-case tracking-normal text-[14px] text-foreground">Read &rarr;</span>
+                  </div>
+                </Link>
+              </li>
+            );
+          })}
+        </ol>
 
-            <h3 className="font-display font-semibold text-foreground text-[26px] md:text-[30px] leading-tight mb-4 max-w-[46ch]">
-              {c.title}
-            </h3>
+        {!visible.length && (
+          <p className="body-copy text-muted measure my-10">
+            Nothing matches that. Clear a filter or the search to see the rest.
+          </p>
+        )}
 
-            <p className="body-copy text-foreground/85 measure mb-6">{c.body}</p>
+        {totalPages > 1 && (
+          <Pager page={page} totalPages={totalPages} setPage={setPage}
+            onGo={() => listRef.current?.scrollIntoView({ block: "start" })} />
+        )}
+      </div>
 
-            {c.evidence && (
-              <ul className="list-none p-0 m-0 measure mb-6">
-                {c.evidence.map((e) => (
-                  <li key={e} className="text-[16px] text-muted py-1.5 pl-5 relative">
-                    <span aria-hidden className="absolute left-0 top-1.5 text-foreground">—</span>
-                    {e}
-                  </li>
-                ))}
-              </ul>
-            )}
-
-            {/* Open questions are published deliberately: a concept that names what
-                would settle it is more credible than one that only asserts. */}
-            {c.questions && (
-              <div className="measure mb-6">
-                <h4 className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground mb-2">
-                  Open questions
-                </h4>
-                <ul className="list-none p-0 m-0">
-                  {c.questions.map((q) => (
-                    <li key={q} className="body-copy text-foreground/75 py-2 pl-5 relative">
-                      <span aria-hidden className="absolute left-0 top-2 text-foreground">?</span>
-                      {q}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {/* Claim and counter-claim, attributed, on the same page. Each half
-                renders independently — an assessment can answer the concept body
-                itself, with no separate author statement above it. Neither half is
-                ever edited to agree with the other; see lib/concepts.ts. */}
-            {c.authorStatement && (
-              <div className="measure mb-6 border-l-2 border-foreground pl-5 py-1">
-                <h4 className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground mb-2">
-                  The author states
-                </h4>
-                {c.authorStatement.map((m) => (
-                  <p key={m} className="body-copy text-foreground/85 m-0 mb-2 last:mb-0">{m}</p>
-                ))}
-                <p className="text-[14px] text-muted mt-3 m-0">
-                  The author&rsquo;s own words, printed as given. Unverified, and not a finding of this research.
-                </p>
-              </div>
-            )}
-
-            {c.aiAssessment && (
-              <div className="measure mb-6 border-l-2 border-accent pl-5 py-1">
-                <h4 className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground mb-2">
-                  AI assessment
-                </h4>
-                {c.aiAssessment.map((m) => (
-                  <p key={m} className="body-copy text-foreground/85 m-0 mb-2 last:mb-0">{m}</p>
-                ))}
-                <p className="text-[14px] text-muted mt-3 m-0">
-                  Written by an AI model at the author&rsquo;s request. Published unedited by the author,
-                  and not independent verification.
-                </p>
-              </div>
-            )}
-
-            {/* The author's own voice, fenced off from the sourced material.
-                Labelled so a reader never mistakes commentary for a finding. */}
-            {c.comments && (
-              <div className="measure mb-6 border-l-2 border-accent/40 pl-5">
-                <h4 className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground mb-2">
-                  Author&rsquo;s note
-                </h4>
-                {c.comments.map((m) => (
-                  <p key={m} className="body-copy text-foreground/75 m-0 mb-2 last:mb-0">{m}</p>
-                ))}
-                <p className="text-[14px] text-muted mt-3 m-0">
-                  Commentary by the author. Not evidence, and not a finding of this research.
-                </p>
-              </div>
-            )}
-
-            {c.references && (
-              <div className="measure mb-6">
-                <h4 className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground mb-2">
-                  References
-                </h4>
-                <ul className="list-none p-0 m-0">
-                  {c.references.map((r) => (
-                    <li key={r.href} className="py-1.5">
-                      <a
-                        href={r.href}
-                        target={r.href.startsWith("http") ? "_blank" : undefined}
-                        rel={r.href.startsWith("http") ? "noreferrer noopener" : undefined}
-                        onClick={() => track("concept_reference_opened", { concept: c.id, href: r.href })}
-                        className="text-[17px] text-foreground underline underline-offset-4 hover:text-accent"
-                      >
-                        {r.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-                {/* Without this note a contextual link reads as corroboration. */}
-                {c.referencesNote && (
-                  <p className="text-[16px] text-muted mt-3 m-0">{c.referencesNote}</p>
-                )}
-              </div>
-            )}
-
-            {/* Verification state is information, not boilerplate, so it stays as a
-                chip. The long per-concept disclaimer is gone: the standing line at
-                the top of the section points at /disclaimer instead. The one
-                exception is a concept whose scope limit is specific to it — it
-                carries `disclaimer`, and that is deliberately preserved. */}
-            {(c.verification && c.verification !== "verified") || c.disclaimer ? (
-              <div className="measure border-l-2 border-edge pl-5 py-1">
-                {c.verification && c.verification !== "verified" && (
-                  <p className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground m-0">
-                    {VERIFICATION_LABEL[c.verification]}
-                  </p>
-                )}
-                {c.disclaimer && (
-                  <p className="text-[16px] text-muted m-0 mt-2">{c.disclaimer}</p>
-                )}
-              </div>
-            ) : null}
-          </li>
-        ))}
-      </ol>
-
-      {!visible.length && (
-        <p className="body-copy text-muted measure mb-16">
-          Nothing matches that. Clear a filter or the search to see the rest.
-        </p>
-      )}
-
-      <p className="body-copy text-muted measure">
-        Every figure cited here is drawn from the research in the{" "}
-        <Link href="/data" className="text-accent underline underline-offset-4">Data</Link>{" "}
-        section, where each fact links to its own source.
-      </p>
-      </div>{/* /content column */}
     </div>
   );
 }

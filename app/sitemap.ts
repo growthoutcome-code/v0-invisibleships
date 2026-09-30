@@ -1,3 +1,4 @@
+import { CONCEPTS } from "@/lib/concepts";
 import type { MetadataRoute } from "next";
 import { allJournalParams, allGlossaryParams } from "@/lib/server-corpus";
 import { DATA_SECTIONS } from "@/lib/routes";
@@ -61,5 +62,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   }));
 
-  return [...sections, ...journal, ...glossary];
+  // One page per concept since 30 Sep 2026 (the list became tiles).
+  const concepts: MetadataRoute.Sitemap = CONCEPTS.map((c) => ({
+    url: `${BASE}/concepts/${c.id}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  return [...sections, ...journal, ...glossary, ...concepts];
 }

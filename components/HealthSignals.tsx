@@ -137,7 +137,7 @@ function ConceptLink({ id, children }: { id: string; children: React.ReactNode }
   return (
     <p className="text-[15px] measure mt-3 mb-0">
       <a
-        href={`/concepts#${id}`}
+        href={`/concepts/${id}`}
         onClick={() => track("concept_from_data", { id })}
         className="text-accent underline underline-offset-4 hover:text-foreground"
       >

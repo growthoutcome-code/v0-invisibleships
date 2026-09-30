@@ -164,7 +164,7 @@ export function EvidenceSpan() {
                   if (!c) return null;
                   return (
                     <li key={id} className="py-1.5">
-                      <a href={`/concepts#${id}`}
+                      <a href={`/concepts/${id}`}
                         onClick={() => track("evidence_span_concept_opened", { id })}
                         className="text-[17px] text-foreground underline underline-offset-4 hover:text-accent">
                         {c.title}

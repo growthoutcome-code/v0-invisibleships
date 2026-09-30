@@ -1487,3 +1487,41 @@ export const RESEARCH_INTRO =
   "Five bodies of work on one page: a procurement record, a public-health record, a crime record, " +
   "a master timeline, and the concepts drawn from all of them. Every figure resolves to a named " +
   "source, every claim states what it rests on, and every one of them says what it does not answer.";
+
+/* ---------- filtering and sorting (Sean, 30 Sep 2026) ----------
+ * In one place because two components need the same answer: the Filter panel's
+ * "Show N" beside the page title, and the tile grid below it. */
+function hasAll(have: string[], want: string[], match: "any" | "all" = "any") {
+  if (!want.length) return true;
+  return match === "all" ? want.every((v) => have.includes(v)) : want.some((v) => have.includes(v));
+}
+
+export function filterConcepts(f: Filters): Concept[] {
+  // Search reads the parts a person would actually remember: the claim, the
+  // argument, the figures, and what it admits it cannot answer.
+  const q = f.q.trim().toLowerCase();
+  return CONCEPTS.filter((c) =>
+    (!q || [c.title, c.body, ...(c.evidence ?? []), ...(c.questions ?? [])].join(" ").toLowerCase().includes(q)) &&
+    hasAll([c.origin], f.origin) &&
+    hasAll([c.basis], f.basis) &&
+    hasAll([c.theme], f.theme) &&
+    hasAll(c.audience, f.audience, f.match.audience) &&
+    hasAll(c.topics, f.topic, f.match.topic));
+}
+
+export type ConceptSort = "default" | "documented" | "az";
+export const CONCEPT_SORTS: { v: ConceptSort; l: string }[] = [
+  { v: "default", l: "Default order" },
+  { v: "documented", l: "Documented first" },
+  { v: "az", l: "A–Z" },
+];
+const BASIS_RANK: Record<Basis, number> = { documented: 0, structural: 1, testimony: 2, pattern: 3 };
+
+export function sortConcepts(list: Concept[], s: ConceptSort): Concept[] {
+  const n = (c: Concept) => CONCEPTS.indexOf(c);
+  const r = [...list];
+  if (s === "documented") r.sort((a, b) => BASIS_RANK[a.basis] - BASIS_RANK[b.basis] || n(a) - n(b));
+  else if (s === "az") r.sort((a, b) => a.title.replace(/^[^A-Za-z0-9]+/, "").localeCompare(b.title.replace(/^[^A-Za-z0-9]+/, "")));
+  else r.sort((a, b) => n(a) - n(b));
+  return r;
+}

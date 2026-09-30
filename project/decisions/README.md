@@ -10,6 +10,7 @@ never edited to reverse it — a new record supersedes the old one, and the old 
 | [0002](0002-visit-trust-labels.md) | How do we know whether a visit actually came from the place it reports? | Accepted | 2026-09-27 |
 | [0003](0003-where-content-lives.md) | Where does the site's content live, and which copy is the reference? | Accepted | 2026-09-29 |
 | [0004](0004-entry-types-and-discovery-notes.md) | How are journal documents typed, and where do the Discovery Notes go? | Accepted | 2026-09-30 |
+| [0005](0005-search-inside-the-filter-panel.md) | Where do search and filters live on the Journal and Concepts, and how are concepts shown? | Accepted | 2026-09-30 |
 
 Next number: **0005**.
 

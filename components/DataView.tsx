@@ -12,7 +12,7 @@ import CrimeSignals from "@/components/CrimeSignals";
 import ConceptsView from "@/components/ConceptsView";
 import ResearchHero from "@/components/ResearchHero";
 import SideNav, { useSectionNav } from "@/components/SideNav";
-import { NO_FILTERS, type Filters } from "@/lib/concepts";
+import { NO_FILTERS, type Filters, type ConceptSort } from "@/lib/concepts";
 
 /**
  * Data section — three sub-tabs (Sean, 2026-08-20):
@@ -54,17 +54,21 @@ function setInternalTab(t: "time" | "adopt") {
  * URL could not follow a sub-tab click.
  */
 export default function DataView({
-  sub, onSub,
+  sub, onSub, conceptFilters, setConceptFilters, conceptSort,
 }: {
   sub: SubTab;
   onSub: (s: SubTab) => void;
+  conceptFilters: Filters;
+  setConceptFilters: (f: Filters) => void;
+  conceptSort: ConceptSort;
 }) {
   useEffect(() => { track("data_report_viewed"); }, []);
 
   // The concept list's controls live here because the hero steers them: picking
   // a reader or a subject up there has to open the list down here already
   // filtered. Lifting the state is what makes that one click instead of two.
-  const [conceptFilters, setConceptFilters] = useState<Filters>(NO_FILTERS);
+  // Held by JournalBrowser since 30 Sep 2026: the Sort and Filter buttons sit
+  // beside the page title, which that component renders.
   // Both hero sections and the report's own <h2>s, which are bare siblings
   // rather than wrapped, hence the selector.
   const nav = useSectionNav("research-root", { selector: "section, h2", heading: "h2" });
@@ -166,7 +170,7 @@ export default function DataView({
 
       {sub === "health" && <HealthSignals onGoTimeline={() => pick("timeline")} />}
       {sub === "crime" && <CrimeSignals onGoTimeline={() => pick("timeline")} />}
-      {sub === "concepts" && <ConceptsView filters={conceptFilters} setFilters={setConceptFilters} />}
+      {sub === "concepts" && <ConceptsView filters={conceptFilters} setFilters={setConceptFilters} sort={conceptSort} />}
     </div>
   );
 }

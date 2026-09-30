@@ -245,3 +245,10 @@ body {
   .gate-plate .gship,
   .gate-plate .gsight { animation: none !important; opacity: .8 !important; }
 }
+
+/* The Government Cloud report's script adds its detail popup (#gov-modal) to
+   <body> once and never removes it, so the report keeps working after a reader
+   leaves and returns. Its styles live inside the report component, so on a page
+   without the report (a concept page reached by a client-side link) it showed as
+   a bare "Close" in the corner. Hidden here, globally, unless it is open. */
+#gov-modal:not(.on) { display: none; }
