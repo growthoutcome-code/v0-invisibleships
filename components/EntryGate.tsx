@@ -82,9 +82,9 @@ const HINT_ID = "gate-terms-hint";
 // The list itself lives in lib/gate.ts — see the note there.
 
 export default function EntryGate() {
-  // Starts closed and is opened in an effect: sessionStorage does not exist
+  // Starts closed and is opened in an effect: browser storage does not exist
   // during SSR, and rendering it on the server would flash the gate at somebody
-  // who has already passed it this session.
+  // who has already passed it on this device.
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState(0);
   const [role, setRole] = useState<string | null>(null);

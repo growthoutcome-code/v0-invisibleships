@@ -14,6 +14,8 @@
  * everything else through as text.
  */
 import type { ReactNode } from "react";
+import DisclaimerLink from "@/components/DisclaimerLink";
+import { isDisclaimerHref } from "@/components/Transcript";
 
 const INLINE = /(\*\*[^*]+\*\*|\*[^*\n]+\*|\[[^\]]+\]\([^)]+\)|<[^\s@<>]+@[^\s@<>]+>)/g;
 
@@ -26,6 +28,9 @@ function inline(text: string, key: string): ReactNode[] {
       if (part.startsWith("**") && part.endsWith("**")) return <strong key={k}>{part.slice(2, -2)}</strong>;
       if (part.startsWith("*") && part.endsWith("*")) return <em key={k}>{part.slice(1, -1)}</em>;
       const link = /^\[([^\]]+)\]\(([^)]+)\)$/.exec(part);
+      if (link && isDisclaimerHref(link[2])) {
+        return <DisclaimerLink key={k} from="journal_quote" className="underline underline-offset-4">{link[1]}</DisclaimerLink>;
+      }
       if (link) {
         return (
           <a key={k} href={link[2]} target="_blank" rel="noreferrer noopener"

@@ -1,19 +1,21 @@
-// Session-persistent gate memory.
+// First-visit gate memory.
 //
-// Backed by sessionStorage under a VERSIONED key:
-//   • Passing the gate lasts the whole browser session — refreshes and deep
-//     links no longer re-show it (Sean, 2026-08-20: the opening animation now
-//     lives in the glossary, so the front door doesn't need to replay).
-//   • A new browser session (or a new device) still meets the full gate:
-//     the content warning, the perceptual-set note, and the terms keep doing
-//     their work. (There is no age attestation any more; it went on 30 August.)
+// Backed by localStorage under a VERSIONED key (Sean, 30 Sep 2026: "make the
+// gate only show up on the first visit"):
+//   • Passing the gate is remembered on the device, across browser sessions —
+//     a returning reader goes straight to the page they were sent to.
+//   • Earlier (20 Aug to 30 Sep) it lasted one browser session, so every new
+//     session met the full gate again. What that bought: a shared computer
+//     showed the warning to the next person. That is what this gives up.
 //   • Bump the _v suffix whenever the gate wording changes materially, so
 //     returning visitors meet the updated terms once more.
+//   • A reader who passed it under the session rule this session is carried
+//     over, so nobody sees it twice on the day this ships.
 //
-// Falls back to the old in-memory flag when storage is unavailable (private
-// mode / storage denied), which simply restores re-gate-on-refresh there.
-// All storage access is wrapped, so this module is SSR-safe: on the server
-// `window` is undefined and hasEntered() reports false.
+// Falls back to the in-memory flag when storage is unavailable (private mode /
+// storage denied), which re-shows the gate on refresh there. All storage access
+// is wrapped, so this module is SSR-safe: on the server `window` is undefined
+// and hasEntered() reports false.
 
 export const GATE_VERSION = "v2";  // v2: the merged three-step gate, 15 Sep 2026
 
@@ -46,7 +48,10 @@ let entered = false;
 export function hasEntered(): boolean {
   if (entered) return true;
   try {
-    return window.sessionStorage.getItem(KEY) === "1";
+    if (window.localStorage.getItem(KEY) === "1") return true;
+    // passed under the old once-per-session rule: remember it on the device now
+    if (window.sessionStorage.getItem(KEY) === "1") { markEntered(); return true; }
+    return false;
   } catch {
     return entered;
   }
@@ -55,7 +60,7 @@ export function hasEntered(): boolean {
 export function markEntered(): void {
   entered = true;
   try {
-    window.sessionStorage.setItem(KEY, "1");
+    window.localStorage.setItem(KEY, "1");
   } catch {
     /* private mode: in-memory flag above still covers this visit */
   }

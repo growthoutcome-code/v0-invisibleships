@@ -18,11 +18,12 @@ import ThemeToggle from "@/components/ThemeToggle";
 // where Header is already the single site header. This keeps the two in step
 // in the meantime.
 const NAV: { href: string; label: string }[] = [
+  // Same order as Header.tsx (Sean, 30 Sep 2026): the record, then what it means.
   { href: "/journal", label: "Journal" },
-  { href: "/glossary", label: "Glossary" },
-  { href: "/documents", label: "Documents" },
-  { href: "/data", label: "Research" },
   { href: "/concepts", label: "Concepts" },
+  { href: "/data", label: "Research" },
+  { href: "/documents", label: "Documents" },
+  { href: "/glossary", label: "Glossary" },
 ];
 
 export default function ItemHeader() {

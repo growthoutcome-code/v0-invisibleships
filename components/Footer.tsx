@@ -26,7 +26,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ACCOUNTS_READY } from "@/lib/flags";
-import { DisclaimerDialog, SafetyDialog } from "@/components/LegalDialogs";
+import { SafetyDialog } from "@/components/LegalDialogs";
 import { DATA_SECTIONS } from "@/lib/routes";
 
 type NavTab = "journal" | "data" | "concepts" | "glossary" | "documents" | "author";
@@ -169,16 +169,15 @@ export default function Footer({ onNav }: { onNav?: (t: NavTab) => void }) {
           ))}
         </div>
 
-        {/* The legal row. Both open in place; both name the page they can also
-            be read as, because a modal is not a citable address. */}
+        {/* The legal row. The disclaimer goes to its own page (Sean, 30 Sep 2026:
+            "From the footer we can point to a full page"); content pages open it
+            as a modal. The safety note still opens in place. */}
         <div className="mt-12 flex flex-col gap-4 pt-6 sm:flex-row sm:items-center">
           <p className="m-0 text-[13px] text-muted">© 2026 Sean C. Harris. All Rights Reserved.</p>
           <div className="flex flex-wrap items-center gap-5 sm:ml-auto">
-            <DisclaimerDialog>
-              <button type="button" className={legalLink}>
-                Critical Disclaimer
-              </button>
-            </DisclaimerDialog>
+            <a href="/disclaimer" className={legalLink}>
+              Critical Disclaimer
+            </a>
             <SafetyDialog>
               <button type="button" className={legalLink}>
                 A note on safety

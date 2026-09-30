@@ -44,17 +44,19 @@ import { ACCOUNTS_READY } from "@/lib/flags";
 export type Tab = "journal" | "glossary" | "documents" | "data" | "concepts" | "author" | "disclaimer";
 
 const NAV: { t: Tab; href: string; label: string }[] = [
+  // Order (Sean, 30 Sep 2026): the record, then what it means. Journal first as
+  // the primary record; Concepts beside it because the two share the Topic
+  // filter; Research and Documents as the supporting evidence; Glossary last,
+  // a reference used while reading rather than a place to start.
+  // Concepts keeps its own top-level entry although it is also a Research
+  // vertical (Sean, 26 Aug): it is the part of this archive a reader is most
+  // likely to have been sent a link to. Both entries land in the same section.
+  // ItemHeader.tsx carries the same list and must be kept in step.
   { t: "journal", href: "/journal", label: "Journal" },
-  { t: "glossary", href: "/glossary", label: "Glossary" },
-  { t: "documents", href: "/documents", label: "Documents" },
-  // Data and Concepts merged on 26 Aug into one Research section with five
-  // verticals. Concepts keeps its own top-level entry anyway (Sean, same day):
-  // it is the part of this archive a reader is most likely to have been sent a
-  // link to, and burying it one click inside Research cost more than the tidier
-  // nav was worth. Both entries land in the same section — Research on its
-  // landing view, Concepts on its vertical — and both addresses already resolve.
-  { t: "data", href: "/data", label: "Research" },
   { t: "concepts", href: "/concepts", label: "Concepts" },
+  { t: "data", href: "/data", label: "Research" },
+  { t: "documents", href: "/documents", label: "Documents" },
+  { t: "glossary", href: "/glossary", label: "Glossary" },
 ];
 
 const linkCls = (active: boolean) =>
