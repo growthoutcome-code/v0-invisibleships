@@ -124,6 +124,7 @@ instead of undoing it.
 | IS-J04-20251012-ENTRY, IS-J04-20251016-ENTRY | Not published: word-for-word repeats of the Part 03 administrative comments; redirect to them | Sean, 30 Sep 2026 |
 | IS-J02-20250824-R04 and the 24 Aug entry list | Title, heading, `notes` and the entry's recording list say "second transcription of Recording 3": Part 02 transcribes `20250824-110328.mp3` twice (same timestamps, 93% same words); both kept | Sean, 30 Sep 2026 (option A) |
 | IS-JDN-* (Discovery Notes) | Not in any Doc. Title, heading, summary and banner written by Claude from each note (the note's own words unchanged) | Sean, 30 Sep 2026 (decision 0004) |
+| IS-JDN-20260523-0928 | The note was only a TypingMind share link. The link is replaced by the conversation it shows, under TypingMind's title "Persona Consumer Sign-In": the question and the final answer, word for word (md5-checked against the share page); the tool's 38 research-step messages are left out, and the answer's headings sit one level under the title | Sean, 30 Sep 2026 ("pull the conversation … and remove the URL") |
 
 **Links are not words.** Repairing a dead audio link (a Drive ID) to the live copy
 of the same file is a link fix, not an edit, and is applied to all three copies.

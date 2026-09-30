@@ -9,10 +9,10 @@ export const CORPUS_SUMMARY = {
   files: 924,
   markdown: 822,
   csv: 29,
-  words: 975065,
-  medianWords: 575,
+  words: 975828,
+  medianWords: 578,
   largestWords: 10246,
-  zipBytes: 3460587,
+  zipBytes: 3462729,
   folders: [
   { key: "journal", label: "Journal", blurb: "The primary record — dated entries and verbatim transcripts.", markdown: 428, data: 0 },
   { key: "references", label: "References", blurb: "The analysis and reference documents, chunked by section.", markdown: 242, data: 0 },
