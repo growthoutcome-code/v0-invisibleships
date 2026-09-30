@@ -167,10 +167,11 @@ links open the file their text names.** `audio_files` holds one row per file nam
 two recordings that share a file (2 Dec R02/R03, intentional; 24 Aug R03/R04, two
 transcriptions of one file, §5) have one row between them.
 
-After the entry types (30 Sep 2026): Supabase holds **776** documents (the 2 Part 04
-repeats deleted); its 382 journal documents carry the same entry type as the site
-(md5 of the id:type list matches). The 13 restored documents are added at the push
-(`rest_*.sql`, which includes their types).
+After the push (30 Sep 2026, commit `6b01654`, deployed): **811 of 811** download
+documents match Supabase (md5 of every body; hash of the sorted id:md5 list equal),
+and all 691 site-data documents match Supabase in title and text. Journal: 417
+documents in all three copies (382 + 13 restored + 22 Discovery Notes). The 35 new
+rows were read from the live site's own files, not pasted.
 
 ## 9. What Supabase does not do yet (so nobody assumes it does)
 

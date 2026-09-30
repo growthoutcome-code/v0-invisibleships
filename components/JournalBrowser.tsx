@@ -89,7 +89,12 @@ export default function JournalBrowser({
   const [cat, setCat] = useState(""); const [stype, setSType] = useState(""); const [audioOnly, setAudioOnly] = useState(false);
   const [gcat, setGcat] = useState("");
 
-  const [page, setPage] = useState(1);
+  // The feed is a window of PAGE_SIZE entries starting at `start` (an index into
+  // `filtered`), not a fixed grid of pages. A month link starts the window at
+  // that month's first entry, so the month opens at the top of the list (Sean,
+  // 30 Sep: with a fixed grid, 14 of 16 months opened below the previous month's
+  // entries, and two months sharing a page made one link do nothing).
+  const [start, setStart] = useState(0);
   // Sticky mount for the Data tab — see the note by its render below.
   const [dataMounted, setDataMounted] = useState(false);
   // Feed order. Default matches the entries themselves, which read latest-first.
@@ -214,10 +219,16 @@ export default function JournalBrowser({
     return r;
   }, [journal, ds, q, dFrom, dTo, part, loc, audioOnly, cat, stype, sort]);
 
-  useEffect(() => { setPage(1); }, [q, dFrom, dTo, part, loc, cat, stype, audioOnly, sort]);
+  useEffect(() => { setStart(0); }, [q, dFrom, dTo, part, loc, cat, stype, audioOnly, sort]);
   useEffect(() => { if (tab === "data" || tab === "concepts") setDataMounted(true); }, [tab]);
 
-  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  // Pages are counted from the window: the entries above it make ceil(start/10)
+  // pages, the window is one, and whatever follows makes the rest. Page 1 is
+  // always the top of the list.
+  const page = Math.ceil(start / PAGE_SIZE) + 1;
+  const totalPages = Math.max(1, page + Math.ceil(Math.max(0, filtered.length - start - PAGE_SIZE) / PAGE_SIZE));
+  const setPage = (n: number) =>
+    setStart(n <= 1 ? 0 : Math.min(Math.max(0, start + (n - page) * PAGE_SIZE), Math.max(0, filtered.length - 1)));
 
   // Journal month index for the shared SideNav (Sean, 2026-08-21). One entry
   // per calendar month rather than per document: 435 entries is not a
@@ -234,12 +245,12 @@ export default function JournalBrowser({
     return [...seen.entries()].map(([m, i]) => ({
       id: m,
       label: `${MONTH[+m.slice(5, 7) - 1]} ${m.slice(0, 4)}`,
-      page: Math.floor(i / PAGE_SIZE) + 1,
+      first: i,
     }));
   }, [filtered]);
 
-  const pageItems = useMemo(() => filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE), [filtered, page]);
-  // the month the current page opens on
+  const pageItems = useMemo(() => filtered.slice(start, start + PAGE_SIZE), [filtered, start]);
+  // the month the list currently opens on
   const activeMonth = useMemo(
     () => (pageItems[0]?.entry_date || "").slice(0, 7) || null,
     [pageItems],
@@ -351,7 +362,7 @@ export default function JournalBrowser({
                 active={activeMonth}
                 onPick={(id: string) => {
                   const m = months.find((x) => x.id === id);
-                  if (m) setPage(m.page);
+                  if (m) setStart(m.first);
                 }}
               />
             )}
@@ -364,7 +375,7 @@ export default function JournalBrowser({
                   onNext={selIdx >= 0 && selIdx < filtered.length - 1 ? () => setSel(filtered[selIdx + 1].id) : undefined}
                 />
               ) : (
-                <Feed items={pageItems} excerpts={excerpts} docCats={ds?.docCats || {}} total={filtered.length}
+                <Feed items={pageItems} excerpts={excerpts} docCats={ds?.docCats || {}} total={filtered.length} from={start + 1}
                   page={page} totalPages={totalPages} setPage={setPage} onOpen={setSel} onSearch={() => setPanelOpen(true)} />
               )}
             </div>
@@ -428,13 +439,13 @@ function TitleBand({ title, actions }: { title: string; actions?: React.ReactNod
 }
 
 /* ---------- Feed ---------- */
-function Feed({ items, excerpts, docCats, total, page, totalPages, setPage, onOpen, onSearch }: any) {
+function Feed({ items, excerpts, docCats, total, from, page, totalPages, setPage, onOpen, onSearch }: any) {
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
         <span />
         <div className="flex items-center gap-2">
-          <span className="text-xs text-muted">{total} entries · page {page} of {totalPages}</span>
+          <span className="text-xs text-muted">{total} entries{items.length ? ` · ${from}–${from + items.length - 1}` : ""}</span>
           <ShareMenu title={`${SITE} — Journal`} align="right" />
         </div>
       </div>
