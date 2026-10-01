@@ -3,6 +3,7 @@
 import { H2_CLASS, SUB_CLASS } from "@/components/SectionHead";
 import { useEffect, useMemo, useRef, useState } from "react";
 import ListPager from "@/components/ListPager";
+import { viewsFor } from "@/lib/routes";
 import { DataNoteLine } from "@/components/DataIntro";
 import DisclaimerLink from "@/components/DisclaimerLink";
 import { Skeleton, SkeletonRows, SkeletonChart } from "@/components/Skeleton";
@@ -287,7 +288,11 @@ function useNarrow() {
 /** Phone-width forms for the only series labelled at that size. */
 /* ------------------------------------------------------------ component --- */
 
-export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => void } = {}) {
+export default function HealthSignals({ onGoTimeline, view, onView }: {
+  onGoTimeline?: () => void;
+  /** One view at a time (lib/routes.ts RESEARCH_VIEWS.health), picked from the sidebar. */
+  view: string; onView: (v: string) => void;
+}) {
   const indicators = useTable<Indicator>("health_indicators");
   const milestones = useTable<Milestone>("health_milestones");
   const claims = useTable<Claim>("health_claims");
@@ -373,48 +378,25 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
 
   return (
     <div className="w-full lg:grid lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-x-10 lg:items-start">
-      <SideNav mode="outline" label="Public Health" sections={nav.sections} active={nav.active} />
+      <SideNav mode="index" label="Public Health"
+        sections={viewsFor("health").map((v) => ({ id: v.id, label: v.label }))}
+        active={view} onPick={onView} />
       <div id="health-root" className="min-w-0">
-      {/* Secondary disclaimer: one line + link. The crisis-resources sentence is
-          SAFETY information, not disclaimer language, and stays visible. */}
-      <DataNoteLine from="health">
-        Official statistics, independently re-checked · causes shown only as attributed by their
-        source · under-reporting documented rather than hidden ·
-      </DataNoteLine>
-      <p className="text-muted text-[15px] measure -mt-6 mb-10">
+      {view === "suicide" && (<>
+      {/* ONE suicide chart, top of page, US in focus (Sean, 2026-08-20). */}
+      <section className="mb-14">
+        <h2 className={H2_CLASS}>Suicide around the world</h2>
+        <p className={SUB_CLASS}>Fourteen countries and the world on one way of counting, from 2000 to 2021.</p>
+        {intl === null ? <SkeletonChart /> : <MultiLineChart chart={intl} captionBelow />}
+        {/* Charts first, copy under them (Sean, 30 Sep 2026). The support line is
+            safety information, not disclaimer language: it sits directly under the
+            chart so it stays in view of the figures. */}
+        <p className="text-muted text-[15px] measure mt-4 mb-8">
         This page reports suicide and overdose statistics — rates and counts only. If you or someone
         you know needs support: in the US, call or text{" "}
         <a href="https://988lifeline.org" target="_blank" rel="noreferrer noopener" className="underline underline-offset-4">988</a>;
         elsewhere, <a href="https://findahelpline.com" target="_blank" rel="noreferrer noopener" className="underline underline-offset-4">findahelpline.com</a>.
       </p>
-
-      {/* Stat tiles + tier legend */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-3">
-        {([
-          [indicators?.length ?? null, "indicator rows"],
-          [milestones?.length ?? null, "timeline milestones"],
-          [claims && dq && overlaps ? claims.length + dq.length + overlaps.length : null, "register rows"],
-          [sources ? sources.length : null, "sources"],
-        ] as [number | null, string][]).map(([n, l]) => (
-          <div key={l} className="border border-edge rounded-xl px-4 py-3">
-            {n === null
-              ? <Skeleton className="h-[34px] w-14 my-[3px]" />
-              : <div className="font-display font-semibold text-[28px] text-foreground">{n}</div>}
-            <div className="text-muted text-[13px]">{l}</div>
-          </div>
-        ))}
-      </div>
-      <p className="text-muted text-[14px] mb-12">
-        Evidence tiers: <strong className="text-foreground/80">A documented</strong> ({tierCounts.A}) ·{" "}
-        <strong className="text-foreground/80">B corroborated</strong> ({tierCounts.B}) ·{" "}
-        <strong className="text-foreground/80">C claimed</strong> ({tierCounts.C}). Tier C renders dashed.
-      </p>
-
-      {/* ONE suicide chart, top of page, US in focus (Sean, 2026-08-20). */}
-      <section className="mb-14">
-        <h2 className={H2_CLASS}>Suicide around the world</h2>
-        <p className={SUB_CLASS}>Fourteen countries and the world on one way of counting, from 2000 to 2021.</p>
-        {intl === null ? <SkeletonChart /> : <MultiLineChart chart={intl} />}
         {intl && (
           <>
             <h3 className="font-display font-semibold text-foreground text-[17px] mb-2 mt-2">
@@ -535,6 +517,33 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
         )}
       </section>
 
+      {/* What this tab is built from: under the first chart, not above it. */}
+      <DataNoteLine from="health">
+        Official statistics, independently re-checked · causes shown only as attributed by their
+        source · under-reporting documented rather than hidden ·
+      </DataNoteLine>
+      {/* Stat tiles + tier legend */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-3">
+        {([
+          [indicators?.length ?? null, "indicator rows"],
+          [milestones?.length ?? null, "timeline milestones"],
+          [claims && dq && overlaps ? claims.length + dq.length + overlaps.length : null, "register rows"],
+          [sources ? sources.length : null, "sources"],
+        ] as [number | null, string][]).map(([n, l]) => (
+          <div key={l} className="border border-edge rounded-xl px-4 py-3">
+            {n === null
+              ? <Skeleton className="h-[34px] w-14 my-[3px]" />
+              : <div className="font-display font-semibold text-[28px] text-foreground">{n}</div>}
+            <div className="text-muted text-[13px]">{l}</div>
+          </div>
+        ))}
+      </div>
+      <p className="text-muted text-[14px] mb-12">
+        Evidence tiers: <strong className="text-foreground/80">A documented</strong> ({tierCounts.A}) ·{" "}
+        <strong className="text-foreground/80">B corroborated</strong> ({tierCounts.B}) ·{" "}
+        <strong className="text-foreground/80">C claimed</strong> ({tierCounts.C}). Tier C renders dashed.
+      </p>
+
       {/* Verdict */}
       {!verdict && (
         <section className="mb-16" aria-busy="true">
@@ -574,6 +583,8 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
 
 
 
+      </>)}
+      {view === "overdose" && (<>
       {/* Overdose */}
       <section className="mb-16">
         <h2 className={H2_CLASS}>
@@ -615,6 +626,8 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
         </ConceptLink>
       </section>
 
+      </>)}
+      {view === "evidence" && (<>
       {/* Trends */}
       {trends === null && <SectionSkeleton title="What the series show" />}
       {!!trends?.length && (
@@ -714,6 +727,8 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
         </section>
       )}
 
+      </>)}
+      {view === "milestones" && (<>
       {/* Milestones */}
       {milestones === null && <SectionSkeleton title="Dated milestones" />}
       {!!milestones?.length && (
@@ -738,6 +753,8 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
         </section>
       )}
 
+      </>)}
+      {view === "indicators" && (<>
       {/* Indicator table */}
       <section className="mb-16">
         <h2 className={H2_CLASS}>All indicators</h2>
@@ -820,6 +837,7 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
           scrollTo={() => srcRef.current?.scrollIntoView({ block: "start" })}
         />
       </section>
+      </>)}
       </div>{/* /content column */}
     </div>
   );

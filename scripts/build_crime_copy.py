@@ -89,7 +89,15 @@ THEMES = {
     ],
     # -------------------------------------------------------- break-ins --
     "burglary_international.json": [
-        t(A, "Four of the five countries are below where they started in 2008. The "
+        t(A, "US police-recorded burglary fell 53% from 2000 to 2019 on the FBI's old count, "
+             "then a further 26% from 2020 to 2024 on its new one."),
+        t(A, "The US lines are dashed: they count all burglary, not just homes, on a different "
+             "system from Europe's. Compare their direction, not their height."),
+        t(A, "The two US lines are not joined. The FBI changed how it counts in 2020, so "
+             "2019 and 2020 are not the same measure."),
+        t(A, "Fewer US burglaries reach the police at all: 59% were reported in 2010, 41% in "
+             "2024. Some of the fall is fewer reports."),
+        t(A, "Four of the five European countries are below where they started in 2008. The "
              "Netherlands fell furthest — 79% below its 2009 peak."),
         t(A, "Italy is the exception: 44% above its 2020 trough and still climbing."),
         t(A, "Germany has also risen 44% since its 2021 low, though it remains half its "
@@ -107,9 +115,40 @@ THEMES = {
              "the same collection."),
     ],
     # --------------------------------------------------------- arrests ---
+    # ------------------------------------------------- crime, overall --
+    # Sean, 1 Oct 2026: the page's own question finally gets a chart
+    # (build_crime_annual.py).
+    "crime_overall_indexed.json": [
+        t(A, "Police-recorded violent crime fell 30% from 1999 to 2019, then a further 16% "
+             "from 2020 to 2025 on the FBI's newer count."),
+        t(A, "Property crime fell further: 44% from 1999 to 2019, then 20% from 2020 to 2025."),
+        t(A, "Violence reported by victims in the national survey, which includes crimes "
+             "never reported to police, is about half its 1999 level."),
+        t(A, "The survey jumped from its 2021 low — 16.5 to 23.5 per 1,000 people in 2022 — "
+             "and has stayed there, while police-recorded violence has fallen since 2022."),
+        t(A, "The police lines break at 2020 because the FBI changed how it counts. 2021 is "
+             "left out: the FBI says that year is not nationally representative."),
+    ],
     "arrests_over_time.json": [
+        # These three were prepended by build_crime_two_directions.py and lived
+        # only in the chart file, so every run of this script deleted them. They
+        # are carried here now, first, in the same order.
+        t(A, "Criminal arrests are down 51% from their 1997 peak. Over the same period crime "
+             "fell too — American policing is getting a better outcome with roughly half the "
+             "coercion."),
+        t(B, "Civil immigration arrests run the other way: a FY2021 trough of 74,082, then "
+             "about 217,500 between January and October 2025, and nearly 50,000 in July 2026 "
+             "alone."),
+        t(A, "The two are different legal systems on different calendars — one criminal, one "
+             "administrative — and neither series explains the other."),
         t(A, "Criminal arrests peaked in 1997 at 15.3 million. 2024, at 7.5 million, is "
              "51% below that."),
+        t(A, "The fall was steady, not one drop: arrests went down every year from 2010 to "
+             "2019, from 13.1 million to 10.1 million."),
+        t(A, "Drug arrests kept rising after all arrests peaked — from 1.58 million in 1997 to "
+             "1.89 million in 2006."),
+        t(A, "The criminal lines break after 2020: the FBI changed how it estimates arrests, "
+             "and 2021 has no national figure."),
         t(A, "Yes, 15.3 million is real — but an arrest is an event, not a person. One "
              "person arrested three times counts three times."),
         t(A, "Most arrests never become imprisonment: 7.5 million criminal arrests a year "
@@ -204,10 +243,13 @@ THEMES = {
 VERDICT_SUMMARY = (
     "Split the question in two, because the record can answer one half and not the "
     "other.\n\n"
-    "Has crime increased? Not as one number. The chart above shows six lanes moving in "
-    "different directions at once — one quadrupled, one is at a record low, one is at a "
-    "22-year high — and the two categories this site cares about most, harassment and "
-    "home invasion, have no lane at all because nobody counts them. Even the official "
+    "Has crime increased? Not by the two broad measures that exist. Police-recorded "
+    "violent and property crime fell across the window, and violence reported by victims "
+    "is about half its 1999 level — the chart above. But harm is not one number: the "
+    "six-lane chart at the top of this page moves in different directions at once — one "
+    "quadrupled, one is at a record low, one is at a 22-year high — and the two categories "
+    "this site cares about most, harassment and home invasion, have no lane at all because "
+    "nobody counts them. Even the official "
     "measures disagree with each other right now: the survey of victims reports more "
     "violence in 2024 than 2021 while police records report less.\n\n"
     "Is there a relationship between any of this and the procurement and legislation "

@@ -361,26 +361,26 @@ const MARKUP = `<div class="wrap">
  <span id="catWrap" class="hidden">Category: <select id="catSel"><option value="">all</option></select></span>
  </div>
 
-<div id="adopt" class="hidden"><div class="tiles" id="a_tiles"></div><h2>Deployments by geography &times; mission domain</h2><p class="subline">Each cell counts the recorded deployments for one region and one mission domain.</p><div class="card"><table class="hm" id="heat"></table></div>
+<div id="adopt" class="hidden"><h2>Deployments by geography &times; mission domain</h2><p class="subline">Each cell counts the recorded deployments for one region and one mission domain.</p><div class="card"><table class="hm" id="heat"></table></div><div class="tiles" id="a_tiles"></div>
  <h2>Top vendors by deployment count</h2><p class="subline">The providers that appear most often in the deployment record, coloured by type of vendor.</p><div class="legend"><span><span class="sw" style="background:var(--series-1)"></span>hyperscaler</span><span><span class="sw" style="background:var(--series-2)"></span>local/champion</span><span><span class="sw" style="background:var(--series-3)"></span>ISV/platform</span></div><div class="card"><div class="hbars" id="vbars"></div></div></div>
 
-<div id="proc" class="hidden"><div class="tiles" id="p_tiles"></div><h2>Disclosed award / pledge value by geography</h2><p class="note">Mixed basis: ceilings + pledges + projected savings. Not a market size.</p><div class="card"><div class="hbars" id="pgbars"></div></div>
+<div id="proc" class="hidden"><h2>Disclosed award / pledge value by geography</h2><p class="note">Mixed basis: ceilings + pledges + projected savings. Not a market size.</p><div class="card"><div class="hbars" id="pgbars"></div></div><div class="tiles" id="p_tiles"></div>
  <h2>Awards by year announced</h2><p class="subline">Contract awards and pledges placed by the year they were announced.</p><div class="card"><div class="tl" id="tline"></div></div><h2>Re-compete calendar &mdash; next 36 months</h2><p class="subline">Contracts in the record that come up for renewal or re-competition in the next three years.</p><div class="card"><div class="hbars" id="rcbars"></div></div></div>
 
-<div id="time"><div class="tiles" id="t_tiles"></div><h2>Master timeline &mdash; all threads</h2><p class="subline">Legislation, releases, deployments, litigation, investment, health and crime on one axis; hollow points are projected.</p>
+<div id="time"><h2>Master timeline &mdash; all threads</h2><p class="subline">Legislation, releases, deployments, litigation, investment, health and crime on one axis; hollow points are projected.</p>
  <div class="legend"><span><span class="sw" style="background:var(--series-2)"></span>Legislation (A)</span><span><span class="sw" style="background:var(--series-1)"></span>Release (B)</span><span><span class="sw" style="background:var(--series-3)"></span>Deploy/enforcement (C)</span><span><span class="sw" style="background:var(--series-4)"></span>Litigation (D)</span><span><span class="sw" style="background:var(--series-5)"></span>Investment (E)</span><span><span class="sw" style="background:var(--series-6)"></span>Health (F)</span><span><span class="sw" style="background:var(--series-7)"></span>Crime (G)</span><!--CRIME-TRACK-G-LEGEND--><!--HEALTH-TRACK-F-LEGEND--><span style="color:var(--text-muted)">hollow=projected · line=today</span></div>
- <div class="card"><div id="tlsvg"></div></div>
+ <div class="card"><div id="tlsvg"></div></div><div class="tiles" id="t_tiles"></div>
  <div class="callout"><b>Enforcement in the timeline:</b> DHS-reported operations now appear on the Deploy track — e.g. the Jul 2026 World Cup human-trafficking crackdown (905 arrested, 180 rescued, agency-reported). The 2025 enforcement sequence still shows policy switch (Jan) preceding software (Apr) and appropriations (Jul): law and money followed policy.</div>
- <h2>Relationship: does law follow capability?</h2><p class="subline">Each paired case sorted by which came first: the law after the capability, the two unrelated, the two together, or the capability after the law.</p><div class="card"><div class="hbars" id="relbars"></div></div></div>
+ <div class="tl-rel"><h2>Relationship: does law follow capability?</h2><p class="subline">Each paired case sorted by which came first: the law after the capability, the two unrelated, the two together, or the capability after the law.</p><div class="card"><div class="hbars" id="relbars"></div></div></div></div>
 
-<div id="invest" class="hidden"><div class="tiles" id="i_tiles"></div><h2>Capital flows: disclosed vs announced pledge</h2><p class="note">Disclosed = ceilings, 10-K revenue, appropriations, closed rounds. Pledge = multi-year, milestone-gated. Never summed. Not investment advice.</p><div class="card"><div class="hbars" id="cfsplit"></div></div>
+<div id="invest" class="hidden"><h2>Capital flows: disclosed vs announced pledge</h2><p class="note">Disclosed = ceilings, 10-K revenue, appropriations, closed rounds. Pledge = multi-year, milestone-gated. Never summed. Not investment advice.</p><div class="card"><div class="hbars" id="cfsplit"></div></div><div class="tiles" id="i_tiles"></div>
  <h2>Largest capital flows</h2><p class="subline">The largest disclosed or pledged sums in the record, biggest first.</p><div class="card"><div class="hbars" id="cftop"></div></div><h2>Market size by domain <span class="note">(analyst forecasts; 2&ndash;3&times; variance)</span></h2><p class="subline">Analyst forecasts of market size in each domain; forecasts for the same domain differ two- to threefold.</p><div class="card"><div class="hbars" id="mktdom"></div></div><h2>Investment thesis by domain</h2><p class="subline">The stated case for investment in each domain, from the sources that make it.</p><div class="card" id="thesisList"></div></div>
 
-<div id="lit" class="hidden"><div class="tiles" id="l_tiles"></div><h2>Cases by vendor / system</h2><p class="subline">Legal and regulatory cases in the record, counted by the vendor or system involved.</p><div class="card"><div class="hbars" id="lvbars"></div></div>
+<div id="lit" class="hidden"><h2>Cases by vendor / system</h2><p class="subline">Legal and regulatory cases in the record, counted by the vendor or system involved.</p><div class="card"><div class="hbars" id="lvbars"></div></div><div class="tiles" id="l_tiles"></div>
  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px"><div><h2>By status</h2><p class="subline">The same cases, counted by their current status.</p><div class="card"><div class="hbars" id="lsbars"></div></div></div><div><h2>By jurisdiction</h2><p class="subline">The same cases, counted by jurisdiction.</p><div class="card"><div class="hbars" id="ljbars"></div></div></div></div>
  <h2>Case register <span id="lcount" style="color:var(--text-secondary);font-weight:400"></span></h2><p class="note">Not legal advice. Ongoing/appeal cases may change. Wrongdoing attributed only where a court/regulator so found. "organized-harassment" = Zersetzung-analogue addendum, kept separate from gov-cloud cases.</p><div class="card" style="max-height:60vh"><table class="dt" id="ltab2"></table></div></div>
 
-<div id="cap" class="hidden"><div class="tiles" id="c_tiles"></div><h2>What the platforms do &mdash; capabilities by category</h2><p class="subline">What the recorded platforms can technically do, counted by category of capability.</p><div class="card"><div class="hbars" id="ccbars"></div></div>
+<div id="cap" class="hidden"><h2>What the platforms do &mdash; capabilities by category</h2><p class="subline">What the recorded platforms can technically do, counted by category of capability.</p><div class="card"><div class="hbars" id="ccbars"></div></div><div class="tiles" id="c_tiles"></div>
  <h2>Capabilities by vendor</h2><p class="subline">The same capabilities, counted by the vendor that offers them.</p><div class="card"><div class="hbars" id="cvbars"></div></div>
  <h2>Capability register <span id="ccount" style="color:var(--text-secondary);font-weight:400"></span></h2><p class="note">What each platform/service technically does and its government mission use. Filter by category above.</p><div class="card" style="max-height:60vh"><table class="dt" id="ctab"></table></div></div>
 
@@ -394,7 +394,17 @@ export default function GovCloudReport() {
     // the <script> on cleanup, which aborted the in-flight fetch before it ran and
     // left the report blank. So: never remove it, and key off its presence in the
     // DOM rather than a ref, which also survives navigating away and back.
-    if (document.getElementById(SCRIPT_ID)) return;
+    //
+    // The script is added once per page load, but React can REMOUNT this markup
+    // (e.g. a concept page, then Research from the menu): the fresh, empty chart
+    // containers were then never drawn — "Master timeline charts aren't
+    // generating" (Sean, 30 Sep 2026). The script is wrapped in
+    // window.__govCloudReportDraw, so a remount redraws into the new markup.
+    if (document.getElementById(SCRIPT_ID)) {
+      const draw = (window as unknown as { __govCloudReportDraw?: () => void }).__govCloudReportDraw;
+      if (draw) draw();
+      return;
+    }
     const s = document.createElement("script");
     s.id = SCRIPT_ID;
     s.src = "/reports/gov-cloud-report.js";

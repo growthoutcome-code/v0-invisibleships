@@ -3,6 +3,7 @@
 import { H2_CLASS, SUB_CLASS } from "@/components/SectionHead";
 import { useEffect, useMemo, useState } from "react";
 import ListPager from "@/components/ListPager";
+import { viewsFor } from "@/lib/routes";
 import { DataNoteLine } from "@/components/DataIntro";
 import DisclaimerLink from "@/components/DisclaimerLink";
 import { SkeletonChart } from "@/components/Skeleton";
@@ -50,6 +51,9 @@ type ChartSeries = {
   tier: string; unit?: string;
   points: { year: number; value: number; tier?: string; note?: string }[];
   caveats?: string[];
+  /** Last year of the old basis: the path is split after it, never drawn across
+   *  (same rule as Lane.break_after; the arrests lines break after 2020). */
+  break_after?: number;
 };
 type Chart = {
   title: string; unit: string; note: string; publisher: string; tier: string;
@@ -119,7 +123,13 @@ type Sweep = {
  * relative change, never magnitude, and each label carries its base year so no
  * one reads two lanes at the same height as two equal quantities.
  */
-function LaneChart({ chart, onPick }: { chart: LaneChart; onPick: (l: Lane) => void }) {
+function LaneChart({ chart, onPick, lead = false }: {
+  chart: LaneChart; onPick: (l: Lane) => void;
+  /** The page's opening chart: its section H2 already names it, so the chart's own
+   *  title is for screen readers only and the axis note goes under the chart
+   *  (Sean, 30 Sep 2026: the chart at the top, under one H2 and one sentence). */
+  lead?: boolean;
+}) {
   const narrow = useNarrow();
   const [hoverYear, setHoverYear] = useState<number | null>(null);
   // Connected legend (Sean, 2026-08-21): four of the five lanes converge below
@@ -150,10 +160,10 @@ function LaneChart({ chart, onPick }: { chart: LaneChart; onPick: (l: Lane) => v
 
   return (
     <figure className="m-0 mb-6">
-      <figcaption className="font-display font-semibold text-foreground text-[19px] mb-1">
+      <figcaption className={lead ? "sr-only" : "font-display font-semibold text-foreground text-[19px] mb-1"}>
         {chart.title}
       </figcaption>
-      <p className="text-muted text-[13px] m-0 mb-3">{chart.unit}</p>
+      {!lead && <p className="text-muted text-[13px] m-0 mb-3">{chart.unit}</p>}
 
       <ul className="list-none p-0 m-0 mb-3 flex flex-wrap gap-x-4 gap-y-1"
         onMouseLeave={() => setFocus(null)}>
@@ -337,6 +347,7 @@ function LaneChart({ chart, onPick }: { chart: LaneChart; onPick: (l: Lane) => v
         )}
       </svg>
       )}
+      {lead && <p className="text-muted text-[13px] m-0 mt-2">{chart.unit}</p>}
 
       <ul className="list-none p-0 mt-4 mb-0">
         {chart.series.map((s, i) => {
@@ -371,7 +382,12 @@ function LaneChart({ chart, onPick }: { chart: LaneChart; onPick: (l: Lane) => v
  * and dashed. Ranges differ (FBI 1960-2025, CDC 1950-2023) and that is drawn
  * honestly — each line simply starts and stops where its data does.
  */
-function TwoSeriesChart({ chart, onPick }: { chart: Chart; onPick: (s: ChartSeries) => void }) {
+function TwoSeriesChart({ chart, onPick, defaultMode = "level" }: {
+  chart: Chart; onPick: (s: ChartSeries) => void;
+  /** The view a reader lands on. Arrests opens on year-over-year change
+   *  (Sean, 1 Oct 2026); Levels is one click away. */
+  defaultMode?: "level" | "change";
+}) {
   const narrow = useNarrow();
   const [hoverYear, setHoverYear] = useState<number | null>(null);
   const [showMarkers, setShowMarkers] = useState(true);
@@ -387,7 +403,7 @@ function TwoSeriesChart({ chart, onPick }: { chart: Chart; onPick: (s: ChartSeri
   // Levels or year-over-year change (Sean, 2026-08-22). Change is computed only
   // between CONSECUTIVE years: a series with a gap gets no bar across it, since
   // the difference between 2019 and 2024 is not a year-over-year change.
-  const [mode, setMode] = useState<"level" | "change">("level");
+  const [mode, setMode] = useState<"level" | "change">(defaultMode);
   const showChange = mode === "change" && !!chart.change_view;
 
   const fmtV = (v: number) =>
@@ -440,7 +456,11 @@ function TwoSeriesChart({ chart, onPick }: { chart: Chart; onPick: (s: ChartSeri
   const yTicks = (() => {
     const t = Array.from({ length: 5 }, (_, i) => v0 + ((v1 - v0) * i) / 4);
     // Zero must be ON the axis in change mode, or a fall reads as a rise.
-    return showChange && !t.some((x) => Math.abs(x) < 1e-9) ? [...t, 0].sort((a, b) => a - b) : t;
+    if (!showChange || t.some((x) => Math.abs(x) < 1e-9)) return t;
+    // Add zero, and drop any tick close enough to it that the labels collide
+    // (the arrests chart printed "0%" on top of "-3.5%").
+    const gap = (v1 - v0) * 0.08;
+    return [...t.filter((x) => Math.abs(x) >= gap), 0].sort((a, b) => a - b);
   })();
   // Shared tick years in the default window; the full-record view spans 75
   // years and needs its own coarser stepping.
@@ -557,7 +577,18 @@ function TwoSeriesChart({ chart, onPick }: { chart: Chart; onPick: (s: ChartSeri
         {view.map((s, i) => {
           const pt = (p: { year: number; value: number }) =>
             `${X(p.year).toFixed(1)},${Y(p.value).toFixed(1)}`;
-          const d = s.points.map((p, j) => `${j ? "L" : "M"}${pt(p)}`).join(" ");
+          // A basis change splits the path: a segment whose two ends sit either
+          // side of break_after is not drawn (the gap can span missing years).
+          const brk = s.break_after ?? null;
+          // In change mode every point is one year against the year before, so
+          // two points more than a year apart are not joined either: a line from
+          // 2003 to 2011 would draw seven changes that were never computed.
+          const crosses = (a: { year: number }, b: { year: number }) =>
+            (brk !== null && a.year <= brk && b.year > brk) ||
+            (showChange && b.year - a.year > 1);
+          const d = s.points
+            .map((p, j) => `${j === 0 || crosses(s.points[j - 1], p) ? "M" : "L"}${pt(p)}`)
+            .join(" ");
           // Dotted means UN-VETTED, matching the Public Health charts, where a
           // dotted run marks a weaker or different basis. It must never carry
           // series identity — that is what stroke weight and the end label do.
@@ -566,8 +597,8 @@ function TwoSeriesChart({ chart, onPick }: { chart: Chart; onPick: (s: ChartSeri
           const weak: string[] = [];
           s.points.forEach((p, j) => {
             if (p.tier && p.tier !== "A") {
-              if (j > 0) weak.push(`M${pt(s.points[j - 1])}L${pt(p)}`);
-              if (j < s.points.length - 1) weak.push(`M${pt(p)}L${pt(s.points[j + 1])}`);
+              if (j > 0 && !crosses(s.points[j - 1], p)) weak.push(`M${pt(s.points[j - 1])}L${pt(p)}`);
+              if (j < s.points.length - 1 && !crosses(p, s.points[j + 1])) weak.push(`M${pt(p)}L${pt(s.points[j + 1])}`);
             }
           });
           const dim = focus !== null && focus !== s.name;
@@ -736,7 +767,11 @@ function TwoSeriesChart({ chart, onPick }: { chart: Chart; onPick: (s: ChartSeri
 
 /* ----------------------------------------------------------------- view --- */
 
-export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => void }) {
+export default function CrimeSignals({ onGoTimeline, view, onView }: {
+  onGoTimeline?: () => void;
+  /** One view at a time (lib/routes.ts RESEARCH_VIEWS.crime), picked from the sidebar. */
+  view: string; onView: (v: string) => void;
+}) {
   const indicators = useTable<Indicator>("/data/crime/tables/crime_indicators.json");
   const dq = useTable<DQ>("/data/crime/tables/crime_data_quality.json");
   const trends = useTable<Trend>("/data/crime/tables/crime_trends.json");
@@ -745,6 +780,8 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
   const verdict = useDoc<Verdict>("/data/crime/tables/crime_verdict.json");
   const chart = useDoc<Chart>("/data/crime/charts/homicide_two_measures.json");
   const lanes = useDoc<LaneChart>("/data/crime/charts/harm_lanes_indexed.json");
+  // Sean, 1 Oct 2026: the verdict's own question gets a chart (build_crime_annual.py).
+  const overall = useDoc<LaneChart>("/data/crime/charts/crime_overall_indexed.json");
   // Reports of the unexplained (Sean, 2026-08-22). Sits in Act 3, with the
   // limits, because three of its four lanes are really findings about what is
   // and is not counted.
@@ -827,8 +864,11 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
     // track shrink below its children's intrinsic width, which is what keeps
     // the 100%-width chart SVGs inside their column.
     <div className="w-full lg:grid lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-x-10 lg:items-start">
-      <SideNav mode="outline" sections={nav.sections} active={nav.active} />
+      <SideNav mode="index" label="Crime"
+        sections={viewsFor("crime").map((v) => ({ id: v.id, label: v.label }))}
+        active={view} onPick={onView} />
       <div id="crime-root" className="min-w-0">
+      {view === "counts" && (<>
       {/* ================= THE OPENING =================
           Sean, 2026-08-22: "Do not begin the Data/Crime page with text. Use a
           chart." So the six-lane chart is the first thing rendered — no note
@@ -847,7 +887,7 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
         <p className={SUB_CLASS}>Six kinds of harm since 1999, each indexed to its own first year, so the chart shows direction, not size.</p>
         {lanes === null ? <SkeletonChart /> : (
           <>
-            <LaneChart chart={lanes} onPick={setLanePicked} />
+            <LaneChart chart={lanes} onPick={setLanePicked} lead />
             {!!lanes.themes?.length && (
               <div className="mt-2 mb-5">
                 <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">
@@ -892,9 +932,32 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
           <h2 className={H2_CLASS}>
             {verdict.claim}
           </h2>
-          {/* the summary's first paragraph is the section's subline */}
-          {verdict.summary.split("\n\n").map((para, i) => (
-            <p key={i} className={i === 0 ? SUB_CLASS : "body-copy text-foreground/90 measure"}>{para}</p>
+          {/* the summary's first paragraph is the section's subline; the chart
+              comes straight after it, and the rest of the summary under the chart */}
+          <p className={SUB_CLASS}>{verdict.summary.split("\n\n")[0]}</p>
+          {overall === null ? <SkeletonChart /> : (
+            <>
+              <LaneChart chart={overall} onPick={setLanePicked} />
+              {!!overall.themes?.length && (
+                <div className="mt-2 mb-5">
+                  <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">
+                    What the chart shows
+                  </h3>
+                  <ul className="list-none p-0 m-0">
+                    {overall.themes.map((th, i) => (
+                      <li key={i} className="flex items-baseline gap-3 py-2 border-b border-edge/60 text-[16px] text-foreground/90">
+                        <TierChip t={th.tier} />
+                        <span className="measure">{th.statement}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              <p className="text-muted text-[15px] measure mb-6">{overall.note}</p>
+            </>
+          )}
+          {verdict.summary.split("\n\n").slice(1).map((para, i) => (
+            <p key={i} className="body-copy text-foreground/90 measure">{para}</p>
           ))}
           <ul className="list-none p-0 m-0 mt-4">
             {verdict.key_figures.map((f, i) => (
@@ -942,6 +1005,8 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
       </section>
 
 
+      </>)}
+      {view === "homicide" && (<>
       {/* ---- homicide: one lens among several, no longer the lead ---- */}
       <section className="mb-12">
         <h2 className={H2_CLASS}>
@@ -1022,6 +1087,8 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
         )}
       </section>
 
+      </>)}
+      {view === "breakins" && (<>
       {/* ---- break-ins abroad, and the offence that is not an offence
              (Sean, 2026-08-21: "have home invasions increased in the US and
              abroad?" and "are they documented or labelled as a burglary?").
@@ -1031,7 +1098,7 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
         <h2 className={H2_CLASS}>
           Break-ins
         </h2>
-        <p className={SUB_CLASS}>Police-recorded burglary of homes in five European countries, on one shared code.</p>
+        <p className={SUB_CLASS}>Police-recorded burglary in the United States and five European countries, since 2000.</p>
         {burg === null ? <SkeletonChart /> : (
           <>
             <IntlLineChart chart={burg} onPick={setIntlPicked} />
@@ -1074,6 +1141,8 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
         )}
       </section>
 
+      </>)}
+      {view === "arrests" && (<>
       {/* ---- arrests over time (Sean, 2026-08-21): the 1997 peak ---- */}
       <section className="mb-14">
         {arrests === null ? <SkeletonChart /> : (
@@ -1082,12 +1151,7 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
               Arrests
             </h2>
             <p className={SUB_CLASS}>Estimated US arrests per year: all arrests, drug arrests and civil immigration arrests.</p>
-            {arrests.accuracy_note && (
-              <DismissibleNote storageKey="is_crime_arrests_accuracy_v1">
-                {arrests.accuracy_note}
-              </DismissibleNote>
-            )}
-            <TwoSeriesChart chart={arrests} onPick={setPicked} />
+            <TwoSeriesChart chart={arrests} onPick={setPicked} defaultMode="change" />
             {!!arrests.themes?.length && (
               <div className="mt-2 mb-5">
                 <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">
@@ -1104,6 +1168,11 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
               </div>
             )}
             <p className="text-muted text-[15px] measure">{arrests.note}</p>
+            {/* Sean, 1 Oct 2026: page text under the chart, not a closable alert
+                above it — same as Who is held. */}
+            {arrests.accuracy_note && (
+              <p className="text-muted text-[15px] measure mt-3">{arrests.accuracy_note}</p>
+            )}
           </>
         )}
       </section>
@@ -1251,6 +1320,8 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
         </section>
       )}
 
+      </>)}
+      {view === "held" && (<>
       {/* ---- incarceration: the stock, where arrests were the flow
              (Sean, 2026-08-22). Sits between arrests and ICE detention on
              purpose: who gets arrested, who ends up held, and the separate
@@ -1263,11 +1334,6 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
         <p className={SUB_CLASS}>People in US prisons, jails and under correctional control, 1999 to 2024.</p>
         {incarc === null ? <SkeletonChart /> : (
           <>
-            {incarc.accuracy_note && (
-              <DismissibleNote storageKey="is_crime_incarceration_accuracy_v1">
-                {incarc.accuracy_note}
-              </DismissibleNote>
-            )}
             <DetentionChart chart={incarc} onPick={setDetPicked} />
             {!!incarc.themes?.length && (
               <div className="mt-2 mb-5">
@@ -1285,6 +1351,12 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
               </div>
             )}
             <p className="text-muted text-[15px] measure">{incarc.note}</p>
+            {/* Sean, 30 Sep 2026: the accuracy note was a dismissible alert above
+                the chart; it is page text now, under the chart like every other
+                note, and can no longer be closed away for good. */}
+            {incarc.accuracy_note && (
+              <p className="text-muted text-[15px] measure mt-3">{incarc.accuracy_note}</p>
+            )}
 
           </>
         )}
@@ -1350,6 +1422,8 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
         )}
       </section>
 
+      </>)}
+      {view === "unexplained" && (<>
       {/* ---- what nobody counts: the lead finding (Sean, 2026-08-21) ---- */}
       {/* ---- reports of the unexplained: chart first, plain-language block
              underneath, absences carried at the same weight as the lines ---- */}
@@ -1381,6 +1455,8 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
         )}
       </section>
 
+      </>)}
+      {view === "method" && (<>
       {notCounted === null ? <SectionSkeleton title="What nobody counts" /> : !!notCounted.length && (
         <section className="mb-14">
           <h3 className="font-display font-semibold text-foreground text-[19px] mb-3">
@@ -1592,14 +1668,15 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
         </section>
       )}
 
+      </>)}
       </div>{/* /content column — modals live outside the grid */}
 
       {/* ---- per-lane detail ---- */}
       {lanePicked && (
         <div role="dialog" aria-modal="true" aria-label={lanePicked.name}
-          className="fixed inset-0 z-50 bg-background/85 overflow-y-auto p-4 sm:p-10"
+          className="fixed inset-0 z-50 bg-background/85 overflow-y-auto p-4 sm:p-10 flex"
           onClick={() => setLanePicked(null)}>
-          <div className="max-w-3xl mx-auto bg-background border border-edge p-6 sm:p-8"
+          <div className="max-w-3xl w-full m-auto bg-background border border-edge p-6 sm:p-8"
             onClick={(e) => e.stopPropagation()}>
             <div className="flex items-start gap-4">
               <h3 className="font-display font-semibold text-foreground text-[22px] m-0">{lanePicked.name}</h3>
@@ -1653,9 +1730,9 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
       {/* ---- per-measure detail (detention) ---- */}
       {detPicked && (
         <div role="dialog" aria-modal="true" aria-label={detPicked.name}
-          className="fixed inset-0 z-50 bg-background/85 overflow-y-auto p-4 sm:p-10"
+          className="fixed inset-0 z-50 bg-background/85 overflow-y-auto p-4 sm:p-10 flex"
           onClick={() => setDetPicked(null)}>
-          <div className="max-w-3xl mx-auto bg-background border border-edge p-6 sm:p-8"
+          <div className="max-w-3xl w-full m-auto bg-background border border-edge p-6 sm:p-8"
             onClick={(e) => e.stopPropagation()}>
             <div className="flex items-start gap-4">
               <h3 className="font-display font-semibold text-foreground text-[22px] m-0">{detPicked.name}</h3>
@@ -1694,9 +1771,9 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
       {/* ---- per-country detail (international homicide) ---- */}
       {intlPicked && (
         <div role="dialog" aria-modal="true" aria-label={intlPicked.name}
-          className="fixed inset-0 z-50 bg-background/85 overflow-y-auto p-4 sm:p-10"
+          className="fixed inset-0 z-50 bg-background/85 overflow-y-auto p-4 sm:p-10 flex"
           onClick={() => setIntlPicked(null)}>
-          <div className="max-w-3xl mx-auto bg-background border border-edge p-6 sm:p-8"
+          <div className="max-w-3xl w-full m-auto bg-background border border-edge p-6 sm:p-8"
             onClick={(e) => e.stopPropagation()}>
             <div className="flex items-start gap-4">
               <h3 className="font-display font-semibold text-foreground text-[22px] m-0">{intlPicked.name}</h3>
@@ -1736,11 +1813,11 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
       {picked && (
         <div
           role="dialog" aria-modal="true" aria-label={picked.name}
-          className="fixed inset-0 z-50 bg-background/85 overflow-y-auto p-4 sm:p-10"
+          className="fixed inset-0 z-50 bg-background/85 overflow-y-auto p-4 sm:p-10 flex"
           onClick={() => setPicked(null)}
         >
           <div
-            className="max-w-3xl mx-auto bg-background border border-edge p-6 sm:p-8"
+            className="max-w-3xl w-full m-auto bg-background border border-edge p-6 sm:p-8"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-start gap-4">

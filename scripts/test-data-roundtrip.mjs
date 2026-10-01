@@ -971,7 +971,7 @@ if (!/Six kinds of harm/i.test(opening.caption || "")) {
 const copy = await page.evaluate(async () => {
   const charts = ["harm_lanes_indexed", "homicide_two_measures", "homicide_international",
     "burglary_international", "arrests_over_time", "incarceration_over_time",
-    "detention_capacity", "anomalies_indexed"];
+    "detention_capacity", "anomalies_indexed", "crime_overall_indexed"];
   const out = [];
   for (const c of charts) {
     const doc = await (await fetch(`/data/crime/charts/${c}.json`)).json();

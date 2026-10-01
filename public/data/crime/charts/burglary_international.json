@@ -1,11 +1,185 @@
 {
-  "title": "Break-ins abroad: one code, five countries",
-  "unit": "Police-recorded burglary of private residential premises, per 100,000 inhabitants (Eurostat/UNODC ICCS05012)",
-  "note": "Every line is filed under the same ICCS code, which makes each line's DIRECTION comparable and the distance between lines much less so \u2014 Eurostat records that Germany's mapping is incomplete and Sweden counts cellar and attic storage where Germany does not. France is absent because Eurostat states there is no correspondence between the French classification and this code at all. The United States publishes nothing on this basis.",
+  "title": "Break-ins: the United States and five European countries",
+  "unit": "Police-recorded burglary per 100,000 people. Europe (solid): homes only, on one shared code (Eurostat/UNODC ICCS05012). United States (dashed): all premises, FBI.",
+  "note": "Every European line is filed under the same ICCS code, which makes each line's DIRECTION comparable and the distance between lines much less so \u2014 Eurostat records that Germany's mapping is incomplete and Sweden counts cellar and attic storage where Germany does not. France is absent because Eurostat states there is no correspondence between the French classification and this code at all. The United States publishes nothing on this code: its dashed lines are the FBI's count of all burglary, homes and other buildings, and they break in 2020 where the FBI changed counting systems. Read them for direction, not against the European levels.",
   "publisher": "Eurostat (joint Eurostat\u2013UNODC data collection)",
   "tier": "A",
   "indexed": false,
   "series": [
+    {
+      "name": "US \u2014 FBI, to 2019",
+      "code": "US-SRS",
+      "emphasis": true,
+      "kind": "other-basis",
+      "basis_short": "FBI: police-recorded burglary of ALL premises (homes and other buildings), per 100,000 people \u2014 not the ICCS code the European lines share",
+      "publisher": "FBI Uniform Crime Reporting Program",
+      "tier": "A",
+      "counts": "police-recorded burglaries of all premises per 100,000 people",
+      "base_year": 2000,
+      "base_value": 728.8,
+      "unit_raw": "per 100,000 inhabitants",
+      "last": {
+        "year": 2019,
+        "value": 340.5
+      },
+      "points": [
+        {
+          "year": 2000,
+          "value": 728.8,
+          "tier": "A"
+        },
+        {
+          "year": 2001,
+          "value": 741.8,
+          "tier": "A"
+        },
+        {
+          "year": 2002,
+          "value": 747.0,
+          "tier": "A"
+        },
+        {
+          "year": 2003,
+          "value": 741.0,
+          "tier": "A"
+        },
+        {
+          "year": 2004,
+          "value": 730.3,
+          "tier": "A"
+        },
+        {
+          "year": 2005,
+          "value": 726.9,
+          "tier": "A"
+        },
+        {
+          "year": 2006,
+          "value": 733.1,
+          "tier": "A"
+        },
+        {
+          "year": 2007,
+          "value": 726.1,
+          "tier": "A"
+        },
+        {
+          "year": 2008,
+          "value": 733.0,
+          "tier": "A"
+        },
+        {
+          "year": 2009,
+          "value": 717.7,
+          "tier": "A"
+        },
+        {
+          "year": 2010,
+          "value": 701.0,
+          "tier": "A"
+        },
+        {
+          "year": 2011,
+          "value": 701.3,
+          "tier": "A"
+        },
+        {
+          "year": 2012,
+          "value": 672.2,
+          "tier": "A"
+        },
+        {
+          "year": 2013,
+          "value": 610.5,
+          "tier": "A"
+        },
+        {
+          "year": 2014,
+          "value": 537.2,
+          "tier": "A"
+        },
+        {
+          "year": 2015,
+          "value": 494.7,
+          "tier": "A"
+        },
+        {
+          "year": 2016,
+          "value": 468.9,
+          "tier": "A"
+        },
+        {
+          "year": 2017,
+          "value": 429.7,
+          "tier": "A"
+        },
+        {
+          "year": 2018,
+          "value": 378.0,
+          "tier": "A"
+        },
+        {
+          "year": 2019,
+          "value": 340.5,
+          "tier": "A"
+        }
+      ],
+      "caveats": [
+        "Summary Reporting System. 2019 is its final year; the system was retired.",
+        "A different basis from every European line: the FBI counts burglary of all premises, not homes only, and the United States publishes nothing on the shared ICCS code. Read the direction, not the height against Europe.",
+        "Fewer burglaries reach the police at all: 58.8% of victimizations were reported in 2010, 40.7% in 2024 (BJS, National Crime Victimization Survey). Part of any fall in police-recorded burglary is fewer reports."
+      ]
+    },
+    {
+      "name": "US \u2014 FBI, from 2020",
+      "code": "US-NIBRS",
+      "emphasis": true,
+      "kind": "other-basis",
+      "basis_short": "FBI: police-recorded burglary of ALL premises (homes and other buildings), per 100,000 people \u2014 not the ICCS code the European lines share",
+      "publisher": "FBI Uniform Crime Reporting Program",
+      "tier": "A",
+      "counts": "police-recorded burglaries of all premises per 100,000 people",
+      "base_year": 2020,
+      "base_value": 309.2,
+      "unit_raw": "per 100,000 inhabitants",
+      "last": {
+        "year": 2024,
+        "value": 229.2
+      },
+      "points": [
+        {
+          "year": 2020,
+          "value": 309.2,
+          "tier": "A"
+        },
+        {
+          "year": 2021,
+          "value": 264.2,
+          "tier": "A"
+        },
+        {
+          "year": 2022,
+          "value": 273.1,
+          "tier": "A"
+        },
+        {
+          "year": 2023,
+          "value": 253.3,
+          "tier": "A"
+        },
+        {
+          "year": 2024,
+          "value": 229.2,
+          "tier": "A"
+        }
+      ],
+      "caveats": [
+        "NIBRS-based national estimates \u2014 a different counting system from the pre-2020 line, so the two are drawn apart and never joined.",
+        "2024 NIBRS covered 75.5% of agencies and 87.2% of the population.",
+        "A different basis from every European line: the FBI counts burglary of all premises, not homes only, and the United States publishes nothing on the shared ICCS code. Read the direction, not the height against Europe.",
+        "Fewer burglaries reach the police at all: 58.8% of victimizations were reported in 2010, 40.7% in 2024 (BJS, National Crime Victimization Survey). Part of any fall in police-recorded burglary is fewer reports."
+      ]
+    },
     {
       "name": "Sweden",
       "code": "SWE",
@@ -549,7 +723,23 @@
   ],
   "themes": [
     {
-      "statement": "Four of the five countries are below where they started in 2008. The Netherlands fell furthest \u2014 79% below its 2009 peak.",
+      "statement": "US police-recorded burglary fell 53% from 2000 to 2019 on the FBI's old count, then a further 26% from 2020 to 2024 on its new one.",
+      "tier": "A"
+    },
+    {
+      "statement": "The US lines are dashed: they count all burglary, not just homes, on a different system from Europe's. Compare their direction, not their height.",
+      "tier": "A"
+    },
+    {
+      "statement": "The two US lines are not joined. The FBI changed how it counts in 2020, so 2019 and 2020 are not the same measure.",
+      "tier": "A"
+    },
+    {
+      "statement": "Fewer US burglaries reach the police at all: 59% were reported in 2010, 41% in 2024. Some of the fall is fewer reports.",
+      "tier": "A"
+    },
+    {
+      "statement": "Four of the five European countries are below where they started in 2008. The Netherlands fell furthest \u2014 79% below its 2009 peak.",
       "tier": "A"
     },
     {

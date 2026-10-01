@@ -27,7 +27,8 @@ import type { SubTab } from "@/components/DataView";
 export default function GatedApp({
   initialTab = "journal",
   initialSub,
-}: { initialTab?: Tab; initialSub?: SubTab }) {
+  initialView,
+}: { initialTab?: Tab; initialSub?: SubTab; initialView?: string }) {
   // The standing disclaimer used to be mounted here. It rendered AFTER
   // JournalBrowser, which contains the Footer — so on all ten of these routes it
   // came out below the footer, hanging under the copyright line like something
@@ -37,5 +38,5 @@ export default function GatedApp({
   //
   // The footer's own "Critical Disclaimer" link opens the full text, so nothing
   // was lost but the misplacement.
-  return <JournalBrowser initialTab={initialTab} initialSub={initialSub} />;
+  return <JournalBrowser initialTab={initialTab} initialSub={initialSub} initialView={initialView} />;
 }

@@ -9,7 +9,7 @@ import type { Dataset, Doc } from "@/lib/types";
 import { track } from "@/lib/analytics";
 import Header, { type Tab } from "@/components/Header";
 import Footer from "@/components/Footer";
-import { pathForSub } from "@/lib/routes";
+import { pathForSub, titleForSub, viewsFor } from "@/lib/routes";
 import SideNav from "@/components/SideNav";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -80,7 +80,8 @@ function excerpt(md: string): string {
 export default function JournalBrowser({
   initialTab = "journal",
   initialSub,
-}: { initialTab?: Tab; initialSub?: SubTab } = {}) {
+  initialView,
+}: { initialTab?: Tab; initialSub?: SubTab; initialView?: string } = {}) {
   const [ds, setDs] = useState<Dataset | null>(null);
   const [loading, setLoading] = useState(true);
   const [tab, setTab] = useState<Tab>(initialTab);
@@ -92,6 +93,10 @@ export default function JournalBrowser({
   const [dataSub, setDataSub] = useState<SubTab>(
     initialSub ?? (initialTab === "concepts" ? "concepts" : "timeline")
   );
+  // The view within the section, one at a time (Sean, 30 Sep 2026). A view that
+  // does not belong to the current section reads as that section's first view.
+  const [dataViewRaw, setDataView] = useState<string | null>(initialView ?? null);
+  const dataView = viewsFor(dataSub).some((v) => v.id === dataViewRaw) ? dataViewRaw! : (viewsFor(dataSub)[0]?.id ?? "");
 
   // Journal search + filter (Sean, 30 Sep): the Concepts pattern — the list
   // follows the search box as you type; the Filter panel holds entry type, part,
@@ -155,7 +160,30 @@ export default function JournalBrowser({
 
      It never delays the work. The fetch runs behind the loader throughout, and
      a fetch slower than three seconds adds nothing at all. */
-  const showLoader = useHeldLoading(loading, 4000, true);
+  const pageLoader = useHeldLoading(loading, 4000, true);
+
+  /* EVERY RESEARCH PAGE OPENS WITH THE LOADER (Sean, 30 Sep 2026: "make sure we're
+     using our page load animations regardless"). Research sections are separate
+     pages with their own addresses, but moving between them from the menu happens
+     inside the app, where nothing reloads and the loader above never ran. So the
+     same four-second state replays whenever the reader arrives at a Research
+     section from elsewhere in the app. The page mounts behind it and fetches in the
+     background, exactly as on a fresh load; the Government Cloud report redraws on
+     remount (GovCloudReport.tsx). */
+  const [sectionPulse, setSectionPulse] = useState(false);
+  // Called from the click that opens a Research section, so the loader and the
+  // switch land in the same render: nothing of the new page shows, or starts
+  // loading, before the loader is up.
+  const arriveAtResearch = (next: SubTab) => {
+    if (tab === "data" && dataSub === next) return;
+    // A new page starts at its top, under the loader.
+    window.scrollTo({ top: 0 });
+    setSectionPulse(true);
+    window.setTimeout(() => setSectionPulse(false), 0);
+    setDataView(null); // a section opens on its first view
+  };
+  const sectionLoader = useHeldLoading(sectionPulse, 4000);
+  const showLoader = pageLoader || sectionLoader;
 
   /* The transcript body is a different case: it opens inside a page the reader
      is already on, so a three-second gate would make the site feel slow. 400ms
@@ -198,13 +226,13 @@ export default function JournalBrowser({
       if (sel) path = `/journal/${sel.toLowerCase()}`;
       else if (tab === "glossary") path = gsel ? `/glossary/${gsel.toLowerCase()}` : "/glossary";
       else if (tab === "documents") path = "/documents";
-      else if (tab === "data") path = pathForSub(dataSub);
+      else if (tab === "data") path = pathForSub(dataSub, dataView);
       else if (tab === "concepts") path = "/concepts";
       else if (tab === "author") path = "/author";
       else if (tab === "disclaimer") path = "/disclaimer";
       window.history.replaceState(null, "", path + window.location.hash);
     } catch { /* ignore */ }
-  }, [tab, sel, gsel, dataSub, deepLinked]);
+  }, [tab, sel, gsel, dataSub, dataView, deepLinked]);
 
   // Section-level analytics: replaceState alone doesn't emit a pageview, so record
   // in-app section switches explicitly for tracking.
@@ -393,6 +421,7 @@ export default function JournalBrowser({
       <Header
         tab={tab}
         onTab={(t) => {
+          if (t === "data") arriveAtResearch("timeline");
           setTab(t);
           // Both nav entries open the same section, so the vertical has to be
           // set from the entry that was clicked. Without this, Research after a
@@ -407,6 +436,8 @@ export default function JournalBrowser({
         // front door moved, then quietly wrong. A real navigation, because the
         // home page is a different route and not a tab of this app.
         onHome={() => { if (typeof window !== "undefined") window.location.assign("/"); }}
+        researchSub={dataSub}
+        onResearch={(s) => { arriveAtResearch(s); setTab("data"); setDataSub(s); setSel(null); setGsel(null); }}
       />
 
       <main className="flex-1 w-full max-w-[1400px] mx-auto px-4 sm:px-6 py-6">
@@ -422,8 +453,11 @@ export default function JournalBrowser({
             down, then fades in. `hidden` rather than unmounting on purpose: the
             Data section is script-drawn once per page load and cannot redraw
             after an unmount, which is the same reason dataMounted exists. */}
+        {/* Fixed to the screen below the header, so the loader is dead centre in the
+            viewport however far down the page the reader clicked from (Sean, 30 Sep
+            2026). It covers the page, which is hidden behind it anyway. */}
         {showLoader && (
-          <div className="grid min-h-[52vh] place-items-center px-4 animate-fade-in sm:min-h-[58vh]">
+          <div className="fixed inset-x-0 bottom-0 top-[72px] lg:top-[88px] z-20 grid place-items-center px-4 bg-background animate-fade-in">
             <Processing label="Loading the corpus" />
           </div>
         )}
@@ -442,7 +476,10 @@ export default function JournalBrowser({
             Nothing renders above the loader until the loader is finished. */}
         {!showLoader && (
           <TitleBand
-            title={TAB_TITLE[tab]}
+            // Research sections carry their own H1 under a small "Research" label
+            // (Sean, 30 Sep 2026), e.g. "The government cloud record".
+            title={tab === "data" ? titleForSub(dataSub) : TAB_TITLE[tab]}
+            eyebrow={tab === "data" ? "Research" : undefined}
           />
         )}
         {/* One sentence under the title, ending with the disclaimer (Sean, 30 Sep
@@ -463,17 +500,13 @@ export default function JournalBrowser({
         )}
         {!showLoader && tab === "documents" && (
           <PageIntro from="documents_intro">
-            Start with the research documents: tools a person can use, from the Personal Protection Plan to a
-            framework for legal action. The four-part journal series, the primary record, follows as the originals.
+            The four-part journal series is the primary record, kept as the original documents; the research
+            documents that follow are tools a person can use, from the Personal Protection Plan to a framework
+            for legal action.
           </PageIntro>
         )}
-        {!showLoader && tab === "data" && (
-          <PageIntro from="research_intro">
-            Government clouds exist to serve the public; this research seeks to understand them from the public
-            record. Separately, do health and crime records show signs of Zersetzung tactics affecting the
-            population?
-          </PageIntro>
-        )}
+        {/* Research has no description under the H1 (Sean, 30 Sep 2026); each section's
+            H1 says what it is. */}
         {tab === "glossary" ? (
           <GlossarySection terms={glossaryTerms} gsel={gsel} setGsel={setGsel}
             docCats={ds?.docCats || {}}
@@ -538,11 +571,13 @@ export default function JournalBrowser({
                aria-hidden={!(tab === "data" || tab === "concepts")}>
             <DataView
               conceptFilters={conceptFilters} setConceptFilters={setConceptFilters} conceptSort={conceptSort} setConceptSort={setConceptSort}
+              view={dataView} onView={(v: string) => setDataView(v)}
               sub={tab === "concepts" ? "concepts" : dataSub}
               onSub={(s) => {
                 // The vertical decides the address: concepts keeps /concepts,
                 // everything else is /data. Both were indexed before the merge
                 // and both still resolve after it.
+                if (s !== "concepts") arriveAtResearch(s);
                 setDataSub(s);
                 setTab(s === "concepts" ? "concepts" : "data");
               }}
@@ -559,7 +594,7 @@ export default function JournalBrowser({
         </div>
       </main>
 
-      <Footer onNav={(t) => { setTab(t); setSel(null); setGsel(null); }} />
+      <Footer onNav={(t) => { if (t === "data") arriveAtResearch("timeline"); setTab(t); setSel(null); setGsel(null); }} />
 
     </div>
   );
@@ -571,10 +606,15 @@ const TAB_TITLE: Record<Tab, string> = { journal: "Journal", glossary: "Glossary
 
 // ~200px page-title band under the nav; its h1 is the current section name,
 // left-aligned and larger than any other heading. 80% width via its parent <main>.
-function TitleBand({ title, actions }: { title: string; actions?: React.ReactNode }) {
+function TitleBand({ title, actions, eyebrow }: { title: string; actions?: React.ReactNode; eyebrow?: string }) {
   return (
     <section className="w-full min-h-[72px] sm:min-h-[160px] flex flex-wrap items-end justify-between gap-x-6 gap-y-4 mb-4 pb-0 sm:mb-8 sm:pb-6">
-      <h1 className="font-display font-bold tracking-tight text-foreground text-[25px] md:text-[34px] lg:text-[42px] leading-none">{title}</h1>
+      <div>
+        {eyebrow && (
+          <p className="font-display text-[12px] sm:text-[13px] font-semibold uppercase tracking-[0.14em] text-muted m-0 mb-2 sm:mb-3">{eyebrow}</p>
+        )}
+        <h1 className="font-display font-bold tracking-tight text-foreground text-[25px] md:text-[34px] lg:text-[42px] leading-none">{title}</h1>
+      </div>
       {actions}
     </section>
   );
@@ -949,12 +989,14 @@ function DocumentsView() {
   );
   return (
     <div className="w-full">
-      <h2 className={H2_CLASS}>The research documents</h2>
-      <p className={SUB_CLASS}>Protection, legal plans and analysis built on the journal.</p>
-      {tiles(refs)}
-      <h2 className={H2_CLASS + " !mt-16"}>The journal series</h2>
+      {/* The journal series leads again (Sean, 30 Sep 2026: "move the section with
+          the four part document series back to the top"). */}
+      <h2 className={H2_CLASS}>The journal series</h2>
       <p className={SUB_CLASS}>The primary record, in four parts, as the original Google Docs.</p>
       {tiles(journal)}
+      <h2 className={H2_CLASS + " !mt-16"}>The research documents</h2>
+      <p className={SUB_CLASS}>Protection, legal plans and analysis built on the journal.</p>
+      {tiles(refs)}
     </div>
   );
 }

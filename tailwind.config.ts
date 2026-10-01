@@ -36,7 +36,14 @@ const config: Config = {
       keyframes: {
         "fade-in": { from: { opacity: "0", transform: "translateY(6px)" }, to: { opacity: "1", transform: "translateY(0)" } },
       },
-      animation: { "fade-in": "fade-in .4s ease-out both" },
+      // `backwards`, not `both` (Sean, 30 Sep 2026: modals "vertically off position").
+      // `both` kept transform: translateY(0) on the element after the animation
+      // ended, and any transform makes the element the containing block for
+      // position: fixed descendants — so every fixed pop-up inside the page (the
+      // Government Cloud and Crime detail windows) was placed against the tall
+      // content column instead of the screen. `backwards` holds the start frame
+      // only until the animation begins and then lets go, leaving no transform.
+      animation: { "fade-in": "fade-in .4s ease-out backwards" },
     },
   },
   plugins: [require("tailwindcss-animate")],

@@ -50,7 +50,7 @@ export default function Page() {
              className="h-12 px-6 rounded-md bg-foreground text-background text-[15px] font-medium inline-flex items-center">
             Start with the questions
           </a>
-          <a href="/data"
+          <a href="/research/timeline"
              className="h-12 px-6 rounded-md border border-edge hover:border-foreground text-[15px] inline-flex items-center">
             See the research
           </a>

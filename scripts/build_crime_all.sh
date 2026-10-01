@@ -37,6 +37,7 @@ run build_crime_milestones.py
 run build_crime_burglary.py
 run build_crime_incarceration.py
 run build_crime_anomalies.py
+run build_crime_annual.py          # annual arrests + the overall crime chart (1 Oct 2026)
 
 # ---- the copy layer ------------------------------------------------------
 # LAST of the content steps. Owns every plain-language statement on the page

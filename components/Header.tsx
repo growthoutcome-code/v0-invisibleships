@@ -34,12 +34,14 @@
  * Contribute is the sign-up: see the note on its label below.
  */
 import { useState } from "react";
-import { Menu, X, Download } from "lucide-react";
+import { Menu, X, Download, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ExportModal from "@/components/ExportModal";
 import { EXPORT_LABEL } from "@/components/ExportButton";
 import ThemeToggle from "@/components/ThemeToggle";
 import { ACCOUNTS_READY } from "@/lib/flags";
+import { RESEARCH_SECTIONS } from "@/lib/routes";
+import type { SubTab } from "@/components/DataView";
 
 export type Tab = "journal" | "glossary" | "documents" | "data" | "concepts" | "author" | "disclaimer";
 
@@ -54,7 +56,9 @@ const NAV: { t: Tab; href: string; label: string }[] = [
   // ItemHeader.tsx carries the same list and must be kept in step.
   { t: "journal", href: "/journal", label: "Journal" },
   { t: "concepts", href: "/concepts", label: "Concepts" },
-  { t: "data", href: "/data", label: "Research" },
+  // Research opens a sub-menu of its four sections (Sean, 30 Sep 2026: "sub-navigation
+  // menu items under the research main menu item due to the sheer volume of data").
+  { t: "data", href: "/research/timeline", label: "Research" },
   { t: "documents", href: "/documents", label: "Documents" },
   { t: "glossary", href: "/glossary", label: "Glossary" },
 ];
@@ -70,8 +74,12 @@ const linkCls = (active: boolean) =>
   }`;
 
 export default function Header({
-  tab, onTab, onHome,
+  tab, onTab, onHome, researchSub, onResearch,
 }: {
+  /** The open Research section, inside the SPA. */
+  researchSub?: SubTab;
+  /** Provided by the SPA to open a Research section in place. Absent = plain links. */
+  onResearch?: (s: SubTab) => void;
   /** Current section, when the header is inside the SPA. Omitted elsewhere. */
   tab?: Tab;
   /** Provided by the SPA to switch tabs in place. Absent = render plain links. */
@@ -80,6 +88,9 @@ export default function Header({
 }) {
   const [open, setOpen] = useState(false);
   const [exportOpen, setExportOpen] = useState(false);
+  // Phone menu: Research's four sections collapse (Sean, 30 Sep 2026: "the mobile
+  // sub-navigation needs to be collapsible"). Open by default only on a Research page.
+  const [researchOpen, setResearchOpen] = useState(tab === "data");
 
   // `phone`: the menu under the hamburger, where links are larger, full-width tap
   // targets (Sean, 30 Sep 2026: "update the text size of the rest of the options").
@@ -99,6 +110,35 @@ export default function Header({
       </a>
     );
   };
+
+  // A Research section link: a button in the SPA, a real link elsewhere.
+  const section = (sec: (typeof RESEARCH_SECTIONS)[number], cls: string) => {
+    const on = tab === "data" && researchSub === sec.sub;
+    return onResearch ? (
+      <button key={sec.slug} onClick={() => { onResearch(sec.sub); setOpen(false); }}
+        aria-current={on ? "page" : undefined} className={`${cls} ${on ? "text-foreground font-semibold" : "text-muted"}`}>{sec.label}</button>
+    ) : (
+      <a key={sec.slug} href={`/research/${sec.slug}`} className={`${cls} text-muted`}>{sec.label}</a>
+    );
+  };
+
+  // Desktop: Research shows its four sections on hover or keyboard focus. The
+  // word itself still opens Research (the Timeline), so the menu is a shortcut,
+  // never a gate.
+  const researchDesktop = (n: (typeof NAV)[number]) => (
+    <div key={n.t} className="relative group">
+      <span className="inline-flex items-center">
+        {item(n)}
+        <ChevronDown size={12} aria-hidden className="-ml-1.5 text-muted transition-transform group-hover:rotate-180 group-focus-within:rotate-180" />
+      </span>
+      <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100 transition-opacity absolute left-1/2 -translate-x-1/2 top-full pt-3 z-40">
+        <div role="menu" aria-label="Research sections" className="min-w-[230px] border border-edge bg-background shadow-lg py-2 flex flex-col">
+          {RESEARCH_SECTIONS.map((sec) => section(sec,
+            "text-left px-4 py-2.5 text-[14px] hover:text-foreground hover:bg-panel transition-colors"))}
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <header className="sticky top-0 z-30 border-b border-edge bg-background/90 backdrop-blur">
@@ -123,7 +163,7 @@ export default function Header({
         </div>
 
         {/* Centre group */}
-        <nav className="hidden shrink-0 items-center gap-0.5 lg:flex">{NAV.map((n) => item(n))}</nav>
+        <nav className="hidden shrink-0 items-center gap-0.5 lg:flex">{NAV.map((n) => (n.t === "data" ? researchDesktop(n) : item(n)))}</nav>
 
         {/* Right group */}
         <div className="flex flex-1 items-center justify-end gap-2">
@@ -182,7 +222,24 @@ export default function Header({
 
       {open && (
         <div className="flex flex-col border-t border-edge px-5 pt-1 pb-5 lg:hidden">
-          {NAV.map((n) => item(n, "", true))}
+          {NAV.map((n) => n.t === "data" ? (
+            <div key={n.t} className="flex flex-col">
+              {/* On phones Research is a disclosure: tapping it shows or hides the
+                  four sections, and Timeline is the first of them. */}
+              <button type="button" onClick={() => setResearchOpen((v) => !v)}
+                aria-expanded={researchOpen} aria-controls="phone-research-sections"
+                className={`${phoneLinkCls(tab === "data")} flex items-center justify-between`}>
+                {n.label}
+                <ChevronDown size={18} aria-hidden className={`transition-transform ${researchOpen ? "rotate-180" : ""}`} />
+              </button>
+              {researchOpen && (
+                <div id="phone-research-sections" className="flex flex-col border-b border-edge/60 pb-2">
+                  {RESEARCH_SECTIONS.map((sec) => section(sec,
+                    "text-left pl-5 pr-1 py-2.5 text-[15px] hover:text-foreground"))}
+                </div>
+              )}
+            </div>
+          ) : item(n, "", true))}
           {/* Full-width button, as on desktop (Sean, 30 Sep 2026). */}
           <button
             onClick={() => { setExportOpen(true); setOpen(false); }}

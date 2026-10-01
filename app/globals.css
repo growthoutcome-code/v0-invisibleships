@@ -206,7 +206,37 @@ body {
    Government Cloud mode hides the internal Timeline button so the same view
    isn't offered in two places. */
 .gov-timeline-only .gov-report .tabs { display: none; }
+/* Timeline's two chart views (30 Sep 2026): the master timeline, or "Does law
+   follow capability?" alone. Both live in the report's #time panel. */
+.tl-view-master .gov-report #time .tl-rel { display: none; }
+.tl-view-law .gov-report #time > :not(.tl-rel) { display: none; }
+.tl-view-law .gov-report .bar { display: none; }
+.tl-view-law .gov-report .tl-rel > h2 { margin-top: 0 !important; }
+/* Timeline's heading and Domain picker are rendered by components/TimelineHead.tsx,
+   in the same heading row as the other Research tabs (Sean, 30 Sep 2026). */
+.gov-timeline-only .gov-report .bar,
+.gov-timeline-only .gov-report #time > h2:first-of-type,
+.gov-timeline-only .gov-report #time > h2:first-of-type + .subline { display: none; }
+/* Charts first, description under them (Sean, 30 Sep 2026): the report's one-line
+   summary of what it is built from moves below its panels. Kept here, not in
+   GovCloudReport.tsx, which scripts/build_govcloud_report.py regenerates. */
+.gov-report .wrap { display: flex; flex-direction: column; }
+.gov-report .wrap > .sub { order: 99; margin: 28px 0 0 !important; }
 .gov-cloud-mode .gov-report .tab[data-t="time"] { display: none; }
+/* Government Cloud's views are picked from the sidebar now (Sean, 30 Sep 2026),
+   so the report's own tab row is hidden; DataView presses its buttons. */
+.gov-cloud-mode .gov-report .tabs { display: none; }
+/* Each view opens on its heading, level with the sidebar: no top margin on a
+   panel's first heading, and the report's control row (empty on most views)
+   takes no space of its own. */
+.gov-report .wrap > div[id] > h2:first-of-type { margin-top: 0 !important; }
+.gov-cloud-mode .gov-report .bar { margin: 0 0 12px; }
+/* Where a view has a picker (Capabilities' Category), it sits right of the
+   heading, as Timeline's Domain picker does; stacked above it on phones. */
+@media (min-width: 640px) {
+  .gov-cloud-mode .gov-report .wrap { position: relative; }
+  .gov-cloud-mode .gov-report .bar { position: absolute; top: -6px; right: 0; margin: 0; }
+}
 
 /* ---------------------------------------------------------------------------
    The gate's perceptual-set drawing (components/EntryGate.tsx, step 2).

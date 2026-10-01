@@ -136,7 +136,7 @@ export function TimelineHub({ onGo }: { onGo: (tab: "govcloud" | "health") => vo
     id: string; title: string; metrics: string; children: React.ReactNode; tab: "govcloud" | "health";
   }) => (
     <div id={id} className="relative border border-edge rounded-xl p-6 pr-14 scroll-mt-28">
-      <CardShare title={title} path={tab === "govcloud" ? "/data/government-cloud" : "/data/public-health"} className="absolute top-3 right-3" />
+      <CardShare title={title} path={tab === "govcloud" ? "/research/government-cloud" : "/research/public-health"} className="absolute top-3 right-3" />
       <h3 className="font-display font-semibold text-foreground text-[19px] mb-1">{title}</h3>
       <p className="text-muted text-[14px] m-0 mb-3 tabular-nums">{metrics}</p>
       <p className="body-copy text-foreground/85 m-0 mb-5">{children}</p>

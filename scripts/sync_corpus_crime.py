@@ -280,6 +280,9 @@ verified against a fetched source. The rate series is complete.
         an_path = CHARTS / "anomalies_indexed.json"
         if an_path.exists():
             dst.writestr(PREFIX + "charts/anomalies_indexed.json", an_path.read_text())
+        ov_path = CHARTS / "crime_overall_indexed.json"
+        if ov_path.exists():
+            dst.writestr(PREFIX + "charts/crime_overall_indexed.json", ov_path.read_text())
         dst.writestr(PREFIX + "charts/homicide_us.csv", hom_csv)
 
         # ---- the Markdown the corpus exists for -----------------------------
@@ -305,7 +308,8 @@ verified against a fetched source. The rate series is complete.
         1 for f in ("homicide_two_measures", "harm_lanes_indexed",
                     "homicide_international", "arrests_over_time",
                     "detention_capacity", "burglary_international",
-                    "incarceration_over_time", "anomalies_indexed")
+                    "incarceration_over_time", "anomalies_indexed",
+                    "crime_overall_indexed")
         if (CHARTS / f"{f}.json").exists()
     )
     quiet or print(f"crime/: {len(TABLE_FILES)} tables + manifest + README + {n_charts} chart files")

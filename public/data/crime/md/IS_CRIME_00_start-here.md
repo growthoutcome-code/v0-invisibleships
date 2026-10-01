@@ -6,9 +6,9 @@ doc_type: section-overview
 section: crime
 geography: United States (unless a row says otherwise)
 generated_by: scripts/build_corpus_md.py
-chart_count: 8
-source_count: 197
-word_count: 540
+chart_count: 9
+source_count: 223
+word_count: 576
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -32,11 +32,11 @@ Window: 1999–2025.
 |---|---|
 | `IS_CRIME_chart_*.md` | One brief per chart: what it shows, every series, caveats |
 | `IS_CRIME_register_*.md` | The registers — what nobody counts, data quality, trends, sweeps |
-| `IS_CRIME_sources.md` | All 197 sources with tier, publisher and link |
+| `IS_CRIME_sources.md` | All 223 sources with tier, publisher and link |
 | `csv/*.csv` | Row data — indicators, sources, registers |
 | `charts/*.json`, `*.json` | The same data programmatically, for code |
 
-8 charts · 197 sources (Tier A 147 · B 49 · C 1)
+9 charts · 223 sources (Tier A 171 · B 51 · C 1)
 
 ## What this research found
 
@@ -44,7 +44,7 @@ Window: 1999–2025.
 
 Split the question in two, because the record can answer one half and not the other.
 
-Has crime increased? Not as one number. The chart above shows six lanes moving in different directions at once — one quadrupled, one is at a record low, one is at a 22-year high — and the two categories this site cares about most, harassment and home invasion, have no lane at all because nobody counts them. Even the official measures disagree with each other right now: the survey of victims reports more violence in 2024 than 2021 while police records report less.
+Has crime increased? Not by the two broad measures that exist. Police-recorded violent and property crime fell across the window, and violence reported by victims is about half its 1999 level — the chart above. But harm is not one number: the six-lane chart at the top of this page moves in different directions at once — one quadrupled, one is at a record low, one is at a 22-year high — and the two categories this site cares about most, harassment and home invasion, have no lane at all because nobody counts them. Even the official measures disagree with each other right now: the survey of victims reports more violence in 2024 than 2021 while police records report less.
 
 Is there a relationship between any of this and the procurement and legislation record elsewhere on this site? This dataset cannot establish one, and does not claim to. The master timeline runs both as parallel lanes so they can be read against each other — but two things happening in the same years is a co-occurrence, and neither record corroborates the other. Where the counting itself changed mid-window, as NIBRS did in 2021, the crime series does not even agree with itself.
 

@@ -7,7 +7,7 @@ section: crime
 geography: United States (unless a row says otherwise)
 generated_by: scripts/build_corpus_md.py
 entry_count: 6
-word_count: 494
+word_count: 531
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -19,14 +19,14 @@ disclaimer: meta/IS_META_terms.md
 The record contains real, sourced wins, and this section reports them straight. Each entry is an agency's own account of its work, with the independent corroboration shown where one exists — and each entry says whether the number counts an outcome (lives, rescues, cases closed) or activity (arrests, seizures).
 
 ### The homicide reversal
-[A] outcome
+[A] outcome — FBI · Violent Crime Falls at Historic Rate, New FBI Data Show (24 Aug 2026) <https://www.fbi.gov/news/press-releases/violent-crime-falls-at-historic-rate-new-fbi-data-show>
 
 Violent crime down 9.3% in 2025 — the largest year-to-year decline since FBI estimation began in 1936 — with murder at 4.1 per 100,000, tied for the lowest rate ever recorded.
 
 *Corroboration:* Independently visible in CDC death-certificate data, which registers the same turn.
 
 ### The overdose decline
-[A] outcome
+[A] outcome — CDC/NCHS · Provisional drug overdose death counts <https://www.cdc.gov/nchs/nvss/vsrr/drug-overdose-data.htm>
 
 Overdose deaths fell 26.2% in 2024 — the largest one-year drop on record — and kept falling in 2025. CDC attributes the decline to naloxone distribution, treatment access, shifts in supply and renewed prevention.
 

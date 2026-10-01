@@ -323,22 +323,66 @@ def eu_series():
     return out
 
 
+# The United States on the same chart (Sean, 30 Sep 2026: "add the US data to the
+# break-ins chart"). It publishes nothing on the ICCS code, so its lines are a
+# DIFFERENT basis — all burglary, homes and other buildings — drawn dashed and
+# split at 2020, where the FBI changed counting systems. Two series, never joined.
+US_BASIS = ("FBI: police-recorded burglary of ALL premises (homes and other buildings), "
+            "per 100,000 people — not the ICCS code the European lines share")
+
+
+def us_series():
+    common_caveats = [
+        "A different basis from every European line: the FBI counts burglary of all premises, "
+        "not homes only, and the United States publishes nothing on the shared ICCS code. "
+        "Read the direction, not the height against Europe.",
+        "Fewer burglaries reach the police at all: 58.8% of victimizations were reported in "
+        "2010, 40.7% in 2024 (BJS, National Crime Victimization Survey). Part of any fall in "
+        "police-recorded burglary is fewer reports.",
+    ]
+    out = []
+    for name, code, vals, extra in (
+        ("US — FBI, to 2019", "US-SRS", FBI_SRS,
+         ["Summary Reporting System. 2019 is its final year; the system was retired."]),
+        ("US — FBI, from 2020", "US-NIBRS", FBI_CDE,
+         ["NIBRS-based national estimates — a different counting system from the pre-2020 "
+          "line, so the two are drawn apart and never joined.",
+          "2024 NIBRS covered 75.5% of agencies and 87.2% of the population."]),
+    ):
+        ys = sorted(vals)
+        out.append({
+            "name": name, "code": code, "emphasis": True, "kind": "other-basis",
+            "basis_short": US_BASIS,
+            "publisher": "FBI Uniform Crime Reporting Program",
+            "tier": "A",
+            "counts": "police-recorded burglaries of all premises per 100,000 people",
+            "base_year": ys[0], "base_value": vals[ys[0]],
+            "unit_raw": "per 100,000 inhabitants",
+            "last": {"year": ys[-1], "value": vals[ys[-1]]},
+            "points": [{"year": y, "value": vals[y], "tier": "A"} for y in ys],
+            "caveats": extra + common_caveats,
+        })
+    return out
+
+
 INTL_CHART = {
-    "title": "Break-ins abroad: one code, five countries",
-    "unit": "Police-recorded burglary of private residential premises, per 100,000 inhabitants (Eurostat/UNODC ICCS05012)",
+    "title": "Break-ins: the United States and five European countries",
+    "unit": ("Police-recorded burglary per 100,000 people. Europe (solid): homes only, on one "
+             "shared code (Eurostat/UNODC ICCS05012). United States (dashed): all premises, FBI."),
     "note": (
-        "Every line is filed under the same ICCS code, which makes each line's DIRECTION "
+        "Every European line is filed under the same ICCS code, which makes each line's DIRECTION "
         "comparable and the distance between lines much less so — Eurostat records that "
         "Germany's mapping is incomplete and Sweden counts cellar and attic storage where "
         "Germany does not. France is absent because Eurostat states there is no "
         "correspondence between the French classification and this code at all. The United "
-        "States publishes "
-        "nothing on this basis."
+        "States publishes nothing on this code: its dashed lines are the FBI's count of all "
+        "burglary, homes and other buildings, and they break in 2020 where the FBI changed "
+        "counting systems. Read them for direction, not against the European levels."
     ),
     "publisher": "Eurostat (joint Eurostat–UNODC data collection)",
     "tier": "A",
     "indexed": False,
-    "series": eu_series(),
+    "series": us_series() + eu_series(),
     "themes": [
         {"statement": "Four of the five countries are below where they started in 2008. The "
                       "Netherlands fell furthest by a wide margin — 79% below its 2009 "

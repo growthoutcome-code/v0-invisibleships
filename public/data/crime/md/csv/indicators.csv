@@ -331,14 +331,7 @@ US,ncvs_household_burglary_rate,Lowest of 2020-24; ~75% below 1999 (definition c
 US,burglary_pct_reported_to_police,,BJS,cs105,A,% reported,58.8,W3,2010
 US,burglary_pct_reported_to_police,,BJS,cs_ncvs_cv24,A,% reported,40.7,W3,2024
 US,total_arrests_us,,FBI CIUS via DrugPolicyFacts,cs107,B,estimated arrests,10441000,W3,1980
-US,total_arrests_us,PEAK,FBI CIUS 1997 T29,cs108,A,estimated arrests,15284300,W3,1997
-US,total_arrests_us,,FBI,cs109,A,estimated arrests,14005615,W3,2008
-US,total_arrests_us,,FBI CIUS 2019,cs110,A,estimated arrests,10085207,W3,2019
-US,total_arrests_us,51% below 1997 peak,FBI CDE,cs004,A,estimated arrests,7522824,W3,2024
 US,drug_arrests_us,,DOJ archive/FBI UCR,cs111,A,drug arrests,580900,W3,1980
-US,drug_arrests_us,,FBI CIUS 1997,cs108,A,drug arrests,1583600,W3,1997
-US,drug_arrests_us,PEAK drug arrests,FBI CIUS via DrugPolicyFacts,cs107,B,drug arrests,1889810,W3,2006
-US,drug_arrests_us,Still the largest single category,FBI CDE,cs004,A,drug arrests,822488,W3,2024
 US,ice_admin_arrests,Civil immigration arrests; see arrests chart caveats.,DHS OHSS / ICE,ice_ohss_2013,A,ICE ERO administrative arrests (federal fiscal year),322093,W3,2011
 US,ice_admin_arrests,Civil immigration arrests; see arrests chart caveats.,DHS OHSS / ICE,ice_ohss_2013,A,ICE ERO administrative arrests (federal fiscal year),290622,W3,2012
 US,ice_admin_arrests,Civil immigration arrests; see arrests chart caveats.,DHS OHSS / ICE,ice_ohss_2013,A,ICE ERO administrative arrests (federal fiscal year),229698,W3,2013
@@ -564,3 +557,126 @@ US,aaro_uap_reports_received,Includes 35 reports of events outside the period.,A
 US,gallup_believe_ghosts_pct,,Gallup,an_gallup_2005,B,percent who believe ghosts exist,38,W2,2001
 US,gallup_believe_ghosts_pct,,Gallup,an_gallup_2005,B,percent who believe ghosts exist,32,W2,2005
 US,gallup_believe_ghosts_pct,Gallup's own summary: beliefs are 'largely unchanged' against 2001. The haunted-houses and ESP items were dropped from the 2025 battery.,Gallup,an_gallup_2025,B,percent who believe ghosts exist,39,W2,2025
+US,fbi_violent_crime_rate_srs,,"FBI (CIUS 2010, Table 1)",cs015,A,"per 100,000 (Summary Reporting System, legacy rape definition)",523.0,W1,1999
+US,fbi_violent_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System, legacy rape definition)",506.5,W1,2000
+US,fbi_violent_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System, legacy rape definition)",504.5,W1,2001
+US,fbi_violent_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System, legacy rape definition)",494.4,W1,2002
+US,fbi_violent_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System, legacy rape definition)",475.8,W1,2003
+US,fbi_violent_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System, legacy rape definition)",463.2,W1,2004
+US,fbi_violent_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System, legacy rape definition)",469.0,W1,2005
+US,fbi_violent_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System, legacy rape definition)",479.3,W1,2006
+US,fbi_violent_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System, legacy rape definition)",471.8,W1,2007
+US,fbi_violent_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System, legacy rape definition)",458.6,W1,2008
+US,fbi_violent_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System, legacy rape definition)",431.9,W1,2009
+US,fbi_violent_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System, legacy rape definition)",404.5,W1,2010
+US,fbi_violent_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System, legacy rape definition)",387.1,W1,2011
+US,fbi_violent_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System, legacy rape definition)",387.8,W1,2012
+US,fbi_violent_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System, legacy rape definition)",369.1,W1,2013
+US,fbi_violent_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System, legacy rape definition)",361.6,W1,2014
+US,fbi_violent_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System, legacy rape definition)",373.7,W1,2015
+US,fbi_violent_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System, legacy rape definition)",386.6,W1,2016
+US,fbi_violent_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System, legacy rape definition)",383.8,W1,2017
+US,fbi_violent_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System, legacy rape definition)",370.4,W1,2018
+US,fbi_violent_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System, legacy rape definition)",366.7,W1,2019
+US,fbi_property_crime_rate_srs,,"FBI (CIUS 2010, Table 1)",cs015,A,"per 100,000 (Summary Reporting System)",3743.6,W1,1999
+US,fbi_property_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System)",3618.3,W1,2000
+US,fbi_property_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System)",3658.1,W1,2001
+US,fbi_property_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System)",3630.6,W1,2002
+US,fbi_property_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System)",3591.2,W1,2003
+US,fbi_property_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System)",3514.1,W1,2004
+US,fbi_property_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System)",3431.5,W1,2005
+US,fbi_property_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System)",3346.6,W1,2006
+US,fbi_property_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System)",3276.4,W1,2007
+US,fbi_property_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System)",3214.6,W1,2008
+US,fbi_property_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System)",3041.3,W1,2009
+US,fbi_property_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System)",2945.9,W1,2010
+US,fbi_property_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System)",2905.4,W1,2011
+US,fbi_property_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System)",2868.0,W1,2012
+US,fbi_property_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System)",2733.6,W1,2013
+US,fbi_property_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System)",2574.1,W1,2014
+US,fbi_property_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System)",2500.5,W1,2015
+US,fbi_property_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System)",2451.6,W1,2016
+US,fbi_property_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System)",2362.9,W1,2017
+US,fbi_property_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System)",2209.8,W1,2018
+US,fbi_property_crime_rate_srs,,"FBI (CIUS 2019, Table 1)",cs017,A,"per 100,000 (Summary Reporting System)",2109.9,W1,2019
+US,fbi_violent_crime_rate_nibrs,Sum of the report's four published offence rates.,"FBI (UCR Summary of Reported Crimes in the Nation, 2025)",cs006,A,"per 100,000 (NIBRS-based estimates, 2025 report)",389.2,W1,2020
+US,fbi_violent_crime_rate_nibrs,Sum of the report's four published offence rates.,"FBI (UCR Summary of Reported Crimes in the Nation, 2025)",cs006,A,"per 100,000 (NIBRS-based estimates, 2025 report)",389.5,W1,2022
+US,fbi_violent_crime_rate_nibrs,Sum of the report's four published offence rates.,"FBI (UCR Summary of Reported Crimes in the Nation, 2025)",cs006,A,"per 100,000 (NIBRS-based estimates, 2025 report)",381.6,W1,2023
+US,fbi_violent_crime_rate_nibrs,,"FBI (UCR Summary of Reported Crimes in the Nation, 2025)",cs006,A,"per 100,000 (NIBRS-based estimates, 2025 report)",362.9,W1,2024
+US,fbi_violent_crime_rate_nibrs,,"FBI (UCR Summary of Reported Crimes in the Nation, 2025)",cs006,A,"per 100,000 (NIBRS-based estimates, 2025 report)",327.6,W1,2025
+US,fbi_property_crime_rate_nibrs,Sum of the report's three published offence rates.,"FBI (UCR Summary of Reported Crimes in the Nation, 2025)",cs006,A,"per 100,000 (NIBRS-based estimates, 2025 report)",1929.1,W1,2020
+US,fbi_property_crime_rate_nibrs,Sum of the report's three published offence rates.,"FBI (UCR Summary of Reported Crimes in the Nation, 2025)",cs006,A,"per 100,000 (NIBRS-based estimates, 2025 report)",1971.4,W1,2022
+US,fbi_property_crime_rate_nibrs,Sum of the report's three published offence rates.,"FBI (UCR Summary of Reported Crimes in the Nation, 2025)",cs006,A,"per 100,000 (NIBRS-based estimates, 2025 report)",1939.5,W1,2023
+US,fbi_property_crime_rate_nibrs,,"FBI (UCR Summary of Reported Crimes in the Nation, 2025)",cs006,A,"per 100,000 (NIBRS-based estimates, 2025 report)",1761.1,W1,2024
+US,fbi_property_crime_rate_nibrs,,"FBI (UCR Summary of Reported Crimes in the Nation, 2025)",cs006,A,"per 100,000 (NIBRS-based estimates, 2025 report)",1534.8,W1,2025
+US,ncvs_violent_victimization_rate,,"BJS (Criminal Victimization, 2024)",cs_ncvs_cv24,A,"victimizations per 1,000 persons age 12+",47.2,W1,1999
+US,ncvs_violent_victimization_rate,,"BJS (Criminal Victimization, 2024)",cs_ncvs_cv24,A,"victimizations per 1,000 persons age 12+",37.5,W1,2000
+US,ncvs_violent_victimization_rate,,"BJS (Criminal Victimization, 2024)",cs_ncvs_cv24,A,"victimizations per 1,000 persons age 12+",32.6,W1,2001
+US,ncvs_violent_victimization_rate,,"BJS (Criminal Victimization, 2024)",cs_ncvs_cv24,A,"victimizations per 1,000 persons age 12+",32.1,W1,2002
+US,ncvs_violent_victimization_rate,,"BJS (Criminal Victimization, 2024)",cs_ncvs_cv24,A,"victimizations per 1,000 persons age 12+",32.1,W1,2003
+US,ncvs_violent_victimization_rate,,"BJS (Criminal Victimization, 2024)",cs_ncvs_cv24,A,"victimizations per 1,000 persons age 12+",27.8,W1,2004
+US,ncvs_violent_victimization_rate,,"BJS (Criminal Victimization, 2024)",cs_ncvs_cv24,A,"victimizations per 1,000 persons age 12+",28.4,W1,2005
+US,ncvs_violent_victimization_rate,,"BJS (Criminal Victimization, 2024)",cs_ncvs_cv24,A,"victimizations per 1,000 persons age 12+",27.2,W1,2007
+US,ncvs_violent_victimization_rate,,"BJS (Criminal Victimization, 2024)",cs_ncvs_cv24,A,"victimizations per 1,000 persons age 12+",25.3,W1,2008
+US,ncvs_violent_victimization_rate,,"BJS (Criminal Victimization, 2024)",cs_ncvs_cv24,A,"victimizations per 1,000 persons age 12+",22.3,W1,2009
+US,ncvs_violent_victimization_rate,,"BJS (Criminal Victimization, 2024)",cs_ncvs_cv24,A,"victimizations per 1,000 persons age 12+",19.3,W1,2010
+US,ncvs_violent_victimization_rate,,"BJS (Criminal Victimization, 2024)",cs_ncvs_cv24,A,"victimizations per 1,000 persons age 12+",22.6,W1,2011
+US,ncvs_violent_victimization_rate,,"BJS (Criminal Victimization, 2024)",cs_ncvs_cv24,A,"victimizations per 1,000 persons age 12+",26.1,W1,2012
+US,ncvs_violent_victimization_rate,,"BJS (Criminal Victimization, 2023)",cs106,A,"victimizations per 1,000 persons age 12+",23.2,W1,2013
+US,ncvs_violent_victimization_rate,,"BJS (Criminal Victimization, 2023)",cs106,A,"victimizations per 1,000 persons age 12+",20.1,W1,2014
+US,ncvs_violent_victimization_rate,,"BJS (Criminal Victimization, 2023)",cs106,A,"victimizations per 1,000 persons age 12+",18.6,W1,2015
+US,ncvs_violent_victimization_rate,,"BJS (Criminal Victimization, 2023)",cs106,A,"victimizations per 1,000 persons age 12+",19.7,W1,2016
+US,ncvs_violent_victimization_rate,,"BJS (Criminal Victimization, 2023)",cs106,A,"victimizations per 1,000 persons age 12+",20.6,W1,2017
+US,ncvs_violent_victimization_rate,,"BJS (Criminal Victimization, 2023)",cs106,A,"victimizations per 1,000 persons age 12+",23.2,W1,2018
+US,ncvs_violent_victimization_rate,,"BJS (Criminal Victimization, 2023)",cs106,A,"victimizations per 1,000 persons age 12+",21.0,W1,2019
+US,ncvs_violent_victimization_rate,,"BJS (Criminal Victimization, 2023)",cs106,A,"victimizations per 1,000 persons age 12+",16.4,W1,2020
+US,ncvs_violent_victimization_rate,,"BJS (Criminal Victimization, 2023)",cs106,A,"victimizations per 1,000 persons age 12+",16.5,W1,2021
+US,ncvs_violent_victimization_rate,,"BJS (Criminal Victimization, 2023)",cs106,A,"victimizations per 1,000 persons age 12+",23.5,W1,2022
+US,ncvs_violent_victimization_rate,,"BJS (Criminal Victimization, 2023)",cs106,A,"victimizations per 1,000 persons age 12+",22.5,W1,2023
+US,ncvs_violent_victimization_rate,,"BJS (Criminal Victimization, 2024)",cs_ncvs_cv24,A,"victimizations per 1,000 persons age 12+",23.3,W1,2024
+US,total_arrests_us,,FBI,ar_cius1995,A,estimated arrests,15119800,W3,1995
+US,total_arrests_us,,FBI,ar_cius1996,A,estimated arrests,15168100,W3,1996
+US,total_arrests_us,PEAK,FBI,cs108,A,estimated arrests,15284300,W3,1997
+US,total_arrests_us,,FBI,ar_cius1998,A,estimated arrests,14528300,W3,1998
+US,total_arrests_us,,FBI,ar_cius1999,A,estimated arrests,14031070,W3,1999
+US,total_arrests_us,,FBI,ar_cius2000,A,estimated arrests,13980297,W3,2000
+US,total_arrests_us,,FBI,ar_cius2001,A,estimated arrests,13699254,W3,2001
+US,total_arrests_us,,FBI,ar_cius2002,A,estimated arrests,13741438,W3,2002
+US,total_arrests_us,,FBI,ar_cius2003,A,estimated arrests,13639479,W3,2003
+US,total_arrests_us,,FBI,cs109,A,estimated arrests,14005615,W3,2008
+US,total_arrests_us,,FBI,ar_cius2010,A,estimated arrests,13120947,W3,2010
+US,total_arrests_us,,FBI,ar_cius2011,A,estimated arrests,12408899,W3,2011
+US,total_arrests_us,,FBI,ar_cius2012,A,estimated arrests,12196959,W3,2012
+US,total_arrests_us,,FBI,ar_cius2013,A,estimated arrests,11302102,W3,2013
+US,total_arrests_us,,FBI,ar_cius2014,A,estimated arrests,11205833,W3,2014
+US,total_arrests_us,,FBI,ar_cius2015,A,estimated arrests,10797088,W3,2015
+US,total_arrests_us,,FBI,ar_cius2016,A,estimated arrests,10662252,W3,2016
+US,total_arrests_us,,FBI,ar_cius2017,A,estimated arrests,10554985,W3,2017
+US,total_arrests_us,,FBI,ar_cius2018,A,estimated arrests,10310960,W3,2018
+US,total_arrests_us,,FBI,ar_cius2019,A,estimated arrests,10085207,W3,2019
+US,total_arrests_us,Rounded as published ('7.6 million').,FBI,ar_fbi2020,A,estimated arrests,7600000,W3,2020
+US,total_arrests_us,51% below 1997 peak,FBI,cs004,A,estimated arrests,7522824,W3,2024
+US,drug_arrests_us,,FBI,ar_cius1995,A,drug arrests,1476100,W3,1995
+US,drug_arrests_us,,FBI,ar_cius1996,A,drug arrests,1506200,W3,1996
+US,drug_arrests_us,,FBI,cs108,A,drug arrests,1583600,W3,1997
+US,drug_arrests_us,,FBI,ar_cius1998,A,drug arrests,1559100,W3,1998
+US,drug_arrests_us,,FBI,ar_cius1999,A,drug arrests,1532200,W3,1999
+US,drug_arrests_us,,FBI,ar_cius2000,A,drug arrests,1579566,W3,2000
+US,drug_arrests_us,,FBI,ar_cius2001,A,drug arrests,1586902,W3,2001
+US,drug_arrests_us,,FBI,ar_cius2002,A,drug arrests,1538813,W3,2002
+US,drug_arrests_us,,FBI,ar_cius2003,A,drug arrests,1678192,W3,2003
+US,drug_arrests_us,"BJS reproduction of the FBI table, rounded to hundreds.","BJS (Drugs and Crime Facts, from FBI CIUS)",ar_bjs_drugs,A,drug arrests,1745700,W3,2004
+US,drug_arrests_us,"BJS reproduction of the FBI table, rounded to hundreds.","BJS (Drugs and Crime Facts, from FBI CIUS)",ar_bjs_drugs,A,drug arrests,1846300,W3,2005
+US,drug_arrests_us,"BJS reproduction of the FBI table, rounded to hundreds.","BJS (Drugs and Crime Facts, from FBI CIUS)",ar_bjs_drugs,A,drug arrests,1889800,W3,2006
+US,drug_arrests_us,"BJS reproduction of the FBI table, rounded to hundreds.","BJS (Drugs and Crime Facts, from FBI CIUS)",ar_bjs_drugs,A,drug arrests,1841200,W3,2007
+US,drug_arrests_us,,FBI,ar_cius2010,A,drug arrests,1638846,W3,2010
+US,drug_arrests_us,,FBI,ar_cius2011,A,drug arrests,1531251,W3,2011
+US,drug_arrests_us,,FBI,ar_cius2012,A,drug arrests,1552432,W3,2012
+US,drug_arrests_us,,FBI,ar_cius2013,A,drug arrests,1501043,W3,2013
+US,drug_arrests_us,,FBI,ar_cius2014,A,drug arrests,1561231,W3,2014
+US,drug_arrests_us,,FBI,ar_cius2015,A,drug arrests,1488707,W3,2015
+US,drug_arrests_us,,FBI,ar_cius2016,A,drug arrests,1572579,W3,2016
+US,drug_arrests_us,,FBI,ar_cius2017,A,drug arrests,1632921,W3,2017
+US,drug_arrests_us,,FBI,ar_cius2018,A,drug arrests,1654282,W3,2018
+US,drug_arrests_us,,FBI,ar_cius2019,A,drug arrests,1558862,W3,2019
+US,drug_arrests_us,Still the largest single category,FBI,cs004,A,drug arrests,822488,W3,2024

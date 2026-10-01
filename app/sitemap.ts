@@ -1,7 +1,7 @@
 import { CONCEPTS } from "@/lib/concepts";
 import type { MetadataRoute } from "next";
 import { allJournalParams, allGlossaryParams } from "@/lib/server-corpus";
-import { DATA_SECTIONS } from "@/lib/routes";
+import { RESEARCH_SECTIONS, RESEARCH_VIEWS } from "@/lib/routes";
 
 /**
  * Sitemap covering every addressable page.
@@ -22,20 +22,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const sections: MetadataRoute.Sitemap = [
     { url: `${BASE}/`, lastModified: now, changeFrequency: "weekly", priority: 1.0 },
     { url: `${BASE}/journal`, lastModified: now, changeFrequency: "weekly", priority: 1.0 },
-    // Two URLs, one section. /data is the Research landing; /concepts opens the
-    // same section on its Concepts vertical. Both were indexed before the merge
-    // and both still resolve, so neither is dropped from the sitemap — removing
-    // /concepts would strand 35 anchors that have been shared.
-    { url: `${BASE}/data`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${BASE}/concepts`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
-    // The three Research verticals. They existed as views for months with no
-    // address, so nothing outside a live session could reach them.
-    ...DATA_SECTIONS.map((sec) => ({
-      url: `${BASE}/data/${sec.slug}`,
+    // The four Research sections, each its own page under /research (30 Sep
+    // 2026). The old /data addresses redirect here and are not listed.
+    ...RESEARCH_SECTIONS.map((sec, i) => ({
+      url: `${BASE}/research/${sec.slug}`,
       lastModified: now,
       changeFrequency: "monthly" as const,
-      priority: 0.85,
+      priority: i === 0 ? 0.9 : 0.85,
     })),
+    // Each section's other views (its first view is the section address above).
+    ...RESEARCH_SECTIONS.flatMap((sec) => (RESEARCH_VIEWS[sec.sub] ?? []).slice(1).map((v) => ({
+      url: `${BASE}/research/${sec.slug}/${v.slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    }))),
     { url: `${BASE}/glossary`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE}/documents`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${BASE}/author`, lastModified: now, changeFrequency: "yearly", priority: 0.4 },

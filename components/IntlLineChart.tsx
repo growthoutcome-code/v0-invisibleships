@@ -56,6 +56,7 @@ export default function IntlLineChart({
     () => Math.max(...chart.series.flatMap((s) => s.points.map((p) => p.value))) * 1.06,
     [chart],
   );
+  const lastYear = useMemo(() => Math.max(...chart.series.map((s) => s.last.year)), [chart]);
   const X = (y: number) => padL + ((y - x0) / (x1 - x0)) * (W - padL - padR);
   const Y = (v: number) => padT + (1 - v / vMax) * (H - padT - padB);
 
@@ -140,7 +141,7 @@ export default function IntlLineChart({
               <svg width="22" height="8" aria-hidden="true">
                 <line x1="0" y1="4" x2="22" y2="4" stroke="currentColor"
                   strokeWidth={s.emphasis ? 3 : 1.5}
-                  strokeDasharray={s.kind === "world" ? "4 3" : undefined} />
+                  strokeDasharray={s.kind === "world" ? "4 3" : s.kind === "other-basis" ? "7 4" : undefined} />
               </svg>
               {s.name}
             </button>
@@ -160,7 +161,11 @@ export default function IntlLineChart({
             key: ser.code,
             label: ser.name,
             value: ser.last.value,
-            display: ser.last.value.toLocaleString(undefined, { maximumFractionDigits: 2 }),
+            // A series that stops earlier than the rest (the US count before the
+            // FBI's 2020 change) says which year its figure is from, so a 2019
+            // number is never read as ranked against 2024 ones.
+            display: ser.last.value.toLocaleString(undefined, { maximumFractionDigits: 2 }) +
+              (ser.last.year < lastYear ? ` (${ser.last.year})` : ""),
             emphasis: ser.emphasis,
             onOpen: () => { onPick(ser); track("intl_series_opened", { c: ser.code, via: "bars" }); },
           }))}
@@ -195,7 +200,7 @@ export default function IntlLineChart({
                 return (
                   <g key={i}>
                     <path d={d} fill="none" stroke="rgb(var(--foreground))" strokeWidth={sw}
-                      strokeDasharray={s.kind === "world" ? "5 4" : undefined} opacity={op} />
+                      strokeDasharray={s.kind === "world" ? "5 4" : s.kind === "other-basis" ? "8 5" : undefined} opacity={op} />
                     {/* fat hit target */}
                     <path d={d} fill="none" stroke="transparent" strokeWidth={narrow ? 24 : 14} />
                     {/* single-point runs would be invisible as paths */}
@@ -256,8 +261,11 @@ export default function IntlLineChart({
 
       <p className="text-muted text-[14px] measure mt-3 mb-0">
         Hover or tap a legend entry to light up its line; tap again (or click the line)
-        for the full year-by-year table, method and caveats. Dashed line is the world
-        aggregate. Breaks in a line are years the source does not publish.
+        for the full year-by-year table, method and caveats.
+        {chart.series.some((s) => s.kind === "world") && " Dashed line is the world aggregate."}
+        {chart.series.some((s) => s.kind === "other-basis") &&
+          " Dashed lines are counted on a different basis from the solid ones; compare their direction, not their height."}
+        {" "}Breaks in a line are years the source does not publish.
       </p>
     </figure>
   );

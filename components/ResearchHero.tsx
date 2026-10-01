@@ -41,10 +41,13 @@ const AUDIENCE_LEAD: Record<Audience, { id: string; label: string }> = {
 };
 
 export default function ResearchHero({
-  onExplore,
+  onExplore, part = "all",
 }: {
   /** Switch to the Concepts vertical with these filters applied. */
   onExplore: (patch: Partial<Filters>) => void;
+  /** Timeline's views (30 Sep 2026): "found" = what this research found;
+   *  "about" = who this is for and what it is made of. */
+  part?: "all" | "found" | "about";
 }) {
   const themeRows = useMemo(() => THEME_ORDER.map((t) => ({
     key: t, label: THEME_LABEL[t], note: THEME_NOTE[t],
@@ -58,6 +61,7 @@ export default function ResearchHero({
   return (
     <div className="mb-14">
       {/* ------------------------------------------------------ what was found */}
+      {part !== "about" && (
       <section className="mb-14">
         <h2 className={H2_CLASS}>
           What this research found
@@ -87,8 +91,10 @@ export default function ResearchHero({
         </h3>
         <EvidenceSpan />
       </section>
+      )}
 
       {/* --------------------------------------------------------- who it is for */}
+      {part !== "found" && (<>
       <section className="mb-14">
         <h2 className={H2_CLASS}>
           Who this is for
@@ -131,6 +137,7 @@ export default function ResearchHero({
           onPick={(k) => { track("hero_theme_picked", { theme: k }); onExplore({ theme: [k as Theme] }); }}
           caption="Concepts by subject. Hover a row for what it covers" />
       </section>
+      </>)}
     </div>
   );
 }

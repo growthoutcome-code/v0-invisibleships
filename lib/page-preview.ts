@@ -1,5 +1,5 @@
 import { getJournalItem, getGlossaryItem } from "@/lib/server-corpus";
-import { DATA_SECTIONS } from "@/lib/routes";
+import { RESEARCH_SECTIONS } from "@/lib/routes";
 
 /**
  * What a path in the "Pages viewed" table actually is.
@@ -27,6 +27,7 @@ const FIXED: Record<string, PathKind> = {
   "/glossary": "glossary-index",
   "/concepts": "concepts",
   "/data": "data-index",
+  "/research": "data-index",
   "/documents": "documents",
   "/disclaimer": "disclaimer",
   "/author": "author",
@@ -78,10 +79,13 @@ export function classifyPath(raw: string): { kind: PathKind; param?: string; pat
   if (FIXED[p]) return { kind: FIXED[p], param: undefined, path: p };
   if (p.startsWith("/api/") || p === "/api") return { kind: "api", path: p };
 
+  // /research/<section>/<view> (30 Sep 2026): a view of a Research section.
+  if (seg.length === 3 && seg[0] === "research") return { kind: "data-section", param: decode(seg[1]), path: p };
   if (seg.length === 2) {
     if (seg[0] === "journal") return { kind: "journal-entry", param: decode(seg[1]), path: p };
     if (seg[0] === "glossary") return { kind: "glossary-term", param: decode(seg[1]), path: p };
-    if (seg[0] === "data") return { kind: "data-section", param: decode(seg[1]), path: p };
+    // /data/<slug> is the pre-30-Sep address of /research/<slug>; both name the same section.
+    if (seg[0] === "data" || seg[0] === "research") return { kind: "data-section", param: decode(seg[1]), path: p };
   }
   return { kind: "unknown", path: p };
 }
@@ -172,8 +176,8 @@ export function previewForPath(raw: string): PagePreview {
   if (fixed) return { path, ...fixed, facts: [], href: path };
 
   if (kind === "data-section") {
-    const hit = DATA_SECTIONS.find((s) => s.slug === param);
-    if (hit) return { path, title: hit.label, kind: "Research vertical", blurb: hit.blurb, facts: [], href: path };
+    const hit = RESEARCH_SECTIONS.find((s) => s.slug === param);
+    if (hit) return { path, title: hit.label, kind: "Research section", blurb: hit.blurb, facts: [], href: `/research/${hit.slug}` };
     return { path, title: param ?? path, kind: "Research vertical", blurb: "A research vertical that is no longer part of the site.", facts: [], href: null, warning: "This vertical does not exist." };
   }
 

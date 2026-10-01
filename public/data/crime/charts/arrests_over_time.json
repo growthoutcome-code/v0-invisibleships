@@ -1,7 +1,7 @@
 {
   "title": "US arrests: the machine peaked in 1997",
   "unit": "Estimated arrests per year, millions (FBI; excludes traffic)",
-  "note": "US arrests peaked in 1997 at 15.28 million \u2014 a fact most readers do not know \u2014 and 2024 is 51% below that. Drug arrests peaked separately in 2006 (1.89M) and remain the largest single category. Constant across the whole era: 82\u201384% of all arrests are for lesser, non-index offences. Sparse points are drawn as points, not smoothed into a line the data cannot support; dotted stretches are years that are not Tier A. The sweeping operations in the register above \u2014 the World Cup's 905 arrests against HSI's 2,545 for all of FY2024 \u2014 sit inside these annual millions, which is the scale a headline arrest number should be read against.",
+  "note": "US arrests peaked in 1997 at 15.28 million \u2014 a fact most readers do not know \u2014 and 2024 is 51% below that. Drug arrests peaked separately in 2006 (1.89M) and remain the largest single category. Constant across the whole era: 82\u201384% of all arrests are for lesser, non-index offences. Years with no published figure are left as gaps and the points are shown; dotted stretches are years that are not Tier A. The sweeping operations in the register above \u2014 the World Cup's 905 arrests against HSI's 2,545 for all of FY2024 \u2014 sit inside these annual millions, which is the scale a headline arrest number should be read against.",
   "publisher": "FBI CIUS/CDE; Council on Criminal Justice corroborating",
   "tier": "A",
   "series": [
@@ -19,36 +19,125 @@
           "note": ""
         },
         {
+          "year": 1995,
+          "value": 15119800,
+          "tier": "A"
+        },
+        {
+          "year": 1996,
+          "value": 15168100,
+          "tier": "A"
+        },
+        {
           "year": 1997,
           "value": 15284300,
-          "tier": "A",
-          "note": "PEAK"
+          "tier": "A"
+        },
+        {
+          "year": 1998,
+          "value": 14528300,
+          "tier": "A"
+        },
+        {
+          "year": 1999,
+          "value": 14031070,
+          "tier": "A"
+        },
+        {
+          "year": 2000,
+          "value": 13980297,
+          "tier": "A"
+        },
+        {
+          "year": 2001,
+          "value": 13699254,
+          "tier": "A"
+        },
+        {
+          "year": 2002,
+          "value": 13741438,
+          "tier": "A"
+        },
+        {
+          "year": 2003,
+          "value": 13639479,
+          "tier": "A"
         },
         {
           "year": 2008,
           "value": 14005615,
-          "tier": "A",
-          "note": ""
+          "tier": "A"
+        },
+        {
+          "year": 2010,
+          "value": 13120947,
+          "tier": "A"
+        },
+        {
+          "year": 2011,
+          "value": 12408899,
+          "tier": "A"
+        },
+        {
+          "year": 2012,
+          "value": 12196959,
+          "tier": "A"
+        },
+        {
+          "year": 2013,
+          "value": 11302102,
+          "tier": "A"
+        },
+        {
+          "year": 2014,
+          "value": 11205833,
+          "tier": "A"
+        },
+        {
+          "year": 2015,
+          "value": 10797088,
+          "tier": "A"
+        },
+        {
+          "year": 2016,
+          "value": 10662252,
+          "tier": "A"
+        },
+        {
+          "year": 2017,
+          "value": 10554985,
+          "tier": "A"
+        },
+        {
+          "year": 2018,
+          "value": 10310960,
+          "tier": "A"
         },
         {
           "year": 2019,
           "value": 10085207,
-          "tier": "A",
-          "note": ""
+          "tier": "A"
+        },
+        {
+          "year": 2020,
+          "value": 7600000,
+          "tier": "A"
         },
         {
           "year": 2024,
           "value": 7522824,
-          "tier": "A",
-          "note": "51% below 1997 peak"
+          "tier": "A"
         }
       ],
       "caveats": [
-        "Selected years, not a continuous annual series \u2014 the FBI's own estimates for the years shown, one consistent series (never mixed with the BJS 1980-2009 series, which uses different weights and yields ~11.6M for 1997).",
-        "2016 and 2021 are known national data gaps and are not shown.",
+        "Each year from that year's own FBI Crime in the United States, Table 29 (Table 18 in 2016), 1995-2019 \u2014 never mixed with the BJS 1980-2009 series, which uses different weights and yields about 11.6M for 1997.",
+        "2004-2007 and 2009 are not drawn: those editions could not be read from the FBI's own pages. 2008 is the FBI's release. Nothing is filled in between.",
+        "2020 is the FBI's release figure, '7.6 million', rounded as published.",
+        "The line breaks after 2020. 2021 has no national estimate, and 2024 is a NIBRS-based estimate (Reported Crimes in the Nation, 2024) \u2014 a different basis from the years before.",
         "An arrest is an enforcement action, not a conviction; 82-84% of arrests across this whole period are for lesser (Part II) offences."
       ],
-      "unit": "estimated criminal arrests per calendar year"
+      "unit": "estimated criminal arrests per calendar year",
+      "break_after": 2020
     },
     {
       "name": "Drug arrests",
@@ -64,29 +153,133 @@
           "note": ""
         },
         {
+          "year": 1995,
+          "value": 1476100,
+          "tier": "A"
+        },
+        {
+          "year": 1996,
+          "value": 1506200,
+          "tier": "A"
+        },
+        {
           "year": 1997,
           "value": 1583600,
-          "tier": "A",
-          "note": ""
+          "tier": "A"
+        },
+        {
+          "year": 1998,
+          "value": 1559100,
+          "tier": "A"
+        },
+        {
+          "year": 1999,
+          "value": 1532200,
+          "tier": "A"
+        },
+        {
+          "year": 2000,
+          "value": 1579566,
+          "tier": "A"
+        },
+        {
+          "year": 2001,
+          "value": 1586902,
+          "tier": "A"
+        },
+        {
+          "year": 2002,
+          "value": 1538813,
+          "tier": "A"
+        },
+        {
+          "year": 2003,
+          "value": 1678192,
+          "tier": "A"
+        },
+        {
+          "year": 2004,
+          "value": 1745700,
+          "tier": "A"
+        },
+        {
+          "year": 2005,
+          "value": 1846300,
+          "tier": "A"
         },
         {
           "year": 2006,
-          "value": 1889810,
-          "tier": "B",
-          "note": "PEAK drug arrests"
+          "value": 1889800,
+          "tier": "A"
+        },
+        {
+          "year": 2007,
+          "value": 1841200,
+          "tier": "A"
+        },
+        {
+          "year": 2010,
+          "value": 1638846,
+          "tier": "A"
+        },
+        {
+          "year": 2011,
+          "value": 1531251,
+          "tier": "A"
+        },
+        {
+          "year": 2012,
+          "value": 1552432,
+          "tier": "A"
+        },
+        {
+          "year": 2013,
+          "value": 1501043,
+          "tier": "A"
+        },
+        {
+          "year": 2014,
+          "value": 1561231,
+          "tier": "A"
+        },
+        {
+          "year": 2015,
+          "value": 1488707,
+          "tier": "A"
+        },
+        {
+          "year": 2016,
+          "value": 1572579,
+          "tier": "A"
+        },
+        {
+          "year": 2017,
+          "value": 1632921,
+          "tier": "A"
+        },
+        {
+          "year": 2018,
+          "value": 1654282,
+          "tier": "A"
+        },
+        {
+          "year": 2019,
+          "value": 1558862,
+          "tier": "A"
         },
         {
           "year": 2024,
           "value": 822488,
-          "tier": "A",
-          "note": "Still the largest single category"
+          "tier": "A"
         }
       ],
       "caveats": [
-        "Peaked in 2006 at 1,889,810; 2024 (822,488) is still the largest single arrest category.",
-        "1980 and 2006-2008 values corroborated via compilations of FBI Table 29 (Tier B where marked)."
+        "Each year from that year's own FBI Table 29 (Table 18 in 2016). 2004-2007 are BJS's reproduction of the same FBI tables, rounded to hundreds.",
+        "Peaked in 2006 at about 1.89 million (1,889,800 in BJS's reproduction of the FBI table; 1,889,810 in third-party compilations of it). 2024 (822,488) is still the largest single arrest category.",
+        "2008, 2009, 2020 and 2021 are not drawn: no figure could be read from the FBI's own pages. The line breaks before 2024, which is a NIBRS-based estimate."
       ],
-      "unit": "estimated drug-abuse violation arrests per calendar year"
+      "unit": "estimated drug-abuse violation arrests per calendar year",
+      "break_after": 2020
     },
     {
       "name": "Civil immigration arrests (ICE)",
@@ -214,6 +407,18 @@
       "tier": "A"
     },
     {
+      "statement": "The fall was steady, not one drop: arrests went down every year from 2010 to 2019, from 13.1 million to 10.1 million.",
+      "tier": "A"
+    },
+    {
+      "statement": "Drug arrests kept rising after all arrests peaked \u2014 from 1.58 million in 1997 to 1.89 million in 2006.",
+      "tier": "A"
+    },
+    {
+      "statement": "The criminal lines break after 2020: the FBI changed how it estimates arrests, and 2021 has no national figure.",
+      "tier": "A"
+    },
+    {
       "statement": "Yes, 15.3 million is real \u2014 but an arrest is an event, not a person. One person arrested three times counts three times.",
       "tier": "A"
     },
@@ -254,6 +459,6 @@
       "tier": "B"
     }
   ],
-  "accuracy_note": "About the accuracy of these figures: arrest totals are estimates assembled from agency reports, and two official federal criminal-arrest series disagree (see the data-quality register); 2016 and 2021 are national gaps. The immigration line is federal FISCAL years. It is published federal statistics through FY2024 and nothing official after that \u2014 the 2025 point is FOIA-derived, marked tier B and drawn dotted.",
+  "accuracy_note": "About the accuracy of these figures: arrest totals are estimates assembled from agency reports, and two official federal criminal-arrest series disagree (see the data-quality register). The criminal lines are annual from 1995 with gaps where an FBI edition could not be read (2004-2009 in part), and break after 2020, where the FBI changed how it estimates; 2021 has no national estimate. The immigration line is federal FISCAL years. It is published federal statistics through FY2024 and nothing official after that \u2014 the 2025 point is FOIA-derived, marked tier B and drawn dotted.",
   "change_view": true
 }

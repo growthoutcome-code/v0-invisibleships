@@ -6,8 +6,8 @@ doc_type: register
 section: crime
 geography: United States (unless a row says otherwise)
 generated_by: scripts/build_corpus_md.py
-entry_count: 12
-word_count: 2281
+entry_count: 13
+word_count: 2397
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -18,7 +18,7 @@ disclaimer: meta/IS_META_terms.md
 
 The kinds of harm this research is most concerned with are the ones with no national statistic. That is not a gap in the research — it is the finding.
 
-**12 entries.**
+**13 entries.**
 
 ### Harassment, as a crime
 [A] **No national count exists** — FBI CJIS · NIBRS User Manual 2025.0 (offence code definitions) <https://le.fbi.gov/file-repository/ucr/nibrs-user-manual-2025.pdf>
@@ -103,6 +103,13 @@ Polling organisations have asked Americans whether they BELIEVE in ghosts every 
 The instruments the National Survey on Drug Use and Health administers to every respondent are a psychological-distress scale, a functional-impairment scale, a depression module and suicidality items. None contains a hallucination or voice-hearing question. Psychosis appears only through clinical interviews in a validation subsample, which produces no published prevalence series. So the one real repeated measurement of psychotic experience in the English-speaking world is English: the Adult Psychiatric Morbidity Survey found 5.6% of adults screening positive in 2000, 5.9% in 2007 and 6.8% in 2014 — and then stopped reporting that figure as an outcome. The only large repeated instrument that scores hallucinations anonymously and annually is a private one, the Global Mind Project, whose respondents are recruited through Meta and Google advertising and whose only representativeness assessment was written by its own staff. It is recorded here as an existence proof, not as a population estimate.
 
 *Who would have to count it:* SAMHSA, by adding an item to NSDUH's self-administered section — the part respondents answer to a machine rather than to an interviewer, which is where a stigmatised question belongs.
+
+### Civil immigration arrests, after FY2024
+[A] **No official annual total is published** — DHS Office of Homeland Security Statistics · Immigration Enforcement Actions annual flow reports (historical index) <https://ohss.dhs.gov/topics/immigration/immigration-enforcement/annual-flow-report/historical>
+
+DHS stopped publishing its detailed monthly immigration-enforcement tables after November 2024 data, and no official FY2025 administrative-arrest total exists. Every figure for 2025 and 2026 on this page is FOIA-derived or press-reported and is marked tier B for that reason. The series that runs FY2011 to FY2024 as published federal statistics simply stops, in the years it is most asked about.
+
+*Who would have to count it:* DHS Office of Homeland Security Statistics, in the Immigration Enforcement Actions annual flow report.
 
 ---
 

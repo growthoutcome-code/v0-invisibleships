@@ -6,8 +6,8 @@ doc_type: source-list
 section: crime
 geography: United States (unless a row says otherwise)
 generated_by: scripts/build_corpus_md.py
-source_count: 197
-word_count: 4609
+source_count: 223
+word_count: 5352
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -16,7 +16,7 @@ disclaimer: meta/IS_META_terms.md
 
 *Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Evidence tiers: **A** documented, **B** corroborated, **C** claimed — B and C may not be quoted as established fact. Causes are reported as attributed, never asserted. This dataset does not corroborate, and is not corroborated by, any other dataset in this corpus. See `meta/IS_META_terms.md`.*
 
-**197 sources.** Tier A 147 · B 49 · C 1. Every figure in this folder resolves to one of these.
+**223 sources.** Tier A 171 · B 51 · C 1. Every figure in this folder resolves to one of these.
 
 | Tier | Publisher | Title | Accessed | Link | Archived |
 |---|---|---|---|---|---|
@@ -69,8 +69,10 @@ disclaimer: meta/IS_META_terms.md
 | A | Bureau of Justice Statistics | Correctional Populations in the United States, 2013, Appendix Table 5 (Dec 2014, NCJ 24847 | 2026-08-22 | <https://bjs.ojp.gov/content/pub/pdf/cpus13.pdf> | — |
 | A | Bureau of Justice Statistics | Census of State and Federal Adult Correctional Facilities, 2019 (Nov 2021, NCJ 301366) | 2026-08-22 | <https://bjs.ojp.gov/content/pub/pdf/csfacf19st.pdf> | — |
 | A | Bureau of Justice Statistics | BJS forthcoming publications — 'Prisoners in 2024 – Statistical Tables' listed for Q3 2026 | 2026-08-22 | <https://bjs.ojp.gov/library/publications/forthcoming> | — |
+| A | Bureau of Justice Statistics | Drugs and Crime Facts: Total estimated drug law violation arrests in the United States, 19 | 2026-10-01 | <https://bjs.ojp.gov/drugs-and-crime-facts/enforcement/arrtot-table> | — |
 | A | CDC NCHS | Drug Overdose Deaths in the United States, 2023-2024 (final) | 2026-08-21 | <https://www.cdc.gov/nchs/products/databriefs/db549.htm> | — |
 | A | CDC, Youth Risk Behavior Survey | YRBS Data Summary & Trends Report 2013–2023 — anonymous, in-school, unchanged wording | 2026-08-22 | <https://www.cdc.gov/yrbs/dstr/pdf/YRBS-2023-Data-Summary-Trend-Report.pdf> | — |
+| A | CDC/NCHS | Provisional drug overdose death counts | 2026-09-01 | <https://www.cdc.gov/nchs/nvss/vsrr/drug-overdose-data.htm> | — |
 | A | Council of Europe / University of Lausanne | SPACE I 2025 key findings — one uniform reference date (31 Jan 2025), 100% response across | 2026-08-22 | <https://wp.unil.ch/space/files/2026/06/260626_key-findings-space-i_prisons-europe-2025.pdf> | — |
 | A | Council on Criminal Justice | Crime Trends in U.S. Cities: Mid-Year 2026 Update (2026-07-22) | 2026-08-21 | <https://counciloncj.org/crime-trends-in-u-s-cities-mid-year-2026-update/> | — |
 | A | Crime Statistics Agency Victoria | Spotlight: burglary / break and enter offences recorded in Victoria | 2026-08-21 | <https://www.crimestatistics.vic.gov.au/spotlight-burglarybreak-and-enter-offences-recorded-in-victoria> | — |
@@ -79,6 +81,7 @@ disclaimer: meta/IS_META_terms.md
 | A | DHS OHSS | Immigration Enforcement Actions: 2016 (Annual Flow Report) | 2026-08-21 | <https://ohss.dhs.gov/sites/default/files/2023-12/Enforcement_Actions_2016.pdf> | — |
 | A | DHS OHSS | Immigration Enforcement Actions: 2017 (Annual Report) | 2026-08-21 | <https://ohss.dhs.gov/sites/default/files/2023-12/enforcement_actions_2017.pdf> | — |
 | A | DHS OHSS | Immigration Enforcement Actions: 2020 (Annual Flow Report) | 2026-08-21 | <https://ohss.dhs.gov/sites/default/files/2023-12/2022_0131_plcy_enforcement_actions_fy2020v2.pdf> | — |
+| A | DHS Office of Homeland Security Statistics | Immigration Enforcement Actions annual flow reports (historical index) | 2026-09-01 | <https://ohss.dhs.gov/topics/immigration/immigration-enforcement/annual-flow-report/historical> | — |
 | A | DOJ / EDNY | 34 PRC National Police Officers Charged with Perpetrating Transnational Repression Scheme  | 2026-08-21 | <https://www.fbi.gov/contact-us/field-offices/newyork/news/thirty-four-officers-of-peoples-republic-of-china-national-police-charged-with-perpetrating-transnational-repression-scheme-targeting-us-residents> | — |
 | A | DOJ archive/FBI UCR | DOJ archive/FBI UCR | 2026-08-21 | <https://www.justice.gov/archive/mps/strategic2001-2006/d_arrtot.htm> | — |
 | A | David Pritchard, Communication Law and Polic | David Pritchard, Communication Law and Policy 14(3), 2009 | 2026-08-21 | <https://uwm.edu/journalism-advertising-media-studies/wp-content/uploads/sites/213/2016/04/Rethinking-Criminal-Libel.pdf> | — |
@@ -94,6 +97,8 @@ disclaimer: meta/IS_META_terms.md
 | A | FBI | FBI Announces Voices Not Forgotten (2026-08-18) | 2026-08-21 | <https://www.fbi.gov/news/press-releases/fbi-announces-voices-not-forgotten> | — |
 | A | FBI | Transnational Repression (counterintelligence program page) | 2026-08-21 | <https://www.fbi.gov/investigate/counterintelligence/transnational-repression> | — |
 | A | FBI | FBI | 2026-08-21 | <https://archives.fbi.gov/archives/news/pressrel/press-releases/fbi-releases-2008-crime-statistics> | — |
+| A | FBI | Violent Crime Falls at Historic Rate, New FBI Data Show (24 Aug 2026) | 2026-09-01 | <https://www.fbi.gov/news/press-releases/violent-crime-falls-at-historic-rate-new-fbi-data-show> | — |
+| A | FBI | FBI Releases 2020 Crime Statistics (press release: 'an estimated 7.6 million arrests, excl | 2026-10-01 | <https://www.fbi.gov/news/press-releases/fbi-releases-2020-crime-statistics> | — |
 | A | FBI CIUS 1997 T29 | FBI CIUS 1997 T29 | 2026-08-21 | <https://ucr.fbi.gov/crime-in-the-u.s/1997/97sec4.pdf> | — |
 | A | FBI CIUS 2019 | FBI CIUS 2019 | 2026-08-21 | <https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/persons-arrested> | — |
 | A | FBI CJIS | FBI Releases Data on Crime in the Nation for 2021 | 2026-08-20 | <https://le.fbi.gov/cjis-division/cjis-link/fbi-releases-data-on-crime-in-the-nation-for-2021> | — |
@@ -127,6 +132,25 @@ disclaimer: meta/IS_META_terms.md
 | A | FBI UCR Program | FBI UCR Program | 2026-08-21 | <https://ucr.fbi.gov/nibrs/2018/resource-pages/countdown.pdf> | — |
 | A | FBI UCR Program | FBI UCR Program | 2026-08-21 | <https://ucr.fbi.gov/nibrs/2019/resource-pages/summary.pdf> | — |
 | A | FBI Uniform Crime Reporting Program | Crime in the United States 2019, Table 1 (Summary Reporting System — final year of the SRS | 2026-08-21 | <https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-1> | — |
+| A | FBI Uniform Crime Reporting Program | Domestic Relationships and Violent Crimes, 2020-2024 (special report, 12 Feb 2026) | 2026-09-01 | <https://www.fbi.gov/news/press-releases/fbi-releases-domestic-violence-special-report> | — |
+| A | FBI Uniform Crime Reporting Program | Crime in the United States 1995, Section IV, Table 29 (Total Estimated Arrests) | 2026-10-01 | <https://ucr.fbi.gov/crime-in-the-u.s/1995/95sec4.pdf> | — |
+| A | FBI Uniform Crime Reporting Program | Crime in the United States 1996, Section IV, Table 29 (Total Estimated Arrests) | 2026-10-01 | <https://ucr.fbi.gov/crime-in-the-u.s/1996/96sec4.pdf> | — |
+| A | FBI Uniform Crime Reporting Program | Crime in the United States 1998, Section IV, Table 29 (Total Estimated Arrests) | 2026-10-01 | <https://ucr.fbi.gov/crime-in-the-u.s/1998/98sec4.pdf> | — |
+| A | FBI Uniform Crime Reporting Program | Crime in the United States 1999, Section IV, Table 29 (Estimated Arrests) | 2026-10-01 | <https://ucr.fbi.gov/crime-in-the-u.s/1999/99sec4.pdf> | — |
+| A | FBI Uniform Crime Reporting Program | Crime in the United States 2000, Section IV, Table 29 (Estimated Arrests) | 2026-10-01 | <https://ucr.fbi.gov/crime-in-the-u.s/2000/00sec4.pdf> | — |
+| A | FBI Uniform Crime Reporting Program | Crime in the United States 2001, Section IV, Table 29 (Estimated Arrests) | 2026-10-01 | <https://ucr.fbi.gov/crime-in-the-u.s/2001/01sec4.pdf> | — |
+| A | FBI Uniform Crime Reporting Program | Crime in the United States 2002, Section IV, Table 29 (Estimated Arrests) | 2026-10-01 | <https://ucr.fbi.gov/crime-in-the-u.s/2002/02sec4.pdf> | — |
+| A | FBI Uniform Crime Reporting Program | Crime in the United States 2003, Section IV, Table 29 (Estimated Number of Arrests) | 2026-10-01 | <https://ucr.fbi.gov/crime-in-the-u.s/2003/03sec4.pdf> | — |
+| A | FBI Uniform Crime Reporting Program | Crime in the United States 2010, Table 29 (Estimated Number of Arrests) | 2026-10-01 | <https://ucr.fbi.gov/crime-in-the-u.s/2010/crime-in-the-u.s.-2010/tables/10tbl29.xls> | — |
+| A | FBI Uniform Crime Reporting Program | Crime in the United States 2011, Table 29 (Estimated Number of Arrests) | 2026-10-01 | <https://ucr.fbi.gov/crime-in-the-u.s/2011/crime-in-the-u.s.-2011/tables/table-29> | — |
+| A | FBI Uniform Crime Reporting Program | Crime in the United States 2012, Table 29 (Estimated Number of Arrests) | 2026-10-01 | <https://ucr.fbi.gov/crime-in-the-u.s/2012/crime-in-the-u.s.-2012/tables/29tabledatadecpdf/table_29_estimated_number_of_arrests_united_states_2012.xls> | — |
+| A | FBI Uniform Crime Reporting Program | Crime in the United States 2013, Table 29 (Estimated Number of Arrests) | 2026-10-01 | <https://ucr.fbi.gov/crime-in-the-u.s/2013/crime-in-the-u.s.-2013/tables/table-29/table_29_estimated_number_of_arrests_united_states_2013.xls> | — |
+| A | FBI Uniform Crime Reporting Program | Crime in the United States 2014, Table 29 (Estimated Number of Arrests) | 2026-10-01 | <https://ucr.fbi.gov/crime-in-the-u.s/2014/crime-in-the-u.s.-2014/tables/table-29> | — |
+| A | FBI Uniform Crime Reporting Program | Crime in the United States 2015, Table 29 (Estimated Number of Arrests) | 2026-10-01 | <https://ucr.fbi.gov/crime-in-the-u.s/2015/crime-in-the-u.s.-2015/tables/table-29> | — |
+| A | FBI Uniform Crime Reporting Program | Crime in the United States 2016, Table 18 (Estimated Number of Arrests; the 2016 edition r | 2026-10-01 | <https://ucr.fbi.gov/crime-in-the-u.s/2016/crime-in-the-u.s.-2016/tables/table-18> | — |
+| A | FBI Uniform Crime Reporting Program | Crime in the United States 2017, Table 29 (Estimated Number of Arrests) | 2026-10-01 | <https://ucr.fbi.gov/crime-in-the-u.s/2017/crime-in-the-u.s.-2017/tables/table-29> | — |
+| A | FBI Uniform Crime Reporting Program | Crime in the United States 2018, Table 29 (Estimated Number of Arrests) | 2026-10-01 | <https://ucr.fbi.gov/crime-in-the-u.s/2018/crime-in-the-u.s.-2018/topic-pages/tables/table-29> | — |
+| A | FBI Uniform Crime Reporting Program | Crime in the United States 2019, Table 29 (Estimated Number of Arrests) | 2026-10-01 | <https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/topic-pages/tables/table-29> | — |
 | A | ICE | ICE Annual Report FY2021 | 2026-08-21 | <https://www.ice.gov/doclib/eoy/iceAnnualReportFY2021.pdf> | — |
 | A | ICE | ICE Annual Report FY2022 | 2026-08-21 | <https://www.ice.gov/doclib/eoy/iceAnnualReportFY2022.pdf> | — |
 | A | ICE | ICE Annual Report FY2023 | 2026-08-21 | <https://www.ice.gov/doclib/eoy/iceAnnualReportFY2023.pdf> | — |
@@ -167,6 +191,7 @@ disclaimer: meta/IS_META_terms.md
 | A | US Senate Appropriations | Homeland Security FY2026 conference bill summary (41,500 maintained) | 2026-08-21 | <https://www.appropriations.senate.gov/imo/media/doc/fy26_homeland_security_conference_bill_summary.pdf> | — |
 | A | US Senate Appropriations | FY2020 Homeland Security Appropriations summary (FY2019 enacted level) | 2026-08-21 | <https://www.appropriations.senate.gov/news/minority/summary-fy-2020-homeland-security-appropriations-bill> | — |
 | A | World Bank (data source: UNODC) | Intentional homicides per 100,000 — UNODC series, World Bank mirror (API extract) | 2026-08-21 | <https://api.worldbank.org/v2/country/USA;KOR;JPN;GBR;AUS;DEU;FRA;CAN;RUS;CHN;IND;ISR;WLD/indicator/VC.IHR.PSRC.P5?format=json&per_page=500&date=1999:2024> | — |
+| B | Associated Press | ICE arrests jumped to nearly 50,000 in July, the highest monthly total of Trump's second t | 2026-09-01 | <https://apnews.com/article/border-immigration-customs-enforcement-data-statistics-f07f56a34bda225e5afa356781ac1740> | — |
 | B | Austin Kocher (Syracuse) | 92% of ICE Detention Growth in FY2026 Driven by Immigrants with No Criminal Convictions | 2026-08-21 | <https://austinkocher.substack.com/p/92-of-ice-detention-growth-in-fy> | — |
 | B | Austin Kocher (Syracuse) | ICE's Delayed Detention Data is Out, Two Record Highs (70,766 on 24 Jan 2026) | 2026-08-21 | <https://austinkocher.substack.com/p/ices-delayed-detention-data-is-out> | — |
 | B | Axios | FBI data for 2025 show biggest drop in violent crime in 90 years (2026-08-18) | 2026-08-20 | <https://www.axios.com/2026/08/18/fbi-violent-crime-drop-2025> | — |
@@ -203,6 +228,7 @@ disclaimer: meta/IS_META_terms.md
 | B | Pew Research Center | Pew Research Center | 2026-08-21 | <https://www.pewresearch.org/internet/2021/01/13/the-state-of-online-harassment/> | — |
 | B | Pew Research Center | The State of Online Harassment (Jan 2021, fielded Sept 2020) | 2026-08-21 | <https://www.pewresearch.org/internet/2021/01/13/the-state-of-online-harassment/> | — |
 | B | Prison Policy Initiative | ICE arrests Jan 20-Oct 15 2025 (~217,500, FOIA data) | 2026-08-21 | <https://www.prisonpolicy.org/blog/2025/12/11/ice-jails-update/> | — |
+| B | Prison Policy Initiative (from Deportation D | ICE arrests, 20 January - 15 October 2025 | 2026-09-01 | <https://www.prisonpolicy.org/blog/2025/10/21/ice-arrests/> | — |
 | B | Reporters Committee for Freedom of the Press | Reporters Committee for Freedom of the Press | 2026-08-21 | <https://www.rcfp.org/introduction-anti-slapp-guide/> | — |
 | B | TRAC Syracuse | Immigration Detention Quick Facts (11 Jul 2026: 65,765; 70.6% no conviction) | 2026-08-21 | <https://tracreports.org/immigration/quickfacts/> | — |
 | B | TRAC Syracuse | ICE Contractual Capacity and Number Detained: Overcapacity vs Overcrowding | 2026-08-21 | <https://tracreports.org/reports/762/> | — |

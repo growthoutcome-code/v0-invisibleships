@@ -51,7 +51,14 @@ const nextConfig = {
     },
   },
   async redirects() {
-    return JOURNAL_REDIRECTS.map(({ from, to }) => ({ source: from, destination: to, permanent: false }));
+    return [
+      ...JOURNAL_REDIRECTS.map(({ from, to }) => ({ source: from, destination: to, permanent: false })),
+      // Research moved from /data to /research/<section> (30 Sep 2026). Only the
+      // three old section slugs: /data/<anything> must NOT match, because the
+      // charts load their files from /data/tables/, /data/health/ and so on.
+      { source: "/data", destination: "/research/timeline", permanent: true },
+      { source: "/data/:slug(government-cloud|public-health|crime)", destination: "/research/:slug", permanent: true },
+    ];
   },
 
   async rewrites() {

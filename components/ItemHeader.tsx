@@ -3,6 +3,8 @@
 // so each nav target is a real URL. Author/Disclaimer live in the footer now.
 import Link from "next/link";
 import ThemeToggle from "@/components/ThemeToggle";
+import { ChevronDown } from "lucide-react";
+import { RESEARCH_SECTIONS } from "@/lib/routes";
 
 // MUST MATCH components/Header.tsx (Sean, 5 September: "in one state I find
 // that only journal glossary and documents are present, and it needs to be all
@@ -21,7 +23,7 @@ const NAV: { href: string; label: string }[] = [
   // Same order as Header.tsx (Sean, 30 Sep 2026): the record, then what it means.
   { href: "/journal", label: "Journal" },
   { href: "/concepts", label: "Concepts" },
-  { href: "/data", label: "Research" },
+  { href: "/research/timeline", label: "Research" },
   { href: "/documents", label: "Documents" },
   { href: "/glossary", label: "Glossary" },
 ];
@@ -32,7 +34,21 @@ export default function ItemHeader() {
       <div className="w-full px-4 sm:px-6 h-14 flex items-center gap-3">
         <Link href="/" className="font-display font-semibold tracking-tight text-foreground shrink-0">Invisible Ships</Link>
         <nav className="hidden lg:flex items-center gap-0.5 mx-auto">
-          {NAV.map((n) => (
+          {NAV.map((n) => n.label === "Research" ? (
+            // Same Research sub-menu as Header.tsx (30 Sep 2026).
+            <div key={n.label} className="relative group">
+              <Link href={n.href} className="inline-flex items-center gap-1 px-2.5 py-1.5 text-[13px] uppercase tracking-wide text-muted hover:text-foreground">
+                {n.label}<ChevronDown size={12} aria-hidden />
+              </Link>
+              <div className="invisible opacity-0 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100 transition-opacity absolute left-1/2 -translate-x-1/2 top-full pt-2 z-40">
+                <div role="menu" aria-label="Research sections" className="min-w-[230px] border border-edge bg-background shadow-lg py-2 flex flex-col">
+                  {RESEARCH_SECTIONS.map((sec) => (
+                    <Link key={sec.slug} href={`/research/${sec.slug}`} className="px-4 py-2.5 text-[14px] text-muted hover:text-foreground hover:bg-panel">{sec.label}</Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : (
             <Link key={n.label} href={n.href} className="px-2.5 py-1.5 text-[13px] uppercase tracking-wide text-muted hover:text-foreground">
               {n.label}
             </Link>

@@ -52,7 +52,7 @@ export const CRIME_FIGURES: DataFigure[] = [
     line: "moving in different directions at once. One quadrupled, one is at a record low, one is at a 22-year high. There is no single number for whether crime rose.",
     source: {
       label: "Crime — the finding",
-      href: "/data/crime",
+      href: "/research/crime",
     },
   },
   {

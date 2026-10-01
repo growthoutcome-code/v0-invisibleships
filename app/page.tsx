@@ -672,7 +672,7 @@ export default function Page() {
               {gc.regulations} regulations · {gc.sources} sources
             </>
           }
-          actions={[{ href: "/data/government-cloud", label: "Go to the government cloud research", primary: true }]}
+          actions={[{ href: "/research/government-cloud", label: "Go to the government cloud research", primary: true }]}
           aside={
             <DisclaimerDialog>
               <button type="button" className="text-[16px] text-muted underline underline-offset-4 hover:text-foreground">
@@ -741,7 +741,7 @@ export default function Page() {
             <Figure
               stat={String(gc.deployments)}
               line={`recorded deployments of these platforms into government use, across every geography in the register. What was actually placed, rather than what was sold.`}
-              href="/data/government-cloud"
+              href="/research/government-cloud"
             />
             <Figure
               stat={`0 of ${gc.regulations}`}
@@ -819,9 +819,9 @@ export default function Page() {
           heading="What does the research show?"
           meta="CDC, NCHS, WHO, FBI, BJS and DHS series · every figure resolves to a named source · none of these records explains another"
           actions={[
-            { href: "/data", label: "Go to all research", primary: true },
-            { href: "/data/public-health", label: "Public health" },
-            { href: "/data/crime", label: "Crime" },
+            { href: "/research/timeline", label: "Go to all research", primary: true },
+            { href: "/research/public-health", label: "Public health" },
+            { href: "/research/crime", label: "Crime" },
           ]}
           aside={
             <DisclaimerDialog>
@@ -921,7 +921,7 @@ export default function Page() {
                 <Figure
                   stat="51% below"
                   line="its 1997 peak: criminal arrests fell from 15.28 million that year to 7.52 million in 2024. Civil immigration arrests, counted by a different agency on a different calendar, moved the other way."
-                  source={{ label: "Crime \u2014 the finding", href: "/data/crime" }}
+                  source={{ label: "Crime \u2014 the finding", href: "/research/crime" }}
                 />
               </div>
               <div>

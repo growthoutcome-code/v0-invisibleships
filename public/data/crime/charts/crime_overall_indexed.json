@@ -1,0 +1,559 @@
+{
+  "title": "Police records and the victim survey, 1999 = 100",
+  "unit": "Each line indexed to its own 1999 figure = 100",
+  "note": "Two measures of the same question, each indexed to its own 1999 figure so they can share an axis: the chart shows direction, never size. The police lines break at 2020, where the FBI changed how it counts, and skip 2021, which the FBI says is not nationally representative. The survey line counts crimes the police never hear about. Click any line for its raw figures, method and caveats.",
+  "publisher": "FBI; Bureau of Justice Statistics",
+  "tier": "A",
+  "indexed": true,
+  "series": [
+    {
+      "name": "Violent crime (police records)",
+      "counts": "Violent crimes known to police per 100,000 people: murder, rape, robbery, aggravated assault",
+      "publisher": "FBI Uniform Crime Reporting Program",
+      "emphasis": true,
+      "base_year": 1999,
+      "base_value": 523.0,
+      "unit_raw": "offences per 100,000 inhabitants",
+      "tier": "A",
+      "basis_short": "FBI violent crime rate per 100,000; indexed to 1999 = 100",
+      "caveats": [
+        "1999: Crime in the United States 2010, Table 1. 2000-2019: Crime in the United States 2019, Table 1, whose violent total uses the legacy rape definition for every year.",
+        "2020 onward: UCR Summary of Reported Crimes in the Nation, 2025, Figure 1. That report prints the total only for 2024 (362.9) and 2025 (327.6); 2020, 2022 and 2023 are the sum of its four published offence rates, a method that reproduces the two printed totals exactly.",
+        "Not joined at 2020. The FBI moved from its Summary Reporting System to NIBRS-based national estimates, and the 2020-onward figures come from a later report that re-estimated those years; 2019 and 2020 are not one measurement. The FBI calls the two 'analogous measures rather than as one being more accurate than the other.'",
+        "2021 is not drawn: the FBI states its 2021 estimates are 'below a statistically acceptable level to be nationally representative and are not comparable to other yearly estimates.'",
+        "From 2020 rape is counted under the FBI's broader 2013 definition.",
+        "Counts only what reaches the police. The victim survey on the same chart also counts crimes that were never reported."
+      ],
+      "points": [
+        {
+          "year": 1999,
+          "value": 100.0,
+          "raw": 523.0,
+          "tier": "A"
+        },
+        {
+          "year": 2000,
+          "value": 96.8,
+          "raw": 506.5,
+          "tier": "A"
+        },
+        {
+          "year": 2001,
+          "value": 96.5,
+          "raw": 504.5,
+          "tier": "A"
+        },
+        {
+          "year": 2002,
+          "value": 94.5,
+          "raw": 494.4,
+          "tier": "A"
+        },
+        {
+          "year": 2003,
+          "value": 91.0,
+          "raw": 475.8,
+          "tier": "A"
+        },
+        {
+          "year": 2004,
+          "value": 88.6,
+          "raw": 463.2,
+          "tier": "A"
+        },
+        {
+          "year": 2005,
+          "value": 89.7,
+          "raw": 469.0,
+          "tier": "A"
+        },
+        {
+          "year": 2006,
+          "value": 91.6,
+          "raw": 479.3,
+          "tier": "A"
+        },
+        {
+          "year": 2007,
+          "value": 90.2,
+          "raw": 471.8,
+          "tier": "A"
+        },
+        {
+          "year": 2008,
+          "value": 87.7,
+          "raw": 458.6,
+          "tier": "A"
+        },
+        {
+          "year": 2009,
+          "value": 82.6,
+          "raw": 431.9,
+          "tier": "A"
+        },
+        {
+          "year": 2010,
+          "value": 77.3,
+          "raw": 404.5,
+          "tier": "A"
+        },
+        {
+          "year": 2011,
+          "value": 74.0,
+          "raw": 387.1,
+          "tier": "A"
+        },
+        {
+          "year": 2012,
+          "value": 74.1,
+          "raw": 387.8,
+          "tier": "A"
+        },
+        {
+          "year": 2013,
+          "value": 70.6,
+          "raw": 369.1,
+          "tier": "A"
+        },
+        {
+          "year": 2014,
+          "value": 69.1,
+          "raw": 361.6,
+          "tier": "A"
+        },
+        {
+          "year": 2015,
+          "value": 71.5,
+          "raw": 373.7,
+          "tier": "A"
+        },
+        {
+          "year": 2016,
+          "value": 73.9,
+          "raw": 386.6,
+          "tier": "A"
+        },
+        {
+          "year": 2017,
+          "value": 73.4,
+          "raw": 383.8,
+          "tier": "A"
+        },
+        {
+          "year": 2018,
+          "value": 70.8,
+          "raw": 370.4,
+          "tier": "A"
+        },
+        {
+          "year": 2019,
+          "value": 70.1,
+          "raw": 366.7,
+          "tier": "A"
+        },
+        {
+          "year": 2020,
+          "value": 74.4,
+          "raw": 389.2,
+          "tier": "A"
+        },
+        {
+          "year": 2022,
+          "value": 74.5,
+          "raw": 389.5,
+          "tier": "A"
+        },
+        {
+          "year": 2023,
+          "value": 73.0,
+          "raw": 381.6,
+          "tier": "A"
+        },
+        {
+          "year": 2024,
+          "value": 69.4,
+          "raw": 362.9,
+          "tier": "A"
+        },
+        {
+          "year": 2025,
+          "value": 62.6,
+          "raw": 327.6,
+          "tier": "A"
+        }
+      ],
+      "break_after": 2019,
+      "summary": "1999\u20132019: \u221230% (Summary Reporting System) \u00b7 2020\u20132025: \u221216% (NIBRS-based estimates)"
+    },
+    {
+      "name": "Property crime (police records)",
+      "counts": "Property crimes known to police per 100,000 people: burglary, larceny-theft, motor vehicle theft",
+      "publisher": "FBI Uniform Crime Reporting Program",
+      "emphasis": false,
+      "base_year": 1999,
+      "base_value": 3743.6,
+      "unit_raw": "offences per 100,000 inhabitants",
+      "tier": "A",
+      "basis_short": "FBI property crime rate per 100,000; indexed to 1999 = 100",
+      "caveats": [
+        "1999: Crime in the United States 2010, Table 1. 2000-2019: Crime in the United States 2019, Table 1.",
+        "2020 onward: UCR Summary of Reported Crimes in the Nation, 2025, Figure 2. The total is printed for 2024 (1,761.1) and 2025 (1,534.8); 2020, 2022 and 2023 are the sum of its three published offence rates.",
+        "Not joined at 2020. The FBI moved from its Summary Reporting System to NIBRS-based national estimates, and the 2020-onward figures come from a later report that re-estimated those years; 2019 and 2020 are not one measurement. The FBI calls the two 'analogous measures rather than as one being more accurate than the other.'",
+        "2021 is not drawn: the FBI states its 2021 estimates are 'below a statistically acceptable level to be nationally representative and are not comparable to other yearly estimates.'",
+        "Most property crime is never reported to police, so this line is a floor, not a count of everything that happened."
+      ],
+      "points": [
+        {
+          "year": 1999,
+          "value": 100.0,
+          "raw": 3743.6,
+          "tier": "A"
+        },
+        {
+          "year": 2000,
+          "value": 96.7,
+          "raw": 3618.3,
+          "tier": "A"
+        },
+        {
+          "year": 2001,
+          "value": 97.7,
+          "raw": 3658.1,
+          "tier": "A"
+        },
+        {
+          "year": 2002,
+          "value": 97.0,
+          "raw": 3630.6,
+          "tier": "A"
+        },
+        {
+          "year": 2003,
+          "value": 95.9,
+          "raw": 3591.2,
+          "tier": "A"
+        },
+        {
+          "year": 2004,
+          "value": 93.9,
+          "raw": 3514.1,
+          "tier": "A"
+        },
+        {
+          "year": 2005,
+          "value": 91.7,
+          "raw": 3431.5,
+          "tier": "A"
+        },
+        {
+          "year": 2006,
+          "value": 89.4,
+          "raw": 3346.6,
+          "tier": "A"
+        },
+        {
+          "year": 2007,
+          "value": 87.5,
+          "raw": 3276.4,
+          "tier": "A"
+        },
+        {
+          "year": 2008,
+          "value": 85.9,
+          "raw": 3214.6,
+          "tier": "A"
+        },
+        {
+          "year": 2009,
+          "value": 81.2,
+          "raw": 3041.3,
+          "tier": "A"
+        },
+        {
+          "year": 2010,
+          "value": 78.7,
+          "raw": 2945.9,
+          "tier": "A"
+        },
+        {
+          "year": 2011,
+          "value": 77.6,
+          "raw": 2905.4,
+          "tier": "A"
+        },
+        {
+          "year": 2012,
+          "value": 76.6,
+          "raw": 2868.0,
+          "tier": "A"
+        },
+        {
+          "year": 2013,
+          "value": 73.0,
+          "raw": 2733.6,
+          "tier": "A"
+        },
+        {
+          "year": 2014,
+          "value": 68.8,
+          "raw": 2574.1,
+          "tier": "A"
+        },
+        {
+          "year": 2015,
+          "value": 66.8,
+          "raw": 2500.5,
+          "tier": "A"
+        },
+        {
+          "year": 2016,
+          "value": 65.5,
+          "raw": 2451.6,
+          "tier": "A"
+        },
+        {
+          "year": 2017,
+          "value": 63.1,
+          "raw": 2362.9,
+          "tier": "A"
+        },
+        {
+          "year": 2018,
+          "value": 59.0,
+          "raw": 2209.8,
+          "tier": "A"
+        },
+        {
+          "year": 2019,
+          "value": 56.4,
+          "raw": 2109.9,
+          "tier": "A"
+        },
+        {
+          "year": 2020,
+          "value": 51.5,
+          "raw": 1929.1,
+          "tier": "A"
+        },
+        {
+          "year": 2022,
+          "value": 52.7,
+          "raw": 1971.4,
+          "tier": "A"
+        },
+        {
+          "year": 2023,
+          "value": 51.8,
+          "raw": 1939.5,
+          "tier": "A"
+        },
+        {
+          "year": 2024,
+          "value": 47.0,
+          "raw": 1761.1,
+          "tier": "A"
+        },
+        {
+          "year": 2025,
+          "value": 41.0,
+          "raw": 1534.8,
+          "tier": "A"
+        }
+      ],
+      "break_after": 2019,
+      "summary": "1999\u20132019: \u221244% (Summary Reporting System) \u00b7 2020\u20132025: \u221220% (NIBRS-based estimates)"
+    },
+    {
+      "name": "Violence reported by victims (survey)",
+      "counts": "Violent victimizations per 1,000 people age 12 or older, from the National Crime Victimization Survey, including crimes never reported to police",
+      "publisher": "Bureau of Justice Statistics",
+      "emphasis": false,
+      "base_year": 1999,
+      "base_value": 47.2,
+      "unit_raw": "victimizations per 1,000 persons age 12 or older",
+      "tier": "A",
+      "basis_short": "BJS violent victimization rate per 1,000 persons 12+; indexed to 1999 = 100",
+      "caveats": [
+        "Asks a national sample of households whether they were victims, so it counts crimes the police never hear about. Includes simple assault, which the FBI's violent total does not.",
+        "1999-2012 and 2024: Criminal Victimization, 2024, appendix table 1. 2013-2023: Criminal Victimization, 2023, appendix table 1. The two editions agree where they overlap.",
+        "2006 is not drawn: BJS states that 'estimates for 2006 should not be compared to other years.'",
+        "A survey estimate with a margin of error: BJS prints a standard error and a 95% confidence interval for every year, so small year-to-year moves may not be real.",
+        "Measured on a different basis from the police lines, so it is indexed to its own 1999 figure. Read the direction, not the distance between the lines."
+      ],
+      "points": [
+        {
+          "year": 1999,
+          "value": 100.0,
+          "raw": 47.2,
+          "tier": "A"
+        },
+        {
+          "year": 2000,
+          "value": 79.4,
+          "raw": 37.5,
+          "tier": "A"
+        },
+        {
+          "year": 2001,
+          "value": 69.1,
+          "raw": 32.6,
+          "tier": "A"
+        },
+        {
+          "year": 2002,
+          "value": 68.0,
+          "raw": 32.1,
+          "tier": "A"
+        },
+        {
+          "year": 2003,
+          "value": 68.0,
+          "raw": 32.1,
+          "tier": "A"
+        },
+        {
+          "year": 2004,
+          "value": 58.9,
+          "raw": 27.8,
+          "tier": "A"
+        },
+        {
+          "year": 2005,
+          "value": 60.2,
+          "raw": 28.4,
+          "tier": "A"
+        },
+        {
+          "year": 2007,
+          "value": 57.6,
+          "raw": 27.2,
+          "tier": "A"
+        },
+        {
+          "year": 2008,
+          "value": 53.6,
+          "raw": 25.3,
+          "tier": "A"
+        },
+        {
+          "year": 2009,
+          "value": 47.2,
+          "raw": 22.3,
+          "tier": "A"
+        },
+        {
+          "year": 2010,
+          "value": 40.9,
+          "raw": 19.3,
+          "tier": "A"
+        },
+        {
+          "year": 2011,
+          "value": 47.9,
+          "raw": 22.6,
+          "tier": "A"
+        },
+        {
+          "year": 2012,
+          "value": 55.3,
+          "raw": 26.1,
+          "tier": "A"
+        },
+        {
+          "year": 2013,
+          "value": 49.2,
+          "raw": 23.2,
+          "tier": "A"
+        },
+        {
+          "year": 2014,
+          "value": 42.6,
+          "raw": 20.1,
+          "tier": "A"
+        },
+        {
+          "year": 2015,
+          "value": 39.4,
+          "raw": 18.6,
+          "tier": "A"
+        },
+        {
+          "year": 2016,
+          "value": 41.7,
+          "raw": 19.7,
+          "tier": "A"
+        },
+        {
+          "year": 2017,
+          "value": 43.6,
+          "raw": 20.6,
+          "tier": "A"
+        },
+        {
+          "year": 2018,
+          "value": 49.2,
+          "raw": 23.2,
+          "tier": "A"
+        },
+        {
+          "year": 2019,
+          "value": 44.5,
+          "raw": 21.0,
+          "tier": "A"
+        },
+        {
+          "year": 2020,
+          "value": 34.7,
+          "raw": 16.4,
+          "tier": "A"
+        },
+        {
+          "year": 2021,
+          "value": 35.0,
+          "raw": 16.5,
+          "tier": "A"
+        },
+        {
+          "year": 2022,
+          "value": 49.8,
+          "raw": 23.5,
+          "tier": "A"
+        },
+        {
+          "year": 2023,
+          "value": 47.7,
+          "raw": 22.5,
+          "tier": "A"
+        },
+        {
+          "year": 2024,
+          "value": 49.4,
+          "raw": 23.3,
+          "tier": "A"
+        }
+      ]
+    }
+  ],
+  "themes": [
+    {
+      "statement": "Police-recorded violent crime fell 30% from 1999 to 2019, then a further 16% from 2020 to 2025 on the FBI's newer count.",
+      "tier": "A"
+    },
+    {
+      "statement": "Property crime fell further: 44% from 1999 to 2019, then 20% from 2020 to 2025.",
+      "tier": "A"
+    },
+    {
+      "statement": "Violence reported by victims in the national survey, which includes crimes never reported to police, is about half its 1999 level.",
+      "tier": "A"
+    },
+    {
+      "statement": "The survey jumped from its 2021 low \u2014 16.5 to 23.5 per 1,000 people in 2022 \u2014 and has stayed there, while police-recorded violence has fallen since 2022.",
+      "tier": "A"
+    },
+    {
+      "statement": "The police lines break at 2020 because the FBI changed how it counts. 2021 is left out: the FBI says that year is not nationally representative.",
+      "tier": "A"
+    }
+  ]
+}
