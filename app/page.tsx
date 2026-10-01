@@ -63,12 +63,12 @@ export const metadata: Metadata = {
   // carries its question mark with it, which an assertion never would.
   title: "Has a neurotech terrorist attack happened?",
   description:
-    "Have international neurotech platforms been deployed, supported by German disintegration “Zersetzung” tactics, risk mitigation or pacification operations that slander and euthanize dissenters? Is the global population being experimented on by a suggested union of ~200 organizations? If so, what populations are exposed to this horrifying and completely transparent first experience with neurotechnology?",
+    "Have international neurotech platforms been deployed, supported by German disintegration “Zersetzung” tactics, risk mitigation or pacification operations that publicly slander and euthanize dissenters with a neurotech bullhorn? Is the global population being experimented on by a suggested union of ~200 foreign organizations? If so, who’s exposed to this completely transparent and horrifying first experience with neurotechnology? Are we all experiencing retaliation from continuing global conflict or something else?",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Has a neurotech terrorist attack happened?",
     description:
-      "Have international neurotech platforms been deployed, supported by German disintegration “Zersetzung” tactics, risk mitigation or pacification operations that slander and euthanize dissenters? Is the global population being experimented on by a suggested union of ~200 organizations? If so, what populations are exposed to this horrifying and completely transparent first experience with neurotechnology?",
+      "Have international neurotech platforms been deployed, supported by German disintegration “Zersetzung” tactics, risk mitigation or pacification operations that publicly slander and euthanize dissenters with a neurotech bullhorn? Is the global population being experimented on by a suggested union of ~200 foreign organizations? If so, who’s exposed to this completely transparent and horrifying first experience with neurotechnology? Are we all experiencing retaliation from continuing global conflict or something else?",
     images: ["/og-default.png"],
   },
 };
@@ -340,9 +340,10 @@ export default function Page() {
                   href="/glossary/zersetzung-tactics"
                   className="text-foreground underline underline-offset-4"
                 >Zersetzung</a>&rdquo; tactics, risk mitigation or pacification operations
-                that slander and euthanize dissenters? Is the global population being
-                experimented on by a suggested union of ~200 organizations? If so, what populations
-                are exposed to this horrifying and completely transparent first experience with neurotechnology?
+                that publicly slander and euthanize dissenters with a neurotech bullhorn? Is the global population being
+                experimented on by a suggested union of ~200 foreign organizations? If so, who&rsquo;s
+                exposed to this completely transparent and horrifying first experience with neurotechnology?
+                Are we all experiencing retaliation from continuing global conflict or something else?
               </p>
 
               <p className="mt-6 text-[16px] leading-relaxed text-foreground/70">
