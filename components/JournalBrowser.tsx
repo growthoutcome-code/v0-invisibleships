@@ -9,6 +9,8 @@ import type { Dataset, Doc } from "@/lib/types";
 import { track } from "@/lib/analytics";
 import Header, { type Tab } from "@/components/Header";
 import Footer from "@/components/Footer";
+import { PageMotif, type MotifName } from "@/components/SectionMotif";
+import BottomSections, { type BottomBlock } from "@/components/BottomSections";
 import { pathForSub, titleForSub, viewsFor } from "@/lib/routes";
 import SideNav from "@/components/SideNav";
 import { Button } from "@/components/ui/button";
@@ -21,7 +23,7 @@ import { ChevronLeft, ChevronRight, Volume2, List, SlidersHorizontal, Search, X 
 import CopyrightTerms from "@/components/CopyrightTerms";
 import ShareMenu from "@/components/ShareMenu";
 import { Transcript } from "@/components/Transcript";
-import { cleanTerm, cleanDef, splitDef, firstSentences } from "@/lib/glossary-format";
+import { cleanTerm, cleanDef, splitDef } from "@/lib/glossary-format";
 import GlossaryBody from "@/components/GlossaryBody";
 import GlossaryIllustration from "@/components/GlossaryIllustration";
 import { DOCUMENTS, AUTHOR, EXTRA_GLOSSARY, type AuthorItem } from "@/lib/site-content";
@@ -35,8 +37,6 @@ import { H2_CLASS, SUB_CLASS } from "@/components/SectionHead";
 import { SortSelect, FilterButton, FilterPanel, ActiveLine, MobileBar } from "@/components/ListControls";
 import { NO_FILTERS, type Filters, type ConceptSort } from "@/lib/concepts";
 import DataView, { type SubTab } from "@/components/DataView";
-import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
 import Processing, { useHeldLoading } from "@/components/Processing";
 import { DISCLAIMER_TITLE } from "@/lib/disclaimer";
 
@@ -417,7 +417,10 @@ export default function JournalBrowser({
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-background text-foreground">
+    // No background here: <body> paints it. A background on this wrapper would
+    // cover the page motif, which sits at a negative z-index so that nothing
+    // on the page — header, modals, loader — has to change its own stacking.
+    <div className="min-h-screen flex flex-col text-foreground">
       <Header
         tab={tab}
         onTab={(t) => {
@@ -439,6 +442,25 @@ export default function JournalBrowser({
         researchSub={dataSub}
         onResearch={(s) => { arriveAtResearch(s); setTab("data"); setDataSub(s); setSel(null); setGsel(null); }}
       />
+
+      {/* One motif behind each main page (Sean, 1 Oct 2026: "The background motif
+          animations need to be added to each main page of the website"). Fixed to
+          the screen, driven by how far down the page the reader is. The home
+          page's assignment is kept for the journal (carry). Lists only:
+          not behind a single journal entry or glossary term being read. */}
+      {!showLoader && (() => {
+        const m: MotifName | null =
+          tab === "journal" ? (selDoc ? null : "carry")
+          // Concepts and Documents carry none (Sean, 1 Oct 2026: "remove the
+          // background from concepts and documents").
+          : tab === "glossary" ? (gsel ? null : "recede")
+          // No motif on Research (Sean, 1 Oct 2026: "pull the motifs from research
+          // due to the presence of charts"); behind a chart, any wash reads as
+          // part of it. Glossary took Research's recede.
+          : null;
+        // keyed by name, so changing page remounts it and its progress restarts
+        return m ? <PageMotif key={m} name={m} /> : null;
+      })()}
 
       <main className="flex-1 w-full max-w-[1400px] mx-auto px-4 sm:px-6 py-6">
         {/* A STAGE OF ITS OWN, AND A CROSS-FADE OUT OF IT (Sean, 15 September:
@@ -585,12 +607,21 @@ export default function JournalBrowser({
           </div>
         )}
 
-        {!showLoader && tab === "journal" && !selDoc && (
-          <GlossaryPeek terms={glossaryTerms} onView={() => { setTab("glossary"); setSel(null); setGsel(null); }} onOpen={(slug: string) => { setTab("glossary"); setSel(null); setGsel(slug); }} />
-        )}
-        {!showLoader && tab === "glossary" && !gsel && (
-          <JournalPeek items={journal} source={ds?.source} onView={() => { setTab("journal"); setSel(null); setGsel(null); }} onOpen={(id: string) => { setTab("journal"); setGsel(null); setSel(id); }} />
-        )}
+        {/* BOTTOM SECTIONS (Sean, 1 Oct 2026): the home page's Journal, Concepts,
+            Research and Glossary blocks under every page, never the page's own.
+            They replace the "From the glossary" / "From the journal" peeks that
+            sat here. Keyed by page so each page starts its carousels fresh. */}
+        {!showLoader && (() => {
+          const tail: { exclude: BottomBlock[]; from: string } | null =
+            tab === "journal" ? { exclude: ["journal"], from: selDoc ? "journal-entry" : "journal" }
+            : tab === "concepts" ? { exclude: ["concepts"], from: "concepts" }
+            : tab === "glossary" ? { exclude: ["glossary"], from: gsel ? "glossary-term" : "glossary" }
+            : tab === "data" ? { exclude: ["research"], from: `research/${dataSub}` }
+            : tab === "documents" ? { exclude: [], from: "documents" }
+            : tab === "author" ? { exclude: ["research", "glossary"], from: "author" }
+            : null; // the disclaimer carries none
+          return tail ? <BottomSections key={tail.from} exclude={tail.exclude} from={tail.from} /> : null;
+        })()}
         </div>
       </main>
 
@@ -855,96 +886,6 @@ function GlossaryTermReader({ term, onBack, onPrev, onNext, onOpenTerm }: any) {
       </div>
     </article>
   );
-}
-
-/* ---------- Peek carousels (auto-rotating cross-links) ---------- */
-function shuffle<T>(arr: T[]): T[] {
-  const a = arr.slice();
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-
-function PeekCarousel({ title, cta, onCta, slides, bottomCta }: { title: string; cta: string; onCta: () => void; slides: JSX.Element[]; bottomCta?: boolean }) {
-  const autoplay = useRef(Autoplay({ delay: 6000, stopOnInteraction: false, stopOnMouseEnter: true }));
-  return (
-    <section className="mt-16 pt-8 min-h-[460px]">
-      <div className="w-full">
-      {/* Carousel fills the full main container width, matching TitleBand above it,
-          so the bottom section lines up with the page on both journal and glossary.
-          The arrows sit in the header row: placed outside the slides (-left-12 /
-          -right-12) they made the page wider than the screen at every width
-          (fixed 30 Sep 2026). */}
-      <Carousel opts={{ loop: true, align: "start" }} plugins={[autoplay.current]} className="w-full">
-        <div className="flex items-center justify-between gap-4 mb-5">
-          <h2 className="font-display text-lg font-semibold text-foreground">{title}</h2>
-          <div className="flex items-center gap-2">
-            <CarouselPrevious className="static translate-y-0" />
-            <CarouselNext className="static translate-y-0" />
-            <button onClick={onCta} className="ml-2 text-sm text-accent hover:underline inline-flex items-center gap-1 whitespace-nowrap">{cta} <ChevronRight size={15} /></button>
-          </div>
-        </div>
-        <CarouselContent>
-          {slides.map((s, i) => (
-            <CarouselItem key={i}>{s}</CarouselItem>
-          ))}
-        </CarouselContent>
-      </Carousel>
-      {bottomCta && (
-        <div className="mt-6 flex justify-center">
-          <Button size="lg" onClick={onCta} className="inline-flex items-center gap-1.5">{cta} <ChevronRight size={16} /></Button>
-        </div>
-      )}
-      </div>
-    </section>
-  );
-}
-
-function GlossaryPeek({ terms, onView, onOpen }: any) {
-  const sample = useMemo(() => shuffle(terms).slice(0, 9), [terms]);
-  const slides = sample.map((t: any) => (
-    <div key={t.slug} className="relative">
-    <Link href={glossaryHref(t.slug)} onClick={spaClick(() => onOpen(t.slug))} className="group flex h-[340px] md:h-[360px] flex-col justify-center pr-12">
-      <div className="text-[11px] uppercase tracking-wide text-muted mb-2">Glossary</div>
-      <div className="font-display text-3xl font-semibold text-foreground group-hover:text-accent term-title">{cleanTerm(t.term)}</div>
-      <p className="mt-4 body-copy text-foreground/85 line-clamp-3 overflow-hidden">{firstSentences(cleanDef(splitDef(t.definition).body), 2)}</p>
-      <div className="mt-5 text-accent text-base">Read →</div>
-    </Link>
-    <CardShare title={cleanTerm(t.term)} path={glossaryHref(t.slug)} className="absolute top-4 right-2" />
-    </div>
-  ));
-  return <PeekCarousel title="From the glossary" cta="Go to Glossary" onCta={onView} slides={slides} bottomCta />;
-}
-
-function JournalPeek({ items, source, onView, onOpen }: any) {
-  const sample = useMemo(() => shuffle(items).slice(0, 9), [items]);
-  // Load a truncated excerpt of each sampled journal entry so the card shows
-  // real body text, not just the title.
-  const [ex, setEx] = useState<Record<string, string>>({});
-  useEffect(() => {
-    let alive = true;
-    Promise.all(
-      sample.map(async (d: any) => {
-        try { return [d.id, excerpt(await getBody(d.id, source))] as const; }
-        catch { return [d.id, ""] as const; }
-      })
-    ).then((pairs) => { if (alive) setEx(Object.fromEntries(pairs)); });
-    return () => { alive = false; };
-  }, [sample, source]);
-  const slides = sample.map((d: any) => (
-    <div key={d.id} className="relative">
-    <Link href={journalHref(d.id)} onClick={spaClick(() => onOpen(d.id))} className="group flex h-[380px] md:h-[400px] flex-col justify-center pr-12">
-      <div className="text-[11px] uppercase tracking-wide text-muted">Journal · {d.entry_date}{d.part != null ? ` · Part ${d.part}` : ""}</div>
-      <div className="mt-2 font-display text-2xl font-semibold text-foreground group-hover:text-accent line-clamp-2">{d.title || d.id}</div>
-      <p className="mt-4 flex-1 body-copy text-foreground/80 line-clamp-[7] overflow-hidden">{ex[d.id] ?? "…"}</p>
-      <div className="mt-4 text-accent text-sm">Read →</div>
-    </Link>
-    <CardShare title={d.title || d.id} path={journalHref(d.id)} className="absolute top-4 right-2" />
-    </div>
-  ));
-  return <PeekCarousel title="From the journal" cta="View Journal" onCta={onView} slides={slides} />;
 }
 
 /* ---------- Filter panel (slide-over) ---------- */

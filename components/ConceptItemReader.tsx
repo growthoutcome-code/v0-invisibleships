@@ -11,6 +11,7 @@ import ConceptArticle from "@/components/ConceptArticle";
 import DisclaimerLink from "@/components/DisclaimerLink";
 import { CONCEPTS } from "@/lib/concepts";
 import { track } from "@/lib/analytics";
+import BottomSections from "@/components/BottomSections";
 
 type Nav = { id: string; title: string };
 
@@ -46,6 +47,8 @@ export default function ConceptItemReader({ id, n, prev, next }: { id: string; n
             </Link>
           )}
         </nav>
+        {/* The home page's other sections, never this one (Sean, 1 Oct 2026). */}
+        <BottomSections exclude={["concepts"]} from="concept" />
       </main>
       <Footer />
     </div>

@@ -11,6 +11,7 @@ import { cleanTerm, splitDef } from "@/lib/glossary-format";
 import GlossaryBody from "@/components/GlossaryBody";
 import GlossaryIllustration from "@/components/GlossaryIllustration";
 import { track } from "@/lib/analytics";
+import BottomSections from "@/components/BottomSections";
 
 type Nav = { slug: string; term: string };
 type Props = {
@@ -42,6 +43,8 @@ export default function GlossaryItemReader({ term, prev, next }: Props) {
             {next && <Link href={`/glossary/${next.slug}`} className="text-accent text-sm ml-auto inline-flex items-center gap-1">Next <ChevronRight size={15} /></Link>}
           </div>
         </article>
+        {/* The home page's other sections, never this one (Sean, 1 Oct 2026). */}
+        <BottomSections exclude={["glossary"]} from="glossary-term" />
       </main>
       <Footer />
     </div>

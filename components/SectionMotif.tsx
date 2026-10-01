@@ -502,3 +502,99 @@ export function MotifStage({
     </div>
   );
 }
+
+/* --------------------------------------------------------------------------
+   Page motif — the same drawings behind a whole page.
+
+   Sean, 1 Oct 2026: "The background motif animations need to be added to each
+   main page of the website. Let's apply the motif chosen for the journal first
+   to the background of the journal page."
+
+   A main page is not a section. The journal feed runs to several screens, and a
+   SectionMotif stretched over it would fit the 1200x620 drawing into a band in
+   the middle of a 4,000px column — the reader would scroll past it once. So the
+   page motif is fixed to the viewport under the header, and --motif-p follows
+   how far the reader is through the PAGE (0 at the top, 1 at the bottom).
+
+   Same weight, same mask and the same reduced-motion rule as SectionMotif. It
+   sits at -z-10, under every in-flow block, so no stacking on the page changes;
+   the one requirement is that no wrapper between it and <body> paints a
+   background (the body paints it).
+   -------------------------------------------------------------------------- */
+
+function usePageProgress<T extends HTMLElement>() {
+  const ref = useRef<T | null>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (still) el.style.setProperty("--motif-p", "0.5");
+
+    let frame = 0;
+    const measure = () => {
+      frame = 0;
+      if (!still) {
+        const doc = document.documentElement;
+        const max = Math.max(1, doc.scrollHeight - window.innerHeight);
+        const p = window.scrollY / max;
+        el.style.setProperty("--motif-p", String(Math.min(1, Math.max(0, p))));
+      }
+      // KEEP CLEAR OF THE BOTTOM SECTIONS (Sean, 1 Oct 2026: "position the main
+      // page backgrounds in a way that they don't come in contact with the
+      // bottom sections"). The layer is fixed to the screen, so once the bottom
+      // sections scroll into view its lower edge is pulled up to meet their top
+      // rule. It ends where they begin, at every scroll position — including
+      // for readers who asked for reduced motion.
+      const tail = document.querySelector("[data-bottom-sections]");
+      const top = tail ? tail.getBoundingClientRect().top : Infinity;
+      el.style.bottom = `${Math.max(0, window.innerHeight - top)}px`;
+    };
+    const request = () => {
+      if (!frame) frame = window.requestAnimationFrame(measure);
+    };
+
+    measure();
+    window.addEventListener("scroll", request, { passive: true });
+    window.addEventListener("resize", request, { passive: true });
+    // The bottom sections mount after the page and grow when their data
+    // arrives, which moves their top without a scroll.
+    const ro = new ResizeObserver(request);
+    ro.observe(document.body);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("scroll", request);
+      window.removeEventListener("resize", request);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  return ref;
+}
+
+export function PageMotif({ name, className }: { name: MotifName; className?: string }) {
+  const ref = usePageProgress<HTMLDivElement>();
+  const Art = ART[name];
+  return (
+    <div
+      ref={ref}
+      data-motif={name}
+      data-page-motif=""
+      aria-hidden="true"
+      className={cn(
+        // Under the sticky header (72px, 88px at lg), over the page background,
+        // under the content.
+        "pointer-events-none fixed inset-x-0 bottom-0 top-[72px] lg:top-[88px] -z-10 select-none overflow-hidden",
+        "text-foreground opacity-[0.14] dark:opacity-[0.11]",
+        // Clear of the title at the top of the page, fully in below it.
+        "[-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,black_34%)]",
+        "[mask-image:linear-gradient(to_bottom,transparent_0%,black_34%)]",
+        "[--motif-p:0]",
+        className,
+      )}
+    >
+      <Art />
+    </div>
+  );
+}

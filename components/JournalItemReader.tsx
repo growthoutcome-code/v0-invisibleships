@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import ShareMenu from "@/components/ShareMenu";
 import { Transcript } from "@/components/Transcript";
 import { track } from "@/lib/analytics";
+import BottomSections from "@/components/BottomSections";
 import { useEffect } from "react";
 import { THEMES, isOrg } from "@/lib/themes";
 import { ENTRY_TYPES } from "@/lib/entry-type";
@@ -52,6 +53,8 @@ export default function JournalItemReader({ doc, body, cats, gloss, prev, next }
             {next && <Link href={`/journal/${next.id}`} className="text-accent text-sm ml-auto inline-flex items-center gap-1">Next <ChevronRight size={15} /></Link>}
           </div>
         </article>
+        {/* The home page's other sections, never this one (Sean, 1 Oct 2026). */}
+        <BottomSections exclude={["journal"]} from="journal-entry" />
       </main>
       <Footer />
     </div>

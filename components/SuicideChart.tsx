@@ -94,7 +94,10 @@ export function MultiLineChart({ chart, captionBelow = false }: { chart: IntlCha
   // Label only the US and the world there, at a size that survives the scale;
   // every country's numbers are in the ranked table directly below.
   const padL = narrow ? 64 : 44;
-  const padR = narrow ? 128 : 128;
+  // 164 on desktop: at 128 the two longest end labels ("United States +40%"
+  // at 13px bold, "West Bank & Gaza +n%") ran past the 760-wide viewBox and were
+  // cut off — the US one being the line the chart exists to show (1 Oct 2026).
+  const padR = narrow ? 128 : 164;
   // The national continuation is part of the full-range view; the pandemic
   // window keeps it too, since 2022-2025 is exactly the period of interest.
   const withExt = chart.series.map((s) => ({

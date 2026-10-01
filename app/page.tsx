@@ -12,10 +12,9 @@ import RelatedLinks from "@/components/RelatedLinks";
 import HomeSuicideChart from "@/components/HomeSuicideChart";
 import { CONCEPTS, FINDINGS, SOURCE_YEARS } from "@/lib/concepts";
 import JournalQuotes from "@/components/JournalQuotes";
-import { CONCEPT_PICKS, GLOSSARY_PICKS } from "@/lib/home-picks";
-import { firstSentences } from "@/lib/glossary-format";
+import { conceptSlides as buildConceptSlides, glossarySlides as buildGlossarySlides } from "@/lib/home-sections";
 import { TRAFFICKING_OPS } from "@/lib/enforcement";
-import { curatedQuotes, glossaryCount, homeGlossary, journalStats } from "@/lib/server-corpus";
+import { curatedQuotes, glossaryCount, journalStats } from "@/lib/server-corpus";
 import { HOME_QUOTES } from "@/lib/home-quotes";
 import { ACCOUNTS_READY } from "@/lib/flags";
 import { capabilityShape, deploymentMix, govCloud, suicideChartDoc, topVendors, usd } from "@/lib/server-data";
@@ -263,51 +262,10 @@ export default function Page() {
   const glossaryTerms = glossaryCount();
   const euFine = FINDINGS.find((f) => f.id === "fined-in-europe-hired-in-america");
 
-  /* THE PRONUNCIATION GOES WHERE A DICTIONARY PUTS IT — above the word, not
-     beside it. splitDef has always computed it and the site had nowhere to show
-     it; a slide whose title IS the term is that place. Terms without one fall
-     back to the section label rather than rendering an empty line. */
-  const glossarySlides: Slide[] = homeGlossary(GLOSSARY_PICKS).map((g) => ({
-    href: `/glossary/${g.slug}`,
-    eyebrow: g.pron || "Glossary",
-    title: g.term,
-    body: g.summary,
-    cta: "Full definition and every entry that uses it",
-  }));
-
-
-  /* CONCEPT SLIDES, DERIVED. Same discipline as the quotations and the chart:
-     an id that stops resolving fails the build rather than quietly rendering a
-     four-slide carousel nobody notices is short. Bodies run 313-2,004 characters
-     in the register, so they are cut to three complete sentences for a slide —
-     the full concept is one click away. */
-  const conceptSlides: Slide[] = CONCEPT_PICKS.map((id) => {
-    const c = CONCEPTS.find((x) => x.id === id);
-    if (!c) {
-      throw new Error(
-        `home concepts: no concept with id ${JSON.stringify(id)} in lib/concepts.ts. ` +
-          `Re-pick it in lib/home-picks.ts.`
-      );
-    }
-    return {
-      href: `/concepts/${c.id}`,
-      eyebrow: `${c.basis} · ${c.theme}`,
-      title: c.title,
-      // FIVE SENTENCES AT 840. Each raise here was forced by a slide stopping
-      // one sentence before its point: at three, the newspapers concept ended on
-      // "Local journalism in the United States has collapsed" and left the 3,500
-      // closed papers behind it; at four and 520, the haunting concept stopped
-      // after naming what is described and dropped the sentence saying what the
-      // terror is FOR — 805 characters, five over the cap. A concept slide that
-      // asserts and then withholds its own payoff is worse than no slide.
-      // 900, and only slide two moves: at 840 the prevention concept lost its
-      // closing sentence by thirty characters — the one saying a system
-      // justified by the worst thing that could happen to your child cannot be
-      // argued with. Every other slide is unchanged between 840 and 900.
-      body: firstSentences(c.body, 5, 900),
-      cta: "Read the concept",
-    };
-  });
+  // Built in lib/home-sections.ts, which the bottom sections under every other
+  // page read too, so the two can never disagree.
+  const glossarySlides: Slide[] = buildGlossarySlides();
+  const conceptSlides: Slide[] = buildConceptSlides();
 
   const sourcesWithUrl = SOURCE_YEARS.filter((s) => s.url).length;
   const earliest = Math.min(...SOURCE_YEARS.map((s) => s.year));
