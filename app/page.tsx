@@ -63,12 +63,12 @@ export const metadata: Metadata = {
   // carries its question mark with it, which an assertion never would.
   title: "Has a neurotech terrorist attack happened?",
   description:
-    "Is there a government cloud platform anywhere running a Zersetzung German disintegration tactics layer that is isolating and discrediting America's citizens? Are those people being harassed through neurotechnology and forced to accept euthanasia? Are they being experimented on without consent by an unacknowledged union of approximately two hundred unknown organizations?",
+    "Have international neurotech platforms been deployed, supported by German disintegration “Zersetzung” tactics, risk mitigation or pacification operations that slander and euthanize dissenters? Is the global population being experimented on by a suggested union of ~200 organizations? If so, what populations are exposed to this horrifying and completely transparent first experience with neurotechnology?",
   alternates: { canonical: "/" },
   openGraph: {
     title: "Has a neurotech terrorist attack happened?",
     description:
-      "Is there a government cloud platform anywhere running a Zersetzung German disintegration tactics layer that is isolating and discrediting America's citizens? Are those people being harassed through neurotechnology and forced to accept euthanasia? Are they being experimented on without consent by an unacknowledged union of approximately two hundred unknown organizations?",
+      "Have international neurotech platforms been deployed, supported by German disintegration “Zersetzung” tactics, risk mitigation or pacification operations that slander and euthanize dissenters? Is the global population being experimented on by a suggested union of ~200 organizations? If so, what populations are exposed to this horrifying and completely transparent first experience with neurotechnology?",
     images: ["/og-default.png"],
   },
 };
@@ -335,18 +335,14 @@ export default function Page() {
                   what this says now and why every clause of it stays inside a
                   question mark. */}
               <p className="mt-6 font-serif text-lg leading-snug text-foreground/85">
-                Is there a government cloud platform anywhere running a{" "}
-                <a
+                Have international neurotech platforms been deployed, supported by German
+                disintegration &ldquo;<a
                   href="/glossary/zersetzung-tactics"
                   className="text-foreground underline underline-offset-4"
-                >
-                  Zersetzung
-                </a>{" "}
-                German disintegration tactics layer that is isolating and discrediting
-                America&rsquo;s citizens? Are those people being harassed
-                through neurotechnology and forced to accept euthanasia? Are they being
-                experimented on without consent by an unacknowledged union of
-                approximately two hundred unknown organizations?
+                >Zersetzung</a>&rdquo; tactics, risk mitigation or pacification operations
+                that slander and euthanize dissenters? Is the global population being
+                experimented on by a suggested union of ~200 organizations? If so, what populations
+                are exposed to this horrifying and completely transparent first experience with neurotechnology?
               </p>
 
               <p className="mt-6 text-[16px] leading-relaxed text-foreground/70">
