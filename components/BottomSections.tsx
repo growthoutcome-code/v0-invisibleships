@@ -29,14 +29,20 @@
  * chart) is fetched when the reader comes within a screen of the bottom, once
  * per visit, so the page above loads no slower for it.
  *
- * No background motif: the journal and glossary pages already run one behind
- * the whole page, and two motions on one screen compete.
+ * MOTIFS (Sean, 1 Oct 2026: "apply the background motifs to these bottom
+ * sections journal and glossary"). Each takes its home-page motif, placed as the
+ * home page places it: `carry` directly behind the journal quotations (Sean,
+ * 5 September: "these motifs to be directly behind the journal entry"), and
+ * `recede` behind the whole glossary block. The page-level motif on the journal
+ * and glossary pages stops at the top of these sections, and neither page shows
+ * its own block, so two motions never meet.
  */
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import HomeCarousel from "@/components/HomeCarousel";
 import JournalQuotes from "@/components/JournalQuotes";
 import { MultiLineChart } from "@/components/SuicideChart";
 import { track } from "@/lib/analytics";
+import SectionMotif, { MotifStage } from "@/components/SectionMotif";
 import type { BottomSectionsData } from "@/lib/home-sections";
 
 export type BottomBlock = "journal" | "concepts" | "research" | "glossary";
@@ -54,18 +60,23 @@ function load(): Promise<BottomSectionsData> {
   return cache;
 }
 
-function Block({ id, eyebrow, heading, children, href, label, from }: {
+function Block({ id, eyebrow, heading, children, href, label, from, motif }: {
   id: BottomBlock; eyebrow: string; heading: ReactNode; children: ReactNode;
   href: string; label: string; from: string;
+  /** A motif behind the whole block, as SiteSection does on the home page. */
+  motif?: "recede";
 }) {
   return (
-    <section aria-labelledby={`bottom-${id}`} className="border-t border-edge py-14 sm:py-16"
+    <section aria-labelledby={`bottom-${id}`}
+      className={motif ? "relative isolate overflow-hidden border-t border-edge py-14 sm:py-16" : "border-t border-edge py-14 sm:py-16"}
       // One event for any link in the block, so PostHog shows which bottom
       // sections are actually used, and from which page.
       onClickCapture={(e) => {
         const a = (e.target as HTMLElement).closest("a");
         if (a) track("bottom_section_click", { from, block: id, href: a.getAttribute("href") });
       }}>
+      {motif && <SectionMotif name={motif} />}
+      <div className={motif ? "relative z-10" : undefined}>
       {/* Same eyebrow treatment as the home sections (SiteSection): accent bar
           and the section name. */}
       <div className="flex items-center gap-3">
@@ -86,6 +97,7 @@ function Block({ id, eyebrow, heading, children, href, label, from }: {
           className="inline-flex h-12 items-center rounded-md bg-foreground px-6 text-[17px] font-medium text-background">
           {label}
         </a>
+      </div>
       </div>
     </section>
   );
@@ -130,7 +142,9 @@ export default function BottomSections({ exclude = [], from }: {
                 className="underline decoration-accent decoration-2 underline-offset-[6px] hover:decoration-foreground">
                 neurotech bullhorn</a></>}
             href="/journal" label="Go to the journal">
-            <JournalQuotes entries={data.quotes} />
+            <MotifStage name="carry" className="-mx-4 px-4 py-6 sm:-mx-8 sm:px-8">
+              <JournalQuotes entries={data.quotes} />
+            </MotifStage>
           </Block>
         );
         if (b === "concepts") return (
@@ -168,7 +182,7 @@ export default function BottomSections({ exclude = [], from }: {
           </Block>
         );
         return (
-          <Block key={b} id={b} from={from} eyebrow="Glossary"
+          <Block key={b} id={b} from={from} eyebrow="Glossary" motif="recede"
             heading="What do these words actually mean?"
             href="/glossary" label="Go to the glossary">
             <HomeCarousel slides={data.glossary} label="Glossary terms" />

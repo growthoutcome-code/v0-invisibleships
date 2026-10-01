@@ -55,8 +55,12 @@ Design choices, each approved by Sean on 1 Oct:
 - Its heading is the finding ("Suicide is rising in the United States and South
   Korea, while the world's rate fell 27%") rather than "What does the research
   show?", which stacked three titles saying the same thing.
-- No background motif on the blocks. Concepts autoplays off, so two rotating
-  carousels never share a screen.
+- Motifs (Sean, 1 Oct, after the first build): `carry` directly behind the journal
+  quotations and `recede` behind the whole glossary block, placed as the home page
+  places them. The page-level motif on the journal and glossary pages stops at the
+  top rule of the bottom sections (`PageMotif` clips its own lower edge), and
+  neither page shows its own block, so two motions never meet.
+- Concepts autoplays off, so two rotating carousels never share a screen.
 - Every link click fires `bottom_section_click` with `from` (page) and `block`.
 
 ## Acceptance
