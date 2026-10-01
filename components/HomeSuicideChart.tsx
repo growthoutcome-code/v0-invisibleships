@@ -29,27 +29,14 @@ import { MultiLineChart, type IntlChart } from "@/components/SuicideChart";
 export default function HomeSuicideChart({ chart }: { chart: IntlChart }) {
   return (
     <figure className="m-0">
-      {/* THE CHART SAYS WHAT IT SHOWS, ABOVE THE PLOT (Sean, 8 September: "that
-          chart needs to be called out as an increase in suicide in the United
-          States and Korea. Do not forget that part. It's very important.").
-
-          It matters more now, not less. Fourteen lines carry more truth than
-          three and they also bury the two that the page is actually about, so
-          the sentence above the plot is what tells a reader which lines to look
-          for before the legend asks them to choose.
-
-          The falling world line stays in the second half of the sentence: it is
-          what makes the rise mean something, and without it "suicide is rising"
-          is a claim this data does not support about the world at large. */}
-      <p className="font-display m-0 mb-1 text-[21px] font-semibold leading-[1.3] text-foreground sm:text-[24px]">
-        Suicide is rising in the United States and South Korea
-      </p>
-      <p className="m-0 mb-6 text-[17px] text-muted">
-        &mdash; while the world&rsquo;s rate fell 27%. Fourteen countries on one
-        comparable basis; tap any line for its method, its caveats and its source.
-      </p>
-
-      <MultiLineChart chart={chart} />
+      {/* ONE HEADING (Sean, 1 Oct 2026: "we have 2 headings but only need
+          one"). The chart's own title is the heading: "Suicide rates, 2000–2021:
+          the US rose 40% while the world fell 27%", worked out from the data so
+          it cannot drift from the lines. The separate "Suicide is rising in the
+          United States and South Korea" heading and its subline are gone; the
+          paragraph on how to read the chart sits under the plot. South Korea's
+          rise is still named in the paragraph above this chart. */}
+      <MultiLineChart chart={chart} readingBelow />
 
       {/* THE TWO THINGS THIS CHART MUST NOT LEAVE OUT. The WHO basis stops at
           2021, and that is also the US peak — so a chart that said nothing

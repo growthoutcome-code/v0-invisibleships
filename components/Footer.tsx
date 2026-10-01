@@ -28,12 +28,13 @@ import Link from "next/link";
 import { ACCOUNTS_READY } from "@/lib/flags";
 import { SafetyDialog } from "@/components/LegalDialogs";
 import { RESEARCH_SECTIONS } from "@/lib/routes";
+import ExportButton, { EXPORT_LABEL } from "@/components/ExportButton";
 
 type NavTab = "journal" | "data" | "concepts" | "glossary" | "documents" | "author";
 
 const COLUMNS: {
   heading: string;
-  links: { t?: NavTab; href: string; label: string }[];
+  links: { t?: NavTab; href: string; label: string; corpus?: boolean }[];
   blurb?: string;
   /** Renders the live count from /api/insights/summary beneath the links. */
   live?: boolean;
@@ -44,7 +45,11 @@ const COLUMNS: {
       { t: "journal", href: "/journal", label: "Journal" },
       { t: "glossary", href: "/glossary", label: "Glossary" },
       { t: "documents", href: "/documents", label: "Documents" },
-      { href: "/api/corpus?from=footer", label: "Corpus for AI" },
+      // Opens the corpus dialog, like every other Corpus for AI button, with the
+      // download icon so it reads as a download (Sean, 1 Oct 2026: it "just
+      // downloads it. It needs to load the modal that explains what it is").
+      // The download itself happens from the dialog.
+      { href: "#corpus", label: EXPORT_LABEL, corpus: true },
     ],
   },
   {
@@ -114,7 +119,12 @@ export default function Footer({ onNav }: { onNav?: (t: NavTab) => void }) {
               <ul className="m-0 mt-4 list-none space-y-2.5 p-0">
                 {col.links.map((l) => (
                   <li key={l.href}>
-                    {onNav && l.t ? (
+                    {l.corpus ? (
+                      <ExportButton
+                        iconSize={14}
+                        className="inline-flex items-center gap-1.5 text-left text-[14px] text-foreground/80 transition-colors hover:text-foreground"
+                      />
+                    ) : onNav && l.t ? (
                       <button
                         type="button"
                         onClick={() => onNav(l.t as NavTab)}

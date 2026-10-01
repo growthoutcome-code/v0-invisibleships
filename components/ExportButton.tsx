@@ -68,7 +68,11 @@ import ExportModal from "@/components/ExportModal";
  */
 export const EXPORT_LABEL = "Corpus for AI";
 
-export default function ExportButton({ className }: { className?: string }) {
+export default function ExportButton({ className, iconSize = 18 }: {
+  className?: string;
+  /** 18 for the section action; smaller where the button sits in running text (the footer). */
+  iconSize?: number;
+}) {
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -84,7 +88,7 @@ export default function ExportButton({ className }: { className?: string }) {
           "inline-flex h-12 items-center gap-2.5 rounded-md bg-foreground px-6 text-[17px] font-medium text-background"
         }
       >
-        <Download size={18} aria-hidden />
+        <Download size={iconSize} aria-hidden className="shrink-0" />
         {EXPORT_LABEL}
       </button>
       <ExportModal open={open} onOpenChange={setOpen} />

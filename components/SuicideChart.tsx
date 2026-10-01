@@ -61,7 +61,15 @@ const SHORT_LABEL: Record<string, string> = {
   "Russian Federation": "Russia",
 };
 
-export function MultiLineChart({ chart, captionBelow = false }: { chart: IntlChart; captionBelow?: boolean }) {
+export function MultiLineChart({ chart, captionBelow = false, readingBelow = false }: {
+  chart: IntlChart;
+  captionBelow?: boolean;
+  /**
+   * Home page only (Sean, 1 Oct 2026): the title and the legend line stay above
+   * the plot, and the paragraph on how to read it moves under it.
+   */
+  readingBelow?: boolean;
+}) {
   const [hoverYear, setHoverYear] = useState<number | null>(null);
   const narrow = useNarrow();
   // Two views of the same twelve series. "rate" answers "how high?"; "change"
@@ -173,10 +181,23 @@ export function MultiLineChart({ chart, captionBelow = false }: { chart: IntlCha
   const xTicks = (win === "covid" ? [2017, 2019, 2021, 2023, 2025] : dataWindowTicks(narrow))
     .filter((y) => y >= x0 && y <= x1);
 
+  const reading = (<span className="block text-foreground/75 text-[15px] mt-1">
+          {indexed
+            ? `Each line starts at its own ${win === "covid" ? 2017 : 2000} suicide rate — for the US that was 11.2 deaths per 100,000 people, roughly 32,000 deaths that year. Above the middle line means more suicide deaths per person than then; below means fewer. Headline figures compare the WHO period, to 2021; dotted tails run on each country's own statistics.`
+            : "Suicide deaths per 100,000 people per year — for the US, 15.6 per 100,000 is roughly 52,000 deaths in a year. Rates are adjusted so countries with older or younger populations can be compared."}
+        </span>
+  );
+
+  // An h3 on the home page, where it is the section's chart heading (Sean,
+  // 1 Oct 2026); elsewhere the page's own heading names the chart.
+  const Title = readingBelow ? "h3" : "span";
   const caption = (
     <>
 
-        <span className="block font-display font-semibold text-foreground text-[19px]">
+        <Title className={readingBelow
+          // Same as the section's other h3, "And in the crime record?" (Sean, 1 Oct 2026).
+          ? "font-display m-0 text-[26px] font-semibold text-foreground"
+          : "block m-0 font-display font-semibold text-foreground text-[19px] leading-snug"}>
           {win === "covid"
             ? (indexed
                 ? (usW
@@ -188,12 +209,8 @@ export function MultiLineChart({ chart, captionBelow = false }: { chart: IntlCha
                     ? `Suicide rates, ${usW.from}–${usW.to}: the US rose ${Math.round(usW.pct)}% while the world fell ${Math.abs(Math.round(wdW.pct))}%`
                     : `Suicide rates, change over the period`)
                 : `Suicide rate, 2000–${x1}: the US against twelve countries and the world`)}
-        </span>
-        <span className="block text-foreground/75 text-[15px] mt-1">
-          {indexed
-            ? `Each line starts at its own ${win === "covid" ? 2017 : 2000} suicide rate — for the US that was 11.2 deaths per 100,000 people, roughly 32,000 deaths that year. Above the middle line means more suicide deaths per person than then; below means fewer. Headline figures compare the WHO period, to 2021; dotted tails run on each country's own statistics.`
-            : "Suicide deaths per 100,000 people per year — for the US, 15.6 per 100,000 is roughly 52,000 deaths in a year. Rates are adjusted so countries with older or younger populations can be compared."}
-        </span>
+        </Title>
+        {!readingBelow && reading}
       <p className="text-muted text-[13px] m-0 mb-3 mt-3">
         Bold line = United States · long-dashed line = world average · dotted after 2021 = each
         country&rsquo;s own national statistics ·{" "}
@@ -416,6 +433,7 @@ export function MultiLineChart({ chart, captionBelow = false }: { chart: IntlCha
       </svg>
       )}
       {captionBelow && <div className="mt-5">{caption}</div>}
+      {readingBelow && <p className="m-0 mt-4">{reading}</p>}
 
       <Dialog open={!!open} onOpenChange={(v) => !v && setOpen(null)}>
         {/* md: a single country's provenance. Was a bespoke 720px. */}
