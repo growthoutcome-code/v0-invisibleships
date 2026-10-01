@@ -16,10 +16,13 @@
  *   3. They replace the "From the glossary" / "From the journal" peeks that
  *      used to sit under the journal and glossary lists.
  *
- * The slides, quotations and chart are the home page's own, built by
- * lib/home-sections.ts and served by /api/bottom-sections, so a block can never
- * disagree with the home section it was taken from — including the glossary's
- * deliberate order (a documented tactic first).
+ * RANDOM, FROM A VETTED POOL (Sean, 1 Oct 2026: "Let's randomize the content
+ * that shows in the bottom sections… I don't want this work to impact the
+ * sections on the home page"). The pools are in lib/bottom-picks.ts and share
+ * little with the home page. Each time this mounts it shows the whole of each
+ * pool in a random order, and one research chart of three.
+ * The slides are built by the same code as the home page's (lib/home-sections.ts,
+ * served by /api/bottom-sections), so they look and are checked the same way.
  *
  * One exception to rule 2, by design: the suicide chart keeps its support line.
  * That is safety information, not disclaimer copy, and the Public Health page
@@ -37,13 +40,19 @@
  * and glossary pages stops at the top of these sections, and neither page shows
  * its own block, so two motions never meet.
  */
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import HomeCarousel from "@/components/HomeCarousel";
 import JournalQuotes from "@/components/JournalQuotes";
 import { MultiLineChart } from "@/components/SuicideChart";
 import { track } from "@/lib/analytics";
 import SectionMotif, { MotifStage } from "@/components/SectionMotif";
+import IntlLineChart, { type IntlChartDoc } from "@/components/IntlLineChart";
+import ConceptTile from "@/components/ConceptTile";
+import {
+  Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi,
+} from "@/components/ui/carousel";
 import type { BottomSectionsData } from "@/lib/home-sections";
+import { BOTTOM_CHARTS, type BottomChart } from "@/lib/bottom-picks";
 
 export type BottomBlock = "journal" | "concepts" | "research" | "glossary";
 const ORDER: BottomBlock[] = ["journal", "concepts", "research", "glossary"];
@@ -60,9 +69,107 @@ function load(): Promise<BottomSectionsData> {
   return cache;
 }
 
-function Block({ id, eyebrow, heading, children, href, label, from, motif }: {
+/** A random `n` of `xs`, in random order (Fisher–Yates on a copy). */
+function sample<T>(xs: T[], n: number): T[] {
+  const a = xs.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a.slice(0, n);
+}
+
+/** The two crime charts the research block can show. Each is a chart the Crime
+ *  pages already publish; the heading is its plain finding and the line under
+ *  it is the one caveat the chart needs. Text from the chart's own "What the
+ *  chart shows" list in public/data/crime/charts. */
+const CRIME_CHARTS: Record<Exclude<BottomChart, "suicide">, {
+  src: string; heading: string; line: string; href: string; label: string;
+}> = {
+  homicide: {
+    src: "/data/crime/charts/homicide_international.json",
+    heading: "The United States’ homicide rate is several times that of comparable countries",
+    line: "In 2023 it was 5.8 per 100,000, against the UK’s 1.1, Germany’s 0.9, South Korea’s 0.5 and Japan’s 0.2. The 2020 spike was an American event; the world line barely moved.",
+    href: "/research/crime/homicide",
+    label: "Go to homicide",
+  },
+  breakins: {
+    src: "/data/crime/charts/burglary_international.json",
+    heading: "Police-recorded burglary in the United States has fallen since 2000",
+    line: "Fewer US burglaries reach the police at all: 59% were reported in 2010, 41% in 2024, so some of the fall is fewer reports. The US lines are dashed because they count all premises on a different system; compare their direction, not their height.",
+    href: "/research/crime/break-ins",
+    label: "Go to break-ins",
+  },
+};
+
+/** One crime chart, fetched only when it is the one picked. */
+function CrimeChart({ src, href }: { src: string; href: string }) {
+  const [doc, setDoc] = useState<IntlChartDoc | null>(null);
+  useEffect(() => {
+    let alive = true;
+    fetch(src).then((r) => (r.ok ? r.json() : null)).then((d) => { if (alive) setDoc(d); }).catch(() => {});
+    return () => { alive = false; };
+  }, [src]);
+  if (!doc) return <div className="min-h-[360px]" aria-hidden />;
+  // Picking a line opens its detail on the Crime page, where the detail lives.
+  return <IntlLineChart chart={doc} lead onPick={() => { window.location.href = href; }} />;
+}
+
+/**
+ * THE CONCEPTS PAGE'S OWN TILES, TWO ACROSS (Sean, 1 Oct 2026: "use 2 up cards
+ * from the concepts page in the concepts bottom section carousel. We could make
+ * the cards square and include some top and bottom negative space").
+ *
+ * A 3:2 card (480px tall on a phone) with the text filling it. One across on
+ * a phone. The arrows move a whole pair, and the dots and count are pairs
+ * ("1 / 2"), not cards. Never rotates on its own: the journal and glossary
+ * carousels do, and two moving carousels never share a screen.
+ */
+function ConceptCards({ tiles, from }: { tiles: BottomSectionsData["concepts"]; from: string }) {
+  const [api, setApi] = useState<CarouselApi>();
+  const [i, setI] = useState(0);
+  const [pages, setPages] = useState(0);
+  useEffect(() => {
+    if (!api) return;
+    // Pages change with the breakpoint (pairs on desktop, single cards on a
+    // phone), so they are re-read whenever embla re-initialises.
+    const on = () => { setPages(api.scrollSnapList().length); setI(api.selectedScrollSnap()); };
+    on();
+    api.on("select", on);
+    api.on("reInit", on);
+    return () => { api.off("select", on); api.off("reInit", on); };
+  }, [api]);
+  return (
+    <Carousel setApi={setApi} aria-label="Concepts" className="relative"
+      opts={{ align: "start", loop: true, breakpoints: { "(min-width: 768px)": { slidesToScroll: 2 } } }}>
+      <CarouselContent>
+        {tiles.map((c) => (
+          <CarouselItem key={c.id} className="basis-full md:basis-1/2">
+            <ConceptTile c={c} from={`bottom:${from}`} square />
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      {/* Same controls as HomeCarousel: in normal flow, 44px arrows, a dot per page. */}
+      <div className="mt-6 flex flex-wrap items-center gap-1.5">
+        <CarouselPrevious className="static mr-1 h-11 w-11 translate-y-0" />
+        <CarouselNext className="static mr-2 h-11 w-11 translate-y-0" />
+        {Array.from({ length: pages }, (_, n) => (
+          <button key={n} type="button" onClick={() => api?.scrollTo(n)}
+            aria-label={`Show ${n + 1} of ${pages}`} aria-current={n === i} className="px-1 py-3">
+            <span className={`block h-1.5 transition-all ${n === i ? "w-7 bg-foreground" : "w-2.5 bg-foreground/20"}`} />
+          </button>
+        ))}
+        {pages > 0 && <span className="ml-2 text-[15px] text-muted">{i + 1} / {pages}</span>}
+      </div>
+    </Carousel>
+  );
+}
+
+function Block({ id, eyebrow, heading, children, href, label, from, motif, wide = false }: {
   id: BottomBlock; eyebrow: string; heading: ReactNode; children: ReactNode;
   href: string; label: string; from: string;
+  /** The full width of the page (Concepts only; Sean, 1 Oct 2026). */
+  wide?: boolean;
   /** A motif behind the whole block, as SiteSection does on the home page. */
   motif?: "recede";
 }) {
@@ -91,7 +198,7 @@ function Block({ id, eyebrow, heading, children, href, label, from, motif }: {
       {/* Capped near the home sections' own measure (about 966px at 1366 wide):
           inside a full-width page column the chart's end labels ran off the
           screen and the quotations ran to 1,300px lines. */}
-      <div className="mt-10 max-w-[1040px]">{children}</div>
+      <div className={wide ? "mt-10" : "mt-10 max-w-[1040px]"}>{children}</div>
       <div className="mt-10">
         <a href={href}
           className="inline-flex h-12 items-center rounded-md bg-foreground px-6 text-[17px] font-medium text-background">
@@ -114,6 +221,19 @@ export default function BottomSections({ exclude = [], from }: {
   const [failed, setFailed] = useState(false);
   const blocks = ORDER.filter((b) => !exclude.includes(b));
 
+  // Picked once, when the data arrives, so a re-render never reshuffles what
+  // the reader is looking at. Client-only (the data is fetched in the browser),
+  // so there is no server render to disagree with.
+  const pick = useMemo(() => data && {
+    // All eight, in a random order, one at a time (Sean, 1 Oct 2026).
+    quotes: sample(data.quotes, data.quotes.length),
+    // All twenty, two up, in a random order: ten pages (Sean, 1 Oct 2026).
+    concepts: sample(data.concepts, data.concepts.length),
+    // All twelve, in a random order (Sean, 1 Oct 2026).
+    glossary: sample(data.glossary, data.glossary.length),
+    chart: sample(BOTTOM_CHARTS, 1)[0],
+  }, [data]);
+
   useEffect(() => {
     const el = ref.current;
     if (!el || data) return;
@@ -130,7 +250,7 @@ export default function BottomSections({ exclude = [], from }: {
 
   return (
     <div ref={ref} className="mt-16" data-bottom-sections={blocks.join(" ")}>
-      {!data ? (
+      {!data || !pick ? (
         // Holds roughly the space the blocks will take, so the footer does not
         // jump when they arrive.
         <div className="min-h-[60vh]" aria-hidden />
@@ -143,19 +263,27 @@ export default function BottomSections({ exclude = [], from }: {
                 neurotech bullhorn</a></>}
             href="/journal" label="Go to the journal">
             <MotifStage name="carry" className="-mx-4 px-4 py-6 sm:-mx-8 sm:px-8">
-              <JournalQuotes entries={data.quotes} />
+              <JournalQuotes entries={pick.quotes} limit={1200} disclaimerFrom={`bottom:${from}`} />
             </MotifStage>
           </Block>
         );
         if (b === "concepts") return (
-          <Block key={b} id={b} from={from} eyebrow="Concepts"
-            heading="What does the record actually establish?"
+          <Block key={b} id={b} from={from} eyebrow="Concepts" wide
+            heading="What might the record suggest?"
             href="/concepts" label="Go to the concepts">
-            {/* Waits to be asked: the journal and glossary carousels rotate, and
-                two moving carousels never share a screen (Sean, 8 September). */}
-            <HomeCarousel slides={data.concepts} label="Concepts" titleSize="heading" autoplay={false} />
+            <ConceptCards tiles={pick.concepts} from={from} />
           </Block>
         );
+        if (b === "research" && pick.chart !== "suicide") {
+          const c = CRIME_CHARTS[pick.chart];
+          return (
+            <Block key={b} id={b} from={from} eyebrow="Research" heading={c.heading}
+              href={c.href} label={c.label}>
+              <CrimeChart src={c.src} href={c.href} />
+              <p className="body-copy measure mt-5 mb-0 text-[17px] leading-relaxed text-foreground/85">{c.line}</p>
+            </Block>
+          );
+        }
         if (b === "research") return (
           <Block key={b} id={b} from={from} eyebrow="Research"
             // The finding is the heading here, not "What does the research
@@ -185,7 +313,7 @@ export default function BottomSections({ exclude = [], from }: {
           <Block key={b} id={b} from={from} eyebrow="Glossary" motif="recede"
             heading="What do these words actually mean?"
             href="/glossary" label="Go to the glossary">
-            <HomeCarousel slides={data.glossary} label="Glossary terms" />
+            <HomeCarousel slides={pick.glossary} label="Glossary terms" />
           </Block>
         );
       })}

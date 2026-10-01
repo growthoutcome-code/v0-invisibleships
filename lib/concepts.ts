@@ -1410,6 +1410,51 @@ export const CONCEPTS: Concept[] = [
       "Both describe the gap this proposal is aimed at. Neither shows that a consumer camera and a government platform are linked.",
     verification: "unverified",
   },
+  {
+    id: "zersetzung-methods-are-crimes",
+    origin: "ai",
+    basis: "documented",
+    theme: "coercion",
+    audience: ["investigators", "press", "household"],
+    topics: ["harassment", "law-government"],
+    title: "Zersetzung's methods are crimes",
+    body:
+      "No law names Zersetzung, but its methods are crimes, and a US court has punished them. In August 2019 members of eBay's security team ran a campaign against Ina and David Steiner, who published a newsletter in Natick, Massachusetts, that was critical of the company. They sent live insects, a bloody pig mask, a funeral wreath and a book on surviving a spouse's death. They posted the couple's address with invitations to strangers, sent threats under invented identities, followed them, and planned to break into their garage to put a tracker on their car. Then they deleted evidence and lied to police.\n\nSeven former employees were convicted; the security director was sentenced to 57 months in prison. eBay admitted the facts in a deferred prosecution agreement and paid a $3 million criminal penalty, the statutory maximum, under three years of independent monitoring. In July 2026 the couple's civil suit settled for a reported $55.7 million.\n\nThe charges map onto Zersetzung's methods: stalking through interstate travel and electronic means (18 U.S.C. § 2261A), conspiracy (§ 371), witness tampering (§ 1512) and destroying records (§ 1519). The same conduct is criminal harassment and stalking under Massachusetts law, and stalking and harassment in Colorado. When two or more people conspire to intimidate someone out of their rights, federal law (§ 241) applies.\n\nGermany never made Zersetzung itself a crime after 1990, because laws cannot punish acts retroactively. It lets victims be formally rehabilitated instead, and since 2019 anyone recognised as the target of a Zersetzung measure receives a one-off payment of €1,500.",
+    evidence: [
+      "August 2019, Natick, Massachusetts: a campaign by members of eBay's security team against the publishers of a newsletter critical of the company, set out in federal charging documents",
+      "Seven former employees convicted; the security director sentenced on 29 September 2022 to 57 months in prison, the last defendant sentenced on 18 July 2024",
+      "Charged under 18 U.S.C. § 371 (conspiracy), § 2261A (stalking by interstate travel and by facilities of commerce), § 1512(b)(3) (witness tampering) and § 1519 (destroying or falsifying records)",
+      "11 January 2024: eBay entered a deferred prosecution agreement, admitted the facts, paid a $3 million criminal penalty and accepted a three-year independent compliance monitor",
+      "27 July 2026: the couple's civil suit (D. Mass., No. 1:21-cv-11181) settled for a reported $55.7 million",
+      "Massachusetts: criminal harassment, M.G.L. c. 265 § 43A; stalking, c. 265 § 43. Colorado: stalking, C.R.S. 18-3-602; harassment, C.R.S. 18-9-111",
+      "Germany: Zersetzung was not prosecuted as such after 1990; the 1994 rehabilitation laws and a 2019 amendment provide rehabilitation and a one-off €1,500 payment for targets of Zersetzung measures",
+    ],
+    questions: [
+      "How would a target show a coordinated campaign when no single act looks criminal on its own?",
+      "Who investigates when the conduct crosses state or national lines?",
+      "This concept reports one prosecuted case. It does not claim that any other campaign described in this archive has been proven.",
+    ],
+    references: [
+      { label: "Two former eBay executives sentenced to prison for cyberstalking — US Attorney, District of Massachusetts", href: "https://www.justice.gov/usao-ma/pr/two-former-ebay-executives-sentenced-prison-cyberstalking" },
+      { label: "eBay to pay $3 million in connection with corporate cyberstalking campaign — US Attorney, District of Massachusetts", href: "https://www.justice.gov/usao-ma/pr/ebay-inc-pay-3-million-connection-corporate-cyberstalking-campaign-targeting" },
+      { label: "Final defendant in eBay cyberstalking case sentenced — US Attorney, District of Massachusetts", href: "https://www.justice.gov/usao-ma/pr/final-defendant-ebay-cyberstalking-case-sentenced" },
+      { label: "Settlement of the civil suit — The Boston Globe, 27 July 2026", href: "https://www.bostonglobe.com/2026/07/27/business/ebay-harassed-ina-david-steiner-settlement/" },
+      { label: "18 U.S.C. § 2261A, stalking — Cornell Legal Information Institute", href: "https://www.law.cornell.edu/uscode/text/18/2261A" },
+      { label: "18 U.S.C. § 241, conspiracy against rights — Cornell Legal Information Institute", href: "https://www.law.cornell.edu/uscode/text/18/241" },
+      { label: "Massachusetts General Laws c. 265 § 43A, criminal harassment", href: "https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter265/Section43A" },
+      { label: "Massachusetts General Laws c. 265 § 43, stalking", href: "https://malegislature.gov/Laws/GeneralLaws/PartIV/TitleI/Chapter265/Section43" },
+      { label: "Colorado Revised Statutes 18-3-602, stalking", href: "https://colorado.public.law/statutes/crs_18-3-602" },
+      { label: "Colorado Revised Statutes 18-9-111, harassment", href: "https://colorado.public.law/statutes/crs_18-9-111" },
+      { label: "Rehabilitation laws for victims of the SED dictatorship — Bundesstiftung zur Aufarbeitung der SED-Diktatur", href: "https://www.bundesstiftung-aufarbeitung.de/de/erinnern/opfer-und-betroffene/juristische-aufarbeitung/rehabilitierungsgesetze" },
+      { label: "Federal Administrative Court on the Zersetzung payment, 14 December 2023", href: "https://www.bverwg.de/pm/2023/93" },
+      { label: "Organised covert harassment of individuals is established fact", href: "/concepts/organised-harassment-is-fact" },
+    ],
+    referencesNote:
+      "The Department of Justice releases and charging documents are cited for the conduct, charges and sentences; the Boston Globe for the civil settlement; the statutes for what the law prohibits; the German sources for how Germany has treated Zersetzung since 1990. The linked concept records the wider set of adjudicated harassment cases.",
+    verification: "unverified",
+    disclaimer:
+      "This concept reports an adjudicated case and the laws that apply to its conduct. It makes no claim that any other organisation or person has committed any crime.",
+  },
 ];
 
 /**
@@ -1449,6 +1494,8 @@ export const SOURCE_YEARS: {
   { year: 2023, label: "Amnesty, Automated Apartheid", url: "https://www.amnesty.org/en/latest/news/2023/05/israel-opt-israeli-authorities-are-using-facial-recognition-technology-to-entrench-apartheid/", cites: ["no-private-thinking-space"] },
   { year: 2023, label: "Tang & Huth semantic decoder", url: "https://www.nature.com/articles/s41593-023-01304-9", cites: ["can-a-machine-read-thought"] },
   { year: 2023, label: "FTC v GoodRx", url: "https://www.ftc.gov/news-events/news/press-releases/2023/02/ftc-enforcement-action-bar-goodrx-sharing-consumers-sensitive-health-info-advertising", cites: ["how-protected-is-your-medical-record"] },
+  { year: 2022, label: "Former eBay security staff sentenced for cyberstalking", url: "https://www.justice.gov/usao-ma/pr/two-former-ebay-executives-sentenced-prison-cyberstalking", cites: ["zersetzung-methods-are-crimes"] },
+  { year: 2024, label: "eBay deferred prosecution agreement, $3m penalty", url: "https://www.justice.gov/usao-ma/pr/ebay-inc-pay-3-million-connection-corporate-cyberstalking-campaign-targeting", cites: ["zersetzung-methods-are-crimes"] },
   { year: 2024, label: "Neurorights Foundation, Safeguarding Brain Data", url: "https://perseus-strategies.com/wp-content/uploads/2024/04/FINAL_Consumer_Neurotechnology_Report_Neurorights_Foundation_April-1.pdf", cites: ["who-owns-neural-data"] },
   { year: 2024, label: "Colorado HB24-1058", url: "https://content.leg.colorado.gov/sites/default/files/documents/2024A/bills/2024a_1058_01.pdf", cites: ["law-for-neural-data"] },
   { year: 2024, label: "WHO-commissioned review finds no cancer link", url: "https://www.arpansa.gov.au/who-review-finds-no-link-between-mobile-phone-use-and-brain-cancer", cites: ["children-wearables-and-rf"] },

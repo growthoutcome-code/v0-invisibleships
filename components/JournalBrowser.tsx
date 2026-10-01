@@ -613,7 +613,8 @@ export default function JournalBrowser({
             sat here. Keyed by page so each page starts its carousels fresh. */}
         {!showLoader && (() => {
           const tail: { exclude: BottomBlock[]; from: string } | null =
-            tab === "journal" ? { exclude: ["journal"], from: selDoc ? "journal-entry" : "journal" }
+            // No research chart under the journal (Sean, 1 Oct 2026).
+            tab === "journal" ? { exclude: ["journal", "research"], from: selDoc ? "journal-entry" : "journal" }
             : tab === "concepts" ? { exclude: ["concepts"], from: "concepts" }
             : tab === "glossary" ? { exclude: ["glossary"], from: gsel ? "glossary-term" : "glossary" }
             : tab === "data" ? { exclude: ["research"], from: `research/${dataSub}` }

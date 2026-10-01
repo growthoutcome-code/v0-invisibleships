@@ -39,6 +39,8 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import EntryProse from "@/components/EntryProse";
+import DisclaimerLink from "@/components/DisclaimerLink";
+import { DISCLAIMER_TITLE } from "@/lib/disclaimer";
 import { CAROUSEL_DELAY_MS, useAutoplayInView } from "@/components/HomeCarousel";
 import type { JournalQuote } from "@/lib/server-corpus";
 
@@ -49,7 +51,16 @@ function longDate(iso: string) {
   });
 }
 
-export default function JournalQuotes({ entries }: { entries: JournalQuote[] }) {
+export default function JournalQuotes({ entries, limit = 460, disclaimerFrom }: {
+  entries: JournalQuote[];
+  /** Characters of quotation shown. The bottom sections carry longer passages
+   *  (Sean, 1 Oct 2026: "double the amount of copy"); the home page keeps 460. */
+  limit?: number;
+  /** When set, a link to the critical disclaimer sits under the carousel
+   *  controls (bottom sections; Sean, 1 Oct 2026). The value names the page
+   *  for the disclaimer_opened event. */
+  disclaimerFrom?: string;
+}) {
   const [api, setApi] = useState<CarouselApi>();
   const [i, setI] = useState(0);
 
@@ -112,25 +123,52 @@ export default function JournalQuotes({ entries }: { entries: JournalQuote[] }) 
                   {e.location ? ` · ${e.location}` : ""}
                   {e.hasAudio ? " · audio" : ""}
                 </p>
+                {/* Time and place (bottom sections; Sean, 1 Oct 2026: "add the date
+                    and time… I think the location is also important"). */}
+                {e.meta && (
+                  <p className="m-0 mt-2 text-[16px] leading-snug text-muted">{e.meta}</p>
+                )}
 
                 <blockquote className="relative m-0 mt-7 pl-7 sm:pl-16">
-                  <span
+                  {!e.parts && <span
                     aria-hidden
                     className="font-serif absolute left-0 top-[-0.2em] select-none text-[44px] leading-none text-foreground/25 sm:text-[96px]"
                   >
                     &ldquo;
-                  </span>
+                  </span>}
                   {/* FOUR LINES (Sean, 8 September). 22px at 1.55 is a 34px line
                       and 26px at 1.5 is a 39px line, so four of them are 136px
                       and 156px. This is a floor, not a clamp: a short quotation
                       fills the same space as a long one so the section stops
                       jumping on every rotation, and the two longest run past it
                       rather than being cut off mid-sentence. */}
-                  <EntryProse
-                    body={e.body}
-                    limit={460}
-                    className="min-h-[136px] font-serif text-[22px] leading-[1.55] text-foreground sm:min-h-[156px] sm:text-[26px] sm:leading-[1.5]"
-                  />
+                  {e.parts ? (
+                    // WHO IS SPEAKING, ONCE PER TURN (Sean, 1 Oct 2026): "From the
+                    // distance" or "From the author", never twice in a row, then
+                    // the quoted lines with line breaks. The labels are set in the
+                    // display face like "Open question", so they read as the
+                    // archive's, never as part of the quotation.
+                    <div className="min-h-[136px] sm:min-h-[156px]">
+                      {e.parts.map((pt, k) => (
+                        <div key={k} className={k ? "mt-6" : ""}>
+                          <p className="m-0 mb-2 font-display text-[14px] uppercase tracking-[0.14em] text-muted">
+                            {pt.label}
+                          </p>
+                          {pt.lines.map((l, n) => (
+                            <p key={n} className={`m-0 font-serif text-[20px] leading-[1.5] text-foreground sm:text-[23px] ${n ? "mt-2" : ""}`}>
+                              {l}
+                            </p>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <EntryProse
+                      body={e.body}
+                      limit={limit}
+                      className="min-h-[136px] font-serif text-[22px] leading-[1.55] text-foreground sm:min-h-[156px] sm:text-[26px] sm:leading-[1.5]"
+                    />
+                  )}
                 </blockquote>
 
                 {/* THE OPEN QUESTION (Sean, 8 September). It is labelled, set in
@@ -197,6 +235,13 @@ export default function JournalQuotes({ entries }: { entries: JournalQuote[] }) 
           {i + 1} / {entries.length}
         </span>
       </div>
+      {/* ONCE, UNDER THE CONTROLS (Sean, 1 Oct 2026: "move the disclaimer link
+          under the carousel controls"). Bottom sections only. */}
+      {disclaimerFrom && (
+        <p className="m-0 mt-3 text-[15px] text-muted">
+          <DisclaimerLink from={disclaimerFrom} className="text-left underline underline-offset-4 hover:text-foreground">{DISCLAIMER_TITLE}</DisclaimerLink>
+        </p>
+      )}
       </Carousel>
     </div>
   );

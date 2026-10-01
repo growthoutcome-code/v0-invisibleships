@@ -1,13 +1,12 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { track } from "@/lib/analytics";
 import ConceptsControls, { conceptPills } from "@/components/ConceptsToolbar";
 import { ActiveLine, MobileBar } from "@/components/ListControls";
 import Pager from "@/components/Pager";
-import CardShare from "@/components/CardShare";
+import ConceptTile from "@/components/ConceptTile";
 import {
   CONCEPTS, NO_FILTERS, BASIS_LABEL, ORIGIN_LABEL,
   filterConcepts, sortConcepts, CONCEPT_SORTS, type Filters, type ConceptSort,
@@ -79,30 +78,11 @@ export default function ConceptsView({
             const n = CONCEPTS.indexOf(c) + 1;
             const topics = [...c.topics].sort((a, b) => Number(lead.includes(b)) - Number(lead.includes(a))).slice(0, 3);
             return (
-              <li key={c.id} className="relative flex">
-                <Link href={`/concepts/${c.id}`} onClick={() => track("concept_opened", { id: c.id, from: "tile" })}
-                  className="group flex flex-col w-full border border-edge p-6 pr-14 hover:border-foreground transition-colors">
-                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-2 mb-4">
-                    <span className="text-[13px] uppercase tracking-[0.08em] font-semibold text-muted tabular-nums">
-                      {String(n).padStart(2, "0")}
-                    </span>
-                    <span className="text-[12px] uppercase tracking-[0.08em] font-semibold text-background bg-foreground px-2 py-0.5">
-                      {ORIGIN_LABEL[c.origin]}
-                    </span>
-                    <span className="text-[12px] uppercase tracking-[0.08em] font-semibold text-foreground">
-                      {BASIS_LABEL[c.basis]}
-                    </span>
-                  </div>
-                  <h3 className="font-display font-semibold text-foreground text-[22px] md:text-[24px] leading-tight mb-3 group-hover:underline underline-offset-4">
-                    {c.title}
-                  </h3>
-                  <p className="text-[17px] leading-[1.55] text-foreground/80 line-clamp-3 m-0 mb-5">{c.body}</p>
-                  <div className="mt-auto flex flex-wrap items-center gap-x-3 gap-y-1 text-[12px] uppercase tracking-[0.06em] text-muted">
-                    {topics.map((t) => <span key={t}>{THEMES[t]}</span>)}
-                    <span className="ml-auto normal-case tracking-normal text-[14px] text-foreground">Read &rarr;</span>
-                  </div>
-                </Link>
-                <CardShare title={c.title} path={`/concepts/${c.id}`} className="absolute top-3 right-3" />
+              <li key={c.id} className="flex">
+                <ConceptTile from="tile" c={{
+                  id: c.id, n, origin: ORIGIN_LABEL[c.origin], basis: BASIS_LABEL[c.basis],
+                  title: c.title, body: c.body, topics: topics.map((t) => THEMES[t]),
+                }} />
               </li>
             );
           })}

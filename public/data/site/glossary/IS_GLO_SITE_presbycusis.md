@@ -5,7 +5,7 @@ collection: glossary
 doc_type: term
 provenance: site-authored
 slug: presbycusis
-categories: [glossary, reference, glossary-neuroscience]
+categories: [glossary, reference, glossary-neuroscience, glossary-health-symptoms]
 word_count: 271
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.

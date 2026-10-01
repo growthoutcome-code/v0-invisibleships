@@ -54,7 +54,7 @@ export default function JournalItemReader({ doc, body, cats, gloss, prev, next }
           </div>
         </article>
         {/* The home page's other sections, never this one (Sean, 1 Oct 2026). */}
-        <BottomSections exclude={["journal"]} from="journal-entry" />
+        <BottomSections exclude={["journal", "research"]} from="journal-entry" />
       </main>
       <Footer />
     </div>

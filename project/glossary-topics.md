@@ -17,6 +17,11 @@ entry records ("Death threats"); a glossary topic says what field a word belongs
 | `glossary-ethics-human-rights` | Ethics & human rights |
 | `glossary-psychology` | Psychology |
 | `glossary-physics-signals` | Physics & signals |
+| `glossary-health-symptoms` | Health & symptoms |
+
+**Health & symptoms added 1 Oct 2026** (Sean), with dumping syndrome and tinnitus:
+a digestive condition filed under Neuroscience would have told a reader something
+false about it. Presbycusis and tinnitus carry Neuroscience as well.
 
 Neuroethics is kept apart from Ethics & human rights: it is the field closest to what
 this archive asks (who may read or write a mind).

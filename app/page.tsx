@@ -979,7 +979,7 @@ export default function Page() {
           id="neurotechnology"
           eyebrow="Concepts"
           motif="lattice"
-          heading="What does the record actually establish?"
+          heading="What might the record suggest?"
           meta={
             <>
               {CONCEPTS.length} concepts · {SOURCE_YEARS.length} dated sources, the
@@ -1067,12 +1067,13 @@ export default function Page() {
           meta={`${glossaryTerms} terms · pronunciation, definition, and every entry in the record that uses them`}
           actions={[{ href: "/glossary", label: "Go to the glossary", primary: true }]}
         >
+          {/* Sean, 1 Oct 2026: replaces the paragraph on documented vs claimed
+              terms. "Neurotech is not known by most people and the glossary
+              terms should help introduce someone." The carousel's order is
+              unchanged; its reasoning is in lib/home-picks.ts. */}
           <p className="body-copy measure text-[24px] leading-relaxed text-foreground/85">
-            Some of these name something documented and some name something claimed,
-            and telling them apart is most of the work. A reader who cannot say which
-            is which cannot evaluate anything else on this page &mdash; so the order
-            below puts a historically documented tactic first, and sets a published
-            physical effect directly beside the claim that resembles it.
+            Neurotechnology is new to most people. These terms, from brain&ndash;computer
+            interfaces to how sound travels, are a place to start.
           </p>
 
           <div className="mt-12">

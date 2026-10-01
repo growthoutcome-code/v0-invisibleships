@@ -236,6 +236,10 @@ export type JournalQuote = {
   body: string;
   /** The archive's own open question for this slide. Curated picks only. */
   question?: string;
+  /** Bottom sections only (lib/bottom-quotes.ts): time and place, and the
+   *  passages grouped by who is speaking. The home page sets neither. */
+  meta?: string;
+  parts?: { label: string; lines: string[] }[];
 };
 
 export function journalQuotes(count = 8): JournalQuote[] {
@@ -331,6 +335,10 @@ export function curatedQuotes(picks: HomeQuotePick[]): JournalQuote[] {
       // corpus, which stays untouched.
       return cut
         .replace(/\s*[[(]\s*\d{1,2}(?:[:m]\d{1,2}){1,2}s?\s*[\])]/g, "")
+        // The other timecode forms the recordings use: [ 29s ], [ 0m21.901s ],
+        // [ 6:52:138-6:56:328 ], [ 14s36s ]. Brackets holding only digits and
+        // time marks; "(paraphrasing)" and the like are untouched.
+        .replace(/\s*\[\s*\d[\d:.ms\s-]*\]/g, "")
         .replace(/[ \t]+\n/g, "\n")
         .replace(/\n{3,}/g, "\n\n")
         .trim();

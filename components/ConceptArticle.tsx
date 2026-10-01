@@ -30,7 +30,11 @@ export default function ConceptArticle({ c, n }: { c: Concept; n: number }) {
         {c.title}
       </h1>
 
-      <p className="body-copy text-foreground/85 measure mb-6">{c.body}</p>
+      {/* One paragraph per blank line in the body. It was a single <p>, so the
+          breaks written into four concepts showed as spaces (1 Oct 2026). */}
+      {c.body.split(/\n{2,}/).map((para, i) => (
+        <p key={i} className="body-copy text-foreground/85 measure mb-6">{para}</p>
+      ))}
 
       {c.evidence && (
         <ul className="list-none p-0 m-0 measure mb-6">

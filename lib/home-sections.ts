@@ -1,6 +1,6 @@
 /**
- * The data behind the home page's Journal, Concepts, Research and Glossary
- * sections — built once, here, for two readers:
+ * The builders behind the home page's Journal, Concepts, Research and Glossary
+ * sections — used, here, by two readers:
  *
  *   app/page.tsx                    the home page itself
  *   app/api/bottom-sections         the bottom sections under every other page
@@ -8,16 +8,21 @@
  *                                   sections to each page of the site to
  *                                   promote engagement")
  *
- * One builder, so a bottom section can never show a different slide, quote or
- * order from the home section it was taken from. Server only: it reads the
- * corpus from disk.
+ * One set of builders, so a bottom slide is built and checked exactly like a
+ * home slide. The CONTENT differs: the home page uses lib/home-picks.ts and
+ * lib/home-quotes.ts; the bottom sections use lib/bottom-picks.ts and show a
+ * random selection (Sean, 1 Oct 2026). Server only: it reads the corpus from
+ * disk.
  */
 import type { Slide } from "@/components/HomeCarousel";
 import type { IntlChart } from "@/components/SuicideChart";
-import { CONCEPTS } from "@/lib/concepts";
+import { BASIS_LABEL, CONCEPTS, ORIGIN_LABEL } from "@/lib/concepts";
+import { THEMES } from "@/lib/themes";
+import type { ConceptTileData } from "@/components/ConceptTile";
 import { CONCEPT_PICKS, GLOSSARY_PICKS } from "@/lib/home-picks";
 import { firstSentences } from "@/lib/glossary-format";
-import { HOME_QUOTES } from "@/lib/home-quotes";
+import { BOTTOM_CONCEPTS, BOTTOM_GLOSSARY } from "@/lib/bottom-picks";
+import { bottomQuotes } from "@/lib/bottom-quotes";
 import { curatedQuotes, homeGlossary, type JournalQuote } from "@/lib/server-corpus";
 import { suicideChartDoc } from "@/lib/server-data";
 
@@ -25,8 +30,8 @@ import { suicideChartDoc } from "@/lib/server-data";
    beside it. splitDef has always computed it and the site had nowhere to show
    it; a slide whose title IS the term is that place. Terms without one fall
    back to the section label rather than rendering an empty line. */
-export function glossarySlides(): Slide[] {
-  return homeGlossary(GLOSSARY_PICKS).map((g) => ({
+export function glossarySlides(picks: string[] = GLOSSARY_PICKS): Slide[] {
+  return homeGlossary(picks).map((g) => ({
     href: `/glossary/${g.slug}`,
     eyebrow: g.pron || "Glossary",
     title: g.term,
@@ -40,13 +45,13 @@ export function glossarySlides(): Slide[] {
    four-slide carousel nobody notices is short. Bodies run 313-2,004 characters
    in the register, so they are cut for a slide — the full concept is one click
    away. */
-export function conceptSlides(): Slide[] {
-  return CONCEPT_PICKS.map((id) => {
+export function conceptSlides(picks: string[] = CONCEPT_PICKS): Slide[] {
+  return picks.map((id) => {
     const c = CONCEPTS.find((x) => x.id === id);
     if (!c) {
       throw new Error(
-        `home concepts: no concept with id ${JSON.stringify(id)} in lib/concepts.ts. ` +
-          `Re-pick it in lib/home-picks.ts.`
+        `concepts: no concept with id ${JSON.stringify(id)} in lib/concepts.ts. ` +
+          `Re-pick it in lib/home-picks.ts or lib/bottom-picks.ts.`
       );
     }
     return {
@@ -67,12 +72,49 @@ export function conceptSlides(): Slide[] {
   });
 }
 
+/**
+ * CONCEPT TILES for the bottom sections (Sean, 1 Oct 2026: "use 2 up cards from
+ * the concepts page in the concepts bottom section carousel"). The same fields
+ * the Concepts page tile shows, resolved to strings here so the register itself
+ * never ships to the browser. The body is cut at 400 characters only to keep
+ * the payload small: the tile clamps it to what fits.
+ */
+export function conceptTiles(picks: string[]): ConceptTileData[] {
+  return picks.map((id) => {
+    const i = CONCEPTS.findIndex((x) => x.id === id);
+    if (i < 0) {
+      throw new Error(
+        `concepts: no concept with id ${JSON.stringify(id)} in lib/concepts.ts. Re-pick it in lib/bottom-picks.ts.`
+      );
+    }
+    const c = CONCEPTS[i];
+    return {
+      id: c.id,
+      n: i + 1,
+      origin: ORIGIN_LABEL[c.origin],
+      basis: BASIS_LABEL[c.basis],
+      title: c.title,
+      // Enough to fill a full-width square; the tile clamps to what fits.
+      body: c.body.length > 1400 ? c.body.slice(0, 1400) : c.body,
+      topics: c.topics.slice(0, 3).map((t) => THEMES[t] ?? t),
+    };
+  });
+}
+
 /** Strings only, so it crosses the network: a Slide's body may be a ReactNode. */
 export type BottomSlide = Omit<Slide, "body"> & { body: string };
 
+/**
+ * THE BOTTOM SECTIONS' POOLS (Sean, 1 Oct 2026: randomise the bottom sections,
+ * leave the home page exactly as it is). Built from lib/bottom-picks.ts, not
+ * the home picks; the page picks at random from these when it loads. Same
+ * builders as the home page, so the slides look the same and a broken pick
+ * fails the build. The crime charts are not here: the page fetches the one it
+ * picks from /data/crime/charts, which already serves them.
+ */
 export type BottomSectionsData = {
   quotes: JournalQuote[];
-  concepts: BottomSlide[];
+  concepts: ConceptTileData[];
   glossary: BottomSlide[];
   suicide: IntlChart;
 };
@@ -81,9 +123,11 @@ export function bottomSectionsData(): BottomSectionsData {
   const asText = (s: Slide[]): BottomSlide[] =>
     s.map((x) => ({ ...x, body: typeof x.body === "string" ? x.body : String(x.body) }));
   return {
-    quotes: curatedQuotes(HOME_QUOTES),
-    concepts: asText(conceptSlides()),
-    glossary: asText(glossarySlides()),
+    // No location on a bottom slide, for the reason given in lib/home-quotes.ts:
+    // every location in the corpus is a specific shelter.
+    quotes: bottomQuotes(),
+    concepts: conceptTiles(BOTTOM_CONCEPTS),
+    glossary: asText(glossarySlides(BOTTOM_GLOSSARY)),
     suicide: suicideChartDoc() as IntlChart,
   };
 }
