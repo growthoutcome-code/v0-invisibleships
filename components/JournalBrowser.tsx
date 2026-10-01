@@ -754,8 +754,12 @@ function GlossarySection({ terms, gsel, setGsel, ctl, docCats }: { terms: any[];
     // One SideNav across the site (Sean, 2026-08-21). Index mode: picking a
     // term replaces the content, so there is no scroll-spy — the active entry
     // is whatever is open.
-    <div className="lg:grid lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-x-8 lg:items-start">
+    // THE RAIL IS THE GLOSSARY'S INDEX (Sean, 1 Oct 2026, after trying tiles:
+    // "it's important that we see all the terms"). A quarter of the page wide,
+    // larger type, and twice the gap to the definitions.
+    <div className="lg:grid lg:grid-cols-[minmax(15rem,25%)_minmax(0,1fr)] lg:gap-x-16 lg:items-start">
       <SideNav
+        large
         mode="index"
         label="Terms"
         sections={terms.map((t: any) => ({ id: t.slug, label: cleanTerm(t.term) }))}

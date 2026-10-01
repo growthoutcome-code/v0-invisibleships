@@ -137,8 +137,11 @@ export function useSectionNav(
 export type NavMode = "index" | "outline";
 
 export default function SideNav({
-  sections, active, label, mode = "outline", onPick, phoneHandledElsewhere = false,
+  sections, active, label, mode = "outline", onPick, phoneHandledElsewhere = false, large = false,
 }: {
+  /** Larger type for a rail that is the page's main index (the Glossary; Sean,
+   *  1 Oct 2026: "increase the font size by 15 to 20%"). 14px → 16.5px. */
+  large?: boolean;
   sections: NavSection[];
   active: string | null;
   label?: string;
@@ -217,13 +220,13 @@ export default function SideNav({
       {/* Wide: a grid column, NOT a float. The parent page supplies the grid. */}
       <nav aria-label={heading}
         className="hidden lg:block self-start sticky top-[96px] max-h-[calc(100vh-8rem)] overflow-y-auto scroll-thin pr-2">
-        <p className="text-muted text-[12px] uppercase tracking-wide mb-2">{heading}</p>
+        <p className={`text-muted ${large ? "text-[14px]" : "text-[12px]"} uppercase tracking-wide mb-2`}>{heading}</p>
         <ul className="list-none p-0 m-0 border-l border-edge">
           {sections.map((s) => (
             <li key={s.id}>
               <button type="button" onClick={() => go(s.id)} disabled={s.disabled}
                 aria-current={active === s.id ? "true" : undefined}
-                className={`flex w-full items-baseline gap-2 text-left pl-3 py-1.5 text-[14px] leading-snug border-l-2 -ml-px transition-colors ${
+                className={`flex w-full items-baseline gap-2 text-left pl-3 ${large ? "py-2 text-[16.5px]" : "py-1.5 text-[14px]"} leading-snug border-l-2 -ml-px transition-colors ${
                   s.disabled
                     ? "border-transparent text-muted/40 cursor-default"
                     : active === s.id

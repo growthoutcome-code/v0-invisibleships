@@ -97,7 +97,11 @@ export function firstSentences(text: string, n = 2, cap = 220): string {
   // The closing mark belongs to that sentence. Without it the sentence never
   // matched, was dropped, and the next one began with a stray ” (the Zersetzung
   // slide, home page and bottom sections, fixed 1 Oct 2026).
-  const matches = masked.match(/[^.!?]+[.!?]+["”’)\]]*(\s|$)/g);
+  // A full stop with no space after it is not a sentence end either: "from
+  // brain.space that extracts" was split at "brain." and the slide began
+  // "space that extracts" (Glossary tiles, 1 Oct 2026). Such dots stay inside
+  // the sentence.
+  const matches = masked.match(/(?:[^.!?]|[.!?]+(?![\s"”’)\]]|$))+[.!?]+["”’)\]]*(\s|$)/g);
   const unmask = (s: string) => s.replace(new RegExp(DOT, "g"), ".");
 
   if (!matches) return clean.length > cap ? clean.slice(0, cap).trim() + "…" : clean;
