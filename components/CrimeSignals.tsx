@@ -1334,7 +1334,7 @@ export default function CrimeSignals({ onGoTimeline, view, onView }: {
         <p className={SUB_CLASS}>People in US prisons, jails and under correctional control, 1999 to 2024.</p>
         {incarc === null ? <SkeletonChart /> : (
           <>
-            <DetentionChart chart={incarc} onPick={setDetPicked} />
+            <DetentionChart chart={incarc} onPick={setDetPicked} defaultMode="change" />
             {!!incarc.themes?.length && (
               <div className="mt-2 mb-5">
                 <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">

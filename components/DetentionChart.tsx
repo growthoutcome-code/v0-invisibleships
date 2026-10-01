@@ -60,8 +60,13 @@ export type DetChart = {
 };
 
 export default function DetentionChart({
-  chart, onPick,
-}: { chart: DetChart; onPick: (s: DetSeries) => void }) {
+  chart, onPick, defaultMode = "level",
+}: {
+  chart: DetChart; onPick: (s: DetSeries) => void;
+  /** The view a reader lands on. Who is held opens on year-over-year change
+   *  (Sean, 1 Oct 2026); it only applies where chart.change_view is set. */
+  defaultMode?: "level" | "change";
+}) {
   const narrow = useNarrow();
   const [focus, setFocus] = useState<string | null>(null);
   const [hover, setHover] = useState<{ s: DetSeries; p: { year: number; value: number; note?: string } } | null>(null);
@@ -69,7 +74,7 @@ export default function DetentionChart({
   // suicide chart carries. Change is computed only across CONSECUTIVE years
   // and never across a declared basis break — a percentage change spanning a
   // change of measurement is not a change in the world.
-  const [mode, setMode] = useState<"level" | "change">("level");
+  const [mode, setMode] = useState<"level" | "change">(defaultMode);
   const asChange = (ser: DetSeries): DetSeries => ({
     ...ser,
     points: ser.points.flatMap((p, i) => {
@@ -291,7 +296,7 @@ export default function DetentionChart({
           <g pointerEvents="none">
             <text x={Math.min(Math.max(X(hover.p.year), padL + 100), W - padR - 100)} y={padT - 8}
               fontSize={fsTip} fill="rgb(var(--foreground))" textAnchor="middle" fontWeight="600">
-              {hover.s.name} · {hover.p.value.toLocaleString()}
+              {hover.s.name} · {showChange ? `${hover.p.year}: ${fmt(hover.p.value)}` : hover.p.value.toLocaleString()}
             </text>
           </g>
         )}
