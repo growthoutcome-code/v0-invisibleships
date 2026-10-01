@@ -2,8 +2,8 @@
 
 - **Branch:** `main`
 - **Started:** 2026-10-01
-- **Status:** Ready to push
-- **Decision record:** `project/decisions/0011-random-bottom-sections-from-a-pool.md`
+- **Status:** Live (pushed 1 Oct 2026, 3db9042); Supabase synced and checked
+- **Decision records:** `project/decisions/0011-random-bottom-sections-from-a-pool.md`, superseded in part by `0012-bottom-sections-show-the-whole-pool.md`
 
 ## Goal
 
@@ -12,15 +12,13 @@ small vetted pool, while the home page stays exactly as it is.
 
 ## Approach
 
-- `lib/bottom-picks.ts` (new): six candidates each for Journal, Concepts and
-  Glossary, three research charts, `BOTTOM_SHOW = 4`.
-- `lib/home-sections.ts`: `conceptSlides()` and `glossarySlides()` take an optional
-  picks list that defaults to the home picks; `bottomSectionsData()` now builds the
-  bottom pools instead of the home content, and blanks quote locations.
-- `components/BottomSections.tsx`: when the data arrives, picks 4 of each pool in
-  random order and 1 chart. Homicide and break-ins are fetched from the existing
-  `/data/crime/charts/*.json` only when picked, and render with `IntlLineChart`;
-  clicking a line goes to that Crime page.
+- `lib/bottom-picks.ts`: the pools (10 journal, 20 concepts, 12 glossary) and the
+  research charts.
+- `lib/home-sections.ts`: `bottomSectionsData()` builds the bottom pools. The home
+  page builders are unchanged.
+- `components/BottomSections.tsx`: shuffles each pool and shows all of it. Research
+  is paused (`PAUSED = ["research"]`) until the charts are picked. The home page chart
+  is separate.
 
 ## Candidates
 
@@ -28,8 +26,8 @@ small vetted pool, while the home page stays exactly as it is.
 |---|---|
 | Journal (all 10 shown, random order) | Threats: 27 Feb 2025 (terrorist attack claim), 23 Aug 2025 R06 (euthanization list), 27 May 2025 ("I will never release you"), 17 Jul 2025 R05 (nuclear threat), 4 Mar 2025 morning ("here to punish someone"). Typed as they speak: 11 Jun 2025 ("kill him myself if he doesn't stop typing"), 6 Nov 2025 3:45am (the Moderna exchange). Technology: 29 May 2025 ("this is not technology" / "it's technology"), 9 Sep 2025 R03 (consent), 10 Jul 2025 R02 ("fancy high-powered phone") |
 | Concepts (Concepts page tiles, two up, full page width; 3:2 cards on desktop, 480px on a phone, text filling each card; all 20 per visit, random order) | only-you-can-hear-it, can-you-record-it, who-owns-neural-data, explanation-is-part-of-the-harm, co-occurrence-is-not-cause, everyone-around-a-target, the-neurotech-bullhorn, low-number-may-mean-low-counting, prescribing-is-not-prevalence, ruin-first-then-rescue, attack-to-force-acknowledgment, denver-acoustic-weapons, made-into-assets-unknowing, no-private-thinking-space, nonsurgical-by-design, what-it-would-take, contractors-killed-and-freed, who-profits-from-a-body, children-wearables-and-rf, how-protected-is-your-medical-record |
-| Research | suicide (unchanged block), homicide against the world, break-ins |
-| Glossary | chilling-effect, no-touch-torture, parametric-array, phantom-sensations, presbycusis, targeted-individual |
+| Research (paused on every page, 1 Oct 2026) | suicide, homicide against the world, break-ins |
+| Glossary (12, all shown, random order; every topic represented) | braincomputer-interface-bci, electroencephalogram, zersetzung-tactics, parametric-array, directed-energy, no-touch-torture, chilling-effect, obedience-experiment, neuro-engagement, nuremberg-code, dumping-syndrome, tinnitus |
 
 Journal rules (Sean, 1 Oct 2026), built by `lib/bottom-quotes.ts`:
 - Every passage cut by the home page's own cutter (anchored, verbatim, timecodes
@@ -50,7 +48,7 @@ Not recorded, so not shown: any reply to the 4 Mar 8:09am line.
 
 - [x] Home page data byte-identical before and after (md5 of quotes, concept and glossary slides).
 - [x] `app/page.tsx` untouched.
-- [x] Every bottom carousel shows "1 / 4"; repeated loads show different first slides and charts.
+- [x] Every bottom carousel shows its whole pool; repeated loads show different first slides.
 - [x] No page shows its own section; Home and Disclaimer show none.
 - [x] Journal (list and entries) shows Concepts and Glossary only: no research chart (Sean, 1 Oct 2026).
 - [x] Concepts shows all 20, two up, random order: "1 / 10" on desktop, "1 / 20" on a phone.
@@ -64,4 +62,16 @@ concept page, a glossary term page, Home. No page errors (only blocked external
 requests from the sandbox). All three charts rendered; the phone homicide chart uses
 the Crime page's existing bar view. `tsc --noEmit` and `check_no_name_lists.py` pass.
 
-Not verified: a production `next build` (too long for the sandbox) and the live site.
+Live, 1 Oct 2026: the Vercel production deployment of 3db9042 is READY. The live
+Glossary lists all 11 new terms, and the new concept page renders.
+
+Supabase, 1 Oct 2026, checked by md5 against the download:
+- All 13 document rows match: 11 glossary terms, the new concept and the updated
+  concepts start-here page.
+- The 11 new glossary definitions match.
+- Glossary has 57 rows.
+- The 84 glossary topic links match `apply_glossary_topics.py` exactly. The 8th topic,
+  Health & symptoms, was added as inserts only, with no delete.
+
+Not verified: the Health & symptoms filter on the live Glossary page, which is drawn in
+the browser and so does not show when the page is fetched as text.

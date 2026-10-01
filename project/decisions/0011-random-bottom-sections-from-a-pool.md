@@ -1,6 +1,6 @@
 # 0011 — Should the bottom sections show random content, and from where?
 
-- **Status:** Accepted
+- **Status:** Superseded by 0012 (all of each pool is now shown; Research paused)
 - **Date:** 2026-10-01
 - **Supersedes:** none
 

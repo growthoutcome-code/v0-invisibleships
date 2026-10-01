@@ -93,7 +93,11 @@ export function firstSentences(text: string, n = 2, cap = 220): string {
     .replace(/\s+/g, " ")
     .trim();
   const masked = clean.replace(ABBREV, (m) => m.replace(/\./g, DOT)).replace(/\b([A-Z])\./g, (_m, c) => c + DOT);
-  const matches = masked.match(/[^.!?]+[.!?]+(\s|$)/g);
+  // A sentence can end inside a quotation: From the German for “decomposition.”
+  // The closing mark belongs to that sentence. Without it the sentence never
+  // matched, was dropped, and the next one began with a stray ” (the Zersetzung
+  // slide, home page and bottom sections, fixed 1 Oct 2026).
+  const matches = masked.match(/[^.!?]+[.!?]+["”’)\]]*(\s|$)/g);
   const unmask = (s: string) => s.replace(new RegExp(DOT, "g"), ".");
 
   if (!matches) return clean.length > cap ? clean.slice(0, cap).trim() + "…" : clean;
