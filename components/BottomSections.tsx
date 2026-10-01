@@ -56,6 +56,14 @@ import { BOTTOM_CHARTS, type BottomChart } from "@/lib/bottom-picks";
 
 export type BottomBlock = "journal" | "concepts" | "research" | "glossary";
 const ORDER: BottomBlock[] = ["journal", "concepts", "research", "glossary"];
+/**
+ * PAUSED (Sean, 1 Oct 2026: "Remove the research bottom section from all
+ * pages until we pick the charts. Do not remove the chart from the home
+ * page."). The block's code stays below; delete "research" from this list to
+ * bring it back. The home page's own chart is a separate component and is
+ * not affected.
+ */
+const PAUSED: BottomBlock[] = ["research"];
 
 let cache: Promise<BottomSectionsData> | null = null;
 function load(): Promise<BottomSectionsData> {
@@ -219,7 +227,7 @@ export default function BottomSections({ exclude = [], from }: {
   const ref = useRef<HTMLDivElement>(null);
   const [data, setData] = useState<BottomSectionsData | null>(null);
   const [failed, setFailed] = useState(false);
-  const blocks = ORDER.filter((b) => !exclude.includes(b));
+  const blocks = ORDER.filter((b) => !exclude.includes(b) && !PAUSED.includes(b));
 
   // Picked once, when the data arrives, so a re-render never reshuffles what
   // the reader is looking at. Client-only (the data is fetched in the browser),
