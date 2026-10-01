@@ -382,8 +382,12 @@ function LaneChart({ chart, onPick, lead = false }: {
  * and dashed. Ranges differ (FBI 1960-2025, CDC 1950-2023) and that is drawn
  * honestly — each line simply starts and stops where its data does.
  */
-function TwoSeriesChart({ chart, onPick, defaultMode = "level" }: {
+function TwoSeriesChart({ chart, onPick, defaultMode = "level", lead = false }: {
   chart: Chart; onPick: (s: ChartSeries) => void;
+  /** Under a section H2 and its sentence, the chart's own title would repeat
+   *  them: it goes screen-reader only and the unit line moves under the plot
+   *  (Sean, 1 Oct 2026: redundant headings on the Crime pages). */
+  lead?: boolean;
   /** The view a reader lands on. Arrests opens on year-over-year change
    *  (Sean, 1 Oct 2026); Levels is one click away. */
   defaultMode?: "level" | "change";
@@ -482,10 +486,10 @@ function TwoSeriesChart({ chart, onPick, defaultMode = "level" }: {
 
   return (
     <figure className="m-0 mb-6">
-      <figcaption className="font-display font-semibold text-foreground text-[19px] mb-1">
+      <figcaption className={lead ? "sr-only" : "font-display font-semibold text-foreground text-[19px] mb-1"}>
         {chart.title}
       </figcaption>
-      <p className="text-muted text-[13px] m-0 mb-3">{chart.unit}</p>
+      {!lead && <p className="text-muted text-[13px] m-0 mb-3">{chart.unit}</p>}
 
       <ul className="list-none p-0 m-0 mb-3 flex flex-wrap gap-x-4 gap-y-1"
         onMouseLeave={() => setFocus(null)}>
@@ -697,6 +701,7 @@ function TwoSeriesChart({ chart, onPick, defaultMode = "level" }: {
         )}
       </svg>
       )}
+      {lead && <p className="text-muted text-[13px] m-0 mt-2">{chart.unit}</p>}
 
       <div className="flex flex-wrap items-center gap-4 mt-3">
         <button
@@ -937,7 +942,7 @@ export default function CrimeSignals({ onGoTimeline, view, onView }: {
           <p className={SUB_CLASS}>{verdict.summary.split("\n\n")[0]}</p>
           {overall === null ? <SkeletonChart /> : (
             <>
-              <LaneChart chart={overall} onPick={setLanePicked} />
+              <LaneChart chart={overall} onPick={setLanePicked} lead />
               {!!overall.themes?.length && (
                 <div className="mt-2 mb-5">
                   <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">
@@ -1015,10 +1020,10 @@ export default function CrimeSignals({ onGoTimeline, view, onView }: {
         <p className={SUB_CLASS}>Two official US measures, from police records (FBI) and death certificates (CDC), which never agree.</p>
         {chart === null ? <SkeletonChart /> : (
           <>
-            <TwoSeriesChart chart={chart} onPick={setPicked} />
+            <TwoSeriesChart chart={chart} onPick={setPicked} lead />
             {!!chart.themes?.length && (
               <div className="mt-2 mb-5">
-                <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">What this shows</h3>
+                <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">What the chart shows</h3>
                 <ul className="list-none p-0 m-0">
                   {chart.themes.map((t, i) => (
                     <li key={i} className="flex items-baseline gap-3 py-2 border-b border-edge/60 text-[16px] text-foreground/90">
@@ -1068,10 +1073,10 @@ export default function CrimeSignals({ onGoTimeline, view, onView }: {
         <p className={SUB_CLASS}>US intentional homicide against comparable countries and the world, on the UN basis.</p>
         {intl === null ? <SkeletonChart /> : (
           <>
-            <IntlLineChart chart={intl} onPick={setIntlPicked} />
+            <IntlLineChart chart={intl} onPick={setIntlPicked} lead />
             {!!(intl as any).themes?.length && (
               <div className="mt-2 mb-5">
-                <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">What this shows</h3>
+                <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">What the chart shows</h3>
                 <ul className="list-none p-0 m-0">
                   {(intl as any).themes.map((t: { statement: string; tier: string }, i: number) => (
                     <li key={i} className="flex items-baseline gap-3 py-2 border-b border-edge/60 text-[16px] text-foreground/90">
@@ -1101,10 +1106,10 @@ export default function CrimeSignals({ onGoTimeline, view, onView }: {
         <p className={SUB_CLASS}>Police-recorded burglary in the United States and five European countries, since 2000.</p>
         {burg === null ? <SkeletonChart /> : (
           <>
-            <IntlLineChart chart={burg} onPick={setIntlPicked} />
+            <IntlLineChart chart={burg} onPick={setIntlPicked} lead />
             {!!burg.themes?.length && (
               <div className="mt-2 mb-5">
-                <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">What this shows</h3>
+                <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">What the chart shows</h3>
                 <ul className="list-none p-0 m-0">
                   {burg.themes.map((t, i) => (
                     <li key={i} className="flex items-baseline gap-3 py-2 border-b border-edge/60 text-[16px] text-foreground/90">
@@ -1150,8 +1155,8 @@ export default function CrimeSignals({ onGoTimeline, view, onView }: {
             <h2 className={H2_CLASS}>
               Arrests
             </h2>
-            <p className={SUB_CLASS}>Estimated US arrests per year: all arrests, drug arrests and civil immigration arrests.</p>
-            <TwoSeriesChart chart={arrests} onPick={setPicked} defaultMode="change" />
+            <p className={SUB_CLASS}>Estimated US arrests per year, which peaked in 1997: all arrests, drug arrests and civil immigration arrests.</p>
+            <TwoSeriesChart chart={arrests} onPick={setPicked} defaultMode="change" lead />
             {!!arrests.themes?.length && (
               <div className="mt-2 mb-5">
                 <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">
@@ -1334,7 +1339,7 @@ export default function CrimeSignals({ onGoTimeline, view, onView }: {
         <p className={SUB_CLASS}>People in US prisons, jails and under correctional control, 1999 to 2024.</p>
         {incarc === null ? <SkeletonChart /> : (
           <>
-            <DetentionChart chart={incarc} onPick={setDetPicked} defaultMode="change" />
+            <DetentionChart chart={incarc} onPick={setDetPicked} defaultMode="change" lead />
             {!!incarc.themes?.length && (
               <div className="mt-2 mb-5">
                 <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">
@@ -1395,13 +1400,13 @@ export default function CrimeSignals({ onGoTimeline, view, onView }: {
             <h2 className={H2_CLASS}>
               ICE detention
             </h2>
-            <p className={SUB_CLASS}>People held in ICE detention against the number of beds Congress funds.</p>
+            <p className={SUB_CLASS}>Where a sweep goes: people held in ICE detention against the number of beds Congress funds.</p>
             {detention.accuracy_note && (
               <DismissibleNote storageKey="is_crime_detention_accuracy_v1">
                 {detention.accuracy_note}
               </DismissibleNote>
             )}
-            <DetentionChart chart={detention} onPick={setDetPicked} />
+            <DetentionChart chart={detention} onPick={setDetPicked} lead />
             {!!detention.themes?.length && (
               <div className="mt-2 mb-5">
                 <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">
@@ -1434,7 +1439,7 @@ export default function CrimeSignals({ onGoTimeline, view, onView }: {
         <p className={SUB_CLASS}>Missing-person records, psychotic symptoms and belief in hauntings, each indexed to its own first year.</p>
         {anomalies === null ? <SkeletonChart /> : (
           <>
-            <LaneChart chart={anomalies} onPick={setLanePicked} />
+            <LaneChart chart={anomalies} onPick={setLanePicked} lead />
             {!!anomalies.themes?.length && (
               <div className="mt-2 mb-5">
                 <h3 className="font-display font-semibold text-foreground text-[19px] mb-2">

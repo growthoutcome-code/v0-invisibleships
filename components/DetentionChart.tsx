@@ -60,9 +60,13 @@ export type DetChart = {
 };
 
 export default function DetentionChart({
-  chart, onPick, defaultMode = "level",
+  chart, onPick, defaultMode = "level", lead = false,
 }: {
   chart: DetChart; onPick: (s: DetSeries) => void;
+  /** Under a section H2 and its sentence, the chart's own title would repeat
+   *  them: it goes screen-reader only and the unit line moves under the plot
+   *  (Sean, 1 Oct 2026: redundant headings on the Crime pages). */
+  lead?: boolean;
   /** The view a reader lands on. Who is held opens on year-over-year change
    *  (Sean, 1 Oct 2026); it only applies where chart.change_view is set. */
   defaultMode?: "level" | "change";
@@ -141,10 +145,10 @@ export default function DetentionChart({
     // than special-casing a title.
     <figure className="m-0 mb-6"
       {...(ownWindow ? { "data-own-window": `${chart.window.from}-${chart.window.to}` } : {})}>
-      <figcaption className="font-display font-semibold text-foreground text-[19px] mb-1">
+      <figcaption className={lead ? "sr-only" : "font-display font-semibold text-foreground text-[19px] mb-1"}>
         {chart.title}
       </figcaption>
-      <p className="text-muted text-[13px] m-0 mb-3">{chart.unit}</p>
+      {!lead && <p className="text-muted text-[13px] m-0 mb-3">{chart.unit}</p>}
 
       {chart.change_view && (
         <div role="group" aria-label="Chart view" className="flex gap-1 mb-3">
@@ -302,6 +306,7 @@ export default function DetentionChart({
         )}
       </svg>
       )}
+      {lead && <p className="text-muted text-[13px] m-0 mt-2">{chart.unit}</p>}
 
       <p className="text-muted text-[14px] measure mt-3 mb-0">
         Hover or tap a legend entry to single out a measure; tap again (or click the

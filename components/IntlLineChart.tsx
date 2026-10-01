@@ -40,8 +40,14 @@ export type IntlChartDoc = {
 };
 
 export default function IntlLineChart({
-  chart, onPick,
-}: { chart: IntlChartDoc; onPick: (s: IntlSeries) => void }) {
+  chart, onPick, lead = false,
+}: {
+  chart: IntlChartDoc; onPick: (s: IntlSeries) => void;
+  /** Under a section H2 and its sentence, the chart's own title would repeat
+   *  them: it goes screen-reader only and the unit line moves under the plot
+   *  (Sean, 1 Oct 2026: redundant headings on the Crime pages). */
+  lead?: boolean;
+}) {
   const narrow = useNarrow();
   const [focus, setFocus] = useState<string | null>(null); // country code
   const [hoverYear, setHoverYear] = useState<number | null>(null);
@@ -117,10 +123,10 @@ export default function IntlLineChart({
 
   return (
     <figure className="m-0 mb-6">
-      <figcaption className="font-display font-semibold text-foreground text-[19px] mb-1">
+      <figcaption className={lead ? "sr-only" : "font-display font-semibold text-foreground text-[19px] mb-1"}>
         {chart.title}
       </figcaption>
-      <p className="text-muted text-[13px] m-0 mb-3">{chart.unit}</p>
+      {!lead && <p className="text-muted text-[13px] m-0 mb-3">{chart.unit}</p>}
 
       {/* The legend, ABOVE the plot, wired to the lines. */}
       <ul className="list-none p-0 m-0 mb-3 flex flex-wrap gap-x-4 gap-y-1"
@@ -258,6 +264,7 @@ export default function IntlLineChart({
         )}
       </svg>
       )}
+      {lead && <p className="text-muted text-[13px] m-0 mt-2">{chart.unit}</p>}
 
       <p className="text-muted text-[14px] measure mt-3 mb-0">
         Hover or tap a legend entry to light up its line; tap again (or click the line)
