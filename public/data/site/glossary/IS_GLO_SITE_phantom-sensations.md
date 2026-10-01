@@ -5,7 +5,7 @@ collection: glossary
 doc_type: term
 provenance: site-authored
 slug: phantom-sensations
-categories: [glossary, reference]
+categories: [glossary, reference, glossary-neuroscience]
 word_count: 184
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.

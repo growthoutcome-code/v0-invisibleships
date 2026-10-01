@@ -74,14 +74,19 @@ export function conceptPills(filters: Filters, setFilters: (f: Filters) => void)
 }
 
 export default function ConceptsControls({
-  filters, setFilters, sort, setSort,
+  filters, setFilters, sort, setSort, open: openProp, setOpen: setOpenProp,
 }: {
   filters: Filters;
   setFilters: (f: Filters) => void;
   sort: ConceptSort;
   setSort: (s: ConceptSort) => void;
+  /** Panel state, shared with the phone MobileBar when the parent passes it. */
+  open?: boolean;
+  setOpen?: (o: boolean) => void;
 }) {
-  const [open, setOpen] = useState(false);
+  const [openLocal, setOpenLocal] = useState(false);
+  const open = openProp ?? openLocal;
+  const setOpen = setOpenProp ?? setOpenLocal;
 
   const set = (patch: Partial<Filters>) => {
     const next = { ...filters, ...patch };

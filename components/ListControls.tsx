@@ -1,6 +1,8 @@
 "use client";
 
-import { Search, SlidersHorizontal, X } from "lucide-react";
+import { useState } from "react";
+import * as SelectPrimitive from "@radix-ui/react-select";
+import { Search, Filter, X, ArrowUpDown, CalendarDays, type LucideIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
@@ -9,9 +11,9 @@ import FilterGroups, { type FilterGroup } from "@/components/FilterGroups";
 /**
  * The list controls shared by the Journal and Concepts (Sean, 30 Sep 2026).
  *
- * Beside the page title: a Sort menu and a Filter button, nothing else. Search,
- * every filter group and "Clear all" live in the Filter panel, which is wider
- * than before so the search box and chips have room.
+ * A Sort menu and a Filter button, on the bar right above the list (moved there
+ * from beside the page title, 30 Sep 2026). Search, every filter group and
+ * "Clear all" live in the Filter panel.
  *
  * This reverses 26 Aug, when search was kept always visible as the fast path.
  * What makes it safe to hide is ActiveLine: whenever a search or filter is on,
@@ -42,7 +44,7 @@ export function FilterButton({ count, open, onOpen }: { count: number; open: boo
   return (
     <button type="button" onClick={onOpen} aria-expanded={open}
       className="inline-flex items-center gap-2 px-4 h-10 border border-edge text-[15px] text-foreground hover:border-foreground transition-colors">
-      <SlidersHorizontal size={16} aria-hidden />
+      <Filter size={16} aria-hidden />
       Filter
       {count > 0 && <span className="ml-1 px-1.5 text-[13px] font-semibold bg-foreground text-background tabular-nums">{count}</span>}
     </button>
@@ -84,32 +86,129 @@ export function FilterPanel({ open, setOpen, title, q, setQ, placeholder, search
   );
 }
 
-/** Only rendered while a search or filter is on. */
-export function ActiveLine({ shown, of, noun, q, clearQ, pills, onClearAll, searching }: {
+/**
+ * The bar directly above the list (Sean, 30 Sep 2026: the filter "should rest to
+ * the right of where the tags show up ... in that same line above the content").
+ * Left: what is on, as removable chips, only while a search or filter is on.
+ * Right: Sort and Filter, always. On the Journal it sits in the content column,
+ * beside the Months sidebar.
+ */
+export function ActiveLine({ shown, of, noun, q, clearQ, pills, onClearAll, searching, controls, countOnPhone = false }: {
   shown: number; of: number; noun: string; q: string; clearQ: () => void;
   pills: Pill[]; onClearAll: () => void; searching?: boolean;
+  /** Sort + Filter, right-aligned on the same line (640px and up; phones use MobileBar) */
+  controls?: React.ReactNode;
+  /** Show the count on phones too. Off on the Journal, whose "1–10 of N" line says it. */
+  countOnPhone?: boolean;
 }) {
-  if (!q.trim() && !pills.length) return null;
-  const chip = "inline-flex items-center gap-1.5 px-2.5 py-1 text-[13px] border border-edge text-foreground hover:border-foreground";
+  const active = !!q.trim() || pills.length > 0;
+  if (!active && !controls) return null;
+  // On phones a chip is the same height as the buttons above it (h-10); from 640px up it is compact.
+  const chip = "inline-flex items-center gap-1.5 h-10 px-3 sm:h-auto sm:px-2.5 sm:py-1 text-[13px] border border-edge text-foreground hover:border-foreground";
   return (
-    <div className="flex flex-wrap items-center gap-2 mb-8">
-      <span className="text-[15px] text-muted tabular-nums whitespace-nowrap mr-1" aria-live="polite">
-        {searching ? "Searching…" : `${shown} of ${of} ${noun}`}
-      </span>
-      {q.trim() && (
-        <button type="button" onClick={clearQ} className={chip}>
-          &ldquo;{q.trim()}&rdquo; <X size={13} aria-hidden /><span className="sr-only">Clear search</span>
-        </button>
+    // Phones (< 640px): the controls are in MobileBar above this line, so it holds
+    // only the chips (and, on Concepts, the count). From 640px (tablets up): count
+    // and chips left, labelled Sort and Filter right; many chips wrap and the
+    // controls keep right. (Sean, 30 Sep 2026.)
+    <div className={`flex flex-wrap items-center gap-x-4 gap-y-4 mb-8 ${!active && !countOnPhone ? "max-sm:hidden" : ""}`}>
+      <div className="flex flex-wrap items-center gap-2 min-w-0 w-full sm:w-auto sm:flex-1">
+        {/* The count always shows, so the bar is balanced: count left, controls
+            right (Sean, 30 Sep 2026: "display in all on the left"). */}
+        <span className={`text-[15px] text-muted tabular-nums whitespace-nowrap mr-1 ${countOnPhone ? "" : "hidden sm:inline"}`} aria-live="polite">
+          {searching ? "Searching…" : active ? `${shown} of ${of} ${noun}` : `Showing all ${of} ${noun}`}
+        </span>
+        {active && (
+          <>
+            {q.trim() && (
+              <button type="button" onClick={clearQ} className={chip}>
+                &ldquo;{q.trim()}&rdquo; <X size={13} aria-hidden /><span className="sr-only">Clear search</span>
+              </button>
+            )}
+            {pills.map((p) => (
+              <button key={p.key} type="button" onClick={p.clear} className={chip}>
+                {p.label} <X size={13} aria-hidden /><span className="sr-only">Remove filter</span>
+              </button>
+            ))}
+            <button type="button" onClick={onClearAll}
+              className="text-[13px] uppercase tracking-[0.08em] font-semibold text-muted hover:text-foreground ml-1">
+              Clear all
+            </button>
+          </>
+        )}
+      </div>
+      {controls && (
+        <div className="hidden sm:flex items-center gap-3 sm:ml-auto sm:justify-end shrink-0">
+          {controls}
+        </div>
       )}
-      {pills.map((p) => (
-        <button key={p.key} type="button" onClick={p.clear} className={chip}>
-          {p.label} <X size={13} aria-hidden /><span className="sr-only">Remove filter</span>
+    </div>
+  );
+}
+
+/**
+ * Phones only (< 640px). One bar of icon buttons across the full width, in equal
+ * parts: Months (Journal only), Sort, Filter (Sean, 30 Sep 2026: "three icons
+ * in a row ... that spans the width of the mobile device"). Each has a hidden
+ * label for screen readers. Months opens the month list directly beneath the
+ * bar. Pinned under the site header while scrolling. From 640px up the labelled
+ * controls on the bar above the list take over (ActiveLine `controls`).
+ */
+export type MonthItem = { id: string; label: string; count?: number; disabled?: boolean };
+
+export function MobileBar<T extends string>({
+  months, sort, onFilter, filterOpen,
+}: {
+  /** The index list: Months on the Journal, Terms on the Glossary (icon + label override). */
+  months?: { items: MonthItem[]; active: string | null; onPick: (id: string) => void; label?: string; icon?: LucideIcon };
+  sort: { value: T; options: { v: T; l: string }[]; onChange: (v: T) => void; label: string };
+  onFilter: () => void;
+  filterOpen: boolean;
+}) {
+  const [open, setOpen] = useState(false);
+  const idxLabel = months?.label || "Months";
+  const IdxIcon = months?.icon || CalendarDays;
+  const btn = "flex items-center justify-center h-10 w-full border border-edge text-foreground hover:border-foreground transition-colors";
+  return (
+    <div className="sm:hidden sticky top-[72px] z-30 -mx-4 px-4 pt-2 pb-2 mb-5 bg-background">
+      <div className={`grid gap-2 ${months ? "grid-cols-3" : "grid-cols-2"}`}>
+        {months && (
+          <button type="button" onClick={() => setOpen((v) => !v)} aria-expanded={open}
+            aria-controls="mobile-months" aria-label={idxLabel} title={idxLabel}
+            className={`${btn} ${open ? "border-foreground" : ""}`}>
+            <IdxIcon size={18} aria-hidden />
+          </button>
+        )}
+        <SelectPrimitive.Root value={sort.value} onValueChange={(v) => sort.onChange(v as T)}>
+          <SelectPrimitive.Trigger aria-label={sort.label} title={sort.label} className={btn}>
+            <ArrowUpDown size={18} aria-hidden />
+          </SelectPrimitive.Trigger>
+          <SelectContent>
+            {sort.options.map((o) => <SelectItem key={o.v} value={o.v}>{o.l}</SelectItem>)}
+          </SelectContent>
+        </SelectPrimitive.Root>
+        <button type="button" onClick={onFilter} aria-expanded={filterOpen} aria-label="Filter" title="Filter" className={btn}>
+          <Filter size={18} aria-hidden />
         </button>
-      ))}
-      <button type="button" onClick={onClearAll}
-        className="text-[13px] uppercase tracking-[0.08em] font-semibold text-muted hover:text-foreground ml-1">
-        Clear all
-      </button>
+      </div>
+      {months && open && (
+        <ul id="mobile-months" aria-label={idxLabel}
+          className="list-none p-0 m-0 mt-2 max-h-[55vh] overflow-y-auto scroll-thin border border-edge bg-background">
+          {months.items.map((m) => (
+            <li key={m.id}>
+              <button type="button" disabled={m.disabled}
+                onClick={() => { if (m.disabled) return; setOpen(false); months.onPick(m.id); window.scrollTo({ top: 0 }); }}
+                aria-current={months.active === m.id ? "true" : undefined}
+                className={`flex w-full items-baseline gap-2 text-left px-3 py-2.5 text-[16px] border-b border-edge/50 last:border-b-0 ${
+                  m.disabled ? "text-muted/50 cursor-default"
+                    : months.active === m.id ? "text-foreground font-semibold bg-panel" : "text-foreground/75 hover:bg-panel"
+                }`}>
+                <span>{m.label}</span>
+                {m.count !== undefined && <span className="ml-auto text-[13px] tabular-nums">{m.count}</span>}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

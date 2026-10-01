@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { track } from "@/lib/analytics";
-import { DataNotice, DataNoteLine } from "@/components/DataIntro";
+import { DataNoteLine } from "@/components/DataIntro";
 import { TimelineNarrative, TimelineHub } from "@/components/TimelineIntro";
 import GovCloudReport from "@/components/GovCloudReport";
 import GovCloudSources from "@/components/GovCloudSources";
@@ -54,13 +54,14 @@ function setInternalTab(t: "time" | "adopt") {
  * URL could not follow a sub-tab click.
  */
 export default function DataView({
-  sub, onSub, conceptFilters, setConceptFilters, conceptSort,
+  sub, onSub, conceptFilters, setConceptFilters, conceptSort, setConceptSort,
 }: {
   sub: SubTab;
   onSub: (s: SubTab) => void;
   conceptFilters: Filters;
   setConceptFilters: (f: Filters) => void;
   conceptSort: ConceptSort;
+  setConceptSort: (s: ConceptSort) => void;
 }) {
   useEffect(() => { track("data_report_viewed"); }, []);
 
@@ -120,7 +121,9 @@ export default function DataView({
           disclaimer on the research page to the top of the page above the tabs."
           It still shows on the landing view only — it is the Timeline's notice,
           and the other verticals carry their own one-line version below. */}
-      {sub === "timeline" && <DataNotice />}
+      {/* The Research sentence under the title replaced the dismissible "About
+          this data" panel (Sean, 30 Sep 2026); it is rendered with the title by
+          JournalBrowser (PageIntro). */}
 
       {sub !== "concepts" && (
       <div role="tablist" aria-label="Research sections"
@@ -170,7 +173,7 @@ export default function DataView({
 
       {sub === "health" && <HealthSignals onGoTimeline={() => pick("timeline")} />}
       {sub === "crime" && <CrimeSignals onGoTimeline={() => pick("timeline")} />}
-      {sub === "concepts" && <ConceptsView filters={conceptFilters} setFilters={setConceptFilters} sort={conceptSort} />}
+      {sub === "concepts" && <ConceptsView filters={conceptFilters} setFilters={setConceptFilters} sort={conceptSort} setSort={setConceptSort} />}
     </div>
   );
 }

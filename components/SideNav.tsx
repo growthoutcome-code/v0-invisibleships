@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { track } from "@/lib/analytics";
+import { ChevronDown } from "lucide-react";
 
 /**
  * The site's ONE side navigation (Sean, 2026-08-21).
@@ -136,7 +137,7 @@ export function useSectionNav(
 export type NavMode = "index" | "outline";
 
 export default function SideNav({
-  sections, active, label, mode = "outline", onPick,
+  sections, active, label, mode = "outline", onPick, phoneHandledElsewhere = false,
 }: {
   sections: NavSection[];
   active: string | null;
@@ -144,6 +145,9 @@ export default function SideNav({
   mode?: NavMode;
   /** index mode only: picking an entry replaces the content. */
   onPick?: (id: string) => void;
+  /** Phones get this list from another control (the Journal's MobileBar), so the
+   *  collapsible shows only from 640px to 1024px. */
+  phoneHandledElsewhere?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const heading = label ?? (mode === "outline" ? "On this page" : "Index");
@@ -169,32 +173,36 @@ export default function SideNav({
     track("side_nav_used", { id, mode });
   };
 
-  // Outline mode names where the reader is; index mode names the list.
-  const triggerLabel = mode === "outline"
-    ? (sections.find((s) => s.id === active)?.label ?? heading)
-    : heading;
+  // Both modes name where the reader is (the current month, or section); the
+  // small label before it names the list.
+  const triggerLabel = sections.find((s) => s.id === active)?.label ?? heading;
 
   return (
     <>
-      {/* ---- narrow: sticky bar + sheet ---- */}
-      <div className="lg:hidden sticky top-[56px] z-30 -mx-4 sm:-mx-6 px-4 sm:px-6 py-2 bg-background/95 backdrop-blur border-b border-edge">
+      {/* ---- narrow (< 1024px): a collapsible, like an accordion ----
+          Sean, 30 Sep 2026: no rule line across the page, a clear sign it opens,
+          and the same height as the Sort and Filter buttons below it. A button
+          with a turning chevron that expands the list in place; the list keeps
+          the counts and greyed-out entries of the wide rail. */}
+      <div className={`${phoneHandledElsewhere ? "hidden sm:block" : ""} lg:hidden sticky top-[72px] z-30 -mx-4 sm:-mx-6 px-4 sm:px-6 pt-2 pb-2 mb-4 bg-background`}>
         <button type="button" onClick={() => setOpen((v) => !v)}
           aria-expanded={open} aria-controls="section-nav-sheet"
-          className="flex items-center gap-2 w-full text-left text-[15px] text-foreground/85 py-1">
-          <span className="text-muted text-[13px] uppercase tracking-wide shrink-0">{heading}</span>
-          <span className="font-display font-semibold truncate">{triggerLabel}</span>
-          <span className={`ml-auto shrink-0 transition-transform ${open ? "rotate-180" : ""}`} aria-hidden="true">▾</span>
+          className="flex items-center gap-3 w-full h-10 px-3 border border-edge text-left hover:border-foreground transition-colors">
+          <span className="text-muted text-[12px] uppercase tracking-wide shrink-0">{heading}</span>
+          <span className="font-display font-semibold text-[15px] text-foreground truncate">{triggerLabel}</span>
+          <ChevronDown size={18} aria-hidden="true"
+            className={`ml-auto shrink-0 text-muted transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
         </button>
         {open && (
           <ul id="section-nav-sheet"
-            className="list-none p-0 m-0 mt-2 mb-1 max-h-[60vh] overflow-y-auto scroll-thin border-t border-edge">
+            className="list-none p-0 m-0 mt-2 max-h-[55vh] overflow-y-auto scroll-thin border border-edge bg-background">
             {sections.map((s) => (
               <li key={s.id}>
                 <button type="button" onClick={() => go(s.id)} disabled={s.disabled}
                   aria-current={active === s.id ? "true" : undefined}
-                  className={`flex w-full items-baseline gap-2 text-left py-2.5 text-[16px] border-b border-edge/50 ${
+                  className={`flex w-full items-baseline gap-2 text-left px-3 py-2.5 text-[16px] border-b border-edge/50 last:border-b-0 ${
                     s.disabled ? "text-muted/50 cursor-default"
-                      : active === s.id ? "text-foreground font-semibold" : "text-foreground/70"
+                      : active === s.id ? "text-foreground font-semibold bg-panel" : "text-foreground/75 hover:bg-panel"
                   }`}>
                   <span>{s.label}</span>
                   {s.count !== undefined && <span className="ml-auto text-[13px] tabular-nums">{s.count}</span>}

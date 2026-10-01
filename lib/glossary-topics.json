@@ -1,0 +1,176 @@
+{
+ "_note": "Glossary topics (Sean, 30 Sep 2026). Up to two per term, keyed by document id. Read by scripts/export_site_content_md.mjs (glossary-site/ categories line), scripts/apply_glossary_topics.py (site data, glossary/ in the download, manifests, Supabase SQL) and the Glossary filter. Rules: project/glossary-topics.md.",
+ "topics": {
+  "glossary-military-intelligence": "Military & intelligence",
+  "glossary-technology": "Technology",
+  "glossary-neuroscience": "Neuroscience",
+  "glossary-neuroethics": "Neuroethics",
+  "glossary-ethics-human-rights": "Ethics & human rights",
+  "glossary-psychology": "Psychology",
+  "glossary-physics-signals": "Physics & signals"
+ },
+ "tags": {
+  "IS-GLO-ARTIFICIAL-INTELLIGENCE": [
+   "glossary-technology"
+  ],
+  "IS-GLO-BRAIN-DATA-AS-A-SERVICE-BRAIN-SPACEHTTP-BRAIN-SPACE": [
+   "glossary-technology",
+   "glossary-neuroethics"
+  ],
+  "IS-GLO-BRAINCOMPUTER-INTERFACE-BCI": [
+   "glossary-technology",
+   "glossary-neuroscience"
+  ],
+  "IS-GLO-CHILLING-EFFECT": [
+   "glossary-ethics-human-rights"
+  ],
+  "IS-GLO-COGNITIVE-LIBERTY": [
+   "glossary-neuroethics",
+   "glossary-ethics-human-rights"
+  ],
+  "IS-GLO-CURSOR-CONTROL-BCI": [
+   "glossary-technology"
+  ],
+  "IS-GLO-ELECTROENCEPHALOGRAM": [
+   "glossary-neuroscience",
+   "glossary-technology"
+  ],
+  "IS-GLO-ELECTROENCEPHALOGRAPH-EEG": [
+   "glossary-neuroscience",
+   "glossary-technology"
+  ],
+  "IS-GLO-EUTHANISIA": [
+   "glossary-ethics-human-rights"
+  ],
+  "IS-GLO-HARDWARE-COMPUTER": [
+   "glossary-technology"
+  ],
+  "IS-GLO-PERCEPTUAL-SET": [
+   "glossary-neuroscience",
+   "glossary-psychology"
+  ],
+  "IS-GLO-SOFTWARE": [
+   "glossary-technology"
+  ],
+  "IS-GLO-SOFTWARE-AS-A-SERVICE-SAAS": [
+   "glossary-technology"
+  ],
+  "IS-GLO-TELEPATHIC": [
+   "glossary-neuroethics"
+  ],
+  "IS-GLO-TELEPATHY": [
+   "glossary-neuroethics"
+  ],
+  "IS-GLO-TERRORISM": [
+   "glossary-ethics-human-rights"
+  ],
+  "IS-GLO-TORMENT": [
+   "glossary-ethics-human-rights",
+   "glossary-psychology"
+  ],
+  "IS-GLO-TRANSPARENT-BRAIN-COMPUTER-INTERFACES-BCIS": [
+   "glossary-technology",
+   "glossary-neuroethics"
+  ],
+  "IS-GLO-SITE-BREACHING": [
+   "glossary-military-intelligence"
+  ],
+  "IS-GLO-SITE-CONTACT-MICROPHONE": [
+   "glossary-technology",
+   "glossary-physics-signals"
+  ],
+  "IS-GLO-SITE-DIRECTED-ENERGY": [
+   "glossary-military-intelligence",
+   "glossary-physics-signals"
+  ],
+  "IS-GLO-SITE-DIVING": [
+   "glossary-military-intelligence"
+  ],
+  "IS-GLO-SITE-ELECTROMAGNETIC-FIELD": [
+   "glossary-physics-signals"
+  ],
+  "IS-GLO-SITE-ENERGY-HARVESTING": [
+   "glossary-physics-signals"
+  ],
+  "IS-GLO-SITE-FALSE-DISCLOSURE": [
+   "glossary-military-intelligence"
+  ],
+  "IS-GLO-SITE-GANG-STALKING": [
+   "glossary-military-intelligence",
+   "glossary-ethics-human-rights"
+  ],
+  "IS-GLO-SITE-GASLIGHTING": [
+   "glossary-psychology"
+  ],
+  "IS-GLO-SITE-IMAGE-BASED-SEARCH": [
+   "glossary-military-intelligence",
+   "glossary-neuroethics"
+  ],
+  "IS-GLO-SITE-LASER-MICROPHONE": [
+   "glossary-technology",
+   "glossary-physics-signals"
+  ],
+  "IS-GLO-SITE-MICROWAVE-AUDITORY-EFFECT": [
+   "glossary-military-intelligence",
+   "glossary-physics-signals"
+  ],
+  "IS-GLO-SITE-MOSQUITO-DEVICE": [
+   "glossary-technology",
+   "glossary-physics-signals"
+  ],
+  "IS-GLO-SITE-MUON-TOMOGRAPHY": [
+   "glossary-physics-signals"
+  ],
+  "IS-GLO-SITE-NECROSIS-NEURO-SCIENCE": [
+   "glossary-neuroscience",
+   "glossary-neuroethics"
+  ],
+  "IS-GLO-SITE-NEURO-ENGAGEMENT": [
+   "glossary-neuroethics"
+  ],
+  "IS-GLO-SITE-NO-TOUCH-TORTURE": [
+   "glossary-ethics-human-rights",
+   "glossary-military-intelligence"
+  ],
+  "IS-GLO-SITE-NON-IONIZING-RADIATION": [
+   "glossary-physics-signals"
+  ],
+  "IS-GLO-SITE-OBEDIENCE-EXPERIMENT": [
+   "glossary-psychology",
+   "glossary-ethics-human-rights"
+  ],
+  "IS-GLO-SITE-PARAMETRIC-ARRAY": [
+   "glossary-technology",
+   "glossary-physics-signals"
+  ],
+  "IS-GLO-SITE-PHANTOM-SENSATIONS": [
+   "glossary-neuroscience"
+  ],
+  "IS-GLO-SITE-PIEZOELECTRICITY": [
+   "glossary-physics-signals"
+  ],
+  "IS-GLO-SITE-PRESBYCUSIS": [
+   "glossary-neuroscience"
+  ],
+  "IS-GLO-SITE-PSYCHOLOGICAL-SMOTHERING": [
+   "glossary-psychology"
+  ],
+  "IS-GLO-SITE-SAMPLING-LIMIT": [
+   "glossary-physics-signals"
+  ],
+  "IS-GLO-SITE-STRUCTURE-BORNE-AUDIO": [
+   "glossary-physics-signals"
+  ],
+  "IS-GLO-SITE-TARGETED-INDIVIDUAL": [
+   "glossary-ethics-human-rights"
+  ],
+  "IS-GLO-SITE-VOICE-TO-SKULL": [
+   "glossary-military-intelligence",
+   "glossary-physics-signals"
+  ],
+  "IS-GLO-SITE-ZERSETZUNG-TACTICS": [
+   "glossary-military-intelligence",
+   "glossary-psychology"
+  ]
+ }
+}

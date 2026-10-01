@@ -59,6 +59,11 @@ const NAV: { t: Tab; href: string; label: string }[] = [
   { t: "glossary", href: "/glossary", label: "Glossary" },
 ];
 
+const phoneLinkCls = (active: boolean) =>
+  `font-display w-full text-left px-1 py-3 text-[15px] font-medium uppercase tracking-[0.12em] border-b border-edge/60 transition-colors ${
+    active ? "text-foreground" : "text-muted hover:text-foreground"
+  }`;
+
 const linkCls = (active: boolean) =>
   `font-display px-2.5 py-1.5 text-[12px] font-medium uppercase tracking-[0.14em] border-b border-transparent transition-colors ${
     active ? "text-foreground border-foreground" : "text-muted hover:text-foreground hover:border-foreground"
@@ -76,20 +81,24 @@ export default function Header({
   const [open, setOpen] = useState(false);
   const [exportOpen, setExportOpen] = useState(false);
 
-  const item = (n: (typeof NAV)[number], extra = "") =>
-    onTab ? (
+  // `phone`: the menu under the hamburger, where links are larger, full-width tap
+  // targets (Sean, 30 Sep 2026: "update the text size of the rest of the options").
+  const item = (n: (typeof NAV)[number], extra = "", phone = false) => {
+    const cls = phone ? phoneLinkCls(tab === n.t) : `${linkCls(tab === n.t)} ${extra}`;
+    return onTab ? (
       <button
         key={n.t}
         onClick={() => { onTab(n.t); setOpen(false); }}
-        className={`${linkCls(tab === n.t)} ${extra}`}
+        className={cls}
       >
         {n.label}
       </button>
     ) : (
-      <a key={n.t} href={n.href} className={`${linkCls(tab === n.t)} ${extra}`}>
+      <a key={n.t} href={n.href} className={cls}>
         {n.label}
       </a>
     );
+  };
 
   return (
     <header className="sticky top-0 z-30 border-b border-edge bg-background/90 backdrop-blur">
@@ -172,13 +181,14 @@ export default function Header({
       </div>
 
       {open && (
-        <div className="flex flex-col gap-1 border-t border-edge px-4 py-3 lg:hidden">
-          {NAV.map((n) => item(n, "text-left"))}
+        <div className="flex flex-col border-t border-edge px-5 pt-1 pb-5 lg:hidden">
+          {NAV.map((n) => item(n, "", true))}
+          {/* Full-width button, as on desktop (Sean, 30 Sep 2026). */}
           <button
             onClick={() => { setExportOpen(true); setOpen(false); }}
-            className="font-display inline-flex items-center gap-1.5 px-2.5 py-1.5 text-left text-[12px] font-medium uppercase tracking-[0.14em] text-muted hover:text-foreground"
+            className="font-display mt-5 inline-flex h-12 w-full items-center justify-center gap-2 bg-foreground px-4 text-[14px] font-medium uppercase tracking-[0.14em] text-background"
           >
-            <Download size={15} /> {EXPORT_LABEL}
+            <Download size={17} /> {EXPORT_LABEL}
           </button>
           {ACCOUNTS_READY && (
             <a

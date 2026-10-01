@@ -25,11 +25,14 @@ import { cleanTerm, cleanDef, splitDef, firstSentences } from "@/lib/glossary-fo
 import GlossaryBody from "@/components/GlossaryBody";
 import GlossaryIllustration from "@/components/GlossaryIllustration";
 import { DOCUMENTS, AUTHOR, EXTRA_GLOSSARY, type AuthorItem } from "@/lib/site-content";
+import GLOSSARY_TOPICS from "@/lib/glossary-topics.json";
 import { CORPUS_SUMMARY } from "@/lib/corpus-summary";
 import PageActions, { type SortDir } from "@/components/PageActions";
 import Pager from "@/components/Pager";
-import { SortSelect, FilterButton, FilterPanel, ActiveLine } from "@/components/ListControls";
-import ConceptsControls from "@/components/ConceptsToolbar";
+import PageIntro from "@/components/PageIntro";
+import CardShare from "@/components/CardShare";
+import { H2_CLASS, SUB_CLASS } from "@/components/SectionHead";
+import { SortSelect, FilterButton, FilterPanel, ActiveLine, MobileBar } from "@/components/ListControls";
 import { NO_FILTERS, type Filters, type ConceptSort } from "@/lib/concepts";
 import DataView, { type SubTab } from "@/components/DataView";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
@@ -106,6 +109,12 @@ export default function JournalBrowser({
   const [textHits, setTextHits] = useState<Set<string>>(new Set());
   const [searching, setSearching] = useState(false);
   const [gcat, setGcat] = useState("");
+  // Glossary controls (Sean, 30 Sep 2026: "it's got to work just like the other
+  // filters"). Held here, not in GlossaryList, so they survive opening a term.
+  const [gsort, setGsort] = useState<GSort>("az");
+  const [gtopics, setGtopics] = useState<string[]>([]);
+  const [gmatch, setGmatch] = useState<"any" | "all">("any");
+  const [gpanel, setGpanel] = useState(false);
 
   // The feed is a window of PAGE_SIZE entries starting at `start` (an index into
   // `filtered`), not a fixed grid of pages. A month link starts the window at
@@ -234,14 +243,19 @@ export default function JournalBrowser({
     return n;
   }, [journal, ds]);
   const themeOpts = useMemo(() => Object.keys(THEMES).filter((t) => tagCount[t]).sort((a, b) => tagCount[b] - tagCount[a]).map((t) => ({ v: t, l: THEMES[t] })), [tagCount]);
-  // No "Organizations named in statements" filter (Sean, 30 Sep 2026: removed).
-  // The tags stay in the data and the download (organizations_named); the reader
-  // hides them. See project/theme-tags.md.
+  // No organizations filter, and no organization tags anywhere (Sean, 30 Sep 2026:
+  // no lists of organizations or names on the site). Search reads the full text.
+  // scripts/check_no_name_lists.py keeps it that way.
   // Entry type replaces the old Topic list, whose options were every category in
   // the archive: 9 of its 16 (legal, analysis, glossary…) matched no journal page.
   const etypes = useMemo(() => Object.keys(ENTRY_TYPES).filter((t) => journal.some((d) => (ds?.docCats[d.id] || []).includes(t))), [journal, ds]);
   // "Paraphrasing" is left out of the filter (Sean, 30 Sep 2026); the tag stays in the data.
-  const stypes = useMemo(() => (ds?.categories || []).filter((c) => c.kind === "statement_type" && c.slug !== "paraphrasing").map((c) => c.slug).sort(), [ds]);
+  // "From the distance" was removed (Sean, 30 Sep 2026): every recording holds
+  // statements from the distance AND from the author, so as a filter it returns
+  // nearly every recorded entry and says nothing. Pulling those statements out as
+  // quotes is a separate job (reading each transcript), not a tag. The tags stay
+  // in the data; only the panel option goes.
+  const stypes = useMemo(() => (ds?.categories || []).filter((c) => c.kind === "statement_type" && c.slug !== "paraphrasing" && c.slug !== "from-the-distance").map((c) => c.slug).sort(), [ds]);
 
   useEffect(() => {
     if (!ds || !q.trim()) { setTextHits(new Set()); setSearching(false); return; }
@@ -344,9 +358,9 @@ export default function JournalBrowser({
     match: fmatch[key], setMatch: (m) => setFmatch((s) => ({ ...s, [key]: m })), ...extra,
   });
   // The panel's groups, in Sean's order (30 Sep 2026): Dates, then Statement
-  // type, then the rest. Glossary term and Organizations were removed from the
-  // panel; their tags stay in the data. Topic is the same vocabulary as the
-  // Concepts panel's Topic.
+  // type, then the rest. Glossary term was removed from the panel (its tags stay
+  // in the data); organization tags were removed altogether. Topic is the same
+  // vocabulary as the Concepts panel's Topic.
   const filterGroups: FilterGroup[] = [
     grp("dates", "Dates", [], { dates: { from: dFrom, to: dTo, setFrom: setDFrom, setTo: setDTo, min: dateSpan.min, max: dateSpan.max } }),
     grp("stype", "Statement type", stypes.map((x) => ({ v: x, l: cap(x) })), { matchable: true }),
@@ -363,6 +377,16 @@ export default function JournalBrowser({
     ...(dTo ? [{ key: "dTo", label: `To ${dTo}`, clear: () => setDTo("") }] : []),
   ];
   const activeFilters = pills.length + (q.trim() ? 1 : 0);
+  // Month list for the sidebar and the phone bar (after activeFilters, which it reads).
+  const monthItems = months.map((m) => ({
+    id: m.id, label: m.label,
+    count: activeFilters ? m.count : undefined,
+    disabled: m.count === 0,
+  }));
+  const pickMonth = (id: string) => {
+    const m = months.find((x) => x.id === id);
+    if (m && m.first >= 0) setStart(m.first);
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
@@ -419,26 +443,41 @@ export default function JournalBrowser({
         {!showLoader && (
           <TitleBand
             title={TAB_TITLE[tab]}
-            actions={
-              tab === "journal" && !selDoc ? (
-                <PageActions>
-                  <SortSelect label="Sort entries" value={sort} options={JOURNAL_SORTS}
-                    onChange={(v) => { setSort(v); track("sort_changed", { sort: v }); }} />
-                  <FilterButton count={activeFilters} open={panelOpen} onOpen={() => { setPanelOpen(true); track("filter_opened", {}); }} />
-                  <FilterPanel open={panelOpen} setOpen={setPanelOpen} title="Search & filter the journal"
-                    q={q} setQ={setQ} placeholder={`Search ${journal.length} entries — words, names, places`} searchLabel="Search the journal"
-                    groups={filterGroups} shown={filtered.length} searching={searching} onClearAll={resetFilters} />
-                </PageActions>
-              ) : tab === "concepts" ? (
-                <PageActions>
-                  <ConceptsControls filters={conceptFilters} setFilters={setConceptFilters} sort={conceptSort} setSort={setConceptSort} />
-                </PageActions>
-              ) : undefined
-            }
           />
         )}
+        {/* One sentence under the title, ending with the disclaimer (Sean, 30 Sep
+            2026). Placement is fixed: under the H1, above the list, on all three. */}
+        {!showLoader && tab === "journal" && !selDoc && (
+          <PageIntro from="journal_intro">
+            Is the{" "}
+            <Link href="/concepts/the-neurotech-bullhorn" className="text-accent underline underline-offset-4">neurotech bullhorn</Link>{" "}
+            real? The journal records the group conversation behind that question, including threats,
+            accusations and suggestions.
+          </PageIntro>
+        )}
+        {!showLoader && tab === "concepts" && (
+          <PageIntro from="concepts_intro">
+            Ideas drawn from this archive&rsquo;s research and journal on a range of subjects, each one either the
+            author&rsquo;s own speculation or generated by AI, and labelled as such.
+          </PageIntro>
+        )}
+        {!showLoader && tab === "documents" && (
+          <PageIntro from="documents_intro">
+            Start with the research documents: tools a person can use, from the Personal Protection Plan to a
+            framework for legal action. The four-part journal series, the primary record, follows as the originals.
+          </PageIntro>
+        )}
+        {!showLoader && tab === "data" && (
+          <PageIntro from="research_intro">
+            Government clouds exist to serve the public; this research seeks to understand them from the public
+            record. Separately, do health and crime records show signs of Zersetzung tactics affecting the
+            population?
+          </PageIntro>
+        )}
         {tab === "glossary" ? (
-          <GlossarySection terms={glossaryTerms} gcat={gcat} setGcat={setGcat} gsel={gsel} setGsel={setGsel} />
+          <GlossarySection terms={glossaryTerms} gsel={gsel} setGsel={setGsel}
+            docCats={ds?.docCats || {}}
+            ctl={{ q: gcat, setQ: setGcat, sort: gsort, setSort: setGsort, topics: gtopics, setTopics: setGtopics, match: gmatch, setMatch: setGmatch, panel: gpanel, setPanel: setGpanel }} />
         ) : tab === "documents" ? (
           <DocumentsView />
         ) : tab === "data" || tab === "concepts" ? (
@@ -453,16 +492,10 @@ export default function JournalBrowser({
               <SideNav
                 mode="index"
                 label="Months"
-                sections={months.map((m) => ({
-                  id: m.id, label: m.label,
-                  count: activeFilters ? m.count : undefined,
-                  disabled: m.count === 0,
-                }))}
+                sections={monthItems}
                 active={activeMonth}
-                onPick={(id: string) => {
-                  const m = months.find((x) => x.id === id);
-                  if (m && m.first >= 0) setStart(m.first);
-                }}
+                onPick={pickMonth}
+                phoneHandledElsewhere
               />
             )}
             <div className="min-w-0 lg:col-start-2">
@@ -474,8 +507,19 @@ export default function JournalBrowser({
                   onNext={selIdx >= 0 && selIdx < filtered.length - 1 ? () => setSel(filtered[selIdx + 1].id) : undefined}
                 />
               ) : (<>
+                <MobileBar months={{ items: monthItems, active: activeMonth, onPick: pickMonth }}
+                  sort={{ value: sort, options: JOURNAL_SORTS, label: "Sort entries", onChange: (v) => { setSort(v); track("sort_changed", { sort: v }); } }}
+                  onFilter={() => { setPanelOpen(true); track("filter_opened", {}); }} filterOpen={panelOpen} />
                 <ActiveLine shown={filtered.length} of={journal.length} noun="entries" q={q} clearQ={() => setQ("")}
-                  pills={pills} onClearAll={resetFilters} searching={searching} />
+                  pills={pills} onClearAll={resetFilters} searching={searching}
+                  controls={<>
+                    <SortSelect label="Sort entries" value={sort} options={JOURNAL_SORTS}
+                      onChange={(v) => { setSort(v); track("sort_changed", { sort: v }); }} />
+                    <FilterButton count={activeFilters} open={panelOpen} onOpen={() => { setPanelOpen(true); track("filter_opened", {}); }} />
+                    <FilterPanel open={panelOpen} setOpen={setPanelOpen} title="Search & filter the journal"
+                      q={q} setQ={setQ} placeholder={`Search ${journal.length} entries — words, names, places`} searchLabel="Search the journal"
+                      groups={filterGroups} shown={filtered.length} searching={searching} onClearAll={resetFilters} />
+                  </>} />
                 <Feed items={pageItems} excerpts={excerpts} docCats={ds?.docCats || {}} lead={fsel.theme || []} total={filtered.length} from={start + 1}
                   filteredOf={activeFilters ? journal.length : 0} searching={false} onClear={resetFilters}
                   page={page} totalPages={totalPages} setPage={setPage} onOpen={setSel} onSearch={() => setPanelOpen(true)} />
@@ -493,7 +537,7 @@ export default function JournalBrowser({
           <div className={tab === "data" || tab === "concepts" ? "" : "hidden"}
                aria-hidden={!(tab === "data" || tab === "concepts")}>
             <DataView
-              conceptFilters={conceptFilters} setConceptFilters={setConceptFilters} conceptSort={conceptSort}
+              conceptFilters={conceptFilters} setConceptFilters={setConceptFilters} conceptSort={conceptSort} setConceptSort={setConceptSort}
               sub={tab === "concepts" ? "concepts" : dataSub}
               onSub={(s) => {
                 // The vertical decides the address: concepts keeps /concepts,
@@ -529,7 +573,7 @@ const TAB_TITLE: Record<Tab, string> = { journal: "Journal", glossary: "Glossary
 // left-aligned and larger than any other heading. 80% width via its parent <main>.
 function TitleBand({ title, actions }: { title: string; actions?: React.ReactNode }) {
   return (
-    <section className="w-full min-h-[160px] flex flex-wrap items-end justify-between gap-x-6 gap-y-4 mb-8 pb-6">
+    <section className="w-full min-h-[72px] sm:min-h-[160px] flex flex-wrap items-end justify-between gap-x-6 gap-y-4 mb-4 pb-0 sm:mb-8 sm:pb-6">
       <h1 className="font-display font-bold tracking-tight text-foreground text-[25px] md:text-[34px] lg:text-[42px] leading-none">{title}</h1>
       {actions}
     </section>
@@ -546,12 +590,13 @@ function Feed({ items, excerpts, docCats, lead = [], total, from, filteredOf, se
           <span className="text-xs text-muted">
             {items.length ? `${from}–${from + items.length - 1} of ${total}` : ""}
           </span>
-          <ShareMenu title={`${SITE} — Journal`} align="right" />
+
         </div>
       </div>
       <div className="space-y-10">
         {items.map((d: Doc) => (
-          <Link key={d.id} href={journalHref(d.id)} onClick={spaClick(() => onOpen(d.id))} className="group block w-full text-left">
+          <div key={d.id} className="relative">
+          <Link href={journalHref(d.id)} onClick={spaClick(() => onOpen(d.id))} className="group block w-full text-left">
             <div className="flex items-center gap-2 text-[11px] uppercase tracking-wide text-muted">
               <span>{entryTypeLabel(docCats[d.id], d.doc_type)}</span>
               {d.audio_url && <span className="text-accent inline-flex items-center gap-1"><Volume2 size={12} /> audio</span>}
@@ -567,6 +612,8 @@ function Feed({ items, excerpts, docCats, lead = [], total, from, filteredOf, se
             </div>
             <div className="mt-3 text-accent text-sm">Read →</div>
           </Link>
+          <CardShare title={d.title || d.id} path={journalHref(d.id)} className="absolute -bottom-2 right-0" />
+          </div>
         ))}
         {items.length === 0 && !searching && <div className="text-muted text-sm py-10 text-center">No entries match. <button onClick={onSearch} className="text-accent underline">Adjust filters</button></div>}
       </div>
@@ -603,7 +650,7 @@ function Reader({ doc, body, bodyLoading, cats, gloss, onBack, onPrev, onNext }:
 }
 
 /* ---------- Glossary ---------- */
-function GlossarySection({ terms, gcat, setGcat, gsel, setGsel }: any) {
+function GlossarySection({ terms, gsel, setGsel, ctl, docCats }: { terms: any[]; gsel: string | null; setGsel: (s: string | null) => void; ctl: GCtl; docCats: Record<string, string[]> }) {
   let content;
   const gi = gsel ? terms.findIndex((t: any) => t.slug === gsel) : -1;
   // In-app handler for internal links inside a definition (e.g. "Related terms").
@@ -629,7 +676,7 @@ function GlossarySection({ terms, gcat, setGcat, gsel, setGsel }: any) {
       />
     );
   } else {
-    content = <GlossaryList terms={terms} gcat={gcat} setGcat={setGcat} onOpen={setGsel} />;
+    content = <GlossaryList terms={terms} ctl={ctl} docCats={docCats} onOpen={setGsel} />;
   }
   return (
     // One SideNav across the site (Sean, 2026-08-21). Index mode: picking a
@@ -642,6 +689,7 @@ function GlossarySection({ terms, gcat, setGcat, gsel, setGsel }: any) {
         sections={terms.map((t: any) => ({ id: t.slug, label: cleanTerm(t.term) }))}
         active={gsel}
         onPick={(slug: string) => setGsel(slug)}
+        phoneHandledElsewhere={!gsel}
       />
       <div className="min-w-0">
         {content}
@@ -650,36 +698,98 @@ function GlossarySection({ terms, gcat, setGcat, gsel, setGsel }: any) {
   );
 }
 
-function GlossaryList({ terms, gcat, setGcat, onOpen }: any) {
-  const shown = terms.filter((t: any) => !gcat || t.term.toLowerCase().includes(gcat.toLowerCase()) || (t.definition || "").toLowerCase().includes(gcat.toLowerCase()));
+type GSort = "az" | "za";
+const GLOSSARY_SORTS: { v: GSort; l: string }[] = [
+  { v: "az", l: "A to Z" }, { v: "za", l: "Z to A" },
+];
+type GCtl = {
+  q: string; setQ: (v: string) => void; sort: GSort; setSort: (v: GSort) => void;
+  topics: string[]; setTopics: (v: string[]) => void; match: "any" | "all"; setMatch: (m: "any" | "all") => void;
+  panel: boolean; setPanel: (o: boolean) => void;
+};
+// A term's document id: the primary-record terms carry one; the site-written terms
+// are IS-GLO-SITE-<SLUG> in the download and Supabase `documents`.
+const glossaryDocId = (t: any) => t.document_id || `IS-GLO-SITE-${String(t.slug || t.term).toUpperCase().replace(/[^A-Z0-9]+/g, "-")}`;
+
+/**
+ * The Glossary list, with the same controls as the Journal and Concepts (Sean,
+ * 30 Sep 2026): search in the Filter panel, Sort beside it, chips above the
+ * list, and the phone icon bar (Terms / Sort / Filter).
+ *
+ * Topic: seven general topics, up to two per term (Sean, 30 Sep 2026), stored
+ * like journal themes — category rows of kind `glossary_topic` on each term's
+ * document id. Order and labels: lib/glossary-topics.json. Rules:
+ * project/glossary-topics.md. Dates do not apply to definitions. "Most used in
+ * the journal" was left out: usage links exist for only 16 of the terms, so it
+ * would rank the newer ones last for a reason that is not true.
+ */
+function GlossaryList({ terms, ctl, docCats, onOpen }: { terms: any[]; ctl: GCtl; docCats: Record<string, string[]>; onOpen: (s: string) => void }) {
+  const { q, setQ, sort, setSort, topics, setTopics, match, setMatch, panel, setPanel } = ctl;
+  const ql = q.trim().toLowerCase();
+  const topicsOf = (t: any) => (docCats[glossaryDocId(t)] || []).filter((c) => c in GLOSSARY_TOPICS.topics);
+  // Only topics some term carries, in the agreed order.
+  const topicOpts = useMemo(() => {
+    const used = new Set(terms.flatMap((t) => topicsOf(t)));
+    return Object.keys(GLOSSARY_TOPICS.topics).filter((k) => used.has(k));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [terms, docCats]);
+  const topicLabel = (k: string) => (GLOSSARY_TOPICS.topics as Record<string, string>)[k] || k;
+  const shown = useMemo(() => {
+    const list = terms.filter((t) =>
+      (!ql || t.term.toLowerCase().includes(ql) || (t.definition || "").toLowerCase().includes(ql)) &&
+      (!topics.length || (match === "all" ? topics.every((x) => topicsOf(t).includes(x)) : topics.some((x) => topicsOf(t).includes(x)))));
+    if (sort === "za") return [...list].reverse();
+    return list;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [terms, ql, topics, match, sort, docCats]);
   // Paginate the term list, matching the journal feed (same PAGE_SIZE + Pager).
   const [gpage, setGpage] = useState(1);
-  useEffect(() => { setGpage(1); }, [gcat]);
+  useEffect(() => { setGpage(1); }, [q, topics, match, sort]);
   const totalPages = Math.max(1, Math.ceil(shown.length / PAGE_SIZE));
   const page = Math.min(gpage, totalPages);
   const pageItems = shown.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+  const clearAll = () => { setQ(""); setTopics([]); };
+  const groups: FilterGroup[] = topicOpts.length ? [{
+    key: "gtopic", label: "Topic", options: topicOpts.map((v) => ({ v, l: topicLabel(v) })), values: topics,
+    matchable: true, match, setMatch,
+    hint: "The field a term belongs to. A term can sit in two.",
+    toggle: (v) => setTopics(topics.includes(v) ? topics.filter((x) => x !== v) : [...topics, v]),
+    clear: () => setTopics([]),
+  }] : [];
+  const pills = topics.map((v) => ({ key: `gtopic:${v}`, label: topicLabel(v), clear: () => setTopics(topics.filter((x) => x !== v)) }));
+  const openPanel = () => { setPanel(true); track("filter_opened", { section: "glossary" }); };
+  const onSort = (v: GSort) => { setSort(v); track("sort_changed", { sort: v, section: "glossary" }); };
   return (
     <div className="w-full mx-auto">
-      <div className="flex items-center justify-between mb-5">
-        <span className="text-xs text-muted">{shown.length} terms · page {page} of {totalPages}</span>
-        <div className="flex items-center gap-2">
-          <Input value={gcat} onChange={(e) => setGcat(e.target.value)} placeholder="Filter terms…" className="w-44" />
-          <ShareMenu title={`${SITE} — Glossary`} align="right" />
-        </div>
-      </div>
+      <MobileBar
+        months={{ items: terms.map((t) => ({ id: t.slug, label: cleanTerm(t.term) })), active: null, onPick: onOpen, label: "Terms", icon: List }}
+        sort={{ value: sort, options: GLOSSARY_SORTS, label: "Sort terms", onChange: onSort }}
+        onFilter={openPanel} filterOpen={panel} />
+      <ActiveLine shown={shown.length} of={terms.length} noun="terms" q={q} clearQ={() => setQ("")}
+        pills={pills} onClearAll={clearAll} countOnPhone
+        controls={<>
+          <SortSelect label="Sort terms" value={sort} options={GLOSSARY_SORTS} onChange={onSort} />
+          <FilterButton count={pills.length + (ql ? 1 : 0)} open={panel} onOpen={openPanel} />
+          <FilterPanel open={panel} setOpen={setPanel} title="Search & filter the glossary"
+            q={q} setQ={setQ} placeholder={`Search ${terms.length} terms and their definitions`} searchLabel="Search the glossary"
+            groups={groups} shown={shown.length} onClearAll={clearAll} />
+        </>} />
       <div className="space-y-8">
         {pageItems.map((t: any) => {
           const { pron, body } = splitDef(t.definition);
           return (
-            <Link key={t.slug} href={glossaryHref(t.slug)} onClick={spaClick(() => onOpen(t.slug))} className="group block w-full text-left">
+            <div key={t.slug} className="relative">
+            <Link href={glossaryHref(t.slug)} onClick={spaClick(() => onOpen(t.slug))} className="group block w-full text-left">
               <h2 className="font-display text-xl font-semibold text-foreground group-hover:text-accent transition-colors term-title">{cleanTerm(t.term)}</h2>
               {pron && <div className="text-xs text-muted italic mt-1">{pron}</div>}
               <p className="body-copy text-foreground/85 mt-2 whitespace-pre-wrap line-clamp-3">{cleanDef(body)}</p>
               <div className="mt-2 text-accent text-sm">Read →</div>
             </Link>
+            <CardShare title={cleanTerm(t.term)} path={glossaryHref(t.slug)} className="absolute -bottom-2 right-0" />
+            </div>
           );
         })}
-        {shown.length === 0 && <div className="text-muted text-sm py-10 text-center">No terms match “{gcat}”.</div>}
+        {shown.length === 0 && <div className="text-muted text-sm py-10 text-center">No terms match.{" "}<button type="button" onClick={clearAll} className="text-accent underline underline-offset-4">Clear all</button></div>}
       </div>
       {totalPages > 1 && <Pager page={page} totalPages={totalPages} setPage={setGpage} />}
     </div>
@@ -722,21 +832,25 @@ function PeekCarousel({ title, cta, onCta, slides, bottomCta }: { title: string;
   return (
     <section className="mt-16 pt-8 min-h-[460px]">
       <div className="w-full">
-      <div className="flex items-center justify-between mb-5">
-        <h2 className="font-display text-lg font-semibold text-foreground">{title}</h2>
-        <button onClick={onCta} className="text-sm text-accent hover:underline inline-flex items-center gap-1">{cta} <ChevronRight size={15} /></button>
-      </div>
       {/* Carousel fills the full main container width, matching TitleBand above it,
           so the bottom section lines up with the page on both journal and glossary.
-          (It was previously inset to the old 13rem-sidebar + 65% column layout.) */}
+          The arrows sit in the header row: placed outside the slides (-left-12 /
+          -right-12) they made the page wider than the screen at every width
+          (fixed 30 Sep 2026). */}
       <Carousel opts={{ loop: true, align: "start" }} plugins={[autoplay.current]} className="w-full">
+        <div className="flex items-center justify-between gap-4 mb-5">
+          <h2 className="font-display text-lg font-semibold text-foreground">{title}</h2>
+          <div className="flex items-center gap-2">
+            <CarouselPrevious className="static translate-y-0" />
+            <CarouselNext className="static translate-y-0" />
+            <button onClick={onCta} className="ml-2 text-sm text-accent hover:underline inline-flex items-center gap-1 whitespace-nowrap">{cta} <ChevronRight size={15} /></button>
+          </div>
+        </div>
         <CarouselContent>
           {slides.map((s, i) => (
             <CarouselItem key={i}>{s}</CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="-left-12" />
-        <CarouselNext className="-right-12" />
       </Carousel>
       {bottomCta && (
         <div className="mt-6 flex justify-center">
@@ -751,12 +865,15 @@ function PeekCarousel({ title, cta, onCta, slides, bottomCta }: { title: string;
 function GlossaryPeek({ terms, onView, onOpen }: any) {
   const sample = useMemo(() => shuffle(terms).slice(0, 9), [terms]);
   const slides = sample.map((t: any) => (
-    <Link key={t.slug} href={glossaryHref(t.slug)} onClick={spaClick(() => onOpen(t.slug))} className="group flex h-[340px] md:h-[360px] flex-col justify-center pr-8">
+    <div key={t.slug} className="relative">
+    <Link href={glossaryHref(t.slug)} onClick={spaClick(() => onOpen(t.slug))} className="group flex h-[340px] md:h-[360px] flex-col justify-center pr-12">
       <div className="text-[11px] uppercase tracking-wide text-muted mb-2">Glossary</div>
       <div className="font-display text-3xl font-semibold text-foreground group-hover:text-accent term-title">{cleanTerm(t.term)}</div>
       <p className="mt-4 body-copy text-foreground/85 line-clamp-3 overflow-hidden">{firstSentences(cleanDef(splitDef(t.definition).body), 2)}</p>
       <div className="mt-5 text-accent text-base">Read →</div>
     </Link>
+    <CardShare title={cleanTerm(t.term)} path={glossaryHref(t.slug)} className="absolute top-4 right-2" />
+    </div>
   ));
   return <PeekCarousel title="From the glossary" cta="Go to Glossary" onCta={onView} slides={slides} bottomCta />;
 }
@@ -777,12 +894,15 @@ function JournalPeek({ items, source, onView, onOpen }: any) {
     return () => { alive = false; };
   }, [sample, source]);
   const slides = sample.map((d: any) => (
-    <Link key={d.id} href={journalHref(d.id)} onClick={spaClick(() => onOpen(d.id))} className="group flex h-[380px] md:h-[400px] flex-col justify-center pr-8">
+    <div key={d.id} className="relative">
+    <Link href={journalHref(d.id)} onClick={spaClick(() => onOpen(d.id))} className="group flex h-[380px] md:h-[400px] flex-col justify-center pr-12">
       <div className="text-[11px] uppercase tracking-wide text-muted">Journal · {d.entry_date}{d.part != null ? ` · Part ${d.part}` : ""}</div>
       <div className="mt-2 font-display text-2xl font-semibold text-foreground group-hover:text-accent line-clamp-2">{d.title || d.id}</div>
       <p className="mt-4 flex-1 body-copy text-foreground/80 line-clamp-[7] overflow-hidden">{ex[d.id] ?? "…"}</p>
       <div className="mt-4 text-accent text-sm">Read →</div>
     </Link>
+    <CardShare title={d.title || d.id} path={journalHref(d.id)} className="absolute top-4 right-2" />
+    </div>
   ));
   return <PeekCarousel title="From the journal" cta="View Journal" onCta={onView} slides={slides} />;
 }
@@ -801,26 +921,40 @@ function JournalPeek({ items, source, onView, onOpen }: any) {
  * Concepts, or the research inputs — so it under-described the download for
  * weeks. A sentence about generated content has to be generated too.
  */
-/* ---------- Documents ---------- */
+/* ---------- Documents ----------
+ * Tiles, two across, matching Concepts (Sean, 30 Sep 2026). The research
+ * documents lead; the four-part journal series follows at the bottom. Each tile opens the original
+ * Google Doc and carries its own share icon. No filters. */
 function DocumentsView() {
-  return (
-    // Full main-container width, matching the journal feed and glossary page.
-    <div className="w-full">
-      <div className="flex items-center justify-between mb-1">
-        <span />
-        <ShareMenu title={`${SITE} — Documents`} align="right" />
-      </div>
-      <p className="text-sm text-muted mb-5 measure">Additional documents beyond the four-part journal series.</p>
-      <div className="space-y-10">
-        {DOCUMENTS.map((d) => (
-          <a key={d.title} href={d.url} target="_blank" rel="noreferrer" className="group block">
-            <div className="font-display text-[18px] font-semibold text-foreground group-hover:text-accent transition-colors">{d.title}</div>
-            <div className="text-[13px] text-accent mt-0.5">{d.subline}</div>
-            <p className="mt-2 body-copy text-foreground/80">{d.description}</p>
-            <div className="mt-3 text-accent text-sm">Open document ↗</div>
+  const journal = DOCUMENTS.filter((d) => d.kind === "journal");
+  const refs = DOCUMENTS.filter((d) => d.kind !== "journal");
+  const tiles = (list: typeof DOCUMENTS) => (
+    <ul className="list-none p-0 m-0 grid grid-cols-1 md:grid-cols-2 gap-5">
+      {list.map((d) => (
+        <li key={d.title} className="relative flex">
+          <a href={d.url} target="_blank" rel="noreferrer noopener"
+            onClick={() => track("document_opened", { title: d.title })}
+            className="group flex flex-col w-full border border-edge p-6 pr-14 hover:border-foreground transition-colors">
+            <span className="text-[12px] uppercase tracking-[0.08em] font-semibold text-muted mb-3">{d.subline}</span>
+            <h3 className="font-display font-semibold text-foreground text-[22px] md:text-[24px] leading-tight mb-3 group-hover:underline underline-offset-4">
+              {d.title}
+            </h3>
+            <p className="text-[17px] leading-[1.55] text-foreground/80 line-clamp-3 m-0 mb-5">{d.description}</p>
+            <span className="mt-auto text-[14px] text-foreground">Open the original &#8599;</span>
           </a>
-        ))}
-      </div>
+          <CardShare title={d.title} url={d.url} className="absolute top-3 right-3" />
+        </li>
+      ))}
+    </ul>
+  );
+  return (
+    <div className="w-full">
+      <h2 className={H2_CLASS}>The research documents</h2>
+      <p className={SUB_CLASS}>Protection, legal plans and analysis built on the journal.</p>
+      {tiles(refs)}
+      <h2 className={H2_CLASS + " !mt-16"}>The journal series</h2>
+      <p className={SUB_CLASS}>The primary record, in four parts, as the original Google Docs.</p>
+      {tiles(journal)}
     </div>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { H2_CLASS, SUB_CLASS } from "@/components/SectionHead";
 import { useEffect, useMemo, useRef, useState } from "react";
 import ListPager from "@/components/ListPager";
 import { DataNoteLine } from "@/components/DataIntro";
@@ -107,7 +108,7 @@ function SourceLink({ id, sources }: { id?: string | null; sources: Source[] }) 
 function SectionSkeleton({ title }: { title: string }) {
   return (
     <section className="mb-16" aria-busy="true">
-      <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">{title}</h2>
+      <h2 className={H2_CLASS}>{title}</h2>
       <SkeletonRows n={5} />
     </section>
   );
@@ -411,6 +412,8 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
 
       {/* ONE suicide chart, top of page, US in focus (Sean, 2026-08-20). */}
       <section className="mb-14">
+        <h2 className={H2_CLASS}>Suicide around the world</h2>
+        <p className={SUB_CLASS}>Fourteen countries and the world on one way of counting, from 2000 to 2021.</p>
         {intl === null ? <SkeletonChart /> : <MultiLineChart chart={intl} />}
         {intl && (
           <>
@@ -535,9 +538,10 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
       {/* Verdict */}
       {!verdict && (
         <section className="mb-16" aria-busy="true">
-          <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
+          <h2 className={H2_CLASS}>
             Has suicide increased by ~30%?
           </h2>
+          <p className={SUB_CLASS}>Yes, across two decades, not as a recent surge.</p>
           <Skeleton className="h-4 w-full measure mb-2" />
           <Skeleton className="h-4 w-5/6 measure mb-6" />
           <SkeletonRows n={4} />
@@ -545,9 +549,10 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
       )}
       {verdict && (
         <section className="mb-16">
-          <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
+          <h2 className={H2_CLASS}>
             Has suicide increased by ~30%?
           </h2>
+          <p className={SUB_CLASS}>Yes, across two decades, not as a recent surge.</p>
           <p className="body-copy text-foreground/90 measure">{verdict.summary}</p>
           <ul className="list-none p-0 m-0 mt-4">
             {verdict.key_figures.map((f, i) => (
@@ -571,9 +576,10 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
 
       {/* Overdose */}
       <section className="mb-16">
-        <h2 className="font-display font-semibold text-foreground text-[21px] mb-6">
+        <h2 className={H2_CLASS}>
           The other curve: overdose deaths
         </h2>
+        <p className={SUB_CLASS}>US overdose deaths since 1999: a far steeper rise than suicide, then a sharp reversal.</p>
         <p className="body-copy text-foreground/90 measure mb-6">
           Suicide and overdose are often reported together as &ldquo;deaths of despair.&rdquo;
           They have not moved together. Over the same quarter-century in which the US suicide
@@ -613,7 +619,8 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
       {trends === null && <SectionSkeleton title="What the series show" />}
       {!!trends?.length && (
         <section ref={trendsP.ref} className="mb-16">
-          <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">What the series show</h2>
+          <h2 className={H2_CLASS}>What the series show</h2>
+          <p className={SUB_CLASS}>Each trend in the record, with its evidence grade and source.</p>
           <ul className="list-none p-0 m-0">
             {trendsP.slice.map((t, i) => (
               <li key={i} className="flex items-baseline gap-3 py-3 border-b border-edge/60 text-[16px] text-foreground/85">
@@ -631,8 +638,8 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
       {dq === null && <SectionSkeleton title="How much the numbers can be trusted" />}
       {!!dq?.length && (
         <section ref={dqP.ref} className="mb-16">
-          <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">How much the numbers can be trusted</h2>
-          <p className="text-muted text-[15px] mb-6 measure">
+          <h2 className={H2_CLASS}>How much the numbers can be trusted</h2>
+          <p className={SUB_CLASS}>
             No country was excluded for having weak data — the weakness is the record.
           </p>
           <ul className="list-none p-0 m-0">
@@ -656,8 +663,8 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
       {claims === null && <SectionSkeleton title="Causes, as attributed" />}
       {!!claims?.length && (
         <section ref={claimsP.ref} id="causes" className="mb-16 scroll-mt-28">
-          <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">Causes, as attributed</h2>
-          <p className="text-muted text-[15px] mb-6 measure">
+          <h2 className={H2_CLASS}>Causes, as attributed</h2>
+          <p className={SUB_CLASS}>
             Who attributes what, in which document. Counter-attributions listed on the same terms.
           </p>
           <ul className="list-none p-0 m-0">
@@ -683,14 +690,14 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
       {overlaps === null && <SectionSkeleton title="Overlaps with the Government Cloud record" />}
       {!!overlaps?.length && (
         <section ref={overlapsP.ref} className="mb-16">
-          <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">Overlaps with the Government Cloud record</h2>
-          <ConceptLink id="co-occurrence-is-not-cause">
-            Read the concept: next to each other is not because of each other
-          </ConceptLink>
-          <p className="text-muted text-[15px] mb-6 measure">
+          <h2 className={H2_CLASS}>Overlaps with the Government Cloud record</h2>
+          <p className={SUB_CLASS}>
             Co-occurrence in time or place is not evidence of a relationship. Each row says what it
             does <em>not</em> show.
           </p>
+          <ConceptLink id="co-occurrence-is-not-cause">
+            Read the concept: next to each other is not because of each other
+          </ConceptLink>
           <ul className="list-none p-0 m-0">
             {overlapsP.slice.map((o) => (
               <li key={o.overlap_id} className="py-4 border-b border-edge/60">
@@ -711,8 +718,8 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
       {milestones === null && <SectionSkeleton title="Dated milestones" />}
       {!!milestones?.length && (
         <section ref={milestonesP.ref} className="mb-16">
-          <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">Dated milestones</h2>
-          <p className="body-copy text-foreground/75 mb-6 measure">
+          <h2 className={H2_CLASS}>Dated milestones</h2>
+          <p className={SUB_CLASS}>
             These feed track F (&ldquo;Health&rdquo;) on the Government Cloud master
             timeline; entries before 2015 appear only here.
           </p>
@@ -733,8 +740,8 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
 
       {/* Indicator table */}
       <section className="mb-16">
-        <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">All indicators</h2>
-        <p className="body-copy text-foreground/75 mb-6 measure">
+        <h2 className={H2_CLASS}>All indicators</h2>
+        <p className={SUB_CLASS}>
           {indicators?.length ?? 0} rows across the United States, OECD peers, and the
           unrestricted international set (Global, China, Russia, India). Provisional
           and preliminary values are marked.
@@ -781,8 +788,8 @@ export default function HealthSignals({ onGoTimeline }: { onGoTimeline?: () => v
 
       {/* Sources */}
       <section ref={srcRef} className="mb-8">
-        <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">Sources</h2>
-        <p className="body-copy text-foreground/75 mb-8 measure">
+        <h2 className={H2_CLASS}>Sources</h2>
+        <p className={SUB_CLASS}>
           {srcs.length} sources ({tierCounts.A} A · {tierCounts.B} B · {tierCounts.C} C), accessed
           2026-08-19.
           {srcTotalPages > 1 && <span className="text-muted"> Page {srcPage} of {srcTotalPages}.</span>}

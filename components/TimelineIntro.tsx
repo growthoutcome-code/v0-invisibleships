@@ -1,5 +1,7 @@
 "use client";
 
+import CardShare from "@/components/CardShare";
+import { H2_CLASS, SUB_CLASS } from "@/components/SectionHead";
 import { useEffect, useState } from "react";
 import { track } from "@/lib/analytics";
 
@@ -28,9 +30,10 @@ export function TimelineNarrative({ onGo }: { onGo: (tab: "govcloud" | "health")
 
   return (
     <section className="mt-14 mb-4 measure">
-      <h2 className="font-display font-semibold text-foreground text-[21px] mb-5">
+      <h2 className={H2_CLASS}>
         Three things this timeline shows
       </h2>
+      <p className={SUB_CLASS}>What the timeline above shows when its tracks are read together.</p>
 
       {/* Scope, per track (Sean, 2026-08-21): the timeline is deliberately
           mixed-scope, so a blanket "US only" label would be wrong — say what
@@ -110,9 +113,11 @@ export function TimelineHub({ onGo }: { onGo: (tab: "govcloud" | "health") => vo
       if (!alive) return;
       const t = man?.tables || {};
       setGc({
-        deployments: t.deployments ?? 399,
-        regulations: t.regulations ?? 99,
-        sources: t.sources ?? 660,
+        // manifest entries are { rows, path }; reading them as numbers printed
+        // "[object Object] deployments" on the cards (fixed 30 Sep 2026)
+        deployments: t.deployments?.rows ?? 399,
+        regulations: t.regulations?.rows ?? 99,
+        sources: t.sources?.rows ?? 660,
         jurisdictions: Array.isArray(geos) ? geos.length : 34,
       });
       setH({
@@ -130,7 +135,8 @@ export function TimelineHub({ onGo }: { onGo: (tab: "govcloud" | "health") => vo
   }: {
     id: string; title: string; metrics: string; children: React.ReactNode; tab: "govcloud" | "health";
   }) => (
-    <div id={id} className="border border-edge rounded-xl p-6 scroll-mt-28">
+    <div id={id} className="relative border border-edge rounded-xl p-6 pr-14 scroll-mt-28">
+      <CardShare title={title} path={tab === "govcloud" ? "/data/government-cloud" : "/data/public-health"} className="absolute top-3 right-3" />
       <h3 className="font-display font-semibold text-foreground text-[19px] mb-1">{title}</h3>
       <p className="text-muted text-[14px] m-0 mb-3 tabular-nums">{metrics}</p>
       <p className="body-copy text-foreground/85 m-0 mb-5">{children}</p>
@@ -145,7 +151,8 @@ export function TimelineHub({ onGo }: { onGo: (tab: "govcloud" | "health") => vo
 
   return (
     <section className="mt-16">
-      <h2 className="font-display font-semibold text-foreground text-[21px] mb-6">Where to go next</h2>
+      <h2 className={H2_CLASS}>Where to go next</h2>
+      <p className={SUB_CLASS}>The records this timeline is drawn from, each with its own tab.</p>
       <div className="grid gap-5 md:grid-cols-2">
         <Card
           id="govcloud"

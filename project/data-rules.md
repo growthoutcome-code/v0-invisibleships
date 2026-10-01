@@ -68,12 +68,21 @@ Google Doc is the record (rule 5).
 - **One copy of a repeated administrative comment.** Part 04 repeats Part 03's
   12 Oct and 16 Oct 2025 comments word for word; the Part 03 copies are published
   and `IS-J04-20251012-ENTRY` / `IS-J04-20251016-ENTRY` redirect to them.
-- **Theme tags and organizations named** (Sean, 30 Sep 2026): every journal document
-  carries the themes it contains and the organizations it names, assigned by reading
-  it (`project/theme-tags.md`); concepts carry the same themes as `topics`. Stored as
-  categories (kind `theme` / `organization`) in all three copies; the download adds
-  an `organizations_named:` line. A theme says what was recorded, never that it is
-  true, and a name is not a claim against the organization.
+- **Theme tags** (Sean, 30 Sep 2026): every journal document carries the themes it
+  contains, assigned by reading it (`project/theme-tags.md`); concepts carry the same
+  themes as `topics`. Stored as categories (kind `theme`) in all three copies. A theme
+  says what was recorded, never that it is true.
+- **No lists of organizations or names, anywhere** (Sean, 30 Sep 2026): "I don't want
+  us creating lists of organizations or lists of names anywhere in the site … I am not
+  prescribing these options, and so therefore I don't want to surface them. However, I
+  do want to support the searching of our site." **Why:** the site documents Zersetzung,
+  and defamation and false accusation are among its tactics. The names in the record are
+  part of what was said to the author and are likely false in most cases; a list would
+  lift them out of that context and repeat the tactic instead of exposing it. The site
+  is not a campaign against any organization. Organization tags were built and then
+  removed the same day from all three copies. Names stay findable through full-text
+  search only, inside the passage where they were said. `scripts/check_no_name_lists.py`
+  runs in `npm run check`.
 - **Discovery Notes are published in the journal as unofficial entries** (Sean,
   30 Sep 2026; decision 0004). They are the author's emailed notes (9 Apr – 24 May
   2026), not in any Google Doc: `journal/discovery-notes/` in the download, type

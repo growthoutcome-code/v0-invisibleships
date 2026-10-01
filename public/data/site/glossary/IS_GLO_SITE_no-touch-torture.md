@@ -5,7 +5,7 @@ collection: glossary
 doc_type: term
 provenance: site-authored
 slug: no-touch-torture
-categories: [glossary, reference]
+categories: [glossary, reference, glossary-ethics-human-rights, glossary-military-intelligence]
 word_count: 124
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.

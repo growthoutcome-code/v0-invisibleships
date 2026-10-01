@@ -115,23 +115,32 @@ export const AUTHOR: AuthorInfo = {
   ],
 };
 
-export type SiteDoc = { title: string; subline: string; description: string; url: string };
+export type SiteDoc = {
+  title: string; subline: string; description: string; url: string;
+  /** "journal" = the four-part series, listed first; the rest are the reference body (Sean, 30 Sep 2026). */
+  kind?: "journal" | "reference";
+};
 const doc = (id: string) => `https://docs.google.com/document/d/${id}/`;
 
+// Order (Sean, 30 Sep 2026): the research documents lead, the Personal Protection
+// Plan first ("really important to understand ... tools that someone could use");
+// the four-part journal series follows at the bottom as the original record.
+// The four parts are the complete original Google Docs, linked as they are: the
+// site curates, the originals remain the whole record.
 export const DOCUMENTS: SiteDoc[] = [
-  {
-    title: "Plan for Justice",
-    subline: "A legal & discovery framework.",
-    description:
-      "The most extensive reference in the series — a structured plan for legal action: household verification, forensic cross-examination, an evidence/discovery framework, and a restitution matrix.",
-    url: doc("1gzmU6tTSu6-qHU-b3FQRxPS58i-BAivjdktiu7mgrB8"),
-  },
   {
     title: "Personal Protection Plan",
     subline: "Household & personal safety guidance.",
     description:
-      "A practical protection framework covering household verification, anti-destabilization measures, and day-to-day personal-safety practices developed in response to the phenomenon.",
+      "Tools a person can use: a request for a Neural Audit, a competency video script, an emergency injunction affidavit, home shielding options and what each step costs.",
     url: doc("1kY_452-jTwhXpABLDKvv8mc0-PE56-6iPPk5BpKtbF8"),
+  },
+  {
+    title: "Plan for Justice",
+    subline: "A legal & discovery framework.",
+    description:
+      "The most extensive reference in the series — a structured plan for legal action: household verification, forensic cross-examination, an evidence/discovery framework, a restitution matrix, and the Emergency Pocket Card.",
+    url: doc("1gzmU6tTSu6-qHU-b3FQRxPS58i-BAivjdktiu7mgrB8"),
   },
   {
     title: "Neuro-tech in Law Enforcement & Zersetzung",
@@ -160,6 +169,35 @@ export const DOCUMENTS: SiteDoc[] = [
     description:
       "An analysis of the recorded external statements, categorized by motivation and theme.",
     url: doc("1VNEL5FEU5tZTocNbY-OM8CiO6P5IuJ2mPmtQ2tFAzUU"),
+  },
+  {
+    kind: "journal",
+    title: "Invisible Ships, Part 01",
+    subline: "Aug 2024 – Aug 22, 2025",
+    description:
+      "The first part of the journal: its front matter, from the executive summary to the evidence, followed by 141 dated entries and recording transcripts.",
+    url: doc("12EN-urHWVOZyhfubcJSsSEyVipI80OVWDTlhCVC9gc0"),
+  },
+  {
+    kind: "journal",
+    title: "Invisible Ships, Part 02",
+    subline: "Aug 23 – Sep 28, 2025",
+    description: "The journal continued: 115 dated entries and recording transcripts.",
+    url: doc("1A4HYkmgZ_lQ5hYSsVtE9CNPIkWb47wNRiZVQs-Du--E"),
+  },
+  {
+    kind: "journal",
+    title: "Invisible Ships, Part 03",
+    subline: "Sep 29 – Nov 8, 2025",
+    description: "The journal continued: 57 dated entries and recording transcripts.",
+    url: doc("1J_oU1Tt-thE2s_DmnPCsckY-LDz4lMPxNV1FB4UBsgs"),
+  },
+  {
+    kind: "journal",
+    title: "Invisible Ships, Part 04",
+    subline: "Nov 9, 2025 – present",
+    description: "The journal continued: 82 dated entries and recording transcripts, and still being written.",
+    url: doc("1MyYwH5Q1xBqazmzgb2L5T6aRmN2-Ymnt5AruoRe7CCU"),
   },
 ];
 

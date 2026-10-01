@@ -5,7 +5,7 @@ collection: glossary
 doc_type: term
 provenance: site-authored
 slug: false-disclosure
-categories: [glossary, reference]
+categories: [glossary, reference, glossary-military-intelligence]
 word_count: 179
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.

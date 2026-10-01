@@ -1,10 +1,11 @@
 "use client";
 
+import { H2_CLASS, SUB_CLASS } from "@/components/SectionHead";
 import { useMemo } from "react";
 import { track } from "@/lib/analytics";
 import { EvidenceSpan, BarRows } from "@/components/ResearchCharts";
 import {
-  CONCEPTS, FINDINGS, RESEARCH_INTRO,
+  CONCEPTS, FINDINGS,
   THEME_LABEL, THEME_NOTE, AUDIENCE_LABEL, AUDIENCE_NOTE,
   type Filters, type Theme, type Audience,
 } from "@/lib/concepts";
@@ -56,14 +57,12 @@ export default function ResearchHero({
 
   return (
     <div className="mb-14">
-      <p className="body-copy text-foreground/85 measure mb-12">{RESEARCH_INTRO}</p>
-
       {/* ------------------------------------------------------ what was found */}
       <section className="mb-14">
-        <h2 className="font-display font-semibold text-foreground text-[26px] md:text-[30px] leading-tight mb-4">
+        <h2 className={H2_CLASS}>
           What this research found
         </h2>
-        <p className="body-copy text-foreground/85 measure mb-8">
+        <p className={SUB_CLASS}>
           Eight of them, each a number that can be checked against a named source. None of these
           is a claim about what is happening to anyone in particular.
         </p>
@@ -91,10 +90,10 @@ export default function ResearchHero({
 
       {/* --------------------------------------------------------- who it is for */}
       <section className="mb-14">
-        <h2 className="font-display font-semibold text-foreground text-[26px] md:text-[30px] leading-tight mb-4">
+        <h2 className={H2_CLASS}>
           Who this is for
         </h2>
-        <p className="body-copy text-foreground/85 measure mb-8">
+        <p className={SUB_CLASS}>
           The same finding is useful to different people for different reasons. Pick a reader and
           the concepts tagged for them open below.
         </p>
@@ -121,10 +120,10 @@ export default function ResearchHero({
 
       {/* ------------------------------------------------------ what it is made of */}
       <section>
-        <h2 className="font-display font-semibold text-foreground text-[26px] md:text-[30px] leading-tight mb-4">
+        <h2 className={H2_CLASS}>
           What it is made of
         </h2>
-        <p className="body-copy text-foreground/85 measure mb-8">
+        <p className={SUB_CLASS}>
           {CONCEPTS.length} concepts across seven subjects, drawn from the four records in this
           section. Pick a subject to open it.
         </p>

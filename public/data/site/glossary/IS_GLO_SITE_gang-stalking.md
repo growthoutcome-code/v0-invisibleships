@@ -5,7 +5,7 @@ collection: glossary
 doc_type: term
 provenance: site-authored
 slug: gang-stalking
-categories: [glossary, reference]
+categories: [glossary, reference, glossary-military-intelligence, glossary-ethics-human-rights]
 word_count: 244
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.

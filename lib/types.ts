@@ -21,7 +21,9 @@ export type Doc = {
   body_markdown?: string | null;
 };
 export type Category = { slug: string; kind: string; label?: string };
-export type GlossaryTerm = { slug: string; term: string; document_id?: string; definition?: string };
+export type GlossaryTerm = { slug: string; term: string; document_id?: string; definition?: string;
+  /** Supabase columns, unused by the site. Glossary topics are category rows (lib/glossary-topics.json). */
+  category?: string | null; created_at?: string };
 
 export type Dataset = {
   docs: Doc[];

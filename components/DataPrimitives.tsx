@@ -1,5 +1,6 @@
 "use client";
 
+import { H2_CLASS } from "@/components/SectionHead";
 import { useEffect, useRef, useState } from "react";
 import { SkeletonRows } from "@/components/Skeleton";
 import { track } from "@/lib/analytics";
@@ -179,7 +180,7 @@ export function DismissibleNote({ storageKey, children }: { storageKey: string; 
 export function SectionSkeleton({ title }: { title: string }) {
   return (
     <section className="mb-16" aria-busy="true">
-      <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">{title}</h2>
+      <h2 className={H2_CLASS}>{title}</h2>
       <SkeletonRows n={5} />
     </section>
   );

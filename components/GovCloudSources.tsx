@@ -1,5 +1,6 @@
 "use client";
 
+import { H2_CLASS, SUB_CLASS } from "@/components/SectionHead";
 import { useEffect, useMemo, useRef, useState } from "react";
 import ListPager from "@/components/ListPager";
 import { SkeletonRows, Skeleton } from "@/components/Skeleton";
@@ -66,7 +67,7 @@ export default function GovCloudSources() {
   if (!rows) {
     return (
       <section className="w-full mt-24" aria-busy="true">
-        <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">Sources</h2>
+        <h2 className={H2_CLASS}>Sources</h2>
         <Skeleton className="h-4 w-96 mb-8" />
         <SkeletonRows n={8} />
       </section>
@@ -75,8 +76,8 @@ export default function GovCloudSources() {
 
   return (
     <section ref={topRef} className="w-full mt-24">
-      <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">Sources</h2>
-      <p className="body-copy text-foreground/75 mb-8 measure">
+      <h2 className={H2_CLASS}>Sources</h2>
+      <p className={SUB_CLASS}>
         {rows.length} citations across {distinct} distinct URLs. Tier A is primary or
         official, B corroborated secondary, C claimed or theoretical. Links open in a
         new tab.{totalPages > 1 && <span className="text-muted"> Page {page} of {totalPages}.</span>}

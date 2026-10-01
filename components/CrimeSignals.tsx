@@ -1,5 +1,6 @@
 "use client";
 
+import { H2_CLASS, SUB_CLASS } from "@/components/SectionHead";
 import { useEffect, useMemo, useState } from "react";
 import ListPager from "@/components/ListPager";
 import { DataNoteLine } from "@/components/DataIntro";
@@ -348,7 +349,8 @@ function LaneChart({ chart, onPick }: { chart: LaneChart; onPick: (l: Lane) => v
                 {s.name}
               </button>
               <span className="text-muted">{s.counts}</span>
-              <span className="ml-auto tabular-nums text-foreground/85 shrink-0">
+              {/* wraps to its own line on phones rather than widening the page */}
+              <span className="sm:ml-auto tabular-nums text-foreground/85 min-w-0 break-words">
                 {/* a lane that changes basis states each half — one percentage
                     across a break would quote two measurements as one */}
                 {s.summary ?? `${s.base_year}–${last.year}: ${pct > 0 ? "+" : ""}${pct}%`}
@@ -841,6 +843,8 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
           lanes are left to the chart. Scope note follows the chart per Sean's
           choice of option B. ================================================ */}
       <section className="mb-16">
+        <h2 className={H2_CLASS}>What the record counts</h2>
+        <p className={SUB_CLASS}>Six kinds of harm since 1999, each indexed to its own first year, so the chart shows direction, not size.</p>
         {lanes === null ? <SkeletonChart /> : (
           <>
             <LaneChart chart={lanes} onPick={setLanePicked} />
@@ -885,11 +889,12 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
       {/* ---- the verdict: the considered answer, under the chart it rests on ---- */}
       {verdict === null ? <SectionSkeleton title="Is crime rising or falling?" /> : (
         <div>
-          <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
+          <h2 className={H2_CLASS}>
             {verdict.claim}
           </h2>
+          {/* the summary's first paragraph is the section's subline */}
           {verdict.summary.split("\n\n").map((para, i) => (
-            <p key={i} className="body-copy text-foreground/90 measure">{para}</p>
+            <p key={i} className={i === 0 ? SUB_CLASS : "body-copy text-foreground/90 measure"}>{para}</p>
           ))}
           <ul className="list-none p-0 m-0 mt-4">
             {verdict.key_figures.map((f, i) => (
@@ -939,9 +944,10 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
 
       {/* ---- homicide: one lens among several, no longer the lead ---- */}
       <section className="mb-12">
-        <h2 className="font-display font-semibold text-foreground text-[21px] mb-4">
+        <h2 className={H2_CLASS}>
           Homicide
         </h2>
+        <p className={SUB_CLASS}>Two official US measures, from police records (FBI) and death certificates (CDC), which never agree.</p>
         {chart === null ? <SkeletonChart /> : (
           <>
             <TwoSeriesChart chart={chart} onPick={setPicked} />
@@ -991,9 +997,10 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
       {/* ---- international (Sean, 2026-08-21): one honest chart, two honest
              non-charts ---- */}
       <section className="mb-14">
-        <h2 className="font-display font-semibold text-foreground text-[21px] mb-4">
+        <h2 className={H2_CLASS}>
           Homicide against the world
         </h2>
+        <p className={SUB_CLASS}>US intentional homicide against comparable countries and the world, on the UN basis.</p>
         {intl === null ? <SkeletonChart /> : (
           <>
             <IntlLineChart chart={intl} onPick={setIntlPicked} />
@@ -1021,9 +1028,10 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
              The chart answers the first question; the block under it answers
              the second, which turns out to be why the first has no answer. ---- */}
       <section className="mb-14">
-        <h2 className="font-display font-semibold text-foreground text-[21px] mb-4">
+        <h2 className={H2_CLASS}>
           Break-ins
         </h2>
+        <p className={SUB_CLASS}>Police-recorded burglary of homes in five European countries, on one shared code.</p>
         {burg === null ? <SkeletonChart /> : (
           <>
             <IntlLineChart chart={burg} onPick={setIntlPicked} />
@@ -1070,9 +1078,10 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
       <section className="mb-14">
         {arrests === null ? <SkeletonChart /> : (
           <>
-            <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
+            <h2 className={H2_CLASS}>
               Arrests
             </h2>
+            <p className={SUB_CLASS}>Estimated US arrests per year: all arrests, drug arrests and civil immigration arrests.</p>
             {arrests.accuracy_note && (
               <DismissibleNote storageKey="is_crime_arrests_accuracy_v1">
                 {arrests.accuracy_note}
@@ -1113,9 +1122,10 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
              The prose does the work a chart cannot: these are two legal systems,
              not two measures of one thing. ---- */}
       <section className="mb-14">
-        <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
+        <h2 className={H2_CLASS}>
           Two directions
         </h2>
+        <p className={SUB_CLASS}>Criminal arrests fell by half from their peak while civil immigration arrests rose.</p>
         <p className="body-copy text-foreground/90 measure mb-4 text-[17px]">
           Criminal arrests peaked in 1997 at 15.28 million and stood at 7.52 million in
           2024 &mdash; 51% below peak. Over the same period crime fell too: violent crime
@@ -1247,9 +1257,10 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
              civil system running alongside. Chart first, plain-language block
              underneath, per the section's standing rule. ---- */}
       <section className="mb-14">
-        <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
+        <h2 className={H2_CLASS}>
           Who is held
         </h2>
+        <p className={SUB_CLASS}>People in US prisons, jails and under correctional control, 1999 to 2024.</p>
         {incarc === null ? <SkeletonChart /> : (
           <>
             {incarc.accuracy_note && (
@@ -1309,9 +1320,10 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
       <section className="mb-14">
         {detention === null ? <SkeletonChart /> : (
           <>
-            <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
+            <h2 className={H2_CLASS}>
               ICE detention
             </h2>
+            <p className={SUB_CLASS}>People held in ICE detention against the number of beds Congress funds.</p>
             {detention.accuracy_note && (
               <DismissibleNote storageKey="is_crime_detention_accuracy_v1">
                 {detention.accuracy_note}
@@ -1342,9 +1354,10 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
       {/* ---- reports of the unexplained: chart first, plain-language block
              underneath, absences carried at the same weight as the lines ---- */}
       <section className="mb-14">
-        <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
+        <h2 className={H2_CLASS}>
           Reports of the unexplained
         </h2>
+        <p className={SUB_CLASS}>Missing-person records, psychotic symptoms and belief in hauntings, each indexed to its own first year.</p>
         {anomalies === null ? <SkeletonChart /> : (
           <>
             <LaneChart chart={anomalies} onPick={setLanePicked} />
@@ -1422,9 +1435,10 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
 
       {/* ---- method: the one section that owns no chart, and says why ---- */}
       <section className="mb-10 pt-6 border-t-2 border-edge">
-        <h2 className="font-display font-semibold text-foreground text-[21px] mb-2">
+        <h2 className={H2_CLASS}>
           Method, limits and sources
         </h2>
+        <p className={SUB_CLASS}>How the counting was done, where it fails, and the sources every figure comes from.</p>
         <p className="text-muted text-[15px] measure mb-0">
           Every section above opens with a chart. This one has none, because what follows is
           how the counting was done and where it fails &mdash; the partial year, the trends,
@@ -1563,14 +1577,14 @@ export default function CrimeSignals({ onGoTimeline }: { onGoTimeline?: () => vo
           </p>
           <ul className="list-none p-0 m-0">
             {srcP.slice.map((s) => (
-              <li key={s.source_id} className="flex items-baseline gap-3 py-3 border-b border-edge/60 text-[15px]">
+              <li key={s.source_id} className="flex flex-wrap items-baseline gap-x-3 gap-y-1 py-3 border-b border-edge/60 text-[15px]">
                 <TierChip t={s.evidence_tier} />
                 <a href={s.url} target="_blank" rel="noreferrer noopener"
                   className="text-foreground/85 underline underline-offset-4 hover:text-accent measure">
                   {s.title || s.url}
                 </a>
                 <ArchivedLink rec={s} />
-                <span className="ml-auto text-muted text-[13px] shrink-0">{s.publisher}</span>
+                <span className="sm:ml-auto text-muted text-[13px] min-w-0 break-words">{s.publisher}</span>
               </li>
             ))}
           </ul>

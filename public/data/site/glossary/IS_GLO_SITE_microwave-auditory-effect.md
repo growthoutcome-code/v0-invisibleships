@@ -5,7 +5,7 @@ collection: glossary
 doc_type: term
 provenance: site-authored
 slug: microwave-auditory-effect
-categories: [glossary, reference]
+categories: [glossary, reference, glossary-military-intelligence, glossary-physics-signals]
 word_count: 155
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.

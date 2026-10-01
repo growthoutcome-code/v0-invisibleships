@@ -5,7 +5,7 @@ collection: glossary
 doc_type: term
 provenance: site-authored
 slug: piezoelectricity
-categories: [glossary, reference]
+categories: [glossary, reference, glossary-physics-signals]
 word_count: 303
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.

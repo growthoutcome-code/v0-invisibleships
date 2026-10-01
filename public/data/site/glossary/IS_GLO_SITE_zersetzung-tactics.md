@@ -5,7 +5,7 @@ collection: glossary
 doc_type: term
 provenance: site-authored
 slug: zersetzung-tactics
-categories: [glossary, reference]
+categories: [glossary, reference, glossary-military-intelligence, glossary-psychology]
 word_count: 225
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.

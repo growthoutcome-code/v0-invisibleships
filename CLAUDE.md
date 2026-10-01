@@ -247,6 +247,12 @@ Rules: `project/data-rules.md`. Reasoning: `project/decisions/0003-where-content
   copies and are listed in data-rules §5 so a re-conversion carries them forward.
 - `npm run check` runs `scripts/sync_site_data_from_download.py --check`. After any
   Supabase write, run the md5 comparison in data-rules §8.
+- **No lists of organizations or names, anywhere** — not as tags, filters, facets,
+  front-matter fields or pages (Sean, 30 Sep 2026). The site documents Zersetzung;
+  defamation and false accusation are among its tactics, and the names in the record are
+  likely false in most cases. A list would repeat the tactic. Search is how a reader finds
+  a name, inside the passage where it was said. Reasoning: data-rules §2; guard:
+  `scripts/check_no_name_lists.py`.
 - **The search index behind Ask** (`document_chunks`, `embed_chunks_batch`) belongs to
   the chat feature on the `ai-chat` branch and is **dormant** (Sean, 30 Sep 2026: "keep
   that part of the chat feature … I don't know if I'm actually going to do that

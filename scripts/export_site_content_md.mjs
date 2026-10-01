@@ -107,6 +107,8 @@ function sweep(dir, written) {
 
 // ------------------------------------------------------------------ glossary
 const TERMS = lift("EXTRA_GLOSSARY");
+const GTOPICS = JSON.parse(readFileSync(join(ROOT, "lib/glossary-topics.json"), "utf8"));
+const gid = (t) => `IS-GLO-SITE-${(t.slug || t.term).toUpperCase().replace(/[^A-Z0-9]+/g, "-")}`;
 prepare(OUT_GLO);
 const gWritten = new Set();
 let gBytes = 0;
@@ -123,13 +125,14 @@ for (const t of TERMS) {
   ].join("\n");
   const text = [
     "---",
-    `id: IS-GLO-SITE-${(t.slug || t.term).toUpperCase().replace(/[^A-Z0-9]+/g, "-")}`,
+    `id: ${gid(t)}`,
     `title: Glossary — ${t.term}`,
     "collection: glossary",
     "doc_type: term",
     "provenance: site-authored",
     `slug: ${t.slug || ""}`,
-    "categories: [glossary, reference]",
+    // Glossary topics (Sean, 30 Sep 2026): one table, lib/glossary-topics.json.
+    `categories: [${["glossary", "reference", ...(GTOPICS.tags[gid(t)] || [])].join(", ")}]`,
     `word_count: ${words(body)}`,
     `author: ${AUTHOR}`,
     `copyright: ${COPYRIGHT}`,

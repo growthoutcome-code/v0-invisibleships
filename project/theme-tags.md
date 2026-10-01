@@ -40,23 +40,22 @@ at the same subject.*
 | `health-effects` | Health & physical effects | records physical symptoms or effects: pain, nausea, sleep loss, sensations, medical matters |
 | `rescue-announcements` | Rescue & public announcements | records promised rescue or help, public announcements, or calls for public acknowledgement |
 
-## Organizations named in statements
+## No organization or name lists
 
-A separate facet, not a theme: the organizations (agencies, companies,
-institutions) a document **names**, normalized to one spelling (e.g. "FBI",
-"Denver Rescue Mission", "Meta"). Shown only as "Organizations named in
-statements", with the disclaimer, because the site makes no claim against any
-organization (CLAUDE.md §1). There is deliberately no "Accusations" filter.
-
-**Not a filter on the site (Sean, 30 Sep 2026: removed from the journal's Filter
-panel).** The tags stay in the data — `rels.json`, Supabase and the download's
-`organizations_named:` line — for readers and tools working from the corpus. The
-site's journal reader does not show them either.
+Organization tags (the organizations each document names) were built on 30 Sep 2026
+and removed the same day from all three copies (Sean: "I don't want us creating lists
+of organizations or lists of names anywhere in the site"). The site documents
+Zersetzung, and defamation and false accusation are among its tactics: the names are
+statements made to the author, likely false in most cases, and a list would present
+them as findings, repeating the tactic. The site is not a campaign against any
+organization. Search
+still reads the full text. There is deliberately no "Accusations" filter either.
+`scripts/check_no_name_lists.py` fails the build if such a list reappears.
 
 ## Where tags live
 
-As categories (rows, not columns — no structural change), kind `theme` and kind
-`organization`, in all three copies: `rels.json` doc_categories, Supabase
+As categories (rows, not columns — no structural change), kind `theme`, in all
+three copies: `rels.json` doc_categories, Supabase
 `document_categories`, the download's `categories:` line and manifests. Concepts
 carry the same theme slugs in `lib/concepts.ts` (`topics`) and in their download
 files. Tags are published only after Sean spot-checks a sample.

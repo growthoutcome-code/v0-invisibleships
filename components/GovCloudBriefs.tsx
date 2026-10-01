@@ -1,5 +1,6 @@
 "use client";
 
+import { H2_CLASS, SUB_CLASS } from "@/components/SectionHead";
 import { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { track } from "@/lib/analytics";
@@ -79,10 +80,10 @@ export default function GovCloudBriefs() {
 
   return (
     <section className="mb-16">
-      <h2 className="font-display font-semibold text-foreground text-[21px] mb-3">
+      <h2 className={H2_CLASS}>
         The research behind this section
       </h2>
-      <p className="body-copy text-foreground/85 measure mb-2">
+      <p className={SUB_CLASS + " !mb-2"}>
         Eight briefs, {data.words.toLocaleString()} words, written as the research was done. The
         charts above are drawn from the same tables these describe. Each opens with its own count
         of what it covers.

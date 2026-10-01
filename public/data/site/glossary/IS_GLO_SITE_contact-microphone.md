@@ -5,7 +5,7 @@ collection: glossary
 doc_type: term
 provenance: site-authored
 slug: contact-microphone
-categories: [glossary, reference]
+categories: [glossary, reference, glossary-technology, glossary-physics-signals]
 word_count: 321
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.

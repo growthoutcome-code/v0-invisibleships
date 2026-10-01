@@ -5,7 +5,7 @@ collection: glossary
 doc_type: term
 provenance: site-authored
 slug: directed-energy
-categories: [glossary, reference]
+categories: [glossary, reference, glossary-military-intelligence, glossary-physics-signals]
 word_count: 109
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
