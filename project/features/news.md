@@ -293,33 +293,33 @@ Decided in conversation on 2 October:
 ## To-dos
 
 **Data and corpus**
-- [ ] `news/` corpus folder: one file per item. Front matter:
+- [x] `news/` corpus folder: one file per item. Front matter:
   - title, publisher, source_type, url, archived_url, date, precision;
   - industry, event, country, stage, related.
 
   The body is the summary. The standing footer is added by the pipeline.
-- [ ] Seed it with the 276 candidates (summaries empty), converted from
+- [x] Seed it with the 276 candidates (summaries empty), converted from
       `news_candidates.csv`.
-- [ ] Pipeline: `npm run corpus` exports the site data index (`public/data/news/`)
+- [x] Pipeline: `npm run corpus` exports the site data index (`public/data/news/`)
       and per-item summary files; the manifest and START-HERE list the folder.
-- [ ] Checks: footer on every news file; `check_no_name_lists.py` covers the folder
+- [x] Checks: footer on every news file; `check_no_name_lists.py` covers the folder
       (publisher and country exempted by Sean, 2 Oct, for News only); the site
       data matches the download.
 - [ ] Supabase: one `documents` row per item (`collection = 'news'`); md5
       verification after the write.
 
 **Page**
-- [ ] `/news` route, plus menu, phone menu and footer entries (via `lib/routes.ts`).
-- [ ] Metrics row.
-- [ ] Chart panel: tabs, the Over time line chart (in the style of the existing line
+- [x] `/news` route, plus menu, phone menu and footer entries (via `lib/routes.ts`).
+- [x] Metrics row.
+- [x] Chart panel: tabs, the Over time line chart (in the style of the existing line
       charts), five bar-chart tabs, click-to-filter.
-- [ ] Filter button, panel and chips driving metrics, charts and list.
-- [ ] List: 25 per page, Pager, loading animation on first load.
-- [ ] Item dialog: summary, Read the original (new tab), archived copy, Share.
-- [ ] `/news/<slug>` share address, opening the dialog over the list.
-- [ ] Export dialog: corpus first, CSV second; CSV carries the disclaimer;
+- [x] Filter button, panel and chips driving metrics, charts and list.
+- [x] List: 25 per page, Pager, loading animation on first load.
+- [x] Item dialog: summary, Read the original (new tab), archived copy, Share.
+- [x] `/news/<slug>` share address, opening the dialog over the list.
+- [x] Export dialog: corpus first, CSV second; CSV carries the disclaimer;
       analytics events.
-- [ ] Standing disclaimer mounted, as on every page.
+- [x] Standing disclaimer mounted, as on every page.
 
 **Content**
 - [ ] Hand-review categories for all items (Sean spot-checks).
@@ -337,7 +337,7 @@ Decided in conversation on 2 October:
 - [ ] Curation skill and weekly drafting task.
 
 **Verify**
-- [ ] Desktop, tablet and phone; filter, tabs, pagination, dialog, share link,
+- [x] Desktop, tablet and phone; filter, tabs, pagination, dialog, share link,
       both exports.
 - [ ] The three copies agree.
 
@@ -345,7 +345,17 @@ Decided in conversation on 2 October:
 
 - **Verified:** the link survey above (a script over the unpacked corpus zip and
   `public/data/tables`), and the DOJ press release text.
-- **Not verified:** whether every news link in the corpus is still live.
+- **Verified (2 Oct, branch `news`, b881041):** `npm run check` passes with the
+  News guards (index matches its 276 files, footer on every file, site data
+  matches the download byte for byte); `check_no_name_lists.py` needed no change.
+  Headless Chromium on localhost: a Category bar filters list and charts (11 of
+  276 for Transnational repression); an item opens the dialog at `/news/<slug>` and
+  Escape restores `/news`; the share address opens its dialog directly; the CSV
+  downloads with the disclaimer as its first line; no page errors; no sideways
+  overflow at tablet or phone width.
+- **Not verified:** whether every news link in the corpus is still live; a
+  production build (`next build` exceeds the sandbox time limit); Supabase rows
+  (not written yet).
 
 ## Open questions for Sean
 
@@ -354,7 +364,8 @@ Decided in conversation on 2 October:
 1. Logos or publisher names as text?
 2. ~~Own pages?~~ Yes: sharing needs them (18:06). Now a dialog with a share address
    (2 Oct).
-3. Publish once about 20 items have summaries, or right away with titles only?
+3. ~~Publish once about 20 items have summaries, or right away with titles only?~~
+   Not before summaries exist (2 Oct). The work stays on branch `news`.
 4. Are defendants' names in a summary acceptable when the DOJ published them, or
    do they stay out?
 5. Should the weekly drafting task be set up now?
