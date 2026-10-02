@@ -220,28 +220,54 @@ export default function NewsView({ items, initialSlug }: { items: NewsItem[]; in
           </p>
         </div>
 
-        <ol className="m-0 list-none divide-y divide-edge border-y border-edge p-0">
-          {pageItems.map((it) => (
-            <li key={it.slug} className="relative py-5 pr-12">
-              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[12px] uppercase tracking-[0.08em] text-muted">
-                <span className="tabular-nums">{newsDate(it)}</span>
-                <span className="font-semibold text-foreground">{it.sourceType}</span>
-                <span className="normal-case tracking-normal text-[13px]">{it.publisher}</span>
-              </div>
-              <a href={newsHref(it.slug)} onClick={(e) => { e.preventDefault(); openItem(it); }}
-                className="mt-1.5 block font-display text-[18px] font-semibold leading-snug text-foreground hover:underline underline-offset-4">
-                {it.title}
-              </a>
-              <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-[12px] uppercase tracking-[0.06em] text-muted">
-                <span>{it.event}</span>
-                {it.industry.map((x) => <span key={x}>{x}</span>)}
-                {it.country && <span>{it.country}</span>}
-                {it.stage && <span className="normal-case tracking-normal italic">{it.stage}</span>}
-              </div>
-              <CardShare title={it.title} path={newsHref(it.slug)} className="absolute right-0 top-5" />
-            </li>
-          ))}
-        </ol>
+        {/* A table from lg (1024px) up; tablets get the stacked rows too, since
+            five columns leave the headline too narrow there. Below that each row stacks into a short card:
+            date and source on one line, the headline, then category and stage. */}
+        <table className="w-full border-collapse text-left">
+          <thead className="hidden lg:table-header-group">
+            <tr className="border-b border-foreground text-[12px] uppercase tracking-[0.08em] text-muted">
+              <th scope="col" className="w-[118px] py-2.5 pr-4 font-normal">Date</th>
+              <th scope="col" className="py-2.5 pr-4 font-normal">Headline</th>
+              <th scope="col" className="w-[19%] py-2.5 pr-4 font-normal">Source</th>
+              <th scope="col" className="w-[17%] py-2.5 pr-4 font-normal">Category</th>
+              <th scope="col" className="w-[104px] py-2.5 pr-2 font-normal">Stage</th>
+              <th scope="col" className="w-10 py-2.5 font-normal"><span className="sr-only">Share</span></th>
+            </tr>
+          </thead>
+          <tbody className="block border-t border-edge lg:table-row-group lg:border-t-0">
+            {pageItems.map((it) => (
+              <tr key={it.slug}
+                className="relative grid grid-cols-[auto_1fr] gap-x-3 gap-y-1.5 border-b border-edge py-4 pr-10 lg:table-row lg:py-0 lg:pr-0 lg:hover:bg-panel">
+                <td className="text-[12px] uppercase tracking-[0.08em] text-muted tabular-nums whitespace-nowrap lg:py-4 lg:pr-4 lg:align-top lg:text-[13px] lg:normal-case lg:tracking-normal">
+                  {newsDate(it)}
+                </td>
+                <td className="col-span-2 row-start-2 lg:py-4 lg:pr-4 lg:align-top">
+                  <a href={newsHref(it.slug)} onClick={(e) => { e.preventDefault(); openItem(it); }}
+                    className="font-display text-[17px] font-semibold leading-snug text-foreground hover:underline underline-offset-4">
+                    {it.title}
+                  </a>
+                  {it.country && <span className="ml-2 hidden text-[12px] uppercase tracking-[0.06em] text-muted lg:inline">{it.country}</span>}
+                </td>
+                <td className="col-start-2 row-start-1 min-w-0 text-[13px] text-muted lg:whitespace-normal lg:py-4 lg:pr-4 lg:align-top">
+                  <span className="font-semibold uppercase tracking-[0.08em] text-[12px] text-foreground">{it.sourceType}</span>
+                  <span className="lg:hidden"> · </span>
+                  <span className="lg:mt-0.5 lg:block">{it.publisher}</span>
+                </td>
+                <td className="col-span-2 text-[12px] uppercase tracking-[0.06em] text-muted lg:py-4 lg:pr-4 lg:align-top">
+                  {it.event}
+                  {it.country && <span className="lg:hidden"> · {it.country}</span>}
+                  {it.stage && <span className="normal-case tracking-normal italic lg:hidden"> · {it.stage}</span>}
+                </td>
+                <td className="hidden text-[13px] italic text-muted lg:table-cell lg:py-4 lg:pr-2 lg:align-top">
+                  {it.stage || <span aria-label="No stage">—</span>}
+                </td>
+                <td className="absolute right-0 top-3.5 lg:static lg:py-3 lg:align-top">
+                  <CardShare title={it.title} path={newsHref(it.slug)} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
         {!shown.length && (
           <p className="body-copy text-muted my-10">
             Nothing matches that.{" "}
