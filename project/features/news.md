@@ -236,19 +236,110 @@ Two pieces (Sean asked whether a skill or an agent fits):
 Set up both after the first batch, so the skill is written from the method that
 actually worked.
 
-## Steps
+## Page design (Sean, 2 Oct 2026)
 
-- [ ] Sean: mandatory URLs; confirm the categories and the country filter.
-- [ ] Collect the PRC espionage releases from justice.gov and fbi.gov (search by
-      year; record title, office, date, URL, charge or outcome). Count them
-      against Sean's 60+.
-- [ ] Source and read each article (primary source first); draft summaries.
-- [ ] Sean reviews the summaries.
-- [ ] Build: route and menu, News page and `/news/<slug>` pages with sharing,
-      corpus folder, pipeline, check guards, Supabase rows (with md5 verification).
-- [ ] Timeline: News band (track H) from the same items; legend and scope note
-      updated; GovCloudReport legend updated.
-- [ ] Verify at desktop, tablet and phone; verify the three copies agree.
+Decided in conversation on 2 October:
+
+- **Metrics first.** A row of figures:
+  - items;
+  - official sources;
+  - years covered;
+  - added this month.
+
+  The chart panel sits underneath.
+- **One full-width chart panel with tabs.**
+  - **Over time** is the first tab and the default: **lines, not stacked bars**,
+    one line per kind-of-event group, by year.
+  - **Where from (publisher) · By category · By source type · By industry · By
+    country:** each a horizontal bar chart. Publisher and country are approved as
+    tabs and as filters (Sean, 2 Oct).
+- **The filter drives the whole page.** Metrics, charts and list all follow it.
+  - The Filter button sits above the metrics, with active filters as removable
+    chips and "Clear all".
+  - The tab for a filtered dimension still shows every value, with the selected
+    one highlighted.
+  - Clicking a bar or a line sets that filter.
+- **The list.** Newest first, **25 per page**, using the existing Pager. The
+  Filter button opens the existing side panel (FilterPanel) with:
+  - search;
+  - category, industry, source type, publisher, country, year.
+- **Loading.**
+  - The index (titles, dates, categories: about 276 rows, small) loads once,
+    behind the site's loading animation, because the charts need every row to
+    count.
+  - Each page of the list renders 25 rows from it.
+  - A summary is fetched only when its item is opened.
+- **Clicking an item opens a dialog, not the original.** The dialog shows:
+  - date, source type, publisher and stage;
+  - the headline and our summary;
+  - categories and related archive pages;
+  - a **"Read the original"** button that opens the publisher's page in a new tab;
+  - the archived copy;
+  - **Share**.
+
+  The shared link is `/news/<slug>`, which opens the same dialog over the list (or
+  a plain page with no scripts), so a shared item always lands on our summary
+  first.
+- **Export.** One "Export" text link beside the item count opens a dialog with:
+  1. **Download the corpus for AI** (primary): the same zip as the header button.
+  2. **Download this list as CSV** (secondary): the items currently shown, built on
+     the spot from the page's data.
+     - Its first line is the standing disclaimer, enforced by a check like the
+       corpus footer.
+     - Both downloads are counted for `/insights`.
+- **Publishing before summaries.** Open (see question 3 below). The
+  recommendation is to keep the page unlisted until about 20 items have summaries.
+
+## To-dos
+
+**Data and corpus**
+- [ ] `news/` corpus folder: one file per item. Front matter:
+  - title, publisher, source_type, url, archived_url, date, precision;
+  - industry, event, country, stage, related.
+
+  The body is the summary. The standing footer is added by the pipeline.
+- [ ] Seed it with the 276 candidates (summaries empty), converted from
+      `news_candidates.csv`.
+- [ ] Pipeline: `npm run corpus` exports the site data index (`public/data/news/`)
+      and per-item summary files; the manifest and START-HERE list the folder.
+- [ ] Checks: footer on every news file; `check_no_name_lists.py` covers the folder
+      (publisher and country exempted by Sean, 2 Oct, for News only); the site
+      data matches the download.
+- [ ] Supabase: one `documents` row per item (`collection = 'news'`); md5
+      verification after the write.
+
+**Page**
+- [ ] `/news` route, plus menu, phone menu and footer entries (via `lib/routes.ts`).
+- [ ] Metrics row.
+- [ ] Chart panel: tabs, the Over time line chart (in the style of the existing line
+      charts), five bar-chart tabs, click-to-filter.
+- [ ] Filter button, panel and chips driving metrics, charts and list.
+- [ ] List: 25 per page, Pager, loading animation on first load.
+- [ ] Item dialog: summary, Read the original (new tab), archived copy, Share.
+- [ ] `/news/<slug>` share address, opening the dialog over the list.
+- [ ] Export dialog: corpus first, CSV second; CSV carries the disclaimer;
+      analytics events.
+- [ ] Standing disclaimer mounted, as on every page.
+
+**Content**
+- [ ] Hand-review categories for all items (Sean spot-checks).
+- [ ] Trim the government cloud contract stories in News to the 15 to 20 that
+      matter; the rest stay as Timeline sources.
+- [ ] First 20 summaries, for Sean's review; then the rest in batches.
+- [ ] Archive every news link (Wayback Machine); keep copies of official releases.
+- [ ] Finish collecting: DOJ releases from 2022 to 2026, AI litigation, protests.
+- [ ] Resolve where the "no private thinking space" passage comes from (the Guardian
+      or Amnesty's *Automated Apartheid*) before any summary or concept repeats it.
+
+**After launch**
+- [ ] Timeline band (track H, News).
+- [ ] "In the news" on linked glossary, concept and journal pages.
+- [ ] Curation skill and weekly drafting task.
+
+**Verify**
+- [ ] Desktop, tablet and phone; filter, tabs, pagination, dialog, share link,
+      both exports.
+- [ ] The three copies agree.
 
 ## Verified / not verified
 
@@ -258,8 +349,12 @@ actually worked.
 
 ## Open questions for Sean
 
+0. ~~Over time first tab? Publisher and country as tabs and filters?~~ Yes to both
+   (2 Oct).
 1. Logos or publisher names as text?
-2. ~~Own pages?~~ Yes: sharing needs them (18:06).
-3. Are defendants' names in a summary acceptable when the DOJ published them, or
+2. ~~Own pages?~~ Yes: sharing needs them (18:06). Now a dialog with a share address
+   (2 Oct).
+3. Publish once about 20 items have summaries, or right away with titles only?
+4. Are defendants' names in a summary acceptable when the DOJ published them, or
    do they stay out?
-4. Should the weekly drafting task be set up now?
+5. Should the weekly drafting task be set up now?
