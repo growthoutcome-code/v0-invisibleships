@@ -12,7 +12,7 @@ issuing_office:
 url: https://www.bostonglobe.com/2026/07/27/business/ebay-harassed-ina-david-steiner-settlement
 archived_url: 
 industry: 
-event: Transnational repression
+event: Courts & litigation
 country: 
 stage: 
 related: 

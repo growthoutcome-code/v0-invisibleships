@@ -12,7 +12,7 @@ issuing_office:
 url: https://www.law.com/2026/07/28/ebay-former-execs-settle-mass-couples-harassment-cyberstalking-suit-for-557m
 archived_url: 
 industry: 
-event: Transnational repression
+event: Courts & litigation
 country: 
 stage: 
 related: 

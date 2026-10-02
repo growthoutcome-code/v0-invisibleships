@@ -60,6 +60,7 @@ const COLUMNS: {
       // no `t`: they are real routes.
       ...RESEARCH_SECTIONS.map((sec) => ({ href: `/research/${sec.slug}`, label: sec.label })),
       { t: "concepts", href: "/concepts", label: "Concepts" },
+      { href: "/news", label: "News" },
     ],
   },
   {

@@ -634,7 +634,7 @@ export default function JournalBrowser({
 
 const JOURNAL_SORTS: { v: SortDir; l: string }[] = [{ v: "newest", l: "Newest first" }, { v: "oldest", l: "Oldest first" }];
 
-const TAB_TITLE: Record<Tab, string> = { journal: "Journal", glossary: "Glossary", documents: "Documents", data: "Research", concepts: "Concepts", author: "About the author", disclaimer: "Disclaimer" };
+const TAB_TITLE: Record<Tab, string> = { news: "News", journal: "Journal", glossary: "Glossary", documents: "Documents", data: "Research", concepts: "Concepts", author: "About the author", disclaimer: "Disclaimer" };
 
 // ~200px page-title band under the nav; its h1 is the current section name,
 // left-aligned and larger than any other heading. 80% width via its parent <main>.

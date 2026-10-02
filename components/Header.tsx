@@ -43,7 +43,7 @@ import { ACCOUNTS_READY } from "@/lib/flags";
 import { RESEARCH_SECTIONS } from "@/lib/routes";
 import type { SubTab } from "@/components/DataView";
 
-export type Tab = "journal" | "glossary" | "documents" | "data" | "concepts" | "author" | "disclaimer";
+export type Tab = "journal" | "glossary" | "documents" | "data" | "concepts" | "author" | "disclaimer" | "news";
 
 const NAV: { t: Tab; href: string; label: string }[] = [
   // Order (Sean, 30 Sep 2026): the record, then what it means. Journal first as
@@ -59,6 +59,9 @@ const NAV: { t: Tab; href: string; label: string }[] = [
   // Research opens a sub-menu of its four sections (Sean, 30 Sep 2026: "sub-navigation
   // menu items under the research main menu item due to the sheer volume of data").
   { t: "data", href: "/research/timeline", label: "Research" },
+  // News sits beside Research, the section it is closest to (Sean, 2 Oct 2026). It
+  // is its own page, not a tab of the app, so it is always a real link.
+  { t: "news", href: "/news", label: "News" },
   { t: "documents", href: "/documents", label: "Documents" },
   { t: "glossary", href: "/glossary", label: "Glossary" },
 ];
@@ -96,7 +99,7 @@ export default function Header({
   // targets (Sean, 30 Sep 2026: "update the text size of the rest of the options").
   const item = (n: (typeof NAV)[number], extra = "", phone = false) => {
     const cls = phone ? phoneLinkCls(tab === n.t) : `${linkCls(tab === n.t)} ${extra}`;
-    return onTab ? (
+    return onTab && n.t !== "news" ? (
       <button
         key={n.t}
         onClick={() => { onTab(n.t); setOpen(false); }}
