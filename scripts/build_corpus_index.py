@@ -120,6 +120,7 @@ def expectations() -> list:
          "glossary-site/", ".md", 1),     # +1 for the README
         ("Crime briefs", md("public/data/crime/md"), "crime/", ".md", 1),
         ("Public Health briefs", md("public/data/health/md"), "public-health/", ".md", 1),
+        ("News items", md("public/data/news/md"), "news/", ".md", 1),   # +1 for the README
         ("Concept files on disk", md("public/data/concepts/md"), "concepts/", ".md", 0),
         # Raw research inputs. Not rendered on the site, and included precisely
         # for that reason: the corpus carries the evidence base, not only what
@@ -252,6 +253,7 @@ your question; each is sized to fit.
 | Investigate the crime findings | `crime/*.md` | {n_of('crime/')} |
 | Investigate the health findings | `public-health/*.md` | {n_of('public-health/')} |
 | Investigate government cloud adoption | `government-cloud/briefs/` | {n_of('government-cloud/', '.md')} |
+| Follow events in the news over time | `news/` | {n_of('news/')} |
 | Read the primary record | `journal/` (large — go by part) | {n_of('journal/')} |
 | Look up terminology | `glossary/` + `glossary-site/` | {n_of('glossary/') + n_of('glossary-site/')} |
 | Check the terms and disclaimer | `meta/` | {n_of('meta/')} |
@@ -270,6 +272,9 @@ your question; each is sized to fit.
 - **`crime/`, `public-health/`, `government-cloud/`** — site-produced research.
   Briefs in Markdown, row data in `csv/`, and the same content as `.json` for
   code. **These three datasets do not corroborate each other, or the journal.**
+- **`news/`** — official releases and outside reporting, one item per file, each
+  with its publisher, date, link and categories and a summary written for this
+  archive. The articles belong to their publishers and are linked, not copied.
 - **`glossary/`** — terms from the source document series.
   **`glossary-site/`** — terms written for the site to explain the work.
 - **`documents/`** — what the source series contains and where it lives.
@@ -331,6 +336,7 @@ FOLDERS = [
     ("crime", "Crime", "Nine findings, their row data, and every source behind them."),
     ("public-health", "Public Health", "Suicide, overdose and the indicators around them."),
     ("government-cloud", "Government Cloud", "Awards, deployments, litigation and capital flows."),
+    ("news", "News", "Official releases and outside reporting, each summarised and linked to the original."),
     ("concepts", "Concepts", "The archive's arguments, each labelled with a basis, an origin, a theme and the readers it was written for."),
     ("glossary", "Glossary", "Terms from the source series, plus terms written for the site."),
     ("research", "Research inputs", "The raw rows the charts were built from. Not rendered anywhere on the site."),
@@ -397,6 +403,7 @@ SECTION_BLURB = {
     "crime": "Nine findings, their row data, and every source behind them.",
     "public-health": "Suicide, overdose and the indicators around them.",
     "government-cloud": "Awards, deployments, litigation and capital flows.",
+    "news": "Official releases and outside reporting, each summarised and linked to the original.",
     "concepts": "The archive's arguments, each labelled by basis, origin, theme and reader.",
     "glossary": "Terms drawn from the source document series.",
     "glossary-site": "Terms written for the site to explain the work.",

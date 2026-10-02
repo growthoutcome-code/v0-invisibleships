@@ -75,6 +75,8 @@ MAP = [
     ("health/md",          "public-health/"),
     ("health/charts",      "public-health/charts/"),
     ("health/tables",      "public-health/"),
+    ("news/md",            "news/"),       # one file per News item
+    ("news",               "news/"),       # index.json
     ("site/meta",          "meta/"),
     ("site/glossary",      "glossary-site/"),
     ("site/documents",     "documents/"),
