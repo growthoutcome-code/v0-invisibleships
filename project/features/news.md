@@ -229,9 +229,10 @@ Two pieces (Sean asked whether a skill or an agent fits):
    - how to write the corpus file.
 
    Any session then follows the same rules.
-2. **A weekly scheduled task** that runs the skill over the followed industries
-   and **drafts** new items into a review list for Sean. Nothing publishes
-   without his approval.
+2. **A daily scheduled task** (Sean, 2 Oct 12:42: "searches for new and relevant
+   articles every single day"; was weekly) that runs the skill over the followed
+   industries and **drafts** new items into a review list for Sean. Nothing
+   publishes without his approval. A project in itself; see To-dos, After launch.
 
 Set up both after the first batch, so the skill is written from the method that
 actually worked.
@@ -290,6 +291,37 @@ Decided in conversation on 2 October:
 - **Publishing before summaries.** Open (see question 3 below). The
   recommendation is to keep the page unlisted until about 20 items have summaries.
 
+## Review round 1 (Sean, 2 Oct 2026, 12:42, on localhost)
+
+**Keep as is:** the filter drives the charts ("extremely valuable"); the tabs; the
+table; share; pagination; mobile overall. The Over time chart is barely usable on
+a phone; Sean: "let's leave it."
+
+**Changes, in the suggested order**
+
+| # | Change | What it takes | Size |
+|---|---|---|---|
+| 1 | **Page width matches the site.** `/news` uses the full width with 100px sides, so on screens wider than about 1450px it runs wider than every other page. | Use the frame the other pages use (`max-w-[1400px] mx-auto px-4 sm:px-6`, as in `JournalBrowser`). Sean left the choice open; recommended: match, since one width across the site is the rule a reader notices broken. | Small |
+| 2 | **Heading "Every item" becomes "Posted articles."** The filtered form becomes "12 of 276 posted articles". | Copy change. | Small |
+| 3 | **Bigger item dialog, room for a long summary.** | `DialogContent size="md"` (672px) becomes `lg` (768px, the size the site uses for long prose); summary set in the reading type at a comfortable measure, scrolling inside the dialog body. | Small |
+| 4 | **Click a line on Over time to open a dialog**, as the other charts do (Public Health's country dialog). | Each line and its legend name open a shadcn `Dialog`: the group's name, its count per year, and its items newest first, each opening the item dialog. Picking the group as a filter moves into that dialog as a button, so a click no longer filters silently. | Medium |
+| 5 | **A News bottom section**, and bottom sections under `/news`. | A News block for `BottomSections`: eyebrow and question, a small Over time visual, the five newest items with summaries, one way in. `/news` shows the existing Journal, Concepts, Research and Glossary blocks, excluding News (rule 1 in `BottomSections.tsx`). | Medium |
+| 6 | **The News section on the home page.** | The same block built by `lib/home-sections.ts`, so home and bottom are checked alike. Goes live with the page, not before: a home section pointing at a page that is not live would be a dead end. | Medium |
+| 7 | **Summaries.** | The dialog is working as built: all 276 items are `summary_status: pending`, so every one says "being written". Not a bug. First 20 for Sean's review, then batches. | Large |
+
+Items 1 to 4 are page polish and can be reviewed together on localhost. 5 and 6
+share one block, so they go together. 7 runs alongside and is what gates launch.
+
+**shadcn components (Sean: "make sure we are using shadcn components").** Already
+on them: the dialogs (`ui/dialog`), the sort select (`ui/select` via
+`ListControls`), the pager (`ui/pagination` via `Pager`). Hand-built: the chart
+tabs, the metric tiles, the bar rows and the table. Tabs: there is no `ui/tabs`
+in the repo, and the one other tablist (`InsightsControls`) is hand-built too;
+adding shadcn Tabs (`@radix-ui/react-tabs`, one new dependency) gives keyboard
+arrows for free. The table: shadcn `ui/table` is plain styled markup; adding it
+is cheap but changes nothing a reader sees. Proposed: add `ui/tabs` and
+`ui/table` with change 4, and use them here first.
+
 ## To-dos
 
 **Data and corpus**
@@ -334,7 +366,12 @@ Decided in conversation on 2 October:
 **After launch**
 - [ ] Timeline band (track H, News).
 - [ ] "In the news" on linked glossary, concept and journal pages.
-- [ ] Curation skill and weekly drafting task.
+- [ ] News section on the home page (review round 1, change 6).
+- [ ] Curation skill.
+- [ ] **Daily Claude task** that searches for new and relevant articles in the
+      followed industries and drafts them for Sean's review (Sean, 2 Oct). A
+      project of its own: sources, de-duplication against the index, the review
+      list format, and how an approved draft becomes an item file.
 
 **Verify**
 - [x] Desktop, tablet and phone; filter, tabs, pagination, dialog, share link,
@@ -368,4 +405,4 @@ Decided in conversation on 2 October:
    Not before summaries exist (2 Oct). The work stays on branch `news`.
 4. Are defendants' names in a summary acceptable when the DOJ published them, or
    do they stay out?
-5. Should the weekly drafting task be set up now?
+5. ~~Should the weekly drafting task be set up now?~~ Daily, after launch (2 Oct).

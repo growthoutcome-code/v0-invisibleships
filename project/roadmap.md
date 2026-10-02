@@ -16,7 +16,7 @@ is real but unscheduled. **Not doing** exists so the same suggestions stop comin
 |---|---|---|
 | Visit trust labels on `/insights` | In progress | `features/visit-trust-labels.md`, decision `0002` |
 | `/insights` restructure — Google leads, pages lead, locations on both tabs | In progress | `features/insights-page-restructure.md` |
-| **News** — a dated index of about 200 official-source posts and news items, one band on the master timeline | **Planning.** Waiting on Sean's mandatory URLs and four answers (categories and country filter, defendants' names, logos versus text, weekly drafting task). First batch: PRC espionage cases from justice.gov and fbi.gov, led by the 15 Sep 2026 DOJ Russia indictment | `features/news.md` |
+| **News** — a dated index of about 200 official-source posts and news items, one band on the master timeline | **Built on branch `news`, not live.** 276 items, page, dialogs, CSV export. Review round 1 (2 Oct): width, heading, bigger dialog, line-click dialog, News bottom and home sections. Launch waits on summaries | `features/news.md` |
 | `POSTHOG_PERSONAL_API_KEY` into Vercel | Missing in production as of 27 Sep, so the live `/insights` had no traffic numbers. **[check]** whether it has been added since | Vercel env |
 
 **Shipped since the last review (27 Sep → 1 Oct):** every unpushed commit is live (production `f14a3cf`), so the gate and download logging is deployed. `gate_events` holds 5 rows, the latest from 1 Oct. The same period also shipped:
@@ -33,7 +33,7 @@ is real but unscheduled. **Not doing** exists so the same suggestions stop comin
 
 | Work | Why now | Notes |
 |---|---|---|
-| News: curation skill and weekly drafting task | Keeps the News index current without Sean searching by hand | After the first batch, so the skill records the method that worked. Drafts only; nothing publishes without Sean. See `features/news.md` |
+| News: curation skill and a daily Claude task that finds new articles | Keeps the News index current without Sean searching by hand | After launch, so the skill records the method that worked. Runs every day (Sean, 2 Oct). Drafts only; nothing publishes without Sean. See `features/news.md` |
 | News: "In the news" on glossary, concept and journal pages | The other direction of each item's backlinks | Built from the same `related` field as the item pages |
 | **Marketing launch** — social plan first | Sean, 27 Sep: starting soon | See `marketing-readiness-notes` in the Claude project. The measurement gap is attribution: **every visit to date is `$direct`** and there is no attribution panel. Agree a UTM convention *before* the first post — inconsistent tags cannot be retrofitted |
 | Traffic sources section on `/insights` | Marketing is worthless unmeasured | PostHog already captures `utm_*` and `$referring_domain`; this is a query, not an architecture |
