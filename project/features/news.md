@@ -337,8 +337,12 @@ is cheap but changes nothing a reader sees. Proposed: add `ui/tabs` and
 - [x] Checks: footer on every news file; `check_no_name_lists.py` covers the folder
       (publisher and country exempted by Sean, 2 Oct, for News only); the site
       data matches the download.
-- [ ] Supabase: one `documents` row per item (`collection = 'news'`); md5
-      verification after the write.
+- [x] Supabase: one `documents` row per item (`collection = 'news'`,
+      `doc_type = 'news-item'`), 276 rows written 2 Oct 2026. The database read each
+      file from the live site (`/data/news/md/`) with its `http` extension, the
+      project's existing load method. Verified: 276 rows, none without a summary,
+      all searchable, and one md5 fingerprint over every row's body equal to the
+      local files'. Re-running the same insert updates News rows only.
 
 **Page**
 - [x] `/news` route, plus menu, phone menu and footer entries (via `lib/routes.ts`).
