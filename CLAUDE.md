@@ -84,9 +84,20 @@ Full reasoning in `claude/measurement-and-privacy-decisions.md`. The rules:
 >    until then `MAXMIND_LICENSE_KEY` still governs and its absence is a supported
 >    state.
 
-- **PostHog only.** Google Analytics was removed on 26 Sep 2026 and is not coming
-  back without a specific reason. Do not add analytics, tag managers, or
-  ad-adjacent scripts.
+- **Google Analytics and PostHog both run. Never remove Google Analytics.**
+  Sean, 28 Sep 2026: "we never want to remove Google Analytics." A Claude
+  session removed it on 26 Sep without being asked (a206fce) and it was
+  restored on 28 Sep (66c5106). Record: `project/decisions/0016-google-analytics-stays.md`.
+  - Every `track()` call and `registerVisitorProps()` writes to both tools.
+  - The corpus download reaches GA server-side through the Measurement Protocol
+    (f1bfa2d), so GA counts real downloads, not clicks.
+  - `/insights` reads GA live as well as PostHog and Supabase.
+  - GA's known limits (no author exclusion of its own, no registered
+    `visitor_role` dimension, an EEA/UK consent obligation once EU readers
+    arrive) are things to note or fix inside GA. They are never a reason to
+    remove it.
+  - Do not add any other analytics, tag manager or ad-adjacent script without
+    Sean.
 - **There is no consent screen, and adding one is a decision, not a fix.** A
   fourth gate step asking permission to count page views was built on 26 Sep 2026
   and deliberately not shipped (Sean: "that seems weird... let people opt out or
@@ -179,7 +190,7 @@ so this is discipline plus the cookie.
 
 `/insights` is public, linked from the footer (far-right column, with a live
 count), `noindex` for now, and reads **only** the `insights_*` Supabase views —
-which exclude author-marked rows — plus PostHog for counts. Prose lives behind
+which exclude author-marked rows — plus PostHog and Google Analytics for counts. Prose lives behind
 "How this is measured", never on the page. The opt-out control lives in that
 dialog.
 

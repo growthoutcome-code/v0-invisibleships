@@ -1,6 +1,6 @@
 # 0001 — How does this site measure its readers, and what does it refuse to do?
 
-- **Status:** Accepted
+- **Status:** Accepted. "PostHog only" and the "Keep Google Analytics" rejection are superseded by [0016](0016-google-analytics-stays.md): Google Analytics stays
 - **Date:** 2026-09-26
 - **Supersedes:** none
 
