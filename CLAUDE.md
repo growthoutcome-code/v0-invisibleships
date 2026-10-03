@@ -211,6 +211,9 @@ bug, even when the content is correct.
 
 ## 4. Environment
 
+**A new workstation** (a second machine, or another contributor) starts from
+`project/workstation-setup.md`.
+
 `.env.local` holds the working set. These must also be set in **Vercel
 Production** or the feature silently does nothing:
 
