@@ -273,7 +273,13 @@ export function initAnalytics() {
   if (KEY) {
     posthog.init(KEY, {
       api_host: HOST,
-      capture_pageview: true,
+      // "history_change", not true (3 Oct 2026). The site is a single-page app:
+      // moving between sections changes the address without reloading, and
+      // `true` counts only full page loads. PostHog was therefore missing most
+      // page views that Google Analytics, whose enhanced measurement counts
+      // address changes by default, was recording. This is part of why GA read
+      // so much higher; the rest is the internal-traffic filter, by design.
+      capture_pageview: "history_change",
       capture_pageleave: true,
       person_profiles: "identified_only",
       // Session replay is off, deliberately, and this line is the reason it
