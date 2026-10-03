@@ -43,6 +43,7 @@
  */
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
+import { usePathname } from "next/navigation";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import CopyrightTerms from "@/components/CopyrightTerms";
@@ -63,6 +64,31 @@ const STEPS = [
 ] as const;
 
 const TERMS_STEP = 2;
+
+// TEMPORARY (Sean, 3 Oct 2026): "turn the gate back on for visits to the home
+// page every time until we get the gate changes worked out." While true, the
+// gate opens on every visit to the home page, including returning to it from
+// inside the site, whether or not this device has passed it before. Every
+// other page keeps the first-visit rule in lib/gate.ts. Set to false to go
+// back to first visit only.
+//
+// It also inflates the gate counts while it is on: each home visit logs a new
+// gate_opened, so read the funnel for these dates with that in mind.
+const GATE_ON_EVERY_HOME_VISIT = true;
+
+// Closed without entering (a click outside the card, or Escape). Remembered for
+// the browser tab's session only (sessionStorage), so the gate does not reopen
+// while the reader moves around the site, including links that reload the page.
+// It is not recorded as passed, so it returns on the next visit. The home page
+// still opens it every time while the rule above is on.
+const DISMISSED_KEY = `is_gate_dismissed_${GATE_VERSION}`;
+function wasDismissed(): boolean {
+  try {
+    return window.sessionStorage.getItem(DISMISSED_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
 
 // Shared between the hint paragraph and the footer button's aria-describedby.
 const HINT_ID = "gate-terms-hint";
@@ -89,6 +115,7 @@ export default function EntryGate() {
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState(0);
   const [role, setRole] = useState<string | null>(null);
+  const pathname = usePathname();
 
   // The page paints FIRST, then the gate arrives over it. Sean, 15 September:
   // "the site loads quickly, the first part of the site, and then the warning
@@ -97,15 +124,24 @@ export default function EntryGate() {
   // then trails the scrim by 180ms (below) so the page is seen to be held back
   // before the panel lands on top of it.
   useEffect(() => {
-    if (hasEntered()) return;
+    const everyHomeVisit = GATE_ON_EVERY_HOME_VISIT && pathname === "/";
+    if ((hasEntered() || wasDismissed()) && !everyHomeVisit) return;
     const t = setTimeout(() => {
+      // A fresh start each time it opens, since it can now open more than once
+      // in one page session (navigating back to the home page).
+      setStep(0);
+      setRole(null);
+      setReadAll(false);
+      setProgress(0);
       setOpen(true);
       // The denominator. Without it the funnel starts at "answered the
       // question", which cannot show how many people met the gate and left.
       logGate("gate_opened");
     }, 350);
     return () => clearTimeout(t);
-  }, []);
+    // pathname: the root layout does not remount on navigation, so this runs
+    // again when a reader returns to the home page from inside the site.
+  }, [pathname]);
 
   useEffect(() => {
     if (open) track(STEPS[step].event);
@@ -185,6 +221,19 @@ export default function EntryGate() {
 
   const locked = step === TERMS_STEP && !readAll;
 
+  // Sean, 3 Oct 2026: "the gate should close if you click outside the gate."
+  // Closing is not entering: nothing is marked as passed, and it is counted
+  // separately so the funnel can tell the two apart.
+  function dismiss() {
+    try {
+      window.sessionStorage.setItem(DISMISSED_KEY, "1");
+    } catch {
+      /* private mode: the gate may reopen on the next page, which is harmless */
+    }
+    track("gate_dismissed", { gate_step: step + 1 });
+    setOpen(false);
+  }
+
   function advance() {
     // aria-disabled keeps this button focusable and clickable (see the footer),
     // so the locked case is handled here rather than by the browser.
@@ -226,9 +275,22 @@ export default function EntryGate() {
         <DialogPrimitive.Overlay className="fixed inset-0 z-[60] bg-black/85 backdrop-blur-[2px] data-[state=open]:animate-in data-[state=open]:fade-in-0" />
         <DialogPrimitive.Content
           aria-describedby={undefined}
-          // Nothing dismisses this except the button on the last step: no
-          // Escape, no click-outside, and no close affordance in the corner.
-          onEscapeKeyDown={(e) => e.preventDefault()}
+          // Until 3 Oct nothing dismissed this except the button on the last
+          // step. Now a click on the dark area around the card closes it, and
+          // so does Escape, its keyboard equivalent (see dismiss()). The
+          // archive's pages still carry the standing disclaimer line
+          // (components/StandingDisclaimer.tsx).
+          //
+          // The dark area is part of this element (it covers the screen and
+          // centres the card), so a click there arrives as a click on this
+          // element itself, not as a Radix "outside" event; those stay ignored.
+          onEscapeKeyDown={(e) => {
+            e.preventDefault();
+            dismiss();
+          }}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) dismiss();
+          }}
           onPointerDownOutside={(e) => e.preventDefault()}
           onInteractOutside={(e) => e.preventDefault()}
           onOpenAutoFocus={(e) => {

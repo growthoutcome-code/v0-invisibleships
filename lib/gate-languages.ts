@@ -101,6 +101,38 @@ const WELCOMES: Record<string, LanguageWelcome> = {
     hello: "स्वागत है",
     text: "यह संग्रह अंग्रेज़ी में लिखा गया है। प्रवेश करने के बाद, “Corpus for AI” से पूरा संग्रह सादे टेक्स्ट फ़ाइलों के रूप में डाउनलोड करें; अनुवाद टूल और AI सहायक इनका अनुवाद वेब पेजों की तुलना में अधिक पूर्ण रूप से करते हैं। आपका ब्राउज़र भी इन पेजों का अनुवाद कर सकता है।",
   },
+  // Added 3 Oct 2026 at Sean's request. Same caveat: AI-drafted, unreviewed.
+  fa: {
+    lang: "fa",
+    name: "Persian",
+    dir: "rtl",
+    hello: "خوش آمدید",
+    text: "این بایگانی به زبان انگلیسی نوشته شده است. پس از ورود، با «Corpus for AI» کل بایگانی را به‌صورت فایل‌های متنی ساده دانلود کنید؛ ابزارهای ترجمه و دستیارهای هوش مصنوعی این فایل‌ها را کامل‌تر از صفحات وب ترجمه می‌کنند. مرورگر شما نیز می‌تواند این صفحات را ترجمه کند.",
+  },
+  tr: {
+    lang: "tr",
+    name: "Turkish",
+    hello: "Hoş geldiniz",
+    text: "Bu arşiv İngilizce yazılmıştır. Girdikten sonra, arşivin tamamını düz metin dosyaları olarak indirmek için «Corpus for AI» bölümünü kullanın; çeviri araçları ve yapay zekâ asistanları bu dosyaları web sayfalarından daha eksiksiz çevirir. Tarayıcınız da bu sayfaları çevirebilir.",
+  },
+  vi: {
+    lang: "vi",
+    name: "Vietnamese",
+    hello: "Chào mừng",
+    text: "Kho lưu trữ này được viết bằng tiếng Anh. Sau khi vào, hãy dùng “Corpus for AI” để tải toàn bộ kho lưu trữ dưới dạng tệp văn bản thuần; các công cụ dịch và trợ lý AI dịch những tệp này đầy đủ hơn so với trang web. Trình duyệt của bạn cũng có thể dịch các trang này.",
+  },
+  id: {
+    lang: "id",
+    name: "Indonesian",
+    hello: "Selamat datang",
+    text: "Arsip ini ditulis dalam bahasa Inggris. Setelah masuk, gunakan “Corpus for AI” untuk mengunduh seluruh arsip sebagai file teks biasa; alat penerjemah dan asisten AI menerjemahkannya lebih lengkap daripada halaman web. Peramban Anda juga dapat menerjemahkan halaman-halaman ini.",
+  },
+  it: {
+    lang: "it",
+    name: "Italian",
+    hello: "Benvenuti",
+    text: "Questo archivio è scritto in inglese. Una volta entrati, usate «Corpus for AI» per scaricare l’intero archivio come file di testo semplice: gli strumenti di traduzione e gli assistenti di IA li traducono in modo più completo rispetto alle pagine web. Anche il vostro browser può tradurre queste pagine.",
+  },
 };
 
 /** Languages with a note, for the check script and the docs. */
@@ -121,5 +153,6 @@ export function welcomeFor(languages: readonly string[]): LanguageWelcome | null
     // Traditional for Taiwan, Hong Kong and Macau, and anyone who asks for it.
     return /hant|-tw|-hk|-mo/.test(tag) ? WELCOMES["zh-Hant"] : WELCOMES["zh-Hans"];
   }
-  return WELCOMES[base] ?? null;
+  // "in" is the old code some browsers still send for Indonesian.
+  return WELCOMES[base === "in" ? "id" : base] ?? null;
 }

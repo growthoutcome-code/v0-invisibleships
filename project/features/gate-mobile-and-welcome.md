@@ -2,7 +2,7 @@
 
 - **Branch:** `gate-mobile-and-welcome`
 - **Started:** 2026-10-03
-- **Status:** Ready to merge (Sean commits and pushes)
+- **Status:** First part merged (950610b, 3 Oct). Second part (below) ready for Sean to commit
 - **Decision record:** `project/decisions/0017-readers-in-other-languages.md`
 
 ## Goal
@@ -32,6 +32,26 @@ browser translate the pages. Translating the pages must not break the site.
   heading is not printed under the identical step title.
 - `app/layout.tsx`: an inline head script that stops browser translators from
   crashing React (Chromium issue 41407169).
+
+## Second part, 3 Oct afternoon (Sean's requests)
+
+- **Gate on every home-page visit, for now.** `GATE_ON_EVERY_HOME_VISIT` in
+  `EntryGate.tsx`. A device that had passed the gate once never saw the new one,
+  which is why the morning's changes were not visible. Other pages keep the
+  first-visit rule. While it is on, `gate_opened` counts home visits.
+- **A click outside the card, or Escape, closes the gate.** Not recorded as
+  passed; remembered for the tab's session (`is_gate_dismissed_v2` in
+  sessionStorage) so it does not reopen page after page, and it returns on the
+  next visit. Event `gate_dismissed` with `gate_step`. This reverses the 15 Sep
+  rule that only the last step's button closed the gate (Sean, 3 Oct).
+- **Five more languages:** Persian (right to left), Turkish, Vietnamese,
+  Indonesian (also the old `in` code), Italian. 16 in all, all AI-drafted.
+
+Verified with Playwright, desktop and 375x667 phone: a click on the card does
+not close it; a click or tap on the dark area does; Escape does; nothing is
+recorded as passed; the next page and a reload stay closed in that tab; the
+home page opens it again; Persian, Italian and Vietnamese notes render, Persian
+right to left. `npm run check` and `tsc` pass.
 
 ## Acceptance
 
