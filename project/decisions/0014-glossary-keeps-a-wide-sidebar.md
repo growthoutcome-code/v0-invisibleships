@@ -23,8 +23,10 @@ every term beside it.
 - **Gap:** the space between the sidebar and the definitions doubles, from 2rem
   to 4rem.
 
-The larger size applies only to the Glossary (`large` on SideNav). The Journal's
-rail is unchanged.
+The larger size applied at first only to the Glossary (`large` on SideNav).
+**Amended 2 Oct 2026:** the Journal's rail now matches it (Sean: "the journal
+sidebar styling and font size needs to be updated to match the glossary"). The
+research rails (Crime, Public Health, Government Cloud) are unchanged.
 
 ## Why
 

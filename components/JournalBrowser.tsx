@@ -542,9 +542,14 @@ export default function JournalBrowser({
         ) : tab === "disclaimer" ? (
           <DisclaimerView />
         ) : (
-          <div className={selDoc ? "" : "lg:grid lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-x-8 lg:items-start"}>
+          <div className={selDoc ? "" : "lg:grid lg:grid-cols-[minmax(15rem,25%)_minmax(0,1fr)] lg:gap-x-16 lg:items-start"}>
+            {/* THE JOURNAL'S RAIL MATCHES THE GLOSSARY'S (Sean, 2 Oct 2026: "the
+                journal sidebar styling and font size needs to be updated to match
+                the glossary"): a quarter of the page wide, larger type, twice the
+                gap. Decision 0014. */}
             {!selDoc && (
               <SideNav
+                large
                 mode="index"
                 label="Months"
                 sections={monthItems}
