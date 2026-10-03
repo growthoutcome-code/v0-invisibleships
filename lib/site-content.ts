@@ -12,6 +12,8 @@ export type AuthorLinkRef = { label: string; url: string };
 export type AuthorItem = { label: string; url?: string; links?: AuthorLinkRef[]; detail?: string };
 export type AuthorSection = {
   title: string;
+  // A paragraph under the title, before the list. Used by "Tools I use".
+  text?: string;
   items: AuthorItem[];
   note?: string;
   links?: { title: string; items: AuthorItem[] };
@@ -111,6 +113,23 @@ export const AUTHOR: AuthorInfo = {
           },
         ],
       },
+    },
+    // Last on the page, by request (Sean, 3 Oct 2026: "at the very bottom of the
+    // about the author page"). Statement chosen by Sean from three drafts; its opening "Tools I use:" became
+    // "I use" because the heading already says it. Plain
+    // names rather than logos for now: OpenAI's official logo files come from
+    // openai.com/brand, and Anthropic publishes none for download, so logos wait
+    // for official files. The note keeps the section from implying endorsement,
+    // which OpenAI's brand rules ask for.
+    {
+      title: "Tools I use",
+      text:
+        "I use Claude (Anthropic) and ChatGPT (OpenAI). Both helped me build this archive, from the code to the research. I'm proud of my journey learning artificial intelligence, and I'd encourage anyone to make use of it.",
+      items: [
+        { label: "Claude, by Anthropic", url: "https://claude.ai/download", detail: "download page" },
+        { label: "ChatGPT, by OpenAI", url: "https://chatgpt.com/download", detail: "download page" },
+      ],
+      note: "Invisible Ships is not affiliated with Anthropic or OpenAI.",
     },
   ],
 };

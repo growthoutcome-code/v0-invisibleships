@@ -44,8 +44,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { usePathname } from "next/navigation";
-import { ChevronDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ChevronDown, Download } from "lucide-react";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { CORPUS_SUMMARY } from "@/lib/corpus-summary";
 import CopyrightTerms from "@/components/CopyrightTerms";
 import { GATE } from "@/lib/gate-content";
 import { hasEntered, markEntered, GATE_VERSION, ROLES } from "@/lib/gate";
@@ -402,6 +403,31 @@ export default function EntryGate() {
                     <p lang={welcome.lang} dir={welcome.dir} className="m-0 mt-1.5 text-[15px] leading-relaxed text-foreground/90">
                       {welcome.text}
                     </p>
+                    {/* The download itself, so the advice above is one tap (Sean,
+                        3 Oct). The label is in the reader's language; the size
+                        stays in figures, which read the same everywhere, beside
+                        the button rather than in it (French and German labels
+                        overflowed a 360px phone), and in its own left-to-right
+                        run so "3.9 MB" never reverses inside Persian or Arabic. The wrapper takes the note's
+                        direction, so in those two the button sits on the right.
+                        Same route as the site's export dialog, marked as coming
+                        from here so /insights can tell the two apart. Every file
+                        in the download carries the Critical Disclaimer. */}
+                    <div dir={welcome.dir} className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1.5">
+                      <a
+                        href="/api/corpus?from=gate_welcome"
+                        download
+                        lang={welcome.lang}
+                        onClick={() => track("export_downloaded", { from: "gate_welcome", welcome_language: welcome.lang })}
+                        className={`${buttonVariants()} h-auto min-h-10 max-w-full gap-2 whitespace-normal py-2 text-start`}
+                      >
+                        <Download size={15} aria-hidden className="shrink-0" />
+                        {welcome.button}
+                      </a>
+                      <span dir="ltr" className="text-[12.5px] text-muted">
+                        .zip &middot; {(CORPUS_SUMMARY.zipBytes / 1e6).toFixed(1)} MB
+                      </span>
+                    </div>
                     <p className="m-0 mt-2 text-[12.5px] text-muted">
                       Shown because your browser&rsquo;s language is set to {welcome.name}.
                     </p>

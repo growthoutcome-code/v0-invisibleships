@@ -5,7 +5,7 @@ collection: meta
 doc_type: author-statement
 source: the site's entry sequence, exported from lib/
 generated_by: scripts/export_site_content_md.mjs
-word_count: 414
+word_count: 480
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -57,6 +57,15 @@ The sections below are here so readers can check who I am for themselves. Damagi
 - [Colorado: myVaccine Record in the myColorado app](https://mycolorado.gov/app-services/myvaccine-record)
 - [Colorado Immunization Information System (CIIS)](https://cdphe.colorado.gov/immunization/ciis/information-about-ciis-immunization)
 - [Oregon: Getting immunization records (Oregon Health Authority)](https://www.oregon.gov/oha/ph/preventionwellness/vaccinesimmunization/gettingimmunized/pages/immrecords.aspx)
+
+## Tools I use
+
+I use Claude (Anthropic) and ChatGPT (OpenAI). Both helped me build this archive, from the code to the research. I'm proud of my journey learning artificial intelligence, and I'd encourage anyone to make use of it.
+
+- [Claude, by Anthropic](https://claude.ai/download) — download page
+- [ChatGPT, by OpenAI](https://chatgpt.com/download) — download page
+
+Invisible Ships is not affiliated with Anthropic or OpenAI.
 
 ---
 

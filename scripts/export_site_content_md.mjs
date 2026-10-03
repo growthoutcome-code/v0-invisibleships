@@ -275,7 +275,9 @@ function authorSectionLines(sections = []) {
   const item = (i) => `- ${head(i)}${i.detail ? ` — ${i.detail}` : ""}`;
   const out = [];
   for (const s of sections) {
-    out.push("", `## ${s.title}`, "", ...s.items.map(item));
+    out.push("", `## ${s.title}`, "");
+    if (s.text) out.push(s.text, "");
+    out.push(...s.items.map(item));
     if (s.note) out.push("", s.note);
     if (s.links) out.push("", `### ${s.links.title}`, "", ...s.links.items.map(item));
   }

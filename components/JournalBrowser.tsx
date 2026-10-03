@@ -1038,6 +1038,7 @@ function AuthorView() {
       {AUTHOR.sections.map((sec) => (
         <section key={sec.title} className="mt-10 border-t border-edge pt-6">
           <h3 className="font-display text-xl font-semibold text-foreground">{sec.title}</h3>
+          {sec.text && <p className="body-copy text-foreground/85 mt-3 measure">{sec.text}</p>}
           <AuthorList items={sec.items} section={sec.title} />
           {sec.note && <p className="text-sm text-muted mt-3">{sec.note}</p>}
           {sec.links && (

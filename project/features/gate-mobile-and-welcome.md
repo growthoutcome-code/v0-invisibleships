@@ -53,6 +53,25 @@ recorded as passed; the next page and a reload stay closed in that tab; the
 home page opens it again; Persian, Italian and Vietnamese notes render, Persian
 right to left. `npm run check` and `tsc` pass.
 
+## Third part, 3 Oct late afternoon: a download button in the note
+
+- Each of the 16 notes now carries a download button with its label in that
+  language (Sean: "make sure the button is translated"), and the notes say
+  "below" instead of "once inside, use Corpus for AI". The English line for
+  English browsers is unchanged and has no button.
+- Same route as the export dialog, `/api/corpus?from=gate_welcome`, so
+  `entry_point` tells the two apart; click event `export_downloaded` with
+  `from: gate_welcome` and `welcome_language`.
+- The box keeps the note's direction, so in Persian and Arabic the button sits
+  on the right. The size (".zip · 3.9 MB", from `CORPUS_SUMMARY`) sits beside the
+  button in its own left-to-right run.
+
+Verified at 360x740 in Persian, Arabic, French, Chinese (Taiwan), Hindi and
+German: the button fits the box (French and German overflowed until the size
+moved out of it), Persian and Arabic place it on the right, a click downloads
+`invisible-ships-corpus.zip` and leaves the gate open, no errors, English shows
+no button. `npm run check` and `tsc` pass.
+
 ## Acceptance
 
 - [x] On 360x740, 375x667 and 390x844, Continue is on screen when the gate opens, on every step.
