@@ -41,7 +41,7 @@
  * from the gate... and then we'll think about animations." Three hairline
  * drawings were prototyped (see claude/gate-merge-plan.md); none ship yet.
  */
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -51,6 +51,7 @@ import { hasEntered, markEntered, GATE_VERSION, ROLES } from "@/lib/gate";
 import { track, registerVisitorProps } from "@/lib/analytics";
 import { logGate } from "@/lib/gate-log";
 import { DISCLAIMER_TITLE } from "@/lib/disclaimer";
+import { CORPUS_LINE, welcomeFor } from "@/lib/gate-languages";
 
 const STEPS = [
   { title: "Welcome to Invisible Ships", cta: "Continue", event: "gate_welcome_viewed" },
@@ -109,6 +110,26 @@ export default function EntryGate() {
   useEffect(() => {
     if (open) track(STEPS[step].event);
   }, [open, step]);
+
+  // The note for readers in other languages (lib/gate-languages.ts), chosen from
+  // the browser's own language setting once the gate opens. The gate never
+  // renders on the server, so navigator is always there by the time this runs.
+  const welcome = useMemo(
+    () => (open ? welcomeFor(navigator.languages?.length ? navigator.languages : [navigator.language]) : null),
+    [open],
+  );
+  // Recorded once, so it is clear whether the note changes how many readers in
+  // other languages get past step 1. The browser language already rides on
+  // every analytics event; this only marks that the note was shown.
+  useEffect(() => {
+    if (open && welcome) track("gate_language_welcome_shown", { welcome_language: welcome.lang });
+  }, [open, welcome]);
+
+  // Focus goes to the title when the gate opens. Radix focuses the first
+  // focusable element by default, which on step 1 is the first answer to the
+  // optional question: on 3 Oct it drew a heavy border round "Law enforcement",
+  // so the gate opened looking as if an answer had been chosen for the reader.
+  const titleRef = useRef<HTMLHeadingElement>(null);
 
   // --- the scroll condition on step 3 -------------------------------------
   const docRef = useRef<HTMLDivElement>(null);
@@ -210,6 +231,10 @@ export default function EntryGate() {
           onEscapeKeyDown={(e) => e.preventDefault()}
           onPointerDownOutside={(e) => e.preventDefault()}
           onInteractOutside={(e) => e.preventDefault()}
+          onOpenAutoFocus={(e) => {
+            e.preventDefault();
+            titleRef.current?.focus();
+          }}
           className="fixed inset-0 z-[61] flex items-start justify-center overflow-y-auto p-3 focus:outline-none sm:p-4"
         >
           {/* The card is a child rather than the Content element itself.
@@ -219,7 +244,12 @@ export default function EntryGate() {
               924px window. Centring comes from this flex container now, so
               nothing competes for `transform`, and a window shorter than the
               card scrolls rather than clipping it. */}
-          <div className="my-auto flex w-[92vw] flex-col border border-edge bg-panel shadow-2xl animate-fade-in [animation-delay:180ms] sm:w-[78vw] sm:max-w-[1040px]">
+          {/* gate-card (globals.css): on phones the card is the height of the
+              screen, so Back and Continue stay pinned at the bottom and only the
+              step's text scrolls. Until 3 Oct the card grew to fit its content
+              and the page scrolled instead, which put Continue 366px below the
+              bottom of a 375x667 phone with nothing on screen saying how to go on. */}
+          <div className="gate-card my-auto flex w-[92vw] flex-col border border-edge bg-panel shadow-2xl animate-fade-in [animation-delay:180ms] sm:w-[78vw] sm:max-w-[1040px]">
           <div className="shrink-0 px-5 pt-5 sm:px-8 sm:pt-6">
             <div className="flex gap-1.5" aria-hidden>
               {STEPS.map((s, n) => (
@@ -236,15 +266,17 @@ export default function EntryGate() {
             <p className="font-display mt-5 mb-2 text-[11.5px] uppercase tracking-[0.16em] text-muted">
               Before you enter · {step + 1} of {STEPS.length}
             </p>
-            <DialogPrimitive.Title className="font-display m-0 text-[21px] font-semibold leading-tight tracking-tight text-foreground sm:text-[27px]">
+            <DialogPrimitive.Title ref={titleRef} tabIndex={-1} className="font-display m-0 focus:outline-none text-[21px] font-semibold leading-tight tracking-tight text-foreground sm:text-[27px]">
               {STEPS[step].title}
             </DialogPrimitive.Title>
           </div>
 
           {/* FIXED HEIGHT so the card never jumps between steps. Tall enough for
               the longest step; anything longer scrolls inside its own panel
-              rather than resizing the frame around it. Released below `sm`,
-              where a fixed box fights the keyboard and the address bar. */}
+              rather than resizing the frame around it. Below `sm` the card itself
+              is the screen's height (gate-card), so this takes whatever the
+              header and footer leave. The gate has no text fields, so there is
+              no keyboard to fight, and dvh follows the address bar. */}
           <div className="min-h-0 flex-1 overflow-hidden sm:h-[484px] sm:flex-none lg:h-[576px]">
             <div
               className="flex h-full transition-transform duration-[450ms] ease-[cubic-bezier(.4,0,.2,1)]"
@@ -294,6 +326,27 @@ export default function EntryGate() {
                   </p>
                 </div>
 
+                {/* Sean, 3 Oct: point readers in other languages to the download,
+                    which translates more completely than the pages. In their own
+                    language when the browser asks for one we have; otherwise in
+                    English. lib/gate-languages.ts holds the text. Below the content
+                    warning, which must stay the first thing a phone shows after
+                    the welcome itself. */}
+                {welcome ? (
+                  <div className="mt-5 border border-edge px-4 py-3">
+                    <p lang={welcome.lang} dir={welcome.dir} className="m-0 text-[14px] font-semibold text-foreground">
+                      {welcome.hello}
+                    </p>
+                    <p lang={welcome.lang} dir={welcome.dir} className="m-0 mt-1.5 text-[15px] leading-relaxed text-foreground/90">
+                      {welcome.text}
+                    </p>
+                    <p className="m-0 mt-2 text-[12.5px] text-muted">
+                      Shown because your browser&rsquo;s language is set to {welcome.name}.
+                    </p>
+                  </div>
+                ) : (
+                  <p className="m-0 mt-5 text-[15px] leading-relaxed text-foreground/90">{CORPUS_LINE}</p>
+                )}
               {/* Full width beneath the welcome, as a row of tags rather than a
                   sidebar. Sean, 15 September: "no sidebar... load those options
                   as pills underneath the main content area." Square-cornered
@@ -380,7 +433,7 @@ export default function EntryGate() {
                     tabIndex={0}
                     role="region"
                     aria-label="Full disclaimer and terms"
-                    className="h-full max-h-[52vh] overflow-y-auto overscroll-contain pr-3 text-[15px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:max-h-none"
+                    className="h-full overflow-y-auto overscroll-contain pr-3 text-[15px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring [&_.body-copy]:text-[16px] sm:[&_.body-copy]:text-[17px]"
                   >
                     <div className="max-w-[80ch]">
                       <CopyrightTerms variant="gate" />
@@ -453,10 +506,17 @@ export default function EntryGate() {
           </div>
 
           <div className="flex shrink-0 items-center justify-between gap-3 border-t border-edge px-5 py-4 sm:px-8">
-            {/* Present on every step, inert on the first — a control that
-                appears and disappears moves the primary button under the
-                cursor between steps. */}
-            <Button variant="outline" disabled={step === 0} onClick={() => setStep(Math.max(0, step - 1))}>
+            {/* Present on every step, so the primary button never moves under
+                the cursor between steps. Invisible on the first (3 Oct): it
+                still holds its place, but a greyed-out Back on the opening
+                screen only looked like something broken. */}
+            <Button
+              variant="outline"
+              disabled={step === 0}
+              aria-hidden={step === 0}
+              className={step === 0 ? "invisible" : undefined}
+              onClick={() => setStep(Math.max(0, step - 1))}
+            >
               Back
             </Button>
             {/* aria-disabled rather than disabled, deliberately. A `disabled`

@@ -35,6 +35,40 @@ const themeScript = `
 }catch(_){document.documentElement.classList.add('dark');}})();
 `;
 
+// Keeps browser translation from crashing the site (3 Oct 2026).
+//
+// Chrome's built-in translator, and Edge's, rewrite the page's text in place,
+// wrapping words in <font> elements that React does not know about. The next
+// time React updates that part of the page it asks the browser to remove or
+// insert next to a node that has moved, the browser throws, and the
+// interactive part of the page (filters, dialogs, the News export) goes blank.
+// Reported to Chromium as issue 41407169 and open for years; this is the
+// widely used workaround.
+//
+// When the node React names is no longer where React thinks it is, the call is
+// skipped instead of throwing. Nothing else changes: untranslated pages never
+// reach the skipped branch. The cost, only under a translator, is that a piece
+// of text React tried to update may keep its old translated wording until the
+// reader reloads, which is better than a blank page.
+//
+// Readers in other languages are pointed to browser translation by the gate
+// (lib/gate-languages.ts), so this protects the very route the site recommends.
+const translationGuardScript = `
+(function(){try{
+  if(typeof Node!=='function'||!Node.prototype||Node.prototype.__isTranslationGuard)return;
+  var rm=Node.prototype.removeChild, ins=Node.prototype.insertBefore;
+  Node.prototype.removeChild=function(child){
+    if(child&&child.parentNode!==this){return child;}
+    return rm.apply(this,arguments);
+  };
+  Node.prototype.insertBefore=function(node,ref){
+    if(ref&&ref.parentNode!==this){return node;}
+    return ins.apply(this,arguments);
+  };
+  Node.prototype.__isTranslationGuard=true;
+}catch(_){}})();
+`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -46,6 +80,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: translationGuardScript }} />
       </head>
       <body>
         <AnalyticsInit />

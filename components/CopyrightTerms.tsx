@@ -17,6 +17,7 @@
 //            data was gathered, which is what the rest of the site links to.
 import type { ReactNode } from "react";
 import { TERMS, type TermsBlock } from "@/lib/terms";
+import { DISCLAIMER_TITLE } from "@/lib/disclaimer";
 
 // The inline markup subset lib/terms.ts documents: **bold**, *italic*, `code`,
 // [label](href). Split on the alternation so the captured delimiters survive;
@@ -96,7 +97,12 @@ export default function CopyrightTerms({ variant = "full" }: { variant?: "gate" 
           the order, and the Critical Disclaimer is deliberately at the top. */}
       {sections.map((s) => (
         <div key={s.id} id={s.id} className="scroll-mt-28">
-          <div className="font-display text-foreground font-semibold text-lg">{s.heading}</div>
+          {/* In the gate the step's own title is already this heading, directly
+              above, so it is not printed twice (3 Oct 2026). Every other
+              section keeps its heading, and /disclaimer prints them all. */}
+          {!(variant === "gate" && s.heading === DISCLAIMER_TITLE) && (
+            <div className="font-display text-foreground font-semibold text-lg">{s.heading}</div>
+          )}
           {s.blocks.map((b, i) => (
             <Block key={`${s.id}-${i}`} block={b} first={i === 0} id={s.id} i={i} />
           ))}

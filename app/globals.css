@@ -251,6 +251,15 @@ body {
    is named for: the disturbance on the water was legible before the ships were.
    Shortening that beat would make it decoration.
 --------------------------------------------------------------------------- */
+/* The entry gate's card on phones: the height of the screen, so Back and
+ * Continue stay pinned at the bottom and only the step's text scrolls (3 Oct
+ * 2026; see components/EntryGate.tsx). The vh line is the fallback for browsers
+ * without dvh, which follows the address bar as it shows and hides. 1.5rem is
+ * the dialog's own p-3 padding, top and bottom. From sm up the card sizes to
+ * its fixed-height middle as before. */
+.gate-card { height: calc(100vh - 1.5rem); height: calc(100dvh - 1.5rem); }
+@media (min-width: 640px) { .gate-card { height: auto; } }
+
 .gate-plate { display: block; width: 100%; height: auto; color: currentColor; }
 .gate-plate line,
 .gate-plate path,
