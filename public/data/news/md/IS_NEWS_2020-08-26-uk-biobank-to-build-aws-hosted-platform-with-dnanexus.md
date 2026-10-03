@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *Computer Weekly, 2020-08-26. Original: <https://www.computerweekly.com/news/252487787/UK-Biobank-to-build-AWS-hosted-data-analysis-platform-with-DNAnexus-to-speed-research>*
 
-Summary not yet written.
+UK Biobank is working with DNAnexus to build a data analysis platform hosted on Amazon Web Services, so approved researchers can analyse its health and genetic data in the cloud instead of downloading it, Computer Weekly reports. The resource covers more than 500,000 UK volunteers and is expected to grow to 15 petabytes over five years.
+
+According to the report, the project is funded by Wellcome, AWS is providing $1.5 million in research credits for early-career researchers and those in low- and middle-income countries, and launch was expected in summer 2021.
 
 ---
 

@@ -16,7 +16,7 @@ event: Protests
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft-search
 found_via: new, found 1 Oct 2026
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,7 @@ disclaimer: meta/IS_META_terms.md
 
 *CNBC, 2025-08-28. Original: <https://www.cnbc.com/2025/08/28/microsoft-fires-two-employees-over-breaking-into-protests-at-its-presidents-office.html>*
 
-Summary not yet written.
+Microsoft fired two employees over breaking into its president's office, CNBC reports. Other outlets covering the same story describe it as a protest over the company's work with Israel's military during the war in Gaza.
 
 ---
 

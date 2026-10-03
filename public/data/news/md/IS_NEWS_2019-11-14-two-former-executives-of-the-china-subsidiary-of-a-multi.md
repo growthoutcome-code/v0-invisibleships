@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2019-11-14. Original: <https://www.justice.gov/opa/pr/two-former-executives-china-subsidiary-multi-level-marketing-company-charged-scheme-pay>*
 
-Summary not yet written.
+Two former executives of the China subsidiary of a Los Angeles-based multi-level marketing company were charged with conspiring to violate the Foreign Corrupt Practices Act, the Justice Department announced on 14 November 2019. The indictment alleges they approved systematic bribes to Chinese government officials from 2007 to February 2017 to obtain licences, influence investigations and suppress negative state media reports.
+
+One of the two is also charged with perjury and destroying records, accused of lying to the Securities and Exchange Commission and deleting files from a company laptop. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

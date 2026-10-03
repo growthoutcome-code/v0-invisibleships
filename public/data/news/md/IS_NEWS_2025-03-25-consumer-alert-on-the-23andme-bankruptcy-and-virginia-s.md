@@ -16,7 +16,7 @@ event: Regulation & law
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft-search
 found_via: new, found 2 Oct 2026
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,7 @@ disclaimer: meta/IS_META_terms.md
 
 *Virginia Attorney General, 2025-03-25. Original: <https://www.oag.state.va.us/media-center/news-releases/2850-march-25-2025-consumer-alert-attorney-general-miyares-alerts-virginians-on-23andme-bankruptcy-and-virginias-genetic-data-privacy-law>*
 
-Summary not yet written.
+Virginia's attorney general issued a consumer alert on 25 March 2025 about 23andMe's bankruptcy filing and the state's genetic data privacy law. Local coverage of the alert says Virginia law requires 23andMe to delete a customer's data on request, and that the attorney general urged Virginians to consider deleting their genetic data from the service.
 
 ---
 

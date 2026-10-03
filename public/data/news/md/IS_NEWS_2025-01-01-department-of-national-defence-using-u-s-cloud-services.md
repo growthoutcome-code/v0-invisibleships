@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *Global News, 2025-01-01. Original: <https://globalnews.ca/news/11436395/department-of-national-defence-us-cloud-services>*
 
-Summary not yet written.
+Canada's Department of National Defence has spent about $1.3 billion on U.S. cloud services since 2021, Global News reported on 19 September 2025, citing documents released in response to a question from a Conservative MP. More than $1 billion went to Microsoft, $247.4 million to Amazon and about $22 million to Google.
+
+According to the department, the services support work such as Royal Canadian Air Force aircraft maintenance, the military pay system and army planning tools. Global News notes that the U.S. CLOUD Act lets U.S. authorities require American companies to hand over data held abroad, and that Canadian leaders have discussed a sovereign cloud.
 
 ---
 

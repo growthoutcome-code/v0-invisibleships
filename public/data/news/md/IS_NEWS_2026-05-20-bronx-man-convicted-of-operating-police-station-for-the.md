@@ -16,7 +16,7 @@ event: Transnational repression
 country: China
 stage: convicted
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2026-05-20. Original: <https://www.justice.gov/opa/pr/bronx-man-convicted-operating-police-station-chinese-government-new-york-city-and>*
 
-Summary not yet written.
+A federal jury in Brooklyn convicted a Bronx resident of acting as an illegal agent of China's Ministry of Public Security and of obstruction of justice, the Justice Department says. According to the department, from January 2022 he ran an undeclared police station for the Chinese government in Manhattan's Chinatown, tasked in part with gathering information on political dissidents.
+
+A co-defendant pleaded guilty in December 2024. The convicted man faces up to 30 years in prison at sentencing.
 
 ---
 

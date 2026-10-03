@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *Computer Weekly, 2021-02-19. Original: <https://www.computerweekly.com/news/252499036/HMRC-signs-reworked-three-year-public-cloud-deal-with-AWS-worth-94m>*
 
-Summary not yet written.
+HM Revenue & Customs has signed a three-year, £94 million deal with Amazon Web Services that started on 1 April 2021, Computer Weekly reports. It replaces a £40 million contract and lets HMRC use discounts under the government's One Government Value Arrangement.
+
+According to Computer Weekly, the deal was arranged through the G-Cloud 12 framework with a minimum yearly commitment of about £29 million. HMRC was AWS's largest UK public sector customer in 2020.
 
 ---
 

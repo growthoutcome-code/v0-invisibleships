@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *Nextgov/FCW, 2024-05-01. Original: <https://www.nextgov.com/artificial-intelligence/2024/05/microsoft-deploys-air-gapped-ai-classified-cloud/396354>*
 
-Summary not yet written.
+Microsoft has set up a version of OpenAI's GPT-4 in an air-gapped top-secret cloud, not connected to the internet, for U.S. defense and intelligence agencies, Nextgov/FCW reported on 7 May 2024. According to Nextgov/FCW, the system took about 18 months to build and was awaiting approval from government officials before use on classified networks.
+
+The report says users cannot train the model on new data because of the isolated design.
 
 ---
 

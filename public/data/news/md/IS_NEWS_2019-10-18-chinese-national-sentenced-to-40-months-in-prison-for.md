@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: sentenced
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2019-10-18. Original: <https://www.justice.gov/opa/pr/chinese-national-sentenced-40-months-prison-conspiring-illegally-export-military-and-space>*
 
-Summary not yet written.
+A Chinese national was sentenced to 40 months in prison after pleading guilty to conspiring to export military- and space-grade electronics to China without a licence, the Justice Department says. According to the department, from December 2016 to January 2018 he arranged to buy radiation-hardened power amplifiers and supervisory circuits from U.S. suppliers using several aliases.
+
+The department says the U.S. Department of Commerce denies licences for these parts to China as a policy. He was arrested at Los Angeles International Airport in September 2018 while trying to meet an undercover agent.
 
 ---
 

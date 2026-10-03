@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: China
 stage: arrested
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2018-09-25. Original: <https://www.justice.gov/opa/pr/chinese-national-arrested-allegedly-acting-within-united-states-illegal-agent-people-s>*
 
-Summary not yet written.
+A Chinese national was arrested in Chicago and charged with acting as an agent of the People's Republic of China without notifying the Attorney General, the Justice Department announced on 25 September 2018. Prosecutors allege he worked under the direction of a Chinese intelligence officer and gathered background information on eight people, including Chinese-born engineers and scientists at U.S. defense contractors, as possible recruits.
+
+The charge carries up to 10 years in prison. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

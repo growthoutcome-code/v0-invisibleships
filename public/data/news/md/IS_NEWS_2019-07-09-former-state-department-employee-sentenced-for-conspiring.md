@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: China
 stage: sentenced
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2019-07-09. Original: <https://www.justice.gov/opa/pr/former-state-department-employee-sentenced-conspiring-chinese-agents>*
 
-Summary not yet written.
+A former U.S. State Department office management specialist with a Top Secret clearance was sentenced on 9 July 2019 to 40 months in prison and fined $40,000 for conspiring to defraud the United States, the Justice Department says. She had pleaded guilty in April 2019.
+
+According to the department, over five years she accepted tens of thousands of dollars in cash, travel, tuition and other benefits from two Chinese intelligence agents in exchange for internal State Department documents. The department says she hid the contacts, misled investigators, and told others to destroy evidence.
 
 ---
 

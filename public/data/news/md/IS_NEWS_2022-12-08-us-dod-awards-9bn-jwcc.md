@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *DatacenterDynamics, 2022-12-08. Original: <https://www.datacenterdynamics.com/en/news/us-department-of-defense-awards-9bn-joint-warfighter-cloud-capability-to-aws-google-microsoft-and-oracle>*
 
-Summary not yet written.
+The U.S. Department of Defense awarded its $9 billion Joint Warfighting Cloud Capability contract to Amazon Web Services, Google, Microsoft and Oracle, DatacenterDynamics reports. The five-year contract covers cloud services at all classification levels, with the four companies competing for individual task orders.
+
+According to the report, it replaces the cancelled $10 billion JEDI contract, a single-vendor deal that faced years of disputes and lawsuits.
 
 ---
 

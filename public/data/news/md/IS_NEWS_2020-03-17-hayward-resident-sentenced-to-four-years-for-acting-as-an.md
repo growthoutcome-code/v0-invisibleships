@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: China
 stage: sentenced
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2020-03-17. Original: <https://www.justice.gov/opa/pr/hayward-resident-sentenced-four-years-acting-agent-people-s-republic-china>*
 
-Summary not yet written.
+A Hayward, California, resident was sentenced to four years in prison and a $30,000 fine for acting as an agent of China's Ministry of State Security without notifying the Attorney General, the Justice Department announced on 17 March 2020. He had pleaded guilty in November 2019.
+
+According to the department, from 2015 he carried out dead drops in the San Francisco Bay Area and Georgia, leaving cash and collecting SD cards with classified information to take to Chinese officials, and was paid at least $30,000.
 
 ---
 

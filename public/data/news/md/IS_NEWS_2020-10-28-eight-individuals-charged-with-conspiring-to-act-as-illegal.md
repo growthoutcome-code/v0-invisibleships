@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2020-10-28. Original: <https://www.justice.gov/opa/pr/eight-individuals-charged-conspiring-act-illegal-agents-people-s-republic-china>*
 
-Summary not yet written.
+Eight people have been charged with conspiring to act as illegal agents of the People's Republic of China, the Justice Department announced on 28 October 2020, and six of them are also charged with conspiracy to commit interstate and international stalking. Prosecutors allege that from 2016 to 2019, under the direction of Chinese officials and as part of the campaign known as Operation Fox Hunt, they surveilled, harassed and pressured a New Jersey resident and his family to make him return to China.
+
+The department says five were arrested in New York and California and three remained at large. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

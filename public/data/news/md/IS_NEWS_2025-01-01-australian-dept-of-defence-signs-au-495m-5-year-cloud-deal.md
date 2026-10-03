@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *DatacenterDynamics, 2025-01-01. Original: <https://www.datacenterdynamics.com/en/news/australian-department-of-defence-signs-au495m-five-year-cloud-deal-with-microsoft>*
 
-Summary not yet written.
+Australia's Department of Defence has signed a five-year, AU$495 million (US$324.71 million) cloud contract with Microsoft starting on 1 September 2025, DatacenterDynamics reports, citing iTnews. Microsoft Azure will support the department's enterprise resource planning platform, which covers logistics, maintenance, finance and procurement.
+
+The deal replaces a three-year, AU$107 million agreement that expired on 30 June 2025. DatacenterDynamics notes the department has also signed recent contracts with Citrix and Oracle, while AWS is separately building a classified data center campus for the government.
 
 ---
 

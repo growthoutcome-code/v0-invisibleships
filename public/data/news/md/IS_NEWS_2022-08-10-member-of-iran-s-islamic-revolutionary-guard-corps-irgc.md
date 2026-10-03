@@ -16,7 +16,7 @@ event: Murder for hire & violent plots
 country: Iran
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2022-08-10. Original: <https://www.justice.gov/opa/pr/member-irans-islamic-revolutionary-guard-corps-irgc-charged-plot-murder-former-national>*
 
-Summary not yet written.
+A member of Iran's Islamic Revolutionary Guard Corps was charged in Washington, D.C., with trying to arrange the murder of a former U.S. national security advisor, the Justice Department announced on 10 August 2022. Prosecutors allege he tried to hire people in the United States to carry out the killing for $300,000, allegedly in retaliation for a death in 2020.
+
+The charges are use of interstate commerce in murder-for-hire and attempting to provide material support to a transnational murder plot. The department says he remains at large abroad. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *Nextgov/FCW, 2025-03-01. Original: <https://www.nextgov.com/defense/2025/03/pentagons-next-major-cloud-contract-works/403775>*
 
-Summary not yet written.
+The Pentagon is developing JWCC Next, a successor to its $9 billion Joint Warfighting Cloud Capability contract with Amazon Web Services, Google, Microsoft and Oracle, Nextgov/FCW reported on 14 March 2025. A draft request for proposals was expected later in 2025, and $2.3 billion in task orders had been issued under the current contract.
+
+According to a Defense Information Systems Agency official, the new contract would open access to third-party vendors and marketplaces beyond the four providers. The Pentagon did not give its expected value.
 
 ---
 

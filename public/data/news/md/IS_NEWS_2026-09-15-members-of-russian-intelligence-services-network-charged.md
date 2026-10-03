@@ -16,7 +16,7 @@ event: Murder for hire & violent plots
 country: Russia
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2026-09-15. Original: <https://www.justice.gov/opa/pr/members-russian-intelligence-services-network-charged-conspiring-finance-terrorism-and>*
 
-Summary not yet written.
+The Justice Department announced on 15 September 2026 that five people it says worked for Russian intelligence services have been charged with conspiring to finance terrorism and conspiring to commit murder for hire. The indictment alleges they recruited people in the United States to watch and kill Russian dissidents, and coordinated attacks in European countries that support Ukraine.
+
+The department says the defendants remain at large. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

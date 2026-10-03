@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *Computer Weekly, 2023-01-01. Original: <https://www.computerweekly.com/news/365533652/GDS-goes-serverless-to-bring-personalisation-to-online-government-services-with-One-Login>*
 
-Summary not yet written.
+The UK Government Digital Service is building One Login, its £400 million digital identity and sign-in system for government services, on a fully serverless architecture hosted by Amazon Web Services, Computer Weekly reported on 23 March 2023. The system replaces the earlier Verify system and is meant to give users a more personalised and consistent experience across services.
+
+According to Computer Weekly, departments were testing it in beta, HM Revenue & Customs was due to start moving to it in summer 2023, and the team was deploying more than 200 production changes a week.
 
 ---
 

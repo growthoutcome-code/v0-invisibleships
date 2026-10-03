@@ -16,7 +16,7 @@ event: Transnational repression
 country: China
 stage: arrested
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ NSD transnational repression list
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2024-05-01. Original: <https://www.justice.gov/opa/pr/two-arrested-and-13-charged-three-separate-cases-alleged-participation-malign-schemes-united>*
 
-Summary not yet written.
+The Justice Department announced on 24 October 2022 charges against 13 people in three cases alleging schemes by the Chinese government in the United States; two were arrested in New York. Prosecutors allege that seven defendants, including Chinese officials, sought to force U.S. residents to return to China; that two alleged Chinese intelligence officers tried to bribe a government employee for files from a federal prosecution; and that four people recruited U.S. academics and former officials as intelligence sources.
+
+The other 11 defendants remain at large. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

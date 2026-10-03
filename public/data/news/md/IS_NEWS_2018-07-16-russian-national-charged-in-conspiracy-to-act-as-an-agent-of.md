@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: Russia
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2018-07-16. Original: <https://www.justice.gov/opa/pr/russian-national-charged-conspiracy-act-agent-russian-federation-within-united-states>*
 
-Summary not yet written.
+A Russian national was arrested in Washington, D.C., on 15 July 2018 and charged with conspiring to act as an agent of the Russian Federation without notifying the Attorney General, the Justice Department announced the next day. According to the complaint, from 2015 to at least February 2017 she worked at the direction of a senior Russian government official to build relationships with Americans and infiltrate organizations with influence in U.S. politics.
+
+The charge carries up to five years in prison. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

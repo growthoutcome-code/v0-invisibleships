@@ -16,7 +16,7 @@ event: Regulation & law
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft-search
 found_via: already in the corpus
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,7 @@ disclaimer: meta/IS_META_terms.md
 
 *MedTech Dive, 2025-04-01. Original: <https://www.medtechdive.com/news/precision-neuroscience-brain-implant-fda-cleared/745913>*
 
-Summary not yet written.
+Precision Neuroscience received U.S. Food and Drug Administration clearance for a brain implant, MedTech Dive reports. Other coverage describes the device as a minimally invasive brain-computer interface, and CNBC reported the clearance on 17 April 2025.
 
 ---
 

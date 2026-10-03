@@ -16,7 +16,7 @@ event: Global conflict
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft-search
 found_via: already in the site (concepts)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,7 @@ disclaimer: meta/IS_META_terms.md
 
 *Amnesty International, 2023-05-02. Original: <https://www.amnesty.org/en/latest/news/2023/05/israel-opt-israeli-authorities-are-using-facial-recognition-technology-to-entrench-apartheid>*
 
-Summary not yet written.
+Amnesty International published a report in May 2023 saying Israeli authorities are using facial recognition technology against Palestinians to entrench what it calls apartheid. According to Amnesty, this includes a previously unreported facial recognition system.
 
 ---
 

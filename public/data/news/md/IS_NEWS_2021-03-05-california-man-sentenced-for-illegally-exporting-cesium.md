@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: sentenced
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2021-03-05. Original: <https://www.justice.gov/usao-ma/pr/california-man-sentenced-illegally-exporting-cesium-atomic-clocks-hong-kong>*
 
-Summary not yet written.
+A California man was sentenced to time served, three years of supervised release and one year of home confinement for illegally exporting cesium atomic clocks to Hong Kong, the U.S. Attorney's Office in Massachusetts announced on 5 March 2021. He had pleaded guilty in August 2020 to conspiracy, unlawful exports and smuggling.
+
+According to prosecutors, he bought the clocks under a fake company name, claiming they were for cordless phone research, and shipped one to Hong Kong in 2016 without a licence. A Hong Kong co-conspirator remains at large.
 
 ---
 

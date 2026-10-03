@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: China
 stage: pleaded guilty
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2026-06-04. Original: <https://www.justice.gov/opa/pr/american-citizen-pleads-guilty-working-agent-peoples-republic-china>*
 
-Summary not yet written.
+An American citizen pleaded guilty to acting as an agent of China's Ministry of State Security without notifying the U.S. government, the Justice Department says. According to the department, from 2019 to February 2026 he worked his way into U.S. political circles, recruited intelligence sources and passed sensitive information to his handlers, for more than $100,000.
+
+The charge carries up to 10 years in prison. Sentencing was set for 1 September 2026.
 
 ---
 

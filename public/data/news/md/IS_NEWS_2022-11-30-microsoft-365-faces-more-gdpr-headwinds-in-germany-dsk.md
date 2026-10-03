@@ -9,14 +9,14 @@ date_precision: day
 publisher: The Register
 source_type: Trade press
 issuing_office: 
-url: https://www.theregister.com/offbeat/2022/11/30/microsoft_365_faces_more_gdpr_headwinds_in_germany
+url: https://www.theregister.com/2022/11/30/office_365_faces_more_gdpr/
 archived_url: 
 industry: Government cloud & surveillance technology
 event: Regulation & law
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -24,9 +24,11 @@ disclaimer: meta/IS_META_terms.md
 ---
 # Microsoft 365 faces more GDPR headwinds in Germany (DSK assessment)
 
-*The Register, 2022-11-30. Original: <https://www.theregister.com/offbeat/2022/11/30/microsoft_365_faces_more_gdpr_headwinds_in_germany>*
+*The Register, 2022-11-30. Original: <https://www.theregister.com/2022/11/30/office_365_faces_more_gdpr/>*
 
-Summary not yet written.
+Germany's conference of federal and state data protection authorities, the DSK, concluded that Microsoft 365 still does not meet GDPR requirements and cannot be used lawfully by schools or public authorities in Germany, The Register reports. The finding followed two years of talks between a working group and Microsoft, and cited Microsoft's access to unencrypted data and U.S. surveillance laws.
+
+According to The Register, the assessment does not apply to businesses or consumers. Microsoft disputed it, saying its products meet or exceed EU data protection law.
 
 ---
 

@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: China
 stage: convicted
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ NSD transnational repression list
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2024-08-01. Original: <https://www.justice.gov/opa/pr/new-york-resident-convicted-acting-covert-chinese-agent>*
 
-Summary not yet written.
+A 75-year-old New York resident who co-founded a pro-democracy group in Queens was convicted by a jury on 6 August 2024 of acting as an agent of the Chinese government without notifying the Attorney General, conspiracy, criminal use of identification and making false statements to law enforcement, the Justice Department says. According to the department, he posed as a democracy activist while secretly reporting on group members and other activists to China's Ministry of State Security since at least 2006.
+
+He faces up to 25 years in prison, and sentencing was set for 9 January 2025.
 
 ---
 

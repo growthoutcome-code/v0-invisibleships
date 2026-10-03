@@ -16,7 +16,7 @@ event: Regulation & law
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the corpus
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *Forbes, 2025-03-08. Original: <https://www.forbes.com/sites/luisromero/2025/03/08/neuralink-seeks-telepathy-and-telekinesis-is-mind-control-next>*
 
-Summary not yet written.
+Neuralink filed U.S. trademark applications for the names Telepathy and Telekinesis on 3 March 2025, on an intent-to-use basis, Forbes reports. Its Link implant, tested in people since January 2024, turns neural signals into cursor movements, and three people had received it.
+
+Forbes notes that a separate implant, Blindsight, aimed at restoring limited vision, has an FDA breakthrough device designation, and that any such products would likely need years more testing and regulatory approval. A trademark lawyer quoted in the piece raises ethical, privacy and security concerns.
 
 ---
 

@@ -16,7 +16,7 @@ event: Protests
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft-search
 found_via: new, found 1 Oct 2026
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,7 @@ disclaimer: meta/IS_META_terms.md
 
 *Fortune, 2025-05-22. Original: <https://fortune.com/article/microsoft-employee-protest-satya-nadella-keynote-israel-contracts-gaza-azure>*
 
-Summary not yet written.
+A Microsoft employee shouted over the chief executive's keynote speech to protest the company's contracts with Israel, citing claims that alleged war crimes in Gaza were powered by Microsoft's Azure cloud, Fortune reports. Other coverage places the disruption at Microsoft's Build developer conference.
 
 ---
 

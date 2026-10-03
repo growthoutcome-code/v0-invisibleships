@@ -16,7 +16,7 @@ event: Regulation & law
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *IAPP, 2024-08-01. Original: <https://iapp.org/news/a/israel-marks-a-new-era-in-privacy-law-amendment-13-ushers-in-sweeping-reform>*
 
-Summary not yet written.
+Israel's Amendment 13 to its Protection of Privacy Law takes effect on 14 August 2025, IAPP reports. The amendment requires the appointment of privacy protection officers, adds transparency duties and rules for data brokers, and broadens the definition of sensitive data.
+
+According to IAPP, the Privacy Protection Authority gains powers to issue administrative orders and fines that can reach millions of shekels, and has signalled it will enforce its guidelines as strictly as the law itself.
 
 ---
 

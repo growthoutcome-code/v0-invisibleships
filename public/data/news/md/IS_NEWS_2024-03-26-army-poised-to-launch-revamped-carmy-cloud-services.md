@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *DefenseScoop, 2024-03-26. Original: <https://defensescoop.com/2024/03/26/army-carmy-2-cloud-environment>*
 
-Summary not yet written.
+The U.S. Army planned to open a revamped cloud environment, cArmy 2.0, in April 2024, its chief information officer said during a webinar, DefenseScoop reports. The new version is meant to simplify architecture, rely more on automation and favour platform and software services over raw infrastructure, with easier onboarding for new users.
+
+According to DefenseScoop, it follows a pause of several months to rethink the Army's cloud model. The current environment runs on Amazon Web Services and Microsoft Azure, and the Army is moving away from a reseller model toward contracts under the Pentagon's Joint Warfighting Cloud Capability.
 
 ---
 

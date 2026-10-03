@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *DatacenterDynamics, 2025-01-24. Original: <https://www.datacenterdynamics.com/en/news/google-provided-ai-technology-to-idf-during-israel-gaza-war>*
 
-Summary not yet written.
+Google Cloud provided AI technology, including its Vertex platform and access to Gemini, to Israel's military and Defense Ministry after the 7 October 2023 Hamas attack, DatacenterDynamics reports, citing internal documents reviewed by The Washington Post. According to the report, a Google employee escalated requests for more access, and use continued through at least November 2024.
+
+Google and Amazon Web Services won a $1.2 billion contract, Project Nimbus, in 2021 to provide cloud services to Israel's government. The article includes no comment from Google.
 
 ---
 

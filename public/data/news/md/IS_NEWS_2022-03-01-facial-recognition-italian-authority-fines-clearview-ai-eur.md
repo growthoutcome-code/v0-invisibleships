@@ -16,7 +16,7 @@ event: Courts & litigation
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft-search
 found_via: already in the corpus
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,7 @@ disclaimer: meta/IS_META_terms.md
 
 *European Data Protection Board, 2022-03-01. Original: <https://www.edpb.europa.eu/news/national-news/2022/facial-recognition-italian-sa-fines-clearview-ai-eur-20-million_en>*
 
-Summary not yet written.
+Italy's data protection authority has fined Clearview AI €20 million, according to a notice published by the European Data Protection Board. Copies of the notice say the authority also banned the company from using biometric data and monitoring people in Italy.
 
 ---
 

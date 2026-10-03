@@ -16,7 +16,7 @@ event: Regulation & law
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *DatacenterDynamics, 2022-04-01. Original: <https://www.datacenterdynamics.com/en/news/russia-bans-purchase-of-foreign-software-for-critical-infrastructure>*
 
-Summary not yet written.
+Russia's president signed a decree, effective 31 March 2022, barring Russian entities from buying foreign software for use on significant critical information infrastructure without approval from an authorised federal body, DatacenterDynamics reports. The ban also covers services needed to use such software.
+
+According to the publication, critical infrastructure includes systems in healthcare, manufacturing, communications, transport, energy, finance and telecommunications. The decree followed international sanctions over Russia's invasion of Ukraine.
 
 ---
 

@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2018-12-20. Original: <https://www.justice.gov/opa/pr/two-chinese-hackers-associated-ministry-state-security-charged-global-computer-intrusion>*
 
-Summary not yet written.
+Two Chinese nationals said to be members of the hacking group APT10, working with the Tianjin bureau of China's Ministry of State Security, were charged in Manhattan federal court, the Justice Department announced on 20 December 2018. The charges are conspiracy to commit computer intrusions, conspiracy to commit wire fraud and aggravated identity theft.
+
+Prosecutors allege that from 2006 to 2018 they hacked managed service providers in at least 12 countries to reach their clients, stole data from more than 45 technology companies and U.S. government agencies, and obtained personal data on more than 100,000 U.S. Navy personnel. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

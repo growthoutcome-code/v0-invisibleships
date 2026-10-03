@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: China
 stage: arrested
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ NSD transnational repression list
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2024-08-01. Original: <https://www.justice.gov/opa/pr/new-york-man-arrested-operating-illegal-agent-chinese-government-united-states>*
 
-Summary not yet written.
+A 67-year-old resident of Queens, New York, was arrested in Flushing on 21 August 2024 on charges of acting and conspiring to act as an unregistered agent of the Chinese government and making false statements to the FBI, the Justice Department says. Prosecutors allege that from 2018 to June 2023 he took instructions from and reported to a Ministry of State Security officer, monitoring people seen as threats to China, and helped infiltrate a dissidents' encrypted chat group.
+
+These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

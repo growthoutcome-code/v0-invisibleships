@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: Russia
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2022-07-29. Original: <https://www.justice.gov/opa/pr/russian-national-charged-conspiring-have-us-citizens-act-illegal-agents-russian-government>*
 
-Summary not yet written.
+The Justice Department announced on 29 July 2022 that a Moscow resident who founded the Anti-Globalization Movement of Russia has been charged with conspiring to have U.S. citizens act as illegal agents of the Russian government. The indictment alleges that from December 2014 to March 2022, working with Russia's FSB, he recruited and directed three U.S. political groups in Florida, Georgia and California, funding protests, travel and local election campaigns.
+
+The charge carries a maximum of five years in prison, the department says. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

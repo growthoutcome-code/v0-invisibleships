@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: settled
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2019-12-19. Original: <https://www.justice.gov/usao-wdmi/pr/2019_1219_VARI>*
 
-Summary not yet written.
+Van Andel Research Institute in Grand Rapids, Michigan, agreed to pay $5.5 million to settle allegations under the False Claims Act, the U.S. Attorney's Office for the Western District of Michigan announced on 19 December 2019. The government alleged the institute did not disclose Chinese government grants, including Thousand Talents support, received by two researchers working on National Institutes of Health grants between 2012 and 2019.
+
+According to the office, the institute also told the NIH in December 2018 that there was no undisclosed overlap in funding without an adequate basis. The office says the claims are allegations only and there has been no determination of liability.
 
 ---
 

@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2022-10-24. Original: <https://www.justice.gov/usao-nj/pr/chinese-intelligence-officers-charged-using-academic-cover-target-individuals-united>*
 
-Summary not yet written.
+Four Chinese nationals, three of them officers of China's Ministry of State Security, were charged in New Jersey with conspiring to act as agents of China in the United States, the Justice Department announced on 24 October 2022. Prosecutors allege that from 2008 to 2018 they used an academic institute at Ocean University of China as cover to recruit U.S. professors, a former federal law enforcement officer and a state homeland security official, including through paid trips to China.
+
+These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

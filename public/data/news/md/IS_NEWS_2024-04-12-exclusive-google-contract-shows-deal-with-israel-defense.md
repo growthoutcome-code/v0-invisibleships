@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *TIME, 2024-04-12. Original: <https://time.com/6966102/google-contract-israel-defense-ministry-gaza-war>*
 
-Summary not yet written.
+Google is providing cloud consulting services to Israel's Ministry of Defense under a contract dated 27 March 2024, TIME reports. According to the document TIME reviewed, the ministry sought help expanding its access to Google Cloud infrastructure and AI services so that multiple units could use its "landing zone", with Google billing more than $1 million and applying a 15% discount under the Project Nimbus framework.
+
+The version TIME saw was unsigned, and the work was due to start on 14 April 2024 for one year. Google told TIME the Nimbus contract covers civilian work and declined to comment on the defense ministry contract specifically.
 
 ---
 

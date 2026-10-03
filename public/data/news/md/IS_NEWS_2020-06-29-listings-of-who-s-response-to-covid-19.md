@@ -16,7 +16,7 @@ event: Public health
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the corpus
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *World Health Organization, 2020-06-29. Original: <https://www.who.int/news/item/29-06-2020-covidtimeline>*
 
-Summary not yet written.
+The World Health Organization published a timeline of its COVID-19 response on 29 June 2020, later updated in January 2021, starting from 31 December 2019, when its country office in China picked up reports of viral pneumonia cases in Wuhan. Milestones listed include declaring a Public Health Emergency of International Concern on 30 January 2020, naming the disease COVID-19 on 11 February 2020 and describing it as a pandemic on 11 March 2020.
+
+The page also lists media briefings, World Health Assembly sessions, research forums and vaccine development figures.
 
 ---
 

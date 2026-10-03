@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *iTnews, 2025-09-01. Original: <https://www.itnews.com.au/news/defence-commits-to-five-more-years-of-azure-worth-495m-618459>*
 
-Summary not yet written.
+Australia's Department of Defence committed $495 million to Microsoft Azure for five years, from 1 September 2025 to 31 August 2030, iTnews reports. The deal sets a minimum of $100 million a year in Azure use and supports Defence's SAP-based enterprise resource planning platform and its Microsoft 365 environment.
+
+It replaces a three-year, $107 million arrangement that expired on 30 June 2025 and was bought through the reseller Data#3. iTnews notes Defence has separately committed more than $2 billion to Amazon Web Services for classified cloud for the Australian Signals Directorate.
 
 ---
 

@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: China
 stage: sentenced
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2019-05-17. Original: <https://www.justice.gov/opa/pr/former-cia-officer-sentenced-prison-espionage>*
 
-Summary not yet written.
+A former CIA case officer and Defense Intelligence Agency officer was sentenced on 17 May 2019 to 20 years in prison for spying for China, the Justice Department says. A jury had convicted him in June 2018 of conspiring to transmit national defense information, delivering classified information and making false statements; two counts were later dismissed for lack of venue.
+
+According to the department, he met a Chinese intelligence officer in Shanghai in 2017 and used a covert communications device to send classified documents, at least two of them successfully, including information identifying human sources.
 
 ---
 

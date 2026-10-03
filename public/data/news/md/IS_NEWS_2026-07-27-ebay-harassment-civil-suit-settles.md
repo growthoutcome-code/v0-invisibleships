@@ -16,7 +16,7 @@ event: Courts & litigation
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the corpus
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *The Boston Globe, 2026-07-27. Original: <https://www.bostonglobe.com/2026/07/27/business/ebay-harassed-ina-david-steiner-settlement>*
 
-Summary not yet written.
+A Natick, Massachusetts, couple who ran a website covering eBay settled their civil suit against eBay, its former chief executive and two other former executives for $55.7 million, the Boston Globe reports. eBay pays $46.15 million of it.
+
+In 2019, eBay employees carried out a harassment campaign against the couple that included threatening messages, disturbing deliveries and physical surveillance. Seven employees later pleaded guilty to criminal charges, and four served prison time.
 
 ---
 

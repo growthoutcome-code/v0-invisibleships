@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *TechCrunch, 2022-03-10. Original: <https://techcrunch.com/2022/03/10/amazon-microsoft-and-google-have-suspended-cloud-sales-in-russia>*
 
-Summary not yet written.
+Amazon Web Services, Microsoft and Google have stopped taking on new cloud customers in Russia, TechCrunch reports. AWS said on 8 March 2022 that it had stopped new sign-ups in Russia and Belarus, Microsoft said it was suspending all new sales in Russia, and Google Cloud said it was not accepting new Russian customers.
+
+According to TechCrunch, IBM said it had suspended all business in Russia, while Cloudflare kept its services running there. IDC told the publication the global effect would be limited because Russia and Ukraine make up about 1% of worldwide ICT spending.
 
 ---
 

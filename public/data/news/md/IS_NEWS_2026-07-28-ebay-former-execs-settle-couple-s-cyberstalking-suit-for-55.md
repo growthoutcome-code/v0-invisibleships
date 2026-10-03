@@ -16,7 +16,7 @@ event: Courts & litigation
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the corpus
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *Law.com, 2026-07-28. Original: <https://www.law.com/2026/07/28/ebay-former-execs-settle-mass-couples-harassment-cyberstalking-suit-for-557m>*
 
-Summary not yet written.
+Law.com reports that eBay and former eBay executives settled a Massachusetts couple's harassment and cyberstalking suit for $55.7 million. The couple ran a website that covered eBay. In 2019, eBay employees targeted them with threatening messages, disturbing deliveries and surveillance.
+
+Seven former employees had already pleaded guilty to criminal charges over the campaign.
 
 ---
 

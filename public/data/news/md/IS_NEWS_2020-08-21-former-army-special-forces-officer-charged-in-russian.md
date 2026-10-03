@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: Russia
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2020-08-21. Original: <https://www.justice.gov/opa/pr/former-army-special-forces-officer-charged-russian-espionage-conspiracy>*
 
-Summary not yet written.
+A former U.S. Army Special Forces officer from Virginia has been arrested and indicted on a charge of conspiring to give U.S. national defense information to Russian intelligence agents, the Justice Department announced on 21 August 2020. The indictment alleges that from December 1996 to January 2011 he met Russian intelligence officers, was given a code name, and passed on information about his chemical and Special Forces units, a past deployment and former team members who might be recruited.
+
+The charge carries a maximum of life in prison. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

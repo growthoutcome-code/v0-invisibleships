@@ -16,7 +16,7 @@ event: Public health
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the corpus
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *World Health Organization, 2021-08-10. Original: <https://www.who.int/news/item/10-08-2021-interim-statement-on-covid-19-vaccine-booster-doses>*
 
-Summary not yet written.
+The World Health Organization's immunization advisory group said on 10 August 2021 that countries should focus on giving first vaccine courses widely, and that any booster doses should be based on evidence and aimed at those most in need. It said evidence on a broad need for boosters remained limited and inconclusive.
+
+According to the statement, giving boosters while many populations had not received a first course would worsen inequities between countries.
 
 ---
 

@@ -16,7 +16,7 @@ event: Courts & litigation
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft-search
 found_via: already in the corpus
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,7 @@ disclaimer: meta/IS_META_terms.md
 
 *Federal Trade Commission, 2023-12-19. Original: <https://www.ftc.gov/news-events/news/press-releases/2023/12/rite-aid-banned-using-ai-facial-recognition-after-ftc-says-retailer-deployed-technology-without>*
 
-Summary not yet written.
+The Federal Trade Commission announced in December 2023 that Rite Aid will be banned from using AI facial recognition technology for five years. The FTC says the retailer deployed the technology in its stores without reasonable safeguards, and that it falsely tagged consumers as shoplifters.
 
 ---
 

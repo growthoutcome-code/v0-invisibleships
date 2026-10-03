@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: convicted
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2021-04-22. Original: <https://www.justice.gov/opa/pr/phd-chemist-convicted-conspiracy-steal-trade-secrets-economic-espionage-theft-trade-secrets>*
 
-Summary not yet written.
+A federal jury in Greeneville, Tennessee convicted a former Coca-Cola and Eastman Chemical engineer of conspiracy to steal trade secrets, economic espionage, theft of trade secrets and wire fraud, the Justice Department announced on 22 April 2021. Prosecutors say she stole formulas for BPA-free coatings used inside drinks cans, which cost about $120 million to develop.
+
+According to the department, she planned to use the secrets to set up a coatings company in China and received Chinese government grants. Sentencing was set for 1 November.
 
 ---
 

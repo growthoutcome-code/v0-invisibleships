@@ -16,7 +16,7 @@ event: Global conflict
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: new, found 1 Oct 2026
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *TechCrunch, 2025-09-25. Original: <https://techcrunch.com/2025/09/25/microsoft-cuts-cloud-services-to-israeli-military-unit-over-palestinian-surveillance>*
 
-Summary not yet written.
+Microsoft announced on 25 September 2025 that it had ceased and disabled some Azure cloud storage and AI services used by Israel's Ministry of Defense, TechCrunch reports. The company said its review, launched in August, found evidence supporting reports that Unit 8200, an Israeli military intelligence unit, used Azure to store data from phone calls by Palestinians in Gaza and the West Bank, which its policies prohibit.
+
+Microsoft said it cannot access customer content directly and began its review after reporting by The Guardian.
 
 ---
 

@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *DatacenterDynamics, 2020-11-01. Original: <https://www.datacenterdynamics.com/en/news/ice-plans-100-million-cloud-spend-aws-and-azure>*
 
-Summary not yet written.
+U.S. Immigration and Customs Enforcement plans to spend at least $100 million over five years on cloud hosting in Amazon Web Services and Microsoft Azure environments, DatacenterDynamics reports. The report says ICE spent $9.9 million on Azure and more than $24 million on AWS-hosted Palantir services in fiscal 2020, and has a separate $19.4 million Microsoft contract for mail, calendar and document workloads.
+
+The article also notes earlier protests by Microsoft and Amazon employees over their companies' work with ICE.
 
 ---
 

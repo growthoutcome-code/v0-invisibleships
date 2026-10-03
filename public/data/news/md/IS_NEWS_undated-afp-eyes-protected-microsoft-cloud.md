@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *iTnews. Original: <https://www.itnews.com.au/news/afp-eyes-protected-microsoft-cloud-520519>*
 
-Summary not yet written.
+The Australian Federal Police was preparing a proof of concept for Microsoft's protected-level cloud, starting with moving its SharePoint environments to Office 365, iTnews reported on 14 March 2019. The agency said the trial would test whether the cloud services were viable and fit for purpose, and that the final scope had not been decided.
+
+According to iTnews, with about 6,500 staff the AFP would be the largest agency making such a move, after similar steps by the Department of Foreign Affairs and Trade and the Digital Transformation Agency; about 50 agencies were reportedly considering it.
 
 ---
 

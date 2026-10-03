@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft-search
 found_via: already in the site (concepts)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *Tampa Bay Times, 2020-09-03. Original: <https://projects.tampabay.com/projects/2020/investigations/police-pasco-sheriff-targeted/school-data>*
 
-Summary not yet written.
+The Pasco County Sheriff's Office in Florida keeps a secret list of schoolchildren it considers at risk of becoming criminals, built from school records and state child-welfare data, the Tampa Bay Times reports. According to the investigation, about 420 children were on the list, drawn from more than 30,000 middle and high school students, using factors such as D or F grades, absences, discipline referrals, witnessing household violence and histories of abuse or neglect.
+
+The Times reports that neither students nor parents are told, and federal privacy law experts questioned whether the data sharing is lawful. The sheriff's office said the programme is for mentoring and providing resources, and the school board pointed to agreements requiring lawful use and safeguards.
 
 ---
 

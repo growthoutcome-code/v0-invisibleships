@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: China
 stage: pleaded guilty
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2023-10-10. Original: <https://www.justice.gov/opa/pr/us-navy-service-member-pleads-guilty-transmitting-sensitive-us-military-information-chinese>*
 
-Summary not yet written.
+A U.S. Navy petty officer who held a security clearance at Naval Base Ventura County pleaded guilty to conspiracy and receiving bribes for sending sensitive military information to a Chinese intelligence officer, the Justice Department announced on 10 October 2023. According to the department, from August 2021 to at least May 2023 he sent plans for a large Indo-Pacific military exercise, operational orders and blueprints for a radar system in Okinawa, Japan, in exchange for at least $14,866.
+
+The department says he used encrypted communications and destroyed evidence. Sentencing was set for 8 January 2024, and he faces up to 20 years in prison.
 
 ---
 

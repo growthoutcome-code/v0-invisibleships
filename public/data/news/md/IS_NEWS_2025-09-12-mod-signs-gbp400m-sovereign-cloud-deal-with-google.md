@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *Computer Weekly, 2025-09-12. Original: <https://www.computerweekly.com/news/366630792/Ministry-of-Defence-signs-400m-sovereign-cloud-deal-with-Google>*
 
-Summary not yet written.
+The UK Ministry of Defence signed a £400 million deal with Google Cloud for a secure, sovereign cloud platform, Computer Weekly reported on 12 September 2025. The ministry says the deal supports its Strategic Defence Review, including use of AI and secure work with allied countries.
+
+Computer Weekly notes the article does not give the contract's length or which systems and data classifications it covers. Google Cloud's earlier UK government contracts totalled under £3 million.
 
 ---
 

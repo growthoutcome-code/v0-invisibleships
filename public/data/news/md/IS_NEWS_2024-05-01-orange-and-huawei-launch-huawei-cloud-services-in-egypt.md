@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *DatacenterDynamics, 2024-05-01. Original: <https://www.datacenterdynamics.com/en/news/orange-and-huawei-launch-huawei-cloud-services-in-egypt>*
 
-Summary not yet written.
+Orange Egypt and Huawei have launched Huawei Cloud services in Egypt, hosted in Orange data centers in Alexandria, Cairo and the New Administrative Capital, DatacenterDynamics reported on 29 April 2024. The infrastructure, platform and software services are offered through Huawei Cloud and Orange Business Cloud and are aimed at government institutions and local and international companies.
+
+According to the report, the services must comply with Egypt's cloud and data sovereignty rules, and they extend an Orange Business Cloud partnership started in 2020.
 
 ---
 

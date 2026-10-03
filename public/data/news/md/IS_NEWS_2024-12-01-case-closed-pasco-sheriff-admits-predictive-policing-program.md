@@ -16,7 +16,7 @@ event: Courts & litigation
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft-search
 found_via: already in the site (concepts)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,7 @@ disclaimer: meta/IS_META_terms.md
 
 *Institute for Justice, 2024-12-01. Original: <https://ij.org/press-release/case-closed-pasco-sheriff-admits-predictive-policing-program-violated-residents-constitutional-rights>*
 
-Summary not yet written.
+The Pasco County Sheriff's Office in Florida has admitted that its predictive policing program violated the Constitution, the Institute for Justice says, closing a lawsuit over the program. Other news reports say the sheriff agreed to end the program to settle the lawsuit, which alleged harassment of residents.
 
 ---
 

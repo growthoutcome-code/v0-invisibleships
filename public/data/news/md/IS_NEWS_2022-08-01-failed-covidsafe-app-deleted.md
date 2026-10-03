@@ -16,7 +16,7 @@ event: Public health
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the corpus
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *Australian Department of Health, 2022-08-01. Original: <https://www.health.gov.au/ministers/the-hon-mark-butler-mp/media/failed-covidsafe-app-deleted>*
 
-Summary not yet written.
+Australia's health minister announced on 16 August 2022 that the COVIDSafe contact tracing app had been removed from app stores and its user data deleted. The government says the app cost more than $21 million, including $10 million to develop and $7 million in advertising.
+
+According to the minister's office, the app had 7.9 million registrations but identified only 2 positive cases that manual contact tracers had not already found. The Office of the Australian Information Commissioner was to check that the data was handled correctly.
 
 ---
 

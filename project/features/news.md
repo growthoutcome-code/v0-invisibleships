@@ -2,7 +2,7 @@
 
 - **Branch:** `main`
 - **Started:** 2026-10-01
-- **Status:** Plan, awaiting Sean's approval and his mandatory URLs
+- **Status:** Built on `news`; 259 of 276 summaries written (drafts). Ready to merge to `main` (2 Oct 2026)
 - **Decision record:** none yet. Write one once the open questions below are settled.
 
 ## Goal
@@ -357,7 +357,8 @@ is cheap but changes nothing a reader sees. Proposed: add `ui/tabs` and
 - [ ] Hand-review categories for all items (Sean spot-checks).
 - [ ] Trim the government cloud contract stories in News to the 15 to 20 that
       matter; the rest stay as Timeline sources.
-- [ ] First 20 summaries, for Sean's review; then the rest in batches.
+- [x] Summaries: 259 of 276 written 2 Oct (226 from the original page, `summary_status: draft`; 33 from search results or a republished copy, `draft-search`). 17 pending, their links listed below.
+- [ ] Sean reviews the drafts; recheck the 33 `draft-search` first.
 - [ ] Archive every news link (Wayback Machine); keep copies of official releases.
 - [ ] Finish collecting: DOJ releases from 2022 to 2026, AI litigation, protests.
 - [ ] Resolve where the "no private thinking space" passage comes from (the Guardian
@@ -367,6 +368,7 @@ is cheap but changes nothing a reader sees. Proposed: add `ui/tabs` and
 - [ ] Timeline band (track H, News).
 - [ ] "In the news" on linked glossary, concept and journal pages.
 - [ ] News section on the home page (review round 1, change 6).
+- [ ] A News block in the bottom sections of other pages (review round 1, change 5, first half).
 - [ ] Curation skill.
 - [ ] **Daily Claude task** that searches for new and relevant articles in the
       followed industries and drafts them for Sean's review (Sean, 2 Oct). A
@@ -406,3 +408,129 @@ is cheap but changes nothing a reader sees. Proposed: add `ui/tabs` and
 4. Are defendants' names in a summary acceptable when the DOJ published them, or
    do they stay out?
 5. ~~Should the weekly drafting task be set up now?~~ Daily, after launch (2 Oct).
+
+
+## Done 2 Oct 2026 (evening)
+
+- **Review round 1, change 1:** `/news` uses the site's frame
+  (`max-w-[1400px] mx-auto px-4 sm:px-6 py-6`, as `JournalBrowser`). Checked at
+  1600px: 1,400px wide, centred.
+- **Review round 1, change 4:** a point on an Over time line opens a dialog for
+  that group and year; a legend name opens it for every year. The dialog gives
+  the count, what the line counts, a year switcher and the sources (each opens
+  the item dialog, plus a link to the original). "Filter the page to this line"
+  is a button in the dialog, not a silent click. Checked in headless Chromium:
+  point, legend, item, filter, phone width, no page errors.
+- **Bottom sections under `/news`:** Journal, Concepts, Glossary, Contribute.
+- **Contribute bottom section on every page that has bottom sections** (Sean:
+  "it may be very important to include the contribute bottom section on every
+  single page"). Built in `BottomSections.tsx`, always last. The three columns
+  moved into `components/ContributeColumns.tsx`, used by the home page and the
+  bottom block, so the safety wording cannot drift. The home page's Contribute
+  text was compared before and after: identical. Not on Insights, Why, Safety
+  or the Disclaimer, which carry no bottom sections; Sean to decide.
+- **Summaries applied, `npm run corpus` and `npm run check` pass.** Two broken
+  source links replaced (The Register, WHO).
+- **Still unlisted** (`robots: noindex`) until the 17 pending items have
+  summaries (recommended, Sean agreed to go ahead).
+
+## The website-permission prompts (2 Oct 2026)
+
+Writing summaries from the original pages meant opening about 65 websites, and
+each new site asks Sean once to allow it. Six researchers running at once
+flooded him with prompts after he had stepped away. Claude cannot change this
+from a session. What works without a prompt: a link Sean pastes into the chat
+himself, sites he has already allowed, and web search (thinner). The rules
+from now on:
+- say how many approvals a task needs, before it starts, and get them in one
+  sitting;
+- nothing that triggers prompts runs after Sean steps away;
+- no fan-out of research agents onto new sites while he is not watching;
+- the daily news task, when built, is set to automatic approval in its own
+  settings, if the account allows it.
+
+Full write-up and the 17 links to paste: Claude project doc
+`claude/news-summaries-status.md`.
+
+### Date corrections (found while writing summaries, 2 Oct 2026; not yet applied)
+
+Each changes the file name and `/news/<slug>`, so apply them together before launch, rebuild with `npm run corpus`, and re-run `npm run check`.
+
+| Item file (start) | Date in file | What the source says |
+|---|---|---|
+| 2025-10-01-state-of-local-news | 2025-10-01 | 22 Oct 2025 |
+| 2025-09-01-senators-introduce-legislation (MIND Act) | 2025-09-01 | 24 Sep 2025 |
+| 2025-09-01-defence-commits-to-five-more-years-of-azure | 2025-09-01 | 4 Jul 2025 (contract starts 1 Sep) |
+| 2025-08-20-u-s-navy-sailor-convicted | 2025-08-20 | 21 Aug 2025 |
+| 2025-08-06-israel-s-military-surveillance-agency (DCD) | 2025-08-06 | 7 Aug 2025 |
+| 2025-08-06-a-mass-surveillance-project (+972) | 2025-08-06 | link now opens the 25 Sep 2025 follow-up |
+| 2025-08-01-breakthrough-brain-computer-interface | 2025-08-01 | 22 Aug 2025 |
+| 2025-08-06-woman-wrongly-accused-of-carjacking | 2025-08-06 | AP versions 4 Sep 2025 (check) |
+| 2025-04-01-senators-call-on-ftc | 2025-04-01 | 28 Apr 2025 |
+| 2025-04-01-precision-neuroscience | 2025-04-01 | 17 Apr 2025 |
+| 2025-03-01-the-pentagon-s-next-major-cloud-contract | 2025-03-01 | 14 Mar 2025 |
+| 2025-01-01-new-authority-…-mexico | 2025-01-01 | 11 Mar 2025 |
+| 2025-01-01-medical-software-in-russia | 2025-01-01 | 13 Dec 2022; page does not mention EGISZ/EMIAS (title wrong too) |
+| 2025-01-01-inside-israel-deal-…-nimbus | 2025-01-01 | 29 Oct 2025 |
+| 2025-01-01-government-renews-aws-sourcing-deal | 2025-01-01 | unclear, about Feb 2025 (check) |
+| 2025-01-01-department-of-national-defence | 2025-01-01 | 19 Sep 2025 |
+| 2025-01-01-denver-bans-sharing-of-alpr-data | 2025-01-01 | 22 Oct 2025 |
+| 2025-01-01-cloud-services-russian-market | 2025-01-01 | living page; latest figures Jan 2026 |
+| 2025-01-01-aws-pledges-further-13bn-…-india | 2025-01-01 | 25 Jun 2026 |
+| 2025-01-01-australian-dept-of-defence-…-495m | 2025-01-01 | 4 Jul 2025 |
+| 2024-10-01-charges-against-indian-government-employee | 2024-10-01 | 17 Oct 2024 |
+| 2024-10-01-murder-for-hire-charges-against-islamic-revolutionary-guard | 2024-10-01 | 22 Oct 2024; duplicate of 2024-10-22 IRGC item |
+| 2024-09-01-florida-telecommunications | 2024-09-01 | 23 Aug 2024 |
+| 2024-08-01-new-york-resident-convicted | 2024-08-01 | 6 Aug 2024 |
+| 2024-08-01-new-york-man-arrested | 2024-08-01 | 21 Aug 2024 |
+| 2024-08-01-israel-amendment-13-privacy-reform | 2024-08-01 | 13 Aug 2025 |
+| 2024-08-01-amazon-to-invest-7-2b-in-israel | 2024-08-01 | early Aug 2023 (check) |
+| 2024-07-01-two-men-plead-guilty | 2024-07-01 | 25 Jul 2024 |
+| 2024-05-01-two-arrested-and-13-charged | 2024-05-01 | 24 Oct 2022 |
+| 2024-05-01-saudi-center3-targets-1gw | 2024-05-01 | 14 Aug 2025 |
+| 2024-05-01-orange-and-huawei-…-egypt | 2024-05-01 | 29 Apr 2024 |
+| 2024-05-01-microsoft-deploys-air-gapped-ai | 2024-05-01 | 7 May 2024 |
+| 2024-04-29-egypt-launches-gov-cloud | 2024-04-29 | event 28 Apr, article 30 Apr 2024 |
+| 2024-12-01-case-closed-pasco-sheriff | 2024-12-01 | date unchecked; stage should be settled/closed |
+| 2024-01-01-uk-government-renews-preferential-pricing-…-aws | 2024-01-01 | 7 Dec 2023 |
+| 2024-01-01-one-iranian-and-two-canadian-nationals-indicted | 2024-01-01 | 29 Jan 2024 |
+| 2024-01-01-ato-is-rewiring-its-cloud-responsibility-model | 2024-01-01 | 26 Aug 2024 |
+| 2023-06-01-federal-jury-convicts-three-defendants | 2023-06-01 | 20 Jun 2023; stage should be convicted |
+| 2023-05-01-massachusetts-man-indicted | 2023-05-01 | 15 May 2023 |
+| 2023-04-01-two-arrested-for-operating-illegal-overseas-police-station | 2023-04-01 | 17 Apr 2023 |
+| 2023-04-01-40-officers-of-china-s-national-police | 2023-04-01 | 17 Apr 2023 |
+| 2023-01-01-gds-goes-serverless-with-one-login | 2023-01-01 | 23 Mar 2023 |
+| 2023-01-01-cloud-based-fingerprint-system-for-uk-police | 2023-01-01 | 12 Dec 2022 |
+| 2023-01-01-aws-wins-gbp94m-contract-with-uk-dwp | 2023-01-01 | 8 Jan 2024 |
+| 2022-11-01-mod-issues-revised-cloud-strategy | 2022-11-01 | 8 Feb 2023 |
+| 2022-12-21-veterans-minister-on-assisted-dying | 2022-12-21 | possibly 17 Dec 2022 (check) |
+| 2022-12-07-pentagon-awards-…-jwcc | 2022-12-07 | award 7 Dec, article 8 Dec 2022 (fine) |
+| 2022-08-01-former-twitter-employee | 2022-08-01 | 10 Aug 2022 |
+| 2022-08-01-failed-covidsafe-app-deleted | 2022-08-01 | 16 Aug 2022 |
+| 2022-07-01-five-men-indicted | 2022-07-01 | 7 Jul 2022 |
+| 2022-06-16-microsoft-opens-first-middle-eastern-azure-regions | 2022-06-16 | June 2019 |
+| 2022-05-01-dta-renews-gov-wide-aws-deal | 2022-05-01 | 14 Apr 2022 |
+| 2022-03-01-microsoft-suspends-access-…-russian | 2022-03-01 | event is 20 Mar 2024 |
+| 2022-03-01-man-charged-in-transnational-repression-campaign | 2022-03-01 | 30 Mar 2022; duplicate of 2022-03-30 Fox Hunt item |
+| 2022-03-01-five-individuals-charged-variously | 2022-03-01 | 16 Mar 2022 |
+| 2022-02-01-individual-pleads-guilty | 2022-02-01 | 16 Feb 2022 |
+| 2022-02-01-oracle-inaugurates-regional-cloud-center-in-jerusalem | 2022-02-01 | unchecked |
+| 2022-01-01-denver-city-council-approves-shotspotter | 2022-01-01 | 4 Jan 2022 |
+| 2022-01-01-belarusian-government-officials-charged | 2022-01-01 | 20 Jan 2022 |
+| 2021-07-01-iranian-intelligence-officials-indicted | 2021-07-01 | 13 Jul 2021 |
+| 2021-02-19-hmrc-signs-three-year-aws-deal | 2021-02-19 | 8 Apr 2021 |
+| 2021-11-05-jury-convicts-chinese-intelligence-officer | — | stage blank, should be convicted |
+| 2021-09-24-huawei-cfo | — | stage "admitted": deferred prosecution agreement |
+| 2021-01-20-mit-professor-indicted | — | stage "charged": charges dismissed Jan 2022 |
+| 2021-01-01-unusable-and-unused-vaccine-systems | 2021-01-01 | 17 Feb 2021 |
+| 2021-01-01-microsoft-to-acquire-at-t-network-cloud | 2021-01-01 | 1 Jul 2021 |
+| 2021-01-01-hhs-renews-expands-palantir-tiberius | 2021-01-01 | 26 Jul 2021 |
+| 2020-11-01-ice-plans-100-million-cloud-spend | 2020-11-01 | 19 Nov 2020 |
+| 2020-09-03-targeted-pasco-sheriff | 2020-09-03 | URL is the school-data part, 19 Nov 2020 |
+| 2020-08-26-uk-biobank | 2020-08-26 | 18 Aug 2020 |
+| 2020-11-25-cia-awards-multibillion-c2e | 2020-11-25 | 23 Nov 2020 |
+| 2020-03-28-nhs-corrals-microsoft | 2020-03-28 | 30 Mar 2020 |
+| 2019-01-01-how-the-dwp-adopted-a-cloud-first-model | 2019-01-01 | 25 Oct 2019 |
+| 2016-01-01-ibm-blamed-for-australian-census-website-crash | 2016-01-01 | 29 Nov 2016 |
+| 2018-11-01-fbi-counterterrorism-investigations-now-run-on-amazon | 2018-11-01 | 29 Nov 2018 |
+| undated NSW Police / DTA COVIDSafe / AFP / TAdviser FSTEC | (none) | 7 Apr 2021 / 6 May 2020 / 14 Mar 2019 / updated 25 Mar 2024 |

@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: convicted
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2019-07-02. Original: <https://www.justice.gov/opa/pr/electrical-engineer-convicted-conspiring-illegally-export-china-semiconductor-chips-missile>*
 
-Summary not yet written.
+A federal jury convicted an electrical engineer, who was president of a Chinese semiconductor company, on 18 counts after a six-week trial, the Justice Department announced on 2 July 2019. The counts include conspiracy to violate the International Emergency Economic Powers Act, mail and wire fraud, tax fraud, false statements and unauthorized computer access.
+
+According to the department, he schemed to export to China without a licence U.S.-made chips with uses in missiles, missile guidance systems, fighter jets, electronic warfare and radar, then lied to federal authorities. The department says the counts carry a combined statutory maximum of 219 years in prison.
 
 ---
 

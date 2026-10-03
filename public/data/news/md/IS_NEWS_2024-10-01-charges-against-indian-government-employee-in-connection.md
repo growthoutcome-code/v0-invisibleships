@@ -16,7 +16,7 @@ event: Murder for hire & violent plots
 country: India
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ NSD transnational repression list
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2024-10-01. Original: <https://www.justice.gov/opa/pr/justice-department-announces-charges-against-indian-government-employee-connection-foiled>*
 
-Summary not yet written.
+The Justice Department announced on 17 October 2024 that an employee of India's Cabinet Secretariat, which houses its foreign intelligence service, has been charged with murder-for-hire, conspiracy to commit murder-for-hire and money laundering conspiracy. Prosecutors allege he directed a foiled plot in 2023 to kill a U.S. citizen of Indian origin in New York City, an attorney and activist who advocates for Sikh separatism, agreeing to pay $100,000 and delivering $15,000 in advance.
+
+The department says the defendant remains at large in India, and a co-conspirator charged earlier was extradited to the United States. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

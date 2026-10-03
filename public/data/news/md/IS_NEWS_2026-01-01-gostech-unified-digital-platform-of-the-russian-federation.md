@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *TAdviser, 2026-01-01. Original: <https://tadviser.com/index.php/Article:Gostech_(Unified_Digital_Platform_of_the_Russian_Federation)>*
 
-Summary not yet written.
+TAdviser's reference article describes GosTech, Russia's single state platform for building and running government information systems on shared cloud infrastructure. The Ministry of Digital Development coordinates it, a federal institution called State Technologies operates it, and Rostelecom and Sberbank are the main contractors.
+
+It began as an experiment in 2022, was approved by presidential decree in April 2023 and was put into federal law in November 2025. By September 2025, 52 government systems ran on it. Full migration to GosTech 2.0 is planned for December 2027.
 
 ---
 

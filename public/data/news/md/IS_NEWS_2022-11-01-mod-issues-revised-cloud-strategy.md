@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *Computer Weekly, 2022-11-01. Original: <https://www.computerweekly.com/news/365530572/MoD-issues-revised-cloud-strategy-as-it-prepares-to-move-top-secret-data-off-premise-by-2025>*
 
-Summary not yet written.
+The UK Ministry of Defence published a revised cloud strategy that aims to move secret and top secret data to the cloud by 2025, Computer Weekly reported on 8 February 2023. The 39-page strategy describes the ministry's current technology as too fragmented, insecure and outdated, and calls for a multi-cloud approach.
+
+According to Computer Weekly, about 400 workloads at the official classification had already moved, the ministry planned a separate procurement framework for secret workloads in late 2023, and it had awarded 162 cloud-related contracts worth about £211 million since 2020.
 
 ---
 

@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: China
 stage: sentenced
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2023-01-25. Original: <https://www.justice.gov/usao-ndil/pr/chinese-national-sentenced-eight-years-prison-acting-within-us-unregistered-agent>*
 
-Summary not yet written.
+A Chinese citizen who had joined the U.S. Army Reserves was sentenced in Chicago to eight years in prison for acting as an unregistered agent of the People's Republic of China, the Justice Department announced on 25 January 2023. A jury had convicted him in 2022 on three counts, including making a false statement to the Army.
+
+According to the department, he gave a provincial Chinese intelligence office background information on engineers and scientists, some working for U.S. defense contractors, as possible recruits.
 
 ---
 

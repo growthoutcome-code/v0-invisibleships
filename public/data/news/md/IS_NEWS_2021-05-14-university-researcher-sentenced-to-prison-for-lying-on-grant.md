@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: sentenced
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2021-05-14. Original: <https://www.justice.gov/opa/pr/university-researcher-sentenced-prison-lying-grant-applications-develop-scientific-expertise>*
 
-Summary not yet written.
+A rheumatology professor who led research teams at Ohio State University was sentenced to 37 months in prison for making false statements to federal authorities, the Justice Department announced on 14 May 2021. He had pleaded guilty in November 2020.
+
+According to the department, he hid his part in Chinese government talent programs on National Institutes of Health grant applications. He was ordered to pay about $3.4 million to the NIH and about $413,000 to Ohio State. He was arrested in May 2020 in Anchorage, Alaska, while preparing to fly to China.
 
 ---
 

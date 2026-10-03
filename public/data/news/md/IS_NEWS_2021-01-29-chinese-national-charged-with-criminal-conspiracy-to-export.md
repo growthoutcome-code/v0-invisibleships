@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2021-01-29. Original: <https://www.justice.gov/opa/pr/chinese-national-charged-criminal-conspiracy-export-us-power-amplifiers-china>*
 
-Summary not yet written.
+A Chinese national who worked as a sales account manager for Avnet Asia, a Singapore-based electronic components distributor, has been charged with conspiring to illegally export U.S. power amplifiers with potential military uses to China, the Justice Department announced on 29 January 2021. The indictment alleges that from 2012 to 2015 he took part in at least 18 shipments worth more than $814,000, using paperwork that falsely said the goods would stay in Hong Kong.
+
+The department says Avnet Asia agreed to pay $1,508,000 in a criminal settlement and $1,721,000 in an administrative penalty. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

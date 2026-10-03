@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft-search
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,7 @@ disclaimer: meta/IS_META_terms.md
 
 *Times of Israel, 2024-08-01. Original: <https://www.timesofisrael.com/amazon-to-invest-7-2b-in-israel-as-tech-giant-rolls-out-local-cloud-data-region>*
 
-Summary not yet written.
+Amazon will invest $7.2 billion in Israel through 2037 as Amazon Web Services opens a local cloud data region in Tel Aviv, the Times of Israel reports. Other outlets, including CIO.com and JNS, reported the plan in early August 2023.
 
 ---
 

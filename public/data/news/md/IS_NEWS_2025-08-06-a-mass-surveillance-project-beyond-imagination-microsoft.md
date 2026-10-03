@@ -16,7 +16,7 @@ event: Global conflict
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the corpus
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *+972 Magazine, 2025-08-06. Original: <https://www.972mag.com/microsoft-cloud-israel-8200-expose>*
 
-Summary not yet written.
+Microsoft has ended Israeli military intelligence Unit 8200's access to Azure cloud storage and AI services used to hold intercepted Palestinian phone calls, +972 Magazine reports, citing The Guardian. The decision followed an August investigation by +972, Local Call and The Guardian, which reported that the unit stored about 11,500 terabytes of recordings of calls from Gaza and the West Bank on Azure.
+
+According to +972, sources said the data was used in military operations, and the unit moved the data to Amazon Web Services soon after publication. Microsoft said it does not provide technology to facilitate mass surveillance of civilians.
 
 ---
 

@@ -16,7 +16,7 @@ event: Murder for hire & violent plots
 country: Belarus
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ NSD transnational repression list
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2022-01-01. Original: <https://www.justice.gov/opa/pr/belarusian-government-officials-charged-aircraft-piracy-diverting-ryanair-flight-4978-arrest>*
 
-Summary not yet written.
+Four Belarusian officials have been charged with conspiracy to commit aircraft piracy over the 23 May 2021 diversion of Ryanair Flight 4978 to Minsk, the Justice Department announced on 20 January 2022. They include the head and deputy head of Belarus's air navigation authority and two security service officers.
+
+The indictment alleges they made up a bomb threat to force the Athens-to-Vilnius flight, which carried four U.S. nationals, to land so a dissident journalist on board could be arrested. All four remain at large. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

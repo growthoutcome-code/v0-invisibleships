@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2019-04-23. Original: <https://www.justice.gov/opa/pr/former-ge-engineer-and-chinese-businessman-charged-economic-espionage-and-theft-ge-s-trade>*
 
-Summary not yet written.
+A former GE Power & Water engineer and a Chinese businessman were charged in a 14-count indictment with economic espionage and theft of GE trade secrets on turbine technology, the Justice Department announced on 23 April 2019. Prosecutors allege the engineer took design models and engineering drawings and sent them to the businessman in China to benefit two Chinese companies working on turbine parts.
+
+The department says the engineer was arraigned in the Northern District of New York and released on conditions. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

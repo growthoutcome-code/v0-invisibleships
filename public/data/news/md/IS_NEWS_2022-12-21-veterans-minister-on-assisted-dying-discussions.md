@@ -16,7 +16,7 @@ event: Public health
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the corpus
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *Global News, 2022-12-21. Original: <https://globalnews.ca/news/9352616/veterans-affairs-minister-year-end-maid>*
 
-Summary not yet written.
+Canada's veterans affairs minister said an internal investigation found four cases in which the same Veterans Affairs Canada service agent discussed medical assistance in dying with veterans, Global News reports from a year-end interview. The minister said his earlier description of an isolated incident was not correct.
+
+According to Global News, the employee was suspended pending the investigation and the matter was referred to the RCMP. The minister said he believed these might be all the cases but did not know for certain.
 
 ---
 

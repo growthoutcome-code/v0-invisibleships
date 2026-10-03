@@ -16,7 +16,7 @@ event: Murder for hire & violent plots
 country: Iran
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ NSD transnational repression list
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2024-01-01. Original: <https://www.justice.gov/opa/pr/one-iranian-and-two-canadian-nationals-indicted-murder-hire-scheme>*
 
-Summary not yet written.
+One Iranian and two Canadian nationals have been indicted in Minnesota on a charge of conspiring to use interstate commerce in a murder-for-hire plot, the Justice Department announced on 29 January 2024. Prosecutors allege they recruited people to travel to the United States to kill two Maryland residents who had defected from Iran, and negotiated a payment of $350,000 plus $20,000 in expenses.
+
+According to the department, the Iranian national is believed to be in Iran and the two Canadians are held in Canada on unrelated charges; one also faces firearms charges. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2018-10-10. Original: <https://www.justice.gov/opa/pr/chinese-intelligence-officer-charged-economic-espionage-involving-theft-trade-secrets-leading>*
 
-Summary not yet written.
+An officer of China's Ministry of State Security was extradited to the United States from Belgium and charged with conspiring and attempting to commit economic espionage and steal trade secrets, the Justice Department announced on 10 October 2018. He was arrested in Belgium on 1 April 2018 and indicted by a federal grand jury in the Southern District of Ohio.
+
+Prosecutors allege he targeted leading aviation companies, including GE Aviation, by inviting their experts to China under the pretext of giving university presentations. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

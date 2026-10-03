@@ -16,7 +16,7 @@ event: Research & breakthroughs
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (concepts)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *Nieman Lab, 2025-10-01. Original: <https://www.niemanlab.org/2025/10/in-medills-latest-state-of-local-news-report-a-festering>*
 
-Summary not yet written.
+About 3,500 U.S. newspapers have closed since 2005, nearly 40% of the country's local papers, according to the 2025 State of Local News report from Northwestern University's Medill school, as Nieman Lab reports. The report counts 213 counties with no local news source and 1,524 more with only one, and more than 270,000 newspaper jobs lost since 2005.
+
+It also finds that traffic to the websites of the 100 largest newspapers fell 45% over four years, and that newer digital outlets and philanthropic grants are concentrated in metro areas.
 
 ---
 

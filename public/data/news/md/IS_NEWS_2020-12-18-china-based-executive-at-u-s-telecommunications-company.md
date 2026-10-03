@@ -16,7 +16,7 @@ event: Transnational repression
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2020-12-18. Original: <https://www.justice.gov/opa/pr/china-based-executive-us-telecommunications-company-charged-disrupting-video-meetings>*
 
-Summary not yet written.
+A China-based employee of a U.S. videoconferencing company, who the Justice Department says served as its main liaison with Chinese law enforcement and intelligence services, was charged in a complaint unsealed in Brooklyn on 18 December 2020 with conspiracy to commit interstate harassment and unlawful conspiracy to transfer a means of identification. Prosecutors allege he and others disrupted online meetings held in May and June 2020 to commemorate the Tiananmen Square massacre, including by fabricating terms-of-service violations and creating fake accounts to justify ending meetings and suspending users.
+
+The department says he is not in U.S. custody. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

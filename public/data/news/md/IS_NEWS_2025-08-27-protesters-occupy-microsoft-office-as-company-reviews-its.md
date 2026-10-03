@@ -16,7 +16,7 @@ event: Protests
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: new, found 1 Oct 2026
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *NPR, 2025-08-27. Original: <https://www.npr.org/2025/08/27/nx-s1-5518786/microsoft-protesters-office-israel>*
 
-Summary not yet written.
+Protesters occupied the office of Microsoft's president at the company's headquarters in Redmond, Washington, to oppose its work with Israel's military, NPR reports. The group No Azure for Apartheid says seven people, including current and former Microsoft employees, were arrested.
+
+The protest followed reporting by The Guardian that Israel's military stored surveillance data on Palestinians on Microsoft's Azure cloud. Microsoft says it has hired an outside law firm to review the reports and that its terms of service would prohibit such use.
 
 ---
 

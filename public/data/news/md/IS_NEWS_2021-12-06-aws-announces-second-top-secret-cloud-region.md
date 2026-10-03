@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *Nextgov/FCW, 2021-12-06. Original: <https://www.nextgov.com/emerging-tech/2021/12/amazon-web-services-announces-second-top-secret-cloud-region/187303>*
 
-Summary not yet written.
+Amazon Web Services announced on 6 December 2021 a second cloud region for top secret U.S. government workloads, called AWS Top Secret-West, Nextgov reports. It serves defense, intelligence and national security agencies, and is meant to add geographic availability and resilience.
+
+According to Nextgov, the first such region, in northern Virginia, has run since 2014, and both are cut off from the internet. AWS did not disclose where the new region is, beyond saying it is more than 1,000 miles from the first.
 
 ---
 

@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: China
 stage: sentenced
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2019-11-22. Original: <https://www.justice.gov/opa/pr/former-cia-officer-sentenced-conspiracy-commit-espionage>*
 
-Summary not yet written.
+A former CIA case officer was sentenced on 22 November 2019 to 19 years in prison for conspiring to give national defense information to China, the Justice Department says. He had pleaded guilty in May 2018.
+
+According to the department, he left the CIA in 2007, moved to Hong Kong, and from 2010 received taskings from Chinese intelligence officers while hundreds of thousands of dollars were deposited into his bank account. The department says he wrote a document describing CIA officers' assignments and a sensitive operation, kept notes naming intelligence assets, and lied to investigators.
 
 ---
 

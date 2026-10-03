@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: Saudi Arabia
 stage: convicted
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ NSD transnational repression list
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2022-08-01. Original: <https://www.justice.gov/opa/pr/former-twitter-employee-found-guilty-acting-agent-foreign-government-and-unlawfully-sharing>*
 
-Summary not yet written.
+A federal jury in the Northern District of California convicted a former Twitter media partnerships manager for the Middle East and North Africa of acting as an agent of Saudi Arabia without notifying the Attorney General, the Justice Department announced on 10 August 2022. He was also convicted of conspiracy, wire fraud, international money laundering and falsifying records, and acquitted on five other fraud counts.
+
+According to the department, he accessed private information on Twitter accounts critical of the Saudi government and royal family on behalf of Saudi officials, in return for a $42,000 watch and $200,000 in payments to a Lebanese bank account. No sentencing date had been set.
 
 ---
 

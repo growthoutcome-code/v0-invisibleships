@@ -16,7 +16,7 @@ event: Public health
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft-search
 found_via: new, found 2 Oct 2026
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,7 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Food and Drug Administration, 2020-12-11. Original: <https://www.fda.gov/news-events/press-announcements/fda-takes-key-action-fight-against-covid-19-issuing-emergency-use-authorization-first-covid-19>*
 
-Summary not yet written.
+The U.S. Food and Drug Administration issued its first emergency use authorization for a COVID-19 vaccine on 11 December 2020, allowing the Pfizer-BioNTech vaccine to be used in people aged 16 and older. The FDA says the vaccine met the legal criteria for an emergency authorization after review by its career scientists and input from independent experts.
 
 ---
 

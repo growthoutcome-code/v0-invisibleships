@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: China
 stage: convicted
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2025-08-20. Original: <https://www.justice.gov/opa/pr/us-navy-sailor-convicted-spying-china>*
 
-Summary not yet written.
+A U.S. Navy machinist's mate serving on the amphibious assault ship USS Essex in San Diego was convicted of spying for China, the Justice Department announced on 21 August 2025. A federal jury in the Southern District of California found him guilty on six counts, including conspiracy to commit espionage, espionage, and unlawfully exporting technical defense data.
+
+According to the department, from February 2022 to August 2023 he sent a Chinese intelligence officer photos, videos, weapons information and technical manuals on the Essex and other Navy ships, for more than $12,000. Sentencing was set for 1 December 2025.
 
 ---
 

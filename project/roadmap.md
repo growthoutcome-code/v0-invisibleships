@@ -1,6 +1,6 @@
 # Invisible Ships — roadmap
 
-**Last reviewed: 2026-10-01.**
+**Last reviewed: 2026-10-02.**
 
 How to read this: **Now** is being worked on. **Next** is agreed and queued. **Later**
 is real but unscheduled. **Not doing** exists so the same suggestions stop coming back.
@@ -16,7 +16,7 @@ is real but unscheduled. **Not doing** exists so the same suggestions stop comin
 |---|---|---|
 | Visit trust labels on `/insights` | In progress | `features/visit-trust-labels.md`, decision `0002` |
 | `/insights` restructure — Google leads, pages lead, locations on both tabs | In progress | `features/insights-page-restructure.md` |
-| **News** — a dated index of about 200 official-source posts and news items, one band on the master timeline | **Built on branch `news`, not live.** 276 items, page, dialogs, CSV export. Review round 1 (2 Oct): width, heading, bigger dialog, line-click dialog, News bottom and home sections. Launch waits on summaries | `features/news.md` |
+| **News** — a dated index of about 200 official-source posts and news items, one band on the master timeline | **Ready to merge (2 Oct).** 276 items, 259 with draft summaries, 17 pending. Width fixed, line-click dialog, bottom sections on `/news`, and a Contribute bottom section on every page with bottom sections. Unlisted until the 17 are written; then Sean reviews the drafts | `features/news.md` |
 | `POSTHOG_PERSONAL_API_KEY` into Vercel | Missing in production as of 27 Sep, so the live `/insights` had no traffic numbers. **[check]** whether it has been added since | Vercel env |
 
 **Shipped since the last review (27 Sep → 1 Oct):** every unpushed commit is live (production `f14a3cf`), so the gate and download logging is deployed. `gate_events` holds 5 rows, the latest from 1 Oct. The same period also shipped:

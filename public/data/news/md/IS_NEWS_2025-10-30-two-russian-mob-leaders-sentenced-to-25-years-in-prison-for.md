@@ -16,7 +16,7 @@ event: Murder for hire & violent plots
 country: Iran
 stage: sentenced
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2025-10-30. Original: <https://www.justice.gov/usao-sdny/pr/two-russian-mob-leaders-sentenced-25-years-prison-murder-hire-targeting-journalist>*
 
-Summary not yet written.
+Two senior members of a faction of a Russian organized crime group were each sentenced to 25 years in prison for a murder-for-hire plot against a journalist and human rights activist, the U.S. Attorney's Office for the Southern District of New York says. According to prosecutors, the plot was directed by Iran's Islamic Revolutionary Guard Corps.
+
+A jury convicted both men of murder for hire, attempted murder in aid of racketeering and related charges after a two-week trial.
 
 ---
 

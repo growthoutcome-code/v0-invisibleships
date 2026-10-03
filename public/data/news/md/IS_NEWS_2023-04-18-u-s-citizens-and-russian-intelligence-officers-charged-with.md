@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: Russia
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2023-04-18. Original: <https://www.justice.gov/opa/pr/us-citizens-and-russian-intelligence-officers-charged-conspiring-use-us-citizens-illegal>*
 
-Summary not yet written.
+Three Russian nationals the Justice Department says are tied to Russia's FSB intelligence service and four U.S. citizens were charged with conspiring to use Americans as illegal agents of the Russian government, the department announced on 18 April 2023. According to the superseding indictment in Florida, from 2014 to 2022 the Russians directed U.S. political groups, including the African People's Socialist Party, Uhuru Movement and Black Hammer, to spread pro-Russian propaganda and funded a 2019 local election campaign.
+
+In a separate case in Washington, D.C., a Russian national was charged with conspiring with an FSB officer to recruit U.S. academics. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2022-03-30. Original: <https://www.justice.gov/usao-sdny/pr/chinese-national-charged-acting-unregistered-agent-chinese-government-united-states>*
 
-Summary not yet written.
+A Chinese citizen has been charged in Manhattan federal court with acting as an unregistered agent of the Chinese government in the United States, the U.S. Attorney's Office for the Southern District of New York announced on 30 March 2022. The complaint alleges that from February 2017 to February 2022 he took part in "Operation Fox Hunt", hiring private investigators to surveil people China sought to return and threatening them to go back or settle.
+
+Prosecutors also allege he worked with a U.S. law enforcement officer as a co-conspirator. The office says he is at large in China. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

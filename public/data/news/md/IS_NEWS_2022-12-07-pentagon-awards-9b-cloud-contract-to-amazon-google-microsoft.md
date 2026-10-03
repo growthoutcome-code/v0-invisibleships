@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *Nextgov/FCW, 2022-12-07. Original: <https://www.nextgov.com/digital-government/2022/12/amazon-google-microsoft-oracle-awarded-9b-pentagon-cloud-contract/380596>*
 
-Summary not yet written.
+The Defense Department awarded Amazon Web Services, Google, Microsoft and Oracle places on the $9 billion Joint Warfighting Cloud Capability contract, Nextgov reported on 7 December 2022. The four will compete for task orders to provide cloud services across all classification levels.
+
+According to Nextgov, the multi-vendor contract replaces the single-award JEDI program, which was cancelled after years of litigation, and the awards had been delayed from earlier in 2022.
 
 ---
 

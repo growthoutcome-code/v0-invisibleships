@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft-search
 found_via: already in the corpus
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Defense, 2020-12-01. Original: <https://www.defense.gov/Explore/News/Article/Article/2446061/tiberius-platform-aids-covid-19-logistics-delivery>*
 
-Summary not yet written.
+Tiberius, a data platform run by the Department of Health and Human Services and the Department of Defense under Operation Warp Speed, tracks COVID-19 vaccines through manufacturing, allocation, state planning, delivery and administration, according to the Defense Department's news service. It is used by 64 states, territories and large cities, and gives a zip-code-level view of priority groups such as frontline workers and nursing home residents.
+
+The article says the platform draws on Census data, the vaccine tracking system and commercial logistics firms, and that all incoming data is de-identified, with no personal identifying or health information. It says full operational use began over Labor Day weekend 2020.
 
 ---
 

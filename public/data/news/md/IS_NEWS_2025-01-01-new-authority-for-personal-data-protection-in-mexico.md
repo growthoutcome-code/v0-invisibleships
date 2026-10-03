@@ -16,7 +16,7 @@ event: Regulation & law
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *IAPP, 2025-01-01. Original: <https://iapp.org/news/a/new-authority-established-for-personal-data-protection-in-mexico>*
 
-Summary not yet written.
+Mexico has dissolved its National Institute of Transparency, Access to Information and Protection of Personal Data (INAI) through a constitutional reform, according to a contributed analysis published by IAPP. The Senate approved the reform on 28 November 2024 and it was published in the Official Gazette on 20 December 2024.
+
+According to the article, INAI's personal data protection functions move to a body within the federal government, the Ministry of Anticorruption and Good Governance, under new and revised transparency and data protection laws proposed in a presidential bill submitted on 20 February 2025.
 
 ---
 

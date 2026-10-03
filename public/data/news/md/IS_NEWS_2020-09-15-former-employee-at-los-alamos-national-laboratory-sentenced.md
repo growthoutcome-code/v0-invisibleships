@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: sentenced
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2020-09-15. Original: <https://www.justice.gov/opa/pr/former-employee-los-alamos-national-laboratory-sentenced-probation-making-false-statements>*
 
-Summary not yet written.
+A former employee of Los Alamos National Laboratory was sentenced on 11 September 2020 to five years of probation and a $75,000 fine for making a false statement to the Department of Energy, the Justice Department says. He had pleaded guilty in January 2020.
+
+According to the department, in June 2018 he falsely told a counterintelligence officer that he had not been recruited by, or applied to, China's Thousand Talents Program.
 
 ---
 

@@ -16,7 +16,7 @@ event: Courts & litigation
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft-search
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,7 @@ disclaimer: meta/IS_META_terms.md
 
 *CBS News Detroit, 2025-08-06. Original: <https://www.cbsnews.com/detroit/news/woman-wrongly-accused-carjacking-loses-lawsuit-detroit-police-used-facial-tech>*
 
-Summary not yet written.
+A woman who was wrongly accused of carjacking has lost her lawsuit against Detroit police, who had used facial recognition technology in the case, CBS News Detroit reports. Syndicated Associated Press versions of the story are dated 4 September 2025.
 
 ---
 

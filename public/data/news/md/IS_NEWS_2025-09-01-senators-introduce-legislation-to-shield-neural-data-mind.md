@@ -16,7 +16,7 @@ event: Regulation & law
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the corpus
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Senate Commerce Committee, 2025-09-01. Original: <https://www.commerce.senate.gov/press/dem/release/sens-cantwell-schumer-markey-introduce-legislation-to-shield>*
 
-Summary not yet written.
+Three Democratic U.S. senators, including the Senate Democratic leader and the ranking member of the Commerce Committee, announced the Management of Individuals' Neural Data Act (MIND Act) on 24 September 2025, according to the committee's Democratic staff. The bill directs the Federal Trade Commission to study how neural data, information from brain activity that can reveal thoughts, emotions or decision-making, should be protected.
+
+The senators cite risks including manipulative advertising, insurance discrimination, exploitation by foreign adversaries, and collection by consumer wearables. The FTC would consult agencies, industry, academia and civil society and identify gaps in current law.
 
 ---
 

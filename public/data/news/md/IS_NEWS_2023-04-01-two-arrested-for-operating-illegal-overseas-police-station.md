@@ -16,7 +16,7 @@ event: Transnational repression
 country: China
 stage: arrested
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ NSD transnational repression list
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2023-04-01. Original: <https://www.justice.gov/opa/pr/two-arrested-operating-illegal-overseas-police-station-chinese-government>*
 
-Summary not yet written.
+Two New York City residents were arrested on 17 April 2023 on charges of helping run an undeclared police station in Manhattan's Chinatown for a provincial branch of China's Ministry of Public Security, the Justice Department says. Prosecutors describe it as the first such overseas police station in the United States.
+
+According to the department, the two are charged with conspiring to act as agents of the People's Republic of China and with obstruction of justice for deleting messages with a Chinese official after learning of an FBI investigation. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2020-07-21. Original: <https://www.justice.gov/opa/pr/two-chinese-hackers-working-ministry-state-security-charged-global-computer-intrusion>*
 
-Summary not yet written.
+Two Chinese nationals have been indicted by a federal grand jury in Spokane, Washington, on 11 counts including conspiracy to commit computer fraud, conspiracy to steal trade secrets, conspiracy to commit wire fraud and aggravated identity theft, the Justice Department announced on 21 July 2020. Prosecutors allege a hacking campaign of more than ten years against companies, governments, NGOs, dissidents, clergy and human rights activists in the United States and ten other countries, partly for China's Ministry of State Security.
+
+The department says the two also probed the networks of companies developing COVID-19 vaccines, tests and treatments. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

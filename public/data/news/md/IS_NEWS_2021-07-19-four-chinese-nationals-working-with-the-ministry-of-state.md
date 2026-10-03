@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2021-07-19. Original: <https://www.justice.gov/opa/pr/four-chinese-nationals-working-ministry-state-security-charged-global-computer-intrusion>*
 
-Summary not yet written.
+Four Chinese nationals, three of them officers of the Hainan State Security Department, have been charged over a hacking campaign against dozens of companies, universities and government bodies, the Justice Department announced on 19 July 2021. The indictment alleges that from 2011 to 2018 they sought trade secrets and intellectual property in the United States and 11 other countries.
+
+According to the department, targets included aviation, defense, healthcare and maritime organisations and research on infectious diseases such as Ebola and MERS. The charges are conspiracy to commit computer fraud and conspiracy to commit economic espionage. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

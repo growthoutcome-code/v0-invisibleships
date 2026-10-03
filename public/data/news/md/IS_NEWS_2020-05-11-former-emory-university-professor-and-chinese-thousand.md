@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: sentenced
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2020-05-11. Original: <https://www.justice.gov/opa/pr/former-emory-university-professor-and-chinese-thousand-talents-participant-convicted-and>*
 
-Summary not yet written.
+A former Emory University professor who took part in China's Thousand Talents Program pleaded guilty to filing a false tax return and was sentenced on 8 May 2020 to one year of probation and $35,089 in restitution, the Justice Department says. Prosecutors say he did not report at least $500,000 in income earned while working for Chinese institutions from 2012 to 2018.
+
+According to the department, the case began after the National Institutes of Health raised concerns about his undisclosed foreign research work.
 
 ---
 

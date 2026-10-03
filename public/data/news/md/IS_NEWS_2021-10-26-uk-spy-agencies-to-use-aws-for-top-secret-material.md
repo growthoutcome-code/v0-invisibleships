@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *DatacenterDynamics, 2021-10-26. Original: <https://www.datacenterdynamics.com/en/news/uk-spy-agencies-to-use-amazon-web-services-to-host-top-secret-material-in-the-cloud>*
 
-Summary not yet written.
+Britain's GCHQ, MI5 and MI6, along with the Ministry of Defence, will use Amazon Web Services to host top secret material, DatacenterDynamics reports, citing the Financial Times. The contract is estimated at £500 million to £1 billion over the next decade, with data held in Amazon data centres in the UK.
+
+According to the report, the agencies say Amazon will have no access to the data. Privacy International criticised the deal as agreed in secret, and the report notes questions over whether the U.S. CLOUD Act could apply.
 
 ---
 

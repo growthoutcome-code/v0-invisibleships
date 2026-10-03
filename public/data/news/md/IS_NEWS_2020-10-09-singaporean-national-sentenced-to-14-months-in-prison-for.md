@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: China
 stage: sentenced
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2020-10-09. Original: <https://www.justice.gov/opa/pr/singaporean-national-sentenced-14-months-prison-acting-united-states-illegal-agent-chinese>*
 
-Summary not yet written.
+A Singaporean national was sentenced on 9 October 2020 to 14 months in prison for acting in the United States as an illegal agent of Chinese intelligence, the Justice Department says. He had pleaded guilty on 24 July 2020.
+
+According to the department, starting in 2015 he worked with Chinese intelligence officers and recruited Americans with security clearances to provide non-public information, using social media, professional networking sites and a fake consulting company set up in 2018.
 
 ---
 

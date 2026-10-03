@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *iTnews, 2024-07-04. Original: <https://www.itnews.com.au/news/australian-government-signs-aws-to-deliver-2bn-top-secret-cloud-609426>*
 
-Summary not yet written.
+The Australian government has signed Amazon Web Services to build a top-secret cloud for defence and national intelligence agencies, worth at least $2 billion over ten years, iTnews reported on 4 July 2024. According to iTnews, the cloud will host and analyse the country's most classified data, support AI and machine learning, and serve agencies including the Australian Signals Directorate and the Office of National Intelligence.
+
+iTnews notes the deal uses a single vendor, unlike the U.S. equivalent, and supports the separate $10 billion REDSPICE cyber program.
 
 ---
 

@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: convicted
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2020-06-26. Original: <https://www.justice.gov/opa/pr/chinese-citizen-convicted-economic-espionage-theft-trade-secrets-and-conspiracy>*
 
-Summary not yet written.
+A Chinese citizen was convicted on 26 June 2020 of economic espionage, theft of trade secrets and conspiracy after a four-day bench trial, the Justice Department says. Prosecutors say he stole wireless filter technology from two U.S. semiconductor companies, Avago and Skyworks, to benefit Tianjin University, which the department describes as an instrumentality of the Chinese government.
+
+The department says sentencing was set for 31 August 2020.
 
 ---
 

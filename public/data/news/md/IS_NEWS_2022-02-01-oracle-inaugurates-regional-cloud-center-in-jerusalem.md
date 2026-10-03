@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft-search
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,7 @@ disclaimer: meta/IS_META_terms.md
 
 *Times of Israel, 2022-02-01. Original: <https://www.timesofisrael.com/oracle-inaugurates-regional-cloud-center-in-jerusalem-plans-to-open-2nd-site>*
 
-Summary not yet written.
+Oracle has opened a regional cloud centre in Jerusalem and plans to open a second site in Israel, the Times of Israel reports. Oracle's own release notes list a new cloud region in Jerusalem, Israel.
 
 ---
 

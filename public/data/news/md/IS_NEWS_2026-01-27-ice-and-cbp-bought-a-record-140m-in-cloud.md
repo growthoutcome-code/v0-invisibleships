@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *Forbes, 2026-01-27. Original: <https://www.forbes.com/sites/the-wiretap/2026/01/27/immigration-record-spend-on-amazon-and-trump>*
 
-Summary not yet written.
+Immigration and Customs Enforcement and Customs and Border Protection bought about $140 million in cloud services between March and November 2025, mostly from Amazon Web Services and Microsoft, Forbes reports from federal contracting records.
+
+CBP spent nearly $39 million on AWS, which Forbes describes as a record for Amazon, and $38 million on Microsoft licenses. ICE bought $38 million in Microsoft software, $25 million in AWS services and about $530,000 in Google cloud products.
 
 ---
 

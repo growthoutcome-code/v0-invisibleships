@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *FedScoop, 2022-04-27. Original: <https://fedscoop.com/nsa-re-awards-10b-wildandstormy-cloud-computing-contract-to-aws>*
 
-Summary not yet written.
+The National Security Agency has again awarded its WildandStormy cloud computing contract, worth up to $10 billion, to Amazon Web Services, FedScoop reports. The contract supports the agency's Hybrid Compute Initiative, which looks at keeping sensitive national security data in commercial cloud infrastructure.
+
+Microsoft had protested the first award to AWS, and in December 2021 the Government Accountability Office upheld the protest, finding the NSA had improperly assessed technical proposals. The NSA says it re-evaluated the proposals and made a new best-value decision consistent with that ruling.
 
 ---
 

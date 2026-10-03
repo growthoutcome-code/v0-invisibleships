@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2020-06-09. Original: <https://www.justice.gov/opa/pr/harvard-university-professor-indicted-false-statement-charges>*
 
-Summary not yet written.
+A former chair of Harvard University's chemistry department was indicted on 9 June 2020 on two counts of making false statements to federal authorities about his involvement in China's Thousand Talents Program, the Justice Department says. Prosecutors allege he did not disclose his role at Wuhan University of Technology, which they say offered up to $50,000 a month, living expenses and more than $1.5 million for a lab, while his group received more than $15 million in NIH and Defense Department funding.
+
+He had been arrested in January 2020. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

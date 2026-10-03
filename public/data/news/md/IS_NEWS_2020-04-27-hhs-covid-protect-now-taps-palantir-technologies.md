@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft-search
 found_via: new, found 2 Oct 2026
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,7 @@ disclaimer: meta/IS_META_terms.md
 
 *ClearanceJobs, 2020-04-27. Original: <https://news.clearancejobs.com/2020/04/27/hhs-covid-protect-now-taps-palantir-technologies>*
 
-Summary not yet written.
+The Department of Health and Human Services awarded Palantir Technologies two contracts in April 2020 for HHS Protect, a platform pulling COVID-19 data from federal, state and local governments, healthcare facilities and colleges, ClearanceJobs reports. According to the report, the platform combines 187 datasets, including hospital capacity, supply chains, testing, demographics and state policies, to help officials limit the spread of the virus.
 
 ---
 

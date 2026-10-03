@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *TAdviser, 2025-01-01. Original: <https://tadviser.com/index.php/Article:Cloud_services_(Russian_market)>*
 
-Summary not yet written.
+Russia's cloud services market reached 416.5 billion rubles in 2025, up 29% from 322.3 billion rubles in 2024, according to iKS-Consulting figures compiled by TAdviser. SaaS accounted for 190.7 billion rubles, IaaS for 183.1 billion and PaaS for 42.7 billion.
+
+In the combined IaaS and PaaS market, Cloud.ru held 32.5%, RTK-DPC 13.7% and Yandex Cloud 11%, iKS-Consulting says. TAdviser notes that other firms give different 2024 estimates, and iKS-Consulting forecasts the market will reach 1.2 trillion rubles by 2030.
 
 ---
 

@@ -87,6 +87,8 @@ export default function NewsView({ items, initialSlug }: { items: NewsItem[]; in
   const [exportOpen, setExportOpen] = useState(false);
   const [corpusOpen, setCorpusOpen] = useState(false);
   const [openSlug, setOpenSlug] = useState<string | null>(initialSlug ?? null);
+  // The Over time chart's dialog: a line, and the year clicked (null: every year).
+  const [lineOpen, setLineOpen] = useState<{ label: string; year: number | null } | null>(null);
   const listRef = useRef<HTMLDivElement>(null);
 
   const ql = q.trim().toLowerCase();
@@ -189,9 +191,9 @@ export default function NewsView({ items, initialSlug }: { items: NewsItem[]; in
         </div>
         <div className="p-4 sm:p-6" role="tabpanel">
           {tab === "time" ? (
-            <TimeChart items={shown} onPickGroup={(events) => {
-              setSel((s) => ({ ...s, event: events }));
-              track("news_chart_filter", { dim: "group", value: events.join("|") });
+            <TimeChart items={shown} onOpen={(label, year) => {
+              setLineOpen({ label, year });
+              track("news_line_opened", { group: label, year: year ?? "all" });
             }} />
           ) : (
             // The tab for a filtered dimension still lists every value, counted over
@@ -282,6 +284,16 @@ export default function NewsView({ items, initialSlug }: { items: NewsItem[]; in
 
       <ItemDialog item={open} onClose={closeItem} />
 
+      <LineDialog open={lineOpen} items={shown} filtered={shown.length !== items.length}
+        onClose={() => setLineOpen(null)}
+        onYear={(year) => setLineOpen((o) => (o ? { ...o, year } : o))}
+        onItem={(it) => { setLineOpen(null); openItem(it); }}
+        onFilter={(events) => {
+          setSel((s) => ({ ...s, event: events }));
+          setLineOpen(null);
+          track("news_chart_filter", { dim: "group", value: events.join("|") });
+        }} />
+
       <ExportDialog open={exportOpen} setOpen={setExportOpen} items={shown} filtered={shown.length !== items.length}
         onCorpus={() => { setExportOpen(false); setCorpusOpen(true); }} />
       <ExportModal open={corpusOpen} onOpenChange={setCorpusOpen} />
@@ -299,7 +311,7 @@ function Tile({ n, label }: { n: number | string; label: string }) {
 }
 
 /* ---------- Over time: one line per group of events, by year ---------- */
-function TimeChart({ items, onPickGroup }: { items: NewsItem[]; onPickGroup: (events: string[]) => void }) {
+function TimeChart({ items, onOpen }: { items: NewsItem[]; onOpen: (label: string, year: number | null) => void }) {
   const [hover, setHover] = useState<number | null>(null);
   // A phone gets a narrower drawing, not a scrolled one: the SVG scales to the
   // column, so the canvas is sized for it and the type stays readable.
@@ -344,9 +356,31 @@ function TimeChart({ items, onPickGroup }: { items: NewsItem[]; onPickGroup: (ev
               strokeWidth={s.weight} strokeDasharray={s.dash} strokeLinejoin="round"
               points={s.vals.map((v, i) => `${X(years[i])},${Y(v)}`).join(" ")} />
           ))}
-          {years.map((y) => (
+          {/* The points for the year under the cursor: each one is clickable. */}
+          {hover !== null && series.map((s) => (
+            <circle key={s.label} cx={X(hover)} cy={Y(s.vals[years.indexOf(hover)])} r={narrow ? 5 : 4}
+              fill="rgb(var(--background))" stroke="rgb(var(--foreground))" strokeOpacity={s.opacity} strokeWidth={2} />
+          ))}
+          {/* One column per year catches the pointer. A click opens the line whose
+              point is nearest the pointer in that year, as the other charts open a
+              dialog for what was clicked. */}
+          {years.map((y, yi) => (
             <rect key={y} x={X(y) - (W - pl - pr) / years.length / 2} y={pt} width={(W - pl - pr) / years.length}
-              height={H - pt - pb} fill="transparent" onMouseEnter={() => setHover(y)} />
+              height={H - pt - pb} fill="transparent" className="cursor-pointer"
+              onMouseEnter={() => setHover(y)}
+              onClick={(e) => {
+                const svg = (e.currentTarget as SVGRectElement).ownerSVGElement;
+                if (!svg) return;
+                const box = svg.getBoundingClientRect();
+                const py = (e.clientY - box.top) * (H / box.height);
+                let best: (typeof series)[number] | null = null, gap = Infinity;
+                series.forEach((s) => {
+                  const d = Math.abs(Y(s.vals[yi]) - py);
+                  if (d < gap) { gap = d; best = s; }
+                });
+                setHover(y);
+                if (best && gap <= (narrow ? 34 : 26)) onOpen((best as (typeof series)[number]).label, y);
+              }} />
           ))}
         </svg>
       </div>
@@ -355,7 +389,7 @@ function TimeChart({ items, onPickGroup }: { items: NewsItem[]; onPickGroup: (ev
       <ul className="m-0 mt-4 grid list-none gap-x-8 gap-y-2 p-0 sm:grid-cols-2 lg:grid-cols-3">
         {series.map((s) => (
           <li key={s.label}>
-            <button type="button" onClick={() => onPickGroup(s.events)}
+            <button type="button" onClick={() => onOpen(s.label, null)}
               className="flex w-full items-center gap-3 text-left text-[14px] text-foreground hover:underline underline-offset-4">
               <svg width="34" height="10" aria-hidden className="shrink-0">
                 <line x1="1" x2="33" y1="5" y2="5" stroke="rgb(var(--foreground))" strokeOpacity={s.opacity}
@@ -367,7 +401,7 @@ function TimeChart({ items, onPickGroup }: { items: NewsItem[]; onPickGroup: (ev
           </li>
         ))}
       </ul>
-      <p className="m-0 mt-3 text-[13px] text-muted">Counts for {hy}. Hover the chart for another year; select a line&rsquo;s name to filter to it.</p>
+      <p className="m-0 mt-3 text-[13px] text-muted">Counts for {hy}. Hover the chart for another year. Select a point on a line, or a line&rsquo;s name, to see the items behind it.</p>
     </div>
   );
 }
@@ -405,6 +439,111 @@ function Bars({ rows, selected, onPick, note }: { rows: [string, number][]; sele
         </button>
       )}
     </div>
+  );
+}
+
+/* ---------- The line dialog: what a point or a line counts, and its sources ---------- */
+const H4 = "text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground mb-2 mt-0";
+
+function LineDialog({ open, items, filtered, onClose, onYear, onItem, onFilter }: {
+  open: { label: string; year: number | null } | null;
+  items: NewsItem[];
+  filtered: boolean;
+  onClose: () => void;
+  onYear: (year: number | null) => void;
+  onItem: (it: NewsItem) => void;
+  onFilter: (events: string[]) => void;
+}) {
+  const [all, setAll] = useState(false);
+  useEffect(() => { setAll(false); }, [open?.label, open?.year]);
+  const g = open ? EVENT_GROUPS.find((x) => x.label === open.label) ?? null : null;
+  const inLine = g ? items.filter((i) => g.events.includes(i.event)) : [];
+  const perYear = counts(inLine, "year").sort((a, b) => b[0].localeCompare(a[0]));
+  const list = (open?.year ? inLine.filter((i) => i.date.startsWith(String(open.year))) : inLine)
+    .slice().sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+  const official = list.filter((i) => i.sourceType === "Official").length;
+  const pubs = new Set(list.map((i) => i.publisher)).size;
+  const LIMIT = 25;
+  const rows = all ? list : list.slice(0, LIMIT);
+  return (
+    <Dialog open={!!open} onOpenChange={(o) => !o && onClose()}>
+      <DialogContent size="md">
+        {open && g && (
+          <>
+            <DialogHeader>
+              <p className="m-0 text-[12px] uppercase tracking-[0.08em] text-muted">
+                News over time{open.year ? ` · ${open.year}` : " · every year"}
+              </p>
+              <DialogTitle className="font-display text-2xl">{g.label}</DialogTitle>
+            </DialogHeader>
+            <DialogBody>
+              <p className="body-copy text-foreground/90 m-0 mb-4">
+                {list.length} {list.length === 1 ? "item" : "items"} {open.year ? `in ${open.year}` : "across every year"}
+                {list.length ? `: ${official} from official sources, from ${pubs} ${pubs === 1 ? "publisher" : "publishers"}.` : "."}
+                {filtered ? " Counted over the items the current filter shows." : ""}
+              </p>
+
+              <h4 className={H4}>What this line counts</h4>
+              <p className="text-[15px] text-foreground/85 m-0 mb-4">
+                {g.events.length > 1
+                  ? `Items in these categories: ${g.events.join(", ")}.`
+                  : `Items in the category ${g.events[0]}.`}{" "}
+                Each item is counted in the year it was published.
+              </p>
+
+              <h4 className={H4}>By year</h4>
+              <div className="mb-5 flex flex-wrap gap-2">
+                <button type="button" onClick={() => onYear(null)} aria-pressed={open.year === null}
+                  className={`border px-2.5 py-1 text-[13px] tabular-nums ${open.year === null ? "border-foreground bg-foreground text-background" : "border-edge text-foreground hover:border-foreground"}`}>
+                  Every year · {inLine.length}
+                </button>
+                {perYear.map(([y, n]) => (
+                  <button key={y} type="button" onClick={() => onYear(+y)} aria-pressed={open.year === +y}
+                    className={`border px-2.5 py-1 text-[13px] tabular-nums ${open.year === +y ? "border-foreground bg-foreground text-background" : "border-edge text-foreground hover:border-foreground"}`}>
+                    {y} · {n}
+                  </button>
+                ))}
+              </div>
+
+              <h4 className={H4}>Sources</h4>
+              {!list.length ? (
+                <p className="text-[15px] text-muted m-0">No items on this line in {open.year}.</p>
+              ) : (
+                <ul className="m-0 list-none border-t border-edge p-0">
+                  {rows.map((it) => (
+                    <li key={it.slug} className="border-b border-edge py-3">
+                      <p className="m-0 text-[12px] uppercase tracking-[0.08em] text-muted">
+                        {newsDate(it)} · <span className="font-semibold text-foreground">{it.sourceType}</span> · <span className="normal-case tracking-normal">{it.publisher}</span>
+                      </p>
+                      <button type="button" onClick={() => onItem(it)}
+                        className="font-display mt-1 text-left text-[16px] font-semibold leading-snug text-foreground hover:underline underline-offset-4">
+                        {it.title}
+                      </button>
+                      <a href={it.url} target="_blank" rel="noopener noreferrer"
+                        onClick={() => track("news_original_opened", { slug: it.slug, from: "line" })}
+                        className="mt-1 flex w-fit items-center gap-1 text-[13px] text-muted underline underline-offset-4 hover:text-foreground">
+                        Original <ExternalLink size={12} aria-hidden />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {list.length > LIMIT && (
+                <button type="button" onClick={() => setAll((a) => !a)} className="mt-4 text-[14px] text-foreground underline underline-offset-4">
+                  {all ? `Show the newest ${LIMIT}` : `Show all ${list.length}`}
+                </button>
+              )}
+            </DialogBody>
+            <DialogFooter className="flex flex-wrap items-center gap-3">
+              <button type="button" onClick={() => onFilter(g.events)}
+                className="inline-flex h-10 items-center bg-foreground px-4 text-[15px] font-semibold text-background">
+                Filter the page to this line
+              </button>
+            </DialogFooter>
+          </>
+        )}
+      </DialogContent>
+    </Dialog>
   );
 }
 

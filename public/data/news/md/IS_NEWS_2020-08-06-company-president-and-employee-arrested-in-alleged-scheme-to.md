@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: arrested
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2020-08-06. Original: <https://www.justice.gov/opa/pr/company-president-and-employee-arrested-alleged-scheme-violate-export-control-reform-act>*
 
-Summary not yet written.
+The president and a sales representative of America Techma Inc., a New Jersey company, were arrested on 6 August 2020 and charged with conspiring to export controlled electronic components to China without licences, as well as conspiracy to commit wire and bank fraud and money laundering, the Justice Department says. Prosecutors allege the parts, controlled for reasons including missile technology and nuclear non-proliferation, were sent through Hong Kong companies, and that the defendants discussed routing shipments through South Korea to avoid detection.
+
+These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

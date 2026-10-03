@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: Russia
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2025-08-06. Original: <https://www.justice.gov/opa/pr/active-duty-soldier-arrested-and-charged-espionage-and-export-violations>*
 
-Summary not yet written.
+A 22-year-old active-duty U.S. Army soldier stationed at Fort Bliss, Texas, who held a Top Secret clearance, was arrested and charged with attempting to send national defense information to a foreign adversary and attempting to export controlled technical data, the Justice Department announced on 6 August 2025. According to the department, he tried to pass information on the M1A2 Abrams tank to Russia's Ministry of Defense, including handing an SD card of documents to a person he believed represented Russia, and the FBI says he sought Russian citizenship in return.
+
+The case is in federal court in the Western District of Texas. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

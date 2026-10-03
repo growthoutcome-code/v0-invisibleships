@@ -16,7 +16,7 @@ event: Research & breakthroughs
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft-search
 found_via: new, found 2 Oct 2026
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,7 @@ disclaimer: meta/IS_META_terms.md
 
 *Meta AI research, 2025-02-01. Original: <https://ai.meta.com/research/publications/brain-to-text-decoding-a-non-invasive-approach-via-typing>*
 
-Summary not yet written.
+Researchers at Meta FAIR and the research centre BCBL published a paper, Brain-to-Text Decoding: A Non-invasive Approach via Typing, on decoding text from brain activity recorded without surgery while people type, according to Meta. The paper is also posted on arXiv.
 
 ---
 

@@ -16,7 +16,7 @@ event: Transnational repression
 country: China
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ NSD transnational repression list
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2023-06-01. Original: <https://www.justice.gov/opa/pr/federal-jury-convicts-three-defendants-interstate-stalking-chinese-nationals-united-states>*
 
-Summary not yet written.
+A federal jury in Brooklyn convicted three people of interstate stalking-related crimes in a campaign carried out on behalf of the People's Republic of China, the Justice Department announced on 20 June 2023. According to the department, between 2016 and 2019 they surveilled and harassed U.S. residents to pressure them to return to China, as part of the Chinese effort known as Operation Fox Hunt.
+
+One defendant, a retired U.S. police officer working as a private investigator, and one other were also convicted of acting as illegal agents of China. The department says the defendants face maximum sentences of 10 to 25 years.
 
 ---
 

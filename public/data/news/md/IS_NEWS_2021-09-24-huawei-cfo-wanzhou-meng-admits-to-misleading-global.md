@@ -16,7 +16,7 @@ event: Regulation & law
 country: China
 stage: admitted
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2021-09-24. Original: <https://www.justice.gov/opa/pr/huawei-cfo-wanzhou-meng-admits-misleading-global-financial-institution>*
 
-Summary not yet written.
+Huawei's chief financial officer entered into a deferred prosecution agreement on bank and wire fraud charges, the Justice Department announced on 24 September 2021. Under the deal she admitted making false statements to a global bank in 2013 about Huawei's control of Skycom, a Hong Kong company operating in Iran.
+
+According to the department, the charges will be pursued if she breaches the agreement, including by committing another crime. The United States withdrew its request for her extradition from Canada.
 
 ---
 

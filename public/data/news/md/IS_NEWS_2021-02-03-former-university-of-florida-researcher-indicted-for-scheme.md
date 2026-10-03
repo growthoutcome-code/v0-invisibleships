@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2021-02-03. Original: <https://www.justice.gov/opa/pr/former-university-florida-researcher-indicted-scheme-defraud-national-institutes-health-and>*
 
-Summary not yet written.
+A former University of Florida professor has been indicted on six counts of wire fraud and four of making false statements, the Justice Department announced on 3 February 2021. Prosecutors allege he got a $1.75 million National Institutes of Health grant while hiding a Chinese company he owned, his role in China's Thousand Talents Program and support from the Chinese government.
+
+The department says he has not returned to the United States since August 2019 and is at large. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

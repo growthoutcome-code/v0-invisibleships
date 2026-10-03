@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *FedScoop, 2021-01-01. Original: <https://fedscoop.com/hhs-palantir-tiberius-contract-renewal>*
 
-Summary not yet written.
+The Department of Health and Human Services renewed its contract with Palantir for the Tiberius COVID-19 vaccine distribution platform at $31 million, up from about $17 million for the previous one-year deal, FedScoop reports. According to the report, Tiberius grew from tracking vaccine distribution into a backbone for dosage programmes and policy analysis on boosters, additional doses and international vaccine distribution.
+
+FedScoop says the platform has 2,000 to 3,000 users across federal agencies, states and territories, cities such as New York and Chicago, and commercial pharmacy chains. It began under Operation Warp Speed.
 
 ---
 

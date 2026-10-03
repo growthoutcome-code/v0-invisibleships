@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft-search
 found_via: already in the site (concepts)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,7 @@ disclaimer: meta/IS_META_terms.md
 
 *Electronic Frontier Foundation, 2022-08-01. Original: <https://www.eff.org/deeplinks/2022/08/inside-fog-data-science-secretive-company-selling-mass-surveillance-local-police>*
 
-Summary not yet written.
+The Electronic Frontier Foundation published an investigation in August 2022 into Fog Data Science, a data broker that sells local police a tool called Fog Reveal. According to the EFF, the tool lets police look up where people's phones have been, which it describes as mass surveillance, and PBS NewsHour reported on it as a low-cost cellphone tracking tool for police.
 
 ---
 

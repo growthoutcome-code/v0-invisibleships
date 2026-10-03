@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *DatacenterDynamics, 2023-01-01. Original: <https://www.datacenterdynamics.com/en/news/aws-wins-94m-contract-with-uk-govs-dwp>*
 
-Summary not yet written.
+Amazon Web Services won a three-year, £94 million public cloud hosting contract with the UK Department for Work and Pensions, DatacenterDynamics reports. The contract was signed on 1 December 2023, runs to November 2026 and was awarded under the second One Government Value Agreement between AWS and the Crown Commercial Service.
+
+According to the report, the department has used AWS since 2016 and its previous three-year deal was worth £57 million.
 
 ---
 

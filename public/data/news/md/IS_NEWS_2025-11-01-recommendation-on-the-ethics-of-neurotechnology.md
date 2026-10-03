@@ -16,7 +16,7 @@ event: Regulation & law
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the corpus
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *UNESCO, 2025-11-01. Original: <https://www.unesco.org/en/legal-affairs/recommendation-ethics-neurotechnology>*
 
-Summary not yet written.
+UNESCO's General Conference adopted the Recommendation on the Ethics of Neurotechnology in November 2025. It is a global standard for technologies that measure, access, monitor, analyse, predict or change the nervous system, in medical and non-medical use.
+
+It sets principles on human rights, privacy (including mental privacy), personal autonomy and freedom of thought, and on fair access to these technologies.
 
 ---
 

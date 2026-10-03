@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: pleaded guilty
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2020-09-16. Original: <https://www.justice.gov/opa/pr/jacksonville-woman-pleads-guilty-attempting-illegally-exporting-maritime-raiding-craft-and>*
 
-Summary not yet written.
+A Jacksonville, Florida, woman has pleaded guilty to conspiracy to submit false export information, fraudulent export and attempted fraudulent export in a scheme to send military-grade combat rubber raiding craft to China, the Justice Department announced on 16 September 2020. Prosecutors say the seven boats, fitted with multi-fuel engines and designed for U.S. military use, were to be shipped to mainland China using false paperwork that named Hong Kong and misstated the end user.
+
+The department says a co-defendant pleaded guilty in August 2020 and two others were set for trial in February 2021. Sentencing had not been scheduled; she faces up to 15 years in prison.
 
 ---
 

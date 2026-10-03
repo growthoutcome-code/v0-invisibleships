@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2026-05-11. Original: <https://www.justice.gov/opa/pr/arcadia-california-mayor-federally-charged-acting-illegal-agent-peoples-republic-china>*
 
-Summary not yet written.
+The mayor of Arcadia, California, was charged with acting as an illegal agent of the People's Republic of China, the Justice Department announced. According to the plea agreement, from late 2020 through 2022 the mayor promoted PRC propaganda in the United States at the direction of PRC government officials, including through a website that published content they supplied.
+
+The mayor agreed to plead guilty to the charge, which carries up to 10 years in prison. Until convicted, the mayor is presumed innocent.
 
 ---
 

@@ -16,7 +16,7 @@ event: Protests
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft-search
 found_via: new, found 1 Oct 2026
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,7 @@ disclaimer: meta/IS_META_terms.md
 
 *CNN, 2025-08-21. Original: <https://www.cnn.com/2025/08/21/tech/microsoft-employee-protests-israel-intl>*
 
-Summary not yet written.
+Protests by Microsoft employees over the company's ties to Israel's military led to 18 arrests, CNN reports. Wider coverage of the same events says the arrests came as Microsoft reviews its work with Israel's military.
 
 ---
 

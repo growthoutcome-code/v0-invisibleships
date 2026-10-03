@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: sentenced
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2020-02-11. Original: <https://www.justice.gov/opa/pr/american-businessman-who-ran-houston-based-subsidiary-chinese-company-sentenced-prison-theft>*
 
-Summary not yet written.
+An American businessman who ran the Houston subsidiary of a Chinese materials company was sentenced on 11 February 2020 to 16 months in prison for conspiring to steal trade secrets, the Justice Department says. A jury had convicted him in July 2019, and he was ordered to forfeit more than $330,000.
+
+According to the department, he hired former employees of a Houston company that makes syntactic foam, a buoyancy material used in offshore oil and gas drilling, and used its proprietary information to set up a manufacturing process in China.
 
 ---
 

@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2025-06-30. Original: <https://www.justice.gov/opa/pr/justice-department-charges-two-individuals-acting-agents-prc-government>*
 
-Summary not yet written.
+Two Chinese nationals, one a U.S. permanent resident living in Oregon and the other visiting on a tourist visa, have been charged with acting as agents of China's government without notifying the Attorney General, the Justice Department announced on 30 June 2025. According to the department, they worked for China's Ministry of State Security, including trying to identify and recruit U.S. Navy personnel and arranging a cash dead drop in California in 2022.
+
+The FBI arrested both on 27 June 2025, and the case is in the Northern District of California, the department says. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

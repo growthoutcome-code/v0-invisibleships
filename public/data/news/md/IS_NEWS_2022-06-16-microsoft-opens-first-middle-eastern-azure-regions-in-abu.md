@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *DatacenterDynamics, 2022-06-16. Original: <https://www.datacenterdynamics.com/en/news/microsoft-opens-first-middle-eastern-azure-regions-abu-dhabi-and-dubai>*
 
-Summary not yet written.
+Microsoft has opened its first cloud data centre regions in the Middle East, in Abu Dhabi and Dubai, DatacenterDynamics reports. The regions offer Azure and Office 365, with Dynamics 365 and Power Platform to follow later in 2019.
+
+According to the publication, Microsoft is the first of the three largest cloud providers to open data centres in the region, and has received Dubai Electronic Security Center cloud certification. Early customers include Emirates Group and Emaar Properties.
 
 ---
 

@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2019-08-21. Original: <https://www.justice.gov/opa/pr/university-kansas-researcher-indicted-fraud-failing-disclose-conflict-interest-chinese>*
 
-Summary not yet written.
+An associate professor at the University of Kansas was indicted on one count of wire fraud and three counts of program fraud, the Justice Department announced on 21 August 2019. Prosecutors allege he signed a five-year contract in May 2018 to work full time for Fuzhou University in China while doing research funded by the U.S. Department of Energy and the National Science Foundation, and did not disclose it as required.
+
+The department says the alleged fraud involves more than $37,000 in salary. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

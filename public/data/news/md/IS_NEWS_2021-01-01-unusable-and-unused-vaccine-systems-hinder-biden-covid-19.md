@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *FedScoop, 2021-01-01. Original: <https://fedscoop.com/covid-19-vaccine-scheduling-data>*
 
-Summary not yet written.
+Many states found the CDC's Vaccine Administration Management System, built by Deloitte under a $44 million no-bid contract awarded in May 2020, unusable, FedScoop reports, citing bugs that cancelled appointments and locked staff out. States turned to alternatives such as PrepMod, Eventbrite and Solv, while a separate CDC tool, CDC Assist, went unused.
+
+FedScoop also reports that the CDC's VTrckS tracking system works poorly with other systems, so state officials transfer some data by hand. Deloitte said the system had performed strongly since its mid-December launch, and the CDC and HHS did not respond to requests for comment.
 
 ---
 

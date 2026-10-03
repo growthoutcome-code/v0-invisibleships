@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2019-05-09. Original: <https://www.justice.gov/opa/pr/member-sophisticated-china-based-hacking-group-indicted-series-computer-intrusions-including>*
 
-Summary not yet written.
+A federal grand jury in Indianapolis indicted a Chinese national and an unidentified co-defendant over a series of computer intrusions, including the 2015 breach of health insurer Anthem, the Justice Department announced on 9 May 2019. The four counts include conspiracy to commit fraud and identity theft, conspiracy to commit wire fraud, and damaging protected computers.
+
+Prosecutors allege the group, from 2014, used phishing emails and malware against Anthem and three other U.S. businesses, and that the Anthem breach exposed personal data on about 78.8 million people. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

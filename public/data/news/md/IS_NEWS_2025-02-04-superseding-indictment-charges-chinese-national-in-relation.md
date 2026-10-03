@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2025-02-04. Original: <https://www.justice.gov/opa/pr/superseding-indictment-charges-chinese-national-relation-alleged-plan-steal-proprietary-ai>*
 
-Summary not yet written.
+A federal grand jury returned a superseding indictment on 4 February 2025 charging a 38-year-old Chinese national and former Google software engineer with seven counts of economic espionage and seven counts of theft of trade secrets, the Justice Department says. According to the department, between May 2022 and May 2023 he uploaded more than 1,000 confidential Google files on its AI infrastructure, including chip and GPU systems, while secretly working with two China-based technology companies and founding his own AI company in China.
+
+Each economic espionage count carries up to 15 years in prison and each trade secret count up to 10 years. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

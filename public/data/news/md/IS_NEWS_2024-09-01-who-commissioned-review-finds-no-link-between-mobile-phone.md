@@ -16,7 +16,7 @@ event: Research & breakthroughs
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft-search
 found_via: already in the site (concepts)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,7 @@ disclaimer: meta/IS_META_terms.md
 
 *ARPANSA, 2024-09-01. Original: <https://www.arpansa.gov.au/who-review-finds-no-link-between-mobile-phone-use-and-brain-cancer>*
 
-Summary not yet written.
+A review commissioned by the World Health Organization found no link between mobile phone use and brain cancer, the Australian Radiation Protection and Nuclear Safety Agency (ARPANSA) says. Press reports from early September 2024 describe it as a major review covering 28 years of research.
 
 ---
 

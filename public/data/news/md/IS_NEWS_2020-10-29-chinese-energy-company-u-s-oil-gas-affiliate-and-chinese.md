@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2020-10-29. Original: <https://www.justice.gov/opa/pr/chinese-energy-company-us-oil-gas-affiliate-and-chinese-national-indicted-theft-trade-secrets>*
 
-Summary not yet written.
+A Chinese energy company based in Yantai, its U.S. oil and gas equipment affiliate and a Chinese national have been indicted for conspiracy, theft of trade secrets and attempted theft of trade secrets, the Justice Department announced on 29 October 2020. Prosecutors allege they conspired in 2019 to steal coiled tubing technology from a Houston-area oil and gas manufacturer, with help from one of its employees who was paid $1,000 a day for a trip to China.
+
+The department says that employee has already pleaded guilty to conspiracy, and there is an outstanding arrest warrant for the Chinese national, who is believed to be in China. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

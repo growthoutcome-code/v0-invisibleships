@@ -16,7 +16,7 @@ event: Courts & litigation
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *IAPP, 2022-07-13. Original: <https://iapp.org/news/a/greek-dpa-imposes-20m-euro-fine-on-clearview-ai-for-unlawful-processing-of-personal-data>*
 
-Summary not yet written.
+Greece's data protection authority has fined Clearview AI €20 million, its largest fine to date, IAPP reports. The case began with a complaint from the nonprofit Homo Digitalis after the company did not answer a person's request to access her data.
+
+According to IAPP, the authority found Clearview processed biometric data without a legal basis, failed to inform people or name an EU representative, and breached the right of access. It ordered the company to delete data on people in Greece and stop processing it.
 
 ---
 

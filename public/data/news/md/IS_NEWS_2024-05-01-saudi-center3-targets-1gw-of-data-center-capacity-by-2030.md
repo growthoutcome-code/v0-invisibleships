@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *DatacenterDynamics, 2024-05-01. Original: <https://www.datacenterdynamics.com/en/news/saudis-center3-targets-1gw-of-data-center-capacity-by-2030>*
 
-Summary not yet written.
+Saudi Telecom Company's data center subsidiary center3 aims to reach 1GW of capacity by 2030 and has announced a $10 billion investment, DatacenterDynamics reported on 14 August 2025. The company, formed in 2022, has invested $3 billion so far and targets about 300MW by 2027, with about 20 data centers in operation or development in Saudi Arabia and Bahrain.
+
+DatacenterDynamics notes the announcement did not say how the $10 billion will be spent or where the new capacity will be located.
 
 ---
 

@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *The Register, 2026-03-25. Original: <https://www.theregister.com/2026/03/25/hmrc_fujitsu_contract_aws>*
 
-Summary not yet written.
+Amazon Web Services won a £472.8 million contract, as the only bidder, to move HM Revenue & Customs systems out of three data centres run by Fujitsu, The Register reports. The systems run older operating systems, including HP-UX, IBM AIX and Solaris. The contract runs at least seven years, to 2033.
+
+Google and IBM withdrew. Sources told The Register the tender ruled out hybrid cloud and left the government no leverage to negotiate.
 
 ---
 

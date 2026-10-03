@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft-search
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,7 @@ disclaimer: meta/IS_META_terms.md
 
 *CNBC, 2025-06-05. Original: <https://www.cnbc.com/2025/06/05/anduril-valuation-founders-fund.html>*
 
-Summary not yet written.
+Defense technology company Anduril raised new funding at a $30.5 billion valuation in a round led by Founders Fund, CNBC reports, citing the company's chairman. Other coverage of the round, including TechCrunch, puts the amount raised at $2.5 billion.
 
 ---
 

@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2021-11-05. Original: <https://www.justice.gov/opa/pr/jury-convicts-chinese-intelligence-officer-espionage-crimes-attempting-steal-trade-secrets>*
 
-Summary not yet written.
+A federal jury convicted a Chinese Ministry of State Security officer of conspiring and attempting to commit economic espionage and steal trade secrets, the Justice Department announced on 5 November 2021. The department says he was the first Chinese intelligence officer extradited to the United States for trial.
+
+According to prosecutors, from 2013 he used aliases to target aviation companies, including trying to obtain GE Aviation's composite engine fan technology from an employee. He was arrested in Belgium in April 2018. Sentencing was to follow.
 
 ---
 

@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *DatacenterDynamics, 2025-09-01. Original: <https://www.datacenterdynamics.com/en/news/aws-launches-cloud-region-in-new-zealand>*
 
-Summary not yet written.
+Amazon Web Services launched its Asia Pacific (New Zealand) cloud region in Auckland, with three availability zones, DatacenterDynamics reported on 1 September 2025. AWS says it plans to invest NZ$7.5 billion (about US$5.3 billion) in the country.
+
+The region was first announced in 2021 and had been planned for 2024. Early customers named include Kiwibank, Trade Me and Xero, and AWS says the region will be supported by a wind power purchase agreement.
 
 ---
 

@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *DefenseScoop, 2022-12-07. Original: <https://defensescoop.com/2022/12/07/pentagon-awards-aws-google-microsoft-and-oracle-spots-on-joint-warfighting-cloud-capability-solicitation>*
 
-Summary not yet written.
+The Pentagon picked Amazon Web Services, Google, Microsoft and Oracle on 7 December 2022 for its Joint Warfighting Cloud Capability contract, which has a ceiling of $9 billion, DefenseScoop reports. The Defense Information Systems Agency runs the contract, under which no money was obligated at award; funds are released as the companies compete for task orders.
+
+According to DefenseScoop, unclassified services were available at award, secret services about 60 days later, and top secret and tactical edge services within 180 days. The contract replaces the cancelled JEDI program.
 
 ---
 

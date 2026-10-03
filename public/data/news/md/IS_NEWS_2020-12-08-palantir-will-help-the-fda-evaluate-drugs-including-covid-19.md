@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: new, found 2 Oct 2026
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *TechCrunch, 2020-12-08. Original: <https://techcrunch.com/2020/12/08/palantirs-fda-hhs-contract>*
 
-Summary not yet written.
+Palantir won a three-year, $44.4 million contract with the U.S. Food and Drug Administration to help review drugs, including COVID-19 treatments, and assess the safety of other regulated products such as hand sanitiser, TechCrunch reports, citing Bloomberg. The work covers the FDA's Center for Drug Evaluation and Research and its Oncology Center of Excellence.
+
+TechCrunch says Palantir's shares rose about 20% after the news, and that it was unclear whether the incoming administration would expand federal work with the company.
 
 ---
 

@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: Russia
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2023-03-24. Original: <https://www.justice.gov/usao-dc/pr/russian-national-illegal-charged-acting-agent-russian-intelligence-service-united-states>*
 
-Summary not yet written.
+A Russian national who allegedly worked as an "illegal" agent of a Russian intelligence service under a false Brazilian identity was charged in Washington, D.C., the Justice Department announced on 24 March 2023. Prosecutors allege he used the identity to obtain a U.S. student visa, attend a university in the District of Columbia, and collect information on U.S. persons and foreign policy for his handlers.
+
+The charges include acting as an agent of a foreign power, visa fraud, bank fraud and wire fraud. According to the department, he is in custody in Brazil on fraud charges over the false identity. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

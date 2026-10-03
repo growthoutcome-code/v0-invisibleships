@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: China
 stage: pleaded guilty
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ NSD transnational repression list
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2024-07-01. Original: <https://www.justice.gov/opa/pr/two-men-plead-guilty-acting-illegal-agents-chinese-government-and-bribery>*
 
-Summary not yet written.
+Two Los Angeles-area men pleaded guilty on 25 July 2024 to acting as unregistered agents of the Chinese government and bribing a public official, the Justice Department says. According to the department, under a Chinese official's direction in 2023 they tried to use the IRS Whistleblower Program to strip the tax-exempt status of an entity run by practitioners of a spiritual practice banned in China, making cash bribe payments of $1,000 and $4,000 in May 2023 and offering $50,000 to open an audit.
+
+Sentencing was set for 30 and 31 October 2024, and each faces up to 25 years in prison.
 
 ---
 

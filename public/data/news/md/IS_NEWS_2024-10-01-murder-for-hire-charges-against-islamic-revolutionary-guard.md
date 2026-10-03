@@ -16,7 +16,7 @@ event: Murder for hire & violent plots
 country: Iran
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ NSD transnational repression list
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2024-10-01. Original: <https://www.justice.gov/opa/pr/justice-department-announces-murder-hire-charges-against-islamic-revolutionary-guard-corps>*
 
-Summary not yet written.
+The Justice Department announced on 22 October 2024 a superseding indictment charging four Iran-based men, including a brigadier general of the Islamic Revolutionary Guard Corps and a former counterintelligence chief of the IRGC Intelligence Organization, with murder-for-hire, money laundering and sanctions offenses. Prosecutors allege they contracted an Eastern European criminal group to kill a U.S. citizen of Iranian origin in New York City, a journalist and human rights activist critical of the Iranian government, and that the plot was disrupted when a man was arrested near the victim's home in July 2022 with an assault rifle.
+
+The Iran-based defendants remain at large, while members of the criminal group were arrested overseas. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

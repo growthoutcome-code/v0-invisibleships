@@ -16,7 +16,7 @@ event: Research & breakthroughs
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft-search
 found_via: already in the corpus
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *Business Wire, 2020-08-27. Original: <https://www.businesswire.com/news/home/20200827005748/en/Synchron%E2%80%99s-Stentrode-Brain-Computer-Interface>*
 
-Summary not yet written.
+Synchron says the U.S. Food and Drug Administration has granted Breakthrough Device designation to its Stentrode brain-computer interface, which is meant to let people with paralysis control digital devices by thought. According to the company, the device is delivered to the brain through blood vessels, without open brain surgery.
+
+Synchron says data from its ongoing first-in-human trial in people with upper-limb paralysis will inform a pivotal study for U.S. marketing approval, and that it plans to evaluate the device in people with paralysis from conditions such as spinal cord injury, ALS and stroke.
 
 ---
 

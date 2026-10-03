@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *DatacenterDynamics, 2024-12-07. Original: <https://www.datacenterdynamics.com/en/news/google-launches-mexican-cloud-region-in-queretaro>*
 
-Summary not yet written.
+Google has opened its 41st cloud region, in Querétaro, Mexico, its third in Latin America after Santiago, Chile, and São Paulo, Brazil, DatacenterDynamics reported on 7 December 2024. The region was first announced in July 2022.
+
+According to DatacenterDynamics, Oracle and Microsoft already run cloud regions in Querétaro, Huawei has two near Mexico City, and AWS was planning a full region in the area.
 
 ---
 

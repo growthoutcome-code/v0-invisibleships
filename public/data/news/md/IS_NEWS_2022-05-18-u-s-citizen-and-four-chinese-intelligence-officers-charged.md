@@ -16,7 +16,7 @@ event: Transnational repression
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2022-05-18. Original: <https://www.justice.gov/opa/pr/us-citizen-and-four-chinese-intelligence-officers-charged-spying-prominent-dissidents-human>*
 
-Summary not yet written.
+A U.S. citizen living in Queens and four officers of China's Ministry of State Security have been charged over an alleged scheme to spy on pro-democracy activists and dissidents, the Justice Department announced on 18 May 2022. The indictment alleges that since at least 2011 the Queens resident gathered information on Hong Kong, Taiwanese, Uyghur and Tibetan activists and passed it to his handlers.
+
+The department says the U.S. citizen was arrested on 16 March 2022 and the four officers remain at large. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

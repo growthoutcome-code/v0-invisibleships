@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: China
 stage: arrested
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2023-08-03. Original: <https://www.justice.gov/opa/pr/two-us-navy-servicemembers-arrested-transmitting-military-information-peoples-republic-china>*
 
-Summary not yet written.
+Two U.S. Navy servicemembers in California were arrested on charges of sending military information to the People's Republic of China, the Justice Department announced on 3 August 2023. A machinist's mate at Naval Base San Diego is charged with conspiring to send national defense information to a Chinese intelligence officer, including technical manuals on ship weapons and propulsion; prosecutors say he was paid thousands of dollars.
+
+A petty officer at Naval Base Ventura County is charged with receiving about $14,866 in bribes for sending operational plans for a military exercise and radar blueprints, according to the department. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

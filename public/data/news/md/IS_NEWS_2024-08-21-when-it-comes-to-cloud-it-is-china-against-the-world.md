@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *The Register, 2024-08-21. Original: <https://www.theregister.com/off-prem/2024/08/21/when-it-comes-to-cloud-its-china-against-the-world/1206891>*
 
-Summary not yet written.
+Amazon, Microsoft and Google together hold about two-thirds of the global cloud infrastructure market, with shares of 32%, 23% and 12%, The Register reported on 21 August 2024, citing Synergy Research Group data for the second quarter of 2024. In mainland China the ranking is different: Alibaba leads, followed by Tencent, China Telecom, Huawei, China Unicom and China Mobile.
+
+The Register notes that Western providers can operate in China only through local partners, and Google Cloud is not offered there. Global cloud infrastructure revenue was $79 billion in the quarter.
 
 ---
 

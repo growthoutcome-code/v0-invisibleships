@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *Computer Weekly, 2023-01-01. Original: <https://www.computerweekly.com/news/252528242/Cloud-based-fingerprint-system-for-UK-police-nears-completion>*
 
-Summary not yet written.
+A cloud-based system for sharing fingerprints and crime scene images among the 43 police forces in England and Wales was close to completion, Computer Weekly reported on 12 December 2022. Built by the Police Digital Service on Amazon Web Services under the Transforming Forensics programme, it links to the Home Office's national fingerprint database of 8.4 million records, with the first full deployment planned for March 2023.
+
+According to the report, the system is meant to identify suspects within hours rather than days. An independent privacy consultant told Computer Weekly that AWS's terms fall short of UK data protection law for sensitive policing data.
 
 ---
 

@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2021-04-21. Original: <https://www.justice.gov/opa/pr/mathematics-professor-and-university-researcher-indicted-grant-fraud>*
 
-Summary not yet written.
+A mathematics professor at Southern Illinois University Carbondale has been indicted on two counts of wire fraud and one of making false statements, the Justice Department announced on 21 April 2021. Prosecutors allege he obtained $151,099 from the National Science Foundation while hiding a Chinese provincial research grant and a paid post at Shenzhen University.
+
+The wire fraud counts each carry up to 20 years in prison. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

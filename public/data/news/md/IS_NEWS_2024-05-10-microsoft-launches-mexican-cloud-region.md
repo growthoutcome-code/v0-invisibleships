@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *DatacenterDynamics, 2024-05-10. Original: <https://www.datacenterdynamics.com/en/news/microsoft-launches-mexican-cloud-region>*
 
-Summary not yet written.
+Microsoft has launched its first cloud region in Mexico, Azure Mexico Central, in the Querétaro metropolitan area, DatacenterDynamics reported on 10 May 2024. The region is part of a $1.1 billion investment announced in 2020 and offers Azure, Microsoft 365, Dynamics 365 and Power Platform services locally.
+
+DatacenterDynamics notes that AWS and Google had also announced regions near Querétaro, and that Huawei and Oracle already operate in Mexico.
 
 ---
 

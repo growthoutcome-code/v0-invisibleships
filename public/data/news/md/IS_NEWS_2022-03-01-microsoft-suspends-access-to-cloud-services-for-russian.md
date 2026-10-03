@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *DatacenterDynamics, 2022-03-01. Original: <https://www.datacenterdynamics.com/en/news/microsoft-suspends-access-to-cloud-services-for-russian-companies>*
 
-Summary not yet written.
+Microsoft is cutting off companies registered in Russia from cloud services including Azure, Power BI and OneDrive from 20 March 2024, DatacenterDynamics reports, citing a letter from Microsoft to its Russian distributor Softline. Microsoft Office and Windows are not affected.
+
+According to the publication, the move follows the EU's twelfth sanctions package, which bans supplying enterprise software, including cloud services, to Russian-registered entities. Softline was trying to negotiate a short postponement.
 
 ---
 

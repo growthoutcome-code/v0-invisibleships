@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ NSD transnational repression list
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2023-05-01. Original: <https://www.justice.gov/opa/pr/massachusetts-man-indicted-acting-illegal-agent-people-s-republic-china>*
 
-Summary not yet written.
+A 63-year-old resident of Brighton, Massachusetts, was arrested and indicted on charges of acting as an illegal agent of the People's Republic of China, the Justice Department announced on 15 May 2023. Prosecutors allege that from 2018 to 2022 he gave Chinese officials information on Boston-area dissidents and community groups, including photographs of pro-democracy protesters, and organised a counter-protest, without notifying the U.S. Attorney General.
+
+The department says he faces up to 10 years in prison on the main charge. Until convicted, the defendant is presumed innocent.
 
 ---
 

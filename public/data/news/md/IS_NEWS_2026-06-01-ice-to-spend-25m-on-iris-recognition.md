@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *FedScoop, 2026-06-01. Original: <https://fedscoop.com/dhs-ice-agents-biometrics-contract-iris-recognition>*
 
-Summary not yet written.
+Immigration and Customs Enforcement awarded BI2 Technologies a $25 million contract for 1,570 iris-scanning devices for field agents, running June 2026 to May 2027, FedScoop reports. The devices combine iris, fingerprint and face recognition and connect to the vendor's system of about 5 million booking records from 47 states. FedScoop notes the vendor does not hold FedRAMP authorization.
+
+House Democrats have criticized mobile biometric collection, and the DHS Inspector General is auditing how the agency collects and shares this data.
 
 ---
 

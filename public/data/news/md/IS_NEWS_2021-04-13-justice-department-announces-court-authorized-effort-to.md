@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2021-04-13. Original: <https://www.justice.gov/opa/pr/justice-department-announces-court-authorized-effort-disrupt-exploitation-microsoft-exchange>*
 
-Summary not yet written.
+The Justice Department announced on 13 April 2021 a court-authorised FBI operation that removed malicious web shells from hundreds of U.S. computers running Microsoft Exchange Server. The department says the web shells had been left by one early hacking group exploiting flaws Microsoft disclosed on 2 March 2021, and remained on the servers at the end of March.
+
+According to the department, the FBI sent a command through each web shell telling the server to delete it. The operation did not patch the flaws or remove other malware, and the FBI said it would try to notify the computer owners.
 
 ---
 

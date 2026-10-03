@@ -16,7 +16,7 @@ event: Courts & litigation
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft-search
 found_via: already in the corpus
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,7 @@ disclaimer: meta/IS_META_terms.md
 
 *CNIL (France), 2022-10-20. Original: <https://www.cnil.fr/en/facial-recognition-20-million-euros-penalty-against-clearview-ai>*
 
-Summary not yet written.
+France's data protection authority, the CNIL, fined Clearview AI €20 million in October 2022 over the company's facial recognition practices, which it found to be an unlawful collection and processing of biometric data. Clearview AI responded by disputing the French regulator's jurisdiction, Biometric Update reports.
 
 ---
 

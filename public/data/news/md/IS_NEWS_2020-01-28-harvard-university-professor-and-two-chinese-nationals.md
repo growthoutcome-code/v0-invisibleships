@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2020-01-28. Original: <https://www.justice.gov/opa/pr/harvard-university-professor-and-two-chinese-nationals-charged-three-separate-china-related>*
 
-Summary not yet written.
+The Justice Department announced on 28 January 2020 charges in three separate China-related cases in Boston. The chair of Harvard University's chemistry department was arrested and charged with making a false statement, accused of concealing his role in China's Thousand Talents Plan, under which prosecutors say he was paid $50,000 a month plus $1.5 million to set up a lab.
+
+A former Boston University researcher was charged with visa fraud, false statements and acting as an agent of a foreign government, accused of hiding her service as a Chinese army officer; prosecutors say she is in China. A cancer researcher at a Boston hospital was indicted for allegedly trying to smuggle 21 vials of biological material to China. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

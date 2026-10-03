@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: China
 stage: pleaded guilty
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2019-04-17. Original: <https://www.justice.gov/opa/pr/former-manager-international-airline-pleads-guilty-acting-agent-chinese-government>*
 
-Summary not yet written.
+A former counter agent and station manager for a Chinese airline at a U.S. airport pleaded guilty to acting as an agent of the Chinese government without notifying the Attorney General, the Justice Department announced on 17 April 2019. According to the department, she placed packages for Chinese military officers on flights to China as unaccompanied luggage or under other passengers' names, in breach of security rules, and encouraged co-workers to help.
+
+The department says she faces up to 10 years in prison and forfeiture of about $170,000.
 
 ---
 

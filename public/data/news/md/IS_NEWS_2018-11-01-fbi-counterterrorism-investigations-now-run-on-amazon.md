@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *Nextgov/FCW, 2018-11-01. Original: <https://www.nextgov.com/modernization/2018/11/fbis-counterterrorism-investigations-now-run-amazon/153133>*
 
-Summary not yet written.
+The FBI's counterterrorism division moved its data operations to Amazon Web Services, Nextgov reports, using the Commercial Cloud Services (C2S) environment for secret and top secret data and AWS GovCloud for sensitive unclassified data. The partnership began about two years earlier.
+
+According to the report, the FBI cited rapid data growth, from 50 terabytes after the 2013 Boston Marathon bombing to one petabyte after the 2017 Las Vegas shooting. The bureau also piloted Amazon Rekognition to analyse surveillance video.
 
 ---
 

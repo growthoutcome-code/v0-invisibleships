@@ -16,7 +16,7 @@ event: Research & breakthroughs
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft-search
 found_via: already in the site (concepts)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,7 @@ disclaimer: meta/IS_META_terms.md
 
 *Nature Neuroscience, 2023-05-01. Original: <https://www.nature.com/articles/s41593-023-01304-9>*
 
-Summary not yet written.
+A study in Nature Neuroscience describes a decoder that reconstructs continuous language from non-invasive brain recordings. ScienceDaily reports that the decoder can reveal the stories in people's minds.
 
 ---
 

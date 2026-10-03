@@ -16,7 +16,7 @@ event: Transnational repression
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ NSD transnational repression list
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2022-03-01. Original: <https://www.justice.gov/opa/pr/man-charged-transnational-repression-campaign-while-acting-illegal-agent-chinese-government>*
 
-Summary not yet written.
+A Chinese national has been charged with acting as an illegal agent of the Chinese government in a campaign targeting people in the United States, the Justice Department announced on 30 March 2022. The complaint, unsealed in the Southern District of New York, alleges he hired private investigators to gather information on people China called fugitives, giving them 35 names including a U.S. citizen.
+
+Prosecutors allege he threatened one target at a December 2019 meeting in New York City and worked with a U.S. law enforcement officer. He faces up to 10 years on one count and five on the other. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

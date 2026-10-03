@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2021-01-20. Original: <https://www.justice.gov/usao-ma/pr/mit-professor-indicted-charges-relating-grant-fraud>*
 
-Summary not yet written.
+A Massachusetts Institute of Technology professor and lab director was indicted on 19 January 2021 on two counts of wire fraud, one count of failing to file a foreign bank account report and one count of making a false statement on a tax return, according to the U.S. Attorney's Office in Massachusetts. Prosecutors alleged he did not disclose contracts, appointments and awards from entities in the People's Republic of China when applying for U.S. Department of Energy grant funding, and did not report a foreign bank account to the IRS.
+
+He had been arrested on 14 January 2021. The office's page now notes that the criminal charges against him were dismissed in January 2022.
 
 ---
 

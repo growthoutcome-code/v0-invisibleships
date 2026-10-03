@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: China
 stage: pleaded guilty
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2025-06-18. Original: <https://www.justice.gov/usao-wdwa/pr/former-jblm-soldier-pleads-guilty-attempting-share-military-secrets-china>*
 
-Summary not yet written.
+A former U.S. Army sergeant who served in a military intelligence battalion at Joint Base Lewis-McChord pleaded guilty to attempting to deliver national defense information and retaining national defense information, the U.S. Attorney's Office for the Western District of Washington announced on 18 June 2025. According to prosecutors, after leaving the Army he contacted Chinese officials offering defense information, prepared documents describing classified information, and kept a device that could access secure military networks.
+
+He lived in China until October 2023, when he was arrested on arrival in San Francisco. Sentencing was set for 9 September 2025.
 
 ---
 

@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2021-02-26. Original: <https://www.justice.gov/opa/pr/chinese-businessman-charged-conspiring-steal-trade-secrets>*
 
-Summary not yet written.
+A Hong Kong businessman has been indicted on a charge of conspiring to steal General Electric trade secrets on silicon carbide MOSFET technology, used as switches in electronic devices, the Justice Department announced on 26 February 2021. Prosecutors allege that from March 2017 to January 2018 he worked with a GE engineer and sought about $30 million from investors.
+
+The department says it has no evidence the technology was transferred to Chinese companies, and that the defendant is at large. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

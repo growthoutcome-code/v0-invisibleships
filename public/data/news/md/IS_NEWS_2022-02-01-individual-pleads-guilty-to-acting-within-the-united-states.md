@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: Russia
 stage: pleaded guilty
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ NSD transnational repression list
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2022-02-01. Original: <https://www.justice.gov/opa/pr/individual-pleads-guilty-acting-within-united-states-behalf-russian-government>*
 
-Summary not yet written.
+A Mexican national living in Singapore pleaded guilty to acting in the United States on behalf of the Russian government without notifying the Attorney General, the Justice Department announced on 16 February 2022. According to the department, in February 2020 he followed directions from a person he believed was a Russian official, renting a home in Miami-Dade County, Florida, and arranging for a photo of a U.S. person's car and where it was parked.
+
+Sentencing was set for 17 May 2022 in Miami. He faces up to 10 years in prison.
 
 ---
 

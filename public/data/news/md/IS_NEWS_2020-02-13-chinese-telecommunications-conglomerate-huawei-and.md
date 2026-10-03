@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2020-02-13. Original: <https://www.justice.gov/opa/pr/chinese-telecommunications-conglomerate-huawei-and-subsidiaries-charged-racketeering>*
 
-Summary not yet written.
+A 16-count superseding indictment unsealed in federal court in Brooklyn charges Huawei, four of its subsidiaries and its chief financial officer with offences including racketeering conspiracy and conspiracy to steal trade secrets, the Justice Department announced on 13 February 2020. Prosecutors allege a decades-long effort to take intellectual property, such as router source code and antenna and robotics technology, from six U.S. technology companies.
+
+The indictment also alleges Huawei hid its business in Iran and North Korea using code names, and that an unofficial subsidiary helped the Iranian government with domestic surveillance. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *Computer Weekly, 2019-01-01. Original: <https://www.computerweekly.com/news/252472878/How-the-DWP-lifted-two-decades-of-outsourcing-to-adopt-a-cloud-first-model>*
 
-Summary not yet written.
+The UK Department for Work and Pensions moved to a cloud-first approach after ending long-running IT outsourcing, Computer Weekly reports. In 2017 about 400 IT staff were brought in-house from Hewlett Packard Enterprise, and the department chose AWS and Microsoft Azure over colocation hosting, with Universal Credit its first major cloud application.
+
+According to the report, public-facing systems run on the hyperscale clouds while staying connected to internal data centres that still run IBM mainframes and older Unix servers, which are being opened up through APIs rather than rewritten.
 
 ---
 

@@ -16,7 +16,7 @@ event: Murder for hire & violent plots
 country: Iran
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2024-11-08. Original: <https://www.justice.gov/opa/pr/justice-department-announces-murder-hire-and-related-charges-against-irgc-asset-and-two>*
 
-Summary not yet written.
+The Justice Department announced on 8 November 2024 murder-for-hire and related charges against an asset of the Iranian government based in Tehran and two men from Brooklyn and Staten Island, New York. Prosecutors allege the Tehran-based man directed the other two to watch and kill a U.S. citizen of Iranian descent in New York who criticizes the Iranian government, promising $100,000, and that he said he was tasked by the IRGC in October 2024 to provide a plan to assassinate the then President-elect.
+
+The two New York men were arrested and detained; the Tehran-based defendant remains at large. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

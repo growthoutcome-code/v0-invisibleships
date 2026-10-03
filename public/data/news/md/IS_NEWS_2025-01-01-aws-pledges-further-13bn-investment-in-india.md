@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *DatacenterDynamics, 2025-01-01. Original: <https://www.datacenterdynamics.com/en/news/aws-pledges-further-13bn-investment-in-ai-and-cloud-infrastructure-in-india>*
 
-Summary not yet written.
+Amazon Web Services has pledged a further $13 billion for AI and cloud infrastructure in India, expanding data center capacity in Mumbai and Hyderabad, DatacenterDynamics reported on 25 June 2026. Amazon says this brings its total planned investment in India across all its businesses to $48 billion between 2026 and 2030.
+
+DatacenterDynamics notes that the split between the two regions was not disclosed. Earlier AWS commitments included $8.3 billion for the Mumbai region in 2025 and $7 billion for Hyderabad in December 2025.
 
 ---
 

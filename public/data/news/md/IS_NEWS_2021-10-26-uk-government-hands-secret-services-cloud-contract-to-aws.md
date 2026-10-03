@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *The Register, 2021-10-26. Original: <https://www.theregister.com/2021/10/26/uk_security_services_aws>*
 
-Summary not yet written.
+The UK's intelligence agencies GCHQ, MI5 and MI6, and the Ministry of Defence, have signed a contract with Amazon Web Services to store classified data in UK-based data centres, The Register reports, citing the Financial Times. The deal was reportedly signed earlier in 2021.
+
+According to The Register, sources said AWS will not have access to the data. Neither AWS nor the agencies commented.
 
 ---
 

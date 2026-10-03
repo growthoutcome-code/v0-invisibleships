@@ -16,7 +16,7 @@ event: Global conflict
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft-search
 found_via: already in the corpus
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,7 @@ disclaimer: meta/IS_META_terms.md
 
 *The Guardian, 2025-03-06. Original: <https://www.theguardian.com/world/2025/mar/06/israel-military-ai-surveillance>*
 
-Summary not yet written.
+Israel's military intelligence agency, Unit 8200, has been building an AI language tool similar to ChatGPT, trained on a large collection of intercepted Palestinian communications in Arabic, according to an investigation reported by The Guardian. Coverage of the investigation says the work drew on military reservists with experience at Google, Meta and Microsoft.
 
 ---
 

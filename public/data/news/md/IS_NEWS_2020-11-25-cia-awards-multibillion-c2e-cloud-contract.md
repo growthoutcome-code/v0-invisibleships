@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *DatacenterDynamics, 2020-11-25. Original: <https://www.datacenterdynamics.com/en/news/cia-awards-multibillion-c2e-cloud-contract-aws-microsoft-google-oracle-and-ibm>*
 
-Summary not yet written.
+The CIA awarded its Commercial Cloud Enterprise (C2E) contract to Amazon Web Services, Microsoft, Google, Oracle and IBM, DatacenterDynamics reports. The contract is worth tens of billions of dollars over 15 years, though the exact value was not disclosed, and covers cloud work across 17 intelligence community agencies at different classification levels.
+
+According to the report, the five companies will compete for individual task orders, ending the CIA's single-vendor arrangement with AWS that began in 2013.
 
 ---
 

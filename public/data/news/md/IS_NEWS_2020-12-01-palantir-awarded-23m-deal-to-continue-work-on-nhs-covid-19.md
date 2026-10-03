@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft-search
 found_via: already in the corpus
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,7 @@ disclaimer: meta/IS_META_terms.md
 
 *Digital Health, 2020-12-01. Original: <https://www.digitalhealth.net/2020/12/palantir-awarded-23m-deal-to-continue-work-on-nhs-covid-19-data-store>*
 
-Summary not yet written.
+Palantir has been awarded a £23 million contract to continue its work on the NHS Covid-19 Data Store, Digital Health reports. The contract runs to December 2022.
 
 ---
 

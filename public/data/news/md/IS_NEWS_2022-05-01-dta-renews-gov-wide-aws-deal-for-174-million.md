@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *iTnews, 2022-05-01. Original: <https://www.itnews.com.au/news/dta-renews-gov-wide-aws-deal-for-174-million-578790>*
 
-Summary not yet written.
+Australia's Digital Transformation Agency has renewed its whole-of-government agreement with Amazon Web Services for $174.1 million over three years, to May 2025, iTnews reports. It replaces a 2019 agreement first valued at $39 million that grew to $390.8 million.
+
+According to iTnews, the deal applies to federal agencies and can be used by states, territories, universities and government-owned corporations case by case. It covers more than 200 AWS services and adds purchasing through AWS partners.
 
 ---
 

@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2024-09-03. Original: <https://www.justice.gov/opa/pr/former-high-ranking-new-york-state-government-employee-charged-acting-undisclosed-agent>*
 
-Summary not yet written.
+A former deputy chief of staff in the New York State Executive Chamber and her husband were arrested and charged on 3 September 2024 with acting as undisclosed agents of the Chinese government and the Chinese Communist Party, the Justice Department says. The charges include violating the Foreign Agents Registration Act, visa fraud, bringing in aliens, and money laundering and bank fraud conspiracies.
+
+Prosecutors allege she blocked Taiwanese government representatives' access to state officials and changed state messaging on issues important to China, in return for benefits including millions of dollars in business deals, travel and luxury goods. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

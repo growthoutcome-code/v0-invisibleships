@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *Computer Weekly, 2020-03-28. Original: <https://www.computerweekly.com/news/252480796/Coronavirus-NHS-corrals-Microsoft-Palantir-and-Google-to-hone-data-analysis>*
 
-Summary not yet written.
+The NHS is building a COVID-19 data platform with Microsoft, Palantir, Google and the AI firm Faculty, Computer Weekly reports. According to the report, Microsoft provides data storage on Azure, Palantir's Foundry software integrates and cleans data such as 111 calls and test results, Google tools collect hospital capacity data, and Faculty builds dashboards and models.
+
+Computer Weekly says Palantir acts as a data processor and may not share data without NHS England's permission, and that the platform was meant to close once the pandemic was contained. Civil liberties groups criticised Palantir's involvement.
 
 ---
 

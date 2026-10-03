@@ -16,7 +16,7 @@ event: Regulation & law
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft-search
 found_via: new, found 2 Oct 2026
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Senate (Sen. Warren), 2020-07-01. Original: <https://www.warren.senate.gov/newsroom/press-releases/warren-leads-colleagues-demanding-answers-from-hhs-about-the-departments-handling-of-the-personal-health-information-of-millions-of-americans>*
 
-Summary not yet written.
+Sixteen members of Congress wrote to the Department of Health and Human Services on 1 July 2020 asking for more details about HHS Protect, the COVID-19 data platform built with Palantir under a contract of about $25 million, according to a press release from the lead senator's office. The lawmakers said including protected health information in the database raised privacy concerns, including possible use by immigration and law enforcement agencies.
+
+They urged HHS to follow seven privacy principles, such as data minimisation, anonymisation and deletion after the emergency, and asked for a response by 15 July 2020.
 
 ---
 

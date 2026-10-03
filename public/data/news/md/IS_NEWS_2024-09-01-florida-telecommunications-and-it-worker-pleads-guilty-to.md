@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: China
 stage: pleaded guilty
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ NSD transnational repression list
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2024-09-01. Original: <https://www.justice.gov/opa/pr/florida-telecommunications-and-information-technology-worker-pleads-guilty-conspiring-act>*
 
-Summary not yet written.
+A 59-year-old telecommunications and IT worker from Wesley Chapel, Florida, pleaded guilty on 23 August 2024 to conspiring to act as an agent of the Chinese government without notifying the Attorney General, the Justice Department says. According to the department, he acted as a cooperative contact for China's Ministry of State Security from at least 2012, giving it information on Chinese dissidents, Falun Gong practitioners and pro-democracy advocates in the United States.
+
+He also admitted passing on information about his employers, including a telecom company's branch offices in China and cybersecurity materials. He faces up to five years in prison.
 
 ---
 

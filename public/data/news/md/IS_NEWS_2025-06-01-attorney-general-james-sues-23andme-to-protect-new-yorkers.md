@@ -16,7 +16,7 @@ event: Courts & litigation
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft-search
 found_via: new, found 2 Oct 2026
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,7 @@ disclaimer: meta/IS_META_terms.md
 
 *New York Attorney General, 2025-06-01. Original: <https://ag.ny.gov/press-release/2025/attorney-general-james-sues-23andme-protect-new-yorkers-genetic-data>*
 
-Summary not yet written.
+New York's attorney general has sued 23andMe to protect New Yorkers' genetic data, the attorney general's office announced. News coverage describes the case as part of a lawsuit by several U.S. states objecting to the sale of customers' genetic data.
 
 ---
 

@@ -16,7 +16,7 @@ event: Transnational repression
 country: China
 stage: pleaded guilty
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2024-12-18. Original: <https://www.justice.gov/opa/pr/new-york-resident-pleads-guilty-operating-secret-police-station-chinese-government-lower>*
 
-Summary not yet written.
+A 60-year-old New York resident pleaded guilty on 18 December 2024 to conspiring to act as an illegal agent of the Chinese government by helping open and run an undeclared police station in Manhattan's Chinatown for the Fuzhou branch of China's Ministry of Public Security, the Justice Department says. According to the department, it was the first known overseas police station of its kind in the United States; it occupied a whole floor of an office building and closed in fall 2022 after an FBI search.
+
+He also admitted deleting communications with a ministry official after learning of the FBI investigation. He faces up to five years in prison, and a co-defendant has pleaded not guilty and awaits trial.
 
 ---
 

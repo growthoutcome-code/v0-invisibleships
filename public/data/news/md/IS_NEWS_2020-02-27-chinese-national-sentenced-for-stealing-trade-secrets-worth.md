@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: sentenced
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2020-02-27. Original: <https://www.justice.gov/opa/pr/chinese-national-sentenced-stealing-trade-secrets-worth-1-billion>*
 
-Summary not yet written.
+A Chinese national who worked as an associate scientist at a U.S. petroleum company in Oklahoma was sentenced to 24 months in federal prison for stealing trade secrets, the Justice Department announced on 27 February 2020. He had pleaded guilty in November 2019 to theft, unauthorized transmission and unauthorized possession of a trade secret.
+
+According to the department, he copied hundreds of files on next-generation flow battery technology for energy storage to a thumb drive in December 2018 before resigning. The department valued the research at more than $1 billion; he was ordered to pay $150,000 in restitution to his former employer.
 
 ---
 

@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: pleaded guilty
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2020-10-28. Original: <https://www.justice.gov/opa/pr/taiwan-company-pleads-guilty-trade-secret-theft-criminal-case-involving-prc-state-owned>*
 
-Summary not yet written.
+Taiwanese semiconductor foundry United Microelectronics Corporation pleaded guilty on 28 October 2020 to one count of criminal trade secret theft and was sentenced to a $60 million fine, three years of probation and cooperation with the U.S. government, the Justice Department says. Prosecutors say the company hired three employees of Micron Technology's Taiwan subsidiary and used them to steal memory chip (DRAM) trade secrets for the benefit of Fujian Jinhua, a Chinese state-owned company.
+
+The department says the case against Fujian Jinhua and three individuals was continuing toward a trial expected in 2021, and that they are presumed innocent unless proven guilty.
 
 ---
 

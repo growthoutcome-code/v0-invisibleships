@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2011-09-28. Original: <https://www.justice.gov/opa/pr/former-guard-charged-attempting-communicate-national-defense-information-people-s-republic>*
 
-Summary not yet written.
+A former contract security guard at a U.S. consulate under construction in China was charged in a superseding indictment with attempting to communicate national defense information to China, the Justice Department announced on 28 September 2011. Prosecutors allege that from March to August 2011 he tried to pass photographs and other information to Chinese representatives, and lied to the FBI.
+
+He is also charged with two counts of making false statements and with failing to appear in court as required; the department says he was arrested on 24 September 2011. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

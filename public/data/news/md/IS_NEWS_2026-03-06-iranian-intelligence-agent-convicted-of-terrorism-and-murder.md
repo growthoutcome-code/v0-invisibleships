@@ -16,7 +16,7 @@ event: Murder for hire & violent plots
 country: Iran
 stage: convicted
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2026-03-06. Original: <https://www.justice.gov/usao-edny/pr/iranian-intelligence-agent-convicted-terrorism-and-murder-hire-connection-foiled-plot>*
 
-Summary not yet written.
+A federal jury in Brooklyn convicted an operative of Iran's Islamic Revolutionary Guard Corps of murder for hire and attempting an act of terrorism, the U.S. Attorney's Office for the Eastern District of New York says. According to prosecutors, he was sent to the United States in 2024 to recruit people to kill U.S. government officials and politicians.
+
+Undercover officers posed as hitmen, and he was arrested before any attack. He faces up to life in prison.
 
 ---
 

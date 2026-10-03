@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: pleaded guilty
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2021-04-28. Original: <https://www.justice.gov/opa/pr/chinese-national-pleads-guilty-illegal-exports-northwestern-polytechnical-university>*
 
-Summary not yet written.
+A Chinese national living in Massachusetts pleaded guilty in Boston federal court to illegally exporting U.S. maritime technology to Northwestern Polytechnical University, a Chinese military university, the Justice Department announced on 28 April 2021. According to the department, from July 2015 to December 2016 he shipped at least 60 hydrophones, used to detect sound underwater, worth about $100,000.
+
+He also pleaded guilty to visa fraud, false statements, money laundering and smuggling. Sentencing was to follow.
 
 ---
 

@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: China
 stage: sentenced
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2026-01-12. Original: <https://www.justice.gov/opa/pr/former-us-navy-sailor-sentenced-200-months-spying-china>*
 
-Summary not yet written.
+A former U.S. Navy machinist's mate who held a security clearance was sentenced to 200 months in prison for spying for China, the Justice Department says. A jury had convicted him on six counts, including conspiracy to commit espionage and illegally exporting technical data.
+
+According to the department, from March 2022 to August 2023 he sent a Chinese intelligence officer thousands of pages of technical manuals and other information on Navy surface warships, including weapons, propulsion and ship locations, for more than $12,000.
 
 ---
 

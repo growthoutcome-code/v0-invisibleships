@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *FedScoop, 2026-06-15. Original: <https://fedscoop.com/dhs-cumulus-cloud-project-aws-contract>*
 
-Summary not yet written.
+FedScoop reports that the Department of Homeland Security awarded Amazon Web Services a $2.6 billion contract for cloud infrastructure, training and marketplace services across the department. It is the first award in Cumulus, the department's first department-wide cloud buying program, with a one-year base period and four option years.
+
+DHS expects at least $142 million in savings in the first year. Oracle, Google Cloud and Microsoft Azure are expected to join later.
 
 ---
 

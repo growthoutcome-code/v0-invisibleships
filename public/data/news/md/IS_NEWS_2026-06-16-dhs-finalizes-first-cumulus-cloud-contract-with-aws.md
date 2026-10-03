@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *Nextgov/FCW, 2026-06-16. Original: <https://www.nextgov.com/acquisition/2026/06/dhs-finalizes-first-cumulus-cloud-contract-aws/414197>*
 
-Summary not yet written.
+The Department of Homeland Security has finalized the first of four cloud awards under its Cumulus program, with Amazon Web Services, Nextgov/FCW reports. The award has a ceiling of $2.5 billion over up to five years: a one-year base period and four option years.
+
+DHS planned similar awards with Oracle, Google Cloud and Microsoft by the end of June 2026. The aim is to bring the department's cloud buying together and see its cloud spending in one place.
 
 ---
 

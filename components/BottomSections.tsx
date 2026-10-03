@@ -53,9 +53,18 @@ import {
 } from "@/components/ui/carousel";
 import type { BottomSectionsData } from "@/lib/home-sections";
 import { BOTTOM_CHARTS, type BottomChart } from "@/lib/bottom-picks";
+import ContributeColumns from "@/components/ContributeColumns";
+import ExportButton from "@/components/ExportButton";
+import { SafetyDialog } from "@/components/LegalDialogs";
 
-export type BottomBlock = "journal" | "concepts" | "research" | "glossary";
-const ORDER: BottomBlock[] = ["journal", "concepts", "research", "glossary"];
+export type BottomBlock = "journal" | "concepts" | "research" | "glossary" | "contribute";
+/**
+ * CONTRIBUTE IS LAST, AND ON EVERY PAGE (Sean, 2 Oct 2026: "it may be very
+ * important to include the contribute bottom section on every single page").
+ * It is no page's own section, so no `exclude` ever removes it; the home page
+ * has its own Contribute section and carries no bottom sections.
+ */
+const ORDER: BottomBlock[] = ["journal", "concepts", "research", "glossary", "contribute"];
 /**
  * PAUSED (Sean, 1 Oct 2026: "Remove the research bottom section from all
  * pages until we pick the charts. Do not remove the chart from the home
@@ -173,13 +182,15 @@ function ConceptCards({ tiles, from }: { tiles: BottomSectionsData["concepts"]; 
   );
 }
 
-function Block({ id, eyebrow, heading, children, href, label, from, motif, wide = false }: {
+function Block({ id, eyebrow, heading, children, href, label, from, motif, wide = false, actions }: {
   id: BottomBlock; eyebrow: string; heading: ReactNode; children: ReactNode;
-  href: string; label: string; from: string;
+  href?: string; label?: string; from: string;
+  /** In place of the one link, for a block whose way on is not a page (Contribute). */
+  actions?: ReactNode;
   /** The full width of the page (Concepts only; Sean, 1 Oct 2026). */
   wide?: boolean;
   /** A motif behind the whole block, as SiteSection does on the home page. */
-  motif?: "recede";
+  motif?: "recede" | "room";
 }) {
   return (
     <section aria-labelledby={`bottom-${id}`}
@@ -207,11 +218,13 @@ function Block({ id, eyebrow, heading, children, href, label, from, motif, wide 
           inside a full-width page column the chart's end labels ran off the
           screen and the quotations ran to 1,300px lines. */}
       <div className={wide ? "mt-10" : "mt-10 max-w-[1040px]"}>{children}</div>
-      <div className="mt-10">
-        <a href={href}
-          className="inline-flex h-12 items-center rounded-md bg-foreground px-6 text-[17px] font-medium text-background">
-          {label}
-        </a>
+      <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
+        {actions ?? (
+          <a href={href}
+            className="inline-flex h-12 items-center rounded-md bg-foreground px-6 text-[17px] font-medium text-background">
+            {label}
+          </a>
+        )}
       </div>
       </div>
     </section>
@@ -315,6 +328,24 @@ export default function BottomSections({ exclude = [], from }: {
               <a href="https://988lifeline.org" target="_blank" rel="noreferrer noopener" className="underline underline-offset-4">988</a>;
               elsewhere, <a href="https://findahelpline.com" target="_blank" rel="noreferrer noopener" className="underline underline-offset-4">findahelpline.com</a>.
             </p>
+          </Block>
+        );
+        // The home page's Contribute section, as rule 2 cuts it: eyebrow, question,
+        // the three columns, the way on. The lead paragraph and the notes below the
+        // columns stay on the home page. The safety notice is kept, as the suicide
+        // chart keeps its support line: it is safety information, not disclaimer copy.
+        if (b === "contribute") return (
+          <Block key={b} id={b} from={from} eyebrow="Contribute" motif="room"
+            heading="What can you do?"
+            actions={<>
+              <ExportButton />
+              <SafetyDialog>
+                <button type="button" className="text-[16px] text-muted underline underline-offset-4 hover:text-foreground">
+                  Safety notice
+                </button>
+              </SafetyDialog>
+            </>}>
+            <ContributeColumns />
           </Block>
         );
         return (

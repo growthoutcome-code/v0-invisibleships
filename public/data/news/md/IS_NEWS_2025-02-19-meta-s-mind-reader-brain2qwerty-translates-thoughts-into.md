@@ -16,7 +16,7 @@ event: Research & breakthroughs
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft-search
 found_via: new, found 2 Oct 2026
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,7 @@ disclaimer: meta/IS_META_terms.md
 
 *Forbes, 2025-02-19. Original: <https://www.forbes.com/sites/luisromero/2025/02/19/metas-mind-reader-brain2qwerty-translates-thoughts-into-text>*
 
-Summary not yet written.
+Forbes reports on Brain2Qwerty, a Meta research system that translates brain activity into typed text. Other coverage of the research notes that it relies on a room-sized scanning machine.
 
 ---
 

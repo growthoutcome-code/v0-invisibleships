@@ -16,7 +16,7 @@ event: Public health
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: new, found 2 Oct 2026
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *World Health Organization, 2023-05-05. Original: <https://www.who.int/news/item/05-05-2023-statement-on-the-fifteenth-meeting-of-the-international-health-regulations-(2005)-emergency-committee-regarding-the-coronavirus-disease-(covid-19)-pandemic>*
 
-Summary not yet written.
+The World Health Organization's Director-General determined that COVID-19 no longer constitutes a public health emergency of international concern, following the fifteenth meeting of the International Health Regulations Emergency Committee on 4 May 2023, WHO said on 5 May 2023. The committee cited falling deaths and hospitalisations and high levels of population immunity, and advised moving to long-term management of the disease.
+
+WHO issued seven temporary recommendations, including keeping surveillance, adding COVID-19 vaccination to routine programmes and lifting travel-related health requirements. It noted the virus continues to evolve.
 
 ---
 

@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: arrested
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2020-08-24. Original: <https://www.justice.gov/opa/pr/nasa-researcher-arrested-false-statements-and-wire-fraud-relation-china-s-talents-program>*
 
-Summary not yet written.
+A Texas A&M University professor who led a research team doing work for NASA was arrested on 23 August 2020 and charged with conspiracy, making false statements and wire fraud, the Justice Department says. Prosecutors allege he hid his affiliations with Chinese universities and companies, including a senior post at Guangdong University of Technology and participation in a Chinese talents programme, while working on NASA-funded research whose terms barred such collaboration.
+
+These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

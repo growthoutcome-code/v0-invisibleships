@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: China
 stage: arrested
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2020-08-17. Original: <https://www.justice.gov/opa/pr/former-cia-officer-arrested-and-charged-espionage>*
 
-Summary not yet written.
+A former CIA officer who later worked as an FBI contract linguist in Honolulu was arrested on 14 August 2020 and charged with conspiring to communicate U.S. national defense information to aid China, the Justice Department says. Prosecutors allege that in 2001 he and a relative, also a former CIA officer, gave Chinese intelligence officials information about CIA personnel and operations in exchange for $50,000, and that from 2004 to 2010 he copied and photographed classified FBI documents and took them to China.
+
+The charge carries a maximum of life in prison. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

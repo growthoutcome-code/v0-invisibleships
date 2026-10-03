@@ -16,7 +16,7 @@ event: Espionage & foreign agents
 country: China
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: justice.gov search, date read from the release
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2017-06-22. Original: <https://www.justice.gov/opa/pr/virginia-man-arrested-and-charged-espionage>*
 
-Summary not yet written.
+A self-employed consultant from Virginia who had worked for government agencies and defense contractors was arrested in Leesburg, Virginia, and charged with delivering defense information to aid a foreign government and making false statements, the Justice Department announced on 22 June 2017. According to the complaint, he travelled to Shanghai in March and April 2017 to meet people he believed were Chinese intelligence officers and sent them Top Secret and Secret documents.
+
+The department says four classified documents were found on his device. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

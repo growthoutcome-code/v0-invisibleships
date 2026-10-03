@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: arrested
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2020-05-11. Original: <https://www.justice.gov/opa/pr/university-arkansas-professor-arrested-wire-fraud>*
 
-Summary not yet written.
+A University of Arkansas professor was arrested on 8 May 2020 and charged with one count of wire fraud, the Justice Department says. Prosecutors allege he hid close ties with the Chinese government and Chinese companies when applying, through the university, for NASA grant funding.
+
+The charge carries a maximum of 20 years in prison. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

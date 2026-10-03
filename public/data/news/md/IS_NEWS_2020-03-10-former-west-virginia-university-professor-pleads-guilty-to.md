@@ -16,7 +16,7 @@ event: Technology theft & export control
 country: China
 stage: pleaded guilty
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ China Initiative compilation
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2020-03-10. Original: <https://www.justice.gov/opa/pr/former-west-virginia-university-professor-pleads-guilty-fraud-enabled-him-participate-people>*
 
-Summary not yet written.
+A former tenured physics professor at West Virginia University pleaded guilty on 10 March 2020 to one count of federal program fraud, the Justice Department says. According to the department, he obtained paid parental leave for the fall 2018 semester by saying he would care for a newborn, but spent nearly all of it working in China under the country's Thousand Talents Plan.
+
+The department says the university paid him $20,189 during the leave, which he agreed to repay, and that China had promised him about $802,000 in subsidies and salary. He resigned from the university in August 2019 and faces up to 10 years in prison and a fine of up to $250,000.
 
 ---
 

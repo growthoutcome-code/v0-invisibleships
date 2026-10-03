@@ -16,7 +16,7 @@ event: Murder for hire & violent plots
 country: Iran
 stage: charged
 related: 
-summary_status: pending
+summary_status: draft
 found_via: DOJ NSD transnational repression list
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *U.S. Department of Justice, 2021-07-01. Original: <https://www.justice.gov/opa/pr/iranian-intelligence-officials-indicted-kidnapping-conspiracy-charges>*
 
-Summary not yet written.
+An Iranian intelligence official and three Iran-based intelligence assets have been charged with conspiring to kidnap a Brooklyn-based journalist and human rights activist critical of Iran's government, the Justice Department announced on 13 July 2021. The indictment alleges the plan was to take the journalist to Iran, and that private investigators were hired to watch the journalist's home and family.
+
+The four also face sanctions, fraud and money laundering conspiracy charges, and a California resident is charged with helping fund the surveillance. These are charges only: every defendant is presumed innocent unless proven guilty in court.
 
 ---
 

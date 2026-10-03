@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *iTnews. Original: <https://www.itnews.com.au/news/microsoft-azure-aws-to-host-nsw-police-core-systems-562282>*
 
-Summary not yet written.
+The New South Wales Police Force picked Microsoft Azure and Amazon Web Services to host core policing systems, iTnews reported on 7 April 2021. The systems include the new Integrated Policing Operating System, which replaces a 27-year-old core system, and computer-aided dispatch.
+
+According to iTnews, the force chose a mostly public cloud, hybrid approach because the systems must co-exist with on-premises legacy IT, and a protected-level Azure environment was being built. The report says the force had spent about $40 million on the overall replacement program.
 
 ---
 

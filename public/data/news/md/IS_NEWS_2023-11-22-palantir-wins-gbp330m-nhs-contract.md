@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *The Register, 2023-11-22. Original: <https://www.theregister.com/2023/11/22/palantir_wins_nhs_contract>*
 
-Summary not yet written.
+Palantir won a seven-year, £330 million contract from NHS England to build the Federated Data Platform, The Register reports, announced on 22 November 2023. The platform is meant to connect data held in separate NHS systems to support care and planning, and Palantir's partners include Accenture, PwC, NECS and Carnall Farrar.
+
+According to The Register, Palantir had earlier received about £60 million in NHS contracts awarded without competition. Critics raised concerns about lock-in, and the National Data Guardian said the public wants assurance the NHS keeps control.
 
 ---
 

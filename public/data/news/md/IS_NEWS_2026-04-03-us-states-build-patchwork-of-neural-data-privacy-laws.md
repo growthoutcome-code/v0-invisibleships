@@ -16,7 +16,7 @@ event: Regulation & law
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: new, found 1 Oct 2026
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *Inside BCI, 2026-04-03. Original: <https://insidebci.com/policy/2026-04-03-us-states-build-patchwork-of-neural-data-privacy-laws-as-bci-market-accelerates>*
 
-Summary not yet written.
+Inside BCI reports that four U.S. states, Colorado, California, Montana and Connecticut, have passed laws protecting neural data, each written differently. Colorado's law applies when the data is used to identify someone. California's covers information from nervous-system activity. Montana amended its genetic privacy law and added a warrant requirement. Connecticut's covers central nervous system activity.
+
+A federal bill, the MIND Act, would have the FTC study neural data and recommend national standards. As of April 2026 it had not left committee.
 
 ---
 

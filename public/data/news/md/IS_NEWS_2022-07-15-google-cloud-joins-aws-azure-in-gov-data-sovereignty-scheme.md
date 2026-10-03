@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *iTnews, 2022-07-15. Original: <https://www.itnews.com.au/news/google-cloud-joins-aws-azure-in-gov-data-sovereignty-scheme-582705>*
 
-Summary not yet written.
+Google Cloud has been certified at the highest "strategic" level of Australia's Hosting Certification Framework, joining Amazon Web Services, Microsoft Azure and six other providers, iTnews reports. The framework requires certified providers to let the government set ownership and control conditions.
+
+According to iTnews, federal agencies must use certified providers for sensitive government data and whole-of-government systems in new contracts and extensions. Around 28 providers were still awaiting certification, and one unnamed agency received an exemption for at least a year.
 
 ---
 

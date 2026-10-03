@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *Nextgov/FCW, 2020-11-20. Original: <https://www.nextgov.com/modernization/2020/11/exclusive-cia-awards-secret-multibillion-dollar-cloud-contract/170227>*
 
-Summary not yet written.
+The CIA awarded its Commercial Cloud Enterprise (C2E) contract to Amazon Web Services, Microsoft, Google, Oracle and IBM, Nextgov reported on 20 November 2020. The multiple-award contract will provide cloud infrastructure, platform and software services, plus professional services, to the CIA and 16 other intelligence agencies at classification levels up to top secret.
+
+The value was not made public, but Nextgov says 2019 procurement documents put it at tens of billions of dollars over about 15 years. According to the report, AWS was the only provider then authorised at all classification levels.
 
 ---
 

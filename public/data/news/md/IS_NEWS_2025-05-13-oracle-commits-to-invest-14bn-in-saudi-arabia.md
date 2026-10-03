@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *DatacenterDynamics, 2025-05-13. Original: <https://www.datacenterdynamics.com/en/news/oracle-commits-to-invest-14bn-in-saudi-arabia-over-next-10-years>*
 
-Summary not yet written.
+Oracle said on 13 May 2025 that it will invest $14 billion in Saudi Arabia over the next 10 years to expand its cloud and AI services there, DatacenterDynamics reports. The announcement followed the U.S. president's visit to the country.
+
+Oracle already runs cloud regions in Jeddah, launched in 2020, and Riyadh, launched in 2024, and has listed a planned region in Neom as coming soon.
 
 ---
 
