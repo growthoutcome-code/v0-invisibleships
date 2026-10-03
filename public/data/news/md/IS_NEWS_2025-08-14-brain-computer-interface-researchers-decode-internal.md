@@ -16,7 +16,7 @@ event: Research & breakthroughs
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: new, found 2 Oct 2026
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *STAT, 2025-08-14. Original: <https://www.statnews.com/2025/08/14/can-a-computer-turn-our-internal-monologue-into-speech>*
 
-Summary not yet written.
+STAT reports on a Stanford study, published in Cell, in which a brain-computer interface decoded inner speech in real time, with up to 74% accuracy from a 125,000-word vocabulary. The four participants had conditions such as ALS or brainstem stroke that limit speech.
+
+The system works from thought before any attempt to speak, so it does not depend on the muscles used in speaking.
 
 ---
 

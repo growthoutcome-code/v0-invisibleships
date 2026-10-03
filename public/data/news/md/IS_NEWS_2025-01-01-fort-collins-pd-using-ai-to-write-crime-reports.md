@@ -16,7 +16,7 @@ event: Reports & statistics
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft-search
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,7 @@ disclaimer: meta/IS_META_terms.md
 
 *9NEWS, 2025-01-01. Original: <https://www.9news.com/article/tech/fort-collins-police-department-ai-crime-reports/73-78e8761d-7b72-4e15-8980-8f62703a9c7b>*
 
-Summary not yet written.
+9NEWS reports that the Fort Collins Police Department in Colorado uses artificial intelligence to write crime reports. Other coverage identifies the tool as Axon's Draft One, used to cut the time officers spend writing reports.
 
 ---
 

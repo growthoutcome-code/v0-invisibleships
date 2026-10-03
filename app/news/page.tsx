@@ -6,8 +6,7 @@ export const metadata: Metadata = {
   title: "News — Invisible Ships",
   description: "Official releases and outside reporting on neurotechnology, biotechnology, artificial intelligence and government cloud, each summarised and linked to the original.",
   alternates: { canonical: "/news" },
-  // Unlisted until the summaries are written (Sean, 2 Oct 2026).
-  robots: { index: false, follow: false },
+  // Listed from 2 Oct 2026, once every item had a summary (it was unlisted until then).
 };
 
 export default async function Page() {

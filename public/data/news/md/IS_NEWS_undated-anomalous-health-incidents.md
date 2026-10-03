@@ -16,7 +16,7 @@ event: Public health
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the corpus
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *Military Health System. Original: <https://www.health.mil/Military-Health-Topics/Warfighter-Brain-Health/Brain-Health-Topics/Anomalous-Health-Incidents>*
 
-Summary not yet written.
+The Military Health System describes anomalous health incidents as a group of sudden symptoms that follow an unexplained sensory event, in people with no history of head injury, reported by Defense Department personnel since 2016. Reported symptoms include changes in hearing, balance problems, headaches, dizziness and difficulty thinking.
+
+The page describes the care being developed for affected people, including standard care pathways, a patient registry and resources for clinicians. It makes no statement about what causes the incidents.
 
 ---
 

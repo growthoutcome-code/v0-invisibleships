@@ -16,7 +16,7 @@ event: Contracts & deployments
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (sources.json)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *CNN Business, 2013-01-30. Original: <https://www.cnn.com/2013/01/30/business/swizterland-nestle-spying-civil-case/index.html>*
 
-Summary not yet written.
+A Swiss civil court found Nestlé and the security firm Securitas liable for infiltrating meetings of members of the anti-globalisation group Attac in 2003, CNN reports. The court awarded each claimant 3,000 Swiss francs in damages.
+
+Nestlé said the infiltration was against its corporate business principles.
 
 ---
 

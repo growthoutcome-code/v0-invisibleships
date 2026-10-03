@@ -16,7 +16,7 @@ event: Research & breakthroughs
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: new, found 2 Oct 2026
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *UC San Francisco, 2023-08-23. Original: <https://www.ucsf.edu/news/2023/08/425986/how-artificial-intelligence-gave-paralyzed-woman-her-voice-back>*
 
-Summary not yet written.
+Researchers at UC San Francisco and UC Berkeley developed a brain-computer interface that let a woman paralysed by a stroke speak through a digital avatar, with synthesised speech and facial expressions, for the first time in 18 years, UCSF reports. The system decodes brain signals into text at nearly 80 words per minute, against 14 words per minute with her previous device, by recognising the sounds that make up words rather than whole words.
+
+The study was published in Nature on 23 August 2023.
 
 ---
 

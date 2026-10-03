@@ -16,7 +16,7 @@ event: Research & breakthroughs
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: new, found 2 Oct 2026
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *National Institutes of Health, 2024-08-01. Original: <https://www.nih.gov/news-events/nih-research-matters/brain-computer-interface-helps-paralyzed-man-speak>*
 
-Summary not yet written.
+The National Institutes of Health reports on a UC Davis study in which a brain-computer interface let a 45-year-old man with ALS communicate by decoding his attempted speech into words. Accuracy was over 99% with a 50-word vocabulary after 30 minutes of calibration, and about 97.5% with a 125,000-word vocabulary after longer use.
+
+The findings were published in the New England Journal of Medicine on 14 August 2024.
 
 ---
 

@@ -16,7 +16,7 @@ event: Courts & litigation
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the corpus
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *Biometric Update, 2025-06-01. Original: <https://www.biometricupdate.com/202506/wrongful-arrest-in-us-linked-to-facial-recognition-error-leads-to-200k-settlement>*
 
-Summary not yet written.
+A Georgia resident who was wrongly arrested in 2022 after facial recognition software misidentified him as a theft suspect has settled his lawsuit against the Jefferson Parish Sheriff's Office in Louisiana for $200,000, Biometric Update reports. The office did not admit fault.
+
+Biometric Update notes the case exposed a lack of verification steps and of any formal policy on the office's use of facial recognition.
 
 ---
 

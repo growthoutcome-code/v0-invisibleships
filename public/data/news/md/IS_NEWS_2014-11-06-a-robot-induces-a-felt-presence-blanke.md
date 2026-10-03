@@ -16,7 +16,7 @@ event: Research & breakthroughs
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: already in the site (concepts)
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *EurekAlert!, 2014-11-06. Original: <https://www.eurekalert.org/news-releases/889913>*
 
-Summary not yet written.
+Researchers at the École Polytechnique Fédérale de Lausanne reported in Current Biology on 6 November 2014 that a robot could produce the feeling that someone else is nearby in healthy volunteers, by creating a conflict between their movements and what they felt. The work also studied 12 neurological patients who had experienced such a presence.
+
+The researchers conclude that the feeling arises when the brain misattributes signals from its own body to someone else, and suggest it may help explain some symptoms of schizophrenia.
 
 ---
 

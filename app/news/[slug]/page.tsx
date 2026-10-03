@@ -20,7 +20,6 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     title: `${it.title} — Invisible Ships News`,
     description: `${it.publisher}, ${newsDate(it)}. Summarised by Invisible Ships, with a link to the original.`,
     alternates: { canonical: `/news/${it.slug}` },
-    robots: { index: false, follow: false },
   };
 }
 

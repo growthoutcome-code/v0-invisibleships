@@ -16,7 +16,7 @@ event: Research & breakthroughs
 country: 
 stage: 
 related: 
-summary_status: pending
+summary_status: draft
 found_via: new, found 2 Oct 2026
 author: Sean C. Harris
 copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
@@ -26,7 +26,9 @@ disclaimer: meta/IS_META_terms.md
 
 *UC Davis Health, 2024-08-14. Original: <https://health.ucdavis.edu/news/headlines/new-brain-computer-interface-allows-man-with-als-to-speak-again/2024/08>*
 
-Summary not yet written.
+UC Davis Health reports that a brain-computer interface translated a man with ALS's attempted speech into words with 97% accuracy, using four microelectrode arrays implanted in the region of the brain that coordinates speech movements. Accuracy reached 99.6% with a 50-word vocabulary after 30 minutes of training, and 90.2% with a 125,000-word vocabulary after a further 1.4 hours.
+
+The study was published in the New England Journal of Medicine on 14 August 2024.
 
 ---
 

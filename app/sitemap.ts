@@ -2,6 +2,8 @@ import { CONCEPTS } from "@/lib/concepts";
 import type { MetadataRoute } from "next";
 import { allJournalParams, allGlossaryParams } from "@/lib/server-corpus";
 import { RESEARCH_SECTIONS, RESEARCH_VIEWS } from "@/lib/routes";
+import { readFileSync } from "node:fs";
+import path from "node:path";
 
 /**
  * Sitemap covering every addressable page.
@@ -38,6 +40,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.7,
     }))),
+    { url: `${BASE}/news`, lastModified: now, changeFrequency: "weekly", priority: 0.85 },
     { url: `${BASE}/glossary`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${BASE}/documents`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     { url: `${BASE}/author`, lastModified: now, changeFrequency: "yearly", priority: 0.4 },
@@ -72,5 +75,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...sections, ...journal, ...glossary, ...concepts];
+  // Every News item's share address, from the same index the page reads.
+  const newsIndex = JSON.parse(readFileSync(path.join(process.cwd(), "public/data/news/index.json"), "utf-8")) as { slug: string }[];
+  const news: MetadataRoute.Sitemap = newsIndex.map(({ slug }) => ({
+    url: `${BASE}/news/${slug}`,
+    lastModified: now,
+    changeFrequency: "yearly",
+    priority: 0.5,
+  }));
+
+  return [...sections, ...journal, ...glossary, ...concepts, ...news];
 }

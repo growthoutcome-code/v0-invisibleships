@@ -14,7 +14,7 @@ archived_url:
 industry: 
 event: Technology theft & export control
 country: China
-stage: 
+stage: convicted
 related: 
 summary_status: draft
 found_via: DOJ China Initiative compilation

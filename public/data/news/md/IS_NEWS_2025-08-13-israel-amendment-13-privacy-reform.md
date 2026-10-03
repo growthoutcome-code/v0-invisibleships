@@ -1,0 +1,39 @@
+---
+id: IS-NEWS-2025-08-13-ISRAEL-AMENDMENT-13-PRIVACY-REFORM
+slug: 2025-08-13-israel-amendment-13-privacy-reform
+title: Israel Amendment 13 privacy reform
+collection: news
+doc_type: news-item
+date: 2025-08-13
+date_precision: day
+publisher: IAPP
+source_type: Trade press
+issuing_office: 
+url: https://iapp.org/news/a/israel-marks-a-new-era-in-privacy-law-amendment-13-ushers-in-sweeping-reform
+archived_url: 
+industry: 
+event: Regulation & law
+country: 
+stage: 
+related: 
+summary_status: draft
+found_via: already in the site (sources.json)
+author: Sean C. Harris
+copyright: Summary © 2026 Sean C. Harris. The linked article belongs to its publisher.
+disclaimer: meta/IS_META_terms.md
+---
+# Israel Amendment 13 privacy reform
+
+*IAPP, 2024-08-01. Original: <https://iapp.org/news/a/israel-marks-a-new-era-in-privacy-law-amendment-13-ushers-in-sweeping-reform>*
+
+Israel's Amendment 13 to its Protection of Privacy Law takes effect on 14 August 2025, IAPP reports. The amendment requires the appointment of privacy protection officers, adds transparency duties and rules for data brokers, and broadens the definition of sensitive data.
+
+According to IAPP, the Privacy Protection Authority gains powers to issue administrative orders and fines that can reach millions of shekels, and has signalled it will enforce its guidelines as strictly as the law itself.
+
+---
+
+## Critical Disclaimer on Transcripts and Accusations
+
+Transcripts and statements recorded in this archive are external communications and do NOT represent the author's beliefs, views, or intent. Nothing here accuses, blames, or alleges malfeasance by any named person, company, or government body, and all of this information requires independent verification.
+
+The full Critical Disclaimer, copyright and terms are in meta/IS_META_terms.md, and at https://www.invisibleships.com/disclaimer.

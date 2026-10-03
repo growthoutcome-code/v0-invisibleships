@@ -16,7 +16,7 @@ is real but unscheduled. **Not doing** exists so the same suggestions stop comin
 |---|---|---|
 | Visit trust labels on `/insights` | In progress | `features/visit-trust-labels.md`, decision `0002` |
 | `/insights` restructure — Google leads, pages lead, locations on both tabs | In progress | `features/insights-page-restructure.md` |
-| **News** — a dated index of about 200 official-source posts and news items, one band on the master timeline | **Ready to merge (2 Oct).** 276 items, 259 with draft summaries, 17 pending. Width fixed, line-click dialog, bottom sections on `/news`, and a Contribute bottom section on every page with bottom sections. Unlisted until the 17 are written; then Sean reviews the drafts | `features/news.md` |
+| **News** — a dated index of about 200 official-source posts and news items, one band on the master timeline | **Live (2 Oct).** 276 items, all with draft summaries, dates corrected, listed for search engines. Contribute bottom section on every page with bottom sections. Next: Sean reviews the drafts | `features/news.md` |
 | `POSTHOG_PERSONAL_API_KEY` into Vercel | Missing in production as of 27 Sep, so the live `/insights` had no traffic numbers. **[check]** whether it has been added since | Vercel env |
 
 **Shipped since the last review (27 Sep → 1 Oct):** every unpushed commit is live (production `f14a3cf`), so the gate and download logging is deployed. `gate_events` holds 5 rows, the latest from 1 Oct. The same period also shipped:
@@ -33,7 +33,7 @@ is real but unscheduled. **Not doing** exists so the same suggestions stop comin
 
 | Work | Why now | Notes |
 |---|---|---|
-| News: curation skill and a daily Claude task that finds new articles | Keeps the News index current without Sean searching by hand | After launch, so the skill records the method that worked. Runs every day (Sean, 2 Oct). Drafts only; nothing publishes without Sean. See `features/news.md` |
+| **Source watch**: a scheduled Claude task that finds new News items and watches every cited source across the site for changes (plan: `features/source-watch.md`, questions for Sean) | Keeps the News index current without Sean searching by hand | After launch, so the skill records the method that worked. Runs every day (Sean, 2 Oct). Drafts only; nothing publishes without Sean. See `features/news.md` |
 | News: "In the news" on glossary, concept and journal pages | The other direction of each item's backlinks | Built from the same `related` field as the item pages |
 | **Marketing launch** — social plan first | Sean, 27 Sep: starting soon | See `marketing-readiness-notes` in the Claude project. The measurement gap is attribution: **every visit to date is `$direct`** and there is no attribution panel. Agree a UTM convention *before* the first post — inconsistent tags cannot be retrofitted |
 | Traffic sources section on `/insights` | Marketing is worthless unmeasured | PostHog already captures `utm_*` and `$referring_domain`; this is a query, not an architecture |

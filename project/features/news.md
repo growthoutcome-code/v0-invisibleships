@@ -2,7 +2,7 @@
 
 - **Branch:** `main`
 - **Started:** 2026-10-01
-- **Status:** Built on `news`; 259 of 276 summaries written (drafts). Ready to merge to `main` (2 Oct 2026)
+- **Status:** Live on `main` (2 Oct 2026). All 276 items have draft summaries; dates corrected; listed for search engines
 - **Decision record:** none yet. Write one once the open questions below are settled.
 
 ## Goal
@@ -534,3 +534,25 @@ Each changes the file name and `/news/<slug>`, so apply them together before lau
 | 2016-01-01-ibm-blamed-for-australian-census-website-crash | 2016-01-01 | 29 Nov 2016 |
 | 2018-11-01-fbi-counterterrorism-investigations-now-run-on-amazon | 2018-11-01 | 29 Nov 2018 |
 | undated NSW Police / DTA COVIDSafe / AFP / TAdviser FSTEC | (none) | 7 Apr 2021 / 6 May 2020 / 14 Mar 2019 / updated 25 Mar 2024 |
+
+## Finished 2 Oct 2026, night
+
+- **The last 17 summaries written** from the links Sean pasted (16 from the source;
+  Fort Collins from search results, since 9News and CNN refuse automated
+  reading). All 276 items now have a summary: 242 `draft`, 34 `draft-search`.
+- **Dates corrected on 69 items** (file, slug, id, date and precision), from the
+  table above. Items whose correct date was uncertain were left as they were and
+  marked "(check)" there. Two living reference pages stay undated.
+- **Stages:** two jury convictions set to `convicted`.
+- **The two "duplicates" kept.** Each is a second official release about the same
+  case (Justice Department national office and the Manhattan U.S. Attorney), the
+  same rule as the eBay and DHS pairs.
+- **Listed for search engines:** `robots: noindex` removed from `/news` and
+  `/news/<slug>`; `/news` and all 276 item pages added to the sitemap.
+- **Contribute bottom section full width** (Sean: its three columns were squeezed
+  to 1,040px). Glossary stays at 1,040px.
+- **Note on GitHub Desktop:** switching branches with uncommitted work stashes it.
+  On 2 Oct that set aside 17 summaries mid-run (`stash@{0}`, "!!GitHub_Desktop<news>").
+  They were re-applied, so the stash is redundant and can be discarded.
+- **Next:** the source watch, a scheduled task for new items and changed sources,
+  is planned in `features/source-watch.md`.

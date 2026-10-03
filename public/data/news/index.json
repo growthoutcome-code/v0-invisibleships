@@ -90,6 +90,46 @@
 "hasSummary": true
 },
 {
+"slug": "2026-06-25-aws-pledges-further-13bn-investment-in-india",
+"file": "IS_NEWS_2026-06-25-aws-pledges-further-13bn-investment-in-india.md",
+"title": "AWS pledges further $13bn investment in India",
+"date": "2026-06-25",
+"precision": "day",
+"publisher": "DatacenterDynamics",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://www.datacenterdynamics.com/en/news/aws-pledges-further-13bn-investment-in-ai-and-cloud-infrastructure-in-india",
+"archivedUrl": "",
+"industry": [
+"Government cloud & surveillance technology"
+],
+"event": "Contracts & deployments",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
+"slug": "2026-06-17-navy-neptune-awards-four-jwcc-cloud-task-orders",
+"file": "IS_NEWS_2026-06-17-navy-neptune-awards-four-jwcc-cloud-task-orders.md",
+"title": "Navy Neptune Awards Four JWCC Cloud Task Orders",
+"date": "2026-06-17",
+"precision": "day",
+"publisher": "ExecutiveBiz",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://www.executivebiz.com/articles/navy-jwcc-aws-azure-google-oracle-task-orders",
+"archivedUrl": "",
+"industry": [
+"Government cloud & surveillance technology"
+],
+"event": "Contracts & deployments",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
 "slug": "2026-06-16-dhs-finalizes-first-cumulus-cloud-contract-with-aws",
 "file": "IS_NEWS_2026-06-16-dhs-finalizes-first-cumulus-cloud-contract-with-aws.md",
 "title": "DHS finalizes first Cumulus cloud contract with AWS",
@@ -376,11 +416,31 @@
 "hasSummary": true
 },
 {
-"slug": "2025-10-01-state-of-local-news-3-500-newspapers-gone-medill",
-"file": "IS_NEWS_2025-10-01-state-of-local-news-3-500-newspapers-gone-medill.md",
+"slug": "2025-10-29-inside-israel-deal-with-google-and-amazon-project-nimbus",
+"file": "IS_NEWS_2025-10-29-inside-israel-deal-with-google-and-amazon-project-nimbus.md",
+"title": "Inside Israel deal with Google and Amazon (Project Nimbus)",
+"date": "2025-10-29",
+"precision": "day",
+"publisher": "+972 Magazine",
+"sourceType": "News",
+"office": "",
+"url": "https://www.972mag.com/project-nimbus-contract-google-amazon-israel",
+"archivedUrl": "",
+"industry": [
+"Government cloud & surveillance technology"
+],
+"event": "Contracts & deployments",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
+"slug": "2025-10-22-state-of-local-news-3-500-newspapers-gone-medill",
+"file": "IS_NEWS_2025-10-22-state-of-local-news-3-500-newspapers-gone-medill.md",
 "title": "State of local news: 3,500 newspapers gone (Medill)",
-"date": "2025-10-01",
-"precision": "month",
+"date": "2025-10-22",
+"precision": "day",
 "publisher": "Nieman Lab",
 "sourceType": "News",
 "office": "",
@@ -388,6 +448,24 @@
 "archivedUrl": "",
 "industry": [],
 "event": "Research & breakthroughs",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
+"slug": "2025-10-22-denver-bans-sharing-of-alpr-data-with-feds-in-five-month",
+"file": "IS_NEWS_2025-10-22-denver-bans-sharing-of-alpr-data-with-feds-in-five-month.md",
+"title": "Denver bans sharing of ALPR data with feds in five-month Flock extension",
+"date": "2025-10-22",
+"precision": "day",
+"publisher": "Denver7",
+"sourceType": "News",
+"office": "",
+"url": "https://www.denver7.com/news/front-range/denver/denver-bans-sharing-of-license-plate-reader-data-with-the-feds-as-part-of-five-month-flock-contract-extension",
+"archivedUrl": "",
+"industry": [],
+"event": "Regulation & law",
 "country": "",
 "stage": "",
 "related": [],
@@ -428,6 +506,46 @@
 "Government cloud & surveillance technology"
 ],
 "event": "Global conflict",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
+"slug": "2025-09-24-senators-introduce-legislation-to-shield-neural-data-mind",
+"file": "IS_NEWS_2025-09-24-senators-introduce-legislation-to-shield-neural-data-mind.md",
+"title": "Senators introduce legislation to shield neural data (MIND Act)",
+"date": "2025-09-24",
+"precision": "day",
+"publisher": "U.S. Senate Commerce Committee",
+"sourceType": "Official",
+"office": "",
+"url": "https://www.commerce.senate.gov/press/dem/release/sens-cantwell-schumer-markey-introduce-legislation-to-shield",
+"archivedUrl": "",
+"industry": [
+"Neurotechnology"
+],
+"event": "Regulation & law",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
+"slug": "2025-09-19-department-of-national-defence-using-u-s-cloud-services",
+"file": "IS_NEWS_2025-09-19-department-of-national-defence-using-u-s-cloud-services.md",
+"title": "Department of National Defence using U.S. cloud services",
+"date": "2025-09-19",
+"precision": "day",
+"publisher": "Global News",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://globalnews.ca/news/11436395/department-of-national-defence-us-cloud-services",
+"archivedUrl": "",
+"industry": [
+"Government cloud & surveillance technology"
+],
+"event": "Contracts & deployments",
 "country": "",
 "stage": "",
 "related": [],
@@ -484,46 +602,6 @@
 "archivedUrl": "",
 "industry": [],
 "event": "Courts & litigation",
-"country": "",
-"stage": "",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "2025-09-01-senators-introduce-legislation-to-shield-neural-data-mind",
-"file": "IS_NEWS_2025-09-01-senators-introduce-legislation-to-shield-neural-data-mind.md",
-"title": "Senators introduce legislation to shield neural data (MIND Act)",
-"date": "2025-09-01",
-"precision": "month",
-"publisher": "U.S. Senate Commerce Committee",
-"sourceType": "Official",
-"office": "",
-"url": "https://www.commerce.senate.gov/press/dem/release/sens-cantwell-schumer-markey-introduce-legislation-to-shield",
-"archivedUrl": "",
-"industry": [
-"Neurotechnology"
-],
-"event": "Regulation & law",
-"country": "",
-"stage": "",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "2025-09-01-defence-commits-to-five-more-years-of-azure-worth-495m",
-"file": "IS_NEWS_2025-09-01-defence-commits-to-five-more-years-of-azure-worth-495m.md",
-"title": "Defence commits to five more years of Azure worth $495m",
-"date": "2025-09-01",
-"precision": "day",
-"publisher": "iTnews",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://www.itnews.com.au/news/defence-commits-to-five-more-years-of-azure-worth-495m-618459",
-"archivedUrl": "",
-"industry": [
-"Government cloud & surveillance technology"
-],
-"event": "Contracts & deployments",
 "country": "",
 "stage": "",
 "related": [],
@@ -590,6 +668,44 @@
 "hasSummary": true
 },
 {
+"slug": "2025-08-22-breakthrough-brain-computer-interface-decodes-self-talk",
+"file": "IS_NEWS_2025-08-22-breakthrough-brain-computer-interface-decodes-self-talk.md",
+"title": "Breakthrough brain-computer interface decodes self-talk",
+"date": "2025-08-22",
+"precision": "day",
+"publisher": "Psychology Today",
+"sourceType": "News",
+"office": "",
+"url": "https://www.psychologytoday.com/us/blog/the-future-brain/202508/breakthrough-brain-computer-interface-decodes-self-talk",
+"archivedUrl": "",
+"industry": [
+"Neurotechnology"
+],
+"event": "Research & breakthroughs",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
+"slug": "2025-08-21-u-s-navy-sailor-convicted-of-spying-for-china",
+"file": "IS_NEWS_2025-08-21-u-s-navy-sailor-convicted-of-spying-for-china.md",
+"title": "U.S. Navy Sailor Convicted of Spying for China",
+"date": "2025-08-21",
+"precision": "day",
+"publisher": "U.S. Department of Justice",
+"sourceType": "Official",
+"office": "Office of Public Affairs",
+"url": "https://www.justice.gov/opa/pr/us-navy-sailor-convicted-spying-china",
+"archivedUrl": "",
+"industry": [],
+"event": "Espionage & foreign agents",
+"country": "China",
+"stage": "convicted",
+"related": [],
+"hasSummary": true
+},
+{
 "slug": "2025-08-21-microsoft-employee-protests-over-israel-military-ties-lead",
 "file": "IS_NEWS_2025-08-21-microsoft-employee-protests-over-israel-military-ties-lead.md",
 "title": "Microsoft employee protests over Israel military ties lead to 18 arrests",
@@ -610,20 +726,22 @@
 "hasSummary": true
 },
 {
-"slug": "2025-08-20-u-s-navy-sailor-convicted-of-spying-for-china",
-"file": "IS_NEWS_2025-08-20-u-s-navy-sailor-convicted-of-spying-for-china.md",
-"title": "U.S. Navy Sailor Convicted of Spying for China",
-"date": "2025-08-20",
+"slug": "2025-08-14-saudi-center3-targets-1gw-of-data-center-capacity-by-2030",
+"file": "IS_NEWS_2025-08-14-saudi-center3-targets-1gw-of-data-center-capacity-by-2030.md",
+"title": "Saudi center3 targets 1GW of data center capacity by 2030",
+"date": "2025-08-14",
 "precision": "day",
-"publisher": "U.S. Department of Justice",
-"sourceType": "Official",
-"office": "Office of Public Affairs",
-"url": "https://www.justice.gov/opa/pr/us-navy-sailor-convicted-spying-china",
+"publisher": "DatacenterDynamics",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://www.datacenterdynamics.com/en/news/saudis-center3-targets-1gw-of-data-center-capacity-by-2030",
 "archivedUrl": "",
-"industry": [],
-"event": "Espionage & foreign agents",
-"country": "China",
-"stage": "convicted",
+"industry": [
+"Government cloud & surveillance technology"
+],
+"event": "Contracts & deployments",
+"country": "",
+"stage": "",
 "related": [],
 "hasSummary": true
 },
@@ -645,7 +763,7 @@
 "country": "",
 "stage": "",
 "related": [],
-"hasSummary": false
+"hasSummary": true
 },
 {
 "slug": "2025-08-14-brain-computer-interface-researchers-decode-internal",
@@ -665,7 +783,25 @@
 "country": "",
 "stage": "",
 "related": [],
-"hasSummary": false
+"hasSummary": true
+},
+{
+"slug": "2025-08-13-israel-amendment-13-privacy-reform",
+"file": "IS_NEWS_2025-08-13-israel-amendment-13-privacy-reform.md",
+"title": "Israel Amendment 13 privacy reform",
+"date": "2025-08-13",
+"precision": "day",
+"publisher": "IAPP",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://iapp.org/news/a/israel-marks-a-new-era-in-privacy-law-amendment-13-ushers-in-sweeping-reform",
+"archivedUrl": "",
+"industry": [],
+"event": "Regulation & law",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
 },
 {
 "slug": "2025-08-07-pentagon-officials-gearing-up-for-jwcc-next-solicitation",
@@ -682,6 +818,26 @@
 "Government cloud & surveillance technology"
 ],
 "event": "Contracts & deployments",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
+"slug": "2025-08-07-israel-s-military-surveillance-agency-stores-masses-of",
+"file": "IS_NEWS_2025-08-07-israel-s-military-surveillance-agency-stores-masses-of.md",
+"title": "Israel's military surveillance agency stores masses of intelligence on Palestinians on Microsoft cloud",
+"date": "2025-08-07",
+"precision": "day",
+"publisher": "DatacenterDynamics",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://www.datacenterdynamics.com/en/news/israels-military-surveillance-agency-stores-masses-of-intelligence-on-palestinians-on-microsoft-cloud",
+"archivedUrl": "",
+"industry": [
+"Government cloud & surveillance technology"
+],
+"event": "Global conflict",
 "country": "",
 "stage": "",
 "related": [],
@@ -729,26 +885,6 @@
 "hasSummary": true
 },
 {
-"slug": "2025-08-06-israel-s-military-surveillance-agency-stores-masses-of",
-"file": "IS_NEWS_2025-08-06-israel-s-military-surveillance-agency-stores-masses-of.md",
-"title": "Israel's military surveillance agency stores masses of intelligence on Palestinians on Microsoft cloud",
-"date": "2025-08-06",
-"precision": "day",
-"publisher": "DatacenterDynamics",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://www.datacenterdynamics.com/en/news/israels-military-surveillance-agency-stores-masses-of-intelligence-on-palestinians-on-microsoft-cloud",
-"archivedUrl": "",
-"industry": [
-"Government cloud & surveillance technology"
-],
-"event": "Global conflict",
-"country": "",
-"stage": "",
-"related": [],
-"hasSummary": true
-},
-{
 "slug": "2025-08-06-active-duty-soldier-arrested-and-charged-with-espionage-and",
 "file": "IS_NEWS_2025-08-06-active-duty-soldier-arrested-and-charged-with-espionage-and.md",
 "title": "Active-Duty Soldier Arrested and Charged with Espionage and Export Violations",
@@ -787,20 +923,40 @@
 "hasSummary": true
 },
 {
-"slug": "2025-08-01-breakthrough-brain-computer-interface-decodes-self-talk",
-"file": "IS_NEWS_2025-08-01-breakthrough-brain-computer-interface-decodes-self-talk.md",
-"title": "Breakthrough brain-computer interface decodes self-talk",
-"date": "2025-08-01",
-"precision": "month",
-"publisher": "Psychology Today",
-"sourceType": "News",
+"slug": "2025-07-04-defence-commits-to-five-more-years-of-azure-worth-495m",
+"file": "IS_NEWS_2025-07-04-defence-commits-to-five-more-years-of-azure-worth-495m.md",
+"title": "Defence commits to five more years of Azure worth $495m",
+"date": "2025-07-04",
+"precision": "day",
+"publisher": "iTnews",
+"sourceType": "Trade press",
 "office": "",
-"url": "https://www.psychologytoday.com/us/blog/the-future-brain/202508/breakthrough-brain-computer-interface-decodes-self-talk",
+"url": "https://www.itnews.com.au/news/defence-commits-to-five-more-years-of-azure-worth-495m-618459",
 "archivedUrl": "",
 "industry": [
-"Neurotechnology"
+"Government cloud & surveillance technology"
 ],
-"event": "Research & breakthroughs",
+"event": "Contracts & deployments",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
+"slug": "2025-07-04-australian-dept-of-defence-signs-au-495m-5-year-cloud-deal",
+"file": "IS_NEWS_2025-07-04-australian-dept-of-defence-signs-au-495m-5-year-cloud-deal.md",
+"title": "Australian Dept of Defence signs AU$495m 5-year cloud deal with Microsoft",
+"date": "2025-07-04",
+"precision": "day",
+"publisher": "DatacenterDynamics",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://www.datacenterdynamics.com/en/news/australian-department-of-defence-signs-au495m-five-year-cloud-deal-with-microsoft",
+"archivedUrl": "",
+"industry": [
+"Government cloud & surveillance technology"
+],
+"event": "Contracts & deployments",
 "country": "",
 "stage": "",
 "related": [],
@@ -881,7 +1037,7 @@
 "country": "",
 "stage": "",
 "related": [],
-"hasSummary": false
+"hasSummary": true
 },
 {
 "slug": "2025-06-01-attorney-general-james-sues-23andme-to-protect-new-yorkers",
@@ -944,6 +1100,26 @@
 "hasSummary": true
 },
 {
+"slug": "2025-04-28-senators-call-on-ftc-to-protect-consumers-neural-data",
+"file": "IS_NEWS_2025-04-28-senators-call-on-ftc-to-protect-consumers-neural-data.md",
+"title": "Senators call on FTC to protect consumers' neural data",
+"date": "2025-04-28",
+"precision": "day",
+"publisher": "U.S. Senate Commerce Committee",
+"sourceType": "Official",
+"office": "",
+"url": "https://www.commerce.senate.gov/press/dem/release/cantwell-schumer-markey-call-on-ftc-to-protect-consumers-neural-data-2025-4",
+"archivedUrl": "",
+"industry": [
+"Neurotechnology"
+],
+"event": "Regulation & law",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
 "slug": "2025-04-23-former-u-s-army-intelligence-analyst-sentenced-for-selling",
 "file": "IS_NEWS_2025-04-23-former-u-s-army-intelligence-analyst-sentenced-for-selling.md",
 "title": "Former U.S. Army Intelligence Analyst Sentenced for Selling Sensitive Military Information",
@@ -962,31 +1138,11 @@
 "hasSummary": true
 },
 {
-"slug": "2025-04-01-senators-call-on-ftc-to-protect-consumers-neural-data",
-"file": "IS_NEWS_2025-04-01-senators-call-on-ftc-to-protect-consumers-neural-data.md",
-"title": "Senators call on FTC to protect consumers' neural data",
-"date": "2025-04-01",
-"precision": "month",
-"publisher": "U.S. Senate Commerce Committee",
-"sourceType": "Official",
-"office": "",
-"url": "https://www.commerce.senate.gov/press/dem/release/cantwell-schumer-markey-call-on-ftc-to-protect-consumers-neural-data-2025-4",
-"archivedUrl": "",
-"industry": [
-"Neurotechnology"
-],
-"event": "Regulation & law",
-"country": "",
-"stage": "",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "2025-04-01-precision-neuroscience-brain-implant-cleared-by-fda",
-"file": "IS_NEWS_2025-04-01-precision-neuroscience-brain-implant-cleared-by-fda.md",
+"slug": "2025-04-17-precision-neuroscience-brain-implant-cleared-by-fda",
+"file": "IS_NEWS_2025-04-17-precision-neuroscience-brain-implant-cleared-by-fda.md",
 "title": "Precision Neuroscience brain implant cleared by FDA",
-"date": "2025-04-01",
-"precision": "month",
+"date": "2025-04-17",
+"precision": "day",
 "publisher": "MedTech Dive",
 "sourceType": "Trade press",
 "office": "",
@@ -1036,6 +1192,44 @@
 "Biotechnology & health"
 ],
 "event": "Courts & litigation",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
+"slug": "2025-03-14-the-pentagon-s-next-major-cloud-contract-is-in-the-works",
+"file": "IS_NEWS_2025-03-14-the-pentagon-s-next-major-cloud-contract-is-in-the-works.md",
+"title": "The Pentagon's next major cloud contract is in the works",
+"date": "2025-03-14",
+"precision": "day",
+"publisher": "Nextgov/FCW",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://www.nextgov.com/defense/2025/03/pentagons-next-major-cloud-contract-works/403775",
+"archivedUrl": "",
+"industry": [
+"Government cloud & surveillance technology"
+],
+"event": "Contracts & deployments",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
+"slug": "2025-03-11-new-authority-for-personal-data-protection-in-mexico",
+"file": "IS_NEWS_2025-03-11-new-authority-for-personal-data-protection-in-mexico.md",
+"title": "New authority for personal data protection in Mexico",
+"date": "2025-03-11",
+"precision": "day",
+"publisher": "IAPP",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://iapp.org/news/a/new-authority-established-for-personal-data-protection-in-mexico",
+"archivedUrl": "",
+"industry": [],
+"event": "Regulation & law",
 "country": "",
 "stage": "",
 "related": [],
@@ -1114,26 +1308,6 @@
 "event": "Technology theft & export control",
 "country": "China",
 "stage": "charged",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "2025-03-01-the-pentagon-s-next-major-cloud-contract-is-in-the-works",
-"file": "IS_NEWS_2025-03-01-the-pentagon-s-next-major-cloud-contract-is-in-the-works.md",
-"title": "The Pentagon's next major cloud contract is in the works",
-"date": "2025-03-01",
-"precision": "day",
-"publisher": "Nextgov/FCW",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://www.nextgov.com/defense/2025/03/pentagons-next-major-cloud-contract-works/403775",
-"archivedUrl": "",
-"industry": [
-"Government cloud & surveillance technology"
-],
-"event": "Contracts & deployments",
-"country": "",
-"stage": "",
 "related": [],
 "hasSummary": true
 },
@@ -1262,56 +1436,18 @@
 "hasSummary": true
 },
 {
-"slug": "2025-01-01-new-authority-for-personal-data-protection-in-mexico",
-"file": "IS_NEWS_2025-01-01-new-authority-for-personal-data-protection-in-mexico.md",
-"title": "New authority for personal data protection in Mexico",
-"date": "2025-01-01",
+"slug": "2025-01-14-amazon-bedrock-opens-at-aws-top-secret-cloud",
+"file": "IS_NEWS_2025-01-14-amazon-bedrock-opens-at-aws-top-secret-cloud.md",
+"title": "Amazon Bedrock Opens at AWS Top Secret Cloud",
+"date": "2025-01-14",
 "precision": "day",
-"publisher": "IAPP",
+"publisher": "ExecutiveBiz",
 "sourceType": "Trade press",
 "office": "",
-"url": "https://iapp.org/news/a/new-authority-established-for-personal-data-protection-in-mexico",
-"archivedUrl": "",
-"industry": [],
-"event": "Regulation & law",
-"country": "",
-"stage": "",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "2025-01-01-medical-software-in-russia-egisz-emias",
-"file": "IS_NEWS_2025-01-01-medical-software-in-russia-egisz-emias.md",
-"title": "Medical software in Russia (EGISZ / EMIAS)",
-"date": "2025-01-01",
-"precision": "day",
-"publisher": "TAdviser",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://tadviser.com/index.php/Article:Medical_software_in_Russia",
+"url": "https://www.executivebiz.com/articles/amazon-bedrock-platform-top-secret-cloud-availability",
 "archivedUrl": "",
 "industry": [
-"Biotechnology & health",
-"Government cloud & surveillance technology"
-],
-"event": "Contracts & deployments",
-"country": "",
-"stage": "",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "2025-01-01-inside-israel-deal-with-google-and-amazon-project-nimbus",
-"file": "IS_NEWS_2025-01-01-inside-israel-deal-with-google-and-amazon-project-nimbus.md",
-"title": "Inside Israel deal with Google and Amazon (Project Nimbus)",
-"date": "2025-01-01",
-"precision": "day",
-"publisher": "+972 Magazine",
-"sourceType": "News",
-"office": "",
-"url": "https://www.972mag.com/project-nimbus-contract-google-amazon-israel",
-"archivedUrl": "",
-"industry": [
+"Artificial intelligence",
 "Government cloud & surveillance technology"
 ],
 "event": "Contracts & deployments",
@@ -1358,44 +1494,6 @@
 "country": "",
 "stage": "",
 "related": [],
-"hasSummary": false
-},
-{
-"slug": "2025-01-01-department-of-national-defence-using-u-s-cloud-services",
-"file": "IS_NEWS_2025-01-01-department-of-national-defence-using-u-s-cloud-services.md",
-"title": "Department of National Defence using U.S. cloud services",
-"date": "2025-01-01",
-"precision": "day",
-"publisher": "Global News",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://globalnews.ca/news/11436395/department-of-national-defence-us-cloud-services",
-"archivedUrl": "",
-"industry": [
-"Government cloud & surveillance technology"
-],
-"event": "Contracts & deployments",
-"country": "",
-"stage": "",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "2025-01-01-denver-bans-sharing-of-alpr-data-with-feds-in-five-month",
-"file": "IS_NEWS_2025-01-01-denver-bans-sharing-of-alpr-data-with-feds-in-five-month.md",
-"title": "Denver bans sharing of ALPR data with feds in five-month Flock extension",
-"date": "2025-01-01",
-"precision": "day",
-"publisher": "Denver7",
-"sourceType": "News",
-"office": "",
-"url": "https://www.denver7.com/news/front-range/denver/denver-bans-sharing-of-license-plate-reader-data-with-the-feds-as-part-of-five-month-flock-contract-extension",
-"archivedUrl": "",
-"industry": [],
-"event": "Regulation & law",
-"country": "",
-"stage": "",
-"related": [],
 "hasSummary": true
 },
 {
@@ -1417,67 +1515,6 @@
 "stage": "",
 "related": [],
 "hasSummary": true
-},
-{
-"slug": "2025-01-01-aws-pledges-further-13bn-investment-in-india",
-"file": "IS_NEWS_2025-01-01-aws-pledges-further-13bn-investment-in-india.md",
-"title": "AWS pledges further $13bn investment in India",
-"date": "2025-01-01",
-"precision": "day",
-"publisher": "DatacenterDynamics",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://www.datacenterdynamics.com/en/news/aws-pledges-further-13bn-investment-in-ai-and-cloud-infrastructure-in-india",
-"archivedUrl": "",
-"industry": [
-"Government cloud & surveillance technology"
-],
-"event": "Contracts & deployments",
-"country": "",
-"stage": "",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "2025-01-01-australian-dept-of-defence-signs-au-495m-5-year-cloud-deal",
-"file": "IS_NEWS_2025-01-01-australian-dept-of-defence-signs-au-495m-5-year-cloud-deal.md",
-"title": "Australian Dept of Defence signs AU$495m 5-year cloud deal with Microsoft",
-"date": "2025-01-01",
-"precision": "day",
-"publisher": "DatacenterDynamics",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://www.datacenterdynamics.com/en/news/australian-department-of-defence-signs-au495m-five-year-cloud-deal-with-microsoft",
-"archivedUrl": "",
-"industry": [
-"Government cloud & surveillance technology"
-],
-"event": "Contracts & deployments",
-"country": "",
-"stage": "",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "2025-01-01-amazon-bedrock-opens-at-aws-top-secret-cloud",
-"file": "IS_NEWS_2025-01-01-amazon-bedrock-opens-at-aws-top-secret-cloud.md",
-"title": "Amazon Bedrock Opens at AWS Top Secret Cloud",
-"date": "2025-01-01",
-"precision": "day",
-"publisher": "ExecutiveBiz",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://www.executivebiz.com/articles/amazon-bedrock-platform-top-secret-cloud-availability",
-"archivedUrl": "",
-"industry": [
-"Artificial intelligence",
-"Government cloud & surveillance technology"
-],
-"event": "Contracts & deployments",
-"country": "",
-"stage": "",
-"related": [],
-"hasSummary": false
 },
 {
 "slug": "2024-12-19-southern-california-political-operative-arrested-on-federal",
@@ -1592,11 +1629,11 @@
 "hasSummary": true
 },
 {
-"slug": "2024-10-01-murder-for-hire-charges-against-islamic-revolutionary-guard",
-"file": "IS_NEWS_2024-10-01-murder-for-hire-charges-against-islamic-revolutionary-guard.md",
+"slug": "2024-10-22-murder-for-hire-charges-against-islamic-revolutionary-guard",
+"file": "IS_NEWS_2024-10-22-murder-for-hire-charges-against-islamic-revolutionary-guard.md",
 "title": "Murder-for-hire charges against Islamic Revolutionary Guard Corps members",
-"date": "2024-10-01",
-"precision": "month",
+"date": "2024-10-22",
+"precision": "day",
 "publisher": "U.S. Department of Justice",
 "sourceType": "Official",
 "office": "Office of Public Affairs",
@@ -1610,11 +1647,11 @@
 "hasSummary": true
 },
 {
-"slug": "2024-10-01-charges-against-indian-government-employee-in-connection",
-"file": "IS_NEWS_2024-10-01-charges-against-indian-government-employee-in-connection.md",
+"slug": "2024-10-17-charges-against-indian-government-employee-in-connection",
+"file": "IS_NEWS_2024-10-17-charges-against-indian-government-employee-in-connection.md",
 "title": "Charges against Indian government employee in connection with foiled assassination plot",
-"date": "2024-10-01",
-"precision": "month",
+"date": "2024-10-17",
+"precision": "day",
 "publisher": "U.S. Department of Justice",
 "sourceType": "Official",
 "office": "Office of Public Affairs",
@@ -1624,6 +1661,26 @@
 "event": "Murder for hire & violent plots",
 "country": "India",
 "stage": "charged",
+"related": [],
+"hasSummary": true
+},
+{
+"slug": "2024-09-18-neuralink-wins-fda-breakthrough-nod-for-vision-restoring",
+"file": "IS_NEWS_2024-09-18-neuralink-wins-fda-breakthrough-nod-for-vision-restoring.md",
+"title": "Neuralink wins FDA breakthrough nod for vision-restoring implant (Blindsight)",
+"date": "2024-09-18",
+"precision": "day",
+"publisher": "MassDevice",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://www.massdevice.com/neuralink-wins-fda-breakthrough-nod-for-vision-restoring-implant",
+"archivedUrl": "",
+"industry": [
+"Neurotechnology"
+],
+"event": "Regulation & law",
+"country": "",
+"stage": "",
 "related": [],
 "hasSummary": true
 },
@@ -1687,31 +1744,31 @@
 "hasSummary": true
 },
 {
-"slug": "2024-09-01-neuralink-wins-fda-breakthrough-nod-for-vision-restoring",
-"file": "IS_NEWS_2024-09-01-neuralink-wins-fda-breakthrough-nod-for-vision-restoring.md",
-"title": "Neuralink wins FDA breakthrough nod for vision-restoring implant (Blindsight)",
-"date": "2024-09-01",
-"precision": "month",
-"publisher": "MassDevice",
+"slug": "2024-08-26-ato-is-rewiring-its-cloud-responsibility-model",
+"file": "IS_NEWS_2024-08-26-ato-is-rewiring-its-cloud-responsibility-model.md",
+"title": "ATO is rewiring its cloud responsibility model",
+"date": "2024-08-26",
+"precision": "day",
+"publisher": "iTnews",
 "sourceType": "Trade press",
 "office": "",
-"url": "https://www.massdevice.com/neuralink-wins-fda-breakthrough-nod-for-vision-restoring-implant",
+"url": "https://www.itnews.com.au/news/ato-is-rewiring-its-cloud-responsibility-model-611021",
 "archivedUrl": "",
 "industry": [
-"Neurotechnology"
+"Government cloud & surveillance technology"
 ],
-"event": "Regulation & law",
+"event": "Contracts & deployments",
 "country": "",
 "stage": "",
 "related": [],
-"hasSummary": false
+"hasSummary": true
 },
 {
-"slug": "2024-09-01-florida-telecommunications-and-it-worker-pleads-guilty-to",
-"file": "IS_NEWS_2024-09-01-florida-telecommunications-and-it-worker-pleads-guilty-to.md",
+"slug": "2024-08-23-florida-telecommunications-and-it-worker-pleads-guilty-to",
+"file": "IS_NEWS_2024-08-23-florida-telecommunications-and-it-worker-pleads-guilty-to.md",
 "title": "Florida telecommunications and IT worker pleads guilty to conspiring to act as illegal PRC agent",
-"date": "2024-09-01",
-"precision": "month",
+"date": "2024-08-23",
+"precision": "day",
 "publisher": "U.S. Department of Justice",
 "sourceType": "Official",
 "office": "Office of Public Affairs",
@@ -1745,6 +1802,24 @@
 "hasSummary": true
 },
 {
+"slug": "2024-08-21-new-york-man-arrested-for-operating-as-illegal-agent-of-the",
+"file": "IS_NEWS_2024-08-21-new-york-man-arrested-for-operating-as-illegal-agent-of-the.md",
+"title": "New York man arrested for operating as illegal agent of the Chinese government",
+"date": "2024-08-21",
+"precision": "day",
+"publisher": "U.S. Department of Justice",
+"sourceType": "Official",
+"office": "Office of Public Affairs",
+"url": "https://www.justice.gov/opa/pr/new-york-man-arrested-operating-illegal-agent-chinese-government-united-states",
+"archivedUrl": "",
+"industry": [],
+"event": "Espionage & foreign agents",
+"country": "China",
+"stage": "arrested",
+"related": [],
+"hasSummary": true
+},
+{
 "slug": "2024-08-14-new-brain-computer-interface-allows-man-with-als-to-speak",
 "file": "IS_NEWS_2024-08-14-new-brain-computer-interface-allows-man-with-als-to-speak.md",
 "title": "New brain-computer interface allows man with ALS to speak again",
@@ -1762,14 +1837,14 @@
 "country": "",
 "stage": "",
 "related": [],
-"hasSummary": false
+"hasSummary": true
 },
 {
-"slug": "2024-08-01-new-york-resident-convicted-of-acting-as-covert-chinese",
-"file": "IS_NEWS_2024-08-01-new-york-resident-convicted-of-acting-as-covert-chinese.md",
+"slug": "2024-08-06-new-york-resident-convicted-of-acting-as-covert-chinese",
+"file": "IS_NEWS_2024-08-06-new-york-resident-convicted-of-acting-as-covert-chinese.md",
 "title": "New York resident convicted of acting as covert Chinese agent",
-"date": "2024-08-01",
-"precision": "month",
+"date": "2024-08-06",
+"precision": "day",
 "publisher": "U.S. Department of Justice",
 "sourceType": "Official",
 "office": "Office of Public Affairs",
@@ -1779,42 +1854,6 @@
 "event": "Espionage & foreign agents",
 "country": "China",
 "stage": "convicted",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "2024-08-01-new-york-man-arrested-for-operating-as-illegal-agent-of-the",
-"file": "IS_NEWS_2024-08-01-new-york-man-arrested-for-operating-as-illegal-agent-of-the.md",
-"title": "New York man arrested for operating as illegal agent of the Chinese government",
-"date": "2024-08-01",
-"precision": "month",
-"publisher": "U.S. Department of Justice",
-"sourceType": "Official",
-"office": "Office of Public Affairs",
-"url": "https://www.justice.gov/opa/pr/new-york-man-arrested-operating-illegal-agent-chinese-government-united-states",
-"archivedUrl": "",
-"industry": [],
-"event": "Espionage & foreign agents",
-"country": "China",
-"stage": "arrested",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "2024-08-01-israel-amendment-13-privacy-reform",
-"file": "IS_NEWS_2024-08-01-israel-amendment-13-privacy-reform.md",
-"title": "Israel Amendment 13 privacy reform",
-"date": "2024-08-01",
-"precision": "day",
-"publisher": "IAPP",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://iapp.org/news/a/israel-marks-a-new-era-in-privacy-law-amendment-13-ushers-in-sweeping-reform",
-"archivedUrl": "",
-"industry": [],
-"event": "Regulation & law",
-"country": "",
-"stage": "",
 "related": [],
 "hasSummary": true
 },
@@ -1836,7 +1875,7 @@
 "country": "",
 "stage": "",
 "related": [],
-"hasSummary": false
+"hasSummary": true
 },
 {
 "slug": "2024-08-01-amazon-to-invest-7-2b-in-israel",
@@ -1879,6 +1918,24 @@
 "hasSummary": true
 },
 {
+"slug": "2024-07-25-two-men-plead-guilty-to-acting-as-illegal-agents-of-the",
+"file": "IS_NEWS_2024-07-25-two-men-plead-guilty-to-acting-as-illegal-agents-of-the.md",
+"title": "Two men plead guilty to acting as illegal agents of the Chinese government and bribery",
+"date": "2024-07-25",
+"precision": "day",
+"publisher": "U.S. Department of Justice",
+"sourceType": "Official",
+"office": "Office of Public Affairs",
+"url": "https://www.justice.gov/opa/pr/two-men-plead-guilty-acting-illegal-agents-chinese-government-and-bribery",
+"archivedUrl": "",
+"industry": [],
+"event": "Espionage & foreign agents",
+"country": "China",
+"stage": "pleaded guilty",
+"related": [],
+"hasSummary": true
+},
+{
 "slug": "2024-07-04-australian-government-signs-aws-to-deliver-2bn-top-secret",
 "file": "IS_NEWS_2024-07-04-australian-government-signs-aws-to-deliver-2bn-top-secret.md",
 "title": "Australian government signs AWS to deliver $2bn top-secret cloud",
@@ -1899,24 +1956,6 @@
 "hasSummary": true
 },
 {
-"slug": "2024-07-01-two-men-plead-guilty-to-acting-as-illegal-agents-of-the",
-"file": "IS_NEWS_2024-07-01-two-men-plead-guilty-to-acting-as-illegal-agents-of-the.md",
-"title": "Two men plead guilty to acting as illegal agents of the Chinese government and bribery",
-"date": "2024-07-01",
-"precision": "month",
-"publisher": "U.S. Department of Justice",
-"sourceType": "Official",
-"office": "Office of Public Affairs",
-"url": "https://www.justice.gov/opa/pr/two-men-plead-guilty-acting-illegal-agents-chinese-government-and-bribery",
-"archivedUrl": "",
-"industry": [],
-"event": "Espionage & foreign agents",
-"country": "China",
-"stage": "pleaded guilty",
-"related": [],
-"hasSummary": true
-},
-{
 "slug": "2024-05-10-microsoft-launches-mexican-cloud-region",
 "file": "IS_NEWS_2024-05-10-microsoft-launches-mexican-cloud-region.md",
 "title": "Microsoft launches Mexican cloud region",
@@ -1928,6 +1967,27 @@
 "url": "https://www.datacenterdynamics.com/en/news/microsoft-launches-mexican-cloud-region",
 "archivedUrl": "",
 "industry": [
+"Government cloud & surveillance technology"
+],
+"event": "Contracts & deployments",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
+"slug": "2024-05-07-microsoft-deploys-air-gapped-ai-for-classified-customers",
+"file": "IS_NEWS_2024-05-07-microsoft-deploys-air-gapped-ai-for-classified-customers.md",
+"title": "Microsoft deploys air-gapped AI for classified customers",
+"date": "2024-05-07",
+"precision": "day",
+"publisher": "Nextgov/FCW",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://www.nextgov.com/artificial-intelligence/2024/05/microsoft-deploys-air-gapped-ai-classified-cloud/396354",
+"archivedUrl": "",
+"industry": [
+"Artificial intelligence",
 "Government cloud & surveillance technology"
 ],
 "event": "Contracts & deployments",
@@ -1957,94 +2017,35 @@
 "hasSummary": true
 },
 {
-"slug": "2024-05-01-two-arrested-and-13-charged-in-three-separate-cases-alleging",
-"file": "IS_NEWS_2024-05-01-two-arrested-and-13-charged-in-three-separate-cases-alleging.md",
-"title": "Two arrested and 13 charged in three separate cases alleging malign schemes in the United States",
-"date": "2024-05-01",
-"precision": "month",
-"publisher": "U.S. Department of Justice",
-"sourceType": "Official",
-"office": "Office of Public Affairs",
-"url": "https://www.justice.gov/opa/pr/two-arrested-and-13-charged-three-separate-cases-alleged-participation-malign-schemes-united",
-"archivedUrl": "",
-"industry": [],
-"event": "Transnational repression",
-"country": "China",
-"stage": "arrested",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "2024-05-01-saudi-center3-targets-1gw-of-data-center-capacity-by-2030",
-"file": "IS_NEWS_2024-05-01-saudi-center3-targets-1gw-of-data-center-capacity-by-2030.md",
-"title": "Saudi center3 targets 1GW of data center capacity by 2030",
-"date": "2024-05-01",
-"precision": "day",
-"publisher": "DatacenterDynamics",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://www.datacenterdynamics.com/en/news/saudis-center3-targets-1gw-of-data-center-capacity-by-2030",
-"archivedUrl": "",
-"industry": [
-"Government cloud & surveillance technology"
-],
-"event": "Contracts & deployments",
-"country": "",
-"stage": "",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "2024-05-01-orange-and-huawei-launch-huawei-cloud-services-in-egypt",
-"file": "IS_NEWS_2024-05-01-orange-and-huawei-launch-huawei-cloud-services-in-egypt.md",
-"title": "Orange and Huawei launch Huawei Cloud services in Egypt",
-"date": "2024-05-01",
-"precision": "day",
-"publisher": "DatacenterDynamics",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://www.datacenterdynamics.com/en/news/orange-and-huawei-launch-huawei-cloud-services-in-egypt",
-"archivedUrl": "",
-"industry": [
-"Government cloud & surveillance technology"
-],
-"event": "Contracts & deployments",
-"country": "",
-"stage": "",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "2024-05-01-microsoft-deploys-air-gapped-ai-for-classified-customers",
-"file": "IS_NEWS_2024-05-01-microsoft-deploys-air-gapped-ai-for-classified-customers.md",
-"title": "Microsoft deploys air-gapped AI for classified customers",
-"date": "2024-05-01",
-"precision": "day",
-"publisher": "Nextgov/FCW",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://www.nextgov.com/artificial-intelligence/2024/05/microsoft-deploys-air-gapped-ai-classified-cloud/396354",
-"archivedUrl": "",
-"industry": [
-"Artificial intelligence",
-"Government cloud & surveillance technology"
-],
-"event": "Contracts & deployments",
-"country": "",
-"stage": "",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "2024-04-29-egypt-launches-gov-cloud-computing-data-center",
-"file": "IS_NEWS_2024-04-29-egypt-launches-gov-cloud-computing-data-center.md",
+"slug": "2024-04-30-egypt-launches-gov-cloud-computing-data-center",
+"file": "IS_NEWS_2024-04-30-egypt-launches-gov-cloud-computing-data-center.md",
 "title": "Egypt launches gov cloud computing data center",
-"date": "2024-04-29",
+"date": "2024-04-30",
 "precision": "day",
 "publisher": "DatacenterDynamics",
 "sourceType": "Trade press",
 "office": "",
 "url": "https://www.datacenterdynamics.com/en/news/egypt-launches-govt-cloud-computing-data-center",
+"archivedUrl": "",
+"industry": [
+"Government cloud & surveillance technology"
+],
+"event": "Contracts & deployments",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
+"slug": "2024-04-29-orange-and-huawei-launch-huawei-cloud-services-in-egypt",
+"file": "IS_NEWS_2024-04-29-orange-and-huawei-launch-huawei-cloud-services-in-egypt.md",
+"title": "Orange and Huawei launch Huawei Cloud services in Egypt",
+"date": "2024-04-29",
+"precision": "day",
+"publisher": "DatacenterDynamics",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://www.datacenterdynamics.com/en/news/orange-and-huawei-launch-huawei-cloud-services-in-egypt",
 "archivedUrl": "",
 "industry": [
 "Government cloud & surveillance technology"
@@ -2156,15 +2157,53 @@
 "hasSummary": true
 },
 {
-"slug": "2024-01-01-uk-government-renews-preferential-pricing-agreement-with-aws",
-"file": "IS_NEWS_2024-01-01-uk-government-renews-preferential-pricing-agreement-with-aws.md",
-"title": "UK government renews preferential pricing agreement with AWS",
-"date": "2024-01-01",
-"precision": "day",
-"publisher": "Computer Weekly",
+"slug": "2024-03-01-microsoft-suspends-access-to-cloud-services-for-russian",
+"file": "IS_NEWS_2024-03-01-microsoft-suspends-access-to-cloud-services-for-russian.md",
+"title": "Microsoft suspends access to cloud services for Russian companies",
+"date": "2024-03-01",
+"precision": "month",
+"publisher": "DatacenterDynamics",
 "sourceType": "Trade press",
 "office": "",
-"url": "https://www.computerweekly.com/news/366562418/UK-government-quietly-renews-public-sector-preferential-pricing-agreement-with-AWS",
+"url": "https://www.datacenterdynamics.com/en/news/microsoft-suspends-access-to-cloud-services-for-russian-companies",
+"archivedUrl": "",
+"industry": [
+"Government cloud & surveillance technology"
+],
+"event": "Contracts & deployments",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
+"slug": "2024-01-29-one-iranian-and-two-canadian-nationals-indicted-in-murder",
+"file": "IS_NEWS_2024-01-29-one-iranian-and-two-canadian-nationals-indicted-in-murder.md",
+"title": "One Iranian and two Canadian nationals indicted in murder-for-hire scheme",
+"date": "2024-01-29",
+"precision": "day",
+"publisher": "U.S. Department of Justice",
+"sourceType": "Official",
+"office": "Office of Public Affairs",
+"url": "https://www.justice.gov/opa/pr/one-iranian-and-two-canadian-nationals-indicted-murder-hire-scheme",
+"archivedUrl": "",
+"industry": [],
+"event": "Murder for hire & violent plots",
+"country": "Iran",
+"stage": "charged",
+"related": [],
+"hasSummary": true
+},
+{
+"slug": "2024-01-08-aws-wins-gbp94m-contract-with-uk-dwp",
+"file": "IS_NEWS_2024-01-08-aws-wins-gbp94m-contract-with-uk-dwp.md",
+"title": "AWS wins GBP94m contract with UK DWP",
+"date": "2024-01-08",
+"precision": "day",
+"publisher": "DatacenterDynamics",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://www.datacenterdynamics.com/en/news/aws-wins-94m-contract-with-uk-govs-dwp",
 "archivedUrl": "",
 "industry": [
 "Government cloud & surveillance technology"
@@ -2193,44 +2232,6 @@
 "country": "",
 "stage": "",
 "related": [],
-"hasSummary": false
-},
-{
-"slug": "2024-01-01-one-iranian-and-two-canadian-nationals-indicted-in-murder",
-"file": "IS_NEWS_2024-01-01-one-iranian-and-two-canadian-nationals-indicted-in-murder.md",
-"title": "One Iranian and two Canadian nationals indicted in murder-for-hire scheme",
-"date": "2024-01-01",
-"precision": "month",
-"publisher": "U.S. Department of Justice",
-"sourceType": "Official",
-"office": "Office of Public Affairs",
-"url": "https://www.justice.gov/opa/pr/one-iranian-and-two-canadian-nationals-indicted-murder-hire-scheme",
-"archivedUrl": "",
-"industry": [],
-"event": "Murder for hire & violent plots",
-"country": "Iran",
-"stage": "charged",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "2024-01-01-ato-is-rewiring-its-cloud-responsibility-model",
-"file": "IS_NEWS_2024-01-01-ato-is-rewiring-its-cloud-responsibility-model.md",
-"title": "ATO is rewiring its cloud responsibility model",
-"date": "2024-01-01",
-"precision": "day",
-"publisher": "iTnews",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://www.itnews.com.au/news/ato-is-rewiring-its-cloud-responsibility-model-611021",
-"archivedUrl": "",
-"industry": [
-"Government cloud & surveillance technology"
-],
-"event": "Contracts & deployments",
-"country": "",
-"stage": "",
-"related": [],
 "hasSummary": true
 },
 {
@@ -2249,6 +2250,26 @@
 "Government cloud & surveillance technology"
 ],
 "event": "Courts & litigation",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
+"slug": "2023-12-07-uk-government-renews-preferential-pricing-agreement-with-aws",
+"file": "IS_NEWS_2023-12-07-uk-government-renews-preferential-pricing-agreement-with-aws.md",
+"title": "UK government renews preferential pricing agreement with AWS",
+"date": "2023-12-07",
+"precision": "day",
+"publisher": "Computer Weekly",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://www.computerweekly.com/news/366562418/UK-government-quietly-renews-public-sector-preferential-pricing-agreement-with-AWS",
+"archivedUrl": "",
+"industry": [
+"Government cloud & surveillance technology"
+],
+"event": "Contracts & deployments",
 "country": "",
 "stage": "",
 "related": [],
@@ -2352,7 +2373,7 @@
 "country": "",
 "stage": "",
 "related": [],
-"hasSummary": false
+"hasSummary": true
 },
 {
 "slug": "2023-08-03-two-u-s-navy-servicemembers-arrested-for-transmitting",
@@ -2373,11 +2394,11 @@
 "hasSummary": true
 },
 {
-"slug": "2023-06-01-federal-jury-convicts-three-defendants-of-interstate",
-"file": "IS_NEWS_2023-06-01-federal-jury-convicts-three-defendants-of-interstate.md",
+"slug": "2023-06-20-federal-jury-convicts-three-defendants-of-interstate",
+"file": "IS_NEWS_2023-06-20-federal-jury-convicts-three-defendants-of-interstate.md",
 "title": "Federal jury convicts three defendants of interstate stalking for Chinese nationals",
-"date": "2023-06-01",
-"precision": "month",
+"date": "2023-06-20",
+"precision": "day",
 "publisher": "U.S. Department of Justice",
 "sourceType": "Official",
 "office": "Office of Public Affairs",
@@ -2386,7 +2407,7 @@
 "industry": [],
 "event": "Transnational repression",
 "country": "China",
-"stage": "",
+"stage": "convicted",
 "related": [],
 "hasSummary": true
 },
@@ -2400,6 +2421,24 @@
 "sourceType": "Official",
 "office": "Office of Public Affairs",
 "url": "https://www.justice.gov/opa/pr/illegal-agents-prc-government-charged-prc-directed-bribery-scheme",
+"archivedUrl": "",
+"industry": [],
+"event": "Espionage & foreign agents",
+"country": "China",
+"stage": "charged",
+"related": [],
+"hasSummary": true
+},
+{
+"slug": "2023-05-15-massachusetts-man-indicted-for-acting-as-illegal-agent-of",
+"file": "IS_NEWS_2023-05-15-massachusetts-man-indicted-for-acting-as-illegal-agent-of.md",
+"title": "Massachusetts man indicted for acting as illegal agent of the PRC",
+"date": "2023-05-15",
+"precision": "day",
+"publisher": "U.S. Department of Justice",
+"sourceType": "Official",
+"office": "Office of Public Affairs",
+"url": "https://www.justice.gov/opa/pr/massachusetts-man-indicted-acting-illegal-agent-people-s-republic-china",
 "archivedUrl": "",
 "industry": [],
 "event": "Espionage & foreign agents",
@@ -2471,24 +2510,6 @@
 "hasSummary": true
 },
 {
-"slug": "2023-05-01-massachusetts-man-indicted-for-acting-as-illegal-agent-of",
-"file": "IS_NEWS_2023-05-01-massachusetts-man-indicted-for-acting-as-illegal-agent-of.md",
-"title": "Massachusetts man indicted for acting as illegal agent of the PRC",
-"date": "2023-05-01",
-"precision": "month",
-"publisher": "U.S. Department of Justice",
-"sourceType": "Official",
-"office": "Office of Public Affairs",
-"url": "https://www.justice.gov/opa/pr/massachusetts-man-indicted-acting-illegal-agent-people-s-republic-china",
-"archivedUrl": "",
-"industry": [],
-"event": "Espionage & foreign agents",
-"country": "China",
-"stage": "charged",
-"related": [],
-"hasSummary": true
-},
-{
 "slug": "2023-05-01-facial-recognition-french-authority-imposes-penalty-payment",
 "file": "IS_NEWS_2023-05-01-facial-recognition-french-authority-imposes-penalty-payment.md",
 "title": "Facial recognition: French authority imposes penalty payment on Clearview AI",
@@ -2528,11 +2549,11 @@
 "hasSummary": true
 },
 {
-"slug": "2023-04-01-two-arrested-for-operating-illegal-overseas-police-station",
-"file": "IS_NEWS_2023-04-01-two-arrested-for-operating-illegal-overseas-police-station.md",
+"slug": "2023-04-17-two-arrested-for-operating-illegal-overseas-police-station",
+"file": "IS_NEWS_2023-04-17-two-arrested-for-operating-illegal-overseas-police-station.md",
 "title": "Two arrested for operating illegal overseas police station of the Chinese government",
-"date": "2023-04-01",
-"precision": "month",
+"date": "2023-04-17",
+"precision": "day",
 "publisher": "U.S. Department of Justice",
 "sourceType": "Official",
 "office": "Office of Public Affairs",
@@ -2546,11 +2567,11 @@
 "hasSummary": true
 },
 {
-"slug": "2023-04-01-40-officers-of-china-s-national-police-charged-in",
-"file": "IS_NEWS_2023-04-01-40-officers-of-china-s-national-police-charged-in.md",
+"slug": "2023-04-17-40-officers-of-china-s-national-police-charged-in",
+"file": "IS_NEWS_2023-04-17-40-officers-of-china-s-national-police-charged-in.md",
 "title": "40 officers of China's national police charged in transnational repression schemes targeting U.S. residents",
-"date": "2023-04-01",
-"precision": "month",
+"date": "2023-04-17",
+"precision": "day",
 "publisher": "U.S. Department of Justice",
 "sourceType": "Official",
 "office": "Office of Public Affairs",
@@ -2578,6 +2599,46 @@
 "event": "Espionage & foreign agents",
 "country": "Russia",
 "stage": "charged",
+"related": [],
+"hasSummary": true
+},
+{
+"slug": "2023-03-23-gds-goes-serverless-with-one-login",
+"file": "IS_NEWS_2023-03-23-gds-goes-serverless-with-one-login.md",
+"title": "GDS goes serverless with One Login",
+"date": "2023-03-23",
+"precision": "day",
+"publisher": "Computer Weekly",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://www.computerweekly.com/news/365533652/GDS-goes-serverless-to-bring-personalisation-to-online-government-services-with-One-Login",
+"archivedUrl": "",
+"industry": [
+"Government cloud & surveillance technology"
+],
+"event": "Contracts & deployments",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
+"slug": "2023-02-08-mod-issues-revised-cloud-strategy",
+"file": "IS_NEWS_2023-02-08-mod-issues-revised-cloud-strategy.md",
+"title": "MoD issues revised cloud strategy",
+"date": "2023-02-08",
+"precision": "day",
+"publisher": "Computer Weekly",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://www.computerweekly.com/news/365530572/MoD-issues-revised-cloud-strategy-as-it-prepares-to-move-top-secret-data-off-premise-by-2025",
+"archivedUrl": "",
+"industry": [
+"Government cloud & surveillance technology"
+],
+"event": "Contracts & deployments",
+"country": "",
+"stage": "",
 "related": [],
 "hasSummary": true
 },
@@ -2638,66 +2699,6 @@
 "hasSummary": true
 },
 {
-"slug": "2023-01-01-gds-goes-serverless-with-one-login",
-"file": "IS_NEWS_2023-01-01-gds-goes-serverless-with-one-login.md",
-"title": "GDS goes serverless with One Login",
-"date": "2023-01-01",
-"precision": "day",
-"publisher": "Computer Weekly",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://www.computerweekly.com/news/365533652/GDS-goes-serverless-to-bring-personalisation-to-online-government-services-with-One-Login",
-"archivedUrl": "",
-"industry": [
-"Government cloud & surveillance technology"
-],
-"event": "Contracts & deployments",
-"country": "",
-"stage": "",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "2023-01-01-cloud-based-fingerprint-system-for-uk-police-nears",
-"file": "IS_NEWS_2023-01-01-cloud-based-fingerprint-system-for-uk-police-nears.md",
-"title": "Cloud-based fingerprint system for UK police nears completion",
-"date": "2023-01-01",
-"precision": "day",
-"publisher": "Computer Weekly",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://www.computerweekly.com/news/252528242/Cloud-based-fingerprint-system-for-UK-police-nears-completion",
-"archivedUrl": "",
-"industry": [
-"Government cloud & surveillance technology"
-],
-"event": "Contracts & deployments",
-"country": "",
-"stage": "",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "2023-01-01-aws-wins-gbp94m-contract-with-uk-dwp",
-"file": "IS_NEWS_2023-01-01-aws-wins-gbp94m-contract-with-uk-dwp.md",
-"title": "AWS wins GBP94m contract with UK DWP",
-"date": "2023-01-01",
-"precision": "day",
-"publisher": "DatacenterDynamics",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://www.datacenterdynamics.com/en/news/aws-wins-94m-contract-with-uk-govs-dwp",
-"archivedUrl": "",
-"industry": [
-"Government cloud & surveillance technology"
-],
-"event": "Contracts & deployments",
-"country": "",
-"stage": "",
-"related": [],
-"hasSummary": true
-},
-{
 "slug": "2022-12-21-veterans-minister-on-assisted-dying-discussions",
 "file": "IS_NEWS_2022-12-21-veterans-minister-on-assisted-dying-discussions.md",
 "title": "Veterans minister on assisted-dying discussions",
@@ -2710,6 +2711,47 @@
 "archivedUrl": "",
 "industry": [],
 "event": "Public health",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
+"slug": "2022-12-13-medical-software-in-russia-egisz-emias",
+"file": "IS_NEWS_2022-12-13-medical-software-in-russia-egisz-emias.md",
+"title": "Medical software in Russia (EGISZ / EMIAS)",
+"date": "2022-12-13",
+"precision": "day",
+"publisher": "TAdviser",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://tadviser.com/index.php/Article:Medical_software_in_Russia",
+"archivedUrl": "",
+"industry": [
+"Biotechnology & health",
+"Government cloud & surveillance technology"
+],
+"event": "Contracts & deployments",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
+"slug": "2022-12-12-cloud-based-fingerprint-system-for-uk-police-nears",
+"file": "IS_NEWS_2022-12-12-cloud-based-fingerprint-system-for-uk-police-nears.md",
+"title": "Cloud-based fingerprint system for UK police nears completion",
+"date": "2022-12-12",
+"precision": "day",
+"publisher": "Computer Weekly",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://www.computerweekly.com/news/252528242/Cloud-based-fingerprint-system-for-UK-police-nears-completion",
+"archivedUrl": "",
+"industry": [
+"Government cloud & surveillance technology"
+],
+"event": "Contracts & deployments",
 "country": "",
 "stage": "",
 "related": [],
@@ -2796,22 +2838,20 @@
 "hasSummary": true
 },
 {
-"slug": "2022-11-01-mod-issues-revised-cloud-strategy",
-"file": "IS_NEWS_2022-11-01-mod-issues-revised-cloud-strategy.md",
-"title": "MoD issues revised cloud strategy",
-"date": "2022-11-01",
+"slug": "2022-10-24-two-arrested-and-13-charged-in-three-separate-cases-alleging",
+"file": "IS_NEWS_2022-10-24-two-arrested-and-13-charged-in-three-separate-cases-alleging.md",
+"title": "Two arrested and 13 charged in three separate cases alleging malign schemes in the United States",
+"date": "2022-10-24",
 "precision": "day",
-"publisher": "Computer Weekly",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://www.computerweekly.com/news/365530572/MoD-issues-revised-cloud-strategy-as-it-prepares-to-move-top-secret-data-off-premise-by-2025",
+"publisher": "U.S. Department of Justice",
+"sourceType": "Official",
+"office": "Office of Public Affairs",
+"url": "https://www.justice.gov/opa/pr/two-arrested-and-13-charged-three-separate-cases-alleged-participation-malign-schemes-united",
 "archivedUrl": "",
-"industry": [
-"Government cloud & surveillance technology"
-],
-"event": "Contracts & deployments",
-"country": "",
-"stage": "",
+"industry": [],
+"event": "Transnational repression",
+"country": "China",
+"stage": "arrested",
 "related": [],
 "hasSummary": true
 },
@@ -2855,6 +2895,27 @@
 "hasSummary": true
 },
 {
+"slug": "2022-08-16-failed-covidsafe-app-deleted",
+"file": "IS_NEWS_2022-08-16-failed-covidsafe-app-deleted.md",
+"title": "Failed COVIDSafe app deleted",
+"date": "2022-08-16",
+"precision": "day",
+"publisher": "Australian Department of Health",
+"sourceType": "Official",
+"office": "",
+"url": "https://www.health.gov.au/ministers/the-hon-mark-butler-mp/media/failed-covidsafe-app-deleted",
+"archivedUrl": "",
+"industry": [
+"Biotechnology & health",
+"Government cloud & surveillance technology"
+],
+"event": "Public health",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
 "slug": "2022-08-10-member-of-iran-s-islamic-revolutionary-guard-corps-irgc",
 "file": "IS_NEWS_2022-08-10-member-of-iran-s-islamic-revolutionary-guard-corps-irgc.md",
 "title": "Member of Iran's Islamic Revolutionary Guard Corps (IRGC) Charged with Plot to Murder the Former National Security Advisor",
@@ -2873,6 +2934,24 @@
 "hasSummary": true
 },
 {
+"slug": "2022-08-10-former-twitter-employee-found-guilty-of-acting-as-agent-of-a",
+"file": "IS_NEWS_2022-08-10-former-twitter-employee-found-guilty-of-acting-as-agent-of-a.md",
+"title": "Former Twitter employee found guilty of acting as agent of a foreign government",
+"date": "2022-08-10",
+"precision": "day",
+"publisher": "U.S. Department of Justice",
+"sourceType": "Official",
+"office": "Office of Public Affairs",
+"url": "https://www.justice.gov/opa/pr/former-twitter-employee-found-guilty-acting-agent-foreign-government-and-unlawfully-sharing",
+"archivedUrl": "",
+"industry": [],
+"event": "Espionage & foreign agents",
+"country": "Saudi Arabia",
+"stage": "convicted",
+"related": [],
+"hasSummary": true
+},
+{
 "slug": "2022-08-01-inside-fog-data-science-the-secretive-company-selling-mass",
 "file": "IS_NEWS_2022-08-01-inside-fog-data-science-the-secretive-company-selling-mass.md",
 "title": "Inside Fog Data Science, the secretive company selling mass surveillance to local police",
@@ -2887,45 +2966,6 @@
 "Government cloud & surveillance technology"
 ],
 "event": "Contracts & deployments",
-"country": "",
-"stage": "",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "2022-08-01-former-twitter-employee-found-guilty-of-acting-as-agent-of-a",
-"file": "IS_NEWS_2022-08-01-former-twitter-employee-found-guilty-of-acting-as-agent-of-a.md",
-"title": "Former Twitter employee found guilty of acting as agent of a foreign government",
-"date": "2022-08-01",
-"precision": "month",
-"publisher": "U.S. Department of Justice",
-"sourceType": "Official",
-"office": "Office of Public Affairs",
-"url": "https://www.justice.gov/opa/pr/former-twitter-employee-found-guilty-acting-agent-foreign-government-and-unlawfully-sharing",
-"archivedUrl": "",
-"industry": [],
-"event": "Espionage & foreign agents",
-"country": "Saudi Arabia",
-"stage": "convicted",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "2022-08-01-failed-covidsafe-app-deleted",
-"file": "IS_NEWS_2022-08-01-failed-covidsafe-app-deleted.md",
-"title": "Failed COVIDSafe app deleted",
-"date": "2022-08-01",
-"precision": "month",
-"publisher": "Australian Department of Health",
-"sourceType": "Official",
-"office": "",
-"url": "https://www.health.gov.au/ministers/the-hon-mark-butler-mp/media/failed-covidsafe-app-deleted",
-"archivedUrl": "",
-"industry": [
-"Biotechnology & health",
-"Government cloud & surveillance technology"
-],
-"event": "Public health",
 "country": "",
 "stage": "",
 "related": [],
@@ -3010,11 +3050,11 @@
 "hasSummary": true
 },
 {
-"slug": "2022-07-01-five-men-indicted-in-transnational-repression-scheme-to",
-"file": "IS_NEWS_2022-07-01-five-men-indicted-in-transnational-repression-scheme-to.md",
+"slug": "2022-07-07-five-men-indicted-in-transnational-repression-scheme-to",
+"file": "IS_NEWS_2022-07-07-five-men-indicted-in-transnational-repression-scheme-to.md",
 "title": "Five men indicted in transnational repression scheme to silence critics of the PRC",
-"date": "2022-07-01",
-"precision": "month",
+"date": "2022-07-07",
+"precision": "day",
 "publisher": "U.S. Department of Justice",
 "sourceType": "Official",
 "office": "Office of Public Affairs",
@@ -3024,26 +3064,6 @@
 "event": "Transnational repression",
 "country": "China",
 "stage": "charged",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "2022-06-16-microsoft-opens-first-middle-eastern-azure-regions-in-abu",
-"file": "IS_NEWS_2022-06-16-microsoft-opens-first-middle-eastern-azure-regions-in-abu.md",
-"title": "Microsoft opens first Middle Eastern Azure regions in Abu Dhabi and Dubai",
-"date": "2022-06-16",
-"precision": "day",
-"publisher": "DatacenterDynamics",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://www.datacenterdynamics.com/en/news/microsoft-opens-first-middle-eastern-azure-regions-abu-dhabi-and-dubai",
-"archivedUrl": "",
-"industry": [
-"Government cloud & surveillance technology"
-],
-"event": "Contracts & deployments",
-"country": "",
-"stage": "",
 "related": [],
 "hasSummary": true
 },
@@ -3066,15 +3086,15 @@
 "hasSummary": true
 },
 {
-"slug": "2022-05-01-dta-renews-gov-wide-aws-deal-for-174-million",
-"file": "IS_NEWS_2022-05-01-dta-renews-gov-wide-aws-deal-for-174-million.md",
-"title": "DTA renews gov-wide AWS deal for $174 million",
-"date": "2022-05-01",
+"slug": "2022-04-27-nsa-re-awards-10b-wildandstormy-cloud-contract-to-aws",
+"file": "IS_NEWS_2022-04-27-nsa-re-awards-10b-wildandstormy-cloud-contract-to-aws.md",
+"title": "NSA re-awards $10B WildandStormy cloud contract to AWS",
+"date": "2022-04-27",
 "precision": "day",
-"publisher": "iTnews",
+"publisher": "FedScoop",
 "sourceType": "Trade press",
 "office": "",
-"url": "https://www.itnews.com.au/news/dta-renews-gov-wide-aws-deal-for-174-million-578790",
+"url": "https://fedscoop.com/nsa-re-awards-10b-wildandstormy-cloud-computing-contract-to-aws",
 "archivedUrl": "",
 "industry": [
 "Government cloud & surveillance technology"
@@ -3086,15 +3106,15 @@
 "hasSummary": true
 },
 {
-"slug": "2022-04-27-nsa-re-awards-10b-wildandstormy-cloud-contract-to-aws",
-"file": "IS_NEWS_2022-04-27-nsa-re-awards-10b-wildandstormy-cloud-contract-to-aws.md",
-"title": "NSA re-awards $10B WildandStormy cloud contract to AWS",
-"date": "2022-04-27",
+"slug": "2022-04-14-dta-renews-gov-wide-aws-deal-for-174-million",
+"file": "IS_NEWS_2022-04-14-dta-renews-gov-wide-aws-deal-for-174-million.md",
+"title": "DTA renews gov-wide AWS deal for $174 million",
+"date": "2022-04-14",
 "precision": "day",
-"publisher": "FedScoop",
+"publisher": "iTnews",
 "sourceType": "Trade press",
 "office": "",
-"url": "https://fedscoop.com/nsa-re-awards-10b-wildandstormy-cloud-computing-contract-to-aws",
+"url": "https://www.itnews.com.au/news/dta-renews-gov-wide-aws-deal-for-174-million-578790",
 "archivedUrl": "",
 "industry": [
 "Government cloud & surveillance technology"
@@ -3124,6 +3144,24 @@
 "hasSummary": true
 },
 {
+"slug": "2022-03-30-man-charged-in-transnational-repression-campaign-while",
+"file": "IS_NEWS_2022-03-30-man-charged-in-transnational-repression-campaign-while.md",
+"title": "Man charged in transnational repression campaign while acting as illegal agent of the Chinese government",
+"date": "2022-03-30",
+"precision": "day",
+"publisher": "U.S. Department of Justice",
+"sourceType": "Official",
+"office": "Office of Public Affairs",
+"url": "https://www.justice.gov/opa/pr/man-charged-transnational-repression-campaign-while-acting-illegal-agent-chinese-government",
+"archivedUrl": "",
+"industry": [],
+"event": "Transnational repression",
+"country": "China",
+"stage": "charged",
+"related": [],
+"hasSummary": true
+},
+{
 "slug": "2022-03-30-chinese-national-charged-with-acting-as-an-unregistered",
 "file": "IS_NEWS_2022-03-30-chinese-national-charged-with-acting-as-an-unregistered.md",
 "title": "Chinese National Charged With Acting As An Unregistered Agent Of The Chinese Government In The United States",
@@ -3136,6 +3174,24 @@
 "archivedUrl": "",
 "industry": [],
 "event": "Espionage & foreign agents",
+"country": "China",
+"stage": "charged",
+"related": [],
+"hasSummary": true
+},
+{
+"slug": "2022-03-16-five-individuals-charged-variously-with-stalking-harassing",
+"file": "IS_NEWS_2022-03-16-five-individuals-charged-variously-with-stalking-harassing.md",
+"title": "Five individuals charged variously with stalking, harassing and spying on U.S. residents on behalf of the PRC",
+"date": "2022-03-16",
+"precision": "day",
+"publisher": "U.S. Department of Justice",
+"sourceType": "Official",
+"office": "Office of Public Affairs",
+"url": "https://www.justice.gov/opa/pr/five-individuals-charged-variously-stalking-harassing-and-spying-us-residents-behalf-prc-0",
+"archivedUrl": "",
+"industry": [],
+"event": "Transnational repression",
 "country": "China",
 "stage": "charged",
 "related": [],
@@ -3182,62 +3238,6 @@
 "hasSummary": true
 },
 {
-"slug": "2022-03-01-microsoft-suspends-access-to-cloud-services-for-russian",
-"file": "IS_NEWS_2022-03-01-microsoft-suspends-access-to-cloud-services-for-russian.md",
-"title": "Microsoft suspends access to cloud services for Russian companies",
-"date": "2022-03-01",
-"precision": "day",
-"publisher": "DatacenterDynamics",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://www.datacenterdynamics.com/en/news/microsoft-suspends-access-to-cloud-services-for-russian-companies",
-"archivedUrl": "",
-"industry": [
-"Government cloud & surveillance technology"
-],
-"event": "Contracts & deployments",
-"country": "",
-"stage": "",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "2022-03-01-man-charged-in-transnational-repression-campaign-while",
-"file": "IS_NEWS_2022-03-01-man-charged-in-transnational-repression-campaign-while.md",
-"title": "Man charged in transnational repression campaign while acting as illegal agent of the Chinese government",
-"date": "2022-03-01",
-"precision": "month",
-"publisher": "U.S. Department of Justice",
-"sourceType": "Official",
-"office": "Office of Public Affairs",
-"url": "https://www.justice.gov/opa/pr/man-charged-transnational-repression-campaign-while-acting-illegal-agent-chinese-government",
-"archivedUrl": "",
-"industry": [],
-"event": "Transnational repression",
-"country": "China",
-"stage": "charged",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "2022-03-01-five-individuals-charged-variously-with-stalking-harassing",
-"file": "IS_NEWS_2022-03-01-five-individuals-charged-variously-with-stalking-harassing.md",
-"title": "Five individuals charged variously with stalking, harassing and spying on U.S. residents on behalf of the PRC",
-"date": "2022-03-01",
-"precision": "month",
-"publisher": "U.S. Department of Justice",
-"sourceType": "Official",
-"office": "Office of Public Affairs",
-"url": "https://www.justice.gov/opa/pr/five-individuals-charged-variously-stalking-harassing-and-spying-us-residents-behalf-prc-0",
-"archivedUrl": "",
-"industry": [],
-"event": "Transnational repression",
-"country": "China",
-"stage": "charged",
-"related": [],
-"hasSummary": true
-},
-{
 "slug": "2022-03-01-facial-recognition-italian-authority-fines-clearview-ai-eur",
 "file": "IS_NEWS_2022-03-01-facial-recognition-italian-authority-fines-clearview-ai-eur.md",
 "title": "Facial recognition: Italian authority fines Clearview AI EUR 20 million",
@@ -3255,6 +3255,24 @@
 "event": "Courts & litigation",
 "country": "",
 "stage": "",
+"related": [],
+"hasSummary": true
+},
+{
+"slug": "2022-02-16-individual-pleads-guilty-to-acting-within-the-united-states",
+"file": "IS_NEWS_2022-02-16-individual-pleads-guilty-to-acting-within-the-united-states.md",
+"title": "Individual pleads guilty to acting within the United States on behalf of Russian government",
+"date": "2022-02-16",
+"precision": "day",
+"publisher": "U.S. Department of Justice",
+"sourceType": "Official",
+"office": "Office of Public Affairs",
+"url": "https://www.justice.gov/opa/pr/individual-pleads-guilty-acting-within-united-states-behalf-russian-government",
+"archivedUrl": "",
+"industry": [],
+"event": "Espionage & foreign agents",
+"country": "Russia",
+"stage": "pleaded guilty",
 "related": [],
 "hasSummary": true
 },
@@ -3279,28 +3297,28 @@
 "hasSummary": true
 },
 {
-"slug": "2022-02-01-individual-pleads-guilty-to-acting-within-the-united-states",
-"file": "IS_NEWS_2022-02-01-individual-pleads-guilty-to-acting-within-the-united-states.md",
-"title": "Individual pleads guilty to acting within the United States on behalf of Russian government",
-"date": "2022-02-01",
-"precision": "month",
+"slug": "2022-01-20-belarusian-government-officials-charged-with-aircraft-piracy",
+"file": "IS_NEWS_2022-01-20-belarusian-government-officials-charged-with-aircraft-piracy.md",
+"title": "Belarusian government officials charged with aircraft piracy for diverting Ryanair flight 4978",
+"date": "2022-01-20",
+"precision": "day",
 "publisher": "U.S. Department of Justice",
 "sourceType": "Official",
 "office": "Office of Public Affairs",
-"url": "https://www.justice.gov/opa/pr/individual-pleads-guilty-acting-within-united-states-behalf-russian-government",
+"url": "https://www.justice.gov/opa/pr/belarusian-government-officials-charged-aircraft-piracy-diverting-ryanair-flight-4978-arrest",
 "archivedUrl": "",
 "industry": [],
-"event": "Espionage & foreign agents",
-"country": "Russia",
-"stage": "pleaded guilty",
+"event": "Murder for hire & violent plots",
+"country": "Belarus",
+"stage": "charged",
 "related": [],
 "hasSummary": true
 },
 {
-"slug": "2022-01-01-denver-city-council-approves-shotspotter-extension-4-7m-5yr",
-"file": "IS_NEWS_2022-01-01-denver-city-council-approves-shotspotter-extension-4-7m-5yr.md",
+"slug": "2022-01-04-denver-city-council-approves-shotspotter-extension-4-7m-5yr",
+"file": "IS_NEWS_2022-01-04-denver-city-council-approves-shotspotter-extension-4-7m-5yr.md",
 "title": "Denver City Council approves ShotSpotter extension ($4.7M, 5yr)",
-"date": "2022-01-01",
+"date": "2022-01-04",
 "precision": "day",
 "publisher": "Denver7",
 "sourceType": "News",
@@ -3313,24 +3331,6 @@
 "event": "Contracts & deployments",
 "country": "",
 "stage": "",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "2022-01-01-belarusian-government-officials-charged-with-aircraft-piracy",
-"file": "IS_NEWS_2022-01-01-belarusian-government-officials-charged-with-aircraft-piracy.md",
-"title": "Belarusian government officials charged with aircraft piracy for diverting Ryanair flight 4978",
-"date": "2022-01-01",
-"precision": "month",
-"publisher": "U.S. Department of Justice",
-"sourceType": "Official",
-"office": "Office of Public Affairs",
-"url": "https://www.justice.gov/opa/pr/belarusian-government-officials-charged-aircraft-piracy-diverting-ryanair-flight-4978-arrest",
-"archivedUrl": "",
-"industry": [],
-"event": "Murder for hire & violent plots",
-"country": "Belarus",
-"stage": "charged",
 "related": [],
 "hasSummary": true
 },
@@ -3368,7 +3368,7 @@
 "industry": [],
 "event": "Technology theft & export control",
 "country": "China",
-"stage": "",
+"stage": "convicted",
 "related": [],
 "hasSummary": true
 },
@@ -3451,6 +3451,26 @@
 "hasSummary": true
 },
 {
+"slug": "2021-07-26-hhs-renews-expands-palantir-tiberius-contract-to-31m",
+"file": "IS_NEWS_2021-07-26-hhs-renews-expands-palantir-tiberius-contract-to-31m.md",
+"title": "HHS renews, expands Palantir Tiberius contract to $31M",
+"date": "2021-07-26",
+"precision": "day",
+"publisher": "FedScoop",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://fedscoop.com/hhs-palantir-tiberius-contract-renewal",
+"archivedUrl": "",
+"industry": [
+"Government cloud & surveillance technology"
+],
+"event": "Contracts & deployments",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
 "slug": "2021-07-22-nine-individuals-charged-in-superseding-indictment-with",
 "file": "IS_NEWS_2021-07-22-nine-individuals-charged-in-superseding-indictment-with.md",
 "title": "Nine Individuals Charged in Superseding Indictment with Conspiring to Act as Illegal Agents of the People's Republic of China",
@@ -3487,11 +3507,11 @@
 "hasSummary": true
 },
 {
-"slug": "2021-07-01-iranian-intelligence-officials-indicted-on-kidnapping",
-"file": "IS_NEWS_2021-07-01-iranian-intelligence-officials-indicted-on-kidnapping.md",
+"slug": "2021-07-13-iranian-intelligence-officials-indicted-on-kidnapping",
+"file": "IS_NEWS_2021-07-13-iranian-intelligence-officials-indicted-on-kidnapping.md",
 "title": "Iranian intelligence officials indicted on kidnapping conspiracy charges",
-"date": "2021-07-01",
-"precision": "month",
+"date": "2021-07-13",
+"precision": "day",
 "publisher": "U.S. Department of Justice",
 "sourceType": "Official",
 "office": "Office of Public Affairs",
@@ -3501,6 +3521,26 @@
 "event": "Murder for hire & violent plots",
 "country": "Iran",
 "stage": "charged",
+"related": [],
+"hasSummary": true
+},
+{
+"slug": "2021-07-01-microsoft-to-acquire-at-t-network-cloud-azure-to-host-at-t",
+"file": "IS_NEWS_2021-07-01-microsoft-to-acquire-at-t-network-cloud-azure-to-host-at-t.md",
+"title": "Microsoft to acquire AT&T Network Cloud; Azure to host AT&T 5G",
+"date": "2021-07-01",
+"precision": "day",
+"publisher": "DatacenterDynamics",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://www.datacenterdynamics.com/en/news/microsoft-to-acquire-atts-network-cloud-azure-to-host-att-5g-network",
+"archivedUrl": "",
+"industry": [
+"Government cloud & surveillance technology"
+],
+"event": "Contracts & deployments",
+"country": "",
+"stage": "",
 "related": [],
 "hasSummary": true
 },
@@ -3617,6 +3657,46 @@
 "hasSummary": true
 },
 {
+"slug": "2021-04-08-hmrc-signs-three-year-aws-deal-worth-gbp94m",
+"file": "IS_NEWS_2021-04-08-hmrc-signs-three-year-aws-deal-worth-gbp94m.md",
+"title": "HMRC signs three-year AWS deal worth GBP94m",
+"date": "2021-04-08",
+"precision": "day",
+"publisher": "Computer Weekly",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://www.computerweekly.com/news/252499036/HMRC-signs-reworked-three-year-public-cloud-deal-with-AWS-worth-94m",
+"archivedUrl": "",
+"industry": [
+"Government cloud & surveillance technology"
+],
+"event": "Contracts & deployments",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
+"slug": "2021-04-07-microsoft-azure-aws-to-host-nsw-police-core-systems",
+"file": "IS_NEWS_2021-04-07-microsoft-azure-aws-to-host-nsw-police-core-systems.md",
+"title": "Microsoft Azure, AWS to host NSW Police core systems",
+"date": "2021-04-07",
+"precision": "day",
+"publisher": "iTnews",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://www.itnews.com.au/news/microsoft-azure-aws-to-host-nsw-police-core-systems-562282",
+"archivedUrl": "",
+"industry": [
+"Government cloud & surveillance technology"
+],
+"event": "Contracts & deployments",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
 "slug": "2021-03-05-california-man-sentenced-for-illegally-exporting-cesium",
 "file": "IS_NEWS_2021-03-05-california-man-sentenced-for-illegally-exporting-cesium.md",
 "title": "California Man Sentenced for Illegally Exporting Cesium Atomic Clocks to Hong Kong",
@@ -3653,17 +3733,18 @@
 "hasSummary": true
 },
 {
-"slug": "2021-02-19-hmrc-signs-three-year-aws-deal-worth-gbp94m",
-"file": "IS_NEWS_2021-02-19-hmrc-signs-three-year-aws-deal-worth-gbp94m.md",
-"title": "HMRC signs three-year AWS deal worth GBP94m",
-"date": "2021-02-19",
+"slug": "2021-02-17-unusable-and-unused-vaccine-systems-hinder-biden-covid-19",
+"file": "IS_NEWS_2021-02-17-unusable-and-unused-vaccine-systems-hinder-biden-covid-19.md",
+"title": "Unusable and unused vaccine systems hinder Biden COVID-19 response",
+"date": "2021-02-17",
 "precision": "day",
-"publisher": "Computer Weekly",
+"publisher": "FedScoop",
 "sourceType": "Trade press",
 "office": "",
-"url": "https://www.computerweekly.com/news/252499036/HMRC-signs-reworked-three-year-public-cloud-deal-with-AWS-worth-94m",
+"url": "https://fedscoop.com/covid-19-vaccine-scheduling-data",
 "archivedUrl": "",
 "industry": [
+"Biotechnology & health",
 "Government cloud & surveillance technology"
 ],
 "event": "Contracts & deployments",
@@ -3745,67 +3826,6 @@
 "event": "Technology theft & export control",
 "country": "China",
 "stage": "charged",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "2021-01-01-unusable-and-unused-vaccine-systems-hinder-biden-covid-19",
-"file": "IS_NEWS_2021-01-01-unusable-and-unused-vaccine-systems-hinder-biden-covid-19.md",
-"title": "Unusable and unused vaccine systems hinder Biden COVID-19 response",
-"date": "2021-01-01",
-"precision": "day",
-"publisher": "FedScoop",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://fedscoop.com/covid-19-vaccine-scheduling-data",
-"archivedUrl": "",
-"industry": [
-"Biotechnology & health",
-"Government cloud & surveillance technology"
-],
-"event": "Contracts & deployments",
-"country": "",
-"stage": "",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "2021-01-01-microsoft-to-acquire-at-t-network-cloud-azure-to-host-at-t",
-"file": "IS_NEWS_2021-01-01-microsoft-to-acquire-at-t-network-cloud-azure-to-host-at-t.md",
-"title": "Microsoft to acquire AT&T Network Cloud; Azure to host AT&T 5G",
-"date": "2021-01-01",
-"precision": "day",
-"publisher": "DatacenterDynamics",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://www.datacenterdynamics.com/en/news/microsoft-to-acquire-atts-network-cloud-azure-to-host-att-5g-network",
-"archivedUrl": "",
-"industry": [
-"Government cloud & surveillance technology"
-],
-"event": "Contracts & deployments",
-"country": "",
-"stage": "",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "2021-01-01-hhs-renews-expands-palantir-tiberius-contract-to-31m",
-"file": "IS_NEWS_2021-01-01-hhs-renews-expands-palantir-tiberius-contract-to-31m.md",
-"title": "HHS renews, expands Palantir Tiberius contract to $31M",
-"date": "2021-01-01",
-"precision": "day",
-"publisher": "FedScoop",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://fedscoop.com/hhs-palantir-tiberius-contract-renewal",
-"archivedUrl": "",
-"industry": [
-"Government cloud & surveillance technology"
-],
-"event": "Contracts & deployments",
-"country": "",
-"stage": "",
 "related": [],
 "hasSummary": true
 },
@@ -3911,10 +3931,10 @@
 "hasSummary": true
 },
 {
-"slug": "2020-11-25-cia-awards-multibillion-c2e-cloud-contract",
-"file": "IS_NEWS_2020-11-25-cia-awards-multibillion-c2e-cloud-contract.md",
+"slug": "2020-11-23-cia-awards-multibillion-c2e-cloud-contract",
+"file": "IS_NEWS_2020-11-23-cia-awards-multibillion-c2e-cloud-contract.md",
 "title": "CIA awards multibillion C2E cloud contract",
-"date": "2020-11-25",
+"date": "2020-11-23",
 "precision": "day",
 "publisher": "DatacenterDynamics",
 "sourceType": "Trade press",
@@ -3951,10 +3971,10 @@
 "hasSummary": true
 },
 {
-"slug": "2020-11-01-ice-plans-100-million-cloud-spend-on-aws-and-azure",
-"file": "IS_NEWS_2020-11-01-ice-plans-100-million-cloud-spend-on-aws-and-azure.md",
+"slug": "2020-11-19-ice-plans-100-million-cloud-spend-on-aws-and-azure",
+"file": "IS_NEWS_2020-11-19-ice-plans-100-million-cloud-spend-on-aws-and-azure.md",
 "title": "ICE plans $100 million cloud spend on AWS and Azure",
-"date": "2020-11-01",
+"date": "2020-11-19",
 "precision": "day",
 "publisher": "DatacenterDynamics",
 "sourceType": "Trade press",
@@ -4155,27 +4175,6 @@
 "hasSummary": true
 },
 {
-"slug": "2020-08-26-uk-biobank-to-build-aws-hosted-platform-with-dnanexus",
-"file": "IS_NEWS_2020-08-26-uk-biobank-to-build-aws-hosted-platform-with-dnanexus.md",
-"title": "UK Biobank to build AWS-hosted platform with DNAnexus",
-"date": "2020-08-26",
-"precision": "day",
-"publisher": "Computer Weekly",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://www.computerweekly.com/news/252487787/UK-Biobank-to-build-AWS-hosted-data-analysis-platform-with-DNAnexus-to-speed-research",
-"archivedUrl": "",
-"industry": [
-"Biotechnology & health",
-"Government cloud & surveillance technology"
-],
-"event": "Contracts & deployments",
-"country": "",
-"stage": "",
-"related": [],
-"hasSummary": true
-},
-{
 "slug": "2020-08-24-nasa-researcher-arrested-for-false-statements-and-wire-fraud",
 "file": "IS_NEWS_2020-08-24-nasa-researcher-arrested-for-false-statements-and-wire-fraud.md",
 "title": "NASA Researcher Arrested for False Statements and Wire Fraud in Relation to China's Talents Program",
@@ -4232,6 +4231,27 @@
 "hasSummary": true
 },
 {
+"slug": "2020-08-18-uk-biobank-to-build-aws-hosted-platform-with-dnanexus",
+"file": "IS_NEWS_2020-08-18-uk-biobank-to-build-aws-hosted-platform-with-dnanexus.md",
+"title": "UK Biobank to build AWS-hosted platform with DNAnexus",
+"date": "2020-08-18",
+"precision": "day",
+"publisher": "Computer Weekly",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://www.computerweekly.com/news/252487787/UK-Biobank-to-build-AWS-hosted-data-analysis-platform-with-DNAnexus-to-speed-research",
+"archivedUrl": "",
+"industry": [
+"Biotechnology & health",
+"Government cloud & surveillance technology"
+],
+"event": "Contracts & deployments",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
 "slug": "2020-08-17-former-cia-officer-arrested-and-charged-with-espionage",
 "file": "IS_NEWS_2020-08-17-former-cia-officer-arrested-and-charged-with-espionage.md",
 "title": "Former CIA Officer Arrested and Charged with Espionage",
@@ -4267,7 +4287,7 @@
 "country": "",
 "stage": "",
 "related": [],
-"hasSummary": false
+"hasSummary": true
 },
 {
 "slug": "2020-08-06-company-president-and-employee-arrested-in-alleged-scheme-to",
@@ -4437,6 +4457,26 @@
 "hasSummary": true
 },
 {
+"slug": "2020-05-06-dta-chief-defends-aws-pick-for-covidsafe",
+"file": "IS_NEWS_2020-05-06-dta-chief-defends-aws-pick-for-covidsafe.md",
+"title": "DTA chief defends AWS pick for COVIDSafe",
+"date": "2020-05-06",
+"precision": "day",
+"publisher": "iTnews",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://www.itnews.com.au/news/dta-chief-defends-aws-pick-for-covidsafe-547844",
+"archivedUrl": "",
+"industry": [
+"Government cloud & surveillance technology"
+],
+"event": "Contracts & deployments",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
 "slug": "2020-05-01-dhs-moving-biometrics-database-to-amazon-cloud",
 "file": "IS_NEWS_2020-05-01-dhs-moving-biometrics-database-to-amazon-cloud.md",
 "title": "DHS moving biometrics database to Amazon Cloud",
@@ -4454,7 +4494,7 @@
 "country": "",
 "stage": "",
 "related": [],
-"hasSummary": false
+"hasSummary": true
 },
 {
 "slug": "2020-04-27-hhs-covid-protect-now-taps-palantir-technologies",
@@ -4496,10 +4536,10 @@
 "hasSummary": true
 },
 {
-"slug": "2020-03-28-nhs-corrals-microsoft-palantir-and-google-for-data-analysis",
-"file": "IS_NEWS_2020-03-28-nhs-corrals-microsoft-palantir-and-google-for-data-analysis.md",
+"slug": "2020-03-30-nhs-corrals-microsoft-palantir-and-google-for-data-analysis",
+"file": "IS_NEWS_2020-03-30-nhs-corrals-microsoft-palantir-and-google-for-data-analysis.md",
 "title": "NHS corrals Microsoft, Palantir and Google for data analysis",
-"date": "2020-03-28",
+"date": "2020-03-30",
 "precision": "day",
 "publisher": "Computer Weekly",
 "sourceType": "Trade press",
@@ -4737,6 +4777,26 @@
 "hasSummary": true
 },
 {
+"slug": "2019-10-25-how-the-dwp-adopted-a-cloud-first-model",
+"file": "IS_NEWS_2019-10-25-how-the-dwp-adopted-a-cloud-first-model.md",
+"title": "How the DWP adopted a cloud-first model",
+"date": "2019-10-25",
+"precision": "day",
+"publisher": "Computer Weekly",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://www.computerweekly.com/news/252472878/How-the-DWP-lifted-two-decades-of-outsourcing-to-adopt-a-cloud-first-model",
+"archivedUrl": "",
+"industry": [
+"Government cloud & surveillance technology"
+],
+"event": "Contracts & deployments",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
 "slug": "2019-10-18-chinese-national-sentenced-to-40-months-in-prison-for",
 "file": "IS_NEWS_2019-10-18-chinese-national-sentenced-to-40-months-in-prison-for.md",
 "title": "Chinese National Sentenced to 40 Months in Prison for Conspiring to Illegally Export Military- and Space-Grade Technology",
@@ -4845,6 +4905,26 @@
 "hasSummary": true
 },
 {
+"slug": "2019-06-01-microsoft-opens-first-middle-eastern-azure-regions-in-abu",
+"file": "IS_NEWS_2019-06-01-microsoft-opens-first-middle-eastern-azure-regions-in-abu.md",
+"title": "Microsoft opens first Middle Eastern Azure regions in Abu Dhabi and Dubai",
+"date": "2019-06-01",
+"precision": "month",
+"publisher": "DatacenterDynamics",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://www.datacenterdynamics.com/en/news/microsoft-opens-first-middle-eastern-azure-regions-abu-dhabi-and-dubai",
+"archivedUrl": "",
+"industry": [
+"Government cloud & surveillance technology"
+],
+"event": "Contracts & deployments",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
 "slug": "2019-05-17-former-cia-officer-sentenced-to-prison-for-espionage",
 "file": "IS_NEWS_2019-05-17-former-cia-officer-sentenced-to-prison-for-espionage.md",
 "title": "Former CIA Officer Sentenced to Prison for Espionage",
@@ -4917,6 +4997,26 @@
 "hasSummary": true
 },
 {
+"slug": "2019-03-14-afp-eyes-protected-microsoft-cloud",
+"file": "IS_NEWS_2019-03-14-afp-eyes-protected-microsoft-cloud.md",
+"title": "AFP eyes protected Microsoft cloud",
+"date": "2019-03-14",
+"precision": "day",
+"publisher": "iTnews",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://www.itnews.com.au/news/afp-eyes-protected-microsoft-cloud-520519",
+"archivedUrl": "",
+"industry": [
+"Government cloud & surveillance technology"
+],
+"event": "Contracts & deployments",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
 "slug": "2019-01-28-chinese-telecommunications-device-manufacturer-and-its-u-s",
 "file": "IS_NEWS_2019-01-28-chinese-telecommunications-device-manufacturer-and-its-u-s.md",
 "title": "Chinese Telecommunications Device Manufacturer and its U.S. Affiliate Indicted for Theft of Trade Secrets, Wire Fraud, and Obstruction of Justice",
@@ -4931,26 +5031,6 @@
 "event": "Technology theft & export control",
 "country": "China",
 "stage": "charged",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "2019-01-01-how-the-dwp-adopted-a-cloud-first-model",
-"file": "IS_NEWS_2019-01-01-how-the-dwp-adopted-a-cloud-first-model.md",
-"title": "How the DWP adopted a cloud-first model",
-"date": "2019-01-01",
-"precision": "day",
-"publisher": "Computer Weekly",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://www.computerweekly.com/news/252472878/How-the-DWP-lifted-two-decades-of-outsourcing-to-adopt-a-cloud-first-model",
-"archivedUrl": "",
-"industry": [
-"Government cloud & surveillance technology"
-],
-"event": "Contracts & deployments",
-"country": "",
-"stage": "",
 "related": [],
 "hasSummary": true
 },
@@ -4973,10 +5053,10 @@
 "hasSummary": true
 },
 {
-"slug": "2018-11-01-fbi-counterterrorism-investigations-now-run-on-amazon",
-"file": "IS_NEWS_2018-11-01-fbi-counterterrorism-investigations-now-run-on-amazon.md",
+"slug": "2018-11-29-fbi-counterterrorism-investigations-now-run-on-amazon",
+"file": "IS_NEWS_2018-11-29-fbi-counterterrorism-investigations-now-run-on-amazon.md",
 "title": "FBI Counterterrorism Investigations Now Run on Amazon",
-"date": "2018-11-01",
+"date": "2018-11-29",
 "precision": "day",
 "publisher": "Nextgov/FCW",
 "sourceType": "Trade press",
@@ -5065,6 +5145,46 @@
 "hasSummary": true
 },
 {
+"slug": "2017-03-16-microsoft-azure-govt-cloud-gets-fedramp-high-ato-from-va",
+"file": "IS_NEWS_2017-03-16-microsoft-azure-govt-cloud-gets-fedramp-high-ato-from-va.md",
+"title": "Microsoft Azure Govt Cloud Gets FedRAMP High ATO From VA",
+"date": "2017-03-16",
+"precision": "day",
+"publisher": "ExecutiveBiz",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://www.executivebiz.com/articles/microsoft-azure-govt-cloud-gets-fedramp-high-ato-from-va",
+"archivedUrl": "",
+"industry": [
+"Government cloud & surveillance technology"
+],
+"event": "Contracts & deployments",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
+"slug": "2016-11-29-ibm-blamed-for-australian-census-website-crash",
+"file": "IS_NEWS_2016-11-29-ibm-blamed-for-australian-census-website-crash.md",
+"title": "IBM blamed for Australian census website crash",
+"date": "2016-11-29",
+"precision": "day",
+"publisher": "Computer Weekly",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://www.computerweekly.com/news/450403576/IBM-blamed-for-Australian-census-website-crash",
+"archivedUrl": "",
+"industry": [
+"Government cloud & surveillance technology"
+],
+"event": "Contracts & deployments",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
 "slug": "2016-03-11-russian-national-pleads-guilty-in-connection-with-conspiracy",
 "file": "IS_NEWS_2016-03-11-russian-national-pleads-guilty-in-connection-with-conspiracy.md",
 "title": "Russian National Pleads Guilty in Connection with Conspiracy to Work for Russian Intelligence",
@@ -5079,26 +5199,6 @@
 "event": "Espionage & foreign agents",
 "country": "Russia",
 "stage": "pleaded guilty",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "2016-01-01-ibm-blamed-for-australian-census-website-crash",
-"file": "IS_NEWS_2016-01-01-ibm-blamed-for-australian-census-website-crash.md",
-"title": "IBM blamed for Australian census website crash",
-"date": "2016-01-01",
-"precision": "day",
-"publisher": "Computer Weekly",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://www.computerweekly.com/news/450403576/IBM-blamed-for-Australian-census-website-crash",
-"archivedUrl": "",
-"industry": [
-"Government cloud & surveillance technology"
-],
-"event": "Contracts & deployments",
-"country": "",
-"stage": "",
 "related": [],
 "hasSummary": true
 },
@@ -5120,7 +5220,7 @@
 "country": "",
 "stage": "",
 "related": [],
-"hasSummary": false
+"hasSummary": true
 },
 {
 "slug": "2013-01-30-nestle-found-liable-over-spying-on-ngo",
@@ -5140,7 +5240,7 @@
 "country": "",
 "stage": "",
 "related": [],
-"hasSummary": false
+"hasSummary": true
 },
 {
 "slug": "2011-09-28-former-guard-charged-with-attempting-to-communicate-national",
@@ -5157,86 +5257,6 @@
 "event": "Espionage & foreign agents",
 "country": "China",
 "stage": "charged",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "undated-navy-neptune-awards-four-jwcc-cloud-task-orders",
-"file": "IS_NEWS_undated-navy-neptune-awards-four-jwcc-cloud-task-orders.md",
-"title": "Navy Neptune Awards Four JWCC Cloud Task Orders",
-"date": "",
-"precision": "",
-"publisher": "ExecutiveBiz",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://www.executivebiz.com/articles/navy-jwcc-aws-azure-google-oracle-task-orders",
-"archivedUrl": "",
-"industry": [
-"Government cloud & surveillance technology"
-],
-"event": "Contracts & deployments",
-"country": "",
-"stage": "",
-"related": [],
-"hasSummary": false
-},
-{
-"slug": "undated-microsoft-azure-govt-cloud-gets-fedramp-high-ato-from-va",
-"file": "IS_NEWS_undated-microsoft-azure-govt-cloud-gets-fedramp-high-ato-from-va.md",
-"title": "Microsoft Azure Govt Cloud Gets FedRAMP High ATO From VA",
-"date": "",
-"precision": "",
-"publisher": "ExecutiveBiz",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://www.executivebiz.com/articles/microsoft-azure-govt-cloud-gets-fedramp-high-ato-from-va",
-"archivedUrl": "",
-"industry": [
-"Government cloud & surveillance technology"
-],
-"event": "Contracts & deployments",
-"country": "",
-"stage": "",
-"related": [],
-"hasSummary": false
-},
-{
-"slug": "undated-microsoft-azure-aws-to-host-nsw-police-core-systems",
-"file": "IS_NEWS_undated-microsoft-azure-aws-to-host-nsw-police-core-systems.md",
-"title": "Microsoft Azure, AWS to host NSW Police core systems",
-"date": "",
-"precision": "",
-"publisher": "iTnews",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://www.itnews.com.au/news/microsoft-azure-aws-to-host-nsw-police-core-systems-562282",
-"archivedUrl": "",
-"industry": [
-"Government cloud & surveillance technology"
-],
-"event": "Contracts & deployments",
-"country": "",
-"stage": "",
-"related": [],
-"hasSummary": true
-},
-{
-"slug": "undated-dta-chief-defends-aws-pick-for-covidsafe",
-"file": "IS_NEWS_undated-dta-chief-defends-aws-pick-for-covidsafe.md",
-"title": "DTA chief defends AWS pick for COVIDSafe",
-"date": "",
-"precision": "",
-"publisher": "iTnews",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://www.itnews.com.au/news/dta-chief-defends-aws-pick-for-covidsafe-547844",
-"archivedUrl": "",
-"industry": [
-"Government cloud & surveillance technology"
-],
-"event": "Contracts & deployments",
-"country": "",
-"stage": "",
 "related": [],
 "hasSummary": true
 },
@@ -5276,26 +5296,6 @@
 "Biotechnology & health"
 ],
 "event": "Public health",
-"country": "",
-"stage": "",
-"related": [],
-"hasSummary": false
-},
-{
-"slug": "undated-afp-eyes-protected-microsoft-cloud",
-"file": "IS_NEWS_undated-afp-eyes-protected-microsoft-cloud.md",
-"title": "AFP eyes protected Microsoft cloud",
-"date": "",
-"precision": "",
-"publisher": "iTnews",
-"sourceType": "Trade press",
-"office": "",
-"url": "https://www.itnews.com.au/news/afp-eyes-protected-microsoft-cloud-520519",
-"archivedUrl": "",
-"industry": [
-"Government cloud & surveillance technology"
-],
-"event": "Contracts & deployments",
 "country": "",
 "stage": "",
 "related": [],

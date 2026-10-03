@@ -187,7 +187,8 @@ function Block({ id, eyebrow, heading, children, href, label, from, motif, wide 
   href?: string; label?: string; from: string;
   /** In place of the one link, for a block whose way on is not a page (Contribute). */
   actions?: ReactNode;
-  /** The full width of the page (Concepts only; Sean, 1 Oct 2026). */
+  /** The full width of the page: Concepts (Sean, 1 Oct 2026) and Contribute, whose
+   *  three columns were squeezed into 1,040px (Sean, 2 Oct 2026). */
   wide?: boolean;
   /** A motif behind the whole block, as SiteSection does on the home page. */
   motif?: "recede" | "room";
@@ -335,7 +336,7 @@ export default function BottomSections({ exclude = [], from }: {
         // columns stay on the home page. The safety notice is kept, as the suicide
         // chart keeps its support line: it is safety information, not disclaimer copy.
         if (b === "contribute") return (
-          <Block key={b} id={b} from={from} eyebrow="Contribute" motif="room"
+          <Block key={b} id={b} from={from} eyebrow="Contribute" motif="room" wide
             heading="What can you do?"
             actions={<>
               <ExportButton />
