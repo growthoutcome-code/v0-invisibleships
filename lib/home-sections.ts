@@ -16,7 +16,7 @@
  */
 import type { Slide } from "@/components/HomeCarousel";
 import type { IntlChart } from "@/components/SuicideChart";
-import { BASIS_LABEL, CONCEPTS, ORIGIN_LABEL } from "@/lib/concepts";
+import { BASIS_LABEL, CONCEPTS, ORIGIN_LABEL, plainText } from "@/lib/concepts";
 import { THEMES } from "@/lib/themes";
 import type { ConceptTileData } from "@/components/ConceptTile";
 import { CONCEPT_PICKS, GLOSSARY_PICKS } from "@/lib/home-picks";
@@ -66,7 +66,7 @@ export function conceptSlides(picks: string[] = CONCEPT_PICKS): Slide[] {
       // terror is FOR. At 840 the prevention concept lost its closing sentence by
       // thirty characters. A concept slide that asserts and then withholds its
       // own payoff is worse than no slide.
-      body: firstSentences(c.body, 5, 900),
+      body: firstSentences(plainText(c.body), 5, 900),
       cta: "Read the concept",
     };
   });
@@ -95,7 +95,7 @@ export function conceptTiles(picks: string[]): ConceptTileData[] {
       basis: BASIS_LABEL[c.basis],
       title: c.title,
       // Enough to fill a full-width square; the tile clamps to what fits.
-      body: c.body.length > 1400 ? c.body.slice(0, 1400) : c.body,
+      body: plainText(c.body).slice(0, 1400),
       topics: c.topics.slice(0, 3).map((t) => THEMES[t] ?? t),
     };
   });

@@ -66,22 +66,19 @@ const STEPS = [
 
 const TERMS_STEP = 2;
 
-// TEMPORARY (Sean, 3 Oct 2026): "turn the gate back on for visits to the home
-// page every time until we get the gate changes worked out." While true, the
-// gate opens on every visit to the home page, including returning to it from
-// inside the site, whether or not this device has passed it before. Every
-// other page keeps the first-visit rule in lib/gate.ts. Set to false to go
-// back to first visit only.
-//
-// It also inflates the gate counts while it is on: each home visit logs a new
-// gate_opened, so read the funnel for these dates with that in mind.
-const GATE_ON_EVERY_HOME_VISIT = true;
+// Off since 4 Oct 2026 (Sean: "make sure the gate only fires the first time
+// you visit. And maybe every week thereafter", then "once every 30 days");
+// the 30-day rule is in lib/gate.ts. From 3 to 4 Oct it was on ("turn the gate back on for visits to
+// the home page every time until we get the gate changes worked out"): the gate
+// opened on every visit to the home page whatever the device had passed, and
+// each of those visits logged a gate_opened, so gate counts for 3-4 Oct are
+// inflated. Set to true to bring that back while testing gate changes.
+const GATE_ON_EVERY_HOME_VISIT = false;
 
 // Closed without entering (a click outside the card, or Escape). Remembered for
 // the browser tab's session only (sessionStorage), so the gate does not reopen
 // while the reader moves around the site, including links that reload the page.
-// It is not recorded as passed, so it returns on the next visit. The home page
-// still opens it every time while the rule above is on.
+// It is not recorded as passed, so it returns on the next visit.
 const DISMISSED_KEY = `is_gate_dismissed_${GATE_VERSION}`;
 function wasDismissed(): boolean {
   try {
@@ -289,8 +286,13 @@ export default function EntryGate() {
             e.preventDefault();
             dismiss();
           }}
+          // On the home page a click outside the card does NOT close the gate
+          // (Sean, 4 Oct 2026: "make sure that if you click outside the gate,
+          // it does not shut the gate on the home page"). The home page is the
+          // front door, so the gate there stays until the reader enters.
+          // Everywhere else the click still closes it, as from 3 Oct.
           onClick={(e) => {
-            if (e.target === e.currentTarget) dismiss();
+            if (e.target === e.currentTarget && pathname !== "/") dismiss();
           }}
           onPointerDownOutside={(e) => e.preventDefault()}
           onInteractOutside={(e) => e.preventDefault()}

@@ -3,6 +3,7 @@
 import { track } from "@/lib/analytics";
 import { BASIS_LABEL, ORIGIN_LABEL, VERIFICATION_LABEL, type Concept } from "@/lib/concepts";
 import { THEMES } from "@/lib/themes";
+import ConceptBody, { renderConceptInline } from "@/components/ConceptBody";
 
 /**
  * One concept in full, on its own page (/concepts/<id>, Sean 30 Sep 2026).
@@ -32,9 +33,9 @@ export default function ConceptArticle({ c, n }: { c: Concept; n: number }) {
 
       {/* One paragraph per blank line in the body. It was a single <p>, so the
           breaks written into four concepts showed as spaces (1 Oct 2026). */}
-      {c.body.split(/\n{2,}/).map((para, i) => (
-        <p key={i} className="body-copy text-foreground/85 measure mb-6">{para}</p>
-      ))}
+      {/* Plain prose renders exactly as before (one paragraph per blank line);
+          a body may also use the small markdown subset in ConceptBody (4 Oct 2026). */}
+      <ConceptBody md={c.body} />
 
       {c.evidence && (
         <ul className="list-none p-0 m-0 measure mb-6">
@@ -58,7 +59,7 @@ export default function ConceptArticle({ c, n }: { c: Concept; n: number }) {
             {c.questions.map((q) => (
               <li key={q} className="body-copy text-foreground/75 py-2 pl-5 relative">
                 <span aria-hidden className="absolute left-0 top-2 text-foreground">?</span>
-                {q}
+                {renderConceptInline(q, q.slice(0, 24))}
               </li>
             ))}
           </ul>
@@ -106,7 +107,7 @@ export default function ConceptArticle({ c, n }: { c: Concept; n: number }) {
             Author&rsquo;s note
           </h4>
           {c.comments.map((m) => (
-            <p key={m} className="body-copy text-foreground/75 m-0 mb-2 last:mb-0">{m}</p>
+            <p key={m} className="body-copy text-foreground/75 m-0 mb-3 last:mb-0">{renderConceptInline(m, m.slice(0, 24))}</p>
           ))}
           <p className="text-[14px] text-muted mt-3 m-0">
             Commentary by the author. Not evidence, and not a finding of this research.

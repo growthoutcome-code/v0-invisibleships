@@ -23,8 +23,9 @@ never edited to reverse it — a new record supersedes the old one, and the old 
 | [0015](0015-news-publisher-and-country-filters.md) | May the News page filter and chart by publisher and country? | Accepted | 2026-10-02 |
 | [0016](0016-google-analytics-stays.md) | Does the site keep Google Analytics alongside PostHog? | Accepted | 2026-09-28 |
 | [0017](0017-readers-in-other-languages.md) | How does the site serve readers in other languages? | Accepted | 2026-10-03 |
+| [0018](0018-gate-first-visit-then-weekly.md) | How often does the gate show? (first visit, then every 30 days) | Accepted | 2026-10-04 |
 
-Next number: **0018**.
+Next number: **0019**.
 
 Start from `TEMPLATE.md`. The **Rejected** table is the part that earns its keep — it
 is what stops a settled question being reopened by someone proposing an option that

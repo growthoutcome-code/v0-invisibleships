@@ -35,7 +35,7 @@ browser translate the pages. Translating the pages must not break the site.
 
 ## Second part, 3 Oct afternoon (Sean's requests)
 
-- **Gate on every home-page visit, for now.** `GATE_ON_EVERY_HOME_VISIT` in
+- **Gate on every home-page visit, for now** (turned off 4 Oct; see the fourth part). `GATE_ON_EVERY_HOME_VISIT` in
   `EntryGate.tsx`. A device that had passed the gate once never saw the new one,
   which is why the morning's changes were not visible. Other pages keep the
   first-visit rule. While it is on, `gate_opened` counts home visits.
@@ -71,6 +71,28 @@ German: the button fits the box (French and German overflowed until the size
 moved out of it), Persian and Arabic place it on the right, a click downloads
 `invisible-ships-corpus.zip` and leaves the gate open, no errors, English shows
 no button. `npm run check` and `tsc` pass.
+
+## Fourth part, 4 Oct: first visit, then weekly
+
+- `GATE_ON_EVERY_HOME_VISIT` is now false. Sean: "make sure the gate only fires
+  the first time you visit. And maybe every week thereafter."
+- `lib/gate.ts` stores the time of the pass instead of "1"; the gate shows again
+  after `GATE_REPEAT_DAYS` (7). Old "1" values meet the gate once more.
+- **Same day, changed to 30 days.** Sean: "make sure the gate only opens once
+  every 30 days." `GATE_REPEAT_DAYS` is now 30.
+- **Home page: an outside click no longer closes the gate.** Sean: "make sure
+  that if you click outside the gate, it does not shut the gate on the home
+  page." On `/` the gate stays until the reader enters; on every other page a
+  click outside still closes it. Escape still closes it everywhere, as the
+  keyboard way out.
+  Decision record `0018`.
+- Shipped in the same commit as the home animation update (the seated figure is
+  now a woman with a ponytail).
+
+Verified with Playwright on the dev server: a fresh device sees the gate; after
+entering, a reload and the home page do not show it; with the stored time moved
+8 days back it shows again; an old "1" value shows it; Escape keeps it closed in
+that tab and a new tab shows it again.
 
 ## Acceptance
 

@@ -9,7 +9,7 @@ import Pager from "@/components/Pager";
 import ConceptTile from "@/components/ConceptTile";
 import {
   CONCEPTS, NO_FILTERS, BASIS_LABEL, ORIGIN_LABEL,
-  filterConcepts, sortConcepts, CONCEPT_SORTS, type Filters, type ConceptSort,
+  filterConcepts, sortConcepts, plainText, CONCEPT_SORTS, type Filters, type ConceptSort,
 } from "@/lib/concepts";
 import { THEMES } from "@/lib/themes";
 
@@ -81,7 +81,7 @@ export default function ConceptsView({
               <li key={c.id} className="flex">
                 <ConceptTile from="tile" c={{
                   id: c.id, n, origin: ORIGIN_LABEL[c.origin], basis: BASIS_LABEL[c.basis],
-                  title: c.title, body: c.body, topics: topics.map((t) => THEMES[t]),
+                  title: c.title, body: plainText(c.body), topics: topics.map((t) => THEMES[t]),
                 }} />
               </li>
             );

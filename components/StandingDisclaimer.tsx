@@ -4,8 +4,8 @@ import DisclaimerLink from "@/components/DisclaimerLink";
 /**
  * The standing notice, under every page of content.
  *
- * WHY EVERY PAGE AND NOT JUST THE GATE. The gate is met once per browser
- * session, and only by somebody who arrives at the site. Most readers of a
+ * WHY EVERY PAGE AND NOT JUST THE GATE. The gate is met on a first visit and
+ * then once every 30 days (lib/gate.ts), and only by somebody who arrives at the site. Most readers of a
  * journal entry will arrive at that entry — 438 of them are in the sitemap and
  * every one is a shareable URL. Before this, a person landing on a transcript
  * from a search result or a forwarded link read a verbatim recording with names

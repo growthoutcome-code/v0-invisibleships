@@ -1,16 +1,20 @@
-// First-visit gate memory.
+// Gate memory: first visit, then once every 30 days.
 //
-// Backed by localStorage under a VERSIONED key (Sean, 30 Sep 2026: "make the
-// gate only show up on the first visit"):
-//   • Passing the gate is remembered on the device, across browser sessions —
-//     a returning reader goes straight to the page they were sent to.
-//   • Earlier (20 Aug to 30 Sep) it lasted one browser session, so every new
-//     session met the full gate again. What that bought: a shared computer
-//     showed the warning to the next person. That is what this gives up.
-//   • Bump the _v suffix whenever the gate wording changes materially, so
-//     returning visitors meet the updated terms once more.
-//   • A reader who passed it under the session rule this session is carried
-//     over, so nobody sees it twice on the day this ships.
+// Sean, 4 Oct 2026: "make sure the gate only fires the first time you visit.
+// And maybe every week thereafter." Then, the same day: "make sure the gate
+// only opens once every 30 days." Decision record 0018.
+//   • Passing the gate stores the time it was passed, on the device
+//     (localStorage, under a VERSIONED key). For GATE_REPEAT_DAYS after that a
+//     returning reader goes straight to the page they were sent to; after it,
+//     the gate shows once more and the clock restarts.
+//   • Before this (30 Sep to 4 Oct) a pass was remembered forever, and from
+//     3 Oct the home page showed it on every visit as a temporary measure.
+//     Devices that passed under the old rule stored "1" with no date; they meet
+//     the gate once more, then follow the 30-day rule.
+//   • Bump the _v suffix whenever the gate wording changes materially, so every
+//     returning visitor meets the updated terms at once rather than within 30 days.
+//   • Closing the gate without entering (Escape) is not a pass; see
+//     components/EntryGate.tsx.
 //
 // Falls back to the in-memory flag when storage is unavailable (private mode /
 // storage denied), which re-shows the gate on refresh there. All storage access
@@ -20,6 +24,10 @@
 export const GATE_VERSION = "v2";  // v2: the merged three-step gate, 15 Sep 2026
 
 const KEY = `is_gate_entered_${GATE_VERSION}`;
+
+/** How long a pass lasts on a device before the gate shows again. */
+export const GATE_REPEAT_DAYS = 30;  // was 7 (weekly) until 4 Oct 2026
+const REPEAT_MS = GATE_REPEAT_DAYS * 24 * 60 * 60 * 1000;
 
 /**
  * The options on the gate's optional "who is reading" question.
@@ -48,10 +56,14 @@ let entered = false;
 export function hasEntered(): boolean {
   if (entered) return true;
   try {
-    if (window.localStorage.getItem(KEY) === "1") return true;
-    // passed under the old once-per-session rule: remember it on the device now
-    if (window.sessionStorage.getItem(KEY) === "1") { markEntered(); return true; }
-    return false;
+    // A number is the time of the last pass. Anything else ("1" from the old
+    // rule, or nothing) means the gate shows.
+    const passed = Number(window.localStorage.getItem(KEY));
+    if (!Number.isFinite(passed) || passed < 1e12) return false;
+    const age = Date.now() - passed;
+    // A clock set backwards gives a negative age; show the gate rather than
+    // trusting a pass from the future.
+    return age >= 0 && age < REPEAT_MS;
   } catch {
     return entered;
   }
@@ -60,7 +72,7 @@ export function hasEntered(): boolean {
 export function markEntered(): void {
   entered = true;
   try {
-    window.localStorage.setItem(KEY, "1");
+    window.localStorage.setItem(KEY, String(Date.now()));
   } catch {
     /* private mode: in-memory flag above still covers this visit */
   }
