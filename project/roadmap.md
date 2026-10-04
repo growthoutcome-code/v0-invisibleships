@@ -1,6 +1,6 @@
 # Invisible Ships — roadmap
 
-**Last reviewed: 2026-10-02.**
+**Last reviewed: 2026-10-04.**
 
 How to read this: **Now** is being worked on. **Next** is agreed and queued. **Later**
 is real but unscheduled. **Not doing** exists so the same suggestions stop coming back.
@@ -58,7 +58,7 @@ Pulled from the decision records so nobody re-proposes them.
 
 | Proposal | Why not | Record |
 |---|---|---|
-| Google Analytics | Removed 26 Sep. Cannot do the cross-check `0002` depends on. Only re-open for Google Ads conversion tracking | `0001` |
+| Removing Google Analytics | It stays, alongside PostHog (Sean, 28 Sep: "we never want to remove Google Analytics"). The 26 Sep removal was reversed on 28 Sep | `0016` |
 | Cookie banner or consent screen for page views | Overstates ordinary monitoring; adds friction to entry | `0001` |
 | Gate question asking reader location or country | Readers breeze through to the content; answers would be noise presented as data | `0001`, `0002` |
 | Cloudflare in front of the site | Carries no ASN to origin on any plan; needs a Worker and a DNS move, and breaks Vercel's geo headers | `0002` |
@@ -66,6 +66,7 @@ Pulled from the decision records so nobody re-proposes them.
 | Third-party VPN detection APIs | Post every reader's IP to a third party | `0002` |
 | Determining the real location behind a VPN | Not obtainable by any tool at any price; pursuing it would make the terms false | `0002` |
 | Storing an IP address | Never | `0001` |
+| Right-to-left support for the site, and translating it | Parked 4 Oct 2026 (Sean). No visitors with right-to-left browser languages yet; layout and charts are 1–2 weeks and only pay off with a translated site. Kept as a separate plan in the Claude project (`claude/rtl-plan.md`, `claude/rtl-research.md`). What stays: the gate's language note, which reads right to left in Persian and Arabic | `0017` |
 
 ## Standing constraints on everything above
 
