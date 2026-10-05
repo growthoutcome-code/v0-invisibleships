@@ -37,7 +37,7 @@ export default function ConceptItemReader({ id, n, prev, next }: { id: string; n
   const nextInSeries = CONCEPTS.find((x) => x.id === nextId) ?? c;
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
-      <ItemHeader />
+      <ItemHeader tab="concepts" />
       <main className="flex-1 w-full max-w-[1400px] mx-auto px-4 sm:px-6 py-6">
         {/* TITLE BAND, IDENTICAL TO THE CONCEPTS LIST PAGE (Sean, 4 Oct 2026: "it
             needs to match the height and the top margin from the header

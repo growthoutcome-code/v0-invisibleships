@@ -29,7 +29,7 @@ export default function JournalItemReader({ doc, body, cats, gloss, prev, next }
   useEffect(() => { track("entry_opened", { id: doc.id, route: true }); }, [doc.id]);
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
-      <ItemHeader />
+      <ItemHeader tab="journal" />
       <main className="flex-1 w-full max-w-[1400px] mx-auto px-4 sm:px-6 py-6">
         <article className="w-full">
           <div className="flex items-center justify-between mb-4">

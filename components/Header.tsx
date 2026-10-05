@@ -53,7 +53,8 @@ const NAV: { t: Tab; href: string; label: string }[] = [
   // Concepts keeps its own top-level entry although it is also a Research
   // vertical (Sean, 26 Aug): it is the part of this archive a reader is most
   // likely to have been sent a link to. Both entries land in the same section.
-  // ItemHeader.tsx carries the same list and must be kept in step.
+  // Item routes use this header too (ItemHeader.tsx just passes the tab), so
+  // this is the only copy of the menu.
   { t: "journal", href: "/journal", label: "Journal" },
   { t: "concepts", href: "/concepts", label: "Concepts" },
   // Research opens a sub-menu of its four sections (Sean, 30 Sep 2026: "sub-navigation

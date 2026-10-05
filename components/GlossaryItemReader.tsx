@@ -26,7 +26,7 @@ export default function GlossaryItemReader({ term, prev, next }: Props) {
   useEffect(() => { track("term_opened", { slug: term.slug, route: true }); }, [term.slug]);
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
-      <ItemHeader />
+      <ItemHeader tab="glossary" />
       <main className="flex-1 w-full max-w-[1400px] mx-auto px-4 sm:px-6 py-6">
         <article className="w-full">
           <div className="flex items-center justify-between mb-4">
