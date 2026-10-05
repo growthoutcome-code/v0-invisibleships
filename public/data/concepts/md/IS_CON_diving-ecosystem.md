@@ -1,6 +1,6 @@
 ---
-id: IS-CON-THE-OPEN-CHANNEL
-title: Concept — The Open Channel
+id: IS-CON-DIVING-ECOSYSTEM
+title: Concept — The Diving Ecosystem
 collection: concepts
 doc_type: concept
 basis: pattern
@@ -16,7 +16,7 @@ author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
 ---
-# The Open Channel
+# The Diving Ecosystem
 
 *Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Every concept states its BASIS, its ORIGIN, its THEME and the readers it was written for. The basis tiers are ranked, and never blended inside a single concept: a reader who accepts only `documented` entries can still rely on every one of those and discard the rest without unpicking anything. `testimony` is a dated first-person report, verified by nobody, and says so on its own face wherever it appears. Causes are reported as attributed, never asserted. See `meta/IS_META_terms.md`.*
 
@@ -27,7 +27,7 @@ disclaimer: meta/IS_META_terms.md
 
 **Not independently verified.**
 
-**Series: Telepathic communication, part 1 of 3.** 1. The Open Channel (this concept) · 2. [Diving](IS_CON_diving.md) · 3. [Why Hasn't It Been Turned Off?](IS_CON_why-hasnt-it-been-turned-off.md)
+**Series: Telepathic communication, part 1 of 3.** 1. The Diving Ecosystem (this concept) · 2. [Diving](IS_CON_diving.md) · 3. [Why Hasn't It Been Turned Off?](IS_CON_why-hasnt-it-been-turned-off.md)
 
 A hypothetical system, suggested to be a military deployment, that supports telepathic communication. Its suggested purpose is to give an invading force full transparency over all communication within enemy territory. That transparency would cover more than speech: through the [Diving](/glossary/diving) process, with or without a computer, it would reach the memories of people inside that territory.
 

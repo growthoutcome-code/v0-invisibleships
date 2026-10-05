@@ -11,7 +11,7 @@ topics: [speculation, technology, surveillance, harassment, euthanization, propo
 verification: unverified
 series: telepathic-communication
 generated_by: scripts/export_concepts_md.mjs
-word_count: 4904
+word_count: 4964
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -27,7 +27,7 @@ disclaimer: meta/IS_META_terms.md
 
 **Not independently verified.**
 
-**Series: Telepathic communication, part 2 of 3.** 1. [The Open Channel](IS_CON_the-open-channel.md) · 2. Diving (this concept) · 3. [Why Hasn't It Been Turned Off?](IS_CON_why-hasnt-it-been-turned-off.md)
+**Series: Telepathic communication, part 2 of 3.** 1. [The Diving Ecosystem](IS_CON_diving-ecosystem.md) · 2. Diving (this concept) · 3. [Why Hasn't It Been Turned Off?](IS_CON_why-hasnt-it-been-turned-off.md)
 
 [Diving](/glossary/diving) is the process of establishing a brain-to-brain connection with another human being. According to statements, and to human experience, it can be done with a computer or without one. This concept sets out the author's hypothesis of how it works without a computer, and why that matters.
 
@@ -55,7 +55,7 @@ The brain-computer interface industry and the field of neuroscience would not ca
 
 *On the record:* every one of Neuralink's systems connects a brain to a computer. None connects one person's brain to another's.
 
-*Related: [Diving](/glossary/diving) · [Breaching](/glossary/breaching) · [Telepathy](/glossary/telepathy) · [Brain-computer interface](/glossary/braincomputer-interface-bci) · [The Open Channel](/concepts/the-open-channel)*
+*Related: [Diving](/glossary/diving) · [Breaching](/glossary/breaching) · [Telepathy](/glossary/telepathy) · [Brain-computer interface](/glossary/braincomputer-interface-bci) · [The Diving Ecosystem](/concepts/diving-ecosystem)*
 
 ---
 
@@ -85,7 +85,7 @@ The first question is what you want. **To investigate** the person harassing you
 
 **If an investigation is already under way,** attaching yourself to the harasser may open the door for it to run an [image-based search](/glossary/image-based-search) on them. Then step aside. Two people in the same seat of consciousness, running the same search, is a problem: you may find someone already there, accessing the same memories.
 
-**Connecting others: pinch and pull.** Once you have found someone, you can pinch from their field and pull a connection into another person, through one of the body's openings. This is how a facilitated Dive is described: one person's field, drawn into someone else.
+**Connecting others: pinch and pull.** Once you have found someone, you can pinch from their field and pull a connection into another person, through one of the body's openings. This is how a facilitated Dive is described: one person's field, drawn into someone else. If this is possible today, if a third party can connect any two people, or many, without their knowledge or consent, is that not one of the most dangerous situations imaginable, for national security and for public safety alike? Anyone could be connected to anyone: an officer to a suspect, an official to an adversary, a child to a stranger.
 
 ### Step 3 — Investigate
 
@@ -215,7 +215,7 @@ Over the last two to three months, the author has been proud of the people who h
 
 ## Why it matters
 
-If a mirror reveals a face, a vehicle reveals a home, and paperwork reveals a case, then this is exactly the transparency described in [The Open Channel](/concepts/the-open-channel): a military deployment that gives an invading force access not only to what people say, but to their memories. Every officer, investigator and family member is exposed in the same way. And if roughly 95% of the people using it do not know a computer is unnecessary, the few who do hold an advantage over everyone else, law enforcement included.
+If a mirror reveals a face, a vehicle reveals a home, and paperwork reveals a case, then this is exactly the transparency described in [The Diving Ecosystem](/concepts/diving-ecosystem): a military deployment that gives an invading force access not only to what people say, but to their memories. Every officer, investigator and family member is exposed in the same way. And if roughly 95% of the people using it do not know a computer is unnecessary, the few who do hold an advantage over everyone else, law enforcement included.
 
 And according to a large pattern of statements, about 95% of the people involved, local law enforcement included, and most importantly the attackers themselves, do not know their own vulnerability: that everyone can be reached by Diving without a computer.
 
@@ -265,7 +265,7 @@ Finally he sat down and started researching, to find an explanation, because he 
 - [1. Neuralink — Speech Restoration (VOICE) clinical trial](https://neuralink.com/trials/speech-restoration/)
 - [2. Neuralink — video of Kenneth, a VOICE participant with ALS (24 March 2026)](https://x.com/neuralink/status/2036489073091580011)
 - [3. Botvinick and Cohen — Rubber hands "feel" touch that eyes see, Nature (1998)](https://www.nature.com/articles/35784)
-- [4. Invisible Ships — The Open Channel, the first concept in this series](/concepts/the-open-channel)
+- [4. Invisible Ships — The Diving Ecosystem, the first concept in this series](/concepts/diving-ecosystem)
 - [5. Electrical Safety Foundation International — Fire safety for pet owners](https://www.esfi.org/fire-safety-for-pet-owners-fact-sheet/)
 
 *Documented context only. Nothing here shows that the process this concept describes exists. Neuralink's systems connect a brain to a computer, not to another person; the rubber hand illusion shows the brain can feel touch it only sees; pets do start house fires by accident. Glossary terms are linked inside the text.*

@@ -119,7 +119,7 @@ in `IS_CON_00_findings.md`, and every dated source behind them is in
 
 - **Why Hasn't It Been Turned Off?** `IS_CON_why-hasnt-it-been-turned-off.md` · origin: author — *Not independently verified*
 - **Diving** `IS_CON_diving.md` · origin: author — *Not independently verified*
-- **The Open Channel** `IS_CON_the-open-channel.md` · origin: author — *Not independently verified*
+- **The Diving Ecosystem** `IS_CON_diving-ecosystem.md` · origin: author — *Not independently verified*
 
 ### testimony (2)
 

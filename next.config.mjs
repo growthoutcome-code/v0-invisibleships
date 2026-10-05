@@ -57,6 +57,8 @@ const nextConfig = {
       // three old section slugs: /data/<anything> must NOT match, because the
       // charts load their files from /data/tables/, /data/health/ and so on.
       { source: "/data", destination: "/research/timeline", permanent: true },
+      // Concept renamed 5 Oct 2026: The Open Channel became The Diving Ecosystem.
+      { source: "/concepts/the-open-channel", destination: "/concepts/diving-ecosystem", permanent: true },
       { source: "/data/:slug(government-cloud|public-health|crime)", destination: "/research/:slug", permanent: true },
     ];
   },

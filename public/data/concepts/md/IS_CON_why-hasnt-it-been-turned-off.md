@@ -27,7 +27,7 @@ disclaimer: meta/IS_META_terms.md
 
 **Not independently verified.**
 
-**Series: Telepathic communication, part 3 of 3.** 1. [The Open Channel](IS_CON_the-open-channel.md) · 2. [Diving](IS_CON_diving.md) · 3. Why Hasn't It Been Turned Off? (this concept)
+**Series: Telepathic communication, part 3 of 3.** 1. [The Diving Ecosystem](IS_CON_diving-ecosystem.md) · 2. [Diving](IS_CON_diving.md) · 3. Why Hasn't It Been Turned Off? (this concept)
 
 If this experience is the work of a military deployment, then it is the work of a machine operated by human beings. And a machine can be turned off at any time. So why hasn't it been?
 
@@ -133,7 +133,7 @@ Remember, all of this is hypothetical. Every statement heard on the bullhorn, an
 
 *Related glossary: [Zersetzung tactics](/glossary/zersetzung-tactics) · [Phantom sensations](/glossary/phantom-sensations) · [Tinnitus](/glossary/tinnitus) · [Telepathy](/glossary/telepathy) · [Diving](/glossary/diving) · [Voice-to-skull (V2K)](/glossary/voice-to-skull) · [The Mosquito](/glossary/mosquito-device) · [Targeted individual](/glossary/targeted-individual) · [Self-elected suicide](/glossary/self-elected-suicide)*
 
-*Related concepts: [The Open Channel](/concepts/the-open-channel) · [Diving](/concepts/diving) · [What is the neurotech bullhorn?](/concepts/the-neurotech-bullhorn) · [Why isn't any of this in the news?](/concepts/why-isnt-this-in-the-news) · [Your house is not haunted](/concepts/what-produces-the-feeling) · [Zersetzung's methods are crimes](/concepts/zersetzung-methods-are-crimes) · [Next to each other is not because of each other](/concepts/co-occurrence-is-not-cause)*
+*Related concepts: [The Diving Ecosystem](/concepts/diving-ecosystem) · [Diving](/concepts/diving) · [What is the neurotech bullhorn?](/concepts/the-neurotech-bullhorn) · [Why isn't any of this in the news?](/concepts/why-isnt-this-in-the-news) · [Your house is not haunted](/concepts/what-produces-the-feeling) · [Zersetzung's methods are crimes](/concepts/zersetzung-methods-are-crimes) · [Next to each other is not because of each other](/concepts/co-occurrence-is-not-cause)*
 
 ## What this does not answer
 
@@ -169,7 +169,7 @@ Remember, all of this is hypothetical. Every statement heard on the bullhorn, an
 
 ## References
 
-- [1. Invisible Ships — The Open Channel, part 1 of this series](/concepts/the-open-channel)
+- [1. Invisible Ships — The Diving Ecosystem, part 1 of this series](/concepts/diving-ecosystem)
 - [2. Invisible Ships — Diving, part 2 of this series](/concepts/diving)
 - [3. 988 Suicide & Crisis Lifeline](https://988lifeline.org)
 - [4. U.S. Food and Drug Administration — COVID-19 vaccines (ingredients and fact sheets)](https://www.fda.gov/emergency-preparedness-and-response/coronavirus-disease-2019-covid-19/covid-19-vaccines)
