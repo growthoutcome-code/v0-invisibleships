@@ -11,7 +11,7 @@ topics: [speculation, technology, harassment, euthanization, health-effects, pro
 verification: unverified
 series: telepathic-communication
 generated_by: scripts/export_concepts_md.mjs
-word_count: 2776
+word_count: 2863
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -99,6 +99,8 @@ Why is there no explanation in the news? The record includes another large patte
 
 As part of that system, statements describe a risk-mitigation layer. In paraphrase: *We have to include euthanization. We have to include it.* As if healthcare, and an explanation, were not options. Other statements, again in paraphrase: *Historically, we protect national security.* But as a citizen, the author was never harassed before his vaccination.
 
+Another statement goes further. In paraphrase: *Euthanization is in the building.* The suggestion is that news offices have a "euthanization therapist," a psychologist or mental-health professional, on site. Is there any truth to this? And if there were, how would it affect the people who work there, knowing that someone in the building was there for that purpose?
+
 These are reported statements, not findings. Is any of it true? And if it is, who decided that silence was the safer course? (See [Why isn't any of this in the news?](/concepts/why-isnt-this-in-the-news))
 
 ## Is anyone in government being told?
@@ -152,6 +154,7 @@ Remember, all of this is hypothetical. Every statement heard on the bullhorn, an
 - Is this an "industry standard" that has always existed, or a "new process" that never did? Why has the answer changed?
 - Why do statements on the bullhorn point to 2027, and why does that match the date Canada set for assisted dying where mental illness is the only condition?
 - If unconsented research is meant to end in 2027, who decided the date, and why should anyone wait for it?
+- Is there any truth to the statement that news offices have a "euthanization therapist" in the building? If so, what would that do to the people who work there?
 
 
 ## Author's note

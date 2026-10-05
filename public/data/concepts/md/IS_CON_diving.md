@@ -11,7 +11,7 @@ topics: [speculation, technology, surveillance, harassment, euthanization, propo
 verification: unverified
 series: telepathic-communication
 generated_by: scripts/export_concepts_md.mjs
-word_count: 4713
+word_count: 4904
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -49,6 +49,8 @@ According to statements on the bullhorn, Diving is a military workflow: heavily 
 
 Those statements also suggest that only one group is permitted to Dive without a computer, that no one else is meant to know it can be done, and that doing it, or sharing how, could get a person added to the euthanization list and executed. They suggest, too, that roughly 95% of the people carrying out the harassment use a computer and do not know it is unnecessary.
 
+**Two kinds of Dive.** A Dive can be one person connecting themselves to another, with or without a computer. It can also be *facilitated*: a third party, with or without a computer, connecting two people to each other, or many people at once.
+
 The brain-computer interface industry and the field of neuroscience would not call any of this spiritual. Neuralink's VOICE trial is one public example: Kenneth, among the first participants with ALS, now speaks through thought. Device control, operating a computer or phone by thought, is a large part of what Neuralink offers, and its first implant is named Telepathy. Next is Blindsight, which aims to restore sight to people who are blind.
 
 *On the record:* every one of Neuralink's systems connects a brain to a computer. None connects one person's brain to another's.
@@ -65,7 +67,7 @@ The brain-computer interface industry and the field of neuroscience would not ca
 
 For the author, it begins with the harassment. Suppose you are in physical distress: abdominal discomfort, nausea, vomiting, an irregular and painful bowel movement. From a distance, the bullhorn is shouting at you to raise your hand for assistance. In one recorded instance it was, word for word, "Put your motherfucking hand up." Or it repeats, more quietly, "Do you need assistance? Do you need assistance?"
 
-Bring the sound of their voice to your location. Close your eyes, and put your mind's eye on their body and their position. By harassing you, they have put a bullseye on their own forehead: the more you listen, the closer their communication comes. As their voice arrives by [voice-to-skull](/glossary/voice-to-skull) communication, the three-dimensional footprint, yours and theirs, is being shared and processed by artificial intelligence.
+Bring the sound of their voice to your location. Close your eyes, and put your mind's eye on their body and their position. Picture a field around the person, something like an [electromagnetic field](/glossary/electromagnetic-field). Listening to their harassment brings them, and their field, to your location. From there you can back up and navigate the space around them. By harassing you, they have put a bullseye on their own forehead: the more you listen, the closer their communication comes. As their voice arrives by [voice-to-skull](/glossary/voice-to-skull) communication, the three-dimensional footprint, yours and theirs, is being shared and processed by artificial intelligence.
 
 Once you have them at your location, back up three to five feet. Do you find the back of a head? What does it look like? Ethnicity, body type, age, haircut and clothing come through. Even behind blackout technology, you can feel your way around them. Lean to the right for a profile, or rotate them to look directly at their face.
 
@@ -82,6 +84,8 @@ The first question is what you want. **To investigate** the person harassing you
 **Why connect at all?** To draw a character sketch of their face, or make a careful mental note of it, and to note what they are saying. If you ever hope to join a class action or be represented, a character sketch and transcripts of the harassment are the least you would need. In the author's view, it is also one of the most effective ways to tell an attacker you are not a good fit for what they are attempting: the home invasion and the euthanization.
 
 **If an investigation is already under way,** attaching yourself to the harasser may open the door for it to run an [image-based search](/glossary/image-based-search) on them. Then step aside. Two people in the same seat of consciousness, running the same search, is a problem: you may find someone already there, accessing the same memories.
+
+**Connecting others: pinch and pull.** Once you have found someone, you can pinch from their field and pull a connection into another person, through one of the body's openings. This is how a facilitated Dive is described: one person's field, drawn into someone else.
 
 ### Step 3 — Investigate
 
@@ -102,6 +106,8 @@ The diving ecosystem seems to work in visual metaphors. The search itself, the l
 Ask for the results as a list, and it has been suggested that the most recent memories surface at the bottom.
 
 ### Step 5 — Disconnect
+
+**How often?** According to statements, and to the author's experience, this happens daily. The author estimates, conservatively, that he is connected into someone else more than ten times a day.
 
 Remember that, for the general population, this is not a computer-assisted process. It happens in the mind. To disconnect, you first have to find what you are connected to.
 
@@ -144,7 +150,7 @@ Where is the law enforcement community in that moment? Is this happening to peop
 
 It's a question, not an accusation.
 
-*Related: [Image-based search](/glossary/image-based-search) · [Voice-to-skull](/glossary/voice-to-skull) · [Non-ionizing radiation](/glossary/non-ionizing-radiation) · [Phantom sensations](/glossary/phantom-sensations) · [Necrosis](/glossary/necrosis-neuro-science) · [Can you record it?](/concepts/can-you-record-it)*
+*Related: [Image-based search](/glossary/image-based-search) · [Voice-to-skull](/glossary/voice-to-skull) · [Non-ionizing radiation](/glossary/non-ionizing-radiation) · [Electromagnetic field](/glossary/electromagnetic-field) · [Phantom sensations](/glossary/phantom-sensations) · [Necrosis](/glossary/necrosis-neuro-science) · [Can you record it?](/concepts/can-you-record-it)*
 
 ### What it may cost you
 
@@ -234,6 +240,8 @@ And according to a large pattern of statements, about 95% of the people involved
 - If Diving is detectable, as the author's experience suggests, why has the bullhorn insisted for years that it is not?
 - Why was the situation presented as hopeless two to three years ago, and who benefited from people believing it?
 - Can an animal be Dived on, and used to observe a home or to cause harm in it? If so, how would anyone know?
+- Who facilitates connections between people who have never met, and why?
+- If one person is connected into others more than ten times a day, how many people are being connected without their knowledge?
 
 
 ## Author's note
