@@ -120,7 +120,7 @@ export const SERIES: Record<string, { title: string; blurb: string; ids: string[
   "telepathic-communication": {
     title: "Telepathic communication",
     blurb: "The author's hypothesis of a telepathic communication system, and of how a person might use it. Read in order.",
-    ids: ["the-open-channel", "diving"],
+    ids: ["the-open-channel", "diving", "why-hasnt-it-been-turned-off"],
   },
 };
 
@@ -215,9 +215,46 @@ export const BASIS_NOTE: Record<Basis, string> = {
 
 export const CONCEPTS: Concept[] = [
   /**
+   * Why Hasn't It Been Turned Off? (Sean, 4 Oct 2026). Author speculation;
+   * part 3 of the series "telepathic-communication". Listed first. GENERATED
+   * by Core Concepts/drafts/build_turned_off_entry.py: edit the draft, not this.
+   */
+  {
+    id: "why-hasnt-it-been-turned-off",
+    origin: "author",
+    basis: "pattern",
+    theme: "neurotech",
+    audience: ["household", "investigators", "policy", "press"],
+    topics: ["speculation", "technology", "harassment", "euthanization", "health-effects", "proposed-solutions"],
+    verification: "unverified",
+    series: "telepathic-communication",
+    title: "Why Hasn't It Been Turned Off?",
+    body: "If this experience is the work of a military deployment, then it is the work of a machine operated by human beings. And a machine can be turned off at any time. So why hasn't it been?\n\n*This concept is the author's speculation. It does not assert that the system it describes exists. Every statement recorded in the journal is an external communication; read this concept under the [Critical Disclaimer](/disclaimer).*\n\n---\n\n## Two tragic ironies\n\n**The first is the story people are told:** that this is the spirit world, or something extraterrestrial; that no one can stop it; that there is no hope. If it is a machine operated by human beings, none of that is true.\n\n**The second is the simplest.** The surest way never to \"euthanize\" anyone for communicating is not to harass them in the first place. The offices doing this can stop at any time. They can simply choose not to communicate. No law of nature compels any of it. This is the work of human beings, and no one has to communicate with anyone.\n\n## Who gains from harassment?\n\nDoesn't law enforcement lose every covert opportunity the moment harassment begins? A person who is being harassed knows they are being watched, and a person who knows they are being watched is no longer a covert source of anything. The author is not an intelligence analyst, but the logic seems plain.\n\nAnd if someone has been experimented on through this system, isn't the best thing anyone could do for them to stop, immediately? What would be surreal, and unusually cruel, is the opposite: [Zersetzung](/glossary/zersetzung-tactics) tactics used to force a person to accept a home invasion, a beheading, a dissection.\n\n## Has it been turned off before?\n\nBased on past statements, and on the author's own experience, the machine has been turned off more than once, and each time the author felt a significant drop, as if his body's chemistry had fallen away.\n\nStatements on the bullhorn, and the author's experience, suggest that anyone connected to this system may feel a rise in serotonin and dopamine simply from being connected to others who are also connected. If so, what happens when it is switched off abruptly?\n\nIt has been suggested that it should not be. Given the ultrasonic sound attacks, and the [tinnitus](/glossary/tinnitus) people may be living with, the suggestion is that the system should be tapered off rather than cut, because of its effect on the human brain.\n\n*On the record:* no published research documents a remote system that raises serotonin or dopamine. What is documented is that social connection affects mood, and that abrupt changes in stimulation, sleep or stress can make people feel worse before they feel better. Anyone feeling a sudden drop in mood should talk to a doctor; if you are struggling, you can call or text 988 at any time.\n\n## It was quiet for years\n\nAccording to statements the author has received, he was observed with similar technology from as early as 1998. In all that time he was never spoken to and never harassed, except on rare occasions, and on those occasions what he heard was supportive. The harassment began only after his COVID-19 vaccination: a Moderna vaccine, followed by a Pfizer booster.\n\nThere is no proof that the vaccination is the reason for this experience, and the author does not claim it is. The timing is simply what he observed. Statements on the bullhorn have said, again and again, that no implant is needed to experience [voice-to-skull](/glossary/voice-to-skull) (V2K) communication.\n\n*On the record:* the ingredients of the COVID-19 vaccines are published, and none of them is a device, a sensor or anything that could receive or transmit a signal. That two things happen close together in time does not mean one caused the other (see [Next to each other is not because of each other](/concepts/co-occurrence-is-not-cause)).\n\n## A machine, not a spirit\n\nThis experience is the outcome of a machine. A machine can be turned off at any time, and, if what the author describes is true, it has been before. The only question left is why it is still running.\n\n\n*Related glossary: [Zersetzung tactics](/glossary/zersetzung-tactics) · [Tinnitus](/glossary/tinnitus) · [Telepathy](/glossary/telepathy) · [Diving](/glossary/diving) · [Voice-to-skull (V2K)](/glossary/voice-to-skull) · [The Mosquito](/glossary/mosquito-device) · [Targeted individual](/glossary/targeted-individual)*\n\n*Related concepts: [The Open Channel](/concepts/the-open-channel) · [Diving](/concepts/diving) · [What is the neurotech bullhorn?](/concepts/the-neurotech-bullhorn) · [Your house is not haunted](/concepts/what-produces-the-feeling) · [Zersetzung's methods are crimes](/concepts/zersetzung-methods-are-crimes) · [Next to each other is not because of each other](/concepts/co-occurrence-is-not-cause)*",
+    questions: [
+      "If this is a machine operated by human beings, who has the authority to turn it off?",
+      "Why would anyone be punished for communicating, when the people operating the system could simply stop communicating first?",
+      "Does harassment destroy the covert value of the very surveillance it relies on?",
+      "If it has been switched off before, why was it switched back on?",
+      "If switching it off abruptly harms people, what would a safe, tapered shutdown look like, and who would be responsible for it?",
+      "Who benefits from people believing it is the spirit world, or extraterrestrial, and cannot be stopped?",
+      "If the author was observed for years without being harassed, what changed, and who decided it?",
+    ],
+    comments: [
+      "**There is hope.** The belief that this cannot be stopped is part of what keeps it going. A machine can be turned off.",
+    ],
+    references: [
+      { label: "1. Invisible Ships — The Open Channel, part 1 of this series", href: "/concepts/the-open-channel" },
+      { label: "2. Invisible Ships — Diving, part 2 of this series", href: "/concepts/diving" },
+      { label: "3. 988 Suicide & Crisis Lifeline", href: "https://988lifeline.org" },
+      { label: "4. U.S. Food and Drug Administration — COVID-19 vaccines (ingredients and fact sheets)", href: "https://www.fda.gov/emergency-preparedness-and-response/coronavirus-disease-2019-covid-19/covid-19-vaccines" },
+    ],
+    referencesNote:
+      "The first two are the earlier parts of this series. The third is a crisis line, listed for readers' safety, not as evidence. The fourth is where the vaccines' published ingredients can be read.",
+  },
+  /**
    * Diving (Sean, 4 Oct 2026). Author speculation: how the Diving process
    * might work without a computer, its risks, and choosing the explanation.
-   * Listed first as the most recent concept; second in the series
+   * Second in the concept list; second in the series
    * "telepathic-communication" after The Open Channel. GENERATED from the
    * reader draft by Core Concepts/drafts/build_diving_entry.py: edit the
    * draft, not this.

@@ -11,7 +11,7 @@ topics: [speculation, technology, surveillance, harassment, law-government, euth
 verification: unverified
 series: telepathic-communication
 generated_by: scripts/export_concepts_md.mjs
-word_count: 4279
+word_count: 4288
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -27,7 +27,7 @@ disclaimer: meta/IS_META_terms.md
 
 **Not independently verified.**
 
-**Series: Telepathic communication, part 1 of 2.** 1. The Open Channel (this concept) · 2. [Diving](IS_CON_diving.md)
+**Series: Telepathic communication, part 1 of 3.** 1. The Open Channel (this concept) · 2. [Diving](IS_CON_diving.md) · 3. [Why Hasn't It Been Turned Off?](IS_CON_why-hasnt-it-been-turned-off.md)
 
 A hypothetical system, suggested to be a military deployment, that supports telepathic communication. Its suggested purpose is to give an invading force full transparency over all communication within enemy territory. That transparency would cover more than speech: through the [Diving](/glossary/diving) process, with or without a computer, it would reach the memories of people inside that territory.
 

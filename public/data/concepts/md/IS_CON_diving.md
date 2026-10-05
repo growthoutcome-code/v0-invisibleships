@@ -11,7 +11,7 @@ topics: [speculation, technology, surveillance, harassment, euthanization, propo
 verification: unverified
 series: telepathic-communication
 generated_by: scripts/export_concepts_md.mjs
-word_count: 4704
+word_count: 4713
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -27,7 +27,7 @@ disclaimer: meta/IS_META_terms.md
 
 **Not independently verified.**
 
-**Series: Telepathic communication, part 2 of 2.** 1. [The Open Channel](IS_CON_the-open-channel.md) · 2. Diving (this concept)
+**Series: Telepathic communication, part 2 of 3.** 1. [The Open Channel](IS_CON_the-open-channel.md) · 2. Diving (this concept) · 3. [Why Hasn't It Been Turned Off?](IS_CON_why-hasnt-it-been-turned-off.md)
 
 [Diving](/glossary/diving) is the process of establishing a brain-to-brain connection with another human being. According to statements, and to human experience, it can be done with a computer or without one. This concept sets out the author's hypothesis of how it works without a computer, and why that matters.
 
