@@ -1,9 +1,8 @@
 "use client";
 
-import type React from "react";
 
 import { track } from "@/lib/analytics";
-import { BASIS_LABEL, ORIGIN_LABEL, VERIFICATION_LABEL, type Concept } from "@/lib/concepts";
+import { VERIFICATION_LABEL, type Concept } from "@/lib/concepts";
 import { THEMES } from "@/lib/themes";
 import ConceptBody, { renderConceptInline } from "@/components/ConceptBody";
 
@@ -12,32 +11,9 @@ import ConceptBody, { renderConceptInline } from "@/components/ConceptBody";
  * Moved here from ConceptsView, which now shows tiles; the wording, the labels
  * and every attribution note are unchanged.
  */
-export default function ConceptArticle({ c, n, intro }: { c: Concept; n: number; intro?: React.ReactNode }) {
+export default function ConceptArticle({ c }: { c: Concept }) {
   return (
     <article>
-      {/* H1 first, then the meta under it, then the page description (Sean,
-          4 Oct 2026: "let's make the H1 the top thing and put the meta
-          underneath", as the News page does). */}
-      <h1 className="font-display font-semibold text-foreground text-[28px] md:text-[36px] leading-tight mb-3 max-w-[40ch]">
-        {c.title}
-      </h1>
-
-      <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2 mb-5">
-        <span className="text-[13px] uppercase tracking-[0.08em] font-semibold text-muted tabular-nums">
-          {String(n).padStart(2, "0")}
-        </span>
-        {/* Origin reads first — a reader should know who formed a claim before
-            they weigh what it rests on. */}
-        <span className="text-[13px] uppercase tracking-[0.08em] font-semibold text-background bg-foreground px-2.5 py-1">
-          {ORIGIN_LABEL[c.origin]}
-        </span>
-        <span className="text-[13px] uppercase tracking-[0.08em] font-semibold text-foreground">
-          {BASIS_LABEL[c.basis]}
-        </span>
-      </div>
-
-      {intro}
-
       {/* Plain prose renders exactly as before (one paragraph per blank line);
           a body may also use the small markdown subset in ConceptBody (4 Oct 2026). */}
       <ConceptBody md={c.body} />
