@@ -142,7 +142,7 @@ function CrimeChart({ src, href }: { src: string; href: string }) {
  * ("1 / 2"), not cards. Never rotates on its own: the journal and glossary
  * carousels do, and two moving carousels never share a screen.
  */
-function ConceptCards({ tiles, from }: { tiles: BottomSectionsData["concepts"]; from: string }) {
+export function ConceptCards({ tiles, from, label = "Concepts" }: { tiles: BottomSectionsData["concepts"]; from: string; label?: string }) {
   const [api, setApi] = useState<CarouselApi>();
   const [i, setI] = useState(0);
   const [pages, setPages] = useState(0);
@@ -157,7 +157,7 @@ function ConceptCards({ tiles, from }: { tiles: BottomSectionsData["concepts"]; 
     return () => { api.off("select", on); api.off("reInit", on); };
   }, [api]);
   return (
-    <Carousel setApi={setApi} aria-label="Concepts" className="relative"
+    <Carousel setApi={setApi} aria-label={label} className="relative"
       opts={{ align: "start", loop: true, breakpoints: { "(min-width: 768px)": { slidesToScroll: 2 } } }}>
       <CarouselContent>
         {tiles.map((c) => (
@@ -182,8 +182,10 @@ function ConceptCards({ tiles, from }: { tiles: BottomSectionsData["concepts"]; 
   );
 }
 
-function Block({ id, eyebrow, heading, children, href, label, from, motif, wide = false, actions }: {
-  id: BottomBlock; eyebrow: string; heading: ReactNode; children: ReactNode;
+// Exported for the concept page's Series block (4 Oct 2026), which uses the
+// same treatment as every other bottom section.
+export function Block({ id, eyebrow, heading, children, href, label, from, motif, wide = false, actions }: {
+  id: BottomBlock | "series"; eyebrow: string; heading: ReactNode; children: ReactNode;
   href?: string; label?: string; from: string;
   /** In place of the one link, for a block whose way on is not a page (Contribute). */
   actions?: ReactNode;

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ItemGate from "@/components/ItemGate";
 import ConceptItemReader from "@/components/ConceptItemReader";
-import { CONCEPTS } from "@/lib/concepts";
+import { CONCEPTS, plainText } from "@/lib/concepts";
 
 // One page per concept (Sean, 30 Sep 2026). The list at /concepts shows tiles;
 // the full concept lives here so it can be linked, cited and indexed. Old
@@ -20,7 +20,7 @@ export function generateMetadata({ params }: { params: { id: string } }): Metada
   const c = CONCEPTS.find((x) => x.id === params.id);
   if (!c) return { title: "Not found — Invisible Ships" };
   const title = `${c.title} — Invisible Ships Concepts`;
-  const description = summary(c.body);
+  const description = summary(plainText(c.body));
   const url = `/concepts/${c.id}`;
   return {
     title,

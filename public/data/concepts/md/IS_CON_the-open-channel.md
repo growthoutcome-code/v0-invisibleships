@@ -9,8 +9,9 @@ theme: neurotech
 audience: [household, investigators, policy, press]
 topics: [speculation, technology, surveillance, harassment, law-government, euthanization, health-effects]
 verification: unverified
+series: telepathic-communication
 generated_by: scripts/export_concepts_md.mjs
-word_count: 4159
+word_count: 4279
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -26,6 +27,8 @@ disclaimer: meta/IS_META_terms.md
 
 **Not independently verified.**
 
+**Series: Telepathic communication, part 1 of 2.** 1. The Open Channel (this concept) · 2. [Diving](IS_CON_diving.md)
+
 A hypothetical system, suggested to be a military deployment, that supports telepathic communication. Its suggested purpose is to give an invading force full transparency over all communication within enemy territory. That transparency would cover more than speech: through the [Diving](/glossary/diving) process, with or without a computer, it would reach the memories of people inside that territory.
 
 *This concept is the author's speculation. It describes a hypothetical system and does not assert that the system exists. Every statement recorded in the journal is an external communication; read this concept under the [Critical Disclaimer](/disclaimer).*
@@ -33,6 +36,8 @@ A hypothetical system, suggested to be a military deployment, that supports tele
 > **Do not reward their presence: the author's caution**
 >
 > In the author's experience, the system is generally used to provoke people and draw them out of their homes. When it began, in 2023, the voices presented themselves as the spirit world. Once the author researched neuroscience and realised they were human beings, he ended every relationship with any so-called invisible friend, anyone communicating on the system. The author's view is that it is vital not to reward their illegitimate presence. Rewarding it erodes the constitutional rights of everyone around you, and your own most of all, and it puts your life at risk. Their refusal to share contact details through any public, accountable channel is a serious red flag. For anyone experiencing this kind of communication, the author regards that refusal as a sign that their life is in danger.
+
+> **The author's own conduct.** The author Dives only when he is being harassed, and only to defend himself. As a citizen, he does not run image-based search investigations on anyone. There seems to be a line of people who want to investigate those harassing the group he belongs to; he is not one of them. Respect people's space, and never speak for what someone else is going through. His full ethical standards are set out in [Diving](/concepts/diving).
 
 ---
 
@@ -123,7 +128,7 @@ One hypothesis is that the message arrives in encrypted form and the receiver ed
 
 ### Capability 8 — Diving
 
-Connecting and disconnecting are both part of the [Diving](/glossary/diving) process. Together they could be called the diving ecosystem.
+Connecting and disconnecting are both part of the [Diving](/glossary/diving) process. Together they could be called the diving ecosystem. The author's full hypothesis of how Diving works, step by step, is set out in [Diving](/concepts/diving), the next concept in this series.
 
 Once someone starts talking, their voice is like a bullseye. To find the speaker, a person only has to listen. Harassment is therefore a disadvantage. Someone who harasses, threatens an attack (an ultrasonic sound attack, for example), or narrates what they observe reveals their body and their neural connection. The more they say, the easier they are to find.
 

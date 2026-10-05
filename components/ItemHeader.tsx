@@ -2,8 +2,12 @@
 // Slim full-width header for standalone item routes — link-based (not SPA-state)
 // so each nav target is a real URL. Author/Disclaimer live in the footer now.
 import Link from "next/link";
+import { useState } from "react";
 import ThemeToggle from "@/components/ThemeToggle";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Download } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import ExportModal from "@/components/ExportModal";
+import { EXPORT_LABEL } from "@/components/ExportButton";
 import { RESEARCH_SECTIONS } from "@/lib/routes";
 
 // MUST MATCH components/Header.tsx (Sean, 5 September: "in one state I find
@@ -30,6 +34,9 @@ const NAV: { href: string; label: string }[] = [
 ];
 
 export default function ItemHeader() {
+  // The corpus download, as in Header.tsx (Sean, 4 Oct 2026: "the download
+  // corpus for AI button is missing" on concept pages). Same label, same dialog.
+  const [exportOpen, setExportOpen] = useState(false);
   return (
     <header className="sticky top-0 z-30 bg-background/85 backdrop-blur">
       <div className="w-full px-4 sm:px-6 h-14 flex items-center gap-3">
@@ -55,10 +62,19 @@ export default function ItemHeader() {
             </Link>
           ))}
         </nav>
-        <div className="ml-auto flex items-center gap-1.5">
+        <div className="ml-auto flex items-center gap-2">
           <ThemeToggle />
+          <Button
+            size="sm"
+            onClick={() => setExportOpen(true)}
+            aria-label={EXPORT_LABEL}
+            className="font-display text-[12px] uppercase tracking-[0.14em]"
+          >
+            <Download size={15} /> <span className="hidden sm:inline">{EXPORT_LABEL}</span>
+          </Button>
         </div>
       </div>
+      <ExportModal open={exportOpen} onOpenChange={setExportOpen} />
     </header>
   );
 }

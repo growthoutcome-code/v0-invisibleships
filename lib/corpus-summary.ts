@@ -5,14 +5,14 @@
 // fails if it drifts, so what the export dialog claims and what a visitor
 // receives cannot come apart.
 export const CORPUS_SUMMARY = {
-  generated: "2026-10-04",
-  files: 1217,
-  markdown: 1113,
+  generated: "2026-10-05",
+  files: 1218,
+  markdown: 1114,
   csv: 29,
-  words: 1063105,
+  words: 1068060,
   medianWords: 339,
   largestWords: 10259,
-  zipBytes: 3921250,
+  zipBytes: 3932916,
   folders: [
   { key: "journal", label: "Journal", blurb: "The primary record — dated entries and verbatim transcripts.", markdown: 428, data: 0 },
   { key: "references", label: "References", blurb: "The analysis and reference documents, chunked by section.", markdown: 242, data: 0 },
@@ -20,7 +20,7 @@ export const CORPUS_SUMMARY = {
   { key: "public-health", label: "Public Health", blurb: "Suicide, overdose and the indicators around them.", markdown: 11, data: 20 },
   { key: "government-cloud", label: "Government Cloud", blurb: "Awards, deployments, litigation and capital flows.", markdown: 10, data: 40 },
   { key: "news", label: "News", blurb: "Official releases and outside reporting, each summarised and linked to the original.", markdown: 277, data: 1 },
-  { key: "concepts", label: "Concepts", blurb: "The archive's arguments, each labelled with a basis, an origin, a theme and the readers it was written for.", markdown: 45, data: 2 },
+  { key: "concepts", label: "Concepts", blurb: "The archive's arguments, each labelled with a basis, an origin, a theme and the readers it was written for.", markdown: 46, data: 2 },
   { key: "glossary", label: "Glossary", blurb: "Terms from the source series, plus terms written for the site.", markdown: 59, data: 0 },
   { key: "research", label: "Research inputs", blurb: "The raw rows the charts were built from. Not rendered anywhere on the site.", markdown: 4, data: 7 },
   { key: "meta", label: "Terms", blurb: "Copyright, disclaimer, author statement, category vocabulary.", markdown: 8, data: 0 },

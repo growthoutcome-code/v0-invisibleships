@@ -14,9 +14,7 @@ Disclaimer. How often should a returning reader on the same device meet it?
 **On the first visit, and then once every 30 days.** Passing the gate stores
 the time on the device. For 30 days (`GATE_REPEAT_DAYS` in `lib/gate.ts`) the
 reader goes straight in; after that the gate shows once more and the clock
-restarts. Closing
-it with Escape is not a pass: it stays closed for that browser tab and returns
-on the next visit. Bumping `GATE_VERSION` still shows it to everyone at once.
+restarts. The gate is mandatory: only entering closes it (see the amendment below). Bumping `GATE_VERSION` still shows it to everyone at once.
 
 Sean, 4 Oct 2026: "make sure the gate only fires the first time you visit. And
 maybe every week thereafter." Amended the same day: "make sure the gate only
@@ -68,3 +66,7 @@ gate stays until the reader enters. On every other page an outside click still
 closes it (that is not a pass). Escape still closes it everywhere, because a
 keyboard user needs a way out of a modal. Sean: "make sure that if you click
 outside the gate, it does not shut the gate on the home page."
+
+## Amendment, 4 Oct 2026 (evening): the gate is mandatory
+
+Sean: "That gate is mandatory." Nothing closes the gate except entering it: not Escape, and not a click outside the card, on any page. The session memory of a closed gate (`is_gate_dismissed_<version>`) is gone, so only a pass (stored for 30 days) skips it. Keyboard users move through the steps with Tab and Enter. This replaces the outside-click amendment above.

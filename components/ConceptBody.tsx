@@ -3,7 +3,8 @@
 //
 // Every concept before "The Open Channel" is plain prose, and plain prose
 // renders here exactly as it did: one paragraph per blank line. The subset:
-//   ### / #### headings, "> " quoted callouts, **bold**, *italic*, [links](href)
+//   ### / #### headings, "> " quoted callouts, "- " bullet lists,
+//   **bold**, *italic*, [links](href)
 //
 // Links follow the site rule (Sean, 4 Oct 2026):
 //   /disclaimer          opens the disclaimer modal, like every in-page reference
@@ -57,6 +58,18 @@ export default function ConceptBody({ md }: { md: string }) {
             </blockquote>
           );
         }
+        if (b.kind === "list") {
+          return (
+            <ul key={k} className="measure mb-6 list-none p-0">
+              {b.items.map((it, j) => (
+                <li key={j} className="body-copy text-foreground/85 py-1 pl-5 relative">
+                  <span aria-hidden className="absolute left-0 top-1 text-foreground">—</span>
+                  {renderConceptInline(it, `${k}-${j}`)}
+                </li>
+              ))}
+            </ul>
+          );
+        }
         const t = b.text;
         if (t.startsWith("#### ")) return <h4 key={k} className="font-display text-xl font-semibold text-foreground mt-8 mb-3 measure">{renderConceptInline(t.slice(5), k)}</h4>;
         if (t.startsWith("### ")) return <h3 key={k} className="font-display text-2xl font-semibold text-foreground mt-10 mb-4 measure">{renderConceptInline(t.slice(4), k)}</h3>;
@@ -68,7 +81,7 @@ export default function ConceptBody({ md }: { md: string }) {
   );
 }
 
-type Block = { kind: "text"; text: string } | { kind: "quote"; paras: string[] };
+type Block = { kind: "text"; text: string } | { kind: "quote"; paras: string[] } | { kind: "list"; items: string[] };
 
 /** Splits on blank lines, then folds consecutive "> " lines into one callout. */
 function groupQuotes(md: string): Block[] {
@@ -89,6 +102,12 @@ function groupQuotes(md: string): Block[] {
       }
       if (cur.length) paras.push(cur.join(" "));
       out.push({ kind: "quote", paras });
+      i--;
+    } else if (/^- /.test(ln.trim())) {
+      flush();
+      const items: string[] = [];
+      while (i < lines.length && /^- /.test(lines[i].trim())) { items.push(lines[i].trim().slice(2)); i++; }
+      out.push({ kind: "list", items });
       i--;
     } else if (ln.trim() === "") {
       flush();

@@ -75,18 +75,9 @@ const TERMS_STEP = 2;
 // inflated. Set to true to bring that back while testing gate changes.
 const GATE_ON_EVERY_HOME_VISIT = false;
 
-// Closed without entering (a click outside the card, or Escape). Remembered for
-// the browser tab's session only (sessionStorage), so the gate does not reopen
-// while the reader moves around the site, including links that reload the page.
-// It is not recorded as passed, so it returns on the next visit.
-const DISMISSED_KEY = `is_gate_dismissed_${GATE_VERSION}`;
-function wasDismissed(): boolean {
-  try {
-    return window.sessionStorage.getItem(DISMISSED_KEY) === "1";
-  } catch {
-    return false;
-  }
-}
+// (Until 4 Oct 2026 a reader could close the gate without entering, remembered
+// for the tab's session under is_gate_dismissed_<version>. The gate is now
+// mandatory, so there is nothing to remember.)
 
 // Shared between the hint paragraph and the footer button's aria-describedby.
 const HINT_ID = "gate-terms-hint";
@@ -123,7 +114,8 @@ export default function EntryGate() {
   // before the panel lands on top of it.
   useEffect(() => {
     const everyHomeVisit = GATE_ON_EVERY_HOME_VISIT && pathname === "/";
-    if ((hasEntered() || wasDismissed()) && !everyHomeVisit) return;
+    // Mandatory gate (4 Oct 2026): only a pass skips it; closing is no longer possible.
+    if (hasEntered() && !everyHomeVisit) return;
     const t = setTimeout(() => {
       // A fresh start each time it opens, since it can now open more than once
       // in one page session (navigating back to the home page).
@@ -219,19 +211,6 @@ export default function EntryGate() {
 
   const locked = step === TERMS_STEP && !readAll;
 
-  // Sean, 3 Oct 2026: "the gate should close if you click outside the gate."
-  // Closing is not entering: nothing is marked as passed, and it is counted
-  // separately so the funnel can tell the two apart.
-  function dismiss() {
-    try {
-      window.sessionStorage.setItem(DISMISSED_KEY, "1");
-    } catch {
-      /* private mode: the gate may reopen on the next page, which is harmless */
-    }
-    track("gate_dismissed", { gate_step: step + 1 });
-    setOpen(false);
-  }
-
   function advance() {
     // aria-disabled keeps this button focusable and clickable (see the footer),
     // so the locked case is handled here rather than by the browser.
@@ -273,27 +252,13 @@ export default function EntryGate() {
         <DialogPrimitive.Overlay className="fixed inset-0 z-[60] bg-black/85 backdrop-blur-[2px] data-[state=open]:animate-in data-[state=open]:fade-in-0" />
         <DialogPrimitive.Content
           aria-describedby={undefined}
-          // Until 3 Oct nothing dismissed this except the button on the last
-          // step. Now a click on the dark area around the card closes it, and
-          // so does Escape, its keyboard equivalent (see dismiss()). The
-          // archive's pages still carry the standing disclaimer line
-          // (components/StandingDisclaimer.tsx).
-          //
-          // The dark area is part of this element (it covers the screen and
-          // centres the card), so a click there arrives as a click on this
-          // element itself, not as a Radix "outside" event; those stay ignored.
-          onEscapeKeyDown={(e) => {
-            e.preventDefault();
-            dismiss();
-          }}
-          // On the home page a click outside the card does NOT close the gate
-          // (Sean, 4 Oct 2026: "make sure that if you click outside the gate,
-          // it does not shut the gate on the home page"). The home page is the
-          // front door, so the gate there stays until the reader enters.
-          // Everywhere else the click still closes it, as from 3 Oct.
-          onClick={(e) => {
-            if (e.target === e.currentTarget && pathname !== "/") dismiss();
-          }}
+          // THE GATE IS MANDATORY (Sean, 4 Oct 2026: "That gate is mandatory").
+          // Nothing closes it except entering: not Escape, not a click outside
+          // the card, on any page. Keyboard users reach the step buttons with Tab.
+          // (3–4 Oct: Escape and an outside click closed it without entering;
+          // the outside click was first stopped on the home page only.)
+          onEscapeKeyDown={(e) => e.preventDefault()}
+
           onPointerDownOutside={(e) => e.preventDefault()}
           onInteractOutside={(e) => e.preventDefault()}
           onOpenAutoFocus={(e) => {

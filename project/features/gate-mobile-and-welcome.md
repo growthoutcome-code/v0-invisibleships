@@ -134,3 +134,5 @@ Not verified:
   invisible Back button must use `textContent`.
 - The page behind the gate has its own `role="region"`; scope test selectors to
   `[role=dialog]`.
+
+- **Same evening: the gate is mandatory.** Sean: "That gate is mandatory." Escape and an outside click no longer close it on any page, and the tab-session memory of a closed gate is removed. Only entering closes it. Decision 0018, amended.

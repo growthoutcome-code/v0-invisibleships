@@ -13,8 +13,8 @@
 //     the gate once more, then follow the 30-day rule.
 //   • Bump the _v suffix whenever the gate wording changes materially, so every
 //     returning visitor meets the updated terms at once rather than within 30 days.
-//   • Closing the gate without entering (Escape) is not a pass; see
-//     components/EntryGate.tsx.
+//   • The gate is mandatory (4 Oct 2026): nothing closes it except entering;
+//     see components/EntryGate.tsx.
 //
 // Falls back to the in-memory flag when storage is unavailable (private mode /
 // storage denied), which re-shows the gate on refresh there. All storage access
