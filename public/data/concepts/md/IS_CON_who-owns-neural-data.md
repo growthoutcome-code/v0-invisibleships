@@ -9,8 +9,9 @@ theme: neurotech
 audience: [household, policy]
 topics: [technology, surveillance]
 verification: unverified
+series: [neurotechnology-and-neural-data]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 510
+word_count: 585
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -25,6 +26,8 @@ disclaimer: meta/IS_META_terms.md
 **Written for: Households and individuals · Legislators and regulators.**
 
 **Not independently verified.**
+
+**Series: Neurotechnology and neural data, part 1 of 6.** 1. Who owns what your brain emits? (this concept) · 2. [Can a machine read what you are thinking?](IS_CON_can-a-machine-read-thought.md) · 3. [Did anyone try to build a way in without surgery?](IS_CON_nonsurgical-by-design.md) · 4. [What would it actually take to do this without consent?](IS_CON_what-it-would-take.md) · 5. [Why did legislatures write laws for neural data?](IS_CON_law-for-neural-data.md) · 6. [Are children harmed by wireless exposure?](IS_CON_children-wearables-and-rf.md)
 
 Consumer neurotechnology already exists and is already sold: EEG headbands for meditation, focus trackers, sleep monitors, gaming headsets. In April 2024 the Neurorights Foundation published an assessment of the privacy practices of thirty such companies. Twenty-nine of the thirty appeared to have access to the consumer's neural data with no meaningful limitation on that access. Twenty-nine could transfer data to third parties, and twenty said so explicitly. Fewer than half — fourteen of thirty — gave the consumer any stated right to delete it. Only twelve offered both withdrawal of consent and deletion. Eight had no publicly available privacy policy at all. Nothing here was hidden. These are the companies' own published terms, read carefully by people who then counted. The question of who owns what a brain emits is not waiting on some future technology to become urgent. It was answered commercially, in advance, in documents nobody reads.
 

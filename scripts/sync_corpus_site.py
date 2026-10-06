@@ -112,6 +112,12 @@ def build(dst: zipfile.ZipFile) -> int:
         )
     dst.writestr(PREFIX + "source-years.csv", csv_src.read_text())
 
+    # The concept series table (6 Oct 2026), byte for byte as the site reads it.
+    series_src = MD.parent / "series.json"
+    if not series_src.exists():
+        raise SystemExit("no series.json at " + str(series_src))
+    dst.writestr(PREFIX + "series.json", series_src.read_text())
+
     concept_files = [f for f in files if not f.name.startswith("IS_CON_00_")]
     manifest = {
         "name": "Invisible Ships — Core Concepts",

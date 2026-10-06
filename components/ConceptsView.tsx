@@ -8,8 +8,8 @@ import { ActiveLine, MobileBar } from "@/components/ListControls";
 import Pager from "@/components/Pager";
 import ConceptTile from "@/components/ConceptTile";
 import {
-  CONCEPTS, NO_FILTERS, BASIS_LABEL, ORIGIN_LABEL,
-  filterConcepts, sortConcepts, plainText, CONCEPT_SORTS, type Filters, type ConceptSort,
+  CONCEPTS, NO_FILTERS, BASIS_LABEL, ORIGIN_LABEL, SERIES_LIST, seriesOf, isNewConcept,
+  filterConcepts, sortConcepts, plainText, CONCEPT_SORTS, type Concept, type Filters, type ConceptSort,
 } from "@/lib/concepts";
 import { THEMES } from "@/lib/themes";
 
@@ -25,6 +25,13 @@ import { THEMES } from "@/lib/themes";
  *
  * The side rail is gone: with tiles, search, filters and page numbers, a list
  * of forty titles down the side had nothing left to do.
+ *
+ * BY SERIES, the default sort (Sean, 6 Oct 2026: "by default, we can sort by
+ * series"): one section per series (public/data/concepts/series.json), in page
+ * order, each with its concepts in reading order, so a reader who never opens
+ * the filter still sees how the concepts fit together. A concept in two series
+ * appears in both, saying where else it is. Filters and search still apply; a
+ * series with nothing matching is left out. No page numbers in this sort.
  */
 const PAGE = 12;
 
@@ -59,6 +66,33 @@ export default function ConceptsView({
   const totalPages = Math.max(1, Math.ceil(visible.length / PAGE));
   const shown = visible.slice((page - 1) * PAGE, page * PAGE);
   const lead = filters.topic;
+  // "New" depends on today's date, so it is decided after the page loads.
+  const [now, setNow] = useState<number | null>(null);
+  useEffect(() => { setNow(Date.now()); }, []);
+  const tileFor = (c: Concept, extra: { part?: string; alsoIn?: string[] } = {}) => {
+    const topics = [...c.topics].sort((a, b) => Number(lead.includes(b)) - Number(lead.includes(a))).slice(0, 3);
+    return {
+      id: c.id, n: CONCEPTS.indexOf(c) + 1, origin: ORIGIN_LABEL[c.origin], basis: BASIS_LABEL[c.basis],
+      title: c.title, body: plainText(c.body), topics: topics.map((t) => THEMES[t]),
+      isNew: now !== null && isNewConcept(c.id, now), ...extra,
+    };
+  };
+  const bySeries = sort === "series";
+  const sections = useMemo(() => {
+    if (!bySeries) return [];
+    const ok = new Set(visible.map((c) => c.id));
+    const out = SERIES_LIST.map((s) => ({
+      key: s.key, title: s.title, blurb: s.blurb, total: s.ids.length,
+      items: s.ids.flatMap((id, k) => {
+        const c = CONCEPTS.find((x) => x.id === id);
+        return c && ok.has(id) ? [{ c, k }] : [];
+      }),
+    })).filter((s) => s.items.length);
+    const loose = visible.filter((c) => !seriesOf(c.id).length);
+    if (loose.length) out.push({ key: "not-in-a-series", title: "Not in a series", blurb: "", total: loose.length,
+      items: loose.map((c, k) => ({ c, k })) });
+    return out;
+  }, [bySeries, visible]);
 
   return (
     <div className="w-full">
@@ -73,20 +107,72 @@ export default function ConceptsView({
           onClearAll={() => setFilters(NO_FILTERS)}
           controls={<ConceptsControls filters={filters} setFilters={setFilters} sort={sort} setSort={setSort} open={panelOpen} setOpen={setPanelOpen} />} />
 
+        {bySeries ? (
+          <>
+            {/* Jump list: every series shown, so a reader can go straight to one. */}
+            {/* On a phone, ten links would fill the first screen, so the jump
+                list is one menu there; from tablet up, the links. */}
+            {sections.length > 1 && (
+              <label className="md:hidden block mb-8">
+                <span className="sr-only">Jump to a series</span>
+                <select defaultValue="" className="w-full h-10 px-3 border border-edge bg-background text-[15px] text-foreground"
+                  onChange={(e) => {
+                    const key = e.target.value; if (!key) return;
+                    document.getElementById(`series-${key}`)?.scrollIntoView({ block: "start" });
+                    track("concepts_series_jump", { series: key }); e.target.value = "";
+                  }}>
+                  <option value="">Jump to a series ({sections.length})</option>
+                  {sections.map((s) => <option key={s.key} value={s.key}>{s.title}</option>)}
+                </select>
+              </label>
+            )}
+            {sections.length > 1 && (
+              <nav aria-label="Series" className="hidden md:block mb-10">
+                <p className="text-[12px] uppercase tracking-[0.08em] font-semibold text-muted m-0 mb-2">Series</p>
+                <ul className="list-none p-0 m-0 flex flex-wrap gap-x-5 gap-y-2">
+                  {sections.map((s) => (
+                    <li key={s.key}>
+                      <a href={`#series-${s.key}`} className="text-[15px] text-foreground underline underline-offset-4 decoration-edge hover:decoration-foreground"
+                        onClick={() => track("concepts_series_jump", { series: s.key })}>{s.title}</a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            )}
+            {sections.map((s, i) => (
+              <section key={s.key} id={`series-${s.key}`} aria-labelledby={`series-h-${s.key}`}
+                className={`scroll-mt-28 ${i ? "mt-14 pt-10 border-t border-edge" : ""}`}>
+                <h2 id={`series-h-${s.key}`} className="font-display font-semibold text-foreground text-[24px] md:text-[28px] leading-tight m-0 mb-2">
+                  {s.title}
+                </h2>
+                {s.blurb && <p className="body-copy text-foreground/85 measure m-0 mb-1">{s.blurb}</p>}
+                <p className="text-[14px] text-muted m-0 mb-6">
+                  {s.key === "not-in-a-series" ? `${s.items.length} ${s.items.length === 1 ? "concept" : "concepts"}`
+                    : s.items.length === s.total ? `${s.total} concepts, read in order`
+                    : `${s.items.length} of ${s.total} concepts match`}
+                </p>
+                <ol className="list-none p-0 m-0 grid grid-cols-1 md:grid-cols-2 gap-5">
+                  {s.items.map(({ c, k }) => (
+                    <li key={c.id} className="flex">
+                      <ConceptTile from={`series:${s.key}`} c={tileFor(c, s.key === "not-in-a-series" ? {} : {
+                        part: `Part ${k + 1} of ${s.total}`,
+                        alsoIn: seriesOf(c.id).filter((x) => x.key !== s.key).map((x) => x.title),
+                      })} />
+                    </li>
+                  ))}
+                </ol>
+              </section>
+            ))}
+          </>
+        ) : (
         <ol className="list-none p-0 m-0 grid grid-cols-1 md:grid-cols-2 gap-5">
-          {shown.map((c) => {
-            const n = CONCEPTS.indexOf(c) + 1;
-            const topics = [...c.topics].sort((a, b) => Number(lead.includes(b)) - Number(lead.includes(a))).slice(0, 3);
-            return (
-              <li key={c.id} className="flex">
-                <ConceptTile from="tile" c={{
-                  id: c.id, n, origin: ORIGIN_LABEL[c.origin], basis: BASIS_LABEL[c.basis],
-                  title: c.title, body: plainText(c.body), topics: topics.map((t) => THEMES[t]),
-                }} />
-              </li>
-            );
-          })}
+          {shown.map((c) => (
+            <li key={c.id} className="flex">
+              <ConceptTile from="tile" c={tileFor(c)} />
+            </li>
+          ))}
         </ol>
+        )}
 
         {!visible.length && (
           <p className="body-copy text-muted measure my-10">
@@ -94,7 +180,7 @@ export default function ConceptsView({
           </p>
         )}
 
-        {totalPages > 1 && (
+        {!bySeries && totalPages > 1 && (
           <Pager page={page} totalPages={totalPages} setPage={setPage}
             onGo={() => listRef.current?.scrollIntoView({ block: "start" })} />
         )}

@@ -2,8 +2,8 @@
 """Concept series as relationships (Sean, 4 Oct 2026: "please make sure Supabase
 and all our … schema or relationships is updated").
 
-A series is defined once, in lib/concepts.ts (SERIES, and `series` on each
-concept). This script carries it into the relationship data the site already
+A series is defined once, in public/data/concepts/series.json (since 6 Oct
+2026; before that in lib/concepts.ts). A concept may be in several series. This script carries it into the relationship data the site already
 uses, the same way journal themes and glossary topics are stored. No new table
 or column:
 
@@ -29,24 +29,21 @@ import json, os, re, sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CHECK, SQL = "--check" in sys.argv, "--sql" in sys.argv
 
-src = open(os.path.join(ROOT, "lib/concepts.ts"), encoding="utf-8").read()
-blk = re.search(r"export const SERIES[^=]*=\s*\{(.*?)\n\};", src, re.S)
-if not blk:
-    sys.exit("apply_concept_series: SERIES not found in lib/concepts.ts")
+# The one definition (Sean, 6 Oct 2026): public/data/concepts/series.json, in
+# page order, each series in reading order. A concept may be in several.
+data = json.load(open(os.path.join(ROOT, "public/data/concepts/series.json"), encoding="utf-8"))
 SERIES = {}
-for m in re.finditer(r'"([a-z0-9-]+)":\s*\{(.*?)\n  \}', blk.group(1), re.S):
-    body = m.group(2)
-    title = re.search(r'title:\s*"([^"]+)"', body).group(1)
-    ids = re.findall(r'"([a-z0-9-]+)"', re.search(r"ids:\s*\[(.*?)\]", body, re.S).group(1))
-    SERIES[m.group(1)] = {"title": title, "ids": ids}
+for row in data["series"]:
+    assert row["key"] not in SERIES, f"series key {row['key']} appears twice"
+    assert len(set(row["concepts"])) == len(row["concepts"]), f"series {row['key']} lists a concept twice"
+    SERIES[row["key"]] = {"title": row["name"], "ids": row["concepts"]}
 
-# every concept that names a series must be listed in it, and vice versa
-declared = dict(re.findall(r'id:\s*"([a-z0-9-]+)",(?:(?!\n  \{).)*?series:\s*"([a-z0-9-]+)"', src, re.S))
-for cid, key in declared.items():
-    assert key in SERIES and cid in SERIES[key]["ids"], f"{cid} names series {key} but is not listed in it"
-for key, s in SERIES.items():
-    for cid in s["ids"]:
-        assert declared.get(cid) == key, f"series {key} lists {cid}, which does not name it"
+# every concept a series names must exist
+src = open(os.path.join(ROOT, "lib/concepts.ts"), encoding="utf-8").read()
+known = set(re.findall(r'\n  \{\n    id: "([a-z0-9-]+)"', src[src.index("export const CONCEPTS"):]))
+for key, s_ in SERIES.items():
+    for cid in s_["ids"]:
+        assert cid in known, f"series {key} lists {cid}, which is not a concept in lib/concepts.ts"
 
 doc = lambda cid: f"IS-CON-{cid.upper()}"
 cats = [{"slug": f"series-{k}", "kind": "series", "label": s["title"]} for k, s in SERIES.items()]
@@ -56,6 +53,8 @@ for k, s in SERIES.items():
     for a, b in zip(s["ids"], s["ids"][1:]):
         links.append({"from_id": doc(a), "to_id": doc(b), "kind": "series_next"})
         links.append({"from_id": doc(b), "to_id": doc(a), "kind": "series_prev"})
+seen = set()
+links = [l for l in links if not ((l["from_id"], l["to_id"], l["kind"]) in seen or seen.add((l["from_id"], l["to_id"], l["kind"])))]
 
 if SQL:
     esc = lambda t: t.replace("'", "''")
@@ -97,8 +96,11 @@ changed = not in_step or new_cats != rels["categories"]
 
 # the download side is written by the concept exporter; check it carries the series
 md_dir = os.path.join(ROOT, "public/data/concepts/md")
-missing = [cid for k, s in SERIES.items() for cid in s["ids"]
-           if f"series: {k}" not in open(os.path.join(md_dir, f"IS_CON_{cid}.md"), encoding="utf-8").read()]
+def fm_series(cid):
+    t = open(os.path.join(md_dir, f"IS_CON_{cid}.md"), encoding="utf-8").read()
+    m = re.search(r"^series: \[(.*)\]$", t, re.M)
+    return [x.strip() for x in m.group(1).split(",")] if m else []
+missing = [cid for k, s in SERIES.items() for cid in s["ids"] if k not in fm_series(cid)]
 
 if CHECK:
     errs = []

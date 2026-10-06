@@ -32,7 +32,13 @@ import { ChevronDown } from "lucide-react";
 /** count / disabled: index mode only. The journal keeps every month listed while
  *  filtered, with the number of matching entries, and greys out months with none
  *  (Sean, 30 Sep 2026: "keep the sidebar on the screen all the time"). */
-export type NavSection = { id: string; label: string; count?: number; disabled?: boolean };
+export type NavSection = {
+  id: string; label: string; count?: number; disabled?: boolean;
+  /** A heading inside the list, not a link (a concept's series, when it is in several). */
+  group?: boolean;
+  /** Marked as current even when `active` names another entry (the same concept listed under two series). */
+  current?: boolean;
+};
 
 export function useSectionNav(
   rootId: string,
@@ -178,7 +184,7 @@ export default function SideNav({
 
   // Both modes name where the reader is (the current month, or section); the
   // small label before it names the list.
-  const triggerLabel = sections.find((s) => s.id === active)?.label ?? heading;
+  const triggerLabel = sections.find((s) => s.id === active || s.current)?.label ?? heading;
 
   return (
     <>
@@ -199,13 +205,15 @@ export default function SideNav({
         {open && (
           <ul id="section-nav-sheet"
             className="list-none p-0 m-0 mt-2 max-h-[55vh] overflow-y-auto scroll-thin border border-edge bg-background">
-            {sections.map((s) => (
+            {sections.map((s) => s.group ? (
+              <li key={s.id} className="px-3 pt-3 pb-1 text-[12px] uppercase tracking-wide text-muted border-b border-edge/50">{s.label}</li>
+            ) : (
               <li key={s.id}>
                 <button type="button" onClick={() => go(s.id)} disabled={s.disabled}
-                  aria-current={active === s.id ? "true" : undefined}
+                  aria-current={active === s.id || s.current ? "true" : undefined}
                   className={`flex w-full items-baseline gap-2 text-left px-3 py-2.5 text-[16px] border-b border-edge/50 last:border-b-0 ${
                     s.disabled ? "text-muted/50 cursor-default"
-                      : active === s.id ? "text-foreground font-semibold bg-panel" : "text-foreground/75 hover:bg-panel"
+                      : active === s.id || s.current ? "text-foreground font-semibold bg-panel" : "text-foreground/75 hover:bg-panel"
                   }`}>
                   <span>{s.label}</span>
                   {s.count !== undefined && <span className="ml-auto text-[13px] tabular-nums">{s.count}</span>}
@@ -222,14 +230,16 @@ export default function SideNav({
         className="hidden lg:block self-start sticky top-[96px] max-h-[calc(100vh-8rem)] overflow-y-auto scroll-thin pr-2">
         <p className={`text-muted ${large ? "text-[14px]" : "text-[12px]"} uppercase tracking-wide mb-2`}>{heading}</p>
         <ul className="list-none p-0 m-0 border-l border-edge">
-          {sections.map((s) => (
+          {sections.map((s) => s.group ? (
+            <li key={s.id} className={`pl-3 pt-4 first:pt-1 pb-1 text-muted uppercase tracking-wide ${large ? "text-[13px]" : "text-[11px]"}`}>{s.label}</li>
+          ) : (
             <li key={s.id}>
               <button type="button" onClick={() => go(s.id)} disabled={s.disabled}
-                aria-current={active === s.id ? "true" : undefined}
+                aria-current={active === s.id || s.current ? "true" : undefined}
                 className={`flex w-full items-baseline gap-2 text-left pl-3 ${large ? "py-2 text-[16.5px]" : "py-1.5 text-[14px]"} leading-snug border-l-2 -ml-px transition-colors ${
                   s.disabled
                     ? "border-transparent text-muted/40 cursor-default"
-                    : active === s.id
+                    : active === s.id || s.current
                     ? "border-foreground text-foreground font-semibold"
                     : "border-transparent text-muted hover:text-foreground"
                 }`}>

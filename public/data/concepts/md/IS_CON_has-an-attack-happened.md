@@ -9,8 +9,9 @@ theme: experience
 audience: [household]
 topics: [proposed-solutions, speculation, technology, obedience-coercion, law-government]
 verification: unverified
+series: [the-authors-account]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 670
+word_count: 700
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -25,6 +26,8 @@ disclaimer: meta/IS_META_terms.md
 **Written for: Households and individuals.**
 
 **Not independently verified.**
+
+**Series: The author's account, part 1 of 3.** 1. Has an attack happened? (this concept) · 2. [What is the neurotech bullhorn?](IS_CON_the-neurotech-bullhorn.md) · 3. [Do Not Choose Yourself](IS_CON_do-not-choose-yourself.md)
 
 The author reports experiences interpreted as possible unconsented-to auditory or neurological communication, along with perceived coercive messages, including messages related to self-harm. The author does not know the mechanism and raises possible explanations only as hypotheses. This is a dated record of reported experience, not evidence that any particular technology, transmission infrastructure, person, organization, or coordinated campaign is responsible. No conclusion should be drawn without independent technical testing, corroboration, and reliable records.
 

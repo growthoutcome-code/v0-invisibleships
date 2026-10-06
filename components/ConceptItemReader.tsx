@@ -11,7 +11,7 @@ import ConceptArticle from "@/components/ConceptArticle";
 import SideNav from "@/components/SideNav";
 import { useRouter } from "next/navigation";
 import PageIntro from "@/components/PageIntro";
-import { BASIS_LABEL, CONCEPTS, ORIGIN_LABEL, SERIES, plainText } from "@/lib/concepts";
+import { BASIS_LABEL, CONCEPTS, ORIGIN_LABEL, seriesOf, plainText } from "@/lib/concepts";
 import { track } from "@/lib/analytics";
 import BottomSections, { Block, ConceptCards } from "@/components/BottomSections";
 import { THEMES } from "@/lib/themes";
@@ -22,19 +22,33 @@ export default function ConceptItemReader({ id, n, prev, next }: { id: string; n
   const c = CONCEPTS.find((x) => x.id === id)!;
   useEffect(() => { track("concept_opened", { id, route: true }); }, [id]);
   const router = useRouter();
-  const series = c.series ? SERIES[c.series] : undefined;
-  // The series as concept tiles, in reading order, built the way the bottom
+  // Every series this concept is in (public/data/concepts/series.json; Sean,
+  // 6 Oct 2026: "a concept can exist in multiple series"), in page order.
+  const inSeries = seriesOf(c.id);
+  // A series as concept tiles, in reading order, built the way the bottom
   // sections build theirs (lib/home-sections.ts conceptTiles).
-  const seriesTiles = (series?.ids ?? []).flatMap((sid) => {
+  const tilesOf = (ids: string[]) => ids.flatMap((sid) => {
     const k = CONCEPTS.findIndex((x) => x.id === sid);
     if (k < 0) return [];
     const s = CONCEPTS[k];
     return [{ id: s.id, n: k + 1, origin: ORIGIN_LABEL[s.origin], basis: BASIS_LABEL[s.basis], title: s.title,
       body: plainText(s.body).slice(0, 1400), topics: s.topics.slice(0, 3).map((t) => THEMES[t] ?? t) }];
   });
-  const seriesPos = series ? series.ids.indexOf(c.id) : -1;
-  const nextId = series ? series.ids[(seriesPos + 1) % series.ids.length] : c.id;
-  const nextInSeries = CONCEPTS.find((x) => x.id === nextId) ?? c;
+  const nextIn = (ids: string[]) => {
+    const pos = ids.indexOf(c.id);
+    const nx = CONCEPTS.find((x) => x.id === ids[(pos + 1) % ids.length]) ?? c;
+    return { nx, label: nx.id === c.id ? "Start the series"
+      : pos < ids.length - 1 ? `Next in the series: ${nx.title}` : `Back to the start: ${nx.title}` };
+  };
+  // The rail: each series' name above its own list. Entries are keyed by series, so a concept listed twice
+  // is marked current in both places.
+  const railSections = inSeries.flatMap((ser) => [
+        { id: `group/${ser.key}`, label: ser.title, group: true },
+        ...ser.ids.flatMap((sid, k) => {
+          const s = CONCEPTS.find((x) => x.id === sid);
+          return s ? [{ id: `${ser.key}/${sid}`, label: `${k + 1}. ${s.title}`, current: sid === c.id }] : [];
+        }),
+      ]);
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       <ItemHeader tab="concepts" />
@@ -79,19 +93,16 @@ export default function ConceptItemReader({ id, n, prev, next }: { id: string; n
             4 Oct 2026: "that sidebar styling needs to match the left-hand
             sidebar for glossary… on the right-hand side… title it series").
             A concept without a series keeps its single column. */}
-        {series ? (
+        {inSeries.length ? (
           <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(15rem,25%)] lg:gap-x-16 lg:items-start">
             <div className="lg:order-2">
               <SideNav
                 large
                 mode="index"
                 label="Series"
-                sections={series.ids.flatMap((sid, k) => {
-                  const s = CONCEPTS.find((x) => x.id === sid);
-                  return s ? [{ id: sid, label: `${k + 1}. ${s.title}` }] : [];
-                })}
-                active={c.id}
-                onPick={(sid) => { if (sid !== c.id) router.push(`/concepts/${sid}`); }}
+                sections={railSections}
+                active={`${inSeries[0].key}/${c.id}`}
+                onPick={(key) => { const sid = key.split("/")[1]; if (sid && sid !== c.id) router.push(`/concepts/${sid}`); }}
               />
             </div>
             <div className="min-w-0 lg:order-1"><ConceptArticle c={c} /></div>
@@ -105,15 +116,18 @@ export default function ConceptItemReader({ id, n, prev, next }: { id: string; n
             Block and two-up concept cards as the Concepts bottom section, in
             the series' reading order. A concept with no series keeps its
             previous / next links. */}
-        {series ? (
-          <div className="mt-16">
-            <Block id="series" from="concept" eyebrow="Series" wide
-              heading={series.title}
-              href={`/concepts/${nextInSeries.id}`}
-              label={nextInSeries.id === c.id ? "Start the series" : (seriesPos < series.ids.length - 1 ? `Next in the series: ${nextInSeries.title}` : `Back to the start: ${nextInSeries.title}`)}>
-              <p className="body-copy text-foreground/85 measure m-0 mb-8">{series.blurb}</p>
-              <ConceptCards tiles={seriesTiles} from="concept-series" label={`Series: ${series.title}`} />
-            </Block>
+        {inSeries.length ? (
+          <div className="mt-16 space-y-16">
+            {inSeries.map((ser) => {
+              const { nx, label } = nextIn(ser.ids);
+              return (
+                <Block key={ser.key} id={`series-${ser.key}`} from="concept" eyebrow="Series" wide
+                  heading={ser.title} href={`/concepts/${nx.id}`} label={label}>
+                  <p className="body-copy text-foreground/85 measure m-0 mb-8">{ser.blurb}</p>
+                  <ConceptCards tiles={tilesOf(ser.ids)} from={`concept-series:${ser.key}`} label={`Series: ${ser.title}`} />
+                </Block>
+              );
+            })}
           </div>
         ) : (
         <nav aria-label="More concepts" className="flex gap-6 mt-14 pt-6 border-t border-edge">

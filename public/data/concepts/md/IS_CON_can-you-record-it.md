@@ -9,8 +9,9 @@ theme: neurotech
 audience: [household, investigators, clinicians]
 topics: [proposed-solutions, technology]
 verification: verified
+series: [hearing-something-no-one-else-hears]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 611
+word_count: 669
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -23,6 +24,8 @@ disclaimer: meta/IS_META_terms.md
 **Origin: ai.** Derived by AI analysis of the dataset.  
 **Theme: Neurotechnology.**  
 **Written for: Households and individuals · Law enforcement and investigators · Clinicians.**
+
+**Series: Hearing something no one else hears, part 2 of 5.** 1. [“Only I can hear it” is not, by itself, unusual](IS_CON_only-you-can-hear-it.md) · 2. Can you record it? (this concept) · 3. [Your house is not haunted](IS_CON_what-produces-the-feeling.md) · 4. [Are Denver citizens subject to acoustic weapons?](IS_CON_denver-acoustic-weapons.md) · 5. [Does the explanation itself do harm?](IS_CON_explanation-is-part-of-the-harm.md)
 
 Three things could put a voice where no speaker is, and they differ in a way that can be checked rather than argued. Two of them make real sound in air: a transducer bonded to a window or wall drives the surface as a loudspeaker, and an ultrasonic beam demodulates into audible sound along its path. Both are commercial products. Anyone standing in the room hears them, and any recorder captures them. The third — the claimed delivery of speech by pulsed radio-frequency energy — produces its pressure wave inside the skull, at a tenth of a pascal to three pascals, conducted through bone to the inner ear. If that is what is happening, there is no sound in the room at all: a person beside you hears nothing, and a microphone records nothing, not because the equipment failed but because there is nothing in the air to capture. So the question is not whether you believe any of this. It is whether a second person and a cheap recorder find something, and that is a question with an answer.
 

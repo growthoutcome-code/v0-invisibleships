@@ -9,8 +9,9 @@ theme: neurotech
 audience: [policy]
 topics: [proposed-solutions, technology, law-government]
 verification: unverified
+series: [neurotechnology-and-neural-data]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 534
+word_count: 609
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -25,6 +26,8 @@ disclaimer: meta/IS_META_terms.md
 **Written for: Legislators and regulators.**
 
 **Not independently verified.**
+
+**Series: Neurotechnology and neural data, part 5 of 6.** 1. [Who owns what your brain emits?](IS_CON_who-owns-neural-data.md) · 2. [Can a machine read what you are thinking?](IS_CON_can-a-machine-read-thought.md) · 3. [Did anyone try to build a way in without surgery?](IS_CON_nonsurgical-by-design.md) · 4. [What would it actually take to do this without consent?](IS_CON_what-it-would-take.md) · 5. Why did legislatures write laws for neural data? (this concept) · 6. [Are children harmed by wireless exposure?](IS_CON_children-wearables-and-rf.md)
 
 Legislatures rarely move early. On neural data, three of them did. Colorado passed HB24-1058 in 2024, amending its consumer privacy act to require express consent before neural data is collected or used, separate consent or an opt-out before it goes to a third party, and a route for a person to have it deleted. California did the same through SB 1223, folding neural data into the categories its privacy act treats as sensitive. Montana went further from a different direction, adding neural data to its genetic information privacy act, effective October 2025. What is notable is not the content but the margins: these passed unanimously or nearly so, in a period when almost nothing does. A category of information most people have never heard of was given statutory protection by bipartisan votes in three states. Either those legislatures were persuaded that a capability exists worth regulating, or they were persuaded one is close enough that waiting was the greater risk. The record shows the votes. It does not show which of those two it was.
 

@@ -9,8 +9,9 @@ theme: record
 audience: [press]
 topics: []
 verification: verified
+series: [how-to-read-this-archive]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 400
+word_count: 497
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -23,6 +24,8 @@ disclaimer: meta/IS_META_terms.md
 **Origin: author.** The author's own observation, from experience.  
 **Theme: The record and its limits.**  
 **Written for: Press and researchers.**
+
+**Series: How to read this archive, part 1 of 8.** 1. Next to each other is not because of each other (this concept) · 2. [We cannot prove which came first, the law or the system](IS_CON_sequence-cannot-be-proven.md) · 3. [“Official” is not the same as “independent”](IS_CON_official-is-not-independent.md) · 4. [The headline spending figure is not what governments spent](IS_CON_headline-spending-is-not-spending.md) · 5. [The numbers under the numbers](IS_CON_low-number-may-mean-low-counting.md) · 6. [Prescribing is not a measure of illness](IS_CON_prescribing-is-not-prevalence.md) · 7. [Why isn't any of this in the news?](IS_CON_why-isnt-this-in-the-news.md) · 8. [There is no column for you](IS_CON_no-column-for-you.md)
 
 This site puts a procurement record and a public-health record on one clock. That is a deliberate choice and a dangerous one, because a timeline is very good at implying something it cannot show. Two things happening in the same year is a co-occurrence. It is not evidence that one caused the other, and no amount of caption underneath undoes what a picture asserts. So the two datasets are kept structurally apart. They do not corroborate each other and the site says so wherever they appear together. The overlaps register states, for every row, what that row does NOT show. Vertical markers for contracts and statutes were proposed for the suicide chart and deliberately left off — the only overlay it carries is the COVID-19 timeline, because that is a global health event with a documented literature on mental health, and even that is a toggle. The discipline costs something. It makes the work less immediately persuasive. That is the trade being made on purpose.
 

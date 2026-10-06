@@ -9,8 +9,9 @@ theme: record
 audience: [clinicians]
 topics: [health-effects]
 verification: verified
+series: [public-health-numbers, how-to-read-this-archive]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 403
+word_count: 556
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -23,6 +24,10 @@ disclaimer: meta/IS_META_terms.md
 **Origin: ai.** Derived by AI analysis of the dataset.  
 **Theme: The record and its limits.**  
 **Written for: Clinicians.**
+
+**Series: Public health: what the numbers show, part 4 of 5.** 1. [The world's suicide rate fell. The United States' rose.](IS_CON_us-rose-against-the-trend.md) · 2. [The fentanyl reversal](IS_CON_the-fentanyl-reversal.md) · 3. [The numbers under the numbers](IS_CON_low-number-may-mean-low-counting.md) · 4. Prescribing is not a measure of illness (this concept) · 5. [Are children harmed by wireless exposure?](IS_CON_children-wearables-and-rf.md)
+
+**Series: How to read this archive, part 6 of 8.** 1. [Next to each other is not because of each other](IS_CON_co-occurrence-is-not-cause.md) · 2. [We cannot prove which came first, the law or the system](IS_CON_sequence-cannot-be-proven.md) · 3. [“Official” is not the same as “independent”](IS_CON_official-is-not-independent.md) · 4. [The headline spending figure is not what governments spent](IS_CON_headline-spending-is-not-spending.md) · 5. [The numbers under the numbers](IS_CON_low-number-may-mean-low-counting.md) · 6. Prescribing is not a measure of illness (this concept) · 7. [Why isn't any of this in the news?](IS_CON_why-isnt-this-in-the-news.md) · 8. [There is no column for you](IS_CON_no-column-for-you.md)
 
 It is tempting to read prescription volume as a thermometer for how ill a population is. The record does not support that, in either direction. In England, antidepressant items rose 50% in nine years while hypnotic and anxiolytic items FELL 16% over exactly the same period, from the same prescribers under the same system. In the United States, antipsychotic use among adults rose from 1.9% to 3.0%, while among children and adolescents it fell, 1.3% to 1.1%. And where a national registry lets diagnosis be counted directly, Denmark's new schizophrenia diagnoses went slightly down, 1.8 to 1.6 per 10,000, across eighteen years in which antipsychotic prescribing rose almost everywhere it was measured. Prescribing moves for its own reasons — guidance, capacity, recognition, duration of treatment, the licensing of new drugs, deliberate deprescribing campaigns. Sometimes it tracks illness. Here it demonstrably moves in opposite directions at once.
 

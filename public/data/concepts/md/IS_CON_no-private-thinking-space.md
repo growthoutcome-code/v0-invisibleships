@@ -9,8 +9,9 @@ theme: surveillance
 audience: [press]
 topics: [technology, surveillance, law-government]
 verification: unverified
+series: [surveillance-in-everyday-life]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 634
+word_count: 720
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -25,6 +26,8 @@ disclaimer: meta/IS_META_terms.md
 **Written for: Press and researchers.**
 
 **Not independently verified.**
+
+**Series: Surveillance in everyday life, part 3 of 7.** 1. [Why does the camera on your door not answer to you?](IS_CON_whose-eyesight-is-it.md) · 2. [Who could refuse a system that saved their child?](IS_CON_prevention-as-the-product.md) · 3. Does being watched change what people let themselves think? (this concept) · 4. [How protected is your medical information?](IS_CON_how-protected-is-your-medical-record.md) · 5. [What are children subject to?](IS_CON_what-children-are-subject-to.md) · 6. [What happens to everyone around a target?](IS_CON_everyone-around-a-target.md) · 7. [Are people made into intelligence assets without knowing it?](IS_CON_made-into-assets-unknowing.md)
 
 Amnesty International's 2023 report Automated Apartheid documented facial-recognition systems, Red Wolf and Blue Wolf among them, used to control Palestinian movement in the occupied territories, with residents describing repeated identification at checkpoints as a condition of ordinary life. Palestinians interviewed described the effect in consistent and non-technical terms: there was no space left in which to think privately. That effect is measurable, and it has been measured in the United States. Jonathon Penney, writing in the Berkeley Technology Law Journal in 2016, examined Wikipedia traffic to privacy-sensitive articles before and after June 2013, when the NSA and PRISM disclosures became public. He found a statistically significant immediate decline, with evidence that it persisted. People stopped looking things up. Nobody instructed them to. The migration of such tools is documented too. Julian Go, in the American Journal of Sociology, traces how instruments and doctrines developed for imperial control returned to domestic American policing; cell-site simulators reached local departments from military origins by the same route. The pattern is old enough to carry a name in the literature. So the question worth asking is not whether America has some particular system. It is narrower and answerable: given that capabilities move from conflict territory to domestic policing, and that surveillance measurably changes what people do, what has already arrived here, and what has it already changed?
 

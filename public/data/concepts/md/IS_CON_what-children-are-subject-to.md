@@ -9,8 +9,9 @@ theme: surveillance
 audience: [household, investigators, policy]
 topics: [proposed-solutions, harassment, surveillance, law-government]
 verification: unverified
+series: [surveillance-in-everyday-life]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 946
+word_count: 1032
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -25,6 +26,8 @@ disclaimer: meta/IS_META_terms.md
 **Written for: Households and individuals · Law enforcement and investigators · Legislators and regulators.**
 
 **Not independently verified.**
+
+**Series: Surveillance in everyday life, part 5 of 7.** 1. [Why does the camera on your door not answer to you?](IS_CON_whose-eyesight-is-it.md) · 2. [Who could refuse a system that saved their child?](IS_CON_prevention-as-the-product.md) · 3. [Does being watched change what people let themselves think?](IS_CON_no-private-thinking-space.md) · 4. [How protected is your medical information?](IS_CON_how-protected-is-your-medical-record.md) · 5. What are children subject to? (this concept) · 6. [What happens to everyone around a target?](IS_CON_everyone-around-a-target.md) · 7. [Are people made into intelligence assets without knowing it?](IS_CON_made-into-assets-unknowing.md)
 
 In November 2020 the Tampa Bay Times published Targeted, an investigation into the Pasco County Sheriff's Office in Florida. The office had built a list of roughly 420 schoolchildren it considered likely future criminals. The children were not told. Their parents were not told. The school superintendent said he had not known the data was being used this way. The list was assembled from sixteen categories drawn from school records and state child-welfare data, and the categories are the part worth reading twice. A child could be flagged for grades of D or below, for three or more absences in a quarter, for discipline referrals — and for adverse childhood experiences, meaning abuse, witnessing violence, or having a parent incarcerated. A child who had been abused was thereby made more likely to appear on a police list of probable future offenders. The district's early-warning system covered more than thirty thousand middle and high school students, and the district paid the Sheriff's Office $2.3 million a year for thirty-two school resource officers. What happened next is the part worth recording, because it is the rarest outcome in this entire archive: someone was held to account. Four Pasco residents — Darlene Deegan, Dalanea Taylor, Tammy Heilman and Robert A. Jones III — sued in federal court in 2021, represented by the Institute for Justice. The pattern they described was not dramatic. Deputies arrived repeatedly, at all hours, and wrote citations for overgrown grass, missing house numbers, unvaccinated pets and window tint. The Sheriff's Office discontinued the programme in 2023. On 4 December 2024, with trial about to begin, it settled — and the settlement was not a denial. The Sheriff's Office admitted the programme violated the Fourth Amendment, because the checks exceeded the implied licence any visitor has to knock on a door; the First Amendment, because they directly and substantially interfered with the right of intimate association; and Fourteenth Amendment due process, because they interfered with the plaintiffs' liberty interests. It paid $105,000 in damages and is barred from running a comparable programme again. Whatever else is or is not happening to children, this happened, was documented in detail, required no capability anyone would dispute exists, and ended with a government admitting in writing that it had violated three amendments.
 

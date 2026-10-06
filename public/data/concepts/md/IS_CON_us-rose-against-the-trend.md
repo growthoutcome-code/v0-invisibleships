@@ -9,8 +9,9 @@ theme: health
 audience: [clinicians]
 topics: [health-effects]
 verification: verified
+series: [public-health-numbers]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 368
+word_count: 424
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -23,6 +24,8 @@ disclaimer: meta/IS_META_terms.md
 **Origin: ai.** Derived by AI analysis of the dataset.  
 **Theme: Health outcomes.**  
 **Written for: Clinicians.**
+
+**Series: Public health: what the numbers show, part 1 of 5.** 1. The world's suicide rate fell. The United States' rose. (this concept) · 2. [The fentanyl reversal](IS_CON_the-fentanyl-reversal.md) · 3. [The numbers under the numbers](IS_CON_low-number-may-mean-low-counting.md) · 4. [Prescribing is not a measure of illness](IS_CON_prescribing-is-not-prevalence.md) · 5. [Are children harmed by wireless exposure?](IS_CON_children-wearables-and-rf.md)
 
 Between 2000 and 2021, on the one basis that allows countries to be compared at all, the world's suicide rate fell 27%. Most countries fell with it — Russia by 60%, China by 42%, Israel by 36%, Japan by 28%, India by 21%. Over the same years the United States rose 40%, in a steady climb rather than a spike. It is not alone in rising: South Korea rose further, and the UK, Australia and the West Bank & Gaza were effectively flat. But among large wealthy countries the American direction is the outlier, and the gap is not small — 67 percentage points between the US and the world it is usually compared to.
 

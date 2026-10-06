@@ -9,8 +9,9 @@ theme: record
 audience: [press]
 topics: []
 verification: verified
+series: [how-to-read-this-archive]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 220
+word_count: 317
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -23,6 +24,8 @@ disclaimer: meta/IS_META_terms.md
 **Origin: ai.** Derived by AI analysis of the dataset.  
 **Theme: The record and its limits.**  
 **Written for: Press and researchers.**
+
+**Series: How to read this archive, part 3 of 8.** 1. [Next to each other is not because of each other](IS_CON_co-occurrence-is-not-cause.md) · 2. [We cannot prove which came first, the law or the system](IS_CON_sequence-cannot-be-proven.md) · 3. “Official” is not the same as “independent” (this concept) · 4. [The headline spending figure is not what governments spent](IS_CON_headline-spending-is-not-spending.md) · 5. [The numbers under the numbers](IS_CON_low-number-may-mean-low-counting.md) · 6. [Prescribing is not a measure of illness](IS_CON_prescribing-is-not-prevalence.md) · 7. [Why isn't any of this in the news?](IS_CON_why-isnt-this-in-the-news.md) · 8. [There is no column for you](IS_CON_no-column-for-you.md)
 
 73 of the 87 vendor-published sources in this research carry the top evidence tier. That is defensible for a fact like which company won which contract, and it is not the same as independent confirmation. Stated here because a reader deserves to weigh it, and because the limits of a record are part of the record.
 

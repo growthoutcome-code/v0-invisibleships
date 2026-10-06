@@ -24,6 +24,12 @@ export type ConceptTileData = {
   title: string;
   body: string;
   topics: string[]; // THEMES labels, already resolved, at most three
+  /** "Part 2 of 5" when the tile is shown inside a series (ConceptsView, By series). */
+  part?: string;
+  /** Recently added (lib/concepts.ts isNewConcept). */
+  isNew?: boolean;
+  /** The other series this concept is also in, already resolved to names. */
+  alsoIn?: string[];
 };
 
 export default function ConceptTile({ c, from, square = false, onOpen }: {
@@ -79,6 +85,12 @@ export default function ConceptTile({ c, from, square = false, onOpen }: {
           <span className="text-[12px] uppercase tracking-[0.08em] font-semibold text-foreground">
             {c.basis}
           </span>
+          {c.part && (
+            <span className="text-[12px] uppercase tracking-[0.08em] font-semibold text-muted">{c.part}</span>
+          )}
+          {c.isNew && (
+            <span className="text-[12px] uppercase tracking-[0.08em] font-semibold text-foreground border border-foreground px-1.5 py-px">New</span>
+          )}
         </div>
         <h3 className="font-display font-semibold text-foreground text-[22px] md:text-[24px] leading-tight mb-3 group-hover:underline underline-offset-4">
           {c.title}
@@ -93,6 +105,9 @@ export default function ConceptTile({ c, from, square = false, onOpen }: {
           </div>
         ) : (
           <p className="text-[17px] leading-[1.55] text-foreground/80 line-clamp-3 m-0 mb-5">{c.body}</p>
+        )}
+        {c.alsoIn && c.alsoIn.length > 0 && (
+          <p className="m-0 mb-3 text-[14px] text-muted">Also in: {c.alsoIn.join(" · ")}</p>
         )}
         {/* Pinned to the bottom of the tile, in both forms. */}
         <div className={`mt-auto flex flex-wrap items-center gap-x-3 gap-y-1 text-[12px] uppercase tracking-[0.06em] text-muted`}>

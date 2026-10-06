@@ -9,8 +9,9 @@ theme: surveillance
 audience: [household, policy]
 topics: [proposed-solutions, technology, surveillance, law-government]
 verification: unverified
+series: [surveillance-in-everyday-life]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 459
+word_count: 545
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -25,6 +26,8 @@ disclaimer: meta/IS_META_terms.md
 **Written for: Households and individuals · Legislators and regulators.**
 
 **Not independently verified.**
+
+**Series: Surveillance in everyday life, part 1 of 7.** 1. Why does the camera on your door not answer to you? (this concept) · 2. [Who could refuse a system that saved their child?](IS_CON_prevention-as-the-product.md) · 3. [Does being watched change what people let themselves think?](IS_CON_no-private-thinking-space.md) · 4. [How protected is your medical information?](IS_CON_how-protected-is-your-medical-record.md) · 5. [What are children subject to?](IS_CON_what-children-are-subject-to.md) · 6. [What happens to everyone around a target?](IS_CON_everyone-around-a-target.md) · 7. [Are people made into intelligence assets without knowing it?](IS_CON_made-into-assets-unknowing.md)
 
 A doorbell camera watches your street and answers to its manufacturer. You can look at what it recorded; you do not hold it, and you cannot say who else can. The proposal here is narrower than a privacy argument and harder to dismiss: give a citizen their own eyesight — one recording that belongs to the person the way a body camera belongs to an officer.
 

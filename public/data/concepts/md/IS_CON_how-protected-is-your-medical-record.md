@@ -9,8 +9,9 @@ theme: surveillance
 audience: [household, policy, clinicians]
 topics: [technology, surveillance, law-government]
 verification: unverified
+series: [surveillance-in-everyday-life]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 680
+word_count: 766
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -25,6 +26,8 @@ disclaimer: meta/IS_META_terms.md
 **Written for: Households and individuals · Legislators and regulators · Clinicians.**
 
 **Not independently verified.**
+
+**Series: Surveillance in everyday life, part 4 of 7.** 1. [Why does the camera on your door not answer to you?](IS_CON_whose-eyesight-is-it.md) · 2. [Who could refuse a system that saved their child?](IS_CON_prevention-as-the-product.md) · 3. [Does being watched change what people let themselves think?](IS_CON_no-private-thinking-space.md) · 4. How protected is your medical information? (this concept) · 5. [What are children subject to?](IS_CON_what-children-are-subject-to.md) · 6. [What happens to everyone around a target?](IS_CON_everyone-around-a-target.md) · 7. [Are people made into intelligence assets without knowing it?](IS_CON_made-into-assets-unknowing.md)
 
 Less than most people assume, and the gap is structural rather than criminal. HIPAA protects a setting, not a category of information. It binds health plans, clearinghouses and providers who bill electronically. It does not bind most of the places health information is now generated. That distinction is not academic. When the Federal Trade Commission acted against GoodRx in February 2023, it could not use HIPAA at all — it used the Health Breach Notification Rule, and part of its complaint was that GoodRx had falsely suggested to consumers that it complied with HIPAA. What GoodRx had actually done was compile lists of users who bought particular medications and upload their email addresses, phone numbers and mobile advertising identifiers to Facebook, Google, Criteo, Branch and Twilio, so those users could be advertised to on the basis of their prescriptions and health conditions. The penalty was $1.5 million. The FTC brought a comparable action against BetterHelp over mental-health questionnaire data shared with advertisers. Scale is the other half. In 2024 a ransomware attack on Change Healthcare, a UnitedHealth subsidiary that processes a large share of American medical claims, exposed the data of roughly 190 million people — the largest health-data breach in United States history, and not a break-in at a doctor's office but a failure at a clearing house most patients had never heard of and none had chosen. So the honest answer is that medical privacy in America is strong where a clinician is involved and weak nearly everywhere else, and the largest single loss of it was not a violation by anyone treating a patient.
 

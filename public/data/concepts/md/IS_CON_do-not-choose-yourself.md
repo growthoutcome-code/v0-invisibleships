@@ -9,8 +9,9 @@ theme: neurotech
 audience: [household, investigators, policy, press]
 topics: [speculation, technology, harassment, euthanization, proposed-solutions]
 verification: unverified
+series: [the-authors-account]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 1850
+word_count: 1880
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -25,6 +26,8 @@ disclaimer: meta/IS_META_terms.md
 **Written for: Households and individuals · Law enforcement and investigators · Legislators and regulators · Press and researchers.**
 
 **Not independently verified.**
+
+**Series: The author's account, part 3 of 3.** 1. [Has an attack happened?](IS_CON_has-an-attack-happened.md) · 2. [What is the neurotech bullhorn?](IS_CON_the-neurotech-bullhorn.md) · 3. Do Not Choose Yourself (this concept)
 
 *This concept is being written in parts. More of it is being recorded and will be added.*
 

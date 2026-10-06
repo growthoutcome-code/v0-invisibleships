@@ -9,8 +9,9 @@ theme: procurement
 audience: [policy]
 topics: [technology, law-government]
 verification: verified
+series: [government-cloud-contracts]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 272
+word_count: 363
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -23,6 +24,8 @@ disclaimer: meta/IS_META_terms.md
 **Origin: ai.** Derived by AI analysis of the dataset.  
 **Theme: Procurement and accountability.**  
 **Written for: Legislators and regulators.**
+
+**Series: Government cloud: what the contracts show, part 2 of 7.** 1. [The headline spending figure is not what governments spent](IS_CON_headline-spending-is-not-spending.md) · 2. A law saying “keep it local” doesn’t keep it local (this concept) · 3. [Systems built for an emergency get switched off after it](IS_CON_emergency-systems-withdrawn.md) · 4. [A regulator finding does not stop a deployment](IS_CON_findings-dont-stop-deployment.md) · 5. [Fined in Europe, hired in America](IS_CON_fined-in-europe-hired-in-america.md) · 6. [Accountability isn't wired to deployment, even in the schema](IS_CON_accountability-not-wired.md) · 7. [There is no column for you](IS_CON_no-column-for-you.md)
 
 Twenty countries in this record have rules requiring government data to stay within their borders. In ten of the countries where we can see actual deployments, most government workloads still run on American companies anyway. The only places where that genuinely changes are the ones that shut those companies out altogether — and even there, the few remaining records are exits rather than operations.
 

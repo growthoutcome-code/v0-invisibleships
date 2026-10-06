@@ -9,8 +9,9 @@ theme: surveillance
 audience: [household, investigators]
 topics: [technology, surveillance, law-government]
 verification: unverified
+series: [harassment-and-coercion, surveillance-in-everyday-life]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 586
+word_count: 755
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -25,6 +26,10 @@ disclaimer: meta/IS_META_terms.md
 **Written for: Households and individuals · Law enforcement and investigators.**
 
 **Not independently verified.**
+
+**Series: Harassment and coercion, part 6 of 8.** 1. [Organised covert harassment of individuals is established fact](IS_CON_organised-harassment-is-fact.md) · 2. [Zersetzung's methods are crimes](IS_CON_zersetzung-methods-are-crimes.md) · 3. [We're keeping you to ourselves](IS_CON_ruin-first-then-rescue.md) · 4. [An attack to force acknowledgment](IS_CON_attack-to-force-acknowledgment.md) · 5. [What happens to everyone around a target?](IS_CON_everyone-around-a-target.md) · 6. Are people made into intelligence assets without knowing it? (this concept) · 7. [Does the explanation itself do harm?](IS_CON_explanation-is-part-of-the-harm.md) · 8. [Are Denver citizens subject to acoustic weapons?](IS_CON_denver-acoustic-weapons.md)
+
+**Series: Surveillance in everyday life, part 7 of 7.** 1. [Why does the camera on your door not answer to you?](IS_CON_whose-eyesight-is-it.md) · 2. [Who could refuse a system that saved their child?](IS_CON_prevention-as-the-product.md) · 3. [Does being watched change what people let themselves think?](IS_CON_no-private-thinking-space.md) · 4. [How protected is your medical information?](IS_CON_how-protected-is-your-medical-record.md) · 5. [What are children subject to?](IS_CON_what-children-are-subject-to.md) · 6. [What happens to everyone around a target?](IS_CON_everyone-around-a-target.md) · 7. Are people made into intelligence assets without knowing it? (this concept)
 
 Intelligence tradecraft has always separated a witting source from an unwitting one. A person can supply information without knowing who receives it, or that anyone does. What changed is scale, and it required nobody's cooperation. American law enforcement agencies buy location data that phones emit continuously. The Electronic Frontier Foundation's investigation into Fog Data Science documented a company selling local police searchable access to billions of location signals harvested from ordinary apps, at prices small departments could afford. Babel Street's Locate X offered comparable capability, and EPIC obtained records of Customs and Border Protection's use of it. The mechanism is commercial: brokers buy from the advertising ecosystem and agencies buy from brokers. No warrant is involved because no compulsion is involved. The result is a population of unwitting sources. A person carrying a phone generates a record of where they went, who they were near and for how long, and that record is purchasable. They were never approached, never recruited, and are never harassed — because harassment would defeat the purpose. The value of an unwitting asset lies precisely in their not knowing. What this does not describe is access to perception. No documented capability reads a person's eyesight, and the mechanism above does not require one. What people already emit is sufficient.
 

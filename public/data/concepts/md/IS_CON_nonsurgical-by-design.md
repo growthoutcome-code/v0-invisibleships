@@ -9,8 +9,9 @@ theme: neurotech
 audience: [policy]
 topics: [technology, law-government]
 verification: unverified
+series: [neurotechnology-and-neural-data]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 478
+word_count: 553
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -25,6 +26,8 @@ disclaimer: meta/IS_META_terms.md
 **Written for: Legislators and regulators.**
 
 **Not independently verified.**
+
+**Series: Neurotechnology and neural data, part 3 of 6.** 1. [Who owns what your brain emits?](IS_CON_who-owns-neural-data.md) · 2. [Can a machine read what you are thinking?](IS_CON_can-a-machine-read-thought.md) · 3. Did anyone try to build a way in without surgery? (this concept) · 4. [What would it actually take to do this without consent?](IS_CON_what-it-would-take.md) · 5. [Why did legislatures write laws for neural data?](IS_CON_law-for-neural-data.md) · 6. [Are children harmed by wireless exposure?](IS_CON_children-wearables-and-rf.md)
 
 Yes, openly, and the programme documents say so. DARPA's Next-Generation Nonsurgical Neurotechnology programme — N3 — set out, in its own words, to develop high-performance bi-directional brain-machine interfaces for able-bodied service members. Bi-directional means read and write. Able-bodied means the purpose was not restoring lost function; the stated applications were controlling unmanned vehicles and cyber-defence systems. Six teams were funded in 2019. The published performance targets were specific: sixteen independent channels, within sixteen cubic millimetres of neural tissue, at fifty milliseconds of latency, using light, acoustic or electromagnetic energy rather than implanted electrodes. The programme is now listed as complete and retained for reference. What this establishes is intent and investment, publicly recorded. It does not establish that the targets were met, and the targets themselves describe a person wearing equipment, not a person at a distance.
 

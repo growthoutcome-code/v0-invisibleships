@@ -9,8 +9,9 @@ theme: record
 audience: [household, press]
 topics: [technology]
 verification: unverified
+series: [neurotechnology-and-neural-data]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 593
+word_count: 668
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -25,6 +26,8 @@ disclaimer: meta/IS_META_terms.md
 **Written for: Households and individuals · Press and researchers.**
 
 **Not independently verified.**
+
+**Series: Neurotechnology and neural data, part 4 of 6.** 1. [Who owns what your brain emits?](IS_CON_who-owns-neural-data.md) · 2. [Can a machine read what you are thinking?](IS_CON_can-a-machine-read-thought.md) · 3. [Did anyone try to build a way in without surgery?](IS_CON_nonsurgical-by-design.md) · 4. What would it actually take to do this without consent? (this concept) · 5. [Why did legislatures write laws for neural data?](IS_CON_law-for-neural-data.md) · 6. [Are children harmed by wireless exposure?](IS_CON_children-wearables-and-rf.md)
 
 The three concepts alongside this one describe what the public record contains: consumer devices whose makers reserve broad rights over neural data, three states legislating that data as sensitive, a decoder that partially reconstructs meaning, and a defence programme that funded a nonsurgical interface with published targets. Setting them side by side makes the boundary visible, and the boundary is the useful part. Every documented capability requires at least one of three things: physical contact with the head, a cooperative and individually trained subject, or equipment the person is inside or wearing. The decoder needed fifteen hours per person and failed against an untrained subject, and failed again when a trained one resisted. The DARPA targets describe sixteen channels within sixteen cubic millimetres — a wearable interface on an operator who put it on. Consumer EEG reads voltage at the scalp through electrodes touching it. Not one documented system operates at distance on a person who has not participated. That is not an argument that nothing could ever be built. It is a statement of where the published record currently stops, offered because a person who suspects something is happening to them deserves to know what the actual state of the art requires — and because a claim that outruns it should be recognisable as doing so.
 

@@ -9,8 +9,9 @@ theme: neurotech
 audience: [clinicians]
 topics: [technology, surveillance]
 verification: unverified
+series: [neurotechnology-and-neural-data]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 554
+word_count: 629
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -25,6 +26,8 @@ disclaimer: meta/IS_META_terms.md
 **Written for: Clinicians.**
 
 **Not independently verified.**
+
+**Series: Neurotechnology and neural data, part 2 of 6.** 1. [Who owns what your brain emits?](IS_CON_who-owns-neural-data.md) · 2. Can a machine read what you are thinking? (this concept) · 3. [Did anyone try to build a way in without surgery?](IS_CON_nonsurgical-by-design.md) · 4. [What would it actually take to do this without consent?](IS_CON_what-it-would-take.md) · 5. [Why did legislatures write laws for neural data?](IS_CON_law-for-neural-data.md) · 6. [Are children harmed by wireless exposure?](IS_CON_children-wearables-and-rf.md)
 
 Partly, under conditions that are worth stating precisely. In May 2023 Jerry Tang and Alexander Huth published a semantic decoder in Nature Neuroscience that reconstructed continuous language from non-invasive brain recordings. A person lay in an fMRI scanner; a transformer model turned the blood-flow signal into text that captured the gist of what they were hearing or imagining, matching the intended meaning roughly half the time. It is a real result and it was replicated in the paper across participants. The conditions are as important as the finding. The decoder required about fifteen hours of scanner time per person to train, and it worked only for the individual it was trained on — run against an untrained person, it produced unintelligible output. It worked only with willing participants. And when a trained subject deliberately resisted, by counting, naming animals or telling themselves a different story, the decoder failed entirely. The researchers tested that on purpose and reported it. So the honest answer is that meaning can be partially reconstructed from a cooperative, individually-trained person lying still inside a superconducting magnet the size of a small room. That is a genuine advance in decoding, and it is a long way from reading a mind that does not wish to be read.
 

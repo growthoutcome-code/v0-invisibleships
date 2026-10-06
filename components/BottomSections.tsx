@@ -185,7 +185,7 @@ export function ConceptCards({ tiles, from, label = "Concepts" }: { tiles: Botto
 // Exported for the concept page's Series block (4 Oct 2026), which uses the
 // same treatment as every other bottom section.
 export function Block({ id, eyebrow, heading, children, href, label, from, motif, wide = false, actions }: {
-  id: BottomBlock | "series"; eyebrow: string; heading: ReactNode; children: ReactNode;
+  id: BottomBlock | "series" | `series-${string}`; eyebrow: string; heading: ReactNode; children: ReactNode;
   href?: string; label?: string; from: string;
   /** In place of the one link, for a block whose way on is not a page (Contribute). */
   actions?: ReactNode;

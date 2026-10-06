@@ -9,7 +9,7 @@ theme: neurotech
 audience: [household, investigators, policy, press]
 topics: [speculation, technology, harassment, euthanization, health-effects, proposed-solutions]
 verification: unverified
-series: telepathic-communication
+series: [telepathic-communication]
 generated_by: scripts/export_concepts_md.mjs
 word_count: 2863
 author: Sean C. Harris

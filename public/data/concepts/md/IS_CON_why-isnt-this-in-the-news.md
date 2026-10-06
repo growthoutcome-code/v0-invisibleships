@@ -9,8 +9,9 @@ theme: record
 audience: [press]
 topics: []
 verification: unverified
+series: [how-to-read-this-archive]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 637
+word_count: 734
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -25,6 +26,8 @@ disclaimer: meta/IS_META_terms.md
 **Written for: Press and researchers.**
 
 **Not independently verified.**
+
+**Series: How to read this archive, part 7 of 8.** 1. [Next to each other is not because of each other](IS_CON_co-occurrence-is-not-cause.md) · 2. [We cannot prove which came first, the law or the system](IS_CON_sequence-cannot-be-proven.md) · 3. [“Official” is not the same as “independent”](IS_CON_official-is-not-independent.md) · 4. [The headline spending figure is not what governments spent](IS_CON_headline-spending-is-not-spending.md) · 5. [The numbers under the numbers](IS_CON_low-number-may-mean-low-counting.md) · 6. [Prescribing is not a measure of illness](IS_CON_prescribing-is-not-prevalence.md) · 7. Why isn't any of this in the news? (this concept) · 8. [There is no column for you](IS_CON_no-column-for-you.md)
 
 The usual assumption is that silence means suppression. There is a duller explanation with far better evidence behind it, and anyone reasoning about an absence of coverage should meet it first. Local journalism in the United States has collapsed. Northwestern's Medill School has tracked it annually; its 2025 State of Local News report counts nearly 3,500 newspapers gone since 2005 — close to forty per cent of all local papers in the country — with 136 lost in the last year alone. Two hundred and thirteen counties now have no local news source of any kind. A further 1,524 counties have exactly one, usually a weekly. Roughly fifty million Americans live with limited or no access to local news. More than 270,000 newspaper jobs have disappeared since 2005, a decline of over seventy-five per cent. So for a large part of the country, the question is not why reporters did not cover something. It is that there is no reporter. No one attends the council meeting, reads the court docket, or files the records request. Things do not go uncovered because they were buried; they go uncovered because the institution that used to notice them was dissolved for economic reasons over two decades, in public, with the numbers published every year. An absence of coverage is therefore very weak evidence of anything. It was weak evidence before any particular story existed.
 

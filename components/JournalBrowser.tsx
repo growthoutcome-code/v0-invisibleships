@@ -134,7 +134,7 @@ export default function JournalBrowser({
   // Concepts' controls sit in this title band, so their state lives here and is
   // handed down to DataView -> ConceptsView (the Research hero still steers it).
   const [conceptFilters, setConceptFilters] = useState<Filters>(NO_FILTERS);
-  const [conceptSort, setConceptSort] = useState<ConceptSort>("default");
+  const [conceptSort, setConceptSort] = useState<ConceptSort>("series");
   const [sel, setSel] = useState<string | null>(null);
   const [gsel, setGsel] = useState<string | null>(null);
   const [body, setBody] = useState(""); const [bodyLoading, setBodyLoading] = useState(false);

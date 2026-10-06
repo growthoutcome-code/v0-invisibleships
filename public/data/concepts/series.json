@@ -1,0 +1,65 @@
+{
+  "about": "Concept series for invisibleships.com/concepts, in the order they appear on the page. Each series lists its concepts in reading order. A concept can be in more than one series. This file is the only place series are defined; lib/concepts.ts, the download and Supabase are generated from it (scripts/apply_concept_series.py).",
+  "series": [
+    {
+      "key": "telepathic-communication",
+      "name": "Telepathic communication",
+      "description": "The author's hypothesis of a telepathic communication system, and of how a person might use it.",
+      "concepts": ["diving-ecosystem", "diving", "why-hasnt-it-been-turned-off"]
+    },
+    {
+      "key": "the-authors-account",
+      "name": "The author's account",
+      "description": "What the author reports he has experienced and been told, and his advice to anyone in the same position.",
+      "concepts": ["has-an-attack-happened", "the-neurotech-bullhorn", "do-not-choose-yourself"]
+    },
+    {
+      "key": "hearing-something-no-one-else-hears",
+      "name": "Hearing something no one else hears",
+      "description": "What can produce a sound or a voice that only one person hears, how to check it, and what an explanation does.",
+      "concepts": ["only-you-can-hear-it", "can-you-record-it", "what-produces-the-feeling", "denver-acoustic-weapons", "explanation-is-part-of-the-harm"]
+    },
+    {
+      "key": "neurotechnology-and-neural-data",
+      "name": "Neurotechnology and neural data",
+      "description": "What brain technology can and cannot do today, who owns the data it collects, and the laws written for it.",
+      "concepts": ["who-owns-neural-data", "can-a-machine-read-thought", "nonsurgical-by-design", "what-it-would-take", "law-for-neural-data", "children-wearables-and-rf"]
+    },
+    {
+      "key": "harassment-and-coercion",
+      "name": "Harassment and coercion",
+      "description": "Documented cases of covert harassment, and the methods described in the research.",
+      "concepts": ["organised-harassment-is-fact", "zersetzung-methods-are-crimes", "ruin-first-then-rescue", "attack-to-force-acknowledgment", "everyone-around-a-target", "made-into-assets-unknowing", "explanation-is-part-of-the-harm", "denver-acoustic-weapons"]
+    },
+    {
+      "key": "surveillance-in-everyday-life",
+      "name": "Surveillance in everyday life",
+      "description": "Cameras, records and monitoring that reach ordinary people, including children and the people around a target.",
+      "concepts": ["whose-eyesight-is-it", "prevention-as-the-product", "no-private-thinking-space", "how-protected-is-your-medical-record", "what-children-are-subject-to", "everyone-around-a-target", "made-into-assets-unknowing"]
+    },
+    {
+      "key": "government-cloud-contracts",
+      "name": "Government cloud: what the contracts show",
+      "description": "What the government cloud records show about spending, where data is kept, and what happens after a system is deployed.",
+      "concepts": ["headline-spending-is-not-spending", "local-law-does-not-mean-local", "emergency-systems-withdrawn", "findings-dont-stop-deployment", "fined-in-europe-hired-in-america", "accountability-not-wired", "no-column-for-you"]
+    },
+    {
+      "key": "who-answers-for-harm",
+      "name": "Who answers for harm",
+      "description": "Cases where regulators, courts or contracts did, or did not, hold anyone to account.",
+      "concepts": ["findings-dont-stop-deployment", "fined-in-europe-hired-in-america", "contractors-killed-and-freed", "zersetzung-methods-are-crimes", "who-profits-from-a-body", "accountability-not-wired"]
+    },
+    {
+      "key": "public-health-numbers",
+      "name": "Public health: what the numbers show",
+      "description": "Suicide, overdose and prescribing figures from the site's public health data, and how to read them.",
+      "concepts": ["us-rose-against-the-trend", "the-fentanyl-reversal", "low-number-may-mean-low-counting", "prescribing-is-not-prevalence", "children-wearables-and-rf"]
+    },
+    {
+      "key": "how-to-read-this-archive",
+      "name": "How to read this archive",
+      "description": "The limits of the evidence here: what a timeline, a source or a number can and cannot show.",
+      "concepts": ["co-occurrence-is-not-cause", "sequence-cannot-be-proven", "official-is-not-independent", "headline-spending-is-not-spending", "low-number-may-mean-low-counting", "prescribing-is-not-prevalence", "why-isnt-this-in-the-news", "no-column-for-you"]
+    }
+  ]
+}

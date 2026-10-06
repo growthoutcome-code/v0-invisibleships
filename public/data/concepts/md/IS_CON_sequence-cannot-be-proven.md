@@ -9,8 +9,9 @@ theme: record
 audience: [press]
 topics: [law-government]
 verification: verified
+series: [how-to-read-this-archive]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 256
+word_count: 353
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -23,6 +24,8 @@ disclaimer: meta/IS_META_terms.md
 **Origin: ai.** Derived by AI analysis of the dataset.  
 **Theme: The record and its limits.**  
 **Written for: Press and researchers.**
+
+**Series: How to read this archive, part 2 of 8.** 1. [Next to each other is not because of each other](IS_CON_co-occurrence-is-not-cause.md) · 2. We cannot prove which came first, the law or the system (this concept) · 3. [“Official” is not the same as “independent”](IS_CON_official-is-not-independent.md) · 4. [The headline spending figure is not what governments spent](IS_CON_headline-spending-is-not-spending.md) · 5. [The numbers under the numbers](IS_CON_low-number-may-mean-low-counting.md) · 6. [Prescribing is not a measure of illness](IS_CON_prescribing-is-not-prevalence.md) · 7. [Why isn't any of this in the news?](IS_CON_why-isnt-this-in-the-news.md) · 8. [There is no column for you](IS_CON_no-column-for-you.md)
 
 The timeline shows laws and deployments together, and it is tempting to read cause into the order they appear. The data does not support that reading. The fields built to link one event to another were never filled in, and the deployment records carry no date at all. Thirty-two events are tagged with labels like “law follows capability”, but those tags point at nothing. Treat the timeline as two stories shown side by side, not as one causing the other.
 

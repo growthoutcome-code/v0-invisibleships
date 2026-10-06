@@ -9,8 +9,9 @@ theme: surveillance
 audience: [policy, household]
 topics: [proposed-solutions, technology, surveillance, law-government]
 verification: unverified
+series: [surveillance-in-everyday-life]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 523
+word_count: 609
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -25,6 +26,8 @@ disclaimer: meta/IS_META_terms.md
 **Written for: Legislators and regulators · Households and individuals.**
 
 **Not independently verified.**
+
+**Series: Surveillance in everyday life, part 2 of 7.** 1. [Why does the camera on your door not answer to you?](IS_CON_whose-eyesight-is-it.md) · 2. Who could refuse a system that saved their child? (this concept) · 3. [Does being watched change what people let themselves think?](IS_CON_no-private-thinking-space.md) · 4. [How protected is your medical information?](IS_CON_how-protected-is-your-medical-record.md) · 5. [What are children subject to?](IS_CON_what-children-are-subject-to.md) · 6. [What happens to everyone around a target?](IS_CON_everyone-around-a-target.md) · 7. [Are people made into intelligence assets without knowing it?](IS_CON_made-into-assets-unknowing.md)
 
 Imagine the terms inverted: you are told whenever you are observed, harassment is a crime rather than a method, and law enforcement is paid for harm that did not happen rather than arrests that did. Now the hard case: someone on a registry is present where children are, and the system flags it in seconds rather than after a report — an automation raises it, a person reviews it, a person decides. The intervention is closer to social work than policing; the individual is steered away, no crime occurs, and a child goes home that afternoon never knowing there was an afternoon to survive. The family is told a harm was prevented, and invited to review the service. What they feel is relief so total it forecloses argument, and that is the finding: a system justified by the worst thing that could happen to your child cannot be argued with by anyone who loves a child.
 

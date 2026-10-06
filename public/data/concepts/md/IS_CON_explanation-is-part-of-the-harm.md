@@ -9,8 +9,9 @@ theme: coercion
 audience: [household, clinicians]
 topics: [proposed-solutions, speculation, obedience-coercion, law-government]
 verification: unverified
+series: [hearing-something-no-one-else-hears, harassment-and-coercion]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 554
+word_count: 695
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -25,6 +26,10 @@ disclaimer: meta/IS_META_terms.md
 **Written for: Households and individuals · Clinicians.**
 
 **Not independently verified.**
+
+**Series: Hearing something no one else hears, part 5 of 5.** 1. [“Only I can hear it” is not, by itself, unusual](IS_CON_only-you-can-hear-it.md) · 2. [Can you record it?](IS_CON_can-you-record-it.md) · 3. [Your house is not haunted](IS_CON_what-produces-the-feeling.md) · 4. [Are Denver citizens subject to acoustic weapons?](IS_CON_denver-acoustic-weapons.md) · 5. Does the explanation itself do harm? (this concept)
+
+**Series: Harassment and coercion, part 7 of 8.** 1. [Organised covert harassment of individuals is established fact](IS_CON_organised-harassment-is-fact.md) · 2. [Zersetzung's methods are crimes](IS_CON_zersetzung-methods-are-crimes.md) · 3. [We're keeping you to ourselves](IS_CON_ruin-first-then-rescue.md) · 4. [An attack to force acknowledgment](IS_CON_attack-to-force-acknowledgment.md) · 5. [What happens to everyone around a target?](IS_CON_everyone-around-a-target.md) · 6. [Are people made into intelligence assets without knowing it?](IS_CON_made-into-assets-unknowing.md) · 7. Does the explanation itself do harm? (this concept) · 8. [Are Denver citizens subject to acoustic weapons?](IS_CON_denver-acoustic-weapons.md)
 
 An unexplained experience arrives without a label. Whatever attaches to it next does real work: it decides what the person does, who they trust, and whether they seek help. Claiming supernatural or superhuman authority in order to secure compliance is among the oldest documented methods of control. Spiritualist mediums worked bereaved families with cold reading and staged effects, and the Fox sisters, who began the movement, confessed the fraud in 1888. Faith healers have been prosecuted for it. Research on coercive groups records claimed transcendent authority as a standard instrument for overriding a member's own judgment, because an authority that cannot be checked cannot be argued with. The public-safety consequence is separate from whether any given experience has an external cause. A person who attributes what is happening to them to spirits, to extraterrestrials, or to any agency beyond reach will not pursue the remedies that exist for causes within reach: a physician, a lawyer, a police report, a decibel meter, a technical measurement. The explanation forecloses the response, and it does so whether it was handed to the person or arrived at alone. The same logic applies to any framing that places a cause beyond investigation, including the framings on this site. A concept that names this risk and exempts itself from it has not understood it.
 

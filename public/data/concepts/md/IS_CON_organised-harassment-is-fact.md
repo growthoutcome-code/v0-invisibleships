@@ -9,8 +9,9 @@ theme: coercion
 audience: [investigators, press]
 topics: [harassment, surveillance, law-government]
 verification: verified
+series: [harassment-and-coercion]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 238
+word_count: 321
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -23,6 +24,8 @@ disclaimer: meta/IS_META_terms.md
 **Origin: ai.** Derived by AI analysis of the dataset.  
 **Theme: Coercion and control.**  
 **Written for: Law enforcement and investigators · Press and researchers.**
+
+**Series: Harassment and coercion, part 1 of 8.** 1. Organised covert harassment of individuals is established fact (this concept) · 2. [Zersetzung's methods are crimes](IS_CON_zersetzung-methods-are-crimes.md) · 3. [We're keeping you to ourselves](IS_CON_ruin-first-then-rescue.md) · 4. [An attack to force acknowledgment](IS_CON_attack-to-force-acknowledgment.md) · 5. [What happens to everyone around a target?](IS_CON_everyone-around-a-target.md) · 6. [Are people made into intelligence assets without knowing it?](IS_CON_made-into-assets-unknowing.md) · 7. [Does the explanation itself do harm?](IS_CON_explanation-is-part-of-the-harm.md) · 8. [Are Denver citizens subject to acoustic weapons?](IS_CON_denver-acoustic-weapons.md)
 
 Not a theory, and not confined to states. Seven decided or settled cases in this record describe sustained, deniable targeting of named people — by police forces and by corporations. Two further entries are included as context and as a contested case, and are labelled as such rather than counted alongside these.
 

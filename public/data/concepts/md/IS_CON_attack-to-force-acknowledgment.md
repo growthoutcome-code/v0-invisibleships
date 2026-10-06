@@ -9,8 +9,9 @@ theme: coercion
 audience: [investigators]
 topics: [speculation, obedience-coercion, violence, terrorism, rescue-announcements]
 verification: unverified
+series: [harassment-and-coercion]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 567
+word_count: 650
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -25,6 +26,8 @@ disclaimer: meta/IS_META_terms.md
 **Written for: Law enforcement and investigators.**
 
 **Not independently verified.**
+
+**Series: Harassment and coercion, part 4 of 8.** 1. [Organised covert harassment of individuals is established fact](IS_CON_organised-harassment-is-fact.md) · 2. [Zersetzung's methods are crimes](IS_CON_zersetzung-methods-are-crimes.md) · 3. [We're keeping you to ourselves](IS_CON_ruin-first-then-rescue.md) · 4. An attack to force acknowledgment (this concept) · 5. [What happens to everyone around a target?](IS_CON_everyone-around-a-target.md) · 6. [Are people made into intelligence assets without knowing it?](IS_CON_made-into-assets-unknowing.md) · 7. [Does the explanation itself do harm?](IS_CON_explanation-is-part-of-the-harm.md) · 8. [Are Denver citizens subject to acoustic weapons?](IS_CON_denver-acoustic-weapons.md)
 
 Violence is sometimes not aimed at a target's capacity. It is aimed at a target's response. Schelling separated two uses of force: deterrence stops an adversary from doing something, while compellence makes them do something, and works by inflicting harm that ends only when a demand is met. The harm is not the objective — it is the bargaining position. Terrorism research names a related form directly. Kydd and Walter catalogue provocation among five strategies: attack in order to goad the target into a reaction that serves the attacker, usually an overreaction that costs them legitimacy. A third variant belongs to gray-zone conflict, where an act is conducted deniably while its authorship is signalled privately. The victim is left without a good exit — acknowledge the attack publicly and concede a vulnerability, or absorb it in silence and let it continue. Attribution itself becomes the thing being fought over. What unites all three is that the demanded response IS the operation, not a side effect of it. An adversary who wants to be named is running a different operation from one who wants to stay hidden, and the difference shows in what they ask for.
 

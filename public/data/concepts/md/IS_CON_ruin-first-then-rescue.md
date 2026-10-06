@@ -9,8 +9,9 @@ theme: coercion
 audience: [household, investigators]
 topics: [harassment, speculation, obedience-coercion, law-government, family-network]
 verification: unverified
+series: [harassment-and-coercion]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 574
+word_count: 657
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -25,6 +26,8 @@ disclaimer: meta/IS_META_terms.md
 **Written for: Households and individuals · Law enforcement and investigators.**
 
 **Not independently verified.**
+
+**Series: Harassment and coercion, part 3 of 8.** 1. [Organised covert harassment of individuals is established fact](IS_CON_organised-harassment-is-fact.md) · 2. [Zersetzung's methods are crimes](IS_CON_zersetzung-methods-are-crimes.md) · 3. We're keeping you to ourselves (this concept) · 4. [An attack to force acknowledgment](IS_CON_attack-to-force-acknowledgment.md) · 5. [What happens to everyone around a target?](IS_CON_everyone-around-a-target.md) · 6. [Are people made into intelligence assets without knowing it?](IS_CON_made-into-assets-unknowing.md) · 7. [Does the explanation itself do harm?](IS_CON_explanation-is-part-of-the-harm.md) · 8. [Are Denver citizens subject to acoustic weapons?](IS_CON_denver-acoustic-weapons.md)
 
 A reputation can be destroyed as a means rather than as an end. The tactic appears in several literatures that rarely cite one another. Intelligence tradecraft calls it compromise. East Germany's Stasi called it Zersetzung. Research on domestic abuse calls it isolation. Cult-exit and trafficking studies describe manufactured disgrace used for retention. The mechanism is the same in each. Sever the target's ties to everyone outside the group, and do it publicly, because public damage is self-sustaining — people withdraw on their own once a story circulates, and no further effort is required. The target's own account of what is happening then begins to sound like paranoia, which deepens the isolation again. What remains is a person with no relationships outside the group that ruined them. At that point recruitment needs no persuasion. It needs only to be the last door open. Stated from the inside, the logic is possessive rather than punitive: every tie severed is a tie that cannot compete, and the point of the ruin is not that the target suffers but that nobody else is left. The cruelty is not a side effect of the recruitment. It is the method.
 

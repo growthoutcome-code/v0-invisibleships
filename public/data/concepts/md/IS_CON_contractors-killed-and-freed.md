@@ -9,8 +9,9 @@ theme: procurement
 audience: [investigators, policy, press]
 topics: [violence, law-government]
 verification: unverified
+series: [who-answers-for-harm]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 559
+word_count: 626
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -25,6 +26,8 @@ disclaimer: meta/IS_META_terms.md
 **Written for: Law enforcement and investigators · Legislators and regulators · Press and researchers.**
 
 **Not independently verified.**
+
+**Series: Who answers for harm, part 3 of 6.** 1. [A regulator finding does not stop a deployment](IS_CON_findings-dont-stop-deployment.md) · 2. [Fined in Europe, hired in America](IS_CON_fined-in-europe-hired-in-america.md) · 3. Have private contractors killed civilians and gone free? (this concept) · 4. [Zersetzung's methods are crimes](IS_CON_zersetzung-methods-are-crimes.md) · 5. [Who profits from a body?](IS_CON_who-profits-from-a-body.md) · 6. [Accountability isn't wired to deployment, even in the schema](IS_CON_accountability-not-wired.md)
 
 Yes, and the case is documented from beginning to end, including the end. On 16 September 2007, Blackwater contractors guarding a State Department convoy opened fire in Nisour Square, Baghdad, killing fourteen unarmed Iraqi civilians and wounding others. The United States prosecuted. After years of litigation, four contractors were convicted in federal court — one of first-degree murder, three of voluntary manslaughter and firearms offences. In December 2020 all four were pardoned by presidential act, and the convictions ceased to have effect. United Nations human-rights experts called the pardons an affront to justice and said they violated obligations under international humanitarian law. What makes this worth recording is not that private force killed civilians, which is documented in many places, but the shape of the whole sequence: the killings happened, the justice system worked, and the outcome was undone by an authority the justice system does not reach. Accountability that can be reversed at will is a different thing from accountability, and a reader weighing whether private organisations face consequences has one fully documented answer to work from.
 

@@ -9,8 +9,9 @@ theme: experience
 audience: [household, clinicians]
 topics: [harassment, speculation, technology, euthanization, obedience-coercion, health-effects]
 verification: unverified
+series: [hearing-something-no-one-else-hears]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 816
+word_count: 874
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -25,6 +26,8 @@ disclaimer: meta/IS_META_terms.md
 **Written for: Households and individuals · Clinicians.**
 
 **Not independently verified.**
+
+**Series: Hearing something no one else hears, part 3 of 5.** 1. [“Only I can hear it” is not, by itself, unusual](IS_CON_only-you-can-hear-it.md) · 2. [Can you record it?](IS_CON_can-you-record-it.md) · 3. Your house is not haunted (this concept) · 4. [Are Denver citizens subject to acoustic weapons?](IS_CON_denver-acoustic-weapons.md) · 5. [Does the explanation itself do harm?](IS_CON_explanation-is-part-of-the-harm.md)
 
 Your house is not haunted, and that is a finding rather than a reassurance. In 2014 Olaf Blanke's group manufactured the feeling of a presence in healthy people: a blindfolded participant moved a lever, a robot reproduced the movement against their back, and a half-second delay was enough that one in three felt someone standing behind them — two asked for the experiment to stop. Nobody was ever in the room with them. What this record describes is that effect imposed rather than induced: phantom sensations across every sense, and visuals reproducing what a haunting is supposed to look like. The terror is the mechanism — a household driven outside will accept help from whoever is waiting, and what this record says waits there is a facilitator of Zersetzung tactics and a suggestion of euthanasia.
 

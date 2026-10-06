@@ -9,8 +9,9 @@ theme: neurotech
 audience: [household, investigators, press]
 topics: [speculation, technology, law-government]
 verification: unverified
+series: [the-authors-account]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 1193
+word_count: 1223
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -25,6 +26,8 @@ disclaimer: meta/IS_META_terms.md
 **Written for: Households and individuals · Law enforcement and investigators · Press and researchers.**
 
 **Not independently verified.**
+
+**Series: The author's account, part 2 of 3.** 1. [Has an attack happened?](IS_CON_has-an-attack-happened.md) · 2. What is the neurotech bullhorn? (this concept) · 3. [Do Not Choose Yourself](IS_CON_do-not-choose-yourself.md)
 
 You will not find the neurotech bullhorn in the transcripts. This archive runs from 27 February 2025 to 6 May 2026, and the term belongs to what came after it — it names something the record has not caught up with, which is the reason it needs naming rather than a reason to leave it out. What it names is a civilian experience rather than a private one: less a voice in one head than a loudspeaker mounted at every intersection, putting the same disintegration conversation in front of everyone in earshot, subject or not. The nearest named thing is voice-to-skull, or V2K — a claimed one-to-one channel, speech delivered to a single head with no external acoustic source. The bullhorn is what V2K would be if it stopped being private: the same claimed delivery, addressed to a street rather than to a person. That is why bullhorn and not implant, transmitter or voice — the word is about reach and the absence of consent, not about hardware. And it runs both ways, which is the part most easily missed: a channel a population can hear is a channel that population can talk on, local law enforcement included. One distinction decides everything else here. Aimed AT a person, the claim is V2K: nothing sounds in the room, and nothing could be recorded there. Aimed NEAR a person — at a house, so that windows and walls are driven and the conversation becomes a whisper through the building — the claim is something else entirely, because that is a real technology that costs thirty-three dollars, and it makes real sound that a neighbour hears and a phone records. The two cannot both be true of the same event.
 

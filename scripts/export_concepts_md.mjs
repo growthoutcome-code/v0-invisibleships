@@ -226,9 +226,12 @@ const FINDINGS = lift("FINDINGS");
 const NOT_ESTABLISHED = lift("NOT_ESTABLISHED");
 const RESEARCH_INTRO = lift("RESEARCH_INTRO");
 const SOURCE_YEARS = lift("SOURCE_YEARS");
-// Concept series (4 Oct 2026): exported as a line under the axes and a
-// `series:` frontmatter field, so the download carries the grouping too.
-const SERIES = lift("SERIES");
+// Concept series: exported as a line under the axes for each series a concept
+// is in, and a `series: [..]` frontmatter field, so the download carries the
+// grouping too. Defined in public/data/concepts/series.json (6 Oct 2026; a
+// concept may be in several), which also ships in the download as-is.
+const SERIES_LIST = JSON.parse(readFileSync(join(ROOT, "public/data/concepts/series.json"), "utf8")).series;
+const seriesOf = (id) => SERIES_LIST.filter((s) => s.concepts.includes(id));
 
 // Every axis declared on a Concept must reach the exported frontmatter. If a
 // sixth axis is added to lib/concepts.ts and not to AXES, this names it rather
@@ -275,14 +278,13 @@ function toMarkdown(c) {
   if (c.verification && c.verification !== "verified") {
     b.push("", `**${VERIFICATION_LABEL[c.verification] || c.verification}.**`);
   }
-  if (c.series && SERIES[c.series]) {
-    const ser = SERIES[c.series];
-    const n = ser.ids.indexOf(c.id) + 1;
-    const list = ser.ids.map((id, i) => {
+  for (const ser of seriesOf(c.id)) {
+    const n = ser.concepts.indexOf(c.id) + 1;
+    const list = ser.concepts.map((id, i) => {
       const t = (CONCEPTS.find((x) => x.id === id) || {}).title || id;
       return id === c.id ? `${i + 1}. ${t} (this concept)` : `${i + 1}. [${t}](IS_CON_${id}.md)`;
     }).join(" · ");
-    b.push("", `**Series: ${ser.title}, part ${n} of ${ser.ids.length}.** ${list}`);
+    b.push("", `**Series: ${ser.name}, part ${n} of ${ser.concepts.length}.** ${list}`);
   }
   b.push("", c.body.trim(), "");
 
@@ -332,7 +334,7 @@ function toMarkdown(c) {
     `audience: [${(c.audience || []).join(", ")}]`,
     `topics: [${(c.topics || []).join(", ")}]`,
     `verification: ${c.verification || "verified"}`,
-    ...(c.series ? [`series: ${c.series}`] : []),
+    ...(seriesOf(c.id).length ? [`series: [${seriesOf(c.id).map((x) => x.key).join(", ")}]`] : []),
     "generated_by: scripts/export_concepts_md.mjs",
     `word_count: ${words(body)}`,
     `author: ${AUTHOR}`,
