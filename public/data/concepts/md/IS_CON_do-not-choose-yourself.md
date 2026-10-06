@@ -9,9 +9,8 @@ theme: neurotech
 audience: [household, investigators, policy, press]
 topics: [speculation, technology, harassment, euthanization, proposed-solutions]
 verification: unverified
-series: telepathic-communication
 generated_by: scripts/export_concepts_md.mjs
-word_count: 1879
+word_count: 1850
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -26,8 +25,6 @@ disclaimer: meta/IS_META_terms.md
 **Written for: Households and individuals · Law enforcement and investigators · Legislators and regulators · Press and researchers.**
 
 **Not independently verified.**
-
-**Series: Telepathic communication, part 4 of 4.** 1. [The Diving Ecosystem](IS_CON_diving-ecosystem.md) · 2. [Diving](IS_CON_diving.md) · 3. [Why Hasn't It Been Turned Off?](IS_CON_why-hasnt-it-been-turned-off.md) · 4. Do Not Choose Yourself (this concept)
 
 *This concept is being written in parts. More of it is being recorded and will be added.*
 
@@ -131,14 +128,14 @@ In the author's opinion, the whole industry is bottlenecked. There is so much ta
 
 ## References
 
-- [1. Invisible Ships — The Diving Ecosystem, part 1 of this series](/concepts/diving-ecosystem)
-- [2. Invisible Ships — Diving, part 2 of this series](/concepts/diving)
-- [3. Invisible Ships — Why Hasn't It Been Turned Off?, part 3 of this series](/concepts/why-hasnt-it-been-turned-off)
+- [1. Invisible Ships — The Diving Ecosystem (Telepathic communication, part 1)](/concepts/diving-ecosystem)
+- [2. Invisible Ships — Diving (Telepathic communication, part 2)](/concepts/diving)
+- [3. Invisible Ships — Why Hasn't It Been Turned Off? (Telepathic communication, part 3)](/concepts/why-hasnt-it-been-turned-off)
 - [4. Invisible Ships — What is the neurotech bullhorn?](/concepts/the-neurotech-bullhorn)
 - [5. Invisible Ships — The world's suicide rate fell. The United States' rose.](/concepts/us-rose-against-the-trend)
 - [6. 988 Suicide & Crisis Lifeline](https://988lifeline.org)
 
-*The first three are the earlier parts of this series. The next two are related concepts on this site; the suicide figures come from the site's Public Health data. The last is a crisis line, listed for readers' safety, not as evidence.*
+*The first three are the parts of the Telepathic communication series that this concept follows on from. The next two are related concepts on this site; the suicide figures come from the site's Public Health data. The last is a crisis line, listed for readers' safety, not as evidence.*
 
 ---
 
