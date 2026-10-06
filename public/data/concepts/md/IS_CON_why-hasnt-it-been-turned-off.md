@@ -11,7 +11,7 @@ topics: [speculation, technology, harassment, euthanization, health-effects, pro
 verification: unverified
 series: telepathic-communication
 generated_by: scripts/export_concepts_md.mjs
-word_count: 2863
+word_count: 2870
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -27,7 +27,7 @@ disclaimer: meta/IS_META_terms.md
 
 **Not independently verified.**
 
-**Series: Telepathic communication, part 3 of 3.** 1. [The Diving Ecosystem](IS_CON_diving-ecosystem.md) · 2. [Diving](IS_CON_diving.md) · 3. Why Hasn't It Been Turned Off? (this concept)
+**Series: Telepathic communication, part 3 of 4.** 1. [The Diving Ecosystem](IS_CON_diving-ecosystem.md) · 2. [Diving](IS_CON_diving.md) · 3. Why Hasn't It Been Turned Off? (this concept) · 4. [Do Not Choose Yourself](IS_CON_do-not-choose-yourself.md)
 
 If this experience is the work of a military deployment, then it is the work of a machine operated by human beings. And a machine can be turned off at any time. So why hasn't it been?
 
