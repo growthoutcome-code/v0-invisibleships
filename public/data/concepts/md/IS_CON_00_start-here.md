@@ -3,9 +3,9 @@ id: IS-CON-00-START-HERE
 title: Concepts — start here
 collection: concepts
 doc_type: section-overview
-concept_count: 45
+concept_count: 46
 generated_by: scripts/export_concepts_md.mjs
-word_count: 1213
+word_count: 1225
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -14,7 +14,7 @@ disclaimer: meta/IS_META_terms.md
 
 *Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Every concept states its BASIS, its ORIGIN, its THEME and the readers it was written for. The basis tiers are ranked, and never blended inside a single concept: a reader who accepts only `documented` entries can still rely on every one of those and discard the rest without unpicking anything. `testimony` is a dated first-person report, verified by nobody, and says so on its own face wherever it appears. Causes are reported as attributed, never asserted. See `meta/IS_META_terms.md`.*
 
-**45 concepts.** Each is a self-contained file, safe to hand to
+**46 concepts.** Each is a self-contained file, safe to hand to
 an assistant on its own.
 
 ## How to read the basis label
@@ -23,7 +23,7 @@ an assistant on its own.
 |---|---|---|---|
 | `documented` | A source, ruling or official record supports this directly. | Strongest | 28 |
 | `structural` | This follows from what the dataset does or does not contain. | Strong, but about the data, not the world | 11 |
-| `pattern` | An observation drawn from experience, offered as an observation. | Offered as an observation, not as proof | 4 |
+| `pattern` | An observation drawn from experience, offered as an observation. | Offered as an observation, not as proof | 5 |
 | `testimony` | A dated first-person report of what the author experienced or was told. Verified by nobody. | Verified by nobody | 2 |
 
 The tiers are ranked and never blended inside a single concept, so a reader
@@ -40,7 +40,7 @@ the archive uses it.
 | Procurement and accountability | Who buys what, and what happens when a finding lands against them. | 6 |
 | Surveillance and the person | What is collected about people who never agreed to any of it. | 8 |
 | Neurotechnology | What can actually be read from a brain, and under what conditions. | 12 |
-| Coercion and control | Documented methods for controlling a person without touching them. | 6 |
+| Coercion and control | Documented methods for controlling a person without touching them. | 7 |
 | Health outcomes | Population outcomes measured against the rest of the world. | 2 |
 | Reported experience | First-person report, and what is known about experience without an external source. | 2 |
 
@@ -51,11 +51,11 @@ one. These are routes in, not walls — nothing is hidden from anybody.
 
 | Audience | Who that means | Concepts |
 |---|---|---|
-| Households and individuals | For a person who thinks something is happening to them, or to someone they live with. | 22 |
-| Law enforcement and investigators | For anyone whose job is to establish what happened and to whom. | 17 |
-| Legislators and regulators | For anyone writing or enforcing a rule about any of this. | 19 |
+| Households and individuals | For a person who thinks something is happening to them, or to someone they live with. | 23 |
+| Law enforcement and investigators | For anyone whose job is to establish what happened and to whom. | 18 |
+| Legislators and regulators | For anyone writing or enforcing a rule about any of this. | 20 |
 | Clinicians | For anyone a frightened person is likely to reach first. | 11 |
-| Press and researchers | For anyone who has to decide whether a claim can be published. | 19 |
+| Press and researchers | For anyone who has to decide whether a claim can be published. | 20 |
 
 ## What this section does not establish
 
@@ -115,8 +115,9 @@ in `IS_CON_00_findings.md`, and every dated source behind them is in
 - **Who could refuse a system that saved their child?** `IS_CON_prevention-as-the-product.md` · origin: author — *Not independently verified*
 - **Why does the camera on your door not answer to you?** `IS_CON_whose-eyesight-is-it.md` · origin: author — *Not independently verified*
 
-### pattern (4)
+### pattern (5)
 
+- **Who Will Say It First?** `IS_CON_who-will-say-it-first.md` · origin: author — *Not independently verified*
 - **Do Not Choose Yourself** `IS_CON_do-not-choose-yourself.md` · origin: author — *Not independently verified*
 - **Why Hasn't It Been Turned Off?** `IS_CON_why-hasnt-it-been-turned-off.md` · origin: author — *Not independently verified*
 - **Diving** `IS_CON_diving.md` · origin: author — *Not independently verified*

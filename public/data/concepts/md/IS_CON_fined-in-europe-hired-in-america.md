@@ -11,7 +11,7 @@ topics: [technology, surveillance, law-government]
 verification: verified
 series: [government-cloud-contracts, who-answers-for-harm]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 429
+word_count: 437
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -27,7 +27,7 @@ disclaimer: meta/IS_META_terms.md
 
 **Series: Government cloud: what the contracts show, part 5 of 7.** 1. [The headline spending figure is not what governments spent](IS_CON_headline-spending-is-not-spending.md) · 2. [A law saying “keep it local” doesn’t keep it local](IS_CON_local-law-does-not-mean-local.md) · 3. [Systems built for an emergency get switched off after it](IS_CON_emergency-systems-withdrawn.md) · 4. [A regulator finding does not stop a deployment](IS_CON_findings-dont-stop-deployment.md) · 5. Fined in Europe, hired in America (this concept) · 6. [Accountability isn't wired to deployment, even in the schema](IS_CON_accountability-not-wired.md) · 7. [There is no column for you](IS_CON_no-column-for-you.md)
 
-**Series: Who answers for harm, part 2 of 6.** 1. [A regulator finding does not stop a deployment](IS_CON_findings-dont-stop-deployment.md) · 2. Fined in Europe, hired in America (this concept) · 3. [Have private contractors killed civilians and gone free?](IS_CON_contractors-killed-and-freed.md) · 4. [Zersetzung's methods are crimes](IS_CON_zersetzung-methods-are-crimes.md) · 5. [Who profits from a body?](IS_CON_who-profits-from-a-body.md) · 6. [Accountability isn't wired to deployment, even in the schema](IS_CON_accountability-not-wired.md)
+**Series: Who answers for harm, part 2 of 7.** 1. [A regulator finding does not stop a deployment](IS_CON_findings-dont-stop-deployment.md) · 2. Fined in Europe, hired in America (this concept) · 3. [Have private contractors killed civilians and gone free?](IS_CON_contractors-killed-and-freed.md) · 4. [Zersetzung's methods are crimes](IS_CON_zersetzung-methods-are-crimes.md) · 5. [Who profits from a body?](IS_CON_who-profits-from-a-body.md) · 6. [Accountability isn't wired to deployment, even in the schema](IS_CON_accountability-not-wired.md) · 7. [Who Will Say It First?](IS_CON_who-will-say-it-first.md)
 
 One facial-recognition company has been fined roughly €90 million by four European regulators for collecting people's faces without asking, and ordered to delete data in Australia and Canada. Over the same period, US Immigration and Customs Enforcement paid it $12.75 million — one of those the largest facial-recognition purchase ICE has made. Its American class-action settlement was paid in company shares rather than cash. One arm of government is penalising what another arm is buying, and nothing in this record shows the two ever meeting.
 

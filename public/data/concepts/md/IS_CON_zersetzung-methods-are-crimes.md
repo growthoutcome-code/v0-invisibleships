@@ -11,7 +11,7 @@ topics: [harassment, law-government]
 verification: unverified
 series: [harassment-and-coercion, who-answers-for-harm]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 1090
+word_count: 1098
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -29,7 +29,7 @@ disclaimer: meta/IS_META_terms.md
 
 **Series: Harassment and coercion, part 2 of 8.** 1. [Organised covert harassment of individuals is established fact](IS_CON_organised-harassment-is-fact.md) · 2. Zersetzung's methods are crimes (this concept) · 3. [We're keeping you to ourselves](IS_CON_ruin-first-then-rescue.md) · 4. [An attack to force acknowledgment](IS_CON_attack-to-force-acknowledgment.md) · 5. [What happens to everyone around a target?](IS_CON_everyone-around-a-target.md) · 6. [Are people made into intelligence assets without knowing it?](IS_CON_made-into-assets-unknowing.md) · 7. [Does the explanation itself do harm?](IS_CON_explanation-is-part-of-the-harm.md) · 8. [Are Denver citizens subject to acoustic weapons?](IS_CON_denver-acoustic-weapons.md)
 
-**Series: Who answers for harm, part 4 of 6.** 1. [A regulator finding does not stop a deployment](IS_CON_findings-dont-stop-deployment.md) · 2. [Fined in Europe, hired in America](IS_CON_fined-in-europe-hired-in-america.md) · 3. [Have private contractors killed civilians and gone free?](IS_CON_contractors-killed-and-freed.md) · 4. Zersetzung's methods are crimes (this concept) · 5. [Who profits from a body?](IS_CON_who-profits-from-a-body.md) · 6. [Accountability isn't wired to deployment, even in the schema](IS_CON_accountability-not-wired.md)
+**Series: Who answers for harm, part 4 of 7.** 1. [A regulator finding does not stop a deployment](IS_CON_findings-dont-stop-deployment.md) · 2. [Fined in Europe, hired in America](IS_CON_fined-in-europe-hired-in-america.md) · 3. [Have private contractors killed civilians and gone free?](IS_CON_contractors-killed-and-freed.md) · 4. Zersetzung's methods are crimes (this concept) · 5. [Who profits from a body?](IS_CON_who-profits-from-a-body.md) · 6. [Accountability isn't wired to deployment, even in the schema](IS_CON_accountability-not-wired.md) · 7. [Who Will Say It First?](IS_CON_who-will-say-it-first.md)
 
 No law names Zersetzung, but its methods are crimes, and a US court has punished them. In August 2019 members of eBay's security team ran a campaign against Ina and David Steiner, who published a newsletter in Natick, Massachusetts, that was critical of the company. They sent live insects, a bloody pig mask, a funeral wreath and a book on surviving a spouse's death. They posted the couple's address with invitations to strangers, sent threats under invented identities, followed them, and planned to break into their garage to put a tracker on their car. Then they deleted evidence and lied to police.
 
