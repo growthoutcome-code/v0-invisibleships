@@ -11,7 +11,7 @@ topics: [speculation, technology, surveillance, harassment, law-government, euth
 verification: unverified
 series: telepathic-communication
 generated_by: scripts/export_concepts_md.mjs
-word_count: 4295
+word_count: 4575
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -138,6 +138,16 @@ Consider how sensitive this is. A person's memories are the output of that searc
 
 *Related: [Diving](/glossary/diving) · [Breaching](/glossary/breaching) · [Image-based search](/glossary/image-based-search) · [The Mosquito](/glossary/mosquito-device) · [Parametric array](/glossary/parametric-array)*
 
+### Capability 9 — Augmented reality alongside phantom sensations
+
+It has been suggested that augmented reality can be experienced alongside [phantom sensations](/glossary/phantom-sensations): images added to what a person sees, at the same moment as something they feel.
+
+For example, you might see a snake slithering across your kitchen floor. Was it actually there? Or was it a telepathic suggestion? You might feel something crawling on your skin, look down, and for a split second see something: an insect, perhaps under the sleeve of your coat. Was it there? Or is this weapons development, neurotechnological weapons development?
+
+*On the record:* the feeling of insects crawling on or under the skin has a medical name, formication. It is a recognized symptom with many known causes, among them some medications, alcohol withdrawal, menopause, vitamin B12 deficiency, diabetes, and some neurological and mental health conditions (Reference 21). Brief glimpses of something that is not there are also common, especially at the edge of vision or when a person is tired or startled. Researchers have made people see simple shapes by electrically stimulating the visual cortex through electrodes implanted on the brain (Reference 22). That takes surgery; no published research shows an image, of an animal or anything else, placed in someone's vision at a distance. Anyone having these experiences should have them assessed by a doctor, because several of the causes are treatable.
+
+*Related: [Phantom sensations](/glossary/phantom-sensations) · [Diving](/concepts/diving)*
+
 ## What this does not answer
 
 - Does the translation in Capability 4 also translate physical speech, or only telepathic communication?
@@ -203,6 +213,8 @@ Consider how sensitive this is. A person's memories are the output of that searc
 - [18. NIDDK — Dumping syndrome](https://www.niddk.nih.gov/health-information/digestive-diseases/dumping-syndrome)
 - [19. FBI Director Kash Patel, statement on X (May 2026), as reported by ZeroHedge: 62 removals of Chinese spies in 2026](https://www.zerohedge.com/political/113-active-spies-foreign-countries-arrested-fbi-director)
 - [20. United Nations Office on Genocide Prevention — Crimes against humanity (Rome Statute, Article 7)](https://www.un.org/en/genocideprevention/crimes-against-humanity.shtml)
+- [21. Medical News Today (medically reviewed) — Formication: definition, causes, and treatment](https://www.medicalnewstoday.com/articles/321896)
+- [22. Baylor College of Medicine — Tracing outlines on the brain triggers shape perception (Beauchamp et al., Cell, 2020)](https://blogs.bcm.edu/2020/05/26/from-the-labs-tracing-outlines-on-the-brain-triggers-shape-perception/)
 
 *Documented context only. Nothing here shows that the system this concept describes exists; each reference records something real that the concept is read against. Glossary terms and related concepts are linked inside each capability.*
 
