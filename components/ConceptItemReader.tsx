@@ -2,8 +2,8 @@
 // Standalone concept page body (behind the gate), in the same frame as the
 // journal and glossary item pages: back link, share, the concept, previous/next.
 import Link from "next/link";
+import { ChevronLeft } from "lucide-react";
 import { useEffect } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import ItemHeader from "@/components/ItemHeader";
 import Footer from "@/components/Footer";
 import ShareMenu from "@/components/ShareMenu";
@@ -11,7 +11,7 @@ import ConceptArticle from "@/components/ConceptArticle";
 import SideNav from "@/components/SideNav";
 import { useRouter } from "next/navigation";
 import PageIntro from "@/components/PageIntro";
-import { BASIS_LABEL, CONCEPTS, ORIGIN_LABEL, SHOW_SERIES_SIDEBAR, seriesOf, plainText } from "@/lib/concepts";
+import { BASIS_LABEL, CONCEPTS, ORIGIN_LABEL, SHOW_SERIES_SIDEBAR, SHOW_SERIES_BLOCK, seriesOf, relatedConcepts, plainText } from "@/lib/concepts";
 import { track } from "@/lib/analytics";
 import BottomSections, { Block, ConceptCards } from "@/components/BottomSections";
 import { THEMES } from "@/lib/themes";
@@ -117,7 +117,7 @@ export default function ConceptItemReader({ id, n, prev, next }: { id: string; n
             Block and two-up concept cards as the Concepts bottom section, in
             the series' reading order. A concept with no series keeps its
             previous / next links. */}
-        {inSeries.length ? (
+        {SHOW_SERIES_BLOCK && inSeries.length ? (
           <div className="mt-16 space-y-16">
             {inSeries.map((ser) => {
               const { nx, label } = nextIn(ser.ids);
@@ -131,18 +131,17 @@ export default function ConceptItemReader({ id, n, prev, next }: { id: string; n
             })}
           </div>
         ) : (
-        <nav aria-label="More concepts" className="flex gap-6 mt-14 pt-6 border-t border-edge">
-          {prev ? (
-            <Link href={`/concepts/${prev.id}`} className="text-accent text-sm inline-flex items-start gap-1 max-w-[45%]">
-              <ChevronLeft size={15} className="mt-0.5 shrink-0" /> <span>{prev.title}</span>
-            </Link>
-          ) : <span />}
-          {next && (
-            <Link href={`/concepts/${next.id}`} className="text-accent text-sm ml-auto inline-flex items-start gap-1 text-right max-w-[45%]">
-              <span>{next.title}</span> <ChevronRight size={15} className="mt-0.5 shrink-0" />
-            </Link>
-          )}
-        </nav>
+          /* RELATED CONCEPTS (Sean, 7 Oct 2026, option 3), in place of the
+             previous / next text links: two up, swiping through up to six,
+             the same tiles and carousel as the Concepts bottom section. The
+             next concept in list order stays as the block's link. */
+          <div className="mt-16">
+            <Block id="related" from="concept" eyebrow="Keep reading" heading="Related concepts" wide
+              href={next ? `/concepts/${next.id}` : "/concepts"}
+              label={next ? `Next concept: ${next.title}` : "All concepts"}>
+              <ConceptCards tiles={tilesOf(relatedConcepts(c.id, 7).filter((r) => r.id !== next?.id).slice(0, 6).map((r) => r.id))} from="concept-related" label="Related concepts" />
+            </Block>
+          </div>
         )}
         {/* The home page's other sections, never this one (Sean, 1 Oct 2026). */}
         <BottomSections exclude={["concepts"]} from="concept" />
