@@ -1,6 +1,6 @@
 ---
 id: IS-CON-WHO-WILL-SAY-IT-FIRST
-title: Concept — Who Will Say It First?
+title: Concept — An Incredible Opportunity
 collection: concepts
 doc_type: concept
 basis: pattern
@@ -11,12 +11,12 @@ topics: [speculation, harassment, euthanization, law-government, proposed-soluti
 verification: unverified
 series: [who-answers-for-harm]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 2063
+word_count: 2059
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
 ---
-# Who Will Say It First?
+# An Incredible Opportunity
 
 *Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Every concept states its BASIS, its ORIGIN, its THEME and the readers it was written for. The basis tiers are ranked, and never blended inside a single concept: a reader who accepts only `documented` entries can still rely on every one of those and discard the rest without unpicking anything. `testimony` is a dated first-person report, verified by nobody, and says so on its own face wherever it appears. Causes are reported as attributed, never asserted. See `meta/IS_META_terms.md`.*
 
@@ -27,7 +27,7 @@ disclaimer: meta/IS_META_terms.md
 
 **Not independently verified.**
 
-**Series: Who answers for harm, part 7 of 7.** 1. [A regulator finding does not stop a deployment](IS_CON_findings-dont-stop-deployment.md) · 2. [Fined in Europe, hired in America](IS_CON_fined-in-europe-hired-in-america.md) · 3. [Have private contractors killed civilians and gone free?](IS_CON_contractors-killed-and-freed.md) · 4. [Zersetzung's methods are crimes](IS_CON_zersetzung-methods-are-crimes.md) · 5. [Who profits from a body?](IS_CON_who-profits-from-a-body.md) · 6. [Accountability isn't wired to deployment, even in the schema](IS_CON_accountability-not-wired.md) · 7. Who Will Say It First? (this concept)
+**Series: Who answers for harm, part 7 of 7.** 1. [A regulator finding does not stop a deployment](IS_CON_findings-dont-stop-deployment.md) · 2. [Fined in Europe, hired in America](IS_CON_fined-in-europe-hired-in-america.md) · 3. [Have private contractors killed civilians and gone free?](IS_CON_contractors-killed-and-freed.md) · 4. [Zersetzung's methods are crimes](IS_CON_zersetzung-methods-are-crimes.md) · 5. [Who profits from a body?](IS_CON_who-profits-from-a-body.md) · 6. [Accountability isn't wired to deployment, even in the schema](IS_CON_accountability-not-wired.md) · 7. An Incredible Opportunity (this concept)
 
 *This concept is the author's speculation. It does not assert that the system it describes exists. Every statement recorded in the journal is an external communication, and every statement heard on the bullhorn requires verification. Read this concept under the [Critical Disclaimer](/disclaimer).*
 

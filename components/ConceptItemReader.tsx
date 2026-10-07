@@ -11,7 +11,7 @@ import ConceptArticle from "@/components/ConceptArticle";
 import SideNav from "@/components/SideNav";
 import { useRouter } from "next/navigation";
 import PageIntro from "@/components/PageIntro";
-import { BASIS_LABEL, CONCEPTS, ORIGIN_LABEL, seriesOf, plainText } from "@/lib/concepts";
+import { BASIS_LABEL, CONCEPTS, ORIGIN_LABEL, SHOW_SERIES_SIDEBAR, seriesOf, plainText } from "@/lib/concepts";
 import { track } from "@/lib/analytics";
 import BottomSections, { Block, ConceptCards } from "@/components/BottomSections";
 import { THEMES } from "@/lib/themes";
@@ -92,8 +92,9 @@ export default function ConceptItemReader({ id, n, prev, next }: { id: string; n
             SideNav the Glossary and Journal use, mirrored to the right (Sean,
             4 Oct 2026: "that sidebar styling needs to match the left-hand
             sidebar for glossary… on the right-hand side… title it series").
-            A concept without a series keeps its single column. */}
-        {inSeries.length ? (
+            A concept without a series keeps its single column. Hidden for now
+            by SHOW_SERIES_SIDEBAR in lib/concepts.ts (Sean, 7 Oct 2026). */}
+        {SHOW_SERIES_SIDEBAR && inSeries.length ? (
           <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(15rem,25%)] lg:gap-x-16 lg:items-start">
             <div className="lg:order-2">
               <SideNav

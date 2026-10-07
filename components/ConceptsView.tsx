@@ -8,7 +8,7 @@ import { ActiveLine, MobileBar } from "@/components/ListControls";
 import Pager from "@/components/Pager";
 import ConceptTile from "@/components/ConceptTile";
 import {
-  CONCEPTS, NO_FILTERS, BASIS_LABEL, ORIGIN_LABEL, SERIES_LIST, seriesOf, isNewConcept,
+  CONCEPTS, NO_FILTERS, BASIS_LABEL, ORIGIN_LABEL, SERIES_LIST, SHOW_SERIES_SORT, seriesOf, isNewConcept,
   filterConcepts, sortConcepts, plainText, CONCEPT_SORTS, type Concept, type Filters, type ConceptSort,
 } from "@/lib/concepts";
 import { THEMES } from "@/lib/themes";
@@ -77,7 +77,7 @@ export default function ConceptsView({
       isNew: now !== null && isNewConcept(c.id, now), ...extra,
     };
   };
-  const bySeries = sort === "series";
+  const bySeries = SHOW_SERIES_SORT && sort === "series";
   const sections = useMemo(() => {
     if (!bySeries) return [];
     const ok = new Set(visible.map((c) => c.id));

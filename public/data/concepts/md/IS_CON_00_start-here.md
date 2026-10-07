@@ -5,7 +5,7 @@ collection: concepts
 doc_type: section-overview
 concept_count: 46
 generated_by: scripts/export_concepts_md.mjs
-word_count: 1225
+word_count: 1223
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -117,7 +117,7 @@ in `IS_CON_00_findings.md`, and every dated source behind them is in
 
 ### pattern (5)
 
-- **Who Will Say It First?** `IS_CON_who-will-say-it-first.md` · origin: author — *Not independently verified*
+- **An Incredible Opportunity** `IS_CON_who-will-say-it-first.md` · origin: author — *Not independently verified*
 - **Do Not Choose Yourself** `IS_CON_do-not-choose-yourself.md` · origin: author — *Not independently verified*
 - **Why Hasn't It Been Turned Off?** `IS_CON_why-hasnt-it-been-turned-off.md` · origin: author — *Not independently verified*
 - **Diving** `IS_CON_diving.md` · origin: author — *Not independently verified*

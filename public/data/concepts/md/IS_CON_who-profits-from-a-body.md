@@ -11,7 +11,7 @@ topics: [law-government]
 verification: unverified
 series: [who-answers-for-harm]
 generated_by: scripts/export_concepts_md.mjs
-word_count: 641
+word_count: 639
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -27,7 +27,7 @@ disclaimer: meta/IS_META_terms.md
 
 **Not independently verified.**
 
-**Series: Who answers for harm, part 5 of 7.** 1. [A regulator finding does not stop a deployment](IS_CON_findings-dont-stop-deployment.md) · 2. [Fined in Europe, hired in America](IS_CON_fined-in-europe-hired-in-america.md) · 3. [Have private contractors killed civilians and gone free?](IS_CON_contractors-killed-and-freed.md) · 4. [Zersetzung's methods are crimes](IS_CON_zersetzung-methods-are-crimes.md) · 5. Who profits from a body? (this concept) · 6. [Accountability isn't wired to deployment, even in the schema](IS_CON_accountability-not-wired.md) · 7. [Who Will Say It First?](IS_CON_who-will-say-it-first.md)
+**Series: Who answers for harm, part 5 of 7.** 1. [A regulator finding does not stop a deployment](IS_CON_findings-dont-stop-deployment.md) · 2. [Fined in Europe, hired in America](IS_CON_fined-in-europe-hired-in-america.md) · 3. [Have private contractors killed civilians and gone free?](IS_CON_contractors-killed-and-freed.md) · 4. [Zersetzung's methods are crimes](IS_CON_zersetzung-methods-are-crimes.md) · 5. Who profits from a body? (this concept) · 6. [Accountability isn't wired to deployment, even in the schema](IS_CON_accountability-not-wired.md) · 7. [An Incredible Opportunity](IS_CON_who-will-say-it-first.md)
 
 In January 2018 Reuters published an investigation by Brian Grow and John Shiffman into the American body trade. Body brokers — legally, non-transplant tissue banks — acquire bodies donated to science, usually for free, then cut them into parts and sell them. The reporters did not merely describe the market. They entered it: Reuters bought a human cervical spine for three hundred dollars. It had belonged to Cody Saunders, a twenty-four-year-old from Tennessee, whose parents had not known what became of him. Across the investigation, family after family had no idea what happened to the person they donated. The legal position is the part most people find hardest to believe. Federal law prohibits selling body parts for transplant into a living person. Most states say nothing at all about selling body parts for research or education. So the trade is not a black market being policed and failing; it is a lawful market that was never regulated, in which a journalist can buy a spine over the counter and the donating family is told nothing. Whatever a person imagines happens to a body, this is what the record actually documents happening.
 

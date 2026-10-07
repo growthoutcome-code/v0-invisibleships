@@ -35,7 +35,7 @@ import PageIntro from "@/components/PageIntro";
 import CardShare from "@/components/CardShare";
 import { H2_CLASS, SUB_CLASS } from "@/components/SectionHead";
 import { SortSelect, FilterButton, FilterPanel, ActiveLine, MobileBar } from "@/components/ListControls";
-import { NO_FILTERS, type Filters, type ConceptSort } from "@/lib/concepts";
+import { NO_FILTERS, DEFAULT_CONCEPT_SORT, type Filters, type ConceptSort } from "@/lib/concepts";
 import DataView, { type SubTab } from "@/components/DataView";
 import Processing, { useHeldLoading } from "@/components/Processing";
 import { DISCLAIMER_TITLE } from "@/lib/disclaimer";
@@ -134,7 +134,7 @@ export default function JournalBrowser({
   // Concepts' controls sit in this title band, so their state lives here and is
   // handed down to DataView -> ConceptsView (the Research hero still steers it).
   const [conceptFilters, setConceptFilters] = useState<Filters>(NO_FILTERS);
-  const [conceptSort, setConceptSort] = useState<ConceptSort>("series");
+  const [conceptSort, setConceptSort] = useState<ConceptSort>(DEFAULT_CONCEPT_SORT);
   const [sel, setSel] = useState<string | null>(null);
   const [gsel, setGsel] = useState<string | null>(null);
   const [body, setBody] = useState(""); const [bodyLoading, setBodyLoading] = useState(false);
