@@ -33,6 +33,7 @@ export const SOURCE_TYPES = ["Official", "News", "Trade press", "Research"] as c
 
 export const INDUSTRIES = [
   "Neurotechnology",
+  "Nanotechnology",
   "Biotechnology & health",
   "Artificial intelligence",
   "Government cloud & surveillance technology",

@@ -1,5 +1,26 @@
 [
 {
+"slug": "2026-10-07-inbrain-and-minigraph-consortium-develop-magnetically-guided-robotic-implantation-for-graphene-bcis",
+"file": "IS_NEWS_2026-10-07-inbrain-and-minigraph-consortium-develop-magnetically-guided-robotic-implantation-for-graphene-bcis.md",
+"title": "INBRAIN and MINIGRAPH consortium develop magnetically guided robotic implantation for ultra-thin graphene brain-computer interfaces",
+"date": "2026-10-07",
+"precision": "day",
+"publisher": "Business Wire (via BioSpace)",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://www.biospace.com/press-releases/inbrain-neuroelectronics-and-minigraph-european-consortium-develop-magnetically-guided-robotic-implantation-for-ultra-thin-graphene-brain-computer-interfaces",
+"archivedUrl": "",
+"industry": [
+"Neurotechnology",
+"Nanotechnology"
+],
+"event": "Research & breakthroughs",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
 "slug": "2026-10-06-festnahmen-wegen-mutmasslicher-landesverraeterischer-ausspaehung",
 "file": "IS_NEWS_2026-10-06-festnahmen-wegen-mutmasslicher-landesverraeterischer-ausspaehung.md",
 "title": "Arrests for alleged treasonous espionage, gathering of state secrets, attempted treason and spying",
@@ -337,6 +358,27 @@
 "hasSummary": true
 },
 {
+"slug": "2026-09-09-drug-delivering-particles-aim-to-breach-the-blood-brain-barrier",
+"file": "IS_NEWS_2026-09-09-drug-delivering-particles-aim-to-breach-the-blood-brain-barrier.md",
+"title": "Drug-delivering particles aim to breach the blood–brain barrier",
+"date": "2026-09-09",
+"precision": "day",
+"publisher": "Nature",
+"sourceType": "News",
+"office": "",
+"url": "https://www.nature.com/articles/d41586-026-02655-6",
+"archivedUrl": "",
+"industry": [
+"Nanotechnology",
+"Biotechnology & health"
+],
+"event": "Research & breakthroughs",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
 "slug": "2026-09-01-american-citizen-who-worked-as-an-agent-for-the-prc",
 "file": "IS_NEWS_2026-09-01-american-citizen-who-worked-as-an-agent-for-the-prc.md",
 "title": "American Citizen who Worked as an Agent for the PRC Sentenced to Two Years in Prison",
@@ -563,6 +605,27 @@
 "hasSummary": true
 },
 {
+"slug": "2026-04-20-inbrain-completes-enrolment-of-first-in-human-study-of-graphene-neural-interfaces",
+"file": "IS_NEWS_2026-04-20-inbrain-completes-enrolment-of-first-in-human-study-of-graphene-neural-interfaces.md",
+"title": "INBRAIN completes enrolment of first-in-human study of graphene neural interfaces",
+"date": "2026-04-20",
+"precision": "day",
+"publisher": "Business Wire",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://www.businesswire.com/news/home/20260420000990/en/INBRAIN-Neuroelectronics-Completes-Enrolment-of-Worlds-First-in-Human-Study-of-Graphene-Neural-Interfaces-for-Brain-Decoding-Mapping",
+"archivedUrl": "",
+"industry": [
+"Neurotechnology",
+"Nanotechnology"
+],
+"event": "Research & breakthroughs",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
 "slug": "2026-04-03-us-states-build-patchwork-of-neural-data-privacy-laws",
 "file": "IS_NEWS_2026-04-03-us-states-build-patchwork-of-neural-data-privacy-laws.md",
 "title": "US states build patchwork of neural data privacy laws",
@@ -597,6 +660,27 @@
 "Government cloud & surveillance technology"
 ],
 "event": "Contracts & deployments",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
+"slug": "2026-03-24-new-lipid-nanoparticle-design-improves-precision-of-mrna-vaccine-delivery",
+"file": "IS_NEWS_2026-03-24-new-lipid-nanoparticle-design-improves-precision-of-mrna-vaccine-delivery.md",
+"title": "New lipid nanoparticle design improves precision of mRNA vaccine delivery",
+"date": "2026-03-24",
+"precision": "day",
+"publisher": "Penn Engineering, University of Pennsylvania",
+"sourceType": "Research",
+"office": "",
+"url": "https://www.engineering.upenn.edu/stories/new-lipid-nanoparticle-design-improves-precision-of-mrna-vaccine-delivery/",
+"archivedUrl": "",
+"industry": [
+"Nanotechnology",
+"Biotechnology & health"
+],
+"event": "Research & breakthroughs",
 "country": "",
 "stage": "",
 "related": [],
@@ -691,6 +775,27 @@
 "Government cloud & surveillance technology"
 ],
 "event": "Contracts & deployments",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
+"slug": "2025-11-14-subsense-launches-animal-studies-to-test-nonsurgical-nanoparticle-brain-computer-interface",
+"file": "IS_NEWS_2025-11-14-subsense-launches-animal-studies-to-test-nonsurgical-nanoparticle-brain-computer-interface.md",
+"title": "Subsense launches animal studies to test nonsurgical nanoparticle brain-computer interface",
+"date": "2025-11-14",
+"precision": "day",
+"publisher": "Medtech Insight",
+"sourceType": "Trade press",
+"office": "",
+"url": "https://insights.citeline.com/medtech-insight/device-area/neurology/subsense-launches-animal-studies-to-test-nonsurgical-nanoparticle-brain-computer-interface-PFQDQ2Y5AVFDLN5FAKHYDAESUQ/",
+"archivedUrl": "",
+"industry": [
+"Neurotechnology",
+"Nanotechnology"
+],
+"event": "Research & breakthroughs",
 "country": "",
 "stage": "",
 "related": [],
@@ -2545,7 +2650,8 @@
 "url": "https://www.psychologytoday.com/us/blog/the-future-brain/202401/transparent-brain-computer-interface-uses-ai-and-nanotech",
 "archivedUrl": "",
 "industry": [
-"Neurotechnology"
+"Neurotechnology",
+"Nanotechnology"
 ],
 "event": "Research & breakthroughs",
 "country": "",
@@ -5236,6 +5342,27 @@
 "archivedUrl": "",
 "industry": [
 "Government cloud & surveillance technology"
+],
+"event": "Contracts & deployments",
+"country": "",
+"stage": "",
+"related": [],
+"hasSummary": true
+},
+{
+"slug": "2019-05-20-six-paths-to-the-nonsurgical-future-of-brain-machine-interfaces",
+"file": "IS_NEWS_2019-05-20-six-paths-to-the-nonsurgical-future-of-brain-machine-interfaces.md",
+"title": "Six paths to the nonsurgical future of brain-machine interfaces",
+"date": "2019-05-20",
+"precision": "day",
+"publisher": "Defense Advanced Research Projects Agency (DARPA)",
+"sourceType": "Official",
+"office": "DARPA news release",
+"url": "https://www.darpa.mil/news/2019/nonsurgical-brain-machine-interfaces",
+"archivedUrl": "",
+"industry": [
+"Neurotechnology",
+"Nanotechnology"
 ],
 "event": "Contracts & deployments",
 "country": "",

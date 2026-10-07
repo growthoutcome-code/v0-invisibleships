@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ItemGate from "@/components/ItemGate";
 import GlossaryItemReader from "@/components/GlossaryItemReader";
-import { allGlossaryParams, getGlossaryItem, glossarySummary } from "@/lib/server-corpus";
+import { allGlossaryParams, getGlossaryItem, glossaryIndex, glossarySummary } from "@/lib/server-corpus";
 import { cleanTerm } from "@/lib/glossary-format";
 
 export function generateStaticParams() {
@@ -30,7 +30,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   if (!item) notFound();
   return (
     <ItemGate>
-      <GlossaryItemReader term={item.term} prev={item.prev} next={item.next} />
+      <GlossaryItemReader term={item.term} prev={item.prev} next={item.next} index={glossaryIndex()} />
     </ItemGate>
   );
 }

@@ -28,6 +28,7 @@ OUT = ROOT / "public/data/news/index.json"
 SOURCE_TYPES = {"Official", "News", "Trade press", "Research"}
 INDUSTRIES = {
     "Neurotechnology",
+    "Nanotechnology",
     "Biotechnology & health",
     "Artificial intelligence",
     "Government cloud & surveillance technology",

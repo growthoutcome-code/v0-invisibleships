@@ -86,8 +86,12 @@ related to these industries. Artificial intelligence is huge. Lawsuits,
 litigation… another way of visualizing sources."
 
 So an item carries two kinds of category:
-- **Industry:** Neurotechnology · Biotechnology · Artificial intelligence ·
-  Government cloud.
+- **Industry:** Neurotechnology · Nanotechnology · Biotechnology · Artificial
+  intelligence · Government cloud. (Nanotechnology added 7 Oct 2026, Sean: "We
+  need our news tasks to include nanotechnology." It covers nanotech as it
+  relates to biotech and neurotech: nanomedicine and lipid nanoparticles,
+  nanomaterial electrodes, injectable or wireless nanoscale neural interfaces.
+  An item can carry it alongside another industry.)
 - **Event type:**
   - Espionage & foreign agents
   - Transnational repression

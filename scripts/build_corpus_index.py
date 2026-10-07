@@ -52,16 +52,50 @@ def disclaimer_footer() -> str:
 
 
 # --------------------------------------------------------------- expectations
+def _strip_comments(s: str) -> str:
+    """Drop // and /* */ comments, leaving string literals untouched."""
+    out, q, esc, j, n = [], None, False, 0, len(s)
+    while j < n:
+        c = s[j]
+        if q:
+            out.append(c)
+            if esc:
+                esc = False
+            elif c == "\\":
+                esc = True
+            elif c == q:
+                q = None
+            j += 1
+            continue
+        if c in "\"'`":
+            q = c; out.append(c); j += 1; continue
+        if s.startswith("//", j):
+            k = s.find("\n", j); j = n if k < 0 else k; continue
+        if s.startswith("/*", j):
+            k = s.find("*/", j + 2); j = n if k < 0 else k + 2; continue
+        out.append(c); j += 1
+    return "".join(out)
+
+
 def count_ts_array(path: pathlib.Path, name: str) -> int:
     """Count top-level entries in a plain-data TypeScript array literal."""
     if not path.exists():
         return 0
     s = path.read_text()
-    i = s.find(f"{name}")
+    # Find the declaration, not the first mention: since 7 Oct 2026 lib/concepts.ts
+    # uses CONCEPTS in a function and a comment above the array, and counting from
+    # there read 0 concepts and failed the build.
+    i = s.find(f"const {name}")
+    if i < 0:
+        i = s.find(f"{name}")
     if i < 0:
         return 0
     eq = s.find("=", i)
     open_i = s.find("[", eq)
+    # Comments inside the array are not data. An apostrophe in one ("a concept's
+    # page") opened a phantom string and undercounted the concepts, so they are
+    # removed before counting.
+    s = s[:open_i] + _strip_comments(s[open_i:])
     depth, q, esc = 0, None, False
     end = -1
     for j in range(open_i, len(s)):

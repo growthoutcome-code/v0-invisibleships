@@ -730,6 +730,17 @@ function Reader({ doc, body, bodyLoading, cats, gloss, onBack, onPrev, onNext }:
 function GlossarySection({ terms, gsel, setGsel, ctl, docCats }: { terms: any[]; gsel: string | null; setGsel: (s: string | null) => void; ctl: GCtl; docCats: Record<string, string[]> }) {
   let content;
   const gi = gsel ? terms.findIndex((t: any) => t.slug === gsel) : -1;
+  // Keep the open term in view in the rail (Sean, 7 Oct 2026: the sidebar stays,
+  // and a term opens to its right). Scrolls the rail only, never the page.
+  useEffect(() => {
+    if (!gsel) return;
+    const nav = document.querySelector<HTMLElement>('nav[aria-label="Terms"]');
+    const btn = nav?.querySelector<HTMLElement>('button[aria-current="true"]');
+    if (!nav || !btn) return;
+    // The part of the rail on screen: under the title band it can run past the window.
+    const top = btn.offsetTop, h = Math.max(120, Math.min(nav.clientHeight, window.innerHeight - nav.getBoundingClientRect().top));
+    if (top < nav.scrollTop || top > nav.scrollTop + h - 40) nav.scrollTop = Math.max(0, top - h / 3);
+  }, [gsel]);
   // In-app handler for internal links inside a definition (e.g. "Related terms").
   // Resolves a /glossary/<slug> href to a term and swaps the content in place;
   // anything it can't resolve falls back to a real navigation.

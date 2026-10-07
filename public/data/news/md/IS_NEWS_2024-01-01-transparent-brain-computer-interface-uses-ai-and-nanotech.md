@@ -11,7 +11,7 @@ source_type: News
 issuing_office: 
 url: https://www.psychologytoday.com/us/blog/the-future-brain/202401/transparent-brain-computer-interface-uses-ai-and-nanotech
 archived_url: 
-industry: Neurotechnology
+industry: Neurotechnology · Nanotechnology
 event: Research & breakthroughs
 country: 
 stage: 

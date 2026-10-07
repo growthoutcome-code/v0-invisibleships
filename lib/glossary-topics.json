@@ -3,6 +3,7 @@
  "topics": {
   "glossary-military-intelligence": "Military & intelligence",
   "glossary-technology": "Technology",
+  "glossary-nanotechnology": "Nanotechnology",
   "glossary-neuroscience": "Neuroscience",
   "glossary-neuroethics": "Neuroethics",
   "glossary-ethics-human-rights": "Ethics & human rights",
@@ -71,7 +72,7 @@
   ],
   "IS-GLO-TRANSPARENT-BRAIN-COMPUTER-INTERFACES-BCIS": [
    "glossary-technology",
-   "glossary-neuroethics"
+   "glossary-nanotechnology"
   ],
   "IS-GLO-SITE-BREACHING": [
    "glossary-military-intelligence"
@@ -210,6 +211,74 @@
   ],
   "IS-GLO-SITE-ATROCITIES": [
    "glossary-ethics-human-rights"
+  ],
+  "IS-GLO-SITE-NANOTECHNOLOGY": [
+   "glossary-nanotechnology",
+   "glossary-technology"
+  ],
+  "IS-GLO-SITE-NANOMATERIAL": [
+   "glossary-nanotechnology",
+   "glossary-physics-signals"
+  ],
+  "IS-GLO-SITE-GRAPHENE": [
+   "glossary-nanotechnology",
+   "glossary-physics-signals"
+  ],
+  "IS-GLO-SITE-NANOPARTICLE": [
+   "glossary-nanotechnology",
+   "glossary-technology"
+  ],
+  "IS-GLO-SITE-NANOMEDICINE": [
+   "glossary-nanotechnology",
+   "glossary-health-symptoms"
+  ],
+  "IS-GLO-SITE-LIPID-NANOPARTICLE": [
+   "glossary-nanotechnology",
+   "glossary-health-symptoms"
+  ],
+  "IS-GLO-SITE-MRNA": [
+   "glossary-health-symptoms"
+  ],
+  "IS-GLO-SITE-BLOOD-BRAIN-BARRIER": [
+   "glossary-neuroscience"
+  ],
+  "IS-GLO-SITE-NEURAL-INTERFACE": [
+   "glossary-technology",
+   "glossary-neuroscience"
+  ],
+  "IS-GLO-SITE-ELECTROCORTICOGRAPHY": [
+   "glossary-neuroscience",
+   "glossary-technology"
+  ],
+  "IS-GLO-SITE-TWO-PHOTON-MICROSCOPY": [
+   "glossary-neuroscience",
+   "glossary-technology"
+  ],
+  "IS-GLO-SITE-CALCIUM-IMAGING": [
+   "glossary-neuroscience"
+  ],
+  "IS-GLO-SITE-NEURAL-DECODING": [
+   "glossary-neuroscience",
+   "glossary-neuroethics"
+  ],
+  "IS-GLO-SITE-NEURAL-DUST": [
+   "glossary-nanotechnology",
+   "glossary-neuroscience"
+  ],
+  "IS-GLO-SITE-INJECTABLE-MESH-ELECTRONICS": [
+   "glossary-nanotechnology",
+   "glossary-neuroscience"
+  ],
+  "IS-GLO-SITE-MAGNETOELECTRIC-NANOPARTICLES": [
+   "glossary-nanotechnology",
+   "glossary-military-intelligence"
+  ],
+  "IS-GLO-SITE-OPTOGENETICS": [
+   "glossary-neuroscience"
+  ],
+  "IS-GLO-SITE-NEURALNANOROBOTICS": [
+   "glossary-nanotechnology",
+   "glossary-neuroethics"
   ]
  }
 }

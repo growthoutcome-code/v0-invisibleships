@@ -6,7 +6,7 @@ doc_type: term
 provenance: site-authored
 slug: piezoelectricity
 categories: [glossary, reference, glossary-physics-signals]
-word_count: 303
+word_count: 307
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -24,7 +24,7 @@ Bidirectional does not mean interchangeable, and this is the point most often mi
 
 Documented real-world example: piezoelectric strips are a standard roadway sensor class listed by the US Federal Highway Administration for vehicle counting and weigh-in-motion, sold commercially by International Road Dynamics and TE Connectivity. The Colorado Department of Transportation operates weigh-in-motion at highway stations including Limon, Trinidad, Monument and Lamar, upgrading through autumn 2026. Where piezoelectric elements are in roads, they are there to read traffic — not to generate power, and not to produce sound.
 
-Related terms: [energy harvesting](/glossary/energy-harvesting), [structure-borne audio](/glossary/structure-borne-audio), [microwave auditory effect](/glossary/microwave-auditory-effect)
+Related terms: [energy harvesting](/glossary/energy-harvesting), [structure-borne audio](/glossary/structure-borne-audio), [microwave auditory effect](/glossary/microwave-auditory-effect), [neural dust](/glossary/neural-dust)
 
 Sources: [Traffic Monitoring Guidebook, chapter 4 — FHWA](https://www.fhwa.dot.gov/clas/ctip/traffic_monitoring_guidebook/ch_4.aspx); [Piezoelectric sensors — International Road Dynamics](https://irdinc.com/products/wim-systems/piezoelectric-sensors/); [Weigh-in-motion project underway in Limon — CDOT](https://www.codot.gov/news/2026/july2026news/weigh-in-motion-project-underway-in-limon)
 

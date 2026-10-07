@@ -1334,16 +1334,17 @@ export const CONCEPTS: Concept[] = [
     basis: "documented",
     theme: "neurotech",
     audience: ["policy"],
-    topics: ["technology", "law-government"],
+    topics: ["technology", "nanotechnology", "law-government"],
     title: "Did anyone try to build a way in without surgery?",
     body:
-      "Yes, openly, and the programme documents say so. DARPA's Next-Generation Nonsurgical Neurotechnology programme — N3 — set out, in its own words, to develop high-performance bi-directional brain-machine interfaces for able-bodied service members. Bi-directional means read and write. Able-bodied means the purpose was not restoring lost function; the stated applications were controlling unmanned vehicles and cyber-defence systems. Six teams were funded in 2019. The published performance targets were specific: sixteen independent channels, within sixteen cubic millimetres of neural tissue, at fifty milliseconds of latency, using light, acoustic or electromagnetic energy rather than implanted electrodes. The programme is now listed as complete and retained for reference. What this establishes is intent and investment, publicly recorded. It does not establish that the targets were met, and the targets themselves describe a person wearing equipment, not a person at a distance.",
+      "Yes, openly, and the programme documents say so. DARPA's Next-Generation Nonsurgical Neurotechnology programme — N3 — set out, in its own words, to develop high-performance bi-directional brain-machine interfaces for able-bodied service members. Bi-directional means read and write. Able-bodied means the purpose was not restoring lost function; the stated applications were controlling unmanned vehicles and cyber-defence systems. Six teams were funded in 2019. The published performance targets were specific: sixteen independent channels, within sixteen cubic millimetres of neural tissue, at fifty milliseconds of latency, using light, acoustic or electromagnetic energy rather than implanted electrodes. One funded team, led by Battelle, took a route between surgery and none. Its project, BrainSTORMS, proposed injecting [magnetoelectric nanoparticles](/glossary/magnetoelectric-nanoparticles), guiding them to a region of the brain, and reading from and writing to them through a helmet. That is the programme's clearest link to nanotechnology. It is still an injection, and it was a research proposal, not a system shown working in a person. The programme is now listed as complete and retained for reference. What this establishes is intent and investment, publicly recorded. It does not establish that the targets were met, and the targets themselves describe a person wearing equipment, not a person at a distance.",
     evidence: [
       "DARPA N3 stated aim: 'high-performance, bi-directional brain-machine interfaces for able-bodied service members'",
       "Named applications: unmanned vehicle control and cyber defence — not clinical restoration",
       "Published targets: 16 independent channels, 16mm³ of tissue, 50ms latency",
       "Modalities pursued: light, acoustic and electromagnetic energy, rather than implanted electrodes",
       "Six teams funded from 2019; programme now listed as complete",
+      "One team (Battelle, BrainSTORMS) proposed injected magnetoelectric nanotransducers read and written through a helmet",
     ],
     questions: [
       "A funded programme with published targets is evidence of intent, not of achievement. DARPA funds many things that do not work.",
@@ -1352,6 +1353,7 @@ export const CONCEPTS: Concept[] = [
     ],
     references: [
       { label: "N3: Next-Generation Nonsurgical Neurotechnology — DARPA", href: "https://www.darpa.mil/research/programs/next-generation-nonsurgical-neurotechnology" },
+      { label: "Battelle to develop injectable bi-directional brain-computer interface — Medical Design Briefs", href: "https://www.medicaldesignbriefs.com/component/content/article/34496-battelle-to-develop-injectable-bi-directional-brain-computer-interface" },
       { label: "What would it actually take to do this without consent?", href: "/concepts#what-it-would-take" },
       { label: "Can a machine read what you are thinking?", href: "/concepts#can-a-machine-read-thought" },
     ],
@@ -1838,6 +1840,133 @@ export const CONCEPTS: Concept[] = [
     disclaimer:
       "This concept reports an adjudicated case and the laws that apply to its conduct. It makes no claim that any other organisation or person has committed any crime.",
   },
+  // Nanotechnology concepts (Sean, 7 Oct 2026), from claude/nanotech-glossary-plan.md.
+  {
+    id: "seeing-through-the-interface",
+    origin: "ai",
+    basis: "documented",
+    theme: "neurotech",
+    audience: ["press", "policy"],
+    topics: ["technology", "nanotechnology"],
+    title: "What did the see-through brain interface actually do?",
+    body:
+      "In January 2024 Psychology Today reported on a study from the University of California San Diego, published in Nature Nanotechnology, that built a brain interface you can see through. The electrodes are made of [graphene](/glossary/graphene), a sheet of carbon one atom thick, so the whole array is transparent. It was placed on the surface of a mouse brain, under the skull.\n\nThe array recorded electrical signals from the brain's surface. At the same time, a [two-photon microscope](/glossary/two-photon-microscopy) shone its laser through the array and watched neurons up to 250 micrometres deep (a quarter of a millimetre) light up as they fired, using [calcium imaging](/glossary/calcium-imaging). The researchers then trained an artificial intelligence model on the two recordings together, so that it learned to predict the deeper activity from the surface signals alone. The authors report that it could predict both the average activity and the activity of single cells.\n\nThat is the real advance, and it is a general one. Once the model has learned the relationship, the microscope is no longer needed: the surface array alone gives an estimate of activity it cannot directly measure, so an animal can be observed for longer while it moves freely. This is how [neural decoding](/glossary/neural-decoding) works in general. A device records what it can reach, and a model, trained against something that could see more, fills in the rest.\n\nThe conditions matter as much as the result. The work was done in laboratory mice. Placing the array took surgery, and training the model needed a window in the skull and a laboratory microscope. The authors describe the next step as moving beyond mouse models, and present the work as a route to less invasive implants and treatments for neurological disorders. \"Transparent\" describes the material, which lets light through. It does not mean the animal, or anyone, becomes transparent to the device.",
+    evidence: [
+      "Nature Nanotechnology study from UC San Diego, reported by Psychology Today on 24 January 2024",
+      "Transparent graphene electrode array recorded surface signals while a two-photon microscope imaged calcium activity up to 250 micrometres deep",
+      "An AI model (a bidirectional LSTM network) trained on both recordings predicted deep activity, average and single-cell, from surface signals alone",
+      "Laboratory mice only; the array was surgically placed and training required a cranial window and a microscope",
+    ],
+    questions: [
+      "How well a model trained on one animal carries over to another is not established by the article.",
+      "The study shows inference a quarter of a millimetre below the surface. It says nothing about deep brain structures or about recording from outside the skull.",
+      "Whether the approach works in people has not been tested.",
+    ],
+    references: [
+      { label: "Transparent Brain-Computer Interface Uses AI and Nanotech — Psychology Today (2024)", href: "https://www.psychologytoday.com/us/blog/the-future-brain/202401/transparent-brain-computer-interface-uses-ai-and-nanotech" },
+      { label: "The study — Nature Nanotechnology (2024)", href: "https://www.nature.com/articles/s41565-023-01576-z" },
+      { label: "Can a machine read what you are thinking?", href: "/concepts/can-a-machine-read-thought" },
+      { label: "What would it actually take to do this without consent?", href: "/concepts/what-it-would-take" },
+    ],
+    referencesNote:
+      "The article and the paper are cited for what the study did and the limits its authors stated.",
+    verification: "unverified",
+    disclaimer:
+      "This concept reports one peer-reviewed animal study. It establishes no capability beyond what that study demonstrated.",
+  },
+  {
+    id: "what-is-in-the-shot",
+    origin: "ai",
+    basis: "documented",
+    theme: "record",
+    audience: ["household", "clinicians", "press"],
+    topics: ["nanotechnology", "technology"],
+    title: "Is there nanotechnology in the COVID-19 vaccines?",
+    body:
+      "Yes, in one specific and published sense. The Pfizer-BioNTech and Moderna COVID-19 vaccines are mRNA vaccines, and the mRNA is carried inside [lipid nanoparticles](/glossary/lipid-nanoparticle): tiny spheres made of four kinds of fat, one of them cholesterol. A lipid nanoparticle is about the size of a virus. It protects the fragile [mRNA](/glossary/mrna) on its way into the body's cells, is taken up by them, and releases the mRNA, which the cell uses to make one viral protein for a short time before it breaks down. That is [nanomedicine](/glossary/nanomedicine), and the full ingredient lists are published by regulators, including the FDA, Health Canada and the European Medicines Agency.\n\nWhat a lipid nanoparticle is not is a device. It has no electronics, sensors, antennas, power source or means of sending a signal. The nanotechnology that can record from or stimulate the brain is a different kind of thing: electrode arrays placed by surgery, [injectable mesh electronics](/glossary/injectable-mesh-electronics), or [magnetoelectric nanoparticles](/glossary/magnetoelectric-nanoparticles) that need an outside magnetic field and are still being tested in laboratories and animals. None of these appears on any published vaccine ingredient list.\n\n*On the record:* since 2021, claims that COVID-19 vaccines contain graphene oxide or other graphene materials have been checked by fact-checkers including Reuters, AFP and PolitiFact, and found false. Graphene oxide is not on any published ingredient list, and Pfizer has stated it is not used in making its vaccine. One early source of the claim was a report from a university in Spain that was not peer-reviewed.\n\nWhy the question appears in this archive: statements recorded in the [journal](/journal/is-j02-20250926-r02) suggest that nanotechnology \"has been dispersed into the community\", and connect it with the vaccines that most of the country received. The author has also noted that the first experience unlike anything before came within weeks of his first COVID-19 vaccination (see [Why Hasn't It Been Turned Off?](/concepts/why-hasnt-it-been-turned-off)). Those are his questions, and they are kept as questions. This concept records what the published ingredients show. It does not explain the experiences the archive describes, and two events close together in time do not show that one caused the other (see [Next to each other is not because of each other](/concepts/co-occurrence-is-not-cause)).",
+    evidence: [
+      "Pfizer-BioNTech and Moderna mRNA vaccines use lipid nanoparticles of four lipids (an ionisable lipid, DSPC, cholesterol and a PEG-lipid)",
+      "Ingredient lists are published by regulators, among them Health Canada",
+      "Graphene oxide claims rated false by multiple fact-checkers since 2021; Pfizer stated graphene oxide is not used",
+      "Nanotechnology that records from or stimulates the brain requires electrodes or particles driven from outside; none is on a published ingredient list",
+    ],
+    questions: [
+      "This concept addresses what is in the published ingredients. It does not address the safety record of the vaccines, which is a separate medical question for a doctor or a regulator's published data.",
+      "It does not explain the experiences recorded in the journal; it only removes one proposed mechanism from the record.",
+    ],
+    references: [
+      { label: "Components of COVID-19 vaccines — Health Canada", href: "https://www.canada.ca/en/public-health/services/diseases/2019-novel-coronavirus-infection/awareness-resources/components-covid-19-vaccines.html" },
+      { label: "LNP carriers of the COVID-19 mRNA vaccines — Pharmaceutics (2021)", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC8707022/" },
+      { label: "COVID-19 vaccines do not contain graphene — PolitiFact (2022)", href: "https://politifact.com/factchecks/2022/jan/24/facebook-posts/covid-19-vaccines-do-not-contain-graphene-are-not/" },
+      { label: "Does the Pfizer vaccine contain graphene oxide? — Check Your Fact (2021)", href: "https://checkyourfact.com/2021/07/12/fact-check-pfizer-covid-vaccine-graphene-oxide/" },
+      { label: "Why Hasn't It Been Turned Off?", href: "/concepts/why-hasnt-it-been-turned-off" },
+    ],
+    referencesNote:
+      "Regulators are cited for the ingredients; fact-checkers for the outcome of their checks. A link to the author's concept gives his question, not a finding.",
+    verification: "unverified",
+    disclaimer:
+      "This concept reports published ingredient lists and the outcome of published fact-checks. It makes no claim about the cause of any experience described in this archive, and it is not medical advice.",
+  },
+  {
+    id: "how-small-is-nano",
+    origin: "ai",
+    basis: "documented",
+    theme: "neurotech",
+    audience: ["household", "press"],
+    topics: ["nanotechnology", "technology"],
+    title: "How small is nanotechnology, and what can it do today?",
+    body:
+      "[Nanotechnology](/glossary/nanotechnology) works at roughly 1 to 100 nanometres. A nanometre is one billionth of a metre. A sheet of paper is about 100,000 nanometres thick.\n\nA ladder of sizes helps:\n\n- **A sheet of [graphene](/glossary/graphene):** one atom thick, a fraction of a nanometre.\n- **A [lipid nanoparticle](/glossary/lipid-nanoparticle) in an mRNA vaccine:** roughly 100 nanometres, about the size of a virus.\n- **A neuron's cell body:** thousands to tens of thousands of nanometres across.\n- **A sheet of paper:** about 100,000 nanometres.\n- **A 2016 [neural dust](/glossary/neural-dust) sensor:** about 3 millimetres long, or 3,000,000 nanometres.\n\nThe last line is the point most often missed. Most of what is called nanotechnology in brain research is a device of ordinary, visible size built from nanomaterials: graphene electrodes, nanowire mesh, a millimetre-scale sensor. The parts that are truly nanoscale are particles, and a particle on its own cannot compute, store or transmit anything.\n\nWhat nanoscale technology does today, on the record:\n\n- **Carries medicines and genetic instructions into cells,** as in mRNA vaccines and other approved nanomedicines.\n- **Makes electrodes thinner, softer or transparent,** as in [transparent brain-computer interfaces](/glossary/transparent-brain-computer-interfaces-bcis) and graphene arrays now being tested in people during surgery.\n- **Converts energy sent from outside the body into a local effect,** in laboratories and animals: [magnetoelectric nanoparticles](/glossary/magnetoelectric-nanoparticles) respond to a magnetic field, and in [optogenetics](/glossary/optogenetics) upconversion nanoparticles turn near-infrared light into visible light. In both cases the power and the instruction come from equipment outside the body.\n\nWhat is only proposed: nanoscale robots that travel through the bloodstream, position themselves among brain cells and link the brain to a network. That idea has been published as a proposal (see [What is a brain/cloud interface?](/concepts/brain-cloud-interface)). Nothing of the kind has been built.",
+    evidence: [
+      "Nanoscale is roughly 1 to 100 nanometres; a sheet of paper is about 100,000 nanometres thick (U.S. National Nanotechnology Initiative)",
+      "Neural dust motes demonstrated in 2016 were about 3 millimetres long (UC Berkeley)",
+      "Magnetoelectric nanoparticles and upconversion nanoparticles act only when driven by an external magnetic field or light source",
+      "Brain-linked nanorobots exist only as a published proposal (Frontiers in Neuroscience, 2019)",
+    ],
+    questions: [
+      "Size alone does not set a limit on what future devices could do. This concept describes what is on the record now.",
+    ],
+    references: [
+      { label: "Just How Small Is Nano? — U.S. National Nanotechnology Initiative", href: "https://www.nano.gov/about-nanotechnology/just-how-small-is-nano" },
+      { label: "Sprinkling of neural dust opens door to electroceuticals — Berkeley News (2016)", href: "https://news.berkeley.edu/2016/08/03/sprinkling-of-neural-dust-opens-door-to-electroceuticals/" },
+      { label: "Near-infrared deep brain stimulation via upconversion nanoparticles — RIKEN (2018)", href: "https://www.riken.jp/en/news_pubs/research_news/pr/2018/20180209_1/" },
+      { label: "Did anyone try to build a way in without surgery?", href: "/concepts/nonsurgical-by-design" },
+    ],
+    referencesNote:
+      "Each source is cited for the measurement or result it reports.",
+    verification: "unverified",
+    disclaimer:
+      "This concept summarises published sizes and demonstrated capabilities. It does not predict what future devices will or will not do.",
+  },
+  {
+    id: "brain-cloud-interface",
+    origin: "ai",
+    basis: "documented",
+    theme: "neurotech",
+    audience: ["policy", "press"],
+    topics: ["nanotechnology", "technology", "speculation"],
+    title: "What is a brain/cloud interface?",
+    body:
+      "It is a proposal, published in 2019 in Frontiers in Neuroscience by researchers associated with UC Berkeley and the Institute for Molecular Manufacturing. The paper describes a future discipline it calls [neuralnanorobotics](/glossary/neuralnanorobotics): nanoscale robots that would travel through the bloodstream, cross the [blood–brain barrier](/glossary/blood-brain-barrier), position themselves among or even inside brain cells, and relay information wirelessly between the brain and cloud computing in real time. The authors call the result a human brain/cloud interface, and suggest it might be possible within 20 to 30 years.\n\nThe paper presents these robots as future technology. Nothing like them has been built or demonstrated, and the paper reports no experiment showing one working.\n\n*On the record:* the paper points to one real experiment as an early step. BrainNet, published by University of Washington researchers in Scientific Reports in 2019, let three people jointly play a Tetris-like game by sending yes-or-no decisions from brain to brain. It used EEG caps to read signals and magnetic stimulation of the visual cortex to deliver them, with every participant wearing equipment and taking part willingly. It involved no nanotechnology.\n\nA note on words. The same paper uses the phrase \"transparent shadowing\" for experiencing parts of another person's life through such an interface. It is unrelated to [transparent brain-computer interfaces](/glossary/transparent-brain-computer-interfaces-bcis), which are named for a see-through material.\n\nWhy it matters here: statements recorded in this archive describe everyone being connected, and a proposal like this one shows that the idea has been written down by researchers. It does not show that it exists. For what nanoscale technology can do today, see [How small is nanotechnology, and what can it do today?](/concepts/how-small-is-nano).",
+    evidence: [
+      "Martins et al., 'Human Brain/Cloud Interface', Frontiers in Neuroscience 13:112, 29 March 2019",
+      "The paper presents neuralnanorobots as future technology and suggests 20 to 30 years",
+      "BrainNet (Scientific Reports, 2019): three-person brain-to-brain interface using EEG and transcranial magnetic stimulation, with consenting participants",
+    ],
+    questions: [
+      "A published proposal records an idea and its authors' estimate. It is not evidence that the technology exists or that the estimate is right.",
+    ],
+    references: [
+      { label: "Human Brain/Cloud Interface — Frontiers in Neuroscience (2019)", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6450227/" },
+      { label: "BrainNet: a multi-person brain-to-brain interface — Scientific Reports (2019)", href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6467884/" },
+      { label: "How small is nanotechnology, and what can it do today?", href: "/concepts/how-small-is-nano" },
+    ],
+    referencesNote:
+      "The proposal is cited as a proposal; BrainNet is cited for its own published experiment.",
+    verification: "unverified",
+    disclaimer:
+      "This concept reports a published proposal and one published experiment. It does not establish that any brain/cloud interface exists.",
+  },
 ];
 
 /**
@@ -1884,6 +2013,8 @@ export const SOURCE_YEARS: {
   { year: 2024, label: "WHO-commissioned review finds no cancer link", url: "https://www.arpansa.gov.au/who-review-finds-no-link-between-mobile-phone-use-and-brain-cancer", cites: ["children-wearables-and-rf"] },
   { year: 2024, label: "Change Healthcare breach — 190m people", cites: ["how-protected-is-your-medical-record"] },
   { year: 2024, label: "Pasco settles, admitting three violations", url: "https://ij.org/press-release/case-closed-pasco-sheriff-admits-predictive-policing-program-violated-constitution/", cites: ["what-children-are-subject-to"] },
+  { year: 2019, label: "Martins et al., Human Brain/Cloud Interface", url: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6450227/", cites: ["brain-cloud-interface"] },
+  { year: 2024, label: "Transparent graphene brain interface, Nature Nanotechnology", url: "https://www.nature.com/articles/s41565-023-01576-z", cites: ["seeing-through-the-interface"] },
   { year: 2025, label: "Montana LC0005", cites: ["law-for-neural-data"] },
   { year: 2025, label: "Medill: 3,500 newspapers gone", url: "https://www.niemanlab.org/2025/10/in-medills-latest-state-of-local-news-report-a-festering-20-year-old-problem-looms-larger-than-ever/", cites: ["why-isnt-this-in-the-news"] },
   { year: 2026, label: "Tenth Circuit affirms Epps", cites: ["contractors-killed-and-freed"] },

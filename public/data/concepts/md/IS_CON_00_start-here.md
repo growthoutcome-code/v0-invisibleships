@@ -3,9 +3,9 @@ id: IS-CON-00-START-HERE
 title: Concepts — start here
 collection: concepts
 doc_type: section-overview
-concept_count: 47
+concept_count: 51
 generated_by: scripts/export_concepts_md.mjs
-word_count: 1238
+word_count: 1297
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -14,14 +14,14 @@ disclaimer: meta/IS_META_terms.md
 
 *Independent research compiled from public records for informational purposes only. Not legal, medical, or investment advice. Every concept states its BASIS, its ORIGIN, its THEME and the readers it was written for. The basis tiers are ranked, and never blended inside a single concept: a reader who accepts only `documented` entries can still rely on every one of those and discard the rest without unpicking anything. `testimony` is a dated first-person report, verified by nobody, and says so on its own face wherever it appears. Causes are reported as attributed, never asserted. See `meta/IS_META_terms.md`.*
 
-**47 concepts.** Each is a self-contained file, safe to hand to
+**51 concepts.** Each is a self-contained file, safe to hand to
 an assistant on its own.
 
 ## How to read the basis label
 
 | Basis | What it means | How much weight it carries | In this archive |
 |---|---|---|---|
-| `documented` | A source, ruling or official record supports this directly. | Strongest | 28 |
+| `documented` | A source, ruling or official record supports this directly. | Strongest | 32 |
 | `structural` | This follows from what the dataset does or does not contain. | Strong, but about the data, not the world | 11 |
 | `pattern` | An observation drawn from experience, offered as an observation. | Offered as an observation, not as proof | 6 |
 | `testimony` | A dated first-person report of what the author experienced or was told. Verified by nobody. | Verified by nobody | 2 |
@@ -36,10 +36,10 @@ the archive uses it.
 
 | Theme | What it covers | Concepts |
 |---|---|---|
-| The record and its limits | What this archive can and cannot show, and why an absence proves little. | 9 |
+| The record and its limits | What this archive can and cannot show, and why an absence proves little. | 10 |
 | Procurement and accountability | Who buys what, and what happens when a finding lands against them. | 6 |
 | Surveillance and the person | What is collected about people who never agreed to any of it. | 8 |
-| Neurotechnology | What can actually be read from a brain, and under what conditions. | 13 |
+| Neurotechnology | What can actually be read from a brain, and under what conditions. | 16 |
 | Coercion and control | Documented methods for controlling a person without touching them. | 7 |
 | Health outcomes | Population outcomes measured against the rest of the world. | 2 |
 | Reported experience | First-person report, and what is known about experience without an external source. | 2 |
@@ -51,11 +51,11 @@ one. These are routes in, not walls — nothing is hidden from anybody.
 
 | Audience | Who that means | Concepts |
 |---|---|---|
-| Households and individuals | For a person who thinks something is happening to them, or to someone they live with. | 24 |
+| Households and individuals | For a person who thinks something is happening to them, or to someone they live with. | 26 |
 | Law enforcement and investigators | For anyone whose job is to establish what happened and to whom. | 19 |
-| Legislators and regulators | For anyone writing or enforcing a rule about any of this. | 21 |
-| Clinicians | For anyone a frightened person is likely to reach first. | 11 |
-| Press and researchers | For anyone who has to decide whether a claim can be published. | 21 |
+| Legislators and regulators | For anyone writing or enforcing a rule about any of this. | 23 |
+| Clinicians | For anyone a frightened person is likely to reach first. | 12 |
+| Press and researchers | For anyone who has to decide whether a claim can be published. | 25 |
 
 ## What this section does not establish
 
@@ -70,7 +70,7 @@ in `IS_CON_00_findings.md`, and every dated source behind them is in
 
 ## The concepts
 
-### documented (28)
+### documented (32)
 
 - **Can you record it?** `IS_CON_can-you-record-it.md` · origin: ai
 - **“Only I can hear it” is not, by itself, unusual** `IS_CON_only-you-can-hear-it.md` · origin: ai
@@ -100,6 +100,10 @@ in `IS_CON_00_findings.md`, and every dated source behind them is in
 - **How protected is your medical information?** `IS_CON_how-protected-is-your-medical-record.md` · origin: ai — *Not independently verified*
 - **What happens to everyone around a target?** `IS_CON_everyone-around-a-target.md` · origin: ai — *Not independently verified*
 - **Zersetzung's methods are crimes** `IS_CON_zersetzung-methods-are-crimes.md` · origin: ai — *Not independently verified*
+- **What did the see-through brain interface actually do?** `IS_CON_seeing-through-the-interface.md` · origin: ai — *Not independently verified*
+- **Is there nanotechnology in the COVID-19 vaccines?** `IS_CON_what-is-in-the-shot.md` · origin: ai — *Not independently verified*
+- **How small is nanotechnology, and what can it do today?** `IS_CON_how-small-is-nano.md` · origin: ai — *Not independently verified*
+- **What is a brain/cloud interface?** `IS_CON_brain-cloud-interface.md` · origin: ai — *Not independently verified*
 
 ### structural (11)
 

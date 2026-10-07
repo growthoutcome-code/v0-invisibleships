@@ -6,7 +6,7 @@ doc_type: term
 provenance: site-authored
 slug: electromagnetic-field
 categories: [glossary, reference, glossary-physics-signals]
-word_count: 175
+word_count: 179
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -18,7 +18,7 @@ disclaimer: meta/IS_META_terms.md
 
 A physical field produced by electrically charged objects and by the flow of electric current — the combination of an electric field (created by voltage) and a magnetic field (created by moving current). When these fields change, they propagate through space as electromagnetic waves, spanning the spectrum from power-line frequencies through radio and microwaves to infrared, visible light, and beyond. Every electrical and electronic device produces electromagnetic fields, and they are the medium through which all wireless signals travel. Most everyday EMFs — from power lines, phones, and Wi-Fi — are non-ionizing.
 
-Related terms: [non-ionizing radiation](/glossary/non-ionizing-radiation), [Directed-energy](/glossary/directed-energy), [microwave auditory effect](/glossary/microwave-auditory-effect), [hardware](/glossary/hardware-computer)
+Related terms: [non-ionizing radiation](/glossary/non-ionizing-radiation), [Directed-energy](/glossary/directed-energy), [microwave auditory effect](/glossary/microwave-auditory-effect), [hardware](/glossary/hardware-computer), [magnetoelectric nanoparticles](/glossary/magnetoelectric-nanoparticles)
 
 Sources: [Electromagnetic fields — World Health Organization](https://www.who.int/news-room/questions-and-answers/item/radiation-electromagnetic-fields); [Electromagnetic field — Britannica](https://www.britannica.com/science/electromagnetic-field)
 

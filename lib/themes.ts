@@ -8,6 +8,7 @@ export const THEMES: Record<string, string> = {
   "harassment": "Harassment",
   "speculation": "Speculation",
   "technology": "Technology",
+  "nanotechnology": "Nanotechnology",
   "death-threats": "Death threats",
   "euthanization": "Euthanization",
   "obedience-coercion": "Obedience & coercion",

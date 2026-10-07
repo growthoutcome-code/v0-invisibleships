@@ -28,6 +28,7 @@ at the same subject.*
 | `harassment` | Harassment | records ongoing harassment: insults, taunting, torment, slurs, smear or discrediting aimed at the author or others |
 | `speculation` | Speculation | offers a substantive explanation or theory — who is behind it, why, how it works — presented as uncertain (the author's or in statements) |
 | `technology` | Technology | discusses the technology involved: neurotech, BCI, EMF / directed energy, implants, AI, software, devices |
+| `nanotechnology` | Nanotechnology | discusses nanotechnology itself: nanotech in the body or the community, nanoparticles, nanites, nanomaterial devices such as transparent BCIs (added 7 Oct 2026; a passing mention, such as naming a company or publication, is not enough) |
 | `death-threats` | Death threats | records a threat to kill, or a statement that someone will die or be killed |
 | `euthanization` | Euthanization | records pressure to accept euthanasia / euthanization, "euthanization lists", assisted suicide or "ushering" |
 | `obedience-coercion` | Obedience & coercion | records demands to comply, obey, confess or submit, or other coercive pressure (beyond euthanasia itself) |
@@ -59,3 +60,7 @@ three copies: `rels.json` doc_categories, Supabase
 `document_categories`, the download's `categories:` line and manifests. Concepts
 carry the same theme slugs in `lib/concepts.ts` (`topics`) and in their download
 files. Tags are published only after Sean spot-checks a sample.
+
+## Nanotechnology (7 Oct 2026)
+
+Added at Sean's request with the nanotech glossary terms. Six journal documents carry it, each with its evidence quote, in `scripts/data/theme_nanotechnology.json`; `scripts/apply_theme_nanotechnology.py` writes them to the site data and the download (`--check` in `npm run check`, `--sql` for Supabase). Concepts carry it in `lib/concepts.ts` topics.

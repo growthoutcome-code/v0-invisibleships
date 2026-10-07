@@ -6,7 +6,7 @@ doc_type: term
 provenance: site-authored
 slug: non-ionizing-radiation
 categories: [glossary, reference, glossary-physics-signals]
-word_count: 168
+word_count: 171
 author: Sean C. Harris
 copyright: © 2026 Sean C. Harris. All Rights Reserved.
 disclaimer: meta/IS_META_terms.md
@@ -18,7 +18,7 @@ disclaimer: meta/IS_META_terms.md
 
 Electromagnetic radiation with enough energy to move or heat atoms but not enough to strip their electrons (to “ionize”). It includes radio waves, microwaves, infrared, visible light, and lower-frequency ultraviolet — and is the basis of all wireless communication. Radio-frequency signals can also be used for sensing: research systems use ordinary Wi-Fi and radar (both non-ionizing) to detect motion and even coarse human figures through walls. Contrast with ionizing radiation (X-rays, gamma rays), which carries enough energy to damage DNA.
 
-Related terms: [electromagnetic field](/glossary/electromagnetic-field), [Directed-energy](/glossary/directed-energy), [microwave auditory effect](/glossary/microwave-auditory-effect), [hardware](/glossary/hardware-computer)
+Related terms: [electromagnetic field](/glossary/electromagnetic-field), [Directed-energy](/glossary/directed-energy), [microwave auditory effect](/glossary/microwave-auditory-effect), [hardware](/glossary/hardware-computer), [optogenetics](/glossary/optogenetics)
 
 Sources: [Wi-Vi: seeing through walls with Wi-Fi — MIT](https://people.csail.mit.edu/fadel/wivi/); [Household radar sees through walls — IEEE Spectrum](https://spectrum.ieee.org/household-radar-can-see-through-walls-and-knows-how-youre-feeling)
 

@@ -1,0 +1,12 @@
+{
+ "_note": "Journal documents carrying the Nanotechnology theme (added 7 Oct 2026, Sean). Assigned by reading, per project/theme-tags.md; each keeps the words that justify it. Passing mentions are not tagged (IS-J02-20250825-R07 names publications that wrote about nanotech; IS-J03-20251026-R01 mentions companies that develop it). Applied by scripts/apply_theme_nanotechnology.py.",
+ "theme": "nanotechnology",
+ "tags": [
+  {"id": "IS-J01-20250413-ENTRY", "evidence": "We should all consider the impact of nanotechnology. It's been dispersed into our communities."},
+  {"id": "IS-J02-20250826-R01", "evidence": "because of nanotechnology that could still be in his body"},
+  {"id": "IS-J02-20250926-R02", "evidence": "Nanotech has been suggested to have been dispersed into the community."},
+  {"id": "IS-J03-20251022-R01", "evidence": "this is Nanotechnology, almost every person in the world, uh, has been given a transparent BCI"},
+  {"id": "IS-J04-20251209-R03", "evidence": "the presence of nanotechnology and or a BCI, a brain and computer interface, transparent BCI has been suggested"},
+  {"id": "IS-J04-20260116-ENTRY", "evidence": "Law enforcement did not put nanotech in our agents!"}
+ ]
+}

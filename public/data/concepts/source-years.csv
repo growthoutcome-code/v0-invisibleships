@@ -14,6 +14,7 @@ year,source,url,cited_by_concept_ids,cited_by_files
 2018,"Edrei v Bratton, 2d Cir.",https://law.justia.com/cases/federal/appellate-courts/ca2/17-2065/17-2065-2018-06-13.html,denver-acoustic-weapons,IS_CON_denver-acoustic-weapons.md
 2018,France bans phones in schools,,children-wearables-and-rf,IS_CON_children-wearables-and-rf.md
 2018,"Reuters, The Body Trade",https://ethics.sjmc.wisc.edu/wp-content/uploads/sites/2130/2024/08/reuters_bodytrade.pdf,who-profits-from-a-body,IS_CON_who-profits-from-a-body.md
+2019,"Martins et al., Human Brain/Cloud Interface",https://pmc.ncbi.nlm.nih.gov/articles/PMC6450227/,brain-cloud-interface,IS_CON_brain-cloud-interface.md
 2020,Blackwater pardons,https://news.un.org/en/story/2020/12/1081152,contractors-killed-and-freed,IS_CON_contractors-killed-and-freed.md
 2020,"Tampa Bay Times, Targeted",https://projects.tampabay.com/projects/2020/investigations/police-pasco-sheriff-targeted/school-data/,what-children-are-subject-to,IS_CON_what-children-are-subject-to.md
 2022,EFF exposes Fog Data Science,https://www.eff.org/deeplinks/2022/08/inside-fog-data-science-secretive-company-selling-mass-surveillance-local-police,made-into-assets-unknowing,IS_CON_made-into-assets-unknowing.md
@@ -27,6 +28,7 @@ year,source,url,cited_by_concept_ids,cited_by_files
 2024,"eBay deferred prosecution agreement, $3m penalty",https://www.justice.gov/usao-ma/pr/ebay-inc-pay-3-million-connection-corporate-cyberstalking-campaign-targeting,zersetzung-methods-are-crimes,IS_CON_zersetzung-methods-are-crimes.md
 2024,"Neurorights Foundation, Safeguarding Brain Data",https://perseus-strategies.com/wp-content/uploads/2024/04/FINAL_Consumer_Neurotechnology_Report_Neurorights_Foundation_April-1.pdf,who-owns-neural-data,IS_CON_who-owns-neural-data.md
 2024,"Pasco settles, admitting three violations",https://ij.org/press-release/case-closed-pasco-sheriff-admits-predictive-policing-program-violated-constitution/,what-children-are-subject-to,IS_CON_what-children-are-subject-to.md
+2024,"Transparent graphene brain interface, Nature Nanotechnology",https://www.nature.com/articles/s41565-023-01576-z,seeing-through-the-interface,IS_CON_seeing-through-the-interface.md
 2024,WHO-commissioned review finds no cancer link,https://www.arpansa.gov.au/who-review-finds-no-link-between-mobile-phone-use-and-brain-cancer,children-wearables-and-rf,IS_CON_children-wearables-and-rf.md
 2025,"Medill: 3,500 newspapers gone",https://www.niemanlab.org/2025/10/in-medills-latest-state-of-local-news-report-a-festering-20-year-old-problem-looms-larger-than-ever/,why-isnt-this-in-the-news,IS_CON_why-isnt-this-in-the-news.md
 2025,Montana LC0005,,law-for-neural-data,IS_CON_law-for-neural-data.md

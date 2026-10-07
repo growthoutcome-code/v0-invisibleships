@@ -58,6 +58,12 @@ export function allGlossaryParams() {
   return load().glossary.map((t) => ({ slug: t.slug.toLowerCase() }));
 }
 
+/** Every glossary term, in the order the Glossary lists them: the sidebar on a
+ *  standalone term page (Sean, 7 Oct 2026: "make the sidebar permanent"). */
+export function glossaryIndex(): { slug: string; term: string }[] {
+  return load().glossary.map((t) => ({ slug: t.slug.toLowerCase(), term: t.term }));
+}
+
 export type JournalItem = {
   doc: Doc;
   body: string;
